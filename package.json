@@ -2,7 +2,7 @@
   "name": "salon-tablet",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "dev": "nodemon --inspect .",
     "build": "next build",

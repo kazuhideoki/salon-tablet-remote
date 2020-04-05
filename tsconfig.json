@@ -22,7 +22,7 @@
     "jsx": "preserve"
   },
   "include": [
-    "./pages/**/*"
+    "src/pages/**/*"
   ],
   "exclude": [
     "node_modules"

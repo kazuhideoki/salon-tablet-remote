@@ -93,10 +93,10 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "./pages/index.js":
-/*!************************!*\
-  !*** ./pages/index.js ***!
-  \************************/
+/***/ "./src/pages/index.tsx":
+/*!*****************************!*\
+  !*** ./src/pages/index.tsx ***!
+  \*****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -107,13 +107,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-const Index = props => __jsx("div", null, __jsx("h1", null, props.test));
+const Index = ({
+  test
+}) => __jsx("div", null, __jsx("h1", null, test));
 
 Index.getInitialProps = ({
   req
 }) => {
   return {
-    test: "Hello, worldかな"
+    test: "Helloだな"
   };
 };
 
@@ -122,13 +124,13 @@ Index.getInitialProps = ({
 /***/ }),
 
 /***/ 4:
-/*!******************************!*\
-  !*** multi ./pages/index.js ***!
-  \******************************/
+/*!***********************************!*\
+  !*** multi ./src/pages/index.tsx ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/okikazuhide/Desktop/salon-tablet/pages/index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! /Users/okikazuhide/Desktop/salon-tablet/src/pages/index.tsx */"./src/pages/index.tsx");
 
 
 /***/ }),

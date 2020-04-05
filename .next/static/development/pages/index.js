@@ -1,19 +1,19 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/index.js"],{
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fpages%2Findex.js!./":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fpages%2Findex.js ***!
-  \*******************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fsrc%2Fpages%2Findex.tsx!./":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fsrc%2Fpages%2Findex.tsx ***!
+  \**************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
     (window.__NEXT_P=window.__NEXT_P||[]).push(["/", function() {
-      var mod = __webpack_require__(/*! ./pages/index.js */ "./pages/index.js")
+      var mod = __webpack_require__(/*! ./src/pages/index.tsx */ "./src/pages/index.tsx")
       if(true) {
-        module.hot.accept(/*! ./pages/index.js */ "./pages/index.js", function() {
+        module.hot.accept(/*! ./src/pages/index.tsx */ "./src/pages/index.tsx", function() {
           if(!next.router.components["/"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/index.js */ "./pages/index.js")
+          var updatedPage = __webpack_require__(/*! ./src/pages/index.tsx */ "./src/pages/index.tsx")
           next.router.update("/", updatedPage)
         })
       }
@@ -34,10 +34,10 @@ module.exports = (__webpack_require__(/*! dll-reference dll_2adc2403d89adc16ead0
 
 /***/ }),
 
-/***/ "./pages/index.js":
-/*!************************!*\
-  !*** ./pages/index.js ***!
-  \************************/
+/***/ "./src/pages/index.tsx":
+/*!*****************************!*\
+  !*** ./src/pages/index.tsx ***!
+  \*****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -48,14 +48,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-var Index = function Index(props) {
-  return __jsx("div", null, __jsx("h1", null, props.test));
+var Index = function Index(_ref) {
+  var test = _ref.test;
+  return __jsx("div", null, __jsx("h1", null, test));
 };
 
-Index.getInitialProps = function (_ref) {
-  var req = _ref.req;
+Index.getInitialProps = function (_ref2) {
+  var req = _ref2.req;
   return {
-    test: "Hello, worldかな"
+    test: "Helloだな"
   };
 };
 
@@ -64,13 +65,13 @@ Index.getInitialProps = function (_ref) {
 /***/ }),
 
 /***/ 2:
-/*!***********************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fpages%2Findex.js ***!
-  \***********************************************************************************************************************************/
+/*!******************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fsrc%2Fpages%2Findex.tsx ***!
+  \******************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fpages%2Findex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fpages%2Findex.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fsrc%2Fpages%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fokikazuhide%2FDesktop%2Fsalon-tablet%2Fsrc%2Fpages%2Findex.tsx!./");
 
 
 /***/ }),
