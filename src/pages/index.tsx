@@ -6,7 +6,7 @@ const Index = ({test}) => (
 );
 
 Index.getInitialProps = ({ req }) => {
-  return { test: "Helloだな" };
+  return { test: "Hello, いろいろ" };
 };
 
 export default Index;
