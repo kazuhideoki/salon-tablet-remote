@@ -1,12 +1,18 @@
-const Index = ({test}) => (
-  <div>
-    <h1>{test}</h1>
-  </div>
+import React from "react";
+import { render } from "react-dom";
+import { App } from "../App";
+import { ThemeProvider } from "../modules/ThemeContext";
+import { StoreContextProvider } from "../modules/Store";
+// import * as serviceWorker from "../serviceWorker";
 
-);
+const Index = () =>(
 
-Index.getInitialProps = ({ req }) => {
-  return { test: "Hello, いろいろ" };
-};
+  <ThemeProvider>
+    <StoreContextProvider>
+      <App />
+    </StoreContextProvider>
+  </ThemeProvider>
+)
 
-export default Index;
+export default Index
+// serviceWorker.register();

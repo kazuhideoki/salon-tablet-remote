@@ -9,6 +9,9 @@ const server = express();
 app
   .prepare()
   .then(() => {
+
+    //   -----------ここにバックエンドの処理を書く-----------
+
     server.get("*", (req, res) => {
       return handler(req, res);
     });
