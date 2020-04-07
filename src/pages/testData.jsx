@@ -2,7 +2,7 @@
 import fetch from "node-fetch";
 // const http = require("http");
 import useSWR from "swr";
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
 
 
@@ -32,6 +32,7 @@ const TestData = (props) => {
 // export async function getStaticProps() {
 export async function getServerSideProps() {
     const res = await fetch("http://localhost:3000/post_data", {method: 'GET'});
+    // const res = await http.get("http://localhost:3000/post_data");
     const data = await res.json();
     console.log('initialは' + data);
     

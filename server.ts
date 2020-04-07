@@ -11,6 +11,7 @@ app
   .prepare()
   .then(() => {
 
+
     server.get("/post_data", (req, res) => {
         console.log('post_dataだよ');
         const connection = mysql.createConnection({
