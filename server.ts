@@ -2,7 +2,7 @@ const express = require("express");
 const next = require("next");
 const mysql = require("mysql")
 
-const dev = process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
 const handler = app.getRequestHandler();
 const server = express();
