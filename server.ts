@@ -11,9 +11,7 @@ app
   .prepare()
   .then(() => {
 
-
     server.get("/post_data", (req, res) => {
-        console.log('post_dataだよ');
         const connection = mysql.createConnection({
           host: "localhost",
           user: "root",
@@ -30,31 +28,22 @@ app
           fields
         ) {
           if (err) throw err;
-          console.log('resultは' + result);
 
           return res.send(result[0]);
         });
 
-        // return handler(req, res);
       });
     });
 
 
+    //   -----------ここの上にバックエンドの処理を書く-----------
 
-    server.get("/test", (req, res) => {
-        console.log('serverのtestだよ');
-        
-        return res.send("testさん");
-    });
-
+    // nextのルーティングへ渡している？
     server.get("*", (req, res) => {
-      console.log("nextjsのルーティング");
-
       return handler(req, res);
     });
 
 
-    //   -----------ここにバックエンドの処理を書く-----------
 
     
 
