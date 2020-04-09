@@ -39,9 +39,6 @@ app
 
     // nextのルーティングへ渡している？
     server.get("*", (req, res) => {
-        dns.lookup("salon-tablet.com", function (err, addresses, family) {
-            console.log(addresses);
-        });
         return handler(req, res);
     });
 
