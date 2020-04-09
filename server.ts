@@ -2,6 +2,11 @@ const express = require("express");
 const next = require("next");
 const mysql = require("mysql")
 
+var dns = require("dns");
+var w3 = dns.lookup("salon-tablet.com", function (err, addresses, family) {
+  console.log(addresses);
+});
+
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
 const handler = app.getRequestHandler();
