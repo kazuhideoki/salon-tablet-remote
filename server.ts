@@ -53,7 +53,7 @@ app
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
       console.debug("> Ready on http://localhost:3000");
-      var w3 = dns.lookup("salon-tablet.com", function (
+      dns.lookup("salon-tablet.com", function (
         err,
         addresses,
         family
