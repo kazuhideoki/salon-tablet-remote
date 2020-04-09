@@ -3,9 +3,7 @@ const next = require("next");
 const mysql = require("mysql")
 
 var dns = require("dns");
-var w3 = dns.lookup("salon-tablet.com", function (err, addresses, family) {
-  console.log(addresses);
-});
+
 
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
@@ -55,6 +53,13 @@ app
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
       console.debug("> Ready on http://localhost:3000");
+      var w3 = dns.lookup("salon-tablet.com", function (
+        err,
+        addresses,
+        family
+      ) {
+        console.log(addresses);
+      });
     });
   })
   .catch((err) => {
