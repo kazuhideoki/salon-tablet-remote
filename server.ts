@@ -2,9 +2,6 @@ const express = require("express");
 const next = require("next");
 const mysql = require("mysql")
 
-var dns = require("dns");
-
-
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
 const handler = app.getRequestHandler();
@@ -38,7 +35,6 @@ app
       });
     });
 
-
     //   -----------ここの上にバックエンドの処理を書く-----------
 
     // nextのルーティングへ渡している？
@@ -51,18 +47,9 @@ app
 
 
 
-    
-
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
       console.debug("> Ready on http://localhost:3000");
-      dns.lookup("salon-tablet.com", function (
-        err,
-        addresses,
-        family
-      ) {
-        console.log(addresses);
-      });
     });
   })
   .catch((err) => {
