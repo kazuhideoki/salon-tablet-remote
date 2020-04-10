@@ -19,15 +19,16 @@ export type WpParams = {
     isJa: boolean,
 }
 
-const initPostData = [
-    { 
+
+
+const postDataSingle = { 
     id: 0,
     title: '',
     date: '',
     content: '',
-    }
-];
-export type PostData = typeof initPostData
+}
+export type PostDataSingle = typeof postDataSingle;
+export type PostData = PostDataSingle[]
 
 const initWpData: WpData = {
     articles: [],
@@ -74,7 +75,11 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
-const StoreContextProvider = (props: any) => {
+type Props = { 
+    data: PostData
+}
+
+const StoreContextProvider: React.FC<Props> = (props) => {
     const [postData, dispatchPostData] = useReducer(postDataReducer, props.data);
     const [wpParams, dispatchWpParams] = useReducer(wpParamsReducer, initParams);
     const [wpData, dispatchWpData] = useReducer(wpDataReducer, initWpData);

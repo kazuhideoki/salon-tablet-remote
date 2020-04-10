@@ -7,15 +7,6 @@ import fetch from "node-fetch";
 // import * as serviceWorker from "../serviceWorker";
 
 const Index = (props) =>{
-    console.log(props);
-    
-    const {dispatchPostData} = React.useContext(Store);
-
-    // React.useEffect(() => {
-    //     dispatchPostData({ type: "SET_ARTICLES", payload: props.data });
-    // },[])
-
-    
 
     return (
   <ThemeProvider>
@@ -26,9 +17,12 @@ const Index = (props) =>{
 )}
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/post_data", {method: 'GET'});
-    const data: PostData = await res.json();
-    console.log('initialは' + data);
+    const res = await fetch("http://localhost:3000/post_data/show", { method: "GET" });
+    // const data: PostData = await res.json();
+    // const data = await JSON.parse(res)
+    // const data = res
+    const data = await res.json();
+    console.log("initialは" + data);
     
     return {props: {data}};
 

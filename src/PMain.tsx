@@ -6,6 +6,7 @@ import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-u
 import { pickStaffImg } from "./modules/pickStaffImg";
 import { StyledPaper } from "./StyledComponent/StyledPaper";
 import { useStylesFactory } from "./modules/useStylesFactory";
+import { useUpdateArticle } from "./modules/postDataRducer";
 
 const styles = {
     root: {
@@ -47,15 +48,6 @@ const styles = {
     },
 }
 
-type Props = {
-    postData: PostData
-    wpParams: WpParams
-    wpData: WpData,
-    classes: Record<"root" | "item" | "article" | "titleImgDiv" | "title" | "staffImg" | "img" | "insta" | "instaDiv", string>
-    articles: SortDataPosts,
-    setAndOpenArticleModal: (data: object[]) => void
-}
-
 const PMainContainer = ({presenter}: any) => {
     const classes = useStylesFactory(styles);
 
@@ -89,7 +81,16 @@ const PMainContainer = ({presenter}: any) => {
 
 }
 
-const PMainPresenter = ({
+type Props = {
+    postData: PostData
+    wpParams: WpParams
+    wpData: WpData,
+    classes: Record<"root" | "item" | "article" | "titleImgDiv" | "title" | "staffImg" | "img" | "insta" | "instaDiv", string>
+    articles: SortDataPosts,
+    setAndOpenArticleModal: (data: object[]) => void
+}
+
+const PMainPresenter: React.FC<Props> = ({
   postData,
   wpParams,
   wpData,
@@ -119,10 +120,10 @@ const PMainPresenter = ({
     });
     //   通常の記事一覧の表示
   } else if (postData) {
-      console.log('PMainPresenter' + postData);
-      
+    console.log("PMainPresenter" + postData);
+
     displayArticles = postData.map((value, key: number) => {
-    //   const num = postData[key].id;
+      //   const num = postData[key].id;
 
       return (
         <Grid item key={key} className={classes.item}>
@@ -136,7 +137,7 @@ const PMainPresenter = ({
               <div className={classes.titleImgDiv}>
                 <img
                   className={classes.img}
-                //   src={value.featuredImg}
+                  //   src={value.featuredImg}
                   alt={value.title}
                 />
                 <Typography className={classes.title} variant="h5">
@@ -149,6 +150,7 @@ const PMainPresenter = ({
                 </Typography>
                 <Typography variant="body1">
                   <div dangerouslySetInnerHTML={{ __html: value.content }} />
+                  <button onClick={() => useUpdateArticle()}>更新ボタン</button>
                 </Typography>
               </CardContent>
             </CardActionArea>

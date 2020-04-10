@@ -11,19 +11,20 @@ const app = next({ dev });
 const handler = app.getRequestHandler();
 const server = express();
 
+const mysqlSetting = {
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "salon_tablet",
+}
+
 app
   .prepare()
   .then(() => {
 
-    server.get("/post_data", (req, res) => {
-        const connection = mysql.createConnection({
-          host: "localhost",
-          user: "root",
-          password: "root",
-          database: "salon_tablet",
-        });
-        
-      connection.connect(function (err) {
+    server.get("/post_data/show", (req, res) => {
+    const connection = mysql.createConnection(mysqlSetting);        
+    connection.connect(function (err) {
         if (err) throw err;
 
         connection.query("select * from post_data", function (
@@ -33,6 +34,24 @@ app
         ) {
           if (err) throw err;
 
+          console.log(result);
+          
+          return res.send(result);
+        });
+
+      });
+    });
+    server.post("/post_data/update", (req, res) => {
+    const connection = mysql.createConnection(mysqlSetting);        
+    connection.connect(function (err) {
+        if (err) throw err;
+        const query = "update post_data set content=123 where id=" + req.body.id
+        connection.query(query, function (
+          err,
+          result,
+          fields
+        ) {
+          if (err) {res.send({"err" : true, "Message" : "Error executing MySQL query"})}
           console.log(result);
           
           return res.send(result);
@@ -59,4 +78,4 @@ app
     console.error(err.stack);
     // @ts-ignore
     process.exit(1);
-  });
+  })
