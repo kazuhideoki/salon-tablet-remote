@@ -1,5 +1,5 @@
 import React from "react";
-import { Store, WpData, WpParams } from "./modules/Store";
+import { Store, WpData, WpParams, PostData } from "./modules/Store";
 import { formatDate } from "./modules/organizeData";
 import { sortDataPosts, SortDataPosts, setAuthorName } from "./modules/organizeData";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
@@ -48,6 +48,7 @@ const styles = {
 }
 
 type Props = {
+    postData: PostData
     wpParams: WpParams
     wpData: WpData,
     classes: Record<"root" | "item" | "article" | "titleImgDiv" | "title" | "staffImg" | "img" | "insta" | "instaDiv", string>
@@ -58,7 +59,13 @@ type Props = {
 const PMainContainer = ({presenter}: any) => {
     const classes = useStylesFactory(styles);
 
-    const { wpParams, wpData, dispatchWpData, dispatchAppState } = React.useContext(Store);
+    const {
+      postData,
+      wpParams,
+      wpData,
+      dispatchWpData,
+      dispatchAppState,
+    } = React.useContext(Store);
     // 利用するデータを抜き出し、authorをnumberから名前に変える
     let articles = sortDataPosts(wpData.articles);
         articles = setAuthorName(articles, wpData)
@@ -70,11 +77,12 @@ const PMainContainer = ({presenter}: any) => {
     }
     
     const props = {
-        wpParams,
-        wpData,
-        classes,
-        articles,
-        setAndOpenArticleModal,
+      postData,
+      wpParams,
+      wpData,
+      classes,
+      articles,
+      setAndOpenArticleModal,
     };
 
     return presenter(props)
@@ -82,90 +90,103 @@ const PMainContainer = ({presenter}: any) => {
 }
 
 const PMainPresenter = ({
-    wpParams,
-    wpData,
-    classes,
-    articles,
-    setAndOpenArticleModal,
+  postData,
+  wpParams,
+  wpData,
+  classes,
+  articles,
+  setAndOpenArticleModal,
 }: Props) => {
-    let displayArticles;
-    const instaRef = React.useRef(null)
+  let displayArticles;
+  const instaRef = React.useRef(null);
 
-    //   インスタ表示のときはレイアウトを変える
-    if (articles && wpParams.categories === 187) {
-        displayArticles = articles.map((value, key: number) => {
-            return (
-            <Grid item key={key} className={classes.item}>
-                    <Card
-                        variant="outlined"
-                        className={classes.insta}
-                    >
-                        <Typography gutterBottom variant="h6" align="right">
-                            <h3>{value.date}</h3>
-                        </Typography>
-                        <div className={classes.instaDiv}dangerouslySetInnerHTML={{ __html: value.content }} />
-                    </Card>
-            </Grid>
-            )
-        })
-    //   通常の記事一覧の表示
-    } else if (articles) {
-        displayArticles = articles.map((value, key: number) => {
-            
-            const num = articles[key].authorId  
-        
-            return (
-                <Grid item key={key} className={classes.item}>
-                    <Card variant="outlined" className={classes.article} id={`p_main_` + key} onClick={() => setAndOpenArticleModal([wpData.articles[key]])}>
-                        <CardActionArea>
-                            <div className={classes.titleImgDiv}>
-                                <img
-                                    className={classes.img}
-                                    src={value.featuredImg}
-                                    alt={value.title}
-                                />
-                                <Typography className={classes.title} variant="h5" >
-                                    {value.title}
-                                </Typography>
-                            </div>
-                            <CardContent>
-                                <Typography gutterBottom variant="h6" align="right">
-                                    {value.date} {value.authorName}
-                                </Typography>
-                                <Typography variant="body1">
-                                    <div dangerouslySetInnerHTML={{ __html: value.excerpt }} />
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-            )
-        });
-    // 記事がもしなかった場合の表示
-    } else {
-        displayArticles = <StyledPaper>No articles</StyledPaper>;
-    }
-
-    // instaのiframeの表示サイズを変更させる
-    React.useEffect(() => {
-        // console.log(instaRef.current);
-        if (wpParams.categories === 187) {
-            //@ts-ignore
-            const iframe = instaRef.current.getElementsByClassName("iframe-class")
-            Array.prototype.forEach.call(iframe, function (element: any) {
-                element.style.transform = "scale(1.2)"
-                element.style.transformOrigin = "left"
-            })
-        }  
-    })
-
-    return (
-        <Grid id='p_main' container wrap="nowrap" className={classes.root} spacing={2} ref={instaRef}>
-            {displayArticles}
+  //   インスタ表示のときはレイアウトを変える
+  if (articles && wpParams.categories === 187) {
+    displayArticles = articles.map((value, key: number) => {
+      return (
+        <Grid item key={key} className={classes.item}>
+          <Card variant="outlined" className={classes.insta}>
+            <Typography gutterBottom variant="h6" align="right">
+              <h3>{value.date}</h3>
+            </Typography>
+            <div
+              className={classes.instaDiv}
+              dangerouslySetInnerHTML={{ __html: value.content }}
+            />
+          </Card>
         </Grid>
-        
-    );
-}
+      );
+    });
+    //   通常の記事一覧の表示
+  } else if (postData) {
+      console.log('PMainPresenter' + postData);
+      
+    displayArticles = postData.map((value, key: number) => {
+    //   const num = postData[key].id;
+
+      return (
+        <Grid item key={key} className={classes.item}>
+          <Card
+            variant="outlined"
+            className={classes.article}
+            id={`p_main_` + key}
+            onClick={() => setAndOpenArticleModal([postData[key]])}
+          >
+            <CardActionArea>
+              <div className={classes.titleImgDiv}>
+                <img
+                  className={classes.img}
+                //   src={value.featuredImg}
+                  alt={value.title}
+                />
+                <Typography className={classes.title} variant="h5">
+                  {value.title}
+                </Typography>
+              </div>
+              <CardContent>
+                <Typography gutterBottom variant="h6" align="right">
+                  {/* {value.date} {value.authorName} */}
+                </Typography>
+                <Typography variant="body1">
+                  <div dangerouslySetInnerHTML={{ __html: value.content }} />
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      );
+    });
+    // 記事がもしなかった場合の表示
+  } else {
+    displayArticles = <StyledPaper>No articles</StyledPaper>;
+  }
+
+  // instaのiframeの表示サイズを変更させる
+  React.useEffect(() => {
+    // console.log(instaRef.current);
+    if (wpParams.categories === 187) {
+      //@ts-ignore
+      const iframe = instaRef.current.getElementsByClassName("iframe-class");
+      Array.prototype.forEach.call(iframe, function (element: any) {
+        element.style.transform = "scale(1.2)";
+        element.style.transformOrigin = "left";
+      });
+    }
+  });
+
+  return (
+    <Grid
+      id="p_main"
+      container
+      wrap="nowrap"
+      className={classes.root}
+      spacing={2}
+      ref={instaRef}
+    >
+      {displayArticles}
+    </Grid>
+  );
+};
 export const PMain = () => (
     <PMainContainer presenter={ (props:Props) => <PMainPresenter {...props} />}/>
 )

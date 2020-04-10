@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from "react";
 import { WpParamsAction, wpParamsReducer } from "./wpParamsReducer";
+import { PostDataAction, postDataReducer } from "./postDataRducer";
 import { WpDataAction, wpDataReducer } from "./wpDataReducer";
 import { AppStateAction, appStateReducer } from "./appStateReducer";
 
@@ -17,6 +18,16 @@ export type WpParams = {
     tag: number | string | null,
     isJa: boolean,
 }
+
+const initPostData = [
+    { 
+    id: 0,
+    title: '',
+    date: '',
+    content: '',
+    }
+];
+export type PostData = typeof initPostData
 
 const initWpData: WpData = {
     articles: [],
@@ -43,24 +54,28 @@ const initAppState = {
 }
 export type AppState = typeof initAppState
 
+export type DidpatchPostData = React.Dispatch<PostDataAction>;
 export type DispatchWpParams = React.Dispatch<WpParamsAction>
 export type DispatchWpData = React.Dispatch < WpDataAction >
 export type DispatchAppState = React.Dispatch < AppStateAction >
 export type SetTotalPages = React.Dispatch < React.SetStateAction < number >>
 
 export type ContextProps = {
-    wpParams: WpParams
-    dispatchWpParams: DispatchWpParams
-    wpData: WpData
-    dispatchWpData: DispatchWpData
-    appState: AppState
-    dispatchAppState: DispatchAppState
-    totalPages: number
-    setTotalPages: SetTotalPages
-}
+  postData: PostData;
+  dispatchPostData: DidpatchPostData;
+  wpParams: WpParams;
+  dispatchWpParams: DispatchWpParams;
+  wpData: WpData;
+  dispatchWpData: DispatchWpData;
+  appState: AppState;
+  dispatchAppState: DispatchAppState;
+  totalPages: number;
+  setTotalPages: SetTotalPages;
+};
 const Store = React.createContext({} as ContextProps);
 
-const StoreContextProvider = ({children}: any) => {
+const StoreContextProvider = (props: any) => {
+    const [postData, dispatchPostData] = useReducer(postDataReducer, props.data);
     const [wpParams, dispatchWpParams] = useReducer(wpParamsReducer, initParams);
     const [wpData, dispatchWpData] = useReducer(wpDataReducer, initWpData);
     const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState);
@@ -68,8 +83,10 @@ const StoreContextProvider = ({children}: any) => {
     const [totalPages, setTotalPages] = useState(1)
 
     const values = {
+        postData,
+        dispatchPostData,
         wpParams,
-        dispatchWpParams,
+        dispatchWpParams, 
         wpData,
         dispatchWpData,
         appState,
@@ -80,7 +97,7 @@ const StoreContextProvider = ({children}: any) => {
 
     return (
       <Store.Provider value={ values }>
-            {children}
+            {props.children}
       </Store.Provider>
     );
 

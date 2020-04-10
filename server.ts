@@ -1,7 +1,11 @@
+// @ts-ignore
 const express = require("express");
+// @ts-ignore
 const next = require("next");
+// @ts-ignore
 const mysql = require("mysql")
 
+// @ts-ignore
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
 const handler = app.getRequestHandler();
@@ -22,14 +26,16 @@ app
       connection.connect(function (err) {
         if (err) throw err;
 
-        connection.query("select title from post_data", function (
+        connection.query("select * from post_data", function (
           err,
           result,
           fields
         ) {
           if (err) throw err;
 
-          return res.send(result[0]);
+          console.log(result);
+          
+          return res.send(result);
         });
 
       });
@@ -51,5 +57,6 @@ app
   })
   .catch((err) => {
     console.error(err.stack);
+    // @ts-ignore
     process.exit(1);
   });
