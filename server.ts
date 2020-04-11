@@ -4,6 +4,11 @@ const express = require("express");
 const next = require("next");
 // @ts-ignore
 const mysql = require("mysql")
+// @ts-ignore
+const cors = require("cors")
+// @ts-ignore
+const bodyParser = require("body-parser");
+
 
 // @ts-ignore
 const dev = process.env.NODE_ENV !== "production"
@@ -21,10 +26,12 @@ const mysqlSetting = {
 app
   .prepare()
   .then(() => {
+    server.use(bodyParser.json())
+    server.use(bodyParser.urlencoded({ extended: true }));
 
-    server.get("/post_data/show", (req, res) => {
-    const connection = mysql.createConnection(mysqlSetting);        
-    connection.connect(function (err) {
+    server.get("/post_data/get", (req, res) => {
+      const connection = mysql.createConnection(mysqlSetting);
+      connection.connect(function (err) {
         if (err) throw err;
 
         connection.query("select * from post_data", function (
@@ -34,29 +41,30 @@ app
         ) {
           if (err) throw err;
 
-          console.log(result);
-          
           return res.send(result);
         });
-
       });
     });
-    server.post("/post_data/update", (req, res) => {
-    const connection = mysql.createConnection(mysqlSetting);        
-    connection.connect(function (err) {
+    server.post("/post_data/update/content", (req, res) => {
+        console.log(req.body);
+        
+      const connection = mysql.createConnection(mysqlSetting);
+    //   res.header("Access-Control-Allow-Origin", "*");
+      connection.connect(function (err) {
         if (err) throw err;
-        const query = "update post_data set content=123 where id=" + req.body.id
-        connection.query(query, function (
-          err,
-          result,
-          fields
-        ) {
-          if (err) {res.send({"err" : true, "Message" : "Error executing MySQL query"})}
+        const query =
+          "update post_data set content='" +
+          req.body.content +
+          "' where id=" +
+          req.body.id;
+          connection.query(query, function (err, result, fields) {
+          if (err) {
+            res.send({ err: true, Message: "Error executing MySQL query" });
+          }
           console.log(result);
-          
+
           return res.send(result);
         });
-
       });
     });
 
@@ -64,10 +72,8 @@ app
 
     // nextのルーティングへ渡している？
     server.get("*", (req, res) => {
-        return handler(req, res);
+      return handler(req, res);
     });
-
-
 
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
@@ -78,4 +84,4 @@ app
     console.error(err.stack);
     // @ts-ignore
     process.exit(1);
-  })
+  });

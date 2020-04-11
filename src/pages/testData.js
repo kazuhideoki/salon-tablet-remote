@@ -13,7 +13,9 @@ const TestData = (props) => {
 }
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/post_data/show", {method: 'GET'});
+    const res = await fetch("http://localhost:3000/post_data/get", {
+      method: "GET",
+    });
     const data = await res.json();
     console.log('initial is' + data);
     

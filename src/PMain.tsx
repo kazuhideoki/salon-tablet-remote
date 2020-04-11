@@ -6,7 +6,7 @@ import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-u
 import { pickStaffImg } from "./modules/pickStaffImg";
 import { StyledPaper } from "./StyledComponent/StyledPaper";
 import { useStylesFactory } from "./modules/useStylesFactory";
-import { useUpdateArticle } from "./modules/postDataRducer";
+import { useUpdateContent } from "./modules/postDataRducer";
 
 const styles = {
     root: {
@@ -101,6 +101,9 @@ const PMainPresenter: React.FC<Props> = ({
   let displayArticles;
   const instaRef = React.useRef(null);
 
+//   const updataArticle = (key: number, content: string) => useUpdateArticle(key, content);
+  const updataArticle = useUpdateContent();
+
   //   インスタ表示のときはレイアウトを変える
   if (articles && wpParams.categories === 187) {
     displayArticles = articles.map((value, key: number) => {
@@ -120,7 +123,8 @@ const PMainPresenter: React.FC<Props> = ({
     });
     //   通常の記事一覧の表示
   } else if (postData) {
-    console.log("PMainPresenter" + postData);
+    console.debug("PMainPresenter" + postData);
+
 
     displayArticles = postData.map((value, key: number) => {
       //   const num = postData[key].id;
@@ -150,7 +154,12 @@ const PMainPresenter: React.FC<Props> = ({
                 </Typography>
                 <Typography variant="body1">
                   <div dangerouslySetInnerHTML={{ __html: value.content }} />
-                  <button onClick={() => useUpdateArticle()}>更新ボタン</button>
+                  <button onClick={() => updataArticle(key, "あいうえお")}>
+                    更新ボタン→あいうえお
+                  </button>
+                  <button onClick={() => updataArticle(key, "かきくけこ")}>
+                    更新ボタン→かきくけこ
+                  </button>
                 </Typography>
               </CardContent>
             </CardActionArea>

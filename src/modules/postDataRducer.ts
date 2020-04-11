@@ -4,21 +4,28 @@ import { reducerLogger } from "./reducerLogger";
 import fetch from "node-fetch";
 
 export type PostDataAction = 
-{ type: "SET_ARTICLES"; payload: PostData }
-| { type: "UPDATE_ARTICLE"; payload: PostDataSingle,  }
+{ type: "GET"; payload: PostData }
+| { type: "UPDATE_CONTENT"; payload: {id: number, content: string} }
 
 export function postDataReducer(state: PostData, action: PostDataAction) {
          let newState: PostData;
          const func = postDataReducer;
          switch (action.type) {
-           case "SET_ARTICLES":
+           case "GET":
              newState = action.payload;
              break;
-        //    case "UPDATE_ARTICLE":
-        //     // const newPostDataSingle = state[action.payload.id] = action.payload
+           case "UPDATE_CONTENT":
+             const targetArticle = state[action.payload.id];
 
-        //      newState = {...state, action.payload}
-        //      break;
+             const newArticle = Object.assign(targetArticle, {
+               content: action.payload.content,
+             });
+
+             let articles = state.concat();
+
+             articles[action.payload.id] = newArticle;
+             newState = articles;
+             break;
 
            default:
              console.log("エラーだよ, postDataReducer");
@@ -28,15 +35,28 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
          return newState;
        }
 
-export const useUpdateArticle = async () => {
+export const useUpdateContent = () => {
     const { dispatchPostData } = React.useContext(Store)
-
-    const res = await fetch("http://localhost:3000/post_data/update", {method: 'POST'});
-    const data = JSON.parse(res)
-    if (data.err === true) {
-      alert("うまく更新できなかったよ");
-    } else {
-      dispatchPostData({ type: "UPDATE_ARTICLE", payload: data });
-    }
+    return async (id: number, content: string) => {
+        console.log(id + content);
+        
+      const res = await fetch("http://localhost:3000/post_data/update/content", {
+        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({
+          id: id,
+          content: content,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      
+      if (data.err === true) {
+        alert("うまく更新できなかったよ");
+      } else {
+        dispatchPostData({ type: "UPDATE_CONTENT", payload: {id, content} });
+      }
+    };
 
 }

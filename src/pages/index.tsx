@@ -17,10 +17,9 @@ const Index = (props) =>{
 )}
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/post_data/show", { method: "GET" });
-    // const data: PostData = await res.json();
-    // const data = await JSON.parse(res)
-    // const data = res
+    const res = await fetch("http://localhost:3000/post_data/get", {
+      method: "GET",
+    });
     const data = await res.json();
     console.log("initialは" + data);
     

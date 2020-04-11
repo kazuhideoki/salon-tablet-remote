@@ -125,7 +125,7 @@ const AppPresenter = ({
           <Grid item className={classes.footer}>
             <PFooter />
           </Grid>
-          <PArticleModal />
+          {/* <PArticleModal /> */}
           <PModal />
         </Grid>
       </div>

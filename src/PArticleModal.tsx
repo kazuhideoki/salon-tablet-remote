@@ -133,12 +133,15 @@ const PArticleModalPresenter = ({
     }, [wpData.articleModal]);
     
     return (
+        //@ts-ignore
         <StyledDialog
-        open={isArticleModalOpen}
+        // open={isArticleModalOpen}
         TransitionComponent={Transition}
-        onClose={closeArticleModal}
+        // onClose={closeArticleModal}
         >
-            <CloseButton onClick={closeArticleModal} fix/>
+            <CloseButton 
+            // onClick={closeArticleModal} 
+            fix/>
                 <DialogContentText>{(!isLoadingArticleModal) ? content : null}</DialogContentText>
         </StyledDialog>
     );
