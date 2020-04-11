@@ -50,6 +50,11 @@ app
         
       const connection = mysql.createConnection(mysqlSetting);
       res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Content-Type, application/json"
+      );
       connection.connect(function (err) {
         if (err) throw err;
         const query =
