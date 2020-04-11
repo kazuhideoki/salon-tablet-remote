@@ -49,7 +49,7 @@ app
         console.log(req.body);
         
       const connection = mysql.createConnection(mysqlSetting);
-    //   res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Origin", "*");
       connection.connect(function (err) {
         if (err) throw err;
         const query =
