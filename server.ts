@@ -89,8 +89,8 @@ app
       
       const hostname = os.hostname();
       console.debug("hostnameは " + hostname);
-      //@ts-ignore
-      console.debug(process.env);
+      console.debug("location.hostは " + location.host);
+     
 
     });
   })

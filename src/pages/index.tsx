@@ -10,6 +10,7 @@ const os = require("os");
 
 const Index = (props) =>{
     console.log("フロント側では " + os.hostname());
+    console.log("location.hostは " + location.host);
     const hostname = os.hostname()
     
     return (
