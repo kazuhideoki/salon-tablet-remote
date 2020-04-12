@@ -89,7 +89,7 @@ app
       
       const hostname = os.hostname();
       console.debug("hostnameは " + hostname);
-      console.debug("location.hostは " + location.host);
+    //   console.debug("location.hostは " + location.host);
      
 
     });
