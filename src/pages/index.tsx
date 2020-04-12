@@ -5,8 +5,12 @@ import { ThemeProvider } from "../modules/ThemeContext";
 import { StoreContextProvider, Store, PostData } from "../modules/Store";
 import fetch from "node-fetch";
 // import * as serviceWorker from "../serviceWorker";
+const os = require("os");
+
 
 const Index = (props) =>{
+    console.log("フロント側では " + os.hostname());
+    
 
     return (
   <ThemeProvider>

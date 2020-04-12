@@ -8,6 +8,9 @@ const mysql = require("mysql")
 const cors = require("cors")
 // @ts-ignore
 const bodyParser = require("body-parser");
+// @ts-ignore
+const os = require("os");
+
 
 
 // @ts-ignore
@@ -83,6 +86,9 @@ app
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
       console.debug("> Ready on http://localhost:3000");
+      
+      const hostname = os.hostname();
+      console.debug("hostnameは " + hostname);
     });
   })
   .catch((err) => {

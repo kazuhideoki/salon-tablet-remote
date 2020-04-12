@@ -150,10 +150,12 @@ const PMainPresenter: React.FC<Props> = ({
               </div>
               <CardContent>
                 <Typography gutterBottom variant="h6" align="right">
-                  {/* {value.date} {value.authorName} */}
+                  {value.date}
+                  {/* {value.authorName} */}
                 </Typography>
                 <Typography variant="body1">
                   <div dangerouslySetInnerHTML={{ __html: value.content }} />
+                  <p>{value.content}</p>
                   <button onClick={() => updataArticle(key, "あいうえお")}>
                     更新ボタン→あいうえお
                   </button>
