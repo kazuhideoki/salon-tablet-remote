@@ -10,15 +10,15 @@ const os = require("os");
 
 const Index = (props) =>{
     console.log("フロント側では " + os.hostname());
+    const hostname = os.hostname()
     
-
     return (
-  <ThemeProvider>
-    <StoreContextProvider data={props.data}>
-      <App />
-    </StoreContextProvider>
-  </ThemeProvider>
-)}
+      <ThemeProvider>
+        <StoreContextProvider data={props.data} hostname={hostname}>
+          <App />
+        </StoreContextProvider>
+      </ThemeProvider>
+    );}
 
 export async function getServerSideProps() {
     const res = await fetch("http://localhost:3000/post_data/get", {

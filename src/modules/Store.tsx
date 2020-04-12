@@ -62,6 +62,7 @@ export type DispatchAppState = React.Dispatch < AppStateAction >
 export type SetTotalPages = React.Dispatch < React.SetStateAction < number >>
 
 export type ContextProps = {
+  hostname: string
   postData: PostData;
   dispatchPostData: DidpatchPostData;
   wpParams: WpParams;
@@ -77,9 +78,11 @@ const Store = React.createContext({} as ContextProps);
 
 type Props = { 
     data: PostData
+    hostname: string
 }
 
 const StoreContextProvider: React.FC<Props> = (props) => {
+    const [hostname, setHostname] = useState(props.hostname)
     const [postData, dispatchPostData] = useReducer(postDataReducer, props.data);
     const [wpParams, dispatchWpParams] = useReducer(wpParamsReducer, initParams);
     const [wpData, dispatchWpData] = useReducer(wpDataReducer, initWpData);
@@ -88,6 +91,7 @@ const StoreContextProvider: React.FC<Props> = (props) => {
     const [totalPages, setTotalPages] = useState(1)
 
     const values = {
+        hostname,
         postData,
         dispatchPostData,
         wpParams,
