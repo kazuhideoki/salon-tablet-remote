@@ -1,13 +1,10 @@
 import React, {useContext}from 'react'
 import { Grid } from "@material-ui/core";
 import {
-    Translate,
-    ImportContactsTwoTone,
-    SignalWifi3BarTwoTone,
-    ThumbUpTwoTone,
-    PersonAddTwoTone,
-    ListAltTwoTone,
-    SettingsApplicationsTwoTone,
+  ImportContactsTwoTone,
+  SignalWifi3BarTwoTone,
+  PersonAddTwoTone,
+  SettingsApplicationsTwoTone,
 } from "@material-ui/icons";
 import { ThemeContext } from "./modules/ThemeContext";
 import { Store } from "./modules/Store";
@@ -65,36 +62,40 @@ const PFooterContainer = ({presenter}: any) => {
 const PFooterPresenter = ({ w, classes, themes, changeLang, openModal }: Props) => {
    
     return (
-    // <div className={classes.root}>
-    <div className={classes.root}>
-        <PPagination/>
+      // <div className={classes.root}>
+      <div className={classes.root}>
+        <PPagination />
         <Grid container justify="center" spacing={2}>
-            <Grid item>
-                <IconAndText
-                    icon={ImportContactsTwoTone}
-                    onClick={() => openModal("magazines")}
-                    fontSize="large"
-                    text={w.magazines}
-                />
-            </Grid>
-            <Grid item>
-                <IconAndText
-                    icon={SignalWifi3BarTwoTone}
-                    onClick={() => openModal("wifi")}
-                    text="Wifi"
-                />
-            </Grid>
-            <Grid item>
-                <a href="https://karte.smart-recept.jp/staff/login/">
-                    <IconAndText
-                        icon={PersonAddTwoTone}
-                        text={w.registration}
-                    />
-                </a>
-            </Grid>
+          <Grid item>
+            <IconAndText
+              icon={ImportContactsTwoTone}
+              onClick={() => openModal("magazines")}
+              fontSize="large"
+              text={w.magazines}
+            />
+          </Grid>
+          <Grid item>
+            <IconAndText
+              icon={SignalWifi3BarTwoTone}
+              onClick={() => openModal("wifi")}
+              text="Wifi"
+            />
+          </Grid>
+          <Grid item>
+            <a href="https://karte.smart-recept.jp/staff/login/">
+              <IconAndText icon={PersonAddTwoTone} text={w.registration} />
+            </a>
+          </Grid>
+          <Grid item>
+            <IconAndText
+              icon={SettingsApplicationsTwoTone}
+              onClick={() => openModal("setting")}
+              text="Setting"
+            />
+          </Grid>
         </Grid>
-    {/* </div> */}
-    </div>
+        {/* </div> */}
+      </div>
     );
 };
 export const PFooter = () => (

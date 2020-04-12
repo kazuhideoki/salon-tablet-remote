@@ -62,6 +62,7 @@ export type DispatchAppState = React.Dispatch < AppStateAction >
 export type SetTotalPages = React.Dispatch < React.SetStateAction < number >>
 
 export type ContextProps = {
+  postData: PostData;
   dispatchPostData: DidpatchPostData;
   wpParams: WpParams;
   dispatchWpParams: DispatchWpParams;
