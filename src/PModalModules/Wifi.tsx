@@ -7,7 +7,7 @@ export const Wifi = () => {
     const w = useWordsChange(wifi)
 
     return (
-        <div>
+        <>
             <Typography variant="h2" align='center' gutterBottom >
                 NAOKI Hair Dressing
             </Typography>
@@ -17,6 +17,6 @@ export const Wifi = () => {
             <Typography variant="h2" align='center'>
                 02350235
             </Typography>
-        </div> 
+        </> 
     )
 }

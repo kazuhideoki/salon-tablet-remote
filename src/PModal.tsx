@@ -7,11 +7,12 @@ import { Dialog, Slide, withStyles, DialogContent } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 
 import { useStylesFactory } from "./modules/useStylesFactory";
-import { Wifi } from "./PModalModules/Wifi";
 import { TagModal } from "./PModalModules/TagModal";
-import { AuthorModal } from "./PModalModules/AuthorModal";
 import { CloseButton } from "./molecules/CloseButton";
 import { ColorChart } from "./PModalModules/ColorChart";
+import { Setting } from "./PModalModules/Setting/Setting";
+import { EditArticle } from "./PModalModules/Setting/EditArticle";
+import { EditFooter } from "./PModalModules/Setting/EditFooter";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -103,6 +104,17 @@ const PModalPresenter = ({
                 className={classes.tagAuthorRoot}
               />
             );
+        break;
+        case "setting":
+            ModalContent = () => <Setting openModal={openModal} />;
+        break;
+        case "edit_article":
+            modalStyle = size100;
+            ModalContent = () => <EditArticle/>
+        break;
+        case "edit_footer":
+            modalStyle = size90;
+            ModalContent = () => <EditFooter/>
         break;
 
         default:
