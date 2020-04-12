@@ -5,13 +5,7 @@ const next = require("next");
 // @ts-ignore
 const mysql = require("mysql")
 // @ts-ignore
-const cors = require("cors")
-// @ts-ignore
 const bodyParser = require("body-parser");
-// @ts-ignore
-const os = require("os");
-
-
 
 // @ts-ignore
 const dev = process.env.NODE_ENV !== "production"
@@ -86,12 +80,6 @@ app
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
       console.debug("> Ready on http://localhost:3000");
-      
-      const hostname = os.hostname();
-      console.debug("hostnameは " + hostname);
-    //   console.debug("location.hostは " + location.host);
-     
-
     });
   })
   .catch((err) => {

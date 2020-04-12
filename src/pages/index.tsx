@@ -1,22 +1,14 @@
 import React from "react";
-import { render } from "react-dom";
 import { App } from "../App";
 import { ThemeProvider } from "../modules/ThemeContext";
-import { StoreContextProvider, Store, PostData } from "../modules/Store";
+import { StoreContextProvider} from "../modules/Store";
 import fetch from "node-fetch";
 // import * as serviceWorker from "../serviceWorker";
 const os = require("os");
 
 
 const Index = (props) =>{
-    console.log("フロント側では " + os.hostname());
-    
-    // const hostname = os.hostname()
 
-    React.useEffect(() => {
-        console.log("location.hostは " + location.host);
-    })
-    
     return (
       <ThemeProvider>
         <StoreContextProvider data={props.data} 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PostData, PostDataSingle, Store } from "./Store";
+import { PostData, Store } from "./Store";
 import { reducerLogger } from "./reducerLogger";
 import fetch from "node-fetch";
 
@@ -16,13 +16,10 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
              break;
            case "UPDATE_CONTENT":
              const targetArticle = state[action.payload.id];
-
              const newArticle = Object.assign(targetArticle, {
                content: action.payload.content,
              });
-
              let articles = state.concat();
-
              articles[action.payload.id] = newArticle;
              newState = articles;
              break;
