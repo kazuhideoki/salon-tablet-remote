@@ -11,7 +11,7 @@ const os = require("os");
 const Index = (props) =>{
     console.log("フロント側では " + os.hostname());
     
-    const hostname = os.hostname()
+    // const hostname = os.hostname()
 
     React.useEffect(() => {
         console.log("location.hostは " + location.host);
@@ -19,7 +19,9 @@ const Index = (props) =>{
     
     return (
       <ThemeProvider>
-        <StoreContextProvider data={props.data} hostname={hostname}>
+        <StoreContextProvider data={props.data} 
+        // hostname={hostname}
+        >
           <App />
         </StoreContextProvider>
       </ThemeProvider>

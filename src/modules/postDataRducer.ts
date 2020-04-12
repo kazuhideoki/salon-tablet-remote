@@ -36,19 +36,22 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
        }
 
 export const useUpdateContent = () => {
-    const { hostname, dispatchPostData } = React.useContext(Store)
+    const { dispatchPostData } = React.useContext(Store)
     return async (id: number, content: string) => {
         console.log(id + content);
         
-      const res = await fetch(`http://${hostname}:3000/post_data/update/content`, {
-        headers: { 'Content-Type': 'application/json' },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({
-          id: id,
-          content: content,
-        }),
-      });
+      const res = await fetch(
+        `http://${location.host}/post_data/update/content`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
+          mode: "cors",
+          body: JSON.stringify({
+            id: id,
+            content: content,
+          }),
+        }
+      );
       const data = await res.json();
       console.log(data);
       
