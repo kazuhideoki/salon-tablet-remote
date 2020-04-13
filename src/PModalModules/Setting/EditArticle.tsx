@@ -1,15 +1,19 @@
 import React from 'react'
-import { getToday } from "../../modules/organizeSql/getToday";
+import { dateToSql } from "../../modules/organizeSql/dateToSql";
 import { Store } from '../../modules/Store'
-import { useCreatePost } from '../../modules/postDataRducer';
+import { useCreatePost, useDeletePost } from "../../modules/postDataRducer";
 
 
 const CreateArticle = () => {
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('')
-    const date = getToday()
+
+    const today = new Date()
+    const date = dateToSql(today);
 
     const createPost = useCreatePost()
+    const deletePost = useDeletePost()
+
     const hundleSubmit = (e) => {
         e.preventDefault();
         createPost(title, date, content)
@@ -45,6 +49,7 @@ const ShowArticle = () => {
         <h3>{value.date}</h3>
         <p>{value.content}</p>
         <button>編集する</button>
+        <button onClick={() => deletePost(key)}>削除する</button>
         </>
     ))
 

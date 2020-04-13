@@ -3,10 +3,14 @@ import { PostData, Store } from "./Store";
 import { reducerLogger } from "./reducerLogger";
 import fetch from "node-fetch";
 
-export type PostDataAction = 
-{ type: "GET"; payload: PostData }
-| { type: "CREATE_POST", payload: {id: number, title: string, date: string, content: string} }
-| { type: "UPDATE_CONTENT"; payload: {id: number, content: string} }
+export type PostDataAction =
+  | { type: "GET"; payload: PostData }
+  | {
+      type: "CREATE_POST";
+      payload: { id: number; title: string; date: string; content: string };
+    }
+  | { type: "UPDATE_CONTENT"; payload: { id: number; content: string } }
+  | { type: "DELETE_POST"; payload: { id: number } };
 
 export function postDataReducer(state: PostData, action: PostDataAction) {
     let newState: PostData;
@@ -16,7 +20,7 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
         newState = action.payload;
         break;
       case "CREATE_POST":
-        const arr = [...state, action.payload]
+        const arr = [...state, action.payload];
         newState = arr.concat();
         break;
       case "UPDATE_CONTENT":
@@ -27,6 +31,11 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
         let articles = state.concat();
         articles[action.payload.id] = newArticle;
         newState = articles;
+        break;
+      case "DELETE_POST":
+        newState = state.filter((value, index) =>{
+            return state[index].id !== action.payload.id
+        })
         break;
 
       default:
@@ -96,8 +105,8 @@ export const useUpdateContent = () => {
 }
 export const useDeletePost = () => {
     const { dispatchPostData } = React.useContext(Store)
-    return async (id: number, content: string) => {
-        console.log(id + content);
+    return async (id: number) => {
+        console.log(id);
         
       const res = await fetch(
         `http://${location.host}/post_data/delete/post`,
@@ -114,7 +123,7 @@ export const useDeletePost = () => {
       if (data.err === true) {
         alert("削除できませんでした");
       } else {
-        dispatchPostData({ type: "UPDATE_CONTENT", payload: {id, content} });
+        dispatchPostData({ type: "DELETE_POST", payload: {id} });
       }
     };
 

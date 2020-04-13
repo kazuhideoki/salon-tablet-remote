@@ -66,9 +66,6 @@ app.prepare().then(() => {
               "','" +
               content +
               "')";
-            // const query =
-            //   "INSERT INTO `post_data`(`title`,`date`,`content`) VALUES ('title','2020-04-13 02:11:22','conten dayo−2ddgsagdsagfsafg')";
-         
             connection.query(query,  function (err, result, fields) {
             if (err) {
                 console.debug(err)
@@ -105,6 +102,28 @@ app.prepare().then(() => {
             });
         });
     });
+     server.post("/post_data/delete/post", (req, res) => {
+       const id = req.body.id;
+       corsHeader(res);
+       const connection = mysql.createConnection(mysqlSetting);
+
+       connection.connect(function (err) {
+         if (err) throw err;
+         const query =
+           "DELETE FROM `post_data` WHERE id=" + id
+           
+         connection.query(query, function (err, result, fields) {
+           if (err) {
+             console.debug(err);
+
+             res.send({ err: true, Message: "Error executing MySQL query" });
+           }
+           console.log(result);
+
+           return res.send(result);
+         });
+       });
+     });
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 
