@@ -1,7 +1,7 @@
 import React from 'react'
 import { dateToSql } from "../../modules/organizeSql/dateToSql";
 import { Store } from '../../modules/Store'
-import { useCreatePost } from '../../modules/postDataRducer';
+import { useCreatePost, useDeletePost } from "../../modules/postDataRducer";
 import { sqlToDate } from '../../modules/organizeSql/sqlToDate';
 
 const CreateArticle = () => {
@@ -12,7 +12,7 @@ const CreateArticle = () => {
     const date = dateToSql(today);
 
     const createPost = useCreatePost()
-    const deletePost = useDeletePost()
+    
 
     const hundleSubmit = (e) => {
         e.preventDefault();
@@ -41,20 +41,21 @@ const CreateArticle = () => {
 }
 
 const ShowArticle = () => {
-    const { postData } = React.useContext(Store)
-    const articles = postData.map( (value, key)=> (
-        <>
-        <div style={{borderTop: "solid 2px"}}></div>
-        <h2 key={key}>{value.title}</h2>
-        <h3>{sqlToDate(value.date)}</h3>
-        <p>{value.content}</p>
-        <button>編集する</button>
-        <button onClick={() => deletePost(key)}>削除する</button>
-        </>
-    ))
+  const { postData } = React.useContext(Store);
+  const deletePost = useDeletePost();
+  const articles = postData.map((value, key) => (
+    <>
+      <div style={{ borderTop: "solid 2px" }}></div>
+      <h2 key={key}>{value.title}</h2>
+      <h3>{sqlToDate(value.date)}</h3>
+      <p>{value.content}</p>
+      <button>編集する</button>
+      <button onClick={() => deletePost(value.id)}>削除する</button>
+    </>
+  ));
 
-    return <>{articles}</>
-}
+  return <>{articles}</>;
+};
 
 export const EditArticle = () => {
     return (
