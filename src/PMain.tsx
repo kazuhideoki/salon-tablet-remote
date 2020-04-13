@@ -1,6 +1,7 @@
 import React from "react";
 import { Store, WpData, WpParams, PostData } from "./modules/Store";
 import { formatDate } from "./modules/organizeData";
+import { sqlToDate } from "./modules/organizeSql/sqlToDate";
 import { sortDataPosts, SortDataPosts, setAuthorName } from "./modules/organizeData";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { pickStaffImg } from "./modules/pickStaffImg";
@@ -150,18 +151,12 @@ const PMainPresenter: React.FC<Props> = ({
               </div>
               <CardContent>
                 <Typography gutterBottom variant="h6" align="right">
-                  {value.date}
+                  {sqlToDate(value.date)}
                   {/* {value.authorName} */}
                 </Typography>
                 <Typography variant="body1">
                   <div dangerouslySetInnerHTML={{ __html: value.content }} />
                   <p>{value.content}</p>
-                  <button onClick={() => updataArticle(key, "あいうえお")}>
-                    更新ボタン→あいうえお
-                  </button>
-                  <button onClick={() => updataArticle(key, "かきくけこ")}>
-                    更新ボタン→かきくけこ
-                  </button>
                 </Typography>
               </CardContent>
             </CardActionArea>

@@ -1,4 +1,4 @@
-export const getToday = () => {
+export const dateToSql = (date) => {
     var toDoubleDigits = function(num) {
     num += "";
     if (num.length === 1) {
@@ -7,7 +7,6 @@ export const getToday = () => {
     return num;   
     }  
 
-     var date = new Date();
      var yyyy = date.getFullYear();
      var mm = toDoubleDigits(date.getMonth() + 1);
      var dd = toDoubleDigits(date.getDate());

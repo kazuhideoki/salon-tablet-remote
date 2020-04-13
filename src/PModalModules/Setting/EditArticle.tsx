@@ -1,8 +1,8 @@
 import React from 'react'
 import { dateToSql } from "../../modules/organizeSql/dateToSql";
 import { Store } from '../../modules/Store'
-import { useCreatePost, useDeletePost } from "../../modules/postDataRducer";
-
+import { useCreatePost } from '../../modules/postDataRducer';
+import { sqlToDate } from '../../modules/organizeSql/sqlToDate';
 
 const CreateArticle = () => {
     const [title, setTitle] = React.useState('');
@@ -46,7 +46,7 @@ const ShowArticle = () => {
         <>
         <div style={{borderTop: "solid 2px"}}></div>
         <h2 key={key}>{value.title}</h2>
-        <h3>{value.date}</h3>
+        <h3>{sqlToDate(value.date)}</h3>
         <p>{value.content}</p>
         <button>編集する</button>
         <button onClick={() => deletePost(key)}>削除する</button>
