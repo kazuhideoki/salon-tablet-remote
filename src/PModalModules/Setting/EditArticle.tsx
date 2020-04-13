@@ -1,5 +1,5 @@
 import React from 'react'
-import { getToday } from "../../modules/organizeSql/getToday";
+import { dateToSql } from "../../modules/organizeSql/dateToSql";
 import { Store } from '../../modules/Store'
 import { useCreatePost } from '../../modules/postDataRducer';
 
@@ -7,7 +7,9 @@ import { useCreatePost } from '../../modules/postDataRducer';
 const CreateArticle = () => {
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('')
-    const date = getToday()
+
+    const today = new Date()
+    const date = dateToSql(today);
 
     const createPost = useCreatePost()
     const hundleSubmit = (e) => {
