@@ -8,6 +8,8 @@ import { pickStaffImg } from "./modules/pickStaffImg";
 import { StyledPaper } from "./StyledComponent/StyledPaper";
 import { useStylesFactory } from "./modules/useStylesFactory";
 import { useUpdatePost } from "./modules/postDataRducer";
+import { UpdatePostButton } from "./molecules/UpdatePostButton";
+import { DeletePostButton } from "./molecules/DeletePostButton";
 
 const styles = {
     root: {
@@ -15,6 +17,7 @@ const styles = {
         height: "100%",
     },
     item: {
+        position: 'relative',
         height: "100%",
     },
     article: {
@@ -33,10 +36,11 @@ const styles = {
     },
     title: {
         position: "absolute",
-        bottom: 0, 
+        bottom: 0,
         width: "100%",
         padding: "40px 10px 0 10px",
-        background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5074404761904762) 33%, rgba(255,255,255,1) 100%)",
+        background:
+            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5074404761904762) 33%, rgba(255,255,255,1) 100%)",
     },
     img: {
         objectFit: "cover",
@@ -45,19 +49,31 @@ const styles = {
         backgroundSize: "cover",
     },
     staffImg: {
-        width: 50
+        width: 50,
     },
-}
+    updatePostButton: {
+        position: 'absolute',
+        top: 0,
+        right: 0
+    },
+    deletePostButton: {
+        position: 'absolute',
+        top: 0,
+        right: 50
+    }
+};
 
 export const PMain = () => {
     const classes = useStylesFactory(styles);
 
     const {
+        appState,
       postData,
       wpParams,
       wpData,
       dispatchWpData,
       dispatchAppState,
+      isSetting,
     } = React.useContext(Store);
     // 利用するデータを抜き出し、authorをnumberから名前に変える
     let articles = sortDataPosts(wpData.articles);
@@ -117,10 +133,20 @@ export const PMain = () => {
             console.debug("PMainPresenter" + postData);
 
             displayArticles = postData.map((value, key: number) => {
-                //   const num = postData[key].id;
 
                 return (
                     <Grid item key={key} className={classes.item}>
+                        {isSetting ? 
+                            <UpdatePostButton
+                                position={classes.updatePostButton}
+                            />
+                        : null }
+                        {isSetting ? 
+                            <UpdatePostButton
+                                position={classes.updatePostButton}
+                            />
+                        : null }
+
                         <Card
                             variant="outlined"
                             className={classes.article}

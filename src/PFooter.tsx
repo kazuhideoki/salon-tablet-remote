@@ -27,7 +27,7 @@ const styles = {
 export const PFooter = () => {
     const themes = React.useContext(ThemeContext);
     const classes = useStylesFactory(styles);
-    const { wpParams, dispatchWpParams, dispatchAppState } = useContext(Store);
+    const { wpParams, dispatchWpParams, dispatchAppState, isSetting, setIsSetting } = useContext(Store);
 
     const changeLang = () => {
         dispatchAppState({ type: "START_LOADING" });
@@ -35,7 +35,6 @@ export const PFooter = () => {
     };
     const openModal = (modalName: string) =>
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
-
     const w = useWordsChange(pfooter);
 
     const props = {
@@ -79,7 +78,7 @@ export const PFooter = () => {
                     <Grid item>
                         <IconAndText
                             icon={SettingsApplicationsTwoTone}
-                            onClick={() => openModal("setting")}
+                            onClick={() => setIsSetting(!isSetting)}
                             text="Setting"
                         />
                     </Grid>
