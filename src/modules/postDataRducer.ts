@@ -1,15 +1,13 @@
 import React from 'react'
-import { PostData, Store } from "./Store";
+import { PostData, Store, PostDataSingle } from "./Store";
 import { reducerLogger } from "./reducerLogger";
 import fetch from "node-fetch";
+import { StepContent } from '@material-ui/core';
 
 export type PostDataAction =
   | { type: "GET"; payload: PostData }
-  | {
-      type: "CREATE_POST";
-      payload: { id: number; title: string; date: string; content: string };
-    }
-  | { type: "UPDATE_CONTENT"; payload: { id: number; content: string } }
+  | { type: "CREATE_POST", payload: PostDataSingle }
+  | { type: "UPDATE_POST"; payload: PostDataSingle }
   | { type: "DELETE_POST"; payload: { id: number } };
 
 export function postDataReducer(state: PostData, action: PostDataAction) {
@@ -23,18 +21,18 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
         const arr = [...state, action.payload];
         newState = arr.concat();
         break;
-      case "UPDATE_CONTENT":
-        const targetArticle = state[action.payload.id];
-        const newArticle = Object.assign(targetArticle, {
-          content: action.payload.content,
-        });
-        let articles = state.concat();
-        articles[action.payload.id] = newArticle;
-        newState = articles;
+      case "UPDATE_POST":
+          newState = state.map((value, index) => {
+            if (value.id === action.payload.id) {
+                return action.payload
+            } else {
+                return value
+            }
+          })
         break;
       case "DELETE_POST":
         newState = state.filter((value, index) =>{
-            return state[index].id !== action.payload.id
+            return value.id !== action.payload.id;
         })
         break;
 
@@ -74,31 +72,63 @@ export const useCreatePost = () => {
         }
     }
 }
+export const useGetSinglePost = () => {
+    return async (
+      id: number,
+        setTitle,
+        setContent,
+    //   titleRef,
+    //   contentRef,
+      setIsEdit,
+      setEdittingPostParams
+    ) => {
+      console.log(id);
+    //   console.log(JSON.stringify({ id }));
+    //   console.log(JSON.stringify(id));
 
-export const useUpdateContent = () => {
-    const { dispatchPostData } = React.useContext(Store)
-    return async (id: number, content: string) => {
-        console.log(id + content);
-        
       const res = await fetch(
-        `http://${location.host}/post_data/update/content`,
+        `http://${location.host}/post_data/get/singlepost`,
         {
           headers: { "Content-Type": "application/json" },
           method: "POST",
           mode: "cors",
-          body: JSON.stringify({
-            id: id,
-            content: content,
-          }),
+          body: JSON.stringify({ id }),
         }
       );
       const data = await res.json();
       console.log(data);
-      
+
+      if (data.err === true) {
+        alert("記事を取得できませんでした");
+      } else {
+        setTitle(data.title);
+        // titleRef.current.value = data.title
+        //   contentRef.current.value = data.content
+          setContent(data.content);
+          setIsEdit(true);
+        setEdittingPostParams(data);
+        // console.log("useGetSinglePost内のtitleRef" + titleRef);
+      }
+    };
+};
+
+export const useUpdatePost = () => {
+    const { dispatchPostData } = React.useContext(Store)
+    return async (params, setIsEdit) => {
+      const res = await fetch(`http://${location.host}/post_data/update/post`, {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(params),
+      });
+      const data = await res.json();
+      console.log(data);
+
       if (data.err === true) {
         alert("更新できませんでした");
       } else {
-        dispatchPostData({ type: "UPDATE_CONTENT", payload: {id, content} });
+        dispatchPostData({ type: "UPDATE_POST", payload: params });
+        setIsEdit(false);
       }
     };
 

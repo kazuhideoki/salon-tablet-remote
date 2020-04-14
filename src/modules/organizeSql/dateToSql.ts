@@ -6,13 +6,13 @@ export const dateToSql = (date) => {
     }
     return num;   
     }  
-
-     var yyyy = date.getFullYear();
-     var mm = toDoubleDigits(date.getMonth() + 1);
-     var dd = toDoubleDigits(date.getDate());
-     var hh = toDoubleDigits(date.getHours());
-     var mi = toDoubleDigits(date.getMinutes());
-     const sc = toDoubleDigits(date.getSeconds());
+    const dateObj = new Date(date)
+     var yyyy = dateObj.getFullYear();
+     var mm = toDoubleDigits(dateObj.getMonth() + 1);
+     var dd = toDoubleDigits(dateObj.getDate());
+     var hh = toDoubleDigits(dateObj.getHours());
+     var mi = toDoubleDigits(dateObj.getMinutes());
+     const sc = toDoubleDigits(dateObj.getSeconds());
      return yyyy + "-" + mm + "-" + dd + " " + hh + ":" + mi + ":" + sc;
 
 

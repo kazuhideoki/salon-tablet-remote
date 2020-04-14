@@ -7,7 +7,7 @@ import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-u
 import { pickStaffImg } from "./modules/pickStaffImg";
 import { StyledPaper } from "./StyledComponent/StyledPaper";
 import { useStylesFactory } from "./modules/useStylesFactory";
-import { useUpdateContent } from "./modules/postDataRducer";
+import { useUpdatePost } from "./modules/postDataRducer";
 
 const styles = {
     root: {
@@ -103,7 +103,6 @@ const PMainPresenter: React.FC<Props> = ({
   const instaRef = React.useRef(null);
 
 //   const updataArticle = (key: number, content: string) => useUpdateArticle(key, content);
-  const updataArticle = useUpdateContent();
 
   //   インスタ表示のときはレイアウトを変える
   if (articles && wpParams.categories === 187) {

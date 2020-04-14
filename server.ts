@@ -48,6 +48,7 @@ app.prepare().then(() => {
         });
       });
     });
+    
 
     server.post("/post_data/create/post", (req, res) => {
         const {title, date, content} = req.body
@@ -79,7 +80,29 @@ app.prepare().then(() => {
         });
      });
 
-    server.post("/post_data/update/content", (req, res) => {
+     server.post("/post_data/get/singlepost", (req, res) => {
+         console.log(req.body);
+         
+        corsHeader(res);
+       const connection = mysql.createConnection(mysqlSetting);
+       connection.connect(function (err) {
+         if (err) throw err;
+         const query = "SELECT * FROM `post_data` where id=" + req.body.id;
+
+         connection.query(query, function (err, result, fields) {
+           if (err) console.debug(err);
+           console.dir('singlepostのresultは'+ JSON.stringify(result));
+           console.dir('singlepostのfieldsは'+ JSON.stringify(fields));
+           
+           
+
+           return res.send(result[0]);
+         });
+       });
+     });
+
+    server.post("/post_data/update/post", (req, res) => {
+        const {id, title, date, content} = req.body
         console.log(req.body);
         corsHeader(res);
         
@@ -88,15 +111,15 @@ app.prepare().then(() => {
         connection.connect(function (err) {
             if (err) throw err;
             const query =
-            "update post_data set content='" +
-            req.body.content +
-            "' where id=" +
-            req.body.id;
+            "UPDATE `post_data` SET title='" +
+            title + "', date='" + date + "', content='" + content + "' WHERE id=" + id;
             connection.query(query, function (err, result, fields) {
+                console.log(query);
+                
             if (err) {
-                res.send({ err: true, Message: "Error executing MySQL query" });
+                res.send({ err: true, Message: "Error executing MySQL query", body: err});
             }
-            console.log(result);
+            console.dir('updatepostのresultは ' + JSON.stringify(result));
 
             return res.send(result);
             });
@@ -118,7 +141,7 @@ app.prepare().then(() => {
 
              res.send({ err: true, Message: "Error executing MySQL query" });
            }
-           console.log(result);
+           console.dir('deletepostのresultは ' + JSON.stringify(result));
 
            return res.send(result);
          });
