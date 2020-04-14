@@ -19,13 +19,7 @@ const styles = {
   }
 };
 
-type Props = {
-    classes: Record<"root" | "img" | "p", string>
-    SortedNotice: any[]
-    setAndOpenArticleModal: () => void
-}
-
-const PHeaderContainer = ({presenter}: any) => {
+export const PHeader = () => {
     const classes = useStylesFactory(styles)
 
     const { wpData, wpParams, dispatchWpData, dispatchAppState } = React.useContext(Store);
@@ -43,32 +37,46 @@ const PHeaderContainer = ({presenter}: any) => {
         SortedNotice,
         setAndOpenArticleModal
     }
-    return presenter(props)
+    type Props = typeof props
+
+
+
+    const PHeaderPresenter = ({
+        classes,
+        SortedNotice,
+        setAndOpenArticleModal,
+    }: Props) => {
+        let displayNotice;
+        if (SortedNotice) {
+            displayNotice = SortedNotice.map((value, key) => (
+                <StyledPaper
+                    key={key}
+                    className={classes.root}
+                    onClick={() => setAndOpenArticleModal()}
+                >
+                    <Typography variant="subtitle1">
+                        <img
+                            className={classes.img}
+                            src={value.featuredImg}
+                            alt={value.title}
+                        />
+                        {value.title} {value.date}
+                    </Typography>
+                </StyledPaper>
+            ));
+        } else {
+            displayNotice = (
+                <StyledPaper>
+                    <h2>Welcome to Naoki Hair Dressing!</h2>
+                </StyledPaper>
+            );
+        }
+
+        return <>{displayNotice}</>;
+    };
+
+
+
+    return PHeaderPresenter(props);
 }
 
-const PHeaderPresenter = ({ classes, SortedNotice, setAndOpenArticleModal }: Props) => {
-    let displayNotice
-    if (SortedNotice) {
-        displayNotice = SortedNotice.map((value, key) => (
-            <StyledPaper key={key} className={classes.root} onClick={() => setAndOpenArticleModal()}>
-                <Typography variant="subtitle1">
-                    <img
-                        className={classes.img}
-                        src={value.featuredImg}
-                        alt={value.title}
-                    />
-                    {value.title} {value.date}
-                </Typography>
-            </StyledPaper>
-         ))   
-    }else {
-        displayNotice = <StyledPaper><h2>Welcome to Naoki Hair Dressing!</h2></StyledPaper>
-    }
-
-    return <>{displayNotice}</>
-
-}
-
-export const PHeader = () => (
-    <PHeaderContainer presenter={(props: Props) => <PHeaderPresenter {...props} />} />
-)

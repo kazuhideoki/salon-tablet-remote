@@ -48,6 +48,7 @@ export type WpData = {
 };
 
 const initAppState = {
+    isEdit: false,
     setModal: 'magazines',
     isModalOpen: false,
     isArticleModalOpen: false,

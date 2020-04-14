@@ -25,18 +25,9 @@ const styles = {
         
     },
 }
-
-type Props = {
-    classes: Record<string, string>
-    setModal: AppState["setModal"],
-    isModalOpen: AppState["isModalOpen"]
-    openModal: (name: string) => void,
-    closeModal: () => void,
-    setParamsAndClose: ({ type, payload }: SetParamsAndClose) => void
-}
 type SetParamsAndClose = Tag | Author
 
-const PModalContainer = ({presenter}: any) => {
+export const PModal = () => {
     const classes = useStylesFactory(styles);
 
     const { dispatchWpParams, appState, dispatchAppState } = React.useContext(Store)
@@ -62,95 +53,92 @@ const PModalContainer = ({presenter}: any) => {
         closeModal,
         setParamsAndClose
     };
+    type Props = typeof props
 
-    return presenter(props)
+
+    const PModalPresenter = ({
+        classes,
+        setModal,
+        isModalOpen,
+        openModal,
+        closeModal,
+        setParamsAndClose,
+    }: Props) => {
+        // modalは内容、modalStyle内容に応じてDialogのstyleを変える
+        let ModalContent = () => <></>;
+        let modalStyle = null;
+        const size90 = {
+            width: "90vw",
+            height: "90vh",
+            padding: 0,
+            overflow: "hidden",
+        };
+        const size100 = {
+            width: "100vw",
+            height: "100vh",
+            padding: 0,
+        };
+
+        switch (setModal) {
+            case "colorChart":
+                modalStyle = size90;
+                ModalContent = () => <ColorChart />;
+                break;
+            case "tag":
+                ModalContent = () => (
+                    <TagModal
+                        setParamsAndClose={setParamsAndClose}
+                        className={classes.tagAuthorRoot}
+                    />
+                );
+                break;
+            case "setting":
+                ModalContent = () => <Setting openModal={openModal} />;
+                break;
+            case "edit_article":
+                modalStyle = size100;
+                ModalContent = () => <EditArticle />;
+                break;
+            case "edit_footer":
+                modalStyle = size90;
+                ModalContent = () => <EditFooter />;
+                break;
+
+            default:
+                console.log("エラーだよ、PModal");
+        }
+
+        // modalStyleの指定がなければデフォルト値をあてる
+        let paperStyle: any = modalStyle || {
+            width: 500,
+            height: 500,
+            padding: 30,
+        };
+        paperStyle.maxWidth = "100%";
+        paperStyle.maxHeight = "100%";
+        paperStyle.margin = 0;
+
+        const StyledDialog = withStyles({
+            paper: paperStyle,
+        })(Dialog);
+
+        return (
+            <StyledDialog
+                open={isModalOpen}
+                TransitionComponent={Transition}
+                onClose={closeModal}
+                maxWidth="xl"
+            >
+                <CloseButton onClick={closeModal} />
+                <DialogContent className={classes.dialogContent}>
+                    <ModalContent />
+                </DialogContent>
+            </StyledDialog>
+        );
+    };
+
+
+
+    return PModalPresenter(props);
 
 }
-
-const PModalPresenter = ({
-    classes,
-    setModal,
-    isModalOpen,
-    openModal,
-    closeModal,
-    setParamsAndClose,
-}: Props) => {
-    // modalは内容、modalStyle内容に応じてDialogのstyleを変える
-    let ModalContent = () => <></>
-    let modalStyle = null
-    const size90 = {
-        width: "90vw",
-        height: "90vh",
-        padding: 0,
-        overflow: "hidden",
-    }
-    const size100 = {
-        width: "100vw",
-        height: "100vh",
-        padding: 0,
-
-    }
-    
-    switch (setModal) {
-        case "colorChart":
-            modalStyle = size90      
-            ModalContent = () => <ColorChart/>
-        break;
-        case "tag":
-
-            ModalContent = () => (
-              <TagModal
-                setParamsAndClose={setParamsAndClose}
-                className={classes.tagAuthorRoot}
-              />
-            );
-        break;
-        case "setting":
-            ModalContent = () => <Setting openModal={openModal} />;
-        break;
-        case "edit_article":
-            modalStyle = size100;
-            ModalContent = () => <EditArticle/>
-        break;
-        case "edit_footer":
-            modalStyle = size90;
-            ModalContent = () => <EditFooter/>
-        break;
-
-        default:
-        console.log("エラーだよ、PModal");
-    }
-    
-    // modalStyleの指定がなければデフォルト値をあてる
-    let paperStyle: any = modalStyle || {
-        width: 500,
-        height: 500,
-        padding: 30
-    }
-    paperStyle.maxWidth = "100%"
-    paperStyle.maxHeight = "100%"
-    paperStyle.margin = 0
-
-
-    const StyledDialog = withStyles({
-        paper: paperStyle
-    })(Dialog);
-
-    return (
-        <StyledDialog
-        open={isModalOpen}
-        TransitionComponent={Transition}
-        onClose={closeModal}
-        maxWidth="xl"
-        >
-            <CloseButton onClick={closeModal}/>
-            <DialogContent className={classes.dialogContent}>
-                <ModalContent/>
-            </DialogContent>
-        </StyledDialog>
-    );
-};
-
-export const PModal = () => (
-    <PModalContainer presenter={(props: Props) => <PModalPresenter {...props} />} />
-);

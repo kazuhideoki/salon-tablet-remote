@@ -57,7 +57,7 @@ type Props = {
     isLoading: boolean
 }
 
-const AppContainer = ({presenter}: any)=> {
+export const App = ()=> {
     const classes = useStylesFactory(styles)
 
     const { wpParams, dispatchWpData, appState, dispatchAppState, setTotalPages } = React.useContext(Store);
@@ -97,41 +97,39 @@ const AppContainer = ({presenter}: any)=> {
     classes,
     isLoading,
     };
+    type Props = typeof props
 
-    return presenter(props)
-}
 
-const AppPresenter = ({
-    classes,
-    isLoading,
-}: Props) => {
 
-    return (
-      <div className={classes.root}>
-        <Grid
-          spacing={0}
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-          className={classes.gridRoot}
-        >
-          {/* <Grid item className={classes.header}>
+    const AppPresenter = ({ classes, isLoading }: Props) => {
+        return (
+            <div className={classes.root}>
+                <Grid
+                    spacing={0}
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.gridRoot}
+                >
+                    {/* <Grid item className={classes.header}>
                     <PHeader />
                 </Grid> */}
-          <Grid item className={classes.main}>
-            {!isLoading ? <PMain /> : <Skeleton />}
-          </Grid>
-          <Grid item className={classes.footer}>
-            <PFooter />
-          </Grid>
-          {/* <PArticleModal /> */}
-          <PModal />
-        </Grid>
-      </div>
-    );
-};
+                    <Grid item className={classes.main}>
+                        {!isLoading ? <PMain /> : <Skeleton />}
+                    </Grid>
+                    <Grid item className={classes.footer}>
+                        <PFooter />
+                    </Grid>
+                    {/* <PArticleModal /> */}
+                    <PModal />
+                </Grid>
+            </div>
+        );
+    };
 
-export const App = () => (
-    <AppContainer presenter={(props: Props) => <AppPresenter {...props} />} />
-);
+
+
+    return AppPresenter(props)
+}
+

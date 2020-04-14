@@ -1,6 +1,6 @@
 import React from 'react'
 import { Store } from "./modules/Store";
-import { WpParamsAction } from "./modules/wpParamsReducer";
+import { MainHome } from "./modules/wpParamsReducer";
 import {
     Home,
     Label,
@@ -46,15 +46,7 @@ export type pageArrowProps = {
   classesIcon?: string
 };
 
-type Props = {
-    classes: Record<string, string>
-    currentPage: number
-    openModal: (modalName: string) => void
-    setParams: (type: any) => void
-    totalPages: number
-}
-
-const PPaginationContainer = ({ presenter }: any) => {
+export const PPagination = () => {
     const classes = useStylesFactory(styles)
     const { wpParams, dispatchWpParams, dispatchAppState, totalPages } = React.useContext(
       Store
@@ -66,9 +58,9 @@ const PPaginationContainer = ({ presenter }: any) => {
     }
 
     // wpParamsReducerのWpParamsActionで上手く行かなった。検討の余地あり
-    const setParams = (arg: WpParamsAction) => {
-      dispatchAppState({ type: "START_LOADING" });
-      dispatchWpParams(arg);
+    const setParams = (arg: MainHome) => {
+        dispatchAppState({ type: "START_LOADING" });
+        dispatchWpParams(arg);
     };
     
     const props = {
@@ -78,71 +70,84 @@ const PPaginationContainer = ({ presenter }: any) => {
         setParams,
         totalPages,
     };
+    type Props = typeof props
 
-    return presenter(props)
-}
 
-const PPaginationPresenter = ({
-    classes,
-    currentPage,
-    openModal,
-    setParams,
-    totalPages,
-}: Props) => { 
-    const HomeButton = () => {
-        const arg = { type: "MAINHOME" };
-        return <Home onClick={() => setParams(arg)} className={classes.icon}/>;
-    };
-    const Tag = () => <Label onClick={() => openModal("tag")} className={classes.icon}/>;
-    const Author = () => <Person onClick={() => openModal("author")} className={classes.icon}/>;
+    const PPaginationPresenter = ({
+        classes,
+        currentPage,
+        openModal,
+        setParams,
+        totalPages,
+    }: Props) => { 
+        const HomeButton = () => {
+            const arg = { type: "MAINHOME" } as const
+            return (
+                <Home onClick={() => setParams(arg)} className={classes.icon} />
+            );
+        };
+        const Tag = () => (
+            <Label onClick={() => openModal("tag")} className={classes.icon} />
+        );
+        const Author = () => (
+            <Person
+                onClick={() => openModal("author")}
+                className={classes.icon}
+            />
+        );
 
-    const PageNumber = () => {
-        return <p className={classes.nums}>【 {currentPage}/{totalPages} 】</p>
-    }
+        const PageNumber = () => {
+            return (
+                <p className={classes.nums}>
+                    【 {currentPage}/{totalPages} 】
+                </p>
+            );
+        };
 
-    const SelectParams = () => (
-        <>
-            <Grid item>
-                <HomeButton />
+        const SelectParams = () => (
+            <>
+                <Grid item>
+                    <HomeButton />
+                </Grid>
+            </>
+        );
+
+        const Pagination = () => (
+            <Grid item className={classes.pagination}>
+                <Latest
+                    setParams={setParams}
+                    classesDisable={classes.disable}
+                    classesIcon={classes.icon}
+                />
+                <Prev
+                    setParams={setParams}
+                    classesDisable={classes.disable}
+                    classesIcon={classes.icon}
+                />
+                <DisplayNumbers setParams={setParams} />
+                <Next
+                    setParams={setParams}
+                    classesDisable={classes.disable}
+                    classesIcon={classes.icon}
+                />
+                <Oldest
+                    setParams={setParams}
+                    classesDisable={classes.disable}
+                    classesIcon={classes.icon}
+                />
             </Grid>
-        </>
-    )
+        );
 
-    const Pagination = () => (
-      <Grid item className={classes.pagination}>
-        <Latest
-          setParams={setParams}
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-        />
-        <Prev
-          setParams={setParams}
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-        />
-        <DisplayNumbers setParams={setParams} />
-        <Next
-          setParams={setParams}
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-        />
-        <Oldest
-          setParams={setParams}
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-        />
-      </Grid>
-    );
+        return (
+            <Grid container justify="center" spacing={1}>
+                <SelectParams />
+                <PageNumber />
+                <Pagination />
+            </Grid>
+        );
+    };
 
-    return (
-        <Grid container justify="center" spacing={1}>
-            <SelectParams />
-            <PageNumber />
-            <Pagination />
-        </Grid>
-    );
-};
 
-export const PPagination = () => (
-    <PPaginationContainer presenter={(props: Props) => <PPaginationPresenter {...props} />} />
-);
+
+    return PPaginationPresenter(props);
+}

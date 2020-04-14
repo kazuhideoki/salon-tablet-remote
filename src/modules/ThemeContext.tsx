@@ -48,7 +48,7 @@ const themes = {
     // fontSize
     icon: 85,
     iconSmall : 38,
-};
+} as const
 
 export type ThemeType = typeof themes;
 
