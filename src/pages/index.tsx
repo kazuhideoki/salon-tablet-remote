@@ -24,9 +24,9 @@ export async function getServerSideProps() {
       method: "GET",
     });
     const data = await res.json();
-    console.log("initialは" + data);
+    console.log("indexのserversideは" + JSON.stringify(data));
     
-    return {props: {data}};
+    return {props: {data: data.rawData}};
 
 };
 

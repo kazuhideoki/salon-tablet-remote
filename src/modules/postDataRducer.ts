@@ -2,41 +2,40 @@ import React from 'react'
 import { PostData, Store, PostDataSingle } from "./Store";
 import { reducerLogger } from "./reducerLogger";
 import fetch from "node-fetch";
-import { StepContent } from '@material-ui/core';
 
 export type PostDataAction =
-  | { type: "GET"; payload: PostData }
-  | { type: "CREATE_POST", payload: PostDataSingle }
-  | { type: "UPDATE_POST"; payload: PostDataSingle }
-  | { type: "DELETE_POST"; payload: { id: number } };
+| { type: "GET"; payload: PostData }
+| { type: "CREATE_POST", payload: PostDataSingle }
+| { type: "UPDATE_POST"; payload: PostDataSingle }
+| { type: "DELETE_POST"; payload: { id: number } };
 
 export function postDataReducer(state: PostData, action: PostDataAction) {
     let newState: PostData;
     const func = postDataReducer;
     switch (action.type) {
-      case "GET":
+    case "GET":
         newState = action.payload;
         break;
-      case "CREATE_POST":
+    case "CREATE_POST":
         const arr = [...state, action.payload];
         newState = arr.concat();
         break;
-      case "UPDATE_POST":
-          newState = state.map((value, index) => {
+    case "UPDATE_POST":
+        newState = state.map((value, index) => {
             if (value.id === action.payload.id) {
                 return action.payload
             } else {
                 return value
             }
-          })
+        })
         break;
-      case "DELETE_POST":
+    case "DELETE_POST":
         newState = state.filter((value, index) =>{
             return value.id !== action.payload.id;
         })
         break;
 
-      default:
+    default:
         console.log("エラーだよ, postDataReducer");
         newState = { ...state };
     }
@@ -50,13 +49,13 @@ export const useCreatePost = () => {
     return async (title:string, date:string, content:string) => {
         let params = { id:0 , title, date, content }
         const res = await fetch(
-          `http://${location.host}/post_data/create/post`,
-          {
+        `http://${location.host}/post_data/create/post`,
+        {
             headers: { "Content-Type": "application/json" },
             method: "POST",
             mode: "cors",
             body: JSON.stringify(params),
-          }
+        }
         );
         const data = await res.json();
         console.log(data);
@@ -65,71 +64,71 @@ export const useCreatePost = () => {
         if (data.err === true) {
         alert("投稿できませんでした");
         } else {
+        params.id = data.rawData.id
         dispatchPostData({
-          type: "CREATE_POST",
-          payload: params,
+        type: "CREATE_POST",
+        payload: params,
         });
         }
     }
 }
 export const useGetSinglePost = () => {
     return async (
-      id: number,
+    id: number,
         setTitle,
         setContent,
     //   titleRef,
     //   contentRef,
-      setIsEdit,
-      setEdittingPostParams
+    setIsEdit,
+    setEdittingPostParams
     ) => {
-      console.log(id);
+    console.log(id);
     //   console.log(JSON.stringify({ id }));
     //   console.log(JSON.stringify(id));
 
-      const res = await fetch(
+    const res = await fetch(
         `http://${location.host}/post_data/get/singlepost`,
         {
-          headers: { "Content-Type": "application/json" },
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify({ id }),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ id }),
         }
-      );
-      const data = await res.json();
-      console.log(data);
+    );
+    const data = await res.json();
+    console.log(data);
 
-      if (data.err === true) {
+    if (data.err === true) {
         alert("記事を取得できませんでした");
-      } else {
-        setTitle(data.title);
-        // titleRef.current.value = data.title
-        //   contentRef.current.value = data.content
-          setContent(data.content);
-          setIsEdit(true);
-        setEdittingPostParams(data);
-        // console.log("useGetSinglePost内のtitleRef" + titleRef);
-      }
+    } else {
+        const {title, content} = data.rawData
+        setTitle(title);
+        setContent(content);
+        setIsEdit(true);
+        setEdittingPostParams(data.rawData);
+
+    }
     };
 };
 
 export const useUpdatePost = () => {
     const { dispatchPostData } = React.useContext(Store)
     return async (params, setIsEdit) => {
-      const res = await fetch(`http://${location.host}/post_data/update/post`, {
+    const res = await fetch(`http://${location.host}/post_data/update/post`, {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
         body: JSON.stringify(params),
-      });
-      const data = await res.json();
-      console.log(data);
+    });
+    const data = await res.json();
+    console.log(data);
 
-      if (data.err === true) {
+    if (data.err === true) {
         alert("更新できませんでした");
-      } else {
+    } else {
         dispatchPostData({ type: "UPDATE_POST", payload: params });
         setIsEdit(false);
-      }
+    }
     };
 
 }
@@ -138,23 +137,23 @@ export const useDeletePost = () => {
     return async (id: number) => {
         console.log(id);
         
-      const res = await fetch(
+    const res = await fetch(
         `http://${location.host}/post_data/delete/post`,
         {
-          headers: { "Content-Type": "application/json" },
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify({id}),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({id}),
         }
-      );
-      const data = await res.json();
-      console.log(data);
-      
-      if (data.err === true) {
+    );
+    const data = await res.json();
+    console.log(data);
+    
+    if (data.err === true) {
         alert("削除できませんでした");
-      } else {
+    } else {
         dispatchPostData({ type: "DELETE_POST", payload: {id} });
-      }
+    }
     };
 
 }
