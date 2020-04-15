@@ -10,6 +10,7 @@ import { useStylesFactory } from "./modules/useStylesFactory";
 import { useUpdatePost } from "./modules/postDataRducer";
 import { UpdatePostButton } from "./molecules/UpdatePostButton";
 import { DeletePostButton } from "./molecules/DeletePostButton";
+import { CreatePostButton } from "./molecules/CreatePostButton";
 
 const styles = {
     root: {
@@ -17,7 +18,7 @@ const styles = {
         height: "100%",
     },
     item: {
-        position: 'relative',
+        position: "relative",
         height: "100%",
     },
     article: {
@@ -52,15 +53,23 @@ const styles = {
         width: 50,
     },
     updatePostButton: {
-        position: 'absolute',
+        position: "absolute",
         top: 0,
-        right: 0
+        right: 0,
+        zIndex: 100,
     },
     deletePostButton: {
-        position: 'absolute',
+        position: "absolute",
         top: 0,
-        right: 50
-    }
+        right: 50,
+        zIndex: 100,
+    },
+    createPostButton: {
+        position: "absolute",
+        top: 50,
+        left: 100,
+        zIndex: 100,
+    },
 };
 
 export const PMain = () => {
@@ -136,16 +145,16 @@ export const PMain = () => {
 
                 return (
                     <Grid item key={key} className={classes.item}>
-                        {isSetting ? 
+                        {isSetting ? (
                             <UpdatePostButton
                                 position={classes.updatePostButton}
                             />
-                        : null }
-                        {isSetting ? 
-                            <UpdatePostButton
+                        ) : null}
+                        {isSetting ? (
+                            <DeletePostButton
                                 position={classes.updatePostButton}
                             />
-                        : null }
+                        ) : null}
 
                         <Card
                             variant="outlined"
@@ -221,6 +230,9 @@ export const PMain = () => {
                 spacing={2}
                 ref={instaRef}
             >
+                {isSetting ? (
+                    <CreatePostButton position={classes.createPostButton} />
+                ) : null}
                 {displayArticles}
             </Grid>
         );
