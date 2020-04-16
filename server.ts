@@ -13,7 +13,7 @@ const server = express();
 
 // @ts-ignore
 const knex = require("knex")({
-    dialect: "mysql",
+    client: "mysql",
     connection: {
         host: "localhost",
         user: "root",
@@ -46,6 +46,7 @@ app.prepare().then(() => {
         .then((result) => {
             const data = { rawData: result.toArray() };
             res.send(data)
+            console.log(JSON.stringify(result));
         })
         .catch((err) => {
             console.log(JSON.stringify(err));

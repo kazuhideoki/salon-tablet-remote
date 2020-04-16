@@ -148,11 +148,14 @@ export const PMain = () => {
                         {isSetting ? (
                             <UpdatePostButton
                                 position={classes.updatePostButton}
+                                // params={params}
+                                // setIsEdit={setIsEdit}
                             />
                         ) : null}
                         {isSetting ? (
                             <DeletePostButton
-                                position={classes.updatePostButton}
+                                position={classes.deletePostButton}
+                                id={value.id}
                             />
                         ) : null}
 
@@ -222,7 +225,7 @@ export const PMain = () => {
         });
 
         return (
-            <Grid
+            <Grid 
                 id="p_main"
                 container
                 wrap="nowrap"

@@ -20,9 +20,9 @@ const Index = (props) =>{
     );}
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/post_data/get", {
-      method: "GET",
-    });
+    const res = await fetch("http://localhost:3000/post_data/get");
+    console.log(JSON.stringify(res));
+
     const data = await res.json();
     console.log("indexのserversideは" + JSON.stringify(data));
     

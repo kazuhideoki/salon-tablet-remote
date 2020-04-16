@@ -8,7 +8,7 @@ export const CreatePostButton = (props) => {
             variant="contained"
             color="primary"
             size="large"
-            className={props.classes.createPostButton}
+            className={props.createPostButton}
             endIcon={<NoteAddTwoTone />}
         >
             Save
