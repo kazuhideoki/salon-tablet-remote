@@ -72,6 +72,33 @@ export const useCreatePost = () => {
         }
     }
 }
+export const useCreatePostD = () => {
+    const { dispatchPostData } = React.useContext(Store);
+    return async (editorState) => {
+        const res = await fetch(
+        `http://${location.host}/post_data/create/postd`,
+        {
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(editorState),
+        }
+        );
+        const data = await res.json();
+        console.log(data);
+        // params.id = data.insertId;
+
+        if (data.err === true) {
+        alert("投稿できませんでした");
+        } else {
+        // params.id = data.rawData.id
+        dispatchPostData({
+        type: "CREATE_POST",
+            payload: editorState,
+        });
+        }
+    }
+}
 export const useGetSinglePost = () => {
     return async (
     id: number,

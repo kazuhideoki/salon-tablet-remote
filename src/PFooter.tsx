@@ -27,7 +27,7 @@ const styles = {
 export const PFooter = () => {
     const themes = React.useContext(ThemeContext);
     const classes = useStylesFactory(styles);
-    const { wpParams, dispatchWpParams, dispatchAppState, isSetting, setIsSetting } = useContext(Store);
+    const { wpParams, dispatchWpParams, dispatchAppState } = useContext(Store);
 
     const changeLang = () => {
         dispatchAppState({ type: "START_LOADING" });
@@ -43,11 +43,11 @@ export const PFooter = () => {
         themes,
         changeLang,
         openModal,
+        dispatchAppState,
     };
     type Props = typeof props;
 
-    const PFooterPresenter = (props: Props) => {
-        const { w, classes, themes, changeLang, openModal } = props;
+    const PFooterPresenter = ({ w, classes, themes, changeLang, openModal, dispatchAppState }: Props) => {
         return (
             <div className={classes.root}>
                 <PPagination />
@@ -78,7 +78,7 @@ export const PFooter = () => {
                     <Grid item>
                         <IconAndText
                             icon={SettingsApplicationsTwoTone}
-                            onClick={() => setIsSetting(!isSetting)}
+                            onClick={() => dispatchAppState({type: 'TOGGLE_IS_SETTING'})}
                             text="Setting"
                         />
                     </Grid>

@@ -48,6 +48,7 @@ export type WpData = {
 };
 
 const initAppState = {
+    isSetting: false,
     setModal: "magazines",
     isModalOpen: false,
     isArticleModalOpen: false,
@@ -72,8 +73,8 @@ export type ContextProps = {
     dispatchAppState: DispatchAppState;
     totalPages: number;
     setTotalPages: SetTotalPages;
-    isSetting: boolean;
-    setIsSetting: React.Dispatch<React.SetStateAction<boolean>>
+    // isSetting: boolean;
+    // setIsSetting: React.Dispatch<React.SetStateAction<boolean>>
 };
 const Store = React.createContext({} as ContextProps);
 
@@ -88,7 +89,7 @@ const StoreContextProvider: React.FC<Props> = (props) => {
     const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState);
     // トータルページ数を取得、paginationに利用
     const [totalPages, setTotalPages] = useState(1)
-    const [isSetting, setIsSetting] = useState(false)
+    // const [isSetting, setIsSetting] = useState(false)
 
     const values = {
         postData,
@@ -101,8 +102,8 @@ const StoreContextProvider: React.FC<Props> = (props) => {
         dispatchAppState,
         totalPages,
         setTotalPages,
-        isSetting,
-        setIsSetting,
+        // isSetting,
+        // setIsSetting,
     };
 
     return (

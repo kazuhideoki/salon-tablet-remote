@@ -82,7 +82,7 @@ export const PMain = () => {
       wpData,
       dispatchWpData,
       dispatchAppState,
-      isSetting,
+    //   isSetting,
     } = React.useContext(Store);
     // 利用するデータを抜き出し、authorをnumberから名前に変える
     let articles = sortDataPosts(wpData.articles);
@@ -101,7 +101,8 @@ export const PMain = () => {
       classes,
       articles,
       setAndOpenArticleModal,
-    };
+    dispatchAppState,
+        };
     type Props = typeof props
 
 
@@ -112,6 +113,7 @@ export const PMain = () => {
         classes,
         articles,
         setAndOpenArticleModal,
+        dispatchAppState,
     }: Props) => {
         let displayArticles;
         const instaRef = React.useRef(null);
@@ -145,14 +147,14 @@ export const PMain = () => {
 
                 return (
                     <Grid item key={key} className={classes.item}>
-                        {isSetting ? (
+                        {appState.isSetting ? (
                             <UpdatePostButton
                                 position={classes.updatePostButton}
                                 // params={params}
                                 // setIsEdit={setIsEdit}
                             />
                         ) : null}
-                        {isSetting ? (
+                        {appState.isSetting ? (
                             <DeletePostButton
                                 position={classes.deletePostButton}
                                 id={value.id}
@@ -233,8 +235,8 @@ export const PMain = () => {
                 spacing={2}
                 ref={instaRef}
             >
-                {isSetting ? (
-                    <CreatePostButton position={classes.createPostButton} />
+                {appState.isSetting ? (
+                    <CreatePostButton position={classes.createPostButton}/>
                 ) : null}
                 {displayArticles}
             </Grid>

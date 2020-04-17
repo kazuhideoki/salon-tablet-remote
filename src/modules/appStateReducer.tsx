@@ -2,8 +2,9 @@ import { AppState } from './Store'
 import { reducerLogger } from "./reducerLogger";
 
 export type AppStateAction = 
+    { type: "TOGGLE_IS_SETTING" } |
     { type: "OPEN_MODAL", payload: string } |
-    { type: "CLOSE_MODAL" } |
+    { type: "CLOSE_MODAL" } | 
     { type: "OPEN_ARTICLE_MODAL" } |
     { type: "CLOSE_ARTICLE_MODAL" } |
     { type: "START_LOADING" } |
@@ -13,6 +14,12 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState
     const func = appStateReducer
     switch (action.type) {
+        case "TOGGLE_IS_SETTING":
+            newState =  {
+            ...state,
+            isSetting: !state.isSetting
+        };
+            break
         case "OPEN_MODAL":
             newState =  {
             ...state,

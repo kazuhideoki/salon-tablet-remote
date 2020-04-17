@@ -105,7 +105,7 @@ export const PModal = () => {
                 break;
 
             default:
-                console.log("エラーだよ、PModal");
+                console.log("エラーだよ、PModal→ '" + setModal +"'");
         }
 
         // modalStyleの指定がなければデフォルト値をあてる

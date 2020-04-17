@@ -1,13 +1,44 @@
-import React from 'react'
+import React from 'react' 
 import { dateToSql } from "../../modules/organizeSql/dateToSql";
 import { Store, PostDataSingle } from '../../modules/Store'
 import {
   useCreatePost,
+    useCreatePostD,
   useGetSinglePost,
   useUpdatePost, 
   useDeletePost,
 } from "../../modules/postDataRducer";
 import { sqlToDate } from '../../modules/organizeSql/sqlToDate';
+import { Editor, EditorState } from 'draft-js';
+
+const ArticleEditor = () => {
+    const [editorState, setEditorState] = React.useState(
+        EditorState.createEmpty(),
+    );
+    const createPostD = useCreatePostD()
+    const hundleSubmit = (editorState) => {
+    // if (isEdit) {
+    //     e.preventDefault();
+    //     const params = {
+    //         id: edittingPostParams.id,
+    //         title: title,
+    //         date: dateToSql(edittingPostParams.date),
+    //         content: content,
+    //     };
+    //     updatePost(params, setIsEdit);
+    // } else {
+        createPostD(editorState);
+        setEditorState(EditorState.createEmpty())
+    // }
+    }
+
+    return (<>
+    <Editor editorState={editorState} onChange={setEditorState} />
+        <button onClick={(editorState) => hundleSubmit(editorState)}></button>
+        </>
+    );
+}
+
 
 const PostForm = (props) => {
     const {
@@ -15,18 +46,11 @@ const PostForm = (props) => {
       setTitle,
       content,
       setContent,
-    //   titleRef,
-    //   contentRef,
       isEdit,
       setIsEdit,
       edittingPostParams,
       setEdittingPostParams,
     } = props;
-    // const [edittingPostParams, setEdittingPostParams] = React.useState({
-    //   id: 0,
-    //   title: '',
-    //   date: '',
-    //   content: '',
     const today = new Date()
     const date = dateToSql(today);
 
@@ -48,9 +72,7 @@ const PostForm = (props) => {
             e.preventDefault();
             createPost(title, date, content);
             setTitle('')
-            // titleRef.current.value = ''
             setContent('') 
-            // contentRef.current.value = ''
         }
     }
     const modeNotice = (isEdit) ? `${edittingPostParams.title}の記事を編集中` : "新規投稿"
@@ -69,7 +91,6 @@ const PostForm = (props) => {
         <input
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-        // ref={titleRef}
           type="text"
           name="title"
         />
@@ -78,7 +99,6 @@ const PostForm = (props) => {
           style={{ width: 300, height: 100 }}
           onChange={(e) => setContent(e.target.value)}
           value={content}
-        // ref={contentRef}
           type="text"
           name="content"
         />
@@ -96,8 +116,6 @@ const ShowArticle = (props) => {
         setTitle,
         content,
         setContent,
-    //   titleRef,
-    //   contentRef,
       isEdit,
       setIsEdit,
       setEdittingPostParams,
@@ -131,11 +149,8 @@ const ShowArticle = (props) => {
   return <>{articles}</>;
 };
 
-// const formRef = React.useRef(null)
 export const EditArticle = () => {
     const [title, setTitle] = React.useState("");
-    // const titleRef = React.useRef(null);
-    // const contentRef = React.useRef(null);
     const [content, setContent] = React.useState("");
     const [isEdit, setIsEdit] = React.useState(false);
     const [edittingPostParams, setEdittingPostParams] = React.useState(
@@ -147,8 +162,6 @@ export const EditArticle = () => {
       setTitle,
       content,
       setContent,
-    // titleRef,
-    // contentRef,
       isEdit,
       setIsEdit,
       edittingPostParams,
@@ -157,6 +170,7 @@ export const EditArticle = () => {
 
     return (
       <div>
+        <ArticleEditor/>
         <PostForm {...props} />
         <ShowArticle {...props} />
       </div>
