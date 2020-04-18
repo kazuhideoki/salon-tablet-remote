@@ -1,5 +1,5 @@
 import React from "react";
-import { App } from "../App";
+import { App } from "../app/App";
 import { ThemeProvider } from "../modules/ThemeContext";
 import { StoreContextProvider} from "../modules/Store";
 import fetch from "node-fetch";

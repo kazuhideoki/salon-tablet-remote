@@ -2,15 +2,15 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { PModal } from "./PModal";
-import { PHeader } from "./PHeader"; 
-import { PMain } from "./PMain";
-import { PFooter } from "./PFooter";
-import { Store } from "./modules/Store";
-import { PArticleModal } from "./PArticleModal";
-import { getWpPosts, getWpPostsImportant, getWpTags, getWpUsers } from "./modules/wpApiFetch";
-import { ThemeContext, ThemeType } from "./modules/ThemeContext";
-import { useStylesFactory } from "./modules/useStylesFactory";
+import { PModal } from "../PModal";
+import { PHeader } from "../PHeader"; 
+import { PMain } from "../PMain";
+import { PFooter } from "../PFooter";
+import { Store } from "../modules/Store";
+import { PArticleModal } from "../PArticleModal";
+import { getWpPosts, getWpPostsImportant, getWpTags, getWpUsers } from "../modules/wpApiFetch";
+import { ThemeContext, ThemeType } from "../modules/ThemeContext";
+import { useStylesFactory } from "../modules/useStylesFactory";
 
 
 // 3段のコンテナの整形に関してのみ記述, 
