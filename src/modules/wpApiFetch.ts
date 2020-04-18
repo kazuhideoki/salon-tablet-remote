@@ -1,6 +1,6 @@
 import { WpParams, SetTotalPages } from "./Store";
-import {SetArticlesImportantEn, SetArticlesImportantJa, SetTags, SetUsers } from "../App";
-import { SetSingleArticle } from "../PArticleModal";
+import {SetArticlesImportantEn, SetArticlesImportantJa, SetTags, SetUsers } from "../app/App";
+import { SetSingleArticle } from "../app/PArticleModal";
 
 export function makeApiParamsPosts(state: WpParams, perPage: number) {
     const per_page = perPage;

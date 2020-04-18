@@ -1,10 +1,10 @@
 import React from "react";
-import { Store } from './modules/Store'
-import { formatDate } from "./modules/organizeData";
-import { sortDataPosts } from "./modules/organizeData";
-import { StyledPaper } from "./StyledComponent/StyledPaper";
+import { Store } from '../modules/Store'
+import { formatDate } from "../modules/organizeData";
+import { sortDataPosts } from "../modules/organizeData";
+import { StyledPaper } from "../StyledComponent/StyledPaper";
 import { Typography } from "@material-ui/core";
-import { useStylesFactory } from "./modules/useStylesFactory";
+import { useStylesFactory } from "../modules/useStylesFactory";
 
 const styles = {
   root: {

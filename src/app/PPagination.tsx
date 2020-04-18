@@ -1,20 +1,20 @@
 import React from 'react'
-import { Store } from "./modules/Store";
-import { MainHome } from "./modules/wpParamsReducer";
+import { Store } from "../modules/Store";
+import { MainHome } from "../modules/wpParamsReducer";
 import {
     Home,
     Label,
     Person,
 } from "@material-ui/icons";
-import { ThemeType } from './modules/ThemeContext';
-import { useStylesFactory } from './modules/useStylesFactory';
+import { ThemeType } from '../modules/ThemeContext';
+import { useStylesFactory } from '../modules/useStylesFactory';
 import { Grid } from '@material-ui/core';
 
-import { Prev } from './PPaginationModules/Prev';
-import { Latest } from './PPaginationModules/Latest';
-import { DisplayNumbers } from './PPaginationModules/DisplayNumbers';
-import { Oldest } from './PPaginationModules/Oldest';
-import { Next } from './PPaginationModules/Next';
+import { Prev } from '../PPaginationModules/Prev';
+import { Latest } from '../PPaginationModules/Latest';
+import { DisplayNumbers } from '../PPaginationModules/DisplayNumbers';
+import { Oldest } from '../PPaginationModules/Oldest';
+import { Next } from '../PPaginationModules/Next';
 
 
 const styles = {

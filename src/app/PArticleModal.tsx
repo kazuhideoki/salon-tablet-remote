@@ -1,8 +1,8 @@
 import React from 'react'
-import { Store, WpData } from './modules/Store';
-import { getWpSinglePosts } from "./modules/wpApiFetch";
-import { sortDataPosts } from "./modules/organizeData";
-import { bindOnclick } from "./modules/bindOnclick";
+import { Store, WpData } from '../modules/Store';
+import { getWpSinglePosts } from "../modules/wpApiFetch";
+import { sortDataPosts } from "../modules/organizeData";
+import { bindOnclick } from "../modules/bindOnclick";
 import { TransitionProps } from '@material-ui/core/transitions';
 import {
     Dialog,
@@ -11,9 +11,9 @@ import {
     Slide,
     withStyles
 } from "@material-ui/core";
-import { StyledPaper } from './StyledComponent/StyledPaper';
-import { CloseButton } from './molecules/CloseButton';
-import { useStylesFactory } from './modules/useStylesFactory';
+import { StyledPaper } from '../StyledComponent/StyledPaper';
+import { CloseButton } from '../molecules/CloseButton';
+import { useStylesFactory } from '../modules/useStylesFactory';
 // import "../public/PArticleModal.scss";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {

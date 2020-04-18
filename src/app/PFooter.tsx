@@ -6,14 +6,14 @@ import {
     PersonAddTwoTone,
     SettingsApplicationsTwoTone,
 } from "@material-ui/icons";
-import { ThemeContext } from "./modules/ThemeContext";
-import { Store } from "./modules/Store";
-import { ThemeType } from "./modules/ThemeContext";
-import { pfooter } from "./modules/words";
+import { ThemeContext } from "../modules/ThemeContext";
+import { Store } from "../modules/Store";
+import { ThemeType } from "../modules/ThemeContext";
+import { pfooter } from "../modules/words";
 import { PPagination } from "./PPagination";
-import { useStylesFactory } from "./modules/useStylesFactory";
-import { IconAndText } from "./molecules/IconAndText";
-import { useWordsChange } from "./modules/useWordsChange";
+import { useStylesFactory } from "../modules/useStylesFactory";
+import { IconAndText } from "../molecules/IconAndText";
+import { useWordsChange } from "../modules/useWordsChange";
 
 const styles = {
     root: {

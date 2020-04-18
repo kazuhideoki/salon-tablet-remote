@@ -1,18 +1,18 @@
 import React from "react";
-import { Store } from "./modules/Store";
-import { Tag, Author } from "./modules/wpParamsReducer";
-import { AppState } from "./modules/Store";
+import { Store } from "../modules/Store";
+import { Tag, Author } from "../modules/wpParamsReducer";
+import { AppState } from "../modules/Store";
 
 import { Dialog, Slide, withStyles, DialogContent } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 
-import { useStylesFactory } from "./modules/useStylesFactory";
-import { TagModal } from "./PModalModules/TagModal";
-import { CloseButton } from "./molecules/CloseButton";
-import { ColorChart } from "./PModalModules/ColorChart";
-import { Setting } from "./PModalModules/Setting/Setting";
-import { EditArticle } from "./PModalModules/Setting/EditArticle";
-import { EditFooter } from "./PModalModules/Setting/EditFooter";
+import { useStylesFactory } from "../modules/useStylesFactory";
+import { TagModal } from "../PModalModules/TagModal";
+import { CloseButton } from "../molecules/CloseButton";
+import { ColorChart } from "../PModalModules/ColorChart";
+import { Setting } from "../PModalModules/Setting/Setting";
+import { EditArticle } from "../PModalModules/Setting/EditArticle";
+import { EditFooter } from "../PModalModules/Setting/EditFooter";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore

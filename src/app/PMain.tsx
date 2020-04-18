@@ -1,16 +1,16 @@
 import React from "react";
-import { Store, WpData, WpParams, PostData } from "./modules/Store";
-import { formatDate } from "./modules/organizeData";
-import { sqlToDate } from "./modules/organizeSql/sqlToDate";
-import { sortDataPosts, SortDataPosts, setAuthorName } from "./modules/organizeData";
+import { Store, WpData, WpParams, PostData } from "../modules/Store";
+import { formatDate } from "../modules/organizeData";
+import { sqlToDate } from "../modules/organizeSql/sqlToDate";
+import { sortDataPosts, SortDataPosts, setAuthorName } from "../modules/organizeData";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { pickStaffImg } from "./modules/pickStaffImg";
-import { StyledPaper } from "./StyledComponent/StyledPaper";
-import { useStylesFactory } from "./modules/useStylesFactory";
-import { useUpdatePost } from "./modules/postDataRducer";
-import { UpdatePostButton } from "./molecules/UpdatePostButton";
-import { DeletePostButton } from "./molecules/DeletePostButton";
-import { CreatePostButton } from "./molecules/CreatePostButton";
+import { pickStaffImg } from "../modules/pickStaffImg";
+import { StyledPaper } from "../StyledComponent/StyledPaper";
+import { useStylesFactory } from "../modules/useStylesFactory";
+import { useUpdatePost } from "../modules/postDataRducer";
+import { UpdatePostButton } from "../molecules/UpdatePostButton";
+import { DeletePostButton } from "../molecules/DeletePostButton";
+import { CreatePostButton } from "../molecules/CreatePostButton";
 
 const styles = {
     root: {
