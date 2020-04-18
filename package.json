@@ -23,6 +23,7 @@
     "bookshelf": "^1.1.1",
     "cors": "^2.8.5",
     "draft-js": "^0.11.5",
+    "draft-js-export-html": "^1.4.1",
     "express": "^4.17.1",
     "knex": "^0.20.13",
     "mysql": "^2.18.1",

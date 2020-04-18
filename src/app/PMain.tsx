@@ -3,9 +3,12 @@ import { Store } from "./Store/Store";
 import { sqlToDate } from "./modules/organizeSql/sqlToDate";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { useStylesFactory } from "./Store/useStylesFactory";
-import { UpdatePostButton } from "./molecules/UpdatePostButton";
-import { DeletePostButton } from "./molecules/DeletePostButton";
-import { CreatePostButton } from "./molecules/CreatePostButton";
+import { UpdatePostButton } from "./Setting/UpdatePostButton";
+import { DeletePostButton } from "./Setting/DeletePostButton";
+import { CreatePostButton } from "./Setting/CreatePostButton";
+import { stateToHTML } from "draft-js-export-html";
+
+
 
 const styles = {
     root: {
@@ -71,20 +74,16 @@ export const PMain = () => {
     const classes = useStylesFactory(styles);
 
     const {
-    appState,
-      postData,
-      dispatchAppState,
-    //   isSetting,
+        appState,
+        postData,
+        dispatchAppState,
     } = React.useContext(Store);
-    // 利用するデータを抜き出し、authorをnumberから名前に変える
-    let articles 
-    
+    // 利用するデータを抜き出し、authorをnumberから名前に変える    
     const props = {
-      postData,
-      classes,
-      articles,
-    dispatchAppState,
-        };
+        postData,
+        classes,
+        dispatchAppState,
+    };
     type Props = typeof props
 
 
@@ -104,8 +103,6 @@ export const PMain = () => {
                         {appState.isSetting ? (
                             <UpdatePostButton
                                 position={classes.updatePostButton}
-                                // params={params}
-                                // setIsEdit={setIsEdit}
                             />
                         ) : null}
                         {appState.isSetting ? (
@@ -121,35 +118,27 @@ export const PMain = () => {
                             id={`p_main_` + key}
                         >
                             <CardActionArea>
-                                <div className={classes.titleImgDiv}>
-                                    <img
-                                        className={classes.img}
-                                        //   src={value.featuredImg}
-                                        alt={value.title}
-                                    />
+                                <CardContent>
                                     <Typography
                                         className={classes.title}
                                         variant="h5"
                                     >
                                         {value.title}
                                     </Typography>
-                                </div>
-                                <CardContent>
                                     <Typography
                                         gutterBottom
                                         variant="h6"
                                         align="right"
                                     >
                                         {sqlToDate(value.date)}
-                                        {/* {value.authorName} */}
                                     </Typography>
                                     <Typography variant="body1">
-                                        <div
+                                        {/* <div
                                             dangerouslySetInnerHTML={{
                                                 __html: value.content,
                                             }}
-                                        />
-                                        <p>{value.content}</p>
+                                        /> */}
+                                        <p>{stateToHTML(value.content)}</p>
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain";
-import { PFooter } from "./PFooter";
+import { PFooter } from "./PFooter/PFooter";
 import { Store } from "./Store/Store";
 import { ThemeType } from "./Store/ThemeContext";
 import { useStylesFactory } from "./Store/useStylesFactory";
