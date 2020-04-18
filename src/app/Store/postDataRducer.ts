@@ -22,11 +22,11 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
         break;
     case "UPDATE_POST":
         newState = state.map((value, index) => {
-            if (value.id === action.payload.id) {
-                return action.payload
-            } else {
-                return value
-            }
+        if (value.id === action.payload.id) {
+            return action.payload
+        } else {
+            return value
+        }
         })
         break;
     case "DELETE_POST":
@@ -85,8 +85,8 @@ export const useCreatePostD = () => {
             }
         );
         const data = await res.json();
-        console.log(data);
-        params.id = data.insertId;
+        console.log('useCreatePostDの戻ってくるdataダヨ→' + JSON.stringify(data));
+        params.id = data.rawData.id;
 
         if (data.err === true) {
         alert("投稿できませんでした");

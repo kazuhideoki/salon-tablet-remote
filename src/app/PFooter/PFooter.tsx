@@ -6,10 +6,9 @@ import {
     PersonAddTwoTone,
     SettingsApplicationsTwoTone,
 } from "@material-ui/icons";
-import { ThemeContext } from "./Store/ThemeContext";
-import { Store } from "./Store/Store";
-import { IconAndText } from "./molecules/IconAndText";
-import { useStylesFactory } from "./Store/useStylesFactory";
+import { Store } from "../Store/Store";
+import { IconAndText } from "./IconAndText";
+import { useStylesFactory } from "../Store/useStylesFactory";
 
 const styles = {
     root: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconAndText } from "../molecules/IconAndText";
+import { IconAndText } from "../PFooter/IconAndText";
 import { BorderColorTwoTone, AppsTwoTone } from "@material-ui/icons";
 
 export const Setting = ({openModal}) => {

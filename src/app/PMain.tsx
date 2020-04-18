@@ -7,6 +7,8 @@ import { UpdatePostButton } from "./Setting/UpdatePostButton";
 import { DeletePostButton } from "./Setting/DeletePostButton";
 import { CreatePostButton } from "./Setting/CreatePostButton";
 import { stateToHTML } from "draft-js-export-html";
+import { convertFromRaw } from "draft-js";
+
 
 
 
@@ -78,7 +80,7 @@ export const PMain = () => {
         postData,
         dispatchAppState,
     } = React.useContext(Store);
-    // 利用するデータを抜き出し、authorをnumberから名前に変える    
+
     const props = {
         postData,
         classes,
@@ -94,7 +96,7 @@ export const PMain = () => {
         let displayArticles;
 
         if (postData) {
-            console.debug("PMainPresenter" + postData);
+            console.debug("PMainPresenter" + JSON.stringify(postData));
 
             displayArticles = postData.map((value, key: number) => {
 
@@ -138,7 +140,11 @@ export const PMain = () => {
                                                 __html: value.content,
                                             }}
                                         /> */}
-                                        <p>{stateToHTML(value.content)}</p>
+                                        <p>
+                                            {stateToHTML(
+                                                convertFromRaw(value.content)
+                                            )}
+                                        </p>
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

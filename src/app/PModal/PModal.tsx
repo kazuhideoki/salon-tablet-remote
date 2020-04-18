@@ -5,7 +5,7 @@ import { Dialog, Slide, withStyles, DialogContent } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 
 import { useStylesFactory } from "../Store/useStylesFactory";
-import { CloseButton } from "../molecules/CloseButton";
+import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
 import { Setting } from "../Setting/Setting";
 import { EditArticle } from "../Setting/EditArticle";

@@ -2,28 +2,11 @@ import React, { useReducer, useState } from "react";
 import { PostDataAction, postDataReducer } from "./postDataRducer";
 import { AppStateAction, appStateReducer } from "./appStateReducer";
 
-const initParams: WpParams = {
-    currentPage: 1,
-    categories: 24,
-    author: '',
-    tag: '',
-    isJa: false,
-};
-export type WpParams = {
-    currentPage: number,
-    categories: number,
-    author: number | string | null,
-    tag: number | string | null,
-    isJa: boolean,
-}
-
-
-
 const postDataSingle = { 
     id: 0,
     title: '',
     date: '',
-    content: '',
+    content: '' as any,
 }
 export type PostDataSingle = typeof postDataSingle;
 export type PostData = PostDataSingle[]
@@ -65,11 +48,7 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
-type Props = { 
-    data: PostData
-}
-
-const StoreContextProvider: React.FC<Props> = (props) => {
+const StoreContextProvider = (props) => {
     const [postData, dispatchPostData] = useReducer(postDataReducer, props.data);
     const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState);
 

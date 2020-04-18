@@ -65,7 +65,7 @@ app.prepare().then(() => {
         // new PostData(req.body)
         .save()
         .then((result) => {
-            console.log('create/postのresultは ' + result);
+            console.log('create/postのresultは ' + JSON.stringify(result));
             
             const data = { rawData: result };
             res.send(data);
@@ -86,12 +86,12 @@ app.prepare().then(() => {
         })
             .save()
             .then((result) => {
-                console.log("create/postdのresultは " + result);
+                console.log("create/postdのresultは " + JSON.stringify(result));
 
                 const data = { rawData: result };
                 res.send(data);
             })
-            .catch((err) => {
+            .catch((err) => { 
                 res.status(500).json({
                     err: true,
                     data: { message: err.message },

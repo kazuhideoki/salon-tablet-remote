@@ -10,54 +10,39 @@ import {
 } from "../Store/postDataRducer";
 import { sqlToDate } from '../modules/organizeSql/sqlToDate';
 import { Editor, EditorState, convertToRaw } from "draft-js";
-import { useStylesFactory } from '../Store/useStylesFactory';
-
-const styles = {
-    editor: {
-        width: 300,
-        height: 100
-    }
-}
 
 const ArticleEditor = () => {
-    // const classes = useStylesFactory(styles)
     const [editorState, setEditorState] = React.useState(
         EditorState.createEmpty(),
     );
     const createPostD = useCreatePostD()
-    const hundleSubmit = (editorState) => {
-    // if (isEdit) {
-    //     e.preventDefault();
-    //     const params = {
-    //         id: edittingPostParams.id,
-    //         title: title,
-    //         date: dateToSql(edittingPostParams.date),
-    //         content: content,
-    //     };
-    //     updatePost(params, setIsEdit);
-    // } else {
+
+    const hundleSubmit = () => {
         const today = new Date();
         const date = dateToSql(today);
 
         const contentState = editorState.getCurrentContent();
         const content = convertToRaw(contentState);
+        // const content = contentState
 
         const params = {
             id: null,
             title: 'これはdraftjsのeditorから',
             date: date,
-            consten: content,
+            content: JSON.stringify(content)
         }
 
         createPostD(params);
         setEditorState(EditorState.createEmpty())
-    // }
     }
 
     return (
         <>
-            <Editor editorState={editorState} onChange={setEditorState} />
-            <button onClick={(editorState) => hundleSubmit(editorState)}>
+            <Editor
+                editorState={editorState}
+                onChange={(e) => setEditorState(e)}
+            />
+            <button onClick={() => hundleSubmit()}>
                 投稿
             </button>
         </>
