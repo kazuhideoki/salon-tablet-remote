@@ -9,9 +9,18 @@ import {
   useDeletePost,
 } from "../../modules/postDataRducer";
 import { sqlToDate } from '../../modules/organizeSql/sqlToDate';
-import { Editor, EditorState } from 'draft-js';
+import { Editor, EditorState, convertToRaw } from "draft-js";
+import { useStylesFactory } from '../../modules/useStylesFactory';
+
+const styles = {
+    editor: {
+        width: 300,
+        height: 100
+    }
+}
 
 const ArticleEditor = () => {
+    // const classes = useStylesFactory(styles)
     const [editorState, setEditorState] = React.useState(
         EditorState.createEmpty(),
     );
@@ -27,14 +36,30 @@ const ArticleEditor = () => {
     //     };
     //     updatePost(params, setIsEdit);
     // } else {
-        createPostD(editorState);
+        const today = new Date();
+        const date = dateToSql(today);
+
+        const contentState = editorState.getCurrentContent();
+        const content = convertToRaw(contentState);
+
+        const params = {
+            id: null,
+            title: 'これはdraftjsのeditorから',
+            date: date,
+            consten: content,
+        }
+
+        createPostD(params);
         setEditorState(EditorState.createEmpty())
     // }
     }
 
-    return (<>
-    <Editor editorState={editorState} onChange={setEditorState} />
-        <button onClick={(editorState) => hundleSubmit(editorState)}></button>
+    return (
+        <>
+            <Editor editorState={editorState} onChange={setEditorState} />
+            <button onClick={(editorState) => hundleSubmit(editorState)}>
+                投稿
+            </button>
         </>
     );
 }

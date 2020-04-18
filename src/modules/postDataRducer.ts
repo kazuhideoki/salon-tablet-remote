@@ -70,23 +70,23 @@ export const useCreatePost = () => {
         payload: params,
         });
         }
-    }
+    } 
 }
 export const useCreatePostD = () => {
     const { dispatchPostData } = React.useContext(Store);
-    return async (editorState) => {
+    return async (params) => {
         const res = await fetch(
-        `http://${location.host}/post_data/create/postd`,
-        {
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-            mode: "cors",
-            body: JSON.stringify(editorState),
-        }
+            `http://${location.host}/post_data/create/postd`,
+            {
+                headers: { "Content-Type": "application/json" },
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(params),
+            }
         );
         const data = await res.json();
         console.log(data);
-        // params.id = data.insertId;
+        params.id = data.insertId;
 
         if (data.err === true) {
         alert("投稿できませんでした");
@@ -94,7 +94,7 @@ export const useCreatePostD = () => {
         // params.id = data.rawData.id
         dispatchPostData({
         type: "CREATE_POST",
-            payload: editorState,
+            payload: params,
         });
         }
     }

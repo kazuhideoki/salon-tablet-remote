@@ -80,21 +80,23 @@ app.prepare().then(() => {
     server.post("/post_data/create/postd", (req, res) => {
         const { title, date, content } = req.body;
         new PostData({
-            content: req.body,
+            title: title,
+            date: date,
+            content: content,
         })
-        .save()
-        .then((result) => {
-            console.log('create/postdのresultは ' + result);
-            
-            const data = { rawData: result };
-            res.send(data);
+            .save()
+            .then((result) => {
+                console.log("create/postdのresultは " + result);
+
+                const data = { rawData: result };
+                res.send(data);
             })
-        .catch((err) => {
-            res.status(500).json({
-                err: true,
-                data: { message: err.message },
+            .catch((err) => {
+                res.status(500).json({
+                    err: true,
+                    data: { message: err.message },
+                });
             });
-        });
      });
 
      server.post("/post_data/get/singlepost", (req, res) => {
