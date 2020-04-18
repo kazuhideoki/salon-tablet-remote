@@ -1,7 +1,5 @@
 import React, { useReducer, useState } from "react";
-import { WpParamsAction, wpParamsReducer } from "./wpParamsReducer";
 import { PostDataAction, postDataReducer } from "./postDataRducer";
-import { WpDataAction, wpDataReducer } from "./wpDataReducer";
 import { AppStateAction, appStateReducer } from "./appStateReducer";
 
 const initParams: WpParams = {
@@ -55,24 +53,15 @@ const initAppState = {
     isLoading: false,
 };
 export type AppState = typeof initAppState
-
 export type DidpatchPostData = React.Dispatch<PostDataAction>;
-export type DispatchWpParams = React.Dispatch<WpParamsAction>
-export type DispatchWpData = React.Dispatch < WpDataAction >
 export type DispatchAppState = React.Dispatch < AppStateAction >
 export type SetTotalPages = React.Dispatch < React.SetStateAction < number >>
 
 export type ContextProps = {
     postData: PostData;
     dispatchPostData: DidpatchPostData;
-    wpParams: WpParams;
-    dispatchWpParams: DispatchWpParams;
-    wpData: WpData;
-    dispatchWpData: DispatchWpData;
     appState: AppState;
     dispatchAppState: DispatchAppState;
-    totalPages: number;
-    setTotalPages: SetTotalPages;
 };
 const Store = React.createContext({} as ContextProps);
 
@@ -82,26 +71,13 @@ type Props = {
 
 const StoreContextProvider: React.FC<Props> = (props) => {
     const [postData, dispatchPostData] = useReducer(postDataReducer, props.data);
-    const [wpParams, dispatchWpParams] = useReducer(wpParamsReducer, initParams);
-    const [wpData, dispatchWpData] = useReducer(wpDataReducer, initWpData);
     const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState);
-    // トータルページ数を取得、paginationに利用
-    const [totalPages, setTotalPages] = useState(1)
-    // const [isSetting, setIsSetting] = useState(false)
 
     const values = {
         postData,
         dispatchPostData,
-        wpParams,
-        dispatchWpParams,
-        wpData,
-        dispatchWpData,
         appState,
         dispatchAppState,
-        totalPages,
-        setTotalPages,
-        // isSetting,
-        // setIsSetting,
     };
 
     return (

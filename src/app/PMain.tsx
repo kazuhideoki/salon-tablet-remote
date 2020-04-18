@@ -1,9 +1,8 @@
 import React from "react";
-import { Store, WpData, WpParams, PostData } from "./Store/Store";
+import { Store } from "./Store/Store";
 import { sqlToDate } from "./modules/organizeSql/sqlToDate";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { useStylesFactory } from "./Store/useStylesFactory";
-import { useUpdatePost } from "./Store/postDataRducer";
 import { UpdatePostButton } from "./molecules/UpdatePostButton";
 import { DeletePostButton } from "./molecules/DeletePostButton";
 import { CreatePostButton } from "./molecules/CreatePostButton";
@@ -72,29 +71,18 @@ export const PMain = () => {
     const classes = useStylesFactory(styles);
 
     const {
-        appState,
+    appState,
       postData,
-      wpParams,
-      wpData,
-      dispatchWpData,
       dispatchAppState,
     //   isSetting,
     } = React.useContext(Store);
     // 利用するデータを抜き出し、authorをnumberから名前に変える
     let articles 
-
-    const setAndOpenArticleModal = (data: object[]) => {
-        dispatchWpData({type: "SET_SINGLE_ARTICLE", payload: data})
-        dispatchAppState({ type: "OPEN_ARTICLE_MODAL"})
-    }
     
     const props = {
       postData,
-      wpParams,
-      wpData,
       classes,
       articles,
-      setAndOpenArticleModal,
     dispatchAppState,
         };
     type Props = typeof props
@@ -102,39 +90,11 @@ export const PMain = () => {
 
     const PMainPresenter: React.FC<Props> = ({
         postData,
-        wpParams,
-        wpData,
         classes,
-        articles,
-        setAndOpenArticleModal,
-        dispatchAppState,
     }: Props) => {
         let displayArticles;
-        const instaRef = React.useRef(null);
 
-        //   const updataArticle = (key: number, content: string) => useUpdateArticle(key, content);
-
-        //   インスタ表示のときはレイアウトを変える
-        if (articles && wpParams.categories === 187) {
-            displayArticles = articles.map((value, key: number) => {
-                return (
-                    <Grid item key={key} className={classes.item}>
-                        <Card variant="outlined" className={classes.insta}>
-                            <Typography gutterBottom variant="h6" align="right">
-                                <h3>{value.date}</h3>
-                            </Typography>
-                            <div
-                                className={classes.instaDiv}
-                                dangerouslySetInnerHTML={{
-                                    __html: value.content,
-                                }}
-                            />
-                        </Card>
-                    </Grid>
-                );
-            });
-            //   通常の記事一覧の表示
-        } else if (postData) {
+        if (postData) {
             console.debug("PMainPresenter" + postData);
 
             displayArticles = postData.map((value, key: number) => {
@@ -159,9 +119,6 @@ export const PMain = () => {
                             variant="outlined"
                             className={classes.article}
                             id={`p_main_` + key}
-                            onClick={() =>
-                                setAndOpenArticleModal([postData[key]])
-                            }
                         >
                             <CardActionArea>
                                 <div className={classes.titleImgDiv}>
@@ -205,21 +162,6 @@ export const PMain = () => {
             displayArticles = <div>No articles</div>;
         }
 
-        // instaのiframeの表示サイズを変更させる
-        React.useEffect(() => {
-            // console.log(instaRef.current);
-            if (wpParams.categories === 187) {
-                //@ts-ignore
-                const iframe = instaRef.current.getElementsByClassName(
-                    "iframe-class"
-                );
-                Array.prototype.forEach.call(iframe, function (element: any) {
-                    element.style.transform = "scale(1.2)";
-                    element.style.transformOrigin = "left";
-                });
-            }
-        });
-
         return (
             <Grid 
                 id="p_main"
@@ -227,7 +169,6 @@ export const PMain = () => {
                 wrap="nowrap"
                 className={classes.root}
                 spacing={2}
-                ref={instaRef}
             >
                 {appState.isSetting ? (
                     <CreatePostButton position={classes.createPostButton}/>

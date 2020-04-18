@@ -1,7 +1,5 @@
 import React from "react";
 import { Store } from "../Store/Store";
-import { Tag, Author } from "../Store/wpParamsReducer";
-import { AppState } from "../Store/Store";
 
 import { Dialog, Slide, withStyles, DialogContent } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
@@ -9,9 +7,9 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "../molecules/CloseButton";
 import { ColorChart } from "./ColorChart";
-import { Setting } from "./Setting/Setting";
-import { EditArticle } from "./Setting/EditArticle";
-import { EditFooter } from "./Setting/EditFooter";
+import { Setting } from "../Setting/Setting";
+import { EditArticle } from "../Setting/EditArticle";
+import { EditFooter } from "../Setting/EditFooter";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -24,12 +22,11 @@ const styles = {
         
     },
 }
-type SetParamsAndClose = Tag | Author
 
 export const PModal = () => {
     const classes = useStylesFactory(styles);
 
-    const { dispatchWpParams, appState, dispatchAppState } = React.useContext(Store)
+    const { appState, dispatchAppState } = React.useContext(Store)
     const setModal = appState.setModal;
     const isModalOpen = appState.isModalOpen
     const openModal = (name: string) => {
@@ -38,11 +35,6 @@ export const PModal = () => {
     const closeModal = () => {
       dispatchAppState({ type: "CLOSE_MODAL" });
     };
-    const setParamsAndClose = ({ type, payload }: SetParamsAndClose) => {
-        dispatchAppState({ type: "START_LOADING" })
-        dispatchWpParams({ type: type, payload: payload })
-        dispatchAppState({ type: "CLOSE_MODAL" });
-    }
 
     const props = {
         classes,
@@ -50,7 +42,6 @@ export const PModal = () => {
         isModalOpen,
         openModal,
         closeModal,
-        setParamsAndClose
     };
     type Props = typeof props
 
@@ -61,7 +52,6 @@ export const PModal = () => {
         isModalOpen,
         openModal,
         closeModal,
-        setParamsAndClose,
     }: Props) => {
         // modalは内容、modalStyle内容に応じてDialogのstyleを変える
         let ModalContent = () => <></>;

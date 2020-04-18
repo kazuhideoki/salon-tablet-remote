@@ -6,9 +6,8 @@ import {
     PersonAddTwoTone,
     SettingsApplicationsTwoTone,
 } from "@material-ui/icons";
-import { ThemeContext, ThemeType } from "./Store/ThemeContext";
+import { ThemeContext } from "./Store/ThemeContext";
 import { Store } from "./Store/Store";
-import { PPagination } from "./PPagination/PPagination";
 import { IconAndText } from "./molecules/IconAndText";
 import { useStylesFactory } from "./Store/useStylesFactory";
 
@@ -22,30 +21,21 @@ const styles = {
 };
 
 export const PFooter = () => {
-    const themes = React.useContext(ThemeContext);
     const classes = useStylesFactory(styles);
-    const { dispatchWpParams, dispatchAppState } = useContext(Store);
-
-    const changeLang = () => {
-        dispatchAppState({ type: "START_LOADING" });
-        dispatchWpParams({ type: "LANG" });
-    };
+    const { dispatchAppState } = useContext(Store);
     const openModal = (modalName: string) =>
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
 
     const props = {
         classes,
-        themes,
-        changeLang,
         openModal,
         dispatchAppState,
     };
     type Props = typeof props;
 
-    const PFooterPresenter = ({ classes, themes, changeLang, openModal, dispatchAppState }: Props) => {
+    const PFooterPresenter = ({ classes, openModal, dispatchAppState }: Props) => {
         return (
             <div className={classes.root}>
-                <PPagination />
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
                         <IconAndText

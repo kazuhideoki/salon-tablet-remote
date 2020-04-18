@@ -1,16 +1,16 @@
 import React from 'react' 
-import { dateToSql } from "../../modules/organizeSql/dateToSql";
-import { Store, PostDataSingle } from '../../Store/Store'
+import { dateToSql } from "../modules/organizeSql/dateToSql";
+import { Store, PostDataSingle } from '../Store/Store'
 import {
   useCreatePost,
     useCreatePostD,
   useGetSinglePost,
   useUpdatePost, 
   useDeletePost,
-} from "../../Store/postDataRducer";
-import { sqlToDate } from '../../modules/organizeSql/sqlToDate';
+} from "../Store/postDataRducer";
+import { sqlToDate } from '../modules/organizeSql/sqlToDate';
 import { Editor, EditorState, convertToRaw } from "draft-js";
-import { useStylesFactory } from '../../Store/useStylesFactory';
+import { useStylesFactory } from '../Store/useStylesFactory';
 
 const styles = {
     editor: {
@@ -74,7 +74,6 @@ const PostForm = (props) => {
       isEdit,
       setIsEdit,
       edittingPostParams,
-      setEdittingPostParams,
     } = props;
     const today = new Date()
     const date = dateToSql(today);

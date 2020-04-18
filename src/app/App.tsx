@@ -1,12 +1,11 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain";
 import { PFooter } from "./PFooter";
 import { Store } from "./Store/Store";
-import { ThemeContext, ThemeType } from "./Store/ThemeContext";
+import { ThemeType } from "./Store/ThemeContext";
 import { useStylesFactory } from "./Store/useStylesFactory";
 
 
@@ -57,20 +56,9 @@ type Props = {
 export const App = ()=> {
     const classes = useStylesFactory(styles)
 
-    const { wpParams, dispatchWpData, appState, dispatchAppState, setTotalPages } = React.useContext(Store);
+    const { appState, dispatchAppState } = React.useContext(Store);
     const isLoading = appState.isLoading
     const endLoading = () => dispatchAppState({type: "END_LOADING"})
-    const setArticles = (data: any) =>
-        dispatchWpData({ type: "SET_ARTICLES", payload: data });
-
-    const setArticlesImportantEn = (data: any) =>
-        dispatchWpData({ type: "SET_ARTICLES_IMPORTANT_EN", payload: data });
-    const setArticlesImportantJa = (data: any) =>
-        dispatchWpData({ type: "SET_ARTICLES_IMPORTANT_JA", payload: data });
-    const setTags = (data: any) =>
-        dispatchWpData({ type: "SET_TAGS", payload: data });
-    const setUsers = (data: any) =>
-        dispatchWpData({ type: "SET_USERS", payload: data });
 
     const props = {
     classes,
@@ -91,16 +79,12 @@ export const App = ()=> {
                     alignItems="center"
                     className={classes.gridRoot}
                 >
-                    {/* <Grid item className={classes.header}>
-                    <PHeader />
-                </Grid> */}
                     <Grid item className={classes.main}>
                         {!isLoading ? <PMain /> : <Skeleton />}
                     </Grid>
                     <Grid item className={classes.footer}>
                         <PFooter />
                     </Grid>
-                    {/* <PArticleModal /> */}
                     <PModal />
                 </Grid>
             </div>
