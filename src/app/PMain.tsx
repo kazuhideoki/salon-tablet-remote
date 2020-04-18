@@ -1,13 +1,9 @@
 import React from "react";
-import { Store, WpData, WpParams, PostData } from "../modules/Store";
-import { formatDate } from "../modules/organizeData";
-import { sqlToDate } from "../modules/organizeSql/sqlToDate";
-import { sortDataPosts, SortDataPosts, setAuthorName } from "../modules/organizeData";
+import { Store, WpData, WpParams, PostData } from "./Store/Store";
+import { sqlToDate } from "./modules/organizeSql/sqlToDate";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { pickStaffImg } from "../modules/pickStaffImg";
-import { StyledPaper } from "./StyledComponent/StyledPaper";
-import { useStylesFactory } from "../modules/useStylesFactory";
-import { useUpdatePost } from "../modules/postDataRducer";
+import { useStylesFactory } from "./Store/useStylesFactory";
+import { useUpdatePost } from "./Store/postDataRducer";
 import { UpdatePostButton } from "./molecules/UpdatePostButton";
 import { DeletePostButton } from "./molecules/DeletePostButton";
 import { CreatePostButton } from "./molecules/CreatePostButton";
@@ -85,9 +81,7 @@ export const PMain = () => {
     //   isSetting,
     } = React.useContext(Store);
     // 利用するデータを抜き出し、authorをnumberから名前に変える
-    let articles = sortDataPosts(wpData.articles);
-        articles = setAuthorName(articles, wpData)
-        articles = formatDate(articles)
+    let articles 
 
     const setAndOpenArticleModal = (data: object[]) => {
         dispatchWpData({type: "SET_SINGLE_ARTICLE", payload: data})
@@ -208,7 +202,7 @@ export const PMain = () => {
             });
             // 記事がもしなかった場合の表示
         } else {
-            displayArticles = <StyledPaper>No articles</StyledPaper>;
+            displayArticles = <div>No articles</div>;
         }
 
         // instaのiframeの表示サイズを変更させる

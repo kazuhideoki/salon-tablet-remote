@@ -1,8 +1,8 @@
 import React from "react";
 import { NavigateBefore } from "@material-ui/icons";
-import { pageArrowProps } from "../PPagination";
-import { Store } from "../modules/Store";
-import { WpParamsAction } from "../modules/wpParamsReducer";
+import { pageArrowProps } from "./PPagination";
+import { Store } from "../Store/Store";
+import { WpParamsAction } from "../Store/wpParamsReducer";
 
 export const Prev = (props: pageArrowProps) => {
   const { wpParams } = React.useContext(Store);

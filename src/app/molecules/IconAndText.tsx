@@ -1,8 +1,8 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
-import { useStylesFactory } from '../modules/useStylesFactory'
-import { ThemeType } from '../modules/ThemeContext'
-import { Store } from '../modules/Store'
+import { useStylesFactory } from '../Store/useStylesFactory'
+import { ThemeType } from '../Store/ThemeContext'
+import { Store } from '../Store/Store'
 
 const styles = {
     root : {

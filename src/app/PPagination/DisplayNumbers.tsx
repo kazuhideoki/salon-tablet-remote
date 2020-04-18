@@ -1,8 +1,8 @@
 import React from "react";
-import { Store } from "../modules/Store";
-import { useStylesFactory } from "../modules/useStylesFactory";
-import { ThemeType } from "../modules/ThemeContext";
-import { pageArrowProps } from "../PPagination";
+import { Store } from "../Store/Store";
+import { useStylesFactory } from "../Store/useStylesFactory";
+import { ThemeType } from "../Store/ThemeContext";
+import { pageArrowProps } from "./PPagination";
 
 const styles = {
   nums: {

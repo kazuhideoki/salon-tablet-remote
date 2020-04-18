@@ -1,8 +1,8 @@
 import React from "react";
 import { LastPage } from "@material-ui/icons";
-import { pageArrowProps } from "../PPagination";
-import { Store } from "../modules/Store";
-import { WpParamsAction } from "../modules/wpParamsReducer";
+import { pageArrowProps } from "./PPagination";
+import { Store } from "../Store/Store";
+import { WpParamsAction } from "../Store/wpParamsReducer";
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Oldest = (props: pageArrowProps) => {

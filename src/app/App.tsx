@@ -2,15 +2,12 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { PModal } from "./PModal";
-import { PHeader } from "./PHeader"; 
+import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain";
 import { PFooter } from "./PFooter";
-import { Store } from "../modules/Store";
-import { PArticleModal } from "./PArticleModal";
-import { getWpPosts, getWpPostsImportant, getWpTags, getWpUsers } from "../modules/wpApiFetch";
-import { ThemeContext, ThemeType } from "../modules/ThemeContext";
-import { useStylesFactory } from "../modules/useStylesFactory";
+import { Store } from "./Store/Store";
+import { ThemeContext, ThemeType } from "./Store/ThemeContext";
+import { useStylesFactory } from "./Store/useStylesFactory";
 
 
 // 3段のコンテナの整形に関してのみ記述, 
@@ -66,10 +63,6 @@ export const App = ()=> {
     const setArticles = (data: any) =>
         dispatchWpData({ type: "SET_ARTICLES", payload: data });
 
-    const getPosts = async function() {
-        await getWpPosts({ wpParams, setArticles, setTotalPages })
-        endLoading()
-    }
     const setArticlesImportantEn = (data: any) =>
         dispatchWpData({ type: "SET_ARTICLES_IMPORTANT_EN", payload: data });
     const setArticlesImportantJa = (data: any) =>
@@ -78,20 +71,6 @@ export const App = ()=> {
         dispatchWpData({ type: "SET_TAGS", payload: data });
     const setUsers = (data: any) =>
         dispatchWpData({ type: "SET_USERS", payload: data });
-
-    React.useEffect(() => {
-        getPosts()
-    }, [wpParams]);
-
-    React.useEffect(() => {          
-        getWpPostsImportant({ setArticlesImportantEn, setArticlesImportantJa});
-    }, []);
-    React.useEffect(() => {          
-        getWpTags(setTags);
-    }, []);
-    React.useEffect(() => {
-        getWpUsers(setUsers);
-    }, []);
 
     const props = {
     classes,

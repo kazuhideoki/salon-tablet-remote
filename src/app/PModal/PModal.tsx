@@ -1,18 +1,17 @@
 import React from "react";
-import { Store } from "../modules/Store";
-import { Tag, Author } from "../modules/wpParamsReducer";
-import { AppState } from "../modules/Store";
+import { Store } from "../Store/Store";
+import { Tag, Author } from "../Store/wpParamsReducer";
+import { AppState } from "../Store/Store";
 
 import { Dialog, Slide, withStyles, DialogContent } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 
-import { useStylesFactory } from "../modules/useStylesFactory";
-import { TagModal } from "./PModalModules/TagModal";
-import { CloseButton } from "./molecules/CloseButton";
-import { ColorChart } from "./PModalModules/ColorChart";
-import { Setting } from "./PModalModules/Setting/Setting";
-import { EditArticle } from "./PModalModules/Setting/EditArticle";
-import { EditFooter } from "./PModalModules/Setting/EditFooter";
+import { useStylesFactory } from "../Store/useStylesFactory";
+import { CloseButton } from "../molecules/CloseButton";
+import { ColorChart } from "./ColorChart";
+import { Setting } from "./Setting/Setting";
+import { EditArticle } from "./Setting/EditArticle";
+import { EditFooter } from "./Setting/EditFooter";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -83,14 +82,6 @@ export const PModal = () => {
             case "colorChart":
                 modalStyle = size90;
                 ModalContent = () => <ColorChart />;
-                break;
-            case "tag":
-                ModalContent = () => (
-                    <TagModal
-                        setParamsAndClose={setParamsAndClose}
-                        className={classes.tagAuthorRoot}
-                    />
-                );
                 break;
             case "setting":
                 ModalContent = () => <Setting openModal={openModal} />;

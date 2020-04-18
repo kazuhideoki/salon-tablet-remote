@@ -1,19 +1,15 @@
 import React from "react";
 import { App } from "../app/App";
-import { ThemeProvider } from "../modules/ThemeContext";
-import { StoreContextProvider} from "../modules/Store";
+import { ThemeProvider } from "../app/Store/ThemeContext";
+import { StoreContextProvider} from "../app/Store/Store";
 import fetch from "node-fetch";
 // import * as serviceWorker from "../serviceWorker";
-const os = require("os");
-
 
 const Index = (props) =>{
 
     return (
       <ThemeProvider>
-        <StoreContextProvider data={props.data} 
-        // hostname={hostname}
-        >
+        <StoreContextProvider data={props.data}>
           <App />
         </StoreContextProvider>
       </ThemeProvider>

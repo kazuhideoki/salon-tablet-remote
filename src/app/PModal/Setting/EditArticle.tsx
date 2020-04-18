@@ -1,16 +1,16 @@
 import React from 'react' 
 import { dateToSql } from "../../modules/organizeSql/dateToSql";
-import { Store, PostDataSingle } from '../../modules/Store'
+import { Store, PostDataSingle } from '../../Store/Store'
 import {
   useCreatePost,
     useCreatePostD,
   useGetSinglePost,
   useUpdatePost, 
   useDeletePost,
-} from "../../modules/postDataRducer";
+} from "../../Store/postDataRducer";
 import { sqlToDate } from '../../modules/organizeSql/sqlToDate';
 import { Editor, EditorState, convertToRaw } from "draft-js";
-import { useStylesFactory } from '../../modules/useStylesFactory';
+import { useStylesFactory } from '../../Store/useStylesFactory';
 
 const styles = {
     editor: {

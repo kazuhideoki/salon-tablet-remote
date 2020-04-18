@@ -6,14 +6,11 @@ import {
     PersonAddTwoTone,
     SettingsApplicationsTwoTone,
 } from "@material-ui/icons";
-import { ThemeContext } from "../modules/ThemeContext";
-import { Store } from "../modules/Store";
-import { ThemeType } from "../modules/ThemeContext";
-import { pfooter } from "../modules/words";
-import { PPagination } from "./PPagination";
-import { useStylesFactory } from "../modules/useStylesFactory";
+import { ThemeContext, ThemeType } from "./Store/ThemeContext";
+import { Store } from "./Store/Store";
+import { PPagination } from "./PPagination/PPagination";
 import { IconAndText } from "./molecules/IconAndText";
-import { useWordsChange } from "../modules/useWordsChange";
+import { useStylesFactory } from "./Store/useStylesFactory";
 
 const styles = {
     root: {
@@ -27,7 +24,7 @@ const styles = {
 export const PFooter = () => {
     const themes = React.useContext(ThemeContext);
     const classes = useStylesFactory(styles);
-    const { wpParams, dispatchWpParams, dispatchAppState } = useContext(Store);
+    const { dispatchWpParams, dispatchAppState } = useContext(Store);
 
     const changeLang = () => {
         dispatchAppState({ type: "START_LOADING" });
@@ -35,10 +32,8 @@ export const PFooter = () => {
     };
     const openModal = (modalName: string) =>
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
-    const w = useWordsChange(pfooter);
 
     const props = {
-        w,
         classes,
         themes,
         changeLang,
@@ -47,7 +42,7 @@ export const PFooter = () => {
     };
     type Props = typeof props;
 
-    const PFooterPresenter = ({ w, classes, themes, changeLang, openModal, dispatchAppState }: Props) => {
+    const PFooterPresenter = ({ classes, themes, changeLang, openModal, dispatchAppState }: Props) => {
         return (
             <div className={classes.root}>
                 <PPagination />
@@ -57,7 +52,7 @@ export const PFooter = () => {
                             icon={ImportContactsTwoTone}
                             onClick={() => openModal("magazines")}
                             fontSize="large"
-                            text={w.magazines}
+                            text={'雑誌'}
                         />
                     </Grid>
                     <Grid item>
@@ -71,7 +66,7 @@ export const PFooter = () => {
                         <a href="https://karte.smart-recept.jp/staff/login/">
                             <IconAndText
                                 icon={PersonAddTwoTone}
-                                text={w.registration}
+                                text={'登録'}
                             />
                         </a>
                     </Grid>

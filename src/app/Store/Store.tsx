@@ -73,8 +73,6 @@ export type ContextProps = {
     dispatchAppState: DispatchAppState;
     totalPages: number;
     setTotalPages: SetTotalPages;
-    // isSetting: boolean;
-    // setIsSetting: React.Dispatch<React.SetStateAction<boolean>>
 };
 const Store = React.createContext({} as ContextProps);
 
