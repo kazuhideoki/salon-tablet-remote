@@ -11,8 +11,8 @@ import {
     Slide,
     withStyles
 } from "@material-ui/core";
-import { StyledPaper } from '../StyledComponent/StyledPaper';
-import { CloseButton } from '../molecules/CloseButton';
+import { StyledPaper } from './StyledComponent/StyledPaper';
+import { CloseButton } from './molecules/CloseButton';
 import { useStylesFactory } from '../modules/useStylesFactory';
 // import "../public/PArticleModal.scss";
 

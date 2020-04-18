@@ -10,11 +10,11 @@ import { ThemeType } from '../modules/ThemeContext';
 import { useStylesFactory } from '../modules/useStylesFactory';
 import { Grid } from '@material-ui/core';
 
-import { Prev } from '../PPaginationModules/Prev';
-import { Latest } from '../PPaginationModules/Latest';
-import { DisplayNumbers } from '../PPaginationModules/DisplayNumbers';
-import { Oldest } from '../PPaginationModules/Oldest';
-import { Next } from '../PPaginationModules/Next';
+import { Prev } from './PPaginationModules/Prev';
+import { Latest } from './PPaginationModules/Latest';
+import { DisplayNumbers } from './PPaginationModules/DisplayNumbers';
+import { Oldest } from './PPaginationModules/Oldest';
+import { Next } from './PPaginationModules/Next';
 
 
 const styles = {

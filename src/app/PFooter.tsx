@@ -12,7 +12,7 @@ import { ThemeType } from "../modules/ThemeContext";
 import { pfooter } from "../modules/words";
 import { PPagination } from "./PPagination";
 import { useStylesFactory } from "../modules/useStylesFactory";
-import { IconAndText } from "../molecules/IconAndText";
+import { IconAndText } from "./molecules/IconAndText";
 import { useWordsChange } from "../modules/useWordsChange";
 
 const styles = {

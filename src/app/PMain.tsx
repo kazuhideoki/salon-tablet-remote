@@ -5,12 +5,12 @@ import { sqlToDate } from "../modules/organizeSql/sqlToDate";
 import { sortDataPosts, SortDataPosts, setAuthorName } from "../modules/organizeData";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { pickStaffImg } from "../modules/pickStaffImg";
-import { StyledPaper } from "../StyledComponent/StyledPaper";
+import { StyledPaper } from "./StyledComponent/StyledPaper";
 import { useStylesFactory } from "../modules/useStylesFactory";
 import { useUpdatePost } from "../modules/postDataRducer";
-import { UpdatePostButton } from "../molecules/UpdatePostButton";
-import { DeletePostButton } from "../molecules/DeletePostButton";
-import { CreatePostButton } from "../molecules/CreatePostButton";
+import { UpdatePostButton } from "./molecules/UpdatePostButton";
+import { DeletePostButton } from "./molecules/DeletePostButton";
+import { CreatePostButton } from "./molecules/CreatePostButton";
 
 const styles = {
     root: {

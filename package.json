@@ -2,9 +2,9 @@
   "name": "salon-tablet",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "src/server/server.ts",
   "scripts": {
-    "dev": "node server.ts",
+    "dev": "node src/server/server.ts",
     "build": "NODE_OPTIONS=--max_old_space_size=4096 next build",
     "start": "NODE_ENV=production node ."
   },
