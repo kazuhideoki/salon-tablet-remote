@@ -6,8 +6,6 @@ import { useStylesFactory } from "./Store/useStylesFactory";
 import { UpdatePostButton } from "./Setting/UpdatePostButton";
 import { DeletePostButton } from "./Setting/DeletePostButton";
 import { CreatePostButton } from "./Setting/CreatePostButton";
-import { stateToHTML } from "draft-js-export-html";
-import { convertFromRaw } from "draft-js";
 
 
 
@@ -34,14 +32,6 @@ const styles = {
     },
     titleImgDiv: {
         position: "relative",
-    },
-    title: {
-        position: "absolute",
-        bottom: 0,
-        width: "100%",
-        padding: "40px 10px 0 10px",
-        background:
-            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5074404761904762) 33%, rgba(255,255,255,1) 100%)",
     },
     img: {
         objectFit: "cover",
@@ -101,55 +91,40 @@ export const PMain = () => {
             displayArticles = postData.map((value, key: number) => {
 
                 return (
-                    <Grid item key={key} className={classes.item}>
-                        {appState.isSetting ? (
-                            <UpdatePostButton
-                                position={classes.updatePostButton}
-                            />
-                        ) : null}
-                        {appState.isSetting ? (
-                            <DeletePostButton
-                                position={classes.deletePostButton}
-                                id={value.id}
-                            />
-                        ) : null}
+                <Grid item key={key} className={classes.item}>
+                    {appState.isSetting ? (
+                    <UpdatePostButton position={classes.updatePostButton} />
+                    ) : null}
+                    {appState.isSetting ? (
+                    <DeletePostButton
+                        position={classes.deletePostButton}
+                        id={value.id}
+                    />
+                    ) : null}
 
-                        <Card
-                            variant="outlined"
-                            className={classes.article}
-                            id={`p_main_` + key}
-                        >
-                            <CardActionArea>
-                                <CardContent>
-                                    <Typography
-                                        className={classes.title}
-                                        variant="h5"
-                                    >
-                                        {value.title}
-                                    </Typography>
-                                    <Typography
-                                        gutterBottom
-                                        variant="h6"
-                                        align="right"
-                                    >
-                                        {sqlToDate(value.date)}
-                                    </Typography>
-                                    <Typography variant="body1">
-                                        {/* <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: value.content,
-                                            }}
-                                        /> */}
-                                        <p>
-                                            {stateToHTML(
-                                                convertFromRaw(value.content)
-                                            )}
-                                        </p>
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
+                    <Card
+                    variant="outlined"
+                    className={classes.article}
+                    id={`p_main_` + key}
+                    >
+                    <CardActionArea>
+                        <CardContent>
+                        <Typography variant="h5">{value.title}</Typography>
+                        <Typography gutterBottom variant="h6" align="right">
+                            {sqlToDate(value.date)}
+                        </Typography>
+                        {/* <Typography variant="body1"> */}
+                        {/* <div
+                            dangerouslySetInnerHTML={{
+                                __html: value.content,
+                            }}
+                        /> */}
+                        {value.content}
+                        {/* </Typography> */}
+                        </CardContent>
+                    </CardActionArea>
+                    </Card>
+                </Grid>
                 );
             });
             // 記事がもしなかった場合の表示

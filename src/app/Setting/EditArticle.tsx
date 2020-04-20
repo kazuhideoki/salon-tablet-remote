@@ -9,45 +9,6 @@ import {
   useDeletePost,
 } from "../Store/postDataRducer";
 import { sqlToDate } from '../modules/organizeSql/sqlToDate';
-import { Editor, EditorState, convertToRaw } from "draft-js";
-
-const ArticleEditor = () => {
-    const [editorState, setEditorState] = React.useState(
-        EditorState.createEmpty(),
-    );
-    const createPostD = useCreatePostD()
-
-    const hundleSubmit = () => {
-        const today = new Date();
-        const date = dateToSql(today);
-
-        const contentState = editorState.getCurrentContent();
-        const content = convertToRaw(contentState);
-        // const content = contentState
-
-        const params = {
-            id: null,
-            title: 'これはdraftjsのeditorから',
-            date: date,
-            content: JSON.stringify(content)
-        }
-
-        createPostD(params);
-        setEditorState(EditorState.createEmpty())
-    }
-
-    return (
-        <>
-            <Editor
-                editorState={editorState}
-                onChange={(e) => setEditorState(e)}
-            />
-            <button onClick={() => hundleSubmit()}>
-                投稿
-            </button>
-        </>
-    );
-}
 
 
 const PostForm = (props) => {
@@ -179,7 +140,6 @@ export const EditArticle = () => {
 
     return (
       <div>
-        <ArticleEditor/>
         <PostForm {...props} />
         <ShowArticle {...props} />
       </div>
