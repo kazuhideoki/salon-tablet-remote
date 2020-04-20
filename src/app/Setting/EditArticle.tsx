@@ -14,6 +14,7 @@ import dynamic from "next/dynamic";
 const Editor = dynamic(() => import("../react-quill/Editor"),{
     ssr: false
 });
+// import Editor from "../react-quill/Editor";
 
 
 const PostForm = (props) => {

@@ -80,7 +80,7 @@ export const useCreatePostD = () => {
             {
                 headers: { "Content-Type": "application/json" },
                 method: "POST",
-                mode: "cors",
+                mode: "cors", 
                 body: JSON.stringify(params),
             }
         );

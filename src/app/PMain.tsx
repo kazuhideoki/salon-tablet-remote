@@ -114,12 +114,12 @@ export const PMain = () => {
                             {sqlToDate(value.date)}
                         </Typography>
                         {/* <Typography variant="body1"> */}
-                        {/* <div
+                        <div
                             dangerouslySetInnerHTML={{
                                 __html: value.content,
                             }}
-                        /> */}
-                        {value.content}
+                        />
+                        {/* {value.content} */}
                         {/* </Typography> */}
                         </CardContent>
                     </CardActionArea>
