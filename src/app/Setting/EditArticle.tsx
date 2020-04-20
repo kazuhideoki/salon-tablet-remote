@@ -9,6 +9,11 @@ import {
   useDeletePost,
 } from "../Store/postDataRducer";
 import { sqlToDate } from '../modules/organizeSql/sqlToDate';
+import ReactQuill from "react-quill"; 
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("../react-quill/Editor"),{
+    ssr: false
+});
 
 
 const PostForm = (props) => {
@@ -140,6 +145,7 @@ export const EditArticle = () => {
 
     return (
       <div>
+          <Editor/>
         <PostForm {...props} />
         <ShowArticle {...props} />
       </div>
