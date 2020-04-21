@@ -137,6 +137,41 @@ export const useGetSinglePost = () => {
     }
     };
 };
+export const useGetSinglePostD = () => {
+    const { dispatchAppState } = React.useContext(Store);
+    return async (
+        params
+    ) => {
+    console.log(params.id);
+
+    const res = await fetch(
+        `http://${location.host}/post_data/get/singlepost`,
+        {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ id: params.id }),
+        }
+    );
+    const data = await res.json();
+    console.log(data);
+
+    if (data.err === true) {
+        alert("記事を取得できませんでした");
+    } else {
+        const {title, content} = data.rawData
+        // setTitle(title);
+        // setIsEdit(true);
+        // setEdittingPostParams(data.rawData);
+        // setEditorText(content);
+        dispatchAppState({
+          type: "OPEN_MODAL",
+          payload: "edit_article",
+        });
+
+    }
+    };
+};
 
 export const useUpdatePost = () => {
     const { dispatchPostData } = React.useContext(Store)
