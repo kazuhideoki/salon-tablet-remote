@@ -41,8 +41,25 @@ app.prepare().then(() => {
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }));
 
+    Bookshelf.plugin('pagination')
+
     server.get("/post_data/get", (req, res) => {
         new PostData().fetchAll()
+        .then((result) => {
+            const data = { rawData: result.toArray() };
+            res.send(data)
+            console.log(JSON.stringify(result));
+        })
+        .catch((err) => {
+            console.log(JSON.stringify(err));
+            
+            res.status(500).json({err: true, data:{message: err.message}})
+        })
+    });
+    server.get("/post_data/get/:page", (req, res) => {
+        const pg = req.body.page
+
+        new PostData().fetchPage({page:pg, pageSize:5})
         .then((result) => {
             const data = { rawData: result.toArray() };
             res.send(data)

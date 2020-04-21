@@ -9,6 +9,7 @@ import {
 import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { useStylesFactory } from "../Store/useStylesFactory";
+import { Pagination } from './Pagination/Pagination';
 
 const styles = {
     root: {
@@ -35,6 +36,7 @@ export const PFooter = () => {
     const PFooterPresenter = ({ classes, openModal, dispatchAppState }: Props) => {
         return (
             <div className={classes.root}>
+                <Pagination/>
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
                         <IconAndText

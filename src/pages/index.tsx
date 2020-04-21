@@ -19,7 +19,7 @@ const Index = (props) =>{
     );}
 
 export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/post_data/get");
+    const res = await fetch("http://localhost:3000/post_data/get/1");
     console.log(JSON.stringify(res));
 
     const data = await res.json();
