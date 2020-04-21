@@ -8,9 +8,11 @@ import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
 import { Setting } from "../Setting/Setting";
-import { EditArticle } from "../Setting/EditArticle";
-import { EditFooter } from "../Setting/EditFooter";
-
+// import { EditFooter } from "../Setting/EditFooter";
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("../react-quill/Editor"), {
+  ssr: false,
+});
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
@@ -77,13 +79,13 @@ export const PModal = () => {
                 ModalContent = () => <Setting openModal={openModal} />;
                 break;
             case "edit_article":
-                modalStyle = size100;
-                ModalContent = () => <EditArticle />;
-                break;
-            case "edit_footer":
                 modalStyle = size90;
-                ModalContent = () => <EditFooter />;
+                ModalContent = () => <Editor />;
                 break;
+            // case "edit_footer":
+            //     modalStyle = size90;
+            //     ModalContent = () => <EditFooter />;
+            //     break;
 
             default:
                 console.log("エラーだよ、PModal→ '" + setModal +"'");

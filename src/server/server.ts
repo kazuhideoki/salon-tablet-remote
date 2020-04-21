@@ -54,30 +54,8 @@ app.prepare().then(() => {
             res.status(500).json({err: true, data:{message: err.message}})
         })
     });
-
+   
     server.post("/post_data/create/post", (req, res) => {
-        const { title, date, content } = req.body;
-        new PostData({
-            title: title,
-            date: date,
-            content: content,
-        })
-        // new PostData(req.body)
-        .save()
-        .then((result) => {
-            console.log('create/postのresultは ' + JSON.stringify(result));
-            
-            const data = { rawData: result };
-            res.send(data);
-            })
-        .catch((err) => {
-            res.status(500).json({
-                err: true,
-                data: { message: err.message },
-            });
-        });
-     });
-    server.post("/post_data/create/postd", (req, res) => {
         const { title, date, content } = req.body;
         new PostData({
             title: title,
@@ -86,7 +64,7 @@ app.prepare().then(() => {
         })
             .save()
             .then((result) => {
-                console.log("create/postdのresultは " + JSON.stringify(result));
+                console.log("create/postのresultは " + JSON.stringify(result));
 
                 const data = { rawData: result };
                 res.send(data);
