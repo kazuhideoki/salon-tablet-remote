@@ -78,42 +78,8 @@ export const useCreatePost = () => {
            }
          };
        };
+
 export const useGetSinglePost = () => {
-    return async (
-    id: number,
-        setTitle,
-        setContent,
-        setIsEdit,
-        setEdittingPostParams
-    ) => {
-    console.log(id);
-
-
-    const res = await fetch(
-        `http://${location.host}/post_data/get/singlepost`,
-        {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ id }),
-        }
-    );
-    const data = await res.json();
-    console.log(data);
-
-    if (data.err === true) {
-        alert("記事を取得できませんでした");
-    } else {
-        const {title, content} = data.rawData
-        setTitle(title);
-        setContent(content);
-        setIsEdit(true);
-        setEdittingPostParams(data.rawData);
-
-    }
-    };
-};
-export const useGetSinglePostD = () => {
     const { dispatchAppState } = React.useContext(Store);
     const {
         setTitleText,
