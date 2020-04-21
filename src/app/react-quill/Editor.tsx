@@ -62,37 +62,39 @@ const hundleSubmit = () => {
 };
 const enableCreateMode = () => {
     setIsEdittingPost(false);
-    // setTitle("");
+    setTitleText("");
     setEditorText("");
 };
 
-const modeNotice = () => {
+const ModeNotice = () => {
     return(
         <>
-        <p>{`${edittingPostParams.title}の記事を編集中`}</p>
-        <button onClick={() => enableCreateMode()}>新規投稿にする</button>
+            <p>{`${edittingPostParams.title}の記事を編集中`}</p>
+            <button onClick={() => enableCreateMode()}>新規投稿にする</button>
         </>
     )
 }
 
 
 return (
-    <>
-        {isEdittingPost
-        ? modeNotice
-        : "新規投稿"}
-        
-        <h2>記事タイトル</h2>
-        <input value={titleText} onChange={(e => setTitleText(e.target.value))}/>
-        <ReactQuill
-            value={editorText}
-            onChange={(e) => setEditorText(e)}
-            theme="snow"
-            modules={modules}
-            formats={formats}
-        />
-        <button onClick={() => hundleSubmit()}>投稿</button>
-    </>
+  <>
+    {isEdittingPost ? <ModeNotice/> : <p>"新規投稿"</p>}
+
+    <h2>記事タイトル</h2>
+    <input
+      value={titleText}
+      onChange={(e) => setTitleText(e.target.value)}
+      style={{ marginBottom: "20px" }}
+    />
+    <ReactQuill
+      value={editorText}
+      onChange={(e) => setEditorText(e)}
+      theme="snow"
+      modules={modules}
+      formats={formats}
+    />
+    <button onClick={() => hundleSubmit()}>投稿</button>
+  </>
 );
 };
 

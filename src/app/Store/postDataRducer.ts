@@ -113,10 +113,10 @@ export const useGetSinglePost = () => {
              setIsEdittingPost(true);
              setEdittingPostParams(data.rawData);
              setEditorText(content);
-             dispatchAppState({
-               type: "OPEN_MODAL",
-               payload: "edit_article",
-             });
+            //  dispatchAppState({
+            //    type: "OPEN_MODAL",
+            //    payload: "edit_article",
+            //  });
            }
     };
 };
