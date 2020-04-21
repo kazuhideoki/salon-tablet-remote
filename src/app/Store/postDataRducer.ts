@@ -45,7 +45,7 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
 }
 
 export const useCreatePost = () => {
-         const { dispatchPostData } = React.useContext(Store);
+         const { dispatchPostData, dispatchAppState } = React.useContext(Store);
          const { setEditorText, setTitleText } = React.useContext(
            EditorContext
          );
@@ -74,6 +74,7 @@ export const useCreatePost = () => {
              });
              setEditorText("");
              setTitleText("")
+             dispatchAppState({type: "CLOSE_MODAL"})
            }
          };
        };
@@ -155,7 +156,7 @@ export const useGetSinglePostD = () => {
 };
 
 export const useUpdatePost = () => {
-    const { dispatchPostData } = React.useContext(Store)
+    const { dispatchPostData, dispatchAppState } = React.useContext(Store);
     const { setTitleText, setEditorText, setIsEdittingPost } = React.useContext(
       EditorContext
     );
@@ -177,7 +178,7 @@ export const useUpdatePost = () => {
         setIsEdittingPost(false);
         setTitleText('')
         setEditorText('')
-
+        dispatchAppState({ type: "CLOSE_MODAL" });
     }
     };
 
