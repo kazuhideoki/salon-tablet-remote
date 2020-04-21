@@ -93,7 +93,10 @@ export const PMain = () => {
                 return (
                 <Grid item key={key} className={classes.item}>
                     {appState.isSetting ? (
-                    <UpdatePostButton position={classes.updatePostButton} />
+                    <UpdatePostButton
+                        position={classes.updatePostButton}
+                        params={value}
+                    />
                     ) : null}
                     {appState.isSetting ? (
                     <DeletePostButton
@@ -116,7 +119,7 @@ export const PMain = () => {
                         {/* <Typography variant="body1"> */}
                         <div
                             dangerouslySetInnerHTML={{
-                                __html: value.content,
+                            __html: value.content,
                             }}
                         />
                         {/* {value.content} */}

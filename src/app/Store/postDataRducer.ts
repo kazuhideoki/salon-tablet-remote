@@ -2,6 +2,7 @@ import React from 'react'
 import { PostData, Store, PostDataSingle } from "./Store";
 import { reducerLogger } from "./reducerLogger";
 import fetch from "node-fetch";
+import { EditorContext } from './EditorContext';
 
 export type PostDataAction =
 | { type: "GET"; payload: PostData }
@@ -137,9 +138,51 @@ export const useGetSinglePost = () => {
     }
     };
 };
+export const useGetSinglePostD = () => {
+    const { dispatchAppState } = React.useContext(Store);
+    const {
+      setEditorText,
+      setIsEdittingPost,
+      setEdittingPostParams,
+    } = React.useContext(EditorContext);
+    return async (
+        params
+    ) => {
+    console.log(params.id);
+
+    const res = await fetch(
+        `http://${location.host}/post_data/get/singlepost`,
+        {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ id: params.id }),
+        }
+    );
+    const data = await res.json();
+    console.log(data);
+
+    if (data.err === true) {
+        alert("記事を取得できませんでした");
+    } else {
+             const { title, content } = data.rawData;
+             // setTitle(title);
+             setIsEdittingPost(true);
+             setEdittingPostParams(data.rawData);
+             setEditorText(content);
+             dispatchAppState({
+               type: "OPEN_MODAL",
+               payload: "edit_article",
+             });
+           }
+    };
+};
 
 export const useUpdatePost = () => {
     const { dispatchPostData } = React.useContext(Store)
+    const { setEditorText, setIsEdittingPost } = React.useContext(
+      EditorContext
+    );
     return async (params, setIsEdit) => {
     const res = await fetch(`http://${location.host}/post_data/update/post`, {
         headers: { "Content-Type": "application/json" },
@@ -155,6 +198,9 @@ export const useUpdatePost = () => {
     } else {
         dispatchPostData({ type: "UPDATE_POST", payload: params });
         setIsEdit(false);
+        setIsEdittingPost(false);
+        setEditorText('')
+
     }
     };
 

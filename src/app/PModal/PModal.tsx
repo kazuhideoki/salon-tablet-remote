@@ -70,7 +70,7 @@ export const PModal = () => {
 
         switch (setModal) {
             case "colorChart":
-                modalStyle = size90;
+                modalStyle = size90; 
                 ModalContent = () => <ColorChart />;
                 break;
             case "setting":
