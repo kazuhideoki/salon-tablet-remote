@@ -8,9 +8,11 @@ import {
   useDeletePost,
 } from "../Store/postDataRducer";
 import { dateToSql } from "../modules/organizeSql/dateToSql";
+import { EditorContext } from "../Store/EditorContext";
 
 const Editor = () => {
-  const [editorText, setEditorText] = React.useState("");
+//   const [editorText, setEditorText] = React.useState("");
+const {editorText, setEditorText} = React.useContext(EditorContext)
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
