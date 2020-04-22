@@ -11,6 +11,7 @@ import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
 import { Oldest } from "./Oldest";
 import { Next } from "./Next";
+import { useGetPost } from "../../Store/postDataRducer";
 
 const styles = {
   icon: {
@@ -36,7 +37,7 @@ const styles = {
 };
 
 export type pageArrowProps = {
-  setParams: (type: any) => void;
+  hundleOnClick: (type: any) => void;
   classesDisable?: string;
   classesIcon?: string;
 };
@@ -49,8 +50,9 @@ export const Pagination = () => {
     dispatchAppState,
   } = React.useContext(Store);
   const { page, pageCount} = paginationParams;
+  const getPost = useGetPost()
 
-  const setParams = (arg: PaginationParamsAction) => {
+  const hundleOnClick = (arg: PaginationParamsAction) => {
     // dispatchAppState({ type: "START_LOADING" });
     dispatchPaginationParams(arg);
   };
@@ -58,21 +60,21 @@ export const Pagination = () => {
   const props = {
     classes,
     page,
-    setParams,
+    hundleOnClick,
     pageCount,
   };
   type Props = typeof props
 
   const PaginationPresenter = ({
-    classes, 
+    classes,
     page,
-    setParams,
+    hundleOnClick,
     pageCount,
   }: Props) => {
     const HomeButton = () => {
       return (
         <Home
-          onClick={() => setParams({ type: "MAINHOME" })}
+          onClick={() => hundleOnClick({ type: "MAINHOME" })}
           className={classes.icon}
         />
       );
@@ -88,28 +90,41 @@ export const Pagination = () => {
     const PaginationArrows = () => (
       <Grid item className={classes.pagination}>
         <Latest
-          setParams={setParams}
           classesDisable={classes.disable}
           classesIcon={classes.icon}
+          hundleOnClick={hundleOnClick}
         />
         <Prev
-          setParams={setParams}
           classesDisable={classes.disable}
           classesIcon={classes.icon}
+          hundleOnClick={hundleOnClick}
         />
-        <DisplayNumbers setParams={setParams} />
+        <DisplayNumbers hundleOnClick={hundleOnClick} />
         <Next
-          setParams={setParams}
           classesDisable={classes.disable}
           classesIcon={classes.icon}
+          hundleOnClick={hundleOnClick}
         />
         <Oldest
-          setParams={setParams}
           classesDisable={classes.disable}
           classesIcon={classes.icon}
+          hundleOnClick={hundleOnClick}
         />
       </Grid>
     );
+
+    React.useEffect(() => {
+      async () => {
+        const pagination = await getPost(paginationParams.page);
+        // ※useEffect内でreturnすると次の[input]のトリガーに引っかからない？
+        return () => {
+          dispatchPaginationParams({
+            type: "SET_PAGINATION_PARAMS",
+            payload: pagination,
+          });
+        };
+      };
+    }, [paginationParams.page, paginationParams.pageCount]);
 
     return (
       <Grid container justify="center" spacing={1}>

@@ -12,7 +12,7 @@ export const Next = (props: pageArrowProps) => {
   let onClick;
   let disable;
   if (!(page === pageCount)) {
-    onClick = () => props.setParams({ type: "NEXT" });
+    onClick = () => props.hundleOnClick({ type: "NEXT" });
     disable = null;
   } else {
     onClick = undefined;

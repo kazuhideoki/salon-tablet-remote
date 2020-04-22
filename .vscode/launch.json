@@ -4,6 +4,17 @@
     // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/src/server/server.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ]
+        },
         {
             "type": "node",
             "request": "attach",
@@ -14,26 +25,17 @@
             ]
         },
 
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach",
-            "port": 3000,
-            "skipFiles": [
-                "<node_internals>/**"
-            ]
-        },
 
-
-
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}"
-        }
-    ]
+    ],
+    // "compounds": [
+    //     {
+    //         "name": "Next: Full",
+    //         "configurations": [
+    //             "Next: Node",
+    //             "Next: Chrome"
+    //         ]
+    //     }
+    // ]
 
 
 }

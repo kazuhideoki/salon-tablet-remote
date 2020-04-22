@@ -91,3 +91,4 @@ export const App = ()=> {
     return AppPresenter(props)
 }
 
+export default App

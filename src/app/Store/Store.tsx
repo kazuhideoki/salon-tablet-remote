@@ -86,3 +86,5 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
 };
 
 export { Store, StoreContextProvider };
+
+export default StoreContextProvider;

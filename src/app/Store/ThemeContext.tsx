@@ -63,3 +63,5 @@ export const ThemeProvider = ({ children }: any) => {
     )
 };
 
+export default ThemeProvider;
+

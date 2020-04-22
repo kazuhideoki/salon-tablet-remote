@@ -61,7 +61,7 @@ export const useGetPost = () => {
         const data = await res.json();
         // const pageCount = data.pagination.pageCount;
 
-         if (data.err === true) {
+         if (data.err === true) { 
            alert("投稿できませんでした");
          } else {
             dispatchPostData({
@@ -70,10 +70,11 @@ export const useGetPost = () => {
             });
             dispatchAppState({ type: "END_LOADING" });
             if (paginationParams !== data.pagination) {
-                dispatchPaginationParams({
-                    type: "SET_PAGINATION_PARAMS",
-                    payload: data.pagination,
-                });
+                // dispatchPaginationParams({
+                //     type: "SET_PAGINATION_PARAMS",
+                //     payload: data.pagination,
+                // });
+                return data.pagination
             }
         }
         

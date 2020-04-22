@@ -12,7 +12,7 @@ export const Prev = (props: pageArrowProps) => {
   let onClick;
   let disable;
   if (!(page === 1)) {
-    onClick = () => props.setParams(arg);
+    onClick = () => props.hundleOnClick(arg);
     disable = null;
   } else {
     onClick = undefined;

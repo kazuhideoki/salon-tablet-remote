@@ -50,7 +50,11 @@ export function paginationParamsReducer(
              newState = { ...state, page: action.payload };
              break;
            case "SET_PAGINATION_PARAMS":
-             newState = { ...action.payload };
+               if (state !== action.payload) {
+                   newState = { ...action.payload };
+               }else{
+                   return state
+               }
              break;
 
            default:

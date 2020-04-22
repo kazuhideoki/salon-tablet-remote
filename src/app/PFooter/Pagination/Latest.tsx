@@ -13,7 +13,7 @@ export const Latest = (props: pageArrowProps) => {
     let onClick;
     let disable;
     if (page > 3 && pageCount > 3) {
-      onClick = () => props.setParams({ type: "LATEST" });
+      onClick = () => props.hundleOnClick({ type: "LATEST" });
       disable = null;
     } else {
       onClick = undefined;

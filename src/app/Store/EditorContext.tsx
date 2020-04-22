@@ -40,3 +40,4 @@ const EditorContextProvider = (props) => {
 }
 
 export { EditorContext, EditorContextProvider };
+export default EditorContextProvider

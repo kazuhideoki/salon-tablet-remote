@@ -47,9 +47,13 @@ export const DisplayNumbers = (props: pageArrowProps) => {
 
     const arg = { type: "NUM", payload: num };
     return (
-      <button key={num} onClick={() => props.setParams(arg)} className={classes.nums}>
+      <button
+        key={num}
+        onClick={() => props.hundleOnClick(arg)}
+        className={classes.nums}
+      >
         {num}
-      </button> 
+      </button>
     );
   });
 
