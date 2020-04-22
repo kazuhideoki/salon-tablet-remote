@@ -7,18 +7,17 @@ import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Latest = (props: pageArrowProps) => {
-    const { paginationParams, totalPages } = React.useContext(Store);
-    const currentPage = paginationParams.currentPage;
+    const { paginationParams } = React.useContext(Store);
+    const {currentPage, pageCount} = paginationParams
 
-    const arg: PaginationParamsAction = { type: "LATEST" };
     let onClick;
     let disable;
-    if (currentPage > 3 && totalPages > 3) {
-        onClick = () => props.setParams(arg);
-        disable = null;
+    if (currentPage > 3 && pageCount > 3) {
+      onClick = () => props.setParams({ type: "LATEST" });
+      disable = null;
     } else {
-        onClick = undefined;
-        disable = props.classesDisable;
+      onClick = undefined;
+      disable = props.classesDisable;
     }
     return (
         <FirstPage

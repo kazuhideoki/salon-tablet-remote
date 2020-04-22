@@ -32,16 +32,18 @@ function corsHeader(res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     res.header(
-      "Access-Control-Allow-Headers",
-      "Content-Type, application/json"
+        "Access-Control-Allow-Headers",
+        "Content-Type, application/json"
     );
 }  
 
 app.prepare().then(() => {
+
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }));
 
-    Bookshelf.plugin('pagination')
+    // Bookshelf.plugin('pagination')
+    // Bookshelf.fetchPage()
 
     server.get("/post_data/get", (req, res) => {
         new PostData().fetchAll()
@@ -56,14 +58,19 @@ app.prepare().then(() => {
             res.status(500).json({err: true, data:{message: err.message}})
         })
     });
+
     server.get("/post_data/get/:page", (req, res) => {
         const pg = req.body.page
 
         new PostData().fetchPage({page:pg, pageSize:5})
         .then((result) => {
-            const data = { rawData: result.toArray() };
+            const data = {
+              rawData: result.toArray(),
+              pagination: result.pagination,
+            };
             res.send(data)
             console.log(JSON.stringify(result));
+            console.log(JSON.stringify(result.pagination));
         })
         .catch((err) => {
             console.log(JSON.stringify(err));
@@ -75,23 +82,27 @@ app.prepare().then(() => {
     server.post("/post_data/create/post", (req, res) => {
         const { title, date, content } = req.body;
         new PostData({
-            title: title,
-            date: date,
-            content: content,
+          title: title,
+          date: date,
+          content: content,
         })
-            .save()
-            .then((result) => {
-                console.log("create/postのresultは " + JSON.stringify(result));
+          .save()
+          .then((result) => {
+            console.log("create/postのresultは " + JSON.stringify(result));
 
-                const data = { rawData: result };
-                res.send(data);
-            })
-            .catch((err) => { 
-                res.status(500).json({
-                    err: true,
-                    data: { message: err.message },
-                });
+            const data = {
+              rawData: result,
+              pagination: result.pagination,
+            };
+            console.log(JSON.stringify(data));
+            res.send(data);
+          })
+          .catch((err) => {
+            res.status(500).json({
+              err: true,
+              data: { message: err.message },
             });
+          });
      });
 
      server.post("/post_data/get/singlepost", (req, res) => {

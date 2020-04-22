@@ -6,7 +6,7 @@ import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
 
 export const Prev = (props: pageArrowProps) => {
   const { paginationParams } = React.useContext(Store);
-  const currentPage = paginationParams.currentPage;
+  const { currentPage } = paginationParams;
 
   const arg: PaginationParamsAction = { type: "PREV" };
   let onClick;

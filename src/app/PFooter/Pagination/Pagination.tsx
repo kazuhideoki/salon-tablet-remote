@@ -41,29 +41,19 @@ export type pageArrowProps = {
   classesIcon?: string;
 };
 
-type Props = {
-  classes: Record<string, string>;
-  currentPage: number;
-  openModal: (modalName: string) => void;
-  setParams: (type: any) => void;
-  totalPages: number;
-};
-
-const PPaginationContainer = ({ presenter }: any) => {
+export const Pagination = () => {
   const classes = useStylesFactory(styles);
   const {
     paginationParams,
     dispatchPaginationParams,
     dispatchAppState,
-    totalPages,
   } = React.useContext(Store);
+  const { currentPage, pageCount} = paginationParams;
 
-  const currentPage = paginationParams.currentPage;
   const openModal = (modalName: string) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
   };
 
-  // wpParamsReducerのWpParamsActionで上手く行かなった。検討の余地あり
   const setParams = (arg: PaginationParamsAction) => {
     dispatchAppState({ type: "START_LOADING" });
     dispatchPaginationParams(arg);
@@ -74,83 +64,68 @@ const PPaginationContainer = ({ presenter }: any) => {
     currentPage,
     openModal,
     setParams,
-    totalPages,
+    pageCount,
   };
+  type Props = typeof props
 
-  return presenter(props);
-};
+  const PaginationPresenter = ({
+    classes,
+    currentPage,
+    openModal,
+    setParams,
+    pageCount,
+  }: Props) => {
+    const HomeButton = () => {
+      return (
+        <Home
+          onClick={() => setParams({ type: "MAINHOME" })}
+          className={classes.icon}
+        />
+      );
+    };
+    const PageNumber = () => {
+      return (
+        <p className={classes.nums}>
+          【 {currentPage}/{pageCount} 】
+        </p>
+      );
+    };
 
-const PPaginationPresenter = ({
-  classes,
-  currentPage,
-  openModal,
-  setParams,
-  totalPages,
-}: Props) => {
-  const HomeButton = () => {
-    const arg = { type: "MAINHOME" };
-    return <Home onClick={() => setParams(arg)} className={classes.icon} />;
-  };
-  const Tag = () => (
-    <Label onClick={() => openModal("tag")} className={classes.icon} />
-  );
-  const Author = () => (
-    <Person onClick={() => openModal("author")} className={classes.icon} />
-  );
+    const PaginationArrows = () => (
+      <Grid item className={classes.pagination}>
+        <Latest
+          setParams={setParams}
+          classesDisable={classes.disable}
+          classesIcon={classes.icon}
+        />
+        <Prev
+          setParams={setParams}
+          classesDisable={classes.disable}
+          classesIcon={classes.icon}
+        />
+        <DisplayNumbers setParams={setParams} />
+        <Next
+          setParams={setParams}
+          classesDisable={classes.disable}
+          classesIcon={classes.icon}
+        />
+        <Oldest
+          setParams={setParams}
+          classesDisable={classes.disable}
+          classesIcon={classes.icon}
+        />
+      </Grid>
+    );
 
-  const PageNumber = () => {
     return (
-      <p className={classes.nums}>
-        【 {currentPage}/{totalPages} 】
-      </p>
+      <Grid container justify="center" spacing={1}>
+        <HomeButton />
+        <PageNumber />
+        <PaginationArrows />
+      </Grid>
     );
   };
 
-  const SelectParams = () => (
-    <>
-      <Grid item>
-        <HomeButton />
-      </Grid>
-    </>
-  );
+  return PaginationPresenter(props)
 
-  const Pagination = () => (
-    <Grid item className={classes.pagination}>
-      <Latest
-        setParams={setParams}
-        classesDisable={classes.disable}
-        classesIcon={classes.icon}
-      />
-      <Prev
-        setParams={setParams}
-        classesDisable={classes.disable}
-        classesIcon={classes.icon}
-      />
-      <DisplayNumbers setParams={setParams} />
-      <Next
-        setParams={setParams}
-        classesDisable={classes.disable}
-        classesIcon={classes.icon}
-      />
-      <Oldest
-        setParams={setParams}
-        classesDisable={classes.disable}
-        classesIcon={classes.icon}
-      />
-    </Grid>
-  );
-
-  return (
-    <Grid container justify="center" spacing={1}>
-      <SelectParams />
-      <PageNumber />
-      <Pagination />
-    </Grid>
-  );
 };
-
-export const Pagination = () => (
-  <PPaginationContainer
-    presenter={(props: Props) => <PPaginationPresenter {...props} />}
-  />
-);

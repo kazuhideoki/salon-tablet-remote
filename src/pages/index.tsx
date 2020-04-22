@@ -18,16 +18,16 @@ const Index = (props) =>{
       </ThemeProvider>
     );}
 
-export async function getServerSideProps() {
-    const res = await fetch("http://localhost:3000/post_data/get/1");
-    console.log(JSON.stringify(res));
+// export async function getServerSideProps() {
+//     const res = await fetch("http://localhost:3000/post_data/get/1");
+//     console.log(JSON.stringify(res));
 
-    const data = await res.json();
-    console.log("indexのserversideは" + JSON.stringify(data));
+//     const data = await res.json();
+//     console.log("indexのserversideは" + JSON.stringify(data));
     
-    return {props: {data: data.rawData}};
+//     return {props: {data: data.rawData}};
 
-};
+// };
 
 export default Index
 // serviceWorker.register();

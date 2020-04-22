@@ -7,9 +7,10 @@ export type Prev = { type: "PREV" };
 export type Next = { type: "NEXT" };
 export type Oldest = { type: "OLDEST"; payload: number };
 export type Num = { type: "NUM"; payload: number };
+export type SetPageCount = { type: "SET_PAGE_COUNT"; payload: number };
 
 export type NoPayload = MainHome | Latest | Prev | Next
-export type WithPayload = Oldest | Num 
+export type WithPayload = Oldest | Num | SetPageCount
 
 export type PaginationParamsAction = NoPayload | WithPayload;
 
@@ -44,6 +45,9 @@ export function paginationParamsReducer(
              break;
            case "NUM":
              newState = { ...state, currentPage: action.payload };
+             break;
+           case "SET_PAGE_COUNT":
+             newState = { ...state, pageCount: action.payload };
              break;
 
            default:

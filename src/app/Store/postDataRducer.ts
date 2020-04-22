@@ -44,8 +44,42 @@ export function postDataReducer(state: PostData, action: PostDataAction) {
     return newState;
 }
 
+export const useGetPost = () => {
+    const {
+      paginationParams, 
+      dispatchPaginationParams,
+      dispatchPostData,
+    } = React.useContext(Store);
+
+    return async (pagination) => {
+        const res = await fetch(
+          `http://localhost:3000/post_data/get/${pagination.currentPage}`
+        );
+        console.log(JSON.stringify(res));
+
+        const data = await res.json();
+        const pageCount = data.pagination.pageCount;
+
+         if (data.err === true) {
+           alert("投稿できませんでした");
+         } else {
+            dispatchPostData({
+            type: "GET",
+            payload: data.rawData,
+            });
+                if (paginationParams.pageCount !== pageCount) {
+                  dispatchPaginationParams({
+                    type: "SET_PAGE_COUNT",
+                    payload: pageCount,
+                  });
+                }
+        }
+        
+    }
+}
+
 export const useCreatePost = () => {
-         const { dispatchPostData, dispatchAppState } = React.useContext(Store);
+         const { paginationParams, dispatchPaginationParams, dispatchPostData, dispatchAppState } = React.useContext(Store);
          const { setEditorText, setTitleText } = React.useContext(
            EditorContext
          );
@@ -64,6 +98,7 @@ export const useCreatePost = () => {
              "useCreatePostの戻ってくるdataダヨ→" + JSON.stringify(data)
            );
            params.id = data.rawData.id;
+           const pageCount = data.pagination.pageCount;
 
            if (data.err === true) {
              alert("投稿できませんでした");
@@ -75,6 +110,13 @@ export const useCreatePost = () => {
              setEditorText("");
              setTitleText("")
              dispatchAppState({type: "CLOSE_MODAL"})
+             if (paginationParams.pageCount !== pageCount) {
+                 dispatchPaginationParams({
+                   type: "SET_PAGE_COUNT",
+                   payload: pageCount,
+                 });
+             }
+
            }
          };
        };
@@ -150,7 +192,11 @@ export const useUpdatePost = () => {
 
 }
 export const useDeletePost = () => {
-    const { dispatchPostData } = React.useContext(Store)
+    const {
+      paginationParams,
+      dispatchPaginationParams,
+      dispatchPostData,
+    } = React.useContext(Store);
     return async (id: number) => {
         console.log(id);
         
@@ -164,12 +210,18 @@ export const useDeletePost = () => {
         }
     );
     const data = await res.json();
-    console.log(data);
+    const pageCount = data.pagination.pageCount;
     
     if (data.err === true) {
         alert("削除できませんでした");
     } else {
         dispatchPostData({ type: "DELETE_POST", payload: {id} });
+        if (paginationParams.pageCount !== pageCount) {
+          dispatchPaginationParams({
+            type: "SET_PAGE_COUNT",
+            payload: pageCount,
+          });
+        }
     }
     };
 

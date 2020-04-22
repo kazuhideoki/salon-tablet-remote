@@ -6,14 +6,13 @@ import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
 
 
 export const Next = (props: pageArrowProps) => {
-  const { paginationParams, totalPages } = React.useContext(Store);
-  const currentPage = paginationParams.currentPage;
+  const { paginationParams } = React.useContext(Store);
+  const {currentPage, pageCount} = paginationParams
 
-  const arg: PaginationParamsAction = { type: "NEXT" };
   let onClick;
   let disable;
-  if (!(currentPage === totalPages)) {
-    onClick = () => props.setParams(arg);
+  if (!(currentPage === pageCount)) {
+    onClick = () => props.setParams({ type: "NEXT" });
     disable = null;
   } else {
     onClick = undefined;

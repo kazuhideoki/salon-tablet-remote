@@ -7,6 +7,7 @@ import { PFooter } from "./PFooter/PFooter";
 import { Store } from "./Store/Store";
 import { ThemeType } from "./Store/ThemeContext";
 import { useStylesFactory } from "./Store/useStylesFactory";
+import { useGetPost } from "./Store/postDataRducer";
 
 
 // 3段のコンテナの整形に関してのみ記述, 
@@ -41,24 +42,17 @@ const styles = {
     }
 }
 
-export type SetArticles = (data: any) => void
-export type SetArticlesImportant = (data: any) => void
-export type SetArticlesImportantEn = (data: any) => void
-export type SetArticlesImportantJa = (data: any) => void
-export type SetTags = (data: any) => void
-export type SetUsers = (data: any) => void
-
-type Props = {
-    classes: Record<string, string>
-    isLoading: boolean
-}
-
 export const App = ()=> {
     const classes = useStylesFactory(styles)
 
-    const { appState, dispatchAppState } = React.useContext(Store);
+    const { paginationParams, appState, dispatchAppState } = React.useContext(Store);
     const isLoading = appState.isLoading
     const endLoading = () => dispatchAppState({type: "END_LOADING"})
+    const getPost = useGetPost()
+
+    React.useEffect(() => {
+      getPost(paginationParams);
+    }, [paginationParams.currentPage]);
 
     const props = {
     classes,

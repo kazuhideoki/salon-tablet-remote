@@ -19,8 +19,8 @@ const styles = {
 
 export const DisplayNumbers = (props: pageArrowProps) => {
     const classes = useStylesFactory(styles)
-    const { paginationParams, totalPages } = React.useContext(Store);
-    const currentPage = paginationParams.currentPage;
+    const { paginationParams } = React.useContext(Store);
+    const {currentPage, pageCount} = paginationParams;
 
     const number1 = currentPage - 2;
     const number2 = currentPage - 1;
@@ -32,15 +32,18 @@ export const DisplayNumbers = (props: pageArrowProps) => {
   const nums = numbers.map(num => {
     if (num <= 0) {
       return "";
-    } else if (num > totalPages) {
-      return "";
-    } else if (num === currentPage) {
-      return (
-        <button key={num} className={`${classes.nums} ${classes.numsCurrent}`}>
-          {num}
-        </button>
-      );
-    }
+    } else if (num > pageCount) {
+             return "";
+           } else if (num === currentPage) {
+             return (
+               <button
+                 key={num}
+                 className={`${classes.nums} ${classes.numsCurrent}`}
+               >
+                 {num}
+               </button>
+             );
+           }
 
     const arg = { type: "NUM", payload: num };
     return (
