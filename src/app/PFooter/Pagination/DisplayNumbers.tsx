@@ -20,13 +20,13 @@ const styles = {
 export const DisplayNumbers = (props: pageArrowProps) => {
     const classes = useStylesFactory(styles)
     const { paginationParams } = React.useContext(Store);
-    const {currentPage, pageCount} = paginationParams;
+    const {page, pageCount} = paginationParams;
 
-    const number1 = currentPage - 2;
-    const number2 = currentPage - 1;
-    const number3 = currentPage;
-    const number4 = currentPage + 1;
-    const number5 = currentPage + 2;
+    const number1 = page - 2;
+    const number2 = page - 1;
+    const number3 = page;
+    const number4 = page + 1;
+    const number5 = page + 2;
 
     const numbers = [number1, number2, number3, number4, number5];
   const nums = numbers.map(num => {
@@ -34,7 +34,7 @@ export const DisplayNumbers = (props: pageArrowProps) => {
       return "";
     } else if (num > pageCount) {
              return "";
-           } else if (num === currentPage) {
+           } else if (num === page) {
              return (
                <button
                  key={num}

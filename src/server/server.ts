@@ -69,8 +69,8 @@ app.prepare().then(() => {
               pagination: result.pagination,
             };
             res.send(data)
-            console.log(JSON.stringify(result));
-            console.log(JSON.stringify(result.pagination));
+            // console.log(JSON.stringify(result));
+            // console.log(JSON.stringify(result.pagination));
         })
         .catch((err) => {
             console.log(JSON.stringify(err));

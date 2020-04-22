@@ -48,30 +48,24 @@ export const Pagination = () => {
     dispatchPaginationParams,
     dispatchAppState,
   } = React.useContext(Store);
-  const { currentPage, pageCount} = paginationParams;
-
-  const openModal = (modalName: string) => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
-  };
+  const { page, pageCount} = paginationParams;
 
   const setParams = (arg: PaginationParamsAction) => {
-    dispatchAppState({ type: "START_LOADING" });
+    // dispatchAppState({ type: "START_LOADING" });
     dispatchPaginationParams(arg);
   };
 
   const props = {
     classes,
-    currentPage,
-    openModal,
+    page,
     setParams,
     pageCount,
   };
   type Props = typeof props
 
   const PaginationPresenter = ({
-    classes,
-    currentPage,
-    openModal,
+    classes, 
+    page,
     setParams,
     pageCount,
   }: Props) => {
@@ -86,7 +80,7 @@ export const Pagination = () => {
     const PageNumber = () => {
       return (
         <p className={classes.nums}>
-          【 {currentPage}/{pageCount} 】
+          【 {page}/{pageCount} 】
         </p>
       );
     };

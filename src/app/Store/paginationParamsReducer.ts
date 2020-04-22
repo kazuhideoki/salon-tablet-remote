@@ -7,10 +7,13 @@ export type Prev = { type: "PREV" };
 export type Next = { type: "NEXT" };
 export type Oldest = { type: "OLDEST"; payload: number };
 export type Num = { type: "NUM"; payload: number };
-export type SetPageCount = { type: "SET_PAGE_COUNT"; payload: number };
+export type SetPaginationParams = {
+  type: "SET_PAGINATION_PARAMS";
+  payload: PaginationParams;
+};
 
 export type NoPayload = MainHome | Latest | Prev | Next
-export type WithPayload = Oldest | Num | SetPageCount
+export type WithPayload = Oldest | Num | SetPaginationParams;
 
 export type PaginationParamsAction = NoPayload | WithPayload;
 
@@ -26,28 +29,28 @@ export function paginationParamsReducer(
              // 言語に沿ってcategoriesを設定
              newState = {
                ...state,
-               currentPage: 1,
+               page: 1,
              };
              break;
            case "LATEST":
-             newState = { ...state, currentPage: 1 };
+             newState = { ...state, page: 1 };
              break;
            case "PREV":
-             const n = Number(state.currentPage);
-             newState = { ...state, currentPage: n - 1 };
+             const n = Number(state.page);
+             newState = { ...state, page: n - 1 };
              break;
            case "NEXT":
-             const m = Number(state.currentPage);
-             newState = { ...state, currentPage: m + 1 };
+             const m = Number(state.page);
+             newState = { ...state, page: m + 1 };
              break;
            case "OLDEST":
-             newState = { ...state, currentPage: action.payload };
+             newState = { ...state, page: action.payload };
              break;
            case "NUM":
-             newState = { ...state, currentPage: action.payload };
+             newState = { ...state, page: action.payload };
              break;
-           case "SET_PAGE_COUNT":
-             newState = { ...state, pageCount: action.payload };
+           case "SET_PAGINATION_PARAMS":
+             newState = { ...action.payload };
              break;
 
            default:

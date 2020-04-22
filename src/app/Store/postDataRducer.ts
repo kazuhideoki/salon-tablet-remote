@@ -49,30 +49,32 @@ export const useGetPost = () => {
       paginationParams, 
       dispatchPaginationParams,
       dispatchPostData,
+      dispatchAppState,
     } = React.useContext(Store);
 
     return async (pagination) => {
         const res = await fetch(
-          `http://localhost:3000/post_data/get/${pagination.currentPage}`
+          `http://localhost:3000/post_data/get/${pagination.page}`
         );
         console.log(JSON.stringify(res));
 
         const data = await res.json();
-        const pageCount = data.pagination.pageCount;
+        // const pageCount = data.pagination.pageCount;
 
          if (data.err === true) {
            alert("投稿できませんでした");
          } else {
             dispatchPostData({
-            type: "GET",
-            payload: data.rawData,
+                type: "GET",
+                payload: data.rawData,
             });
-                if (paginationParams.pageCount !== pageCount) {
-                  dispatchPaginationParams({
-                    type: "SET_PAGE_COUNT",
-                    payload: pageCount,
-                  });
-                }
+            dispatchAppState({ type: "END_LOADING" });
+            if (paginationParams !== data.pagination) {
+                dispatchPaginationParams({
+                    type: "SET_PAGINATION_PARAMS",
+                    payload: data.pagination,
+                });
+            }
         }
         
     }
@@ -110,11 +112,11 @@ export const useCreatePost = () => {
              setEditorText("");
              setTitleText("")
              dispatchAppState({type: "CLOSE_MODAL"})
-             if (paginationParams.pageCount !== pageCount) {
-                 dispatchPaginationParams({
-                   type: "SET_PAGE_COUNT",
-                   payload: pageCount,
-                 });
+             if (paginationParams !== data.pagination) {
+               dispatchPaginationParams({
+                 type: "SET_PAGINATION_PARAMS",
+                 payload: data.pagination,
+               });
              }
 
            }
@@ -216,10 +218,10 @@ export const useDeletePost = () => {
         alert("削除できませんでした");
     } else {
         dispatchPostData({ type: "DELETE_POST", payload: {id} });
-        if (paginationParams.pageCount !== pageCount) {
+        if (paginationParams !== data.pagination) {
           dispatchPaginationParams({
-            type: "SET_PAGE_COUNT",
-            payload: pageCount,
+            type: "SET_PAGINATION_PARAMS",
+            payload: data.pagination,
           });
         }
     }

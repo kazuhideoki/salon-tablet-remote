@@ -50,9 +50,10 @@ export const App = ()=> {
     const endLoading = () => dispatchAppState({type: "END_LOADING"})
     const getPost = useGetPost()
 
-    React.useEffect(() => {
-      getPost(paginationParams);
-    }, [paginationParams.currentPage]);
+    // React.useEffect(() => {
+    //     dispatchAppState({ type: "START_LOADING" });
+    //     getPost(paginationParams);
+    // }, [paginationParams.page]);
 
     const props = {
     classes,

@@ -7,7 +7,7 @@ import {
 } from "./paginationParamsReducer";
 
 const initPagination = {
-    currentPage: 0,
+    page: 0,
     pageCount: 0,
     pageSize: 0,
     rawCount: 0,
@@ -48,32 +48,41 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
-const StoreContextProvider = (props) => {
-    const [paginationParams, dispatchPaginationParams] = useReducer(
-      paginationParamsReducer,
-      initPagination
-    );
-    // const [totalPages, setTotalPages] = React.useState(0)
-    const [postData, dispatchPostData] = useReducer(postDataReducer, props.data);
-    const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState);
-
-    const values = {
-        paginationParams,
-        dispatchPaginationParams,
-        // totalPages,
-        // setTotalPages,
-        postData,
-        dispatchPostData,
-        appState,
-        dispatchAppState,
-    };
-
-    return (
-      <Store.Provider value={ values }>
-            {props.children}
-      </Store.Provider>
-    );
-
+export type StoreContextProviderProps = {
+    data: {
+        rawData: PostData
+        pagination: PaginationParams
+    }
+    children?: React.ReactNode
 }
+
+const StoreContextProvider = (props: StoreContextProviderProps) => {
+  const [paginationParams, dispatchPaginationParams] = useReducer(
+    paginationParamsReducer,
+    props.data.pagination
+  );
+  // const [totalPages, setTotalPages] = React.useState(0)
+  const [postData, dispatchPostData] = useReducer(
+    postDataReducer,
+    props.data.rawData
+  );
+  const [appState, dispatchAppState] = useReducer(
+    appStateReducer,
+    initAppState
+  );
+
+  const values = {
+    paginationParams,
+    dispatchPaginationParams,
+    // totalPages,
+    // setTotalPages,
+    postData,
+    dispatchPostData,
+    appState,
+    dispatchAppState,
+  };
+
+  return <Store.Provider value={values}>{props.children}</Store.Provider>;
+};
 
 export { Store, StoreContextProvider };
