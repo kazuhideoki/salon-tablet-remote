@@ -5,7 +5,7 @@
   "main": "src/server/server.ts",
   "scripts": {
     "dev": "node .",
-    "ins": "node --inspect=0.0.0.0:9229 --inspect-brk src/server/server.ts",
+    "ins": "node --inspect=0.0.0.0:9229 src/server/server.ts",
     "build": "NODE_OPTIONS=--max_old_space_size=4096 next build",
     "start": "NODE_ENV=production node ."
   },
