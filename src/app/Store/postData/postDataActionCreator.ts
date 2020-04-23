@@ -26,6 +26,7 @@ export const useGetPost = () => {
         payload: data.rawData,
       });
       dispatchAppState({ type: "END_LOADING" });
+    //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
         dispatchPaginationParams({
           type: "SET_PAGINATION_PARAMS",

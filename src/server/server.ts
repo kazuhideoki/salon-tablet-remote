@@ -57,10 +57,9 @@ app.prepare().then(() => {
     // });
 
     server.get("/post_data/get/:page", (req, res) => {
-        const pg = req.body.page
+        const pg = req.params.page
         console.log(
-          "/post_data/get/:page の  req.body.page" +
-            JSON.stringify(req.body.page)
+          "/post_data/get/:page の  req.body" + JSON.stringify(req.params.page)
         );
 
         new PostData()
