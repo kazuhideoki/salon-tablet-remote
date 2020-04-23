@@ -7,7 +7,7 @@ import { PFooter } from "./PFooter/PFooter";
 import { Store } from "./Store/Store";
 import { ThemeType } from "./Store/ThemeContext";
 import { useStylesFactory } from "./Store/useStylesFactory";
-import { useGetPost } from "./Store/postDataRducer";
+import { useGetPost } from "./Store/postData/postDataActionCreator";
 
 
 // 3段のコンテナの整形に関してのみ記述, 

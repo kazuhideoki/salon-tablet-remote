@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from "react";
-import { PostDataAction, postDataReducer } from "./postDataRducer";
+import { PostDataAction, postDataReducer } from "./postData/postDataRducer";
 import { AppStateAction, appStateReducer } from "./appStateReducer";
 import {
   PaginationParamsAction,

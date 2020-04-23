@@ -8,11 +8,10 @@ export const Prev = (props: pageArrowProps) => {
   const { paginationParams } = React.useContext(Store);
   const { page } = paginationParams;
 
-  const arg: PaginationParamsAction = { type: "PREV" };
   let onClick;
   let disable;
   if (!(page === 1)) {
-    onClick = () => props.hundleOnClick(arg);
+    onClick = () => props.hundleOnClick({ type: "PREV" });
     disable = null;
   } else {
     onClick = undefined;

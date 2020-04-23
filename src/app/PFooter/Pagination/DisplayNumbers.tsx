@@ -45,11 +45,10 @@ export const DisplayNumbers = (props: pageArrowProps) => {
              );
            }
 
-    const arg = { type: "NUM", payload: num };
     return (
       <button
         key={num}
-        onClick={() => props.hundleOnClick(arg)}
+        onClick={() => props.hundleOnClick({ type: "NUM", payload: num })}
         className={classes.nums}
       >
         {num}

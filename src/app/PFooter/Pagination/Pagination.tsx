@@ -11,130 +11,126 @@ import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
 import { Oldest } from "./Oldest";
 import { Next } from "./Next";
-import { useGetPost } from "../../Store/postDataRducer";
+import { useGetPost } from "../../Store/postData/postDataActionCreator";
 
 const styles = {
-  icon: {
-    fontSize: (themes: ThemeType) => themes.iconSmall,
-  },
-  nums: {
-    fontSize: (themes: ThemeType) => themes.iconSmall * 0.7,
-    border: "none",
-    backgroundColor: "transparent",
-    margin: "auto 10px",
-  },
-  numsCurrent: {
-    fontWeight: "bold",
-  },
-  disable: {
-    color: "whitesmoke",
-  },
-  pagination: {
-    display: "flex",
-    justifyContent: "center",
-    width: 400,
-  },
+    icon: {
+        fontSize: (themes: ThemeType) => themes.iconSmall,
+    },
+    nums: {
+        fontSize: (themes: ThemeType) => themes.iconSmall * 0.7,
+        border: "none",
+        backgroundColor: "transparent",
+        margin: "auto 10px",
+    },
+    numsCurrent: {
+        fontWeight: "bold",
+    },
+    disable: {
+        color: "whitesmoke",
+    },
+    pagination: {
+        display: "flex",
+        justifyContent: "center",
+        width: 400,
+    },
 };
 
 export type pageArrowProps = {
-  hundleOnClick: (type: any) => void;
-  classesDisable?: string;
-  classesIcon?: string;
+    hundleOnClick: (arg: PaginationParamsAction) => void;
+    classesDisable?: string;
+    classesIcon?: string;
 };
 
 export const Pagination = () => {
-  const classes = useStylesFactory(styles);
-  const {
-    paginationParams,
-    dispatchPaginationParams,
-    dispatchAppState,
-  } = React.useContext(Store);
-  const { page, pageCount} = paginationParams;
-  const getPost = useGetPost()
+    const [changedPagination, setChangedPagination] = React.useState(false)
+    const classes = useStylesFactory(styles);
+    const {
+        paginationParams,
+        dispatchPaginationParams,
+        dispatchAppState,
+    } = React.useContext(Store);
+    const { page, pageCount} = paginationParams;
+    const getPost = useGetPost()
 
-  const hundleOnClick = (arg: PaginationParamsAction) => {
-    // dispatchAppState({ type: "START_LOADING" });
-    dispatchPaginationParams(arg);
-  };
-
-  const props = {
-    classes,
-    page,
-    hundleOnClick,
-    pageCount,
-  };
-  type Props = typeof props
-
-  const PaginationPresenter = ({
-    classes,
-    page,
-    hundleOnClick,
-    pageCount,
-  }: Props) => {
-    const HomeButton = () => {
-      return (
-        <Home
-          onClick={() => hundleOnClick({ type: "MAINHOME" })}
-          className={classes.icon}
-        />
-      );
-    };
-    const PageNumber = () => {
-      return (
-        <p className={classes.nums}>
-          【 {page}/{pageCount} 】
-        </p>
-      );
+    const hundleOnClick = (arg: PaginationParamsAction ) => {
+        dispatchAppState({ type: "START_LOADING" });
+        dispatchPaginationParams(arg);
+        setChangedPagination(!changedPagination);
     };
 
-    const PaginationArrows = () => (
-      <Grid item className={classes.pagination}>
-        <Latest
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-          hundleOnClick={hundleOnClick}
-        />
-        <Prev
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-          hundleOnClick={hundleOnClick}
-        />
-        <DisplayNumbers hundleOnClick={hundleOnClick} />
-        <Next
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-          hundleOnClick={hundleOnClick}
-        />
-        <Oldest
-          classesDisable={classes.disable}
-          classesIcon={classes.icon}
-          hundleOnClick={hundleOnClick}
-        />
-      </Grid>
-    );
-
+    // paginationParamsが変わったらchangedPaginationが変わりそれがトリガーになってgetPostされる
     React.useEffect(() => {
-      async () => {
-        const pagination = await getPost(paginationParams.page);
-        // ※useEffect内でreturnすると次の[input]のトリガーに引っかからない？
-        return () => {
-          dispatchPaginationParams({
-            type: "SET_PAGINATION_PARAMS",
-            payload: pagination,
-          });
-        };
+      getPost(paginationParams);
+    }, [changedPagination]);
+
+    const props = {
+      classes,
+      page,
+      hundleOnClick,
+      pageCount,
+      changedPagination,
+    };
+    type Props = typeof props
+
+    const PaginationPresenter = ({
+      classes,
+      page,
+      hundleOnClick,
+      pageCount,
+      changedPagination,
+    }: Props) => {
+      const HomeButton = () => {
+        return (
+          <Home
+            onClick={() => hundleOnClick({ type: "MAINHOME" })}
+            className={classes.icon}
+          />
+        );
       };
-    }, [paginationParams.page, paginationParams.pageCount]);
+      const PageNumber = () => {
+        return (
+          <p className={classes.nums}>
+            【 {page}/{pageCount} 】
+          </p>
+        );
+      };
 
-    return (
-      <Grid container justify="center" spacing={1}>
-        <HomeButton />
-        <PageNumber />
-        <PaginationArrows />
-      </Grid>
-    );
-  };
+      const PaginationArrows = () => (
+        <Grid item className={classes.pagination}>
+          <Latest
+            classesDisable={classes.disable}
+            classesIcon={classes.icon}
+            hundleOnClick={hundleOnClick}
+          />
+          <Prev
+            classesDisable={classes.disable}
+            classesIcon={classes.icon}
+            hundleOnClick={hundleOnClick}
+          />
+          <DisplayNumbers hundleOnClick={hundleOnClick} />
+          <Next
+            classesDisable={classes.disable}
+            classesIcon={classes.icon}
+            hundleOnClick={hundleOnClick}
+          />
+          <Oldest
+            classesDisable={classes.disable}
+            classesIcon={classes.icon}
+            hundleOnClick={hundleOnClick}
+          />
+        </Grid>
+      );
 
-  return PaginationPresenter(props)
+      return (
+        <Grid container justify="center" spacing={1}>
+          <HomeButton />
+          <PageNumber />
+          <PaginationArrows />
+        </Grid>
+      );
+    };
+
+    return PaginationPresenter(props)
 
 };

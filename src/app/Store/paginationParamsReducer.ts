@@ -19,7 +19,7 @@ export type PaginationParamsAction = NoPayload | WithPayload;
 
 export function paginationParamsReducer(
          state: PaginationParams,
-         action: PaginationParamsAction
+         action: PaginationParamsAction 
        ) {
          let newState: PaginationParams;
          const func = paginationParamsReducer;
@@ -50,11 +50,7 @@ export function paginationParamsReducer(
              newState = { ...state, page: action.payload };
              break;
            case "SET_PAGINATION_PARAMS":
-               if (state !== action.payload) {
-                   newState = { ...action.payload };
-               }else{
-                   return state
-               }
+            newState = { ...action.payload };
              break;
 
            default:
