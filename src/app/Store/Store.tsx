@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import { PostDataAction, postDataReducer } from "./postData/postDataRducer";
 import { AppStateAction, appStateReducer } from "./appStateReducer";
 import {
@@ -7,11 +7,11 @@ import {
 } from "./paginationParams/paginationParamsReducer";
 
 const initPagination = {
-    page: 0,
-    pageCount: 0,
-    pageSize: 0,
-    rawCount: 0,
-}
+  page: 0,
+  pageCount: 0,
+  pageSize: 0,
+  rowCount: 0,
+};
 export type PaginationParams = typeof initPagination;
 
 const postDataSingle = { 
@@ -39,8 +39,6 @@ export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
 export type ContextProps = {
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
-//   totalPages: number;
-//   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
   postData: PostData;
   dispatchPostData: DidpatchPostData;
   appState: AppState;
@@ -61,7 +59,6 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     paginationParamsReducer,
     props.data.pagination
   );
-  // const [totalPages, setTotalPages] = React.useState(0)
   const [postData, dispatchPostData] = useReducer(
     postDataReducer,
     props.data.rawData
@@ -74,8 +71,6 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
   const values = {
     paginationParams,
     dispatchPaginationParams,
-    // totalPages,
-    // setTotalPages,
     postData,
     dispatchPostData,
     appState,

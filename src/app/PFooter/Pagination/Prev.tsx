@@ -2,16 +2,22 @@ import React from "react";
 import { NavigateBefore } from "@material-ui/icons";
 import { pageArrowProps } from "./Pagination";
 import { Store } from "../../Store/Store";
-import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
+import { useGetPost } from "../../Store/postData/postDataActionCreator";
 
 export const Prev = (props: pageArrowProps) => {
-  const { paginationParams } = React.useContext(Store);
+  const { paginationParams, dispatchAppState } = React.useContext(Store);
   const { page } = paginationParams;
+  const getPost = useGetPost();
+
+  const hundleOnClick = () => {
+    dispatchAppState({ type: "START_LOADING" });
+    getPost(page - 1);
+  };
 
   let onClick;
   let disable;
   if (!(page === 1)) {
-    onClick = () => props.hundleOnClick({ type: "PREV" });
+    onClick = () => hundleOnClick();
     disable = null;
   } else {
     onClick = undefined;

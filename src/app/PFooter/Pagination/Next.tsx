@@ -7,7 +7,7 @@ import { useGetPost } from "../../Store/postData/postDataActionCreator";
 
 export const Next = (props: pageArrowProps) => {
   const { paginationParams, dispatchAppState } = React.useContext(Store);
-  const { page, pageCount, rawCount } = paginationParams;
+  const { page, pageCount, rowCount } = paginationParams;
   const getPost = useGetPost()
 
   const hundleOnClick = () => {
@@ -17,7 +17,7 @@ export const Next = (props: pageArrowProps) => {
 
   let onClick;
   let disable;
-  if (!(page === pageCount) && rawCount !== 0) { 
+  if (!(page === pageCount) && rowCount !== 0) {
     onClick = () => hundleOnClick();
     disable = null;
   } else {

@@ -5,13 +5,13 @@ import { paginationParamsReducer } from "../app/Store/paginationParams/paginatio
 import { StoreContextProviderProps } from "../app/Store/Store";
 // import * as serviceWorker from "../serviceWorker";
 
-// ★★★ 通常版
+// ★★★ 通常版 サーバーサイドレンダリング
 // import { App } from "../app/App";
 // import { ThemeProvider } from "../app/Store/ThemeContext";
 // import { StoreContextProvider} from "../app/Store/Store";
 // import { EditorContextProvider } from "../app/Store/EditorContext";
 
-// ★★★ デバック版
+// ★★★ デバック版↓? クライアントサイドレンダリングに
 import dynamic from "next/dynamic";
 const ThemeProvider = dynamic(() => import("../app/Store/ThemeContext"), {
   ssr: false,

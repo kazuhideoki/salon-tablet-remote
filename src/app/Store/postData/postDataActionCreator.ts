@@ -145,6 +145,7 @@ export const useDeletePost = () => {
   const {
     paginationParams,
     dispatchPaginationParams,
+    postData,
     dispatchPostData,
   } = React.useContext(Store);
   return async (id: number) => {
@@ -168,7 +169,12 @@ export const useDeletePost = () => {
           payload: data.pagination,
         });
       }
-      getPost(paginationParams.page);
+    //   ページに表示されている記事が1で、かつ、最後の1記事ではない
+      if (postData.length === 1 && paginationParams.rowCount > 1) {
+        getPost(paginationParams.page - 1);
+      } else {
+        getPost(paginationParams.page);
+      }
     }
   };
 };

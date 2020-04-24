@@ -1,8 +1,5 @@
-import React from 'react'
-import { PostData, Store, PostDataSingle } from "../Store";
+import { PostData, PostDataSingle } from "../Store";
 import { reducerLogger } from "../reducerLogger";
-import fetch from "node-fetch";
-import { EditorContext } from '../EditorContext';
 
 export type PostDataAction =
 | { type: "GET"; payload: PostData }

@@ -31,6 +31,12 @@ function corsHeader(res) {
     );
 }  
 
+import { PostData, PaginationParams } from "../app/Store/Store";
+export type ResData = {
+    rawData: PostData,
+    pagination: PaginationParams
+}
+
 app.prepare().then(() => {
 
     server.use(bodyParser.json())
@@ -46,7 +52,7 @@ app.prepare().then(() => {
             .orderBy("date", "desc")
             .fetchPage({ page: pg, pageSize: 5 })
             .then((result) => {
-            const data = {
+            const data: ResData = {
               rawData: result.toArray(),
               pagination: result.pagination,
             };
@@ -144,21 +150,6 @@ app.prepare().then(() => {
             });
         });        
      });
-
-    server.post("/post_data/pagination"), (req, res) => {
-        new PostData()
-        .fetchPage({pageSize: 1})
-        .then((result) => {
-            const data = { pagination: result.pagination}
-            res.send(data)
-        })
-        .catch((err) => {
-            res.status(500).json({
-                err: true,
-                data: { message: err.message },
-            });
-        });   
-    }
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 

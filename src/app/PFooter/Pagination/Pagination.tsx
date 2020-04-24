@@ -1,6 +1,5 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
 import { Home, Label, Person } from "@material-ui/icons";
 import { ThemeType } from "../../Store/ThemeContext";
 import { useStylesFactory } from "../../Store/useStylesFactory";
@@ -37,7 +36,6 @@ const styles = {
 };
 
 export type pageArrowProps = {
-    hundleOnClick: (arg: PaginationParamsAction) => void;
     classesDisable?: string;
     classesIcon?: string;
 };
@@ -52,17 +50,6 @@ export const Pagination = () => {
     } = React.useContext(Store);
     const { page, pageCount} = paginationParams;
     const getPost = useGetPost()
-
-    // const hundleOnClick = (arg ) => {
-    //     dispatchAppState({ type: "START_LOADING" });
-    //     dispatchPaginationParams(arg);
-    //     // setChangedPagination(!changedPagination);
-    // };
-
-    // paginationParamsが変わったらchangedPaginationが変わりそれがトリガーになってgetPostされる
-    // React.useEffect(() => {
-    //   getPost(paginationParams);
-    // }, [changedPagination]);
 
     const props = {
       classes,
@@ -102,23 +89,19 @@ export const Pagination = () => {
           <Latest
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
           <Prev
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
-          <DisplayNumbers hundleOnClick={hundleOnClick} />
+          <DisplayNumbers/>
           <Next
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
           <Oldest
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
         </Grid>
       );
