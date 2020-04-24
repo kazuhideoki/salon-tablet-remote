@@ -1,5 +1,5 @@
 // @ts-ignore
-const express = require("express");
+import express from "express";
 // @ts-ignore
 const next = require("next");
 // @ts-ignore
