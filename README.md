@@ -1,16 +1,24 @@
-## 環境構築参考
+## Getting Started
 
-express + nextjs
+First, run the development server:
 
-https://tgmgli0n.hatenablog.jp/entry/2019/09/17/003658
-https://github.com/zeit/next.js/blob/canary/examples/ssr-caching/server.js
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-express + typescript
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-https://qiita.com/techneconn/items/012bdf1b9ff3881546b3
-https://qiita.com/kubocchi/items/0e9bf6ee9eab98905d77
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-next + typescript
+## Learn More
 
-https://code-log.hatenablog.com/entry/2020/01/23/231848
-https://qiita.com/ryo511/items/d2cfc70ab29618e8852b
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on ZEIT Now
