@@ -2,19 +2,23 @@ import React from "react";
 import { NavigateNext } from "@material-ui/icons";
 import { pageArrowProps } from "./Pagination";
 import { Store } from "../../Store/Store";
-import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
 import { useGetPost } from "../../Store/postData/postDataActionCreator";
 
 
 export const Next = (props: pageArrowProps) => {
-  const { paginationParams } = React.useContext(Store);
+  const { paginationParams, dispatchAppState } = React.useContext(Store);
   const { page, pageCount, rawCount } = paginationParams;
   const getPost = useGetPost()
+
+  const hundleOnClick = () => {
+      dispatchAppState({ type: "START_LOADING" });
+      getPost(page + 1)
+  }
 
   let onClick;
   let disable;
   if (!(page === pageCount) && rawCount !== 0) { 
-    onClick = () => props.hundleOnClick({ type: "NEXT" });
+    onClick = () => hundleOnClick();
     disable = null;
   } else {
     onClick = undefined;

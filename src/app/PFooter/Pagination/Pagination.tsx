@@ -1,6 +1,6 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
+import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
 import { Home, Label, Person } from "@material-ui/icons";
 import { ThemeType } from "../../Store/ThemeContext";
 import { useStylesFactory } from "../../Store/useStylesFactory";
@@ -53,21 +53,20 @@ export const Pagination = () => {
     const { page, pageCount} = paginationParams;
     const getPost = useGetPost()
 
-    const hundleOnClick = (arg: PaginationParamsAction ) => {
-        dispatchAppState({ type: "START_LOADING" });
-        dispatchPaginationParams(arg);
-        setChangedPagination(!changedPagination);
-    };
+    // const hundleOnClick = (arg ) => {
+    //     dispatchAppState({ type: "START_LOADING" });
+    //     dispatchPaginationParams(arg);
+    //     // setChangedPagination(!changedPagination);
+    // };
 
     // paginationParamsが変わったらchangedPaginationが変わりそれがトリガーになってgetPostされる
-    React.useEffect(() => {
-      getPost(paginationParams);
-    }, [changedPagination]);
+    // React.useEffect(() => {
+    //   getPost(paginationParams);
+    // }, [changedPagination]);
 
     const props = {
       classes,
       page,
-      hundleOnClick,
       pageCount,
       changedPagination,
     };
@@ -76,14 +75,16 @@ export const Pagination = () => {
     const PaginationPresenter = ({
       classes,
       page,
-      hundleOnClick,
       pageCount,
-      changedPagination,
     }: Props) => {
+        const hundleOnClick = () => {
+            return 0
+        }
+
       const HomeButton = () => {
         return (
           <Home
-            onClick={() => hundleOnClick({ type: "MAINHOME" })}
+            onClick={() => getPost(1)}
             className={classes.icon}
           />
         );

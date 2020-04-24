@@ -10,9 +10,9 @@ export const useGetPost = () => {
     dispatchAppState,
   } = React.useContext(Store);
 
-  return async (pagination) => {
+  return async (page) => {
     const res = await fetch(
-      `http://localhost:3000/post_data/get/${pagination.page}`
+      `http://localhost:3000/post_data/get/${page}`
     );
     console.log(JSON.stringify(res));
 
@@ -73,8 +73,7 @@ export const useCreatePost = () => {
           payload: data.pagination,
         });
       }
-      paginationParams.page = 1;
-      getPost(paginationParams);
+      getPost(1);
     }
   };
 };
@@ -169,7 +168,7 @@ export const useDeletePost = () => {
           payload: data.pagination,
         });
       }
-      getPost(paginationParams);
+      getPost(paginationParams.page);
     }
   };
 };

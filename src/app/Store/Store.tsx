@@ -4,7 +4,7 @@ import { AppStateAction, appStateReducer } from "./appStateReducer";
 import {
   PaginationParamsAction,
   paginationParamsReducer,
-} from "./paginationParamsReducer";
+} from "./paginationParams/paginationParamsReducer";
 
 const initPagination = {
     page: 0,

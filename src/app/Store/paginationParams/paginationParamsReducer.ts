@@ -1,5 +1,5 @@
-import { PaginationParams } from "./Store";
-import { reducerLogger } from "./reducerLogger";
+import { PaginationParams } from "../Store";
+import { reducerLogger } from "../reducerLogger";
 
 export type MainHome = { type: "MAINHOME" };
 export type Latest = { type: "LATEST" };
@@ -26,7 +26,6 @@ export function paginationParamsReducer(
 
          switch (action.type) {
            case "MAINHOME":
-             // 言語に沿ってcategoriesを設定
              newState = {
                ...state,
                page: 1,
@@ -60,3 +59,5 @@ export function paginationParamsReducer(
          reducerLogger({ state, newState, func, action });
          return newState;
        }
+
+

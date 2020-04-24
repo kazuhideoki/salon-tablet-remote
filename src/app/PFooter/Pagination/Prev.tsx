@@ -2,7 +2,7 @@ import React from "react";
 import { NavigateBefore } from "@material-ui/icons";
 import { pageArrowProps } from "./Pagination";
 import { Store } from "../../Store/Store";
-import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
+import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
 
 export const Prev = (props: pageArrowProps) => {
   const { paginationParams } = React.useContext(Store);

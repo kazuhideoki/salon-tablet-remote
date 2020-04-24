@@ -145,6 +145,21 @@ app.prepare().then(() => {
         });        
      });
 
+    server.post("/post_data/pagination"), (req, res) => {
+        new PostData()
+        .fetchPage({pageSize: 1})
+        .then((result) => {
+            const data = { pagination: result.pagination}
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).json({
+                err: true,
+                data: { message: err.message },
+            });
+        });   
+    }
+
     //   -----------ここの上にバックエンドの処理を書く-----------
 
     // nextのルーティング
