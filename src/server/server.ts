@@ -1,17 +1,12 @@
-// @ts-ignore
 import express from "express";
-// @ts-ignore
-const next = require("next");
-// @ts-ignore
-const bodyParser = require("body-parser");
+import next from "next";
+import bodyParser from "body-parser";
 
-// @ts-ignore
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
 const handler = app.getRequestHandler();
 const server = express();
 
-// @ts-ignore
 const knex = require("knex")({
     client: "mysql",
     connection: {
@@ -22,7 +17,6 @@ const knex = require("knex")({
         charset: "utf8mb4",
 },
 });
-// @ts-ignore
 const Bookshelf = require('bookshelf')(knex)
 const PostData = Bookshelf.Model.extend({
     tableName: "post_data",
@@ -41,20 +35,6 @@ app.prepare().then(() => {
 
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }));
-
-    // server.get("/post_data/get", (req, res) => {
-    //     new PostData().fetchAll()
-    //     .then((result) => {
-    //         const data = { rawData: result.toArray() };
-    //         res.send(data)
-    //         console.log(JSON.stringify(result));
-    //     })
-    //     .catch((err) => {
-    //         console.log(JSON.stringify(err));
-            
-    //         res.status(500).json({err: true, data:{message: err.message}})
-    //     })
-    // });
 
     server.get("/post_data/get/:page", (req, res) => {
         const pg = req.params.page
