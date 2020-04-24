@@ -4,7 +4,6 @@ import { Home, Label, Person } from "@material-ui/icons";
 import { ThemeType } from "../../Store/ThemeContext";
 import { useStylesFactory } from "../../Store/useStylesFactory";
 import { Grid } from "@material-ui/core";
-
 import { Prev } from "./Prev";
 import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
