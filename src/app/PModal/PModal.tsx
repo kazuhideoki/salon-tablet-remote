@@ -8,7 +8,7 @@ import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
 import { Setting } from "../Setting/Setting";
-import { FooterIconEditor } from "../Setting/FooterIconEditor";
+import { FooterEditor } from "../Setting/FooterEditor";
 import dynamic from "next/dynamic";
 const Editor = dynamic(() => import("../Setting/Editor"), {
   ssr: false,
@@ -84,7 +84,7 @@ export const PModal = () => {
             break;
           case "edit_footer_icon":
             modalStyle = size90;
-            ModalContent = () => <FooterIconEditor />;
+            ModalContent = () => <FooterEditor />;
             break;
 
           default:
