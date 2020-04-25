@@ -137,6 +137,7 @@ export const useUpdatePost = () => {
       setTitleText("");
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
+
     }
   };
 };
