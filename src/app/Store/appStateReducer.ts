@@ -20,7 +20,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
             isSetting: !state.isSetting
         };
             break
-        case "OPEN_MODAL":
+        case "OPEN_MODAL": 
             newState =  {
             ...state,
             setModal: action.payload, 

@@ -15,20 +15,20 @@ const initPagination = {
 export type PaginationParams = typeof initPagination;
 
 const postDataSingle = { 
-    id: 0,
-    title: '',
-    date: '',
-    content: '' as any,
+  id: 0,
+  title: '',
+  date: '',
+  content: '' as any,
 }
 export type PostDataSingle = typeof postDataSingle;
 export type PostData = PostDataSingle[]
 
 const initAppState = {
-    isSetting: false,
-    setModal: "magazines",
-    isModalOpen: false,
-    isArticleModalOpen: false,
-    isLoading: false,
+  isSetting: false,
+  setModal: "edit_article",
+  isModalOpen: false,
+  isArticleModalOpen: false,
+  isLoading: false,
 };
 export type AppState = typeof initAppState
 

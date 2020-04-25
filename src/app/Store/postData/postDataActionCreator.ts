@@ -14,7 +14,6 @@ export const useGetPost = () => {
     const res = await fetch(
       `http://localhost:3000/post_data/get/${page}`
     );
-    console.log(JSON.stringify(res));
 
     const data = await res.json();
 
@@ -54,7 +53,6 @@ export const useCreatePost = () => {
       body: JSON.stringify(params),
     });
     const data = await res.json();
-    console.log("useCreatePostの戻ってくるdataダヨ→" + JSON.stringify(data));
     params.id = data.rawData.id;
 
     if (data.err === true) {
@@ -87,8 +85,6 @@ export const useGetSinglePost = () => {
   } = React.useContext(EditorContext);
 
   return async (params) => {
-    console.log(params.id);
-
     const res = await fetch(
       `http://${location.host}/post_data/get/singlepost`,
       {
@@ -99,7 +95,6 @@ export const useGetSinglePost = () => {
       }
     );
     const data = await res.json();
-    console.log(data);
 
     if (data.err === true) {
       alert("記事を取得できませんでした");
@@ -126,7 +121,6 @@ export const useUpdatePost = () => {
       body: JSON.stringify(params),
     });
     const data = await res.json();
-    console.log(data);
 
     if (data.err === true) {
       alert("更新できませんでした");
@@ -150,7 +144,6 @@ export const useDeletePost = () => {
     dispatchPostData,
   } = React.useContext(Store);
   return async (id: number) => {
-    console.log(id);
 
     const res = await fetch(`http://${location.host}/post_data/delete/post`, {
       headers: { "Content-Type": "application/json" },

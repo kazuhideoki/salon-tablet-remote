@@ -5,7 +5,7 @@ import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-u
 import { useStylesFactory } from "./Store/useStylesFactory";
 import { UpdatePostButton } from "./Setting/UpdatePostButton";
 import { DeletePostButton } from "./Setting/DeletePostButton";
-import { CreatePostButton } from "./Setting/CreatePostButton";
+import { CreateButton } from "./Setting/CreateButton";
 
 
 
@@ -86,8 +86,6 @@ export const PMain = () => {
         let displayArticles;
 
         if (postData) {
-            console.debug("PMainPresenter" + JSON.stringify(postData));
-
             displayArticles = postData.map((value, key: number) => {
 
                 return (
@@ -116,14 +114,11 @@ export const PMain = () => {
                         <Typography gutterBottom variant="h6" align="right">
                             {sqlToDate(value.date)}
                         </Typography>
-                        {/* <Typography variant="body1"> */}
                         <div
                             dangerouslySetInnerHTML={{
                             __html: value.content,
                             }}
                         />
-                        {/* {value.content} */}
-                        {/* </Typography> */}
                         </CardContent>
                     </CardActionArea>
                     </Card>
@@ -136,18 +131,18 @@ export const PMain = () => {
         }
 
         return (
-            <Grid 
-                id="p_main"
-                container
-                wrap="nowrap"
-                className={classes.root}
-                spacing={2}
-            >
-                {appState.isSetting ? (
-                    <CreatePostButton position={classes.createPostButton}/>
-                ) : null}
-                {displayArticles}
-            </Grid>
+          <Grid
+            id="p_main"
+            container
+            wrap="nowrap"
+            className={classes.root}
+            spacing={2}
+          >
+            {appState.isSetting ? (
+              <CreateButton position={classes.createPostButton} />
+            ) : null}
+            {displayArticles}
+          </Grid>
         );
     };
 

@@ -8,9 +8,9 @@ import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
 import { Setting } from "../Setting/Setting";
-// import { EditFooter } from "../Setting/EditFooter";
+import { FooterIconEditor } from "../Setting/FooterIconEditor";
 import dynamic from "next/dynamic";
-const Editor = dynamic(() => import("../react-quill/Editor"), {
+const Editor = dynamic(() => import("../Setting/Editor"), {
   ssr: false,
 });
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
@@ -71,24 +71,24 @@ export const PModal = () => {
         };
 
         switch (setModal) {
-            case "colorChart":
-                modalStyle = size90; 
-                ModalContent = () => <ColorChart />;
-                break;
-            case "setting":
-                ModalContent = () => <Setting openModal={openModal} />;
-                break;
-            case "edit_article":
-                modalStyle = size90;
-                ModalContent = () => <Editor />;
-                break;
-            // case "edit_footer":
-            //     modalStyle = size90;
-            //     ModalContent = () => <EditFooter />;
-            //     break;
+          case "colorChart":
+            modalStyle = size90;
+            ModalContent = () => <ColorChart />;
+            break;
+          case "setting":
+            ModalContent = () => <Setting openModal={openModal} />;
+            break;
+          case "edit_article":
+            modalStyle = size90;
+            ModalContent = () => <Editor />;
+            break;
+          case "edit_footer_icon":
+            modalStyle = size90;
+            ModalContent = () => <FooterIconEditor />;
+            break;
 
-            default:
-                console.log("エラーだよ、PModal→ '" + setModal +"'");
+          default:
+            console.log("エラーだよ、PModal→ '" + setModal + "'");
         }
 
         // modalStyleの指定がなければデフォルト値をあてる

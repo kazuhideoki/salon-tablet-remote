@@ -44,9 +44,6 @@ app.prepare().then(() => {
 
     server.get("/post_data/get/:page", (req, res) => {
         const pg = req.params.page
-        console.log(
-          "/post_data/get/:page の  req.body" + JSON.stringify(req.params.page)
-        );
 
         new PostData()
             .orderBy("date", "desc")
@@ -57,15 +54,8 @@ app.prepare().then(() => {
               pagination: result.pagination,
             };
             res.send(data);
-            // console.log(JSON.stringify(result));
-            console.log(
-              "/post_data/get/:page のresult.pagination " +
-                JSON.stringify(result.pagination)
-            );
           })
           .catch((err) => {
-            console.log(JSON.stringify(err));
-
             res.status(500).json({ err: true, data: { message: err.message } });
           });
     });
@@ -79,13 +69,10 @@ app.prepare().then(() => {
         })
           .save()
           .then((result) => {
-            console.log("create/postのresultは " + JSON.stringify(result));
-
             const data = {
               rawData: result,
               pagination: result.pagination,
             };
-            console.log(JSON.stringify(data));
             res.send(data);
           })
           .catch((err) => {
@@ -102,9 +89,7 @@ app.prepare().then(() => {
             const data = { rawData: result };
             res.send(data)
         })
-        .catch((err) => {
-            console.log(JSON.stringify(err));
-            
+        .catch((err) => {            
             res.status(500).json({err: true, data:{message: err.message}})
         })         
      });
@@ -160,7 +145,7 @@ app.prepare().then(() => {
 
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
-      console.debug("> Ready on http://localhost:3000");
+      console.log("> Ready on http://localhost:3000");
     });
 })
 .catch((err) => {
