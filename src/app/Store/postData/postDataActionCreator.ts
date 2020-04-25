@@ -60,19 +60,19 @@ export const useCreatePost = () => {
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      dispatchPostData({
-        type: "CREATE_POST",
-        payload: params,
-      });
+      // dispatchPostData({
+      //   type: "CREATE_POST",
+      //   payload: params,
+      // });
       setEditorText("");
       setTitleText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
-      if (paginationParams !== data.pagination) {
-        dispatchPaginationParams({
-          type: "SET_PAGINATION_PARAMS",
-          payload: data.pagination,
-        });
-      }
+      // if (paginationParams !== data.pagination) {
+      //   dispatchPaginationParams({
+      //     type: "SET_PAGINATION_PARAMS",
+      //     payload: data.pagination,
+      //   });
+      // }
       getPost(1);
     }
   };
@@ -162,16 +162,17 @@ export const useDeletePost = () => {
     if (data.err === true) {
       alert("削除できませんでした");
     } else {
-      dispatchPostData({ type: "DELETE_POST", payload: { id } });
-      if (paginationParams !== data.pagination) {
-        dispatchPaginationParams({
-          type: "SET_PAGINATION_PARAMS",
-          payload: data.pagination,
-        });
-      }
+      // dispatchPostData({ type: "DELETE_POST", payload: { id } });
+      // if (paginationParams !== data.pagination) {
+      //   dispatchPaginationParams({
+      //     type: "SET_PAGINATION_PARAMS",
+      //     payload: data.pagination,
+      //   });
+      // }
     //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (postData.length === 1 && paginationParams.rowCount > 1) {
-        getPost(paginationParams.page - 1);
+          const targetPage = paginationParams.page - 1;
+        getPost(targetPage);
       } else {
         getPost(paginationParams.page);
       }

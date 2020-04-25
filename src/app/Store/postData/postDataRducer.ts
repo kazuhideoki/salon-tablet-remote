@@ -10,7 +10,7 @@ export type PostDataAction =
 export function postDataReducer(state: PostData, action: PostDataAction) {
     let newState: PostData;
     const func = postDataReducer;
-    switch (action.type) {
+    switch (action.type) { 
     case "GET":
         newState = action.payload;
         break;

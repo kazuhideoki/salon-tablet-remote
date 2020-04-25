@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server/server.ts",
   "scripts": {
-    "dev": "ts-node --project tsconfig.server.json .",
+    "dev": "NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json .",
     "ins": "node --inspect=0.0.0.0:9229 src/server/server.ts",
     "build:server": "tsc --project tsconfig.server.json",
     "build:next": "NODE_OPTIONS=--max_old_space_size=4096 next build",
