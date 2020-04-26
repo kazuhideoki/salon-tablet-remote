@@ -5,8 +5,6 @@ export default {
   component: CloseButton,
 };
 
-
-
 export const Normal = () => (
   <CloseButton/>
 );
