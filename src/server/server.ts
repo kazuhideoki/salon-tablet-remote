@@ -43,6 +43,7 @@ app.prepare().then(() => {
     server.use(bodyParser.urlencoded({ extended: true }));
 
     server.get("/post_data/get/:page", (req, res) => {
+      corsHeader(res)
         const pg = req.params.page
 
         new PostData()
@@ -61,6 +62,7 @@ app.prepare().then(() => {
     });
    
     server.post("/post_data/create/post", (req, res) => {
+      corsHeader(res);
         const { title, date, content } = req.body;
         new PostData({
           title: title,
@@ -84,6 +86,7 @@ app.prepare().then(() => {
      });
 
      server.post("/post_data/get/singlepost", (req, res) => {
+       corsHeader(res);
         new PostData().where('id', '=', req.body.id).fetch()
         .then((result) => {
             const data = { rawData: result };
@@ -95,6 +98,7 @@ app.prepare().then(() => {
      });
 
     server.post("/post_data/update/post", (req, res) => {
+      corsHeader(res);
         const {id, title, date, content} = req.body
 
         new PostData().where('id',id)
@@ -117,6 +121,7 @@ app.prepare().then(() => {
      });
 
      server.post("/post_data/delete/post", (req, res) => {
+       corsHeader(res);
        const id = req.body.id;
        new PostData()
         .where("id", id)
