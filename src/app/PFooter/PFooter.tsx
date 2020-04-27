@@ -10,6 +10,7 @@ import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { Pagination } from './Pagination/Pagination';
+import { SettingButton } from "../Setting/SettingButton";
 
 const styles = {
     root: {
@@ -69,6 +70,7 @@ export const PFooter = () => {
                         />
                     </Grid>
                 </Grid>
+                <SettingButton/>
             </div>
         );
     };

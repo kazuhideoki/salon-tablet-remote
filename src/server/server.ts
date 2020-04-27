@@ -22,6 +22,7 @@ const PostData = Bookshelf.Model.extend({
     tableName: "post_data",
 });
 
+
 function corsHeader(res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
@@ -42,11 +43,13 @@ app.prepare().then(() => {
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }));
 
+    // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
     server.get("/post_data/get/:page", (req, res) => {
         const pg = req.params.page
 
         new PostData()
             .orderBy("date", "desc")
+            // pageSizeは一度に取得する記事数
             .fetchPage({ page: pg, pageSize: 5 })
             .then((result) => {
             const data: ResData = {
@@ -59,7 +62,8 @@ app.prepare().then(() => {
             res.status(500).json({ err: true, data: { message: err.message } });
           });
     });
-   
+  
+    // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
     server.post("/post_data/create/post", (req, res) => {
         const { title, date, content } = req.body;
         new PostData({
@@ -81,9 +85,10 @@ app.prepare().then(() => {
               data: { message: err.message },
             });
           });
-     });
+    });
 
-     server.post("/post_data/get/singlepost", (req, res) => {
+    //  記事編集時に対象の記事を取得する。
+    server.post("/post_data/get/singlepost", (req, res) => {
         new PostData().where('id', '=', req.body.id).fetch()
         .then((result) => {
             const data = { rawData: result };
@@ -92,8 +97,9 @@ app.prepare().then(() => {
         .catch((err) => {            
             res.status(500).json({err: true, data:{message: err.message}})
         })         
-     });
+    });
 
+    //  編集した記事をアップデートする。
     server.post("/post_data/update/post", (req, res) => {
         const {id, title, date, content} = req.body
 
@@ -114,11 +120,12 @@ app.prepare().then(() => {
                 data: { message: err.message },
             });
         });         
-     });
+    });
 
-     server.post("/post_data/delete/post", (req, res) => {
-       const id = req.body.id;
-       new PostData()
+    // Idを渡して多少のデータを削除する
+    server.post("/post_data/delete/post", (req, res) => {
+      const id = req.body.id;
+      new PostData()
         .where("id", id)
         .fetch()
         .then((record) => {
@@ -134,7 +141,7 @@ app.prepare().then(() => {
                 data: { message: err.message },
             });
         });        
-     });
+    });
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 
