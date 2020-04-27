@@ -11,9 +11,7 @@ export const useGetPost = () => {
   } = React.useContext(Store);
 
   return async (page) => {
-    const res = await fetch(
-      `http://localhost:3000/post_data/get/${page}`
-    );
+    const res = await fetch(`http://${location.host}/post_data/get/${page}`);
 
     const data = await res.json();
 
