@@ -45,6 +45,7 @@ app.prepare().then(() => {
 
     // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
     server.get("/post_data/get/:page", (req, res) => {
+      corsHeader(res)
         const pg = req.params.page
 
         new PostData()
@@ -65,6 +66,7 @@ app.prepare().then(() => {
   
     // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
     server.post("/post_data/create/post", (req, res) => {
+      corsHeader(res);
         const { title, date, content } = req.body;
         new PostData({
           title: title,
@@ -87,8 +89,8 @@ app.prepare().then(() => {
           });
     });
 
-    //  記事編集時に対象の記事を取得する。
-    server.post("/post_data/get/singlepost", (req, res) => {
+     server.post("/post_data/get/singlepost", (req, res) => {
+       corsHeader(res);
         new PostData().where('id', '=', req.body.id).fetch()
         .then((result) => {
             const data = { rawData: result };
@@ -101,6 +103,7 @@ app.prepare().then(() => {
 
     //  編集した記事をアップデートする。
     server.post("/post_data/update/post", (req, res) => {
+      corsHeader(res);
         const {id, title, date, content} = req.body
 
         new PostData().where('id',id)
@@ -122,10 +125,11 @@ app.prepare().then(() => {
         });         
     });
 
-    // Idを渡して多少のデータを削除する
-    server.post("/post_data/delete/post", (req, res) => {
-      const id = req.body.id;
-      new PostData()
+// Idを渡して多少のデータを削除する
+     server.post("/post_data/delete/post", (req, res) => {
+       corsHeader(res);
+       const id = req.body.id;
+       new PostData()
         .where("id", id)
         .fetch()
         .then((record) => {

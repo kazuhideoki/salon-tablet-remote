@@ -24,6 +24,7 @@ const styles = {
 export const PFooter = () => {
     const classes = useStylesFactory(styles);
     const { dispatchAppState } = useContext(Store);
+  // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
     const openModal = (modalName: string) =>
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
 
