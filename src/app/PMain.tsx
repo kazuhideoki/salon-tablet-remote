@@ -3,9 +3,9 @@ import { Store } from "./Store/Store";
 import { sqlToDate } from "./modules/organizeSql/sqlToDate";
 import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { useStylesFactory } from "./Store/useStylesFactory";
-import { UpdatePostButton } from "./Setting/UpdatePostButton";
-import { DeletePostButton } from "./Setting/DeletePostButton";
-import { CreateButton } from "./Setting/CreateButton";
+import { UpdatePostButton } from "./Setting/buttons/UpdatePostButton";
+import { DeletePostButton } from "./Setting/buttons/DeletePostButton";
+import { CreateButton } from "./Setting/buttons/CreateButton";
 
 
 

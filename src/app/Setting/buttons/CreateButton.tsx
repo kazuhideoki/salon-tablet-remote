@@ -1,8 +1,8 @@
 import React from 'react'
 import { NoteAddTwoTone } from "@material-ui/icons";
 import { Button, withStyles } from "@material-ui/core";
-import { Store } from '../Store/Store';
-import { EditorContext } from '../Store/EditorContext';
+import { Store } from '../../Store/Store';
+import { EditorContext } from '../../Store/EditorContext';
 
 export const CreateButton = (props) => {
     const { dispatchAppState } = React.useContext(Store)

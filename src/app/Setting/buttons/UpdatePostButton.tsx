@@ -1,10 +1,10 @@
 import React from 'react'
 import { IconButton } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
-import { useGetSinglePost } from "../Store/postData/postDataActionCreator";
-import { Store } from '../Store/Store';
-import Editor from './Editor';
-import { EditorContext } from '../Store/EditorContext';
+import { useGetSinglePost } from "../../Store/postData/postDataActionCreator";
+import { Store } from '../../Store/Store';
+import Editor from '../Editor';
+import { EditorContext } from '../../Store/EditorContext';
 
 export const UpdatePostButton = (props) => { 
     const { dispatchAppState } = React.useContext(Store);

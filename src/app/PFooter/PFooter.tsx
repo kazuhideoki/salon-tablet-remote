@@ -67,7 +67,7 @@ export const PFooter = () => {
                         <IconAndText
                             icon={SettingsApplicationsTwoTone}
                             onClick={() => dispatchAppState({type: 'TOGGLE_IS_SETTING'})}
-                            text="Setting"
+                            text="setting"
                         />
                     </Grid>
                 </Grid>
