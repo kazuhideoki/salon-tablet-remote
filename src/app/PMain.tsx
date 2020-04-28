@@ -9,7 +9,7 @@ import { CreateButton } from "./Setting/CreateButton";
 
 
 
-
+// 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const styles = {
     root: {
         overflow: "scroll",

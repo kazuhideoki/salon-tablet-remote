@@ -43,6 +43,7 @@ const styles = {
 }
 
 export const App = ()=> {
+  // useStylesFactoryでthemeContextから受け取った値をもとに、styleに定義したコンポーネントごとのスタイルを反映させたclassNameを出力
     const classes = useStylesFactory(styles)
 
     const { paginationParams, appState, dispatchAppState } = React.useContext(Store);
@@ -50,18 +51,11 @@ export const App = ()=> {
     const endLoading = () => dispatchAppState({type: "END_LOADING"})
     const getPost = useGetPost()
 
-    // React.useEffect(() => {
-    //     dispatchAppState({ type: "START_LOADING" });
-    //     getPost(paginationParams);
-    // }, [paginationParams.page]);
-
     const props = {
     classes,
     isLoading,
     };
     type Props = typeof props
-
-
 
     const AppPresenter = ({ classes, isLoading }: Props) => {
         return (
@@ -75,6 +69,7 @@ export const App = ()=> {
                     className={classes.gridRoot}
                 >
                     <Grid item className={classes.main}>
+                        {/* Skeltonはローディング中に表示させる */}
                         {!isLoading ? <PMain /> : <Skeleton />}
                     </Grid>
                     <Grid item className={classes.footer}>

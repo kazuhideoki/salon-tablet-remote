@@ -30,6 +30,7 @@ import { EditorContextProvider } from "../app/Store/EditorContext";
 const Index = (props: StoreContextProviderProps) => {
   console.log("initialPropsは " + JSON.stringify(props));
 
+  // テーマ、記事データ、appの状態管理を読み込む
   return (
     <ThemeProvider>
       <StoreContextProvider data={props.data} >
