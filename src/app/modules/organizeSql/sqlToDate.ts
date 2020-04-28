@@ -1,3 +1,4 @@
+// データベースからフロントに渡ってきたデータを整形する
 export const sqlToDate = (arg) => {
     const date = new Date(arg);
 

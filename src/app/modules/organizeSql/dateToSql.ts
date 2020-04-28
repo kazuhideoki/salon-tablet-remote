@@ -1,3 +1,4 @@
+// フロントからデータベースに日時データを渡す時
 export const dateToSql = (date) => {
     var toDoubleDigits = function(num) {
     num += "";
