@@ -7,7 +7,7 @@ import {
 import { dateToSql } from "../modules/organizeSql/dateToSql";
 import { EditorContext } from "../Store/EditorContext";
 
-const Editor = () => {
+const ArticleEditor = () => {
 const {
     titleText,
     setTitleText,
@@ -98,4 +98,4 @@ const {
     );
 };
 
-export default Editor
+export default ArticleEditor

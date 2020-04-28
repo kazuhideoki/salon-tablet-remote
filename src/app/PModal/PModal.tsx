@@ -8,9 +8,9 @@ import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
 import { Setting } from "../Setting/Setting";
-import { FooterEditor } from "../Setting/FooterEditor";
+import { FooterItemEditor } from "../Setting/FooterItemEditor";
 import dynamic from "next/dynamic";
-const Editor = dynamic(() => import("../Setting/Editor"), {
+const Editor = dynamic(() => import("../Setting/ArticleEditor"), {
   ssr: false,
 });
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
@@ -84,7 +84,7 @@ export const PModal = () => {
             break;
           case "edit_footer_icon":
             modalStyle = size90;
-            ModalContent = () => <FooterEditor />;
+            ModalContent = () => <FooterItemEditor />;
             break;
 
           default:

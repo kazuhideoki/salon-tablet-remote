@@ -1,60 +1,95 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { useStylesFactory } from '../Store/useStylesFactory';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 import {
   ImportContactsTwoTone,
   SignalWifi3BarTwoTone,
   PersonAddTwoTone,
   SettingsApplicationsTwoTone,
-} from "@material-ui/icons";
+  AcUnit,
+  AccessAlarm,
+  Accessibility,
 
-const styles = makeStyles((theme: Theme) =>
+} from "@material-ui/icons";
+import { Popover, Button } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 240,
+    gridList: {
+      width: 300,
+      height: 300,
     },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-    menuItem: {
-      display: 'flex',
-      flexDirection: 'column',
-    }
   }),
 );
 
-export const IconSelect = () => {
-  const classes = useStylesFactory(styles)
-  const [selectedIcon, setSelectedIcon] = React.useState('');
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSelectedIcon(event.target.value as string);
+const tileData = [ImportContactsTwoTone,
+  SignalWifi3BarTwoTone,
+  PersonAddTwoTone,
+  SettingsApplicationsTwoTone, ImportContactsTwoTone,
+  SignalWifi3BarTwoTone,
+  PersonAddTwoTone,
+  SettingsApplicationsTwoTone,
+  AcUnit,
+  AccessAlarm,
+  Accessibility, ImportContactsTwoTone,
+  SignalWifi3BarTwoTone,
+  PersonAddTwoTone,
+  SettingsApplicationsTwoTone,
+  AcUnit,
+  AccessAlarm,
+  Accessibility,]
+
+export const  IconSelect = (props) => {
+  const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
   };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  
+  const IconItem = (props) => {
+    return <props.icon style={{ fontSize: 50 }} />
+  }
+
   return (
-    <div>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Icon</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={selectedIcon}
-            onChange={handleChange}
-          >
-        //@ts-ignore
-          <MenuItem className={classes.menuItem} value={'ImportContactsTwoTone'}><ImportContactsTwoTone/></MenuItem>
-          //@ts-ignore
-          <MenuItem value={SignalWifi3BarTwoTone}><SignalWifi3BarTwoTone/></MenuItem>
-          //@ts-ignore
-          <MenuItem value={SettingsApplicationsTwoTone}><SettingsApplicationsTwoTone/></MenuItem>
-          </Select>
-        </FormControl>
+    <div className={props.className}>
+      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+        アイコン選択
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+      >
+        <GridList cellHeight={50}
+        className={classes.gridList}
+        cols={5}>
+          {tileData.map((tile, index) => (
+            <GridListTile key={index} >
+              <IconItem icon={tile}/>
+            </GridListTile>
+          ))}
+        </GridList>
+      </Popover>
     </div>
-      
-  )
+  );
 }
