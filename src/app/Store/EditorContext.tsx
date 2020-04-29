@@ -11,6 +11,8 @@ type ContextProps = {
   edittingPostParams:PostDataSingle
   setEdittingPostParams: React.Dispatch<React.SetStateAction<PostDataSingle>>
 
+  selectedIcon: string,
+  setSelectedIcon: React.Dispatch<React.SetStateAction<string>>,
   iconName: string
   setIconName: React.Dispatch<React.SetStateAction<string>>
   footerItemEditorText: string
@@ -30,6 +32,7 @@ const EditorContextProvider = (props) => {
   const [isEdittingPost, setIsEdittingPost] = React.useState(false)
   const [edittingPostParams, setEdittingPostParams] = React.useState({} as PostDataSingle);
 
+  const [selectedIcon, setSelectedIcon] = React.useState('')
   const [iconName, setIconName] = React.useState("")
   const [footerItemEditorText, setFooterItemEditorText] = React.useState("");
   const [isEdittingFooterItem, setIsEdittingFooterItem] = React.useState(false)
@@ -45,6 +48,8 @@ const EditorContextProvider = (props) => {
     edittingPostParams,
     setEdittingPostParams,
 
+    selectedIcon,
+    setSelectedIcon,
     iconName,
     setIconName,
     footerItemEditorText,

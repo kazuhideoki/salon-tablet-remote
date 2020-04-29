@@ -7,10 +7,11 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
-import { Setting } from "../Setting/Setting";
-import { FooterItemEditor } from "../Setting/FooterItemEditor";
 import dynamic from "next/dynamic";
-const Editor = dynamic(() => import("../Setting/ArticleEditor"), {
+const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
+  ssr: false,
+});
+const FooterItemEditor = dynamic(() => import("../Setting/FooterItemEditor"), {
   ssr: false,
 });
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
@@ -75,12 +76,12 @@ export const PModal = () => {
             modalStyle = size90;
             ModalContent = () => <ColorChart />;
             break;
-          case "setting":
-            ModalContent = () => <Setting openModal={openModal} />;
-            break;
+          // case "setting":
+          //   ModalContent = () => ;
+          //   break;
           case "edit_article":
             modalStyle = size90;
-            ModalContent = () => <Editor />;
+            ModalContent = () => <ArticleEditor />;
             break;
           case "edit_footer_icon":
             modalStyle = size90;

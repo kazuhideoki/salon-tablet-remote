@@ -1,11 +1,13 @@
 import React from 'react'
-import { IconSelect } from "./IconSelect";
+import { IconSelect } from "./iconSelect/IconSelect";
 import ReactQuill from 'react-quill';
 import { EditorContext } from '../Store/EditorContext';
 import { FooterItem } from '../Store/Store';
 
 export const FooterItemEditor = () => {
   const {
+    selectedIcon,
+    setSelectedIcon,
     iconName,
     setIconName,
     footerItemEditorText,
@@ -14,6 +16,9 @@ export const FooterItemEditor = () => {
     setIsEdittingFooterItem,
     edittingFooterItemParams,
   } = React.useContext(EditorContext);
+
+
+
 
   const modules = {
     toolbar: [
@@ -31,53 +36,43 @@ export const FooterItemEditor = () => {
     'list', 'bullet', 'indent',
     'link',
   ]
-  const createPost = useCreatePost();
-  const updatePost = useUpdatePost();
+  // const createPost = useCreatePost();
+  // const updatePost = useUpdatePost();
 
 
-  const hundleSubmit = () => {
-    if (isEdittingFooterItem) {
-      const params: FooterItem = {
-        footer_items_id: edittingFooterItemParams.footer_items_id,
-        icon_name: iconName,
-        // date: dateToSql(edittingFooterItemParams.date),
-        item_content: footerItemEditorText,
-      };
-      updatePost(params, setIsEdittingFooterItem);
+  // const hundleSubmit = () => {
+  //   if (isEdittingFooterItem) {
+  //     const params: FooterItem = {
+  //       footer_items_id: edittingFooterItemParams.footer_items_id,
+  //       icon_name: iconName,
+  //       // date: dateToSql(edittingFooterItemParams.date),
+  //       item_content: footerItemEditorText,
+  //     };
+  //     updatePost(params, setIsEdittingFooterItem);
 
-    } else {
-      const today = new Date();
-      const date = dateToSql(today);
-      const params: FooterItem = {
-        footer_items_id: 0,
-        icon_name: iconName,
-        // date: date,
-        item_content: footerItemEditorText,
-      };
-      createPost(params);
+  //   } else {
+  //     const today = new Date();
+  //     const date = dateToSql(today);
+  //     const params: FooterItem = {
+  //       footer_items_id: 0,
+  //       icon_name: iconName,
+  //       // date: date,
+  //       item_content: footerItemEditorText,
+  //     };
+  //     createPost(params);
 
-    }
-  };
-  const enableCreateMode = () => {
-    setIsEdittingFooterItem(false);
-    setIconName("");
-    setFooterItemEditorText("");
-  };
+  //   }
+  // };
+  // const enableCreateMode = () => {
+  //   setIsEdittingFooterItem(false);
+  //   setIconName("");
+  //   setFooterItemEditorText("");
+  // };
 
-  const ModeNotice = () => {
-    return (
-      <>
-        <p>{`${edittingFooterItemParams.icon_name}のアイコンを編集中`}</p>
-        <button onClick={() => enableCreateMode()}>新規作成にする</button>
-      </>
-    )
-  }
 
 
   return (
     <>
-      {isEdittingFooterItem ? <ModeNotice /> : <p>"新規投稿"</p>}
-
       <h2>記事タイトル</h2>
       <input
         value={iconName}
@@ -91,8 +86,15 @@ export const FooterItemEditor = () => {
         modules={modules}
         formats={formats}
       />
-      <button onClick={() => hundleSubmit()}>完了</button>
-      <IconSelect />
+      <button
+      // onClick={() => hundleSubmit()}
+      >
+        完了
+      </button>
+      <IconSelect
+        selectedIcon={selectedIcon}
+        setSelectedIcon={setSelectedIcon}
+      />
     </>
   );
 };
