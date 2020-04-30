@@ -1,7 +1,7 @@
 import React from 'react';
-import { SettingButton } from "../app/Setting/SettingButton";
+import { SettingButtonOpened } from "../app/Setting/SettingButtonOpened";
 export default {
-  title: " SettingBottun ",
-  component: SettingButton,
+  title: " SettingButtonOpened ",
+  component: SettingButtonOpened,
 };
-export const Normal = () => <SettingButton />;
+export const Normal = () => <SettingButtonOpened />;

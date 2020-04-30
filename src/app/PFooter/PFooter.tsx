@@ -9,7 +9,7 @@ import {
 import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { useStylesFactory } from "../Store/useStylesFactory";
-import { Pagination } from './Pagination/Pagination';
+import { PPagination } from './Pagination/PPagination';
 import { SettingButtonOpened } from "../Setting/SettingButtonOpened";
 
 const styles = {
@@ -38,7 +38,7 @@ export const PFooter = () => {
     const PFooterPresenter = ({ classes, openModal, dispatchAppState }: Props) => {
         return (
             <div className={classes.root}>
-                <Pagination/>
+                <PPagination/>
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
                         <IconAndText

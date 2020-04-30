@@ -2,7 +2,7 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { useStylesFactory } from "../../Store/useStylesFactory";
 import { ThemeType } from "../../Store/ThemeContext";
-import { pageArrowProps } from "./Pagination";
+import { pageArrowProps } from "./PPagination";
 import { useGetPost } from "../../Store/postData/postDataActionCreator";
 
 const styles = {

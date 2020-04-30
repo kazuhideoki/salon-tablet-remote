@@ -1,6 +1,6 @@
 import React from "react";
 import { LastPage } from "@material-ui/icons";
-import { pageArrowProps } from "./Pagination";
+import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
 import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
 import { useGetPost } from "../../Store/postData/postDataActionCreator";

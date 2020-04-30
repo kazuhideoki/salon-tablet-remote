@@ -1,6 +1,6 @@
 import React from "react";
 import { FirstPage } from "@material-ui/icons";
-import { pageArrowProps } from "./Pagination";
+import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
 import { useGetPost } from "../../Store/postData/postDataActionCreator";
 

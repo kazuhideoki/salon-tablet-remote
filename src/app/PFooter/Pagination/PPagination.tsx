@@ -39,7 +39,7 @@ export type pageArrowProps = {
     classesIcon?: string;
 };
 
-export const Pagination = () => {
+export const PPagination = () => {
     const [changedPagination, setChangedPagination] = React.useState(false)
     const classes = useStylesFactory(styles);
     const {
