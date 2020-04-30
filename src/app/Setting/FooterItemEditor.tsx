@@ -7,7 +7,7 @@ import { FooterItem } from '../Store/Store';
 export const FooterItemEditor = () => {
   const {
     selectedIcon,
-    setSelectedIcon,
+    dispatchSelectedIcon,
     iconName,
     setIconName,
     footerItemEditorText,
@@ -92,8 +92,8 @@ export const FooterItemEditor = () => {
         完了
       </button>
       <IconSelect
-        selectedIcon={selectedIcon}
-        setSelectedIcon={setSelectedIcon}
+        // selectedIcon={selectedIcon}
+        // setSelectedIcon={setSelectedIcon}
       />
     </>
   );

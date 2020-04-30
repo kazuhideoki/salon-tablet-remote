@@ -4,6 +4,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Popover, Button, TextField, IconButton } from '@material-ui/core';
 import { icons } from "./icons";
+import { EditorContext } from '../../Store/EditorContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,11 +12,29 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 300,
       height: 300,
     },
-  }),
+    selectedIconField : {
+      width: 70
+    }
+  })
 );
 
-export const  IconSelect = ({ selectedIcon, setSelectedIcon,}) => {
+type Props = {
+  selectedIcon: string
+  setSelectedIcon: React.Dispatch<React.SetStateAction<string>>
+}
+
+export const IconItem = (props) => {
+  const iconName = props.iconName;
+
+  return <props.icon style={{ fontSize: 50 }} />;
+};
+
+// export const  IconSelect:React.FC<Props> = ({ selectedIcon, setSelectedIcon}) => {
+export const IconSelect = () => {
   const classes = useStyles();
+  const { selectedIcon, dispatchSelectedIcon } = React.useContext(
+    EditorContext
+  );
 
   // 以下Popoverのための設定
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -29,20 +48,8 @@ export const  IconSelect = ({ selectedIcon, setSelectedIcon,}) => {
   const id = open ? 'simple-popover' : undefined;
   // 以上Popoverのための設定
   
-  const IconItem = (props) => {
-      
-    const iconName = props.icon
-    return (
-      // これつけると薄くなる？？
-      <IconButton
-        // onClickでアイコン名をsetする
-        onClick={() => props.setSelectedIcon(iconName)}
-        aria-label={"icon_selection"}
-      >
-        <props.icon style={{ fontSize: 50 }} />
-      </IconButton>
-    );
-  }
+
+  const displayedIcon = (props) => <props.icon />
 
   return (
     <div>
@@ -74,30 +81,43 @@ export const  IconSelect = ({ selectedIcon, setSelectedIcon,}) => {
           cellHeight={50}
           className={classes.gridList}
           cols={5}
+          // タップで閉じるように
           onClick={() => handleClose()}
         >
           {icons.map((icon, index) => {
+            //@ts-ignore
+            // console.log(icon[0]);
+            console.log(JSON.stringify(icon[1]));
+
             return (
-              <GridListTile key={index}>
-                <IconItem
-                  icon={icon}
-                  iconName={icon.name}
-                  setSelectedIcon={setSelectedIcon}
-                />
+              <GridListTile
+                key={index}
+                cols={1}
+                //@ts-ignore
+                onClick={() =>
+                  dispatchSelectedIcon({ type: "SET_ICON", payload: icon[1] })
+                }
+              >
+                <IconItem icon={icon[1]} />
               </GridListTile>
             );
           })}
         </GridList>
       </Popover>
-      <TextField
-        value={selectedIcon}
+      {/* TextFieldに選択したアイコンを表示させようとしたができない*/}
+      {/* <TextField
+        //@ts-ignore
+        // value={selectedIcon}
+        value={() => <IconItem icon={selectedIcon}/>}
         InputProps={{
           readOnly: true,
+          className: classes.selectedIconField,
         }}
         id="outlined-basic"
         label="アイコン"
         variant="outlined"
-      />
+      /> */}
+      {selectedIcon ? <IconItem icon={selectedIcon} /> : null}
     </div>
   );
 }

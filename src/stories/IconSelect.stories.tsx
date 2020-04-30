@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconSelect } from '../app/Setting/iconSelect/IconSelect';
+import { IconSelect, IconItem } from "../app/Setting/iconSelect/IconSelect";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { EditorContext } from "../app/Store/EditorContext";
 
@@ -14,7 +14,7 @@ title: 'IconSelect',
 component: IconSelect,
 };
 export const Normal = () => {
-const {selectedIcon, setSelectedIcon} = React.useContext(EditorContext)
+const {selectedIcon, dispatchSelectedIcon} = React.useContext(EditorContext)
 
 return <>
 <p>a</p>
@@ -28,7 +28,8 @@ return <>
 <p>a</p>
 <p>a</p>
 <p>a</p>
-fdddddddddddddddddd<IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/>
+{/* fdddddddddddddddddd<IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
+fdddddddddddddddddd<IconSelect />
 </>
 };
 
@@ -36,13 +37,17 @@ fdddddddddddddddddd<IconSelect selectedIcon={selectedIcon} setSelectedIcon={setS
 
 
 export const bottomSet = () => {
-  const { selectedIcon, setSelectedIcon } = React.useContext(EditorContext);
+  const { selectedIcon, dispatchSelectedIcon } = React.useContext(
+    EditorContext
+  );
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
       fdsa
-      <IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/>
+      {/* <IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
+      <IconSelect />
+      {(selectedIcon)? <IconItem icon={selectedIcon}/> : null}
     </div>
   );
 }

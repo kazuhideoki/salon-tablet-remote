@@ -11,8 +11,11 @@ type ContextProps = {
   edittingPostParams:PostDataSingle
   setEdittingPostParams: React.Dispatch<React.SetStateAction<PostDataSingle>>
 
-  selectedIcon: string,
-  setSelectedIcon: React.Dispatch<React.SetStateAction<string>>,
+
+  // selectedIcon: number,
+  // setSelectedIcon: React.Dispatch<React.SetStateAction<number>>,
+  selectedIcon: any
+  dispatchSelectedIcon: any
   iconName: string
   setIconName: React.Dispatch<React.SetStateAction<string>>
   footerItemEditorText: string
@@ -32,7 +35,24 @@ const EditorContextProvider = (props) => {
   const [isEdittingPost, setIsEdittingPost] = React.useState(false)
   const [edittingPostParams, setEdittingPostParams] = React.useState({} as PostDataSingle);
 
-  const [selectedIcon, setSelectedIcon] = React.useState('')
+  // const [selectedIcon, setSelectedIcon] = React.useState(0)
+
+  const selectedIconReducer = (state, action) => {
+    switch (action.type) {
+      case "SET_ICON":
+        return action.payload
+        break;
+    
+      default:
+        return state
+        break;
+    }
+  }
+
+  const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
+    selectedIconReducer,
+    {}
+  );
   const [iconName, setIconName] = React.useState("")
   const [footerItemEditorText, setFooterItemEditorText] = React.useState("");
   const [isEdittingFooterItem, setIsEdittingFooterItem] = React.useState(false)
@@ -48,8 +68,10 @@ const EditorContextProvider = (props) => {
     edittingPostParams,
     setEdittingPostParams,
 
+    // selectedIcon,
+    // setSelectedIcon,
     selectedIcon,
-    setSelectedIcon,
+    dispatchSelectedIcon,
     iconName,
     setIconName,
     footerItemEditorText,
