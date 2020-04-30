@@ -1,5 +1,8 @@
 import React from 'react'
 import { PostDataSingle, FooterItem } from './Store';
+import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import { SvgIconTypeMap } from '@material-ui/core';
+// import { Settings } from '@material-ui/icons';
 
 type ContextProps = {
   titleText: string
@@ -11,11 +14,8 @@ type ContextProps = {
   edittingPostParams:PostDataSingle
   setEdittingPostParams: React.Dispatch<React.SetStateAction<PostDataSingle>>
 
-
-  // selectedIcon: number,
-  // setSelectedIcon: React.Dispatch<React.SetStateAction<number>>,
-  selectedIcon: any
-  dispatchSelectedIcon: any
+  selectedIcon: OverridableComponent<SvgIconTypeMap<{}, "svg">> | null
+  dispatchSelectedIcon: React.Dispatch<any>
   iconName: string
   setIconName: React.Dispatch<React.SetStateAction<string>>
   footerItemEditorText: string
@@ -35,7 +35,6 @@ const EditorContextProvider = (props) => {
   const [isEdittingPost, setIsEdittingPost] = React.useState(false)
   const [edittingPostParams, setEdittingPostParams] = React.useState({} as PostDataSingle);
 
-  // const [selectedIcon, setSelectedIcon] = React.useState(0)
 
   const selectedIconReducer = (state, action) => {
     switch (action.type) {
@@ -48,10 +47,10 @@ const EditorContextProvider = (props) => {
         break;
     }
   }
-
+  // reducerにすることで複雑なオブジェクトを格納できる
   const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
     selectedIconReducer,
-    {}
+    null
   );
   const [iconName, setIconName] = React.useState("")
   const [footerItemEditorText, setFooterItemEditorText] = React.useState("");
@@ -68,8 +67,6 @@ const EditorContextProvider = (props) => {
     edittingPostParams,
     setEdittingPostParams,
 
-    // selectedIcon,
-    // setSelectedIcon,
     selectedIcon,
     dispatchSelectedIcon,
     iconName,

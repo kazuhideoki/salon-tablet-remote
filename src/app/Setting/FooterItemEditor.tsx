@@ -17,9 +17,6 @@ export const FooterItemEditor = () => {
     edittingFooterItemParams,
   } = React.useContext(EditorContext);
 
-
-
-
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -91,10 +88,7 @@ export const FooterItemEditor = () => {
       >
         完了
       </button>
-      <IconSelect
-        // selectedIcon={selectedIcon}
-        // setSelectedIcon={setSelectedIcon}
-      />
+      <IconSelect/>
     </>
   );
 };

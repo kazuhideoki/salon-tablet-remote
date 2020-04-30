@@ -85,9 +85,6 @@ export const IconSelect = () => {
           onClick={() => handleClose()}
         >
           {icons.map((icon, index) => {
-            //@ts-ignore
-            // console.log(icon[0]);
-            console.log(JSON.stringify(icon[1]));
 
             return (
               <GridListTile
@@ -95,28 +92,15 @@ export const IconSelect = () => {
                 cols={1}
                 //@ts-ignore
                 onClick={() =>
-                  dispatchSelectedIcon({ type: "SET_ICON", payload: icon[1] })
+                  dispatchSelectedIcon({ type: "SET_ICON", payload: icon[0] })
                 }
               >
-                <IconItem icon={icon[1]} />
+                <IconItem icon={icon[0]} />
               </GridListTile>
             );
           })}
         </GridList>
       </Popover>
-      {/* TextFieldに選択したアイコンを表示させようとしたができない*/}
-      {/* <TextField
-        //@ts-ignore
-        // value={selectedIcon}
-        value={() => <IconItem icon={selectedIcon}/>}
-        InputProps={{
-          readOnly: true,
-          className: classes.selectedIconField,
-        }}
-        id="outlined-basic"
-        label="アイコン"
-        variant="outlined"
-      /> */}
       {selectedIcon ? <IconItem icon={selectedIcon} /> : null}
     </div>
   );
