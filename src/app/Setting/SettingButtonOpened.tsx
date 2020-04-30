@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     staticTooltipLabel: {
-      // width: 'max-content'
       width: "max-content",
     },
   })
@@ -80,7 +79,6 @@ export const SettingButtonOpened = () => {
           onClick={() => handleClose()}
         />
       }
-      // icon={<Settings onClick={() => handleClose()}/>}
       // onClose={handleClose}
       onOpen={() => handleOpen()}
       open={open}

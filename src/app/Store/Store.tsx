@@ -85,7 +85,7 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     footerItemsReducer,
     [initFooterItem]
     // とりあえずinitPropsを、あとから↓設定
-    // props.data.rawData.footerItems
+    // props.data.rawData.footerItems的な
   );
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,

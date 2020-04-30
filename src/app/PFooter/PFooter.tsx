@@ -10,6 +10,7 @@ import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { PPagination } from './Pagination/PPagination';
+import { SettingButton } from "../Setting/SettingButton";
 import { SettingButtonOpened } from "../Setting/SettingButtonOpened";
 
 const styles = {
@@ -23,7 +24,7 @@ const styles = {
 
 export const PFooter = () => {
     const classes = useStylesFactory(styles);
-    const { dispatchAppState } = useContext(Store);
+    const { appState,dispatchAppState } = useContext(Store);
   // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
     const openModal = (modalName: string) =>
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
@@ -71,7 +72,7 @@ export const PFooter = () => {
                         />
                     </Grid>
                 </Grid>
-              <SettingButtonOpened/>
+              {(appState.isSetting)? <SettingButtonOpened/>: <SettingButton/>}
             </div>
         );
     };

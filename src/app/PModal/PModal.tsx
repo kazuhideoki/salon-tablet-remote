@@ -7,6 +7,7 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
+import { SettingPassword } from "./SettingPassword";
 import dynamic from "next/dynamic";
 const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
   ssr: false,
@@ -76,9 +77,9 @@ export const PModal = () => {
             modalStyle = size90;
             ModalContent = () => <ColorChart />;
             break;
-          // case "setting":
-          //   ModalContent = () => ;
-          //   break;
+          case "setting_password":
+            ModalContent = () => <SettingPassword/>
+            break;
           case "edit_article":
             modalStyle = size90;
             ModalContent = () => <ArticleEditor />;
