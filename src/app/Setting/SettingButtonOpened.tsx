@@ -31,7 +31,7 @@ const actions = [
   { icon: <NoteAddOutlined />, name: "新規投稿" },
 ];
 
-export const SettingButton = () => {
+export const SettingButtonOpened = () => {
   const classes = useStyles();
   const { dispatchAppState } = React.useContext(Store)
   const [open, setOpen] = React.useState(false);
@@ -73,6 +73,7 @@ export const SettingButton = () => {
           icon={action.icon}
           tooltipOpen
           tooltipTitle={action.name}
+          //@ts-ignore
           TooltipClasses={classes.tooltip}
           onClick={handleClose}
         />
