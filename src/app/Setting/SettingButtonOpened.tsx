@@ -16,19 +16,32 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       "&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight": {
         top: theme.spacing(4),
-        left: theme.spacing(4 ),
+        left: theme.spacing(4),
       },
     },
-    tooltip: {
-      width: 'max-content'
-    }
+    staticTooltipLabel: {
+      // width: 'max-content'
+      width: "max-content",
+    },
   })
 );
 
+const staticTooltip = {
+  width: "max-content",
+};
+
 // 上が下に来る
 const actions = [
-  { icon: <VideoLabel />, name: "フッターアイコン追加" },
-  { icon: <NoteAddOutlined />, name: "新規投稿" },
+  { 
+    icon: <VideoLabel />,
+    name: "フッターアイコン追加"
+    // name: "New Icon"
+  },
+  { 
+    icon: <NoteAddOutlined />,
+    // name: "新規投稿"
+    name: "New Article"
+  },
 ];
 
 export const SettingButtonOpened = () => {
@@ -60,21 +73,28 @@ export const SettingButtonOpened = () => {
       className={classes.speedDial}
       hidden={hidden}
       // onCloseを除き, SpeedDialIconにonClickをつけることでアイコンをタップしたときのみ戻る。
-      icon={<SpeedDialIcon icon={<Settings />} openIcon={<Close/>} onClick={() => handleClose()}/>}
+      icon={
+        <SpeedDialIcon
+          icon={<Settings />}
+          openIcon={<Close />}
+          onClick={() => handleClose()}
+        />
+      }
       // icon={<Settings onClick={() => handleClose()}/>}
       // onClose={handleClose}
       onOpen={() => handleOpen()}
       open={open}
       direction={"up"}
     >
-      {actions.map((action) => (
+      {actions.map((action, index) => (
         <SpeedDialAction
-          key={action.name}
+          key={index}
           icon={action.icon}
           tooltipOpen
           tooltipTitle={action.name}
-          //@ts-ignore
-          TooltipClasses={classes.tooltip}
+          // TooltipClassesがうまくいかなかったので直接classesにいれた↓
+          // TooltipClasses={classes.tooltip}
+          classes={{ staticTooltipLabel: classes.staticTooltipLabel }}
           onClick={handleClose}
         />
       ))}

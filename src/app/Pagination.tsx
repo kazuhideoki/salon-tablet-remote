@@ -22,7 +22,7 @@ const Link = () => {
   )
 }
 
-Material - uiのPaginationを途中まで試したがuseGetとの結びつけが難しそうで中断
+// Material - uiのPaginationを途中まで試したがuseGetとの結びつけが難しそうで中断
 export const Pagination = () => {
   const classes = useStyles();
   const {paginationParams} = React.useContext(Store)
