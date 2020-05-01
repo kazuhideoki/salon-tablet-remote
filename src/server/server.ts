@@ -1,7 +1,6 @@
 import express from "express";
 import next from "next";
 import bodyParser from "body-parser";
-
 const { join } = require("path");
 const { parse } = require("url");
 
@@ -45,6 +44,16 @@ app.prepare().then(() => {
 
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }));
+
+    // PWA対応 next-offlineを利用
+    server.get("/service-worker.js", (req, res) => {
+      const parsedUrl = parse(req.url, true);
+      const { pathname } = parsedUrl;
+      const filePath = join(__dirname, ".next", pathname);
+
+      app.serveStatic(req, res, filePath);
+      
+    });
 
     // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
     server.get("/post_data/get/:page", (req, res) => {
@@ -152,19 +161,9 @@ app.prepare().then(() => {
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 
-    
+    // nextのルーティング
     server.get("*", (req, res) => {
-      // PWA対応
-      const parsedUrl = parse(req.url, true);
-      const { pathname } = parsedUrl;
-      if (pathname === '/service-worker.js') {
-      const filePath = join(__dirname, '.next', pathname)
-
-      app.serveStatic(req, res, filePath)
-    } else {
-      // nextのルーティング
       return handler(req, res);
-    }
     });
 
     server.listen(3000, (err) => {
