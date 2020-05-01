@@ -10,6 +10,7 @@ import { App } from "../app/App";
 import { ThemeProvider } from "../app/Store/ThemeContext";
 import { StoreContextProvider} from "../app/Store/Store";
 import { EditorContextProvider } from "../app/Store/EditorContext";
+import { Head } from "next/document";
 
 // ★★★ デバック版↓? クライアントサイドレンダリングに
 // import dynamic from "next/dynamic";
@@ -32,6 +33,9 @@ const Index = (props: StoreContextProviderProps) => {
  
   // テーマ、記事データ、appの状態管理を読み込む
   return (
+    <>
+    <Head><title>SALON TABLET</title></Head>
+
     <StoreContextProvider data={props.data} >
       <ThemeProvider>
         <EditorContextProvider>
@@ -39,6 +43,7 @@ const Index = (props: StoreContextProviderProps) => {
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>
+    </>
   );
 };
 
