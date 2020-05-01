@@ -60,6 +60,12 @@ export const PModal = () => {
         // modalは内容、modalStyle内容に応じてDialogのstyleを変える
         let ModalContent = () => <></>;
         let modalStyle = null;
+        const sizeSmall = {
+            width: 300,
+            height: 100,
+            padding: 0,
+            overflow: "hidden",
+        };
         const size90 = {
             width: "90vw",
             height: "90vh",
@@ -78,6 +84,7 @@ export const PModal = () => {
             ModalContent = () => <ColorChart />;
             break;
           case "setting_password":
+            modalStyle = sizeSmall;
             ModalContent = () => <SettingPassword/>
             break;
           case "edit_article":
