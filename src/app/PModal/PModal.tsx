@@ -57,8 +57,9 @@ export const PModal = () => {
         openModal,
         closeModal,
     }: Props) => {
-        // modalは内容、modalStyle内容に応じてDialogのstyleを変える
+        // ModalContentは内容モーダルウィンドウの中身の設定
         let ModalContent = () => <></>;
+        // modalStyleにモーダルのサイズやoverflowなどのプロパティを設定する。
         let modalStyle = null;
         const sizeSmall = {
             width: 300,
