@@ -2,6 +2,9 @@ import express from "express";
 import next from "next";
 import bodyParser from "body-parser";
 
+const { join } = require("path");
+const { parse } = require("url");
+
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
 const handler = app.getRequestHandler();
@@ -149,9 +152,19 @@ app.prepare().then(() => {
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 
-    // nextのルーティング
+    
     server.get("*", (req, res) => {
+      // PWA対応
+      const parsedUrl = parse(req.url, true);
+      const { pathname } = parsedUrl;
+      if (pathname === '/service-worker.js') {
+      const filePath = join(__dirname, '.next', pathname)
+
+      app.serveStatic(req, res, filePath)
+    } else {
+      // nextのルーティング
       return handler(req, res);
+    }
     });
 
     server.listen(3000, (err) => {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconSelect } from "./iconSelect/IconSelect";
 import ReactQuill from 'react-quill';
+import { QuillEditor } from "./QuillEditor";
 import { EditorContext } from '../Store/EditorContext';
 import { FooterItem } from '../Store/Store';
 
@@ -17,22 +18,7 @@ export const FooterItemEditor = () => {
     edittingFooterItemParams,
   } = React.useContext(EditorContext);
 
-  const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-      ['link', 'image'],
-      ['clean']
-    ],
-  }
-
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link',
-  ]
+  
   // const createPost = useCreatePost();
   // const updatePost = useUpdatePost();
 
@@ -70,19 +56,14 @@ export const FooterItemEditor = () => {
 
   return (
     <>
-      <h2>記事タイトル</h2>
+      <h2>フッターの設定</h2>
       <input
         value={iconName}
         onChange={(e) => setIconName(e.target.value)}
         style={{ marginBottom: "20px" }}
       />
-      <ReactQuill
-        value={footerItemEditorText}
-        onChange={(e) => setFooterItemEditorText(e)}
-        theme="snow"
-        modules={modules}
-        formats={formats}
-      />
+      <QuillEditor value={footerItemEditorText}
+      setValue={setFooterItemEditorText}/>
       <button
       // onClick={() => hundleSubmit()}
       >

@@ -52,7 +52,7 @@ const themes = {
 
 export type ThemeType = typeof themes;
 
-export const ThemeContext = React.createContext({} as ThemeType);
+export const ThemeContext = React.createContext(themes as ThemeType);
 
 export const ThemeProvider = ({ children }: any) => {
 
