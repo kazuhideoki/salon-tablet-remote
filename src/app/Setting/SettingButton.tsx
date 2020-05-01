@@ -1,16 +1,11 @@
 import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import SpeedDial, { SpeedDialProps } from "@material-ui/lab/SpeedDial";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import {
-  VideoLabel,
-  NoteAddOutlined,
   Settings,
-  Close,
 } from "@material-ui/icons";
 import { Store } from "../Store/Store";
-import { SettingButtonOpened } from "./SettingButtonOpened";
 
 type Props = {
   className?: string
@@ -18,7 +13,7 @@ type Props = {
 }
 
 export const SettingButton = ({className, handleOpen }:Props) => {
-  const { appState, dispatchAppState } = React.useContext(Store) 
+  const { dispatchAppState } = React.useContext(Store) 
 
     return (
       <SpeedDial

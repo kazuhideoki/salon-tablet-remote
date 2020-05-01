@@ -64,11 +64,11 @@ export const PFooter = () => {
                         </a>
                     </Grid>
                     <Grid item>
-                        <IconAndText
+                        {/* <IconAndText
                             icon={SettingsApplicationsTwoTone}
                             onClick={() => dispatchAppState({type: 'TOGGLE_IS_SETTING'})}
                             text="setting"
-                        />
+                        /> */}
                     </Grid>
                 </Grid>
               

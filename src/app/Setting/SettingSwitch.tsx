@@ -28,28 +28,15 @@ const useStyles = makeStyles((theme: Theme) =>
 export const SettingSwitch = () => {
   const classes = useStyles()
   const {appState} = React.useContext(Store)
-  //   const [open, setOpen] = React.useState(false);
-
-
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   return (
     <>
       {appState.isSetting ? (
         <SettingButtonOpened
           className={classes.speedDial}
-          // handleOpen={handleOpen}
-          // handleClose={handleClose}
         />
       ) : (
         <SettingButton className={classes.setting}
-        // handleOpen={handleOpen}
         />
       )}
     </>

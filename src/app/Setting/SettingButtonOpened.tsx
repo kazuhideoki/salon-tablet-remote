@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
         left: theme.spacing(4),
       },
     },
+    // Tooltipのラベルの表示を整形
     staticTooltipLabel: {
       width: "max-content",
     },
@@ -26,18 +27,21 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 // 上が下に来る
-const actions = [
+const useActions = () => {
+  const { dispatchAppState } = React.useContext(Store)
+  
+  return [
   { 
-    icon: <VideoLabel />,
+    icon: <VideoLabel onClick={() => dispatchAppState({type: "OPEN_MODAL", payload: 'edit_footer_icon'})}/>,
     name: "フッターアイコン追加"
     // name: "New Icon"
   },
   { 
-    icon: <NoteAddOutlined />,
+    icon: <NoteAddOutlined onClick={() => dispatchAppState({type: "OPEN_MODAL", payload: 'edit_article'})}/>,
     // name: "新規投稿"
     name: "New Article"
   },
-];
+]}
 
 type Props = {
   className?: string
@@ -53,17 +57,12 @@ export const SettingButtonOpened = ({
   // const [open, setOpen] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
   const { appState, dispatchAppState } = React.useContext(Store)
+  const actions = useActions()
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
   const handleClose = () => {
     dispatchAppState({ type: "OFF_IS_SETTING" });
   };
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
   const handleOpen = () => {
     dispatchAppState({type: "ON_IS_SETTING"});
   };
@@ -72,11 +71,11 @@ export const SettingButtonOpened = ({
     <SpeedDial
       ariaLabel="SpeedDial SettingO
       ButtonOpened"
-      // className={classes.speedDial}
       // propsでSettingButtonと同じものを渡すように
       className={className}
       hidden={hidden}
       // onCloseを除き, SpeedDialIconにonClickをつけることでアイコンをタップしたときのみ戻る。
+      // onClose={handleClose}
       icon={
         <SpeedDialIcon
           icon={<Settings />}
@@ -84,9 +83,7 @@ export const SettingButtonOpened = ({
           onClick={() => handleClose()}
         />
       }
-      // onClose={handleClose}
       onOpen={() => handleOpen()}
-      // open={open}
       open={appState.isSetting}
       direction={"up"}
     >
@@ -99,7 +96,6 @@ export const SettingButtonOpened = ({
           // TooltipClassesがうまくいかなかったので直接classesにいれた↓
           // TooltipClasses={classes.tooltip}
           classes={{ staticTooltipLabel: classes.staticTooltipLabel }}
-          onClick={handleClose}
         />
       ))}
     </SpeedDial>
