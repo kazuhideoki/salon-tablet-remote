@@ -1,48 +1,64 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import { PostDataAction, postDataReducer } from "./postData/postDataRducer";
+import { FooterItemsAction, footerItemsReducer } from "./footerItems/footerItemsReducer";
 import { AppStateAction, appStateReducer } from "./appStateReducer";
 import {
   PaginationParamsAction,
   paginationParamsReducer,
-} from "./paginationParamsReducer";
+} from "./paginationParams/paginationParamsReducer";
 
 const initPagination = {
-    page: 0,
-    pageCount: 0,
-    pageSize: 0,
-    rawCount: 0,
-}
+  page: 0,
+  pageCount: 0,
+  pageSize: 0,
+  rowCount: 0,
+};
 export type PaginationParams = typeof initPagination;
 
 const postDataSingle = { 
-    id: 0,
-    title: '',
-    date: '',
-    content: '' as any,
+  id: 0,
+  title: '',
+  date: '',
+  content: '' as any,
 }
 export type PostDataSingle = typeof postDataSingle;
 export type PostData = PostDataSingle[]
 
+const initFooterItem = {
+  footer_items_id: 0,
+  is_published: false,
+  created_at: '',
+  updated_at: '',
+  icon_name: '',
+  displayed_icon: '',
+  on_tap_modal_open: true,
+  item_content: '',
+  order: 0
+}
+export type FooterItem = typeof initFooterItem
+export type FooterItems = FooterItem[]
+
 const initAppState = {
-    isSetting: false,
-    setModal: "magazines",
-    isModalOpen: false,
-    isArticleModalOpen: false,
-    isLoading: false,
+  isSetting: false,
+  setModal: "edit_article",
+  isModalOpen: false,
+  isArticleModalOpen: false,
+  isLoading: false,
 };
 export type AppState = typeof initAppState
 
-export type DidpatchPostData = React.Dispatch<PostDataAction>;
+export type DispatchPostData = React.Dispatch<PostDataAction>;
+export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
 export type DispatchAppState = React.Dispatch < AppStateAction >
 export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
 
 export type ContextProps = {
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
-//   totalPages: number;
-//   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
   postData: PostData;
-  dispatchPostData: DidpatchPostData;
+  dispatchPostData: DispatchPostData;
+  footerItems: FooterItems
+  dispatchFooterItems: DispatchFooterItems
   appState: AppState;
   dispatchAppState: DispatchAppState;
 };
@@ -61,10 +77,15 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     paginationParamsReducer,
     props.data.pagination
   );
-  // const [totalPages, setTotalPages] = React.useState(0)
   const [postData, dispatchPostData] = useReducer(
     postDataReducer,
     props.data.rawData
+  );
+  const [footerItems, dispatchFooterItems] = useReducer(
+    footerItemsReducer,
+    [initFooterItem]
+    // とりあえずinitPropsを、あとから↓設定
+    // props.data.rawData.footerItems的な
   );
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,
@@ -74,10 +95,10 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
   const values = {
     paginationParams,
     dispatchPaginationParams,
-    // totalPages,
-    // setTotalPages,
     postData,
     dispatchPostData,
+    footerItems,
+    dispatchFooterItems,
     appState,
     dispatchAppState,
   };

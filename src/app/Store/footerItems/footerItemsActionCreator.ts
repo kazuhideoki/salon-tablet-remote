@@ -1,12 +1,12 @@
-import React from 'react'
-import { Store } from '../Store'
-import { EditorContext } from '../EditorContext';
+import React from "react";
+import { Store } from "../Store";
+import { EditorContext } from "../EditorContext";
 
-export const useGetPost = () => {
+export const useGetFooterItems = () => {
   const {
     paginationParams,
     dispatchPaginationParams,
-    dispatchPostData,
+    dispatchFooterItems,
     dispatchAppState,
   } = React.useContext(Store);
 
@@ -18,12 +18,12 @@ export const useGetPost = () => {
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      dispatchPostData({
+      dispatchFooterItems({
         type: "GET",
         payload: data.rawData,
       });
       dispatchAppState({ type: "END_LOADING" });
-    //   paginationが変わったらセットし直す
+      //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
         dispatchPaginationParams({
           type: "SET_PAGINATION_PARAMS",
@@ -34,15 +34,15 @@ export const useGetPost = () => {
   };
 };
 
-export const useCreatePost = () => {
+export const useCreateFooterItem = () => {
   const getPost = useGetPost();
   const {
     paginationParams,
     dispatchPaginationParams,
-    dispatchPostData,
+    dispatchFooterItems,
     dispatchAppState,
   } = React.useContext(Store);
-  const { setEditorText, setTitleText } = React.useContext(EditorContext);
+  const { setFooterItemEditorText, setIconName } = React.useContext(EditorContext);
   return async (params) => {
     const res = await fetch(`http://${location.host}/post_data/create/post`, {
       headers: { "Content-Type": "application/json" },
@@ -56,30 +56,20 @@ export const useCreatePost = () => {
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      // dispatchPostData({
-      //   type: "CREATE_POST",
-      //   payload: params,
-      // });
-      setEditorText("");
-      setTitleText("");
+      setFooterItemEditorText("");
+      setIconName("");
       dispatchAppState({ type: "CLOSE_MODAL" });
-      // if (paginationParams !== data.pagination) {
-      //   dispatchPaginationParams({
-      //     type: "SET_PAGINATION_PARAMS",
-      //     payload: data.pagination,
-      //   });
-      // }
       getPost(1);
     }
   };
 };
 
-export const useGetSinglePost = () => {
+export const useGetFooterItem = () => {
   const {
-    setTitleText,
-    setEditorText,
-    setIsEdittingPost,
-    setEdittingPostParams,
+    setIconName,
+    setFooterItemEditorText,
+    setIsEdittingFooterItem,
+    setEdittingFooterItemParams,
   } = React.useContext(EditorContext);
 
   return async (params) => {
@@ -97,17 +87,17 @@ export const useGetSinglePost = () => {
     if (data.err === true) {
       alert("記事を取得できませんでした");
     } else {
-      const { title, content } = data.rawData;
-      setTitleText(title);
-      setIsEdittingPost(true);
-      setEdittingPostParams(data.rawData);
-      setEditorText(content);
+      // const { title, content } = data.rawData;
+      setIconName(title);
+      setIsEdittingFooterItem(true);
+      setEdittingFooterItemParams(data.rawData);
+      setFooterItemEditorText(content);
     }
   };
 };
 
-export const useUpdatePost = () => {
-  const { dispatchPostData, dispatchAppState } = React.useContext(Store);
+export const useUpdateFooterItem = () => {
+  const { dispatchFooterItems, dispatchAppState } = React.useContext(Store);
   const { setTitleText, setEditorText, setIsEdittingPost } = React.useContext(
     EditorContext
   );
@@ -123,26 +113,24 @@ export const useUpdatePost = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      dispatchPostData({ type: "UPDATE_POST", payload: params });
+      dispatchFooterItems({ type: "UPDATE_FOOTER_ITEM", payload: params });
       setIsEdit(false);
       setIsEdittingPost(false);
       setTitleText("");
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
-
     }
   };
 };
-export const useDeletePost = () => {
+export const useDeleteFooterItem = () => {
   const getPost = useGetPost();
   const {
     paginationParams,
     dispatchPaginationParams,
-    postData,
-    dispatchPostData,
+    footerItems,
+    dispatchFooterItems,
   } = React.useContext(Store);
   return async (id: number) => {
-
     const res = await fetch(`http://${location.host}/post_data/delete/post`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
@@ -154,16 +142,9 @@ export const useDeletePost = () => {
     if (data.err === true) {
       alert("削除できませんでした");
     } else {
-      // dispatchPostData({ type: "DELETE_POST", payload: { id } });
-      // if (paginationParams !== data.pagination) {
-      //   dispatchPaginationParams({
-      //     type: "SET_PAGINATION_PARAMS",
-      //     payload: data.pagination,
-      //   });
-      // }
-    //   ページに表示されている記事が1で、かつ、最後の1記事ではない
+      //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (postData.length === 1 && paginationParams.rowCount > 1) {
-          const targetPage = paginationParams.page - 1;
+        const targetPage = paginationParams.page - 1;
         getPost(targetPage);
       } else {
         getPost(paginationParams.page);

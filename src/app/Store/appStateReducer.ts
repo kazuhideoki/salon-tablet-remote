@@ -3,6 +3,8 @@ import { reducerLogger } from "./reducerLogger";
 
 export type AppStateAction = 
     { type: "TOGGLE_IS_SETTING" } |
+    { type: "ON_IS_SETTING" } |
+    { type: "OFF_IS_SETTING" } |
     { type: "OPEN_MODAL", payload: string } |
     { type: "CLOSE_MODAL" } | 
     { type: "OPEN_ARTICLE_MODAL" } |
@@ -19,44 +21,56 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
             ...state,
             isSetting: !state.isSetting
         };
-            break
-        case "OPEN_MODAL":
+          break;
+        case "ON_IS_SETTING":
+            newState =  {
+            ...state,
+            isSetting: true
+        };
+          break;
+        case "OFF_IS_SETTING":
+            newState =  {
+            ...state,
+            isSetting: false
+        };
+          break
+        case "OPEN_MODAL": 
             newState =  {
             ...state,
             setModal: action.payload, 
             isModalOpen: true
         };
-            break
+          break
         case "CLOSE_MODAL":
             newState =  {
             ...state,
             isModalOpen: false
         };
-            break
+          break
         case "OPEN_ARTICLE_MODAL":
             newState =  {
             ...state,
             isArticleModalOpen: true
         };
-            break
+          break
         case "CLOSE_ARTICLE_MODAL":
             newState =  {
             ...state,
             isArticleModalOpen: false
         };
-            break
+          break
         case "START_LOADING":
             newState =  {
             ...state,
             isLoading: true
         };
-            break
+          break
         case "END_LOADING":
             newState =  {
             ...state,
             isLoading: false
         };
-        break
+          break
             default:
         console.log("エラーだよ,appStateReducer");
             newState =  { ...state };

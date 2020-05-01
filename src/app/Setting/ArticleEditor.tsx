@@ -7,7 +7,7 @@ import {
 import { dateToSql } from "../modules/organizeSql/dateToSql";
 import { EditorContext } from "../Store/EditorContext";
 
-const Editor = () => {
+const ArticleEditor = () => {
 const {
     titleText,
     setTitleText,
@@ -31,7 +31,7 @@ const {
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
-        'link', 'image'
+        'link',
     ]
     const createPost = useCreatePost();
         const updatePost = useUpdatePost();
@@ -98,4 +98,4 @@ const {
     );
 };
 
-export default Editor
+export default ArticleEditor

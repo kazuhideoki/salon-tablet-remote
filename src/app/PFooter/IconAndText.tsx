@@ -16,10 +16,19 @@ const styles = {
     }
 } 
 
+// 表示させるアイコンはprops.icon→Material-uiのicon、もしくはprops.img→imgのsrcで切り替えることが出来る。
+type Props = {
+
+}
+
 export const IconAndText = (props:any) => {
     const classes = useStylesFactory(styles)
     const {dispatchAppState} = React.useContext(Store)
+
+    // onClickをonCloseの渡し方で挙動を変える
+    // モーダルウィンドウが多段階になっている場合用。調整の必要ありか。
     let onClick: () => void
+    // 両方渡したら閉じて開く
     if (props.onClose && props.onClick) {
         onClick = () => {
             dispatchAppState({type: 'CLOSE_MODAL'})

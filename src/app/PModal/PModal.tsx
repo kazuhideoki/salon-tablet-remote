@@ -7,10 +7,12 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { ColorChart } from "./ColorChart";
-import { Setting } from "../Setting/Setting";
-// import { EditFooter } from "../Setting/EditFooter";
+import { SettingPassword } from "./SettingPassword";
 import dynamic from "next/dynamic";
-const Editor = dynamic(() => import("../react-quill/Editor"), {
+const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
+  ssr: false,
+});
+const FooterItemEditor = dynamic(() => import("../Setting/FooterItemEditor"), {
   ssr: false,
 });
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
@@ -71,24 +73,24 @@ export const PModal = () => {
         };
 
         switch (setModal) {
-            case "colorChart":
-                modalStyle = size90; 
-                ModalContent = () => <ColorChart />;
-                break;
-            case "setting":
-                ModalContent = () => <Setting openModal={openModal} />;
-                break;
-            case "edit_article":
-                modalStyle = size90;
-                ModalContent = () => <Editor />;
-                break;
-            // case "edit_footer":
-            //     modalStyle = size90;
-            //     ModalContent = () => <EditFooter />;
-            //     break;
+          case "colorChart":
+            modalStyle = size90;
+            ModalContent = () => <ColorChart />;
+            break;
+          case "setting_password":
+            ModalContent = () => <SettingPassword/>
+            break;
+          case "edit_article":
+            modalStyle = size90;
+            ModalContent = () => <ArticleEditor />;
+            break;
+          case "edit_footer_icon":
+            modalStyle = size90;
+            ModalContent = () => <FooterItemEditor />;
+            break;
 
-            default:
-                console.log("エラーだよ、PModal→ '" + setModal +"'");
+          default:
+            console.log("エラーだよ、PModal→ '" + setModal + "'");
         }
 
         // modalStyleの指定がなければデフォルト値をあてる

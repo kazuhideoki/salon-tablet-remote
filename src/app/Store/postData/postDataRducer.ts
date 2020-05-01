@@ -1,8 +1,5 @@
-import React from 'react'
-import { PostData, Store, PostDataSingle } from "../Store";
+import { PostData, PostDataSingle } from "../Store";
 import { reducerLogger } from "../reducerLogger";
-import fetch from "node-fetch";
-import { EditorContext } from '../EditorContext';
 
 export type PostDataAction =
 | { type: "GET"; payload: PostData }
@@ -13,7 +10,7 @@ export type PostDataAction =
 export function postDataReducer(state: PostData, action: PostDataAction) {
     let newState: PostData;
     const func = postDataReducer;
-    switch (action.type) {
+    switch (action.type) { 
     case "GET":
         newState = action.payload;
         break;

@@ -1,11 +1,9 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
 import { Home, Label, Person } from "@material-ui/icons";
 import { ThemeType } from "../../Store/ThemeContext";
 import { useStylesFactory } from "../../Store/useStylesFactory";
 import { Grid } from "@material-ui/core";
-
 import { Prev } from "./Prev";
 import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
@@ -37,12 +35,11 @@ const styles = {
 };
 
 export type pageArrowProps = {
-    hundleOnClick: (arg: PaginationParamsAction) => void;
     classesDisable?: string;
     classesIcon?: string;
 };
 
-export const Pagination = () => {
+export const PPagination = () => {
     const [changedPagination, setChangedPagination] = React.useState(false)
     const classes = useStylesFactory(styles);
     const {
@@ -53,21 +50,9 @@ export const Pagination = () => {
     const { page, pageCount} = paginationParams;
     const getPost = useGetPost()
 
-    const hundleOnClick = (arg: PaginationParamsAction ) => {
-        dispatchAppState({ type: "START_LOADING" });
-        dispatchPaginationParams(arg);
-        setChangedPagination(!changedPagination);
-    };
-
-    // paginationParamsが変わったらchangedPaginationが変わりそれがトリガーになってgetPostされる
-    React.useEffect(() => {
-      getPost(paginationParams);
-    }, [changedPagination]);
-
     const props = {
       classes,
       page,
-      hundleOnClick,
       pageCount,
       changedPagination,
     };
@@ -76,14 +61,16 @@ export const Pagination = () => {
     const PaginationPresenter = ({
       classes,
       page,
-      hundleOnClick,
       pageCount,
-      changedPagination,
     }: Props) => {
+        const hundleOnClick = () => {
+            return 0
+        }
+
       const HomeButton = () => {
         return (
           <Home
-            onClick={() => hundleOnClick({ type: "MAINHOME" })}
+            onClick={() => getPost(1)}
             className={classes.icon}
           />
         );
@@ -101,23 +88,19 @@ export const Pagination = () => {
           <Latest
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
           <Prev
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
-          <DisplayNumbers hundleOnClick={hundleOnClick} />
+          <DisplayNumbers/>
           <Next
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
           <Oldest
             classesDisable={classes.disable}
             classesIcon={classes.icon}
-            hundleOnClick={hundleOnClick}
           />
         </Grid>
       );

@@ -9,7 +9,8 @@ import {
 import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { useStylesFactory } from "../Store/useStylesFactory";
-import { Pagination } from './Pagination/Pagination';
+import { PPagination } from './Pagination/PPagination';
+
 
 const styles = {
     root: {
@@ -22,7 +23,8 @@ const styles = {
 
 export const PFooter = () => {
     const classes = useStylesFactory(styles);
-    const { dispatchAppState } = useContext(Store);
+    const { appState,dispatchAppState } = useContext(Store);
+  // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
     const openModal = (modalName: string) =>
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
 
@@ -36,7 +38,7 @@ export const PFooter = () => {
     const PFooterPresenter = ({ classes, openModal, dispatchAppState }: Props) => {
         return (
             <div className={classes.root}>
-                <Pagination/>
+                <PPagination/>
                 <Grid container justify="center" spacing={2}>
                     <Grid item>
                         <IconAndText
@@ -62,13 +64,14 @@ export const PFooter = () => {
                         </a>
                     </Grid>
                     <Grid item>
-                        <IconAndText
+                        {/* <IconAndText
                             icon={SettingsApplicationsTwoTone}
                             onClick={() => dispatchAppState({type: 'TOGGLE_IS_SETTING'})}
-                            text="Setting"
-                        />
+                            text="setting"
+                        /> */}
                     </Grid>
                 </Grid>
+              
             </div>
         );
     };

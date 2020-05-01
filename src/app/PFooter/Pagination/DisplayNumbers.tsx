@@ -2,7 +2,8 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { useStylesFactory } from "../../Store/useStylesFactory";
 import { ThemeType } from "../../Store/ThemeContext";
-import { pageArrowProps } from "./Pagination";
+import { pageArrowProps } from "./PPagination";
+import { useGetPost } from "../../Store/postData/postDataActionCreator";
 
 const styles = {
   nums: {
@@ -19,8 +20,14 @@ const styles = {
 
 export const DisplayNumbers = (props: pageArrowProps) => {
     const classes = useStylesFactory(styles)
-    const { paginationParams } = React.useContext(Store);
+    const { paginationParams, dispatchAppState } = React.useContext(Store);
     const {page, pageCount} = paginationParams;
+    const getPost = useGetPost();
+
+    const hundleOnClick = (num) => {
+      dispatchAppState({ type: "START_LOADING" });
+      getPost(num);
+    };
 
     const number1 = page - 2;
     const number2 = page - 1;
@@ -48,7 +55,7 @@ export const DisplayNumbers = (props: pageArrowProps) => {
     return (
       <button
         key={num}
-        onClick={() => props.hundleOnClick({ type: "NUM", payload: num })}
+        onClick={() => hundleOnClick(num)}
         className={classes.nums}
       >
         {num}

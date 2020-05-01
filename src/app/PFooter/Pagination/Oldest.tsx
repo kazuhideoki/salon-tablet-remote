@@ -1,19 +1,25 @@
 import React from "react";
 import { LastPage } from "@material-ui/icons";
-import { pageArrowProps } from "./Pagination";
+import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
-import { PaginationParamsAction } from "../../Store/paginationParamsReducer";
+import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
+import { useGetPost } from "../../Store/postData/postDataActionCreator";
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Oldest = (props: pageArrowProps) => {
-  const { paginationParams } = React.useContext(Store);
+  const { paginationParams, dispatchAppState } = React.useContext(Store);
   const {page, pageCount} = paginationParams;
+  const getPost = useGetPost();
+
+  const hundleOnClick = () => {
+    dispatchAppState({ type: "START_LOADING" });
+    getPost(pageCount);
+  };
 
   let onClick;
   let disable;
   if (page < pageCount - 2 && pageCount > 3) {
-    onClick = () =>
-      props.hundleOnClick({ type: "OLDEST", payload: pageCount });
+    onClick = () => hundleOnClick();
     disable = null;
   } else {
     onClick = undefined;

@@ -22,6 +22,7 @@ const PostData = Bookshelf.Model.extend({
     tableName: "post_data",
 });
 
+
 function corsHeader(res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
@@ -31,40 +32,41 @@ function corsHeader(res) {
     );
 }  
 
+import { PostData, PaginationParams } from "../app/Store/Store";
+export type ResData = {
+    rawData: PostData,
+    pagination: PaginationParams
+}
+
 app.prepare().then(() => {
 
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }));
 
+    // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
     server.get("/post_data/get/:page", (req, res) => {
+      corsHeader(res)
         const pg = req.params.page
-        console.log(
-          "/post_data/get/:page の  req.body" + JSON.stringify(req.params.page)
-        );
 
         new PostData()
             .orderBy("date", "desc")
+            // pageSizeは一度に取得する記事数
             .fetchPage({ page: pg, pageSize: 5 })
             .then((result) => {
-            const data = {
+            const data: ResData = {
               rawData: result.toArray(),
               pagination: result.pagination,
             };
             res.send(data);
-            // console.log(JSON.stringify(result));
-            console.log(
-              "/post_data/get/:page のresult.pagination " +
-                JSON.stringify(result.pagination)
-            );
           })
           .catch((err) => {
-            console.log(JSON.stringify(err));
-
             res.status(500).json({ err: true, data: { message: err.message } });
           });
     });
-   
+  
+    // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
     server.post("/post_data/create/post", (req, res) => {
+      corsHeader(res);
         const { title, date, content } = req.body;
         new PostData({
           title: title,
@@ -73,13 +75,10 @@ app.prepare().then(() => {
         })
           .save()
           .then((result) => {
-            console.log("create/postのresultは " + JSON.stringify(result));
-
             const data = {
               rawData: result,
               pagination: result.pagination,
             };
-            console.log(JSON.stringify(data));
             res.send(data);
           })
           .catch((err) => {
@@ -88,22 +87,23 @@ app.prepare().then(() => {
               data: { message: err.message },
             });
           });
-     });
+    });
 
      server.post("/post_data/get/singlepost", (req, res) => {
+       corsHeader(res);
         new PostData().where('id', '=', req.body.id).fetch()
         .then((result) => {
             const data = { rawData: result };
             res.send(data)
         })
-        .catch((err) => {
-            console.log(JSON.stringify(err));
-            
+        .catch((err) => {            
             res.status(500).json({err: true, data:{message: err.message}})
         })         
-     });
+    });
 
+    //  編集した記事をアップデートする。
     server.post("/post_data/update/post", (req, res) => {
+      corsHeader(res);
         const {id, title, date, content} = req.body
 
         new PostData().where('id',id)
@@ -123,9 +123,11 @@ app.prepare().then(() => {
                 data: { message: err.message },
             });
         });         
-     });
+    });
 
+// Idを渡して多少のデータを削除する
      server.post("/post_data/delete/post", (req, res) => {
+       corsHeader(res);
        const id = req.body.id;
        new PostData()
         .where("id", id)
@@ -143,7 +145,7 @@ app.prepare().then(() => {
                 data: { message: err.message },
             });
         });        
-     });
+    });
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 
@@ -154,7 +156,7 @@ app.prepare().then(() => {
 
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);
-      console.debug("> Ready on http://localhost:3000");
+      console.log("> Ready on http://localhost:3000");
     });
 })
 .catch((err) => {
