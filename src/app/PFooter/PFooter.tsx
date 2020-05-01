@@ -10,8 +10,7 @@ import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { PPagination } from './Pagination/PPagination';
-import { SettingButton } from "../Setting/SettingButton";
-import { SettingButtonOpened } from "../Setting/SettingButtonOpened";
+
 
 const styles = {
     root: {
@@ -72,7 +71,7 @@ export const PFooter = () => {
                         />
                     </Grid>
                 </Grid>
-              {(appState.isSetting)? <SettingButtonOpened/>: <SettingButton/>}
+              
             </div>
         );
     };

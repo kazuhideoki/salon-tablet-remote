@@ -25,10 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const staticTooltip = {
-  width: "max-content",
-};
-
 // 上が下に来る
 const actions = [
   { 
@@ -43,33 +39,42 @@ const actions = [
   },
 ];
 
-export const SettingButtonOpened = () => {
+type Props = {
+  className?: string
+  handleOpen?: () => void
+  handleClose?: () => void
+}
+export const SettingButtonOpened = ({
+  className,
+  // handleOpen,
+  // handleClose
+}:Props) => {
   const classes = useStyles();
-  const { dispatchAppState } = React.useContext(Store)
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
+  const { appState, dispatchAppState } = React.useContext(Store)
 
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
   const handleClose = () => {
-    setOpen(false);
-  };
-  const handleCloseAndSetting = () => {
-    dispatchAppState({ type: 'TOGGLE_IS_SETTING' })
-    setOpen(false);
+    dispatchAppState({ type: "OFF_IS_SETTING" });
   };
 
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
   const handleOpen = () => {
-    setOpen(true);
+    dispatchAppState({type: "ON_IS_SETTING"});
   };
-  const handleOpenAndSetting = () => {
-    dispatchAppState({type: 'TOGGLE_IS_SETTING'})
-    setOpen(true);
-  }
-
 
   return (
     <SpeedDial
-      ariaLabel="SpeedDial example"
-      className={classes.speedDial}
+      ariaLabel="SpeedDial SettingO
+      ButtonOpened"
+      // className={classes.speedDial}
+      // propsでSettingButtonと同じものを渡すように
+      className={className}
       hidden={hidden}
       // onCloseを除き, SpeedDialIconにonClickをつけることでアイコンをタップしたときのみ戻る。
       icon={
@@ -81,7 +86,8 @@ export const SettingButtonOpened = () => {
       }
       // onClose={handleClose}
       onOpen={() => handleOpen()}
-      open={open}
+      // open={open}
+      open={appState.isSetting}
       direction={"up"}
     >
       {actions.map((action, index) => (

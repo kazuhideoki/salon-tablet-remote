@@ -12,27 +12,29 @@ import {
 import { Store } from "../Store/Store";
 import { SettingButtonOpened } from "./SettingButtonOpened";
 
+type Props = {
+  className?: string
+  handleOpen?: () => void
+}
 
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      position: "absolute",
-      "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
-        bottom: theme.spacing(4),
-        right: theme.spacing(4),
-      },
-      "&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight": {
-        top: theme.spacing(4),
-        left: theme.spacing(4),
-      },
-    },
-  })
-);
-
-
-export const SettingButton = () => {
-  const classes = useStyles()
+export const SettingButton = ({className, handleOpen }:Props) => {
   const { appState, dispatchAppState } = React.useContext(Store) 
-    return <Settings onClick={() => dispatchAppState({ type: 'OPEN_MODAL', payload: 'setting_password'})} />;
+
+    return (
+      <SpeedDial
+      ariaLabel="SpeedDial SettingO
+      Button"
+      // propsでSettingButtonと同じものを渡すように
+      className={className}
+      icon={
+        <SpeedDialIcon
+          icon={<Settings />}
+          onClick={() =>
+          dispatchAppState({ type: "OPEN_MODAL", payload: "setting_password" })
+        }
+        />
+      }
+      open={false}
+    ></SpeedDial>
+    );
 }
