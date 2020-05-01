@@ -1,0 +1,8 @@
+{
+  "theme_color": "#21d4f3",
+  "background_color": "#21d4f3",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "scope": "/",
+  "start_url": "/"
+}

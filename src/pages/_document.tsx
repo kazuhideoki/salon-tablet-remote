@@ -18,6 +18,9 @@ class MyDocument extends Document {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
+          {/* 【PWA対応】manifest.json を読み込む */}
+          <link rel="manifest" href="/manifest.json" />
+
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link
             rel="stylesheet"
@@ -36,7 +39,7 @@ class MyDocument extends Document {
                 box-sizing: border-box;
               }
               body {
-                font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+                font-family: "Roboto", "Helvetica", "Arial", sans-serif;
                 font-size: 1rem;
                 margin: 0;
               }
@@ -48,7 +51,7 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
