@@ -62,7 +62,7 @@ export const PModal = () => {
         // modalStyleにモーダルのサイズやoverflowなどのプロパティを設定する。
         let modalStyle = null;
         const sizeSmall = {
-            width: 300,
+            width: '60vw',
             height: 100,
             padding: 0,
             overflow: "hidden",
