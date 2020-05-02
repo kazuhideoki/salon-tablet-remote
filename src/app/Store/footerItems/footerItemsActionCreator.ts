@@ -11,7 +11,7 @@ export const useGetFooterItems = () => {
   } = React.useContext(Store);
 
   return async (page) => {
-    const res = await fetch(`http://${location.host}/post_data/get/${page}`);
+    const res = await fetch(`${location.protocol}//${location.host}/post_data/get/${page}`);
 
     const data = await res.json();
 
@@ -35,7 +35,7 @@ export const useGetFooterItems = () => {
 };
 
 export const useCreateFooterItem = () => {
-  const getPost = useGetPost();
+  // const getPost = useGetPost();
   const {
     paginationParams,
     dispatchPaginationParams,
@@ -44,7 +44,7 @@ export const useCreateFooterItem = () => {
   } = React.useContext(Store);
   const { setFooterItemEditorText, setIconName } = React.useContext(EditorContext);
   return async (params) => {
-    const res = await fetch(`http://${location.host}/post_data/create/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/post_data/create/post`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
@@ -59,7 +59,7 @@ export const useCreateFooterItem = () => {
       setFooterItemEditorText("");
       setIconName("");
       dispatchAppState({ type: "CLOSE_MODAL" });
-      getPost(1);
+      // getPost(1);
     }
   };
 };
@@ -74,7 +74,7 @@ export const useGetFooterItem = () => {
 
   return async (params) => {
     const res = await fetch(
-      `http://${location.host}/post_data/get/singlepost`,
+      `${location.protocol}//${location.host}/post_data/get/singlepost`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -87,7 +87,7 @@ export const useGetFooterItem = () => {
     if (data.err === true) {
       alert("記事を取得できませんでした");
     } else {
-      // const { title, content } = data.rawData;
+      const { title, content } = data.rawData;
       setIconName(title);
       setIsEdittingFooterItem(true);
       setEdittingFooterItemParams(data.rawData);
@@ -102,7 +102,7 @@ export const useUpdateFooterItem = () => {
     EditorContext
   );
   return async (params, setIsEdit) => {
-    const res = await fetch(`http://${location.host}/post_data/update/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/post_data/update/post`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
@@ -123,7 +123,7 @@ export const useUpdateFooterItem = () => {
   };
 };
 export const useDeleteFooterItem = () => {
-  const getPost = useGetPost();
+  // const getPost = useGetPost();
   const {
     paginationParams,
     dispatchPaginationParams,
@@ -131,7 +131,7 @@ export const useDeleteFooterItem = () => {
     dispatchFooterItems,
   } = React.useContext(Store);
   return async (id: number) => {
-    const res = await fetch(`http://${location.host}/post_data/delete/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/post_data/delete/post`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
@@ -143,12 +143,12 @@ export const useDeleteFooterItem = () => {
       alert("削除できませんでした");
     } else {
       //   ページに表示されている記事が1で、かつ、最後の1記事ではない
-      if (postData.length === 1 && paginationParams.rowCount > 1) {
-        const targetPage = paginationParams.page - 1;
-        getPost(targetPage);
-      } else {
-        getPost(paginationParams.page);
-      }
+      // if (postData.length === 1 && paginationParams.rowCount > 1) {
+      //   const targetPage = paginationParams.page - 1;
+      //   getPost(targetPage);
+      // } else {
+      //   getPost(paginationParams.page);
+      // }
     }
   };
 };

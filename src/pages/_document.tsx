@@ -18,6 +18,7 @@ class MyDocument extends Document {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
+          
           {/* 【PWA対応】manifest.json を読み込む */}
           <link rel="manifest" href="/manifest.json" />
 
