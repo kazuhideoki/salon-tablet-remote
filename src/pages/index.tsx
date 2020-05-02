@@ -10,7 +10,7 @@ import { App } from "../app/App";
 import { ThemeProvider } from "../app/Store/ThemeContext";
 import { StoreContextProvider} from "../app/Store/Store";
 import { EditorContextProvider } from "../app/Store/EditorContext";
-import { Head } from "next/document";
+import Head from "next/head";
 
 // ★★★ デバック版↓? クライアントサイドレンダリングに
 // import dynamic from "next/dynamic";
@@ -34,6 +34,7 @@ const Index = (props: StoreContextProviderProps) => {
   // テーマ、記事データ、appの状態管理を読み込む
   return (
     <>
+    {/* ↓これをつけるとdocumentPropsエラーになる */}
     <Head><title>SALON TABLET</title></Head>
 
     <StoreContextProvider data={props.data} >
