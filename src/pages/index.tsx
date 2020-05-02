@@ -10,7 +10,7 @@ import { App } from "../app/App";
 import { ThemeProvider } from "../app/Store/ThemeContext";
 import { StoreContextProvider} from "../app/Store/Store";
 import { EditorContextProvider } from "../app/Store/EditorContext";
-import { Head } from "next/document";
+import Head from "next/head";
 
 // ★★★ デバック版↓? クライアントサイドレンダリングに
 // import dynamic from "next/dynamic";
@@ -49,9 +49,8 @@ const Index = (props: StoreContextProviderProps) => {
 
 export async function getServerSideProps() {
 
-      const res = await fetch(
-        `http://localhost:3000/post_data/get/1`
-      );
+  // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
+      const res = await fetch(`http://localhost:3000/post_data/get/1`);
       
       const data = await res.json();
       console.log("getServerSidePropsは " + JSON.stringify(data));

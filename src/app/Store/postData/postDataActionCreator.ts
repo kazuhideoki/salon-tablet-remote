@@ -11,7 +11,9 @@ export const useGetPost = () => {
   } = React.useContext(Store);
 
   return async (page) => {
-    const res = await fetch(`http://${location.host}/post_data/get/${page}`);
+    const res = await fetch(
+      `${location.protocol}//${location.host}/post_data/get/${page}`
+    );
 
     const data = await res.json();
 
@@ -44,12 +46,15 @@ export const useCreatePost = () => {
   } = React.useContext(Store);
   const { setEditorText, setTitleText } = React.useContext(EditorContext);
   return async (params) => {
-    const res = await fetch(`http://${location.host}/post_data/create/post`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(params),
-    });
+    const res = await fetch(
+      `${location.protocol}//${location.host}/post_data/create/post`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(params),
+      }
+    );
     const data = await res.json();
     params.id = data.rawData.id;
 
@@ -84,7 +89,7 @@ export const useGetSinglePost = () => {
 
   return async (params) => {
     const res = await fetch(
-      `http://${location.host}/post_data/get/singlepost`,
+      `${location.protocol}//${location.host}/post_data/get/singlepost`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -112,12 +117,15 @@ export const useUpdatePost = () => {
     EditorContext
   );
   return async (params, setIsEdit) => {
-    const res = await fetch(`http://${location.host}/post_data/update/post`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(params),
-    });
+    const res = await fetch(
+      `${location.protocol}//${location.host}/post_data/update/post`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(params),
+      }
+    );
     const data = await res.json();
 
     if (data.err === true) {
@@ -143,12 +151,15 @@ export const useDeletePost = () => {
   } = React.useContext(Store);
   return async (id: number) => {
 
-    const res = await fetch(`http://${location.host}/post_data/delete/post`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify({ id }),
-    });
+    const res = await fetch(
+      `${location.protocol}//${location.host}/post_data/delete/post`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ id }),
+      }
+    );
     const data = await res.json();
 
     if (data.err === true) {
