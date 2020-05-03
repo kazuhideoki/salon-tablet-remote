@@ -3,8 +3,8 @@
 
 https: var withOffline = require("next-offline");
 
-var nextConfig = {
+var nextConfig = { dontAutoRegisterSw: true }
 
-}
+
 // nextConfig を withOffline に渡す
 module.exports = withOffline(nextConfig);
