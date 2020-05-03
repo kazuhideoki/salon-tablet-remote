@@ -50,10 +50,10 @@ app.prepare().then(() => {
       const parsedUrl = parse(req.url, true);
       const { pathname } = parsedUrl;
 
-      const filePath = join(__dirname, ".next", pathname);
+      // const filePath = join(__dirname, ".next", pathname);
 
       // _nextにするとよい、と言っているぺーじがあったので→結果変わらず
-      // const filePath = join(__dirname, "_next", pathname);
+      const filePath = join(__dirname, "_next", pathname);
 
       app.serveStatic(req, res, filePath);
       
