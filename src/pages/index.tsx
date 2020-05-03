@@ -11,6 +11,7 @@ import { ThemeProvider } from "../app/Store/ThemeContext";
 import { StoreContextProvider} from "../app/Store/Store";
 import { EditorContextProvider } from "../app/Store/EditorContext";
 import Head from "next/head";
+import { register, unregister } from "next-offline/runtime";
 
 // ★★★ デバック版↓? クライアントサイドレンダリングに
 // import dynamic from "next/dynamic";
@@ -30,6 +31,13 @@ import Head from "next/head";
 
 const Index = (props: StoreContextProviderProps) => {
   console.log("initialPropsは " + JSON.stringify(props));
+
+  React.useEffect(() => {
+    register()
+    return () => {
+      unregister()
+    }
+  },[])
  
   // テーマ、記事データ、appの状態管理を読み込む
   return (
