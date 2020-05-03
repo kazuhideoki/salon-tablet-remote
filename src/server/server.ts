@@ -47,6 +47,7 @@ app.prepare().then(() => {
 
     // PWA対応 next-offlineを利用
     server.get("/service-worker.js", (req, res) => {
+      corsHeader(res);
       const parsedUrl = parse(req.url, true);
       const { pathname } = parsedUrl;
       const filePath = join(__dirname, ".next", pathname);
