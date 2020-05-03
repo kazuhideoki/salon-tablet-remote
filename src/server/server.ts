@@ -46,14 +46,18 @@ app.prepare().then(() => {
     server.use(bodyParser.urlencoded({ extended: true }));
 
     // PWA対応 next-offlineを利用
-    server.get("/service-worker.js", (req, res) => {
-      const parsedUrl = parse(req.url, true);
-      const { pathname } = parsedUrl;
-      const filePath = join(__dirname, ".next", pathname);
+    // server.get("/service-worker.js", (req, res) => {
+    //   corsHeader(res);
+    //   const parsedUrl = parse(req.url, true);
+    //   const { pathname } = parsedUrl;
 
-      app.serveStatic(req, res, filePath);
+    //   console.log("pathnameは " + JSON.stringify(pathname));
+    //   const filePath = join(__dirname, ".next", pathname);
+    //   console.log('filePathは ' + JSON.stringify(filePath));
       
-    });
+    //   app.serveStatic(req, res, filePath);
+      
+    // });
 
     // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
     server.get("/post_data/get/:page", (req, res) => {
@@ -79,26 +83,26 @@ app.prepare().then(() => {
     // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
     server.post("/post_data/create/post", (req, res) => {
       corsHeader(res);
-        const { title, date, content } = req.body;
-        new PostData({
-          title: title,
-          date: date,
-          content: content,
-        })
-          .save()
-          .then((result) => {
-            const data = {
-              rawData: result,
-              pagination: result.pagination,
-            };
-            res.send(data);
-          })
-          .catch((err) => {
-            res.status(500).json({
-              err: true,
-              data: { message: err.message },
-            });
-          });
+      const { title, date, content } = req.body;
+      new PostData({
+        title: title,
+        date: date,
+        content: content,
+      })
+      .save()
+      .then((result) => {
+        const data = {
+          rawData: result,
+          pagination: result.pagination,
+        };
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          err: true,
+          data: { message: err.message },
+        });
+      });
     });
 
      server.post("/post_data/get/singlepost", (req, res) => {

@@ -1,5 +1,8 @@
 node_modules
-.next
+.next/*
+!.next/static
+.next/static/*
+!.next/static/manifest.json
 build
 dist
 .cache
