@@ -1,9 +1,15 @@
 // 【PWA対応】withOffline を読み込む
 //github.com/hanford/next-offline
 
-https: var withOffline = require("next-offline");
+// var withOffline = require("next-offline");
+// var nextConfig = { dontAutoRegisterSw: true }
 
-var nextConfig = { dontAutoRegisterSw: true }
+var withPWA = require("next-pwa");
+var nextConfig = {
+  pwa: {
+    dest: "public",
+  },
+};
 
-// nextConfig を withOffline に渡す
-module.exports = withOffline(nextConfig);
+// nextConfig を渡す
+module.exports = withPWA(nextConfig);
