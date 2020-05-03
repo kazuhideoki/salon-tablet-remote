@@ -50,7 +50,10 @@ app.prepare().then(() => {
       corsHeader(res);
       const parsedUrl = parse(req.url, true);
       const { pathname } = parsedUrl;
+      console.log("pathnameは " + JSON.stringify(pathname));
       const filePath = join(__dirname, ".next", pathname);
+      console.log('filePathは ' + JSON.stringify(filePath));
+      
 
       app.serveStatic(req, res, filePath);
       
