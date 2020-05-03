@@ -3,8 +3,7 @@
 
 https: var withOffline = require("next-offline");
 
-var nextConfig = {
+var nextConfig = { distDir: "_next" };
 
-}
 // nextConfig を withOffline に渡す
 module.exports = withOffline(nextConfig);

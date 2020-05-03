@@ -34,6 +34,7 @@ const Index = (props: StoreContextProviderProps) => {
   // テーマ、記事データ、appの状態管理を読み込む
   return (
     <>
+    {/* ↓これをつけるとdocumentPropsエラーになる */}
     <Head><title>SALON TABLET</title></Head>
 
     <StoreContextProvider data={props.data} >
