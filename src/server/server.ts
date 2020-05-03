@@ -51,11 +51,10 @@ app.prepare().then(() => {
       const parsedUrl = parse(req.url, true);
       const { pathname } = parsedUrl;
 
-      // const filePath = join(__dirname, ".next", pathname);
-
-      // _nextにするとよい、と言っているぺーじがあったので→結果変わらず
-      const filePath = join(__dirname, "_next", pathname);
-
+      console.log("pathnameは " + JSON.stringify(pathname));
+      const filePath = join(__dirname, ".next", pathname);
+      console.log('filePathは ' + JSON.stringify(filePath));
+      
       app.serveStatic(req, res, filePath);
       
     });
