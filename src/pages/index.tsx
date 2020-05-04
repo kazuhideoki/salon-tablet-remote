@@ -1,7 +1,5 @@
 import React from "react";
 import fetch from "node-fetch";
-import { useGetPost } from "../app/Store/postData/postDataActionCreator";
-import { paginationParamsReducer } from "../app/Store/paginationParams/paginationParamsReducer";
 import { StoreContextProviderProps } from "../app/Store/Store";
 // import * as serviceWorker from "../serviceWorker";
 
@@ -32,13 +30,15 @@ import { register, unregister } from "next-offline/runtime";
 const Index = (props: StoreContextProviderProps) => {
   console.log("initialPropsは " + JSON.stringify(props));
 
-  // React.useEffect(() => {
-  //   register()
-  //   return () => {
-  //     unregister()
-  //   }
-  // },[])
- 
+
+  // service-worker.jsの登録と解除。unmount時に解除することで、キャッシュが残り画面が更新されない状態を防ぐ
+  React.useEffect(() => {
+    register()
+    return () => {
+      unregister()
+    }
+  },[])
+   
   // テーマ、記事データ、appの状態管理を読み込む
   return (
     <>
@@ -75,4 +75,3 @@ export async function getServerSideProps() {
 };
 
 export default Index
-// serviceWorker.register();

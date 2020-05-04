@@ -1,15 +1,12 @@
-// 【PWA対応】withOffline を読み込む
-//github.com/hanford/next-offline
-
-// var withOffline = require("next-offline");
-// var nextConfig = { dontAutoRegisterSw: true }
-
-var withPWA = require("next-pwa");
+// 【PWA対応】【next-offline】 を読み込む
+var withOffline = require('next-offline')
 var nextConfig = {
-  pwa: {
-    dest: "public",
+  // 【next-offline】index.tsxのuseEffectでregisterをunregisterをするための設定
+  dontAutoRegisterSw: true,
+  // 【next-offline】デフォルトの/service-worker.jsでアクセスできるように出力先を../publicに
+  workboxOpts: {
+    swDest: "../public/service-worker.js",
   },
 };
-
-// nextConfig を渡す
-module.exports = withPWA(nextConfig);
+ 
+module.exports = withOffline(nextConfig)

@@ -66,29 +66,29 @@ class MyDocument extends Document {
           <link
             rel="apple-touch-icon"
             type="image/png"
-            href="public/images/icons/icon-192x192.png"
+            href="/images/icons/icon-192x192.png"
           />
           <link
             rel="icon"
             type="image/png"
-            href="public/images/icons/icon-192x192.png"
+            href="/images/icons/icon-192x192.png"
           />
 
-          <link rel="manifest" href="/public/manifest.json" />
+          <link rel="manifest" href="/manifest.json" />
           {/* <link
             rel="mask-icon"
             href="/static/icons/safari-pinned-tab.svg"
             color="#5bbad5"
           /> */}
-          <link rel="shortcut icon" href="/public/favicon.ico" />
 
+          <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:url" content={this.domain} />
           <meta name="twitter:title" content="Salon Tablet" />
           <meta name="twitter:description" content={this.content} />
           <meta
             name="twitter:image"
-            content={this.domain + "public/images/icons/icon-192x192.png"}
+            content={this.domain + "/images/icons/icon-192x192.png"}
           />
           {/* <meta name="twitter:creator" content="@DavidWShadow" /> */}
           <meta property="og:type" content="website" />
@@ -98,7 +98,7 @@ class MyDocument extends Document {
           <meta property="og:url" content={this.domain} />
           <meta
             property="og:image"
-            content={this.domain + "public/images/icons/icon-192x192.png"}
+            content={this.domain + "/images/icons/icon-192x192.png"}
           />
 
           {/* 【PWA対応】next-pwaのdocumentより ここまで */}
