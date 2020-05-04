@@ -38,7 +38,7 @@ const Index = (props: StoreContextProviderProps) => {
     return () => {
       unregister()
     }
-  })
+  },[])
  
   // テーマ、記事データ、appの状態管理を読み込む
   return (
