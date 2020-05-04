@@ -28,6 +28,7 @@
     "knex": "^0.20.13",
     "mysql": "^2.18.1",
     "next": "^9.3.4",
+    "next-offline": "^5.0.2",
     "next-pwa": "^2.3.3",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.1",
