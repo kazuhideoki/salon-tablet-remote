@@ -33,6 +33,7 @@ import { register, unregister } from "next-offline/runtime";
 const Index = (props: StoreContextProviderProps) => {
   console.log("initialPropsは " + JSON.stringify(props));
 
+  // service-worker.jsの登録と解除。unmount時に解除することで、キャッシュが残り画面が更新されない状態を防ぐ
   React.useEffect(() => {
     register()
     return () => {

@@ -1,10 +1,13 @@
-// 【PWA対応】withOffline を読み込む
-// next.config.js
+// 【PWA対応】【next-offline】 を読み込む
 var withOffline = require('next-offline')
 
 var nextConfig = {
+  // 【next-offline】index.tsxのuseEffectでregisterをunregisterをするための設定
   dontAutoRegisterSw: true,
-  workboxOpts: { swDest: "static/service-worker.js" },
+  // 【next-offline】デフォルトの/service-worker.jsでアクセスできるように出力先をstaticに
+  workboxOpts: {
+    swDest: "../public/service-worker.js",
+  },
 };
  
 module.exports = withOffline(nextConfig)

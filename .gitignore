@@ -1,15 +1,6 @@
 node_modules
-.next/*
-# !.next/static/manifest.json
-!.next/static/
-.next/static/chunks/
-.next/static/development/
-.next/static/runtime/
-.next/static/webpack/
-# !.next/static/images/icons/*.png
-
-# .next/static/*
-# !.next/static/manifest.json
+.next
+_next
 build
 dist
 .cache
