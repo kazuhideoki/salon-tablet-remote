@@ -1,7 +1,5 @@
 import React from "react";
 import fetch from "node-fetch";
-import { useGetPost } from "../app/Store/postData/postDataActionCreator";
-import { paginationParamsReducer } from "../app/Store/paginationParams/paginationParamsReducer";
 import { StoreContextProviderProps } from "../app/Store/Store";
 // import * as serviceWorker from "../serviceWorker";
 
@@ -76,4 +74,3 @@ export async function getServerSideProps() {
 };
 
 export default Index
-// serviceWorker.register();
