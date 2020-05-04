@@ -5,6 +5,7 @@
 // var nextConfig = { dontAutoRegisterSw: true }
 
 var withPWA = require("next-pwa");
+
 var nextConfig = {
   pwa: {
     dest: "public",
