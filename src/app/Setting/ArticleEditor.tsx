@@ -19,11 +19,12 @@ const ArticleEditor = () => {
     edittingPostParams,
   } = React.useContext(EditorContext);
   const createPost = useCreatePost();
-      const updatePost = useUpdatePost();
+  const updatePost = useUpdatePost();
 
 
   const hundleSubmit = () => {
     const today = new Date();
+      // 記事編集
       if (isEdittingPost) {
           const params: TArticle = {
             id: edittingPostParams.id,
@@ -35,10 +36,10 @@ const ArticleEditor = () => {
           };
           updatePost(params, setIsEdittingPost);
 
+      // 新規投稿
       }else{
-          const params: TArticle = {
-            // idはauto incrementalだがuseCreateから返り値があるので入れてある
-            id: 0,
+          const params: ArticleWithoutId = {
+            // idは自動で付与
             is_published: true,
             created_at: dateToSql(today),
             updated_at: null,

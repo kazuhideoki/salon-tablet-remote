@@ -1,5 +1,5 @@
 import React from 'react'
-import { Store, TArticle } from '../Store'
+import { Store, TArticle, ArticleWithoutId } from '../Store'
 import { EditorContext } from '../EditorContext';
 
 export const useGetPost = () => {
@@ -45,7 +45,7 @@ export const useCreatePost = () => {
     dispatchAppState,
   } = React.useContext(Store);
   const { setEditorText, setTitleText } = React.useContext(EditorContext);
-  return async (params: TArticle) => {
+  return async (params: ArticleWithoutId) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/create/post`,
       {
@@ -56,9 +56,11 @@ export const useCreatePost = () => {
       }
     );
     const data = await res.json();
-    params.id = data.rawData.id;
+    // params.id = data.rawData.id;
 
     if (data.err === true) {
+      console.log(data);
+
       alert("投稿できませんでした");
     } else {
       // dispatchArticles({
