@@ -21,14 +21,22 @@ const ArticleEditor = () => {
   const createPost = useCreatePost();
   const updatePost = useUpdatePost();
 
-
-  const hundleSubmit = () => {
+  type handleSubmit = {
+    isDraft?: boolean
+  }
+  const handleSubmit = ({isDraft}) => {
+    let is_published: boolean
+    if (isDraft) {
+      is_published = false
+    }else{
+      is_published = true
+    }
     const today = new Date();
       // 記事編集
       if (isEdittingPost) {
           const params: TArticle = {
             id: edittingPostParams.id,
-            is_published: true,
+            is_published: is_published,
             created_at: dateToSql(edittingPostParams.created_at),
             updated_at: dateToSql(today),
             title: titleText,
@@ -40,7 +48,7 @@ const ArticleEditor = () => {
       }else{
           const params: ArticleWithoutId = {
             // idは自動で付与
-            is_published: true,
+            is_published: is_published,
             created_at: dateToSql(today),
             updated_at: null,
             title: titleText,
@@ -50,26 +58,9 @@ const ArticleEditor = () => {
 
       }
   };
-  const enableCreateMode = () => {
-      setIsEdittingPost(false);
-      setTitleText("");
-      setEditorText("");
-  };
-
-  const ModeNotice = () => {
-      return(
-          <>
-              <p>{`${edittingPostParams.title}の記事を編集中`}</p>
-              <button onClick={() => enableCreateMode()}>新規投稿にする</button>
-          </>
-      )
-  }
-
 
   return (
     <>
-      {isEdittingPost ? <ModeNotice /> : <p>"新規投稿"</p>}
-
       <h2>記事タイトル</h2>
       <input
         value={titleText}
@@ -77,7 +68,12 @@ const ArticleEditor = () => {
         style={{ marginBottom: "20px" }}
       />
       <QuillEditor value={editorText} setValue={setEditorText} />
-      <button onClick={() => hundleSubmit()}>投稿</button>
+      <button onClick={() => handleSubmit({ isDraft: false })}>
+        {isEdittingPost ? "更新" : "投稿"}
+      </button>
+      <button onClick={() => handleSubmit({ isDraft: true })}>
+        下書き保存
+      </button>
     </>
   );
 };
