@@ -3,7 +3,7 @@ import { LastPage } from "@material-ui/icons";
 import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
 import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
-import { useGetPost } from "../../Store/postData/postDataActionCreator";
+import { useGetPost } from "../../Store/articles/articlesActionCreator";
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Oldest = (props: pageArrowProps) => {

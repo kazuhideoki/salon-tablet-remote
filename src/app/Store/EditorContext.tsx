@@ -1,5 +1,5 @@
 import React from 'react'
-import { PostDataSingle, FooterItem } from './Store';
+import { TArticle, FooterItem } from './Store';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
 // import { Settings } from '@material-ui/icons';
@@ -11,8 +11,8 @@ type ContextProps = {
   setEditorText: React.Dispatch<React.SetStateAction<string>>
   isEdittingPost: boolean,
   setIsEdittingPost: React.Dispatch<React.SetStateAction<boolean>>
-  edittingPostParams:PostDataSingle
-  setEdittingPostParams: React.Dispatch<React.SetStateAction<PostDataSingle>>
+  edittingPostParams: TArticle
+  setEdittingPostParams: React.Dispatch<React.SetStateAction<TArticle>>
 
   selectedIcon: OverridableComponent<SvgIconTypeMap<{}, "svg">> | null
   dispatchSelectedIcon: React.Dispatch<any>
@@ -33,7 +33,9 @@ const EditorContextProvider = (props) => {
   const [titleText, setTitleText] = React.useState("")
   const [editorText, setEditorText] = React.useState("");
   const [isEdittingPost, setIsEdittingPost] = React.useState(false)
-  const [edittingPostParams, setEdittingPostParams] = React.useState({} as PostDataSingle);
+  const [edittingPostParams, setEdittingPostParams] = React.useState(
+    {} as TArticle
+  );
 
 
   const selectedIconReducer = (state, action) => {

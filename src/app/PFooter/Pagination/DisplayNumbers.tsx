@@ -3,7 +3,7 @@ import { Store } from "../../Store/Store";
 import { useStylesFactory } from "../../Store/useStylesFactory";
 import { ThemeType } from "../../Store/ThemeContext";
 import { pageArrowProps } from "./PPagination";
-import { useGetPost } from "../../Store/postData/postDataActionCreator";
+import { useGetPost } from "../../Store/articles/articlesActionCreator";
 
 const styles = {
   nums: {

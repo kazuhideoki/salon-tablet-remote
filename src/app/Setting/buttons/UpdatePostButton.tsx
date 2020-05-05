@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconButton } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
-import { useGetSinglePost } from "../../Store/postData/postDataActionCreator";
+import { useGetSinglePost } from "../../Store/articles/articlesActionCreator";
 import { Store } from '../../Store/Store';
 import Editor from '../ArticleEditor';
 import { EditorContext } from '../../Store/EditorContext';
@@ -9,12 +9,12 @@ import { EditorContext } from '../../Store/EditorContext';
 export const UpdatePostButton = (props) => { 
     const { dispatchAppState } = React.useContext(Store);
     const { setIsEdittingPost } = React.useContext(EditorContext);
-    const GetSinglePost = useGetSinglePost();
+    const getSinglePost = useGetSinglePost();
 
     const hundleOnClick = () => {
         dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
         setIsEdittingPost(true);
-        GetSinglePost(props.params);
+        getSinglePost(props.params);
     };
     return (
       <IconButton

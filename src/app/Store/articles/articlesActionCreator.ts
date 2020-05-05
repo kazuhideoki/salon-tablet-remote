@@ -1,18 +1,18 @@
 import React from 'react'
-import { Store } from '../Store'
+import { Store, TArticle } from '../Store'
 import { EditorContext } from '../EditorContext';
 
 export const useGetPost = () => {
   const {
     paginationParams,
     dispatchPaginationParams,
-    dispatchPostData,
+    dispatchArticles,
     dispatchAppState,
   } = React.useContext(Store);
 
   return async (page) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/post_data/get/${page}`
+      `${location.protocol}//${location.host}/articles/get/${page}`
     );
 
     const data = await res.json();
@@ -20,7 +20,7 @@ export const useGetPost = () => {
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      dispatchPostData({
+      dispatchArticles({
         type: "GET",
         payload: data.rawData,
       });
@@ -41,13 +41,13 @@ export const useCreatePost = () => {
   const {
     paginationParams,
     dispatchPaginationParams,
-    dispatchPostData,
+    dispatchArticles,
     dispatchAppState,
   } = React.useContext(Store);
   const { setEditorText, setTitleText } = React.useContext(EditorContext);
-  return async (params) => {
+  return async (params: TArticle) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/post_data/create/post`,
+      `${location.protocol}//${location.host}/articles/create/post`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -56,12 +56,12 @@ export const useCreatePost = () => {
       }
     );
     const data = await res.json();
-    params.id = data.rawData.id;
+    params.article_id = data.rawData.article_id;
 
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      // dispatchPostData({
+      // dispatchArticles({
       //   type: "CREATE_POST",
       //   payload: params,
       // });
@@ -89,12 +89,12 @@ export const useGetSinglePost = () => {
 
   return async (params) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/post_data/get/singlepost`,
+      `${location.protocol}//${location.host}/articles/get/singlepost`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ id: params.id }),
+        body: JSON.stringify({ article_id: params.article_id }),
       }
     );
     const data = await res.json();
@@ -102,23 +102,23 @@ export const useGetSinglePost = () => {
     if (data.err === true) {
       alert("記事を取得できませんでした");
     } else {
-      const { title, content } = data.rawData;
+      const { title, article_content } = data.rawData;
       setTitleText(title);
       setIsEdittingPost(true);
       setEdittingPostParams(data.rawData);
-      setEditorText(content);
+      setEditorText(article_content);
     }
   };
 };
 
 export const useUpdatePost = () => {
-  const { dispatchPostData, dispatchAppState } = React.useContext(Store);
+  const { dispatchArticles, dispatchAppState } = React.useContext(Store);
   const { setTitleText, setEditorText, setIsEdittingPost } = React.useContext(
     EditorContext
   );
   return async (params, setIsEdit) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/post_data/update/post`,
+      `${location.protocol}//${location.host}/articles/update/post`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -131,7 +131,7 @@ export const useUpdatePost = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      dispatchPostData({ type: "UPDATE_POST", payload: params });
+      dispatchArticles({ type: "UPDATE_POST", payload: params });
       setIsEdit(false);
       setIsEdittingPost(false);
       setTitleText("");
@@ -146,18 +146,18 @@ export const useDeletePost = () => {
   const {
     paginationParams,
     dispatchPaginationParams,
-    postData,
-    dispatchPostData,
+    articles,
+    dispatchArticles,
   } = React.useContext(Store);
-  return async (id: number) => {
+  return async (article_id: number) => {
 
     const res = await fetch(
-      `${location.protocol}//${location.host}/post_data/delete/post`,
+      `${location.protocol}//${location.host}/articles/delete/post`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({ article_id }),
       }
     );
     const data = await res.json();
@@ -165,7 +165,7 @@ export const useDeletePost = () => {
     if (data.err === true) {
       alert("削除できませんでした");
     } else {
-      // dispatchPostData({ type: "DELETE_POST", payload: { id } });
+      // dispatchArticles({ type: "DELETE_POST", payload: { id } });
       // if (paginationParams !== data.pagination) {
       //   dispatchPaginationParams({
       //     type: "SET_PAGINATION_PARAMS",
@@ -173,7 +173,7 @@ export const useDeletePost = () => {
       //   });
       // }
     //   ページに表示されている記事が1で、かつ、最後の1記事ではない
-      if (postData.length === 1 && paginationParams.rowCount > 1) {
+      if (articles.length === 1 && paginationParams.rowCount > 1) {
           const targetPage = paginationParams.page - 1;
         getPost(targetPage);
       } else {

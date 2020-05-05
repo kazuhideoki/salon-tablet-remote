@@ -59,17 +59,15 @@ const Index = (props: StoreContextProviderProps) => {
 export async function getServerSideProps() {
 
   // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-      const res = await fetch(`http://localhost:3000/post_data/get/1`);
+      const res = await fetch(`http://localhost:3000/articles/get/1`);
       
       const data = await res.json();
       console.log("getServerSidePropsは " + JSON.stringify(data));
 
       if (data.err === true) {
-        alert("投稿できませんでした");
+        return null
       } else {
-
         return { props: { data } };  
-
       }
 
 };

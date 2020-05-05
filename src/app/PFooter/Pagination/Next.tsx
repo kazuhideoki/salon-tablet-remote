@@ -2,7 +2,7 @@ import React from "react";
 import { NavigateNext } from "@material-ui/icons";
 import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
-import { useGetPost } from "../../Store/postData/postDataActionCreator";
+import { useGetPost } from "../../Store/articles/articlesActionCreator";
 
 
 export const Next = (props: pageArrowProps) => {

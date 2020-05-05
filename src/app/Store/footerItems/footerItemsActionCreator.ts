@@ -11,7 +11,7 @@ export const useGetFooterItems = () => {
   } = React.useContext(Store);
 
   return async (page) => {
-    const res = await fetch(`${location.protocol}//${location.host}/post_data/get/${page}`);
+    const res = await fetch(`${location.protocol}//${location.host}/articles/get/${page}`);
 
     const data = await res.json();
 
@@ -44,14 +44,14 @@ export const useCreateFooterItem = () => {
   } = React.useContext(Store);
   const { setFooterItemEditorText, setIconName } = React.useContext(EditorContext);
   return async (params) => {
-    const res = await fetch(`${location.protocol}//${location.host}/post_data/create/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/articles/create/post`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
       body: JSON.stringify(params),
     });
     const data = await res.json();
-    params.id = data.rawData.id;
+    params.article_id = data.rawData.article_id;
 
     if (data.err === true) {
       alert("投稿できませんでした");
@@ -74,12 +74,12 @@ export const useGetFooterItem = () => {
 
   return async (params) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/post_data/get/singlepost`,
+      `${location.protocol}//${location.host}/articles/get/singlepost`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ id: params.id }),
+        body: JSON.stringify({ footer_item_id: params.footer_item_id }),
       }
     );
     const data = await res.json();
@@ -102,7 +102,7 @@ export const useUpdateFooterItem = () => {
     EditorContext
   );
   return async (params, setIsEdit) => {
-    const res = await fetch(`${location.protocol}//${location.host}/post_data/update/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/articles/update/post`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
@@ -131,7 +131,7 @@ export const useDeleteFooterItem = () => {
     dispatchFooterItems,
   } = React.useContext(Store);
   return async (id: number) => {
-    const res = await fetch(`${location.protocol}//${location.host}/post_data/delete/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/articles/delete/post`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
@@ -143,7 +143,7 @@ export const useDeleteFooterItem = () => {
       alert("削除できませんでした");
     } else {
       //   ページに表示されている記事が1で、かつ、最後の1記事ではない
-      // if (postData.length === 1 && paginationParams.rowCount > 1) {
+      // if (articles.length === 1 && paginationParams.rowCount > 1) {
       //   const targetPage = paginationParams.page - 1;
       //   getPost(targetPage);
       // } else {

@@ -9,7 +9,7 @@ import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
 import { Oldest } from "./Oldest";
 import { Next } from "./Next";
-import { useGetPost } from "../../Store/postData/postDataActionCreator";
+import { useGetPost } from "../../Store/articles/articlesActionCreator";
 
 const styles = {
     icon: {

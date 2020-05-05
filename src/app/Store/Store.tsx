@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { PostDataAction, postDataReducer } from "./postData/postDataRducer";
+import { ArticlesAction, articlesReducer } from "./articles/articlesRducer";
 import { FooterItemsAction, footerItemsReducer } from "./footerItems/footerItemsReducer";
 import { AppStateAction, appStateReducer } from "./appStateReducer";
 import {
@@ -15,14 +15,25 @@ const initPagination = {
 };
 export type PaginationParams = typeof initPagination;
 
-const postDataSingle = { 
-  id: 0,
+const articleWithoutId = { 
+  // id: 0,
+  // title: '',
+  // date: '',
+  // content: '' as any,
+  
+  is_published: false,
+  created_at: '',
+  updated_at: '',
   title: '',
-  date: '',
-  content: '' as any,
+  article_content: '',
 }
-export type PostDataSingle = typeof postDataSingle;
-export type PostData = PostDataSingle[]
+export type ArticleWithoutId = typeof articleWithoutId
+const articleId = {
+  article_id: 0,
+}
+export type ArticleId = typeof articleId
+export type TArticle = ArticleWithoutId & ArticleId
+export type TArticles = TArticle[]
 
 const initFooterItem = {
   footer_items_id: 0,
@@ -47,7 +58,7 @@ const initAppState = {
 };
 export type AppState = typeof initAppState
 
-export type DispatchPostData = React.Dispatch<PostDataAction>;
+export type DispatchArticles = React.Dispatch<ArticlesAction>;
 export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
 export type DispatchAppState = React.Dispatch < AppStateAction >
 export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
@@ -55,8 +66,8 @@ export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
 export type ContextProps = {
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
-  postData: PostData;
-  dispatchPostData: DispatchPostData;
+  articles: TArticles;
+  dispatchArticles: DispatchArticles;
   footerItems: FooterItems
   dispatchFooterItems: DispatchFooterItems
   appState: AppState;
@@ -66,7 +77,7 @@ const Store = React.createContext({} as ContextProps);
 
 export type StoreContextProviderProps = {
     data: {
-        rawData: PostData
+        rawData: TArticles
         pagination: PaginationParams
     }
     children?: React.ReactNode
@@ -77,8 +88,8 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     paginationParamsReducer,
     props.data.pagination
   );
-  const [postData, dispatchPostData] = useReducer(
-    postDataReducer,
+  const [articles, dispatchArticles] = useReducer(
+    articlesReducer,
     props.data.rawData
   );
   const [footerItems, dispatchFooterItems] = useReducer(
@@ -95,8 +106,8 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
   const values = {
     paginationParams,
     dispatchPaginationParams,
-    postData,
-    dispatchPostData,
+    articles,
+    dispatchArticles,
     footerItems,
     dispatchFooterItems,
     appState,

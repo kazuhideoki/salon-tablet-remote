@@ -2,10 +2,11 @@ import React from "react";
 import {
   useCreatePost,
   useUpdatePost,
-} from "../Store/postData/postDataActionCreator";
+} from "../Store/articles/articlesActionCreator";
 import { dateToSql } from "../modules/organizeSql/dateToSql";
 import { EditorContext } from "../Store/EditorContext";
 import { QuillEditor } from "./QuillEditor";
+import { ArticleWithoutId, TArticle } from "../Store/Store";
 
 const ArticleEditor = () => {
   const {
@@ -22,23 +23,27 @@ const ArticleEditor = () => {
 
 
   const hundleSubmit = () => {
+    const today = new Date();
       if (isEdittingPost) {
-          const params = {
-              id: edittingPostParams.id,
-              title: titleText,
-              date: dateToSql(edittingPostParams.date),
-              content: editorText,
+          const params: TArticle = {
+            article_id: edittingPostParams.article_id,
+            is_published: true,
+            created_at: dateToSql(edittingPostParams.created_at),
+            updated_at: dateToSql(today),
+            title: titleText,
+            article_content: editorText,
           };
           updatePost(params, setIsEdittingPost);
 
       }else{
-          const today = new Date();
-          const date = dateToSql(today);
-          const params = {
-              id: 0,
-              title: titleText,
-              date: date,
-              content: editorText,
+          const params: TArticle = {
+            // article_idはauto incrementalだがuseCreateから返り値があるので入れてある
+            article_id: 0,
+            is_published: true,
+            created_at: dateToSql(today),
+            updated_at: null,
+            title: titleText,
+            article_content: editorText,
           };
           createPost(params);
 

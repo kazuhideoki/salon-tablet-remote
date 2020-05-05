@@ -67,12 +67,12 @@ export const PMain = () => {
 
     const {
         appState,
-        postData,
+        articles,
         dispatchAppState,
     } = React.useContext(Store);
 
     const props = {
-        postData,
+        articles,
         classes,
         dispatchAppState,
     };
@@ -80,13 +80,13 @@ export const PMain = () => {
 
 
     const PMainPresenter: React.FC<Props> = ({
-        postData,
+        articles,
         classes,
     }: Props) => {
         let displayArticles;
 
-        if (postData) {
-            displayArticles = postData.map((value, key: number) => {
+        if (articles) {
+            displayArticles = articles.map((value, key: number) => {
 
                 return (
                 <Grid item key={key} className={classes.item}>
@@ -99,7 +99,7 @@ export const PMain = () => {
                     {appState.isSetting ? (
                     <DeletePostButton
                         position={classes.deletePostButton}
-                        id={value.id}
+                        id={value.article_id}
                     />
                     ) : null}
 
@@ -112,11 +112,11 @@ export const PMain = () => {
                         <CardContent>
                         <Typography variant="h5">{value.title}</Typography>
                         <Typography gutterBottom variant="h6" align="right">
-                            {sqlToDate(value.date)}
+                            {sqlToDate(value.created_at)}
                         </Typography>
                         <div
                             dangerouslySetInnerHTML={{
-                            __html: value.content,
+                            __html: value.article_content,
                             }}
                         />
                         </CardContent>

@@ -18,8 +18,8 @@ const knex = require("knex")({
 },
 });
 const Bookshelf = require('bookshelf')(knex)
-const PostData = Bookshelf.Model.extend({
-    tableName: "post_data",
+const ArticlesTable = Bookshelf.Model.extend({
+    tableName: "articles",
 });
 
 
@@ -32,9 +32,9 @@ function corsHeader(res) {
     );
 }  
 
-import { PostData, PaginationParams } from "../app/Store/Store";
+import { TArticles, PaginationParams, ArticleWithoutId, TArticle } from "../app/Store/Store";
 export type ResData = {
-    rawData: PostData,
+    rawData: TArticles,
     pagination: PaginationParams
 }
 
@@ -44,107 +44,120 @@ app.prepare().then(() => {
     server.use(bodyParser.urlencoded({ extended: true }));
 
     // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
-    server.get("/post_data/get/:page", (req, res) => {
+    server.get("/articles/get/:page", (req, res) => {
       corsHeader(res)
         const pg = req.params.page
 
-        new PostData()
-            .orderBy("date", "desc")
-            // pageSizeは一度に取得する記事数
-            .fetchPage({ page: pg, pageSize: 5 })
-            .then((result) => {
+        new ArticlesTable()
+          .orderBy("created_at", "desc")
+          // pageSizeは一度に取得する記事数
+          .fetchPage({ page: pg, pageSize: 5 })
+
+          // .fetchAll()
+
+          .then((result) => {
             const data: ResData = {
               rawData: result.toArray(),
               pagination: result.pagination,
             };
+            console.log("/articles/get/:pageは " + JSON.stringify(data));
+
             res.send(data);
           })
           .catch((err) => {
+            // console.log("/articles/get/:pageのエラーは " + JSON.stringify(err));
+
             res.status(500).json({ err: true, data: { message: err.message } });
           });
     });
   
     // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
-    server.post("/post_data/create/post", (req, res) => {
+    server.post("/articles/create/post", (req, res) => {
       corsHeader(res);
-      const { title, date, content } = req.body;
-      new PostData({
-        title: title,
-        date: date,
-        content: content,
-      })
-      .save()
-      .then((result) => {
-        const data = {
-          rawData: result,
-          pagination: result.pagination,
-        };
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).json({
-          err: true,
-          data: { message: err.message },
+      const params: ArticleWithoutId = req.body;
+      // new Articles({
+      //   title: title,
+      //   is_published,
+      //   created_at: created_at,
+      //   article_content: article_content,
+      // })
+      new ArticlesTable(params)
+        .save()
+        .then((result) => {
+          const data = {
+            rawData: result,
+            pagination: result.pagination,
+          };
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).json({
+            err: true,
+            data: { message: err.message },
+          });
         });
-      });
     });
 
-     server.post("/post_data/get/singlepost", (req, res) => {
+     server.post("/articles/get/singlepost", (req, res) => {
        corsHeader(res);
-        new PostData().where('id', '=', req.body.id).fetch()
-        .then((result) => {
+        new ArticlesTable()
+          .where("article_id", "=", req.body.article_id)
+          .fetch()
+          .then((result) => {
             const data = { rawData: result };
-            res.send(data)
-        })
-        .catch((err) => {            
-            res.status(500).json({err: true, data:{message: err.message}})
-        })         
+            res.send(data);
+          })
+          .catch((err) => {
+            res.status(500).json({ err: true, data: { message: err.message } });
+          });         
     });
 
     //  編集した記事をアップデートする。
-    server.post("/post_data/update/post", (req, res) => {
+    server.post("/articles/update/post", (req, res) => {
       corsHeader(res);
-        const {id, title, date, content} = req.body
+        const params: TArticle = req.body
 
-        new PostData().where('id',id)
-        .save({
-            title: title,
-            date: date,
-            content: content,
-        },{patch:true})
-        .then((result) => {
+        new ArticlesTable()
+          .where("article_id", params.article_id)
+          // .save({
+          //     title: title,
+          //     date: date,
+          //     content: content,
+          // },{patch:true})
+          .save(params, { patch: true })
+          .then((result) => {
             console.dir("updatepostのresultは " + JSON.stringify(result));
             const data = { rawData: result };
             res.send(data);
-        })
-        .catch((err) => {
+          })
+          .catch((err) => {
             res.status(500).json({
-                err: true,
-                data: { message: err.message },
+              err: true,
+              data: { message: err.message },
             });
-        });         
+          });         
     });
 
 // Idを渡して多少のデータを削除する
-     server.post("/post_data/delete/post", (req, res) => {
+     server.post("/articles/delete/post", (req, res) => {
        corsHeader(res);
-       const id = req.body.id;
-       new PostData()
-        .where("id", id)
-        .fetch()
-        .then((record) => {
-            record.destroy();
-        })
-        .then((result) => {
-            const data = { rawData: result };
-            res.send(data);
-            })
-        .catch((err) => {
-            res.status(500).json({
-                err: true,
-                data: { message: err.message },
-            });
-        });        
+       const article_id = req.body.article_id;
+       new ArticlesTable()
+         .where("article_id", article_id)
+         .fetch()
+         .then((record) => {
+           record.destroy();
+         })
+         .then((result) => {
+           const data = { rawData: result };
+           res.send(data);
+         })
+         .catch((err) => {
+           res.status(500).json({
+             err: true,
+             data: { message: err.message },
+           });
+         });        
     });
 
     //   -----------ここの上にバックエンドの処理を書く-----------
