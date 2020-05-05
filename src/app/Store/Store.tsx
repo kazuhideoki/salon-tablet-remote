@@ -29,7 +29,7 @@ const articleWithoutId = {
 }
 export type ArticleWithoutId = typeof articleWithoutId
 const articleId = {
-  article_id: 0,
+  id: 0,
 }
 export type ArticleId = typeof articleId
 export type TArticle = ArticleWithoutId & ArticleId

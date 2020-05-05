@@ -101,7 +101,7 @@ app.prepare().then(() => {
      server.post("/articles/get/singlepost", (req, res) => {
        corsHeader(res);
         new ArticlesTable()
-          .where("article_id", "=", req.body.article_id)
+          .where("id", "=", req.body.id)
           .fetch()
           .then((result) => {
             const data = { rawData: result };
@@ -118,7 +118,7 @@ app.prepare().then(() => {
         const params: TArticle = req.body
 
         new ArticlesTable()
-          .where("article_id", params.article_id)
+          .where("id", params.id)
           // .save({
           //     title: title,
           //     date: date,
@@ -141,9 +141,9 @@ app.prepare().then(() => {
 // Idを渡して多少のデータを削除する
      server.post("/articles/delete/post", (req, res) => {
        corsHeader(res);
-       const article_id = req.body.article_id;
+       const id = req.body.id;
        new ArticlesTable()
-         .where("article_id", article_id)
+         .where("id", id)
          .fetch()
          .then((record) => {
            record.destroy();

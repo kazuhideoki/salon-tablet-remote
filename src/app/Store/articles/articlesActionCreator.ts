@@ -56,7 +56,7 @@ export const useCreatePost = () => {
       }
     );
     const data = await res.json();
-    params.article_id = data.rawData.article_id;
+    params.id = data.rawData.id;
 
     if (data.err === true) {
       alert("投稿できませんでした");
@@ -94,7 +94,7 @@ export const useGetSinglePost = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ article_id: params.article_id }),
+        body: JSON.stringify({ id: params.id }),
       }
     );
     const data = await res.json();
@@ -149,7 +149,7 @@ export const useDeletePost = () => {
     articles,
     dispatchArticles,
   } = React.useContext(Store);
-  return async (article_id: number) => {
+  return async (id: number) => {
 
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/delete/post`,
@@ -157,7 +157,7 @@ export const useDeletePost = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ article_id }),
+        body: JSON.stringify({ id }),
       }
     );
     const data = await res.json();

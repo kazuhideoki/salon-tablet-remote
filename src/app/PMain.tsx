@@ -99,7 +99,7 @@ export const PMain = () => {
                     {appState.isSetting ? (
                     <DeletePostButton
                         position={classes.deletePostButton}
-                        id={value.article_id}
+                        id={value.id}
                     />
                     ) : null}
 

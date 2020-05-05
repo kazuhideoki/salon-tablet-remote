@@ -9,7 +9,7 @@ export const DeletePostButton = (props) => {
     return (
       <IconButton
         className={props.position}
-        onClick={() => deletePost(props.article_id)}
+        onClick={() => deletePost(props.id)}
       >
         <DeleteForeverTwoTone />
       </IconButton>

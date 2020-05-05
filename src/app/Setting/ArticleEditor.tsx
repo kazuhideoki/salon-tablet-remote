@@ -26,7 +26,7 @@ const ArticleEditor = () => {
     const today = new Date();
       if (isEdittingPost) {
           const params: TArticle = {
-            article_id: edittingPostParams.article_id,
+            id: edittingPostParams.id,
             is_published: true,
             created_at: dateToSql(edittingPostParams.created_at),
             updated_at: dateToSql(today),
@@ -37,8 +37,8 @@ const ArticleEditor = () => {
 
       }else{
           const params: TArticle = {
-            // article_idはauto incrementalだがuseCreateから返り値があるので入れてある
-            article_id: 0,
+            // idはauto incrementalだがuseCreateから返り値があるので入れてある
+            id: 0,
             is_published: true,
             created_at: dateToSql(today),
             updated_at: null,

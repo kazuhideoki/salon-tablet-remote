@@ -5,7 +5,7 @@ export type ArticlesAction =
   | { type: "GET"; payload: TArticles }
   | { type: "CREATE_POST"; payload: TArticle }
   | { type: "UPDATE_POST"; payload: TArticle }
-  | { type: "DELETE_POST"; payload: { article_id: number } };
+  | { type: "DELETE_POST"; payload: { id: number } };
 
 export function articlesReducer(state: TArticles, action: ArticlesAction) {
     let newState: TArticles;
@@ -20,7 +20,7 @@ export function articlesReducer(state: TArticles, action: ArticlesAction) {
         break;
     case "UPDATE_POST":
         newState = state.map((value, index) => {
-        if (value.article_id === action.payload.article_id) {
+        if (value.id === action.payload.id) {
           return action.payload;
         } else {
           return value;
@@ -29,7 +29,7 @@ export function articlesReducer(state: TArticles, action: ArticlesAction) {
         break;
     case "DELETE_POST":
         newState = state.filter((value, index) =>{
-            return value.article_id !== action.payload.article_id;
+            return value.id !== action.payload.id;
         })
         break;
 

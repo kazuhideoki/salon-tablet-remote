@@ -51,7 +51,7 @@ export const useCreateFooterItem = () => {
       body: JSON.stringify(params),
     });
     const data = await res.json();
-    params.article_id = data.rawData.article_id;
+    params.id = data.rawData.id;
 
     if (data.err === true) {
       alert("投稿できませんでした");
