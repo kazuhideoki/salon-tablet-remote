@@ -99,16 +99,17 @@ export const PMain = () => {
                 }
 
                 // 下書きは下書き用classNameを付与
-                const isDraft =
-                  value.is_published == true ? classes.itemIsPublished : classes.itemIsDraft
+                // const isDraft =
+                //   value.is_published == true ? classes.itemIsPublished : classes.itemIsDraft
 
                 return (
                   // <Grid item key={key} className={`${classes.item} ${isDraft}`}>
                   <Grid
                     item
                     key={key}
+                    // 下書きは下書き用classNameを付与
                     className={
-                      (value.is_published == true)
+                      value.is_published == true
                         ? classes.itemIsPublished
                         : classes.itemIsDraft
                     }
