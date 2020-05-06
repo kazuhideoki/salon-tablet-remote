@@ -14,9 +14,9 @@ const ArticleEditor = () => {
     setTitleText,
     editorText,
     setEditorText,
-    isEdittingPost,
-    setIsEdittingPost,
-    edittingPostParams,
+    isEdittingArticle,
+    setIsEdittingArticle,
+    edittingArticleParams,
   } = React.useContext(EditorContext);
   const createPost = useCreatePost();
   const updatePost = useUpdatePost();
@@ -33,16 +33,16 @@ const ArticleEditor = () => {
     }
     const today = new Date();
       // 記事編集
-      if (isEdittingPost) {
+      if (isEdittingArticle) {
           const params: TArticle = {
-            id: edittingPostParams.id,
+            id: edittingArticleParams.id,
             is_published: is_published,
-            created_at: dateToSql(edittingPostParams.created_at),
+            created_at: dateToSql(edittingArticleParams.created_at),
             updated_at: dateToSql(today),
             title: titleText,
             article_content: editorText,
           };
-          updatePost(params, setIsEdittingPost);
+          updatePost(params, setIsEdittingArticle);
 
       // 新規投稿
       }else{
@@ -69,7 +69,7 @@ const ArticleEditor = () => {
       />
       <QuillEditor value={editorText} setValue={setEditorText} />
       <button onClick={() => handleSubmit({ isDraft: false })}>
-        {isEdittingPost ? "更新" : "投稿"}
+        {isEdittingArticle ? "更新" : "投稿"}
       </button>
       <button onClick={() => handleSubmit({ isDraft: true })}>
         下書き保存

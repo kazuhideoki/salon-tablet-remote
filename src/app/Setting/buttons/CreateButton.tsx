@@ -6,13 +6,13 @@ import { EditorContext } from '../../Store/EditorContext';
 
 export const CreateButton = (props) => {
     const { dispatchAppState } = React.useContext(Store)
-    const { setTitleText, setEditorText, setIsEdittingPost } = React.useContext(
+    const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
       EditorContext
     );
 
     const AddPost = () => {
       dispatchAppState({ type: "OPEN_MODAL", payload: 'edit_article' })
-      setIsEdittingPost(false)
+      setIsEdittingArticle(false)
       setTitleText('')
       setEditorText('')
     }

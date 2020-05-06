@@ -8,12 +8,12 @@ import { EditorContext } from '../../Store/EditorContext';
 
 export const UpdatePostButton = (props) => { 
     const { dispatchAppState } = React.useContext(Store);
-    const { setIsEdittingPost } = React.useContext(EditorContext);
+    const { setIsEdittingArticle } = React.useContext(EditorContext);
     const getSinglePost = useGetSinglePost();
 
     const hundleOnClick = () => {
         dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-        setIsEdittingPost(true);
+        setIsEdittingArticle(true);
         getSinglePost(props.params);
     };
     return (

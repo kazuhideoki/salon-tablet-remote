@@ -98,7 +98,7 @@ export const useGetFooterItem = () => {
 
 export const useUpdateFooterItem = () => {
   const { dispatchFooterItems, dispatchAppState } = React.useContext(Store);
-  const { setTitleText, setEditorText, setIsEdittingPost } = React.useContext(
+  const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
     EditorContext
   );
   return async (params, setIsEdit) => {
@@ -115,7 +115,7 @@ export const useUpdateFooterItem = () => {
     } else {
       dispatchFooterItems({ type: "UPDATE_FOOTER_ITEM", payload: params });
       setIsEdit(false);
-      setIsEdittingPost(false);
+      setIsEdittingArticle(false);
       setTitleText("");
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });

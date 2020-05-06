@@ -9,10 +9,10 @@ type ContextProps = {
   setTitleText: React.Dispatch<React.SetStateAction<string>>
   editorText: string
   setEditorText: React.Dispatch<React.SetStateAction<string>>
-  isEdittingPost: boolean,
-  setIsEdittingPost: React.Dispatch<React.SetStateAction<boolean>>
-  edittingPostParams: TArticle
-  setEdittingPostParams: React.Dispatch<React.SetStateAction<TArticle>>
+  isEdittingArticle: boolean,
+  setIsEdittingArticle: React.Dispatch<React.SetStateAction<boolean>>
+  edittingArticleParams: TArticle
+  setEdittingArticleParams: React.Dispatch<React.SetStateAction<TArticle>>
 
   selectedIcon: OverridableComponent<SvgIconTypeMap<{}, "svg">> | null
   dispatchSelectedIcon: React.Dispatch<any>
@@ -32,8 +32,8 @@ const EditorContext = React.createContext({} as ContextProps);
 const EditorContextProvider = (props) => {
   const [titleText, setTitleText] = React.useState("")
   const [editorText, setEditorText] = React.useState("");
-  const [isEdittingPost, setIsEdittingPost] = React.useState(false)
-  const [edittingPostParams, setEdittingPostParams] = React.useState(
+  const [isEdittingArticle, setIsEdittingArticle] = React.useState(false)
+  const [edittingArticleParams, setEdittingArticleParams] = React.useState(
     {} as TArticle
   );
 
@@ -64,10 +64,10 @@ const EditorContextProvider = (props) => {
     setTitleText,
     editorText,
     setEditorText,
-    isEdittingPost,
-    setIsEdittingPost,
-    edittingPostParams,
-    setEdittingPostParams,
+    isEdittingArticle,
+    setIsEdittingArticle,
+    edittingArticleParams,
+    setEdittingArticleParams,
 
     selectedIcon,
     dispatchSelectedIcon,
