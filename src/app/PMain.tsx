@@ -11,55 +11,60 @@ import { CreateButton } from "./Setting/buttons/CreateButton";
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const styles = {
-    root: {
-        overflow: "scroll",
-        height: "100%",
-    },
-    item: {
-        position: "relative",
-        height: "100%",
-    },
-    article: {
-        width: 350,
-        height: "100%",
-    },
-    insta: {
-        width: 408,
-        height: "100%",
-    },
-    instaDiv: {
-        position: "relative",
-    },
-    titleImgDiv: {
-        position: "relative",
-    },
-    img: {
-        objectFit: "cover",
-        width: "100%",
-        height: 300,
-        backgroundSize: "cover",
-    },
-    staffImg: {
-        width: 50,
-    },
-    updatePostButton: {
-        position: "absolute",
-        top: 0,
-        right: 0,
-        zIndex: 100,
-    },
-    deletePostButton: {
-        position: "absolute",
-        top: 0,
-        right: 50,
-        zIndex: 100,
-    },
-    createPostButton: {
-        position: "absolute",
-        top: 50,
-        left: 100,
-        zIndex: 100,
-    },
+  root: {
+    overflow: "scroll",
+    height: "100%",
+  },
+  itemIsPublished: {
+    position: "relative",
+    height: "100%",
+  },
+  itemIsDraft: {
+    position: "relative",
+    height: "100%",
+    border: "3px solid red",
+  },
+  article: {
+    width: 350,
+    height: "100%",
+  },
+  insta: {
+    width: 408,
+    height: "100%",
+  },
+  instaDiv: {
+    position: "relative",
+  },
+  titleImgDiv: {
+    position: "relative",
+  },
+  img: {
+    objectFit: "cover",
+    width: "100%",
+    height: 300,
+    backgroundSize: "cover",
+  },
+  staffImg: {
+    width: 50,
+  },
+  updatePostButton: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    zIndex: 100,
+  },
+  deletePostButton: {
+    position: "absolute",
+    top: 0,
+    right: 50,
+    zIndex: 100,
+  },
+  createPostButton: {
+    position: "absolute",
+    top: 50,
+    left: 100,
+    zIndex: 100,
+  },
 };
 
 export const PMain = () => {
@@ -93,41 +98,54 @@ export const PMain = () => {
                   return null
                 }
 
+                // 下書きは下書き用classNameを付与
+                const isDraft =
+                  value.is_published == true ? classes.itemIsPublished : classes.itemIsDraft
+
                 return (
-                <Grid item key={key} className={classes.item}>
+                  // <Grid item key={key} className={`${classes.item} ${isDraft}`}>
+                  <Grid
+                    item
+                    key={key}
+                    className={
+                      (value.is_published == true)
+                        ? classes.itemIsPublished
+                        : classes.itemIsDraft
+                    }
+                  >
                     {appState.isSetting ? (
-                    <UpdatePostButton
+                      <UpdatePostButton
                         position={classes.updatePostButton}
                         params={value}
-                    />
+                      />
                     ) : null}
                     {appState.isSetting ? (
-                    <DeletePostButton
+                      <DeletePostButton
                         position={classes.deletePostButton}
                         id={value.id}
-                    />
+                      />
                     ) : null}
 
                     <Card
-                    variant="outlined"
-                    className={classes.article}
-                    id={`p_main_` + key}
+                      variant="outlined"
+                      className={classes.article}
+                      id={`p_main_` + key}
                     >
-                    <CardActionArea>
+                      <CardActionArea>
                         <CardContent>
-                        <Typography variant="h5">{value.title}</Typography>
-                        <Typography gutterBottom variant="h6" align="right">
+                          <Typography variant="h5">{value.title}</Typography>
+                          <Typography gutterBottom variant="h6" align="right">
                             {sqlToDate(value.created_at)}
-                        </Typography>
-                        <div
+                          </Typography>
+                          <div
                             dangerouslySetInnerHTML={{
-                            __html: value.article_content,
+                              __html: value.article_content,
                             }}
-                        />
+                          />
                         </CardContent>
-                    </CardActionArea>
+                      </CardActionArea>
                     </Card>
-                </Grid>
+                  </Grid>
                 );
             });
             // 記事がもしなかった場合の表示
