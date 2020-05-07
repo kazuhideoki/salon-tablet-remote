@@ -59,17 +59,35 @@ const Index = (props: StoreContextProviderProps) => {
 export async function getServerSideProps() {
 
   // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-      const res = await fetch(`http://localhost:3000/articles/get/1`);
+  const articles = async () => {
+    const res = await fetch(`http://localhost:3000/articles/get/1`);
+    const data = await res.json();
+    console.log("articlesは " + JSON.stringify(data));
+
+    if (data.err === true) {
+      return null
+    } else {
+      return data
+    }
+  }
+  const footerItems = async () => {
+    const res = await fetch(`http://localhost:3000/footer_items/get`);
+    const data = await res.json();
+    console.log("footerItemsは " + JSON.stringify(data));
+
+    if (data.err === true) {
+      return null
+    } else {
+      return data
+    }
+  }
+
+  Promise.all([articles(), footerItems()]).then(results => {
+    return { props: { results } } // result = [ articlesの結果, footerItemsの結果 ]
+  }).catch(err => {
+    console.log(err);
+  });
       
-      const data = await res.json();
-      console.log("getServerSidePropsは " + JSON.stringify(data));
-
-      if (data.err === true) {
-        return null
-      } else {
-        return { props: { data } };  
-      }
-
 };
 
 export default Index

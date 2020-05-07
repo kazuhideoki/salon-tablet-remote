@@ -44,6 +44,7 @@ const initFooterItem = {
   displayed_icon: '',
   on_tap_modal_open: true,
   item_content: '',
+  link_url: '',
   order: 0
 }
 export type FooterItem = typeof initFooterItem
@@ -76,27 +77,28 @@ export type ContextProps = {
 const Store = React.createContext({} as ContextProps);
 
 export type StoreContextProviderProps = {
-    data: {
+    data: [
+      {
         rawData: TArticles
         pagination: PaginationParams
-    }
+      },
+      { rawData: FooterItems }
+    ]
     children?: React.ReactNode
 }
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {
   const [paginationParams, dispatchPaginationParams] = useReducer(
     paginationParamsReducer,
-    props.data.pagination
+    props.data[0].pagination
   );
   const [articles, dispatchArticles] = useReducer(
     articlesReducer,
-    props.data.rawData
+    props.data[0].rawData
   );
   const [footerItems, dispatchFooterItems] = useReducer(
     footerItemsReducer,
-    [initFooterItem]
-    // とりあえずinitPropsを、あとから↓設定
-    // props.data.rawData.footerItems的な
+    props.data[1].rawData
   );
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,

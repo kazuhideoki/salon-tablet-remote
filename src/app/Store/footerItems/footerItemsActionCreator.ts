@@ -4,14 +4,12 @@ import { EditorContext } from "../EditorContext";
 
 export const useGetFooterItems = () => {
   const {
-    paginationParams,
-    dispatchPaginationParams,
     dispatchFooterItems,
     dispatchAppState,
   } = React.useContext(Store);
 
   return async (page) => {
-    const res = await fetch(`${location.protocol}//${location.host}/articles/get/${page}`);
+    const res = await fetch(`${location.protocol}//${location.host}/footer_items/get`);
 
     const data = await res.json();
 
@@ -23,13 +21,6 @@ export const useGetFooterItems = () => {
         payload: data.rawData,
       });
       dispatchAppState({ type: "END_LOADING" });
-      //   paginationが変わったらセットし直す
-      if (paginationParams !== data.pagination) {
-        dispatchPaginationParams({
-          type: "SET_PAGINATION_PARAMS",
-          payload: data.pagination,
-        });
-      }
     }
   };
 };
@@ -37,21 +28,18 @@ export const useGetFooterItems = () => {
 export const useCreateFooterItem = () => {
   // const getPost = useGetPost();
   const {
-    paginationParams,
-    dispatchPaginationParams,
     dispatchFooterItems,
     dispatchAppState,
   } = React.useContext(Store);
   const { setFooterItemEditorText, setIconName } = React.useContext(EditorContext);
   return async (params) => {
-    const res = await fetch(`${location.protocol}//${location.host}/articles/create/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/footer_items/create/item`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
       body: JSON.stringify(params),
     });
     const data = await res.json();
-    params.id = data.rawData.id;
 
     if (data.err === true) {
       alert("投稿できませんでした");
@@ -59,7 +47,6 @@ export const useCreateFooterItem = () => {
       setFooterItemEditorText("");
       setIconName("");
       dispatchAppState({ type: "CLOSE_MODAL" });
-      // getPost(1);
     }
   };
 };
@@ -74,7 +61,7 @@ export const useGetFooterItem = () => {
 
   return async (params) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/get/singlepost`,
+      `${location.protocol}//${location.host}/footer_items/get/single`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -102,7 +89,7 @@ export const useUpdateFooterItem = () => {
     EditorContext
   );
   return async (params, setIsEdit) => {
-    const res = await fetch(`${location.protocol}//${location.host}/articles/update/post`, {
+    const res = await fetch(`${location.protocol}//${location.host}/footer_items/update/item`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       mode: "cors",
@@ -122,33 +109,31 @@ export const useUpdateFooterItem = () => {
     }
   };
 };
+
 export const useDeleteFooterItem = () => {
-  // const getPost = useGetPost();
   const {
-    paginationParams,
-    dispatchPaginationParams,
     footerItems,
     dispatchFooterItems,
   } = React.useContext(Store);
-  return async (id: number) => {
-    const res = await fetch(`${location.protocol}//${location.host}/articles/delete/post`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify({ id }),
-    });
+  return async (footer_item_id: number) => {
+    const res = await fetch(
+      `${location.protocol}//${location.host}/footer_items/delete/item`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ footer_item_id }),
+      }
+    );
     const data = await res.json();
 
     if (data.err === true) {
       alert("削除できませんでした");
     } else {
-      //   ページに表示されている記事が1で、かつ、最後の1記事ではない
-      // if (articles.length === 1 && paginationParams.rowCount > 1) {
-      //   const targetPage = paginationParams.page - 1;
-      //   getPost(targetPage);
-      // } else {
-      //   getPost(paginationParams.page);
-      // }
+      dispatchFooterItems({
+        type: "DELETE_FOOTER_ITEM",
+        payload: footer_item_id,
+      });
     }
   };
 };

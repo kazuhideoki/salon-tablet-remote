@@ -5,7 +5,7 @@ export type FooterItemsAction =
   | { type: "GET"; payload: FooterItems }
   | { type: "CREATE_FOOTER_ITEM"; payload: FooterItem }
   | { type: "UPDATE_FOOTER_ITEM"; payload: FooterItem }
-  | { type: "DELETE_FOOTER_ITEM"; payload: { id: number } }
+  | { type: "DELETE_FOOTER_ITEM"; payload: number }
   | { type: "SWITCH_ORDER", payload: unknown}
 
 export function footerItemsReducer(state: FooterItems, action: FooterItemsAction) {
@@ -30,7 +30,7 @@ export function footerItemsReducer(state: FooterItems, action: FooterItemsAction
       break;
     case "DELETE_FOOTER_ITEM":
       newState = state.filter((value, index) => {
-        return value.footer_items_id !== action.payload.id;
+        return value.footer_items_id !== action.payload;
       });
       break;
     // ↓要検討

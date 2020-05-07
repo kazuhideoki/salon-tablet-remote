@@ -1,6 +1,7 @@
 import express from "express";
 import next from "next";
 import bodyParser from "body-parser";
+import { footerItems } from "./footer_items/footer_items";
 
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
@@ -23,7 +24,7 @@ const ArticlesTable = Bookshelf.Model.extend({
 });
 
 
-function corsHeader(res) {
+export function corsHeader(res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     res.header(
@@ -159,6 +160,8 @@ app.prepare().then(() => {
            });
          });        
     });
+
+    footerItems()
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 
