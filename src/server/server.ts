@@ -40,8 +40,8 @@ export type ResData = {
 
 app.prepare().then(() => {
 
-    server.use(bodyParser.json())
-    server.use(bodyParser.urlencoded({ extended: true }));
+    server.use(bodyParser.json({ limit: "50mb" }));
+    server.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
     // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
     server.get("/articles/get/:page", (req, res) => {

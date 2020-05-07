@@ -85,8 +85,8 @@ export const useGetSinglePost = () => {
   const {
     setTitleText,
     setEditorText,
-    setIsEdittingPost,
-    setEdittingPostParams,
+    setIsEdittingArticle,
+    setEdittingArticleParams,
   } = React.useContext(EditorContext);
 
   return async (params) => {
@@ -106,8 +106,8 @@ export const useGetSinglePost = () => {
     } else {
       const { title, article_content } = data.rawData;
       setTitleText(title);
-      setIsEdittingPost(true);
-      setEdittingPostParams(data.rawData);
+      setIsEdittingArticle(true);
+      setEdittingArticleParams(data.rawData);
       setEditorText(article_content);
     }
   };
@@ -115,7 +115,7 @@ export const useGetSinglePost = () => {
 
 export const useUpdatePost = () => {
   const { dispatchArticles, dispatchAppState } = React.useContext(Store);
-  const { setTitleText, setEditorText, setIsEdittingPost } = React.useContext(
+  const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
     EditorContext
   );
   return async (params, setIsEdit) => {
@@ -135,7 +135,7 @@ export const useUpdatePost = () => {
     } else {
       dispatchArticles({ type: "UPDATE_POST", payload: params });
       setIsEdit(false);
-      setIsEdittingPost(false);
+      setIsEdittingArticle(false);
       setTitleText("");
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });

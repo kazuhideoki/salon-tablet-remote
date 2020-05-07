@@ -30,9 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
 // 上が下に来る
 const useActions = () => {
   const { dispatchAppState } = React.useContext(Store)
-  const { setEditorText, setTitleText, setFooterItemEditorText, setIconName } = React.useContext(EditorContext)
+  const {
+    setEditorText,
+    setTitleText,
+    setFooterItemEditorText,
+    setIconName,
+    setIsEdittingArticle,
+  } = React.useContext(EditorContext);
+
   const handleOpenArticleEditor = () => {
     dispatchAppState({type: "OPEN_MODAL", payload: 'edit_article'})
+    setIsEdittingArticle(false)
     setTitleText('')
     setEditorText('')
   }
