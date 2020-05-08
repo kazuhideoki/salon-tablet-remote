@@ -82,8 +82,8 @@ export async function getServerSideProps() {
     }
   }
 
-  Promise.all([articles(), footerItems()]).then(results => {
-    return { props: { results } } // result = [ articlesの結果, footerItemsの結果 ]
+  Promise.all([articles, footerItems]).then(results => {
+    return { props: { data: results } } // result = [ articlesの結果, footerItemsの結果 ]
   }).catch(err => {
     console.log(err);
   });
