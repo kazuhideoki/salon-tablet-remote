@@ -1,7 +1,20 @@
 import express from "express";
 import next from "next";
 import bodyParser from "body-parser";
-import { footerItems } from "./footer_items/footer_items";
+import {
+  footer_items_get,
+  footer_items_create_item,
+  footer_items_get_single,
+  footer_items_update_item,
+  footer_items_delete_item,
+} from "./footer_items/footer_items";
+// import mysql from "mysql";
+// const mysql_setting = {
+//   host: "localhost",
+//   user: "root",
+//   password: "root",
+//   database: "salon_tablet",
+// };
 
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });
@@ -161,7 +174,19 @@ app.prepare().then(() => {
          });        
     });
 
-    footerItems()
+    server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
+    server.post("/footer_items/create/item", (req, res) =>
+      footer_items_create_item(req, res)
+    );
+    server.post("/footer_items/get/single", (req, res) =>
+      footer_items_get_single(req, res)
+    );
+    server.post("/footer_items/update/item", (req, res) =>
+      footer_items_update_item(req, res)
+    );
+    server.post("/footer_items/delete/item", (req, res) =>
+      footer_items_delete_item(req, res)
+    );
 
     //   -----------ここの上にバックエンドの処理を書く-----------
 

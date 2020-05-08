@@ -10,13 +10,19 @@ const mysql_setting = {
   database: 'salon_tablet',
 }
 
-export const footerItems = () => { 
-
-  server.get("/footer_items/get", (req, res) => {
+  export const footer_items_get = (req, res) => {
   corsHeader(res);
     
-    const connection = mysql.createConnection(mysql_setting)
-    connection.connect()
+    const connection = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "root",
+      database: "salon_tablet",
+    });
+    connection.connect(function(err) {
+      if (err) throw err;
+      console.log("MySQL Connected");
+    });
 
     const query = 'SELECT * FROM `footer_items`'
 
@@ -33,13 +39,13 @@ export const footerItems = () => {
       };
       console.log("/footer_items/get/は " + JSON.stringify(data));
 
-      res.send(data);
+      res.json(data);
 
     })  
     connection.end()
-  });
+  }
 
-  server.post("/footer_items/create/item", (req, res) => {
+  export const footer_items_create_item = (req, res) => {
     corsHeader(res);
 
     const { is_published, created_at, updated_at, icon_name, displayed_icon, on_tap_modal_open, item_content, link_url, order } = req.body
@@ -75,9 +81,9 @@ export const footerItems = () => {
 
     });
     connection.end();
-  });
+  }
 
-  server.post("/footer_items/get/single", (req, res) => {
+  export const footer_items_get_single = (req, res) => {
     corsHeader(res);
 
     const { footer_item_id } = req.body;
@@ -103,9 +109,9 @@ export const footerItems = () => {
       res.send(data);
     });
     connection.end();
-  });
+  }
 
-  server.post("/footer_items/update/item", (req, res) => {
+  export const footer_items_update_item = (req, res) => {
     corsHeader(res);
 
     const { footer_item_id } = req.body;
@@ -143,9 +149,9 @@ export const footerItems = () => {
       res.send(data);
     });
     connection.end();
-  });
+  }
 
-  server.post("/footer_items/delete/item", (req, res) => {
+  export const footer_items_delete_item = (req, res) => {
     corsHeader(res);
 
     const { footer_item_id } = req.body;
@@ -171,6 +177,5 @@ export const footerItems = () => {
       res.send(data);
     });
     connection.end();
-  });
+  }
 
-}
