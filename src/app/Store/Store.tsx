@@ -6,6 +6,8 @@ import {
   PaginationParamsAction,
   paginationParamsReducer,
 } from "./paginationParams/paginationParamsReducer";
+import { SvgIconTypeMap } from "@material-ui/core";
+import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 
 const initPagination = {
   page: 0,
@@ -35,8 +37,7 @@ export type ArticleId = typeof articleId
 export type TArticle = ArticleWithoutId & ArticleId
 export type TArticles = TArticle[]
 
-const initFooterItem = {
-  footer_items_id: 0,
+const initFooterItemWithoutId = {
   is_published: false,
   created_at: '',
   updated_at: '',
@@ -47,7 +48,22 @@ const initFooterItem = {
   link_url: '',
   order: 0
 }
-export type FooterItem = typeof initFooterItem
+export type FooterItemWithoutId = {
+  is_published: boolean;
+  created_at: string;
+  updated_at: string | null;
+  icon_name: string;
+  displayed_icon: string;
+  on_tap_modal_open: boolean;
+  item_content: string;
+  link_url: string;
+  order: number;
+};
+export const footerItemId = {
+  footer_items_id: 0,
+};
+export type FooterItemId = typeof footerItemId;
+export type FooterItem = FooterItemWithoutId & FooterItemId;
 export type FooterItems = FooterItem[]
 
 const initAppState = {

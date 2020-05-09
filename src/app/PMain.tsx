@@ -6,6 +6,8 @@ import { useStylesFactory } from "./Store/useStylesFactory";
 import { UpdatePostButton } from "./Setting/buttons/UpdatePostButton";
 import { DeletePostButton } from "./Setting/buttons/DeletePostButton";
 import { CreateButton } from "./Setting/buttons/CreateButton";
+import { useDeletePost, useGetSinglePost } from "./Store/articles/articlesActionCreator";
+import { EditorContext } from "./Store/EditorContext";
 
 
 
@@ -67,107 +69,121 @@ const styles = {
   },
 };
 
+export type HandleOnUpDate = (params: any) => void;
+
+
 export const PMain = () => {
     const classes = useStylesFactory(styles);
-
     const {
         appState,
         articles,
         dispatchAppState,
     } = React.useContext(Store);
+    const deletePost = useDeletePost();
+    const { setIsEdittingArticle } = React.useContext(EditorContext);
+    const getSinglePost = useGetSinglePost();
+
+    const handleOnUpDate: HandleOnUpDate = (params) => {
+      dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
+      setIsEdittingArticle(true);
+      getSinglePost(params);
+    };
+
 
     const props = {
-        articles,
-        classes,
-        dispatchAppState,
+      articles,
+      classes,
+      deletePost,
+      handleOnUpDate,
     };
     type Props = typeof props
 
 
     const PMainPresenter: React.FC<Props> = ({
-        articles,
-        classes,
+      articles,
+      classes,
+      deletePost,
+      handleOnUpDate,
     }: Props) => {
-        let displayArticles;
+      let displayArticles;
 
-        if (articles) {
-            displayArticles = articles.map((value, key: number) => {
+      if (articles) {
+        displayArticles = articles.map((value, key: number) => {
+          // 通常画面で下書き記事は表示させない
+          if (appState.isSetting === false && value.is_published == false) {
+            return null;
+          }
 
-                // 通常画面で下書き記事は表示させない
-                if ( appState.isSetting === false && value.is_published == false ) {
-                  return null
-                }
+          return (
+            // <Grid item key={key} className={`${classes.item} ${isDraft}`}>
+            <Grid
+              item
+              key={key}
+              // 下書きは下書き用classNameを付与
+              className={
+                value.is_published == true
+                  ? classes.itemIsPublished
+                  : classes.itemIsDraft
+              }
+            >
+              {appState.isSetting ? (
+                <UpdatePostButton
+                  position={classes.updatePostButton}
+                  params={value}
+                  // id={value.id}
+                  handleOnClick={handleOnUpDate}
+                />
+              ) : null}
+              {appState.isSetting ? (
+                <DeletePostButton
+                  position={classes.deletePostButton}
+                  id={value.id}
+                  handleOnClick={deletePost}
+                />
+              ) : null}
 
-                // 下書きは下書き用classNameを付与
-                // const isDraft =
-                //   value.is_published == true ? classes.itemIsPublished : classes.itemIsDraft
+              <Card
+                variant="outlined"
+                className={classes.article}
+                id={`p_main_` + key}
+              >
+                <CardActionArea>
+                  <CardContent>
+                    <Typography variant="h5">{value.title}</Typography>
+                    <Typography gutterBottom variant="h6" align="right">
+                      {sqlToDate(value.created_at)}
+                    </Typography>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: value.article_content,
+                      }}
+                    />
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          );
+        });
+        // 記事がもしなかった場合の表示
+      } else {
+        displayArticles = <div>No articles</div>;
+      }
 
-                return (
-                  // <Grid item key={key} className={`${classes.item} ${isDraft}`}>
-                  <Grid
-                    item
-                    key={key}
-                    // 下書きは下書き用classNameを付与
-                    className={
-                      value.is_published == true
-                        ? classes.itemIsPublished
-                        : classes.itemIsDraft
-                    }
-                  >
-                    {appState.isSetting ? (
-                      <UpdatePostButton
-                        position={classes.updatePostButton}
-                        params={value}
-                      />
-                    ) : null}
-                    {appState.isSetting ? (
-                      <DeletePostButton
-                        position={classes.deletePostButton}
-                        id={value.id}
-                      />
-                    ) : null}
-
-                    <Card
-                      variant="outlined"
-                      className={classes.article}
-                      id={`p_main_` + key}
-                    >
-                      <CardActionArea>
-                        <CardContent>
-                          <Typography variant="h5">{value.title}</Typography>
-                          <Typography gutterBottom variant="h6" align="right">
-                            {sqlToDate(value.created_at)}
-                          </Typography>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: value.article_content,
-                            }}
-                          />
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Grid>
-                );
-            });
-            // 記事がもしなかった場合の表示
-        } else {
-            displayArticles = <div>No articles</div>;
-        }
-
-        return (
-          <Grid
-            id="p_main"
-            container
-            wrap="nowrap"
-            className={classes.root}
-            spacing={2}
-          >
-            {/* {appState.isSetting ? (
+      return (
+        <Grid
+          id="p_main"
+          container
+          wrap="nowrap"
+          className={classes.root}
+          spacing={2}
+        >
+          {/* ↓使うかも */}
+          {/* {appState.isSetting ? (
               <CreateButton position={classes.createPostButton} />
             ) : null} */}
-            {displayArticles}
-          </Grid>
-        );
+          {displayArticles}
+        </Grid>
+      );
     };
 
 

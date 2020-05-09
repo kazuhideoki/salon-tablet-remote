@@ -8,13 +8,6 @@ import {
   footer_items_update_item,
   footer_items_delete_item,
 } from "./footer_items/footer_items";
-// import mysql from "mysql";
-// const mysql_setting = {
-//   host: "localhost",
-//   user: "root",
-//   password: "root",
-//   database: "salon_tablet",
-// };
 
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev });

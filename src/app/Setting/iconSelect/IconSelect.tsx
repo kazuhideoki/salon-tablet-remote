@@ -3,7 +3,8 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Popover, Button, TextField, IconButton } from '@material-ui/core';
-import { icons } from "./icons";
+// import { icons } from "./icons";
+import { IconsSetting } from "./icons";
 import { EditorContext } from '../../Store/EditorContext';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -84,17 +85,21 @@ export const IconSelect = () => {
           // タップで閉じるように
           onClick={() => handleClose()}
         >
-          {icons.map((icon, index) => {
-
+          {/* // 単純な配列だとうまく行かなかったので各アイコンを配列に入れた */}
+          {IconsSetting.icons.map((icon, index) => {
             return (
               <GridListTile
                 key={index}
                 cols={1}
                 //@ts-ignore
                 onClick={() =>
-                  dispatchSelectedIcon({ type: "SET_ICON", payload: icon[0] })
+                  dispatchSelectedIcon({
+                    type: "SET_ICON",
+                    payload: icon[0],
+                  })
                 }
               >
+                {/* // 単純な配列だとうまく行かなかったので各アイコンを配列に入れた */}
                 <IconItem icon={icon[0]} />
               </GridListTile>
             );
