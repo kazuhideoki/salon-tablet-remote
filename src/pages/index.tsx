@@ -71,25 +71,7 @@ export async function getServerSideProps() {
     } else {
       return { props: { data:[ data, data2] } };
     }
-
-  // const footerItems = async () => {
-  //   const res = await fetch(`http://localhost:3000/footer_items/get`);
-  //   const data = await res.json();
-  //   console.log("footerItemsは " + JSON.stringify(data));
-
-  //   if (data.err === true) {
-  //     return null
-  //   } else {
-  //     return data
-  //   }
-  // }
-
-  // Promise.all([articles, footerItems]).then(results => {
-  //   return { props: { results } } // result = [ articlesの結果, footerItemsの結果 ]
-  // }).catch(err => {
-  //   console.log(err);
-  // });
-      
+    
 };
 
 export default Index

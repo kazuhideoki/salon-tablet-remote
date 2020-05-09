@@ -14,7 +14,7 @@ type ContextProps = {
   edittingArticleParams: TArticle
   setEdittingArticleParams: React.Dispatch<React.SetStateAction<TArticle>>
 
-  selectedIcon: OverridableComponent<SvgIconTypeMap<{}, "svg">> | null
+  selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string] | null
   dispatchSelectedIcon: React.Dispatch<any>
   iconName: string
   setIconName: React.Dispatch<React.SetStateAction<string>>

@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = {
-  selectedIcon: string
-  setSelectedIcon: React.Dispatch<React.SetStateAction<string>>
-}
+// type Props = {
+//   selectedIcon: string
+//   setSelectedIcon: React.Dispatch<React.SetStateAction<string>>
+// }
 
 export const IconItem = (props) => {
   const iconName = props.iconName;
@@ -95,7 +95,7 @@ export const IconSelect = () => {
                 onClick={() =>
                   dispatchSelectedIcon({
                     type: "SET_ICON",
-                    payload: icon[0],
+                    payload: icon,
                   })
                 }
               >
@@ -106,7 +106,7 @@ export const IconSelect = () => {
           })}
         </GridList>
       </Popover>
-      {selectedIcon ? <IconItem icon={selectedIcon} /> : null}
+      {selectedIcon ? <IconItem icon={selectedIcon[0]} /> : null}
     </div>
   );
 }
