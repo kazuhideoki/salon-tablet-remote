@@ -2,6 +2,7 @@ import React from 'react'
 import { Store, TArticle, ArticleWithoutId } from '../Store'
 import { EditorContext } from '../EditorContext';
 
+
 export const useGetPost = () => {
   const {
     paginationParams,
@@ -143,6 +144,8 @@ export const useUpdatePost = () => {
     }
   };
 };
+
+
 export const useDeletePost = () => {
   const getPost = useGetPost();
   const {

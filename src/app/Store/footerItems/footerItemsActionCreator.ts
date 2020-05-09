@@ -1,6 +1,7 @@
 import React from "react";
 import { Store } from "../Store";
 import { EditorContext } from "../EditorContext";
+import { IconsSetting } from "../../Setting/iconSelect/icons";
 
 export const useGetFooterItems = () => {
   const {
@@ -11,11 +12,13 @@ export const useGetFooterItems = () => {
   return async (page) => {
     const res = await fetch(`${location.protocol}//${location.host}/footer_items/get`);
 
-    const data = await res.json();
+    let data = await res.json();
 
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
+      
+
       dispatchFooterItems({
         type: "GET",
         payload: data.rawData,
@@ -26,13 +29,31 @@ export const useGetFooterItems = () => {
 };
 
 export const useCreateFooterItem = () => {
-  // const getPost = useGetPost();
   const {
     dispatchFooterItems,
     dispatchAppState,
   } = React.useContext(Store);
   const { setFooterItemEditorText, setIconName } = React.useContext(EditorContext);
-  return async (params) => {
+  return async (values ) => {
+    const { is_published, created_at, updated_at, icon_name, displayed_icon, on_tap_modal_open, item_content, link_url, order } = values
+
+    console.log(displayed_icon); 
+    console.log(JSON.stringify(displayed_icon));
+    
+
+    const params = {
+      is_published: is_published,
+      created_at: created_at,
+      // "updated_at"は '' で入れられない→datetimeに合わない
+      icon_name: icon_name,
+      // displayed_icon: JSON.stringify(displayed_icon),
+      displayed_icon: displayed_icon,
+      on_tap_modal_open: on_tap_modal_open,
+      item_content: item_content,
+      link_url: link_url,
+      order: order,
+    };
+
     const res = await fetch(`${location.protocol}//${location.host}/footer_items/create/item`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",

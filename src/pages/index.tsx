@@ -59,42 +59,33 @@ const Index = (props: StoreContextProviderProps) => {
 export async function getServerSideProps() {
 
   // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-  const articles = () => new Promise( (resolve, reject) => {
-    fetch(`http://localhost:3000/articles/get/1`).then((res)=> {
-      res.json().then((data) => {
-        // console.log("articlesは " + JSON.stringify(data));
-    
-        if (data.err === true) {
-          reject(data.err);
-        } else {
-          resolve(data)
-        }
+    const res = await fetch(`http://localhost:3000/articles/get/1`);
+    const data = await res.json();
+    console.log("articlesは " + JSON.stringify(data));
+    const res2 = await fetch(`http://localhost:3000/footer_items/get`);
+    const data2 = await res2.json();
+    console.log("footerItemsは " + JSON.stringify(data2));
 
-      })
-    })
-  })
-  const footerItems = () => new Promise((resolve, reject) => {
-    fetch(`http://localhost:3000/footer_items/get`).then((res) => {
-      res.json().then((data) => {
-        // console.log("footerItemsは " + JSON.stringify(data));
+    if (data.err === true) {
+      return null
+    } else {
+      return { props: { data:[ data, data2] } };
+    }
 
-        if (data.err === true) {
-          reject(data.err);
-        } else {
-          resolve(data);
-        }
-      });
-    });
-  });
+  // const footerItems = async () => {
+  //   const res = await fetch(`http://localhost:3000/footer_items/get`);
+  //   const data = await res.json();
+  //   console.log("footerItemsは " + JSON.stringify(data));
 
-  (async () => {
-    const articlesData = await articles()
-    const footerItemsData = await footerItems()
-    return { props: { data: [await articlesData, await footerItemsData] } };
-  })()
+  //   if (data.err === true) {
+  //     return null
+  //   } else {
+  //     return data
+  //   }
+  // }
 
   // Promise.all([articles, footerItems]).then(results => {
-  //   return { props: { data: results } } // result = [ articlesの結果, footerItemsの結果 ]
+  //   return { props: { results } } // result = [ articlesの結果, footerItemsの結果 ]
   // }).catch(err => {
   //   console.log(err);
   // });

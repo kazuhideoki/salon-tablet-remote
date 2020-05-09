@@ -3,13 +3,18 @@ import { IconButton } from '@material-ui/core'
 import { DeleteForeverTwoTone } from "@material-ui/icons";
 import { useDeletePost } from "../../Store/articles/articlesActionCreator";
 
-export const DeletePostButton = (props) => {
-    const deletePost = useDeletePost()
+type Type = {
+  position: string
+  id: number
+  handleOnClick: (id: number) => Promise<void> //deletePost 
+}
+
+export const DeletePostButton = (props: Type) => {
 
     return (
       <IconButton
         className={props.position}
-        onClick={() => deletePost(props.id)}
+        onClick={() => props.handleOnClick(props.id)}
       >
         <DeleteForeverTwoTone />
       </IconButton>

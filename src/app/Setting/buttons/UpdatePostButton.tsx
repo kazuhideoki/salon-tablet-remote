@@ -2,24 +2,23 @@ import React from 'react'
 import { IconButton } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
 import { useGetSinglePost } from "../../Store/articles/articlesActionCreator";
-import { Store } from '../../Store/Store';
+import { Store, TArticle, FooterItem } from "../../Store/Store";
 import Editor from '../ArticleEditor';
 import { EditorContext } from '../../Store/EditorContext';
+import { HandleOnUpDate } from '../../PMain';
 
-export const UpdatePostButton = (props) => { 
-    const { dispatchAppState } = React.useContext(Store);
-    const { setIsEdittingArticle } = React.useContext(EditorContext);
-    const getSinglePost = useGetSinglePost();
+type Type = {
+  position: string
+  params: TArticle | FooterItem
+  handleOnClick: HandleOnUpDate 
+}
 
-    const hundleOnClick = () => {
-        dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-        setIsEdittingArticle(true);
-        getSinglePost(props.params);
-    };
+export const UpdatePostButton = (props: Type) => { 
+
     return (
       <IconButton
         className={props.position}
-        onClick={() => hundleOnClick()}
+        onClick={() => props.handleOnClick(props.params)}
       >
         <EditTwoTone />
       </IconButton>
