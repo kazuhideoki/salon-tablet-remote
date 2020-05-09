@@ -21,22 +21,22 @@ const styles = {
     justifyContent: "center",
     height: "100%",
   },
-  gridContainer: {
-    position: "relative",
-  },
+  // gridContainer: {
+  //   position: "relative",
+  // },
   gridItem: {
     position: "relative",
   },
   deletePostButton: {
     position: "absolute",
     top: 0,
-    right: 50,
+    right: 20,
     zIndex: 100,
   },
   createPostButton: {
     position: "absolute",
-    top: 50,
-    left: 100,
+    top: 0,
+    right: 60,
     zIndex: 100,
   },
 };
@@ -45,8 +45,10 @@ export const PFooter = () => {
     const classes = useStylesFactory(styles);
     const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
-    const openModal = (modalName: string) =>
+    const openModal = (modalName: string, footerItemContent: any) => {
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
+      dispatchAppState({ type: "SET_FOOTER_ITEM_CONTENT", payload: footerItemContent})
+      }
 
     const { setIsEdittingFooterItem } = React.useContext(
       EditorContext
@@ -75,6 +77,7 @@ export const PFooter = () => {
     if (footerItems) {
       displayFooterItems = footerItems.map((value, index) => {
         
+        return ( 
         <Grid item key={index} className={classes.gridItem}>
           {appState.isSetting ? (
             <UpdatePostButton
@@ -94,25 +97,36 @@ export const PFooter = () => {
           <IconAndText
             icon={IconsSetting.convertIconComponentFromName(value.displayed_icon)}
             onClick={
-              value.on_tap_modal_open ? () => openModal("footer_item") : null
+              value.on_tap_modal_open ? () => openModal("footer_item", value.item_content) : null
             }
             fontSize="large"
             text={value.icon_name}
           />
           {value.on_tap_modal_open ? null : <a />}
-        </Grid>;
+        </Grid>
+        )
         
       })
 
     }else{
-      displayFooterItems = 'No items'
+      displayFooterItems = <>No items</>
     }
 
     return (
       <div className={classes.root}>
         <PPagination/>
-        <Grid container justify="center" spacing={2} className={classes.gridContainer}>
+        <Grid container justify="center" spacing={2}
+        // className={classes.gridContainer}
+        >
           {displayFooterItems}
+          {/* ↓表示テスト */}
+          {/* <Grid item className={classes.gridItem}>
+            <IconAndText
+              icon={ImportContactsTwoTone}
+              fontSize="large"
+              text={"アイコン"}
+            />
+          </Grid> */}
         </Grid>            
       </div>
     )
