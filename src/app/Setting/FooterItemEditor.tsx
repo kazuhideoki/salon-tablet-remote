@@ -30,7 +30,7 @@ export const FooterItemEditor = () => {
   const handleSubmit = () => {
     if (isEdittingFooterItem) {
       // const params: FooterItem = {
-      //   footer_items_id: edittingFooterItemParams.footer_items_id,
+      //   footer_item_id: edittingFooterItemParams.footer_item_id,
       //   icon_name: iconName,
       //   // date: dateToSql(edittingFooterItemParams.date),
       //   item_content: footerItemEditorText,
@@ -41,7 +41,7 @@ export const FooterItemEditor = () => {
       const today = new Date();
       const date = dateToSql(today);
       const params: FooterItemWithoutId = {
-        // footer_items_id: 0,
+        // footer_item_id: 0,
         is_published: false,
         created_at: date,
         updated_at: null,

@@ -10,6 +10,7 @@ const mysql_setting = {
   database: 'salon_tablet',
 }
 
+// /footer_items/get
 export const footer_items_get = (req, res) => {
 corsHeader(res);
   
@@ -45,6 +46,9 @@ corsHeader(res);
   connection.end()
 }
 
+
+// ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+// /footer_items/aceert/item
 export const footer_items_create_item = (req, res) => {
   corsHeader(res);
 
@@ -53,18 +57,8 @@ export const footer_items_create_item = (req, res) => {
   const connection = mysql.createConnection(mysql_setting);
   connection.connect();
 
-  const query = "INSERT INTO `footer_items` set ?";
-  // const data = {
-  //   "is_published": is_published,
-  //   "created_at": created_at,
-  //   // "updated_at"は '' で入れられない→datetimeに合わない
-  //   "icon_name": icon_name,
-  //   "displayed_icon": JSON.stringify(displayed_icon),
-  //   "on_tap_modal_open": on_tap_modal_open,
-  //   "item_content": item_content,
-  //   "link_url": link_url,
-  //   "order": order,
-  // }
+  const query = "INSERT INTO `footer_items` SET ?";
+
   const data = req.body
   connection.query(query, data, (err, result, fields) => {
     if (err) {
@@ -83,6 +77,9 @@ export const footer_items_create_item = (req, res) => {
   connection.end();
 }
 
+
+// ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+// /footer_items/egt/single
 export const footer_items_get_single = (req, res) => {
   corsHeader(res);
 
@@ -91,13 +88,11 @@ export const footer_items_get_single = (req, res) => {
   const connection = mysql.createConnection(mysql_setting);
   connection.connect();
 
-  const query = `SELECT * FROM 'footer_items' WHERE 'footer_item_id' = ${footer_item_id}`;
+  const query = `SELECT * FROM footer_items WHERE footer_item_id=?`;
   
-  connection.query(query, (err, result, fields) => {
+  connection.query(query, footer_item_id, (err, result, fields) => {
     if (err) {
-      console.log(
-        "/footer_items/get/singleのエラーは " + JSON.stringify(err)
-      );
+      console.log("/footer_items/get/singleのエラーは " + JSON.stringify(err));
       res.status(500).json({ err: true, data: { message: err.message } });
     }
 
@@ -111,29 +106,35 @@ export const footer_items_get_single = (req, res) => {
   connection.end();
 }
 
+
+// ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+// /footer_items/adeptu/item
 export const footer_items_update_item = (req, res) => {
   corsHeader(res);
 
-  const { footer_item_id } = req.body;
+  const { footer_item_id, is_published, created_at, updated_at, icon_name, displayed_icon, on_tap_modal_open, item_content, link_url, order } = req.body
 
   const connection = mysql.createConnection(mysql_setting);
   connection.connect();
 
-  const query = `UPDATE 'footer_items' SET ${req.body} WHERE 'footer_item_id' = ${footer_item_id}`;
+  const query = `UPDATE footer_items SET ? WHERE footer_item_id=?`;
   // うまく行かなかったら一個ずつ書く
-  // const data = {
-  //   is_published: is_published,
-  //   created_at: created_at,
-  //   updated_at: updated_at,
-  //   icon_name: icon_name,
-  //   displayed_icon: displayed_icon,
-  //   on_tap_modal_open: on_tap_modal_open,
-  //   item_content: item_content,
-  //   link_url: link_url,
-  //   order: order,
-  // };
+  const data = [
+    {
+    is_published: is_published,
+    created_at: created_at,
+    updated_at: updated_at,
+    icon_name: icon_name,
+    displayed_icon: displayed_icon,
+    on_tap_modal_open: on_tap_modal_open,
+    item_content: item_content,
+    link_url: link_url,
+    order: order,
+    },
+    footer_item_id,
+  ];
 
-  connection.query(query, (err, result, fields) => {
+  connection.query(query, data, (err, result, fields) => {
     if (err) {
       console.log(
         "/footer_items/update/itemのエラーは " + JSON.stringify(err)
@@ -151,6 +152,9 @@ export const footer_items_update_item = (req, res) => {
   connection.end();
 }
 
+
+// ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+// /footer_items/deeelt/item
 export const footer_items_delete_item = (req, res) => {
   corsHeader(res);
 
@@ -159,13 +163,11 @@ export const footer_items_delete_item = (req, res) => {
   const connection = mysql.createConnection(mysql_setting);
   connection.connect();
 
-  const query = `DELETE FROM 'footer_items' WHERE 'footer_item_id' = ${footer_item_id}`;
+  const query = 'DELETE FROM `footer_items` WHERE `footer_item_id`=?';
 
-  connection.query(query, (err, result, fields) => {
+  connection.query(query, footer_item_id, (err, result, fields) => {
     if (err) {
-      console.log(
-        "/footer_items/delete/itemのエラーは " + JSON.stringify(err)
-      );
+      console.log("/footer_items/delete/itemのエラーは " + JSON.stringify(err));
       res.status(500).json({ err: true, data: { message: err.message } });
     }
 

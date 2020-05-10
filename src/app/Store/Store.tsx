@@ -60,7 +60,7 @@ export type FooterItemWithoutId = {
   order: number;
 };
 export const footerItemId = {
-  footer_items_id: 0,
+  footer_item_id: 0,
 };
 export type FooterItemId = typeof footerItemId;
 export type FooterItem = FooterItemWithoutId & FooterItemId;

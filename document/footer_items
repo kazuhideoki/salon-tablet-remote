@@ -5,13 +5,13 @@ output: 全データ
 
 ・新規登録する
 →新しいアイテムを一つ追加する。
-input: `footer_items_id`と`order`以外全部
-処理: `footer_items_id`は自動連番で `order`は一番最後
+input: `footer_item_id`と`order`以外全部
+処理: `footer_item_id`は自動連番で `order`は一番最後
 output: 全データ
 
 ・更新したいデータを取得
 →読み込んだデータをエディット画面に表示
-input: `footer_items_id`
+input: `footer_item_id`
 output: 該当データ
 
 ・更新する
@@ -19,7 +19,7 @@ input: 全カラム
 output: 全データ
 
 ・削除する
-input: `footer_items_id`
+input: `footer_item_id`
 output: 全データ
 
 ・順番を変える

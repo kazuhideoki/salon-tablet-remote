@@ -21,7 +21,7 @@ export function footerItemsReducer(state: FooterItems, action: FooterItemsAction
       break;
     case "UPDATE_FOOTER_ITEM":
       newState = state.map((value, index) => {
-        if (value.footer_items_id === action.payload.footer_items_id) {
+        if (value.footer_item_id === action.payload.footer_item_id) {
           return action.payload;
         } else {
           return value;
@@ -30,7 +30,7 @@ export function footerItemsReducer(state: FooterItems, action: FooterItemsAction
       break;
     case "DELETE_FOOTER_ITEM":
       newState = state.filter((value, index) => {
-        return value.footer_items_id !== action.payload;
+        return value.footer_item_id !== action.payload;
       });
       break;
     // ↓要検討

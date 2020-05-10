@@ -89,7 +89,7 @@ export const PFooter = () => {
           {appState.isSetting ? (
             <DeletePostButton
               position={classes.deletePostButton}
-              id={value.footer_items_id}
+              id={value.footer_item_id}
               handleOnClick={deleteFooterItem}
             />
           ) : null}
