@@ -48,7 +48,7 @@ export type FooterItemWithoutId = {
   created_at: string;
   updated_at: string | null;
   icon_name: string;
-  displayed_icon: string;
+  displayed_icon: string | null;
   on_tap_modal_open: boolean;
   item_content: string;
   link_url: string;

@@ -1,6 +1,5 @@
 import React from 'react'
 import { IconSelect } from "./iconSelect/IconSelect";
-import ReactQuill from 'react-quill';
 import { QuillEditor } from "./QuillEditor";
 import { EditorContext } from '../Store/EditorContext';
 import { FooterItemWithoutId, FooterItem } from "../Store/Store";
@@ -9,8 +8,6 @@ import {
   useCreateFooterItem,
   useUpdateFooterItem,
 } from "../Store/footerItems/footerItemsActionCreator";
-import { Icon } from '@material-ui/core';
-import { IconsSetting } from './iconSelect/icons';
 
 export const FooterItemEditor = () => {
   const {
@@ -36,7 +33,6 @@ export const FooterItemEditor = () => {
     } else {
       is_published = true;
     }
-    // const today = dateToSql(new Date());
     if (isEdittingFooterItem) {
       const params: FooterItem = {
         footer_item_id: edittingFooterItemParams.footer_item_id,
@@ -44,7 +40,8 @@ export const FooterItemEditor = () => {
         created_at: dateToSql(edittingFooterItemParams.created_at),
         updated_at: dateToSql(new Date()),
         icon_name: iconName,
-        displayed_icon: selectedIcon[1],
+        // 選択されていたらアイコンの名前を返す
+        displayed_icon: selectedIcon ? selectedIcon[1] : null,
         on_tap_modal_open: true, // 今後機能つける
         item_content: footerItemEditorText,
         link_url: "", // 今後機能つける
@@ -53,13 +50,12 @@ export const FooterItemEditor = () => {
       updateFooterItem(params, setIsEdittingFooterItem);
     } else {
       const params: FooterItemWithoutId = {
-        // footer_item_id: 0,
         is_published: is_published,
         created_at: dateToSql(new Date()),
         updated_at: null,
         icon_name: iconName,
-        // displayed_icon: IconsSetting.convertIconComponentToName(selectedIcon),
-        displayed_icon: selectedIcon[1],
+        // 選択されていたらアイコンの名前を返す
+        displayed_icon: selectedIcon ? selectedIcon[1] : null,
         on_tap_modal_open: true, // 今後機能つける
         item_content: footerItemEditorText,
         link_url: "", // 今後機能つける

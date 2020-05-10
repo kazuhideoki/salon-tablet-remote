@@ -21,28 +21,7 @@ export const IconsSetting = class {
     [PersonAddTwoTone,"PersonAddTwoTone"],
     [SettingsApplicationsTwoTone,"SettingsApplicationsTwoTone"],
   ];
-  // static convertIconComponentToName(iconComponent: OverridableComponent<SvgIconTypeMap<{}, "svg">>): string {
-  //   const targetIcon = this.icons.find((value) => {
-  //     return value[1] == iconComponent.name
-      
-  //     // ↓null
-  //     // return value[1] == iconComponent.toString();
-  //     // どちらも取得できず↓
-  //     // ↓undifined
-  //     // return value[0].name == iconComponent.name;
-  //     // return value[0].displayName == iconComponent.displayName;
-  //   });
-
-  //   console.log(targetIcon);
-    
-  //   if (targetIcon) {
-  //     //@ts-ignore
-  //     return targetIcon[1]
-  //   }else{
-  //     return null
-  //   }
-  // }
-
+ 
   // アイコン名からもとの[IconComponent, IconName]の形に戻す。
   static convertIconComponentFromName(iconName: string) {
     const targetIcon = this.icons.find((value) => {

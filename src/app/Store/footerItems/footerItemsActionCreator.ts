@@ -38,7 +38,7 @@ export const useCreateFooterItem = () => {
     dispatchSelectedIcon,
   } = React.useContext(EditorContext);
   const getFooterItems = useGetFooterItems();
-  return async (values: FooterItemWithoutId) => {
+  return async (values: FooterItemWithoutId) => { 
     const {
       is_published,
       created_at,

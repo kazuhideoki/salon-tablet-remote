@@ -115,7 +115,6 @@ export const PMain = () => {
           }
 
           return (
-            // <Grid item key={key} className={`${classes.item} ${isDraft}`}>
             <Grid
               item
               key={key}
@@ -166,7 +165,14 @@ export const PMain = () => {
         });
         // 記事がもしなかった場合の表示
       } else {
-        displayArticles = <div>No articles</div>;
+        displayArticles = (
+          <Card
+            variant="outlined"
+            className={classes.article}
+          >
+           記事がありません
+          </Card>
+        );
       }
 
       return (

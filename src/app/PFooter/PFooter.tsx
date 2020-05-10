@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
-import {
-    ImportContactsTwoTone,
-} from "@material-ui/icons";
+import { MoodBad } from "@material-ui/icons";
 import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { useStylesFactory } from "../Store/useStylesFactory";
@@ -117,9 +115,13 @@ export const PFooter = () => {
             ) : null}
             {value.on_tap_modal_open ? null : <a href={value.link_url} />}
             <IconAndText
-              icon={IconsSetting.convertIconComponentFromName(
+              icon={
                 value.displayed_icon
-              )[0]}
+                  ? IconsSetting.convertIconComponentFromName(
+                      value.displayed_icon
+                    )[0]
+                  : MoodBad
+              }
               onClick={
                 value.on_tap_modal_open
                   ? () => openModal("footer_item", value.item_content)
