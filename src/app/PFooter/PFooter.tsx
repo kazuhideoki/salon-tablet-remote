@@ -21,9 +21,15 @@ const styles = {
     justifyContent: "center",
     height: "100%",
   },
-  // gridContainer: {
-  //   position: "relative",
-  // },
+  itemIsPublished: {
+    position: "relative",
+    height: "100%",
+  },
+  itemIsDraft: {
+    position: "relative",
+    height: "100%",
+    border: "3px solid red",
+  },
   gridItem: {
     position: "relative",
   },
@@ -33,13 +39,15 @@ const styles = {
     right: 20,
     zIndex: 100,
   },
-  createPostButton: {
+  updatePostButton: {
     position: "absolute",
     top: 0,
     right: 60,
     zIndex: 100,
   },
 };
+
+export type HandleOnUpDateFooterIcon = (params: any) => void;
 
 export const PFooter = () => {
     const classes = useStylesFactory(styles);
@@ -55,8 +63,8 @@ export const PFooter = () => {
     );
     const getFooterItem = useGetFooterItem();
 
-    const handleOnUpDateFooterIcon = (params) => {
-      dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_icon" });
+    const handleOnUpDateFooterIcon: HandleOnUpDateFooterIcon = (params) => {
+      dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
       setIsEdittingFooterItem(true);
       getFooterItem(params);
     };
@@ -76,35 +84,53 @@ export const PFooter = () => {
 
     if (footerItems) {
       displayFooterItems = footerItems.map((value, index) => {
+
+        // 通常画面で下書き記事は表示させない
+          if (appState.isSetting === false && value.is_published == false) {
+            return null;
+          }
         
-        return ( 
-        <Grid item key={index} className={classes.gridItem}>
-          {appState.isSetting ? (
-            <UpdatePostButton
-              position={classes.updatePostButton}
-              params={value}
-              handleOnClick={handleOnUpDateFooterIcon}
-            />
-          ) : null}
-          {appState.isSetting ? (
-            <DeletePostButton
-              position={classes.deletePostButton}
-              id={value.footer_item_id}
-              handleOnClick={deleteFooterItem}
-            />
-          ) : null}
-          {value.on_tap_modal_open ? null : <a href={value.link_url} />}
-          <IconAndText
-            icon={IconsSetting.convertIconComponentFromName(value.displayed_icon)}
-            onClick={
-              value.on_tap_modal_open ? () => openModal("footer_item", value.item_content) : null
+        return (
+          <Grid
+            item
+            key={index}
+            // 投稿済みか下書きかで見た目を変える
+            className={
+              value.is_published == true
+                ? classes.itemIsPublished
+                : classes.itemIsDraft
             }
-            fontSize="large"
-            text={value.icon_name}
-          />
-          {value.on_tap_modal_open ? null : <a />}
-        </Grid>
-        )
+          >
+            {appState.isSetting ? (
+              <UpdatePostButton
+                position={classes.updatePostButton}
+                params={value}
+                handleOnClick={handleOnUpDateFooterIcon}
+              />
+            ) : null}
+            {appState.isSetting ? (
+              <DeletePostButton
+                position={classes.deletePostButton}
+                id={value.footer_item_id}
+                handleOnClick={deleteFooterItem}
+              />
+            ) : null}
+            {value.on_tap_modal_open ? null : <a href={value.link_url} />}
+            <IconAndText
+              icon={IconsSetting.convertIconComponentFromName(
+                value.displayed_icon
+              )[0]}
+              onClick={
+                value.on_tap_modal_open
+                  ? () => openModal("footer_item", value.item_content)
+                  : null
+              }
+              fontSize="large"
+              text={value.icon_name}
+            />
+            {value.on_tap_modal_open ? null : <a />}
+          </Grid>
+        );
         
       })
 

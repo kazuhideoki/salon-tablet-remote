@@ -59,18 +59,20 @@ const Index = (props: StoreContextProviderProps) => {
 export async function getServerSideProps() {
 
   // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-    const res = await fetch(`http://localhost:3000/articles/get/1`);
-    const data = await res.json();
-    console.log("articlesは " + JSON.stringify(data));
-    const res2 = await fetch(`http://localhost:3000/footer_items/get`);
-    const data2 = await res2.json();
-    console.log("footerItemsは " + JSON.stringify(data2));
+  // articlesでknex+bookshelfをつかっているせいかfooter_itemsがうまく行かなかったので順番を入れ替えた。
+  const res2 = await fetch(`http://localhost:3000/footer_items/get`);
+  const data2 = await res2.json();
+  console.log("footerItemsは " + JSON.stringify(data2));
 
-    if (data.err === true) {
-      return null
-    } else {
-      return { props: { data:[ data, data2] } };
-    }
+  const res = await fetch(`http://localhost:3000/articles/get/1`);
+  const data = await res.json();
+  console.log("articlesは " + JSON.stringify(data));
+
+  if (data.err === true) {
+    return null
+  } else {
+    return { props: { data:[ data, data2] } };
+  }
     
 };
 

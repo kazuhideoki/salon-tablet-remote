@@ -17,12 +17,7 @@ const initPagination = {
 };
 export type PaginationParams = typeof initPagination;
 
-const articleWithoutId = { 
-  // id: 0,
-  // title: '',
-  // date: '',
-  // content: '' as any,
-  
+const articleWithoutId = {   
   is_published: false,
   created_at: '',
   updated_at: '',

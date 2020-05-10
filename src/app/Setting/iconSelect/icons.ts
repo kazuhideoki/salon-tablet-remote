@@ -43,6 +43,7 @@ export const IconsSetting = class {
   //   }
   // }
 
+  // アイコン名からもとの[IconComponent, IconName]の形に戻す。
   static convertIconComponentFromName(iconName: string) {
     const targetIcon = this.icons.find((value) => {
       return value[1] == iconName
@@ -51,7 +52,7 @@ export const IconsSetting = class {
     console.log(targetIcon);
 
     if (targetIcon) {
-      return targetIcon[0];
+      return targetIcon;
     } else {
       return null;
     }

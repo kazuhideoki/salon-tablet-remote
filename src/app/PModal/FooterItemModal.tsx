@@ -5,8 +5,10 @@ export const FooterItemModal = () => {
   const { appState } = React.useContext(Store)
 
   return (
-    <>
-      {appState.footerItemContent}
-    </>
-  )
+    <div
+      dangerouslySetInnerHTML={{
+        __html: appState.footerItemContent,
+      }}
+    />
+  );
 }

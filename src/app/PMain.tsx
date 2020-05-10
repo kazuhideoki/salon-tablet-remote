@@ -5,7 +5,7 @@ import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-u
 import { useStylesFactory } from "./Store/useStylesFactory";
 import { UpdatePostButton } from "./Setting/buttons/UpdatePostButton";
 import { DeletePostButton } from "./Setting/buttons/DeletePostButton";
-import { CreateButton } from "./Setting/buttons/CreateButton";
+// import { CreateButton } from "./Setting/buttons/CreateButton";
 import { useDeletePost, useGetSinglePost } from "./Store/articles/articlesActionCreator";
 import { EditorContext } from "./Store/EditorContext";
 
@@ -119,7 +119,7 @@ export const PMain = () => {
             <Grid
               item
               key={key}
-              // 下書きは下書き用classNameを付与
+              // 投稿済みか下書きかで見た目を変える
               className={
                 value.is_published == true
                   ? classes.itemIsPublished

@@ -38,20 +38,22 @@ const EditorContextProvider = (props) => {
   );
 
 
-  const selectedIconReducer = (state, action) => {
+  const selectedIconReducer = (
+    state: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string] | null,
+    action: {
+      type: "SET_ICON";
+      payload: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
+    }
+  ) => {
     switch (action.type) {
       case "SET_ICON":
-        return action.payload
-        break;
-      // case "SET_BLANC":
-      //   return null
-      //   break;
-    
+        return action.payload;
+      // break;
+
       default:
-        return state
-        break;
+        return state;
     }
-  }
+  };
   // reducerにすることで複雑なオブジェクトを格納できる
   const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
     selectedIconReducer,

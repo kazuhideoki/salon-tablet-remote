@@ -46,7 +46,6 @@ const useActions = () => {
     setEditorText('')
   }
   
-  // ★★★後で作る
   const handleOpenFooterItemEditor = () => {
     dispatchAppState({type: "OPEN_MODAL", payload: 'edit_footer_item'})
     setIconName('')
