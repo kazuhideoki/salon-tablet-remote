@@ -43,6 +43,9 @@ const EditorContextProvider = (props) => {
       case "SET_ICON":
         return action.payload
         break;
+      // case "SET_BLANC":
+      //   return null
+      //   break;
     
       default:
         return state

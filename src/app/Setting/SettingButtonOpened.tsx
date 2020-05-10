@@ -36,6 +36,7 @@ const useActions = () => {
     setFooterItemEditorText,
     setIconName,
     setIsEdittingArticle,
+    dispatchSelectedIcon,
   } = React.useContext(EditorContext);
 
   const handleOpenArticleEditor = () => {
@@ -46,15 +47,16 @@ const useActions = () => {
   }
   
   // ★★★後で作る
-  // const handleOpenFooterItemEditor = () => {
-  //   dispatchAppState({type: "OPEN_MODAL", payload: 'edit_article'})
-  //   setIconName('')
-  //   setFooterItemEditorText('')
-  // }
+  const handleOpenFooterItemEditor = () => {
+    dispatchAppState({type: "OPEN_MODAL", payload: 'edit_footer_item'})
+    setIconName('')
+    setFooterItemEditorText('')
+    dispatchSelectedIcon({ type: "SET_ICON", payload: null });
+  }
 
   return [
   { 
-    icon: <VideoLabel onClick={() => dispatchAppState({type: "OPEN_MODAL", payload: 'edit_footer_icon'})}/>,
+    icon: <VideoLabel onClick={() => handleOpenFooterItemEditor()}/>,
     name: "フッターアイコン追加"
     // name: "New Icon"
   },

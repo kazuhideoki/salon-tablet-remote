@@ -93,7 +93,7 @@ export const PModal = () => {
             modalStyle = size90;
             ModalContent = () => <ArticleEditor />;
             break;
-          case "edit_footer_icon":
+          case "edit_footer_item":
             modalStyle = size90;
             ModalContent = () => <FooterItemEditor />;
             break;

@@ -19,11 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// type Props = {
-//   selectedIcon: string
-//   setSelectedIcon: React.Dispatch<React.SetStateAction<string>>
-// }
-
 export const IconItem = (props) => {
   const iconName = props.iconName;
 
