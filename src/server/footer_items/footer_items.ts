@@ -1,6 +1,7 @@
 // import express from "express";
-import mysql from 'mysql'
+import mysql from 'mysql2'
 import { corsHeader } from '../server'
+import { FooterItems } from "../../app/Store/Store";
 // const server = express();
 
 const mysql_setting = {
@@ -90,14 +91,15 @@ export const footer_items_get_single = (req, res) => {
 
   const query = `SELECT * FROM footer_items WHERE footer_item_id=?`;
   
-  connection.query(query, footer_item_id, (err, result, fields) => {
+  connection.query(query, footer_item_id, (err, result: FooterItems, fields) => {
     if (err) {
       console.log("/footer_items/get/singleのエラーは " + JSON.stringify(err));
       res.status(500).json({ err: true, data: { message: err.message } });
     }
 
     const data = {
-      rawData: result,
+      // 結果が配列で来るので[0]↓
+      rawData: result[0],
     };
     console.log("/footer_items/get/singleは " + JSON.stringify(data));
 
@@ -108,7 +110,7 @@ export const footer_items_get_single = (req, res) => {
 
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-// /footer_items/adeptu/item
+// /footer_items/update/item
 export const footer_items_update_item = (req, res) => {
   corsHeader(res);
 

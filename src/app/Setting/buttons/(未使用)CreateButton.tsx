@@ -17,7 +17,7 @@ export const CreateButton = (props) => {
       setEditorText('')
     }
     const AddFooterIcon = () => {
-      dispatchAppState({ type: "OPEN_MODAL", payload: 'edit_footer_icon' })
+      dispatchAppState({ type: "OPEN_MODAL", payload: 'edit_footer_item' })
     }
 
     return (

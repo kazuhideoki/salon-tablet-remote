@@ -6,11 +6,12 @@ import { Store, TArticle, FooterItem } from "../../Store/Store";
 import Editor from '../ArticleEditor';
 import { EditorContext } from '../../Store/EditorContext';
 import { HandleOnUpDate } from '../../PMain';
+import { HandleOnUpDateFooterIcon } from "../../PFooter/PFooter";
 
 type Type = {
   position: string
   params: TArticle | FooterItem
-  handleOnClick: HandleOnUpDate 
+  handleOnClick: HandleOnUpDate | HandleOnUpDateFooterIcon
 }
 
 export const UpdatePostButton = (props: Type) => { 

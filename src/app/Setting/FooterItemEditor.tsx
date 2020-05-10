@@ -3,16 +3,18 @@ import { IconSelect } from "./iconSelect/IconSelect";
 import ReactQuill from 'react-quill';
 import { QuillEditor } from "./QuillEditor";
 import { EditorContext } from '../Store/EditorContext';
-import { FooterItemWithoutId } from "../Store/Store";
+import { FooterItemWithoutId, FooterItem } from "../Store/Store";
 import { dateToSql } from '../modules/organizeSql/dateToSql';
-import { useCreateFooterItem, useGetFooterItems } from "../Store/footerItems/footerItemsActionCreator";
+import {
+  useCreateFooterItem,
+  useUpdateFooterItem,
+} from "../Store/footerItems/footerItemsActionCreator";
 import { Icon } from '@material-ui/core';
 import { IconsSetting } from './iconSelect/icons';
 
 export const FooterItemEditor = () => {
   const {
     selectedIcon,
-    dispatchSelectedIcon,
     iconName,
     setIconName,
     footerItemEditorText,
@@ -24,37 +26,46 @@ export const FooterItemEditor = () => {
 
   
   const createFooterItem = useCreateFooterItem();
-  const getFooterItems = useGetFooterItems();
+  const updateFooterItem = useUpdateFooterItem();
 
 
-  const handleSubmit = () => {
-    if (isEdittingFooterItem) {
-      // const params: FooterItem = {
-      //   footer_item_id: edittingFooterItemParams.footer_item_id,
-      //   icon_name: iconName,
-      //   // date: dateToSql(edittingFooterItemParams.date),
-      //   item_content: footerItemEditorText,
-      // };
-      // updatePost(params, setIsEdittingFooterItem);
-
+  const handleSubmit = ({ isDraft }) => {
+    let is_published: boolean;
+    if (isDraft) {
+      is_published = false;
     } else {
-      const today = new Date();
-      const date = dateToSql(today);
+      is_published = true;
+    }
+    // const today = dateToSql(new Date());
+    if (isEdittingFooterItem) {
+      const params: FooterItem = {
+        footer_item_id: edittingFooterItemParams.footer_item_id,
+        is_published: is_published,
+        created_at: dateToSql(edittingFooterItemParams.created_at),
+        updated_at: dateToSql(new Date()),
+        icon_name: iconName,
+        displayed_icon: selectedIcon[1],
+        on_tap_modal_open: true, // 今後機能つける
+        item_content: footerItemEditorText,
+        link_url: "", // 今後機能つける
+        order: 1, // 今後機能つける
+      };
+      updateFooterItem(params, setIsEdittingFooterItem);
+    } else {
       const params: FooterItemWithoutId = {
         // footer_item_id: 0,
-        is_published: false,
-        created_at: date,
+        is_published: is_published,
+        created_at: dateToSql(new Date()),
         updated_at: null,
         icon_name: iconName,
         // displayed_icon: IconsSetting.convertIconComponentToName(selectedIcon),
         displayed_icon: selectedIcon[1],
-        on_tap_modal_open: true,
+        on_tap_modal_open: true, // 今後機能つける
         item_content: footerItemEditorText,
-        link_url: "",
-        order: 1,
+        link_url: "", // 今後機能つける
+        order: 1, // 今後機能つける
       };
       createFooterItem(params);
-
     }
   };
 
@@ -66,13 +77,16 @@ export const FooterItemEditor = () => {
         onChange={(e) => setIconName(e.target.value)}
         style={{ marginBottom: "20px" }}
       />
-      <QuillEditor value={footerItemEditorText}
-      setValue={setFooterItemEditorText}/>
-      <IconSelect/>
-      <button
-      onClick={() => handleSubmit()}
-      >
-        完了
+      <QuillEditor
+        value={footerItemEditorText}
+        setValue={setFooterItemEditorText}
+      />
+      <IconSelect />
+      <button onClick={() => handleSubmit({ isDraft: false })}>
+        {isEdittingFooterItem ? "更新" : "投稿"}
+      </button>
+      <button onClick={() => handleSubmit({ isDraft: true })}>
+        下書き保存
       </button>
     </>
   );

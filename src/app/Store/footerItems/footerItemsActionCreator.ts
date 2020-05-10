@@ -1,5 +1,5 @@
 import React from "react";
-import { Store } from "../Store";
+import { Store, FooterItem, FooterItemWithoutId } from "../Store";
 import { EditorContext } from "../EditorContext";
 import { IconsSetting } from "../../Setting/iconSelect/icons";
 
@@ -9,15 +9,14 @@ export const useGetFooterItems = () => {
     dispatchAppState,
   } = React.useContext(Store);
 
-  return async (page) => {
+  return async () => {
     const res = await fetch(`${location.protocol}//${location.host}/footer_items/get`);
 
     let data = await res.json();
 
     if (data.err === true) {
-      alert("投稿できませんでした");
-    } else {
-      
+      alert("取得できませんでした");
+    } else {    
 
       dispatchFooterItems({
         type: "GET",
@@ -33,20 +32,34 @@ export const useCreateFooterItem = () => {
     dispatchFooterItems,
     dispatchAppState,
   } = React.useContext(Store);
-  const { setFooterItemEditorText, setIconName } = React.useContext(EditorContext);
-  return async (values ) => {
-    const { is_published, created_at, updated_at, icon_name, displayed_icon, on_tap_modal_open, item_content, link_url, order } = values
+  const {
+    setFooterItemEditorText,
+    setIconName,
+    dispatchSelectedIcon,
+  } = React.useContext(EditorContext);
+  const getFooterItems = useGetFooterItems();
+  return async (values: FooterItemWithoutId) => {
+    const {
+      is_published,
+      created_at,
+      // updated_at,
+      icon_name,
+      displayed_icon,
+      on_tap_modal_open,
+      item_content,
+      link_url,
+      order,
+    } = values;
 
-    console.log(displayed_icon); 
+    console.log(displayed_icon);
     console.log(JSON.stringify(displayed_icon));
-    
 
-    const params = {
+    const params: FooterItemWithoutId = {
       is_published: is_published,
       created_at: created_at,
       // "updated_at"は '' で入れられない→datetimeに合わない
+      updated_at: null,
       icon_name: icon_name,
-      // displayed_icon: JSON.stringify(displayed_icon),
       displayed_icon: displayed_icon,
       on_tap_modal_open: on_tap_modal_open,
       item_content: item_content,
@@ -54,12 +67,15 @@ export const useCreateFooterItem = () => {
       order: order,
     };
 
-    const res = await fetch(`${location.protocol}//${location.host}/footer_items/create/item`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(params),
-    });
+    const res = await fetch(
+      `${location.protocol}//${location.host}/footer_items/create/item`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(params),
+      }
+    );
     const data = await res.json();
 
     if (data.err === true) {
@@ -67,20 +83,28 @@ export const useCreateFooterItem = () => {
     } else {
       setFooterItemEditorText("");
       setIconName("");
+      dispatchSelectedIcon({
+        type: "SET_ICON",
+        payload: null,
+      });
       dispatchAppState({ type: "CLOSE_MODAL" });
+
+      getFooterItems();
     }
   };
 };
 
+type UseGetFooterItemRes = {rawData: FooterItem, err: undefined} | {err: boolean, data: { message: string }, rawData: undefined}
 export const useGetFooterItem = () => {
   const {
     setIconName,
     setFooterItemEditorText,
     setIsEdittingFooterItem,
     setEdittingFooterItemParams,
+    dispatchSelectedIcon,
   } = React.useContext(EditorContext);
 
-  return async (params) => {
+  return async (params) => { 
     const res = await fetch(
       `${location.protocol}//${location.host}/footer_items/get/single`,
       {
@@ -90,25 +114,28 @@ export const useGetFooterItem = () => {
         body: JSON.stringify({ footer_item_id: params.footer_item_id }),
       }
     );
-    const data = await res.json();
+    const data:UseGetFooterItemRes  = await res.json();
 
     if (data.err === true) {
-      alert("記事を取得できませんでした");
+      alert("アイテムを取得できませんでした");
     } else {
-      const { title, content } = data.rawData;
-      setIconName(title);
+      const { icon_name, item_content, displayed_icon } = data.rawData;
+      setIconName(icon_name);
       setIsEdittingFooterItem(true);
       setEdittingFooterItemParams(data.rawData);
-      setFooterItemEditorText(content);
+      setFooterItemEditorText(item_content);
+      dispatchSelectedIcon({ type: "SET_ICON", payload: IconsSetting.convertIconComponentFromName(displayed_icon) });
     }
   };
 };
 
 export const useUpdateFooterItem = () => {
   const { dispatchFooterItems, dispatchAppState } = React.useContext(Store);
-  const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
+  const { setIconName, setFooterItemEditorText, setIsEdittingFooterItem } = React.useContext(
     EditorContext
   );
+  // const getFooterItems = useGetFooterItems();
+
   return async (params, setIsEdit) => {
     const res = await fetch(`${location.protocol}//${location.host}/footer_items/update/item`, {
       headers: { "Content-Type": "application/json" },
@@ -123,9 +150,9 @@ export const useUpdateFooterItem = () => {
     } else {
       dispatchFooterItems({ type: "UPDATE_FOOTER_ITEM", payload: params });
       setIsEdit(false);
-      setIsEdittingArticle(false);
-      setTitleText("");
-      setEditorText("");
+      setIsEdittingFooterItem(false);
+      setIconName("");
+      setFooterItemEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
     }
   };
@@ -133,9 +160,10 @@ export const useUpdateFooterItem = () => {
 
 export const useDeleteFooterItem = () => {
   const {
-    footerItems,
     dispatchFooterItems,
   } = React.useContext(Store);
+  const getFooterItems = useGetFooterItems();
+
   return async (footer_item_id: number) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/footer_items/delete/item`,
@@ -155,6 +183,8 @@ export const useDeleteFooterItem = () => {
         type: "DELETE_FOOTER_ITEM",
         payload: footer_item_id,
       });
+
+      // getFooterItems()
     }
   };
 };

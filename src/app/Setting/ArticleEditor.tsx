@@ -21,9 +21,6 @@ const ArticleEditor = () => {
   const createPost = useCreatePost();
   const updatePost = useUpdatePost();
 
-  type handleSubmit = {
-    isDraft?: boolean
-  }
   const handleSubmit = ({isDraft}) => {
     let is_published: boolean
     if (isDraft) {
@@ -31,14 +28,13 @@ const ArticleEditor = () => {
     }else{
       is_published = true
     }
-    const today = new Date();
       // 記事編集
       if (isEdittingArticle) {
           const params: TArticle = {
             id: edittingArticleParams.id,
             is_published: is_published,
             created_at: dateToSql(edittingArticleParams.created_at),
-            updated_at: dateToSql(today),
+            updated_at: dateToSql(new Date()),
             title: titleText,
             article_content: editorText,
           };
@@ -49,7 +45,7 @@ const ArticleEditor = () => {
           const params: ArticleWithoutId = {
             // idは自動で付与
             is_published: is_published,
-            created_at: dateToSql(today),
+            created_at: dateToSql(new Date()),
             updated_at: null,
             title: titleText,
             article_content: editorText,
