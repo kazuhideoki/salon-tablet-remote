@@ -30,9 +30,8 @@ export const useGetFooterItems = () => {
 
 export const useCreateFooterItem = () => {
   const {
-    dispatchFooterItems,
     dispatchAppState,
-    footerItems
+    footerItems,
   } = React.useContext(Store);
   const {
     setFooterItemEditorText,
@@ -41,25 +40,21 @@ export const useCreateFooterItem = () => {
   } = React.useContext(EditorContext);
   const getFooterItems = useGetFooterItems();
 
-  // orderの最大値＋1を代入する
+  // orderの最大値を取得
   const orders = footerItems.map((value) => {
     return value.order
   })
   const lastOrder = Math.max(...orders)
 
-
-
   return async (values: FooterItemWithoutId) => { 
     const {
       is_published,
       created_at,
-      // updated_at,
       icon_name,
       displayed_icon,
       on_tap_modal_open,
       item_content,
       link_url,
-      order,
     } = values;
 
     console.log(displayed_icon);
@@ -75,7 +70,7 @@ export const useCreateFooterItem = () => {
       on_tap_modal_open: on_tap_modal_open,
       item_content: item_content,
       link_url: link_url,
-      order: lastOrder + 1,
+      order: lastOrder + 1, // orderの最大値＋1を代入する
     };
 
     const res = await fetch(
@@ -145,7 +140,6 @@ export const useUpdateFooterItem = () => {
   const { setIconName, setFooterItemEditorText, setIsEdittingFooterItem } = React.useContext(
     EditorContext
   );
-  // const getFooterItems = useGetFooterItems();
 
   return async (
     params: FooterItem,
@@ -179,7 +173,6 @@ export const useDeleteFooterItem = () => {
   const {
     dispatchFooterItems,
   } = React.useContext(Store);
-  const getFooterItems = useGetFooterItems();
 
   return async (footer_item_id: number) => {
     const res = await fetch(
@@ -188,7 +181,8 @@ export const useDeleteFooterItem = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify(footer_item_id),
+        // jsonに変換するので数字でも{}で囲む
+        body: JSON.stringify({footer_item_id}),
       }
     );
     const data = await res.json();
@@ -200,8 +194,6 @@ export const useDeleteFooterItem = () => {
         type: "DELETE_FOOTER_ITEM",
         payload: footer_item_id,
       });
-
-      // getFooterItems()
     }
   };
 };

@@ -6,8 +6,6 @@ import {
   PaginationParamsAction,
   paginationParamsReducer,
 } from "./paginationParams/paginationParamsReducer";
-import { SvgIconTypeMap } from "@material-ui/core";
-import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 
 const initPagination = {
   page: 0,
@@ -88,16 +86,6 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
-// export type StoreContextProviderProps = {
-//     data: [
-//       {
-//         rawData: TArticles
-//         pagination: PaginationParams
-//       },
-//       { rawData: FooterItems }
-//     ]
-//     children?: React.ReactNode
-// }
 export type StoreContextProviderProps = {
   data: {
     articles: TArticles;
