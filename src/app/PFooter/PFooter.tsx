@@ -7,6 +7,7 @@ import { useStylesFactory } from "../Store/useStylesFactory";
 import { PPagination } from './Pagination/PPagination';
 import { UpdatePostButton } from "../Setting/buttons/UpdatePostButton";
 import { DeletePostButton } from "../Setting/buttons/DeletePostButton";
+import { SwitchOrderButton } from "../Setting/buttons/SwitchOrderButton";
 import { useGetFooterItem, useDeleteFooterItem } from "../Store/footerItems/footerItemsActionCreator";
 import { EditorContext } from "../Store/EditorContext";
 import { IconsSetting } from "../Setting/iconSelect/icons";
@@ -34,13 +35,19 @@ const styles = {
   deletePostButton: {
     position: "absolute",
     top: 0,
-    right: 20,
+    right: 5,
     zIndex: 100,
   },
   updatePostButton: {
     position: "absolute",
     top: 0,
-    right: 60,
+    right: 35,
+    zIndex: 100,
+  },
+  switchOrderButton: {
+    position: "absolute",
+    top: 0,
+    right: 65,
     zIndex: 100,
   },
 };
@@ -84,21 +91,29 @@ export const PFooter = () => {
       displayFooterItems = footerItems.map((value, index) => {
 
         // 通常画面で下書き記事は表示させない
-          if (appState.isSetting === false && value.is_published == false) {
-            return null;
-          }
+        if (appState.isSetting === false && value.is_published == false) {
+          return null;
+        }
+        
+        // セッティング画面で順番を入れ替えるボタンを表示
         
         return (
           <Grid
-            item
-            key={index}
-            // 投稿済みか下書きかで見た目を変える
-            className={
-              value.is_published == true
-                ? classes.itemIsPublished
-                : classes.itemIsDraft
-            }
+          item
+          key={index}
+          // 投稿済みか下書きかで見た目を変える
+          className={
+            value.is_published == true
+            ? classes.itemIsPublished
+            : classes.itemIsDraft
+          }
           >
+            {appState.isSetting && index !== 0 ?
+              <SwitchOrderButton
+                position={classes.switchOrderButton}
+                params={{footer_item_id: value.footer_item_id, order: value.order,}}
+              />
+              : null}
             {appState.isSetting ? (
               <UpdatePostButton
                 position={classes.updatePostButton}

@@ -45,7 +45,7 @@ export const FooterItemEditor = () => {
         on_tap_modal_open: true, // 今後機能つける
         item_content: footerItemEditorText,
         link_url: "", // 今後機能つける
-        order: 1, // 今後機能つける
+        order: edittingFooterItemParams.order, // 今後機能つける
       };
       updateFooterItem(params, setIsEdittingFooterItem);
     } else {
@@ -54,7 +54,7 @@ export const FooterItemEditor = () => {
         created_at: dateToSql(new Date()),
         updated_at: null,
         icon_name: iconName,
-        // 選択されていたらアイコンの名前を返す
+        // 選択されていたらアイコンの名前を返す.
         displayed_icon: selectedIcon ? selectedIcon[1] : null,
         on_tap_modal_open: true, // 今後機能つける
         item_content: footerItemEditorText,

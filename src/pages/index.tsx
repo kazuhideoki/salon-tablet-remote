@@ -28,7 +28,7 @@ import { register, unregister } from "next-offline/runtime";
 
 
 const Index = (props: StoreContextProviderProps) => {
-  console.log("initialPropsは " + JSON.stringify(props));
+  // console.log("initialPropsは " + JSON.stringify(props));
 
 
   // service-worker.jsの登録と解除。unmount時に解除することで、キャッシュが残り画面が更新されない状態を防ぐ
@@ -71,7 +71,16 @@ export async function getServerSideProps() {
   if (data.err === true) {
     return null
   } else {
-    return { props: { data:[ data, data2] } };
+    // return { props: { data:[ data, data2] } };
+    return {
+      props: {
+        data : {
+          articles: data.rawData,
+          pagination: data.pagination,
+          footerItems: data2.rawData,
+        }
+      }
+    };
   }
     
 };

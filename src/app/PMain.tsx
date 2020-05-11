@@ -52,13 +52,13 @@ const styles = {
   updatePostButton: {
     position: "absolute",
     top: 0,
-    right: 0,
+    right: 50,
     zIndex: 100,
   },
   deletePostButton: {
     position: "absolute",
     top: 0,
-    right: 50,
+    right: 0,
     zIndex: 100,
   },
   createPostButton: {

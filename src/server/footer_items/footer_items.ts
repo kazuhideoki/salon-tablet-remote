@@ -1,15 +1,27 @@
 // import express from "express";
 import mysql from 'mysql2'
+import mysqlPromise from "mysql2/promise";
+import bluebird from "bluebird";
 import { corsHeader } from '../server'
 import { FooterItems } from "../../app/Store/Store";
+import { SwitchOrderParams } from "../../app/Setting/buttons/SwitchOrderButton";
+
 // const server = express();
 
 const mysql_setting = {
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'salon_tablet',
-}
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "salon_tablet",
+  
+};
+const mysql_setting_promise = {
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "salon_tablet",
+  Promise: bluebird,
+};
 
 // /footer_items/get
 export const footer_items_get = (req, res) => {
@@ -26,7 +38,8 @@ corsHeader(res);
     console.log("MySQL Connected");
   });
 
-  const query = 'SELECT * FROM `footer_items`'
+  const query =
+    "SELECT * FROM `footer_items` ORDER BY `order` ASC";
 
   connection.query(query, (err, result, fields) => {
 
@@ -181,5 +194,48 @@ export const footer_items_delete_item = (req, res) => {
     res.json(data);
   });
   connection.end();
+}
+
+// ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+// /footer_items/switchOrder
+export const footer_items_switchOrder = async (req, res) => {
+  corsHeader(res);
+
+  // 検証用
+  // const [footer_item_id, order] = [2,2] 
+  
+  const connection = await mysqlPromise.createConnection(mysql_setting);
+  
+  try{
+    
+    const { footer_item_id, order }: SwitchOrderParams = req.body;
+    console.log("footer_items_switchOrderのreq.bodyは" + JSON.stringify(req.body));
+    
+    // 右側のアイテムのorderを-1
+    const query1 = "UPDATE `footer_items` SET `order`=? WHERE `footer_item_id`=?";
+    const params1 = [order - 1, footer_item_id];
+    // const [rusult1, fields1] = await connection.execute(query1, params1);
+    const [rusult1, fields1] = await connection.query(query1, params1);
+  
+    // 左側のアイテムのorderを+1
+    const query2 =
+      "UPDATE `footer_items` SET `order`=? WHERE `footer_item_id`!=? AND `order`=?";
+    const params2 = [order, footer_item_id, order - 1];
+    const [result2, fields2] = await connection.query(query2, params2);
+
+    console.log("/footer_items/switchOrderは " + JSON.stringify(rusult1) + ' と ' + JSON.stringify(result2));
+
+    res.status(200).json({ err: false});
+
+  }catch(e){
+
+    // console.log("/footer_items/switchOrderのエラーは " + JSON.stringify(e));
+    console.log("/footer_items/switchOrderのエラーは " + e );
+    res.status(500).json({ err: true, data: { message: e } });
+
+  }finally{
+      connection.end();
+  }
+
 }
 

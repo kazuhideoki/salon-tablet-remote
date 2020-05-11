@@ -28,7 +28,7 @@ export const IconsSetting = class {
       return value[1] == iconName
     });
 
-    console.log(targetIcon);
+    // console.log(targetIcon);
 
     if (targetIcon) {
       return targetIcon;

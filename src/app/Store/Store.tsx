@@ -47,17 +47,17 @@ export type FooterItemWithoutId = {
   is_published: boolean;
   created_at: string;
   updated_at: string | null;
-  icon_name: string;
+  icon_name: string | null
   displayed_icon: string | null;
   on_tap_modal_open: boolean;
-  item_content: string;
-  link_url: string;
+  item_content: string | null
+  link_url: string | null,
   order: number;
 };
-export const footerItemId = {
-  footer_item_id: 0,
-};
-export type FooterItemId = typeof footerItemId;
+// export const footerItemId = {
+//   footer_item_id: 0,
+// };
+export type FooterItemId = { footer_item_id: number };
 export type FooterItem = FooterItemWithoutId & FooterItemId;
 export type FooterItems = FooterItem[]
 
@@ -88,29 +88,37 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
+// export type StoreContextProviderProps = {
+//     data: [
+//       {
+//         rawData: TArticles
+//         pagination: PaginationParams
+//       },
+//       { rawData: FooterItems }
+//     ]
+//     children?: React.ReactNode
+// }
 export type StoreContextProviderProps = {
-    data: [
-      {
-        rawData: TArticles
-        pagination: PaginationParams
-      },
-      { rawData: FooterItems }
-    ]
-    children?: React.ReactNode
-}
+  data: {
+    articles: TArticles;
+    pagination: PaginationParams;
+    footerItems: FooterItems;
+  };
+  children?: React.ReactNode;
+};
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {
   const [paginationParams, dispatchPaginationParams] = useReducer(
     paginationParamsReducer,
-    props.data[0].pagination
+    props.data.pagination
   );
   const [articles, dispatchArticles] = useReducer(
     articlesReducer,
-    props.data[0].rawData
+    props.data.articles
   );
   const [footerItems, dispatchFooterItems] = useReducer(
     footerItemsReducer,
-    props.data[1].rawData
+    props.data.footerItems
   );
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,

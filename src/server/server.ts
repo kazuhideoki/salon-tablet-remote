@@ -7,6 +7,7 @@ import {
   footer_items_get_single,
   footer_items_update_item,
   footer_items_delete_item,
+  footer_items_switchOrder,
 } from "./footer_items/footer_items";
 
 const dev = process.env.NODE_ENV !== "production"
@@ -179,6 +180,9 @@ app.prepare().then(() => {
     );
     server.post("/footer_items/delete/item", (req, res) =>
       footer_items_delete_item(req, res)
+    );
+    server.post("/footer_items/switchOrder", (req, res) =>
+      footer_items_switchOrder(req, res)
     );
 
     //   -----------ここの上にバックエンドの処理を書く-----------

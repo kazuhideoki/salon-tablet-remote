@@ -2,6 +2,7 @@ import React from "react";
 import { Store, FooterItem, FooterItemWithoutId } from "../Store";
 import { EditorContext } from "../EditorContext";
 import { IconsSetting } from "../../Setting/iconSelect/icons";
+import { SwitchOrderParams } from "../../Setting/buttons/SwitchOrderButton";
 
 export const useGetFooterItems = () => {
   const {
@@ -31,6 +32,7 @@ export const useCreateFooterItem = () => {
   const {
     dispatchFooterItems,
     dispatchAppState,
+    footerItems
   } = React.useContext(Store);
   const {
     setFooterItemEditorText,
@@ -38,6 +40,15 @@ export const useCreateFooterItem = () => {
     dispatchSelectedIcon,
   } = React.useContext(EditorContext);
   const getFooterItems = useGetFooterItems();
+
+  // orderの最大値＋1を代入する
+  const orders = footerItems.map((value) => {
+    return value.order
+  })
+  const lastOrder = Math.max(...orders)
+
+
+
   return async (values: FooterItemWithoutId) => { 
     const {
       is_published,
@@ -64,7 +75,7 @@ export const useCreateFooterItem = () => {
       on_tap_modal_open: on_tap_modal_open,
       item_content: item_content,
       link_url: link_url,
-      order: order,
+      order: lastOrder + 1,
     };
 
     const res = await fetch(
@@ -136,13 +147,19 @@ export const useUpdateFooterItem = () => {
   );
   // const getFooterItems = useGetFooterItems();
 
-  return async (params, setIsEdit) => {
-    const res = await fetch(`${location.protocol}//${location.host}/footer_items/update/item`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(params),
-    });
+  return async (
+    params: FooterItem,
+    setIsEdit: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    const res = await fetch(
+      `${location.protocol}//${location.host}/footer_items/update/item`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(params),
+      }
+    );
     const data = await res.json();
 
     if (data.err === true) {
@@ -171,7 +188,7 @@ export const useDeleteFooterItem = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ footer_item_id }),
+        body: JSON.stringify(footer_item_id),
       }
     );
     const data = await res.json();
@@ -185,6 +202,31 @@ export const useDeleteFooterItem = () => {
       });
 
       // getFooterItems()
+    }
+  };
+};
+
+export const useSwitchOrder = () => {
+  const getFooterItems = useGetFooterItems();
+
+  return async (params: SwitchOrderParams) => {
+    console.log("useSwitchOrderのparamsは " + params);
+    
+    const res = await fetch(
+      `${location.protocol}//${location.host}/footer_items/switchOrder`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(params),
+      }
+    );
+    const data = await res.json();
+
+    if (data.err === true) {
+      alert("アイテムを入れ替えることができませんでした");
+    } else {
+      getFooterItems();
     }
   };
 };
