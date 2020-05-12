@@ -20,6 +20,10 @@ type ContextProps = {
   setIconName: React.Dispatch<React.SetStateAction<string>>
   footerItemEditorText: string
   setFooterItemEditorText: React.Dispatch<React.SetStateAction<string>>
+  onTap: string
+  setOnTap: React.Dispatch<React.SetStateAction<string>>
+  linkUrl: string,
+  setLinkUrl: React.Dispatch<React.SetStateAction<string>>,
   isEdittingFooterItem: boolean
   setIsEdittingFooterItem: React.Dispatch<React.SetStateAction<boolean>>
   edittingFooterItemParams: FooterItem
@@ -61,6 +65,8 @@ const EditorContextProvider = (props) => {
   );
   const [iconName, setIconName] = React.useState("")
   const [footerItemEditorText, setFooterItemEditorText] = React.useState("");
+  const [onTap, setOnTap] = React.useState('modal')
+  const [linkUrl, setLinkUrl] = React.useState('')
   const [isEdittingFooterItem, setIsEdittingFooterItem] = React.useState(false)
   const [edittingFooterItemParams, setEdittingFooterItemParams] = React.useState({} as FooterItem);
 
@@ -80,6 +86,10 @@ const EditorContextProvider = (props) => {
     setIconName,
     footerItemEditorText,
     setFooterItemEditorText,
+    onTap,
+    setOnTap,
+    linkUrl,
+    setLinkUrl,
     isEdittingFooterItem,
     setIsEdittingFooterItem,
     edittingFooterItemParams,

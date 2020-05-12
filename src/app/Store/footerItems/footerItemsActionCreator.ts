@@ -52,7 +52,7 @@ export const useCreateFooterItem = () => {
       created_at,
       icon_name,
       displayed_icon,
-      on_tap_modal_open,
+      on_tap,
       item_content,
       link_url,
     } = values;
@@ -67,7 +67,7 @@ export const useCreateFooterItem = () => {
       updated_at: null,
       icon_name: icon_name,
       displayed_icon: displayed_icon,
-      on_tap_modal_open: on_tap_modal_open,
+      on_tap: on_tap,
       item_content: item_content,
       link_url: link_url,
       order: lastOrder + 1, // orderの最大値＋1を代入する
@@ -105,6 +105,8 @@ export const useGetFooterItem = () => {
   const {
     setIconName,
     setFooterItemEditorText,
+    setOnTap,
+    setLinkUrl,
     setIsEdittingFooterItem,
     setEdittingFooterItemParams,
     dispatchSelectedIcon,
@@ -125,11 +127,19 @@ export const useGetFooterItem = () => {
     if (data.err === true) {
       alert("アイテムを取得できませんでした");
     } else {
-      const { icon_name, item_content, displayed_icon } = data.rawData;
-      setIconName(icon_name);
+      const {
+        icon_name,
+        item_content,
+        displayed_icon,
+        on_tap,
+        link_url,
+      } = data.rawData;
       setIsEdittingFooterItem(true);
       setEdittingFooterItemParams(data.rawData);
+      setIconName(icon_name);
       setFooterItemEditorText(item_content);
+      setOnTap(on_tap);
+      setLinkUrl(link_url)
       dispatchSelectedIcon({ type: "SET_ICON", payload: IconsSetting.convertIconComponentFromName(displayed_icon) });
     }
   };

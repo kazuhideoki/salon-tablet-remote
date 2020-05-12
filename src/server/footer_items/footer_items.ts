@@ -66,7 +66,7 @@ corsHeader(res);
 export const footer_items_create_item = (req, res) => {
   corsHeader(res);
 
-  // const { is_published, created_at, updated_at, icon_name, displayed_icon, on_tap_modal_open, item_content, link_url, order } = req.body
+  // const { is_published, created_at, updated_at, icon_name, displayed_icon, on_tap, item_content, link_url, order } = req.body
 
   const connection = mysql.createConnection(mysql_setting);
   connection.connect();
@@ -127,7 +127,7 @@ export const footer_items_get_single = (req, res) => {
 export const footer_items_update_item = (req, res) => {
   corsHeader(res);
 
-  const { footer_item_id, is_published, created_at, updated_at, icon_name, displayed_icon, on_tap_modal_open, item_content, link_url, order } = req.body
+  const { footer_item_id, is_published, created_at, updated_at, icon_name, displayed_icon, on_tap, item_content, link_url, order } = req.body
 
   const connection = mysql.createConnection(mysql_setting);
   connection.connect();
@@ -141,7 +141,7 @@ export const footer_items_update_item = (req, res) => {
     updated_at: updated_at,
     icon_name: icon_name,
     displayed_icon: displayed_icon,
-    on_tap_modal_open: on_tap_modal_open,
+    on_tap: on_tap,
     item_content: item_content,
     link_url: link_url,
     order: order,

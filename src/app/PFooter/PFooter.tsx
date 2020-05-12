@@ -128,24 +128,41 @@ export const PFooter = () => {
                 handleOnClick={deleteFooterItem}
               />
             ) : null}
-            {value.on_tap_modal_open ? null : <a href={value.link_url} />}
-            <IconAndText
-              icon={
-                value.displayed_icon
-                  ? IconsSetting.convertIconComponentFromName(
+            {/* on_tapが'link'でリンク埋め込み */}
+            {value.on_tap === 'modal' ? 
+              <IconAndText
+                icon={
+                  value.displayed_icon
+                    ? IconsSetting.convertIconComponentFromName(
                       value.displayed_icon
                     )[0]
-                  : MoodBad
-              }
-              onClick={
-                value.on_tap_modal_open
-                  ? () => openModal("footer_item", value.item_content)
-                  : null
-              }
-              fontSize="large"
-              text={value.icon_name}
-            />
-            {value.on_tap_modal_open ? null : <a />}
+                    : MoodBad
+                }
+                // onClick={
+                //   // on_tapが'modal'でモーダルウィンドウを開く
+                //   value.on_tap === 'modal'
+                //     ? () => openModal("footer_item", value.item_content)
+                //     : null
+                // }
+                onClick={() => openModal("footer_item", value.item_content)}
+                fontSize="large"
+                text={value.icon_name}
+              />
+            
+            : <a href={value.link_url}>
+              <IconAndText
+                icon={
+                  value.displayed_icon
+                    ? IconsSetting.convertIconComponentFromName(
+                        value.displayed_icon
+                      )[0]
+                    : MoodBad
+                }
+                fontSize="large"
+                text={value.icon_name}
+              />
+              </a>
+            }
           </Grid>
         );
         

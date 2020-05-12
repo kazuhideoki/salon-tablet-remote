@@ -36,7 +36,7 @@ const initFooterItemWithoutId = {
   updated_at: '',
   icon_name: '',
   displayed_icon: '',
-  on_tap_modal_open: true,
+  on_tap: 'modal',
   item_content: '',
   link_url: '',
   order: 0
@@ -47,7 +47,7 @@ export type FooterItemWithoutId = {
   updated_at: string | null;
   icon_name: string | null
   displayed_icon: string | null;
-  on_tap_modal_open: boolean;
+  on_tap: string;
   item_content: string | null
   link_url: string | null,
   order: number;

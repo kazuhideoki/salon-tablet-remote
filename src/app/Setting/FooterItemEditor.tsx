@@ -1,13 +1,16 @@
 import React from 'react'
 import { IconSelect } from "./iconSelect/IconSelect";
 import { QuillEditor } from "./QuillEditor";
+import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { EditorContext } from '../Store/EditorContext';
-import { FooterItemWithoutId, FooterItem } from "../Store/Store";
+import { FooterItemWithoutId, FooterItem, Store } from "../Store/Store";
 import { dateToSql } from '../modules/organizeSql/dateToSql';
 import {
   useCreateFooterItem,
   useUpdateFooterItem,
 } from "../Store/footerItems/footerItemsActionCreator";
+import { TextField } from '@material-ui/core';
+
 
 export const FooterItemEditor = () => {
   const {
@@ -16,49 +19,61 @@ export const FooterItemEditor = () => {
     setIconName,
     footerItemEditorText,
     setFooterItemEditorText,
+    onTap,
+    setOnTap,
+    linkUrl,
+    setLinkUrl,
     isEdittingFooterItem,
     setIsEdittingFooterItem,
     edittingFooterItemParams,
   } = React.useContext(EditorContext);
+  const { footerItems } = React.useContext(Store)
 
+  // const [onTap, setOnTap] = React.useState('modal'); // editorContextへ
   
   const createFooterItem = useCreateFooterItem();
   const updateFooterItem = useUpdateFooterItem();
 
 
-  const handleSubmit = ({ isDraft }) => {
-    let is_published: boolean;
-    if (isDraft) {
-      is_published = false;
+  const handleSubmit = ({ isPublishing }) => {
+    // let is_published: boolean;
+    // if (isPublishing) {
+    //   is_published = true;
+    // } else {
+    //   is_published = false;
+    // }
+    let on_tap: boolean;
+    if (onTap === 'modal') {
+      on_tap = true
     } else {
-      is_published = true;
+      on_tap = false
     }
     if (isEdittingFooterItem) {
       const params: FooterItem = {
         footer_item_id: edittingFooterItemParams.footer_item_id,
-        is_published: is_published,
+        is_published: isPublishing,
         created_at: dateToSql(edittingFooterItemParams.created_at),
         updated_at: dateToSql(new Date()),
         icon_name: iconName,
         // 選択されていたらアイコンの名前を返す
         displayed_icon: selectedIcon ? selectedIcon[1] : null,
-        on_tap_modal_open: true, // 今後機能つける
+        on_tap: onTap, // 要確認
         item_content: footerItemEditorText,
-        link_url: "", // 今後機能つける
+        link_url: linkUrl,
         order: edittingFooterItemParams.order,
       };
       updateFooterItem(params, setIsEdittingFooterItem);
     } else {
       const params: FooterItemWithoutId = {
-        is_published: is_published,
+        is_published: isPublishing,
         created_at: dateToSql(new Date()),
         updated_at: null,
         icon_name: iconName,
         // 選択されていたらアイコンの名前を返す.
         displayed_icon: selectedIcon ? selectedIcon[1] : null,
-        on_tap_modal_open: true, // 今後機能つける
+        on_tap: onTap,
         item_content: footerItemEditorText,
-        link_url: "", // 今後機能つける
+        link_url: linkUrl,
         order: 1,
       };
       createFooterItem(params);
@@ -68,20 +83,32 @@ export const FooterItemEditor = () => {
   return (
     <>
       <h2>フッターの設定</h2>
+      <h3>アイコンの名前</h3>
       <input
         value={iconName}
         onChange={(e) => setIconName(e.target.value)}
         style={{ marginBottom: "20px" }}
       />
-      <QuillEditor
-        value={footerItemEditorText}
-        setValue={setFooterItemEditorText}
+      <br/>
+      <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap}/>
+      {onTap === 'modal' 
+        ? <QuillEditor
+          value={footerItemEditorText}
+          setValue={setFooterItemEditorText}
       />
+        : <TextField
+          id="linkUrl"
+          label="リンクURL"
+          value={linkUrl}
+          onChange={(e) => setLinkUrl(e.target.value)}
+          variant="outlined"
+        />
+      }
       <IconSelect />
-      <button onClick={() => handleSubmit({ isDraft: false })}>
+      <button onClick={() => handleSubmit({ isPublishing: true })}>
         {isEdittingFooterItem ? "更新" : "投稿"}
       </button>
-      <button onClick={() => handleSubmit({ isDraft: true })}>
+      <button onClick={() => handleSubmit({ isPublishing: false })}>
         下書き保存
       </button>
     </>
