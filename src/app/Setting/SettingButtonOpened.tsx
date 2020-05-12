@@ -35,6 +35,8 @@ const useActions = () => {
     setTitleText,
     setFooterItemEditorText,
     setIconName,
+    setOnTap,
+    setLinkUrl,
     setIsEdittingArticle,
     dispatchSelectedIcon,
   } = React.useContext(EditorContext);
@@ -50,6 +52,8 @@ const useActions = () => {
     dispatchAppState({type: "OPEN_MODAL", payload: 'edit_footer_item'})
     setIconName('')
     setFooterItemEditorText('')
+    setOnTap('modal')
+    setLinkUrl('')
     dispatchSelectedIcon({ type: "SET_ICON", payload: null });
   }
 
