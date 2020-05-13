@@ -1,5 +1,6 @@
 import express from "express";
 import next from "next";
+import mysqlPromise from "mysql2/promise";
 import bodyParser from "body-parser";
 import {
   footer_items_get,
@@ -30,6 +31,13 @@ const ArticlesTable = Bookshelf.Model.extend({
     tableName: "articles",
 });
 
+const mysql_setting = {
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "salon_tablet",
+};
+
 
 export function corsHeader(res) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -48,36 +56,60 @@ export type ResData = {
 
 app.prepare().then(() => {
 
+    // なにかのエラー対応→{ limit: "50mb" }
     server.use(bodyParser.json({ limit: "50mb" }));
     server.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-    // ':page'の部分にpage番号を入れてポストデータとページネーションを返す
-    server.get("/articles/get/:page", (req, res) => {
-      corsHeader(res)
-        const pg = req.params.page
+    // 記事データとページネーションを返す
+    server.post("/articles/get", async (req, res) => {
+      corsHeader(res);
 
-        new ArticlesTable()
-          .orderBy("created_at", "desc")
-          // pageSizeは一度に取得する記事数
-          .fetchPage({ page: pg, pageSize: 5 })
+      const { page, isSetting } = req.body;
+      console.log("/articles/getのreq.bodyは" + JSON.stringify(req.body));
 
-          // .fetchAll()
+      const connection = await mysqlPromise.createConnection(mysql_setting);
 
-          .then((result) => {
-            const data: ResData = {
-              rawData: result.toArray(),
-              pagination: result.pagination,
-            };
-            console.log("/articles/get/:pageは " + JSON.stringify(data));
+      try {
+        // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
+        let getPublishedOnly: string
+        if (isSetting === false ) {
+          // getPublishedOnly = `WHERE 'is_published' = true`
+          getPublishedOnly = `WHERE is_published = true`
+        } else if (isSetting === true) {
+          getPublishedOnly = ''
+        }
+        const skipRows = 5 * (page - 1) // オフセット, 何ページ飛ばすか
+        const offSet = (skipRows === 0? '' : skipRows + ',') // 冗長か？
+        // const query = `SELECT * FROM 'articles' ${getPublishedOnly} ORDER BY 'created_at' DESC LIMIT ${offSet} 5`
+        const query = `SELECT * FROM articles ${getPublishedOnly} ORDER BY created_at DESC LIMIT ${offSet} 5`
+        console.log(JSON.stringify(query));
+        
+        // const [result, fields] = await connection.query(query, skip);
+        const [result, fields] = await connection.query(query);
+        // const query2 = `SELECT * FROM 'articles' ${getPublishedOnly}`;
+        const query2 = `SELECT * FROM articles ${getPublishedOnly}`;
+        const [result2] = await connection.query(query2);
 
-            res.send(data);
-          })
-          .catch((err) => {
-            // console.log("/articles/get/:pageのエラーは " + JSON.stringify(err));
+        const data: ResData = {
+          rawData: result,
+          pagination: {
+            page: page,
+            pageCount: Math.ceil(result2.length / 5), // 全row数を5で割って切り上げ
+            pageSize: 5,
+            rowCount: result2.length
+          }
+        };
 
-            res.status(500).json({ err: true, data: { message: err.message } });
-          });
-    });
+        res.json(data);
+       
+      } catch (e) {
+        console.log("/articles/getのエラーは " + e);
+        res.status(500).json({ err: true, data: { message: e } });
+      } finally {
+        connection.end();
+      }
+    })
+
   
     // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
     server.post("/articles/create/post", (req, res) => {

@@ -109,10 +109,12 @@ export const PMain = () => {
 
       if (articles) {
         displayArticles = articles.map((value, key: number) => {
+
+          // getPostでの取得で調整するのでいらないか？↓
           // 通常画面で下書き記事は表示させない
-          if (appState.isSetting === false && value.is_published == false) {
-            return null;
-          }
+          // if (appState.isSetting === false && value.is_published == false) {
+          //   return null;
+          // }
 
           return (
             <Grid

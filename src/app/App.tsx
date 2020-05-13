@@ -59,6 +59,10 @@ export const App = ()=> {
     };
     type Props = typeof props
 
+    React.useEffect(() => {
+      getPost(1)
+    },[appState.isSetting])
+
     const AppPresenter = ({ classes, isLoading }: Props) => {
         return (
           <div className={classes.root}>

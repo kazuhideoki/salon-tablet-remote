@@ -64,7 +64,13 @@ export async function getServerSideProps() {
   const data2 = await res2.json();
   console.log("footerItemsは " + JSON.stringify(data2));
 
-  const res = await fetch(`http://localhost:3000/articles/get/1`);
+  const res = await fetch(`http://localhost:3000/articles/get`,
+    {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify({ page: 1, isSetting: false }),
+    });
   const data = await res.json();
   console.log("articlesは " + JSON.stringify(data));
 

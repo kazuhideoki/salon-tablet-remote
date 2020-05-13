@@ -9,11 +9,19 @@ export const useGetPost = () => {
     dispatchPaginationParams,
     dispatchArticles,
     dispatchAppState,
+    appState
   } = React.useContext(Store);
+  const isSetting = appState.isSetting
 
-  return async (page) => {
+  return async (page: number) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/get/${page}`
+      `${location.protocol}//${location.host}/articles/get`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ page, isSetting: isSetting }),
+      }
     );
 
     const data = await res.json();

@@ -1,7 +1,6 @@
 // import express from "express";
 import mysql from 'mysql2'
 import mysqlPromise from "mysql2/promise";
-import bluebird from "bluebird";
 import { corsHeader } from '../server'
 import { FooterItems } from "../../app/Store/Store";
 import { SwitchOrderParams } from "../../app/Setting/buttons/SwitchOrderButton";
@@ -20,7 +19,6 @@ const mysql_setting_promise = {
   user: "root",
   password: "root",
   database: "salon_tablet",
-  Promise: bluebird,
 };
 
 // /footer_items/get
