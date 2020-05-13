@@ -5,8 +5,6 @@ import { corsHeader } from '../server'
 import { FooterItems } from "../../app/Store/Store";
 import { SwitchOrderParams } from "../../app/Setting/buttons/SwitchOrderButton";
 
-// const server = express();
-
 const mysql_setting = {
   host: "localhost",
   user: "root",

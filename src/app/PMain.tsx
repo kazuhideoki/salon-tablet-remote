@@ -12,7 +12,6 @@ import {
 } from "@material-ui/core";
 import { UpdatePostButton } from "./Setting/buttons/UpdatePostButton";
 import { DeletePostButton } from "./Setting/buttons/DeletePostButton";
-// import { CreateButton } from "./Setting/buttons/CreateButton";
 import { useDeletePost, useGetSinglePost } from "./Store/articles/articlesActionCreator";
 import { EditorContext } from "./Store/EditorContext";
 

@@ -77,9 +77,9 @@ export const PFooter = () => {
     const deleteFooterItem = useDeleteFooterItem()
 
     const props = {
-        classes,
-        openModal,
-        dispatchAppState,
+      classes,
+      openModal,
+      dispatchAppState,
       footerItems,
     };
     type Props = typeof props;
@@ -164,9 +164,7 @@ export const PFooter = () => {
     return (
       <div className={classes.root}>
         <PPagination/>
-        <Grid container justify="center" spacing={2}
-        // className={classes.gridContainer}
-        >
+        <Grid container justify="center" spacing={2} >
           {(footerItems.length)? displayFooterItems : noItems}       
         </Grid>            
       </div>

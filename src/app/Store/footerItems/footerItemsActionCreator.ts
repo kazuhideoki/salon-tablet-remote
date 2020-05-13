@@ -64,9 +64,6 @@ export const useCreateFooterItem = () => {
       link_url,
     } = values;
 
-    // console.log(displayed_icon);
-    // console.log(JSON.stringify(displayed_icon));
-
     const params: FooterItemWithoutId = {
       is_published: is_published,
       created_at: created_at,
