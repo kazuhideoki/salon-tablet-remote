@@ -40,11 +40,18 @@ export const useCreateFooterItem = () => {
   } = React.useContext(EditorContext);
   const getFooterItems = useGetFooterItems();
 
-  // orderの最大値を取得
-  const orders = footerItems.map((value) => {
-    return value.order
-  })
-  const lastOrder = Math.max(...orders)
+  let order
+  // footerItemsの配列の中身を判定
+  if (footerItems.length) {
+    // orderの最大値を取得
+    const orders = footerItems.map((value) => {
+      return value.order
+    })
+    order = Math.max(...orders) + 1 // orderの最大値＋1を代入する
+  } else {
+    // 記事がないときは 1にする
+    order = 1
+  }
 
   return async (values: FooterItemWithoutId) => { 
     const {
@@ -57,20 +64,20 @@ export const useCreateFooterItem = () => {
       link_url,
     } = values;
 
-    console.log(displayed_icon);
-    console.log(JSON.stringify(displayed_icon));
+    // console.log(displayed_icon);
+    // console.log(JSON.stringify(displayed_icon));
 
     const params: FooterItemWithoutId = {
       is_published: is_published,
       created_at: created_at,
-      // "updated_at"は '' で入れられない→datetimeに合わない
+      // "updated_at"は '' で入れられない→データベースの型datetimeに合わない
       updated_at: null,
       icon_name: icon_name,
       displayed_icon: displayed_icon,
       on_tap: on_tap,
       item_content: item_content,
       link_url: link_url,
-      order: lastOrder + 1, // orderの最大値＋1を代入する
+      order: order // orderの最大値＋1を代入する
     };
 
     const res = await fetch(

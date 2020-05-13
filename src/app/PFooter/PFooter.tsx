@@ -85,17 +85,13 @@ export const PFooter = () => {
     type Props = typeof props;
 
   const PFooterPresenter = ({ classes, openModal, dispatchAppState, footerItems }: Props) => {
-    let displayFooterItems;
-
-    if (footerItems) {
-      displayFooterItems = footerItems.map((value, index) => {
+    const  displayFooterItems = footerItems.map((value, index) => {
 
         // 通常画面で下書き記事は表示させない
         if (appState.isSetting === false && value.is_published == false) {
           return null;
         }
-        
-        // セッティング画面で順番を入れ替えるボタンを表示
+      
         
         return (
           <Grid
@@ -108,6 +104,7 @@ export const PFooter = () => {
             : classes.itemIsDraft
           }
           >
+            {/* セッティング画面で順番を入れ替えるボタンを表示 */}
             {appState.isSetting && index !== 0 ?
               <SwitchOrderButton
                 position={classes.switchOrderButton}
@@ -128,7 +125,7 @@ export const PFooter = () => {
                 handleOnClick={deleteFooterItem}
               />
             ) : null}
-            {/* on_tapが'link'でリンク埋め込み */}
+            {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
             {value.on_tap === 'modal' ? 
               <IconAndText
                 icon={
@@ -138,12 +135,6 @@ export const PFooter = () => {
                     )[0]
                     : MoodBad
                 }
-                // onClick={
-                //   // on_tapが'modal'でモーダルウィンドウを開く
-                //   value.on_tap === 'modal'
-                //     ? () => openModal("footer_item", value.item_content)
-                //     : null
-                // }
                 onClick={() => openModal("footer_item", value.item_content)}
                 fontSize="large"
                 text={value.icon_name}
@@ -168,9 +159,7 @@ export const PFooter = () => {
         
       })
 
-    }else{
-      displayFooterItems = <>No items</>
-    }
+    const noItems = <Grid item >No items</Grid>;
 
     return (
       <div className={classes.root}>
@@ -178,15 +167,7 @@ export const PFooter = () => {
         <Grid container justify="center" spacing={2}
         // className={classes.gridContainer}
         >
-          {displayFooterItems}
-          {/* ↓表示テスト */}
-          {/* <Grid item className={classes.gridItem}>
-            <IconAndText
-              icon={ImportContactsTwoTone}
-              fontSize="large"
-              text={"アイコン"}
-            />
-          </Grid> */}
+          {(footerItems.length)? displayFooterItems : noItems}       
         </Grid>            
       </div>
     )

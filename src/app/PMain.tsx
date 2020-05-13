@@ -16,8 +16,6 @@ import { DeletePostButton } from "./Setting/buttons/DeletePostButton";
 import { useDeletePost, useGetSinglePost } from "./Store/articles/articlesActionCreator";
 import { EditorContext } from "./Store/EditorContext";
 
-
-
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -83,9 +81,9 @@ export type HandleOnUpDate = (params: any) => void;
 export const PMain = () => {
     const classes = useStyles();
     const {
-        appState,
-        articles,
-        dispatchAppState,
+      appState,
+      articles,
+      dispatchAppState,
     } = React.useContext(Store);
     const deletePost = useDeletePost();
     const { setIsEdittingArticle } = React.useContext(EditorContext);
@@ -97,7 +95,6 @@ export const PMain = () => {
       getSinglePost(params);
     };
 
-
     const props = {
       articles,
       classes,
@@ -106,24 +103,13 @@ export const PMain = () => {
     };
     type Props = typeof props
 
-
     const PMainPresenter: React.FC<Props> = ({
       articles,
       classes,
       deletePost,
       handleOnUpDate,
     }: Props) => {
-      let displayArticles;
-
-      if (articles) {
-        displayArticles = articles.map((value, key: number) => {
-
-          // getPostでの取得で調整するのでいらないか？↓
-          // 通常画面で下書き記事は表示させない
-          // if (appState.isSetting === false && value.is_published == false) {
-          //   return null;
-          // }
-
+      const displayArticles = articles.map((value, key: number) => {
           return (
             <Grid
               item
@@ -174,16 +160,16 @@ export const PMain = () => {
           );
         });
         // 記事がもしなかった場合の表示
-      } else {
-        displayArticles = (
+      const noArticles = (
+        <Grid item >
           <Card
             variant="outlined"
             className={classes.article}
           >
-           記事がありません
+            記事がありません
           </Card>
-        );
-      }
+        </Grid>
+      );
 
       return (
         <Grid
@@ -197,7 +183,7 @@ export const PMain = () => {
           {/* {appState.isSetting ? (
               <CreateButton position={classes.createPostButton} />
             ) : null} */}
-          {displayArticles}
+          {(articles.length)? displayArticles : noArticles}
         </Grid>
       );
     };
