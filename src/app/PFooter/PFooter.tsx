@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles, createStyles } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
 import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
-import { useStylesFactory } from "../Store/useStylesFactory";
 import { PPagination } from './Pagination/PPagination';
 import { UpdatePostButton } from "../Setting/buttons/UpdatePostButton";
 import { DeletePostButton } from "../Setting/buttons/DeletePostButton";
@@ -13,7 +12,8 @@ import { EditorContext } from "../Store/EditorContext";
 import { IconsSetting } from "../Setting/iconSelect/icons";
 
 
-const styles = {
+const useStyles = makeStyles((theme) =>
+  createStyles({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -50,12 +50,12 @@ const styles = {
     right: 65,
     zIndex: 100,
   },
-};
+}))
 
 export type HandleOnUpDateFooterIcon = (params: any) => void;
 
 export const PFooter = () => {
-    const classes = useStylesFactory(styles);
+    const classes = useStyles();
     const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
     const openModal = (modalName: string, footerItemContent: any) => {

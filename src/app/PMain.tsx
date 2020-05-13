@@ -1,8 +1,15 @@
 import React from "react";
 import { Store } from "./Store/Store";
 import { sqlToDate } from "./modules/organizeSql/sqlToDate";
-import { Grid, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { useStylesFactory } from "./Store/useStylesFactory";
+import {
+  Grid,
+  Card,
+  CardActionArea,
+  CardContent,
+  Typography,
+  makeStyles,
+  createStyles,
+} from "@material-ui/core";
 import { UpdatePostButton } from "./Setting/buttons/UpdatePostButton";
 import { DeletePostButton } from "./Setting/buttons/DeletePostButton";
 // import { CreateButton } from "./Setting/buttons/CreateButton";
@@ -12,7 +19,8 @@ import { EditorContext } from "./Store/EditorContext";
 
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
-const styles = {
+const useStyles = makeStyles((theme) =>
+  createStyles({
   root: {
     overflow: "scroll",
     height: "100%",
@@ -67,13 +75,13 @@ const styles = {
     left: 100,
     zIndex: 100,
   },
-};
+}))
 
 export type HandleOnUpDate = (params: any) => void;
 
 
 export const PMain = () => {
-    const classes = useStylesFactory(styles);
+    const classes = useStyles();
     const {
         appState,
         articles,

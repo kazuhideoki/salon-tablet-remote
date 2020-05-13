@@ -1,10 +1,9 @@
 import React from "react";
 import { Store } from "../Store/Store";
 
-import { Dialog, Slide, withStyles, DialogContent } from "@material-ui/core";
+import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 
-import { useStylesFactory } from "../Store/useStylesFactory";
 import { CloseButton } from "./CloseButton";
 import { FooterItemModal } from "../PModal/FooterItemModal";
 
@@ -21,15 +20,16 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const styles = {
+const useStyles = makeStyles((theme) =>
+  createStyles({
     dialogContent: {
         padding: "0!important",
         
     },
-}
+}))
 
 export const PModal = () => {
-    const classes = useStylesFactory(styles);
+    const classes = useStyles();
 
     const { appState, dispatchAppState } = React.useContext(Store)
     const setModal = appState.setModal;
