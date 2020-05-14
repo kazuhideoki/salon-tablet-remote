@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) =>
     justifyContent: "center",
     height: "100%",
   },
+  GridContainer: {
+    overflow: "scroll",
+  },
   itemIsPublished: {
     position: "relative",
     height: "100%",
@@ -164,7 +167,7 @@ export const PFooter = () => {
     return (
       <div className={classes.root}>
         <PPagination/>
-        <Grid container justify="center" spacing={2} >
+        <Grid container justify="center" wrap='nowrap' spacing={2} className={classes.GridContainer}>
           {(footerItems.length)? displayFooterItems : noItems}       
         </Grid>            
       </div>

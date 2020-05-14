@@ -123,10 +123,12 @@ export const useGetSinglePost = () => {
 };
 
 export const useUpdatePost = () => {
-  const { dispatchArticles, dispatchAppState } = React.useContext(Store);
+  const { dispatchArticles, dispatchAppState, paginationParams } = React.useContext(Store);
   const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
     EditorContext
   );
+    const getPost = useGetPost()
+
   return async (params, setIsEdit) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/update/post`,
@@ -142,12 +144,14 @@ export const useUpdatePost = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      dispatchArticles({ type: "UPDATE_POST", payload: params });
+      // dispatchArticles({ type: "UPDATE_POST", payload: params });
       setIsEdit(false);
       setIsEdittingArticle(false);
       setTitleText("");
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
+
+      getPost(paginationParams.page);
 
     }
   };

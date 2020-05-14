@@ -154,6 +154,7 @@ export const useUpdateFooterItem = () => {
   const { setIconName, setFooterItemEditorText, setIsEdittingFooterItem } = React.useContext(
     EditorContext
   );
+  const getFooterItems = useGetFooterItems()
 
   return async (
     params: FooterItem,
@@ -173,12 +174,14 @@ export const useUpdateFooterItem = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      dispatchFooterItems({ type: "UPDATE_FOOTER_ITEM", payload: params });
+      // dispatchFooterItems({ type: "UPDATE_FOOTER_ITEM", payload: params });
       setIsEdit(false);
       setIsEdittingFooterItem(false);
       setIconName("");
       setFooterItemEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
+
+      getFooterItems()
     }
   };
 };
