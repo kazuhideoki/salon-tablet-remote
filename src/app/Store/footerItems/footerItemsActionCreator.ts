@@ -84,7 +84,7 @@ export const useCreateFooterItem = () => {
     };
 
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/create/item`,
+      `${location.protocol}//${location.host}/footer_items/create`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -180,7 +180,7 @@ export const useUpdateFooterItem = () => {
     params: TUpdateFooterItem
   ) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/update/item`,
+      `${location.protocol}//${location.host}/footer_items/update`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -210,7 +210,7 @@ export const useDeleteFooterItem = () => {
 
   return async (footer_item_id: number) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/delete/item`,
+      `${location.protocol}//${location.host}/footer_items/delete`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

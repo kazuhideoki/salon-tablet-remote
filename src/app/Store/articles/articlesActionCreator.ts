@@ -10,7 +10,7 @@ import {
 import { EditorContext } from '../EditorContext';
 
 
-export const useGetPost = () => {
+export const useGetArticle = () => {
   const {
     paginationParams,
     dispatchPaginationParams,
@@ -52,13 +52,13 @@ export const useGetPost = () => {
   };
 };
 
-export type TCreatePost = {
+export type TCreateArticle = {
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
 };
-export const useCreatePost = () => {
-  const getPost = useGetPost();
+export const useCreateArticle = () => {
+  const getArticle = useGetArticle();
   const {
     paginationParams,
     dispatchPaginationParams,
@@ -66,9 +66,9 @@ export const useCreatePost = () => {
     dispatchAppState,
   } = React.useContext(Store);
   const { setEditorText, setTitleText } = React.useContext(EditorContext);
-  return async (params: TCreatePost) => {
+  return async (params: TCreateArticle) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/create/post`,
+      `${location.protocol}//${location.host}/articles/create`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -97,12 +97,12 @@ export const useCreatePost = () => {
       //     payload: data.pagination,
       //   });
       // }
-      getPost(1);
+      getArticle(1);
     }
   };
 };
 
-export const useGetSinglePost = () => {
+export const useGetSingleArticle = () => {
   const {
     setTitleText,
     setEditorText,
@@ -134,22 +134,22 @@ export const useGetSinglePost = () => {
   };
 };
 
-export type TUpdatePost = {
+export type TUpdateArticle = {
   id: T_id;
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
 };
-export const useUpdatePost = () => {
+export const useUpdateArticle = () => {
   const { dispatchArticles, dispatchAppState, paginationParams } = React.useContext(Store);
   const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
     EditorContext
   );
-    const getPost = useGetPost()
+    const getArticle = useGetArticle()
 
-  return async (params: TUpdatePost) => {
+  return async (params: TUpdateArticle) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/update/post`,
+      `${location.protocol}//${location.host}/articles/update`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -167,13 +167,13 @@ export const useUpdatePost = () => {
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
-      getPost(paginationParams.page);
+      getArticle(paginationParams.page);
     }
   };
 };
 
-export const useDeletePost = () => {
-  const getPost = useGetPost();
+export const useDeleteArticle = () => {
+  const getArticle = useGetArticle();
   const {
     paginationParams,
     dispatchPaginationParams,
@@ -182,7 +182,7 @@ export const useDeletePost = () => {
   } = React.useContext(Store);
   return async (id: T_id) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/delete/post`,
+      `${location.protocol}//${location.host}/articles/delete`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -205,9 +205,9 @@ export const useDeletePost = () => {
       //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (articles.length === 1 && paginationParams.rowCount > 1) {
         const targetPage = paginationParams.page - 1;
-        getPost(targetPage);
+        getArticle(targetPage);
       } else {
-        getPost(paginationParams.page);
+        getArticle(paginationParams.page);
       }
     }
   };

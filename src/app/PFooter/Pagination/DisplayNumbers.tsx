@@ -3,7 +3,7 @@ import { Store } from "../../Store/Store";
 import { useStylesFactory } from "../../Store/useStylesFactory";
 import { ThemeType } from "../../Store/ThemeContext";
 import { pageArrowProps } from "./PPagination";
-import { useGetPost } from "../../Store/articles/articlesActionCreator";
+import { useGetArticle } from "../../Store/articles/articlesActionCreator";
 
 const styles = {
   nums: {
@@ -22,11 +22,11 @@ export const DisplayNumbers = (props: pageArrowProps) => {
     const classes = useStylesFactory(styles)
     const { paginationParams, dispatchAppState } = React.useContext(Store);
     const {page, pageCount} = paginationParams;
-    const getPost = useGetPost();
+    const getArticle = useGetArticle();
 
     const hundleOnClick = (num) => {
       dispatchAppState({ type: "START_LOADING" });
-      getPost(num);
+      getArticle(num);
     };
 
     const number1 = page - 2;

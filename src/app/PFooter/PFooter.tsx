@@ -4,8 +4,8 @@ import { MoodBad } from "@material-ui/icons";
 import { Store } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
-import { UpdatePostButton } from "../Setting/buttons/UpdatePostButton";
-import { DeletePostButton } from "../Setting/buttons/DeletePostButton";
+import { UpdateArticleButton } from "../Setting/buttons/UpdateArticleButton";
+import { DeleteArticleButton } from "../Setting/buttons/DeleteArticleButton";
 import { SwitchOrderButton } from "../Setting/buttons/SwitchOrderButton";
 import { useGetFooterItem, useDeleteFooterItem } from "../Store/footerItems/footerItemsActionCreator";
 import { EditorContext } from "../Store/EditorContext";
@@ -35,13 +35,13 @@ const useStyles = makeStyles((theme) =>
   gridItem: {
     position: "relative",
   },
-  deletePostButton: {
+  deleteArticleButton: {
     position: "absolute",
     top: 0,
     right: 5,
     zIndex: 100,
   },
-  updatePostButton: {
+  updateArticleButton: {
     position: "absolute",
     top: 0,
     right: 35,
@@ -118,15 +118,15 @@ export const PFooter = () => {
               />
             ) : null}
             {appState.isSetting ? (
-              <UpdatePostButton
-                position={classes.updatePostButton}
+              <UpdateArticleButton
+                position={classes.updateArticleButton}
                 id={value.footer_item_id}
                 handleOnClick={handleOnUpDateFooterIcon}
               />
             ) : null}
             {appState.isSetting ? (
-              <DeletePostButton
-                position={classes.deletePostButton}
+              <DeleteArticleButton
+                position={classes.deleteArticleButton}
                 id={value.footer_item_id}
                 handleOnClick={deleteFooterItem}
               />

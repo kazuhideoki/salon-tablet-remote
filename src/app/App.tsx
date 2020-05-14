@@ -8,7 +8,7 @@ import { SettingSwitch } from "./Setting/SettingSwitch";
 import { Store } from "./Store/Store";
 import { ThemeType } from "./Store/ThemeContext";
 import { useStylesFactory } from "./Store/useStylesFactory";
-import { useGetPost } from "./Store/articles/articlesActionCreator";
+import { useGetArticle } from "./Store/articles/articlesActionCreator";
 
 
 // 3段のコンテナの整形に関してのみ記述, 
@@ -51,7 +51,7 @@ export const App = ()=> {
     const { paginationParams, appState, dispatchAppState } = React.useContext(Store);
     const isLoading = appState.isLoading
     const endLoading = () => dispatchAppState({type: "END_LOADING"})
-    const getPost = useGetPost()
+    const getArticle = useGetArticle()
 
     const props = {
     classes,
@@ -60,7 +60,7 @@ export const App = ()=> {
     type Props = typeof props
 
     React.useEffect(() => {
-      getPost(1)
+      getArticle(1)
     },[appState.isSetting])
 
     const AppPresenter = ({ classes, isLoading }: Props) => {

@@ -10,7 +10,7 @@ export const CreateButton = (props) => {
       EditorContext
     );
 
-    const AddPost = () => {
+    const AddArticle = () => {
       dispatchAppState({ type: "OPEN_MODAL", payload: 'edit_article' })
       setIsEdittingArticle(false)
       setTitleText('')
@@ -26,9 +26,9 @@ export const CreateButton = (props) => {
           variant="contained"
           color="primary"
           size="large"
-          className={props.createPostButton}
+          className={props.createArticleButton}
           endIcon={<NoteAddTwoTone />}
-          onClick={() => AddPost()}
+          onClick={() => AddArticle()}
         >
           新規投稿
         </Button>
@@ -36,7 +36,7 @@ export const CreateButton = (props) => {
           variant="contained"
           color="secondary"
           size="large"
-          className={props.createPostButton}
+          className={props.createArticleButton}
           endIcon={<NoteAddTwoTone />}
           onClick={() => AddFooterIcon()}
         >

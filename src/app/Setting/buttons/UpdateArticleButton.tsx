@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconButton } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
-import { useGetSinglePost } from "../../Store/articles/articlesActionCreator";
+import { useGetSingleArticle } from "../../Store/articles/articlesActionCreator";
 import { Store, TArticle, FooterItem, T_footer_item_id, T_id } from "../../Store/Store";
 import Editor from '../ArticleEditor';
 import { EditorContext } from '../../Store/EditorContext';
@@ -14,7 +14,7 @@ type Type = {
   handleOnClick: HandleOnUpDate | HandleOnUpDateFooterIcon
 }
 
-export const UpdatePostButton = (props: Type) => { 
+export const UpdateArticleButton = (props: Type) => { 
 
     return (
       <IconButton

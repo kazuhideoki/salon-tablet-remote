@@ -2,18 +2,18 @@ import React from "react";
 import { FirstPage } from "@material-ui/icons";
 import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
-import { useGetPost } from "../../Store/articles/articlesActionCreator";
+import { useGetArticle } from "../../Store/articles/articlesActionCreator";
 
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Latest = (props: pageArrowProps) => {
     const { dispatchAppState, paginationParams } = React.useContext(Store);
     const {page, pageCount} = paginationParams
-    const getPost = useGetPost()
+    const getArticle = useGetArticle()
 
     const hundleOnClick = () => {
       dispatchAppState({ type: "START_LOADING" });
-      getPost(1);
+      getArticle(1);
     };
 
     let onClick;

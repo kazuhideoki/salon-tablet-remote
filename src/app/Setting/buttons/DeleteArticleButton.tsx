@@ -1,15 +1,15 @@
 import React from 'react'
 import { IconButton } from '@material-ui/core'
 import { DeleteForeverTwoTone } from "@material-ui/icons";
-import { useDeletePost } from "../../Store/articles/articlesActionCreator";
+import { useDeleteArticle } from "../../Store/articles/articlesActionCreator";
 
 type Type = {
   position: string
   id: number
-  handleOnClick: (id: number) => Promise<void> //deletePost 
+  handleOnClick: (id: number) => Promise<void> //deleteArticle 
 }
 
-export const DeletePostButton = (props: Type) => {
+export const DeleteArticleButton = (props: Type) => {
 
     return (
       <IconButton

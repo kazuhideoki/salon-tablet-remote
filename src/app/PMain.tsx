@@ -10,9 +10,9 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core";
-import { UpdatePostButton } from "./Setting/buttons/UpdatePostButton";
-import { DeletePostButton } from "./Setting/buttons/DeletePostButton";
-import { useDeletePost, useGetSinglePost } from "./Store/articles/articlesActionCreator";
+import { UpdateArticleButton } from "./Setting/buttons/UpdateArticleButton";
+import { DeleteArticleButton } from "./Setting/buttons/DeleteArticleButton";
+import { useDeleteArticle, useGetSingleArticle } from "./Store/articles/articlesActionCreator";
 import { EditorContext } from "./Store/EditorContext";
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
@@ -54,19 +54,19 @@ const useStyles = makeStyles((theme) =>
   staffImg: {
     width: 50,
   },
-  updatePostButton: {
+  updateArticleButton: {
     position: "absolute",
     top: 0,
     right: 50,
     zIndex: 100,
   },
-  deletePostButton: {
+  deleteArticleButton: {
     position: "absolute",
     top: 0,
     right: 0,
     zIndex: 100,
   },
-  createPostButton: {
+  createArticleButton: {
     position: "absolute",
     top: 50,
     left: 100,
@@ -84,20 +84,20 @@ export const PMain = () => {
       articles,
       dispatchAppState,
     } = React.useContext(Store);
-    const deletePost = useDeletePost();
+    const deleteArticle = useDeleteArticle();
     const { setIsEdittingArticle } = React.useContext(EditorContext);
-    const getSinglePost = useGetSinglePost();
+    const getSingleArticle = useGetSingleArticle();
 
     const handleOnUpDate: HandleOnUpDate = (id: T_id) => {
       dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
       setIsEdittingArticle(true);
-      getSinglePost(id);
+      getSingleArticle(id);
     };
 
     const props = {
       articles,
       classes,
-      deletePost,
+      deleteArticle,
       handleOnUpDate,
     };
     type Props = typeof props
@@ -105,7 +105,7 @@ export const PMain = () => {
     const PMainPresenter: React.FC<Props> = ({
       articles,
       classes,
-      deletePost,
+      deleteArticle,
       handleOnUpDate,
     }: Props) => {
       const displayArticles = articles.map((value, key: number) => {
@@ -121,17 +121,17 @@ export const PMain = () => {
               }
             >
               {appState.isSetting ? (
-                <UpdatePostButton
-                  position={classes.updatePostButton}
+                <UpdateArticleButton
+                  position={classes.updateArticleButton}
                   id={value.id}
                   handleOnClick={handleOnUpDate}
                 />
               ) : null}
               {appState.isSetting ? (
-                <DeletePostButton
-                  position={classes.deletePostButton}
+                <DeleteArticleButton
+                  position={classes.deleteArticleButton}
                   id={value.id}
-                  handleOnClick={deletePost}
+                  handleOnClick={deleteArticle}
                 />
               ) : null}
 
@@ -179,7 +179,7 @@ export const PMain = () => {
         >
           {/* ↓使うかも */}
           {/* {appState.isSetting ? (
-              <CreateButton position={classes.createPostButton} />
+              <CreateButton position={classes.createArticleButton} />
             ) : null} */}
           {(articles.length)? displayArticles : noArticles}
         </Grid>

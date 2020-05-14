@@ -9,7 +9,7 @@ import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
 import { Oldest } from "./Oldest";
 import { Next } from "./Next";
-import { useGetPost } from "../../Store/articles/articlesActionCreator";
+import { useGetArticle } from "../../Store/articles/articlesActionCreator";
 
 const styles = {
     icon: {
@@ -48,7 +48,7 @@ export const PPagination = () => {
         dispatchAppState,
     } = React.useContext(Store);
     const { page, pageCount} = paginationParams;
-    const getPost = useGetPost()
+    const getArticle = useGetArticle()
 
     const props = {
       classes,
@@ -70,7 +70,7 @@ export const PPagination = () => {
       const HomeButton = () => {
         return (
           <Home
-            onClick={() => getPost(1)}
+            onClick={() => getArticle(1)}
             className={classes.icon}
           />
         );

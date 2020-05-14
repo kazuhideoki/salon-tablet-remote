@@ -1,9 +1,9 @@
 import React from "react";
 import {
-  useCreatePost,
-  useUpdatePost,
-  TCreatePost,
-  TUpdatePost,
+  useCreateArticle,
+  useUpdateArticle,
+  TCreateArticle,
+  TUpdateArticle,
 } from "../Store/articles/articlesActionCreator";
 import { EditorContext } from "../Store/EditorContext";
 import { QuillEditor } from "./QuillEditor";
@@ -21,8 +21,8 @@ const ArticleEditor = () => {
     setIsEdittingArticle,
     edittingArticleParams,
   } = React.useContext(EditorContext);
-  const createPost = useCreatePost();
-  const updatePost = useUpdatePost();
+  const createArticle = useCreateArticle();
+  const updateArticle = useUpdateArticle();
 
   const handleSubmit = ({isDraft}) => {
     let is_published: boolean
@@ -33,23 +33,23 @@ const ArticleEditor = () => {
     }
       // 記事編集
       if (isEdittingArticle) {
-          const params: TUpdatePost = {
+          const params: TUpdateArticle = {
             id: edittingArticleParams.id,
             is_published: is_published,
             title: titleText,
             article_content: editorText,
           };
-          updatePost(params);
+          updateArticle(params);
 
       // 新規投稿
       }else{
-          const params: TCreatePost = {
+          const params: TCreateArticle = {
             is_published: is_published,
             title: titleText,
             article_content: editorText,
           };
           //@ts-ignore
-          createPost(params);
+          createArticle(params);
 
       }
   };

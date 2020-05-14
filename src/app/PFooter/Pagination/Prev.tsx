@@ -2,16 +2,16 @@ import React from "react";
 import { NavigateBefore } from "@material-ui/icons";
 import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
-import { useGetPost } from "../../Store/articles/articlesActionCreator";
+import { useGetArticle } from "../../Store/articles/articlesActionCreator";
 
 export const Prev = (props: pageArrowProps) => {
   const { paginationParams, dispatchAppState } = React.useContext(Store);
   const { page } = paginationParams;
-  const getPost = useGetPost();
+  const getArticle = useGetArticle();
 
   const hundleOnClick = () => {
     dispatchAppState({ type: "START_LOADING" });
-    getPost(page - 1);
+    getArticle(page - 1);
   };
 
   let onClick;

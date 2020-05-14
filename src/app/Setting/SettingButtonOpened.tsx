@@ -6,7 +6,7 @@ import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import { VideoLabel, NoteAddOutlined, Settings, Close } from "@material-ui/icons";
 import { Store } from "../Store/Store";
 import { EditorContext } from "../Store/EditorContext";
-import { useGetPost } from "../Store/articles/articlesActionCreator";
+import { useGetArticle } from "../Store/articles/articlesActionCreator";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -88,17 +88,17 @@ export const SettingButtonOpened = ({
   const [hidden, setHidden] = React.useState(false);
   const { appState, dispatchAppState, paginationParams } = React.useContext(Store)
   const actions = useActions()
-  const getPost = useGetPost()
+  const getArticle = useGetArticle()
 
   const handleClose = async () => {
     await dispatchAppState({ type: "OFF_IS_SETTING" });
-    // getPost(1)
+    // getArticle(1)
   };
 
   const handleOpen = () => {
     // dispatchAppState({type: "ON_IS_SETTING"});
     // ON_IS_SETTINGのあとなので全記事を読み込む
-    // getPost(paginationParams.page)
+    // getArticle(paginationParams.page)
   };
 
   return (
@@ -110,7 +110,7 @@ export const SettingButtonOpened = ({
       hidden={hidden}
       // onCloseを除き, SpeedDialIconにonClickをつけることでアイコンをタップしたときのみ戻る。
 
-      // onClose={() => getPost(1)}
+      // onClose={() => getArticle(1)}
       icon={
         <SpeedDialIcon
           icon={<Settings />}
@@ -119,7 +119,7 @@ export const SettingButtonOpened = ({
         />
       }
       onOpen={() => handleOpen()}
-      // onOpen={() => getPost(paginationParams.page)}
+      // onOpen={() => getArticle(paginationParams.page)}
       open={appState.isSetting}
       direction={"up"}
     >

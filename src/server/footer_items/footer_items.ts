@@ -58,7 +58,7 @@ corsHeader(res);
 
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-// /footer_items/aceert/item
+// /footer_items/aceert
 export const footer_items_create_item = (req, res) => {
   corsHeader(res);
 
@@ -119,7 +119,7 @@ export const footer_items_get_single = (req, res) => {
 
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-// /footer_items/update/item
+// /footer_items/update
 export const footer_items_update_item = (req, res) => {
   corsHeader(res);
 
@@ -148,7 +148,7 @@ export const footer_items_update_item = (req, res) => {
   connection.query(query, data, (err, result, fields) => {
     if (err) {
       console.log(
-        "/footer_items/update/itemのエラーは " + JSON.stringify(err)
+        "/footer_items/updateのエラーは " + JSON.stringify(err)
       );
       res.status(500).json({ err: true, data: { message: err.message } });
     }
@@ -156,7 +156,7 @@ export const footer_items_update_item = (req, res) => {
     const data = {
       rawData: result,
     };
-    console.log("/footer_items/update/itemは " + JSON.stringify(data));
+    console.log("/footer_items/updateは " + JSON.stringify(data));
 
     res.json(data);
   });
@@ -165,7 +165,7 @@ export const footer_items_update_item = (req, res) => {
 
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-// /footer_items/deeelt/item
+// /footer_items/deeelt
 export const footer_items_delete_item = (req, res) => {
   corsHeader(res);
 
@@ -178,14 +178,14 @@ export const footer_items_delete_item = (req, res) => {
 
   connection.query(query, footer_item_id, (err, result, fields) => {
     if (err) {
-      console.log("/footer_items/delete/itemのエラーは " + JSON.stringify(err));
+      console.log("/footer_items/deleteのエラーは " + JSON.stringify(err));
       res.status(500).json({ err: true, data: { message: err.message } });
     }
 
     const data = {
       rawData: result,
     };
-    console.log("/footer_items/delete/itemは " + JSON.stringify(data));
+    console.log("/footer_items/deleteは " + JSON.stringify(data));
 
     res.json(data);
   });

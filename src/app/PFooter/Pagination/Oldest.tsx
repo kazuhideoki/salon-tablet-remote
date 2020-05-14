@@ -3,17 +3,17 @@ import { LastPage } from "@material-ui/icons";
 import { pageArrowProps } from "./PPagination";
 import { Store } from "../../Store/Store";
 import { PaginationParamsAction } from "../../Store/paginationParams/paginationParamsReducer";
-import { useGetPost } from "../../Store/articles/articlesActionCreator";
+import { useGetArticle } from "../../Store/articles/articlesActionCreator";
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Oldest = (props: pageArrowProps) => {
   const { paginationParams, dispatchAppState } = React.useContext(Store);
   const {page, pageCount} = paginationParams;
-  const getPost = useGetPost();
+  const getArticle = useGetArticle();
 
   const hundleOnClick = () => {
     dispatchAppState({ type: "START_LOADING" });
-    getPost(pageCount);
+    getArticle(pageCount);
   };
 
   let onClick;

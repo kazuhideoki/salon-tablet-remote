@@ -112,7 +112,7 @@ app.prepare().then(() => {
 
   
     // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
-    server.post("/articles/create/post", (req, res) => {
+    server.post("/articles/create", (req, res) => {
       corsHeader(res);
       const params: ArticleWithoutId = req.body;
       new ArticlesTable(params)
@@ -147,7 +147,7 @@ app.prepare().then(() => {
     });
 
     //  編集した記事をアップデートする。
-    server.post("/articles/update/post", (req, res) => {
+    server.post("/articles/update", (req, res) => {
       corsHeader(res);
         const params: TArticle = req.body
 
@@ -173,7 +173,7 @@ app.prepare().then(() => {
     });
 
 // Idを渡して多少のデータを削除する
-     server.post("/articles/delete/post", (req, res) => {
+     server.post("/articles/delete", (req, res) => {
        corsHeader(res);
        const id = req.body.id;
        new ArticlesTable()
@@ -195,16 +195,16 @@ app.prepare().then(() => {
     });
 
     server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
-    server.post("/footer_items/create/item", (req, res) =>
+    server.post("/footer_items/create", (req, res) =>
       footer_items_create_item(req, res)
     );
     server.post("/footer_items/get/single", (req, res) =>
       footer_items_get_single(req, res)
     );
-    server.post("/footer_items/update/item", (req, res) =>
+    server.post("/footer_items/update", (req, res) =>
       footer_items_update_item(req, res)
     );
-    server.post("/footer_items/delete/item", (req, res) =>
+    server.post("/footer_items/delete", (req, res) =>
       footer_items_delete_item(req, res)
     );
     server.post("/footer_items/switchOrder", (req, res) =>
