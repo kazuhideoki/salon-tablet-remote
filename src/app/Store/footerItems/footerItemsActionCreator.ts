@@ -1,5 +1,5 @@
 import React from "react";
-import { Store, FooterItem, FooterItemWithoutId, T_is_published_footer_items, T_icon_name, T_displayed_icon, T_on_tap, T_item_content, T_link_url, T_order, T_footer_item_id } from "../Store";
+import { Store, FooterItem, FooterItemWithoutId, T_is_published_footer_items, T_icon_name, T_displayed_icon_name, T_on_tap, T_item_content, T_link_url, T_order, T_footer_item_id } from "../Store";
 import { EditorContext } from "../EditorContext";
 import { IconsSetting } from "../../Setting/iconSelect/icons";
 import { SwitchOrderParams } from "../../Setting/buttons/SwitchOrderButton";
@@ -31,7 +31,7 @@ export const useGetFooterItems = () => {
 export type TCreateFooterItem = {
   is_published: T_is_published_footer_items,
   icon_name: T_icon_name,
-  displayed_icon: T_displayed_icon | null,
+  displayed_icon_name: T_displayed_icon_name | null,
   on_tap: T_on_tap,
   item_content: T_item_content,
   link_url: T_link_url,
@@ -67,7 +67,7 @@ export const useCreateFooterItem = () => {
     const {
       is_published,
       icon_name,
-      displayed_icon,
+      displayed_icon_name,
       on_tap,
       item_content,
       link_url,
@@ -76,7 +76,7 @@ export const useCreateFooterItem = () => {
     const params: TCreateFooterItem = {
       is_published: is_published,
       icon_name: icon_name,
-      displayed_icon: displayed_icon,
+      displayed_icon_name: displayed_icon_name,
       on_tap: on_tap,
       item_content: item_content,
       link_url: link_url,
@@ -140,7 +140,7 @@ export const useGetFooterItem = () => {
       const {
         icon_name,
         item_content,
-        displayed_icon,
+        displayed_icon_name,
         on_tap,
         link_url,
       } = data.rawData;
@@ -152,7 +152,7 @@ export const useGetFooterItem = () => {
       setLinkUrl(link_url);
       dispatchSelectedIcon({
         type: "SET_ICON",
-        payload: IconsSetting.convertIconComponentFromName(displayed_icon),
+        payload: IconsSetting.convertIconComponentFromName(displayed_icon_name),
       });
     }
   };
@@ -162,7 +162,7 @@ export type TUpdateFooterItem = {
   footer_item_id: T_footer_item_id
   is_published: T_is_published_footer_items,
   icon_name: T_icon_name,
-  displayed_icon: T_displayed_icon | null,
+  displayed_icon_name: T_displayed_icon_name | null,
   on_tap: T_on_tap,
   item_content: T_item_content,
   link_url: T_link_url,

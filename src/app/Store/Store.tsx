@@ -39,7 +39,7 @@ export type T_is_published_footer_items = boolean;
 export type T_created_at_footer_items = string;
 export type T_updated_at_footer_items = string | null;
 export type T_icon_name = string | null
-export type T_displayed_icon = string | null;
+export type T_displayed_icon_name = string | null;
 export type T_on_tap = string;
 export type T_item_content = string | null
 export type T_link_url = string | null
@@ -50,7 +50,7 @@ export type FooterItemWithoutId = {
   created_at: T_created_at_footer_items;
   updated_at: T_updated_at_footer_items | null;
   icon_name: T_icon_name | null;
-  displayed_icon: T_displayed_icon | null;
+  displayed_icon_name: T_displayed_icon_name | null;
   on_tap: T_on_tap;
   item_content: T_item_content | null;
   link_url: T_link_url | null;

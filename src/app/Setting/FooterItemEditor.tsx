@@ -50,7 +50,7 @@ export const FooterItemEditor = () => {
         is_published: isPublishing,
         icon_name: iconName,
         // 選択されていたらアイコンの名前を返す
-        displayed_icon: selectedIcon ? selectedIcon[1] : null,
+        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
         on_tap: onTap, // 要確認
         item_content: footerItemEditorText,
         link_url: linkUrl,
@@ -62,7 +62,7 @@ export const FooterItemEditor = () => {
         is_published: isPublishing,
         icon_name: iconName,
         // 選択されていたらアイコンの名前を返す.
-        displayed_icon: selectedIcon ? selectedIcon[1] : null,
+        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
         on_tap: onTap,
         item_content: footerItemEditorText,
         link_url: linkUrl,

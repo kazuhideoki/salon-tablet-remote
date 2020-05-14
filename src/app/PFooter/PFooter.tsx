@@ -135,9 +135,9 @@ export const PFooter = () => {
             {value.on_tap === "modal" ? (
               <IconAndText
                 icon={
-                  value.displayed_icon
+                  value.displayed_icon_name
                     ? IconsSetting.convertIconComponentFromName(
-                        value.displayed_icon
+                        value.displayed_icon_name
                       )[0]
                     : MoodBad
                 }
@@ -149,9 +149,9 @@ export const PFooter = () => {
               <a href={value.link_url}>
                 <IconAndText
                   icon={
-                    value.displayed_icon
+                    value.displayed_icon_name
                       ? IconsSetting.convertIconComponentFromName(
-                          value.displayed_icon
+                          value.displayed_icon_name
                         )[0]
                       : MoodBad
                   }
