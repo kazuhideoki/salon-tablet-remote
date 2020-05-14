@@ -4,10 +4,11 @@ import { QuillEditor } from "./QuillEditor";
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { EditorContext } from '../Store/EditorContext';
 import { FooterItemWithoutId, FooterItem, Store } from "../Store/Store";
-import { dateToSql } from '../modules/organizeSql/dateToSql';
 import {
   useCreateFooterItem,
   useUpdateFooterItem,
+  TCreateFooterItem,
+  TUpdateFooterItem,
 } from "../Store/footerItems/footerItemsActionCreator";
 import { TextField } from '@material-ui/core';
 
@@ -44,7 +45,7 @@ export const FooterItemEditor = () => {
       on_tap = false
     }
     if (isEdittingFooterItem) {
-      const params = {
+      const params: TUpdateFooterItem = {
         footer_item_id: edittingFooterItemParams.footer_item_id,
         is_published: isPublishing,
         icon_name: iconName,
@@ -55,9 +56,9 @@ export const FooterItemEditor = () => {
         link_url: linkUrl,
         order: edittingFooterItemParams.order,
       };
-      updateFooterItem(params, setIsEdittingFooterItem);
+      updateFooterItem(params);
     } else {
-      const params = {
+      const params: TCreateFooterItem = {
         is_published: isPublishing,
         icon_name: iconName,
         // 選択されていたらアイコンの名前を返す.

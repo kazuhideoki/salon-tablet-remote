@@ -1,5 +1,5 @@
 import React from "react";
-import { Store, FooterItem, FooterItemWithoutId } from "../Store";
+import { Store, FooterItem, FooterItemWithoutId, T_is_published_footer_items, T_icon_name, T_displayed_icon, T_on_tap, T_item_content, T_link_url, T_order, T_footer_item_id } from "../Store";
 import { EditorContext } from "../EditorContext";
 import { IconsSetting } from "../../Setting/iconSelect/icons";
 import { SwitchOrderParams } from "../../Setting/buttons/SwitchOrderButton";
@@ -28,6 +28,16 @@ export const useGetFooterItems = () => {
   };
 };
 
+export type TCreateFooterItem = {
+  is_published: T_is_published_footer_items,
+  icon_name: T_icon_name,
+  displayed_icon: T_displayed_icon | null,
+  on_tap: T_on_tap,
+  item_content: T_item_content,
+  link_url: T_link_url,
+  order: T_order,
+};
+
 export const useCreateFooterItem = () => {
   const {
     dispatchAppState,
@@ -53,10 +63,9 @@ export const useCreateFooterItem = () => {
     order = 1
   }
 
-  return async (values) => { 
+  return async (values: TCreateFooterItem) => {
     const {
       is_published,
-      created_at,
       icon_name,
       displayed_icon,
       on_tap,
@@ -64,17 +73,14 @@ export const useCreateFooterItem = () => {
       link_url,
     } = values;
 
-    const params: FooterItemWithoutId = {
+    const params: TCreateFooterItem = {
       is_published: is_published,
-      created_at: created_at,
-      // "updated_at"は '' で入れられない→データベースの型datetimeに合わない
-      updated_at: null,
       icon_name: icon_name,
       displayed_icon: displayed_icon,
       on_tap: on_tap,
       item_content: item_content,
       link_url: link_url,
-      order: order // orderの最大値＋1を代入する
+      order: order, // orderの最大値＋1を代入する
     };
 
     const res = await fetch(
@@ -116,17 +122,17 @@ export const useGetFooterItem = () => {
     dispatchSelectedIcon,
   } = React.useContext(EditorContext);
 
-  return async (params) => { 
+  return async (footer_item_id: T_footer_item_id) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/footer_items/get/single`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ footer_item_id: params.footer_item_id }),
+        body: JSON.stringify({ footer_item_id: footer_item_id }),
       }
     );
-    const data:UseGetFooterItemRes  = await res.json();
+    const data: UseGetFooterItemRes = await res.json();
 
     if (data.err === true) {
       alert("アイテムを取得できませんでした");
@@ -143,10 +149,24 @@ export const useGetFooterItem = () => {
       setIconName(icon_name);
       setFooterItemEditorText(item_content);
       setOnTap(on_tap);
-      setLinkUrl(link_url)
-      dispatchSelectedIcon({ type: "SET_ICON", payload: IconsSetting.convertIconComponentFromName(displayed_icon) });
+      setLinkUrl(link_url);
+      dispatchSelectedIcon({
+        type: "SET_ICON",
+        payload: IconsSetting.convertIconComponentFromName(displayed_icon),
+      });
     }
   };
+};
+
+export type TUpdateFooterItem = {
+  footer_item_id: T_footer_item_id
+  is_published: T_is_published_footer_items,
+  icon_name: T_icon_name,
+  displayed_icon: T_displayed_icon | null,
+  on_tap: T_on_tap,
+  item_content: T_item_content,
+  link_url: T_link_url,
+  order: T_order,
 };
 
 export const useUpdateFooterItem = () => {
@@ -157,8 +177,7 @@ export const useUpdateFooterItem = () => {
   const getFooterItems = useGetFooterItems()
 
   return async (
-    params,
-    setIsEdit: React.Dispatch<React.SetStateAction<boolean>>
+    params: TUpdateFooterItem
   ) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/footer_items/update/item`,
@@ -174,13 +193,12 @@ export const useUpdateFooterItem = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      setIsEdit(false);
       setIsEdittingFooterItem(false);
       setIconName("");
       setFooterItemEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
-      getFooterItems()
+      getFooterItems();
     }
   };
 };

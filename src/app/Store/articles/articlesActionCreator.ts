@@ -1,5 +1,12 @@
 import React from 'react'
-import { Store, TArticle, ArticleWithoutId } from '../Store'
+import {
+  Store,
+  TArticle,
+  T_is_published_articles,
+  T_title,
+  T_article_content,
+  T_id,
+} from "../Store";
 import { EditorContext } from '../EditorContext';
 
 
@@ -45,6 +52,11 @@ export const useGetPost = () => {
   };
 };
 
+export type TCreatePost = {
+  is_published: T_is_published_articles;
+  title: T_title;
+  article_content: T_article_content;
+};
 export const useCreatePost = () => {
   const getPost = useGetPost();
   const {
@@ -54,7 +66,7 @@ export const useCreatePost = () => {
     dispatchAppState,
   } = React.useContext(Store);
   const { setEditorText, setTitleText } = React.useContext(EditorContext);
-  return async (params: ArticleWithoutId) => {
+  return async (params: TCreatePost) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/create/post`,
       {
@@ -98,14 +110,14 @@ export const useGetSinglePost = () => {
     setEdittingArticleParams,
   } = React.useContext(EditorContext);
 
-  return async (params) => {
+  return async (id: T_id) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/get/singlepost`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ id: params.id }),
+        body: JSON.stringify({ id: id }),
       }
     );
     const data = await res.json();
@@ -122,6 +134,12 @@ export const useGetSinglePost = () => {
   };
 };
 
+export type TUpdatePost = {
+  id: T_id;
+  is_published: T_is_published_articles;
+  title: T_title;
+  article_content: T_article_content;
+};
 export const useUpdatePost = () => {
   const { dispatchArticles, dispatchAppState, paginationParams } = React.useContext(Store);
   const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
@@ -129,7 +147,7 @@ export const useUpdatePost = () => {
   );
     const getPost = useGetPost()
 
-  return async (params, setIsEdit) => {
+  return async (params: TUpdatePost) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/update/post`,
       {
@@ -144,18 +162,15 @@ export const useUpdatePost = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      setIsEdit(false);
       setIsEdittingArticle(false);
       setTitleText("");
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getPost(paginationParams.page);
-
     }
   };
 };
-
 
 export const useDeletePost = () => {
   const getPost = useGetPost();
@@ -165,8 +180,7 @@ export const useDeletePost = () => {
     articles,
     dispatchArticles,
   } = React.useContext(Store);
-  return async (id: number) => {
-
+  return async (id: T_id) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/delete/post`,
       {
@@ -188,9 +202,9 @@ export const useDeletePost = () => {
       //     payload: data.pagination,
       //   });
       // }
-    //   ページに表示されている記事が1で、かつ、最後の1記事ではない
+      //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (articles.length === 1 && paginationParams.rowCount > 1) {
-          const targetPage = paginationParams.page - 1;
+        const targetPage = paginationParams.page - 1;
         getPost(targetPage);
       } else {
         getPost(paginationParams.page);

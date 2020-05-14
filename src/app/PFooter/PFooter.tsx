@@ -71,10 +71,10 @@ export const PFooter = () => {
     );
     const getFooterItem = useGetFooterItem();
 
-    const handleOnUpDateFooterIcon: HandleOnUpDateFooterIcon = (params) => {
+    const handleOnUpDateFooterIcon: HandleOnUpDateFooterIcon = (footer_item_id) => {
       dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
       setIsEdittingFooterItem(true);
-      getFooterItem(params);
+      getFooterItem(footer_item_id);
     };
 
     const deleteFooterItem = useDeleteFooterItem()
@@ -98,26 +98,29 @@ export const PFooter = () => {
         
         return (
           <Grid
-          item
-          key={index}
-          // 投稿済みか下書きかで見た目を変える
-          className={
-            value.is_published == true
-            ? classes.itemIsPublished
-            : classes.itemIsDraft
-          }
+            item
+            key={index}
+            // 投稿済みか下書きかで見た目を変える
+            className={
+              value.is_published == true
+                ? classes.itemIsPublished
+                : classes.itemIsDraft
+            }
           >
             {/* セッティング画面で順番を入れ替えるボタンを表示 */}
-            {appState.isSetting && index !== 0 ?
+            {appState.isSetting && index !== 0 ? (
               <SwitchOrderButton
                 position={classes.switchOrderButton}
-                params={{footer_item_id: value.footer_item_id, order: value.order,}}
+                params={{
+                  footer_item_id: value.footer_item_id,
+                  order: value.order,
+                }}
               />
-              : null}
+            ) : null}
             {appState.isSetting ? (
               <UpdatePostButton
                 position={classes.updatePostButton}
-                params={value}
+                id={value.footer_item_id}
                 handleOnClick={handleOnUpDateFooterIcon}
               />
             ) : null}
@@ -129,21 +132,7 @@ export const PFooter = () => {
               />
             ) : null}
             {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
-            {value.on_tap === 'modal' ? 
-              <IconAndText
-                icon={
-                  value.displayed_icon
-                    ? IconsSetting.convertIconComponentFromName(
-                      value.displayed_icon
-                    )[0]
-                    : MoodBad
-                }
-                onClick={() => openModal("footer_item", value.item_content)}
-                fontSize="large"
-                text={value.icon_name}
-              />
-            
-            : <a href={value.link_url}>
+            {value.on_tap === "modal" ? (
               <IconAndText
                 icon={
                   value.displayed_icon
@@ -152,11 +141,25 @@ export const PFooter = () => {
                       )[0]
                     : MoodBad
                 }
+                onClick={() => openModal("footer_item", value.item_content)}
                 fontSize="large"
                 text={value.icon_name}
               />
+            ) : (
+              <a href={value.link_url}>
+                <IconAndText
+                  icon={
+                    value.displayed_icon
+                      ? IconsSetting.convertIconComponentFromName(
+                          value.displayed_icon
+                        )[0]
+                      : MoodBad
+                  }
+                  fontSize="large"
+                  text={value.icon_name}
+                />
               </a>
-            }
+            )}
           </Grid>
         );
         

@@ -1,5 +1,5 @@
 import React from "react";
-import { Store } from "./Store/Store";
+import { Store, T_id } from "./Store/Store";
 import { sqlToDate } from "./modules/organizeSql/sqlToDate";
 import {
   Grid,
@@ -88,10 +88,10 @@ export const PMain = () => {
     const { setIsEdittingArticle } = React.useContext(EditorContext);
     const getSinglePost = useGetSinglePost();
 
-    const handleOnUpDate: HandleOnUpDate = (params) => {
+    const handleOnUpDate: HandleOnUpDate = (id: T_id) => {
       dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
       setIsEdittingArticle(true);
-      getSinglePost(params);
+      getSinglePost(id);
     };
 
     const props = {
@@ -123,8 +123,7 @@ export const PMain = () => {
               {appState.isSetting ? (
                 <UpdatePostButton
                   position={classes.updatePostButton}
-                  params={value}
-                  // id={value.id}
+                  id={value.id}
                   handleOnClick={handleOnUpDate}
                 />
               ) : null}

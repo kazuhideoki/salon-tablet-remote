@@ -15,48 +15,50 @@ const initPagination = {
 };
 export type PaginationParams = typeof initPagination;
 
-const articleWithoutId = {   
-  is_published: false,
-  created_at: '',
-  updated_at: '',
-  title: '',
-  article_content: '',
+// ●●●●●● テーブル `articles`
+export type T_id = number
+export type T_is_published_articles = boolean
+export type T_created_at = string 
+export type T_updated_at = string
+export type T_title = string 
+export type T_article_content = string 
+
+export type ArticleWithoutId = {
+  is_published: T_is_published_articles
+  created_at: T_created_at
+  updated_at: T_updated_at
+  title: T_title
+  article_content: T_article_content
 }
-export type ArticleWithoutId = typeof articleWithoutId
-const articleId = {
-  id: 0,
-}
-export type ArticleId = typeof articleId
-export type TArticle = ArticleWithoutId & ArticleId
+export type TArticle = {id: T_id} & ArticleWithoutId
 export type TArticles = TArticle[]
 
-const initFooterItemWithoutId = {
-  is_published: false,
-  created_at: '',
-  updated_at: '',
-  icon_name: '',
-  displayed_icon: '',
-  on_tap: 'modal',
-  item_content: '',
-  link_url: '',
-  order: 0
-}
+// ●●●●●● テーブル `footer_items`
+export type T_footer_item_id = number;
+export type T_is_published_footer_items = boolean;
+export type T_created_at_footer_items = string;
+export type T_updated_at_footer_items = string | null;
+export type T_icon_name = string | null
+export type T_displayed_icon = string | null;
+export type T_on_tap = string;
+export type T_item_content = string | null
+export type T_link_url = string | null
+export type T_order = number;
+
 export type FooterItemWithoutId = {
-  is_published: boolean;
-  created_at: string;
-  updated_at: string | null;
-  icon_name: string | null
-  displayed_icon: string | null;
-  on_tap: string;
-  item_content: string | null
-  link_url: string | null,
-  order: number;
+  is_published: T_is_published_footer_items;
+  created_at: T_created_at_footer_items;
+  updated_at: T_updated_at_footer_items | null;
+  icon_name: T_icon_name | null;
+  displayed_icon: T_displayed_icon | null;
+  on_tap: T_on_tap;
+  item_content: T_item_content | null;
+  link_url: T_link_url | null;
+  order: T_order;
 };
-// export const footerItemId = {
-//   footer_item_id: 0,
-// };
-export type FooterItemId = { footer_item_id: number };
-export type FooterItem = FooterItemWithoutId & FooterItemId;
+export type FooterItem = {
+  footer_item_id: T_footer_item_id;
+} & FooterItemWithoutId;
 export type FooterItems = FooterItem[]
 
 const initAppState = {

@@ -2,11 +2,14 @@ import React from "react";
 import {
   useCreatePost,
   useUpdatePost,
+  TCreatePost,
+  TUpdatePost,
 } from "../Store/articles/articlesActionCreator";
-import { dateToSql } from "../modules/organizeSql/dateToSql";
 import { EditorContext } from "../Store/EditorContext";
 import { QuillEditor } from "./QuillEditor";
 import { ArticleWithoutId, TArticle } from "../Store/Store";
+
+
 
 const ArticleEditor = () => {
   const {
@@ -30,20 +33,17 @@ const ArticleEditor = () => {
     }
       // 記事編集
       if (isEdittingArticle) {
-          // const params: TArticle = {
-          const params = {
+          const params: TUpdatePost = {
             id: edittingArticleParams.id,
             is_published: is_published,
             title: titleText,
             article_content: editorText,
           };
-          updatePost(params, setIsEdittingArticle);
+          updatePost(params);
 
       // 新規投稿
       }else{
-          // const params: ArticleWithoutId = {
-          const params = {
-            // idは自動で付与
+          const params: TCreatePost = {
             is_published: is_published,
             title: titleText,
             article_content: editorText,
