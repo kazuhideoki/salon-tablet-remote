@@ -133,8 +133,8 @@ export const footer_items_update_item = (req, res) => {
   const data = [
     {
     is_published: is_published,
-    created_at: created_at,
-    updated_at: updated_at,
+    // created_at: created_at,
+    // updated_at: updated_at,
     icon_name: icon_name,
     displayed_icon: displayed_icon,
     on_tap: on_tap,

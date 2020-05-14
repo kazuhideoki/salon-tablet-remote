@@ -36,12 +36,7 @@ export const FooterItemEditor = () => {
 
 
   const handleSubmit = ({ isPublishing }) => {
-    // let is_published: boolean;
-    // if (isPublishing) {
-    //   is_published = true;
-    // } else {
-    //   is_published = false;
-    // }
+
     let on_tap: boolean;
     if (onTap === 'modal') {
       on_tap = true
@@ -49,11 +44,9 @@ export const FooterItemEditor = () => {
       on_tap = false
     }
     if (isEdittingFooterItem) {
-      const params: FooterItem = {
+      const params = {
         footer_item_id: edittingFooterItemParams.footer_item_id,
         is_published: isPublishing,
-        created_at: dateToSql(edittingFooterItemParams.created_at),
-        updated_at: dateToSql(new Date()),
         icon_name: iconName,
         // 選択されていたらアイコンの名前を返す
         displayed_icon: selectedIcon ? selectedIcon[1] : null,
@@ -64,10 +57,8 @@ export const FooterItemEditor = () => {
       };
       updateFooterItem(params, setIsEdittingFooterItem);
     } else {
-      const params: FooterItemWithoutId = {
+      const params = {
         is_published: isPublishing,
-        created_at: dateToSql(new Date()),
-        updated_at: null,
         icon_name: iconName,
         // 選択されていたらアイコンの名前を返す.
         displayed_icon: selectedIcon ? selectedIcon[1] : null,

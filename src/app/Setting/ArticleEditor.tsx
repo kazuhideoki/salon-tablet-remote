@@ -34,8 +34,6 @@ const ArticleEditor = () => {
           const params = {
             id: edittingArticleParams.id,
             is_published: is_published,
-            // created_at: edittingArticleParams.created_at,
-            // updated_at: dateToSql(new Date()),
             title: titleText,
             article_content: editorText,
           };
@@ -47,9 +45,6 @@ const ArticleEditor = () => {
           const params = {
             // idは自動で付与
             is_published: is_published,
-            // created_atは自動で現在の日時を付与
-            // created_at: dateToSql(new Date()),
-            // updated_at: null,
             title: titleText,
             article_content: editorText,
           };

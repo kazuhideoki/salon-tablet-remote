@@ -53,7 +53,7 @@ export const useCreateFooterItem = () => {
     order = 1
   }
 
-  return async (values: FooterItemWithoutId) => { 
+  return async (values) => { 
     const {
       is_published,
       created_at,
@@ -157,7 +157,7 @@ export const useUpdateFooterItem = () => {
   const getFooterItems = useGetFooterItems()
 
   return async (
-    params: FooterItem,
+    params,
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     const res = await fetch(
@@ -174,7 +174,6 @@ export const useUpdateFooterItem = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      // dispatchFooterItems({ type: "UPDATE_FOOTER_ITEM", payload: params });
       setIsEdit(false);
       setIsEdittingFooterItem(false);
       setIconName("");

@@ -144,7 +144,6 @@ export const useUpdatePost = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      // dispatchArticles({ type: "UPDATE_POST", payload: params });
       setIsEdit(false);
       setIsEdittingArticle(false);
       setTitleText("");
