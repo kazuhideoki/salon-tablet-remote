@@ -30,11 +30,12 @@ const ArticleEditor = () => {
     }
       // 記事編集
       if (isEdittingArticle) {
-          const params: TArticle = {
+          // const params: TArticle = {
+          const params = {
             id: edittingArticleParams.id,
             is_published: is_published,
-            created_at: dateToSql(edittingArticleParams.created_at),
-            updated_at: dateToSql(new Date()),
+            // created_at: edittingArticleParams.created_at,
+            // updated_at: dateToSql(new Date()),
             title: titleText,
             article_content: editorText,
           };
@@ -42,14 +43,17 @@ const ArticleEditor = () => {
 
       // 新規投稿
       }else{
-          const params: ArticleWithoutId = {
+          // const params: ArticleWithoutId = {
+          const params = {
             // idは自動で付与
             is_published: is_published,
-            created_at: dateToSql(new Date()),
-            updated_at: null,
+            // created_atは自動で現在の日時を付与
+            // created_at: dateToSql(new Date()),
+            // updated_at: null,
             title: titleText,
             article_content: editorText,
           };
+          //@ts-ignore
           createPost(params);
 
       }

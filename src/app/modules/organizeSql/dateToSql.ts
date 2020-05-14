@@ -8,6 +8,7 @@ export const dateToSql = (date) => {
     return num;   
     }  
     const dateObj = new Date(date)
+    
      var yyyy = dateObj.getFullYear();
      var mm = toDoubleDigits(dateObj.getMonth() + 1);
      var dd = toDoubleDigits(dateObj.getDate());

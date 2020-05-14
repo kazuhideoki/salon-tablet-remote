@@ -115,12 +115,6 @@ app.prepare().then(() => {
     server.post("/articles/create/post", (req, res) => {
       corsHeader(res);
       const params: ArticleWithoutId = req.body;
-      // new Articles({
-      //   title: title,
-      //   is_published,
-      //   created_at: created_at,
-      //   article_content: article_content,
-      // })
       new ArticlesTable(params)
         .save()
         .then((result) => {

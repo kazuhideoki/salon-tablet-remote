@@ -40,6 +40,7 @@ const useActions = () => {
     setLinkUrl,
     setIsEdittingArticle,
     dispatchSelectedIcon,
+    setIsEdittingFooterItem,
   } = React.useContext(EditorContext);
 
   const handleOpenArticleEditor = () => {
@@ -51,6 +52,7 @@ const useActions = () => {
   
   const handleOpenFooterItemEditor = () => {
     dispatchAppState({type: "OPEN_MODAL", payload: 'edit_footer_item'})
+    setIsEdittingFooterItem(false)
     setIconName('')
     setFooterItemEditorText('')
     setOnTap('modal')
