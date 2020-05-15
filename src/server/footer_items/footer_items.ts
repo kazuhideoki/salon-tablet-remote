@@ -12,16 +12,10 @@ const mysql_setting = {
   database: "salon_tablet",
   
 };
-const mysql_setting_promise = {
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "salon_tablet",
-};
 
 // /footer_items/get
 export const footer_items_get = (req, res) => {
-corsHeader(res);
+  corsHeader(res);
   
   const connection = mysql.createConnection({
     host: "localhost",
@@ -58,11 +52,10 @@ corsHeader(res);
 
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-// /footer_items/aceert
+// /footer_items/create
 export const footer_items_create_item = (req, res) => {
   corsHeader(res);
 
-  // const { is_published, created_at, updated_at, icon_name, displayed_icon_name, on_tap, item_content, link_url, order } = req.body
 
   const connection = mysql.createConnection(mysql_setting);
   connection.connect();

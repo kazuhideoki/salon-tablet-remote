@@ -1,20 +1,46 @@
 import React from 'react'
-import ReactQuill from "react-quill";
-import { Quill } from "quill";
+import ReactQuill, { Quill } from "react-quill";
+
+export const checkInsertImg = (delta, setHasImg) => {
+  for (let n in delta.ops) {
+    console.log(delta.ops[n]);
+
+    for (let value in delta.ops[n]) {
+      if (value === "insert") {
+        console.log(delta.ops[n]["insert"]);
+
+        for (let value2 in delta.ops[n]["insert"]) {
+          if (value2 === "image") {
+            console.log(delta.ops[n]["insert"]["image"]);
+            setHasImg(true);
+          }
+        }
+      }
+    }
+  }
+}
 
 export const QuillEditor = ({ value ,setValue }) => {
-  const imageHandler = () => {
-    // Quill.insertEmbed(10, "image", "https://quilljs.com/images/cloud.png");
-    alert("imageHandler");
+
+  const [hasImg, setHasImg] = React.useState(false)
+  const [charCount, setCharCount] = React.useState(0)
+
+  const handleOnChange = (content, delta, source, editor) => {
+    setValue(content)
+    console.log(delta)
+    console.log(source)
+
+    checkInsertImg(delta, setHasImg)
+
   }
 
+  const image = hasImg ? "" : "image";
   const modules = {
     // うまくいかない
     // "image-tooltip": true,
     toolbar: [
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
-      // [{ color: [] }, { background: [] }],
       [{ color: [] }, { background: [] }],
       [
         { list: "ordered" },
@@ -22,34 +48,11 @@ export const QuillEditor = ({ value ,setValue }) => {
         { indent: "-1" },
         { indent: "+1" },
       ],
-      ["link", "image"],
+      ["link", image ],
+      // ["link", imageButton],
       ["clean"],
     ],
-    // handlers: {
-    //   image: imageHandler,
-    // },
   };
-
-  //   toolbar: [
-  //     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  //     ['blockquote', 'code-block'],
-
-  //     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  //     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  //     [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  //     [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-  //     [{ 'direction': 'rtl' }],                         // text direction
-
-  //     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-  //     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  //     [{ 'font': [] }],
-  //     [{ 'align': [] }],
-
-  //     ['clean']                                         // remove formatting button
-  //   ]
-  // };
 
   const formats = [
     "header",
@@ -58,21 +61,25 @@ export const QuillEditor = ({ value ,setValue }) => {
     "underline",
     "strike",
     "blockquote",
+    "color",
+    "background",
     "list",
     "bullet",
     "indent",
     "link",
     "image",
-    "color",
+    "clean",
   ];
   return (
-    <ReactQuill
-      value={value}
-      onChange={(e) => setValue(e)}
-      theme="snow"
-      modules={modules}
-      // formats={formats}
-    />
+      <ReactQuill
+        value={value}
+        // onChange={(e) => setValue(e)}
+        onChange={(content, delta, source, editor) => handleOnChange(content, delta, source, editor)}
+        theme="snow"
+        modules={modules}
+        formats={formats}
+      />
+
   );
 };
 

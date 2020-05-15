@@ -7,8 +7,6 @@ import {
 } from "../Store/articles/articlesActionCreator";
 import { EditorContext } from "../Store/EditorContext";
 import { QuillEditor } from "./QuillEditor";
-import { ArticleWithoutId, TArticle } from "../Store/Store";
-
 
 
 const ArticleEditor = () => {
@@ -18,7 +16,6 @@ const ArticleEditor = () => {
     editorText,
     setEditorText,
     isEdittingArticle,
-    setIsEdittingArticle,
     edittingArticleParams,
   } = React.useContext(EditorContext);
   const createArticle = useCreateArticle();
@@ -48,9 +45,8 @@ const ArticleEditor = () => {
             title: titleText,
             article_content: editorText,
           };
-          //@ts-ignore
           createArticle(params);
-
+          
       }
   };
 
