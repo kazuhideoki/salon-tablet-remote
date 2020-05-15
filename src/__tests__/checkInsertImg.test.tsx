@@ -17,11 +17,16 @@ const delta = {
 
 test("checkInsertImg", () => {
   const { result } = renderHook(() => React.useState(false))
-  const [hasImg, setHasImg] = result.current
+
+  // expect(hasImg).toBe(false);
+  expect(result.current[0]).toBe(false);
    
-  checkInsertImg(delta, setHasImg);
+  act(() => {
+    checkInsertImg(delta, result.current[1]);
+    // setHasImg(true)
+  })
 
-  expect(hasImg).toBe(true);
-
+  // expect(hasImg).toBe(true);
+  expect(result.current[0]).toBe(true);
 
 });
