@@ -1,5 +1,9 @@
 import React from 'react'
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill }from "react-quill";
+import ImageCompress from "quill-image-compress";
+// ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み
+// import { ImageResize } from "quill-image-resize-module";
+
 
 // deltaコンテンツの中にimageがあるか判定して、あればsetHasImgでtrueにして、なければfalseにする
 export const checkInsertImg = (deltaContents, setHasImg) => {
@@ -24,33 +28,29 @@ export const checkInsertImg = (deltaContents, setHasImg) => {
   ischeckimg ? setHasImg(true) : setHasImg(false);
 }
 
-
+Quill.register("modules/imageCompress", ImageCompress);
+// Quill.register("modules/imageResize", ImageResize);
 
 export const QuillEditor = ({ value ,setValue }) => {
-
+  
   const [hasImg, setHasImg] = React.useState(false)
   const [charCount, setCharCount] = React.useState(0)
-
+  
   const handleOnChange = (content, delta, source, editor) => {
     setValue(content)
     // console.log(delta)
     // console.log(source)
-
-    checkInsertImg(editor.getContents(), setHasImg);
-
-    console.log(editor.getText());
-    console.log(editor.getContents());
-    console.log(editor.getHTML());
-     
     
-
-
+    checkInsertImg(editor.getContents(), setHasImg);
+    
+    // console.log(editor.getText());
+    // console.log(editor.getContents());
+    // console.log(editor.getHTML());
+    
   }
-
+  
   const image = hasImg ? "" : "image"; // 画像が挿入されているか判定して、なければ画像追加ボタンを表示
   const modules = {
-    // うまくいかない
-    // "image-tooltip": true,
     toolbar: [
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
@@ -61,10 +61,21 @@ export const QuillEditor = ({ value ,setValue }) => {
         { indent: "-1" },
         { indent: "+1" },
       ],
-      ["link", image ],
+      ["link", image],
       // ["link", imageButton],
       ["clean"],
     ],
+    imageCompress: {
+      quality: 0.7, // default
+      maxWidth: 1000, // default
+      maxHeight: 1000, // default
+      imageType: "image/jpeg", // default
+      debug: true, // default
+    },
+    // ImageResize: {
+    //   // https://www.npmjs.com/package/quill-image-resize-module
+    //   },
+    
   };
 
   const formats = [
