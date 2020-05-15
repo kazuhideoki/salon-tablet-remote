@@ -42,6 +42,7 @@ export const QuillEditor = ({ value ,setValue }) => {
     // console.log(source)
     
     checkInsertImg(editor.getContents(), setHasImg);
+    setCharCount(editor.getLength());
     
     // console.log(editor.getText());
     // console.log(editor.getContents());
@@ -95,15 +96,19 @@ export const QuillEditor = ({ value ,setValue }) => {
     "clean",
   ];
   return (
+    <>
       <ReactQuill
         value={value}
         // onChange={(e) => setValue(e)}
-        onChange={(content, delta, source, editor) => handleOnChange(content, delta, source, editor)}
+        onChange={(content, delta, source, editor) =>
+          handleOnChange(content, delta, source, editor)
+        }
         theme="snow"
         modules={modules}
         formats={formats}
       />
-
+      {charCount}
+    </>
   );
 };
 
