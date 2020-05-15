@@ -1,24 +1,30 @@
 import React from 'react'
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill from "react-quill";
 
-export const checkInsertImg = (delta, setHasImg) => {
-  for (let n in delta.ops) {
-    console.log(delta.ops[n]);
+// deltaコンテンツの中にimageがあるか判定して、あればsetHasImgでtrueにして、なければfalseにする
+export const checkInsertImg = (deltaContents, setHasImg) => {
+  // もしかしたらquillのなんらかのメソッドで簡潔に書けるかも
+  let ischeckimg = false
+  for (let n in deltaContents.ops) {
+    // console.log(deltaContents.ops[n]);
 
-    for (let value in delta.ops[n]) {
+    for (let value in deltaContents.ops[n]) {
       if (value === "insert") {
-        console.log(delta.ops[n]["insert"]);
+        // console.log(deltaContents.ops[n]["insert"]);
 
-        for (let value2 in delta.ops[n]["insert"]) {
+        for (let value2 in deltaContents.ops[n]["insert"]) {
           if (value2 === "image") {
-            console.log(delta.ops[n]["insert"]["image"]);
-            setHasImg(true);
+            // console.log(deltaContents.ops[n]["insert"]["image"]);
+            ischeckimg = true
           }
         }
-      }
+      } 
     }
   }
+  ischeckimg ? setHasImg(true) : setHasImg(false);
 }
+
+
 
 export const QuillEditor = ({ value ,setValue }) => {
 
@@ -27,14 +33,21 @@ export const QuillEditor = ({ value ,setValue }) => {
 
   const handleOnChange = (content, delta, source, editor) => {
     setValue(content)
-    console.log(delta)
-    console.log(source)
+    // console.log(delta)
+    // console.log(source)
 
-    checkInsertImg(delta, setHasImg)
+    checkInsertImg(editor.getContents(), setHasImg);
+
+    console.log(editor.getText());
+    console.log(editor.getContents());
+    console.log(editor.getHTML());
+     
+    
+
 
   }
 
-  const image = hasImg ? "" : "image";
+  const image = hasImg ? "" : "image"; // 画像が挿入されているか判定して、なければ画像追加ボタンを表示
   const modules = {
     // うまくいかない
     // "image-tooltip": true,
