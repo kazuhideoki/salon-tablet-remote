@@ -86,7 +86,6 @@ export const IconSelect = () => {
               <GridListTile
                 key={index}
                 cols={1}
-                //@ts-ignore
                 onClick={() =>
                   dispatchSelectedIcon({
                     type: "SET_ICON",

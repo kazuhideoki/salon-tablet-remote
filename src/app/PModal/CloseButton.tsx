@@ -11,7 +11,6 @@ export const CloseButton = (props:any) => {
         top = 40
         right = 40
     }
-    //@ts-ignore
     const StyledHighlightOff = withStyles({
         root: {
             fontSize: '70px',
