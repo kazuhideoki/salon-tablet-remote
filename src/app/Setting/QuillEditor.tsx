@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
 import ImageCompress from "quill-image-compress";
+import { Typography } from '@material-ui/core';
 // ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み
 // import { ImageResize } from "quill-image-resize-module";
 
@@ -107,7 +108,13 @@ export const QuillEditor = ({ value ,setValue }) => {
         modules={modules}
         formats={formats}
       />
-      {charCount}
+      <Typography
+        variant="body2"
+        align="right"
+        color={charCount < 1001 ? 'textPrimary' : 'error'}  
+      >
+        {`${charCount}/1000`}
+      </Typography>
     </>
   );
 };
