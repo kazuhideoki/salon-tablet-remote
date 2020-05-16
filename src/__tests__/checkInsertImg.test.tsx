@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook, act } from "@testing-library/react-hooks";
-import { checkInsertImg } from "../app/Setting/QuillEditor";
+import { checkImg, removeImg } from "../app/Setting/QuillEditor";
 
 const delta = {
   ops: [
@@ -45,21 +45,22 @@ const delta2 = {ops: [
     },
   ],
 }
-test("checkInsertImg", () => {
-  const { result } = renderHook(() => React.useState(false))
+test("checkImg", () => {
+  const { result } = renderHook(() => React.useState(false));
 
   expect(result.current[0]).toBe(false);
-   
+
   // imageがある
   act(() => {
-    checkInsertImg(delta, result.current[1]);
-  })
+    //@ts-ignore
+    checkImg(delta, result.current[1], removeImg);
+  });
   expect(result.current[0]).toBe(true);
 
   // imageがない
   act(() => {
-    checkInsertImg(delta2, result.current[1]);
+    //@ts-ignore
+    checkImg(delta2, result.current[1], removeImg);
   });
   expect(result.current[0]).toBe(false);
-
 });

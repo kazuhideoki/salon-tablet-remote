@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
+import * as TQuill from "quill";
 import ImageCompress from "quill-image-compress";
 import { Typography } from '@material-ui/core';
 // ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み
@@ -7,26 +8,48 @@ import { Typography } from '@material-ui/core';
 
 
 // deltaコンテンツの中にimageがあるか判定して、あればsetHasImgでtrueにして、なければfalseにする
-export const checkInsertImg = (deltaContents, setHasImg) => {
-  // もしかしたらquillのなんらかのメソッドで簡潔に書けるかも
-  let ischeckimg = false
-  for (let n in deltaContents.ops) {
-    // console.log(deltaContents.ops[n]);
+export const checkImg = (
+         deltaContents: TQuill.DeltaStatic,
+         setHasImg: React.Dispatch<React.SetStateAction<boolean>>,
+         removeImg: () => void
+       ) => {
+              // ※もしかしたらquillのなんらかのメソッドで簡潔に書けるかも
+              let isCheckImg = false;
+              let isCheckMoreImgs = false;
+              for (let n in deltaContents.ops) {
+                // console.log(deltaContents.ops[n]);
 
-    for (let value in deltaContents.ops[n]) {
-      if (value === "insert") {
-        // console.log(deltaContents.ops[n]["insert"]);
+                for (let value in deltaContents.ops[n]) {
+                  if (value === "insert") {
+                    // console.log(deltaContents.ops[n]["insert"]);
 
-        for (let value2 in deltaContents.ops[n]["insert"]) {
-          if (value2 === "image") {
-            // console.log(deltaContents.ops[n]["insert"]["image"]);
-            ischeckimg = true
-          }
-        }
-      } 
-    }
-  }
-  ischeckimg ? setHasImg(true) : setHasImg(false);
+                    for (let value2 in deltaContents.ops[n]["insert"]) {
+                      if (value2 === "image") {
+                        // console.log(deltaContents.ops[n]["insert"]["image"]);
+
+                        // 2つ目の画像でisCheckMoreImgsをtrueに
+                        isCheckMoreImgs = isCheckImg ? true : false;
+                        // 1つめの画像でischeckimgをtrueに
+                        isCheckImg = true;
+                      }
+                    }
+                  }
+                }
+              }
+              isCheckImg ? setHasImg(true) : setHasImg(false);
+
+              // checkImg
+              isCheckMoreImgs ? removeImg() : null;
+            };
+
+export const removeImg = () => {
+  const editor = document.getElementById('react_quill_editor')
+  console.log(editor);
+  
+  const imgs = editor.querySelector('img')
+  console.log(imgs);
+  
+  imgs.remove()
 }
 
 Quill.register("modules/imageCompress", ImageCompress);
@@ -39,15 +62,17 @@ export const QuillEditor = ({ value ,setValue }) => {
   
   const handleOnChange = (content, delta, source, editor) => {
     setValue(content)
-    // console.log(delta)
+    console.log(delta)
     // console.log(source)
     
-    checkInsertImg(editor.getContents(), setHasImg);
+    checkImg(editor.getContents(), setHasImg, removeImg);
+
+    // エディターから文字数を取得して文字数カウントのためのcharCountに値を格納
     setCharCount(editor.getLength());
-    
-    // console.log(editor.getText());
-    // console.log(editor.getContents());
-    // console.log(editor.getHTML());
+
+    console.log(editor.getText());
+    console.log(editor.getContents());
+    console.log(editor.getHTML());
     
   }
   
@@ -64,7 +89,7 @@ export const QuillEditor = ({ value ,setValue }) => {
         { indent: "+1" },
       ],
       ["link", image],
-      // ["link", imageButton],
+      // ["link", "image"],
       ["clean"],
     ],
     imageCompress: {
@@ -80,7 +105,7 @@ export const QuillEditor = ({ value ,setValue }) => {
     
   };
 
-  const formats = [
+  let formats = [
     "header",
     "bold",
     "italic",
@@ -96,9 +121,18 @@ export const QuillEditor = ({ value ,setValue }) => {
     "image",
     "clean",
   ];
+
+
+  // if (hasImg) {
+  //   // formatsから除くとその機能自体が使えなくなる
+  //   formats = formats.filter(() =>  !"image" )
+  // }
+
+
   return (
     <>
       <ReactQuill
+        id="react_quill_editor"
         value={value}
         // onChange={(e) => setValue(e)}
         onChange={(content, delta, source, editor) =>
