@@ -29,6 +29,7 @@ export const FooterItemEditor = () => {
     edittingFooterItemParams,
   } = React.useContext(EditorContext);
   const { footerItems } = React.useContext(Store)
+  const [charCount, setCharCount] = React.useState(0);
 
   // const [onTap, setOnTap] = React.useState('modal'); // editorContextへ
   
@@ -81,21 +82,24 @@ export const FooterItemEditor = () => {
         onChange={(e) => setIconName(e.target.value)}
         style={{ marginBottom: "20px" }}
       />
-      <br/>
-      <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap}/>
-      {onTap === 'modal' 
-        ? <QuillEditor
+      <br />
+      <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
+      {onTap === "modal" ? (
+        <QuillEditor
           value={footerItemEditorText}
           setValue={setFooterItemEditorText}
-      />
-        : <TextField
+          charCount={charCount}
+          setCharCount={setCharCount}
+        />
+      ) : (
+        <TextField
           id="linkUrl"
           label="リンクURL"
           value={linkUrl}
           onChange={(e) => setLinkUrl(e.target.value)}
           variant="outlined"
         />
-      }
+      )}
       <IconSelect />
       <button onClick={() => handleSubmit({ isPublishing: true })}>
         {isEdittingFooterItem ? "更新" : "投稿"}

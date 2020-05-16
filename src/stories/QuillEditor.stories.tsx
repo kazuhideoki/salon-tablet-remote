@@ -13,6 +13,14 @@ component: QuillEditor,
 };
 export const Normal = () => {
   const [value, setValue] = React.useState('')
+  const [charCount, setCharCount] = React.useState(0);
 
-  return <QuillEditor value={value} setValue={setValue}/>
+  return (
+    <QuillEditor
+      value={value}
+      setValue={setValue}
+      charCount={charCount}
+      setCharCount={setCharCount}
+    />
+  );
 }

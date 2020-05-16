@@ -18,6 +18,7 @@ const ArticleEditor = () => {
     isEdittingArticle,
     edittingArticleParams,
   } = React.useContext(EditorContext);
+  const [charCount, setCharCount] = React.useState(0);
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
 
@@ -58,7 +59,12 @@ const ArticleEditor = () => {
         onChange={(e) => setTitleText(e.target.value)}
         style={{ marginBottom: "20px" }}
       />
-      <QuillEditor value={editorText} setValue={setEditorText} />
+      <QuillEditor
+        value={editorText}
+        setValue={setEditorText}
+        charCount={charCount}
+        setCharCount={setCharCount}
+      />
       <button onClick={() => handleSubmit({ isDraft: false })}>
         {isEdittingArticle ? "更新" : "投稿"}
       </button>

@@ -9,38 +9,38 @@ import { Typography } from '@material-ui/core';
 
 // deltaコンテンツの中にimageがあるか判定して、あればsetHasImgでtrueにして、なければfalseにする
 export const checkImg = (
-         deltaContents: TQuill.DeltaStatic,
-         setHasImg: React.Dispatch<React.SetStateAction<boolean>>,
-         removeImg: () => void
-       ) => {
-              // ※もしかしたらquillのなんらかのメソッドで簡潔に書けるかも
-              let isCheckImg = false;
-              let isCheckMoreImgs = false;
-              for (let n in deltaContents.ops) {
-                // console.log(deltaContents.ops[n]);
+  deltaContents: TQuill.DeltaStatic,
+  setHasImg: React.Dispatch<React.SetStateAction<boolean>>,
+  removeImg: () => void
+) => {
+  // ※もしかしたらquillのなんらかのメソッドで簡潔に書けるかも
+  let isCheckImg = false;
+  let isCheckMoreImgs = false;
+  for (let n in deltaContents.ops) {
+    // console.log(deltaContents.ops[n]);
 
-                for (let value in deltaContents.ops[n]) {
-                  if (value === "insert") {
-                    // console.log(deltaContents.ops[n]["insert"]);
+    for (let value in deltaContents.ops[n]) {
+      if (value === "insert") {
+        // console.log(deltaContents.ops[n]["insert"]);
 
-                    for (let value2 in deltaContents.ops[n]["insert"]) {
-                      if (value2 === "image") {
-                        // console.log(deltaContents.ops[n]["insert"]["image"]);
+        for (let value2 in deltaContents.ops[n]["insert"]) {
+          if (value2 === "image") {
+            // console.log(deltaContents.ops[n]["insert"]["image"]);
 
-                        // 2つ目の画像でisCheckMoreImgsをtrueに
-                        isCheckMoreImgs = isCheckImg ? true : false;
-                        // 1つめの画像でischeckimgをtrueに
-                        isCheckImg = true;
-                      }
-                    }
-                  }
-                }
-              }
-              isCheckImg ? setHasImg(true) : setHasImg(false);
+            // 2つ目の画像でisCheckMoreImgsをtrueに
+            isCheckMoreImgs = isCheckImg ? true : false;
+            // 1つめの画像でischeckimgをtrueに
+            isCheckImg = true;
+          }
+        }
+      }
+    }
+  }
+  isCheckImg ? setHasImg(true) : setHasImg(false);
 
-              // checkImg
-              isCheckMoreImgs ? removeImg() : null;
-            };
+  // 画像が複数ある場合最初のimgを削除する。その後onChangeが再発火してcheckInsertImgも再発火。imgが一つになるまで続く。
+  isCheckMoreImgs ? removeImg() : null;
+};
 
 export const removeImg = () => {
   const editor = document.getElementById('react_quill_editor')
@@ -52,13 +52,19 @@ export const removeImg = () => {
   imgs.remove()
 }
 
+// 画像圧縮のモジュールを利用可能にimageCompress;
 Quill.register("modules/imageCompress", ImageCompress);
 // Quill.register("modules/imageResize", ImageResize);
 
-export const QuillEditor = ({ value ,setValue }) => {
+type Props = {
+  value: string,
+  setValue: React.Dispatch<React.SetStateAction<string>>,
+  charCount: number
+  setCharCount:React.Dispatch<React.SetStateAction<number>>,
+}
+export const QuillEditor = ({ value ,setValue, charCount, setCharCount }:Props) => {
   
   const [hasImg, setHasImg] = React.useState(false)
-  const [charCount, setCharCount] = React.useState(0)
   
   const handleOnChange = (content, delta, source, editor) => {
     setValue(content)
@@ -70,9 +76,9 @@ export const QuillEditor = ({ value ,setValue }) => {
     // エディターから文字数を取得して文字数カウントのためのcharCountに値を格納
     setCharCount(editor.getLength());
 
-    console.log(editor.getText());
-    console.log(editor.getContents());
-    console.log(editor.getHTML());
+    // console.log(editor.getText());
+    // console.log(editor.getContents());
+    // console.log(editor.getHTML());
     
   }
   
@@ -99,55 +105,43 @@ export const QuillEditor = ({ value ,setValue }) => {
       imageType: "image/jpeg", // default
       debug: true, // default
     },
-    // ImageResize: {
-    //   // https://www.npmjs.com/package/quill-image-resize-module
-    //   },
-    
   };
 
-  let formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "color",
-    "background",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "clean",
-  ];
-
-
-  // if (hasImg) {
-  //   // formatsから除くとその機能自体が使えなくなる
-  //   formats = formats.filter(() =>  !"image" )
-  // }
-
+  // let formats = [
+  //   "header",
+  //   "bold",
+  //   "italic",
+  //   "underline",
+  //   "strike",
+  //   "blockquote",
+  //   "color",
+  //   "background",
+  //   "list",
+  //   "bullet",
+  //   "indent",
+  //   "link",
+  //   "image",
+  //   "clean",
+  // ];
 
   return (
     <>
       <ReactQuill
         id="react_quill_editor"
         value={value}
-        // onChange={(e) => setValue(e)}
         onChange={(content, delta, source, editor) =>
           handleOnChange(content, delta, source, editor)
         }
         theme="snow"
         modules={modules}
-        formats={formats}
+        // formats={formats}
       />
       <Typography
         variant="body2"
         align="right"
-        color={charCount < 1001 ? 'textPrimary' : 'error'}  
+        color={charCount < 1001 ? "textPrimary" : "error"}
       >
-        {`${charCount}/1000`}
+        {charCount < 1001 ? null : "文字数をオーバーしています"}{`${charCount}/1000`}
       </Typography>
     </>
   );
