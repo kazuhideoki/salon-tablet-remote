@@ -10,7 +10,7 @@ import {
   TCreateFooterItem,
   TUpdateFooterItem,
 } from "../Store/footerItems/footerItemsActionCreator";
-import { TextField } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 
 
 export const FooterItemEditor = () => {
@@ -75,13 +75,21 @@ export const FooterItemEditor = () => {
 
   return (
     <>
-      <h2>フッターの設定</h2>
-      <h3>アイコンの名前</h3>
-      <input
+      <h2>フッターアイテム</h2>
+      <TextField
+        id="icon-name-text-field"
+        label="アイコン名"
+        variant="outlined"
         value={iconName}
         onChange={(e) => setIconName(e.target.value)}
         style={{ marginBottom: "20px" }}
+        autoFocus={isEdittingFooterItem ? false : true}
       />
+      {/* <input
+        value={iconName}
+        onChange={(e) => setIconName(e.target.value)}
+        style={{ marginBottom: "20px" }}
+      /> */}
       <br />
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {onTap === "modal" ? (
@@ -101,12 +109,20 @@ export const FooterItemEditor = () => {
         />
       )}
       <IconSelect />
-      <button onClick={() => handleSubmit({ isPublishing: true })}>
+      <Button
+        variant="outlined"
+        onClick={() => handleSubmit({ isPublishing: true })}
+        disabled={charCount < 1001 ? false : true}
+      >
         {isEdittingFooterItem ? "更新" : "投稿"}
-      </button>
-      <button onClick={() => handleSubmit({ isPublishing: false })}>
+      </Button>
+      <Button
+        variant="outlined"
+        onClick={() => handleSubmit({ isPublishing: false })}
+        disabled={charCount < 1001 ? false : true}
+      >
         下書き保存
-      </button>
+      </Button>
     </>
   );
 };
