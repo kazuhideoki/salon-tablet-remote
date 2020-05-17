@@ -7,7 +7,7 @@ import {
 } from "../Store/articles/articlesActionCreator";
 import { EditorContext } from "../Store/EditorContext";
 import { QuillEditor } from "./QuillEditor";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Typography } from "@material-ui/core";
 
 
 const ArticleEditor = () => {
@@ -19,17 +19,17 @@ const ArticleEditor = () => {
     isEdittingArticle,
     edittingArticleParams,
   } = React.useContext(EditorContext);
-  const [charCount, setCharCount] = React.useState(0);
+  const [charCountArticleTitle, setCharCountArticlTitle] = React.useState(0);
+  const [charCountArticleContent, setCharCountArticlContent] = React.useState(0);
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
 
+  const handleOnChangeTitleText = (e) => {
+    setTitleText(e.target.value);
+    setCharCountArticlTitle(e.target.value.length);
+  }
+
   const handleSubmit = ({ isPublishing }) => {
-    // let is_published: boolean;
-    // if (isDraft) {
-    //   is_published = false;
-    // } else {
-    //   is_published = true;
-    // }
     // 記事編集
     if (isEdittingArticle) {
       const params: TUpdateArticle = {
@@ -59,44 +59,46 @@ const ArticleEditor = () => {
         label="タイトル"
         variant="outlined"
         value={titleText}
-        onChange={(e) => setTitleText(e.target.value)}
+        onChange={(e) => handleOnChangeTitleText(e)}
         style={{ marginBottom: "20px" }}
-        // バリデーション出来る？
-        // focusは？
-        autoFocus={isEdittingArticle? false : true}
+        autoFocus={isEdittingArticle ? false : true}
       />
-      {/* <input
-        value={titleText}
-        onChange={(e) => setTitleText(e.target.value)}
-        style={{ marginBottom: "20px" }}
-      /> */}
+      {charCountArticleTitle < 101 ? null : (
+        <Typography
+          variant="body2"
+          color={"error"}
+        >
+          文字数をオーバーしています(100文字以下)
+        </Typography>
+      )}
       <QuillEditor
         value={editorText}
         setValue={setEditorText}
-        charCount={charCount}
-        setCharCount={setCharCount}
+        charCount={charCountArticleContent}
+        setCharCount={setCharCountArticlContent}
       />
       <Button
         variant="outlined"
         onClick={() => handleSubmit({ isPublishing: true })}
-        disabled={charCount < 1001 ? false : true}
+        disabled={
+          charCountArticleTitle < 101 && charCountArticleContent < 1001
+            ? false
+            : true
+        }
       >
         {isEdittingArticle ? "更新" : "投稿"}
       </Button>
       <Button
         variant="outlined"
         onClick={() => handleSubmit({ isPublishing: false })}
-        disabled={charCount < 1001 ? false : true}
+        disabled={
+          charCountArticleTitle < 101 && charCountArticleContent < 1001
+            ? false
+            : true
+        }
       >
         下書き保存
       </Button>
-
-      {/* <button onClick={() => handleSubmit({ isDraft: false })}>
-        {isEdittingArticle ? "更新" : "投稿"}
-      </button>
-      <button onClick={() => handleSubmit({ isDraft: true })}>
-        下書き保存
-      </button> */}
     </>
   );
 };

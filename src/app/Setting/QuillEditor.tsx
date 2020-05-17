@@ -68,7 +68,7 @@ export const QuillEditor = ({ value ,setValue, charCount, setCharCount }:Props) 
   
   const handleOnChange = (content, delta, source, editor) => {
     setValue(content)
-    console.log(delta)
+    // console.log(delta)
     // console.log(source)
     
     checkImg(editor.getContents(), setHasImg, removeImg);

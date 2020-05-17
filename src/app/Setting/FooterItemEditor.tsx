@@ -10,7 +10,7 @@ import {
   TCreateFooterItem,
   TUpdateFooterItem,
 } from "../Store/footerItems/footerItemsActionCreator";
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 
 
 export const FooterItemEditor = () => {
@@ -28,13 +28,16 @@ export const FooterItemEditor = () => {
     setIsEdittingFooterItem,
     edittingFooterItemParams,
   } = React.useContext(EditorContext);
-  const { footerItems } = React.useContext(Store)
-  const [charCount, setCharCount] = React.useState(0);
-
-  // const [onTap, setOnTap] = React.useState('modal'); // editorContextへ
+  const [charCountIconName, setCharCountIconName] = React.useState(0);
+  const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
   
   const createFooterItem = useCreateFooterItem();
   const updateFooterItem = useUpdateFooterItem();
+
+  const handleOnChangeIconName = (e) => {
+    setIconName(e.target.value);
+    setCharCountIconName(e.target.value.length);
+  };
 
 
   const handleSubmit = ({ isPublishing }) => {
@@ -81,23 +84,23 @@ export const FooterItemEditor = () => {
         label="アイコン名"
         variant="outlined"
         value={iconName}
-        onChange={(e) => setIconName(e.target.value)}
+        onChange={(e) => handleOnChangeIconName(e)}
         style={{ marginBottom: "20px" }}
         autoFocus={isEdittingFooterItem ? false : true}
       />
-      {/* <input
-        value={iconName}
-        onChange={(e) => setIconName(e.target.value)}
-        style={{ marginBottom: "20px" }}
-      /> */}
+      {charCountIconName < 101 ? null : (
+        <Typography variant="body2" color={"error"}>
+          文字数をオーバーしています(100文字以下)
+        </Typography>
+      )}
       <br />
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {onTap === "modal" ? (
         <QuillEditor
           value={footerItemEditorText}
           setValue={setFooterItemEditorText}
-          charCount={charCount}
-          setCharCount={setCharCount}
+          charCount={charCountFooterItemContent}
+          setCharCount={setCharCountFooterItemContent}
         />
       ) : (
         <TextField
@@ -112,14 +115,22 @@ export const FooterItemEditor = () => {
       <Button
         variant="outlined"
         onClick={() => handleSubmit({ isPublishing: true })}
-        disabled={charCount < 1001 ? false : true}
+        disabled={
+          charCountIconName < 101 && charCountFooterItemContent < 1001
+            ? false
+            : true
+        }
       >
         {isEdittingFooterItem ? "更新" : "投稿"}
       </Button>
       <Button
         variant="outlined"
         onClick={() => handleSubmit({ isPublishing: false })}
-        disabled={charCount < 1001 ? false : true}
+        disabled={
+          charCountIconName < 101 && charCountFooterItemContent < 1001
+            ? false
+            : true
+        }
       >
         下書き保存
       </Button>

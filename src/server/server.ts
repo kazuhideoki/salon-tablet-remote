@@ -1,5 +1,6 @@
 import express from "express";
 import next from "next";
+import { articlesValidation, validationErrorHandle } from "./validation";
 import mysqlPromise from "mysql2/promise";
 import bodyParser from "body-parser";
 import {
@@ -53,6 +54,10 @@ export type ResData = {
     rawData: TArticles,
     pagination: PaginationParams
 }
+
+
+
+
 
 app.prepare().then(() => {
 
@@ -111,26 +116,38 @@ app.prepare().then(() => {
     })
 
   
-    // 新規投稿用のPOST。{ title, date, content }を渡せばidは自動連番で振られる。
-    server.post("/articles/create", (req, res) => {
-      corsHeader(res);
-      const params: ArticleWithoutId = req.body;
-      new ArticlesTable(params)
-        .save()
-        .then((result) => {
-          const data = {
-            rawData: result,
-            pagination: result.pagination,
-          };
-          res.send(data);
-        })
-        .catch((err) => {
-          res.status(500).json({
-            err: true,
-            data: { message: err.message },
+    // 新規投稿用のPOST。{ title, created_at, article_content }を渡せばidは自動連番で振られる。
+    server.post(
+      "/articles/create",articlesValidation,
+      (req, res) => {
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty()) {
+        //   // バリデーション失敗
+        //   res
+        //     .status(422)
+        //     .json({ err: true, data: { message: errors.array() } });
+        // }
+        validationErrorHandle(req, res)
+
+        corsHeader(res);
+        const params: ArticleWithoutId = req.body;
+        new ArticlesTable(params)
+          .save()
+          .then((result) => {
+            const data = {
+              rawData: result,
+              pagination: result.pagination,
+            };
+            res.send(data);
+          })
+          .catch((err) => {
+            res.status(500).json({
+              err: true,
+              data: { message: err.message },
+            });
           });
-        });
-    });
+      }
+    );
 
      server.post("/articles/get/singlepost", (req, res) => {
        corsHeader(res);
@@ -147,17 +164,19 @@ app.prepare().then(() => {
     });
 
     //  編集した記事をアップデートする。
-    server.post("/articles/update", (req, res) => {
-      corsHeader(res);
-        const params: TArticle = req.body
+    server.post(
+      "/articles/update", articlesValidation,
+      [
+        check("title").isLength({ min: 0, max: 100 }),
+        check("article_content").isLength({ min: 0, max: 1000 }),
+      ],
+      (req, res) => {
+        validationErrorHandle(req, res);
+        corsHeader(res);
+        const params: TArticle = req.body;
 
         new ArticlesTable()
           .where("id", params.id)
-          // .save({
-          //     title: title,
-          //     date: date,
-          //     content: content,
-          // },{patch:true})
           .save(params, { patch: true })
           .then((result) => {
             console.dir("updatepostのresultは " + JSON.stringify(result));
@@ -169,8 +188,9 @@ app.prepare().then(() => {
               err: true,
               data: { message: err.message },
             });
-          });         
-    });
+          });
+      }
+    );
 
 // Idを渡して多少のデータを削除する
      server.post("/articles/delete", (req, res) => {
