@@ -147,6 +147,7 @@ export const PMain = () => {
                       {sqlToDate(value.created_at)}
                     </Typography>
                     <div
+                      className="p-main-article"
                       dangerouslySetInnerHTML={{
                         __html: value.article_content,
                       }}

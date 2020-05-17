@@ -167,10 +167,6 @@ app.prepare().then(() => {
     //  編集した記事をアップデートする。
     server.post(
       "/articles/update", articlesValidation,
-      [
-        check("title").isLength({ min: 0, max: 100 }),
-        check("article_content").isLength({ min: 0, max: 1000 }),
-      ],
       (req, res) => {
         validationErrorHandle(req, res);
         corsHeader(res);
