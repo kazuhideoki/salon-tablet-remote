@@ -1,6 +1,7 @@
 import express from "express";
 import next from "next";
-import { articlesValidation, validationErrorHandle } from "./validation";
+const { check } = require("express-validator");
+import { articlesValidation, footerItemsValidation,validationErrorHandle } from "./validation";
 import mysqlPromise from "mysql2/promise";
 import bodyParser from "body-parser";
 import {
@@ -215,13 +216,13 @@ app.prepare().then(() => {
     });
 
     server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
-    server.post("/footer_items/create", (req, res) =>
+    server.post("/footer_items/create", footerItemsValidation, (req, res) =>
       footer_items_create_item(req, res)
     );
     server.post("/footer_items/get/single", (req, res) =>
       footer_items_get_single(req, res)
     );
-    server.post("/footer_items/update", (req, res) =>
+    server.post("/footer_items/update", footerItemsValidation, (req, res) =>
       footer_items_update_item(req, res)
     );
     server.post("/footer_items/delete", (req, res) =>

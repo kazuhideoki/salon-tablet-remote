@@ -1,6 +1,7 @@
 // import express from "express";
 import mysql from 'mysql2'
 import mysqlPromise from "mysql2/promise";
+import { validationErrorHandle } from "../validation";
 import { corsHeader } from '../server'
 import { FooterItems } from "../../app/Store/Store";
 import { SwitchOrderParams } from "../../app/Setting/buttons/SwitchOrderButton";
@@ -54,6 +55,8 @@ export const footer_items_get = (req, res) => {
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 // /footer_items/create
 export const footer_items_create_item = (req, res) => {
+  validationErrorHandle(req,res)
+
   corsHeader(res);
 
 
@@ -114,6 +117,7 @@ export const footer_items_get_single = (req, res) => {
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 // /footer_items/update
 export const footer_items_update_item = (req, res) => {
+  validationErrorHandle(req, res);
   corsHeader(res);
 
   const { footer_item_id, is_published, created_at, updated_at, icon_name, displayed_icon_name, on_tap, item_content, link_url, order } = req.body
