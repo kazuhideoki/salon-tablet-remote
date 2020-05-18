@@ -6,6 +6,7 @@ export type AppStateAction =
     { type: "ON_IS_SETTING" } |
     { type: "OFF_IS_SETTING" } |
     { type: "OPEN_MODAL", payload: string } |
+    { type: "SET_ARTICLE_CONTENT", payload: any } |
     { type: "SET_FOOTER_ITEM_CONTENT", payload: any } |
     { type: "CLOSE_MODAL" } | 
     { type: "OPEN_ARTICLE_MODAL" } |
@@ -42,10 +43,16 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isModalOpen: true,
         };
         break;
+      case "SET_ARTICLE_CONTENT":
+        newState = {
+          ...state,
+          articleContentModal: action.payload,
+        };
+        break;
       case "SET_FOOTER_ITEM_CONTENT":
         newState = {
           ...state,
-          footerItemContent: action.payload,
+          footerItemContentModal: action.payload,
         };
         break;
       case "CLOSE_MODAL":

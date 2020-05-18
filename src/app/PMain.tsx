@@ -31,8 +31,12 @@ const useStyles = makeStyles((theme) =>
     height: "100%",
     border: "3px solid red",
   },
-  article: {
+  cardActionArea: {
     width: 350,
+    height: "100%",
+  },
+  card: {
+    // width: 350,
     height: "100%",
   },
   insta: {
@@ -94,6 +98,12 @@ export const PMain = () => {
       getSingleArticle(id);
     };
 
+    const openArticle = (article_content) => {
+      dispatchAppState({ type: "SET_ARTICLE_CONTENT", payload: article_content})
+      dispatchAppState({ type: "OPEN_MODAL", payload: "article_modal"})
+
+    }
+
     const props = {
       articles,
       classes,
@@ -135,12 +145,15 @@ export const PMain = () => {
                 />
               ) : null}
 
-              <Card
-                variant="outlined"
-                className={classes.article}
-                id={`p_main_` + key}
+              <CardActionArea
+                className={classes.cardActionArea}
+                onClick={() => openArticle(value.article_content)}
               >
-                <CardActionArea>
+                <Card
+                  variant="outlined"
+                  className={classes.card}
+                  id={`p_main_` + key}
+                >
                   <CardContent>
                     <Typography variant="h5">{value.title}</Typography>
                     <Typography gutterBottom variant="h6" align="right">
@@ -153,8 +166,8 @@ export const PMain = () => {
                       }}
                     />
                   </CardContent>
-                </CardActionArea>
-              </Card>
+                </Card>
+              </CardActionArea>
             </Grid>
           );
         });
@@ -163,7 +176,7 @@ export const PMain = () => {
         <Grid item >
           <Card
             variant="outlined"
-            className={classes.article}
+            className={classes.card}
           >
             記事がありません
           </Card>

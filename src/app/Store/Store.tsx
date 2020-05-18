@@ -64,7 +64,8 @@ export type FooterItems = FooterItem[]
 const initAppState = {
   isSetting: false,
   setModal: "edit_article",
-  footerItemContent: '',
+  articleContentModal: '',
+  footerItemContentModal: '',
   isModalOpen: false,
   isArticleModalOpen: false,
   isLoading: false,

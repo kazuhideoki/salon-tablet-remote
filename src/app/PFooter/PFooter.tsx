@@ -61,9 +61,9 @@ export const PFooter = () => {
     const classes = useStyles();
     const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
-    const openModal = (modalName: string, footerItemContent: any) => {
+    const openModal = (modalName: string, footerItemContentModal: any) => {
         dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
-      dispatchAppState({ type: "SET_FOOTER_ITEM_CONTENT", payload: footerItemContent})
+      dispatchAppState({ type: "SET_FOOTER_ITEM_CONTENT", payload: footerItemContentModal})
       }
 
     const { setIsEdittingFooterItem } = React.useContext(

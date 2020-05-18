@@ -9,6 +9,7 @@ import { FooterItemModal } from "../PModal/FooterItemModal";
 
 import { SettingPassword } from "./SettingPassword";
 import dynamic from "next/dynamic";
+import { ArticleModal } from "./ArticleModal";
 const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
   ssr: false,
 });
@@ -88,6 +89,10 @@ export const PModal = () => {
           case "setting_password":
             modalStyle = sizeSmall;
             ModalContent = () => <SettingPassword/>
+            break;
+          case "article_modal":
+            modalStyle = size90;
+            ModalContent = () => <ArticleModal />;
             break;
           case "edit_article":
             modalStyle = size90;
