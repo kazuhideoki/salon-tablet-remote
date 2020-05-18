@@ -9,6 +9,11 @@ import { Store } from "../Store/Store";
 import { ThemeType } from "../Store/ThemeContext";
 import { useStylesFactory } from "../Store/useStylesFactory";
 import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
+import { StoreContextProviderProps } from "../Store/Store";
+import { ThemeProvider } from "../Store/ThemeContext";
+import { StoreContextProvider } from "../Store/Store";
+import { EditorContextProvider } from "../Store/EditorContext";
+
 
 
 // 3段のコンテナの整形に関してのみ記述, 
@@ -43,12 +48,11 @@ const styles = {
     }
 }
 
-
-export const App = ()=> {
+const AppView = ()=> {
   // useStylesFactoryでthemeContextから受け取った値をもとに、styleに定義したコンポーネントごとのスタイルを反映させたclassNameを出力
     const classes = useStylesFactory(styles)
 
-    const { paginationParams, appState, dispatchAppState } = React.useContext(Store);
+    const { appState, dispatchAppState } = React.useContext(Store);
     const isLoading = appState.isLoading
     const endLoading = () => dispatchAppState({type: "END_LOADING"})
     const getArticles = useGetArticles();
@@ -93,6 +97,20 @@ export const App = ()=> {
 
 
     return AppPresenter(props)
+}
+
+export const App = (props:StoreContextProviderProps) => {
+
+  return (
+    // Storeの情報をContextから読み込んで出力
+    <StoreContextProvider data={props.data}>
+      <ThemeProvider>
+        <EditorContextProvider>
+          <AppView />
+        </EditorContextProvider>
+      </ThemeProvider>
+    </StoreContextProvider>
+  );
 }
 
 export default App
