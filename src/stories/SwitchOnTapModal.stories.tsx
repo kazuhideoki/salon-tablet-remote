@@ -1,5 +1,5 @@
 import React from 'react';
-import { SwitchOnTapModal } from '../app/Setting/SwitchOnTapModal';
+import { SwitchOnTapModal } from '../app/View/Setting/SwitchOnTapModal';
 export default {
 title: 'SwitchOnTapModal',
 component: SwitchOnTapModal,

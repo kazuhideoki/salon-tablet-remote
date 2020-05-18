@@ -1,5 +1,5 @@
 import React from 'react';
-import { SettingButton } from "../app/Setting/SettingButton";
+import { SettingButton } from '../app/View/Setting/SettingButton';
 export default {
 title: 'SettingButton',
 component: SettingButton,

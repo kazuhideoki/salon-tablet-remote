@@ -4,7 +4,7 @@ import { StoreContextProviderProps } from "../app/Store/Store";
 // import * as serviceWorker from "../serviceWorker";
 
 // ★★★ 通常版 サーバーサイドレンダリング
-import { App } from "../app/App";
+import { App } from "../app/View/App";
 import { ThemeProvider } from "../app/Store/ThemeContext";
 import { StoreContextProvider} from "../app/Store/Store";
 import { EditorContextProvider } from "../app/Store/EditorContext";

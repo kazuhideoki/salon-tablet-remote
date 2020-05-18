@@ -1,5 +1,5 @@
 import React from 'react';
-import { SettingUserInfo } from '../app/Setting/SettingUserInfo';
+import { SettingUserInfo } from '../app/View/Setting/SettingUserInfo';
 export default {
 title: 'SettingUserInfo',
 component: SettingUserInfo,

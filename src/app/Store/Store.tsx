@@ -1,11 +1,11 @@
 import React, { useReducer } from "react";
-import { ArticlesAction, articlesReducer } from "./articles/articlesRducer";
-import { FooterItemsAction, footerItemsReducer } from "./footerItems/footerItemsReducer";
-import { AppStateAction, appStateReducer } from "./appStateReducer";
+import { ArticlesAction, articlesReducer } from "../Reducer/articlesRducer";
+import { FooterItemsAction, footerItemsReducer } from "../Reducer/footerItemsReducer";
+import { AppStateAction, appStateReducer } from "../Reducer/appStateReducer";
 import {
   PaginationParamsAction,
   paginationParamsReducer,
-} from "./paginationParams/paginationParamsReducer";
+} from "../Reducer/paginationParamsReducer";
 
 const initPagination = {
   page: 0,
