@@ -6,7 +6,7 @@ import { useDeleteArticle } from "../../Store/articles/articlesActionCreator";
 type Type = {
   position: string
   id: number
-  handleOnClick: (id: number) => Promise<void> //deleteArticle 
+  handleOnClick: (id: number) => void // confirm + deleteArticle 
 }
 
 export const DeleteArticleButton = (props: Type) => {

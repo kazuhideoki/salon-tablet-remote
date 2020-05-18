@@ -98,6 +98,11 @@ export const PMain = () => {
       getSingleArticle(id);
     };
 
+    const handleOnDelete = (id: T_id) => {
+      const deleting = confirm("本当に削除してよろしいですか？");
+      deleting ? deleteArticle(id) : null
+    };
+
     const openArticle = (article_content) => {
       dispatchAppState({ type: "SET_ARTICLE_CONTENT", payload: article_content})
       dispatchAppState({ type: "OPEN_MODAL", payload: "article_modal"})
@@ -141,7 +146,7 @@ export const PMain = () => {
                 <DeleteArticleButton
                   position={classes.deleteArticleButton}
                   id={value.id}
-                  handleOnClick={deleteArticle}
+                  handleOnClick={handleOnDelete}
                 />
               ) : null}
 

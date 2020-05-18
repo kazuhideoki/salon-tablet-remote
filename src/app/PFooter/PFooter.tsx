@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid, makeStyles, createStyles } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store } from "../Store/Store";
+import { Store, T_footer_item_id } from "../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
 import { UpdateArticleButton } from "../Setting/buttons/UpdateArticleButton";
@@ -76,6 +76,10 @@ export const PFooter = () => {
       setIsEdittingFooterItem(true);
       getFooterItem(footer_item_id);
     };
+    const handleOnDeleteFooterItem = (footer_item_id: T_footer_item_id) => {
+      const deleting = confirm("本当に削除してよろしいですか？");
+      deleting ? deleteFooterItem(footer_item_id) : null
+    };
 
     const deleteFooterItem = useDeleteFooterItem()
 
@@ -128,7 +132,7 @@ export const PFooter = () => {
               <DeleteArticleButton
                 position={classes.deleteArticleButton}
                 id={value.footer_item_id}
-                handleOnClick={deleteFooterItem}
+                handleOnClick={handleOnDeleteFooterItem}
               />
             ) : null}
             {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
