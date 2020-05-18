@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   Store,
-  TArticle,
   T_is_published_articles,
   T_title,
   T_article_content,
@@ -52,7 +51,7 @@ export const useGetArticle = () => {
   };
 };
 
-export type TCreateArticle = {
+type TCreateArticle = {
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
@@ -60,13 +59,22 @@ export type TCreateArticle = {
 export const useCreateArticle = () => {
   const getArticle = useGetArticle();
   const {
-    paginationParams,
-    dispatchPaginationParams,
-    dispatchArticles,
     dispatchAppState,
   } = React.useContext(Store);
-  const { setEditorText, setTitleText } = React.useContext(EditorContext);
-  return async (params: TCreateArticle) => {
+  const {
+    setEditorText,
+    setTitleText,
+    titleText,
+    editorText,
+  } = React.useContext(EditorContext);
+  return async (isPublishing: boolean) => {
+
+    const params: TCreateArticle = {
+      is_published: isPublishing,
+      title: titleText,
+      article_content: editorText,
+    };
+
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/create`,
       {
@@ -77,26 +85,16 @@ export const useCreateArticle = () => {
       }
     );
     const data = await res.json();
-    // params.id = data.rawData.id;
 
     if (data.err === true) {
       console.log(data);
 
       alert("投稿できませんでした");
     } else {
-      // dispatchArticles({
-      //   type: "CREATE_POST",
-      //   payload: params,
-      // });
       setEditorText("");
       setTitleText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
-      // if (paginationParams !== data.pagination) {
-      //   dispatchPaginationParams({
-      //     type: "SET_PAGINATION_PARAMS",
-      //     payload: data.pagination,
-      //   });
-      // }
+
       getArticle(1);
     }
   };
@@ -134,20 +132,32 @@ export const useGetSingleArticle = () => {
   };
 };
 
-export type TUpdateArticle = {
+type TUpdateArticle = {
   id: T_id;
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
 };
 export const useUpdateArticle = () => {
-  const { dispatchArticles, dispatchAppState, paginationParams } = React.useContext(Store);
-  const { setTitleText, setEditorText, setIsEdittingArticle } = React.useContext(
-    EditorContext
-  );
+  const { dispatchAppState, paginationParams, } = React.useContext(Store);
+  const {
+    setTitleText,
+    setEditorText,
+    setIsEdittingArticle,
+    edittingArticleParams,
+    titleText,
+    editorText,
+  } = React.useContext(EditorContext);
     const getArticle = useGetArticle()
 
-  return async (params: TUpdateArticle) => {
+  return async (isPublishing: boolean) => {
+    const params: TUpdateArticle = {
+      id: edittingArticleParams.id,
+      is_published: isPublishing,
+      title: titleText,
+      article_content: editorText,
+    };
+
     const res = await fetch(
       `${location.protocol}//${location.host}/articles/update`,
       {
@@ -176,9 +186,7 @@ export const useDeleteArticle = () => {
   const getArticle = useGetArticle();
   const {
     paginationParams,
-    dispatchPaginationParams,
     articles,
-    dispatchArticles,
   } = React.useContext(Store);
   return async (id: T_id) => {
     const res = await fetch(
@@ -195,13 +203,6 @@ export const useDeleteArticle = () => {
     if (data.err === true) {
       alert("削除できませんでした");
     } else {
-      // dispatchArticles({ type: "DELETE_POST", payload: { id } });
-      // if (paginationParams !== data.pagination) {
-      //   dispatchPaginationParams({
-      //     type: "SET_PAGINATION_PARAMS",
-      //     payload: data.pagination,
-      //   });
-      // }
       //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (articles.length === 1 && paginationParams.rowCount > 1) {
         const targetPage = paginationParams.page - 1;

@@ -28,7 +28,7 @@ export const useGetFooterItems = () => {
   };
 };
 
-export type TCreateFooterItem = {
+type TCreateFooterItem = {
   is_published: T_is_published_footer_items,
   icon_name: T_icon_name,
   displayed_icon_name: T_displayed_icon_name | null,
@@ -63,24 +63,24 @@ export const useCreateFooterItem = () => {
     order = 1
   }
 
-  return async (values: TCreateFooterItem) => {
-    const {
-      is_published,
-      icon_name,
-      displayed_icon_name,
-      on_tap,
-      item_content,
-      link_url,
-    } = values;
+  const {
+    iconName,
+    selectedIcon,
+    onTap,
+    footerItemEditorText,
+    linkUrl,
+  } = React.useContext(EditorContext);
 
+  return async (isPublishing: boolean) => {
     const params: TCreateFooterItem = {
-      is_published: is_published,
-      icon_name: icon_name,
-      displayed_icon_name: displayed_icon_name,
-      on_tap: on_tap,
-      item_content: item_content,
-      link_url: link_url,
-      order: order, // orderの最大値＋1を代入する
+      is_published: isPublishing,
+      icon_name: iconName,
+      // 選択されていたらアイコンの名前を返す.
+      displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
+      on_tap: onTap,
+      item_content: footerItemEditorText,
+      link_url: linkUrl,
+      order: 1,
     };
 
     const res = await fetch(
@@ -158,7 +158,7 @@ export const useGetFooterItem = () => {
   };
 };
 
-export type TUpdateFooterItem = {
+type TUpdateFooterItem = {
   footer_item_id: T_footer_item_id
   is_published: T_is_published_footer_items,
   icon_name: T_icon_name,
@@ -170,15 +170,33 @@ export type TUpdateFooterItem = {
 };
 
 export const useUpdateFooterItem = () => {
-  const { dispatchFooterItems, dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(Store);
   const { setIconName, setFooterItemEditorText, setIsEdittingFooterItem } = React.useContext(
     EditorContext
   );
   const getFooterItems = useGetFooterItems()
 
-  return async (
-    params: TUpdateFooterItem
-  ) => {
+  const {
+    edittingFooterItemParams,
+    iconName,
+    selectedIcon,
+    onTap,
+    footerItemEditorText,
+    linkUrl,
+  } = React.useContext(EditorContext);
+
+  return async (isPublishing: boolean) => {
+    const params: TUpdateFooterItem = {
+      footer_item_id: edittingFooterItemParams.footer_item_id,
+      is_published: isPublishing,
+      icon_name: iconName,
+      // 選択されていたらアイコンの名前を返す
+      displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
+      on_tap: onTap, // 要確認
+      item_content: footerItemEditorText,
+      link_url: linkUrl,
+      order: edittingFooterItemParams.order,
+    };
     const res = await fetch(
       `${location.protocol}//${location.host}/footer_items/update`,
       {

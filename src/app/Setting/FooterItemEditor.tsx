@@ -7,15 +7,12 @@ import { FooterItemWithoutId, FooterItem, Store } from "../Store/Store";
 import {
   useCreateFooterItem,
   useUpdateFooterItem,
-  TCreateFooterItem,
-  TUpdateFooterItem,
 } from "../Store/footerItems/footerItemsActionCreator";
 import { TextField, Button, Typography } from '@material-ui/core';
 
 
 export const FooterItemEditor = () => {
   const {
-    selectedIcon,
     iconName,
     setIconName,
     footerItemEditorText,
@@ -25,8 +22,6 @@ export const FooterItemEditor = () => {
     linkUrl,
     setLinkUrl,
     isEdittingFooterItem,
-    setIsEdittingFooterItem,
-    edittingFooterItemParams,
   } = React.useContext(EditorContext);
   const [charCountIconName, setCharCountIconName] = React.useState(0);
   const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
@@ -41,38 +36,10 @@ export const FooterItemEditor = () => {
 
 
   const handleSubmit = ({ isPublishing }) => {
-
-    let on_tap: boolean;
-    if (onTap === 'modal') {
-      on_tap = true
-    } else {
-      on_tap = false
-    }
     if (isEdittingFooterItem) {
-      const params: TUpdateFooterItem = {
-        footer_item_id: edittingFooterItemParams.footer_item_id,
-        is_published: isPublishing,
-        icon_name: iconName,
-        // 選択されていたらアイコンの名前を返す
-        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
-        on_tap: onTap, // 要確認
-        item_content: footerItemEditorText,
-        link_url: linkUrl,
-        order: edittingFooterItemParams.order,
-      };
-      updateFooterItem(params);
+      updateFooterItem(isPublishing);
     } else {
-      const params: TCreateFooterItem = {
-        is_published: isPublishing,
-        icon_name: iconName,
-        // 選択されていたらアイコンの名前を返す.
-        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
-        on_tap: onTap,
-        item_content: footerItemEditorText,
-        link_url: linkUrl,
-        order: 1,
-      };
-      createFooterItem(params);
+      createFooterItem(isPublishing);
     }
   };
 
