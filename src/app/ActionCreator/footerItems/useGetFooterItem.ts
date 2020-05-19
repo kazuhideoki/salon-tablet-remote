@@ -2,6 +2,7 @@ import React from "react";
 import {
   FooterItem,
   T_footer_item_id,
+  Store,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../../View/Setting/iconSelect/icons";
@@ -20,38 +21,29 @@ export const useGetFooterItem = () => {
     setEdittingFooterItemParams,
     dispatchSelectedIcon,
   } = React.useContext(EditorContext);
+  const { footerItems } = React.useContext(Store)
 
   return async (footer_item_id: T_footer_item_id) => {
-    const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/get/single`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ footer_item_id: footer_item_id }),
-      }
-    );
-    const data: UseGetFooterItemRes = await res.json();
 
-    if (data.err === true) {
+    const target = footerItems.filter((value) => {
+      return value.footer_item_id === footer_item_id
+    })
+    const footerItem = target[0]
+
+    if (!footerItem) {
       alert("アイテムを取得できませんでした");
     } else {
-      const {
-        icon_name,
-        item_content,
-        displayed_icon_name,
-        on_tap,
-        link_url,
-      } = data.rawData;
       setIsEdittingFooterItem(true);
-      setEdittingFooterItemParams(data.rawData);
-      setIconName(icon_name);
-      setFooterItemEditorText(item_content);
-      setOnTap(on_tap);
-      setLinkUrl(link_url);
+      setEdittingFooterItemParams(footerItem);
+      setIconName(footerItem.icon_name);
+      setFooterItemEditorText(footerItem.item_content);
+      setOnTap(footerItem.on_tap);
+      setLinkUrl(footerItem.link_url);
       dispatchSelectedIcon({
         type: "SET_ICON",
-        payload: IconsSetting.convertIconComponentFromName(displayed_icon_name),
+        payload: IconsSetting.convertIconComponentFromName(
+          footerItem.displayed_icon_name
+        ),
       });
     }
   };
