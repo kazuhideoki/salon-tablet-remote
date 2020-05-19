@@ -1,8 +1,13 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
+// import { Quill } from "react-quill";
+// import dynamic from "next/dynamic";
+// const ReactQuill = dynamic(() => import("react-quill"), {
+//   ssr: false,
+// });
 import * as TQuill from "quill";
 import ImageCompress from "quill-image-compress";
-import { Typography } from '@material-ui/core';
+import { Typography, CircularProgress } from '@material-ui/core';
 // ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み
 // import { ImageResize } from "quill-image-resize-module";
 
@@ -123,6 +128,15 @@ export const QuillEditor = ({ value ,setValue, charCount, setCharCount }:Props) 
   //   "image",
   //   "clean",
   // ];
+  // const [isLoaded, setIsLoaded] = React.useState(false)
+
+  // React.useEffect(() => {
+  //   setIsLoaded(true)
+  // },[])
+
+  // if (!isLoaded) {
+  //   return <CircularProgress/>
+  // }
 
   return (
     <>
@@ -141,7 +155,8 @@ export const QuillEditor = ({ value ,setValue, charCount, setCharCount }:Props) 
         align="right"
         color={charCount < 1001 ? "textPrimary" : "error"}
       >
-        {charCount < 1001 ? null : "文字数をオーバーしています"}{`${charCount}/1000`}
+        {charCount < 1001 ? null : "文字数をオーバーしています"}
+        {`${charCount}/1000`}
       </Typography>
     </>
   );

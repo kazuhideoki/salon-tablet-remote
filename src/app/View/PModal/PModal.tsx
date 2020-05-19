@@ -13,9 +13,13 @@ import { ArticleModal } from "./ArticleModal";
 const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
   ssr: false,
 });
+// import ArticleEditor from "../Setting/ArticleEditor";
+
 const FooterItemEditor = dynamic(() => import("../Setting/FooterItemEditor"), {
   ssr: false,
 });
+// import FooterItemEditor from "../Setting/FooterItemEditor";
+
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;

@@ -1,7 +1,11 @@
 import React from "react";
 import { EditorContext } from "../../Store/EditorContext";
-import { QuillEditor } from "./QuillEditor";
-import { Button, TextField, Typography } from "@material-ui/core";
+import dynamic from "next/dynamic";
+const QuillEditor = dynamic(() => import("./QuillEditor"), {
+  ssr: false,
+});
+// import { QuillEditor } from "./QuillEditor";
+import { Button, TextField, Typography, CircularProgress } from "@material-ui/core";
 import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
 import { Store } from "../../Store/Store";
@@ -34,6 +38,16 @@ const ArticleEditor = () => {
       createArticle(isPublishing);
     }
   };
+
+  //  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  //  React.useEffect(() => {
+  //    setIsLoaded(true);
+  //  }, []);
+
+  //  if (isLoaded) {
+  //    return <CircularProgress />;
+  //  }
 
   return (
     <>

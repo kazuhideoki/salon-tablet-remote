@@ -103,6 +103,7 @@ export type StoreContextProviderProps = {
     articles: TArticles;
     pagination: PaginationParams;
     footerItems: FooterItems;
+    appState: AppState
   };
   children?: React.ReactNode;
 };
@@ -122,7 +123,8 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
   );
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,
-    initAppState
+    // initAppState
+    props.data.appState
   );
   const [loading, dispatchLoading] = useReducer(
     loadingReducer,
