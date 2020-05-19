@@ -50,11 +50,15 @@ const styles = {
   },
   circularProgress: {
     position: "absolute",
-    top: 0,
-    buttom: 0,
-    left: 0,
-    right: 0,
-    margin: 'auto',
+    // top: 0,
+    // buttom: 0,
+    // left: 0,
+    // right: 0,
+    // margin: 'auto',
+    top: "50%",
+    left: "50%",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
   },
 }
 

@@ -20,12 +20,12 @@ const styles = {
 
 export const DisplayNumbers = (props: pageArrowProps) => {
     const classes = useStylesFactory(styles)
-    const { paginationParams, dispatchAppState } = React.useContext(Store);
+    const { paginationParams, dispatchLoading } = React.useContext(Store);
     const {page, pageCount} = paginationParams;
     const getArticles = useGetArticles();
 
     const hundleOnClick = (num) => {
-      dispatchAppState({ type: "START_LOADING" });
+      dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
       getArticles(num);
     };
 
