@@ -16,27 +16,21 @@ export const useGetSingleArticle = () => {
     setIsEdittingArticle,
     setEdittingArticleParams,
   } = React.useContext(EditorContext);
+  const { articles } = React.useContext(Store)
 
   return async (id: T_id) => {
-    const res = await fetch(
-      `${location.protocol}//${location.host}/articles/get/singlepost`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ id: id }),
-      }
-    );
-    const data = await res.json();
+    const target = articles.filter((value) => {
+      return value.id === id
+    })
+    const article = target[0]
 
-    if (data.err === true) {
+    if (!article) {
       alert("記事を取得できませんでした");
     } else {
-      const { title, article_content } = data.rawData;
-      setTitleText(title);
+      setTitleText(article.title);
       setIsEdittingArticle(true);
-      setEdittingArticleParams(data.rawData);
-      setEditorText(article_content);
+      setEdittingArticleParams(article);
+      setEditorText(article.article_content);
     }
   };
 };
