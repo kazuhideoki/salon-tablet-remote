@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, CircularProgress } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain";
@@ -19,79 +19,91 @@ import { EditorContextProvider } from "../Store/EditorContext";
 // 3段のコンテナの整形に関してのみ記述, 
 // 枠の設定、header,footerの最大値の設定
 const styles = {
-    // vh,vwでデバイスの向きに対応することができる。
-    root: {
-        overflow: "hidden",
-        position: "fixed",
-        left: 0,
-        top: 0,
-        width: "100vw",
-        height: "100vh",
-        padding: (themes: ThemeType) => `${themes.app.padding}vh ${themes.app.padding}vw`,
-    },
-    gridRoot: {
-        height: '100%'
-    },
-    header: {
-        marginBottom: (themes: ThemeType) => themes.pHeader.marginBottom + 'vh',
-        width: (themes: ThemeType) => themes.pHeader.width + 'vw',
-        height: (themes: ThemeType) => themes.pHeader.height + 'vh',
-    },
-    main: {
-        width: (themes: ThemeType) => themes.pMain.width + 'vw',
-        height: (themes: ThemeType) => themes.pMain.height + 'vh',
-    },
-    footer: {
-        marginTop: (themes: ThemeType) => themes.pFooter.marginTop + 'vh',
-        width: (themes: ThemeType) => themes.pFooter.width + 'vw',
-        height: (themes: ThemeType) => themes.pFooter.height + 'vh',
-    }
+  // vh,vwでデバイスの向きに対応することができる。
+  root: {
+      overflow: "hidden",
+      position: "fixed",
+      left: 0,
+      top: 0,
+      width: "100vw",
+      height: "100vh",
+      padding: (themes: ThemeType) => `${themes.app.padding}vh ${themes.app.padding}vw`,
+  },
+  gridRoot: {
+      height: '100%',
+      position: "relative",
+  },
+  header: {
+      marginBottom: (themes: ThemeType) => themes.pHeader.marginBottom + 'vh',
+      width: (themes: ThemeType) => themes.pHeader.width + 'vw',
+      height: (themes: ThemeType) => themes.pHeader.height + 'vh',
+  },
+  main: {
+      width: (themes: ThemeType) => themes.pMain.width + 'vw',
+      height: (themes: ThemeType) => themes.pMain.height + 'vh',
+      position: 'relative',
+  },
+  footer: {
+      marginTop: (themes: ThemeType) => themes.pFooter.marginTop + 'vh',
+      width: (themes: ThemeType) => themes.pFooter.width + 'vw',
+      height: (themes: ThemeType) => themes.pFooter.height + 'vh',
+  },
+  circularProgress: {
+    position: "absolute",
+    top: 0,
+    buttom: 0,
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
 }
 
 const AppView = ()=> {
   // useStylesFactoryでthemeContextから受け取った値をもとに、styleに定義したコンポーネントごとのスタイルを反映させたclassNameを出力
     const classes = useStylesFactory(styles)
 
-    const { appState, dispatchAppState } = React.useContext(Store);
-    const isLoading = appState.isLoading
-    const endLoading = () => dispatchAppState({type: "END_LOADING"})
+    const { appState, dispatchAppState, loading, dispatchLoading } = React.useContext(Store);
+    const isLoading = loading.mainArticles;
     const getArticles = useGetArticles();
 
     const props = {
-    classes,
-    isLoading,
+      classes,
     };
     type Props = typeof props
 
     // 設定モード[isSetting]を切り替えるたびに記事を読み込み直す
     React.useEffect(() => {
+      dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
       getArticles(1);
     },[appState.isSetting])
 
-    const AppPresenter = ({ classes, isLoading }: Props) => {
-        return (
-          <div className={classes.root}>
-            <Grid
-              spacing={0}
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              className={classes.gridRoot}
-            >
-              <Grid item className={classes.main}>
-                {/* Skeltonはローディング中に表示させる */}
-                {!isLoading ? <PMain /> : <Skeleton />}
-              </Grid>
-              <Grid item className={classes.footer}>
-                <PFooter />
-                <SettingSwitch/>
-              </Grid>
-              
-              <PModal />
+    const AppPresenter = ({ classes }: Props) => {
+      return (
+        <div className={classes.root}>
+          <Grid
+            spacing={0}
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            className={classes.gridRoot}
+          >
+            <Grid item className={classes.main}>
+              {loading.mainArticles ? 
+                <CircularProgress className={classes.circularProgress} size={100} thickness={10}/>
+              : <PMain /> }
             </Grid>
-          </div>
-        );
+            <Grid item className={classes.footer}>
+              <PFooter />
+              <SettingSwitch />
+            </Grid>
+            {/* {loading.modalEditor ?
+              <CircularProgress className={classes.circularProgress} size={100} thickness={10}/>
+              : <PModal />} */}
+            <PModal />
+          </Grid>
+        </div>
+      );
     };
 
 

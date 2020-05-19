@@ -12,6 +12,7 @@ export const useGetArticles = () => {
     appState,
   } = React.useContext(Store);
   const isSetting = appState.isSetting;
+  const { dispatchLoading } = React.useContext(Store)
 
   return async (page: number) => {
     const res = await fetch(
@@ -33,7 +34,7 @@ export const useGetArticles = () => {
         type: "GET",
         payload: data.rawData,
       });
-      dispatchAppState({ type: "END_LOADING" });
+      dispatchLoading({type: "OFF_IS_LOADING_MAIN_ARTICLES"})
       //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
         dispatchPaginationParams({

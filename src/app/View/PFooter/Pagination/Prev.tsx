@@ -5,12 +5,12 @@ import { Store } from "../../../Store/Store";
 import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
 
 export const Prev = (props: pageArrowProps) => {
-  const { paginationParams, dispatchAppState } = React.useContext(Store);
+  const { paginationParams, dispatchLoading } = React.useContext(Store);
   const { page } = paginationParams;
   const getArticles = useGetArticles();
 
   const hundleOnClick = () => {
-    dispatchAppState({ type: "START_LOADING" });
+   dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     getArticles(page - 1);
   };
 

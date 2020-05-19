@@ -6,6 +6,7 @@ import {
   PaginationParamsAction,
   paginationParamsReducer,
 } from "../Reducer/paginationParamsReducer";
+import { loadingReducer, LoadingAction } from "../Reducer/loadingReducer";
 
 const initPagination = {
   page: 0,
@@ -68,24 +69,32 @@ const initAppState = {
   footerItemContentModal: '',
   isModalOpen: false,
   isArticleModalOpen: false,
-  isLoading: false,
 };
 export type AppState = typeof initAppState
+const initLoading = {
+  mainArticles: false,
+  modalEditor: false
+}
+export type Loading = typeof initLoading
 
 export type DispatchArticles = React.Dispatch<ArticlesAction>;
 export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
 export type DispatchAppState = React.Dispatch < AppStateAction >
 export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
+export type DispatchLoading = React.Dispatch<LoadingAction>;
+
 
 export type ContextProps = {
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
   articles: TArticles;
   dispatchArticles: DispatchArticles;
-  footerItems: FooterItems
-  dispatchFooterItems: DispatchFooterItems
+  footerItems: FooterItems;
+  dispatchFooterItems: DispatchFooterItems;
   appState: AppState;
   dispatchAppState: DispatchAppState;
+  loading: Loading;
+  dispatchLoading: DispatchLoading
 };
 const Store = React.createContext({} as ContextProps);
 
@@ -115,6 +124,10 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     appStateReducer,
     initAppState
   );
+  const [loading, dispatchLoading] = useReducer(
+    loadingReducer,
+    initLoading
+  );
 
   const values = {
     paginationParams,
@@ -125,6 +138,8 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     dispatchFooterItems,
     appState,
     dispatchAppState,
+    loading,
+    dispatchLoading,
   };
 
   return <Store.Provider value={values}>{props.children}</Store.Provider>;

@@ -2,7 +2,6 @@ import { AppState } from '../Store/Store'
 import { reducerLogger } from "./reducerLogger";
 
 export type AppStateAction = 
-    { type: "TOGGLE_IS_SETTING" } |
     { type: "ON_IS_SETTING" } |
     { type: "OFF_IS_SETTING" } |
     { type: "OPEN_MODAL", payload: string } |
@@ -11,19 +10,13 @@ export type AppStateAction =
     { type: "CLOSE_MODAL" } | 
     { type: "OPEN_ARTICLE_MODAL" } |
     { type: "CLOSE_ARTICLE_MODAL" } |
-    { type: "START_LOADING" } |
+    { type: "SET_IS_LOADING" } |
     { type: "END_LOADING" }
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState
     const func = appStateReducer
     switch (action.type) {
-      case "TOGGLE_IS_SETTING":
-        newState = {
-          ...state,
-          isSetting: !state.isSetting,
-        };
-        break;
       case "ON_IS_SETTING":
         newState = {
           ...state,
@@ -73,18 +66,18 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isArticleModalOpen: false,
         };
         break;
-      case "START_LOADING":
-        newState = {
-          ...state,
-          isLoading: true,
-        };
-        break;
-      case "END_LOADING":
-        newState = {
-          ...state,
-          isLoading: false,
-        };
-        break;
+      // case "SET_IS_LOADING":
+      //   newState = {
+      //     ...state,
+      //     isLoading: true,
+      //   };
+      //   break;
+      // case "END_LOADING":
+      //   newState = {
+      //     ...state,
+      //     isLoading: "",
+      //   };
+      //   break;
       default:
         console.log("エラーだよ,appStateReducer");
         newState = { ...state };

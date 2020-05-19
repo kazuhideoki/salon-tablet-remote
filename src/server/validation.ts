@@ -7,7 +7,7 @@ export const articlesValidation = [
     .withMessage("タイトルは100文字以内にしてください。"),
   // 圧縮された一枚の画像も含めたサイズ。万が一超えたときのためのバリデーション
   check("article_content")
-    .isLength({ min: 0, max: 100000 })
+    .isLength({ min: 0, max: 500000 })
     .withMessage("送信データが大きすぎます。"),
 ];
 export const footerItemsValidation = [
@@ -16,7 +16,7 @@ export const footerItemsValidation = [
     .withMessage("アイコン名は100文字以内にしてください。"),
   // 圧縮された一枚の画像も含めたサイズ。万が一超えたときのためのバリデーション
   check("item_content")
-    .isLength({ min: 0, max: 100000 })
+    .isLength({ min: 0, max: 500000 })
     .withMessage("送信データが大きすぎます。"),
 ];
 

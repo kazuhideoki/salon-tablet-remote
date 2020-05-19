@@ -44,8 +44,6 @@ export const PPagination = () => {
     const classes = useStylesFactory(styles);
     const {
         paginationParams,
-        dispatchPaginationParams,
-        dispatchAppState,
     } = React.useContext(Store);
     const { page, pageCount} = paginationParams;
     const getArticles = useGetArticles();

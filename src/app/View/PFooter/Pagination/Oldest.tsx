@@ -7,12 +7,12 @@ import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Oldest = (props: pageArrowProps) => {
-  const { paginationParams, dispatchAppState } = React.useContext(Store);
+  const { paginationParams, dispatchLoading } = React.useContext(Store);
   const {page, pageCount} = paginationParams;
   const getArticles = useGetArticles();
 
   const hundleOnClick = () => {
-    dispatchAppState({ type: "START_LOADING" });
+   dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     getArticles(pageCount);
   };
 
