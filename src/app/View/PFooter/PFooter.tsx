@@ -15,46 +15,48 @@ import { IconsSetting } from "../Setting/iconSelect/icons";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    height: "100%",
-  },
-  GridContainer: {
-    overflow: "scroll",
-  },
-  itemIsPublished: {
-    position: "relative",
-    height: "100%",
-  },
-  itemIsDraft: {
-    position: "relative",
-    height: "100%",
-    border: "3px solid red",
-  },
-  gridItem: {
-    position: "relative",
-  },
-  deleteArticleButton: {
-    position: "absolute",
-    top: 0,
-    right: 5,
-    zIndex: 100,
-  },
-  updateArticleButton: {
-    position: "absolute",
-    top: 0,
-    right: 35,
-    zIndex: 100,
-  },
-  switchOrderButton: {
-    position: "absolute",
-    top: 0,
-    right: 65,
-    zIndex: 100,
-  },
-}))
+    root: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      height: "100%",
+    },
+    GridContainer: {
+      overflow: "scroll",
+    },
+    // itemIsPublished: {
+    //   // position: "relative",
+    //   height: "100%",
+    // },
+    itemIsDraft: {
+      // position: "relative",
+      height: "100%",
+      border: "3px solid red",
+    },
+    gridItem: {
+      height: "100%",
+      position: "relative",
+    },
+    deleteArticleButton: {
+      position: "absolute",
+      top: 0,
+      right: 5,
+      zIndex: 100,
+    },
+    updateArticleButton: {
+      position: "absolute",
+      top: 0,
+      right: 35,
+      zIndex: 100,
+    },
+    switchOrderButton: {
+      position: "absolute",
+      top: 0,
+      right: 65,
+      zIndex: 100,
+    },
+  })
+);
 
 export type HandleOnUpDateFooterIcon = (params: any) => void;
 
@@ -106,11 +108,11 @@ export const PFooter = () => {
             item
             key={index}
             // 投稿済みか下書きかで見た目を変える
-            className={
-              value.is_published == true
-                ? classes.itemIsPublished
-                : classes.itemIsDraft
-            }
+            className={`${classes.gridItem}
+              ${value.is_published == true
+                ? null
+                : classes.itemIsDraft}
+            `}
           >
             {/* セッティング画面で順番を入れ替えるボタンを表示 */}
             {appState.isSetting && index !== 0 ? (
@@ -175,7 +177,9 @@ export const PFooter = () => {
     return (
       <div className={classes.root}>
         <PPagination/>
-        <Grid container justify="center" wrap='nowrap' spacing={2} className={classes.GridContainer}>
+        <Grid container
+        justify={footerItems.length > 5 ? "space-between" : "space-evenly"}
+        wrap='nowrap' spacing={2} className={classes.GridContainer}>
           {(footerItems.length)? displayFooterItems : noItems}       
         </Grid>            
       </div>
