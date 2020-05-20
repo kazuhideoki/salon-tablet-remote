@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
 import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain";
 import { PFooter } from "./PFooter/PFooter";
@@ -50,11 +49,6 @@ const styles = {
   },
   circularProgress: {
     position: "absolute",
-    // top: 0,
-    // buttom: 0,
-    // left: 0,
-    // right: 0,
-    // margin: 'auto',
     top: "50%",
     left: "50%",
     marginRight: "-50%",
@@ -107,9 +101,6 @@ const AppView = ()=> {
               <PFooter />
               <SettingSwitch />
             </Grid>
-            {/* {loading.modalEditor ?
-              <CircularProgress className={classes.circularProgress} size={100} thickness={10}/>
-              : <PModal />} */}
             <PModal />
           </Grid>
         </div>

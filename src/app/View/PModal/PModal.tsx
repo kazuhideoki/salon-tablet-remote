@@ -1,25 +1,18 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-
 import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
-
 import { CloseButton } from "./CloseButton";
 import { FooterItemModal } from "./FooterItemModal";
-
 import { SettingPassword } from "./SettingPassword";
 import dynamic from "next/dynamic";
 import { ArticleModal } from "./ArticleModal";
 const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
   ssr: false,
 });
-// import ArticleEditor from "../Setting/ArticleEditor";
-
 const FooterItemEditor = dynamic(() => import("../Setting/FooterItemEditor"), {
   ssr: false,
 });
-// import FooterItemEditor from "../Setting/FooterItemEditor";
-
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;

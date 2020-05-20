@@ -27,36 +27,41 @@ export const IconAndText = (props:any) => {
 
     // onClickをonCloseの渡し方で挙動を変える
     // モーダルウィンドウが多段階になっている場合用。調整の必要ありか。
-    let onClick: () => void
+    let handleOnClick: () => void
     // 両方渡したら閉じて開く
     if (props.onClose && props.onClick) {
-        onClick = () => {
-            dispatchAppState({type: 'CLOSE_MODAL'})
-            props.onClick()
-        } 
+        handleOnClick = () => {
+          dispatchAppState({ type: "CLOSE_MODAL" });
+          props.onClick();
+        }; 
     } else if(props.onClick) {
-        onClick = () => props.onClick()
+        handleOnClick = () => props.onClick();
     } else if(props.onClose) {
-        onClick = () => dispatchAppState({ type: "CLOSE_MODAL" });
+        handleOnClick = () => dispatchAppState({ type: "CLOSE_MODAL" });
     }
 
     let icon 
     // svgのアイコンはiconに入れる
     if (props.icon) {
-        icon = <props.icon
-            // onClick={(props.onClick) ? () => props.onClick() : null}
-            onClick={() => onClick()}
+        icon = (
+          <props.icon
+            onClick={props.onClick ? () => handleOnClick() : null}
+            // onClick={() => onClick()}
             className={classes.icon}
             {...props}
-        />
+          />
+        );
     // 画像はurlをimgに入れる。
     }else if(props.img) {
-        icon = <img
+        icon = (
+          <img
             src={props.img}
             alt=""
-            // onClick={() => props.onClick()}
-            onClick={() => onClick()}
-            className={`${classes.img} ${props.className}`}        />
+            onClick={props.onClick ? () => handleOnClick() : null}
+            // onClick={() => onClick()}
+            className={`${classes.img} ${props.className}`}
+          />
+        );
     }
 
     return (

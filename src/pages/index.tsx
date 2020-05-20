@@ -44,14 +44,14 @@ export async function getServerSideProps() {
   const data2 = await res2.json();
   console.log("footerItemsは " + JSON.stringify(data2));
 
-  const initAppState = {
-    isSetting: false,
-    setModal: "edit_article",
-    articleContentModal: "",
-    footerItemContentModal: "",
-    isModalOpen: false,
-    isArticleModalOpen: false,
-  };
+  // const initAppState = {
+  //   isSetting: false,
+  //   setModal: "edit_article",
+  //   articleContentModal: "",
+  //   footerItemContentModal: "",
+  //   isModalOpen: false,
+  //   isArticleModalOpen: false,
+  // };
 
   if (data.err === true) {
     return null
@@ -62,7 +62,7 @@ export async function getServerSideProps() {
           articles: data.rawData,
           pagination: data.pagination,
           footerItems: data2.rawData,
-          appState: initAppState,
+          // appState: initAppState,
         },
       },
     };

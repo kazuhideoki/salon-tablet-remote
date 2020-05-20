@@ -1,10 +1,5 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
-// import { Quill } from "react-quill";
-// import dynamic from "next/dynamic";
-// const ReactQuill = dynamic(() => import("react-quill"), {
-//   ssr: false,
-// });
 import * as TQuill from "quill";
 import ImageCompress from "quill-image-compress";
 import { Typography, CircularProgress } from '@material-ui/core';
@@ -128,15 +123,6 @@ export const QuillEditor = ({ value ,setValue, charCount, setCharCount }:Props) 
   //   "image",
   //   "clean",
   // ];
-  // const [isLoaded, setIsLoaded] = React.useState(false)
-
-  // React.useEffect(() => {
-  //   setIsLoaded(true)
-  // },[])
-
-  // if (!isLoaded) {
-  //   return <CircularProgress/>
-  // }
 
   return (
     <>
