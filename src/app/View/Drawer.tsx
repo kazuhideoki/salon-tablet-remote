@@ -6,7 +6,7 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
+import { Drawer as MuiDrawer } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -17,12 +17,11 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Store } from "../Store/Store";
 import { EditorContext } from "../Store/EditorContext";
-import { NoteAddOutlined, VideoLabel } from "@material-ui/icons";
+import { NoteAddOutlined, VideoLabel, Settings } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -81,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) => {
     })}
   )
 
-export function PersistentDrawerLeft(props) {
+export function Drawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const { dispatchAppState, appState } = React.useContext(Store);
@@ -121,7 +120,10 @@ export function PersistentDrawerLeft(props) {
 
   const handleDrawerClose = () => {
     props.setOpen(false);
-    dispatchAppState({type: "OFF_IS_SETTING"})
+    // Drawerが閉じきってからisSettingをfalseに
+    setTimeout(() => {
+      dispatchAppState({type: "OFF_IS_SETTING"})
+    }, 1000);
   };
 
   const enterPassword = () => {
@@ -141,7 +143,7 @@ export function PersistentDrawerLeft(props) {
       >
         <MenuIcon />
       </IconButton>
-      <Drawer
+      <MuiDrawer
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -176,10 +178,10 @@ export function PersistentDrawerLeft(props) {
           </ListItem>
           <ListItem
             button
-            // onClick={() => ()}
+            onClick={() => dispatchAppState({type: "OPEN_MODAL", payload: 'setting_user_info'})}
           >
             <ListItemIcon>
-              <MailIcon />
+              <Settings />
             </ListItemIcon>
             <ListItemText primary="設定" />
           </ListItem>
@@ -196,7 +198,7 @@ export function PersistentDrawerLeft(props) {
         }
         
         <Divider />
-      </Drawer>
+      </MuiDrawer>
       {/* {props.children} */}
       <main
         className={`${clsx(classes.content, {

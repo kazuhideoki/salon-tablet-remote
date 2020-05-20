@@ -1,6 +1,6 @@
 import React from 'react'
-import { SettingButton } from "./SettingButton";
-import { SettingButtonOpened } from "./SettingButtonOpened";
+import { SettingButton } from "./(未使用)SettingButton";
+import { SettingButtonOpened } from "./(未使用)SettingButtonOpened";
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { Store } from '../../Store/Store';
 

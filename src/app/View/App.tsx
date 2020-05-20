@@ -4,7 +4,7 @@ import { Grid, CircularProgress, makeStyles, createStyles, Theme } from "@materi
 import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain";
 import { PFooter } from "./PFooter/PFooter";
-import { SettingSwitch } from "./Setting/SettingSwitch";
+import { SettingSwitch } from "./Setting/(未使用)SettingSwitch";
 import { Store } from "../Store/Store";
 import { ThemeType, ThemeContext } from "../Store/ThemeContext";
 import { useStylesFactory } from "../Store/useStylesFactory";
@@ -14,7 +14,7 @@ import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { EditorContextProvider } from "../Store/EditorContext";
 import { PDrawer } from "./PDrawer";
-import { PersistentDrawerLeft } from "./PersistentDrawerLeft";
+import { Drawer } from "./Drawer";
 
 // 3段のコンテナの整形に関してのみ記述, 
 // 枠の設定、header,footerの最大値の設定
@@ -101,7 +101,7 @@ const AppView = ()=> {
 
     return (
       <div className={classes.root}>
-        <PersistentDrawerLeft open={open} setOpen={setOpen}>
+        <Drawer open={open} setOpen={setOpen}>
           <Grid
             spacing={0}
             container
@@ -112,13 +112,11 @@ const AppView = ()=> {
           >
             <Grid
               item
+              // mainOpenedでDrawerの開閉時のCSSを適応
               className={`${clsx(classes.content, {
-                //   [classes.contentShift]: props.open,
-                // })} ${props.open ? classes.drawerOpened : null}
                 [classes.contentShift]: open,
               })} ${classes.main} ${open ? classes.mainOpened : null}`}
             >
-              {/* <Grid item className={`${classes.main}`}> */}
               {loading.mainArticles ? (
                 <CircularProgress
                   className={classes.circularProgress}
@@ -131,19 +129,16 @@ const AppView = ()=> {
             </Grid>
             <Grid
               item
+              // footerOpenedでDrawerの開閉時のCSSを適応
               className={`${clsx(classes.content, {
-                //   [classes.contentShift]: props.open,
-                // })} ${props.open ? classes.drawerOpened : null}
                 [classes.contentShift]: open,
               })} ${classes.footer} ${open ? classes.footerOpened : null}`}
             >
-              {/* <Grid item className={`${classes.footer}`}> */}
               <PFooter />
-              {/* <SettingSwitch /> */}
             </Grid>
             <PModal />
           </Grid>
-        </PersistentDrawerLeft>
+        </Drawer>
       </div>
     );
 
@@ -156,9 +151,9 @@ export const App = (props:StoreContextProviderProps) => {
     <StoreContextProvider data={props.data}>
       <ThemeProvider>
         <EditorContextProvider>
-          {/* <PersistentDrawerLeft> */}
+          {/* <Drawer> */}
             <AppView />
-          {/* </PersistentDrawerLeft> */}
+          {/* </Drawer> */}
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>
