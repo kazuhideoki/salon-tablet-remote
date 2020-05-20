@@ -13,7 +13,6 @@ import { StoreContextProviderProps } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { EditorContextProvider } from "../Store/EditorContext";
-import { PDrawer } from "./PDrawer";
 import { Drawer } from "./Drawer";
 
 // 3段のコンテナの整形に関してのみ記述, 
@@ -96,7 +95,7 @@ const AppView = ()=> {
       }
       setIsFirstLoad(false);
     },[appState.isSetting])
-    // PDrawer用
+    // Drawer用
     const [open, setOpen] = React.useState(false);
 
     return (
