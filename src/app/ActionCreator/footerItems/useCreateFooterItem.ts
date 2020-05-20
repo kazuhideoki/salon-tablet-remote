@@ -15,7 +15,7 @@ import { useGetFooterItems } from "./useGetFooterItems";
 type TCreateFooterItem = {
   is_published: T_is_published_footer_items;
   icon_name: T_icon_name;
-  displayed_icon_name: T_displayed_icon_name | null;
+  displayed_icon_name: T_displayed_icon_name | null; 
   on_tap: T_on_tap;
   item_content: T_item_content;
   link_url: T_link_url;
@@ -61,7 +61,7 @@ export const useCreateFooterItem = () => {
       on_tap: onTap,
       item_content: footerItemEditorText,
       link_url: linkUrl,
-      order: 1,
+      order: order,
     };
 
     const res = await fetch(
