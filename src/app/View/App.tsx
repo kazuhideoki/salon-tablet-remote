@@ -139,7 +139,7 @@ const AppView = ()=> {
             >
               {/* <Grid item className={`${classes.footer}`}> */}
               <PFooter />
-              <SettingSwitch />
+              {/* <SettingSwitch /> */}
             </Grid>
             <PModal />
           </Grid>

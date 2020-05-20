@@ -20,6 +20,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../Store/ThemeContext";
+import { Store } from "../Store/Store";
+import { EditorContext } from "../Store/EditorContext";
+import { NoteAddOutlined, VideoLabel } from "@material-ui/icons";
+import { TextField, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => {
     const themes = React.useContext(ThemeContext);
@@ -80,15 +84,50 @@ const useStyles = makeStyles((theme: Theme) => {
 export function PersistentDrawerLeft(props) {
   const classes = useStyles();
   const theme = useTheme();
-  // const [open, setOpen] = React.useState(false);
+  const { dispatchAppState, appState } = React.useContext(Store);
+  const {
+    setEditorText,
+    setTitleText,
+    setFooterItemEditorText,
+    setIconName,
+    setOnTap,
+    setLinkUrl,
+    setIsEdittingArticle,
+    dispatchSelectedIcon,
+    setIsEdittingFooterItem,
+  } = React.useContext(EditorContext);
+
+  const handleOpenArticleEditor = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
+    setIsEdittingArticle(false);
+    setTitleText("");
+    setEditorText("");
+  };
+
+  const handleOpenFooterItemEditor = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
+    setIsEdittingFooterItem(false);
+    setIconName("");
+    setFooterItemEditorText("");
+    setOnTap("modal");
+    setLinkUrl("");
+    dispatchSelectedIcon({ type: "SET_ICON", payload: null });
+  };
 
   const handleDrawerOpen = () => {
     props.setOpen(true);
+    dispatchAppState({ type: "CLOSE_MODAL" });
   };
 
   const handleDrawerClose = () => {
     props.setOpen(false);
+    dispatchAppState({type: "OFF_IS_SETTING"})
   };
+
+  const enterPassword = () => {
+    dispatchAppState({ type: "ON_IS_SETTING" })
+    dispatchAppState({ type: "CLOSE_MODAL" });
+  }
 
   return (
     <div className={classes.root}>
@@ -121,25 +160,48 @@ export function PersistentDrawerLeft(props) {
           </IconButton>
         </div>
         <Divider />
+        {appState.isSetting ? 
         <List>
-          {["新規投稿", "アイコン作成", "設定"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+          <ListItem button onClick={() => handleOpenArticleEditor()}>
+            <ListItemIcon>
+              <NoteAddOutlined />
+            </ListItemIcon>
+            <ListItemText primary="新規投稿" />
+          </ListItem>
+          <ListItem button onClick={() => handleOpenFooterItemEditor()}>
+            <ListItemIcon>
+              <VideoLabel />
+            </ListItemIcon>
+            <ListItemText primary="アイコン作成" />
+          </ListItem>
+          <ListItem
+            button
+            // onClick={() => ()}
+          >
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="設定" />
+          </ListItem>
+        </List> 
+        // パスワード用のTextFieldは今後実装
+        : <><TextField
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          variant="outlined"
+          />
+          <Button onClick={() => enterPassword()}>入力</Button></>
+        }
+        
         <Divider />
       </Drawer>
+      {/* {props.children} */}
       <main
         className={`${clsx(classes.content, {
-        //   [classes.contentShift]: props.open,
-        // })} ${props.open ? classes.drawerOpened : null}
           [classes.contentShift]: props.open,
-        })} 
-        `}
+        })}`}
       >
         {props.children}
       </main>

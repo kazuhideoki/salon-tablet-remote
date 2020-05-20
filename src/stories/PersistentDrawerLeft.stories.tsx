@@ -6,9 +6,12 @@ export default {
   title: "PersistentDrawerLeft",
   component: PersistentDrawerLeft,
 };
-export const Normal = () => 
-<PersistentDrawerLeft>
-  fdas
-  fdas
-  CHILDREN内容
-</PersistentDrawerLeft>
+export const Normal = () => {
+    const [open, setOpen] = React.useState(false);
+
+
+return (
+  <PersistentDrawerLeft open={open} setOpen={setOpen}>
+    fdas fdas CHILDREN内容
+  </PersistentDrawerLeft>
+);}
