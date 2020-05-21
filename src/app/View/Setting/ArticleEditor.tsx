@@ -15,6 +15,7 @@ const ArticleEditor = () => {
     setTitleText,
     editorText,
     setEditorText,
+    setEditorTextExcerpt,
     isEdittingArticle,
   } = React.useContext(EditorContext);
   const [charCountArticleTitle, setCharCountArticlTitle] = React.useState(0);
@@ -60,6 +61,7 @@ const ArticleEditor = () => {
       <QuillEditor
         value={editorText}
         setValue={setEditorText}
+        setEditorTextExcerpt={setEditorTextExcerpt}
         charCount={charCountArticleContent}
         setCharCount={setCharCountArticlContent}
       />

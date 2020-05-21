@@ -5,6 +5,7 @@ import {
   T_title,
   T_article_content,
   T_id,
+  T_article_excerpt,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
@@ -14,6 +15,7 @@ type TUpdateArticle = {
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
+  article_excerpt: T_article_excerpt
 };
 export const useUpdateArticle = () => {
   const { dispatchAppState, paginationParams } = React.useContext(Store);
@@ -24,6 +26,7 @@ export const useUpdateArticle = () => {
     edittingArticleParams,
     titleText,
     editorText,
+    editorTextExcerpt,
   } = React.useContext(EditorContext);
   const getArticles = useGetArticles();
 
@@ -33,6 +36,7 @@ export const useUpdateArticle = () => {
       is_published: isPublishing,
       title: titleText,
       article_content: editorText,
+      article_excerpt: editorTextExcerpt,
     };
 
     const res = await fetch(

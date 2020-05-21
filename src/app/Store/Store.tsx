@@ -23,6 +23,7 @@ export type T_created_at = string
 export type T_updated_at = string
 export type T_title = string 
 export type T_article_content = string 
+export type T_article_excerpt = string 
 
 export type ArticleWithoutId = {
   is_published: T_is_published_articles
@@ -30,6 +31,7 @@ export type ArticleWithoutId = {
   updated_at: T_updated_at
   title: T_title
   article_content: T_article_content
+  article_excerpt: T_article_excerpt
 }
 export type TArticle = {id: T_id} & ArticleWithoutId
 export type TArticles = TArticle[]

@@ -180,13 +180,14 @@ export const PMain = () => {
                     <Typography gutterBottom variant="h6" align="right">
                       {sqlToDate(value.created_at)}
                     </Typography>
-                    {/* <div
+                    <div
                       className="p-main-article"
                       dangerouslySetInnerHTML={{
-                        __html: value.article_content,
+                        __html: value.article_excerpt + '...',
                       }}
-                    /> */}
-                    <QuillExcerpt article_content={value.article_content}/>
+                    />
+                    {/* ↓未使用 */}
+                    {/* <QuillExcerpt article_content={value.article_content}/> */}
                   </CardContent>
                 </Card>
               </CardActionArea>
