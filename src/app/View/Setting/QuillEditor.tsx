@@ -70,7 +70,6 @@ Quill.register("modules/imageCompress", ImageCompress);
 type Props = {
   value: string,
   setValue: React.Dispatch<React.SetStateAction<string>>,
-  // editorTextExcerpt?: string
   setEditorTextExcerpt?: React.Dispatch<React.SetStateAction<string>>
   charCount: number
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
@@ -139,12 +138,6 @@ export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, charCount, 
   //   "image",
   //   "clean",
   // ];
-
-  // React.useEffect(() => {
-  //   checkImg(editor.getContents(), setHasImg, () =>
-  //     removeImg("react_quill_editor")
-  //   );
-  // },[])
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React from 'react';
-import QuillExcerpt from '../app/View/PMain/QuillExcerpt';
+import QuillExcerpt from '../app/View/PMain/(未使用)QuillExcerpt';
 import { onlyText, withImg } from '../__tests__/sampleArticleContent';
 export default {
 title: 'QuillExcerpt',

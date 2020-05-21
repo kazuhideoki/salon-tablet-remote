@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactQuill, {Quill} from "react-quill";
-import { getExcerpt } from "./getExcerpt";
 import { removeImg } from '../Setting/QuillEditor';
 
 const QuillExcerpt = (props) => {
@@ -15,7 +14,6 @@ const QuillExcerpt = (props) => {
   // その後にonChangeが発動し、抜粋表示になる
   const handleOnChange = (editor, length) => {
     console.log();
-    setText(getExcerpt(editor, length))
   };
 
   return (

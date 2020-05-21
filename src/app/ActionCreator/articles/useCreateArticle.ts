@@ -9,7 +9,6 @@ import {
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
-import { getExcerpt } from "../../View/PMain/getExcerpt";
 import { Quill } from "react-quill";
 
 

@@ -17,17 +17,6 @@ import {
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
-import dynamic from "next/dynamic";
-// import { Quill } from "react-quill";
-import ReactQuill from "react-quill";
-import { getExcerpt } from "./getExcerpt";
-// import { QuillExcerpt } from "./QuillExcerpt";
-const QuillExcerpt = dynamic(() => import("./QuillExcerpt"), {
-  ssr: false,
-});
-// const Quill = dynamic(() => import("react-quill"), {
-//   ssr: false,
-// });
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const useStyles = makeStyles((theme) =>
@@ -186,8 +175,6 @@ export const PMain = () => {
                         __html: value.article_excerpt + '...',
                       }}
                     />
-                    {/* ↓未使用 */}
-                    {/* <QuillExcerpt article_content={value.article_content}/> */}
                   </CardContent>
                 </Card>
               </CardActionArea>
