@@ -8,15 +8,26 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core";
-import { UpdateArticleButton } from "./Setting/buttons/UpdateArticleButton";
-import { DeleteArticleButton } from "./Setting/buttons/DeleteArticleButton";
-import { Store,T_id } from "../Store/Store";
+import { UpdateArticleButton } from "../Setting/buttons/UpdateArticleButton";
+import { DeleteArticleButton } from "../Setting/buttons/DeleteArticleButton";
+import { Store,T_id } from "../../Store/Store";
 import {
   useDeleteArticle,
-} from "../ActionCreator/articles/useDeleteArticle";
-import { EditorContext } from "../Store/EditorContext";
-import { useGetSingleArticle } from "../ActionCreator/articles/useGetSingleArticle";
-import { sqlToDate } from "../ActionCreator/organizeSql/sqlToDate";
+} from "../../ActionCreator/articles/useDeleteArticle";
+import { EditorContext } from "../../Store/EditorContext";
+import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
+import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
+import dynamic from "next/dynamic";
+// import { Quill } from "react-quill";
+import ReactQuill from "react-quill";
+import { getExcerpt } from "./getExcerpt";
+// import { QuillExcerpt } from "./QuillExcerpt";
+const QuillExcerpt = dynamic(() => import("./QuillExcerpt"), {
+  ssr: false,
+});
+// const Quill = dynamic(() => import("react-quill"), {
+//   ssr: false,
+// });
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const useStyles = makeStyles((theme) =>
@@ -169,12 +180,13 @@ export const PMain = () => {
                     <Typography gutterBottom variant="h6" align="right">
                       {sqlToDate(value.created_at)}
                     </Typography>
-                    <div
+                    {/* <div
                       className="p-main-article"
                       dangerouslySetInnerHTML={{
                         __html: value.article_content,
                       }}
-                    />
+                    /> */}
+                    <QuillExcerpt article_content={value.article_content}/>
                   </CardContent>
                 </Card>
               </CardActionArea>

@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { Grid, CircularProgress, makeStyles, createStyles, Theme } from "@material-ui/core";
 import { PModal } from "./PModal/PModal";
-import { PMain } from "./PMain";
+import { PMain } from "./PMain/PMain";
 import { PFooter } from "./PFooter/PFooter";
 import { SettingSwitch } from "./Setting/(未使用)SettingSwitch";
 import { Store } from "../Store/Store";

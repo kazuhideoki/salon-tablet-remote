@@ -42,14 +42,25 @@ export const checkImg = (
   isCheckMoreImgs ? removeImg() : null;
 };
 
-export const removeImg = () => {
-  const editor = document.getElementById('react_quill_editor')
+
+export const removeImg = (elementName) => {
+  const editor = document.getElementsByClassName(elementName);
   console.log(editor);
   
-  const imgs = editor.querySelector('img')
-  console.log(imgs);
-  
-  imgs.remove()
+  for (const key in editor) {
+    if (editor.hasOwnProperty(key)) {
+      const element = editor[key];
+      const imgs = element.querySelectorAll("img");
+      console.log(imgs);
+
+      if (imgs) {
+        imgs.forEach((element) => {
+          element.remove()
+        })
+      }  
+      
+    }
+  }
 }
 
 // 画像圧縮のモジュールを利用可能にimageCompress;
@@ -71,7 +82,7 @@ export const QuillEditor = ({ value ,setValue, charCount, setCharCount }:Props) 
     // console.log(delta)
     // console.log(source)
     
-    checkImg(editor.getContents(), setHasImg, removeImg);
+    checkImg(editor.getContents(), setHasImg, () => removeImg('react_quill_editor'));
 
     // エディターから文字数を取得して文字数カウントのためのcharCountに値を格納
     setCharCount(editor.getLength());
@@ -124,10 +135,16 @@ export const QuillEditor = ({ value ,setValue, charCount, setCharCount }:Props) 
   //   "clean",
   // ];
 
+  // React.useEffect(() => {
+  //   checkImg(editor.getContents(), setHasImg, () =>
+  //     removeImg("react_quill_editor")
+  //   );
+  // },[])
+
   return (
     <>
       <ReactQuill
-        id="react_quill_editor"
+        className="react_quill_editor"
         value={value}
         onChange={(content, delta, source, editor) =>
           handleOnChange(content, delta, source, editor)

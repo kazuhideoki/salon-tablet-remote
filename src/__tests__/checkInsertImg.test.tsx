@@ -53,7 +53,7 @@ test("checkImg", () => {
   // imageがある
   act(() => {
     //@ts-ignore
-    checkImg(delta, result.current[1], removeImg);
+    checkImg(delta, result.current[1], () => removeImg('react_quill_editor'));
   });
   expect(result.current[0]).toBe(true);
 
