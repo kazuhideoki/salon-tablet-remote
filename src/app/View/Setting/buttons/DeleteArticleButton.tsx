@@ -4,17 +4,15 @@ import { DeleteForeverTwoTone } from "@material-ui/icons";
 
 type Type = {
   position: string
-  id: number
-  handleOnClick: (id: number) => void // confirm + deleteArticle 
+  // id: number
+  // handleOnClick: (id: number) => void // confirm + deleteArticle 
+  onClick: any
 }
 
-export const DeleteArticleButton = (props: Type) => {
+export const DeleteArticleButton = (props) => {
 
     return (
-      <IconButton
-        className={props.position}
-        onClick={() => props.handleOnClick(props.id)}
-      >
+      <IconButton className={props.position} onClick={() => props.onClick()}>
         <DeleteForeverTwoTone />
       </IconButton>
     );

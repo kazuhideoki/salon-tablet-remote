@@ -1,10 +1,10 @@
 import React from "react";
-import { Store } from "../../Store/Store";
+import { Store, T_order, T_footer_item_id } from "../../Store/Store";
 
 export const useDeleteFooterItem = () => {
   const { dispatchFooterItems } = React.useContext(Store);
 
-  return async (footer_item_id: number) => {
+  return async (footer_item_id: T_footer_item_id, order: T_order) => {
     const res = await fetch(
       `${location.protocol}//${location.host}/footer_items/delete`,
       {
@@ -12,7 +12,7 @@ export const useDeleteFooterItem = () => {
         method: "POST",
         mode: "cors",
         // jsonに変換するので数字でも{}で囲む
-        body: JSON.stringify({ footer_item_id }),
+        body: JSON.stringify({ footer_item_id, order }),
       }
     );
     const data = await res.json();
@@ -22,7 +22,7 @@ export const useDeleteFooterItem = () => {
     } else {
       dispatchFooterItems({
         type: "DELETE_FOOTER_ITEM",
-        payload: footer_item_id,
+        payload: {footer_item_id, order},
       });
     }
   };

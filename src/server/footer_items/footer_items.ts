@@ -61,7 +61,7 @@ export const footer_items_create_item = (req, res) => {
 
 
   const connection = mysql.createConnection(mysql_setting);
-  connection.connect();
+  // connection.connect();
 
   const query = "INSERT INTO `footer_items` SET ?";
 
@@ -92,7 +92,7 @@ export const footer_items_get_single = (req, res) => {
   const { footer_item_id } = req.body;
 
   const connection = mysql.createConnection(mysql_setting);
-  connection.connect();
+  // connection.connect();
 
   const query = `SELECT * FROM footer_items WHERE footer_item_id=?`;
   
@@ -123,7 +123,7 @@ export const footer_items_update_item = (req, res) => {
   const { footer_item_id, is_published, created_at, updated_at, icon_name, displayed_icon_name, on_tap, item_content, link_url, order } = req.body
 
   const connection = mysql.createConnection(mysql_setting);
-  connection.connect();
+  // connection.connect();
 
   const query = `UPDATE footer_items SET ? WHERE footer_item_id=?`;
   // うまく行かなかったら一個ずつ書く
@@ -163,39 +163,43 @@ export const footer_items_update_item = (req, res) => {
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 // /footer_items/deeelt
-export const footer_items_delete_item = (req, res) => {
+export const footer_items_delete_item = async (req, res) => {
   corsHeader(res);
 
-  const { footer_item_id } = req.body;
+  const { footer_item_id, order } = req.body;
 
-  const connection = mysql.createConnection(mysql_setting);
-  connection.connect();
+  const connection = await mysqlPromise.createConnection(mysql_setting);
+  // connection.connect();
+  try {
+    // 該当アイテムの削除
+    const query = "DELETE FROM `footer_items` WHERE `footer_item_id`=?";
+    const [result, fields] = await connection.query(query, footer_item_id)
 
-  const query = 'DELETE FROM `footer_items` WHERE `footer_item_id`=?';
-
-  connection.query(query, footer_item_id, (err, result, fields) => {
-    if (err) {
-      console.log("/footer_items/deleteのエラーは " + JSON.stringify(err));
-      res.status(500).json({ err: true, data: { message: err.message } });
-    }
+    // orderの調整。削除されたものより大きいorderを持つitem(左側のアイテム)をぞれぞれ-1する。
+    const query2 = " UPDATE `footer_items` SET `order` = `order` -1 WHERE `order` > ? ";
+    // const arg = order
+     const [result2, fields2] = await connection.query(query2, order);
 
     const data = {
       rawData: result,
+      fields2: fields2,
     };
     console.log("/footer_items/deleteは " + JSON.stringify(data));
 
     res.json(data);
-  });
-  connection.end();
+
+  } catch(e) {
+    console.log("/footer_items/deleteのエラーは " + JSON.stringify(e));
+    res.status(500).json({ err: true, data: { message: e.message } });
+  } finally {
+    connection.end();
+  }
 }
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 // /footer_items/switchOrder
 export const footer_items_switchOrder = async (req, res) => {
   corsHeader(res);
-
-  // 検証用
-  // const [footer_item_id, order] = [2,2] 
   
   const connection = await mysqlPromise.createConnection(mysql_setting);
   
@@ -207,7 +211,6 @@ export const footer_items_switchOrder = async (req, res) => {
     // 右側のアイテムのorderを-1
     const query1 = "UPDATE `footer_items` SET `order`=? WHERE `footer_item_id`=?";
     const params1 = [order - 1, footer_item_id];
-    // const [rusult1, fields1] = await connection.execute(query1, params1);
     const [rusult1, fields1] = await connection.query(query1, params1);
   
     // 左側のアイテムのorderを+1
@@ -221,14 +224,10 @@ export const footer_items_switchOrder = async (req, res) => {
     res.status(200).json({ err: false});
 
   }catch(e){
-
-    // console.log("/footer_items/switchOrderのエラーは " + JSON.stringify(e));
     console.log("/footer_items/switchOrderのエラーは " + e );
     res.status(500).json({ err: true, data: { message: e } });
-
   }finally{
       connection.end();
   }
-
 }
 

@@ -141,15 +141,17 @@ export const PMain = () => {
               {appState.isSetting ? (
                 <UpdateArticleButton
                   position={classes.updateArticleButton}
-                  id={value.id}
-                  handleOnClick={handleOnUpDate}
+                  // id={value.id}
+                  // handleOnClick={handleOnUpDate}
+                  onClick={() => handleOnUpDate(value.id)}
                 />
               ) : null}
               {appState.isSetting ? (
                 <DeleteArticleButton
                   position={classes.deleteArticleButton}
-                  id={value.id}
-                  handleOnClick={handleOnDelete}
+                  // id={value.id}
+                  // handleOnClick={handleOnDelete}
+                  onClick={() => handleOnDelete(value.id)}
                 />
               ) : null}
 

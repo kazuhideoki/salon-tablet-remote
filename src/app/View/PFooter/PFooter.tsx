@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid, makeStyles, createStyles } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store, T_footer_item_id } from "../../Store/Store";
+import { Store, T_footer_item_id, T_order } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
 import { UpdateArticleButton } from "../Setting/buttons/UpdateArticleButton";
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export type HandleOnUpDateFooterIcon = (params: any) => void;
+// export type HandleOnUpDateFooterIcon = (params: any) => void;
 
 export const PFooter = () => {
     const classes = useStyles();
@@ -73,18 +73,21 @@ export const PFooter = () => {
       EditorContext
     );
     const getFooterItem = useGetFooterItem();
+    const deleteFooterItem = useDeleteFooterItem();
 
-    const handleOnUpDateFooterIcon: HandleOnUpDateFooterIcon = (footer_item_id) => {
+
+    const handleOnUpDateFooterIcon = (
+      footer_item_id: T_footer_item_id
+    ) => {
       dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
       setIsEdittingFooterItem(true);
       getFooterItem(footer_item_id);
     };
-    const handleOnDeleteFooterItem = (footer_item_id: T_footer_item_id) => {
+    const handleOnDeleteFooterItem = (footer_item_id: T_footer_item_id, order: T_order) => {
       const deleting = confirm("本当に削除してよろしいですか？");
-      deleting ? deleteFooterItem(footer_item_id) : null
+      deleting ? deleteFooterItem(footer_item_id, order) : null;
     };
 
-    const deleteFooterItem = useDeleteFooterItem()
 
     const props = {
       classes,
@@ -109,9 +112,7 @@ export const PFooter = () => {
             key={index}
             // 投稿済みか下書きかで見た目を変える
             className={`${classes.gridItem}
-              ${value.is_published == true
-                ? null
-                : classes.itemIsDraft}
+              ${value.is_published == true ? null : classes.itemIsDraft}
             `}
           >
             {/* セッティング画面で順番を入れ替えるボタンを表示 */}
@@ -127,15 +128,19 @@ export const PFooter = () => {
             {appState.isSetting ? (
               <UpdateArticleButton
                 position={classes.updateArticleButton}
-                id={value.footer_item_id}
-                handleOnClick={handleOnUpDateFooterIcon}
+                // id={value.footer_item_id}
+                // handleOnClick={handleOnUpDateFooterIcon}
+                onClick={() => handleOnUpDateFooterIcon(value.footer_item_id)}
               />
             ) : null}
             {appState.isSetting ? (
               <DeleteArticleButton
                 position={classes.deleteArticleButton}
-                id={value.footer_item_id}
-                handleOnClick={handleOnDeleteFooterItem}
+                // id={value.footer_item_id}
+                // handleOnClick={handleOnDeleteFooterItem}
+                onClick={() =>
+                  handleOnDeleteFooterItem(value.footer_item_id, value.order)
+                }
               />
             ) : null}
             {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
