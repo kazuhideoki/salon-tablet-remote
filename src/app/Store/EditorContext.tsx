@@ -11,6 +11,8 @@ type ContextProps = {
   setEditorText: React.Dispatch<React.SetStateAction<string>>
   editorTextExcerpt: string
   setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
+  editorImg: string
+  setEditorImg: React.Dispatch<React.SetStateAction<string>>
   isEdittingArticle: boolean,
   setIsEdittingArticle: React.Dispatch<React.SetStateAction<boolean>>
   edittingArticleParams: TArticle
@@ -39,6 +41,7 @@ const EditorContextProvider = (props) => {
   const [titleText, setTitleText] = React.useState("")
   const [editorText, setEditorText] = React.useState("");
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState("");
+  const [editorImg, setEditorImg] = React.useState("");
   const [isEdittingArticle, setIsEdittingArticle] = React.useState(false)
   const [edittingArticleParams, setEdittingArticleParams] = React.useState(
     {} as TArticle
@@ -80,6 +83,8 @@ const EditorContextProvider = (props) => {
     setEditorText,
     editorTextExcerpt,
     setEditorTextExcerpt,
+    editorImg,
+    setEditorImg,
     isEdittingArticle,
     setIsEdittingArticle,
     edittingArticleParams,

@@ -11,10 +11,12 @@ import { Typography, CircularProgress } from '@material-ui/core';
 export const checkImg = (
   deltaContents: TQuill.DeltaStatic,
   setHasImg: React.Dispatch<React.SetStateAction<boolean>>,
-  removeImg: () => void
+  removeImg: () => void,
+  // setEditorImg?: React.Dispatch<React.SetStateAction<string>>,
 ) => {
   // ※もしかしたらquillのなんらかのメソッドで簡潔に書けるかも
   let isCheckImg = false;
+  let imgData: null | string = null
   let isCheckMoreImgs = false;
   for (let n in deltaContents.ops) {
     // console.log(deltaContents.ops[n]);
@@ -31,15 +33,24 @@ export const checkImg = (
             isCheckMoreImgs = isCheckImg ? true : false;
             // 1つめの画像でischeckimgをtrueに
             isCheckImg = true;
+            // 1つめの画像のデータをimgDataに格納
+            if (imgData === null) {
+              imgData = deltaContents.ops[n]["insert"]["image"] 
+            }
           }
         }
       }
     }
   }
-  isCheckImg ? setHasImg(true) : setHasImg(false);
 
+  isCheckImg ? setHasImg(true) : setHasImg(false);
   // 画像が複数ある場合最初のimgを削除する。その後onChangeが再発火してcheckInsertImgも再発火。imgが一つになるまで続く。
   isCheckMoreImgs ? removeImg() : null;
+
+  console.log(imgData);
+
+  return imgData
+
 };
 
 
@@ -71,10 +82,11 @@ type Props = {
   value: string,
   setValue: React.Dispatch<React.SetStateAction<string>>,
   setEditorTextExcerpt?: React.Dispatch<React.SetStateAction<string>>
+  setEditorImg?: React.Dispatch<React.SetStateAction<string>>
   charCount: number
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
 }
-export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, charCount, setCharCount }:Props) => {
+export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }:Props) => {
   
   const [hasImg, setHasImg] = React.useState(false)
   
@@ -82,15 +94,18 @@ export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, charCount, 
     setValue(content)
     if (setEditorTextExcerpt) {
       setEditorTextExcerpt(editor.getText(0, 100))
+    }  
+    // checkImgで２個以上画像がある場合一つにする
+    const imgData = checkImg(editor.getContents(), setHasImg, () => removeImg('react_quill_editor'));
+    if (setEditorImg) {
+      // ImgDataをarticle_img用に格納する
+      setEditorImg(imgData)
     }
-    // console.log(delta)
-    // console.log(source)
-    
-    checkImg(editor.getContents(), setHasImg, () => removeImg('react_quill_editor'));
-
     // エディターから文字数を取得して文字数カウントのためのcharCountに値を格納
     setCharCount(editor.getLength());
 
+    // console.log(delta)
+    // console.log(source)
     // console.log(editor.getText());
     // console.log(editor.getContents());
     // console.log(editor.getHTML());

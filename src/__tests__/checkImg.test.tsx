@@ -51,11 +51,13 @@ test("checkImg", () => {
   expect(result.current[0]).toBe(false);
 
   // imageがある
+  let imgData = ''
   act(() => {
     //@ts-ignore
-    checkImg(delta, result.current[1], () => removeImg('react_quill_editor'));
+    imgData = checkImg(delta, result.current[1], () => removeImg('react_quill_editor'));
   });
   expect(result.current[0]).toBe(true);
+  expect(imgData).toBe("data:image/jpeg;bas/9k=");
 
   // imageがない
   act(() => {

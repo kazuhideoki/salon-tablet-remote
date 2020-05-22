@@ -6,6 +6,7 @@ import {
   T_article_content,
   T_id,
   T_article_excerpt,
+  T_article_img,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
@@ -17,6 +18,7 @@ type TCreateArticle = {
   title: T_title;
   article_content: T_article_content;
   article_excerpt: T_article_excerpt
+  article_img: T_article_img
 };
 export const useCreateArticle = () => {
   const getArticles = useGetArticles();
@@ -27,6 +29,7 @@ export const useCreateArticle = () => {
     titleText,
     editorText,
     editorTextExcerpt,
+    editorImg,
   } = React.useContext(EditorContext);
   return async (isPublishing: boolean) => {
     const params: TCreateArticle = {
@@ -34,6 +37,7 @@ export const useCreateArticle = () => {
       title: titleText,
       article_content: editorText,
       article_excerpt: editorTextExcerpt,
+      article_img: editorImg,
     };
 
     const res = await fetch(

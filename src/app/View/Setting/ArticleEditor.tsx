@@ -16,6 +16,7 @@ const ArticleEditor = () => {
     editorText,
     setEditorText,
     setEditorTextExcerpt,
+    setEditorImg,
     isEdittingArticle,
   } = React.useContext(EditorContext);
   const [charCountArticleTitle, setCharCountArticlTitle] = React.useState(0);
@@ -62,6 +63,7 @@ const ArticleEditor = () => {
         value={editorText}
         setValue={setEditorText}
         setEditorTextExcerpt={setEditorTextExcerpt}
+        setEditorImg={setEditorImg}
         charCount={charCountArticleContent}
         setCharCount={setCharCountArticlContent}
       />

@@ -169,8 +169,10 @@ export const PMain = () => {
                     <Typography gutterBottom variant="h6" align="right">
                       {sqlToDate(value.created_at)}
                     </Typography>
+                    
+                    <img className="p-main-thumbnail" src={value.article_img}/>
                     <div
-                      className="p-main-article"
+                      className="p-main-article-excerpt"
                       dangerouslySetInnerHTML={{
                         __html: value.article_excerpt + '...',
                       }}
