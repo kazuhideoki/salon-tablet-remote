@@ -14,6 +14,7 @@ import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { EditorContextProvider } from "../Store/EditorContext";
 import { Drawer } from "./Drawer";
+import { PHeader } from "./PHeader";
 
 // 3段のコンテナの整形に関してのみ記述, 
 // 枠の設定、header,footerの最大値の設定
@@ -34,8 +35,16 @@ const useStyles = makeStyles((theme: Theme) => {
         height: "100%",
         position: "relative",
       },
+      header: {
+        width: themes.pHeader.width + "vw",
+        height: themes.pHeader.height + "vh",
+        marginBottom: themes.pHeader.marginBottom + "vh",
+
+      },
+      headerOpened:{
+        width: `calc(${themes.pHeader.width}vw - ${themes.drawerWidth}px)`,
+      },
       main: {
-        marginTop: `${themes.pHeader.marginBottom}vh`,
         width: themes.pMain.width + "vw",
         height: themes.pMain.height + "vh",
         position: "relative",
@@ -109,6 +118,11 @@ const AppView = ()=> {
             alignItems="center"
             className={classes.gridRoot}
           >
+            <Grid item className={`${clsx(classes.content, {
+              [classes.contentShift]: open,
+            })} ${classes.header} ${open ? classes.headerOpened : null}`}>
+              <PHeader/>
+            </Grid>
             <Grid
               item
               // mainOpenedでDrawerの開閉時のCSSを適応

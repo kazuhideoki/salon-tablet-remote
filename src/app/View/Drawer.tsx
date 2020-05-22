@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme: Theme) => {
       menuButton: {
         // marginRight: theme.spacing(2),
         zIndex: 50,
-        marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(2),
+        marginTop: theme.spacing(1),
+        marginLeft: theme.spacing(1),
         position: "absolute",
         top: 0,
         left: 0,
