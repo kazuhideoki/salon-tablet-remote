@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server/server.ts",
   "scripts": {
+    "tsc": "tsc",
     "test": "jest src/__tests__/.*/*.test.tsx?$",
     "dev": "NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json .",
     "ins": "node --inspect=0.0.0.0:9229 src/server/server.ts",
