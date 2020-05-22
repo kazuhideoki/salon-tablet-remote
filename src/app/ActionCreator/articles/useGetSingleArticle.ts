@@ -13,6 +13,8 @@ export const useGetSingleArticle = () => {
   const {
     setTitleText,
     setEditorText,
+    setEditorTextExcerpt,
+    setEditorImg,
     setIsEdittingArticle,
     setEdittingArticleParams,
   } = React.useContext(EditorContext);
@@ -31,6 +33,8 @@ export const useGetSingleArticle = () => {
       setIsEdittingArticle(true);
       setEdittingArticleParams(article);
       setEditorText(article.article_content);
+      setEditorTextExcerpt(article.article_excerpt)
+      setEditorImg(article.article_img)
     }
   };
 };
