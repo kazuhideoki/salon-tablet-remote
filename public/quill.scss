@@ -1,0 +1,10 @@
+// ReactQuillの整形
+
+.quill {
+  .ql-container {
+    // Editor, ContentModal共通のstyle
+    .ql-editor {
+      font-size: 1.5rem;
+    }
+  }
+}

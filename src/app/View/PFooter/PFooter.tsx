@@ -64,9 +64,10 @@ export const PFooter = () => {
     const classes = useStyles();
     const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
-    const openModal = (modalName: string, footerItemContentModal: any) => {
-        dispatchAppState({ type: "OPEN_MODAL", payload: modalName });
-      dispatchAppState({ type: "SET_FOOTER_ITEM_CONTENT", payload: footerItemContentModal})
+
+    const openModal = (item_content: string) => {
+      dispatchAppState({ type: "SET_CONTENT", payload: item_content });
+      dispatchAppState({ type: "OPEN_MODAL", payload: 'content_modal' });
       }
 
     const { setIsEdittingFooterItem } = React.useContext(
@@ -153,7 +154,7 @@ export const PFooter = () => {
                       )[0]
                     : MoodBad
                 }
-                onClick={() => openModal("footer_item", value.item_content)}
+                onClick={() => openModal(value.item_content)}
                 fontSize="large"
                 text={value.icon_name}
               />

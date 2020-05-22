@@ -19,67 +19,60 @@ import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleAr
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
-const useStyles = makeStyles((theme) =>
-  createStyles({
-  root: {
-    overflow: "scroll",
-    height: "100%",
-  },
-  itemIsPublished: {
-    position: "relative",
-    height: "100%",
-  },
-  itemIsDraft: {
-    position: "relative",
-    height: "100%",
-    border: "3px solid red",
-  },
-  cardActionArea: {
-    width: 350,
-    height: "100%",
-  },
-  card: {
-    // width: 350,
-    height: "100%",
-  },
-  insta: {
-    width: 408,
-    height: "100%",
-  },
-  instaDiv: {
-    position: "relative",
-  },
-  titleImgDiv: {
-    position: "relative",
-  },
-  img: {
-    objectFit: "cover",
-    width: "100%",
-    height: 300,
-    backgroundSize: "cover",
-  },
-  staffImg: {
-    width: 50,
-  },
-  updateArticleButton: {
-    position: "absolute",
-    top: 0,
-    right: 50,
-    zIndex: 100,
-  },
-  deleteArticleButton: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    zIndex: 100,
-  },
-  createArticleButton: {
-    position: "absolute",
-    top: 50,
-    left: 100,
-    zIndex: 100,
-  },
-}))
+const useStyles = makeStyles((theme) => {
+  const cardWidth = 350
+
+  return createStyles({
+    root: {
+      overflow: "scroll",
+      height: "100%",
+    },
+    gridItem: {
+      position: "relative",
+      height: "100%",
+    },
+    itemIsDraft: {
+      border: "3px solid red",
+    },
+    cardActionArea: {
+      width: cardWidth,
+      height: "100%",
+    },
+    card: {
+      height: "100%",
+    },
+    thumbnail: {
+      // objectFit: "contain",
+      maxWidth: cardWidth * 0.8,
+      maxHeight: cardWidth * 0.6,
+      display: "block",
+      marginRight: "auto",
+      marginLeft: "auto",
+    },
+    excerpt: {
+      fontSize: "1rem",
+    },
+    updateArticleButton: {
+      position: "absolute",
+      top: 0,
+      right: 50,
+      zIndex: 100,
+    },
+    deleteArticleButton: {
+      position: "absolute",
+      top: 0,
+      right: 0,
+      zIndex: 100,
+    },
+    createArticleButton: {
+      position: "absolute",
+      top: 50,
+      left: 100,
+      zIndex: 100,
+    },
+  });
+
+})
 
 export type HandleOnUpDate = (params: any) => void;
 
@@ -106,9 +99,9 @@ export const PMain = () => {
       deleting ? deleteArticle(id) : null
     };
 
-    const openArticle = (article_content) => {
-      dispatchAppState({ type: "SET_ARTICLE_CONTENT", payload: article_content})
-      dispatchAppState({ type: "OPEN_MODAL", payload: "article_modal"})
+    const openArticle = (article_content: string) => {
+      dispatchAppState({ type: "SET_CONTENT", payload: article_content})
+      dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
 
     }
 
@@ -132,11 +125,9 @@ export const PMain = () => {
               item
               key={key}
               // 投稿済みか下書きかで見た目を変える
-              className={
-                value.is_published == true
-                  ? classes.itemIsPublished
-                  : classes.itemIsDraft
-              }
+              className={`${classes.gridItem}
+                ${!value.is_published ? classes.itemIsDraft : ''}
+              `}
             >
               {appState.isSetting ? (
                 <UpdateArticleButton
@@ -162,21 +153,21 @@ export const PMain = () => {
                 <Card
                   variant="outlined"
                   className={classes.card}
-                  id={`p_main_` + key}
                 >
                   <CardContent>
-                    <Typography variant="h5">{value.title}</Typography>
-                    <Typography gutterBottom variant="h6" align="right">
+
+                    <Typography variant="h5" component="h2">{value.title}</Typography>
+                    <Typography gutterBottom variant="subtitle1" align="right">
                       {sqlToDate(value.created_at)}
-                    </Typography>
-                    
-                    <img className="p-main-thumbnail" src={value.article_img}/>
+                    </Typography>                   
+                    <img className={`p-main-thumbnail ${classes.thumbnail}`} src={value.article_img}/>
                     <div
-                      className="p-main-article-excerpt"
+                      className={`p-main-article-excerpt ${classes.excerpt}`}
                       dangerouslySetInnerHTML={{
                         __html: value.article_excerpt + '...',
                       }}
                     />
+
                   </CardContent>
                 </Card>
               </CardActionArea>

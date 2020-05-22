@@ -36,6 +36,7 @@
     "next-pwa": "^2.3.3",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.1",
+    "normalize.css": "^8.0.1",
     "quill-image-compress": "^1.2.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

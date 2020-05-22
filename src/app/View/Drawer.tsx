@@ -123,7 +123,7 @@ export function Drawer(props) {
     // Drawerが閉じきってからisSettingをfalseに
     setTimeout(() => {
       dispatchAppState({type: "OFF_IS_SETTING"})
-    }, 1000);
+    }, 800);
   };
 
   const enterPassword = () => {

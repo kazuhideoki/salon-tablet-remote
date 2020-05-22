@@ -1,9 +1,9 @@
 // import "../../public/PArticleModal.scss";
 
-// Pmainで表示される記事の整形
-import "../../public/pMainArticle.scss";
-// editor用のcss
+// editor用のsnowテーマのcss
 import "react-quill/dist/quill.snow.css";
+// ReactQuillの整形
+import "../../public/quill.scss";
 
 export default function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

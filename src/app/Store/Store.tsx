@@ -69,12 +69,12 @@ export type FooterItems = FooterItem[]
 const initAppState = {
   isSetting: false,
   setModal: "edit_article",
-  articleContentModal: '',
-  footerItemContentModal: '',
+  ContentModal: '',
   isModalOpen: false,
   isArticleModalOpen: false,
 };
 export type AppState = typeof initAppState
+
 const initLoading = {
   mainArticles: false,
   modalEditor: false
@@ -128,7 +128,6 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,
     initAppState
-    // props.data.appState
   );
   const [loading, dispatchLoading] = useReducer(
     loadingReducer,

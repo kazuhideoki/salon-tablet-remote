@@ -3,10 +3,13 @@ import { Store } from "../../Store/Store";
 import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 import { CloseButton } from "./CloseButton";
-import { FooterItemModal } from "./FooterItemModal";
 import { SettingPassword } from "./SettingPassword";
 import dynamic from "next/dynamic";
-import { ArticleModal } from "./ArticleModal";
+const ContentModal = dynamic(() => import("./ContentModal"), {
+  ssr: false,
+});
+// import { ArticleModal } from "./ArticleModal";
+
 import { SettingUserInfo } from "../Setting/SettingUserInfo";
 const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
   ssr: false,
@@ -80,17 +83,17 @@ export const PModal = () => {
         };
 
         switch (setModal) {
-          case "footer_item":
-            modalStyle = size90;
-            ModalContent = () => <FooterItemModal />;
-            break;
+          // case "footer_item":
+          //   modalStyle = size90;
+          //   ModalContent = () => <FooterItemModal />;
+          //   break;
           case "setting_password":
             modalStyle = sizeSmall;
             ModalContent = () => <SettingPassword />;
             break;
-          case "article_modal":
+          case "content_modal":
             modalStyle = size90;
-            ModalContent = () => <ArticleModal />;
+            ModalContent = () => <ContentModal />;
             break;
           case "edit_article":
             modalStyle = size90;
