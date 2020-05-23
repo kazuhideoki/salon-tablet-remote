@@ -3,7 +3,6 @@ import ReactQuill, { Quill }from "react-quill";
 import ImageCompress from "quill-image-compress";
 import { Typography, CircularProgress } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
-import { ImageButtonDisabled } from "./ImageButtonDisabled";
 
 
 // ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み

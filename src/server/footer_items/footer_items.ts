@@ -4,7 +4,7 @@ import mysqlPromise from "mysql2/promise";
 import { validationErrorHandle } from "../validation";
 import { corsHeader } from '../server'
 import { FooterItems } from "../../app/Store/Store";
-import { SwitchOrderParams } from "../../app/View/Setting/buttons/SwitchOrderButton";
+import { SwitchOrderParams } from "../../app/View/buttons/SwitchOrderButton";
 
 const mysql_setting = {
   host: "localhost",

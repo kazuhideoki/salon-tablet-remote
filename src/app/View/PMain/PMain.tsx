@@ -8,8 +8,8 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core";
-import { UpdateArticleButton } from "../Setting/buttons/UpdateArticleButton";
-import { DeleteArticleButton } from "../Setting/buttons/DeleteArticleButton";
+import { UpdateArticleButton } from "../buttons/UpdateArticleButton";
+import { DeleteArticleButton } from "../buttons/DeleteArticleButton";
 import { Store,T_id } from "../../Store/Store";
 import {
   useDeleteArticle,

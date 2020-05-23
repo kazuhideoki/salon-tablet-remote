@@ -4,9 +4,9 @@ import { MoodBad } from "@material-ui/icons";
 import { Store, T_footer_item_id, T_order } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
-import { UpdateArticleButton } from "../Setting/buttons/UpdateArticleButton";
-import { DeleteArticleButton } from "../Setting/buttons/DeleteArticleButton";
-import { SwitchOrderButton } from "../Setting/buttons/SwitchOrderButton";
+import { UpdateArticleButton } from "../buttons/UpdateArticleButton";
+import { DeleteArticleButton } from "../buttons/DeleteArticleButton";
+import { SwitchOrderButton } from "../buttons/SwitchOrderButton";
 import { useGetFooterItem } from "../../ActionCreator/footerItems/useGetFooterItem";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { EditorContext } from "../../Store/EditorContext";
@@ -24,12 +24,7 @@ const useStyles = makeStyles((theme) =>
     GridContainer: {
       overflow: "scroll",
     },
-    // itemIsPublished: {
-    //   // position: "relative",
-    //   height: "100%",
-    // },
     itemIsDraft: {
-      // position: "relative",
       height: "100%",
       border: "3px solid red",
     },
@@ -58,7 +53,6 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-// export type HandleOnUpDateFooterIcon = (params: any) => void;
 
 export const PFooter = () => {
     const classes = useStyles();

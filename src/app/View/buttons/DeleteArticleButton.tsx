@@ -4,8 +4,6 @@ import { DeleteForeverTwoTone } from "@material-ui/icons";
 
 type Type = {
   position: string
-  // id: number
-  // handleOnClick: (id: number) => void // confirm + deleteArticle 
   onClick: any
 }
 

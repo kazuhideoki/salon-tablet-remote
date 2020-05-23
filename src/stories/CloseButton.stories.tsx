@@ -1,5 +1,5 @@
 import React from "react";
-import { CloseButton } from "../app/View/PModal/CloseButton";
+import { CloseButton } from "../app/View/buttons/CloseButton";
 export default {
   title: "CloseButton",
   component: CloseButton,
@@ -8,3 +8,7 @@ export default {
 export const Normal = () => (
   <CloseButton/>
 );
+
+export const fix = () => (
+         <CloseButton fix />
+       );
