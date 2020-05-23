@@ -7,6 +7,29 @@ import {
   paginationParamsReducer,
 } from "../Reducer/paginationParamsReducer";
 import { loadingReducer, LoadingAction } from "../Reducer/loadingReducer";
+import { userReducer, TUserAction } from "../Reducer/userReducer";
+
+
+export type T_user_id = number
+export type T_user_name = string
+export type T_shop_name = string
+export type T_email = string
+export type T_bcrypt = string // いらないか
+export type T_created_at_user = string
+export type T_updated_at_user = string
+export type T_last_login_at = string
+
+const initUser = {
+  user_id: 0,
+  user_name: 'user',
+  shop_name: 'salon',
+  email: 'example@gmail.com',
+  bcrypt: '',
+  created_at: '',
+  updated_at: '',
+  last_login_at: '',
+}
+export type TUser = typeof initUser
 
 const initPagination = {
   page: 0,
@@ -81,6 +104,7 @@ const initLoading = {
 }
 export type Loading = typeof initLoading
 
+export type DispatchUser = React.Dispatch<TUserAction>;
 export type DispatchArticles = React.Dispatch<ArticlesAction>;
 export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
 export type DispatchAppState = React.Dispatch < AppStateAction >
@@ -89,6 +113,8 @@ export type DispatchLoading = React.Dispatch<LoadingAction>;
 
 
 export type ContextProps = {
+  user: TUser
+  dispatchUser: DispatchUser
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
   articles: TArticles;
@@ -113,6 +139,7 @@ export type StoreContextProviderProps = {
 };
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {
+  const [user, dispatchUser] = useReducer(userReducer, initUser)
   const [paginationParams, dispatchPaginationParams] = useReducer(
     paginationParamsReducer,
     props.data.pagination
@@ -135,6 +162,8 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
   );
 
   const values = {
+    user,
+    dispatchUser,
     paginationParams,
     dispatchPaginationParams,
     articles,

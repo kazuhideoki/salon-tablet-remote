@@ -5,10 +5,17 @@ import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { EditorContext } from "../../Store/EditorContext";
 import { useCreateFooterItem } from "../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../ActionCreator/footerItems/useUpdateFooterItem";
-import { TextField, Button, Typography } from '@material-ui/core';
+import { TextField, Button, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
 
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  iconName: {
+    width: 350,
+    marginBottom: 20,
+  }
+}))
 
 export const FooterItemEditor = () => {
+  const classes = useStyles()
   const {
     iconName,
     setIconName,
@@ -49,7 +56,8 @@ export const FooterItemEditor = () => {
         variant="outlined"
         value={iconName}
         onChange={(e) => handleOnChangeIconName(e)}
-        style={{ marginBottom: "20px" }}
+        className={classes.iconName}
+        // style={{ marginBottom: "20px" }}
         autoFocus={isEdittingFooterItem ? false : true}
       />
       {charCountIconName < 101 ? null : (

@@ -5,11 +5,19 @@ const QuillEditor = dynamic(() => import("./QuillEditor"), {
   ssr: false,
 });
 // import { QuillEditor } from "./QuillEditor";
-import { Button, TextField, Typography, CircularProgress } from "@material-ui/core";
+import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme } from "@material-ui/core";
 import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
 
+const useStyles = makeStyles((theme: Theme) =>  createStyles({
+  title: {
+    width: 350,
+    marginBottom: 20,
+  }
+}))
+
 const ArticleEditor = () => {
+  const classes = useStyles()
   const {
     titleText,
     setTitleText,
@@ -48,6 +56,7 @@ const ArticleEditor = () => {
         variant="outlined"
         value={titleText}
         onChange={(e) => handleOnChangeTitleText(e)}
+        className={classes.title}
         style={{ marginBottom: "20px" }}
         autoFocus={isEdittingArticle ? false : true}
       />
