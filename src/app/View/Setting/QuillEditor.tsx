@@ -3,12 +3,19 @@ import ReactQuill, { Quill }from "react-quill";
 import ImageCompress from "quill-image-compress";
 import { Typography, CircularProgress } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
+import { ImageButtonDisabled } from "./ImageButtonDisabled";
+
+
 // ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み
 // import { ImageResize } from "quill-image-resize-module";
+// Quill.register("modules/imageResize", ImageResize);
 
 // 画像圧縮のモジュールを利用可能にimageCompress;
 Quill.register("modules/imageCompress", ImageCompress);
-// Quill.register("modules/imageResize", ImageResize);
+
+// 動的にアイコンを変えるのは難しいか。。。stateの変化を反映させられないみたい
+// const icons = Quill.import('ui/icons');
+
 
 type Props = {
   value: string,
@@ -27,7 +34,8 @@ export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, setEditorIm
     if (setEditorTextExcerpt) {
       setEditorTextExcerpt(editor.getText(0, 100))
     }  
-    // checkImgで２個以上画像がある場合一つにする
+
+    // checkImgで２個以上画像がある場合一つにする。画像データが返り値
     const imgData = checkImg(editor.getContents(), setHasImg, () => removeImg('react_quill_editor'));
     if (setEditorImg) {
       // ImgDataをarticle_img用に格納する
