@@ -60,8 +60,8 @@ export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, setEditorIm
       [
         { list: "ordered" },
         { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
+        // { indent: "-1" },
+        // { indent: "+1" },
       ],
       ["link", image],
       // ["link", "image"],
