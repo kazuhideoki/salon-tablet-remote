@@ -1,6 +1,9 @@
 import React from 'react'
 import { IconSelect } from "./iconSelect/IconSelect";
-import { QuillEditor } from "./QuillEditor";
+import dynamic from "next/dynamic";
+const QuillEditor = dynamic(() => import("../Setting/QuillEditor"), {
+  ssr: false,
+});
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { EditorContext } from "../../Store/EditorContext";
 import { useCreateFooterItem } from "../../ActionCreator/footerItems/useCreateFooterItem";

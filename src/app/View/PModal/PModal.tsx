@@ -8,15 +8,9 @@ import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("./ContentModal"), {
   ssr: false,
 });
-// import { ArticleModal } from "./ArticleModal";
-
 import { SettingUserInfo } from "../Setting/SettingUserInfo";
-const ArticleEditor = dynamic(() => import("../Setting/ArticleEditor"), {
-  ssr: false,
-});
-const FooterItemEditor = dynamic(() => import("../Setting/FooterItemEditor"), {
-  ssr: false,
-});
+import ArticleEditor from "../Setting/ArticleEditor";
+import FooterItemEditor from "../Setting/FooterItemEditor";
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
