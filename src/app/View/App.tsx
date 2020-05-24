@@ -7,7 +7,6 @@ import { PFooter } from "./PFooter/PFooter";
 import { SettingSwitch } from "./Setting/(未使用)SettingSwitch";
 import { Store } from "../Store/Store";
 import { ThemeType, ThemeContext } from "../Store/ThemeContext";
-import { useStylesFactory } from "../Store/useStylesFactory";
 import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
 import { StoreContextProviderProps } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
@@ -86,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 const AppView = ()=> {
-  // useStylesFactoryでthemeContextから受け取った値をもとに、styleに定義したコンポーネントごとのスタイルを反映させたclassNameを出力
+  // スタイルを反映させたclassNameを出力
     const classes = useStyles();
 
     const { appState, dispatchAppState, loading, dispatchLoading } = React.useContext(Store);

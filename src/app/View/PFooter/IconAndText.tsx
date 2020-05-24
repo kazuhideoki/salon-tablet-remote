@@ -1,18 +1,20 @@
 import React from 'react'
-import { Typography, IconButton, withStyles } from '@material-ui/core'
-import { useStylesFactory } from '../../Store/useStylesFactory'
-import { ThemeType } from '../../Store/ThemeContext'
+import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme } from '@material-ui/core'
+import { ThemeType, ThemeContext } from '../../Store/ThemeContext'
 import { Store } from '../../Store/Store'
 import { Autorenew } from '@material-ui/icons'
 
-const styles = {
-  icon: {
-    fontSize: (themes: ThemeType) => themes.icon,
-  },
-  img: {
-    height: (themes: ThemeType) => themes.icon,
-  },
-}; 
+const useStyles = makeStyles((theme: Theme) => {
+  const themes = React.useContext(ThemeContext);
+  return createStyles({
+    icon: {
+      fontSize: themes.icon,
+    },
+    img: {
+      height: themes.icon,
+    },
+  })
+})
 
 const StyledIconButton = withStyles({
   root: {
@@ -33,7 +35,7 @@ type Props = {
 }
 
 export const IconAndText = (props:any) => {
-    const classes = useStylesFactory(styles)
+    const classes = useStyles()
     const {dispatchAppState} = React.useContext(Store)
 
     // onClickをonCloseの渡し方で挙動を変える

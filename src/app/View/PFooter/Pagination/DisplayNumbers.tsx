@@ -1,25 +1,28 @@
 import React from "react";
 import { Store } from "../../../Store/Store";
-import { useStylesFactory } from "../../../Store/useStylesFactory";
-import { ThemeType } from "../../../Store/ThemeContext";
+import { ThemeContext } from "../../../Store/ThemeContext";
 import { pageArrowProps } from "./PPagination";
 import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core";
 
-const styles = {
-  nums: {
-    fontSize: (themes: ThemeType) => themes.iconSmall * 0.7,
-    border: "none",
-    backgroundColor: "transparent",
-    margin: "auto 10px",
-    padding: 5
-  },
-  numsCurrent: {
-    fontWeight: "bold"
-  }
-};
+const useStyles = makeStyles((theme: Theme) => {
+  const themes = React.useContext(ThemeContext);
+  return createStyles({
+    nums: {
+      fontSize: themes.iconSmall * 0.7,
+      border: "none",
+      backgroundColor: "transparent",
+      margin: "auto 10px",
+      padding: 5
+    },
+    numsCurrent: {
+      fontWeight: "bold"
+    }
+  })
+})
 
 export const DisplayNumbers = (props: pageArrowProps) => {
-    const classes = useStylesFactory(styles)
+    const classes = useStyles()
     const { paginationParams, dispatchLoading } = React.useContext(Store);
     const {page, pageCount} = paginationParams;
     const getArticles = useGetArticles();

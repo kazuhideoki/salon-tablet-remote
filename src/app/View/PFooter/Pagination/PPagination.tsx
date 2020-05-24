@@ -1,9 +1,8 @@
 import React from "react";
 import { Store } from "../../../Store/Store";
-import { Home, Label, Person } from "@material-ui/icons";
-import { ThemeType } from "../../../Store/ThemeContext";
-import { useStylesFactory } from "../../../Store/useStylesFactory";
-import { Grid } from "@material-ui/core";
+import { Home } from "@material-ui/icons";
+import { ThemeContext } from "../../../Store/ThemeContext";
+import { Grid, makeStyles, createStyles, Theme } from "@material-ui/core";
 import { Prev } from "./Prev";
 import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
@@ -11,12 +10,14 @@ import { Oldest } from "./Oldest";
 import { Next } from "./Next";
 import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
 
-const styles = {
+const useStyles = makeStyles((theme: Theme) => {
+  const themes = React.useContext(ThemeContext);
+  return createStyles({
     icon: {
-        fontSize: (themes: ThemeType) => themes.iconSmall,
+        fontSize: themes.iconSmall,
     },
     nums: {
-        fontSize: (themes: ThemeType) => themes.iconSmall * 0.7,
+        fontSize:  themes.iconSmall * 0.7,
         border: "none",
         backgroundColor: "transparent",
         margin: "auto 10px",
@@ -32,7 +33,8 @@ const styles = {
         justifyContent: "center",
         width: 400,
     },
-};
+  })
+})
 
 export type pageArrowProps = {
     classesDisable?: string;
@@ -41,7 +43,7 @@ export type pageArrowProps = {
 
 export const PPagination = () => {
     const [changedPagination, setChangedPagination] = React.useState(false)
-    const classes = useStylesFactory(styles);
+    const classes = useStyles();
     const {
         paginationParams,
     } = React.useContext(Store);
