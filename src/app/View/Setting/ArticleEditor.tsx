@@ -9,12 +9,20 @@ import { Button, TextField, Typography, CircularProgress, makeStyles, createStyl
 import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
 
-const useStyles = makeStyles((theme: Theme) =>  createStyles({
-  title: {
-    width: 350,
-    marginBottom: 20,
-  }
-}))
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    title: {
+      width: 350,
+      marginBottom: 20,
+    },
+    submitButton: {
+      position: "sticky",
+      bottom: 0,
+      zIndex: 100,
+      background: "white",
+    },
+  })
+);
 
 const ArticleEditor = () => {
   const classes = useStyles()
@@ -61,10 +69,7 @@ const ArticleEditor = () => {
         autoFocus={isEdittingArticle ? false : true}
       />
       {charCountArticleTitle < 101 ? null : (
-        <Typography
-          variant="body2"
-          color={"error"}
-        >
+        <Typography variant="body2" color={"error"}>
           文字数をオーバーしています(100文字以下)
         </Typography>
       )}
@@ -78,6 +83,7 @@ const ArticleEditor = () => {
       />
       <Button
         variant="outlined"
+        className={classes.submitButton}
         onClick={() => handleSubmit({ isPublishing: true })}
         disabled={
           charCountArticleTitle < 101 && charCountArticleContent < 1001
@@ -89,6 +95,7 @@ const ArticleEditor = () => {
       </Button>
       <Button
         variant="outlined"
+        className={classes.submitButton}
         onClick={() => handleSubmit({ isPublishing: false })}
         disabled={
           charCountArticleTitle < 101 && charCountArticleContent < 1001

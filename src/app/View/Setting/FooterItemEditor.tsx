@@ -10,12 +10,20 @@ import { useCreateFooterItem } from "../../ActionCreator/footerItems/useCreateFo
 import { useUpdateFooterItem } from "../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  iconName: {
-    width: 350,
-    marginBottom: 20,
-  }
-}))
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    iconName: {
+      width: 350,
+      marginBottom: 20,
+    },
+    submitButton: {
+      position: "sticky",
+      bottom: 0,
+      zIndex: 100,
+      background: "white",
+    },
+  })
+);
 
 export const FooterItemEditor = () => {
   const classes = useStyles()
@@ -89,6 +97,7 @@ export const FooterItemEditor = () => {
       <IconSelect />
       <Button
         variant="outlined"
+        className={classes.submitButton}
         onClick={() => handleSubmit({ isPublishing: true })}
         disabled={
           charCountIconName < 101 && charCountFooterItemContent < 1001
@@ -100,6 +109,7 @@ export const FooterItemEditor = () => {
       </Button>
       <Button
         variant="outlined"
+        className={classes.submitButton}
         onClick={() => handleSubmit({ isPublishing: false })}
         disabled={
           charCountIconName < 101 && charCountFooterItemContent < 1001

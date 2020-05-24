@@ -10,7 +10,7 @@ type Type = {
 export const DeleteArticleButton = (props) => {
 
     return (
-      <IconButton className={props.position} onClick={() => props.onClick()}>
+      <IconButton className={props.position} onClick={() => props.onClick()} style={{zIndex: 200}}>
         <DeleteForeverTwoTone />
       </IconButton>
     );
