@@ -15,8 +15,9 @@ const useStyles = makeStyles((theme: Theme) => {
 })
 
 export const PHeader = () => {
+  const classes = useStyles()
   return (
-    <div>
+    <div className={classes.root}>
       <Typography align="center" variant="h5">
         Salon Tablet
       </Typography>
