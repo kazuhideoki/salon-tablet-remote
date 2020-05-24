@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) =>
       height: "100%",
     },
     GridContainer: {
-      overflow: "scroll",
+      overflowY: "hidden",
+      overflowX: "scroll",
     },
     itemIsDraft: {
       height: "100%",

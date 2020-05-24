@@ -7,13 +7,19 @@ import { Autorenew } from '@material-ui/icons'
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
   return createStyles({
+    root: {
+      // maxWidth: themes.icon * 1.2,
+    },
     icon: {
       fontSize: themes.icon,
     },
     img: {
       height: themes.icon,
     },
-  })
+    iconName: {
+      maxWidth: themes.icon * 1.5,
+    },
+  });
 })
 
 const StyledIconButton = withStyles({
@@ -78,9 +84,9 @@ export const IconAndText = (props:any) => {
     }
 
     return (
-        <StyledIconButton>
+        <StyledIconButton className={classes.root}>
           {icon}
-          <Typography variant="body2">{props.text}</Typography>
+          <Typography variant="body2" className={classes.iconName}>{props.text}</Typography>
         </StyledIconButton>
     );
 }
