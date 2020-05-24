@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => {
       height: themes.icon,
     },
     iconName: {
-      maxWidth: themes.icon * 1.5,
+      maxWidth: themes.icon * 2,
     },
   });
 })
