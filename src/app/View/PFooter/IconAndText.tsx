@@ -1,20 +1,31 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography, IconButton, withStyles } from '@material-ui/core'
 import { useStylesFactory } from '../../Store/useStylesFactory'
 import { ThemeType } from '../../Store/ThemeContext'
 import { Store } from '../../Store/Store'
+import { Autorenew } from '@material-ui/icons'
 
 const styles = {
-    root : {
-        textAlign: "center",
-    },
-    icon: {
-        fontSize: (themes: ThemeType) => themes.icon,
-    },
-    img: {
-        height: (themes: ThemeType) => themes.icon,
-    }
-} 
+  icon: {
+    fontSize: (themes: ThemeType) => themes.icon,
+  },
+  img: {
+    height: (themes: ThemeType) => themes.icon,
+  },
+}; 
+
+const StyledIconButton = withStyles({
+  root: {
+    // もともと定義されているcolorではなくopacityで設定。aタグのカラーを残すことができる
+    color: 'inherit',
+    opacity: 0.75
+  },
+  label: {
+    // アイコンと文字を縦に並べて整形する
+    display: "flex",
+    flexDirection: "column",
+  },
+})(IconButton)
 
 // 表示させるアイコンはprops.icon→Material-uiのicon、もしくはprops.img→imgのsrcで切り替えることが出来る。
 type Props = {
@@ -65,13 +76,11 @@ export const IconAndText = (props:any) => {
     }
 
     return (
-        <div className={classes.root}>
-            {icon}
-            <Typography variant="body2">
-                {props.text}
-            </Typography>
-        </div>
-    )
+        <StyledIconButton>
+          {icon}
+          <Typography variant="body2">{props.text}</Typography>
+        </StyledIconButton>
+    );
 }
 
 

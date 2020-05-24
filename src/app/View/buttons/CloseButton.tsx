@@ -23,7 +23,6 @@ export const CloseButton = (props:any) => {
         position: position,
         top: top,
         right: right,
-        opacity: "0.8",
       },
     })
   );
@@ -34,7 +33,7 @@ export const CloseButton = (props:any) => {
       //@ts-ignore
       <IconButton onClick={props.onClick} className={classes.root}>
         {/* //@ts-ignore */}
-        <HighlightOff style={{ fontSize: "70px" }} />
+        <HighlightOff style={{ fontSize: "60px" }} />
       </IconButton>
     );
 }
