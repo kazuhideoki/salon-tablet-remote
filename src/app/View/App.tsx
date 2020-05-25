@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Grid, CircularProgress, makeStyles, createStyles, Theme } from "@material-ui/core";
+import { Grid, CircularProgress, makeStyles, createStyles, Theme, useMediaQuery } from "@material-ui/core";
 import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain/PMain";
 import { PFooter } from "./PFooter/PFooter";
@@ -14,6 +14,7 @@ import { StoreContextProvider } from "../Store/Store";
 import { EditorContextProvider } from "../Store/EditorContext";
 import { Drawer } from "./Drawer";
 import { PHeader } from "./PHeader";
+import { AppMobile } from "./mobile/AppMobile";
 
 // 3段のコンテナの整形に関してのみ記述, 
 // 枠の設定、header,footerの最大値の設定
@@ -156,16 +157,16 @@ const AppView = ()=> {
 
 }
 
-export const App = (props:StoreContextProviderProps) => {
 
+export const App = (props:StoreContextProviderProps) => {
+  const isMobile = useMediaQuery("(min-width:480px)");
+  
   return (
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
       <ThemeProvider>
         <EditorContextProvider>
-          {/* <Drawer> */}
-            <AppView />
-          {/* </Drawer> */}
+          {!isMobile ? <AppMobile/> : <AppView />}
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>
