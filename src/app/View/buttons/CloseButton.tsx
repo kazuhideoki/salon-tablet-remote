@@ -18,7 +18,7 @@ export const CloseButton = (props:any) => {
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
-        zIndex: 200,
+        zIndex: 200, 
         //@ts-ignore
         position: position,
         top: top,

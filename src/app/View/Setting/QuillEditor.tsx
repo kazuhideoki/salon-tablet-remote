@@ -4,6 +4,8 @@ import ImageCompress from "quill-image-compress";
 import { Typography, CircularProgress } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
 
+// ※ReactQuillのスタイルはquill.scssに記述
+
 
 // ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み
 // import { ImageResize } from "quill-image-resize-module";
@@ -94,6 +96,7 @@ export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, setEditorIm
   // ];
 
   return (
+    // ※ReactQuillのスタイルはquill.scssに記述
     <>
       <ReactQuill
         className="react_quill_editor"

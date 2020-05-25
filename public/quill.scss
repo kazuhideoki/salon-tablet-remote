@@ -7,11 +7,25 @@
     z-index: 100;
     background: white;
 
-    
+    // ●●●ツールバーのサイズ調整↓
+    // ※やっみたがかなり構造が複雑できれいに拡大するのが難しい。divとspanとsvgが入り組んでいる。heightやfontSizeをうまく適応しにくい？
+    // svg {
+    //   height: calc(100% * 1.5);
+    // }
+
+    // button {
+    //   // height: calc(100% * 1.5);
+    //   svg {
+    //     height: calc(100% * 1.5);
+    //   }
+    // }
+    // ●●●ツールバーのサイズ調整⇡
+
   }
   .ql-container {
     // Editor, ContentModal共通のstyle
     .ql-editor {
+      min-height: 50%;
       font-size: 1.4rem;
 
       h1 {

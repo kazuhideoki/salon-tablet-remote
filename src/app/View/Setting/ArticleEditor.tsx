@@ -67,6 +67,7 @@ const ArticleEditor = () => {
         className={classes.title}
         style={{ marginBottom: "20px" }}
         autoFocus={isEdittingArticle ? false : true}
+        // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
       />
       {charCountArticleTitle < 101 ? null : (
         <Typography variant="body2" color={"error"}>
