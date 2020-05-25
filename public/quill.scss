@@ -23,9 +23,9 @@
 
   }
   .ql-container {
+    min-height: 20vh;
     // Editor, ContentModal共通のstyle
     .ql-editor {
-      min-height: 50%;
       font-size: 1.4rem;
 
       h1 {
