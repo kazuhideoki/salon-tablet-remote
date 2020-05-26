@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     iconName: {
       width: 350,
       marginBottom: 20,
+      maxWidth: "100%",
     },
     submitButton: {
       position: "sticky",

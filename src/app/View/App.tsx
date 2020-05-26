@@ -159,14 +159,14 @@ const AppView = ()=> {
 
 
 export const App = (props:StoreContextProviderProps) => {
-  const isMobile = useMediaQuery("(min-width:480px)");
+  const isMobile = useMediaQuery("(max-width:480px)");
   
   return (
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
       <ThemeProvider>
         <EditorContextProvider>
-          {!isMobile ? <AppMobile/> : <AppView />}
+          {isMobile ? <AppMobile/> : <AppView />}
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>

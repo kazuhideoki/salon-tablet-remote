@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       width: 350,
       marginBottom: 20,
+      maxWidth: "100%",
     },
     submitButton: {
       position: "sticky",

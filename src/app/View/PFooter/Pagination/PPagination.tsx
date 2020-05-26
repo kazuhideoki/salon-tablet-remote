@@ -9,6 +9,23 @@ import { DisplayNumbers } from "./DisplayNumbers";
 import { Oldest } from "./Oldest";
 import { Next } from "./Next";
 import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
+import { HomeButton } from "./HomeButton";
+import { PageNumber } from "./PageNumber";
+import { PaginationArrows } from "./PaginationArrows";
+
+// export const usePPaginationProps = () => {
+//   const { paginationParams } = React.useContext(Store);
+//   const { page, pageCount } = paginationParams;
+//   const getArticles = useGetArticles();
+
+//   return {
+//     page,
+//     pageCount,
+//     getArticles,
+//   };
+// };
+// type Props = ReturnType<typeof usePPaginationProps>
+
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
@@ -41,74 +58,20 @@ export type pageArrowProps = {
     classesIcon?: string;
 };
 
-export const PPagination = () => {
-    const [changedPagination, setChangedPagination] = React.useState(false)
-    const classes = useStyles();
-    const {
-        paginationParams,
-    } = React.useContext(Store);
-    const { page, pageCount} = paginationParams;
-    const getArticles = useGetArticles();
+export const PPaginationPresenter = () => {
+  const classes = useStyles();
 
-    const props = {
-      classes,
-      page,
-      pageCount,
-      changedPagination,
-    };
-    type Props = typeof props
-
-    const PaginationPresenter = ({
-      classes,
-      page,
-      pageCount,
-    }: Props) => {
-        const hundleOnClick = () => {
-            return 0
-        }
-
-      const HomeButton = () => {
-        return <Home onClick={() => getArticles(1)} className={classes.icon} />;
-      };
-      const PageNumber = () => {
-        return (
-          <p className={classes.nums}>
-            【 {page}/{pageCount} 】
-          </p>
-        );
-      };
-
-      const PaginationArrows = () => (
-        <Grid item className={classes.pagination}>
-          <Latest
-            classesDisable={classes.disable}
-            classesIcon={classes.icon}
-          />
-          <Prev
-            classesDisable={classes.disable}
-            classesIcon={classes.icon}
-          />
-          <DisplayNumbers/>
-          <Next
-            classesDisable={classes.disable}
-            classesIcon={classes.icon}
-          />
-          <Oldest
-            classesDisable={classes.disable}
-            classesIcon={classes.icon}
-          />
-        </Grid>
-      );
-
-      return (
-        <Grid container justify="center" spacing={1}>
-          <HomeButton />
-          <PageNumber />
-          <PaginationArrows />
-        </Grid>
-      );
-    };
-
-    return PaginationPresenter(props)
-
+  return (
+    <Grid container justify="center" spacing={1}>
+      <HomeButton classes={classes} />
+      <PageNumber classes={classes}/>
+      <PaginationArrows classes={classes}/>
+    </Grid>
+  );
 };
+
+export const PPagination = () => {
+  // usePPaginationProps使うときは記述し直す
+  
+  return <PPaginationPresenter />
+}

@@ -18,6 +18,43 @@ import { EditorContext } from "../../Store/EditorContext";
 import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 
+export type HandleOnUpDate = (params: any) => void;
+export const usePMainProps = () => {
+  const { appState, articles, dispatchAppState } = React.useContext(
+    Store
+  );
+  const deleteArticle = useDeleteArticle();
+  const { setIsEdittingArticle } = React.useContext(EditorContext);
+  const getSingleArticle = useGetSingleArticle();
+
+  const handleOnUpDate: HandleOnUpDate = (id: T_id) => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
+    setIsEdittingArticle(true);
+    getSingleArticle(id);
+  };
+
+  const handleOnDelete = (id: T_id) => {
+    const deleting = confirm("本当に削除してよろしいですか？");
+    deleting ? deleteArticle(id) : null;
+  };
+
+  const openArticle = (article_content: string) => {
+    dispatchAppState({ type: "SET_CONTENT", payload: article_content });
+    dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
+  };
+
+  return {
+    appState,
+    articles,
+    handleOnUpDate,
+    handleOnDelete,
+    openArticle,
+  };
+};
+
+type Props = ReturnType<typeof usePMainProps>
+
+
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const useStyles = makeStyles((theme) => {
   const cardWidth = 350
@@ -74,138 +111,97 @@ const useStyles = makeStyles((theme) => {
 
 })
 
-export type HandleOnUpDate = (params: any) => void;
+export const PMainPresenter = (props: Props) => {
+  const classes = useStyles();
 
-
-export const PMain = () => {
-    const classes = useStyles();
-    const {
-      appState,
-      articles,
-      dispatchAppState,
-    } = React.useContext(Store);
-    const deleteArticle = useDeleteArticle();
-    const { setIsEdittingArticle } = React.useContext(EditorContext);
-    const getSingleArticle = useGetSingleArticle();
-
-    const handleOnUpDate: HandleOnUpDate = (id: T_id) => {
-      dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-      setIsEdittingArticle(true);
-      getSingleArticle(id);
-    };
-
-    const handleOnDelete = (id: T_id) => {
-      const deleting = confirm("本当に削除してよろしいですか？");
-      deleting ? deleteArticle(id) : null
-    };
-
-    const openArticle = (article_content: string) => {
-      dispatchAppState({ type: "SET_CONTENT", payload: article_content})
-      dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
-
-    }
-
-    const props = {
-      articles,
-      classes,
-      deleteArticle,
-      handleOnUpDate,
-    };
-    type Props = typeof props
-
-    const PMainPresenter: React.FC<Props> = ({
-      articles,
-      classes,
-      deleteArticle,
-      handleOnUpDate,
-    }: Props) => {
-      const displayArticles = articles.map((value, key: number) => {
-          return (
-            <Grid
-              item
-              key={key}
-              // 投稿済みか下書きかで見た目を変える
-              className={`${classes.gridItem}
-                ${!value.is_published ? classes.itemIsDraft : ''}
-              `}
-            >
-              {appState.isSetting ? (
-                <UpdateArticleButton
-                  position={classes.updateArticleButton}
-                  // id={value.id}
-                  // handleOnClick={handleOnUpDate}
-                  onClick={() => handleOnUpDate(value.id)}
-                />
-              ) : null}
-              {appState.isSetting ? (
-                <DeleteArticleButton
-                  position={classes.deleteArticleButton}
-                  // id={value.id}
-                  // handleOnClick={handleOnDelete}
-                  onClick={() => handleOnDelete(value.id)}
-                />
-              ) : null}
-
-              <CardActionArea
-                className={classes.cardActionArea}
-                onClick={() => openArticle(value.article_content)}
-              >
-                <Card
-                  variant="outlined"
-                  className={classes.card}
-                >
-                  <CardContent>
-
-                    <Typography variant="h5" component="h2">{value.title}</Typography>
-                    <Typography gutterBottom variant="subtitle1" align="right">
-                      {sqlToDate(value.created_at)}
-                    </Typography>                   
-                    <img className={`p-main-thumbnail ${classes.thumbnail}`} src={value.article_img}/>
-                    <div
-                      className={`p-main-article-excerpt ${classes.excerpt}`}
-                      dangerouslySetInnerHTML={{
-                        __html: value.article_excerpt + '...',
-                      }}
-                    />
-
-                  </CardContent>
-                </Card>
-              </CardActionArea>
-            </Grid>
-          );
-        });
-        // 記事がもしなかった場合の表示
-      const noArticles = (
-        <Grid item >
-          <Card
-            variant="outlined"
-            className={classes.card}
-          >
-            記事がありません
-          </Card>
-        </Grid>
-      );
-
+  const displayArticles = props.articles.map((value, key: number) => {
       return (
         <Grid
-          id="p_main"
-          container
-          wrap="nowrap"
-          className={classes.root}
-          spacing={2}
+          item
+          key={key}
+          // 投稿済みか下書きかで見た目を変える
+          className={`${classes.gridItem}
+            ${!value.is_published ? classes.itemIsDraft : ""}
+          `}
         >
-          {/* ↓使うかも */}
-          {/* {appState.isSetting ? (
-              <CreateButton position={classes.createArticleButton} />
-            ) : null} */}
-          {(articles.length)? displayArticles : noArticles}
+          {props.appState.isSetting ? (
+            <UpdateArticleButton
+              position={classes.updateArticleButton}
+              // id={value.id}
+              // handleOnClick={handleOnUpDate}
+              onClick={() => props.handleOnUpDate(value.id)}
+            />
+          ) : null}
+          {props.appState.isSetting ? (
+            <DeleteArticleButton
+              position={classes.deleteArticleButton}
+              // id={value.id}
+              // handleOnClick={handleOnDelete}
+              onClick={() => props.handleOnDelete(value.id)}
+            />
+          ) : null}
+
+          <CardActionArea
+            className={classes.cardActionArea}
+            onClick={() => props.openArticle(value.article_content)}
+          >
+            <Card variant="outlined" className={classes.card}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  {value.title}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1" align="right">
+                  {}
+                </Typography>
+                <img
+                  className={`p-main-thumbnail ${classes.thumbnail}`}
+                  src={value.article_img}
+                />
+                <div
+                  className={`p-main-article-excerpt ${classes.excerpt}`}
+                  dangerouslySetInnerHTML={{
+                    __html: value.article_excerpt + "...",
+                  }}
+                />
+              </CardContent>
+            </Card>
+          </CardActionArea>
         </Grid>
       );
-    };
+    });
+    // 記事がもしなかった場合の表示
+  const noArticles = (
+    <Grid item >
+      <Card
+        variant="outlined"
+        className={classes.card}
+      >
+        記事がありません
+      </Card>
+    </Grid>
+  );
 
+  return (
+    <Grid
+      id="p_main"
+      container
+      wrap="nowrap"
+      className={classes.root}
+      spacing={2}
+    >
+      {/* ↓使うかも */}
+      {/* {appState.isSetting ? (
+          <CreateButton position={classes.createArticleButton} />
+        ) : null} */}
+      {props.articles.length ? displayArticles : noArticles}
+    </Grid>
+  );
 
+}
 
-    return PMainPresenter(props);
+export const PMain = () => {
+  const props = usePMainProps()
 
+  return <PMainPresenter {...props} />
 }
 
