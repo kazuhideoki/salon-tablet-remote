@@ -50,7 +50,7 @@ export const FooterMobile = () => {
         フッターアイテム追加
       </Button>
       {footerItems.length === 0 ? (
-        <div>アイテムがありません</div>
+        <div className={classes.item}>アイテムがありません</div>
       ) : (
         footerItems.map((value, index) => {
           // アイコン名を該当アイコンコンポーネントに変換

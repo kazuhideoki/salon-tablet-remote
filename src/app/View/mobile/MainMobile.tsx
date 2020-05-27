@@ -37,7 +37,7 @@ export const MainMobile = () => {
     <div className={classes.root}>
       <Button color="primary" className={classes.button} onClick={() => handleOpenArticleEditor()}>新規投稿</Button>
       {articles.length === 0
-      ? <div>記事がありません</div>
+      ? <div className={classes.item}>記事がありません</div>
 
       : articles.map((value, key) => {
         return (
