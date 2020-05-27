@@ -234,8 +234,12 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
   );
 }
 
-export const Drawer: React.FC<DrawerProps> = ({open, setOpen}: DrawerProps) => {
+export const Drawer: React.FC<DrawerProps> = (props) => {
   const useProps = useDrawerProps()
 
-  return <DrawerPresenter {...useProps} open={open} setOpen={setOpen} />;
+  return (
+    <DrawerPresenter {...useProps} open={props.open} setOpen={props.setOpen}>
+      {props.children}
+    </DrawerPresenter>
+  );
 }
