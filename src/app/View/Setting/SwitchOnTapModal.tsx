@@ -20,7 +20,7 @@ export function SwitchOnTapModal({ onTap, setOnTap}) {
 
   return (
     <FormControl component="fieldset">
-      <FormLabel component="legend">アイコン機能切り替え</FormLabel>
+      <FormLabel component="legend">フッターアイテム機能切り替え</FormLabel>
       <RadioGroup row aria-label="gender" name="gender1" value={onTap} onChange={handleChange} >
         <FormControlLabel value="modal" control={<Radio />} label="モーダルウィンドウ" />
         <FormControlLabel value="link" control={<Radio />} label="外部リンク" />

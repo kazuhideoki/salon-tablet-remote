@@ -59,7 +59,7 @@ const useActions = () => {
   return [
   { 
     icon: <VideoLabel onClick={() => handleOpenFooterItemEditor()}/>,
-    name: "フッターアイコン追加"
+    name: "フッターアイテム追加"
     // name: "New Icon"
   },
   { 

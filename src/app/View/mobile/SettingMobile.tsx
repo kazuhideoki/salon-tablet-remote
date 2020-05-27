@@ -4,7 +4,9 @@ import { makeStyles,Theme ,createStyles} from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
-      flexGrow: 1, 
+      overflowY: "scroll",
+      flexGrow: 1,
+      width: "100%",
     },
   });
 });

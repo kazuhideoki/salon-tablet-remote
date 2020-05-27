@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) => {
     root: {
       overflowY: "scroll",
       flexGrow: 1,
+      width: "100%",
     },
     button: {
       width: "100%",
@@ -35,7 +36,10 @@ export const MainMobile = () => {
   return (
     <div className={classes.root}>
       <Button color="primary" className={classes.button} onClick={() => handleOpenArticleEditor()}>新規投稿</Button>
-      {articles.map((value, key) => {
+      {articles.length === 0
+      ? <div>記事がありません</div>
+
+      : articles.map((value, key) => {
         return (
           <div key={key} className={classes.item}>
             <div>{value.title}</div>

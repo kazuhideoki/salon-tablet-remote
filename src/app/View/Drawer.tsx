@@ -186,7 +186,7 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
               <ListItemIcon>
                 <VideoLabel />
               </ListItemIcon>
-              <ListItemText primary="アイコン作成" />
+              <ListItemText primary="フッターアイテム作成" />
             </ListItem>
             <ListItem
               button

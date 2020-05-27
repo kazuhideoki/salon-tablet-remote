@@ -47,55 +47,59 @@ export const FooterMobile = () => {
         className={classes.button}
         onClick={() => handleOpenFooterItemEditor()}
       >
-        フッターアイコン追加
+        フッターアイテム追加
       </Button>
-      {footerItems.map((value, index) => {
-        // アイコン名を該当アイコンコンポーネントに変換
-        const icon = value.displayed_icon_name
-          ? IconsSetting.convertIconComponentFromName(
-              value.displayed_icon_name
-            )[0]
-          : MoodBad;
+      {footerItems.length === 0 ? (
+        <div>アイテムがありません</div>
+      ) : (
+        footerItems.map((value, index) => {
+          // アイコン名を該当アイコンコンポーネントに変換
+          const icon = value.displayed_icon_name
+            ? IconsSetting.convertIconComponentFromName(
+                value.displayed_icon_name
+              )[0]
+            : MoodBad;
 
-        return (
-          <div key={index} className={classes.item}>
-            <div>
-              <Icon icon={icon} />
-              {value.icon_name}
-            </div>
-            <div>
-              {value.item_excerpt}
-              {/* 抜粋が100文字の場合"..."追加" */}
-              {value.item_excerpt.length === 100 ? "..." : ""}
-            </div>
-            <button
-              onClick={() => handleOnUpDateFooterIcon(value.footer_item_id)}
-            >
-              編集
-            </button>
-            <button
-              onClick={() =>
-                handleOnDeleteFooterItem(value.footer_item_id, value.order)
-              }
-            >
-              削除
-            </button>
-            {index !== 0 ? (
+          return (
+            <div key={index} className={classes.item}>
+              <div>
+                <Icon icon={icon} />
+                {value.icon_name}
+              </div>
+              <div>
+                {value.item_excerpt}
+                {/* 抜粋が100文字の場合"..."追加" */}
+                {value.item_excerpt.length === 100 ? "..." : ""}
+              </div>
+              <button
+                onClick={() => handleOnUpDateFooterIcon(value.footer_item_id)}
+              >
+                編集
+              </button>
               <button
                 onClick={() =>
-                  switchOrder({
-                    footer_item_id: value.footer_item_id,
-                    order: value.order,
-                  })
+                  handleOnDeleteFooterItem(value.footer_item_id, value.order)
                 }
               >
-                <ArrowUpward />
-                入れ替え
+                削除
               </button>
-            ) : null}
-          </div>
-        );
-      })}
+              {index !== 0 ? (
+                <button
+                  onClick={() =>
+                    switchOrder({
+                      footer_item_id: value.footer_item_id,
+                      order: value.order,
+                    })
+                  }
+                >
+                  <ArrowUpward />
+                  入れ替え
+                </button>
+              ) : null}
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }
