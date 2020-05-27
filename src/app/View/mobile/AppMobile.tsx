@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme: Theme) => {
       height: "100vh",
       display: "flex",
       flexDirection: "column",
+      alignItems: "center",
+      
     },
   });
 });

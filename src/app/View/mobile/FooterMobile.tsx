@@ -1,15 +1,24 @@
 import React from 'react'
 import { usePFooterProps } from "../PFooter/PFooter";
 import { IconsSetting } from '../Setting/iconSelect/icons';
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
-import { MoodBad } from '@material-ui/icons';
+import { makeStyles, Theme, createStyles, Button } from "@material-ui/core";
+import { MoodBad, ArrowUpward } from "@material-ui/icons";
+import { useSwitchOrder } from '../../ActionCreator/footerItems/useSwitchOrder';
+import { useDrawerProps } from '../Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
   // const themes = React.useContext(ThemeContext);
   return createStyles({
     root: {
-      display: "flex",
-      flexWrap: "wrap",
+      overflowY: "scroll",
+      flexGrow: 1,
+      width: "100%",
+    },
+    button: {
+      width: "100%",
+    },
+    item: {
+      border: "1px solid black",
     },
   });
 });
@@ -25,19 +34,35 @@ export const FooterMobile = () => {
     handleOnDeleteFooterItem,
   } = usePFooterProps();
 
+  const { handleOpenFooterItemEditor } = useDrawerProps()
+
+  const switchOrder = useSwitchOrder()
+
   const Icon = (props) => <props.icon/>
 
   return (
-    <div>
-      {footerItems.map((value, key) => {
-      // アイコン名を該当アイコンコンポーネントに変換
-      const icon = value.displayed_icon_name ? IconsSetting.convertIconComponentFromName(
-        value.displayed_icon_name)[0] : MoodBad
+    <div className={classes.root}>
+      <Button
+        color="primary"
+        className={classes.button}
+        onClick={() => handleOpenFooterItemEditor()}
+      >
+        フッターアイコン追加
+      </Button>
+      {footerItems.map((value, index) => {
+        // アイコン名を該当アイコンコンポーネントに変換
+        const icon = value.displayed_icon_name
+          ? IconsSetting.convertIconComponentFromName(
+              value.displayed_icon_name
+            )[0]
+          : MoodBad;
 
         return (
-          <div className={classes.root} key={key}>
-            <Icon icon={icon} />
-            <div>{value.icon_name}</div>
+          <div key={index} className={classes.item}>
+            <div>
+              <Icon icon={icon} />
+              {value.icon_name}
+            </div>
             <div>{value.item_content}</div>
             <button
               onClick={() => handleOnUpDateFooterIcon(value.footer_item_id)}
@@ -51,6 +76,19 @@ export const FooterMobile = () => {
             >
               削除
             </button>
+            {index !== 0 ? (
+              <button
+                onClick={() =>
+                  switchOrder({
+                    footer_item_id: value.footer_item_id,
+                    order: value.order,
+                  })
+                }
+              >
+                <ArrowUpward />
+                入れ替え
+              </button>
+            ) : null}
           </div>
         );
       })}

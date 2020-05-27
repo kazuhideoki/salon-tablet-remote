@@ -7,6 +7,9 @@ import { ThemeContext } from '../../Store/ThemeContext';
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
   return createStyles({
+    root: {
+      flexGrow: 0,
+    },
     icon: {
         fontSize: themes.iconSmall,
     },
@@ -35,9 +38,9 @@ export const PaginationMobile = () => {
   const classes = useStyles()
 
   return( 
-    <>
-      <HomeButton classes={classes} />
+    <div className={classes. root}>
+      {/* <HomeButton classes={classes} /> */}
       <PaginationArrows classes={classes} />
-    </>
+    </div>
   )
 }

@@ -8,10 +8,11 @@ import { Settings, VideoLabel, NoteAddOutlined } from "@material-ui/icons";
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    flexGrow: 1,
+    flexGrow: 0,
     maxWidth: 500,
-    position: "fixed",
-    bottom: 0,
+    // position: "fixed",
+    // bottom: 0,
+
   },
 });
 

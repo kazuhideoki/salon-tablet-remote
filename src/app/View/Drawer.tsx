@@ -24,6 +24,59 @@ import { EditorContext } from "../Store/EditorContext";
 import { NoteAddOutlined, VideoLabel, Settings } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 
+export const useDrawerProps = () => {
+  const theme = useTheme();
+  const { dispatchAppState, appState } = React.useContext(Store);
+  const {
+    setEditorText,
+    setTitleText,
+    setFooterItemEditorText,
+    setIconName,
+    setOnTap,
+    setLinkUrl,
+    setIsEdittingArticle,
+    dispatchSelectedIcon,
+    setIsEdittingFooterItem,
+  } = React.useContext(EditorContext);
+
+  const handleOpenArticleEditor = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
+    setIsEdittingArticle(false);
+    setTitleText("");
+    setEditorText("");
+  };
+
+  const handleOpenFooterItemEditor = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
+    setIsEdittingFooterItem(false);
+    setIconName("");
+    setFooterItemEditorText("");
+    setOnTap("modal");
+    setLinkUrl("");
+    dispatchSelectedIcon({ type: "SET_ICON", payload: null });
+  };
+
+  const enterPassword = () => {
+    dispatchAppState({ type: "ON_IS_SETTING" });
+    dispatchAppState({ type: "CLOSE_MODAL" });
+  };
+
+  return {
+    theme,
+    appState,
+    dispatchAppState,
+    handleOpenArticleEditor,
+    handleOpenFooterItemEditor,
+    enterPassword,
+  };
+}
+type useDrawerProps = ReturnType<typeof useDrawerProps>
+type DrawerProps = {
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+type PresenterProps = useDrawerProps & DrawerProps
+
 const useStyles = makeStyles((theme: Theme) => {
     const themes = React.useContext(ThemeContext);
     return createStyles({
@@ -74,62 +127,24 @@ const useStyles = makeStyles((theme: Theme) => {
         }),
         marginLeft: 0,
       },
-      // drawerOpened: {
-      //   width: `calc(100% - ${themes.drawerWidth}px)`,
-      // },
     })}
   )
 
-export function Drawer(props) {
+export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const {
-    setEditorText,
-    setTitleText,
-    setFooterItemEditorText,
-    setIconName,
-    setOnTap,
-    setLinkUrl,
-    setIsEdittingArticle,
-    dispatchSelectedIcon,
-    setIsEdittingFooterItem,
-  } = React.useContext(EditorContext);
-
-  const handleOpenArticleEditor = () => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-    setIsEdittingArticle(false);
-    setTitleText("");
-    setEditorText("");
-  };
-
-  const handleOpenFooterItemEditor = () => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
-    setIsEdittingFooterItem(false);
-    setIconName("");
-    setFooterItemEditorText("");
-    setOnTap("modal");
-    setLinkUrl("");
-    dispatchSelectedIcon({ type: "SET_ICON", payload: null });
-  };
 
   const handleDrawerOpen = () => {
     props.setOpen(true);
-    dispatchAppState({ type: "CLOSE_MODAL" });
+    props.dispatchAppState({ type: "CLOSE_MODAL" });
   };
 
   const handleDrawerClose = () => {
     props.setOpen(false);
     // Drawerが閉じきってからisSettingをfalseに
     setTimeout(() => {
-      dispatchAppState({type: "OFF_IS_SETTING"})
+      props.dispatchAppState({ type: "OFF_IS_SETTING" });
     }, 800);
   };
-
-  const enterPassword = () => {
-    dispatchAppState({ type: "ON_IS_SETTING" })
-    dispatchAppState({ type: "CLOSE_MODAL" });
-  }
 
   return (
     <div className={classes.root}>
@@ -154,7 +169,7 @@ export function Drawer(props) {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
+            {props.theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
@@ -162,41 +177,49 @@ export function Drawer(props) {
           </IconButton>
         </div>
         <Divider />
-        {appState.isSetting ? 
-        <List>
-          <ListItem button onClick={() => handleOpenArticleEditor()}>
-            <ListItemIcon>
-              <NoteAddOutlined />
-            </ListItemIcon>
-            <ListItemText primary="新規投稿" />
-          </ListItem>
-          <ListItem button onClick={() => handleOpenFooterItemEditor()}>
-            <ListItemIcon>
-              <VideoLabel />
-            </ListItemIcon>
-            <ListItemText primary="アイコン作成" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() => dispatchAppState({type: "OPEN_MODAL", payload: 'setting_user_info'})}
-          >
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            <ListItemText primary="設定" />
-          </ListItem>
-        </List> 
-        // パスワード用のTextFieldは今後実装
-        : <><TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          variant="outlined"
-          />
-          <Button onClick={() => enterPassword()}>入力</Button></>
-        }
-        
+        {props.appState.isSetting ? (
+          <List>
+            <ListItem button onClick={() => props.handleOpenArticleEditor()}>
+              <ListItemIcon>
+                <NoteAddOutlined />
+              </ListItemIcon>
+              <ListItemText primary="新規投稿" />
+            </ListItem>
+            <ListItem button onClick={() => props.handleOpenFooterItemEditor()}>
+              <ListItemIcon>
+                <VideoLabel />
+              </ListItemIcon>
+              <ListItemText primary="アイコン作成" />
+            </ListItem>
+            <ListItem
+              button
+              onClick={() =>
+                props.dispatchAppState({
+                  type: "OPEN_MODAL",
+                  payload: "setting_user_info",
+                })
+              }
+            >
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              <ListItemText primary="設定" />
+            </ListItem>
+          </List>
+        ) : (
+          // パスワード用のTextFieldは今後実装
+          <>
+            <TextField
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              variant="outlined"
+            />
+            <Button onClick={() => props.enterPassword()}>入力</Button>
+          </>
+        )}
+
         <Divider />
       </MuiDrawer>
       {/* {props.children} */}
@@ -209,4 +232,10 @@ export function Drawer(props) {
       </main>
     </div>
   );
+}
+
+export const Drawer: React.FC<DrawerProps> = ({open, setOpen}: DrawerProps) => {
+  const useProps = useDrawerProps()
+
+  return <DrawerPresenter {...useProps} open={open} setOpen={setOpen} />;
 }

@@ -1,18 +1,23 @@
 import React from 'react'
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 import { usePMainProps } from '../PMain/PMain';
-import { makeStyles,createStyles, Theme } from '@material-ui/core';
+import { makeStyles,createStyles, Theme, Button } from '@material-ui/core';
+import { useDrawerProps } from '../Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
   // const themes = React.useContext(ThemeContext);
   return createStyles({
     root: {
       overflowY: "scroll",
+      flexGrow: 1,
+    },
+    button: {
+      width: "100%",
     },
     item: {
-      border: '1px solid black',
-    }
-  })
+      border: "1px solid black",
+    },
+  });
 })
 
 export const MainMobile = () => {
@@ -25,11 +30,14 @@ export const MainMobile = () => {
     openArticle,
   } = usePMainProps();
 
+  const { handleOpenArticleEditor } = useDrawerProps()
+
   return (
     <div className={classes.root}>
+      <Button color="primary" className={classes.button} onClick={() => handleOpenArticleEditor()}>新規投稿</Button>
       {articles.map((value, key) => {
         return (
-          <div className={classes.item}>
+          <div key={key } className={classes.item}>
             <div>{value.title}</div>
             <div>{sqlToDate(value.created_at)}</div>
             <div>{value.article_excerpt}...</div>
