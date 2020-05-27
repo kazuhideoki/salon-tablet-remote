@@ -8,7 +8,6 @@ import { PModal } from '../PModal/PModal';
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => {
-  // const themes = React.useContext(ThemeContext);
   return createStyles({
     root: {
       width: "100vw",
@@ -28,7 +27,7 @@ export const AppMobile = () => {
   let Display: React.FC
   switch (tab) {
     case 0:
-      Display = () => <MainMobile />
+      Display = () => <><MainMobile /><PaginationMobile /></>
       break;
     case 1:
       Display = () => <FooterMobile />;
@@ -45,7 +44,7 @@ export const AppMobile = () => {
     <>
       <div className={classes.root}>
         <Display />
-        {tab === 0 ? <PaginationMobile /> : null}
+        {/* {tab === 0 ? <PaginationMobile /> : null} */}
         <TabMobile tab={tab} setTab={setTab} />
       </div>
       <PModal />
