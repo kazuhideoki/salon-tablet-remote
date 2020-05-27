@@ -8,6 +8,7 @@ import {
   T_item_content,
   T_link_url,
   T_order,
+  T_item_excerpt,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetFooterItems } from "./useGetFooterItems";
@@ -18,6 +19,7 @@ type TCreateFooterItem = {
   displayed_icon_name: T_displayed_icon_name | null; 
   on_tap: T_on_tap;
   item_content: T_item_content;
+  item_excerpt: T_item_excerpt
   link_url: T_link_url;
   order: T_order;
 };
@@ -49,6 +51,7 @@ export const useCreateFooterItem = () => {
     selectedIcon,
     onTap,
     footerItemEditorText,
+    editorTextExcerpt,
     linkUrl,
   } = React.useContext(EditorContext);
 
@@ -60,6 +63,7 @@ export const useCreateFooterItem = () => {
       displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
       on_tap: onTap,
       item_content: footerItemEditorText,
+      item_excerpt: editorTextExcerpt,
       link_url: linkUrl,
       order: order,
     };

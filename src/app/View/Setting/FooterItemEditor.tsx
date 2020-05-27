@@ -33,6 +33,7 @@ export const FooterItemEditor = () => {
     setIconName,
     footerItemEditorText,
     setFooterItemEditorText,
+    setEditorTextExcerpt,
     onTap,
     setOnTap,
     linkUrl,
@@ -83,6 +84,7 @@ export const FooterItemEditor = () => {
         <QuillEditor
           value={footerItemEditorText}
           setValue={setFooterItemEditorText}
+          setEditorTextExcerpt={setEditorTextExcerpt}
           charCount={charCountFooterItemContent}
           setCharCount={setCharCountFooterItemContent}
         />

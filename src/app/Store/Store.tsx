@@ -70,6 +70,7 @@ export type T_icon_name = string | null
 export type T_displayed_icon_name = string | null;
 export type T_on_tap = string;
 export type T_item_content = string | null
+export type T_item_excerpt = string | null;
 export type T_link_url = string | null
 export type T_order = number;
 
@@ -81,6 +82,7 @@ export type FooterItemWithoutId = {
   displayed_icon_name: T_displayed_icon_name | null;
   on_tap: T_on_tap;
   item_content: T_item_content | null;
+  item_excerpt: T_item_excerpt | null;
   link_url: T_link_url | null;
   order: T_order;
 };

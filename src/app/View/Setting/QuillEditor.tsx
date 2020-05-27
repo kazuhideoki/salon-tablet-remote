@@ -21,7 +21,7 @@ Quill.register("modules/imageCompress", ImageCompress);
 type Props = {
   value: string,
   setValue: React.Dispatch<React.SetStateAction<string>>,
-  setEditorTextExcerpt?: React.Dispatch<React.SetStateAction<string>>
+  setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
   setEditorImg?: React.Dispatch<React.SetStateAction<string>>
   charCount: number
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
@@ -32,9 +32,9 @@ export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, setEditorIm
   
   const handleOnChange = (content, delta, source, editor) => {
     setValue(content)
-    if (setEditorTextExcerpt) {
+    // if (setEditorTextExcerpt) {
       setEditorTextExcerpt(editor.getText(0, 100))
-    }  
+    // }  
 
     // checkImgで２個以上画像がある場合一つにする。画像データが返り値
     const imgData = checkImg(editor.getContents(), setHasImg, () => removeImg('react_quill_editor'));

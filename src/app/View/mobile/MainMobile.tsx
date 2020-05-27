@@ -37,10 +37,14 @@ export const MainMobile = () => {
       <Button color="primary" className={classes.button} onClick={() => handleOpenArticleEditor()}>新規投稿</Button>
       {articles.map((value, key) => {
         return (
-          <div key={key } className={classes.item}>
+          <div key={key} className={classes.item}>
             <div>{value.title}</div>
             <div>{sqlToDate(value.created_at)}</div>
-            <div>{value.article_excerpt}...</div>
+            <div>
+              {value.article_excerpt}
+              {/* 抜粋が100文字の場合"..."追加" */}
+              {value.article_excerpt.length === 100 ? "..." : ""}
+            </div>
             <button onClick={() => handleOnUpDate(value.id)}>編集</button>
             <button onClick={() => handleOnDelete(value.id)}>削除</button>
           </div>

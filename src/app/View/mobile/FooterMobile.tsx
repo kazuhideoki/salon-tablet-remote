@@ -63,7 +63,11 @@ export const FooterMobile = () => {
               <Icon icon={icon} />
               {value.icon_name}
             </div>
-            <div>{value.item_content}</div>
+            <div>
+              {value.item_excerpt}
+              {/* 抜粋が100文字の場合"..."追加" */}
+              {value.item_excerpt.length === 100 ? "..." : ""}
+            </div>
             <button
               onClick={() => handleOnUpDateFooterIcon(value.footer_item_id)}
             >
