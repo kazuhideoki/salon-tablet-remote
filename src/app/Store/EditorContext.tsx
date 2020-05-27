@@ -9,6 +9,10 @@ type ContextProps = {
   setTitleText: React.Dispatch<React.SetStateAction<string>>
   editorText: string
   setEditorText: React.Dispatch<React.SetStateAction<string>>
+  editorTextExcerpt: string
+  setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
+  editorImg: string
+  setEditorImg: React.Dispatch<React.SetStateAction<string>>
   isEdittingArticle: boolean,
   setIsEdittingArticle: React.Dispatch<React.SetStateAction<boolean>>
   edittingArticleParams: TArticle
@@ -20,6 +24,10 @@ type ContextProps = {
   setIconName: React.Dispatch<React.SetStateAction<string>>
   footerItemEditorText: string
   setFooterItemEditorText: React.Dispatch<React.SetStateAction<string>>
+  onTap: string
+  setOnTap: React.Dispatch<React.SetStateAction<string>>
+  linkUrl: string,
+  setLinkUrl: React.Dispatch<React.SetStateAction<string>>,
   isEdittingFooterItem: boolean
   setIsEdittingFooterItem: React.Dispatch<React.SetStateAction<boolean>>
   edittingFooterItemParams: FooterItem
@@ -32,6 +40,8 @@ const EditorContext = React.createContext({} as ContextProps);
 const EditorContextProvider = (props) => {
   const [titleText, setTitleText] = React.useState("")
   const [editorText, setEditorText] = React.useState("");
+  const [editorTextExcerpt, setEditorTextExcerpt] = React.useState("");
+  const [editorImg, setEditorImg] = React.useState("");
   const [isEdittingArticle, setIsEdittingArticle] = React.useState(false)
   const [edittingArticleParams, setEdittingArticleParams] = React.useState(
     {} as TArticle
@@ -61,6 +71,8 @@ const EditorContextProvider = (props) => {
   );
   const [iconName, setIconName] = React.useState("")
   const [footerItemEditorText, setFooterItemEditorText] = React.useState("");
+  const [onTap, setOnTap] = React.useState('modal')
+  const [linkUrl, setLinkUrl] = React.useState('')
   const [isEdittingFooterItem, setIsEdittingFooterItem] = React.useState(false)
   const [edittingFooterItemParams, setEdittingFooterItemParams] = React.useState({} as FooterItem);
 
@@ -69,6 +81,10 @@ const EditorContextProvider = (props) => {
     setTitleText,
     editorText,
     setEditorText,
+    editorTextExcerpt,
+    setEditorTextExcerpt,
+    editorImg,
+    setEditorImg,
     isEdittingArticle,
     setIsEdittingArticle,
     edittingArticleParams,
@@ -80,6 +96,10 @@ const EditorContextProvider = (props) => {
     setIconName,
     footerItemEditorText,
     setFooterItemEditorText,
+    onTap,
+    setOnTap,
+    linkUrl,
+    setLinkUrl,
     isEdittingFooterItem,
     setIsEdittingFooterItem,
     edittingFooterItemParams,

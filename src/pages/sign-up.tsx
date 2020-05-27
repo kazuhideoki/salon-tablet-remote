@@ -48,6 +48,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [userName, setUserName] = React.useState('')
+  const [shopName, setShopName] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
+  const handleOnSubmit = () => {
+
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -71,6 +79,8 @@ export default function SignUp() {
                 id="name"
                 label="名前"
                 autoFocus
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -82,6 +92,8 @@ export default function SignUp() {
                 label="お店の名前"
                 name="shopName"
                 autoComplete="lname"
+                value={shopName}
+                onChange={(e) => setShopName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -93,6 +105,8 @@ export default function SignUp() {
                 label="メールアドレス"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,6 +119,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
             {/* <Grid item xs={12}>
@@ -120,6 +136,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => handleOnSubmit()}
           >
             Sign Up
           </Button>

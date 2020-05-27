@@ -1,0 +1,53 @@
+// ReactQuillの整形
+
+.quill {
+  .ql-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+
+    // ●●●ツールバーのサイズ調整↓
+    // ※やっみたがかなり構造が複雑できれいに拡大するのが難しい。divとspanとsvgが入り組んでいる。heightやfontSizeをうまく適応しにくい？
+    // svg {
+    //   height: calc(100% * 1.5);
+    // }
+
+    // button {
+    //   // height: calc(100% * 1.5);
+    //   svg {
+    //     height: calc(100% * 1.5);
+    //   }
+    // }
+    // ●●●ツールバーのサイズ調整⇡
+  }
+
+  @media only screen and (min-width: 480px) {
+    .ql-container {
+      min-height: 20vh;
+      // Editor, ContentModal共通のstyle
+      .ql-editor {
+        font-size: 1.4rem;
+  
+        h1 {
+          margin-bottom: 1em;
+        }
+        h2 {
+          margin-bottom: 0.7em;
+        }
+        h3 {
+          margin-bottom: 0.6em;
+        }
+        p, ul, ol, blockquote {
+          margin-bottom: 0.5em;
+        }
+        img {
+          max-width: 80%;
+          max-height: 80%;
+        }
+  
+      }
+    }
+  }
+  
+}

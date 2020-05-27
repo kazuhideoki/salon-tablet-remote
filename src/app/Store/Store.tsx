@@ -1,13 +1,35 @@
 import React, { useReducer } from "react";
-import { ArticlesAction, articlesReducer } from "./articles/articlesRducer";
-import { FooterItemsAction, footerItemsReducer } from "./footerItems/footerItemsReducer";
-import { AppStateAction, appStateReducer } from "./appStateReducer";
+import { ArticlesAction, articlesReducer } from "../Reducer/articlesRducer";
+import { FooterItemsAction, footerItemsReducer } from "../Reducer/footerItemsReducer";
+import { AppStateAction, appStateReducer } from "../Reducer/appStateReducer";
 import {
   PaginationParamsAction,
   paginationParamsReducer,
-} from "./paginationParams/paginationParamsReducer";
-import { SvgIconTypeMap } from "@material-ui/core";
-import { OverridableComponent } from "@material-ui/core/OverridableComponent";
+} from "../Reducer/paginationParamsReducer";
+import { loadingReducer, LoadingAction } from "../Reducer/loadingReducer";
+import { userReducer, TUserAction } from "../Reducer/userReducer";
+
+
+export type T_user_id = number
+export type T_user_name = string
+export type T_shop_name = string
+export type T_email = string
+export type T_bcrypt = string // いらないか
+export type T_created_at_user = string
+export type T_updated_at_user = string
+export type T_last_login_at = string
+
+const initUser = {
+  user_id: 0,
+  user_name: 'user',
+  shop_name: 'salon',
+  email: 'example@gmail.com',
+  bcrypt: '',
+  created_at: '',
+  updated_at: '',
+  last_login_at: '',
+}
+export type TUser = typeof initUser
 
 const initPagination = {
   page: 0,
@@ -17,107 +39,131 @@ const initPagination = {
 };
 export type PaginationParams = typeof initPagination;
 
-const articleWithoutId = {   
-  is_published: false,
-  created_at: '',
-  updated_at: '',
-  title: '',
-  article_content: '',
+// ●●●●●● テーブル `articles`
+export type T_id = number
+export type T_is_published_articles = boolean
+export type T_created_at = string 
+export type T_updated_at = string
+export type T_title = string 
+export type T_article_content = string 
+export type T_article_excerpt = string 
+export type T_article_img = string 
+
+export type ArticleWithoutId = {
+  is_published: T_is_published_articles
+  created_at: T_created_at
+  updated_at: T_updated_at
+  title: T_title
+  article_content: T_article_content
+  article_excerpt: T_article_excerpt
+  article_img: T_article_img
 }
-export type ArticleWithoutId = typeof articleWithoutId
-const articleId = {
-  id: 0,
-}
-export type ArticleId = typeof articleId
-export type TArticle = ArticleWithoutId & ArticleId
+export type TArticle = {id: T_id} & ArticleWithoutId
 export type TArticles = TArticle[]
 
-const initFooterItemWithoutId = {
-  is_published: false,
-  created_at: '',
-  updated_at: '',
-  icon_name: '',
-  displayed_icon: '',
-  on_tap_modal_open: true,
-  item_content: '',
-  link_url: '',
-  order: 0
-}
+// ●●●●●● テーブル `footer_items`
+export type T_footer_item_id = number;
+export type T_is_published_footer_items = boolean;
+export type T_created_at_footer_items = string;
+export type T_updated_at_footer_items = string | null;
+export type T_icon_name = string | null
+export type T_displayed_icon_name = string | null;
+export type T_on_tap = string;
+export type T_item_content = string | null
+export type T_link_url = string | null
+export type T_order = number;
+
 export type FooterItemWithoutId = {
-  is_published: boolean;
-  created_at: string;
-  updated_at: string | null;
-  icon_name: string;
-  displayed_icon: string;
-  on_tap_modal_open: boolean;
-  item_content: string;
-  link_url: string;
-  order: number;
+  is_published: T_is_published_footer_items;
+  created_at: T_created_at_footer_items;
+  updated_at: T_updated_at_footer_items | null;
+  icon_name: T_icon_name | null;
+  displayed_icon_name: T_displayed_icon_name | null;
+  on_tap: T_on_tap;
+  item_content: T_item_content | null;
+  link_url: T_link_url | null;
+  order: T_order;
 };
-export const footerItemId = {
-  footer_item_id: 0,
-};
-export type FooterItemId = typeof footerItemId;
-export type FooterItem = FooterItemWithoutId & FooterItemId;
+export type FooterItem = {
+  footer_item_id: T_footer_item_id;
+} & FooterItemWithoutId;
 export type FooterItems = FooterItem[]
 
 const initAppState = {
   isSetting: false,
   setModal: "edit_article",
-  footerItemContent: '',
+  ContentModal: '',
   isModalOpen: false,
   isArticleModalOpen: false,
-  isLoading: false,
 };
 export type AppState = typeof initAppState
 
+const initLoading = {
+  mainArticles: false,
+  modalEditor: false
+}
+export type Loading = typeof initLoading
+
+export type DispatchUser = React.Dispatch<TUserAction>;
 export type DispatchArticles = React.Dispatch<ArticlesAction>;
 export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
 export type DispatchAppState = React.Dispatch < AppStateAction >
 export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
+export type DispatchLoading = React.Dispatch<LoadingAction>;
+
 
 export type ContextProps = {
+  user: TUser
+  dispatchUser: DispatchUser
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
   articles: TArticles;
   dispatchArticles: DispatchArticles;
-  footerItems: FooterItems
-  dispatchFooterItems: DispatchFooterItems
+  footerItems: FooterItems;
+  dispatchFooterItems: DispatchFooterItems;
   appState: AppState;
   dispatchAppState: DispatchAppState;
+  loading: Loading;
+  dispatchLoading: DispatchLoading
 };
 const Store = React.createContext({} as ContextProps);
 
 export type StoreContextProviderProps = {
-    data: [
-      {
-        rawData: TArticles
-        pagination: PaginationParams
-      },
-      { rawData: FooterItems }
-    ]
-    children?: React.ReactNode
-}
+  data: {
+    articles: TArticles;
+    pagination: PaginationParams;
+    footerItems: FooterItems;
+    // appState: AppState
+  };
+  children?: React.ReactNode;
+};
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {
+  const [user, dispatchUser] = useReducer(userReducer, initUser)
   const [paginationParams, dispatchPaginationParams] = useReducer(
     paginationParamsReducer,
-    props.data[0].pagination
+    props.data.pagination
   );
   const [articles, dispatchArticles] = useReducer(
     articlesReducer,
-    props.data[0].rawData
+    props.data.articles
   );
   const [footerItems, dispatchFooterItems] = useReducer(
     footerItemsReducer,
-    props.data[1].rawData
+    props.data.footerItems
   );
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,
     initAppState
   );
+  const [loading, dispatchLoading] = useReducer(
+    loadingReducer,
+    initLoading
+  );
 
   const values = {
+    user,
+    dispatchUser,
     paginationParams,
     dispatchPaginationParams,
     articles,
@@ -126,6 +172,8 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     dispatchFooterItems,
     appState,
     dispatchAppState,
+    loading,
+    dispatchLoading,
   };
 
   return <Store.Provider value={values}>{props.children}</Store.Provider>;

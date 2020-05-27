@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconSelect, IconItem } from "../app/Setting/iconSelect/IconSelect";
+import { IconSelect, IconItem } from "../app/View/Setting/iconSelect/IconSelect";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { EditorContext } from "../app/Store/EditorContext";
 

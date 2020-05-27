@@ -43,6 +43,8 @@ const themes = {
         width: pFooterWidth,
         height: pFooterHeight,
     },
+
+    drawerWidth: 180,
    
 
     // fontSize
