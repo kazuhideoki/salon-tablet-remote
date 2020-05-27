@@ -157,12 +157,14 @@ export const PMainPresenter = (props: Props) => {
                   className={`p-main-thumbnail ${classes.thumbnail}`}
                   src={value.article_img}
                 />
-                <div
+                {/* <div
                   className={`p-main-article-excerpt ${classes.excerpt}`}
                   dangerouslySetInnerHTML={{
                     __html: value.article_excerpt + "...",
                   }}
-                />
+                /> */}
+                <div
+                  className={`p-main-article-excerpt ${classes.excerpt}`}>{value.article_excerpt}{value.article_excerpt.length === 100 ? "..." : ""}</div>
               </CardContent>
             </Card>
           </CardActionArea>
