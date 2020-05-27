@@ -15,7 +15,7 @@ export const useGetSingleArticle = () => {
     setEditorText,
     setEditorTextExcerpt,
     setEditorImg,
-    setIsEdittingArticle,
+    setIsEdittingContent,
     setEdittingArticleParams,
   } = React.useContext(EditorContext);
   const { articles } = React.useContext(Store)
@@ -30,7 +30,7 @@ export const useGetSingleArticle = () => {
       alert("記事を取得できませんでした");
     } else {
       setTitleText(article.title);
-      setIsEdittingArticle(true);
+      setIsEdittingContent(true);
       setEdittingArticleParams(article);
       setEditorText(article.article_content);
       setEditorTextExcerpt(article.article_excerpt)

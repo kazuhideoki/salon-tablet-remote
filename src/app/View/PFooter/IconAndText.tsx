@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => {
     img: {
       height: themes.icon,
     },
-    iconName: {
+    titleText: {
       maxWidth: themes.icon * 2,
     },
   });
@@ -86,7 +86,7 @@ export const IconAndText = (props:any) => {
     return (
         <StyledIconButton className={classes.root}>
           {icon}
-          <Typography variant="body2" className={classes.iconName}>{props.text}</Typography>
+          <Typography variant="body2" className={classes.titleText}>{props.text}</Typography>
         </StyledIconButton>
     );
 }

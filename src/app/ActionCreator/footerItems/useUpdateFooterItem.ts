@@ -29,18 +29,18 @@ type TUpdateFooterItem = {
 export const useUpdateFooterItem = () => {
   const { dispatchAppState } = React.useContext(Store);
   const {
-    setIconName,
-    setFooterItemEditorText,
-    setIsEdittingFooterItem,
+    setTitleText,
+    setEditorText,
+    setIsEdittingContent,
   } = React.useContext(EditorContext);
   const getFooterItems = useGetFooterItems();
 
   const {
     edittingFooterItemParams,
-    iconName,
+    titleText,
     selectedIcon,
     onTap,
-    footerItemEditorText,
+    editorText,
     editorTextExcerpt,
     linkUrl,
   } = React.useContext(EditorContext);
@@ -49,11 +49,11 @@ export const useUpdateFooterItem = () => {
     const params: TUpdateFooterItem = {
       footer_item_id: edittingFooterItemParams.footer_item_id,
       is_published: isPublishing,
-      icon_name: iconName,
+      icon_name: titleText,
       // 選択されていたらアイコンの名前を返す
       displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
       on_tap: onTap, // 要確認
-      item_content: footerItemEditorText,
+      item_content: editorText,
       item_excerpt: editorTextExcerpt,
       link_url: linkUrl,
       order: edittingFooterItemParams.order,
@@ -72,9 +72,9 @@ export const useUpdateFooterItem = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      setIsEdittingFooterItem(false);
-      setIconName("");
-      setFooterItemEditorText("");
+      setIsEdittingContent(false);
+      setTitleText("");
+      setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getFooterItems();

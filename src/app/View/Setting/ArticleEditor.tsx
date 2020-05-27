@@ -34,7 +34,7 @@ const ArticleEditor = () => {
     setEditorText,
     setEditorTextExcerpt,
     setEditorImg,
-    isEdittingArticle,
+    isEdittingContent,
   } = React.useContext(EditorContext);
   const [charCountArticleTitle, setCharCountArticlTitle] = React.useState(0);
   const [charCountArticleContent, setCharCountArticlContent] = React.useState(0);
@@ -48,7 +48,7 @@ const ArticleEditor = () => {
 
   const handleSubmit = ({ isPublishing }) => {
     // 記事編集
-    if (isEdittingArticle) {
+    if (isEdittingContent) {
       updateArticle(isPublishing);
       // 新規投稿
     } else {
@@ -67,7 +67,7 @@ const ArticleEditor = () => {
         onChange={(e) => handleOnChangeTitleText(e)}
         className={classes.title}
         style={{ marginBottom: "20px" }}
-        autoFocus={isEdittingArticle ? false : true}
+        autoFocus={isEdittingContent ? false : true}
         // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
       />
       {charCountArticleTitle < 101 ? null : (
@@ -93,7 +93,7 @@ const ArticleEditor = () => {
             : true
         }
       >
-        {isEdittingArticle ? "更新" : "投稿"}
+        {isEdittingContent ? "更新" : "投稿"}
       </Button>
       <Button
         variant="outlined"

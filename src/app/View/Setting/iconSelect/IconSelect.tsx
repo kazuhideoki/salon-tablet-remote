@@ -2,10 +2,12 @@ import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { Popover, Button, TextField, IconButton } from '@material-ui/core';
+import { Popover, Button, TextField, IconButton, SvgIconTypeMap } from '@material-ui/core';
 // import { icons } from "./icons";
 import { IconsSetting } from "./icons";
 import { EditorContext } from "../../../Store/EditorContext";
+import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import { MoodBad } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,10 +20,14 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-
-export const IconItem = (props) => {
-  const iconName = props.iconName;
-
+type TIconItem = {
+  icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>
+}
+export const IconItem = (props:TIconItem) => {
+  // const titleText = props.titleText;
+  // if (props === undefined) {
+  //   return <MoodBad />
+  // }
   return <props.icon style={{ fontSize: 50 }} />;
 };
 
@@ -32,7 +38,7 @@ export const IconSelect = () => {
     EditorContext
   );
 
-  // 以下Popoverのための設定
+  // 以下アイコン選択のPopoverのための設定
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -42,11 +48,8 @@ export const IconSelect = () => {
   };
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-  // 以上Popoverのための設定
+  // 以上アイコン選択のPopoverのための設定
   
-
-  const displayedIcon = (props) => <props.icon />
-
   return (
     <div>
       <Button

@@ -12,7 +12,7 @@ import { TextField, Button, Typography, makeStyles, Theme, createStyles } from '
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    iconName: {
+    titleText: {
       width: 350,
       marginBottom: 20,
       maxWidth: "100%",
@@ -29,16 +29,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export const FooterItemEditor = () => {
   const classes = useStyles()
   const {
-    iconName,
-    setIconName,
-    footerItemEditorText,
-    setFooterItemEditorText,
+    titleText,
+    setTitleText,
+    editorText,
+    setEditorText,
     setEditorTextExcerpt,
     onTap,
     setOnTap,
     linkUrl,
     setLinkUrl,
-    isEdittingFooterItem,
+    isEdittingContent,
   } = React.useContext(EditorContext);
   const [charCountIconName, setCharCountIconName] = React.useState(0);
   const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
@@ -47,13 +47,13 @@ export const FooterItemEditor = () => {
   const updateFooterItem = useUpdateFooterItem();
 
   const handleOnChangeIconName = (e) => {
-    setIconName(e.target.value);
+    setTitleText(e.target.value);
     setCharCountIconName(e.target.value.length);
   };
 
 
   const handleSubmit = ({ isPublishing }) => {
-    if (isEdittingFooterItem) {
+    if (isEdittingContent) {
       updateFooterItem(isPublishing);
     } else {
       createFooterItem(isPublishing);
@@ -67,11 +67,11 @@ export const FooterItemEditor = () => {
         id="icon-name-text-field"
         label="アイコン名"
         variant="outlined"
-        value={iconName}
+        value={titleText}
         onChange={(e) => handleOnChangeIconName(e)}
-        className={classes.iconName}
+        className={classes.titleText}
         // style={{ marginBottom: "20px" }}
-        autoFocus={isEdittingFooterItem ? false : true}
+        autoFocus={isEdittingContent ? false : true}
       />
       {charCountIconName < 101 ? null : (
         <Typography variant="body2" color={"error"}>
@@ -82,8 +82,8 @@ export const FooterItemEditor = () => {
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {onTap === "modal" ? (
         <QuillEditor
-          value={footerItemEditorText}
-          setValue={setFooterItemEditorText}
+          value={editorText}
+          setValue={setEditorText}
           setEditorTextExcerpt={setEditorTextExcerpt}
           charCount={charCountFooterItemContent}
           setCharCount={setCharCountFooterItemContent}
@@ -108,7 +108,7 @@ export const FooterItemEditor = () => {
             : true
         }
       >
-        {isEdittingFooterItem ? "更新" : "投稿"}
+        {isEdittingContent ? "更新" : "投稿"}
       </Button>
       <Button
         variant="outlined"

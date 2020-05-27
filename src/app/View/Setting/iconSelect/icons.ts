@@ -44,9 +44,9 @@ export const IconsSetting = class {
   ];
 
   // アイコン名からもとの[IconComponent, IconName]の形に戻す。
-  static convertIconComponentFromName(iconName: string) {
+  static convertIconComponentFromName(titleText: string) {
     const targetIcon = this.icons.find((value) => {
-      return value[1] == iconName
+      return value[1] == titleText
     });
 
     // console.log(targetIcon);

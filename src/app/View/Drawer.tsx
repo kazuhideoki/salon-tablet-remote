@@ -30,27 +30,24 @@ export const useDrawerProps = () => {
   const {
     setEditorText,
     setTitleText,
-    setFooterItemEditorText,
-    setIconName,
     setOnTap,
     setLinkUrl,
-    setIsEdittingArticle,
+    setIsEdittingContent,
     dispatchSelectedIcon,
-    setIsEdittingFooterItem,
   } = React.useContext(EditorContext);
 
   const handleOpenArticleEditor = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-    setIsEdittingArticle(false);
+    setIsEdittingContent(false);
     setTitleText("");
     setEditorText("");
   };
 
   const handleOpenFooterItemEditor = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
-    setIsEdittingFooterItem(false);
-    setIconName("");
-    setFooterItemEditorText("");
+    setIsEdittingContent(false);
+    setTitleText("");
+    setEditorText("");
     setOnTap("modal");
     setLinkUrl("");
     dispatchSelectedIcon({ type: "SET_ICON", payload: null });

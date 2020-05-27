@@ -13,11 +13,11 @@ type UseGetFooterItemRes =
   | { err: boolean; data: { message: string }; rawData: undefined };
 export const useGetFooterItem = () => {
   const {
-    setIconName,
-    setFooterItemEditorText,
+    setTitleText,
+    setEditorText,
     setOnTap,
     setLinkUrl,
-    setIsEdittingFooterItem,
+    setIsEdittingContent,
     setEdittingFooterItemParams,
     dispatchSelectedIcon,
   } = React.useContext(EditorContext);
@@ -33,10 +33,10 @@ export const useGetFooterItem = () => {
     if (!footerItem) {
       alert("アイテムを取得できませんでした");
     } else {
-      setIsEdittingFooterItem(true);
+      setIsEdittingContent(true);
       setEdittingFooterItemParams(footerItem);
-      setIconName(footerItem.icon_name);
-      setFooterItemEditorText(footerItem.item_content);
+      setTitleText(footerItem.icon_name);
+      setEditorText(footerItem.item_content);
       setOnTap(footerItem.on_tap);
       setLinkUrl(footerItem.link_url);
       dispatchSelectedIcon({

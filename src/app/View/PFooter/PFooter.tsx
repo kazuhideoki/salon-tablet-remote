@@ -21,7 +21,7 @@ export const usePFooterProps = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };
 
-  const { setIsEdittingFooterItem } = React.useContext(EditorContext);
+  const { setIsEdittingContent } = React.useContext(EditorContext);
   const getFooterItem = useGetFooterItem();
   const deleteFooterItem = useDeleteFooterItem();
 
@@ -32,7 +32,7 @@ export const usePFooterProps = () => {
       type: "OPEN_MODAL",
       payload: "edit_footer_item",
     });
-    setIsEdittingFooterItem(true);
+    setIsEdittingContent(true);
     getFooterItem(footer_item_id);
   };
   const handleOnDeleteFooterItem = (

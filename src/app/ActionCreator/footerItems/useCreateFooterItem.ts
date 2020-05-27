@@ -26,11 +26,9 @@ type TCreateFooterItem = {
 
 export const useCreateFooterItem = () => {
   const { dispatchAppState, footerItems } = React.useContext(Store);
-  const {
-    setFooterItemEditorText,
-    setIconName,
-    dispatchSelectedIcon,
-  } = React.useContext(EditorContext);
+  const { setEditorText, setTitleText, dispatchSelectedIcon } = React.useContext(
+    EditorContext
+  );
   const getFooterItems = useGetFooterItems();
 
   let order;
@@ -47,10 +45,10 @@ export const useCreateFooterItem = () => {
   }
 
   const {
-    iconName,
+    titleText,
     selectedIcon,
     onTap,
-    footerItemEditorText,
+    editorText,
     editorTextExcerpt,
     linkUrl,
   } = React.useContext(EditorContext);
@@ -58,11 +56,11 @@ export const useCreateFooterItem = () => {
   return async (isPublishing: boolean) => {
     const params: TCreateFooterItem = {
       is_published: isPublishing,
-      icon_name: iconName,
+      icon_name: titleText,
       // 選択されていたらアイコンの名前を返す.
       displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
       on_tap: onTap,
-      item_content: footerItemEditorText,
+      item_content: editorText,
       item_excerpt: editorTextExcerpt,
       link_url: linkUrl,
       order: order,
@@ -82,8 +80,8 @@ export const useCreateFooterItem = () => {
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      setFooterItemEditorText("");
-      setIconName("");
+      setEditorText("");
+      setTitleText("");
       dispatchSelectedIcon({
         type: "SET_ICON",
         payload: null,

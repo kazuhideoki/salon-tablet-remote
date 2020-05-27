@@ -24,7 +24,7 @@ export const useUpdateArticle = () => {
   const {
     setTitleText,
     setEditorText,
-    setIsEdittingArticle,
+    setIsEdittingContent,
     edittingArticleParams,
     titleText,
     editorText,
@@ -57,7 +57,7 @@ export const useUpdateArticle = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      setIsEdittingArticle(false);
+      setIsEdittingContent(false);
       setTitleText("");
       setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });

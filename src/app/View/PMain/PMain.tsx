@@ -24,12 +24,12 @@ export const usePMainProps = () => {
     Store
   );
   const deleteArticle = useDeleteArticle();
-  const { setIsEdittingArticle } = React.useContext(EditorContext);
+  const { setIsEdittingContent } = React.useContext(EditorContext);
   const getSingleArticle = useGetSingleArticle();
 
   const handleOnUpDate: HandleOnUpDate = (id: T_id) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-    setIsEdittingArticle(true);
+    setIsEdittingContent(true);
     getSingleArticle(id);
   };
 
