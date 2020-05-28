@@ -36,18 +36,18 @@ fdddddddddddddddddd<IconSelect />
 
 
 
-export const bottomSet = () => {
-  const { selectedIcon, dispatchSelectedIcon } = React.useContext(
-    EditorContext
-  );
-  const classes = useStyles()
+// export const bottomSet = () => {
+//   const { selectedIcon, dispatchSelectedIcon } = React.useContext(
+//     EditorContext
+//   );
+//   const classes = useStyles()
 
-  return (
-    <div className={classes.root}>
-      fdsa
-      {/* <IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
-      <IconSelect />
-      {(selectedIcon)? <IconItem icon={selectedIcon}/> : null}
-    </div>
-  );
-}
+//   return (
+//     <div className={classes.root}>
+//       fdsa
+//       {/* <IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
+//       <IconSelect />
+//       {(selectedIcon)? <IconItem icon={selectedIcon}/> : null}
+//     </div>
+//   );
+// }
