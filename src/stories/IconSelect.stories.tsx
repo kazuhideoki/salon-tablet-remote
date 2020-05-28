@@ -1,5 +1,8 @@
 import React from 'react';
-import { IconSelect, IconItem } from "../app/View/Setting/iconSelect/IconSelect";
+import {
+  SelectIcon,
+  IconItem,
+} from "../app/View/Setting/iconSelect/SelectIcon";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { EditorContext } from "../app/Store/EditorContext";
 
@@ -10,27 +13,30 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 export default {
-title: 'IconSelect',
-component: IconSelect,
+  title: "SelectIcon",
+  component: SelectIcon,
 };
 export const Normal = () => {
 const {selectedIcon, dispatchSelectedIcon} = React.useContext(EditorContext)
 
-return <>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-<p>a</p>
-{/* fdddddddddddddddddd<IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
-fdddddddddddddddddd<IconSelect />
-</>
+return (
+  <>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    <p>a</p>
+    {/* fdddddddddddddddddd<SelectIcon selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
+    fdddddddddddddddddd
+    <SelectIcon />
+  </>
+);
 };
 
 
@@ -45,8 +51,8 @@ fdddddddddddddddddd<IconSelect />
 //   return (
 //     <div className={classes.root}>
 //       fdsa
-//       {/* <IconSelect selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
-//       <IconSelect />
+//       {/* <SelectIcon selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
+//       <SelectIcon />
 //       {(selectedIcon)? <IconItem icon={selectedIcon}/> : null}
 //     </div>
 //   );

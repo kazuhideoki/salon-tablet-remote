@@ -9,5 +9,5 @@ type Props = {
 export const HomeButton = ({classes}: Props) => {
   const getArticles = useGetArticles()
 
-  return <Home onClick={() => getArticles(1)} className={classes.icon} />
+  return <Home onClick={() => getArticles(1)} className={classes.icon ? classes.icon : ""} />
 }

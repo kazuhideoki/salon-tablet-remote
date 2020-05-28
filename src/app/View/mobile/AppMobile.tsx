@@ -6,6 +6,7 @@ import { TabMobile } from './TabMobile'
 import { PaginationMobile } from './PaginationMobile';
 import { PModal } from '../PModal/PModal';
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
+import { HomeButton } from '../PFooter/Pagination/HomeButton';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -17,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) => {
       alignItems: "center",
       
     },
+    homeAndPagination: {
+      display: "flex",
+    }
   });
 });
 
@@ -27,7 +31,15 @@ export const AppMobile = () => {
   let Display: React.FC
   switch (tab) {
     case 0:
-      Display = () => <><MainMobile /><PaginationMobile /></>
+      Display = () => (
+        <>
+          <div className={classes.homeAndPagination}>
+            <HomeButton />
+            <PaginationMobile />
+          </div>
+          <MainMobile />
+        </>
+      );
       break;
     case 1:
       Display = () => <FooterMobile />;

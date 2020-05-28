@@ -8,7 +8,7 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import { EditorContext } from '../../Store/EditorContext';
+import { EditorContext } from '../../../Store/EditorContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,32 +24,26 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const SelectAppLink = ({appLinkUrl, setAppLinkUrl}) => {
   const classes = useStyles()
-  // const { appLinkUrl, setAppLinkUrl} = React.useContext(EditorContext)
-  // const [value, setVaule] = React.useState('')
-
-  // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-  //   setVaule(event.target.value as number);
-  // };
 
   return (
     <FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+      <InputLabel id="select-app-label">アプリ</InputLabel>
       <Select
-        labelId="demo-simple-select-outlined-label"
-        id="demo-simple-select-outlined"
+        labelId="select-app-label"
+        id="select-app"
         value={appLinkUrl}
         onChange={(e: React.ChangeEvent<{ value: string }>) =>
           setAppLinkUrl(e.target.value)
         }
-        // onChange={(e) => handleChange(e)}
-        label="Age"
+        label="アプリ"
       >
+        {/* <AppLinks/> */}
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={"rmagazine://"}>楽天マガジン(iOS)</MenuItem>
-        <MenuItem value={"fb179689808731959://"}>Magzter(iOS)</MenuItem>
-        {/* <MenuItem value={"20"}>楽天マガジン(Android)</MenuItem> */}
+        {/* ※↓mapを使ってやろうとしたがうまく行かなかった。別ファイルにも分けられない？ */}
+        <MenuItem value="rmagazine://">楽天マガジン(iOS)</MenuItem>
+        <MenuItem value="fb179689808731959://">Magzter(iOS)</MenuItem>
       </Select>
     </FormControl>
   );

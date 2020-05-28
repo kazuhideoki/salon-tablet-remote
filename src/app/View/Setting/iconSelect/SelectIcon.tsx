@@ -31,8 +31,8 @@ export const IconItem = (props:TIconItem) => {
   return <props.icon style={{ fontSize: 50 }} />;
 };
 
-// export const  IconSelect:React.FC<Props> = ({ selectedIcon, setSelectedIcon}) => {
-export const IconSelect = () => {
+// export const  SelectIcon:React.FC<Props> = ({ selectedIcon, setSelectedIcon}) => {
+export const SelectIcon = () => {
   const classes = useStyles();
   const { selectedIcon, dispatchSelectedIcon } = React.useContext(
     EditorContext

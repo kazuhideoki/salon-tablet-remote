@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconSelect } from "./iconSelect/IconSelect";
+import { SelectIcon } from "./iconSelect/SelectIcon";
 import dynamic from "next/dynamic";
 const QuillEditor = dynamic(() => import("../Setting/QuillEditor"), {
   ssr: false,
@@ -9,7 +9,7 @@ import { EditorContext } from "../../Store/EditorContext";
 import { useCreateFooterItem } from "../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
-import { SelectAppLink } from './SelectAppLink';
+import { SelectAppLink } from './selectAppLink/SelectAppLink';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -133,7 +133,7 @@ export const FooterItemEditor = () => {
         />
       )} */}
 
-      <IconSelect />
+      <SelectIcon />
       <Button
         variant="outlined"
         className={classes.submitButton}
