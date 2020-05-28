@@ -1,6 +1,8 @@
 {
-  "theme_color": "#21d4f3",
-  "background_color": "#21d4f3",
+  "name": "Salon Tablet",
+  "short_name": "ST",
+  "theme_color": "#f5f5dc",
+  "background_color": "#A07855FF",
   "display": "standalone",
   "Scope": "/",
   "start_url": "/",
