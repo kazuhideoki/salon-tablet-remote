@@ -30,6 +30,8 @@ type ContextProps = {
   setOnTap: React.Dispatch<React.SetStateAction<string>>
   linkUrl: string,
   setLinkUrl: React.Dispatch<React.SetStateAction<string>>,
+  appLinkUrl: string
+  setAppLinkUrl: React.Dispatch<React.SetStateAction<string>>,
   edittingFooterItemParams: FooterItem
   setEdittingFooterItemParams: React.Dispatch<React.SetStateAction<FooterItem>>
 }
@@ -58,6 +60,7 @@ const EditorContextProvider = (props) => {
   );
   const [onTap, setOnTap] = React.useState('modal')
   const [linkUrl, setLinkUrl] = React.useState('')
+  const [appLinkUrl, setAppLinkUrl] = React.useState('')
   const [edittingFooterItemParams, setEdittingFooterItemParams] = React.useState({} as FooterItem);
 
   const values = {
@@ -80,6 +83,8 @@ const EditorContextProvider = (props) => {
     setOnTap,
     linkUrl,
     setLinkUrl,
+    appLinkUrl,
+    setAppLinkUrl,
     edittingFooterItemParams,
     setEdittingFooterItemParams,
   };

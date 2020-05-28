@@ -9,6 +9,7 @@ import { EditorContext } from "../../Store/EditorContext";
 import { useCreateFooterItem } from "../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { SelectAppLink } from './SelectAppLink';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +39,8 @@ export const FooterItemEditor = () => {
     setOnTap,
     linkUrl,
     setLinkUrl,
+    appLinkUrl,
+    setAppLinkUrl,
     isEdittingContent,
   } = React.useContext(EditorContext);
   const [charCountIconName, setCharCountIconName] = React.useState(0);
@@ -60,7 +63,7 @@ export const FooterItemEditor = () => {
     }
   };
 
-  let mainField
+  let mainField: JSX.Element
   if (onTap === "modal") {
     mainField = (
       <QuillEditor
@@ -73,6 +76,7 @@ export const FooterItemEditor = () => {
     );
   } else if (onTap === "link"){
     mainField = (
+      <div>
       <TextField
         id="linkUrl"
         label="リンクURL"
@@ -80,11 +84,15 @@ export const FooterItemEditor = () => {
         onChange={(e) => setLinkUrl(e.target.value)}
         variant="outlined"
       />
+      </div>
     );
   } else if (onTap === "appLink") {
     // mainField = "「appLinkの選択画面」"
-    mainField = <SelectAppLink/>
-  }
+    mainField = (
+      <div>
+        <SelectAppLink appLinkUrl={appLinkUrl} setAppLinkUrl={setAppLinkUrl} />
+      </div>
+    ); }
 
   return (
     <>
@@ -106,6 +114,7 @@ export const FooterItemEditor = () => {
       )}
       <br />
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
+      {mainField}
       {/* {onTap === "modal" ? (
         <QuillEditor
           value={editorText}

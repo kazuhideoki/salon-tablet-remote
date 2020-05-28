@@ -9,6 +9,7 @@ import {
   T_link_url,
   T_order,
   T_item_excerpt,
+  T_app_link_url,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetFooterItems } from "./useGetFooterItems";
@@ -21,6 +22,7 @@ type TCreateFooterItem = {
   item_content: T_item_content;
   item_excerpt: T_item_excerpt
   link_url: T_link_url;
+  app_link_url: T_app_link_url
   order: T_order;
 };
 
@@ -51,6 +53,7 @@ export const useCreateFooterItem = () => {
     editorText,
     editorTextExcerpt,
     linkUrl,
+    appLinkUrl,
   } = React.useContext(EditorContext);
 
   return async (isPublishing: boolean) => {
@@ -63,6 +66,7 @@ export const useCreateFooterItem = () => {
       item_content: editorText,
       item_excerpt: editorTextExcerpt,
       link_url: linkUrl,
+      app_link_url: appLinkUrl,
       order: order,
     };
 

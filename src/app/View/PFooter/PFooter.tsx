@@ -158,7 +158,7 @@ export const PFooterPresenter = (props:Props) => {
           />
         ) : (
           // "modal"以外→"link"か"appLink"の時
-          <a href={value.link_url}>
+          <a href={value.on_tap === "link" ? value.link_url : value.app_link_url}>
             <IconAndText
               icon={
                 value.displayed_icon_name

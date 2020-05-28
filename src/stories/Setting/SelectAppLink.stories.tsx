@@ -4,4 +4,10 @@ export default {
 title: 'Setting/SelectAppLink',
 component: SelectAppLink,
 };
-export const Normal = () => <SelectAppLink />;
+export const Normal = () => {
+  const [appLinkUrl, setAppLinkUrl] = React.useState("");
+
+  return (
+    <SelectAppLink appLinkUrl={appLinkUrl} setAppLinkUrl={setAppLinkUrl} />
+  );
+}

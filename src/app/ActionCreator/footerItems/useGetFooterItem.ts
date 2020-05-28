@@ -17,6 +17,7 @@ export const useGetFooterItem = () => {
     setEditorText,
     setOnTap,
     setLinkUrl,
+    setAppLinkUrl,
     setIsEdittingContent,
     setEdittingFooterItemParams,
     dispatchSelectedIcon,
@@ -39,6 +40,7 @@ export const useGetFooterItem = () => {
       setEditorText(footerItem.item_content);
       setOnTap(footerItem.on_tap);
       setLinkUrl(footerItem.link_url);
+      setAppLinkUrl(footerItem.app_link_url);
       dispatchSelectedIcon({
         type: "SET_ICON",
         payload: IconsSetting.convertIconComponentFromName(

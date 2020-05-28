@@ -32,6 +32,7 @@ export const useDrawerProps = () => {
     setTitleText,
     setOnTap,
     setLinkUrl,
+    setAppLinkUrl,
     setIsEdittingContent,
     dispatchSelectedIcon,
   } = React.useContext(EditorContext);
@@ -50,6 +51,7 @@ export const useDrawerProps = () => {
     setEditorText("");
     setOnTap("modal");
     setLinkUrl("");
+    setAppLinkUrl("");
     dispatchSelectedIcon({ type: "SET_ICON", payload: null });
   };
 

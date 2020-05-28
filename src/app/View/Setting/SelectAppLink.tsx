@@ -8,6 +8,7 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
+import { EditorContext } from '../../Store/EditorContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,9 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectAppLink = () => {
+export const SelectAppLink = ({appLinkUrl, setAppLinkUrl}) => {
   const classes = useStyles()
-  const [value, setVaule] = React.useState(0)
+  // const { appLinkUrl, setAppLinkUrl} = React.useContext(EditorContext)
+  // const [value, setVaule] = React.useState('')
 
   // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
   //   setVaule(event.target.value as number);
@@ -35,9 +37,9 @@ export const SelectAppLink = () => {
       <Select
         labelId="demo-simple-select-outlined-label"
         id="demo-simple-select-outlined"
-        value={value}
-        onChange={(e: React.ChangeEvent<{ value: number }>) =>
-          setVaule(e.target.value)
+        value={appLinkUrl}
+        onChange={(e: React.ChangeEvent<{ value: string }>) =>
+          setAppLinkUrl(e.target.value)
         }
         // onChange={(e) => handleChange(e)}
         label="Age"
@@ -45,9 +47,9 @@ export const SelectAppLink = () => {
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        <MenuItem value={"rmagazine://"}>楽天マガジン(iOS)</MenuItem>
+        <MenuItem value={"fb179689808731959://"}>Magzter(iOS)</MenuItem>
+        {/* <MenuItem value={"20"}>楽天マガジン(Android)</MenuItem> */}
       </Select>
     </FormControl>
   );

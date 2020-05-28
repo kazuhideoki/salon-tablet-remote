@@ -72,6 +72,7 @@ export type T_on_tap = string;
 export type T_item_content = string | null
 export type T_item_excerpt = string | null;
 export type T_link_url = string | null
+export type T_app_link_url = string | null;
 export type T_order = number;
 
 export type FooterItemWithoutId = {
@@ -84,6 +85,7 @@ export type FooterItemWithoutId = {
   item_content: T_item_content | null;
   item_excerpt: T_item_excerpt | null;
   link_url: T_link_url | null;
+  app_link_url: T_app_link_url | null;
   order: T_order;
 };
 export type FooterItem = {
