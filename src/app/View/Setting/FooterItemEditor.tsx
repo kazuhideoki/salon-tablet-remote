@@ -60,6 +60,32 @@ export const FooterItemEditor = () => {
     }
   };
 
+  let mainField
+  if (onTap === "modal") {
+    mainField = (
+      <QuillEditor
+        value={editorText}
+        setValue={setEditorText}
+        setEditorTextExcerpt={setEditorTextExcerpt}
+        charCount={charCountFooterItemContent}
+        setCharCount={setCharCountFooterItemContent}
+      />
+    );
+  } else if (onTap === "link"){
+    mainField = (
+      <TextField
+        id="linkUrl"
+        label="リンクURL"
+        value={linkUrl}
+        onChange={(e) => setLinkUrl(e.target.value)}
+        variant="outlined"
+      />
+    );
+  } else if (onTap === "appLink") {
+    // mainField = "「appLinkの選択画面」"
+    mainField = <SelectAppLink/>
+  }
+
   return (
     <>
       <h2>フッターアイテム</h2>
@@ -80,7 +106,7 @@ export const FooterItemEditor = () => {
       )}
       <br />
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
-      {onTap === "modal" ? (
+      {/* {onTap === "modal" ? (
         <QuillEditor
           value={editorText}
           setValue={setEditorText}
@@ -96,7 +122,8 @@ export const FooterItemEditor = () => {
           onChange={(e) => setLinkUrl(e.target.value)}
           variant="outlined"
         />
-      )}
+      )} */}
+
       <IconSelect />
       <Button
         variant="outlined"

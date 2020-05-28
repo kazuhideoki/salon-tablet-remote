@@ -157,6 +157,7 @@ export const PFooterPresenter = (props:Props) => {
             text={value.icon_name}
           />
         ) : (
+          // "modal"以外→"link"か"appLink"の時
           <a href={value.link_url}>
             <IconAndText
               icon={
