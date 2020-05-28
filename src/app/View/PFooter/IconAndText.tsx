@@ -26,7 +26,8 @@ const StyledIconButton = withStyles({
   root: {
     // もともと定義されているcolorではなくopacityで設定。aタグのカラーを残すことができる
     color: 'inherit',
-    opacity: 0.75
+    opacity: 0.75,
+    borderRadius: "15%",
   },
   label: {
     // アイコンと文字を縦に並べて整形する
