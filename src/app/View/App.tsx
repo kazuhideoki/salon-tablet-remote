@@ -93,17 +93,6 @@ const AppTablet = ()=> {
     const isLoading = loading.mainArticles;
     const getArticles = useGetArticles();
 
-    // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
-    const [isFirstLoad, setIsFirstLoad] = React.useState(true);
-    // 設定モード[isSetting]を切り替えるたびに記事を読み込み直す
-    React.useEffect(() => {
-      if (!isFirstLoad) {  
-        // 二回目以降で発火 
-        dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-        getArticles(1);
-      }
-      setIsFirstLoad(false);
-    },[appState.isSetting])
     // Drawer用
     const [open, setOpen] = React.useState(false);
 
@@ -159,7 +148,20 @@ const AppTablet = ()=> {
 
 const AppView = () => {
   const isMobile = useMediaQuery("(max-width:480px)");
-  const { appState } = React.useContext(Store);
+  const { appState, dispatchLoading } = React.useContext(Store);
+  const getArticles = useGetArticles()
+
+   // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
+    const [isFirstLoad, setIsFirstLoad] = React.useState(true);
+    // 設定モード[isSetting]を切り替えるたびに記事を読み込み直す
+    React.useEffect(() => {
+      if (!isFirstLoad) {  
+        // 二回目以降で発火 
+        dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
+        getArticles(1);
+      }
+      setIsFirstLoad(false);
+    },[appState.isSetting])
 
   if (isMobile && appState.isSetting) {
     return <AppMobile/>
