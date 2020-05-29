@@ -15,6 +15,7 @@ export const useGetFooterItem = () => {
   const {
     setTitleText,
     setEditorText,
+    setEditorTextExcerpt,
     setOnTap,
     setLinkUrl,
     setAppLinkUrl,
@@ -38,6 +39,7 @@ export const useGetFooterItem = () => {
       setEdittingFooterItemParams(footerItem);
       setTitleText(footerItem.icon_name);
       setEditorText(footerItem.item_content);
+      setEditorTextExcerpt(footerItem.item_excerpt);
       setOnTap(footerItem.on_tap);
       setLinkUrl(footerItem.link_url);
       setAppLinkUrl(footerItem.app_link_url);

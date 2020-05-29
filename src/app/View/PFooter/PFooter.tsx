@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Grid, makeStyles, createStyles } from "@material-ui/core";
+import { Grid, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
 import { Store, T_footer_item_id, T_order } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
@@ -43,6 +43,8 @@ export const usePFooterProps = () => {
     deleting ? deleteFooterItem(footer_item_id, order) : null;
   };
 
+  const isMobile = useMediaQuery("(max-width:480px)");
+
   return {
     appState,
     openModal,
@@ -50,6 +52,7 @@ export const usePFooterProps = () => {
     footerItems,
     handleOnUpDateFooterIcon,
     handleOnDeleteFooterItem,
+    isMobile,
   };
 };
 
@@ -182,7 +185,7 @@ export const PFooterPresenter = (props:Props) => {
     <div className={classes.root}>
       <PPagination/>
       <Grid container
-      justify={props.footerItems.length > 5 ? "space-between" : "space-evenly"}
+      justify={props.footerItems.length > 5 || props.isMobile ? "space-between" : "space-evenly" }
       wrap='nowrap' spacing={2} className={classes.GridContainer}>
         {(props.footerItems.length)? displayFooterItems : noItems}       
       </Grid>            

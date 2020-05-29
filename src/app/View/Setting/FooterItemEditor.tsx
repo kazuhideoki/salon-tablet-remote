@@ -8,7 +8,7 @@ import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { EditorContext } from "../../Store/EditorContext";
 import { useCreateFooterItem } from "../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../ActionCreator/footerItems/useUpdateFooterItem";
-import { TextField, Button, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -115,49 +115,40 @@ export const FooterItemEditor = () => {
       <br />
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {mainField}
-      {/* {onTap === "modal" ? (
-        <QuillEditor
-          value={editorText}
-          setValue={setEditorText}
-          setEditorTextExcerpt={setEditorTextExcerpt}
-          charCount={charCountFooterItemContent}
-          setCharCount={setCharCountFooterItemContent}
-        />
-      ) : (
-        <TextField
-          id="linkUrl"
-          label="リンクURL"
-          value={linkUrl}
-          onChange={(e) => setLinkUrl(e.target.value)}
-          variant="outlined"
-        />
-      )} */}
-
-      <SelectIcon />
-      <Button
-        variant="outlined"
-        className={classes.submitButton}
-        onClick={() => handleSubmit({ isPublishing: true })}
-        disabled={
-          charCountIconName < 101 && charCountFooterItemContent < 1001
-            ? false
-            : true
-        }
-      >
-        {isEdittingContent ? "更新" : "投稿"}
-      </Button>
-      <Button
-        variant="outlined"
-        className={classes.submitButton}
-        onClick={() => handleSubmit({ isPublishing: false })}
-        disabled={
-          charCountIconName < 101 && charCountFooterItemContent < 1001
-            ? false
-            : true
-        }
-      >
-        下書き保存
-      </Button>
+      
+      <Grid container>
+        <Grid item>
+          <SelectIcon />
+        </Grid>
+        <Grid item>
+          <Button
+            variant="outlined"
+            className={classes.submitButton}
+            onClick={() => handleSubmit({ isPublishing: true })}
+            disabled={
+              charCountIconName < 101 && charCountFooterItemContent < 1001
+                ? false
+                : true
+            }
+          >
+            {isEdittingContent ? "更新" : "投稿"}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="outlined"
+            className={classes.submitButton}
+            onClick={() => handleSubmit({ isPublishing: false })}
+            disabled={
+              charCountIconName < 101 && charCountFooterItemContent < 1001
+                ? false
+                : true
+            }
+          >
+            下書き保存
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 };

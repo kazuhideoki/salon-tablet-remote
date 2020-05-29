@@ -51,7 +51,7 @@ export const SelectIcon = () => {
   // 以上アイコン選択のPopoverのための設定
   
   return (
-    <div>
+    <>
       <Button
         aria-describedby={id}
         variant="contained"
@@ -104,6 +104,6 @@ export const SelectIcon = () => {
         </GridList>
       </Popover>
       {selectedIcon ? <IconItem icon={selectedIcon[0]} /> : null}
-    </div>
+    </>
   );
 }
