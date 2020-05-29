@@ -2,14 +2,14 @@ import React from 'react'
 import { Store } from '../../../Store/Store';
 
 type Props = {
-  classes?: any
+  className?: string
 }
 
-export const PageNumber = ({classes}: Props) => {
+export const PageNumber = ({ className}: Props) => {
   const { paginationParams } = React.useContext(Store);
 
   return (
-    <p className={classes.nums}>
+    <p className={className}>
       【 {paginationParams.page}/{paginationParams.pageCount} 】
     </p>
   );

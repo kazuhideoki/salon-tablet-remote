@@ -63,8 +63,8 @@ export const PPaginationPresenter = () => {
 
   return (
     <Grid container justify="center" spacing={1}>
-      <HomeButton classes={classes} />
-      <PageNumber classes={classes}/>
+      <HomeButton className={classes.icon} />
+      <PageNumber className={classes.nums}/>
       <PaginationArrows classes={classes}/>
     </Grid>
   );

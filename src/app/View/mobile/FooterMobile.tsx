@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) => {
     item: {
       border: "1px solid black",
     },
+    itemIsDraft: {
+      border: "1px solid red",
+    },
   });
 });
 
@@ -61,7 +64,7 @@ export const FooterMobile = () => {
             : MoodBad;
 
           return (
-            <div key={index} className={classes.item}>
+            <div key={index} className={`${value.is_published ? classes.item : classes.itemIsDraft}`}>
               <div>
                 <Icon icon={icon} />
                 {value.icon_name}

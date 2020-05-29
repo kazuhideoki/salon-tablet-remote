@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) => {
     item: {
       border: "1px solid black",
     },
+    itemIsDraft: {
+      border: "1px solid red",
+    },
   });
 })
 
@@ -41,7 +44,7 @@ export const MainMobile = () => {
 
       : articles.map((value, key) => {
         return (
-          <div key={key} className={classes.item}>
+          <div key={key} className={`${value.is_published ? classes.item : classes.itemIsDraft}`}>
             <div>{value.title}</div>
             <div>{sqlToDate(value.created_at)}</div>
             <div>

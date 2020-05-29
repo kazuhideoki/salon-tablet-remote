@@ -33,11 +33,11 @@ export const AppMobile = () => {
     case 0:
       Display = () => (
         <>
+          <MainMobile />
           <div className={classes.homeAndPagination}>
             <HomeButton />
             <PaginationMobile />
           </div>
-          <MainMobile />
         </>
       );
       break;
