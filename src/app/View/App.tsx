@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => {
     });
 });
 
-const AppView = ()=> {
+const AppTablet = ()=> {
   // スタイルを反映させたclassNameを出力
     const classes = useStyles();
 
@@ -157,16 +157,28 @@ const AppView = ()=> {
 
 }
 
+const AppView = () => {
+  const isMobile = useMediaQuery("(max-width:480px)");
+  const { appState } = React.useContext(Store);
+
+  if (isMobile && appState.isSetting) {
+    return <AppMobile/>
+  } else {
+    return <AppTablet/>
+  }
+
+}
+
 
 export const App = (props:StoreContextProviderProps) => {
-  const isMobile = useMediaQuery("(max-width:480px)");
+  
   
   return (
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
       <ThemeProvider>
         <EditorContextProvider>
-          {isMobile ? <AppMobile/> : <AppView />}
+          <AppView/>
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>

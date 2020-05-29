@@ -6,7 +6,7 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import { Drawer as MuiDrawer } from "@material-ui/core";
+import { Drawer as MuiDrawer, useMediaQuery } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -145,6 +145,62 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
     }, 800);
   };
 
+  const isMobile = useMediaQuery("(max-width:480px)");
+
+  const BeforeIsSettingDrawerMenu = () => {
+    return (
+      <>
+        <TextField
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          variant="outlined"
+        />
+        <Button onClick={() => props.enterPassword()}>設定モード</Button>
+      </>
+    )
+  }
+
+  const BeforeIsSettingDrawerMenuMobile = () => {
+    return (
+      <Button onClick={() => props.dispatchAppState({type: "ON_IS_SETTING"})}>設定モード</Button>
+    )
+  }
+
+  const IsSettingDrawerMenu: React.FC = () => {
+    return (
+      <List>
+        <ListItem button onClick={() => props.handleOpenArticleEditor()}>
+          <ListItemIcon>
+            <NoteAddOutlined />
+          </ListItemIcon>
+          <ListItemText primary="新規投稿" />
+        </ListItem>
+        <ListItem button onClick={() => props.handleOpenFooterItemEditor()}>
+          <ListItemIcon>
+            <VideoLabel />
+          </ListItemIcon>
+          <ListItemText primary="フッターアイテム作成" />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_MODAL",
+              payload: "setting_user_info",
+            })
+          }
+        >
+          <ListItemIcon>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText primary="設定" />
+        </ListItem>
+      </List>
+    );
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -176,52 +232,13 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
           </IconButton>
         </div>
         <Divider />
-        {props.appState.isSetting ? (
-          <List>
-            <ListItem button onClick={() => props.handleOpenArticleEditor()}>
-              <ListItemIcon>
-                <NoteAddOutlined />
-              </ListItemIcon>
-              <ListItemText primary="新規投稿" />
-            </ListItem>
-            <ListItem button onClick={() => props.handleOpenFooterItemEditor()}>
-              <ListItemIcon>
-                <VideoLabel />
-              </ListItemIcon>
-              <ListItemText primary="フッターアイテム作成" />
-            </ListItem>
-            <ListItem
-              button
-              onClick={() =>
-                props.dispatchAppState({
-                  type: "OPEN_MODAL",
-                  payload: "setting_user_info",
-                })
-              }
-            >
-              <ListItemIcon>
-                <Settings />
-              </ListItemIcon>
-              <ListItemText primary="設定" />
-            </ListItem>
-          </List>
-        ) : (
-          // パスワード用のTextFieldは今後実装
-          <>
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="outlined"
-            />
-            <Button onClick={() => props.enterPassword()}>入力</Button>
-          </>
-        )}
+
+        {!props.appState.isSetting && !isMobile ? <BeforeIsSettingDrawerMenu/> : null}
+        {!props.appState.isSetting && isMobile ? <BeforeIsSettingDrawerMenuMobile/> : null}
+        {props.appState.isSetting ? <IsSettingDrawerMenu /> : null}
 
         <Divider />
       </MuiDrawer>
-      {/* {props.children} */}
       <main
         className={`${clsx(classes.content, {
           [classes.contentShift]: props.open,
