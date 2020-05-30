@@ -35,6 +35,8 @@ export const useDrawerProps = () => {
     setAppLinkUrl,
     setIsEdittingContent,
     dispatchSelectedIcon,
+    setCreatedAt,
+    setUpdatedAt,
   } = React.useContext(EditorContext);
 
   const handleOpenArticleEditor = () => {
@@ -42,6 +44,8 @@ export const useDrawerProps = () => {
     setIsEdittingContent(false);
     setTitleText("");
     setEditorText("");
+    setCreatedAt("")
+    setUpdatedAt(null)
   };
 
   const handleOpenFooterItemEditor = () => {
@@ -53,6 +57,8 @@ export const useDrawerProps = () => {
     setLinkUrl("");
     setAppLinkUrl("");
     dispatchSelectedIcon({ type: "SET_ICON", payload: null });
+    setCreatedAt("")
+    setUpdatedAt(null)
   };
 
   const enterPassword = () => {

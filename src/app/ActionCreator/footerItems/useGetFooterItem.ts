@@ -22,6 +22,8 @@ export const useGetFooterItem = () => {
     setIsEdittingContent,
     setEdittingFooterItemParams,
     dispatchSelectedIcon,
+    setCreatedAt,
+    setUpdatedAt,
   } = React.useContext(EditorContext);
   const { footerItems } = React.useContext(Store)
 
@@ -49,6 +51,8 @@ export const useGetFooterItem = () => {
           footerItem.displayed_icon_name
         ),
       });
+      setCreatedAt(footerItem.created_at);
+      setUpdatedAt(footerItem.updated_at);
     }
   };
 };

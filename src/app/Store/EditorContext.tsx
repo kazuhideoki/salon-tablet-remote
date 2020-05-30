@@ -14,6 +14,10 @@ type ContextProps = {
   setEditorText: React.Dispatch<React.SetStateAction<string>>
   editorTextExcerpt: string
   setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
+  createdAt: string
+  setCreatedAt: React.Dispatch<React.SetStateAction<string>>
+  updatedAt: string
+  setUpdatedAt: React.Dispatch<React.SetStateAction<string>>
   isEdittingContent: boolean,
   setIsEdittingContent: React.Dispatch<React.SetStateAction<boolean>>
 
@@ -44,6 +48,8 @@ const EditorContextProvider = (props) => {
   const [titleText, setTitleText] = React.useState("")
   const [editorText, setEditorText] = React.useState("");
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState("");
+  const [createdAt, setCreatedAt] = React.useState("");
+  const [updatedAt, setUpdatedAt] = React.useState("");
   const [isEdittingContent, setIsEdittingContent] = React.useState(false)
   
   // ArticleEditor特有のもの
@@ -70,6 +76,10 @@ const EditorContextProvider = (props) => {
     setEditorText,
     editorTextExcerpt,
     setEditorTextExcerpt,
+    createdAt,
+    setCreatedAt,
+    updatedAt,
+    setUpdatedAt,
     editorImg,
     setEditorImg,
     isEdittingContent,

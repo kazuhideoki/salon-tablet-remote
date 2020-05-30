@@ -45,8 +45,9 @@ export const MainMobile = () => {
       : articles.map((value, key) => {
         return (
           <div key={key} className={`${value.is_published ? classes.item : classes.itemIsDraft}`}>
-            <div>{value.title}</div>
-            <div>{sqlToDate(value.created_at)}</div>
+            <div>タイトル:{value.title}</div>
+            <div>作成日:{sqlToDate(value.created_at)}</div>
+            {value.updated_at ? <div>編集日:{sqlToDate(value.updated_at)}</div> : null}
             <div>
               {value.article_excerpt}
               {/* 抜粋が100文字の場合"..."追加" */}

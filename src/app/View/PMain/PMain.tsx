@@ -151,7 +151,7 @@ export const PMainPresenter = (props: Props) => {
                   {value.title}
                 </Typography>
                 <Typography gutterBottom variant="subtitle1" align="right">
-                  {value.created_at}
+                  {sqlToDate(value.created_at)}
                 </Typography>
                 <img
                   className={`p-main-thumbnail ${classes.thumbnail}`}

@@ -17,6 +17,8 @@ export const useGetSingleArticle = () => {
     setEditorImg,
     setIsEdittingContent,
     setEdittingArticleParams,
+    setCreatedAt,
+    setUpdatedAt,
   } = React.useContext(EditorContext);
   const { articles } = React.useContext(Store)
 
@@ -35,6 +37,9 @@ export const useGetSingleArticle = () => {
       setEditorText(article.article_content);
       setEditorTextExcerpt(article.article_excerpt)
       setEditorImg(article.article_img)
+      setCreatedAt(article.created_at)
+      setUpdatedAt(article.updated_at)
+
     }
   };
 };

@@ -8,6 +8,7 @@ const QuillEditor = dynamic(() => import("./QuillEditor"), {
 import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
 import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
+import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +36,8 @@ const ArticleEditor = () => {
     setEditorTextExcerpt,
     setEditorImg,
     isEdittingContent,
+    createdAt,
+    updatedAt
   } = React.useContext(EditorContext);
   const [charCountArticleTitle, setCharCountArticlTitle] = React.useState(0);
   const [charCountArticleContent, setCharCountArticlContent] = React.useState(0);
@@ -75,6 +78,16 @@ const ArticleEditor = () => {
           文字数をオーバーしています(100文字以下)
         </Typography>
       )}
+
+
+      <Typography>
+        作成日:{sqlToDate(createdAt)}
+      </Typography>
+      {updatedAt? <Typography>
+        編集日:{sqlToDate(updatedAt)}
+      </Typography> : null}
+
+
       <QuillEditor
         editorText={editorText}
         setEditorText={setEditorText}
@@ -87,7 +100,6 @@ const ArticleEditor = () => {
         <Grid item>
           <Button
             variant="outlined"
-            className={classes.submitButton}
             onClick={() => handleSubmit({ isPublishing: true })}
             disabled={
               charCountArticleTitle < 101 && charCountArticleContent < 1001

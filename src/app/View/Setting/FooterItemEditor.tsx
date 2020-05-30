@@ -10,6 +10,7 @@ import { useCreateFooterItem } from "../../ActionCreator/footerItems/useCreateFo
 import { useUpdateFooterItem } from "../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
+import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +43,8 @@ export const FooterItemEditor = () => {
     appLinkUrl,
     setAppLinkUrl,
     isEdittingContent,
+    createdAt,
+    updatedAt,
   } = React.useContext(EditorContext);
   const [charCountIconName, setCharCountIconName] = React.useState(0);
   const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
@@ -113,6 +116,15 @@ export const FooterItemEditor = () => {
         </Typography>
       )}
       <br />
+
+      {/* footerItemEditorでは日付なくても大丈夫？ */}
+      {/* <Typography>
+        作成日:{sqlToDate(createdAt)}
+      </Typography>
+      {updatedAt ? <Typography>
+        編集日:{sqlToDate(updatedAt)}
+      </Typography> : null} */}
+ 
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {mainField}
       

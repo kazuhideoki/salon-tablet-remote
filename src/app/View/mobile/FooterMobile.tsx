@@ -5,6 +5,7 @@ import { makeStyles, Theme, createStyles, Button } from "@material-ui/core";
 import { MoodBad, ArrowUpward } from "@material-ui/icons";
 import { useSwitchOrder } from '../../ActionCreator/footerItems/useSwitchOrder';
 import { useDrawerProps } from '../Drawer';
+import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 
 const useStyles = makeStyles((theme: Theme) => {
   // const themes = React.useContext(ThemeContext);
@@ -67,8 +68,11 @@ export const FooterMobile = () => {
             <div key={index} className={`${value.is_published ? classes.item : classes.itemIsDraft}`}>
               <div>
                 <Icon icon={icon} />
-                {value.icon_name}
+                アイテム名{value.icon_name}
               </div>
+              {/* FooterMobileではなくても大丈夫？ */}
+              {/* <div>作成日:{sqlToDate(value.created_at)}</div>
+              {value.updated_at ? <div>編集日:{sqlToDate(value.updated_at)}</div>: null } */}
               {value.on_tap === "modal" ? 
                 <div>
                   {value.item_excerpt}
