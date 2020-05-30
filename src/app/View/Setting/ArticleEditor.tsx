@@ -5,7 +5,7 @@ const QuillEditor = dynamic(() => import("./QuillEditor"), {
   ssr: false,
 });
 // import { QuillEditor } from "./QuillEditor";
-import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme } from "@material-ui/core";
+import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
 import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: 20,
       maxWidth: "100%",
     },
-    submitButton: {
+    submitButtons: {
       position: "sticky",
       bottom: 0,
       zIndex: 100,
@@ -83,30 +83,35 @@ const ArticleEditor = () => {
         charCount={charCountArticleContent}
         setCharCount={setCharCountArticlContent}
       />
-      <Button
-        variant="outlined"
-        className={classes.submitButton}
-        onClick={() => handleSubmit({ isPublishing: true })}
-        disabled={
-          charCountArticleTitle < 101 && charCountArticleContent < 1001
-            ? false
-            : true
-        }
-      >
-        {isEdittingContent ? "更新" : "投稿"}
-      </Button>
-      <Button
-        variant="outlined"
-        className={classes.submitButton}
-        onClick={() => handleSubmit({ isPublishing: false })}
-        disabled={
-          charCountArticleTitle < 101 && charCountArticleContent < 1001
-            ? false
-            : true
-        }
-      >
-        下書き保存
-      </Button>
+      <Grid container className={classes.submitButtons}>
+        <Grid item>
+          <Button
+            variant="outlined"
+            className={classes.submitButton}
+            onClick={() => handleSubmit({ isPublishing: true })}
+            disabled={
+              charCountArticleTitle < 101 && charCountArticleContent < 1001
+                ? false
+                : true
+            }
+          >
+            {isEdittingContent ? "更新" : "投稿"}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="outlined"
+            onClick={() => handleSubmit({ isPublishing: false })}
+            disabled={
+              charCountArticleTitle < 101 && charCountArticleContent < 1001
+                ? false
+                : true
+            }
+          >
+            下書き保存
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 };

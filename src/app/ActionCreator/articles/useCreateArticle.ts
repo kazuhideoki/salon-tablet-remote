@@ -10,7 +10,6 @@ import {
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
-import { Quill } from "react-quill";
 
 
 export type T_articles_create = {

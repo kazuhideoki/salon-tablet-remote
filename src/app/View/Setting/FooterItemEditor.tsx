@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: 20,
       maxWidth: "100%",
     },
-    submitButton: {
+    submitButtons: {
       position: "sticky",
       bottom: 0,
       zIndex: 100,
@@ -116,14 +116,13 @@ export const FooterItemEditor = () => {
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {mainField}
       
-      <Grid container>
+      <Grid container className={classes.submitButtons}>
         <Grid item>
           <SelectIcon />
         </Grid>
         <Grid item>
           <Button
             variant="outlined"
-            className={classes.submitButton}
             onClick={() => handleSubmit({ isPublishing: true })}
             disabled={
               charCountIconName < 101 && charCountFooterItemContent < 1001
@@ -137,7 +136,6 @@ export const FooterItemEditor = () => {
         <Grid item>
           <Button
             variant="outlined"
-            className={classes.submitButton}
             onClick={() => handleSubmit({ isPublishing: false })}
             disabled={
               charCountIconName < 101 && charCountFooterItemContent < 1001
