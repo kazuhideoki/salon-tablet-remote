@@ -11,13 +11,16 @@ import {
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
 
-type TUpdateArticle = {
-  id: T_id;
+export type T_articles_update = {
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
   article_excerpt: T_article_excerpt
   article_img: T_article_img
+};
+export type TUpdateArticle = {
+  params: T_articles_update;
+  id: T_id
 };
 export const useUpdateArticle = () => {
   const { dispatchAppState, paginationParams } = React.useContext(Store);
@@ -35,12 +38,14 @@ export const useUpdateArticle = () => {
 
   return async (isPublishing: boolean) => {
     const params: TUpdateArticle = {
+      params: {
+        is_published: isPublishing,
+        title: titleText,
+        article_content: editorText,
+        article_excerpt: editorTextExcerpt,
+        article_img: editorImg,
+      },
       id: edittingArticleParams.id,
-      is_published: isPublishing,
-      title: titleText,
-      article_content: editorText,
-      article_excerpt: editorTextExcerpt,
-      article_img: editorImg,
     };
 
     const res = await fetch(

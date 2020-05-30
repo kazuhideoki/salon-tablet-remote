@@ -3,8 +3,13 @@ import mysql from 'mysql2'
 import mysqlPromise from "mysql2/promise";
 import { validationErrorHandle } from "../validation";
 import { corsHeader } from '../server'
-import { FooterItems } from "../../app/Store/Store";
+import { FooterItems, T_footer_item_id } from "../../app/Store/Store";
 import { SwitchOrderParams } from "../../app/View/buttons/SwitchOrderButton";
+import {
+  TUpdateFooterItem,
+  T_footer_items_update_item,
+} from "../../app/ActionCreator/footerItems/useUpdateFooterItem";
+import { T_footer_items_create_item } from '../../app/ActionCreator/footerItems/useCreateFooterItem';
 
 const mysql_setting = {
   host: "localhost",
@@ -65,7 +70,7 @@ export const footer_items_create_item = (req, res) => {
 
   const query = "INSERT INTO `footer_items` SET ?";
 
-  const data = req.body
+  const data: T_footer_items_create_item = req.body.params
   connection.query(query, data, (err, result, fields) => {
     if (err) {
       console.log("/footer_items/get/のエラーは " + JSON.stringify(err));
@@ -116,31 +121,20 @@ export const footer_items_get_single = (req, res) => {
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 // /footer_items/update
+type TUpdateData = [T_footer_items_update_item, T_footer_item_id]
+
 export const footer_items_update_item = (req, res) => {
   validationErrorHandle(req, res);
   corsHeader(res);
 
-  const { footer_item_id, is_published, created_at, updated_at, icon_name, displayed_icon_name, on_tap, item_content, link_url, order } = req.body
+  const { params, id }: TUpdateFooterItem = req.body;
 
   const connection = mysql.createConnection(mysql_setting);
   // connection.connect();
 
   const query = `UPDATE footer_items SET ? WHERE footer_item_id=?`;
   // うまく行かなかったら一個ずつ書く
-  const data = [
-    {
-    is_published: is_published,
-    // created_at: created_at,
-    // updated_at: updated_at,
-    icon_name: icon_name,
-    displayed_icon_name: displayed_icon_name,
-    on_tap: on_tap,
-    item_content: item_content,
-    link_url: link_url,
-    order: order,
-    },
-    footer_item_id,
-  ];
+  const data: TUpdateData = [params, id];
 
   connection.query(query, data, (err, result, fields) => {
     if (err) {

@@ -67,8 +67,8 @@ export const FooterItemEditor = () => {
   if (onTap === "modal") {
     mainField = (
       <QuillEditor
-        value={editorText}
-        setValue={setEditorText}
+        editorText={editorText}
+        setEditorText={setEditorText}
         setEditorTextExcerpt={setEditorTextExcerpt}
         charCount={charCountFooterItemContent}
         setCharCount={setCharCountFooterItemContent}

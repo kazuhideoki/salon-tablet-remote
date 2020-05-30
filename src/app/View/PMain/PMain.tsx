@@ -151,18 +151,12 @@ export const PMainPresenter = (props: Props) => {
                   {value.title}
                 </Typography>
                 <Typography gutterBottom variant="subtitle1" align="right">
-                  {}
+                  {value.created_at}
                 </Typography>
                 <img
                   className={`p-main-thumbnail ${classes.thumbnail}`}
                   src={value.article_img}
                 />
-                {/* <div
-                  className={`p-main-article-excerpt ${classes.excerpt}`}
-                  dangerouslySetInnerHTML={{
-                    __html: value.article_excerpt + "...",
-                  }}
-                /> */}
                 <div
                   className={`p-main-article-excerpt ${classes.excerpt}`}>{value.article_excerpt}{value.article_excerpt.length === 100 ? "..." : ""}</div>
               </CardContent>

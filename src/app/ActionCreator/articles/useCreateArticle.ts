@@ -13,12 +13,16 @@ import { useGetArticles } from "./useGetArticles";
 import { Quill } from "react-quill";
 
 
-type TCreateArticle = {
+export type T_articles_create = {
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
   article_excerpt: T_article_excerpt
   article_img: T_article_img
+};
+
+export type TCreateArticle = {
+  params: T_articles_create;
 };
 export const useCreateArticle = () => {
   const getArticles = useGetArticles();
@@ -33,11 +37,13 @@ export const useCreateArticle = () => {
   } = React.useContext(EditorContext);
   return async (isPublishing: boolean) => {
     const params: TCreateArticle = {
-      is_published: isPublishing,
-      title: titleText,
-      article_content: editorText,
-      article_excerpt: editorTextExcerpt,
-      article_img: editorImg,
+      params: {
+        is_published: isPublishing,
+        title: titleText,
+        article_content: editorText,
+        article_excerpt: editorTextExcerpt,
+        article_img: editorImg,
+      }
     };
 
     const res = await fetch(

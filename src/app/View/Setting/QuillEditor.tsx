@@ -19,22 +19,20 @@ Quill.register("modules/imageCompress", ImageCompress);
 
 
 type Props = {
-  value: string,
-  setValue: React.Dispatch<React.SetStateAction<string>>,
+  editorText: string,
+  setEditorText: React.Dispatch<React.SetStateAction<string>>,
   setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
   setEditorImg?: React.Dispatch<React.SetStateAction<string>>
   charCount: number
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
 }
-export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }:Props) => {
+export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }:Props) => {
   
   const [hasImg, setHasImg] = React.useState(false)
   
   const handleOnChange = (content, delta, source, editor) => {
-    setValue(content)
-    // if (setEditorTextExcerpt) {
-      setEditorTextExcerpt(editor.getText(0, 100))
-    // }  
+    setEditorText(content)
+    setEditorTextExcerpt(editor.getText(0, 100)) 
 
     // checkImgで２個以上画像がある場合一つにする。画像データが返り値
     const imgData = checkImg(editor.getContents(), setHasImg, () => removeImg('react_quill_editor'));
@@ -100,7 +98,7 @@ export const QuillEditor = ({ value, setValue, setEditorTextExcerpt, setEditorIm
     <>
       <ReactQuill
         className="react_quill_editor"
-        value={value}
+        value={editorText}
         onChange={(content, delta, source, editor) =>
           handleOnChange(content, delta, source, editor)
         }

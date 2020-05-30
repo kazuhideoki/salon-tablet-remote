@@ -2,6 +2,8 @@ import { corsHeader } from "./server";
 import { validationErrorHandle } from "./validation";
 import mysqlPromise from "mysql2/promise";
 import { ArticleWithoutId, TArticle, TArticles, PaginationParams } from "../app/Store/Store";
+import { T_articles_create } from "../app/ActionCreator/articles/useCreateArticle";
+import { T_articles_update } from "../app/ActionCreator/articles/useUpdateArticle";
 
 const knex = require("knex")({
     client: "mysql",
@@ -88,7 +90,7 @@ export const articles_create = (req, res) => {
   validationErrorHandle(req, res);
 
   corsHeader(res);
-  const params: ArticleWithoutId = req.body;
+  const params: T_articles_create = req.body.params;
   new ArticlesTable(params)
     .save()
     .then((result) => {
@@ -128,10 +130,10 @@ export const articles_get_singlepost = (req, res) => {
 export const articles_update = (req, res) => {
   validationErrorHandle(req, res);
   corsHeader(res);
-  const params: TArticle = req.body;
+  const params: T_articles_update = req.body.params;
 
   new ArticlesTable()
-    .where("id", params.id)
+    .where("id", req.body.id)
     .save(params, { patch: true })
     .then((result) => {
       console.dir("updatepostのresultは " + JSON.stringify(result));

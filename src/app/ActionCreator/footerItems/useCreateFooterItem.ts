@@ -14,7 +14,7 @@ import {
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetFooterItems } from "./useGetFooterItems";
 
-type TCreateFooterItem = {
+export type T_footer_items_create_item = {
   is_published: T_is_published_footer_items;
   icon_name: T_icon_name;
   displayed_icon_name: T_displayed_icon_name | null; 
@@ -24,6 +24,10 @@ type TCreateFooterItem = {
   link_url: T_link_url;
   app_link_url: T_app_link_url
   order: T_order;
+};
+
+export type TCreateFooterItem = {
+  params: T_footer_items_create_item;
 };
 
 export const useCreateFooterItem = () => {
@@ -58,16 +62,18 @@ export const useCreateFooterItem = () => {
 
   return async (isPublishing: boolean) => {
     const params: TCreateFooterItem = {
-      is_published: isPublishing,
-      icon_name: titleText,
-      // 選択されていたらアイコンの名前を返す.
-      displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
-      on_tap: onTap,
-      item_content: editorText,
-      item_excerpt: editorTextExcerpt,
-      link_url: linkUrl,
-      app_link_url: appLinkUrl,
-      order: order,
+      params: {
+        is_published: isPublishing,
+        icon_name: titleText,
+        // 選択されていたらアイコンの名前を返す.
+        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
+        on_tap: onTap,
+        item_content: editorText,
+        item_excerpt: editorTextExcerpt,
+        link_url: linkUrl,
+        app_link_url: appLinkUrl,
+        order: order,
+      }
     };
 
     const res = await fetch(

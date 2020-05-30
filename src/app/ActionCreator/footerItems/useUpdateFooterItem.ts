@@ -15,18 +15,21 @@ import {
 } from "../../Store/Store";
 import { useGetFooterItems } from "./useGetFooterItems";
 
-type TUpdateFooterItem = {
-  footer_item_id: T_footer_item_id;
+export type T_footer_items_update_item = {
   is_published: T_is_published_footer_items;
   icon_name: T_icon_name;
   displayed_icon_name: T_displayed_icon_name | null;
   on_tap: T_on_tap;
   item_content: T_item_content;
-  item_excerpt: T_item_excerpt
+  item_excerpt: T_item_excerpt;
   link_url: T_link_url;
-  app_link_url: T_app_link_url
+  app_link_url: T_app_link_url;
   order: T_order;
 };
+export type TUpdateFooterItem = {
+  params: T_footer_items_update_item
+  id: T_footer_item_id
+}
 
 export const useUpdateFooterItem = () => {
   const { dispatchAppState } = React.useContext(Store);
@@ -50,17 +53,19 @@ export const useUpdateFooterItem = () => {
 
   return async (isPublishing: boolean) => {
     const params: TUpdateFooterItem = {
-      footer_item_id: edittingFooterItemParams.footer_item_id,
-      is_published: isPublishing,
-      icon_name: titleText,
-      // 選択されていたらアイコンの名前を返す
-      displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
-      on_tap: onTap, // 要確認
-      item_content: editorText,
-      item_excerpt: editorTextExcerpt,
-      link_url: linkUrl,
-      app_link_url: appLinkUrl,
-      order: edittingFooterItemParams.order,
+      id: edittingFooterItemParams.footer_item_id,
+      params: {
+        is_published: isPublishing,
+        icon_name: titleText,
+        // 選択されていたらアイコンの名前を返す
+        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
+        on_tap: onTap, // 要確認
+        item_content: editorText,
+        item_excerpt: editorTextExcerpt,
+        link_url: linkUrl,
+        app_link_url: appLinkUrl,
+        order: edittingFooterItemParams.order,
+      },
     };
     const res = await fetch(
       `${location.protocol}//${location.host}/footer_items/update`,

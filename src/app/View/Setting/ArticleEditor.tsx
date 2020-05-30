@@ -76,8 +76,8 @@ const ArticleEditor = () => {
         </Typography>
       )}
       <QuillEditor
-        value={editorText}
-        setValue={setEditorText}
+        editorText={editorText}
+        setEditorText={setEditorText}
         setEditorTextExcerpt={setEditorTextExcerpt}
         setEditorImg={setEditorImg}
         charCount={charCountArticleContent}
