@@ -90,7 +90,6 @@ export const FooterItemEditor = () => {
       </div>
     );
   } else if (onTap === "appLink") {
-    // mainField = "「appLinkの選択画面」"
     mainField = (
       <div>
         <SelectAppLink appLinkUrl={appLinkUrl} setAppLinkUrl={setAppLinkUrl} />
@@ -102,7 +101,7 @@ export const FooterItemEditor = () => {
       <h2>フッターアイテム</h2>
       <TextField
         id="icon-name-text-field"
-        label="アイコン名"
+        label="アイテム名"
         variant="outlined"
         value={titleText}
         onChange={(e) => handleOnChangeIconName(e)}

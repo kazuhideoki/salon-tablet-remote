@@ -12,14 +12,14 @@ title: 'QuillEditor',
 component: QuillEditor,
 };
 export const Normal = () => {
-  const [value, setValue] = React.useState('')
+  const [editorText, setEditorText] = React.useState("");
   const [charCount, setCharCount] = React.useState(0);
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState('');
 
   return (
     <QuillEditor
-      value={value}
-      setValue={setValue}
+      editorText={editorText}
+      setEditorText={setEditorText}
       setEditorTextExcerpt={setEditorTextExcerpt}
       charCount={charCount}
       setCharCount={setCharCount}
