@@ -80,9 +80,9 @@ const ArticleEditor = () => {
       )}
 
 
-      <Typography>
+      {createdAt ? <Typography>
         作成日:{sqlToDate(createdAt)}
-      </Typography>
+      </Typography> : null}
       {updatedAt? <Typography>
         編集日:{sqlToDate(updatedAt)}
       </Typography> : null}

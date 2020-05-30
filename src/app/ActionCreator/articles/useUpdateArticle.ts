@@ -63,8 +63,8 @@ export const useUpdateArticle = () => {
       alert("更新できませんでした");
     } else {
       setIsEdittingContent(false);
-      setTitleText("");
-      setEditorText("");
+      // setTitleText("");
+      // setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getArticles(paginationParams.page);

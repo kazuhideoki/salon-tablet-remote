@@ -44,7 +44,7 @@ export const useDrawerProps = () => {
     setIsEdittingContent(false);
     setTitleText("");
     setEditorText("");
-    setCreatedAt("")
+    setCreatedAt(null)
     setUpdatedAt(null)
   };
 
@@ -57,7 +57,7 @@ export const useDrawerProps = () => {
     setLinkUrl("");
     setAppLinkUrl("");
     dispatchSelectedIcon({ type: "SET_ICON", payload: null });
-    setCreatedAt("")
+    setCreatedAt(null)
     setUpdatedAt(null)
   };
 

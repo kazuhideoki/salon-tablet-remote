@@ -82,8 +82,8 @@ export const useUpdateFooterItem = () => {
       alert("更新できませんでした");
     } else {
       setIsEdittingContent(false);
-      setTitleText("");
-      setEditorText("");
+      // setTitleText("");
+      // setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getFooterItems();
