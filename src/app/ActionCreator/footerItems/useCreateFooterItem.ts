@@ -77,7 +77,7 @@ export const useCreateFooterItem = () => {
     };
 
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/create`,
+      `${location.protocol}//${location.host}/api/footer_items/create`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

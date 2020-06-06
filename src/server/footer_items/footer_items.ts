@@ -73,14 +73,14 @@ export const footer_items_create_item = (req, res) => {
   const data: T_footer_items_create_item = req.body.params
   connection.query(query, data, (err, result, fields) => {
     if (err) {
-      console.log("/footer_items/get/のエラーは " + JSON.stringify(err));
+      console.log("/footer_items/create/のエラーは " + JSON.stringify(err));
       res.status(500).json({ err: true, data: { message: err.message } });
     }
 
     const data = {
       rawData: result,
     };
-    console.log("/footer_items/get/は " + JSON.stringify(data));
+    console.log("/footer_items/create/は " + JSON.stringify(data));
 
     res.json(data);
 

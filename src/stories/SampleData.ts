@@ -1,5 +1,6 @@
 //@ts-ignore
-export const sampleData = JSON.parse({
+// export const sampleData = JSON.parse({
+export const sampleData = {
   "articles": [
     {
       "id": 15,
@@ -98,4 +99,4 @@ export const sampleData = JSON.parse({
       "order": 1
     }
   ]
-})
+}

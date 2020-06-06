@@ -16,7 +16,7 @@ const knex = require("knex")({
 },
 });
 const Bookshelf = require('bookshelf')(knex)
-const ArticlesTable = Bookshelf.Model.extend({
+export const ArticlesTable = Bookshelf.Model.extend({
     tableName: "articles",
 });
 

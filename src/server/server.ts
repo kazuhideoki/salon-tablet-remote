@@ -4,7 +4,7 @@ import { articlesValidation, footerItemsValidation } from "./validation";
 import bodyParser from "body-parser";
 import {
   footer_items_get,
-  footer_items_create_item,
+  // footer_items_create_item,
   footer_items_get_single,
   footer_items_update_item,
   footer_items_delete_item,
@@ -25,7 +25,9 @@ export function corsHeader(res) {
     );
 }  
 import { TArticles, PaginationParams } from "../app/Store/Store";
-import { articles_delete, articles_update, articles_get_singlepost, articles_create, articles_get } from "./articles";
+import { articles_delete, articles_update, articles_get_singlepost,
+  articles_create,
+  articles_get } from "./articles";
 
 app.prepare().then(() => {
 
@@ -50,9 +52,9 @@ app.prepare().then(() => {
 
     // ●●●footer_items●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
     server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
-    server.post("/footer_items/create", footerItemsValidation, (req, res) =>
-      footer_items_create_item(req, res)
-    );
+    // server.post("/footer_items/create", footerItemsValidation, (req, res) =>
+    //   footer_items_create_item(req, res)
+    // );
     server.post("/footer_items/get/single", (req, res) =>
       footer_items_get_single(req, res)
     );
