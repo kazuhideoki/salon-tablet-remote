@@ -4,7 +4,7 @@ import { articlesValidation, footerItemsValidation } from "./validation";
 import bodyParser from "body-parser";
 import {
   footer_items_get,
-  // footer_items_create_item,
+  footer_items_create_item,
   footer_items_get_single,
   footer_items_update_item,
   footer_items_delete_item,
@@ -51,10 +51,10 @@ app.prepare().then(() => {
     server.post("/articles/delete", (req, res) => articles_delete(req, res));
 
     // ●●●footer_items●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-    server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
-    // server.post("/footer_items/create", footerItemsValidation, (req, res) =>
-    //   footer_items_create_item(req, res)
-    // );
+    // server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
+    server.post("/footer_items/create", footerItemsValidation, (req, res) =>
+      footer_items_create_item(req, res)
+    );
     server.post("/footer_items/get/single", (req, res) =>
       footer_items_get_single(req, res)
     );

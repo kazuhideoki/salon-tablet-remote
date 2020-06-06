@@ -3,17 +3,12 @@ import { db } from "../../../lib/db";
 
 export default async (req, res) => {
   if (req.method === "POST") {
-    //  ↓？？？
-  // validationErrorHandle(req, res);
-  // corsHeader(res);
-
-
   const params = req.body.params;
     try {
       const data = await db(
-        escape(`
-        NSERT INTO footer_items SET ${params}
-      `)
+        // escape(`
+          'INSERT INTO footer_items SET ${params}'
+      // `)
       );
 
       console.log("/footer_items/create/は " + JSON.stringify(data));
