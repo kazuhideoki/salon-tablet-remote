@@ -46,7 +46,7 @@ export const useCreateArticle = () => {
     };
 
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/create`,
+      `${location.protocol}//${location.host}/api/articles/create`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

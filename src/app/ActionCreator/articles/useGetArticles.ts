@@ -16,7 +16,7 @@ export const useGetArticles = () => {
 
   return async (page: number) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/get`,
+      `${location.protocol}//${location.host}/api/articles/get`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

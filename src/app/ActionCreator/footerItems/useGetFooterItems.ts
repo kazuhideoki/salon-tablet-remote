@@ -8,7 +8,7 @@ export const useGetFooterItems = () => {
 
   return async () => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/get`
+      `${location.protocol}//${location.host}/api/footer_items/get`
     );
 
     let data = await res.json();

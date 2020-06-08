@@ -14,7 +14,7 @@ export const useDeleteArticle = () => {
   const { paginationParams, articles } = React.useContext(Store);
   return async (id: T_id) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/delete`,
+      `${location.protocol}//${location.host}/api/articles/delete`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

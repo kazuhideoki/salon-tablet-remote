@@ -6,7 +6,7 @@ export const useDeleteFooterItem = () => {
 
   return async (footer_item_id: T_footer_item_id, order: T_order) => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/delete`,
+      `${location.protocol}//${location.host}/api/footer_items/delete`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

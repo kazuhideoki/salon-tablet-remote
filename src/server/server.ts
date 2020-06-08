@@ -29,6 +29,8 @@ import { articles_delete, articles_update, articles_get_singlepost,
   articles_create,
   articles_get } from "./articles";
 
+import nextauth from "../pages/api/auth/[...nextauth]";
+
 app.prepare().then(() => {
 
     // なにかのエラー対応→{ limit: "50mb" }
@@ -51,7 +53,7 @@ app.prepare().then(() => {
     server.post("/articles/delete", (req, res) => articles_delete(req, res));
 
     // ●●●footer_items●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
-    // server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
+    server.get("/footer_items/get", (req, res) => footer_items_get(req, res));
     server.post("/footer_items/create", footerItemsValidation, (req, res) =>
       footer_items_create_item(req, res)
     );
@@ -68,12 +70,20 @@ app.prepare().then(() => {
       footer_items_switchOrder(req, res)
     );
 
-    //   -----------ここの上にバックエンドの処理を書く-----------
+    server.all("/api/auth/*", (req, res) =>
+      nextauth(req, res)
+    );
 
-    // nextのルーティング
+    //   -----------ここの上にバックエンドの処理を書く-----------
+    // 上のバックエンドの処理に引っかからなかったものを↓
+    // nextのルーティング。serer.allにすることでpostなども対応させてapi routeと共存できる。？→だめ
     server.get("*", (req, res) => {
       return handler(req, res);
     });
+    // custome server使うとapi routeをキャッチしないので追加してみた。→だめ
+    // server.post("*", (req, res) => {
+    //   return handler(req, res);
+    // });
 
     server.listen(3000, (err) => {
       if (err) console.error(err.stack);

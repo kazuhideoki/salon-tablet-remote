@@ -49,7 +49,7 @@ export const useUpdateArticle = () => {
     };
 
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/update`,
+      `${location.protocol}//${location.host}/api/articles/update`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

@@ -76,6 +76,11 @@ export const useCreateFooterItem = () => {
       }
     };
 
+    console.log(`${location.protocol}//${location.host}/api/footer_items/create`);
+    console.log(JSON.stringify(params));
+    
+
+    
     const res = await fetch(
       `${location.protocol}//${location.host}/api/footer_items/create`,
       {

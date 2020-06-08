@@ -9,7 +9,7 @@ export const useSwitchOrder = () => {
     console.log("useSwitchOrderのparamsは " + params);
 
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/switchOrder`,
+      `${location.protocol}//${location.host}/footer_items/api/swith_order`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

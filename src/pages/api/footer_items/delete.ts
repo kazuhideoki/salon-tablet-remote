@@ -1,32 +1,34 @@
 import { db } from "../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_footer_items_create_item } from "../../../app/ActionCreator/footerItems/useCreateFooterItem";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  
   if (req.method === "POST") {
 
-    const params: T_footer_items_create_item = req.body.params;
+    const { footer_item_id, order } = req.body;
+
     try {
-      const data = await db(`INSERT INTO footer_items SET ?`, params);
-  
-      console.log("/footer_items/create/は " + JSON.stringify(data));
-  
+      const data = await db(
+        `DELETE FROM footer_items WHERE footer_item_id = ?`,
+        footer_item_id
+      );
+      const data2 = await db(
+        `UPDATE footer_items SET order = order -1 WHERE order > ? `,
+        order
+      );
+
+
+      console.log("/footer_items/delete/は " + JSON.stringify(data));
+
       res.status(200).json({
-        rawData: data,
+        rawData: data2,
       });
 
     } catch (err) {
-
-      console.log("/footer_items/create/のエラーは " + JSON.stringify(err));
+      console.log("/footer_items/delete/のエラーは " + JSON.stringify(err));
 
       res.status(500).json({ err: true, data: { message: err.message } });
 
     }
-
-  } else if (req.method === "GET") {
-    console.log("GETだよ");
-    
   }
 };
 
@@ -40,3 +42,4 @@ export const config = {
     },
   },
 };
+

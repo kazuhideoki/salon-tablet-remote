@@ -68,7 +68,7 @@ export const useUpdateFooterItem = () => {
       },
     };
     const res = await fetch(
-      `${location.protocol}//${location.host}/footer_items/update`,
+      `${location.protocol}//${location.host}/api/footer_items/update`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",

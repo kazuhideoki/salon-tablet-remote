@@ -1,32 +1,27 @@
 import { db } from "../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_footer_items_create_item } from "../../../app/ActionCreator/footerItems/useCreateFooterItem";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  
   if (req.method === "POST") {
 
-    const params: T_footer_items_create_item = req.body.params;
+    const {params, id} = req.body;
+
     try {
-      const data = await db(`INSERT INTO footer_items SET ?`, params);
-  
-      console.log("/footer_items/create/は " + JSON.stringify(data));
-  
+      const data = await db(
+        `UPDATE footer_items SET ? WHERE footer_item_id = ?`,
+        [params, id]
+      );
+
+      console.log("/footer_items/update/は " + JSON.stringify(data));
+
       res.status(200).json({
         rawData: data,
       });
-
     } catch (err) {
-
-      console.log("/footer_items/create/のエラーは " + JSON.stringify(err));
+      console.log("/footer_items/update/のエラーは " + JSON.stringify(err));
 
       res.status(500).json({ err: true, data: { message: err.message } });
-
     }
-
-  } else if (req.method === "GET") {
-    console.log("GETだよ");
-    
   }
 };
 
@@ -40,3 +35,4 @@ export const config = {
     },
   },
 };
+
