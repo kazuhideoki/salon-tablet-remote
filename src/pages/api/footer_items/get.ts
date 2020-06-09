@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const data = await db("SELECT * FROM footer_items ORDER BY order ASC");
+    const data = await db("SELECT * FROM `footer_items` ORDER BY `order` ASC");
 
     console.log("/footer_items/get/は " + JSON.stringify(data));
 

@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+    
     const { page, isSetting } = req.body;
     // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
     let getPublishedOnly: string;
@@ -23,13 +24,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         ` ORDER BY created_at DESC LIMIT ` +
         offSet +
         ` 5`;
+        console.log(query);
+        
       const data = await db(
         query
         // [getPublishedOnly, offSet]
       );
-
+      const query2 = `SELECT * FROM articles ` + getPublishedOnly;
+      console.log(query2);
+      
       const data2: any = await db(
-        `SELECT * FROM articles` + getPublishedOnly
+        query2
       );
 
       console.log("/articles/get/は " + JSON.stringify(data));
@@ -55,10 +60,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           pageCount: Math.ceil(data2.length / 5), // 全row数を5で割って切り上げ
           pageSize: 5,
           rowCount: data2.length,
-          // page: page,
-          // pageCount: pageCount, // 全row数を5で割って切り上げ
-          // pageSize: 5,
-          // rowCount: rowCount,
         },
       });
     } catch (err) {

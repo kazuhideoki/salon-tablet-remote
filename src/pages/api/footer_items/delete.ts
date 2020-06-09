@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         footer_item_id
       );
       const data2 = await db(
-        `UPDATE footer_items SET order = order -1 WHERE order > ? `,
+        `UPDATE footer_items SET order = order - 1 WHERE order > ? `,
         order
       );
 
