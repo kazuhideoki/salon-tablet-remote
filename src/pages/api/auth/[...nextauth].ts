@@ -1,5 +1,7 @@
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import NextAuth from "next-auth";
+import Providers from "next-auth/providers";
+require("dotenv").config();
+
 const site =
   process.env.NODE_ENV !== "production"
     ? process.env.SITE
@@ -17,23 +19,6 @@ const options = {
     }),
     // When configuring oAuth providers make sure you enabling requesting
     // permission to get the users email address (required to sign in)
-
-    Providers.Google({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
-    }),
-    Providers.Facebook({
-      clientId: process.env.FACEBOOK_ID,
-      clientSecret: process.env.FACEBOOK_SECRET,
-    }),
-    Providers.Twitter({
-      clientId: process.env.TWITTER_ID,
-      clientSecret: process.env.TWITTER_SECRET,
-    }),
-    Providers.GitHub({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }),
   ],
   // The 'database' option should be a connection string or TypeORM
   // configuration object https://typeorm.io/#/connection-options
@@ -59,6 +44,6 @@ const options = {
   //   signin: "/auth/signin",
   // },
 };
+console.log(JSON.stringify(options));
 
-export default (req, res) => NextAuth(req, res, options)
-// module.exports = (req, res) => NextAuth(req, res, options);
+export default (req, res) => NextAuth(req, res, options);

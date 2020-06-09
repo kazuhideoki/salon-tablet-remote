@@ -11,13 +11,13 @@ import { signin, signout, useSession } from "next-auth/client";
 const Index = (props: StoreContextProviderProps) => {
   const [session, loading] = useSession();
 
-  // if (!session) {
-  //   return (<><span>Not signed in</span>
-  //         <a href={`/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin() }}>
-  //           <button>Sign in</button>
-  //         </a></>)
+  if (!session) {
+    return (<><span>Not signed in</span>
+          <a href={`/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin() }}>
+            <button>Sign in</button>
+          </a></>)
     
-  // }
+  }
 
   // service-worker.jsの登録と解除。unmount時に解除することで、キャッシュが残り画面が更新されない状態を防ぐ
   React.useEffect(() => {

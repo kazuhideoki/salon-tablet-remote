@@ -6,7 +6,8 @@ const mysql = serverlessMysql({
     // database: process.env.MYSQL_DATABASE,
     // user: process.env.MYSQL_USER,
     // password: process.env.MYSQL_PASSWORD,
-    // .envファイルだと何故か' '@'localhost'でアクセスしようとしてしまうので直接設定
+
+    // .envファイル読み込めずとりあえず直接設定
     host: "localhost",
     database: "salon_tablet",
     user: "root",
@@ -15,13 +16,7 @@ const mysql = serverlessMysql({
 });
 
 export const db = async (query, params?) => {
-  // try {
-  //   const results = await mysql.query(query, params);
-  //   await mysql.end();
-  //   return results;
-  // } catch (error) {
-  //   return { error };
-  // }
+ 
     const results = await mysql.query(query, params);
     await mysql.end();
     return results;
