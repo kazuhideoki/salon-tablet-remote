@@ -1,4 +1,4 @@
-import { db } from "../../lib/db";
+import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { T_articles_create } from "../../../app/ActionCreator/articles/useCreateArticle";
 

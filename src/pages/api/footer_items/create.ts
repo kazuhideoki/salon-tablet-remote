@@ -1,4 +1,4 @@
-import { db } from "../../lib/db";
+import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { T_footer_items_create_item } from "../../../app/ActionCreator/footerItems/useCreateFooterItem";
 

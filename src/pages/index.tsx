@@ -14,6 +14,10 @@ const Index = (props: StoreContextProviderProps) => {
   // const session = props.session;
   console.log(session)
 
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
   if (!session) {
     return (<><span>Not signed in</span>
           <a href={`/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin(); }}>
