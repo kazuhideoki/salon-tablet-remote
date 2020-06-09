@@ -139,6 +139,7 @@ export type StoreContextProviderProps = {
     footerItems: FooterItems;
     // appState: AppState
   };
+  session?: any
   children?: React.ReactNode;
 };
 

@@ -4,28 +4,32 @@ import { StoreContextProviderProps } from "../app/Store/Store";
 import { App } from "../app/View/App";
 import Head from "next/head";
 import { register, unregister } from "next-offline/runtime";
-
-import { signin, signout, useSession } from "next-auth/client";
+import { session } from "next-auth/client";
+import { signin, signout, useSession, getSession } from "next-auth/client";
+import NextAuth from "next-auth";
 
 
 const Index = (props: StoreContextProviderProps) => {
   const [session, loading] = useSession();
+  // const session = props.session;
+  console.log(session)
 
   if (!session) {
     return (<><span>Not signed in</span>
-          <a href={`/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin() }}>
+          <a href={`/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin(); }}>
             <button>Sign in</button>
           </a></>)
     
   }
 
   // service-worker.jsの登録と解除。unmount時に解除することで、キャッシュが残り画面が更新されない状態を防ぐ
-  React.useEffect(() => {
-    register()
-    return () => {
-      unregister()
-    }
-  },[])
+  // ※今next-offlineを使ってないのでコメントアウトしている。※
+  // React.useEffect(() => {
+  //   register()
+  //   return () => {
+  //     unregister()
+  //   }
+  // },[])
    
   // テーマ、記事データ、appの状態管理を読み込む
   return (
@@ -39,9 +43,10 @@ const Index = (props: StoreContextProviderProps) => {
 };
 
 export async function getServerSideProps() {
+// getSession(context)を動かすために試した↓
+// Index.getInitialProps = async (context) => {
 
   // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-  // articlesでknex+bookshelfをつかっているせいかfooter_itemsがうまく行かなかったので順番を入れ替えた。
   const res = await fetch(`http://localhost:3000/api/articles/get`,
     {
       headers: { "Content-Type": "application/json" },
@@ -67,6 +72,7 @@ export async function getServerSideProps() {
           pagination: data.pagination,
           footerItems: data2.rawData,
         },
+        // session: await NextAuth.getSession(context),
       },
     };
   }
