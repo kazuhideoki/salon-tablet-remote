@@ -20,12 +20,11 @@ const options = {
   ],
   database: process.env.DATABASE_URL,
   jwt: false,
-  sessionMaxAge: 10 * 60 * 1000, // Expire sessions
+  sessionMaxAge: 1 * 60 * 1000, // Expire sessions
  
   // pages: {
   //   signin: "/auth/signin",
   // },
 };
-console.log(JSON.stringify(options));
 
 export default (req, res) => NextAuth(req, res, options);

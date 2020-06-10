@@ -12,17 +12,23 @@ import NextAuth from "next-auth";
 const Index = (props: StoreContextProviderProps) => {
   const [session, loading] = useSession();
   // const session = props.session;
-  console.log(session)
+  console.log("sessionは " + session);
 
   if (loading) {
     return <div>Loading...</div>
   }
 
   if (!session) {
-    return (<><span>Not signed in</span>
+    return (
+      <>
+        <Head><title>SALON TABLET</title></Head>
+        <h1>Salon Tablet</h1>
+          <h2>〜美容室のためのコミュニケーション支援タブレットツール〜</h2>
           <a href={`/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin(); }}>
-            <button>Sign in</button>
-          </a></>)
+            <button>メールアドレスでサインインする</button>
+          </a>
+      </>
+    )
     
   }
 

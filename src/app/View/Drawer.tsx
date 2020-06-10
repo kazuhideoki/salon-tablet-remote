@@ -21,8 +21,10 @@ import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Store } from "../Store/Store";
 import { EditorContext } from "../Store/EditorContext";
-import { NoteAddOutlined, VideoLabel, Settings } from "@material-ui/icons";
+import { NoteAddOutlined, VideoLabel, Settings, ExitToApp } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
+import { signin, signout, useSession, getSession } from "next-auth/client";
+
 
 export const useDrawerProps = () => {
   const theme = useTheme();
@@ -199,9 +201,18 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
           }
         >
           <ListItemIcon>
-            <Settings />
+            <ExitToApp />
           </ListItemIcon>
           <ListItemText primary="設定" />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() => signout()}
+        >
+          <ListItemIcon>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText primary="サインアウト" />
         </ListItem>
       </List>
     );

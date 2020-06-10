@@ -13,6 +13,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Info } from "@material-ui/icons";
+import { signin, signout, useSession, getSession } from "next-auth/client";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function SettingUserInfo() {
   const classes = useStyles();
+  const [session, loading] = useSession();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -78,6 +81,7 @@ export function SettingUserInfo() {
                 label="メールアドレス"
                 name="email"
                 autoComplete="email"
+                value={session && session.user.email}
               />
             </Grid>
             <Grid item xs={12}>
