@@ -4,7 +4,7 @@ import {
   T_is_published_articles,
   T_title,
   T_article_content,
-  T_id,
+  T_article_id,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 
@@ -22,11 +22,11 @@ export const useGetSingleArticle = () => {
   } = React.useContext(EditorContext);
   const { articles } = React.useContext(Store)
 
-  return async (id: T_id) => {
+  return async (article_id: T_article_id) => {
     const target = articles.filter((value) => {
-      return value.id === id
-    })
-    const article = target[0]
+      return value.article_id === article_id;
+    });
+    const article = target[0];
 
     if (!article) {
       alert("記事を取得できませんでした");
@@ -35,11 +35,10 @@ export const useGetSingleArticle = () => {
       setIsEdittingContent(true);
       setEdittingArticleParams(article);
       setEditorText(article.article_content);
-      setEditorTextExcerpt(article.article_excerpt)
-      setEditorImg(article.article_img)
-      setCreatedAt(article.created_at)
-      setUpdatedAt(article.updated_at)
-
+      setEditorTextExcerpt(article.article_excerpt);
+      setEditorImg(article.article_img);
+      setCreatedAt(article.created_at);
+      setUpdatedAt(article.updated_at);
     }
   };
 };

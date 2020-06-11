@@ -2,16 +2,16 @@ import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { T_articles_create } from "../../../app/ActionCreator/articles/useCreateArticle";
 import { T_articles_update } from "../../../app/ActionCreator/articles/useUpdateArticle";
-import { T_id } from "../../../app/Store/Store";
+import { T_article_id } from "../../../app/Store/Store";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const id = req.body.id;
+    const article_id = req.body.article_id;
 
     try {
       const data = await db(
-        `DELETE FROM articles WHERE id = ?`,
-        id
+        `DELETE FROM articles WHERE article_id = ?`,
+        article_id
       );
       console.log("/articles/delete/は " + JSON.stringify(data));
 

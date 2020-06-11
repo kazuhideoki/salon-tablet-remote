@@ -4,7 +4,7 @@ import {
   T_is_published_articles,
   T_title,
   T_article_content,
-  T_id,
+  T_article_id,
   T_article_excerpt,
   T_article_img,
 } from "../../Store/Store";

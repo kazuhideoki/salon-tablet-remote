@@ -1,7 +1,7 @@
 import { corsHeader } from "./server";
 import { validationErrorHandle } from "./validation";
 import mysqlPromise from "mysql2/promise";
-import { TArticles, PaginationParams, T_id } from "../app/Store/Store";
+import { TArticles, PaginationParams, T_article_id } from "../app/Store/Store";
 import { T_articles_create } from "../app/ActionCreator/articles/useCreateArticle";
 import { T_articles_update } from "../app/ActionCreator/articles/useUpdateArticle";
 
@@ -112,7 +112,7 @@ export const articles_create = (req, res) => {
 // "/articles/get/singlepost"
 export const articles_get_singlepost = (req, res) => {
   corsHeader(res);
-  const id: T_id = req.body.id;
+  const id: T_article_id = req.body.id;
   new ArticlesTable()
     .where("id", "=", id)
     .fetch()

@@ -40,7 +40,7 @@ const initPagination = {
 export type PaginationParams = typeof initPagination;
 
 // ●●●●●● テーブル `articles`
-export type T_id = number
+export type T_article_id = number;
 export type T_is_published_articles = boolean
 export type T_created_at = string 
 export type T_updated_at = string
@@ -58,7 +58,7 @@ export type ArticleWithoutId = {
   article_excerpt: T_article_excerpt
   article_img: T_article_img
 }
-export type TArticle = {id: T_id} & ArticleWithoutId
+export type TArticle = {article_id: T_article_id} & ArticleWithoutId
 export type TArticles = TArticle[]
 
 // ●●●●●● テーブル `footer_items`

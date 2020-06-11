@@ -4,7 +4,7 @@ import {
   T_is_published_articles,
   T_title,
   T_article_content,
-  T_id,
+  T_article_id,
   T_article_excerpt,
   T_article_img,
 } from "../../Store/Store";
@@ -20,7 +20,7 @@ export type T_articles_update = {
 };
 export type TUpdateArticle = {
   params: T_articles_update;
-  id: T_id
+  article_id: T_article_id;
 };
 export const useUpdateArticle = () => {
   const { dispatchAppState, paginationParams } = React.useContext(Store);
@@ -45,7 +45,7 @@ export const useUpdateArticle = () => {
         article_excerpt: editorTextExcerpt,
         article_img: editorImg,
       },
-      id: edittingArticleParams.id,
+      article_id: edittingArticleParams.article_id,
     };
 
     const res = await fetch(

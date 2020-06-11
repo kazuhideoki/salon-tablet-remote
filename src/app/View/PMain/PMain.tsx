@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { UpdateArticleButton } from "../buttons/UpdateArticleButton";
 import { DeleteArticleButton } from "../buttons/DeleteArticleButton";
-import { Store,T_id } from "../../Store/Store";
+import { Store,T_article_id } from "../../Store/Store";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
@@ -27,15 +27,15 @@ export const usePMainProps = () => {
   const { setIsEdittingContent } = React.useContext(EditorContext);
   const getSingleArticle = useGetSingleArticle();
 
-  const handleOnUpDate: HandleOnUpDate = (id: T_id) => {
+  const handleOnUpDate: HandleOnUpDate = (article_id: T_article_id) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
     setIsEdittingContent(true);
-    getSingleArticle(id);
+    getSingleArticle(article_id);
   };
 
-  const handleOnDelete = (id: T_id) => {
+  const handleOnDelete = (article_id: T_article_id) => {
     const deleting = confirm("本当に削除してよろしいですか？");
-    deleting ? deleteArticle(id) : null;
+    deleting ? deleteArticle(article_id) : null;
   };
 
   const openArticle = (article_content: string) => {
@@ -129,7 +129,7 @@ export const PMainPresenter = (props: Props) => {
               position={classes.updateArticleButton}
               // id={value.id}
               // handleOnClick={handleOnUpDate}
-              onClick={() => props.handleOnUpDate(value.id)}
+              onClick={() => props.handleOnUpDate(value.article_id)}
             />
           ) : null}
           {props.appState.isSetting ? (
@@ -137,7 +137,7 @@ export const PMainPresenter = (props: Props) => {
               position={classes.deleteArticleButton}
               // id={value.id}
               // handleOnClick={handleOnDelete}
-              onClick={() => props.handleOnDelete(value.id)}
+              onClick={() => props.handleOnDelete(value.article_id)}
             />
           ) : null}
 
@@ -157,8 +157,10 @@ export const PMainPresenter = (props: Props) => {
                   className={`p-main-thumbnail ${classes.thumbnail}`}
                   src={value.article_img}
                 />
-                <div
-                  className={`p-main-article-excerpt ${classes.excerpt}`}>{value.article_excerpt}{value.article_excerpt.length === 100 ? "..." : ""}</div>
+                <div className={`p-main-article-excerpt ${classes.excerpt}`}>
+                  {value.article_excerpt}
+                  {value.article_excerpt.length === 100 ? "..." : ""}
+                </div>
               </CardContent>
             </Card>
           </CardActionArea>
