@@ -10,15 +10,14 @@ import NextAuth from "next-auth";
 
 
 const Index = (props: StoreContextProviderProps) => {
-  const [session, loading] = useSession();
-  // const session = props.session;
-  console.log("sessionは " + session);
+  // const [session, loading] = useSession();
+  // console.log("sessionは " + session);
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // }
 
-  if (!session) {
+  if (!props.session) {
     return (
       <>
         <Head><title>SALON TABLET</title></Head>
@@ -52,7 +51,11 @@ const Index = (props: StoreContextProviderProps) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req}) {
+
+  const sessionObj = await session({req})
+  console.log("getServerSidePropsのsessionは " + JSON.stringify(sessionObj));
+  
 // getSession(context)を動かすために試した↓
 // Index.getInitialProps = async (context) => {
 
@@ -82,7 +85,7 @@ export async function getServerSideProps() {
           pagination: data.pagination,
           footerItems: data2.rawData,
         },
-        // session: await NextAuth.getSession(context),
+        session: sessionObj,
       },
     };
   }

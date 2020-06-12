@@ -7,29 +7,25 @@ import {
   paginationParamsReducer,
 } from "../Reducer/paginationParamsReducer";
 import { loadingReducer, LoadingAction } from "../Reducer/loadingReducer";
-import { userReducer, TUserAction } from "../Reducer/userReducer";
+import { userInfoReducer, TUserInfoAction } from "../Reducer/userInfoReducer";
 
 
 export type T_user_id = number
 export type T_user_name = string
 export type T_shop_name = string
 export type T_email = string
-export type T_bcrypt = string // いらないか
 export type T_created_at_user = string
 export type T_updated_at_user = string
-export type T_last_login_at = string
 
-const initUser = {
+const initUserInfo = {
   user_id: 0,
   user_name: 'user',
   shop_name: 'salon',
   email: 'example@gmail.com',
-  bcrypt: '',
   created_at: '',
   updated_at: '',
-  last_login_at: '',
 }
-export type TUser = typeof initUser
+export type TUserInfo = typeof initUserInfo;
 
 const initPagination = {
   page: 0,
@@ -49,7 +45,8 @@ export type T_article_content = string
 export type T_article_excerpt = string 
 export type T_article_img = string 
 
-export type ArticleWithoutId = {
+export type ArticleWithoutArticleId = {
+  user_id: T_user_id
   is_published: T_is_published_articles
   created_at: T_created_at
   updated_at: T_updated_at
@@ -58,7 +55,7 @@ export type ArticleWithoutId = {
   article_excerpt: T_article_excerpt
   article_img: T_article_img
 }
-export type TArticle = {article_id: T_article_id} & ArticleWithoutId
+export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
 export type TArticles = TArticle[]
 
 // ●●●●●● テーブル `footer_items`
@@ -76,6 +73,7 @@ export type T_app_link_url = string | null;
 export type T_order = number;
 
 export type FooterItemWithoutId = {
+  user_id: T_user_id;
   is_published: T_is_published_footer_items;
   created_at: T_created_at_footer_items;
   updated_at: T_updated_at_footer_items | null;
@@ -108,7 +106,7 @@ const initLoading = {
 }
 export type Loading = typeof initLoading
 
-export type DispatchUser = React.Dispatch<TUserAction>;
+export type DispatchUserInfo = React.Dispatch<TUserInfoAction>;
 export type DispatchArticles = React.Dispatch<ArticlesAction>;
 export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
 export type DispatchAppState = React.Dispatch < AppStateAction >
@@ -117,8 +115,8 @@ export type DispatchLoading = React.Dispatch<LoadingAction>;
 
 
 export type ContextProps = {
-  user: TUser
-  dispatchUser: DispatchUser
+  userInfo: TUserInfo
+  dispatchUserInfo: DispatchUserInfo
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
   articles: TArticles;
@@ -144,7 +142,7 @@ export type StoreContextProviderProps = {
 };
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {
-  const [user, dispatchUser] = useReducer(userReducer, initUser)
+  const [userInfo, dispatchUserInfo] = useReducer(userInfoReducer, initUserInfo)
   const [paginationParams, dispatchPaginationParams] = useReducer(
     paginationParamsReducer,
     props.data.pagination
@@ -167,8 +165,8 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
   );
 
   const values = {
-    user,
-    dispatchUser,
+    userInfo,
+    dispatchUserInfo,
     paginationParams,
     dispatchPaginationParams,
     articles,

@@ -145,8 +145,13 @@ const AppTablet = ()=> {
     );
 
 }
+// import { signin, signout, useSession, getSession } from "next-auth/client";
+
 
 const AppView = () => {
+  // const [session, loading] = useSession();
+  // console.log("App.tsxのsessionは " + JSON.stringify(session));
+
   const isMobile = useMediaQuery("(max-width:480px)");
   const { appState, dispatchLoading } = React.useContext(Store);
   const getArticles = useGetArticles()
