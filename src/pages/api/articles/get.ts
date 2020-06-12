@@ -24,14 +24,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         ` ORDER BY created_at DESC LIMIT ` +
         offSet +
         ` 5`;
-        console.log(query);
+        // console.log(query);
         
       const data = await db(
         query
         // [getPublishedOnly, offSet]
       );
       const query2 = `SELECT * FROM articles ` + getPublishedOnly;
-      console.log(query2);
+      // console.log(query2);
       
       const data2: any = await db(
         query2

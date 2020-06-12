@@ -4,9 +4,8 @@ import { Grid, CircularProgress, makeStyles, createStyles, Theme, useMediaQuery 
 import { PModal } from "./PModal/PModal";
 import { PMain } from "./PMain/PMain";
 import { PFooter } from "./PFooter/PFooter";
-import { SettingSwitch } from "./Setting/(未使用)SettingSwitch";
 import { Store } from "../Store/Store";
-import { ThemeType, ThemeContext } from "../Store/ThemeContext";
+import { ThemeContext } from "../Store/ThemeContext";
 import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
 import { StoreContextProviderProps } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";

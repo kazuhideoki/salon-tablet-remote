@@ -25,7 +25,14 @@ const initUserInfo = {
   created_at: '',
   updated_at: '',
 }
-export type TUserInfo = typeof initUserInfo;
+export type TUserInfo = {
+  user_id: number;
+  user_name: string | null;
+  shop_name: string | null;
+  email: string
+  created_at: string
+  updated_at: string | null
+};
 
 const initPagination = {
   page: 0,

@@ -1,12 +1,12 @@
 import React from "react";
-// import fetch from "node-fetch";
-import { StoreContextProviderProps } from "../app/Store/Store";
+import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
 import { App } from "../app/View/App";
 import Head from "next/head";
 import { register, unregister } from "next-offline/runtime";
 import { session } from "next-auth/client";
 import { signin, signout, useSession, getSession } from "next-auth/client";
-import NextAuth from "next-auth";
+import { db } from "./api/lib/db";
+import { NextPageContext } from "next";
 
 
 const Index = (props: StoreContextProviderProps) => {
@@ -51,13 +51,26 @@ const Index = (props: StoreContextProviderProps) => {
   );
 };
 
-export async function getServerSideProps({req}) {
+export async function getServerSideProps({req}:NextPageContext) { 
+  // const resUserInfo = await fetch(`http://localhost:3000/api/user_info/get`);
+  // const userInfo = await resUserInfo.json();
+  // console.log("userInfo " + userInfo);
 
-  const sessionObj = await session({req})
-  console.log("getServerSidePropsのsessionは " + JSON.stringify(sessionObj));
+  // apiでうまく実装できなかったので、とりあえずここに直接書いておく
+  const sessionObj = await session({ req });
+  let userInfo: any = null
+  if (sessionObj) {
+    userInfo = await db(
+      "select * from `user_info` where email = ?",
+      sessionObj.user.email
+    );
+  }
+  console.log(userInfo);
+  // console.log(JSON.stringify(resUserInfo));
   
-// getSession(context)を動かすために試した↓
-// Index.getInitialProps = async (context) => {
+  // const userInfo = await JSON.parse(resUserInfo)
+
+
 
   // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
   const res = await fetch(`http://localhost:3000/api/articles/get`,
@@ -67,14 +80,15 @@ export async function getServerSideProps({req}) {
       mode: "cors",
       body: JSON.stringify({ page: 1, isSetting: false }),
     });
+    // console.log("articleのresは " + res);
+    
   const data = await res.json();
-  console.log("articlesは " + JSON.stringify(data));
   
   const res2 = await fetch(`http://localhost:3000/api/footer_items/get`);
   const data2 = await res2.json();
-  console.log("footerItemsは " + JSON.stringify(data2));
 
 
+  // ↓tryで全体を囲んだほうがいいか
   if (data.err === true) {
     return null
   } else {
@@ -85,7 +99,15 @@ export async function getServerSideProps({req}) {
           pagination: data.pagination,
           footerItems: data2.rawData,
         },
-        session: sessionObj,
+        // session: userInfo.data,
+
+        // ↓sessionがserializingされていると怒られるので
+        // session: JSON.parse(userInfo[0]),
+        // ↑だめだった Unexpected token o in JSON at position 1
+
+        // userInfoあれば値を返して、なければnull
+        // serializingのエラーが出るので↓
+        session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
       },
     };
   }
