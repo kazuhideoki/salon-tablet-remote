@@ -10,6 +10,7 @@ import {
   T_order,
   T_item_excerpt,
   T_app_link_url,
+  T_user_id,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetFooterItems } from "./useGetFooterItems";
@@ -24,6 +25,7 @@ export type T_footer_items_create_item = {
   link_url: T_link_url;
   app_link_url: T_app_link_url
   order: T_order;
+  user_id: T_user_id
 };
 
 export type TCreateFooterItem = {
@@ -59,6 +61,7 @@ export const useCreateFooterItem = () => {
     linkUrl,
     appLinkUrl,
   } = React.useContext(EditorContext);
+  const { userInfo } = React.useContext(Store)
 
   return async (isPublishing: boolean) => {
     const params: TCreateFooterItem = {
@@ -73,7 +76,8 @@ export const useCreateFooterItem = () => {
         link_url: linkUrl,
         app_link_url: appLinkUrl,
         order: order,
-      }
+        user_id: userInfo.user_id,
+      },
     };
 
     console.log(`${location.protocol}//${location.host}/api/footer_items/create`);

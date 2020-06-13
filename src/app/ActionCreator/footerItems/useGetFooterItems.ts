@@ -4,11 +4,11 @@ import {
 } from "../../Store/Store";
 
 export const useGetFooterItems = () => {
-  const { dispatchFooterItems, dispatchAppState } = React.useContext(Store);
+  const { dispatchFooterItems, dispatchAppState, userInfo } = React.useContext(Store);
 
   return async () => {
     const res = await fetch(
-      `${location.protocol}//${location.host}/api/footer_items/get`
+      `${location.protocol}//${location.host}/api/footer_items/get?userId=${userInfo.user_id}`
     );
 
     let data = await res.json();

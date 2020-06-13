@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export function SettingUserInfo() {
   const classes = useStyles();
   const [session, loading] = useSession();
+  const [name, setName] = React.useState('')
 
   return (
     <Container component="main" maxWidth="xs">
@@ -61,6 +62,7 @@ export function SettingUserInfo() {
                 fullWidth
                 id="name"
                 label="名前"
+                value={name}
               />
             </Grid>
             <Grid item xs={12}>

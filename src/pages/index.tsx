@@ -47,7 +47,7 @@ const Index = (props: StoreContextProviderProps) => {
 
 export async function getServerSideProps({req}:NextPageContext) { 
 
-  // apiでうまく実装できなかったので、とりあえずここに直接書いておく
+  // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const sessionObj = await session({ req });
   let userInfo: any = null
   if (sessionObj) {
@@ -71,7 +71,9 @@ export async function getServerSideProps({req}:NextPageContext) {
       
     const data = await res.json();
     
-    const res2 = await fetch(`http://localhost:3000/api/footer_items/get`);
+    const res2 = await fetch(
+      `http://localhost:3000/api/footer_items/get?userId=${userInfo[0].user_id}`
+    );
     const data2 = await res2.json();
 
     // ↓tryで全体を囲んだほうがいいか

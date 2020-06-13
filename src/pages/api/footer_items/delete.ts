@@ -8,13 +8,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       const data = await db(
-        `DELETE FROM footer_items WHERE footer_item_id = ?`,
+        "DELETE FROM `footer_items` WHERE `footer_item_id`=?",
         footer_item_id
       );
+      // 残ったアイテムのorderを調整するため
       const data2 = await db(
-        `UPDATE footer_items SET order = order - 1 WHERE order > ? `,
+        " UPDATE `footer_items` SET `order` = `order` -1 WHERE `order` > ? ",
         order
       );
+      // UPDATE `footer_items` SET `order` = `order` -1 WHERE `order` > ?
 
 
       console.log("/footer_items/delete/は " + JSON.stringify(data));

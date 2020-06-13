@@ -26,7 +26,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         ` ORDER BY created_at DESC LIMIT ` +
         offSet +
         ` 5`;
-        // console.log(query);
         
       const data = await db(
         query
