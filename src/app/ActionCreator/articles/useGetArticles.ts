@@ -10,6 +10,7 @@ export const useGetArticles = () => {
     dispatchArticles,
     dispatchAppState,
     appState,
+    userInfo,
   } = React.useContext(Store);
   const isSetting = appState.isSetting;
   const { dispatchLoading } = React.useContext(Store)
@@ -21,7 +22,7 @@ export const useGetArticles = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ page, isSetting: isSetting }),
+        body: JSON.stringify({ page, isSetting: isSetting, userId: userInfo.user_id }),
       }
     );
 

@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const data = await db(`INSERT INTO articles SET ?`, params);
       console.log("/articles/create/は " + JSON.stringify(data));
 
-      const data2: any = await db(`SELECT * FROM articles`);
+      const data2: any = await db(`SELECT * FROM articles WHERE user_id = ?`, params.user_id);
 
       res.status(200).json({
         rawData: data,

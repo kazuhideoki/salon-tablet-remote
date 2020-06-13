@@ -143,13 +143,13 @@ export type StoreContextProviderProps = {
     pagination: PaginationParams;
     footerItems: FooterItems;
     // appState: AppState
+    session?: TUserInfo
   };
-  session?: any
   children?: React.ReactNode;
 };
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {
-  const [userInfo, dispatchUserInfo] = useReducer(userInfoReducer, initUserInfo)
+  const [userInfo, dispatchUserInfo] = useReducer(userInfoReducer, props.data.session)
   const [paginationParams, dispatchPaginationParams] = useReducer(
     paginationParamsReducer,
     props.data.pagination

@@ -1,15 +1,17 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+// import { session } from "next-auth/client";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+    // const sessionObj = await session({ req });
     
-    const { page, isSetting } = req.body;
+    const { page, isSetting, userId } = req.body;
     // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
     let getPublishedOnly: string;
     if (isSetting === false) {
       // getPublishedOnly = `WHERE 'is_published' = true`
-      getPublishedOnly = `WHERE is_published = true`;
+      getPublishedOnly = `AND is_published = true`;
     } else if (isSetting === true) {
       getPublishedOnly = "";
     }
@@ -19,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       const query =
-        `SELECT * FROM articles ` +
+        `SELECT * FROM articles WHERE user_id = ${userId} ` +
         getPublishedOnly +
         ` ORDER BY created_at DESC LIMIT ` +
         offSet +
@@ -30,7 +32,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         query
         // [getPublishedOnly, offSet]
       );
-      const query2 = `SELECT * FROM articles ` + getPublishedOnly;
+      const query2 =
+        `SELECT * FROM articles WHERE user_id = ${userId} ` + getPublishedOnly;
       // console.log(query2);
       
       const data2: any = await db(

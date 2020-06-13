@@ -10,14 +10,8 @@ import { NextPageContext } from "next";
 
 
 const Index = (props: StoreContextProviderProps) => {
-  // const [session, loading] = useSession();
-  // console.log("sessionは " + session);
 
-  // if (loading) {
-  //   return <div>Loading...</div>
-  // }
-
-  if (!props.session) {
+  if (!props.data.session) {
     return (
       <>
         <Head><title>SALON TABLET</title></Head>
@@ -52,9 +46,6 @@ const Index = (props: StoreContextProviderProps) => {
 };
 
 export async function getServerSideProps({req}:NextPageContext) { 
-  // const resUserInfo = await fetch(`http://localhost:3000/api/user_info/get`);
-  // const userInfo = await resUserInfo.json();
-  // console.log("userInfo " + userInfo);
 
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく
   const sessionObj = await session({ req });
@@ -65,52 +56,51 @@ export async function getServerSideProps({req}:NextPageContext) {
       sessionObj.user.email
     );
   }
-  console.log(userInfo);
-  // console.log(JSON.stringify(resUserInfo));
-  
-  // const userInfo = await JSON.parse(resUserInfo)
 
-
-
-  // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-  const res = await fetch(`http://localhost:3000/api/articles/get`,
-    {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify({ page: 1, isSetting: false }),
-    });
-    // console.log("articleのresは " + res);
+  if (userInfo) {
     
-  const data = await res.json();
+    // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
+    const res = await fetch(`http://localhost:3000/api/articles/get`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ page: 1, isSetting: false, userId: userInfo[0].user_id}),
+      });
+      // console.log("articleのresは " + res);
+      
+    const data = await res.json();
+    
+    const res2 = await fetch(`http://localhost:3000/api/footer_items/get`);
+    const data2 = await res2.json();
+
+    // ↓tryで全体を囲んだほうがいいか
+    if (data.err === true) {
+      return null
+    } else {
+      return {
+        props: {
+          data: {
+            articles: data.rawData,
+            pagination: data.pagination,
+            footerItems: data2.rawData,
+            session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
+          },
+          // session: userInfo.data,
   
-  const res2 = await fetch(`http://localhost:3000/api/footer_items/get`);
-  const data2 = await res2.json();
-
-
-  // ↓tryで全体を囲んだほうがいいか
-  if (data.err === true) {
-    return null
-  } else {
-    return {
-      props: {
-        data: {
-          articles: data.rawData,
-          pagination: data.pagination,
-          footerItems: data2.rawData,
+          // ↓sessionがserializingされていると怒られるので
+          // session: JSON.parse(userInfo[0]),
+          // ↑だめだった Unexpected token o in JSON at position 1
+  
+          // userInfoあれば値を返して、なければnull
+          // serializingのエラーが出るので↓
         },
-        // session: userInfo.data,
-
-        // ↓sessionがserializingされていると怒られるので
-        // session: JSON.parse(userInfo[0]),
-        // ↑だめだった Unexpected token o in JSON at position 1
-
-        // userInfoあれば値を返して、なければnull
-        // serializingのエラーが出るので↓
-        session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
-      },
-    };
+      };
+    }
   }
+
+
+
     
 };
 

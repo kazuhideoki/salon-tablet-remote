@@ -7,6 +7,7 @@ import {
   T_article_id,
   T_article_excerpt,
   T_article_img,
+  T_user_id,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
@@ -17,7 +18,8 @@ export type T_articles_create = {
   title: T_title;
   article_content: T_article_content;
   article_excerpt: T_article_excerpt
-  article_img: T_article_img
+  article_img: T_article_img,
+  user_id: T_user_id
 };
 
 export type TCreateArticle = {
@@ -25,7 +27,7 @@ export type TCreateArticle = {
 };
 export const useCreateArticle = () => {
   const getArticles = useGetArticles();
-  const { dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState, userInfo } = React.useContext(Store);
   const {
     setEditorText,
     setTitleText,
@@ -42,6 +44,7 @@ export const useCreateArticle = () => {
         article_content: editorText,
         article_excerpt: editorTextExcerpt,
         article_img: editorImg,
+        user_id: userInfo.user_id
       }
     };
 
