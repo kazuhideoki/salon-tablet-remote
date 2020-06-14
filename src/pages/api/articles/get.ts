@@ -58,7 +58,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({
         rawData: data,
         pagination: {
-          page: 1,
+          page: page,
           pageCount: Math.ceil(data2.length / 5), // 全row数を5で割って切り上げ
           pageSize: 5,
           rowCount: data2.length,
