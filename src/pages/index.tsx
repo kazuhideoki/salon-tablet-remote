@@ -7,6 +7,7 @@ import { session } from "next-auth/client";
 import { signin, signout, useSession, getSession } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
+import { server } from "../config";
 
 
 const Index = (props: StoreContextProviderProps) => {
@@ -17,7 +18,7 @@ const Index = (props: StoreContextProviderProps) => {
         <Head><title>SALON TABLET</title></Head>
         <h1>Salon Tablet</h1>
           <h2>〜美容室のためのコミュニケーション支援タブレットツール〜</h2>
-          <a href={`/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin(); }}>
+          <a href={`${server}/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin(); }}>
             <button>メールアドレスでサインインする</button>
           </a>
       </>
