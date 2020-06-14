@@ -49,6 +49,8 @@ export async function getServerSideProps({req}:NextPageContext) {
 
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const sessionObj = await session({ req });
+  console.log("sessionObjは " + JSON.stringify(sessionObj));
+  
   let userInfo: any = null
   if (sessionObj) {
     userInfo = await db(
@@ -57,6 +59,10 @@ export async function getServerSideProps({req}:NextPageContext) {
     );
   }
 
+  console.log("userInfoは " + JSON.stringify(userInfo));
+
+  // let data = null
+  // let data2 = null
   if (userInfo) {
     
     // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
@@ -76,31 +82,27 @@ export async function getServerSideProps({req}:NextPageContext) {
     );
     const data2 = await res2.json();
 
-    // ↓tryで全体を囲んだほうがいいか
-    if (data.err === true) {
-      return null
-    } else {
-      return {
-        props: {
-          data: {
-            articles: data.rawData,
-            pagination: data.pagination,
-            footerItems: data2.rawData,
-            session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
-          },
-          // session: userInfo.data,
-  
-          // ↓sessionがserializingされていると怒られるので
-          // session: JSON.parse(userInfo[0]),
-          // ↑だめだった Unexpected token o in JSON at position 1
-  
-          // userInfoあれば値を返して、なければnull
-          // serializingのエラーが出るので↓
+    return {
+      props: {
+        data: {
+          articles: data.rawData,
+          pagination: data.pagination,
+          footerItems: data2.rawData,
+          session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
         },
-      };
+      },
+    };
+
+  } else {
+
+    return {
+      props: {
+        data: {
+          session: null
+        }
+      }
     }
   }
-
 
 
     
