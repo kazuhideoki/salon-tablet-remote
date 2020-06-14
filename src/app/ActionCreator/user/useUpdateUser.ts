@@ -15,8 +15,12 @@ type TUpdateUser = {
   password?: string
 };
 export const useUpdateUser = () => {
-  const { dispatchAppState, dispatchUser, user } = React.useContext(Store);
-  const {user_id, user_name, shop_name, email } = user
+  const {
+    dispatchAppState,
+    // dispatchUser,
+    userInfo,
+  } = React.useContext(Store);
+  const {user_id, user_name, shop_name, email } = userInfo
 
   return async (password: string) => {
 

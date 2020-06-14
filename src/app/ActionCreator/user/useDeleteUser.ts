@@ -5,8 +5,8 @@ import {
 import { EditorContext } from "../../Store/EditorContext";
 
 export const useDeleteUser = () => {
-  const { user } = React.useContext(Store);
-  const id = user.user_id
+  // const { user } = React.useContext(Store);
+  // const id = user.user_id
 
   return async () => {
     const res = await fetch(
@@ -15,7 +15,7 @@ export const useDeleteUser = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ id }),
+        // body: JSON.stringify({ id }),
       }
     );
     const data = await res.json();

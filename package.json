@@ -5,7 +5,7 @@
   "scripts": {
     "tsc": "tsc",
     "test": "jest src/__tests__/.*/*.test.tsx?$",
-    "dev":  "NODE_OPTIONS=--max_old_space_size=4096 next",
+    "dev": "NODE_OPTIONS=--max_old_space_size=4096 next",
     "build": "NODE_OPTIONS=--max_old_space_size=4096 next build",
     "start": "NODE_ENV=production next start",
     "storybook": "start-storybook -p 6006",

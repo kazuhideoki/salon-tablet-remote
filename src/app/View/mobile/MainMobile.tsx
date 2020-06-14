@@ -44,17 +44,28 @@ export const MainMobile = () => {
 
       : articles.map((value, key) => {
         return (
-          <div key={key} className={`${value.is_published ? classes.item : classes.itemIsDraft}`}>
+          <div
+            key={key}
+            className={`${
+              value.is_published ? classes.item : classes.itemIsDraft
+            }`}
+          >
             <div>タイトル:{value.title}</div>
             <div>作成日:{sqlToDate(value.created_at)}</div>
-            {value.updated_at ? <div>編集日:{sqlToDate(value.updated_at)}</div> : null}
+            {value.updated_at ? (
+              <div>編集日:{sqlToDate(value.updated_at)}</div>
+            ) : null}
             <div>
               {value.article_excerpt}
               {/* 抜粋が100文字の場合"..."追加" */}
               {value.article_excerpt.length === 100 ? "..." : ""}
             </div>
-            <button onClick={() => handleOnUpDate(value.id)}>編集</button>
-            <button onClick={() => handleOnDelete(value.id)}>削除</button>
+            <button onClick={() => handleOnUpDate(value.article_id)}>
+              編集
+            </button>
+            <button onClick={() => handleOnDelete(value.article_id)}>
+              削除
+            </button>
           </div>
         );
       })}

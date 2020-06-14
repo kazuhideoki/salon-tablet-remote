@@ -20,7 +20,7 @@ export function articlesReducer(state: TArticles, action: ArticlesAction) {
         break;
     case "UPDATE_POST":
         newState = state.map((value, index) => {
-        if (value.id === action.payload.id) {
+        if (value.article_id === action.payload.article_id) {
           return action.payload;
         } else {
           return value;
@@ -29,7 +29,7 @@ export function articlesReducer(state: TArticles, action: ArticlesAction) {
         break;
     case "DELETE_POST":
         newState = state.filter((value, index) =>{
-            return value.id !== action.payload.id;
+            return value.article_id !== action.payload.id;
         })
         break;
 
