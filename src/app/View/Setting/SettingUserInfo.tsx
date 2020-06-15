@@ -11,6 +11,7 @@ import { Info } from "@material-ui/icons";
 import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useUpdateUser } from "../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../Store/Store";
+import { EditorContext } from "../../Store/EditorContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,12 +38,23 @@ export function SettingUserInfo() {
   const classes = useStyles();
   const [session, loading] = useSession();
   const { userInfo } = React.useContext(Store)
-  const { user_name, shop_name, user_email, setting_password } = userInfo; 
+  const {
+    name,
+    setName,
+    shopName,
+    setShopName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+  } = React.useContext(EditorContext);
+  // const { user_name, shop_name, user_email, setting_password } = userInfo; 
 
-  const [name, setName] = React.useState(user_name);
-  const [shopName, setShopName] = React.useState(shop_name);
-  const [email, setEmail] = React.useState(user_email);
-  const [password, setPassword] = React.useState(setting_password);
+
+  // const [name, setName] = React.useState(user_name);
+  // const [shopName, setShopName] = React.useState(shop_name);
+  // const [email, setEmail] = React.useState(user_email);
+  // const [password, setPassword] = React.useState(setting_password);
 
 
 
@@ -53,7 +65,8 @@ export function SettingUserInfo() {
     console.log("handleOnSubmitだよ");
     console.log({ name, shopName, email, password });
     
-    updateUser({name, shopName, email, password})
+    // updateUser({name, shopName, email, password})
+    updateUser()
   }
 
   return (
@@ -125,15 +138,16 @@ export function SettingUserInfo() {
           <Typography component="h3" variant="body1">
             ※パスワードは変更時のみご入力下さい。
           </Typography>
-          {/* <Button
-            type="submit" ← あやしい
+          <Button
+            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
             onClick={() => handleOnSubmit()}
-          > */}
-          <Button onClick={() => handleOnSubmit()}>変更</Button>
+          >
+          {/* <Button onClick={() => handleOnSubmit()}>変更 */}
+          </Button>
         </form>
       </div>
     </Container>

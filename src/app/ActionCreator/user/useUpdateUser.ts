@@ -7,6 +7,7 @@ import {
   T_user_email,
   T_setting_password,
 } from "../../Store/Store";
+import { EditorContext } from "../../Store/EditorContext";
 
 export type TUpdateUserInfo = {
   name: string
@@ -29,14 +30,25 @@ export const useUpdateUser = () => {
     userInfo,
   } = React.useContext(Store);
   const {user_id} = userInfo
+  const {
+    name,
+    setName,
+    shopName,
+    setShopName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+  } = React.useContext(EditorContext);
 
-  return async (values: TUpdateUserInfo) => {
+  // return async (values: TUpdateUserInfo) => {
+  return async () => {
     const params: T_update_user = {
       user_id: user_id,
-      user_name: values.name,
-      shop_name: values.shopName,
-      user_email: values.email,
-      setting_password: values.password,
+      user_name: name,
+      shop_name: shopName,
+      user_email: email,
+      setting_password: password,
     };
     console.log("useUpdateUserのparamsは " + params);
     
@@ -55,7 +67,7 @@ export const useUpdateUser = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      dispatchUserInfo({ type: "SET_USER_DATA", payload: values });
+      dispatchUserInfo({ type: "SET_USER_DATA", payload: {name, shopName, email, password} });
       alert("ユーザーデータを更新しました。");
       // ↓modalを閉じるとTextFieldの値をうまく保持できない
       // dispatchAppState({ type: "CLOSE_MODAL" });

@@ -144,12 +144,9 @@ const AppTablet = ()=> {
     );
 
 }
-// import { signin, signout, useSession, getSession } from "next-auth/client";
 
 
 const AppView = () => {
-  // const [session, loading] = useSession();
-  // console.log("App.tsxのsessionは " + JSON.stringify(session));
 
   const isMobile = useMediaQuery("(max-width:480px)");
   const { appState, dispatchLoading } = React.useContext(Store);
@@ -183,7 +180,7 @@ export const App = (props:StoreContextProviderProps) => {
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
       <ThemeProvider>
-        <EditorContextProvider>
+        <EditorContextProvider {...props.data.session}>
           <AppView/>
         </EditorContextProvider>
       </ThemeProvider>
