@@ -55,7 +55,7 @@ export async function getServerSideProps({req}:NextPageContext) {
   let userInfo: any = null
   if (sessionObj) {
     userInfo = await db(
-      "select * from `user_info` where email = ?",
+      "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
   }

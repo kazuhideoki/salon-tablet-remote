@@ -13,25 +13,27 @@ import { userInfoReducer, TUserInfoAction } from "../Reducer/userInfoReducer";
 export type T_user_id = number
 export type T_user_name = string
 export type T_shop_name = string
-export type T_email = string
+export type T_user_email = string;
+export type T_setting_password = string
 export type T_created_at_user = string
 export type T_updated_at_user = string
 
 const initUserInfo = {
   user_id: 0,
-  user_name: 'user',
-  shop_name: 'salon',
-  email: 'example@gmail.com',
-  created_at: '',
-  updated_at: '',
-}
+  user_name: "user",
+  shop_name: "salon",
+  user_email: "example@gmail.com",
+  created_at: "",
+  updated_at: "",
+};
 export type TUserInfo = {
-  user_id: number;
-  user_name: string | null;
-  shop_name: string | null;
-  email: string
-  created_at: string
-  updated_at: string | null
+  user_id: T_user_id;
+  user_name: T_user_name | null;
+  shop_name: T_shop_name | null;
+  user_email: T_user_email;
+  setting_password: T_setting_password | null;
+  created_at: T_created_at_user;
+  updated_at: T_updated_at_user | null;
 };
 
 const initPagination = {

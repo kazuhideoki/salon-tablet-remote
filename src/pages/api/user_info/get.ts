@@ -23,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     // これだめ → ORDER BY user_id, LIMIT 1
     const data = await db(
-      "select * from `user_info` where email = ?",
+      "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
 

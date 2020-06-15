@@ -3,17 +3,14 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Info } from "@material-ui/icons";
 import { signin, signout, useSession, getSession } from "next-auth/client";
+import { useUpdateUser } from "../../ActionCreator/user/useUpdateUser";
+import { Store } from "../../Store/Store";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +36,25 @@ const useStyles = makeStyles((theme) => ({
 export function SettingUserInfo() {
   const classes = useStyles();
   const [session, loading] = useSession();
-  const [name, setName] = React.useState('')
+  const { userInfo } = React.useContext(Store)
+  const { user_name, shop_name, user_email, setting_password } = userInfo; 
+
+  const [name, setName] = React.useState(user_name);
+  const [shopName, setShopName] = React.useState(shop_name);
+  const [email, setEmail] = React.useState(user_email);
+  const [password, setPassword] = React.useState(setting_password);
+
+
+
+
+  const updateUser = useUpdateUser()
+
+  const handleOnSubmit = () => {
+    console.log("handleOnSubmitだよ");
+    console.log({ name, shopName, email, password });
+    
+    updateUser({name, shopName, email, password})
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -63,6 +78,7 @@ export function SettingUserInfo() {
                 id="name"
                 label="名前"
                 value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -73,6 +89,8 @@ export function SettingUserInfo() {
                 label="お店の名前"
                 name="shopName"
                 autoComplete="lname"
+                value={shopName}
+                onChange={(e) => setShopName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -83,7 +101,11 @@ export function SettingUserInfo() {
                 label="メールアドレス"
                 name="email"
                 autoComplete="email"
-                value={session && session.user.email}
+                value={email}
+                InputProps={{
+                  readOnly: true,
+                }}
+                // onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -91,25 +113,27 @@ export function SettingUserInfo() {
                 variant="outlined"
                 fullWidth
                 name="password"
-                label="新しいパスワード"
+                label="パスワード"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
           </Grid>
-            <Typography component="h3" variant="body1">
-              ※パスワードは変更時のみご入力下さい。
-            </Typography>
-          <Button
-            type="submit"
+          <Typography component="h3" variant="body1">
+            ※パスワードは変更時のみご入力下さい。
+          </Typography>
+          {/* <Button
+            type="submit" ← あやしい
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-          >
-            変更
-          </Button>
+            onClick={() => handleOnSubmit()}
+          > */}
+          <Button onClick={() => handleOnSubmit()}>変更</Button>
         </form>
       </div>
     </Container>

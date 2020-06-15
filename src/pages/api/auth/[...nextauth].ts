@@ -29,6 +29,4 @@ const options = {
 
 export default (req, res) => NextAuth(req, res, options);
 
-// create trigger insert_user_trigger after insert on user for each row insert into user_info (user_id, email) select id, email from user where id = LAST_INSERT_ID();
 
-// insert into user_info (user_id, email) select id, email from user where id = 1;

@@ -1,7 +1,8 @@
 import { TUserInfo } from "../Store/Store";
 import { reducerLogger } from "./reducerLogger";
+import { TUpdateUserInfo } from "../ActionCreator/user/useUpdateUser";
 
-export type TUserInfoAction = { type: "SET_USER_DATA"; payload: TUserInfo };
+export type TUserInfoAction = { type: "SET_USER_DATA"; payload: TUpdateUserInfo };
 
 
 export function userInfoReducer(state: TUserInfo, action: TUserInfoAction) {
@@ -9,7 +10,7 @@ export function userInfoReducer(state: TUserInfo, action: TUserInfoAction) {
   const func = userInfoReducer;
   switch (action.type) {
     case "SET_USER_DATA":
-      newState = action.payload
+      newState = {...state, ...action.payload}
       break;
 
     default:

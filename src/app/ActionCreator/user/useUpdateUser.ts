@@ -4,36 +4,45 @@ import {
   T_user_name,
   T_user_id,
   T_shop_name,
-  T_email,
+  T_user_email,
+  T_setting_password,
 } from "../../Store/Store";
 
-type TUpdateUser = {
-  user_id: T_user_id
-  user_name: T_user_name
-  shop_name: T_shop_name
-  email: T_email
-  password?: string
+export type TUpdateUserInfo = {
+  name: string
+  shopName: string
+  email: string
+  password: string
+}
+
+export type T_update_user = {
+  user_id: T_user_id;
+  user_name: T_user_name;
+  shop_name: T_shop_name;
+  user_email: T_user_email;
+  setting_password: T_setting_password;
 };
 export const useUpdateUser = () => {
   const {
     dispatchAppState,
-    // dispatchUser,
+    dispatchUserInfo,
     userInfo,
   } = React.useContext(Store);
-  const {user_id, user_name, shop_name, email } = userInfo
+  const {user_id} = userInfo
 
-  return async (password: string) => {
-
-    const params: TUpdateUser = {
+  return async (values: TUpdateUserInfo) => {
+    const params: T_update_user = {
       user_id: user_id,
-      user_name: user_name,
-      shop_name: shop_name,
-      email: email,
-      password: '',
+      user_name: values.name,
+      shop_name: values.shopName,
+      user_email: values.email,
+      setting_password: values.password,
     };
+    console.log("useUpdateUserのparamsは " + params);
+    
 
     const res = await fetch(
-      `${location.protocol}//${location.host}/articles/update`, //★要変更
+      `${location.protocol}//${location.host}/api/user_info/update`, //★要変更
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -46,10 +55,10 @@ export const useUpdateUser = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-
-      // dispatchUser({type: })
-      dispatchAppState({ type: "CLOSE_MODAL" });
-
+      dispatchUserInfo({ type: "SET_USER_DATA", payload: values });
+      alert("ユーザーデータを更新しました。");
+      // ↓modalを閉じるとTextFieldの値をうまく保持できない
+      // dispatchAppState({ type: "CLOSE_MODAL" });
     }
   };
 };
