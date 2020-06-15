@@ -201,16 +201,13 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
           }
         >
           <ListItemIcon>
-            <ExitToApp />
+            <Settings />
           </ListItemIcon>
           <ListItemText primary="設定" />
         </ListItem>
-        <ListItem
-          button
-          onClick={() => signout()}
-        >
+        <ListItem button onClick={() => signout()}>
           <ListItemIcon>
-            <Settings />
+            <ExitToApp />
           </ListItemIcon>
           <ListItemText primary="サインアウト" />
         </ListItem>

@@ -84,6 +84,19 @@ export function SettingUserInfo() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                variant="outlined"
+                fullWidth
+                id="email"
+                label="メールアドレス"
+                name="email"
+                autoComplete="email"
+                value={email}
+                disabled
+                // onChange={(e) => setEmail(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
                 autoComplete="fname"
                 name="name"
                 variant="outlined"
@@ -104,21 +117,6 @@ export function SettingUserInfo() {
                 autoComplete="lname"
                 value={shopName}
                 onChange={(e) => setShopName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="メールアドレス"
-                name="email"
-                autoComplete="email"
-                value={email}
-                InputProps={{
-                  readOnly: true,
-                }}
-                // onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -146,7 +144,7 @@ export function SettingUserInfo() {
             className={classes.submit}
             onClick={() => handleOnSubmit()}
           >
-          {/* <Button onClick={() => handleOnSubmit()}>変更 */}
+            {/* <Button onClick={() => handleOnSubmit()}>変更 */}
           </Button>
         </form>
       </div>
