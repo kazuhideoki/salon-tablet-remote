@@ -48,16 +48,6 @@ export function SettingUserInfo() {
     password,
     setPassword,
   } = React.useContext(EditorContext);
-  // const { user_name, shop_name, user_email, setting_password } = userInfo; 
-
-
-  // const [name, setName] = React.useState(user_name);
-  // const [shopName, setShopName] = React.useState(shop_name);
-  // const [email, setEmail] = React.useState(user_email);
-  // const [password, setPassword] = React.useState(setting_password);
-
-
-
 
   const updateUser = useUpdateUser()
 
@@ -137,7 +127,7 @@ export function SettingUserInfo() {
             ※パスワードは変更時のみご入力下さい。
           </Typography>
           <Button
-            type="submit"
+            // type="submit"
             fullWidth
             variant="contained"
             color="primary"

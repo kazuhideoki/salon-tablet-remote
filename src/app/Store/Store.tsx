@@ -14,7 +14,6 @@ export type T_user_id = number
 export type T_user_name = string
 export type T_shop_name = string
 export type T_user_email = string;
-export type T_setting_password = string
 export type T_created_at_user = string
 export type T_updated_at_user = string
 
@@ -31,7 +30,6 @@ export type TUserInfo = {
   user_name: T_user_name | null;
   shop_name: T_shop_name | null;
   user_email: T_user_email;
-  setting_password: T_setting_password | null;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
 };

@@ -5,24 +5,21 @@ import {
   T_user_id,
   T_shop_name,
   T_user_email,
-  T_setting_password,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
-
-export type TUpdateUserInfo = {
-  name: string
-  shopName: string
-  email: string
-  password: string
-}
+import { cipher } from "../../../module/bcrypt";
 
 export type T_update_user = {
-  user_id: T_user_id;
-  user_name: T_user_name;
-  shop_name: T_shop_name;
-  user_email: T_user_email;
-  setting_password: T_setting_password;
+  columns: {
+    user_id: T_user_id;
+    user_name: T_user_name;
+    shop_name: T_shop_name;
+    user_email: T_user_email;
+  },
+  plainTextPassword: string
 };
+
+
 export const useUpdateUser = () => {
   const {
     dispatchAppState,
@@ -40,15 +37,16 @@ export const useUpdateUser = () => {
     password,
     setPassword,
   } = React.useContext(EditorContext);
-
-  // return async (values: TUpdateUserInfo) => {
+  // const cipheredPassword = cipher(password);
   return async () => {
     const params: T_update_user = {
-      user_id: user_id,
-      user_name: name,
-      shop_name: shopName,
-      user_email: email,
-      setting_password: password,
+      columns: {
+        user_id: user_id,
+        user_name: name,
+        shop_name: shopName,
+        user_email: email,
+      },
+      plainTextPassword: password,
     };
     console.log("useUpdateUserのparamsは " + params);
     
@@ -67,7 +65,15 @@ export const useUpdateUser = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      dispatchUserInfo({ type: "SET_USER_DATA", payload: {name, shopName, email, password} });
+      dispatchUserInfo({
+        type: "SET_USER_INFO",
+        payload: {
+          user_id: user_id,
+          user_name: name,
+          shop_name: shopName,
+          user_email: email,
+        },
+      });
       alert("ユーザーデータを更新しました。");
       // ↓modalを閉じるとTextFieldの値をうまく保持できない
       // dispatchAppState({ type: "CLOSE_MODAL" });

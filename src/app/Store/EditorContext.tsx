@@ -86,7 +86,7 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
   const [name, setName] = React.useState(props.user_name);
   const [shopName, setShopName] = React.useState(props.shop_name);
   const [email, setEmail] = React.useState(props.user_email);
-  const [password, setPassword] = React.useState(props.setting_password);
+  const [password, setPassword] = React.useState('');
 
   const values = {
     titleText,

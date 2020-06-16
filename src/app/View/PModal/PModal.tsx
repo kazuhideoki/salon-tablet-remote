@@ -77,14 +77,6 @@ export const PModal = () => {
         };
 
         switch (setModal) {
-          // case "footer_item":
-          //   modalStyle = size90;
-          //   ModalContent = () => <FooterItemModal />;
-          //   break;
-          case "setting_password":
-            modalStyle = sizeSmall;
-            ModalContent = () => <SettingPassword />;
-            break;
           case "content_modal":
             modalStyle = size90;
             ModalContent = () => <ContentModal />;
