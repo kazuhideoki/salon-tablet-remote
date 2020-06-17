@@ -55,15 +55,13 @@ export async function getServerSideProps({req}:NextPageContext) {
   let userInfo: any = null
   if (sessionObj) {
     userInfo = await db(
-      "select * from `user_info` where `user_email` = ?",
+      "select `user_id`, `user_name`, `shop_name`, `user_email`, `created_at`, `updated_at` from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
   }
 
   console.log("userInfoは " + JSON.stringify(userInfo));
 
-  // let data = null
-  // let data2 = null
   if (userInfo) {
     
     // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK

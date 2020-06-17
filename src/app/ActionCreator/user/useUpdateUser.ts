@@ -7,7 +7,6 @@ import {
   T_user_email,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
-import { cipher } from "../../../module/bcrypt";
 
 export type T_update_user = {
   columns: {

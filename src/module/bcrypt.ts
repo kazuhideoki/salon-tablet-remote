@@ -6,20 +6,7 @@ const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
 export const cipher = (password: string) => {
-  // return bcrypt.hashSync(password, salt);  
-  console.log("引数のpasswordは " + password);
-  // let result: string = "Initial param"
-  // bcrypt.genSalt(saltRounds, function(err, salt) {
-  //   console.log("saltは " + salt);
-  //   bcrypt.hash(password, salt, function(err, hash) {
-  //     // Store hash in your password DB.
-  //     console.log("hashは " + hash);
-  //     result =  hash;
-  //   });
-  // });
-
-  // return result
-
+  // console.log("引数のpasswordは " + password);
   var salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync("B4c0//", salt);
 }

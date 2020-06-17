@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    overflowY: "scroll",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -34,10 +35,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const validPassword = (password) => {
+  const regrex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
+  return regrex.test(password)
+}
+
 export function SettingUserInfo() {
   const classes = useStyles();
-  const [session, loading] = useSession();
-  const { userInfo } = React.useContext(Store)
   const {
     name,
     setName,
@@ -53,9 +57,7 @@ export function SettingUserInfo() {
 
   const handleOnSubmit = () => {
     console.log("handleOnSubmitだよ");
-    console.log({ name, shopName, email, password });
     
-    // updateUser({name, shopName, email, password})
     updateUser()
   }
 
@@ -124,6 +126,11 @@ export function SettingUserInfo() {
             </Grid>
           </Grid>
           <Typography component="h3" variant="body1">
+            {validPassword(password) || password.length === 0 ? null : (
+              <p style={{ color: "red" }}>
+                ※パスワードは半角英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい
+              </p>
+            )}
             ※パスワードは変更時のみご入力下さい。
           </Typography>
           <Button
@@ -133,8 +140,11 @@ export function SettingUserInfo() {
             color="primary"
             className={classes.submit}
             onClick={() => handleOnSubmit()}
+            disabled={
+              validPassword(password) || password.length === 0 ? false : true
+            }
           >
-            {/* <Button onClick={() => handleOnSubmit()}>変更 */}
+            更新
           </Button>
         </form>
       </div>
