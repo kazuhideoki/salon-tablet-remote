@@ -24,6 +24,7 @@ import { EditorContext } from "../Store/EditorContext";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 import { signin, signout, useSession, getSession } from "next-auth/client";
+import { useCheckPassword } from "../ActionCreator/user/useCheckPassword";
 
 
 export const useDrawerProps = () => {
@@ -62,10 +63,16 @@ export const useDrawerProps = () => {
     setCreatedAt(null)
     setUpdatedAt(null)
   };
-
-  const enterPassword = () => {
-    dispatchAppState({ type: "ON_IS_SETTING" });
-    dispatchAppState({ type: "CLOSE_MODAL" });
+  
+  const checkPassword = useCheckPassword();
+  const handleSubmitPassword = async (password: string) => {
+    const result = await checkPassword(password);
+    if (result === true) {
+      dispatchAppState({ type: "ON_IS_SETTING" });
+      dispatchAppState({ type: "CLOSE_MODAL" });
+    } else if (result === false) {
+      alert("パスワードが間違っています。");
+    }
   };
 
   return {
@@ -74,7 +81,7 @@ export const useDrawerProps = () => {
     dispatchAppState,
     handleOpenArticleEditor,
     handleOpenFooterItemEditor,
-    enterPassword,
+    handleSubmitPassword,
   };
 }
 type useDrawerProps = ReturnType<typeof useDrawerProps>
@@ -156,18 +163,23 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
   const isMobile = useMediaQuery("(max-width:480px)");
 
   const BeforeIsSettingDrawerMenu = () => {
+    const [pass, setPass] = React.useState('')
     return (
       <>
         <TextField
-          id="outlined-password-input"
-          label="Password"
+          id="setting-password-input"
+          label="パスワード"
           type="password"
           autoComplete="current-password"
           variant="outlined"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
         />
-        <Button onClick={() => props.enterPassword()}>設定モード</Button>
+        <Button onClick={() => props.handleSubmitPassword(pass)}>
+          設定モード
+        </Button>
       </>
-    )
+    );
   }
 
   const BeforeIsSettingDrawerMenuMobile = () => {

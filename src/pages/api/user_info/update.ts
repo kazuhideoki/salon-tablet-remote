@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     } else {
       // sqlに入れる用のparamsを,bcryptとともに生成し直す
-      const bcrypt = cipher(plainTextPassword);    
+      const bcrypt = await cipher(plainTextPassword);    
       params = {
         bcrypt_password: bcrypt,
         user_id: columns.user_id,

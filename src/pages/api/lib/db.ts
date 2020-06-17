@@ -15,6 +15,7 @@ const mysql = serverlessMysql({
   },
 });
 
+// ※db(``)の返り値は常に[]
 export const db = async (query, params?) => {
  
     const results = await mysql.query(query, params);

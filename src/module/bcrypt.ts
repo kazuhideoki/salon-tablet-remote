@@ -1,31 +1,26 @@
 // bcryptのライブラリを読み込む
 const bcrypt = require('bcryptjs'); 
-// ストレッチング回数
-const saltRounds = 10;
-// ソルトを生成
-const salt = bcrypt.genSaltSync(saltRounds);
 
 export const cipher = (password: string) => {
-  // console.log("引数のpasswordは " + password);
+  console.log("cipherの引数のpasswordは " + password);
+  // パスワードの強度を上げるにはsaltの数字を上げる
   var salt = bcrypt.genSaltSync(10);
-  return bcrypt.hashSync("B4c0//", salt);
+  return bcrypt.hash(password, salt).then((res: string) => {
+    return res
+  })
 }
 
 export const checkPassword = (password:string, hash:string) => {
   // パスワードとハッシュを比較する
-  bcrypt.compare(password, hash, function(err, res) {
-    if (err) {
-      console.log('想定外のエラー');
-      return false
-    } else {
+  return bcrypt.compare(password, hash).then(res => {
       if (res) {
         console.log('パスワード一致');
-        return false
+        return true
       } else {
         console.log('パスワード不一致');
-        return true
+        return false
       }
     }
-  });
+  );
 
 }
