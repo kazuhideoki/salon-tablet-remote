@@ -25,6 +25,7 @@ import { NoteAddOutlined, VideoLabel, Settings, ExitToApp } from "@material-ui/i
 import { TextField, Button } from "@material-ui/core";
 import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useCheckPassword } from "../ActionCreator/user/useCheckPassword";
+import { cipher } from "../../module/bcrypt";
 
 
 export const useDrawerProps = () => {
@@ -66,6 +67,8 @@ export const useDrawerProps = () => {
   
   const checkPassword = useCheckPassword();
   const handleSubmitPassword = async (password: string) => {
+    console.log(cipher(password))
+    
     const result = await checkPassword(password);
     if (result === true) {
       dispatchAppState({ type: "ON_IS_SETTING" });

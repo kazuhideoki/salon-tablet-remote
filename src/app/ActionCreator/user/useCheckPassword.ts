@@ -35,8 +35,7 @@ export const useCheckPassword = () => {
     if (data.err === true) {
       return alert("チェックできませんでした");
     } else {
-      // dispatchAppState({ type: "ON_IS_SETTING" });
-      // dispatchAppState({ type: "CLOSE_MODAL" });
+
       return data;
     }
   };

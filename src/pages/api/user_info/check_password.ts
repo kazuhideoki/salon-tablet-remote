@@ -11,23 +11,30 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       // ※db(``)の返り値は常に[]
       const data = await db(`select bcrypt_password from user_info where user_id = ?`, user_id);
-
-      const result = await checkPassword(password, data[0].bcrypt_password)
-     
-      // console.log("入力されたpasswordは " + JSON.stringify(password));
-
       
-      
-      // console.log("bcrypt_passwordは " + JSON.stringify(data[0].bcrypt_password));
-      // console.log("パスワードをcipherすると " + JSON.stringify(cipher(password)));
+      console.log("入力されたpasswordは " + JSON.stringify(password));
+      console.log("bcrypt_passwordは " + JSON.stringify(data[0].bcrypt_password));
 
-      
+      // パスワード未設定で、パスワード未入力でのチェックはtrueを返す
+      if (data[0].bcrypt_password === null && password === '') {
+        res.status(200).json(true);
+      } else {
 
-      console.log(
-        "/user_info/check_password/は " + JSON.stringify(result)
-      );
-
-      res.status(200).json(result);
+        const result = await checkPassword(password, data[0].bcrypt_password)
+       
+  
+        
+        
+        // console.log("パスワードをcipherすると " + JSON.stringify(cipher(password)));
+  
+        
+  
+        console.log(
+          "/user_info/check_password/は " + JSON.stringify(result)
+        );
+  
+        res.status(200).json(result);
+      }
 
     } catch (err) {
       console.log(
