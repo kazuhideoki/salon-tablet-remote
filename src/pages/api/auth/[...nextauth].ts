@@ -24,15 +24,17 @@ const options = {
     }),
   ],
   database: process.env.DATABASE_URL,
+  // ※↓どちらのjwtも必要
   jwt: true,
   session: {
     jwt: true,
   },
   sessionMaxAge: 24 * 60 * 60 * 1000, // Expire sessions
 
-  pages: {
-    signin: "/auth/signin",
-  },
+  // ↓これもいらないか？
+  // pages: {
+  //   signin: "/auth/signin",
+  // },
 
   debug: true,
 };
