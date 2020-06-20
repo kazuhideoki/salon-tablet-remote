@@ -143,9 +143,10 @@ export type StoreContextProviderProps = {
     pagination: PaginationParams;
     footerItems: FooterItems;
     // appState: AppState
-    session?: TUserInfo
+    session?: TUserInfo;
   };
   children?: React.ReactNode;
+  csrfToken?: any
 };
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {

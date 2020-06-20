@@ -5,7 +5,7 @@ import { session } from "next-auth/client";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const sessionObj = await session({ req });
   // sessionがなければ(ユーザーがサインインしてなければ)user_infoは渡さない
-  console.log("sessionObjは" + JSON.stringify(sessionObj));
+  // console.log("sessionObjは" + JSON.stringify(sessionObj));
   
   if (!sessionObj) {
     // return res.status(200).json({

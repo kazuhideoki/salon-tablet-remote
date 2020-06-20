@@ -3,11 +3,7 @@ import {
   Store, T_user_id,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
-
-export type T_check_password = {
-  user_id: T_user_id,
-  password: string
-}
+import { T_check_password } from "../../../pages/api/user_info/check_password";
 
 export const useCheckPassword = () => {
   const { dispatchAppState, dispatchUserInfo, userInfo } = React.useContext(
@@ -19,7 +15,7 @@ export const useCheckPassword = () => {
   } = React.useContext(EditorContext);
   // const cipheredPassword = cipher(password);
   return async (password: string) => {
-    const params = { user_id, password };
+    const params: T_check_password = { user_id, password };
 
     const res = await fetch(
       `${location.protocol}//${location.host}/api/user_info/check_password`, //★要変更

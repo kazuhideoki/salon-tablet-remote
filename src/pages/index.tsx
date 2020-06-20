@@ -4,7 +4,7 @@ import { App } from "../app/View/App";
 import Head from "next/head";
 import { register, unregister } from "next-offline/runtime";
 import { session } from "next-auth/client";
-import { signin, signout, useSession, getSession } from "next-auth/client";
+import { signin, signout, useSession, getSession, csrfToken } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
 import { server } from "../config";
@@ -16,23 +16,40 @@ const Index = (props: StoreContextProviderProps) => {
   if (!props.data.session) {
     return (
       <>
-        <Head><title>SALON TABLET</title></Head>
+        <Head>
+          <title>SALON TABLET</title>
+        </Head>
         <h1>Salon Tablet</h1>
         <h2>〜美容室のためのコミュニケーション支援タブレットツール〜</h2>
-        <SignInForm/>  
+
+        {/* <SignInForm/>   */}
+
+        <form
+          method="post"
+          action="/api/auth/signin/email"
+          onSubmit={(e) => {
+            e.preventDefault();
+            //@ts-ignore
+            signin("email", { email: document.getElementById("email").value });
+            // signin("email", { email: document.getElementById("email").nodeValue });
+          }}
+        >
+          <input name="csrfToken" type="hidden" defaultValue={props.csrfToken} />
+          <label>
+            Email address
+            <input type="text" id="email" name="email" />
+          </label>
+          <button type="submit">Sign in with Email</button>
+        </form>
+        <form method="post" action={`${server}/api/auth/callback/credentials`}>
+          <input name="email" type="text" defaultValue="" />
+          <input name="password" type="password" defaultValue="" />
+          <button type="submit">Sign in</button>
+        </form>
       </>
-    )
+    );
     
   }
-
-  // service-worker.jsの登録と解除。unmount時に解除することで、キャッシュが残り画面が更新されない状態を防ぐ
-  // ※今next-offlineを使ってないのでコメントアウトしている。※
-  // React.useEffect(() => {
-  //   register()
-  //   return () => {
-  //     unregister()
-  //   }
-  // },[])
    
   // テーマ、記事データ、appの状態管理を読み込む
   return (
@@ -45,11 +62,13 @@ const Index = (props: StoreContextProviderProps) => {
   );
 };
 
-export async function getServerSideProps({req}:NextPageContext) { 
+// export async function getServerSideProps({req}:NextPageContext) { 
+export async function getServerSideProps(context:NextPageContext) { 
 
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
+  const req = context.req
   const sessionObj = await session({ req });
-  console.log("sessionObjは " + JSON.stringify(sessionObj));
+  // console.log("sessionObjは " + JSON.stringify(sessionObj));
   
   let userInfo: any = null
   if (sessionObj) {
@@ -96,10 +115,11 @@ export async function getServerSideProps({req}:NextPageContext) {
     return {
       props: {
         data: {
-          session: null
-        }
-      }
-    }
+          session: null,
+        },
+        csrfToken: await csrfToken(context),
+      },
+    };
   }
 
 
