@@ -22,30 +22,8 @@ const Index = (props: StoreContextProviderProps) => {
         <h1>Salon Tablet</h1>
         <h2>〜美容室のためのコミュニケーション支援タブレットツール〜</h2>
 
-        {/* <SignInForm/>   */}
+        <SignInForm csrfToken={props.csrfToken} />
 
-        <form
-          method="post"
-          action="/api/auth/signin/email"
-          onSubmit={(e) => {
-            e.preventDefault();
-            //@ts-ignore
-            signin("email", { email: document.getElementById("email").value });
-            // signin("email", { email: document.getElementById("email").nodeValue });
-          }}
-        >
-          <input name="csrfToken" type="hidden" defaultValue={props.csrfToken} />
-          <label>
-            Email address
-            <input type="text" id="email" name="email" />
-          </label>
-          <button type="submit">Sign in with Email</button>
-        </form>
-        <form method="post" action={`${server}/api/auth/callback/credentials`}>
-          <input name="email" type="text" defaultValue="" />
-          <input name="password" type="password" defaultValue="" />
-          <button type="submit">Sign in</button>
-        </form>
       </>
     );
     
@@ -68,32 +46,57 @@ export async function getServerSideProps(context:NextPageContext) {
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const req = context.req
   const sessionObj = await session({ req });
-  // console.log("sessionObjは " + JSON.stringify(sessionObj));
+  console.log("sessionObjは " + JSON.stringify(sessionObj));
   
   let userInfo: any = null
-  if (sessionObj) {
+  // sessionがなくても{"user":{"name":null,"email":null,"image":null},"expires":"2020-07-20T11:55:05.277Z"}が返ってきた。
+  // のでemailがnullじゃなければuserInfoを取りに行く
+  // if (sessionObj) {
+  // サインアウトで TypeError: Cannot read property 'user' of null
+  // if (sessionObj.user.email !== null) {
+
+  // セッションがない場合、セッションが空のオブジェクトの場合
+  if (sessionObj === null || sessionObj.user.email === null) {
+    return {
+      props: {
+        data: {
+          session: null,
+        },
+        csrfToken: await csrfToken(context),
+      },
+    };
+
+  // センションがある場合
+  } else {
     userInfo = await db(
       "select `user_id`, `user_name`, `shop_name`, `user_email`, `created_at`, `updated_at` from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
+    console.log(JSON.stringify(userInfo));
+    
   }
 
   
-  if (sessionObj && userInfo.length) {    
+  // if (sessionObj && userInfo.length) {
+  // if (sessionObj.user.email !== null && userInfo.length) {
+  if (userInfo.length) {
     console.log("userInfoは " + JSON.stringify(userInfo));
-    
+
     // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-    const res = await fetch(`http://localhost:3000/api/articles/get`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ page: 1, isSetting: false, userId: userInfo[0].user_id}),
-      });
-      // console.log("articleのresは " + res);
-      
+    const res = await fetch(`http://localhost:3000/api/articles/get`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify({
+        page: 1,
+        isSetting: false,
+        userId: userInfo[0].user_id,
+      }),
+    });
+    // console.log("articleのresは " + res);
+
     const data = await res.json();
-    
+
     const res2 = await fetch(
       `http://localhost:3000/api/footer_items/get?userId=${userInfo[0].user_id}`
     );
@@ -109,9 +112,7 @@ export async function getServerSideProps(context:NextPageContext) {
         },
       },
     };
-
   } else {
-
     return {
       props: {
         data: {

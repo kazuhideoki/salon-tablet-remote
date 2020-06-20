@@ -7,43 +7,32 @@ import { checkPassword } from '../module/bcrypt';
 import { useCheckPassword } from '../app/ActionCreator/user/useCheckPassword';
 
 
-export const SignInForm = () => {
-  const [pass, setPass] = React.useState('')
-  const [email, setEmail] = React.useState('')
-
-  const handleSubmitPassword = async () => {
-    
-  };
-
-  
+export const SignInForm = (props) => {
 
   return (
     <>
-      <a href={`${server}/api/auth/signin`} onClick={(e) => { e.preventDefault(); signin(); }}>
-        <button>メールアドレスでサインインする</button>
-      </a>
-      <input type="hidden" name="csrfToken" value="1d3044cf6526efab509f19a5cf439a75d4f07c64ed640f6e15397adf1cc48130"></input>
-      <TextField
-        id="index-email-input"
-        label="email"
-        type="email"
-        variant="outlined"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <TextField
-        id="index-password-input"
-        label="パスワード"
-        type="password"
-        autoComplete="current-password"
-        variant="outlined"
-        value={pass}
-        onChange={(e) => setPass(e.target.value)}
-      />
-      <Button onClick={() => handleSubmitPassword()}>サインイン</Button>
+      <form
+        method="post"
+        action={`${server}/api/auth/signin/email`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          //@ts-ignore
+          signin("email", { email: document.getElementById("email").value });
+          // signin("email", { email: document.getElementById("email").nodeValue });
+        }}
+      >
+        <input name="csrfToken" type="hidden" defaultValue={props.csrfToken} />
+        <label>
+          Email address
+          <input type="text" id="email" name="email" />
+        </label>
+        <button type="submit">Sign in with Email</button>
+      </form>
+      <form method="post" action={`${server}/api/auth/callback/credentials`}>
+        <input name="email" type="text" defaultValue="" />
+        <input name="password" type="password" defaultValue="" />
+        <button type="submit">Sign in</button>
+      </form>
     </>
-  )
+  );
 }
-
-
-// http://localhost:3000/api/auth/callback/email?email=cedar123pc%40gmail.com&token=fb851d4f4c835181544851eac4e341e4383a0b530626b55ed9c850c7a1511eea

@@ -10,6 +10,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { user_email, password }: T_check_credentials = req.body;
 
+    console.log("check_credentialsのreq.bodyは " + JSON.stringify(req.body));
+    
+
     try {
       // ※db(``)の返り値は常に[]
       const data = await db(
