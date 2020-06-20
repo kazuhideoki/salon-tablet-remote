@@ -10,6 +10,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { user_email, password }: T_check_credentials = req.body;
 
+    // 念の為、パスワード未設定で、パスワード未入力ログインを弾く
+    if (password === '') {
+      return res.status(500).json({ err: true, data: { message: "パスワードが未入力です" } });
+    }
+
     console.log("check_credentialsのreq.bodyは " + JSON.stringify(req.body));
     
 
@@ -25,23 +30,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         "bcrypt_passwordは " + JSON.stringify(data[0].bcrypt_password)
       );
 
-      // パスワード未設定で、パスワード未入力でのチェックはtrueを返す
-      if (data[0].bcrypt_password === null && password === "") {
-        res.status(200).json(true);
-      } else {
-        const result = await checkPassword(password, data[0].bcrypt_password);
+      const result = await checkPassword(password, data[0].bcrypt_password);
 
-        // console.log("パスワードをcipherすると " + JSON.stringify(cipher(password)));
+      // console.log("パスワードをcipherすると " + JSON.stringify(cipher(password)));
 
-        console.log("/user_info/check_credentials/は " + JSON.stringify(result));
+      console.log("/user_info/check_credentials/は " + JSON.stringify(result));
 
-        res.status(200).json(result);
-      }
+      return res.status(200).json(result);
     } catch (err) {
       console.log(
         "/user_info/check_credentials/のエラーは " + JSON.stringify(err)
       );
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: { message: err.message } });
     }
   }
 };

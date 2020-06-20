@@ -32,7 +32,7 @@ export default async (credentials: TCredentials) => {
     );
     const data: boolean = await res.json();
     console.log(
-      "authorizeCredentialsでcheck_credentialsからの戻り値は " + data
+      "authorizeCredentialsでcheck_credentialsからの戻り値は " + JSON.stringify(data)
     );
 
     if (data === true) {

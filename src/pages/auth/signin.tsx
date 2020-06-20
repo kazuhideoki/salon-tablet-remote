@@ -5,30 +5,6 @@ import { server } from '../../config'
 export default ({ providers, csrfToken }) => {
   return (
     <>
-      {/* {Object.values(providers).map(provider => {
-
-        if (provider === undefined) {
-          console.log("なにかのproviderがないよ");
-          
-          return null         
-        }
-        
-        return (
-        //@ts-ignore
-        <p key={provider.name}>
-          <a href={
-            //@ts-ignore
-            provider.signinUrl
-            } onClick={(e) => e.preventDefault()}>
-            <button onClick={() => signin(provider)}>Sign in with {
-              //@ts-ignore
-            provider.name
-            }</button>
-          </a>page/auth/signin.tsxだよ
-        </p>
-        )
-        
-      })} */}
       <form
         method="post"
         action="/api/auth/signin/email"
