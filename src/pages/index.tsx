@@ -70,6 +70,7 @@ export async function getServerSideProps(context:NextPageContext) {
   } else {
     userInfo = await db(
       "select `user_id`, `user_name`, `shop_name`, `user_email`, `created_at`, `updated_at` from `user_info` where `user_email` = ?",
+      // "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
     console.log(JSON.stringify(userInfo));

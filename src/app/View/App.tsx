@@ -149,20 +149,43 @@ const AppTablet = ()=> {
 const AppView = () => {
 
   const isMobile = useMediaQuery("(max-width:480px)");
-  const { appState, dispatchLoading } = React.useContext(Store);
+  const { appState, dispatchAppState, dispatchLoading, userInfo } = React.useContext(Store);
   const getArticles = useGetArticles()
+  const { user_id } = userInfo
 
-   // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
-    const [isFirstLoad, setIsFirstLoad] = React.useState(true);
-    // 設定モード[isSetting]を切り替えるたびに記事を読み込み直す
-    React.useEffect(() => {
-      if (!isFirstLoad) {  
-        // 二回目以降で発火 
-        dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-        getArticles(1);
+  // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
+  const [isFirstLoad, setIsFirstLoad] = React.useState(true);
+  // 設定モード[isSetting]を切り替えるたびに記事を読み込み直す
+  React.useEffect(() => {
+    if (!isFirstLoad) {  
+      // 二回目以降で発火 
+      dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
+      getArticles(1);
+    }
+    setIsFirstLoad(false);
+  },[appState.isSetting])
+
+  // パスワード未設定でユーザー情報登録へ遷移 → 手間な感じがするので、indexのserverSidePropsでやってもいいかも、要検討
+  //@ts-ignore
+  React.useEffect(async() => {
+    const res = await fetch(
+      `${location.protocol}//${location.host}/api/user_info/check_has_password`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({user_id}),
       }
-      setIsFirstLoad(false);
-    },[appState.isSetting])
+    )
+
+    // パスワードが設定されていたらtrueを返す
+    const data: boolean = await res.json(); 
+
+    if (data === false) {
+      dispatchAppState({type: "OPEN_MODAL", payload: "setting_user_info"})
+    }
+
+  },[])
 
   if (isMobile && appState.isSetting) {
     return <AppMobile/>
