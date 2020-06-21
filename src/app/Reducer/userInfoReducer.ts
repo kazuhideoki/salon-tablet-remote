@@ -6,7 +6,6 @@ import {
   T_user_email,
 } from "../Store/Store";
 import { reducerLogger } from "./reducerLogger";
-import { TUpdateUserInfo } from "../ActionCreator/user/useUpdateUser";
 
 export type TUserInfoAction = {
   type: "SET_USER_INFO";
