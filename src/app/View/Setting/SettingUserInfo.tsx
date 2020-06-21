@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const validPassword = (password) => {
+const isValidPassword = (password) => {
   const regrex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
   return regrex.test(password)
 }
@@ -52,6 +52,8 @@ export function SettingUserInfo() {
     password,
     setPassword,
   } = React.useContext(EditorContext);
+
+  const { userInfo } = React.useContext(Store)
 
   const updateUser = useUpdateUser()
 
@@ -126,13 +128,22 @@ export function SettingUserInfo() {
             </Grid>
           </Grid>
           <Typography component="h3" variant="body1">
-            {validPassword(password) || password.length === 0 ? null : (
-              <p style={{ color: "red" }}>
+            {isValidPassword(password) || password.length === 0 ? null : (
+              <Typography component="h3" variant="body1" color={"error"}>
                 ※パスワードは半角英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい
-              </p>
+              </Typography>
             )}
-            ※パスワードは変更時のみご入力下さい。
+            {userInfo.isSetPassword ?
+              <Typography component="h3" variant="body1" color={"error"}>
+              ※パスワードは変更時のみご入力下さい。
+              </Typography> 
+            : <Typography component="h3" variant="body1" color={"secondary"}>
+              ※パスワードを設定して下さい。(サインインや各種設定で使用)
+              </Typography>
+            }
           </Typography>
+            
+          
           <Button
             // type="submit"
             fullWidth
@@ -141,7 +152,7 @@ export function SettingUserInfo() {
             className={classes.submit}
             onClick={() => handleOnSubmit()}
             disabled={
-              validPassword(password) || password.length === 0 ? false : true
+              isValidPassword(password) || password.length === 0 ? false : true
             }
           >
             更新
