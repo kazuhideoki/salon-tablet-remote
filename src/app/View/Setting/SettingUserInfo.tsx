@@ -71,7 +71,7 @@ export function SettingUserInfo() {
           <Info />
         </Avatar>
         <Typography component="h1" variant="h5">
-          登録情報更新
+          アカウント
         </Typography>
 
         <form className={classes.form} noValidate>
@@ -158,6 +158,19 @@ export function SettingUserInfo() {
             更新
           </Button>
         </form>
+        {/* <Button
+          // type="submit"
+          fullWidth
+          variant="contained"
+          color="secondary"
+          className={classes.submit}
+          onClick={() => handleOnSubmit()}
+          disabled={
+            isValidPassword(password) || password.length === 0 ? false : true
+          }
+        >
+          アカウントを削除する
+          </Button> */}
       </div>
     </Container>
   );

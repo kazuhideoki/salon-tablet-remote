@@ -78,6 +78,11 @@ export const useDrawerProps = () => {
     }
   };
 
+  const handleOnSingOut = () => {
+    const signOuting = confirm('サインアウトしますか？')
+    signOuting ? signout() : null
+  }
+
   return {
     theme,
     appState,
@@ -85,6 +90,7 @@ export const useDrawerProps = () => {
     handleOpenArticleEditor,
     handleOpenFooterItemEditor,
     handleSubmitPassword,
+    handleOnSingOut,
   };
 }
 type useDrawerProps = ReturnType<typeof useDrawerProps>
@@ -218,9 +224,9 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
-          <ListItemText primary="設定" />
+          <ListItemText primary="アカウント" />
         </ListItem>
-        <ListItem button onClick={() => signout()}>
+        <ListItem button onClick={() => props.handleOnSingOut()}>
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>
