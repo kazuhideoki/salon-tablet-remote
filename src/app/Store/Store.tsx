@@ -32,6 +32,8 @@ export type TUserInfo = {
   user_email: T_user_email;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
+  isSetPassword: boolean
+  bcrypt_password?: string | null 
 };
 
 const initPagination = {

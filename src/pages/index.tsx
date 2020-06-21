@@ -40,15 +40,25 @@ const Index = (props: StoreContextProviderProps) => {
   );
 };
 
+type TSessionOnj = {
+  user: {
+    name: string | null,
+    email: string | null,
+    image: string | null,
+  },
+  expires: string | null,
+}
+
 // export async function getServerSideProps({req}:NextPageContext) { 
 export async function getServerSideProps(context:NextPageContext) { 
 
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const req = context.req
-  const sessionObj = await session({ req });
+  const sessionObj: TSessionOnj = await session({ req });
   console.log("sessionObjは " + JSON.stringify(sessionObj));
   
-  let userInfo: any = null
+  let resData = null
+  let userInfo: TUserInfo
   // sessionがなくても{"user":{"name":null,"email":null,"image":null},"expires":"2020-07-20T11:55:05.277Z"}が返ってきた。
   // のでemailがnullじゃなければuserInfoを取りに行く
   // if (sessionObj) {
@@ -68,19 +78,46 @@ export async function getServerSideProps(context:NextPageContext) {
 
   // センションがある場合
   } else {
-    userInfo = await db(
-      "select `user_id`, `user_name`, `shop_name`, `user_email`, `created_at`, `updated_at` from `user_info` where `user_email` = ?",
-      // "select * from `user_info` where `user_email` = ?",
+    //@ts-ignore
+    resData = await db(
+      // "select `user_id`, `user_name`, `shop_name`, `user_email`, `created_at`, `updated_at` from `user_info` where `user_email` = ?",
+      "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
-    console.log(JSON.stringify(userInfo));
+    userInfo = resData[0]
+    console.log("resData.bcrypt_passwordは " + JSON.stringify(userInfo.bcrypt_password));
+      
+    if (userInfo.bcrypt_password ) {
+      userInfo.isSetPassword = true     
+    } else {
+      userInfo.isSetPassword = false
+    }
+
+    // bcrypt_passwordはフロント側に渡さない
+    delete userInfo.bcrypt_password
+
+    // console.log(JSON.stringify(userInfo));
+
+    // const data = await db(
+    //   `select bcrypt_password from user_info where user_email = ?`,
+    //   sessionObj.user.email
+    // );
+
+    // console.log(
+    //   "check_has_passwordの返り値は " + JSON.stringify(data[0].bcrypt_password)
+    // );
+
+    // パスワードが設定されていたらtrueを返す
+    // if (data[0].bcrypt_password) {
+    //   userInfo.isSetPassword = true
+    // } else {
+    //   userInfo.isSetPassword = false
+    // }
     
   }
 
-  
-  // if (sessionObj && userInfo.length) {
-  // if (sessionObj.user.email !== null && userInfo.length) {
-  if (userInfo.length) {
+  // if (userInfo.length) {
+  if (userInfo) {
     console.log("userInfoは " + JSON.stringify(userInfo));
 
     // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
@@ -91,7 +128,7 @@ export async function getServerSideProps(context:NextPageContext) {
       body: JSON.stringify({
         page: 1,
         isSetting: false,
-        userId: userInfo[0].user_id,
+        userId: userInfo.user_id,
       }),
     });
     // console.log("articleのresは " + res);
@@ -99,7 +136,8 @@ export async function getServerSideProps(context:NextPageContext) {
     const data = await res.json();
 
     const res2 = await fetch(
-      `http://localhost:3000/api/footer_items/get?userId=${userInfo[0].user_id}`
+      // `http://localhost:3000/api/footer_items/get?userId=${userInfo[0].user_id}`
+      `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
     );
     const data2 = await res2.json();
 
@@ -109,7 +147,8 @@ export async function getServerSideProps(context:NextPageContext) {
           articles: data.rawData,
           pagination: data.pagination,
           footerItems: data2.rawData,
-          session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
+          // session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
+          session: userInfo && JSON.parse(JSON.stringify(userInfo)),
         },
       },
     };

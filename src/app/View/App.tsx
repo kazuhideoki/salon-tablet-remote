@@ -168,22 +168,26 @@ const AppView = () => {
   // パスワード未設定でユーザー情報登録へ遷移 → 手間な感じがするので、indexのserverSidePropsでやってもいいかも、要検討
   //@ts-ignore
   React.useEffect(async() => {
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/user_info/check_has_password`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({user_id}),
-      }
-    )
-
-    // パスワードが設定されていたらtrueを返す
-    const data: boolean = await res.json(); 
-
-    if (data === false) {
-      dispatchAppState({type: "OPEN_MODAL", payload: "setting_user_info"})
+    if (userInfo.isSetPassword === false) {
+      dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
     }
+
+    // const res = await fetch(
+    //   `${location.protocol}//${location.host}/api/user_info/check_has_password`,
+    //   {
+    //     headers: { "Content-Type": "application/json" },
+    //     method: "POST",
+    //     mode: "cors",
+    //     body: JSON.stringify({user_id}),
+    //   }
+    // )
+
+    // // パスワードが設定されていたらtrueを返す
+    // const data: boolean = await res.json(); 
+
+    // if (data === false) {
+    //   dispatchAppState({type: "OPEN_MODAL", payload: "setting_user_info"})
+    // }
 
   },[])
 
