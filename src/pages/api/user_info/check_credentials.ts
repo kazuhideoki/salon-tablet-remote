@@ -4,11 +4,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { cipher, checkPassword } from "../../../module/bcrypt";
 import { T_user_email } from "../../../app/Store/Store";
 
-export type T_check_credentials = { user_email: T_user_email, password: string };
+export type T_check_credentials = { email: T_user_email, password: string };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { user_email, password }: T_check_credentials = req.body;
+    const { email, password }: T_check_credentials = req.body;
 
     // 念の為、パスワード未設定で、パスワード未入力ログインを弾く
     if (password === '') {
@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       // ※db(``)の返り値は常に[]
       const data = await db(
         `select bcrypt_password from user_info where user_email = ?`,
-        user_email
+        email
       );
 
       console.log("入力されたpasswordは " + JSON.stringify(password));

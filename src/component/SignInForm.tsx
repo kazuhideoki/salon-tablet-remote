@@ -13,7 +13,7 @@ export const SignInForm = (props) => {
     <>
       <form
         method="post"
-        // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避
+        // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 Json Web Tokenの関係か
         action={`${server}/api/auth/signin/email/`}
         onSubmit={(e) => {
           e.preventDefault();
@@ -33,7 +33,7 @@ export const SignInForm = (props) => {
       </form>
       <h2>★すでにアカウントのある方</h2>
       <p>メールアドレスとパスワードでサインインする</p>
-      {/* // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 */}
+      {/* // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 Json Web Tokenの関係か */}
       <form method="post" action={`${server}/api/auth/callback/credentials/`}>
         メールアドレス
         <input name="email" type="text" defaultValue="" />

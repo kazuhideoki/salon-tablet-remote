@@ -21,21 +21,30 @@ const options = {
     }),
     Providers.Credentials({
       authorize: async (credentials) => authorizeCredentials(credentials),
+      credentials: {
+        // domain: {
+        //   label: "Domain",
+        //   type: "text ",
+        //   placeholder: "CORPNET",
+        //   value: "CORPNET",
+        // },
+        email: { label: "Email", type: "text ", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
     }),
   ],
   database: process.env.DATABASE_URL,
-  // ※↓どちらのjwtも必要
-  jwt: true,
+
+  // ※↓こちらはいらない？
+  // jwt: true,
+
+  // ↓ここなくすと credentialsでエラー
+  // 'Signin in with credentials is only supported if JSON Web Tokens are enabled'
   session: {
     jwt: true,
   },
+
   sessionMaxAge: 24 * 60 * 60 * 1000, // Expire sessions
-
-  // ↓これもいらないか？
-  // pages: {
-  //   signin: "/auth/signin",
-  // },
-
   debug: true,
 };
 

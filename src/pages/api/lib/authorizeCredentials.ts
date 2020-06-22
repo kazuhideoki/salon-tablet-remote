@@ -10,7 +10,7 @@ export default async (credentials: TCredentials) => {
   
   const params: T_check_credentials = {
     // user_email: credentials.user_email,
-    user_email: credentials.email,
+    email: credentials.email,
     password: credentials.password,
   };
 
