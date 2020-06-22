@@ -13,7 +13,8 @@ export const SignInForm = (props) => {
     <>
       <form
         method="post"
-        action={`${server}/api/auth/signin/email`}
+        // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避
+        action={`${server}/api/auth/signin/email/`}
         onSubmit={(e) => {
           e.preventDefault();
           //@ts-ignore
@@ -27,15 +28,19 @@ export const SignInForm = (props) => {
           Email address
           <input type="text" id="email" name="email" />
         </label>
-        <br/>
+        <br />
         <button type="submit">メールアドレスでサインインする</button>
       </form>
       <h2>★すでにアカウントのある方</h2>
       <p>メールアドレスとパスワードでサインインする</p>
-      <form method="post" action={`${server}/api/auth/callback/credentials`}>
-        メールアドレス<input name="email" type="text" defaultValue="" /><br/>
-        パスワード<input name="password" type="password" defaultValue="" />
-        <br/>
+      {/* // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 */}
+      <form method="post" action={`${server}/api/auth/callback/credentials/`}>
+        メールアドレス
+        <input name="email" type="text" defaultValue="" />
+        <br />
+        パスワード
+        <input name="password" type="password" defaultValue="" />
+        <br />
         <button type="submit">Sign in</button>
       </form>
     </>
