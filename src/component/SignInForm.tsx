@@ -27,13 +27,15 @@ export const SignInForm = (props) => {
           Email address
           <input type="text" id="email" name="email" />
         </label>
+        <br/>
         <button type="submit">メールアドレスでサインインする</button>
       </form>
       <h2>★すでにアカウントのある方</h2>
       <p>メールアドレスとパスワードでサインインする</p>
       <form method="post" action={`${server}/api/auth/callback/credentials`}>
-        <input name="email" type="text" defaultValue="" />
-        <input name="password" type="password" defaultValue="" />
+        メールアドレス<input name="email" type="text" defaultValue="" /><br/>
+        パスワード<input name="password" type="password" defaultValue="" />
+        <br/>
         <button type="submit">Sign in</button>
       </form>
     </>
