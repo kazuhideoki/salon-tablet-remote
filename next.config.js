@@ -24,7 +24,10 @@ module.exports = {
     // 本番環境safariで null/session のエラーになったので session()内部のfetchを↓で absolute URLにできるはず
     // sessionをserverSideで使う場合有効らしい
     // https://github.com/iaincollins/next-auth/issues/299
-    NEXTAUTH_SITE: "http://localhost:3000/",
+    // NEXTAUTH_SITE: "http://localhost:3000",→ PC 本番環境safariでうまく動作。 iPadで未だ動作せず。
+    // ↑末尾に「/」つけても同じ
+
+    NEXTAUTH_SITE: "https://salon-tablet.com",
   },
 };
 
