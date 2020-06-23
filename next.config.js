@@ -22,7 +22,9 @@ module.exports = {
   },
   env: {
     // 本番環境safariで null/session のエラーになったので session()内部のfetchを↓で absolute URLにできるはず
-    NEXTAUTH_SITE: "http://localhost:3000",
+    // sessionをserverSideで使う場合有効らしい
+    // https://github.com/iaincollins/next-auth/issues/299
+    NEXTAUTH_SITE: "http://localhost:3000/",
   },
 };
 
