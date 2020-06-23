@@ -2,19 +2,12 @@ import React from "react";
 import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
 import { App } from "../app/View/App";
 import Head from "next/head";
-const fetchI = require("isomorphic-fetch");
-import { register, unregister } from "next-offline/runtime";
 import {
-  signin,
-  signout,
-  useSession,
-  getSession,
   csrfToken,
   session,
 } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
-import { server } from "../config";
 import { SignInForm } from "../component/SignInForm";
 
 
@@ -56,36 +49,16 @@ type TSessionOnj = {
   expires: string | null,
 }
 
-// export async function getServerSideProps({req}:NextPageContext) { 
 export async function getServerSideProps(context:NextPageContext) { 
 
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const req = context.req
   const sessionObj: TSessionOnj = await session({ req });
 
-
-  // apiをfetchするとsessionがあっても{}が返ってくる。ブラウザで直接getすると取得できるのに...
-  // const sessionRespose = await fetch(`http://localhost:3000/api/auth/session/`)
-  // const sessionRespose = await fetchI(`http://localhost:3000/api/auth/session/`)
-  // console.log("sessionResposeは " + JSON.stringify(sessionRespose));
-  // const sessionObj = await sessionRespose.json();
-
-  // const sessionObj = fetchI("http://localhost:3000/api/auth/session/")
-  //   .then(function(response) {
-  //     if (response.status >= 400) {
-  //       throw new Error("Bad response from server");
-  //     }
-  //     return response.json();
-  //   })
-  //   .then(function(stories) {
-  //     console.log(stories);
-  //   });
-
   console.log(
     "sessionObjは " + JSON.stringify(sessionObj)
   );
 
-  
   let resData = null
   let userInfo: TUserInfo
   // sessionがなくても{"user":{"name":null,"email":null,"image":null},"expires":"2020-07-20T11:55:05.277Z"}が返ってきた。
@@ -109,7 +82,6 @@ export async function getServerSideProps(context:NextPageContext) {
   } else {
     //@ts-ignore
     resData = await db(
-      // "select `user_id`, `user_name`, `shop_name`, `user_email`, `created_at`, `updated_at` from `user_info` where `user_email` = ?",
       "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
@@ -144,12 +116,10 @@ export async function getServerSideProps(context:NextPageContext) {
         userId: userInfo.user_id,
       }),
     });
-    // console.log("articleのresは " + res);
 
     const data = await res.json();
 
     const res2 = await fetch(
-      // `http://localhost:3000/api/footer_items/get?userId=${userInfo[0].user_id}`
       `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
     );
     const data2 = await res2.json();
@@ -160,7 +130,7 @@ export async function getServerSideProps(context:NextPageContext) {
           articles: data.rawData,
           pagination: data.pagination,
           footerItems: data2.rawData,
-          // session: userInfo && JSON.parse(JSON.stringify(userInfo[0])),
+          // JSONのエラーになったので、このような書き方↓
           session: userInfo && JSON.parse(JSON.stringify(userInfo)),
         },
       },

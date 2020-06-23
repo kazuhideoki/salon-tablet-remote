@@ -20,10 +20,8 @@ module.exports = {
 
     return config;
   },
-  // ↓効いてる？意味ない？
   env: {
-    // NEXTAUTH_BASE_PATH: server + `/api/auth`,
-    // NEXTAUTH_SITE: server,
+    // 本番環境safariで null/session のエラーになったので session()内部のfetchを↓で absolute URLにできるはず
     NEXTAUTH_SITE: "http://localhost:3000",
   },
 };

@@ -1,4 +1,5 @@
-import fetch from "isomorphic-unfetch";
+// aboutページは,只今実験室
+
 import {
   signin,
   signout,
@@ -18,7 +19,7 @@ function About({ sessionObj }) {
     <div>
       About
       <br/>
-      {Object.keys(sessionObj).length ? "session取得" : "sessionなし"}
+      {/* {Object.keys(sessionObj).length ? "session取得" : "sessionなし"} */}
     </div>
   );
 }
@@ -38,8 +39,6 @@ export async function getServerSideProps(context) {
   console.log(
     "sessionObjは " + JSON.stringify(sessionObj)
   );
-
-
 
   const sessionRespose_footer_items = await fetch(
     `http://localhost:3000/api/footer_items/get?userId=1`

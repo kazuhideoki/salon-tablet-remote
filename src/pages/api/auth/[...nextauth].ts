@@ -12,7 +12,6 @@ const site =
     : process.env.SITE_PRO;
 
 const options = {
-  // site: process.env.SITE,
   site: site,
   providers: [
     Providers.Email({
@@ -22,12 +21,6 @@ const options = {
     Providers.Credentials({
       authorize: async (credentials) => authorizeCredentials(credentials),
       credentials: {
-        // domain: {
-        //   label: "Domain",
-        //   type: "text ",
-        //   placeholder: "CORPNET",
-        //   value: "CORPNET",
-        // },
         email: { label: "Email", type: "text ", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
@@ -35,14 +28,12 @@ const options = {
   ],
   database: process.env.DATABASE_URL,
 
-  // ※↓こちらはいらない？
-  // jwt: true,
-
   // ↓ここなくすと credentialsでエラー
   // 'Signin in with credentials is only supported if JSON Web Tokens are enabled'
   session: {
     jwt: true,
   },
+  // callbacksはlogを見る用にためしに設定してみた。
   callbacks: {
     session: async (session, token) => {
       console.log(
@@ -66,11 +57,6 @@ const options = {
       );
       return Promise.resolve(token)
     },
-
-    //     event - compiled successfully
-    // [next-auth][error][CLIENT_FETCH_ERROR] [
-    //   'null/session',
-    //   TypeError: Only absolute URLs are supportedに対して特に変化なし
     redirect: async (url, baseUrl) => {
       console.log(JSON.stringify("callbacks redirectだよ urlは " + url + " baseUrlは " + baseUrl));
       return url.startsWith(baseUrl)
