@@ -7,6 +7,7 @@ import {
   csrfToken,
   session,
 } from "next-auth/client";
+import { server } from "../config";
 
 
 function About({ sessionObj }) {
@@ -28,8 +29,9 @@ export async function getServerSideProps(context) {
 
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const req = context.req
+  process.env.NEXTAUTH_SITE = "http://localhost:3000";
   const sessionObj = await session({ req });
-
+  process.env.NEXTAUTH_SITE = server;
   // apiをfetchするとsessionがあっても{}が返ってくる。ブラウザで直接getすると取得できるのに...
   // const sessionRespose = await fetch(`http://localhost:3000/api/auth/session/`)
   // console.log("aboutのsessionResposeは " + JSON.stringify(sessionRespose));
