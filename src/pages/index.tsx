@@ -2,6 +2,7 @@ import React from "react";
 import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
 import { App } from "../app/View/App";
 import Head from "next/head";
+const fetchI = require("isomorphic-fetch");
 import { register, unregister } from "next-offline/runtime";
 import {
   signin,
@@ -64,9 +65,21 @@ export async function getServerSideProps(context:NextPageContext) {
 
   // apiをfetchするとsessionがあっても{}が返ってくる。ブラウザで直接getすると取得できるのに...
   // const sessionRespose = await fetch(`http://localhost:3000/api/auth/session/`)
+  // const sessionRespose = await fetchI(`http://localhost:3000/api/auth/session/`)
   // console.log("sessionResposeは " + JSON.stringify(sessionRespose));
-
   // const sessionObj = await sessionRespose.json();
+
+  // const sessionObj = fetchI("http://localhost:3000/api/auth/session/")
+  //   .then(function(response) {
+  //     if (response.status >= 400) {
+  //       throw new Error("Bad response from server");
+  //     }
+  //     return response.json();
+  //   })
+  //   .then(function(stories) {
+  //     console.log(stories);
+  //   });
+
   console.log(
     "sessionObjは " + JSON.stringify(sessionObj)
   );
