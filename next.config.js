@@ -1,4 +1,9 @@
+var dev = process.env.NODE_ENV !== "production";
 
+var server = dev
+  ? "http://localhost:3000"
+  : "https://salon-tablet.com";
+  
 module.exports = {
   // server.tsからnextjsのapi routeに移行して、next buildしようとしたら
   // エラー Module not found: Can't resolve 'fs' in のエラーが出たのでこれで無効化
@@ -15,9 +20,9 @@ module.exports = {
 
     return config;
   },
-  // ↓効いてない？意味ない？
+  // ↓効いてる？意味ない？
   env: {
-    NEXTAUTH_BASE_PATH: `http://localhost:3000/api/auth`,
+    NEXTAUTH_BASE_PATH: server + `/api/auth`,
   },
 };
 
