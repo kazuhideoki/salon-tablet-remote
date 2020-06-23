@@ -22,7 +22,8 @@ module.exports = {
   },
   // ↓効いてる？意味ない？
   env: {
-    NEXTAUTH_BASE_PATH: server + `/api/auth`,
+    // NEXTAUTH_BASE_PATH: server + `/api/auth`,
+    NEXTAUTH_SITE: server,
   },
 };
 
