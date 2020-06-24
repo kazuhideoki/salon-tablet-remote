@@ -3,27 +3,46 @@ import {
   Store,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
+import { useCheckPassword } from "./useCheckPassword";
+import { signout } from "next-auth/client";
 
 export const useDeleteUser = () => {
-  // const { user } = React.useContext(Store);
-  // const id = user.user_id
+  const { userInfo } = React.useContext(Store)
+  const {user_email, user_id} = userInfo
+  const checkPassword = useCheckPassword()
 
-  return async () => {
-    const res = await fetch(
-      `${location.protocol}//${location.host}/articles/delete`, //★要変更
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        // body: JSON.stringify({ id }),
-      }
-    );
-    const data = await res.json();
+  return async ({ email, password }) => {
 
-    if (data.err === true) {
-      alert("削除できませんでした");
+    // メールアドレスが違う場合その時点で弾く
+    if (user_email !== email) {
+      alert('メールアドレスが間違っています')
     } else {
-     
+      const result = await checkPassword(password);
+  
+      if (result === true) {
+        // ここにアカウント削除処理実装
+        const res = await fetch(
+          `${location.protocol}//${location.host}/api/user_info/delete`,  
+          {
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(user_id),
+          }
+        );
+        const data = await res.json();
+
+        if (data.err === true) {
+          alert("削除できませんでした");
+        } else {
+          signout()        
+          alert('アカウントを削除しました。')
+        }
+
+      }
+
     }
+
+
   };
 };

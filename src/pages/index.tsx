@@ -86,6 +86,10 @@ export async function getServerSideProps(context:NextPageContext) {
       sessionObj.user.email
     );
     userInfo = resData[0];
+  }
+
+  // if (userInfo.length) {
+  if (userInfo) {
     console.log(
       "resData.bcrypt_passwordは " + JSON.stringify(userInfo.bcrypt_password)
     );
@@ -99,11 +103,9 @@ export async function getServerSideProps(context:NextPageContext) {
     // bcrypt_passwordはフロント側に渡さない bcrypt_passwordは削除
     delete userInfo.bcrypt_password;
 
-  }
-
-  // if (userInfo.length) {
-  if (userInfo) {
     console.log("userInfoは " + JSON.stringify(userInfo));
+
+    
 
     // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
     const res = await fetch(`http://localhost:3000/api/articles/get`, {

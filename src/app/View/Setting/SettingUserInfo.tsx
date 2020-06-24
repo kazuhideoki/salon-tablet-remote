@@ -53,7 +53,7 @@ export function SettingUserInfo() {
     setPassword,
   } = React.useContext(EditorContext);
 
-  const { userInfo } = React.useContext(Store)
+  const { userInfo, dispatchAppState } = React.useContext(Store)
 
   const updateUser = useUpdateUser()
 
@@ -61,6 +61,10 @@ export function SettingUserInfo() {
     console.log("handleOnSubmitだよ");
     
     updateUser()
+  }
+
+  const openDeleteAccountForm = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "delete_account_form" });
   }
 
   return (
@@ -145,7 +149,6 @@ export function SettingUserInfo() {
             
           
           <Button
-            // type="submit"
             fullWidth
             variant="contained"
             color="primary"
@@ -158,19 +161,18 @@ export function SettingUserInfo() {
             更新
           </Button>
         </form>
-        {/* <Button
-          // type="submit"
+        <Button
           fullWidth
           variant="contained"
           color="secondary"
           className={classes.submit}
-          onClick={() => handleOnSubmit()}
-          disabled={
-            isValidPassword(password) || password.length === 0 ? false : true
-          }
+          onClick={() => openDeleteAccountForm()}
+          // disabled={
+          //   isValidPassword(password) || password.length === 0 ? false : true
+          // }
         >
           アカウントを削除する
-          </Button> */}
+          </Button>
       </div>
     </Container>
   );
