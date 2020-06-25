@@ -75,6 +75,7 @@ export const useUpdateUser = () => {
       });
       alert("ユーザーデータを更新しました。");
       // ↓modalを閉じるとTextFieldの値をうまく保持できない
+      // そもそも必要ない
       // dispatchAppState({ type: "CLOSE_MODAL" });
     }
   };

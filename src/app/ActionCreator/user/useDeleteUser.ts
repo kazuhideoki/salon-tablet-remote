@@ -19,7 +19,10 @@ export const useDeleteUser = () => {
     } else {
       const result = await checkPassword(password);
   
-      if (result === true) {
+      if (result === false){
+        alert("パスワードが間違っています");
+
+      } else if(result === true) {
         // ここにアカウント削除処理実装
         const res = await fetch(
           `${location.protocol}//${location.host}/api/user_info/delete`,  
@@ -35,6 +38,7 @@ export const useDeleteUser = () => {
         if (data.err === true) {
           alert("削除できませんでした");
         } else {
+          // ↓signout()が先、alertが後で正しく動作した
           signout()        
           alert('アカウントを削除しました。')
         }

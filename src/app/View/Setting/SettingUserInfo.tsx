@@ -134,7 +134,8 @@ export function SettingUserInfo() {
           <Typography component="h3" variant="body1">
             {isValidPassword(password) || password.length === 0 ? null : (
               <Typography component="h3" variant="body1" color={"error"}>
-                ※パスワードは半角英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい
+                {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
+                <b>※パスワードは【0-9】【a-z】【A-Z】を含む【8文字以上】でご入力下さい</b>
               </Typography>
             )}
             {userInfo.isSetPassword ?

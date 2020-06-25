@@ -50,94 +50,78 @@ type TSessionOnj = {
 }
 
 export async function getServerSideProps(context:NextPageContext) { 
-
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const req = context.req
   const sessionObj: TSessionOnj = await session({ req });
-
   console.log(
     "sessionObjは " + JSON.stringify(sessionObj)
   );
-
-  let resData = null
   let userInfo: TUserInfo
-  // sessionがなくても{"user":{"name":null,"email":null,"image":null},"expires":"2020-07-20T11:55:05.277Z"}が返ってきた。
-  // セッションがない場合、セッションが空のオブジェクトの場合
-  // sessionObj === {};は / api / auth / sessionでsessionがないとき
-  if (
-    sessionObj === null ||
-    !Object.keys(sessionObj).length // {} の場合
-    // || sessionObj.user.email === null
-  ) {
-    return {
-      props: {
-        data: {
-          session: null,
-        },
-        csrfToken: await csrfToken(context),
-      },
-    };
 
-    // センションがある場合
-  } else {
-    //@ts-ignore
-    resData = await db(
+  // セッションがある
+  if (sessionObj !== null) {
+    const res = await db(
       "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
-    userInfo = resData[0];
-  }
+    userInfo = res[0];
 
-  // if (userInfo.length) {
-  if (userInfo) {
-    console.log(
-      "resData.bcrypt_passwordは " + JSON.stringify(userInfo.bcrypt_password)
-    );
+    // ユーザーデータがある
+    if (userInfo) {
+      console.log(
+        "userInfoは " + JSON.stringify(userInfo.bcrypt_password)
+      );
 
-    if (userInfo.bcrypt_password) {
-      userInfo.isSetPassword = true;
-    } else {
-      userInfo.isSetPassword = false;
-    }
+      if (userInfo.bcrypt_password) {
+        userInfo.isSetPassword = true;
+      } else {
+        userInfo.isSetPassword = false;
+      }
 
-    // bcrypt_passwordはフロント側に渡さない bcrypt_passwordは削除
-    delete userInfo.bcrypt_password;
+      // bcrypt_passwordはフロント側に渡さない bcrypt_passwordは削除
+      delete userInfo.bcrypt_password;
 
-    console.log("userInfoは " + JSON.stringify(userInfo));
+      console.log("userInfoは " + JSON.stringify(userInfo));
 
-    
 
-    // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
-    const res = await fetch(`http://localhost:3000/api/articles/get`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify({
-        page: 1,
-        isSetting: false,
-        userId: userInfo.user_id,
-      }),
-    });
 
-    const data = await res.json();
+      // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
+      const res = await fetch(`http://localhost:3000/api/articles/get`, {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({
+          page: 1,
+          isSetting: false,
+          userId: userInfo.user_id,
+        }),
+      });
 
-    const res2 = await fetch(
-      `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
-    );
-    const data2 = await res2.json();
+      const data = await res.json();
 
-    return {
-      props: {
-        data: {
-          articles: data.rawData,
-          pagination: data.pagination,
-          footerItems: data2.rawData,
-          // JSONのエラーになったので、このような書き方↓
-          session: userInfo && JSON.parse(JSON.stringify(userInfo)),
+      const res2 = await fetch(
+        `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
+      );
+      const data2 = await res2.json();
+
+      return {
+        props: {
+          data: {
+            articles: data.rawData,
+            pagination: data.pagination,
+            footerItems: data2.rawData,
+            // JSONのエラーになったので、このような書き方↓
+            session: userInfo && JSON.parse(JSON.stringify(userInfo)),
+          },
         },
-      },
-    };
-  } else {
+      };
+      
+    } 
+
+  } 
+  
+  // ※もしかしたら↓うまく行かないこともあるかもしれないが、スッキリさせた
+  if (sessionObj === null || !userInfo) {
     return {
       props: {
         data: {
@@ -146,7 +130,10 @@ export async function getServerSideProps(context:NextPageContext) {
         csrfToken: await csrfToken(context),
       },
     };
+
   }
+
+  
 
 
     
