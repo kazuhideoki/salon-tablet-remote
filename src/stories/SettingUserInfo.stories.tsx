@@ -1,7 +1,25 @@
 import React from 'react';
-import { SettingUserInfo } from '../app/View/Setting/SettingUserInfo';
+import { SettingUserInfoPresenter } from '../app/View/Setting/SettingUserInfo';
 export default {
-title: 'SettingUserInfo',
-component: SettingUserInfo,
+  title: 'SettingUserInfoPresenter',
+  component: SettingUserInfoPresenter,
 };
-export const Normal = () => <SettingUserInfo />;
+
+const props = {
+  name: null,
+  setName: null,
+  shopName: null,
+  setShopName: null,
+  email: null,
+  password: "123456aA",
+  setPassword: null,
+  userInfo: {
+    isSetPassword: true,
+  },
+  updateUser: null,
+  handleOnSubmit: null,
+  openDeleteAccountForm: null,
+}
+
+//@ts-ignore
+export const Normal = () => <SettingUserInfoPresenter {...props}/>;

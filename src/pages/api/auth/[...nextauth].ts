@@ -1,7 +1,5 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import { db } from "../lib/db";
-import { T_check_credentials } from "../user_info/check_credentials";
 import authorizeCredentials from "../lib/authorizeCredentials";
 // これで環境変数(.envファイル)が使えるようになる
 require("dotenv").config();
