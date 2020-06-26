@@ -9,6 +9,7 @@ import "react-quill/dist/quill.snow.css";
 // ReactQuillの整形
 import "../../public/quill.scss";
 import { server } from "../config";
+import Head from "next/head";
 
 export default function MyApp({ Component, pageProps }) {
   // サーバーサイドでnext-authのsessionをつかうための修正項目
@@ -16,8 +17,13 @@ export default function MyApp({ Component, pageProps }) {
   // https://github.com/iaincollins/next-auth/pull/315
   const { session } = pageProps;
   return (
-    <Provider session={session}>
-      <Component {...pageProps} />
-    </Provider>
+    <>
+      <Head>
+        <title>SALON TABLET</title>
+      </Head>
+      <Provider session={session}>
+        <Component {...pageProps} />
+      </Provider>
+    </>
   );
 }

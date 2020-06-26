@@ -8,7 +8,12 @@ import {
 } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
+//@ts-ignore
 import { SignInForm } from "../component/SignInForm";
+import { Typography, makeStyles, createStyles } from "@material-ui/core";
+import { TopPage } from "../component/TopPage";
+
+
 
 
 const Index = (props: StoreContextProviderProps) => {
@@ -16,26 +21,15 @@ const Index = (props: StoreContextProviderProps) => {
   if (!props.data.session) {
     return (
       <>
-        <Head>
-          <title>SALON TABLET</title>
-        </Head>
-        <h1>Salon Tablet</h1>
-        <h2>〜美容室のためのコミュニケーション支援タブレットツール〜</h2>
-
-        <SignInForm csrfToken={props.csrfToken} />
-
+        <TopPage csrfToken={props.csrfToken} />
       </>
     );
     
-  }
-   
+  } 
   // テーマ、記事データ、appの状態管理を読み込む
   return (
     <>
-    <Head><title>SALON TABLET</title></Head>
-
-    <App data={props.data}/>
-    
+      <App data={props.data}/>
     </>
   );
 };
