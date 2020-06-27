@@ -32,36 +32,36 @@ const options = {
     jwt: true,
   },
   // callbacksはlogを見る用にためしに設定してみた。
-  // callbacks: {
-  //   session: async (session, token) => {
-  //     console.log(
-  //       JSON.stringify(
-  //         "callbacks sessionだよ sessionは " +
-  //           JSON.stringify(session) +
-  //           " tokenは " +
-  //           JSON.stringify(token)
-  //       )
-  //     );
-  //     return Promise.resolve(session)
-  //   },
-  //   jwt: async (token, oAuthProfile) => {
-  //     console.log(
-  //       JSON.stringify(
-  //         "callbacks jwtだよ tokenは " +
-  //           JSON.stringify(token) +
-  //           " oAuthProfileは " +
-  //           JSON.stringify(oAuthProfile)
-  //       )
-  //     );
-  //     return Promise.resolve(token)
-  //   },
-  //   redirect: async (url, baseUrl) => {
-  //     console.log(JSON.stringify("callbacks redirectだよ urlは " + url + " baseUrlは " + baseUrl));
-  //     return url.startsWith(baseUrl)
-  //       ? Promise.resolve(url)
-  //       : Promise.resolve(baseUrl);
-  //   },
-  // },
+  callbacks: {
+    session: async (session, token) => {
+      console.log(
+        JSON.stringify(
+          "callbacks sessionだよ sessionは " +
+            JSON.stringify(session) +
+            " tokenは " +
+            JSON.stringify(token)
+        )
+      );
+      return Promise.resolve(session)
+    },
+    jwt: async (token, oAuthProfile) => {
+      console.log(
+        JSON.stringify(
+          "callbacks jwtだよ tokenは " +
+            JSON.stringify(token) +
+            " oAuthProfileは " +
+            JSON.stringify(oAuthProfile)
+        )
+      );
+      return Promise.resolve(token)
+    },
+    redirect: async (url, baseUrl) => {
+      console.log(JSON.stringify("callbacks redirectだよ urlは " + url + " baseUrlは " + baseUrl));
+      return url.startsWith(baseUrl)
+        ? Promise.resolve(url)
+        : Promise.resolve(baseUrl);
+    },
+  },
 
   sessionMaxAge: 24 * 60 * 60 * 1000, // Expire sessions
   debug: true,
