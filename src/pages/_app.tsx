@@ -1,7 +1,5 @@
 import { config, Provider } from "next-auth/client";
 
-config({ site: server }) // e.g. site: 'http://localhost:3000'
-
 // デバイス間のcssをリセットする
 import "normalize.css"
 // editor用のsnowテーマのcss
@@ -21,9 +19,10 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <title>SALON TABLET</title>
       </Head>
-      <Provider session={session}>
+      <Provider options={{ site: server }} session={session}>
         <Component {...pageProps} />
       </Provider>
     </>
+
   );
 }

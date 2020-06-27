@@ -2,10 +2,7 @@ import React from "react";
 import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
 import { App } from "../app/View/App";
 import Head from "next/head";
-import {
-  csrfToken,
-  session,
-} from "next-auth/client";
+import { csrfToken, getCsrfToken, session, getSession } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
 //@ts-ignore
@@ -13,44 +10,42 @@ import { SignInForm } from "../component/SignInForm";
 import { Typography, makeStyles, createStyles } from "@material-ui/core";
 import { TopPage } from "../component/TopPage";
 
-
-
-
 const Index = (props: StoreContextProviderProps) => {
-
   if (!props.data.session) {
+    // console.log("Index" + JSON.stringify(props.csrfToken));
+
     return (
       <>
         <TopPage csrfToken={props.csrfToken} />
       </>
     );
-    
-  } 
+
+  }
   // テーマ、記事データ、appの状態管理を読み込む
   return (
     <>
-      <App data={props.data}/>
+      <App data={props.data} />
     </>
   );
 };
 
 type TSessionOnj = {
   user: {
-    name: string | null,
-    email: string | null,
-    image: string | null,
-  },
-  expires: string | null,
-}
+    name: string | null;
+    email: string | null;
+    image: string | null;
+  };
+  expires: string | null;
+};
 
-export async function getServerSideProps(context:NextPageContext) { 
+export async function getServerSideProps(context: NextPageContext) {
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
-  const req = context.req
-  const sessionObj: TSessionOnj = await session({ req });
-  console.log(
-    "sessionObjは " + JSON.stringify(sessionObj)
-  );
-  let userInfo: TUserInfo
+  const req = context.req;
+  // const sessionObj: TSessionOnj = await session({ req });
+  // ↓document通りだけど、これはうまく行かない?
+  const sessionObj: TSessionOnj = await getSession({ req });
+  console.log("sessionObjは " + JSON.stringify(sessionObj));
+  let userInfo: TUserInfo;
 
   // セッションがある
   if (sessionObj !== null) {
@@ -62,9 +57,7 @@ export async function getServerSideProps(context:NextPageContext) {
 
     // ユーザーデータがある
     if (userInfo) {
-      console.log(
-        "userInfoは " + JSON.stringify(userInfo.bcrypt_password)
-      );
+      console.log("userInfoは " + JSON.stringify(userInfo.bcrypt_password));
 
       if (userInfo.bcrypt_password) {
         userInfo.isSetPassword = true;
@@ -76,8 +69,6 @@ export async function getServerSideProps(context:NextPageContext) {
       delete userInfo.bcrypt_password;
 
       console.log("userInfoは " + JSON.stringify(userInfo));
-
-
 
       // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
       const res = await fetch(`http://localhost:3000/api/articles/get`, {
@@ -109,28 +100,23 @@ export async function getServerSideProps(context:NextPageContext) {
           },
         },
       };
-      
-    } 
+    }
+  }
 
-  } 
-  
   // ※もしかしたら↓うまく行かないこともあるかもしれないが、スッキリさせた
   if (sessionObj === null || !userInfo) {
+    // const token = await csrfToken(context);
+    const token = await getCsrfToken();
+    console.log("serverSideProps" + JSON.stringify(token));
     return {
       props: {
         data: {
           session: null,
         },
-        csrfToken: await csrfToken(context),
+        csrfToken: token,
       },
     };
-
   }
+}
 
-  
-
-
-    
-};
-
-export default Index
+export default Index;

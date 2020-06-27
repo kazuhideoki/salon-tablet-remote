@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 import { Typography, makeStyles, createStyles } from "@material-ui/core";
-import { SignInForm } from './SignInForm';
+import { SignInForm } from "./SignInForm";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -10,9 +10,10 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-type Props = {csrfToken: string }
+type Props = { csrfToken: string };
 
 export const TopPage: React.FC<Props> = (props) => {
+  // console.log("TopPage" + JSON.stringify(props.csrfToken));
   return (
     <>
       <Typography
@@ -36,4 +37,5 @@ export const TopPage: React.FC<Props> = (props) => {
       <SignInForm csrfToken={props.csrfToken} />
     </>
   );
-}
+
+};

@@ -4,13 +4,8 @@ import authorizeCredentials from "../lib/authorizeCredentials";
 // これで環境変数(.envファイル)が使えるようになる
 require("dotenv").config();
 
-const site =
-  process.env.NODE_ENV !== "production"
-    ? process.env.SITE
-    : process.env.SITE_PRO;
-
 const options = {
-  site: site,
+  site: process.env.SITE,
   providers: [
     Providers.Email({
       server: process.env.EMAIL_SERVER,
@@ -42,25 +37,29 @@ const options = {
   //           JSON.stringify(token)
   //       )
   //     );
-  //     return Promise.resolve(session)
+  //     return Promise.resolve(session);
   //   },
   //   jwt: async (token, oAuthProfile) => {
   //     console.log(
   //       JSON.stringify(
   //         "callbacks jwtだよ tokenは " +
   //           JSON.stringify(token) +
-  //           " oAuthProfileは " +
-  //           JSON.stringify(oAuthProfile)
-  //       )
-  //     );
-  //     return Promise.resolve(token)
-  //   },
-  //   redirect: async (url, baseUrl) => {
-  //     console.log(JSON.stringify("callbacks redirectだよ urlは " + url + " baseUrlは " + baseUrl));
-  //     return url.startsWith(baseUrl)
-  //       ? Promise.resolve(url)
-  //       : Promise.resolve(baseUrl);
-  //   },
+    //         " oAuthProfileは " +
+    //         JSON.stringify(oAuthProfile)
+    //     )
+    //   );
+    //   return Promise.resolve(token);
+    // },
+    // redirect: async (url, baseUrl) => {
+    //   console.log(
+    //     JSON.stringify(
+    //       "callbacks redirectだよ urlは " + url + " baseUrlは " + baseUrl
+    //     )
+    //   );
+    //   return url.startsWith(baseUrl)
+    //     ? Promise.resolve(url)
+    //     : Promise.resolve(baseUrl);
+    // },
   // },
 
   sessionMaxAge: 24 * 60 * 60 * 1000, // Expire sessions

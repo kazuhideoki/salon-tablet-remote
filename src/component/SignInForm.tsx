@@ -1,18 +1,32 @@
-import React from 'react'
-import { server } from '../config';
+import React from "react";
+import { server } from "../config";
 import { signin, signout, useSession, getSession } from "next-auth/client";
-import { TextField, Button, makeStyles, createStyles, Typography } from "@material-ui/core";
-import { useDrawerProps } from '../app/View/Drawer';
-import { checkPassword } from '../module/bcrypt';
-import { useCheckPassword } from '../app/ActionCreator/user/useCheckPassword';
-import { TextFields } from '@material-ui/icons';
+import {
+  TextField,
+  Button,
+  makeStyles,
+  createStyles,
+  Typography,
+} from "@material-ui/core";
+import { useDrawerProps } from "../app/View/Drawer";
+import { checkPassword } from "../module/bcrypt";
+import { useCheckPassword } from "../app/ActionCreator/user/useCheckPassword";
+import { TextFields } from "@material-ui/icons";
 
 const useSignInFormProps = () => {
-  const [newEmail, setNewEmail] = React.useState('')
-  const [UserEmail, setUserEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [newEmail, setNewEmail] = React.useState("");
+  const [UserEmail, setUserEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-}
+  return {
+    newEmail,
+    setNewEmail,
+    UserEmail,
+    setUserEmail,
+    password,
+    setPassword,
+  };
+};
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -29,10 +43,13 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-type Props = {csrfToken: string }
 
-export const SignInForm: React.FC<Props> = (props) => {
-  const classes = useStyles()
+// type Props = {csrfToken: string }
+type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string };
+
+export const SignInFormPresenter: React.FC<Props> = (props) => {
+  console.log("SignInFormPresenter" + JSON.stringify(props.csrfToken));
+  const classes = useStyles();
 
   return (
     <>
@@ -63,6 +80,8 @@ export const SignInForm: React.FC<Props> = (props) => {
           name="email"
           label="メールアドレス"
           autoComplete="email"
+          value={props.newEmail}
+          onChange={(e) => props.setNewEmail(e.target.value)}
         />
         <br />
         <Button
@@ -92,6 +111,9 @@ export const SignInForm: React.FC<Props> = (props) => {
           name="email"
           label="メールアドレス"
           autoComplete="email"
+
+          value={props.UserEmail}
+          onChange={(e) => props.setUserEmail(e.target.value)}
         />
         <br />
         <TextField
@@ -102,6 +124,9 @@ export const SignInForm: React.FC<Props> = (props) => {
           type="password"
           id="password"
           autoComplete="current-password"
+
+          value={props.password}
+          onChange={(e) => props.setPassword(e.target.value)}
         />
         <br />
         <Button type="submit" variant="contained" color="primary">
@@ -110,4 +135,11 @@ export const SignInForm: React.FC<Props> = (props) => {
       </form>
     </>
   );
-}
+};
+
+export const SignInForm = (props) => {
+  const useProps = useSignInFormProps();
+  // console.log("SignInForm" + JSON.stringify(props.csrfToken));
+
+  return <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} />;
+};
