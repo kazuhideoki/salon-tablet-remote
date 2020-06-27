@@ -137,7 +137,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
 
 export const SignInForm = (props) => {
   const useProps = useSignInFormProps();
-  console.log("SignInForm" + JSON.stringify(props.csrfToken));
+  // console.log("SignInForm" + JSON.stringify(props.csrfToken));
 
   return <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} />;
 };

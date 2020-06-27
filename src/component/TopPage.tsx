@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) =>
 type Props = { csrfToken: string };
 
 export const TopPage: React.FC<Props> = (props) => {
-  console.log("TopPage" + JSON.stringify(props.csrfToken));
+  // console.log("TopPage" + JSON.stringify(props.csrfToken));
   return (
     <>
       <Typography

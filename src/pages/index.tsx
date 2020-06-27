@@ -12,7 +12,7 @@ import { TopPage } from "../component/TopPage";
 
 const Index = (props: StoreContextProviderProps) => {
   if (!props.data.session) {
-    console.log("Index" + JSON.stringify(props.csrfToken));
+    // console.log("Index" + JSON.stringify(props.csrfToken));
 
     return (
       <>
