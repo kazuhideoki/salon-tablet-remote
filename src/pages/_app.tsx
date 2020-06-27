@@ -19,7 +19,7 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <title>SALON TABLET</title>
       </Head>
-      <Provider options={{ site: server }} session={session}>
+      <Provider options={{ site: process.env.SITE }} session={session}>
         <Component {...pageProps} />
       </Provider>
     </>
