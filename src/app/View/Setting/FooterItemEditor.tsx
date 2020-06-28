@@ -115,14 +115,6 @@ export const FooterItemEditor = () => {
         </Typography>
       )}
       <br />
-
-      {/* footerItemEditorでは日付なくても大丈夫？ */}
-      {/* <Typography>
-        作成日:{sqlToDate(createdAt)}
-      </Typography>
-      {updatedAt ? <Typography>
-        編集日:{sqlToDate(updatedAt)}
-      </Typography> : null} */}
  
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {mainField}
