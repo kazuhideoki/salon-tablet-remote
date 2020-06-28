@@ -185,7 +185,7 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
           onChange={(e) => setPass(e.target.value)}
         />
         <Button onClick={() => props.handleSubmitPassword(pass)}>
-          設定モード
+          編集モード
         </Button>
       </>
     );
@@ -193,7 +193,7 @@ export const DrawerPresenter:React.FC<PresenterProps> = (props) => {
 
   const BeforeIsSettingDrawerMenuMobile = () => {
     return (
-      <Button onClick={() => props.dispatchAppState({type: "ON_IS_SETTING"})}>設定モード</Button>
+      <Button onClick={() => props.dispatchAppState({type: "ON_IS_SETTING"})}>編集モード</Button>
     )
   }
 

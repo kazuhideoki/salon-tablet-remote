@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     quit: {
       width: "100%",
+      backgroundColor: "whitesmoke",
     },
     homeAndPagination: {
       display: "flex",
@@ -60,7 +61,7 @@ export const AppMobile = () => {
   return (
     <>
       <div className={classes.root}>
-        <Button className={classes.quit} onClick={() => dispatchAppState({type: "OFF_IS_SETTING"})}>設定モードを終了する</Button>
+        <Button className={classes.quit} onClick={() => dispatchAppState({type: "OFF_IS_SETTING"})}>編集モードを終了する</Button>
         <Display />
         {/* {tab === 0 ? <PaginationMobile /> : null} */}
         <TabMobile tab={tab} setTab={setTab} />
