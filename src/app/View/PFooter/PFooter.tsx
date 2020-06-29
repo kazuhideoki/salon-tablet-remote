@@ -11,13 +11,18 @@ import { useGetFooterItem } from "../../ActionCreator/footerItems/useGetFooterIt
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../Setting/iconSelect/icons";
+import { footerItems } from "../../../stories/footerItems";
 
 export const usePFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにPModalで分岐してどのモーダルウィンドウを表示させるか決める
 
   const openModal = (item_content: string) => {
-    dispatchAppState({ type: "SET_CONTENT", payload: item_content });
+    // footerItemは記事タイトルがないので、titleはnull
+    dispatchAppState({
+      type: "SET_MODAL_CONTENT",
+      payload: { title: null, content: item_content },
+    });
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };
 
@@ -161,7 +166,9 @@ export const PFooterPresenter = (props:Props) => {
           />
         ) : (
           // "modal"以外→"link"か"appLink"の時
-          <a href={value.on_tap === "link" ? value.link_url : value.app_link_url}>
+          <a
+            href={value.on_tap === "link" ? value.link_url : value.app_link_url}
+          >
             <IconAndText
               icon={
                 value.displayed_icon_name

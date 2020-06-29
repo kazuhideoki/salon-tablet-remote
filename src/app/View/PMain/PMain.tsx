@@ -38,8 +38,11 @@ export const usePMainProps = () => {
     deleting ? deleteArticle(article_id) : null;
   };
 
-  const openArticle = (article_content: string) => {
-    dispatchAppState({ type: "SET_CONTENT", payload: article_content });
+  const openArticle = (title: string, article_content: string) => {
+    dispatchAppState({
+      type: "SET_MODAL_CONTENT",
+      payload: { title: title, content: article_content },
+    });
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };
 
@@ -143,7 +146,7 @@ export const PMainPresenter = (props: Props) => {
 
           <CardActionArea
             className={classes.cardActionArea}
-            onClick={() => props.openArticle(value.article_content)}
+            onClick={() => props.openArticle(value.title, value.article_content)}
           >
             <Card variant="outlined" className={classes.card}>
               <CardContent>

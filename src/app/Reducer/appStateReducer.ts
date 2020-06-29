@@ -5,7 +5,8 @@ export type AppStateAction =
     { type: "ON_IS_SETTING" } |
     { type: "OFF_IS_SETTING" } |
     { type: "OPEN_MODAL", payload: string } |
-    { type: "SET_CONTENT", payload: any } |
+    // footerItemの場合はtitleはnullが入る
+    { type: "SET_MODAL_CONTENT", payload: {title: string | null, content: string} } |
     { type: "CLOSE_MODAL" } | 
     { type: "OPEN_ARTICLE_MODAL" } |
     { type: "CLOSE_ARTICLE_MODAL" } |
@@ -35,10 +36,13 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isModalOpen: true,
         };
         break;
-      case "SET_CONTENT":
+      case "SET_MODAL_CONTENT":
         newState = {
           ...state,
-          ContentModal: action.payload,
+          currentModalContent: {
+            title: action.payload.title || null,
+            contnet: action.payload.content,
+          },
         };
         break;
       case "CLOSE_MODAL":

@@ -103,7 +103,12 @@ export type FooterItems = FooterItem[]
 const initAppState = {
   isSetting: false,
   setModal: "edit_article",
-  ContentModal: '',
+  // ContentModal: '',
+  // contentModalに表示させる要素
+  currentModalContent: {
+    title: "",
+    contnet: "",
+  },
   isModalOpen: false,
   isArticleModalOpen: false,
 };

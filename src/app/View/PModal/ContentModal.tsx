@@ -13,12 +13,16 @@ const useStyles = makeStyles((theme) =>
 export const ContentModal = () => {
   const { appState } = React.useContext(Store)
   return (
-    // <div
-    //   dangerouslySetInnerHTML={{
-    //     __html: appState.articleContentModal,
-    //   }}
-    // />
-    <ReactQuill readOnly theme='bubble' value={appState.ContentModal}/>
+    <>
+      {appState.currentModalContent.title && (
+        <h1>{appState.currentModalContent.title}</h1>
+      )}
+      <ReactQuill
+        readOnly
+        theme="bubble"
+        value={appState.currentModalContent.contnet}
+      />
+    </>
   );
 }
 
