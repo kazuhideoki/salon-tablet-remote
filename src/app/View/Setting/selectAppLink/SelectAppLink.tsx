@@ -42,8 +42,11 @@ export const SelectAppLink = ({appLinkUrl, setAppLinkUrl}) => {
           <em>None</em>
         </MenuItem>
         {/* ※↓mapを使ってやろうとしたがうまく行かなかった。別ファイルにも分けられない？ */}
-        <MenuItem value="rmagazine://">楽天マガジン(iOS)</MenuItem>
+        <MenuItem value="rmagazine://">楽天マガジン(iOS, Android)</MenuItem>
         <MenuItem value="fb179689808731959://">Magzter(iOS)</MenuItem>
+        <MenuItem value="magzter://">Magzter(Android)</MenuItem>
+        <MenuItem value="ibooks://">iBooks(iOS)</MenuItem>
+        <MenuItem value="photos-redirect://">Photos(iOS)</MenuItem>
       </Select>
     </FormControl>
   );

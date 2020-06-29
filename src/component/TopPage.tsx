@@ -22,7 +22,7 @@ export const TopPage: React.FC<Props> = (props) => {
         gutterBottom
         // className={classes.typography}
       >
-        Salon Tablet
+        SALON TABLET
       </Typography>
       <Typography
         variant="h4"

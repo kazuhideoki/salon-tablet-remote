@@ -115,14 +115,15 @@ export const FooterItemEditor = () => {
         </Typography>
       )}
       <br />
- 
+
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {mainField}
-      
+
+      <SelectIcon />
       <Grid container className={classes.submitButtons}>
-        <Grid item>
+        {/* <Grid item>
           <SelectIcon />
-        </Grid>
+        </Grid> */}
         <Grid item>
           <Button
             variant="outlined"

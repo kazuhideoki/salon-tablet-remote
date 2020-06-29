@@ -23,7 +23,7 @@ export const PHeader = () => {
   return (
     <div className={classes.root}>
       <Typography align="center" variant="h5">
-        {userInfo.shop_name || "Salon Tablet"}
+        {userInfo.shop_name || "SALON TABLET"}
       </Typography>
     </div>
   )

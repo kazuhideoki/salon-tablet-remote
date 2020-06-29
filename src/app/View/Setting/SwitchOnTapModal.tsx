@@ -23,7 +23,7 @@ export function SwitchOnTapModal({ onTap, setOnTap }) {
     <FormControl component="fieldset">
       <FormLabel component="legend">フッターアイテム機能切り替え</FormLabel>
       <RadioGroup row aria-label="gender" name="gender1" value={onTap} onChange={handleChange} >
-        <FormControlLabel value="modal" control={<Radio />} label="モーダルウィンドウ" />
+        <FormControlLabel value="modal" control={<Radio />} label="ウィンドウ" />
         {/* <HelpButton content="ブログ記事のようにウィンドウが開きます。"/> */}
         <FormControlLabel value="link" control={<Radio />} label="外部リンク" />
         <FormControlLabel value="appLink" control={<Radio />} label="アプリリンク" />

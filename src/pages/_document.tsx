@@ -11,7 +11,7 @@ const theme = responsiveFontSizes(createMuiTheme())
 
 class MyDocument extends Document {
   domain = "https://salon-tablet.com";
-  appName = "Salon Tablet";
+  appName = "SALON TABLET";
   content = "Best App for intaraction between hairdressers and their customers";
 
   render() {
@@ -87,7 +87,7 @@ class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:url" content={this.domain} />
-          <meta name="twitter:title" content="Salon Tablet" />
+          <meta name="twitter:title" content="SALON TABLET" />
           <meta name="twitter:description" content={this.content} />
           <meta
             name="twitter:image"
