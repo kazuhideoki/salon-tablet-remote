@@ -9,19 +9,19 @@ component: DrawerPresenter,
 
 
 export const Close = () => {
-  const [open, setOpen] = React.useState(false)
   const theme = useTheme()
   const props = {
     theme: theme,
     appState: {
-      isSetting: true,
+      isSetting: false,
+      isDrawerOpen: false,
     },
     dispatchAppState: null,
     handleOpenArticleEditor: null,
     handleOpenFooterItemEditor: null,
     handleSubmitPassword: null,
     handleOnSingOut: null,
-    open: open,
+    open: false,
     handleDrawerOpen: null,
     handleDrawerClose: null,
     isMobile: null,
@@ -31,19 +31,19 @@ export const Close = () => {
   return <DrawerPresenter {...props}/>
 }
 export const Open = () => {
-  const [open, setOpen] = React.useState(true)
   const theme = useTheme()
   const props = {
     theme: theme,
     appState: {
       isSetting: false,
+      isDrawerOpen: true,
     },
     dispatchAppState: null,
     handleOpenArticleEditor: null,
     handleOpenFooterItemEditor: null,
     handleSubmitPassword: null,
     handleOnSingOut: null,
-    open: open,
+    // open: true,
     handleDrawerOpen: null,
     handleDrawerClose: null,
     isMobile: null,
@@ -52,20 +52,42 @@ export const Open = () => {
   //@ts-ignore
   return <DrawerPresenter {...props}/>
 }
-export const OpenIsSetting = () => {
-  const [open, setOpen] = React.useState(true)
+export const OpenMobile = () => {
   const theme = useTheme()
   const props = {
     theme: theme,
     appState: {
-      isSetting: true,
+      isSetting: false,
+      isDrawerOpen: true,
     },
     dispatchAppState: null,
     handleOpenArticleEditor: null,
     handleOpenFooterItemEditor: null,
     handleSubmitPassword: null,
     handleOnSingOut: null,
-    open: open,
+    // open: true,
+    handleDrawerOpen: null,
+    handleDrawerClose: null,
+    isMobile: true,
+  };
+
+  //@ts-ignore
+  return <DrawerPresenter {...props}/>
+}
+export const OpenIsSetting = () => {
+  const theme = useTheme()
+  const props = {
+    theme: theme,
+    appState: {
+      isSetting: true,
+      isDrawerOpen: true,
+    },
+    dispatchAppState: null,
+    handleOpenArticleEditor: null,
+    handleOpenFooterItemEditor: null,
+    handleSubmitPassword: null,
+    handleOnSingOut: null,
+    // open: true,
     handleDrawerOpen: null,
     handleDrawerClose: null,
     isMobile: null,

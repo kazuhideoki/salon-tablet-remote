@@ -89,15 +89,16 @@ const AppTablet = ()=> {
     const classes = useStyles();
 
     const { appState, dispatchAppState, loading, dispatchLoading } = React.useContext(Store);
+    const open = appState.isDrawerOpen
     const isLoading = loading.mainArticles;
     const getArticles = useGetArticles();
 
     // Drawer用
-    const [open, setOpen] = React.useState(false);
+    // const [open, setOpen] = React.useState(false);
 
     return (
       <div className={classes.root}>
-        <Drawer open={open} setOpen={setOpen}>
+        <Drawer>
           <Grid
             spacing={0}
             container

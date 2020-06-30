@@ -105,6 +105,7 @@ const initAppState = {
   setModal: "edit_article",
   // ContentModal: '',
   // contentModalに表示させる要素
+  isDrawerOpen: false,
   currentModalContent: {
     title: "",
     contnet: "",

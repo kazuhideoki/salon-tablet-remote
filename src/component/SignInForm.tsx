@@ -8,10 +8,6 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
-import { useDrawerProps } from "../app/View/Drawer";
-import { checkPassword } from "../module/bcrypt";
-import { useCheckPassword } from "../app/ActionCreator/user/useCheckPassword";
-import { TextFields } from "@material-ui/icons";
 
 const useSignInFormProps = () => {
   const [newEmail, setNewEmail] = React.useState("");
