@@ -12,6 +12,9 @@ import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    header: {
+      margin: theme.spacing(2)
+    },
     title: {
       width: 350,
       marginBottom: 20,
@@ -53,7 +56,7 @@ const ArticleEditor = () => {
     // 記事編集
     if (isEdittingContent) {
       updateArticle(isPublishing);
-      // 新規投稿
+      // 記事作成
     } else {
       createArticle(isPublishing);
     }
@@ -61,7 +64,9 @@ const ArticleEditor = () => {
 
   return (
     <>
-      <h2>記事</h2>
+      <Typography variant="h4" component="h2" className={classes.header}>
+        {isEdittingContent ? "記事編集" : "記事作成"}
+      </Typography>
       <TextField
         id="article-title-text-field"
         label="タイトル"
@@ -79,14 +84,12 @@ const ArticleEditor = () => {
         </Typography>
       )}
 
-
-      {createdAt ? <Typography>
-        作成日:{sqlToDate(createdAt)}
-      </Typography> : null}
-      {updatedAt? <Typography>
-        編集日:{sqlToDate(updatedAt)}
-      </Typography> : null}
-
+      {createdAt ? (
+        <Typography>作成日:{sqlToDate(createdAt)}</Typography>
+      ) : null}
+      {updatedAt ? (
+        <Typography>編集日:{sqlToDate(updatedAt)}</Typography>
+      ) : null}
 
       <QuillEditor
         editorText={editorText}

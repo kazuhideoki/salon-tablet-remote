@@ -11,9 +11,13 @@ import { useUpdateFooterItem } from "../../ActionCreator/footerItems/useUpdateFo
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
+import { Store } from '../../Store/Store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    header: {
+      margin: theme.spacing(2),
+    },
     titleText: {
       width: 350,
       marginBottom: 20,
@@ -46,6 +50,7 @@ export const FooterItemEditor = () => {
     createdAt,
     updatedAt,
   } = React.useContext(EditorContext);
+  const { appState } = React.useContext(Store)
   const [charCountIconName, setCharCountIconName] = React.useState(0);
   const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
   
@@ -98,7 +103,9 @@ export const FooterItemEditor = () => {
 
   return (
     <>
-      <h2>フッターアイテム</h2>
+      <Typography variant="h4" component="h2" className={classes.header}>
+        {isEdittingContent ? "アイテム編集" : "アイテム作成"}
+      </Typography>
       <TextField
         id="icon-name-text-field"
         label="アイテム名"

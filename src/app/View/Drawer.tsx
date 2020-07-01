@@ -220,13 +220,13 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           <ListItemIcon>
             <NoteAddOutlined />
           </ListItemIcon>
-          <ListItemText primary="新規投稿" />
+          <ListItemText primary="記事作成" />
         </ListItem>
         <ListItem button onClick={() => props.handleOpenFooterItemEditor()}>
           <ListItemIcon>
             <VideoLabel />
           </ListItemIcon>
-          <ListItemText primary="フッターアイテム作成" />
+          <ListItemText primary="アイテム作成" />
         </ListItem>
         <ListItem
           button
