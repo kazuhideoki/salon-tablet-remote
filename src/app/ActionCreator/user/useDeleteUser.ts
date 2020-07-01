@@ -4,7 +4,7 @@ import {
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useCheckPassword } from "./useCheckPassword";
-import { signout } from "next-auth/client";
+const { signout } = require("next-auth/client")
 
 export const useDeleteUser = () => {
   const { userInfo } = React.useContext(Store)

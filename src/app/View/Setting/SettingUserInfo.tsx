@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Settings } from "@material-ui/icons";
-import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useUpdateUser } from "../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";

@@ -2,6 +2,7 @@ import React from "react";
 import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
 import { App } from "../app/View/App";
 import Head from "next/head";
+//@ts-ignore
 import { csrfToken, getCsrfToken, session, getSession } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";

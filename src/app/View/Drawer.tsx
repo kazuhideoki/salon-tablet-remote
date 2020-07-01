@@ -21,8 +21,9 @@ import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Store } from "../Store/Store";
 import { EditorContext } from "../Store/EditorContext";
-import { NoteAddOutlined, VideoLabel, Settings, ExitToApp } from "@material-ui/icons";
+import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
+//@ts-ignore
 import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useCheckPassword } from "../ActionCreator/user/useCheckPassword";
 import { cipher } from "../../module/bcrypt";
@@ -78,6 +79,9 @@ export const useDrawerProps = () => {
       alert("パスワードが間違っています。");
     }
   };
+  const handleOpenFeedback = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "feedback_form" });
+  }
 
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
@@ -108,6 +112,7 @@ export const useDrawerProps = () => {
     handleOpenArticleEditor,
     handleOpenFooterItemEditor,
     handleSubmitPassword,
+    handleOpenFeedback,
     handleOnSingOut,
     // open,
     handleDrawerOpen,
@@ -236,6 +241,12 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <Settings />
           </ListItemIcon>
           <ListItemText primary="アカウント" />
+        </ListItem>
+        <ListItem button onClick={() => props.handleOpenFeedback()}>
+          <ListItemIcon>
+            <Feedback />
+          </ListItemIcon>
+          <ListItemText primary="フィードバック" />
         </ListItem>
         <ListItem button onClick={() => props.handleOnSingOut()}>
           <ListItemIcon>

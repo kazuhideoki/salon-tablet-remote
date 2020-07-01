@@ -1,5 +1,6 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+//@ts-ignore
 import { session } from "next-auth/client";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

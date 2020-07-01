@@ -1,3 +1,4 @@
+//@ts-ignore
 import { config, Provider } from "next-auth/client";
 
 // デバイス間のcssをリセットする

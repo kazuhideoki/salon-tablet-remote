@@ -1,4 +1,6 @@
+//@ts-ignore
 import NextAuth from "next-auth";
+//@ts-ignore
 import Providers from "next-auth/providers";
 import authorizeCredentials from "../lib/authorizeCredentials";
 // これで環境変数(.envファイル)が使えるようになる

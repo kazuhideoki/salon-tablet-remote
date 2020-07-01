@@ -1,6 +1,7 @@
 import React from "react";
 import { server } from "../config";
-import { signin, signout, useSession, getSession } from "next-auth/client";
+// import { signin } from "next-auth/client";
+const { signin } = require("next-auth/client")
 import {
   TextField,
   Button,
