@@ -116,7 +116,7 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
                   fullWidth
                   id="name"
                   label="名前"
-                  value={name}
+                  value={props.name}
                   onChange={(e) => props.setName(e.target.value)}
                 />
               </Grid>
