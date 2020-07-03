@@ -2,6 +2,7 @@ import React from "react";
 import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
 import { App } from "../app/View/App";
 import Head from "next/head";
+//@ts-ignore
 import { csrfToken, getCsrfToken, session, getSession } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
@@ -9,6 +10,7 @@ import { NextPageContext } from "next";
 import { SignInForm } from "../component/SignInForm";
 import { Typography, makeStyles, createStyles } from "@material-ui/core";
 import { TopPage } from "../component/TopPage";
+import { server } from "../config";
 
 const Index = (props: StoreContextProviderProps) => {
   if (!props.data.session) {
@@ -47,30 +49,46 @@ export async function getServerSideProps(context: NextPageContext) {
   console.log("sessionObjは " + JSON.stringify(sessionObj));
   let userInfo: TUserInfo;
 
-  // セッションがある
+  // ★★★セッションがある
   if (sessionObj !== null) {
     const res = await db(
       "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
     userInfo = res[0];
+    const { user_id } = userInfo
 
-    // ユーザーデータがある
+    // ★★★ユーザーデータがある
     if (userInfo) {
       console.log("userInfoは " + JSON.stringify(userInfo.bcrypt_password));
 
+      // ★★★ パスワードの有無
       if (userInfo.bcrypt_password) {
         userInfo.isSetPassword = true;
       } else {
         userInfo.isSetPassword = false;
       }
-
       // bcrypt_passwordはフロント側に渡さない bcrypt_passwordは削除
       delete userInfo.bcrypt_password;
-
       console.log("userInfoは " + JSON.stringify(userInfo));
 
-      // ここはサーバーサイドで実行されるのでhttpとlocalhostでOK
+
+      let data
+      let data2
+      // ★★★最初のサインイン サンプルデータの追加
+      if (userInfo.is_first_sign_in) {
+        console.log("indexのis_first_sign_inのとこだよ");
+        
+        const res = await fetch(`http://localhost:3000/api/create_sample_data`, {
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
+          mode: "cors",
+          body: JSON.stringify(user_id),
+        });
+
+      }
+
+      // 記事取得
       const res = await fetch(`http://localhost:3000/api/articles/get`, {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -82,28 +100,32 @@ export async function getServerSideProps(context: NextPageContext) {
         }),
       });
 
-      const data = await res.json();
+      data = await res.json();
 
+      // アイテム取得
       const res2 = await fetch(
         `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
       );
-      const data2 = await res2.json();
+      data2 = await res2.json();
 
       return {
         props: {
           data: {
-            articles: data.rawData,
-            pagination: data.pagination,
-            footerItems: data2.rawData,
+            articles: data ? data.rawData : [],
+            pagination: data ? data.pagination : [],
+            footerItems: data2 ? data2.rawData : [],
             // JSONのエラーになったので、このような書き方↓
             session: userInfo && JSON.parse(JSON.stringify(userInfo)),
           },
         },
       };
-    }
-  }
+
+    } // ★★★ユーザーデータがある
+
+  } // ★★★セッションがある
 
   // ※もしかしたら↓うまく行かないこともあるかもしれないが、スッキリさせた
+  // ★★★セッションがない
   if (sessionObj === null || !userInfo) {
     // const token = await csrfToken(context);
     const token = await getCsrfToken();

@@ -1,6 +1,7 @@
 import React from "react";
 import { server } from "../config";
-import { signin, signout, useSession, getSession } from "next-auth/client";
+// import { signin } from "next-auth/client";
+const { signin } = require("next-auth/client")
 import {
   TextField,
   Button,
@@ -8,10 +9,6 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
-import { useDrawerProps } from "../app/View/Drawer";
-import { checkPassword } from "../module/bcrypt";
-import { useCheckPassword } from "../app/ActionCreator/user/useCheckPassword";
-import { TextFields } from "@material-ui/icons";
 
 const useSignInFormProps = () => {
   const [newEmail, setNewEmail] = React.useState("");

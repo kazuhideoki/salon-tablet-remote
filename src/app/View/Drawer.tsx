@@ -21,14 +21,16 @@ import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Store } from "../Store/Store";
 import { EditorContext } from "../Store/EditorContext";
-import { NoteAddOutlined, VideoLabel, Settings, ExitToApp } from "@material-ui/icons";
+import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
+//@ts-ignore
 import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useCheckPassword } from "../ActionCreator/user/useCheckPassword";
 import { cipher } from "../../module/bcrypt";
 
 
-export const useDrawerProps = ({open, setOpen}) => {
+// export const useDrawerProps = ({open, setOpen}) => {
+export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState } = React.useContext(Store);
   const {
@@ -77,6 +79,9 @@ export const useDrawerProps = ({open, setOpen}) => {
       alert("パスワードが間違っています。");
     }
   };
+  const handleOpenFeedback = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "feedback_form" });
+  }
 
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
@@ -84,12 +89,14 @@ export const useDrawerProps = ({open, setOpen}) => {
   }
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    // setOpen(true);
+    dispatchAppState({type: "OPEN_DRAWER"})
     dispatchAppState({ type: "CLOSE_MODAL" });
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    // setOpen(false);
+    dispatchAppState({ type: "CLOSE_DRAWER" });
     // Drawerが閉じきってからisSettingをfalseに
     setTimeout(() => {
       dispatchAppState({ type: "OFF_IS_SETTING" });
@@ -105,8 +112,9 @@ export const useDrawerProps = ({open, setOpen}) => {
     handleOpenArticleEditor,
     handleOpenFooterItemEditor,
     handleSubmitPassword,
+    handleOpenFeedback,
     handleOnSingOut,
-    open,
+    // open,
     handleDrawerOpen,
     handleDrawerClose,
     isMobile,
@@ -114,10 +122,10 @@ export const useDrawerProps = ({open, setOpen}) => {
 }
 // type useDrawerProps = ReturnType<typeof useDrawerProps>
 type TUseDrawerProps = ReturnType<typeof useDrawerProps>
-type TDrawerProps = {
-  open: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
+// type TDrawerProps = {
+//   open: boolean
+//   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+// }
 // type PresenterProps = useDrawerProps & DrawerProps
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -176,21 +184,6 @@ const useStyles = makeStyles((theme: Theme) => {
 export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   const classes = useStyles();
 
-  // const handleDrawerOpen = () => {
-  //   props.setOpen(true);
-  //   props.dispatchAppState({ type: "CLOSE_MODAL" });
-  // };
-
-  // const handleDrawerClose = () => {
-  //   props.setOpen(false);
-  //   // Drawerが閉じきってからisSettingをfalseに
-  //   setTimeout(() => {
-  //     props.dispatchAppState({ type: "OFF_IS_SETTING" });
-  //   }, 800);
-  // };
-
-  // const isMobile = useMediaQuery("(max-width:480px)");
-
   const BeforeIsSettingDrawerMenu = () => {
     const [pass, setPass] = React.useState('')
     return (
@@ -227,13 +220,13 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           <ListItemIcon>
             <NoteAddOutlined />
           </ListItemIcon>
-          <ListItemText primary="新規投稿" />
+          <ListItemText primary="記事作成" />
         </ListItem>
         <ListItem button onClick={() => props.handleOpenFooterItemEditor()}>
           <ListItemIcon>
             <VideoLabel />
           </ListItemIcon>
-          <ListItemText primary="フッターアイテム作成" />
+          <ListItemText primary="アイテム作成" />
         </ListItem>
         <ListItem
           button
@@ -248,6 +241,12 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <Settings />
           </ListItemIcon>
           <ListItemText primary="アカウント" />
+        </ListItem>
+        <ListItem button onClick={() => props.handleOpenFeedback()}>
+          <ListItemIcon>
+            <Feedback />
+          </ListItemIcon>
+          <ListItemText primary="フィードバック" />
         </ListItem>
         <ListItem button onClick={() => props.handleOnSingOut()}>
           <ListItemIcon>
@@ -268,7 +267,10 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         aria-label="open drawer"
         onClick={props.handleDrawerOpen}
         edge="start"
-        className={clsx(classes.menuButton, props.open && classes.hide)}
+        className={clsx(
+          classes.menuButton,
+          props.appState.isDrawerOpen && classes.hide
+        )}
       >
         <MenuIcon />
       </IconButton>
@@ -276,13 +278,13 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         className={classes.drawer}
         variant="persistent"
         anchor="left"
-        open={props.open}
+        open={props.appState.isDrawerOpen}
         classes={{
           paper: classes.drawerPaper,
         }}
       >
         <div className={classes.drawerHeader}>
-          {props.appState.isSetting? "編集モード" : "観覧モード"}
+          {props.appState.isSetting ? "編集モード" : "観覧モード"}
           <IconButton onClick={props.handleDrawerClose}>
             {props.theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -305,7 +307,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       </MuiDrawer>
       <main
         className={`${clsx(classes.content, {
-          [classes.contentShift]: props.open,
+          [classes.contentShift]: props.appState.isDrawerOpen,
         })}`}
       >
         {props.children}
@@ -314,13 +316,11 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   );
 }
 
-export const Drawer: React.FC<TDrawerProps> = (props) => {
-  const useProps = useDrawerProps({ open: props.open, setOpen: props.setOpen });
+export const Drawer: React.FC = (props) => {
+  const useProps = useDrawerProps();
 
   return (
-    <DrawerPresenter {...useProps}
-    // open={props.open} setOpen={props.setOpen}
-    >
+    <DrawerPresenter {...useProps}>
       {props.children}
     </DrawerPresenter>
   );

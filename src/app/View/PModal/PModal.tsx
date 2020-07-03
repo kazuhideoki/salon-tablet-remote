@@ -11,6 +11,7 @@ import { SettingUserInfo } from "../Setting/SettingUserInfo";
 import ArticleEditor from "../Setting/ArticleEditor";
 import FooterItemEditor from "../Setting/FooterItemEditor";
 import { DeleteAccountForm } from "../Setting/DeleteAccountForm";
+import { FeedbackForm } from "../Setting/FeedbackForm";
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
@@ -92,6 +93,10 @@ export const PModal = () => {
           case "setting_user_info":
             modalStyle = size90;
             ModalContent = () => <SettingUserInfo />;
+            break;
+          case "feedback_form":
+            modalStyle = size90;
+            ModalContent = () => <FeedbackForm />;
             break;
           case "delete_account_form":
             modalStyle = size90;

@@ -1,17 +1,23 @@
 import { AppState } from '../Store/Store'
 import { reducerLogger } from "./reducerLogger";
+import { TrendingUpOutlined } from '@material-ui/icons';
 
-export type AppStateAction = 
-    { type: "ON_IS_SETTING" } |
-    { type: "OFF_IS_SETTING" } |
-    { type: "OPEN_MODAL", payload: string } |
-    // footerItemの場合はtitleはnullが入る
-    { type: "SET_MODAL_CONTENT", payload: {title: string | null, content: string} } |
-    { type: "CLOSE_MODAL" } | 
-    { type: "OPEN_ARTICLE_MODAL" } |
-    { type: "CLOSE_ARTICLE_MODAL" } |
-    { type: "SET_IS_LOADING" } |
-    { type: "END_LOADING" }
+export type AppStateAction =
+  | { type: "ON_IS_SETTING" }
+  | { type: "OFF_IS_SETTING" }
+  | { type: "OPEN_MODAL"; payload: string }
+  | { type: "OPEN_DRAWER" }
+  | { type: "CLOSE_DRAWER" }
+  // footerItemの場合はtitleはnullが入る
+  | {
+      type: "SET_MODAL_CONTENT";
+      payload: { title: string | null; content: string };
+    }
+  | { type: "CLOSE_MODAL" }
+  | { type: "OPEN_ARTICLE_MODAL" }
+  | { type: "CLOSE_ARTICLE_MODAL" }
+  | { type: "SET_IS_LOADING" }
+  | { type: "END_LOADING" };
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState
@@ -34,6 +40,18 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           ...state,
           setModal: action.payload,
           isModalOpen: true,
+        };
+        break;
+      case "OPEN_DRAWER":
+        newState = {
+          ...state,
+          isDrawerOpen: true,
+        };
+        break;
+      case "CLOSE_DRAWER":
+        newState = {
+          ...state,
+          isDrawerOpen: false,
         };
         break;
       case "SET_MODAL_CONTENT":

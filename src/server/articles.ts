@@ -85,7 +85,7 @@ export const articles_get = async (req, res) => {
 
 // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 // "/articles/create"
-// 新規投稿用のPOST。{ title, created_at, article_content }を渡せばidは自動連番で振られる。
+// 記事作成用のPOST。{ title, created_at, article_content }を渡せばidは自動連番で振られる。
 export const articles_create = (req, res) => {
   validationErrorHandle(req, res);
 

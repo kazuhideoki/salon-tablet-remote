@@ -38,7 +38,7 @@ export const MainMobile = () => {
 
   return (
     <div className={classes.root}>
-      <Button color="primary" className={classes.button} onClick={() => handleOpenArticleEditor()}>新規投稿</Button>
+      <Button color="primary" className={classes.button} onClick={() => handleOpenArticleEditor()}>記事作成</Button>
       {articles.length === 0
       ? <div className={classes.item}>記事がありません</div>
 

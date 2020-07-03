@@ -51,7 +51,7 @@ export const FooterMobile = () => {
         className={classes.button}
         onClick={() => handleOpenFooterItemEditor()}
       >
-        フッターアイテム追加
+        アイテム追加
       </Button>
       {footerItems.length === 0 ? (
         <div className={classes.item}>アイテムがありません</div>

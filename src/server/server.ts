@@ -40,7 +40,7 @@ app.prepare().then(() => {
     // ●●●articles●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
     // 記事データとページネーションを返す
     server.post("/articles/get", (req, res) => articles_get(req, res))
-    // 新規投稿用のPOST。{ title, created_at, article_content }を渡せばidは自動連番で振られる。
+    // 記事作成用のPOST。{ title, created_at, article_content }を渡せばidは自動連番で振られる。
     server.post(
       "/articles/create",articlesValidation, (req, res) => articles_create(req, res)
     );

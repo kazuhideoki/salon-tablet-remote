@@ -1,7 +1,5 @@
 import React from 'react'
 import { makeStyles,Theme ,createStyles} from '@material-ui/core';
-import { signin, signout, useSession, getSession } from "next-auth/client";
-import { Store } from '../../Store/Store';
 import { useDrawerProps } from '../Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
