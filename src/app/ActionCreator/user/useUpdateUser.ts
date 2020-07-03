@@ -73,10 +73,10 @@ export const useUpdateUser = () => {
           user_email: email,
         },
       });
+      dispatchAppState({ type: "CLOSE_MODAL" });
       alert("ユーザーデータを更新しました。");
       // ↓modalを閉じるとTextFieldの値をうまく保持できない
       // そもそも必要ない
-      // dispatchAppState({ type: "CLOSE_MODAL" });
     }
   };
 };

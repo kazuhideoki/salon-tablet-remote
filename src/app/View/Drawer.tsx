@@ -184,6 +184,8 @@ const useStyles = makeStyles((theme: Theme) => {
 export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   const classes = useStyles();
 
+
+
   const BeforeIsSettingDrawerMenu = () => {
     const [pass, setPass] = React.useState('')
     return (
@@ -259,6 +261,33 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
     );
   };
 
+  let DrawerHeader
+  // Open 開いてパスワード入力画面
+  if (!props.appState.isSetting) {
+    DrawerHeader = () => (
+      <IconButton onClick={props.handleDrawerClose}>
+        {props.theme.direction === "ltr" ? (
+          <ChevronLeftIcon />
+        ) : (
+          <ChevronRightIcon />
+        )}
+      </IconButton>
+    );
+  } 
+  // Open isSetting 開いて編集モード
+  else if (props.appState.isSetting) {
+    DrawerHeader = () => (
+      <Button onClick={props.handleDrawerClose}>
+        観覧モードに切り替える
+        {props.theme.direction === "ltr" ? (
+          <ChevronLeftIcon />
+        ) : (
+          <ChevronRightIcon />
+        )}
+      </Button>
+    );
+  } 
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -284,14 +313,17 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          {props.appState.isSetting ? "編集モード" : "観覧モード"}
+          {/* {props.appState.isDrawerOpen && props.appState.isSetting
+            ? "観覧モードに切り替える"
+            : null }
           <IconButton onClick={props.handleDrawerClose}>
             {props.theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
             )}
-          </IconButton>
+          </IconButton> */}
+          <DrawerHeader/>
         </div>
         <Divider />
 
