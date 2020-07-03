@@ -9,6 +9,7 @@ import "react-quill/dist/quill.snow.css";
 import "../../public/quill.scss";
 import { server } from "../config";
 import Head from "next/head";
+require("dotenv").config();
 
 export default function MyApp({ Component, pageProps }) {
   // サーバーサイドでnext-authのsessionをつかうための修正項目
