@@ -30,10 +30,11 @@ export type TUserInfo = {
   user_name: T_user_name | null;
   shop_name: T_shop_name | null;
   user_email: T_user_email;
+  is_first_sign_in: boolean;
+  bcrypt_password?: string
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
-  isSetPassword: boolean
-  bcrypt_password?: string | null 
+  isSetPassword: boolean;
 };
 
 const initPagination = {
@@ -43,7 +44,7 @@ const initPagination = {
   rowCount: 0,
 };
 export type PaginationParams = typeof initPagination;
-
+export type T_is_sample = boolean
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
 export type T_is_published_articles = boolean
@@ -55,15 +56,16 @@ export type T_article_excerpt = string
 export type T_article_img = string 
 
 export type ArticleWithoutArticleId = {
-  user_id: T_user_id
-  is_published: T_is_published_articles
-  created_at: T_created_at
-  updated_at: T_updated_at
-  title: T_title
-  article_content: T_article_content
-  article_excerpt: T_article_excerpt
-  article_img: T_article_img
-}
+  user_id: T_user_id;
+  is_published: T_is_published_articles;
+  created_at: T_created_at;
+  updated_at: T_updated_at;
+  title: T_title;
+  article_content: T_article_content;
+  article_excerpt: T_article_excerpt;
+  article_img: T_article_img;
+  is_sample_data: T_is_sample;
+};
 export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
 export type TArticles = TArticle[]
 
@@ -94,6 +96,7 @@ export type FooterItemWithoutId = {
   link_url: T_link_url | null;
   app_link_url: T_app_link_url | null;
   order: T_order;
+  is_sample_data: T_is_sample;
 };
 export type FooterItem = {
   footer_item_id: T_footer_item_id;
@@ -154,7 +157,8 @@ export type StoreContextProviderProps = {
     session?: TUserInfo;
   };
   children?: React.ReactNode;
-  csrfToken?: any
+  csrfToken?: any;
+  bcrypt_password?: string
 };
 
 const StoreContextProvider = (props: StoreContextProviderProps) => {

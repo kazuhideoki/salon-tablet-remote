@@ -15,6 +15,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         "DELETE FROM `users` WHERE `id`=?",
         user_id
       );
+
+      const data3 = await db(
+        "DELETE FROM `articles` WHERE `user_id`=?",
+        user_id
+      );
+
+      const data4 = await db(
+        "DELETE FROM `footer_items` WHERE `user_id`=?",
+        user_id
+      );
       
       console.log("/user_info/delete/は " + JSON.stringify({data, data2}));
 

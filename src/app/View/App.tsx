@@ -14,6 +14,7 @@ import { EditorContextProvider } from "../Store/EditorContext";
 import { Drawer } from "./Drawer";
 import { PHeader } from "./PHeader";
 import { AppMobile } from "./mobile/AppMobile";
+import { server } from "../../config";
 
 // 3段のコンテナの整形に関してのみ記述, 
 // 枠の設定、header,footerの最大値の設定
@@ -152,7 +153,9 @@ const AppView = () => {
   const isMobile = useMediaQuery("(max-width:480px)");
   const { appState, dispatchAppState, dispatchLoading, userInfo } = React.useContext(Store);
   const getArticles = useGetArticles()
-  const { user_id } = userInfo
+  const { user_id, is_first_sign_in } = userInfo
+  console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
+  
 
   // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
   const [isFirstLoad, setIsFirstLoad] = React.useState(true);
@@ -166,29 +169,28 @@ const AppView = () => {
     setIsFirstLoad(false);
   },[appState.isSetting])
 
+  // React.useEffect( () => {
+  //   if (is_first_sign_in) {
+  //     console.log("AppVeiwのuseEffectのcreate_sample_dataのとこだよ");
+      
+  //     (async () => {
+  //       const res = await fetch(`${server}/api/create_sample_data`, {
+  //         headers: { "Content-Type": "application/json" },
+  //         method: "POST",
+  //         mode: "cors",
+  //         body: JSON.stringify(user_id),
+  //       });
+
+  //     })()
+  //   }
+  // },[])
+
   // パスワード未設定でユーザー情報登録へ遷移 → 手間な感じがするので、indexのserverSidePropsでやってもいいかも、要検討
   //@ts-ignore
   React.useEffect(async() => {
     if (userInfo.isSetPassword === false) {
       dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
     }
-
-    // const res = await fetch(
-    //   `${location.protocol}//${location.host}/api/user_info/check_has_password`,
-    //   {
-    //     headers: { "Content-Type": "application/json" },
-    //     method: "POST",
-    //     mode: "cors",
-    //     body: JSON.stringify({user_id}),
-    //   }
-    // )
-
-    // // パスワードが設定されていたらtrueを返す
-    // const data: boolean = await res.json(); 
-
-    // if (data === false) {
-    //   dispatchAppState({type: "OPEN_MODAL", payload: "setting_user_info"})
-    // }
 
   },[])
 
