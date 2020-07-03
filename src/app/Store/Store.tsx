@@ -64,6 +64,7 @@ export type ArticleWithoutArticleId = {
   article_content: T_article_content;
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
+  // 初回サインイン時のサンプルデータのコピー元をtrueに
   is_sample_data: T_is_sample;
 };
 export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
@@ -96,6 +97,7 @@ export type FooterItemWithoutId = {
   link_url: T_link_url | null;
   app_link_url: T_app_link_url | null;
   order: T_order;
+  // 初回サインイン時のサンプルデータのコピー元をtrueに
   is_sample_data: T_is_sample;
 };
 export type FooterItem = {

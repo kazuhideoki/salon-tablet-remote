@@ -169,22 +169,6 @@ const AppView = () => {
     setIsFirstLoad(false);
   },[appState.isSetting])
 
-  // React.useEffect( () => {
-  //   if (is_first_sign_in) {
-  //     console.log("AppVeiwのuseEffectのcreate_sample_dataのとこだよ");
-      
-  //     (async () => {
-  //       const res = await fetch(`${server}/api/create_sample_data`, {
-  //         headers: { "Content-Type": "application/json" },
-  //         method: "POST",
-  //         mode: "cors",
-  //         body: JSON.stringify(user_id),
-  //       });
-
-  //     })()
-  //   }
-  // },[])
-
   // パスワード未設定でユーザー情報登録へ遷移 → 手間な感じがするので、indexのserverSidePropsでやってもいいかも、要検討
   //@ts-ignore
   React.useEffect(async() => {
