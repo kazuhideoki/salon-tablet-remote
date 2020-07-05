@@ -12,6 +12,7 @@ import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFo
 import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../Setting/iconSelect/icons";
 import { EditButtonsBox } from "../buttons/EditButtonsBox";
+import { yellow } from "@material-ui/core/colors";
 
 export const usePFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
@@ -86,10 +87,15 @@ const useStyles = makeStyles((theme) =>
     editButtonsBox: {
       position: "absolute",
       top: 0,
-      right: 5,
+      right: 0,
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
       zIndex: 100,
     },
-
+    isSettingIconAndText: {
+      margin: "0 20px"
+    }
   })
 );
 
@@ -111,7 +117,7 @@ export const PFooterPresenter:React.FC<Props> = (props) => {
             ${value.is_published == true ? null : classes.itemIsDraft}
           `}
       >
-        {/* セッティング画面で順番を入れ替えるボタンを表示 */}
+        {/* セッティング画面で順番を入れ替えるボタンなどを表示 */}
         {props.appState.isSetting ? (
           <EditButtonsBox className={classes.editButtonsBox}>
             <SwitchOrderButton
@@ -134,11 +140,14 @@ export const PFooterPresenter:React.FC<Props> = (props) => {
               }
             />
           </EditButtonsBox>
-        ) : null}     
-       
+        ) : null}
+
         {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
         {value.on_tap === "modal" ? (
           <IconAndText
+            className={
+              props.appState.isSetting ? classes.isSettingIconAndText : null
+            }
             icon={
               value.displayed_icon_name
                 ? IconsSetting.convertIconComponentFromName(
@@ -147,7 +156,7 @@ export const PFooterPresenter:React.FC<Props> = (props) => {
                 : MoodBad
             }
             onClick={() => props.openModal(value.item_content)}
-            fontSize="large"
+            // fontSize="large"
             text={value.icon_name}
           />
         ) : (
@@ -156,6 +165,9 @@ export const PFooterPresenter:React.FC<Props> = (props) => {
             href={value.on_tap === "link" ? value.link_url : value.app_link_url}
           >
             <IconAndText
+              className={
+                props.appState.isSetting ? classes.isSettingIconAndText : null
+              }
               icon={
                 value.displayed_icon_name
                   ? IconsSetting.convertIconComponentFromName(
@@ -163,7 +175,7 @@ export const PFooterPresenter:React.FC<Props> = (props) => {
                     )[0]
                   : MoodBad
               }
-              fontSize="large"
+              // fontSize="large"
               text={value.icon_name}
             />
           </a>

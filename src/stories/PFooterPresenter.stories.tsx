@@ -25,3 +25,30 @@ export const Normal = () => {
     <PFooterPresenter {...props}/>
   )
 }
+
+export const NormalIsSettingFalse = () => {
+
+  return (
+    //@ts-ignore
+    <PFooterPresenter {...props} appState={{ isSetting: false }} />
+  );
+}
+
+const footerItems = samplefooterItems
+  .concat(samplefooterItems)
+  .concat(samplefooterItems)
+  .concat(samplefooterItems);
+
+export const ManyIcon = () => {
+  return (
+    //@ts-ignore
+    <PFooterPresenter {...props} footerItems={footerItems} />
+  );
+};
+
+export const ManyIconIsSettingFalse = () => {
+  return (
+    //@ts-ignore
+    <PFooterPresenter {...props} footerItems={footerItems} appState={{ isSetting: false }} />
+  );
+};

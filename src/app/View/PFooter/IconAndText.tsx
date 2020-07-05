@@ -1,15 +1,13 @@
 import React from 'react'
-import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme } from '@material-ui/core'
+import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme, SvgIconTypeMap } from '@material-ui/core'
 import { ThemeType, ThemeContext } from '../../Store/ThemeContext'
 import { Store } from '../../Store/Store'
 import { Autorenew } from '@material-ui/icons'
+import { OverridableComponent } from '@material-ui/core/OverridableComponent'
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
   return createStyles({
-    root: {
-      // maxWidth: themes.icon * 1.2,
-    },
     icon: {
       fontSize: themes.icon,
     },
@@ -38,27 +36,19 @@ const StyledIconButton = withStyles({
 
 // 表示させるアイコンはprops.icon→Material-uiのicon、もしくはprops.img→imgのsrcで切り替えることが出来る。
 type Props = {
+  icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
+  text: string,
+  onClick?: () => void
 
+  img?: any
+  className?: string
 }
 
-export const IconAndText = (props:any) => {
+export const IconAndText:React.FC<Props> = (props) => {
     const classes = useStyles()
     const {dispatchAppState} = React.useContext(Store)
 
-    // onClickをonCloseの渡し方で挙動を変える
-    // モーダルウィンドウが多段階になっている場合用。調整の必要ありか。
-    let handleOnClick: () => void
-    // 両方渡したら閉じて開く
-    if (props.onClose && props.onClick) {
-        handleOnClick = () => {
-          dispatchAppState({ type: "CLOSE_MODAL" });
-          props.onClick();
-        }; 
-    } else if(props.onClick) {
-        handleOnClick = () => props.onClick();
-    } else if(props.onClose) {
-        handleOnClick = () => dispatchAppState({ type: "CLOSE_MODAL" });
-    }
+    const handleOnClick = () => props.onClick();
 
     let icon 
     // svgのアイコンはiconに入れる
@@ -68,7 +58,6 @@ export const IconAndText = (props:any) => {
             onClick={props.onClick ? () => handleOnClick() : null}
             // onClick={() => onClick()}
             className={classes.icon}
-            {...props}
           />
         );
     // 画像はurlをimgに入れる。
@@ -85,7 +74,7 @@ export const IconAndText = (props:any) => {
     }
 
     return (
-        <StyledIconButton className={classes.root}>
+        <StyledIconButton className={props.className}>
           {icon}
           <Typography variant="body2" className={classes.titleText}>{props.text}</Typography>
         </StyledIconButton>

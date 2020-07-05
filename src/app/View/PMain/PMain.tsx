@@ -86,7 +86,6 @@ const useStyles = makeStyles((theme) => {
       height: "100%",
     },
     thumbnail: {
-      // objectFit: "contain",
       maxWidth: cardWidth * 0.8,
       maxHeight: cardWidth * 0.6,
       display: "block",
@@ -97,9 +96,7 @@ const useStyles = makeStyles((theme) => {
       fontSize: "1rem",
     },
     editButtonsBox: {
-      position: "absolute",
-      top: 0,
-      right: 5,
+      margin: "0 0 0 auto",
       zIndex: 100,
     },   
   });

@@ -4,6 +4,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
    const { footer_item_id, order } = req.body;
+
+    // orderが連番じゃなかったらエラー出す
+
     try {
       // 右側のアイテムのorderを-1
       const date1 = await db(
