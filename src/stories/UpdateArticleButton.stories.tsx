@@ -1,7 +1,9 @@
 import React from 'react';
-import { UpdateArticleButton } from "../app/View/buttons/UpdateArticleButton";
+import { UpdateButton } from "../app/View/buttons/UpdateButton";
 export default {
-title: 'UpdateArticleButton',
-component: UpdateArticleButton,
+  title: "UpdateButton",
+  component: UpdateButton,
 };
-export const Normal = () => <UpdateArticleButton onClick={undefined} position={undefined}/>;
+export const Normal = () => (
+         <UpdateButton onClick={undefined} position={undefined} />
+       );

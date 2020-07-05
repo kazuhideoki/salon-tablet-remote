@@ -25,8 +25,8 @@ export function SwitchOnTapModal({ onTap, setOnTap }) {
       <RadioGroup row aria-label="gender" name="gender1" value={onTap} onChange={handleChange} >
         <FormControlLabel value="modal" control={<Radio />} label="ウィンドウ" />
         {/* <HelpButton content="ブログ記事のようにウィンドウが開きます。"/> */}
-        <FormControlLabel value="link" control={<Radio />} label="外部リンク" />
-        <FormControlLabel value="appLink" control={<Radio />} label="アプリリンク" />
+        <FormControlLabel value="link" control={<Radio />} label="リンク" />
+        <FormControlLabel value="appLink" control={<Radio />} label="ショートカット" />
       </RadioGroup>
     </FormControl>
   );

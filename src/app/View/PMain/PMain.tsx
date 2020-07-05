@@ -8,8 +8,8 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core";
-import { UpdateArticleButton } from "../buttons/UpdateArticleButton";
-import { DeleteArticleButton } from "../buttons/DeleteArticleButton";
+import { UpdateButton } from "../buttons/UpdateButton";
+import { DeleteButton } from "../buttons/DeleteButton";
 import { Store,T_article_id } from "../../Store/Store";
 import {
   useDeleteArticle,
@@ -17,6 +17,7 @@ import {
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
+import { EditButtonsBox } from "../buttons/EditButtonsBox";
 
 export type HandleOnUpDate = (params: any) => void;
 export const usePMainProps = () => {
@@ -70,6 +71,8 @@ const useStyles = makeStyles((theme) => {
     gridItem: {
       position: "relative",
       height: "100%",
+      display: "flex",
+      flexDirection: "column",
     },
     itemIsDraft: {
       border: "3px solid red",
@@ -77,6 +80,7 @@ const useStyles = makeStyles((theme) => {
     cardActionArea: {
       width: cardWidth,
       height: "100%",
+      flexGrow: 1
     },
     card: {
       height: "100%",
@@ -92,24 +96,12 @@ const useStyles = makeStyles((theme) => {
     excerpt: {
       fontSize: "1rem",
     },
-    updateArticleButton: {
+    editButtonsBox: {
       position: "absolute",
       top: 0,
-      right: 50,
+      right: 5,
       zIndex: 100,
-    },
-    deleteArticleButton: {
-      position: "absolute",
-      top: 0,
-      right: 0,
-      zIndex: 100,
-    },
-    createArticleButton: {
-      position: "absolute",
-      top: 50,
-      left: 100,
-      zIndex: 100,
-    },
+    },   
   });
 
 })
@@ -128,25 +120,21 @@ export const PMainPresenter = (props: Props) => {
           `}
         >
           {props.appState.isSetting ? (
-            <UpdateArticleButton
-              position={classes.updateArticleButton}
-              // id={value.id}
-              // handleOnClick={handleOnUpDate}
-              onClick={() => props.handleOnUpDate(value.article_id)}
-            />
-          ) : null}
-          {props.appState.isSetting ? (
-            <DeleteArticleButton
-              position={classes.deleteArticleButton}
-              // id={value.id}
-              // handleOnClick={handleOnDelete}
-              onClick={() => props.handleOnDelete(value.article_id)}
-            />
+            <EditButtonsBox className={classes.editButtonsBox}>
+              <UpdateButton
+                onClick={() => props.handleOnUpDate(value.article_id)}
+              />
+              <DeleteButton
+                onClick={() => props.handleOnDelete(value.article_id)}
+              />
+            </EditButtonsBox>
           ) : null}
 
           <CardActionArea
             className={classes.cardActionArea}
-            onClick={() => props.openArticle(value.title, value.article_content)}
+            onClick={() =>
+              props.openArticle(value.title, value.article_content)
+            }
           >
             <Card variant="outlined" className={classes.card}>
               <CardContent>
@@ -190,10 +178,7 @@ export const PMainPresenter = (props: Props) => {
       className={classes.root}
       spacing={2}
     >
-      {/* ↓使うかも */}
-      {/* {appState.isSetting ? (
-          <CreateButton position={classes.createArticleButton} />
-        ) : null} */}
+
       {props.articles.length ? displayArticles : noArticles}
     </Grid>
   );

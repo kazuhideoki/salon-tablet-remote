@@ -4,7 +4,6 @@ import { SwapHorizontalCircleOutlined } from "@material-ui/icons";
 import { IconButton } from '@material-ui/core';
 
 type Type = {
-  position: string
   params: SwitchOrderParams
 }
 export type SwitchOrderParams = {
@@ -17,9 +16,14 @@ export const SwitchOrderButton = (props: Type) => {
 
   const switchOrder = useSwitchOrder();
 
+  // 一番目のアイテムには必要ないので表示させない
+  if (props.params.order === 1) {
+    return null
+  }
+
   return (
     <IconButton
-      className={props.position}
+      // className={props.position}
       onClick={() => switchOrder(props.params)}
     >
       <SwapHorizontalCircleOutlined />

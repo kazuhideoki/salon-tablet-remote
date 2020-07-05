@@ -4,14 +4,14 @@ import { MoodBad } from "@material-ui/icons";
 import { Store, T_footer_item_id, T_order } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
-import { UpdateArticleButton } from "../buttons/UpdateArticleButton";
-import { DeleteArticleButton } from "../buttons/DeleteArticleButton";
+import { UpdateButton } from "../buttons/UpdateButton";
+import { DeleteButton } from "../buttons/DeleteButton";
 import { SwitchOrderButton } from "../buttons/SwitchOrderButton";
 import { useGetFooterItem } from "../../ActionCreator/footerItems/useGetFooterItem";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../Setting/iconSelect/icons";
-import { footerItems } from "../../../stories/footerItems";
+import { EditButtonsBox } from "../buttons/EditButtonsBox";
 
 export const usePFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
@@ -83,28 +83,17 @@ const useStyles = makeStyles((theme) =>
       height: "100%",
       position: "relative",
     },
-    deleteArticleButton: {
+    editButtonsBox: {
       position: "absolute",
       top: 0,
       right: 5,
       zIndex: 100,
     },
-    updateArticleButton: {
-      position: "absolute",
-      top: 0,
-      right: 35,
-      zIndex: 100,
-    },
-    switchOrderButton: {
-      position: "absolute",
-      top: 0,
-      right: 65,
-      zIndex: 100,
-    },
+
   })
 );
 
-export const PFooterPresenter = (props:Props) => {
+export const PFooterPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const displayFooterItems = props.footerItems.map((value, index) => {
@@ -123,33 +112,30 @@ export const PFooterPresenter = (props:Props) => {
           `}
       >
         {/* セッティング画面で順番を入れ替えるボタンを表示 */}
-        {props.appState.isSetting && index !== 0 ? (
-          <SwitchOrderButton
-            position={classes.switchOrderButton}
-            params={{
-              footer_item_id: value.footer_item_id,
-              order: value.order,
-            }}
-          />
-        ) : null}
         {props.appState.isSetting ? (
-          <UpdateArticleButton
-            position={classes.updateArticleButton}
-            // id={value.footer_item_id}
-            // handleOnClick={handleOnUpDateFooterIcon}
-            onClick={() => props.handleOnUpDateFooterIcon(value.footer_item_id)}
-          />
-        ) : null}
-        {props.appState.isSetting ? (
-          <DeleteArticleButton
-            position={classes.deleteArticleButton}
-            // id={value.footer_item_id}
-            // handleOnClick={handleOnDeleteFooterItem}
-            onClick={() =>
-              props.handleOnDeleteFooterItem(value.footer_item_id, value.order)
-            }
-          />
-        ) : null}
+          <EditButtonsBox className={classes.editButtonsBox}>
+            <SwitchOrderButton
+              params={{
+                footer_item_id: value.footer_item_id,
+                order: value.order,
+              }}
+            />
+            <UpdateButton
+              onClick={() =>
+                props.handleOnUpDateFooterIcon(value.footer_item_id)
+              }
+            />
+            <DeleteButton
+              onClick={() =>
+                props.handleOnDeleteFooterItem(
+                  value.footer_item_id,
+                  value.order
+                )
+              }
+            />
+          </EditButtonsBox>
+        ) : null}     
+       
         {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
         {value.on_tap === "modal" ? (
           <IconAndText
@@ -190,7 +176,7 @@ export const PFooterPresenter = (props:Props) => {
 
   return (
     <div className={classes.root}>
-      <PPagination/>
+      {props.children}
       <Grid container
       justify={props.footerItems.length > 5 || props.isMobile ? "space-between" : "space-evenly" }
       wrap='nowrap' spacing={2} className={classes.GridContainer}>
@@ -203,5 +189,9 @@ export const PFooterPresenter = (props:Props) => {
 
 export const PFooter = () => {
   const props = usePFooterProps()
-  return <PFooterPresenter {...props}/>
+  return (
+    <PFooterPresenter {...props}>
+      <PPagination />
+    </PFooterPresenter>
+  );
 }

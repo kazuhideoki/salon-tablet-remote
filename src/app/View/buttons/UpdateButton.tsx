@@ -5,15 +5,14 @@ import { T_footer_item_id, T_article_id } from "../../Store/Store";
 import { HandleOnUpDate } from '../PMain/PMain';
 
 type Type = {
-  position: string
+  // 記事とアイテムで共有するのでonClickまるごと渡す
   onClick: any
 }
 
-export const UpdateArticleButton = (props: Type) => { 
+export const UpdateButton = (props: Type) => { 
 
     return (
       <IconButton
-        className={props.position}
         onClick={() => props.onClick()}
       >
         <EditTwoTone />

@@ -1,4 +1,4 @@
-export const footerItems = [
+export const samplefooterItems = [
   {
     footer_item_id: 2,
     is_published: 1,
