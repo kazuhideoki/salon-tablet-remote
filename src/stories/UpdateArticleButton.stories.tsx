@@ -5,5 +5,5 @@ export default {
   component: UpdateButton,
 };
 export const Normal = () => (
-         <UpdateButton onClick={undefined} position={undefined} />
+         <UpdateButton onClick={undefined} />
        );

@@ -36,8 +36,8 @@ const StyledIconButton = withStyles({
 
 // 表示させるアイコンはprops.icon→Material-uiのicon、もしくはprops.img→imgのsrcで切り替えることが出来る。
 type Props = {
-  icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
-  text: string,
+  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
+  text?: string,
   onClick?: () => void
 
   img?: any
