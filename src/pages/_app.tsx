@@ -21,10 +21,11 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <title>SALON TABLET</title>
       </Head>
+      {/* ↓たまにprocess.env.SITEをうまく読み込めない */}
       <Provider options={{ site: process.env.SITE }} session={session}>
+      {/* <Provider options={{ site: server }} session={session}> */}
         <Component {...pageProps} />
       </Provider>
     </>
-
   );
 }
