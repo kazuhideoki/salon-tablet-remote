@@ -45,7 +45,7 @@ export const samplefooterItems = [
     on_tap: "modal",
     item_content: "",
     link_url: "",
-    order: 3,
+    order: 4,
   },
   {
     footer_item_id: 4,
@@ -57,6 +57,6 @@ export const samplefooterItems = [
     on_tap: "modal",
     item_content: "",
     link_url: "",
-    order: 3,
+    order: 5,
   },
 ];

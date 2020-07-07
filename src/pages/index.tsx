@@ -88,6 +88,8 @@ export async function getServerSideProps(context: NextPageContext) {
           body: JSON.stringify(user_id),
         });
 
+        
+
       }
 
       // 記事取得
