@@ -1,16 +1,12 @@
 import React from "react";
 import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
 import { App } from "../app/View/App";
-import Head from "next/head";
 //@ts-ignore
-import { csrfToken, getCsrfToken, session, getSession } from "next-auth/client";
+import { getCsrfToken, getSession } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
 //@ts-ignore
-import { SignInForm } from "../component/SignInForm";
-import { Typography, makeStyles, createStyles } from "@material-ui/core";
 import { TopPage } from "../component/TopPage";
-import { server } from "../config";
 
 
 const Index = (props: StoreContextProviderProps) => {
@@ -99,7 +95,7 @@ export async function getServerSideProps(context: NextPageContext) {
         mode: "cors",
         body: JSON.stringify({
           page: 1,
-          isSetting: false,
+          isSetting: true,
           userId: userInfo.user_id,
         }),
       });
