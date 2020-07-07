@@ -4,4 +4,6 @@ _next
 build
 dist
 .cache
+
 .env
+.env.local

@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) =>
 type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string };
 
 export const SignInFormPresenter: React.FC<Props> = (props) => {
-  console.log("SignInFormPresenter" + JSON.stringify(props.csrfToken));
   const classes = useStyles();
 
   return (
@@ -57,7 +56,8 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         onSubmit={(e) => {
           e.preventDefault();
           //@ts-ignore
-          signin("email", { email: document.getElementById("email").value });
+          // signin("email", { email: document.getElementById("email").value });
+          signin("email", { email: props.newEmail });
         }}
       >
         <Typography
@@ -66,7 +66,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           gutterBottom
           className={classes.typography}
         >
-          初めての方
+          ・初めての方
         </Typography>
         <input name="csrfToken" type="hidden" defaultValue={props.csrfToken} />
         <TextField
@@ -87,7 +87,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           color="primary"
           className={classes.button}
         >
-          確認メールを送る
+          メールアドレスで登録する
         </Button>
       </form>
 
@@ -97,7 +97,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         gutterBottom
         className={classes.typography}
       >
-        アカウントをお持ちの方
+        ・アカウントをお持ちの方
       </Typography>
       <form method="post" action={`${server}/api/auth/callback/credentials/`}>
         {/* メールアドレス */}

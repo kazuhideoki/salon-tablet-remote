@@ -12,6 +12,7 @@ import { Typography, makeStyles, createStyles } from "@material-ui/core";
 import { TopPage } from "../component/TopPage";
 import { server } from "../config";
 
+
 const Index = (props: StoreContextProviderProps) => {
   if (!props.data.session) {
     // console.log("Index" + JSON.stringify(props.csrfToken));
@@ -40,7 +41,8 @@ type TSessionOnj = {
   expires: string | null;
 };
 
-export async function getServerSideProps(context: NextPageContext) {
+export async function getServerSideProps(context: NextPageContext) {  
+
   // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const req = context.req;
   // const sessionObj: TSessionOnj = await session({ req });
@@ -129,7 +131,7 @@ export async function getServerSideProps(context: NextPageContext) {
   if (sessionObj === null || !userInfo) {
     // const token = await csrfToken(context);
     const token = await getCsrfToken();
-    console.log("serverSideProps" + JSON.stringify(token));
+    console.log("index,getServerSidePropsのcsrfToken" + JSON.stringify(token));
     return {
       props: {
         data: {
