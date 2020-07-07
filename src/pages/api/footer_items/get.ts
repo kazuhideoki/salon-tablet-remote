@@ -1,23 +1,36 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+import { checkOrders } from "../lib/checkOrders";
+import { FooterItems } from "../../../app/Store/Store";
+import { correctOrders } from "../lib/correctOrders";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const data = await db(
+    //@ts-ignore
+    const data: FooterItems = await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
       "SELECT * FROM footer_items WHERE user_id = ? ORDER BY `order` ASC",
       // queryは文字列で来るため
       Number(req.query.userId)
     );
 
+    // footer_itemsのorderが正しく連番になっているかチェックする
+    const isCorrectOrders = checkOrders(data)
+    console.log("isCorrectOrdersは " + isCorrectOrders);
+    
+    // もしorderが正しくなかったら、直す処理
+    if (isCorrectOrders === false) {
+      correctOrders(data)
+    }
+
     console.log("/footer_items/get/は " + JSON.stringify(data));
 
-    res.status(200).json({
+    return res.status(200).json({
       rawData: data,
     });
   } catch (err) {
     console.log("/footer_items/get/のエラーは " + JSON.stringify(err));
-    res.status(500).json({ err: true, data: { message: err.message } });
+    return res.status(500).json({ err: true, data: { message: err.message } });
   }
 };
 
