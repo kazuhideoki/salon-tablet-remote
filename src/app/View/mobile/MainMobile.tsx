@@ -28,7 +28,6 @@ export const useMainMobileProps = () => {
 type Props = ReturnType<typeof useMainMobileProps>
 
 const useStyles = makeStyles((theme: Theme) => {
-  // const themes = React.useContext(ThemeContext);
   return createStyles({
     root: {
       overflowY: "scroll",
@@ -62,9 +61,6 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
         return (
           <div
             key={key}
-            // className={`${
-            //   value.is_published ? classes.item : classes.itemIsDraft
-            // }`}
             className={classes.item}
           >
             <div>
