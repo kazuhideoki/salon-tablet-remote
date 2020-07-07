@@ -4,7 +4,6 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import authorizeCredentials from "../lib/authorizeCredentials";
 // これで環境変数(.envファイル)が使えるようになる
-require("dotenv").config();
 
 const options = {
   site: process.env.SITE,
