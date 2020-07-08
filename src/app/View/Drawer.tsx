@@ -320,16 +320,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          {/* {props.appState.isDrawerOpen && props.appState.isSetting
-            ? "観覧モードに切り替える"
-            : null }
-          <IconButton onClick={props.handleDrawerClose}>
-            {props.theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton> */}
           <DrawerHeader/>
         </div>
         <Divider />

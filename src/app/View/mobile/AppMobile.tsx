@@ -38,6 +38,11 @@ export const AppMobile = () => {
   const [tab, setTab] = React.useState(0)
   const { dispatchAppState, loading } = React.useContext(Store)
 
+  const onClickOffIsSetting = () => {
+    dispatchAppState({ type: "OFF_IS_SETTING" })
+    dispatchAppState({type: "CLOSE_DRAWER"})
+  }
+
   let Display: React.FC
   switch (tab) {
     case 0:
@@ -65,7 +70,7 @@ export const AppMobile = () => {
   return (
     <>
       <div className={classes.root}>
-        <Button className={classes.quit} onClick={() => dispatchAppState({type: "OFF_IS_SETTING"})}>観覧モードに切り替える</Button>
+        <Button className={classes.quit} onClick={() => onClickOffIsSetting()}>観覧モードに切り替える</Button>
         <Display />
         {/* {tab === 0 ? <PaginationMobile /> : null} */}
         <TabMobile tab={tab} setTab={setTab} className={classes.tabMobile}/>
