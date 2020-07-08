@@ -124,7 +124,7 @@ const AppTablet = ()=> {
                 <CircularProgress
                   className={classes.circularProgress}
                   size={100}
-                  thickness={10}
+                  thickness={5}
                 />
               ) : (
                 <PMain />

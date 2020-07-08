@@ -32,7 +32,7 @@ import { cipher } from "../../module/bcrypt";
 // export const useDrawerProps = ({open, setOpen}) => {
 export const useDrawerProps = () => {
   const theme = useTheme();
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState, appState, dispatchLoading } = React.useContext(Store);
   const {
     setEditorText,
     setTitleText,
@@ -69,16 +69,22 @@ export const useDrawerProps = () => {
   
   const checkPassword = useCheckPassword();
   const handleSubmitPassword = async (password: string) => {
-    console.log(cipher(password))
+    // console.log(cipher(password))
     
     const result = await checkPassword(password);
     if (result === true) {
       dispatchAppState({ type: "ON_IS_SETTING" });
-      dispatchAppState({ type: "CLOSE_MODAL" });
+      // dispatchAppState({ type: "CLOSE_MODAL" });
+      dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
     } else if (result === false) {
       alert("パスワードが間違っています。");
     }
   };
+  const handleSwitchIsSetting = () => {
+    dispatchAppState({ type: "ON_IS_SETTING" })
+    dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
+  }
+
   const handleOpenFeedback = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "feedback_form" });
   }
@@ -112,6 +118,7 @@ export const useDrawerProps = () => {
     handleOpenArticleEditor,
     handleOpenFooterItemEditor,
     handleSubmitPassword,
+    handleSwitchIsSetting,
     handleOpenFeedback,
     handleOnSingOut,
     // open,
@@ -208,7 +215,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
 
   const BeforeIsSettingDrawerMenuMobile = () => {
     return (
-      <Button onClick={() => props.dispatchAppState({ type: "ON_IS_SETTING" })}>
+      <Button onClick={() => props.handleSwitchIsSetting()}>
         編集モードに切り替える
       </Button>
     );

@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export function TabMobile({tab, setTab}) {
+export function TabMobile({tab, setTab, className}) {
   const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -24,7 +24,7 @@ export function TabMobile({tab, setTab}) {
   };
 
   return (
-    <Paper square className={classes.root}>
+    <Paper square className={`${classes.root} ${className}`}>
       <Tabs
         value={tab}
         onChange={handleChange}
@@ -33,9 +33,9 @@ export function TabMobile({tab, setTab}) {
         textColor="secondary"
         aria-label="icon label tabs example"
       >
-        <Tab icon={<NoteAddOutlined />} label="ARTICLES" />
-        <Tab icon={<VideoLabel />} label="FOOTERICONS" />
-        <Tab icon={<Settings />} label="SETTING" />
+        <Tab icon={<NoteAddOutlined />} label="記事" />
+        <Tab icon={<VideoLabel />} label="アイテム" />
+        <Tab icon={<Settings />} label="設定" />
       </Tabs>
     </Paper>
   );

@@ -1,8 +1,9 @@
 import React from 'react'
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 import { usePMainProps } from '../PMain/PMain';
-import { makeStyles,createStyles, Theme, Button } from '@material-ui/core';
+import { makeStyles,createStyles, Theme, Button, CircularProgress } from '@material-ui/core';
 import { useDrawerProps } from '../Drawer';
+import { Store } from '../../Store/Store';
 
 export const useMainMobileProps = () => {
   const {
@@ -13,6 +14,8 @@ export const useMainMobileProps = () => {
     openArticle,
   } = usePMainProps();
 
+  const { loading } = React.useContext(Store)
+
   const { handleOpenArticleEditor } = useDrawerProps()
 
   return {
@@ -22,6 +25,7 @@ export const useMainMobileProps = () => {
     handleOnDelete,
     openArticle,
     handleOpenArticleEditor,
+    loading,
   }
 }
 
@@ -45,12 +49,27 @@ const useStyles = makeStyles((theme: Theme) => {
       borderRadius: 2,
       fontStyle: "italic",
     },
+    circularProgress: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
   });
 })
 
 export const MainMobilePresenter:React.FC<Props> = (props) => {
   const classes = useStyles()
 
+  if (props.loading.mainArticles) {
+    return <CircularProgress
+      className={classes.circularProgress}
+      size={50}
+      thickness={4}
+    />
+  }
+      
   return (
     <div className={classes.root}>
       <Button color="primary" className={classes.button} onClick={() => props.handleOpenArticleEditor()}>記事作成</Button>

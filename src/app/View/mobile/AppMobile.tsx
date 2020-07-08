@@ -5,7 +5,7 @@ import { SettingMobile } from "./SettingMobile";
 import { TabMobile } from './TabMobile'
 import { PaginationMobile } from './PaginationMobile';
 import { PModal } from '../PModal/PModal';
-import { makeStyles, createStyles, Theme, Button } from "@material-ui/core";
+import { makeStyles, createStyles, Theme, Button, CircularProgress } from "@material-ui/core";
 import { HomeButton } from '../PFooter/Pagination/HomeButton';
 import { Store } from '../../Store/Store';
 
@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     homeAndPagination: {
       display: "flex",
+    },
+    tabMobile: {
+      position: "absolute",
+      bottom: 0,
     }
   });
 });
@@ -32,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const AppMobile = () => {
   const classes = useStyles()
   const [tab, setTab] = React.useState(0)
-  const { dispatchAppState } = React.useContext(Store)
+  const { dispatchAppState, loading } = React.useContext(Store)
 
   let Display: React.FC
   switch (tab) {
@@ -64,7 +68,7 @@ export const AppMobile = () => {
         <Button className={classes.quit} onClick={() => dispatchAppState({type: "OFF_IS_SETTING"})}>観覧モードに切り替える</Button>
         <Display />
         {/* {tab === 0 ? <PaginationMobile /> : null} */}
-        <TabMobile tab={tab} setTab={setTab} />
+        <TabMobile tab={tab} setTab={setTab} className={classes.tabMobile}/>
       </div>
       <PModal />
     </>
