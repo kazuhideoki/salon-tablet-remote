@@ -21,7 +21,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Store } from "../Store/Store";
 import { EditorContext } from "../Store/EditorContext";
-import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback } from "@material-ui/icons";
+import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 //@ts-ignore
 import { signin, signout, useSession, getSession } from "next-auth/client";
@@ -121,19 +121,13 @@ export const useDrawerProps = () => {
     handleSwitchIsSetting,
     handleOpenFeedback,
     handleOnSingOut,
-    // open,
     handleDrawerOpen,
     handleDrawerClose,
     isMobile,
   };
 }
-// type useDrawerProps = ReturnType<typeof useDrawerProps>
-type TUseDrawerProps = ReturnType<typeof useDrawerProps>
-// type TDrawerProps = {
-//   open: boolean
-//   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-// }
-// type PresenterProps = useDrawerProps & DrawerProps
+
+export type TUseDrawerProps = ReturnType<typeof useDrawerProps>
 
 const useStyles = makeStyles((theme: Theme) => {
     const themes = React.useContext(ThemeContext);
@@ -236,6 +230,20 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <VideoLabel />
           </ListItemIcon>
           <ListItemText primary="アイテム作成" />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_MODAL",
+              payload: "setting_theme",
+            })
+          }
+        >
+          <ListItemIcon>
+            <Wallpaper />
+          </ListItemIcon>
+          <ListItemText primary="テーマ変更" />
         </ListItem>
         <ListItem
           button

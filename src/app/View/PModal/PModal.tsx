@@ -12,6 +12,7 @@ import ArticleEditor from "../Setting/ArticleEditor";
 import FooterItemEditor from "../Setting/FooterItemEditor";
 import { DeleteAccountForm } from "../Setting/DeleteAccountForm";
 import { FeedbackForm } from "../Setting/FeedbackForm";
+import { SettingTheme } from "../Setting/SettingTheme";
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
@@ -89,6 +90,10 @@ export const PModal = () => {
           case "edit_footer_item":
             modalStyle = size90;
             ModalContent = () => <FooterItemEditor />;
+            break;
+          case "setting_theme":
+            modalStyle = size90;
+            ModalContent = () => <SettingTheme />;
             break;
           case "setting_user_info":
             modalStyle = size90;
