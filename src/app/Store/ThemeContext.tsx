@@ -1,4 +1,5 @@
 import React from "react";
+import { createMuiTheme, CssBaseline } from "@material-ui/core";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -44,24 +45,41 @@ const themes = {
         height: pFooterHeight,
     },
 
-    drawerWidth: 180,
+    drawerWidth: 210,
    
-
     // fontSize
     icon: 85,
     iconSmall : 38,
+
+    
 } as const
 
 export type ThemeType = typeof themes;
 
 export const ThemeContext = React.createContext(themes as ThemeType);
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        html: {
+          // WebkitFontSmoothing: 'auto',
+          fontFamily: ['"ヒラギノ角ゴ ProN"', "futura-pt",].join(','),
+        },
+      },
+    },
+  },
+});
+
 export const ThemeProvider = ({ children }: any) => {
 
     return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         <ThemeContext.Provider value={themes}>
         {children}
         </ThemeContext.Provider>
+      </ThemeProvider>
     )
 };
 

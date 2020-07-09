@@ -3,11 +3,13 @@ import { config, Provider } from "next-auth/client";
 
 // デバイス間のcssをリセットする
 import "normalize.css"
+// ベースのcssの適応
+// import "../../public/base.scss";
+
 // editor用のsnowテーマのcss
 import "react-quill/dist/quill.snow.css";
 // ReactQuillの整形
 import "../../public/quill.scss";
-import { server } from "../config";
 import Head from "next/head";
 require("dotenv").config();
 
