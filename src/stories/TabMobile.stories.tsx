@@ -7,6 +7,6 @@ component: TabMobile,
 export const Normal = () => {
   const [tab, setTab] = React.useState("articles");
   
-return <TabMobile tab={tab} setTab={setTab} />;
+return <TabMobile tab={tab} setTab={setTab} className='' />;
 
 }
