@@ -1,21 +1,16 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
 import ImageCompress from "quill-image-compress";
+import ImageResize from "quill-image-resize-module-react";
 import { Typography, CircularProgress } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
 
-// ※ReactQuillのスタイルはquill.scssに記述
+// ※■■■ReactQuillのスタイルはquill.scssに記述■■■
 
-
-// ↓使ってみたが, 導入するとeditorが表示されなくなった。アンイストール済み
-// import { ImageResize } from "quill-image-resize-module";
-// Quill.register("modules/imageResize", ImageResize);
-
+// 画像サイズ変更のモジュールregister
+Quill.register("modules/imageResize", ImageResize);
 // 画像圧縮のモジュールを利用可能にimageCompress;
 Quill.register("modules/imageCompress", ImageCompress);
-
-// 動的にアイコンを変えるのは難しいか。。。stateの変化を反映させられないみたい
-// const icons = Quill.import('ui/icons');
 
 
 type Props = {
@@ -42,12 +37,6 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
     }
     // エディターから文字数を取得して文字数カウントのためのcharCountに値を格納
     setCharCount(editor.getLength());
-
-    // console.log(delta)
-    // console.log(source)
-    // console.log(editor.getText());
-    // console.log(editor.getContents());
-    // console.log(editor.getHTML());
     
   }
   
@@ -57,14 +46,8 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
       [{ color: [] }, { background: [] }],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        // { indent: "-1" },
-        // { indent: "+1" },
-      ],
+      [{ list: "ordered" }, { list: "bullet" }],
       ["link", image, "video"],
-      // ["link", "image"],
       ["clean"],
     ],
     imageCompress: {
@@ -74,24 +57,12 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       imageType: "image/jpeg", // default
       debug: true, // default
     },
+    imageResize: {
+      parchment: Quill.import('parchment'),
+      // See optional "config" below
+      modules: ["Resize", "DisplaySize", "Toolbar"],
+    },
   };
-
-  // let formats = [
-  //   "header",
-  //   "bold",
-  //   "italic",
-  //   "underline",
-  //   "strike",
-  //   "blockquote",
-  //   "color",
-  //   "background",
-  //   "list",
-  //   "bullet",
-  //   "indent",
-  //   "link",
-  //   "image",
-  //   "clean",
-  // ];
 
   return (
     // ※ReactQuillのスタイルはquill.scssに記述
