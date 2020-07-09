@@ -1,5 +1,9 @@
 import React from "react";
-import { createMuiTheme, CssBaseline } from "@material-ui/core";
+import {
+  createMuiTheme,
+  CssBaseline,
+  MuiThemeProvider,
+} from "@material-ui/core";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -24,39 +28,42 @@ const pMainHeight = screenHeight - pHeaderHeight - pHeaderMarginBottom - pFooter
 
 
 // ThemeContext.Providerを通して渡される値
-const themes = {
-    app: {
-        padding: portalPadding,
-        width: portalWidth,
-        height: portalHeight,
-    },
-    pHeader: {
-        marginBottom: pHeaderMarginBottom,
-        width: pHeaderWidth,
-        height: pHeaderHeight,
-    },
-    pMain: {
-        width: pMainWidth,
-        height: pMainHeight,
-    },
-    pFooter: {
-        marginTop: pFooterMarginTop,
-        width: pFooterWidth,
-        height: pFooterHeight,
-    },
+const themeArgs = {
+  app: {
+    padding: portalPadding,
+    width: portalWidth,
+    height: portalHeight,
+  },
+  pHeader: {
+    marginBottom: pHeaderMarginBottom,
+    width: pHeaderWidth,
+    height: pHeaderHeight,
+  },
+  pMain: {
+    width: pMainWidth,
+    height: pMainHeight,
+  },
+  pFooter: {
+    marginTop: pFooterMarginTop,
+    width: pFooterWidth,
+    height: pFooterHeight,
+  },
 
-    drawerWidth: 210,
-   
-    // fontSize
-    icon: 85,
-    iconSmall : 38,
+  drawerWidth: 210,
 
-    
-} as const
+  // fontSize
+  icon: 85,
+  iconSmall: 38,
+}
 
-export type ThemeType = typeof themes;
+export type TThemeArgs = typeof themeArgs;
 
-export const ThemeContext = React.createContext(themes as ThemeType);
+type TThemeContext = {
+  selectedTheme: string,
+  setSelectedTheme: React.Dispatch<React.SetStateAction<string>>,
+} & TThemeArgs
+
+export const ThemeContext = React.createContext({} as TThemeContext);
 
 const theme = createMuiTheme({
   overrides: {
@@ -73,14 +80,24 @@ const theme = createMuiTheme({
 
 export const ThemeProvider = ({ children }: any) => {
 
+    const [selectedTheme, setSelectedTheme] = React.useState("nonTheme");
+
+    const themeValue = {
+      ...themeArgs,
+      selectedTheme,
+      setSelectedTheme,
+    };
+
     return (
-      <ThemeProvider theme={theme}>
+      // これでmaterial uiのthemeオブジェクトを下へ送る
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <ThemeContext.Provider value={themes}>
-        {children}
+        {/* 独自設定した変数を下へ送る */}
+        <ThemeContext.Provider value={themeValue}>
+          {children}
         </ThemeContext.Provider>
-      </ThemeProvider>
-    )
+      </MuiThemeProvider>
+    );
 };
 
 export default ThemeProvider;
