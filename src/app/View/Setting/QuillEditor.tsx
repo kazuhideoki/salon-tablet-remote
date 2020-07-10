@@ -72,7 +72,8 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       parchment: Quill.import("parchment"),
       // ResizeはimageのResizeをtouchイベントでも適応
       // ※画像をタップしたときに t.onUpdateのエラーが出るが、動作に問題はない？
-      modules: ["DisplaySize", "Toolbar", Resize],
+      // modules: ["DisplaySize", "Toolbar", Resize],
+      modules: ["DisplaySize", "Toolbar", "Resize"],
     },
     // imageDrop: true,
   };
