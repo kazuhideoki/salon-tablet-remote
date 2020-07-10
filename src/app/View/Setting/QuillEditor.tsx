@@ -3,7 +3,7 @@ import ReactQuill, { Quill }from "react-quill";
 import ImageCompress from "quill-image-compress";
 import ImageResize from "quill-image-resize-module-react";
 
-import { Typography, CircularProgress } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
 import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
 
@@ -31,6 +31,8 @@ type Props = {
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
 }
 export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }:Props) => {
+  console.log("QuillEditorだよ");
+  
   
   const [hasImg, setHasImg] = React.useState(false)
   
