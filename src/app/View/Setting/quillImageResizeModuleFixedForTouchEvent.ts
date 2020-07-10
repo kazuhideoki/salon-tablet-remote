@@ -1,7 +1,18 @@
 import { BaseModule } from "quill-image-resize-module-react/src/modules/BaseModule";
 
 // imageのResizeをtouchイベントでも適応するためのquill-image-resize-module-react用のモジュール
-export class Resize extends BaseModule {
+export class Resize {
+  constructor(resizer) {
+    //@ts-ignore
+    this.overlay = resizer.overlay;
+    //@ts-ignore
+    this.img = resizer.img;
+    //@ts-ignore
+    this.options = resizer.options;
+    //@ts-ignore
+    this.requestUpdate = resizer.onUpdate;
+  }
+
   onCreate = () => {
     // console.log("onCreateだよ");
 
