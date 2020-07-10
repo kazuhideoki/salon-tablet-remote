@@ -39,7 +39,7 @@ export const checkImg = (
   // 画像が複数ある場合最初のimgを削除する。その後onChangeが再発火してcheckInsertImgも再発火。imgが一つになるまで続く。
   isCheckMoreImgs ? removeImg() : null;
 
-  console.log(imgData);
+  // console.log(imgData);
 
   return imgData;
 };
