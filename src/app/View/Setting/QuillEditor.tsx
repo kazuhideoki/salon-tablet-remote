@@ -9,8 +9,7 @@ import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
 
 // ※■■■ReactQuillのスタイルはquill.scssに記述■■■
 
-// 画像サイズ変更のモジュールregister
-// Quill.register("modules/imageResize", ImageResize);
+
 
 
 // コピペ、ドラック/ドロップのモジュール
@@ -20,6 +19,9 @@ import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
 
 // 画像圧縮のモジュールを利用可能にimageCompress;
 Quill.register("modules/imageCompress", ImageCompress);
+
+// 画像サイズ変更のモジュールregister
+Quill.register("modules/imageResize", ImageResize);
 
 
 type Props = {
@@ -68,13 +70,13 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       imageType: "image/jpeg", // default
       debug: true, // default
     },
-    // imageResize: {
-    //   parchment: Quill.import("parchment"),
-    //   // ResizeはimageのResizeをtouchイベントでも適応
-    //   // ※画像をタップしたときに t.onUpdateのエラーが出るが、動作に問題はない？
-    //   modules: ["DisplaySize", "Toolbar", Resize],
-    //   // modules: ["DisplaySize", "Toolbar", "Resize"],
-    // },
+    imageResize: {
+      parchment: Quill.import("parchment"),
+      // ResizeはimageのResizeをtouchイベントでも適応
+      // ※画像をタップしたときに t.onUpdateのエラーが出るが、動作に問題はない？
+      modules: ["DisplaySize", "Toolbar", Resize],
+      // modules: ["DisplaySize", "Toolbar", "Resize"],
+    },
     // imageDrop: true,
   };
 
