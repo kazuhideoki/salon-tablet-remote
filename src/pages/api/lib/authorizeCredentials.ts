@@ -1,5 +1,6 @@
 import { T_check_credentials } from "../user_info/check_credentials";
 import { db } from "./db";
+import { server } from "../../../config";
 
 type TCredentials = {
   email: string
@@ -21,7 +22,7 @@ export default async (credentials: TCredentials) => {
   try {
     const res = await fetch(
       // `${location.protocol}//${location.host}/api/user_info/check_credentials`,
-      `http://localhost:3000/api/user_info/check_credentials`,
+      `${server}/api/user_info/check_credentials`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
