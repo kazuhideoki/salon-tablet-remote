@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 const QuillEditor = dynamic(() => import("./QuillEditor"), {
   ssr: false,
 });
-// import { QuillEditor } from "./QuillEditor";
 import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
 import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
