@@ -41,6 +41,7 @@
     "normalize.css": "^8.0.1",
     "quill-image-compress": "^1.2.7",
     "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize": "^3.0.9",
     "quill-image-resize-module-react": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

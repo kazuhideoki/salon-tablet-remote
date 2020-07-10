@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
 import ImageCompress from "quill-image-compress";
-import ImageResize from "quill-image-resize-module-react";
+// import ImageResize from "quill-image-resize-module-react";
+
+import ImageResize from "quill-image-resize";
 
 import { Typography } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
