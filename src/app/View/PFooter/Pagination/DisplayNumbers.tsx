@@ -3,7 +3,8 @@ import { Store } from "../../../Store/Store";
 import { ThemeContext } from "../../../Store/ThemeContext";
 import { pageArrowProps } from "./PPagination";
 import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
-import { makeStyles, createStyles, Theme } from "@material-ui/core";
+import { makeStyles, createStyles, Theme, Typography } from "@material-ui/core";
+import { LoadingAction } from "../../../Reducer/loadingReducer";
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
@@ -21,16 +22,18 @@ const useStyles = makeStyles((theme: Theme) => {
   })
 })
 
-export const DisplayNumbers = (props: pageArrowProps) => {
-    const classes = useStyles()
-    const { paginationParams, dispatchLoading } = React.useContext(Store);
-    const {page, pageCount} = paginationParams;
-    const getArticles = useGetArticles();
+type Props = {
+  paginationParams: {
+    page: number;
+    pageCount: number;
+    pageSize: number;
+    rowCount: number;
+  },
+  hundleOnNumClick: (num: any) => void,
+}
 
-    const hundleOnClick = (num) => {
-      dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-      getArticles(num);
-    };
+export const DisplayNumbers = (props: Props) => {
+    const classes = useStyles()  
 
     const number1 = page - 2;
     const number2 = page - 1;
@@ -50,7 +53,9 @@ export const DisplayNumbers = (props: pageArrowProps) => {
                  key={num}
                  className={`${classes.nums} ${classes.numsCurrent}`}
                >
-                 {num}
+                 {/* <Typography variant="subtitle1"> */}
+                  {num}
+                 {/* </Typography> */}
                </button>
              );
            }
@@ -58,10 +63,12 @@ export const DisplayNumbers = (props: pageArrowProps) => {
     return (
       <button
         key={num}
-        onClick={() => hundleOnClick(num)}
+        onClick={() => hundleOnNumClick(num)}
         className={classes.nums}
       >
+        {/* <Typography variant="subtitle1"> */}
         {num}
+        {/* </Typography> */}
       </button>
     );
   });

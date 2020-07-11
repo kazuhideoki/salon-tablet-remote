@@ -1,7 +1,17 @@
 // ReactQuillの整形
 
 .quill {
+  font-family: inherit; // Typographyのthemeを適応するためのinherit
+  .ql-container {
+    font-family: inherit; // Typographyのthemeを適応するためのinherit
+    .ql-editor {
+      font-family: inherit; // Typographyのthemeを適応するためのinherit
+    }
+  }
   .ql-toolbar {
+    font-family: inherit; // Typographyのthemeを適応するためのinherit
+    
+
     position: sticky;
     top: 0;
     z-index: 100;

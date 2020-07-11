@@ -8,14 +8,15 @@ import { Oldest } from "./Oldest";
 
 type Props = {
   classes?: any
+  dispatchLoading:
 }
 
-export const PaginationArrows = ({classes}: Props) => {
+export const PaginationArrows = ({classes, dispatchLoading}: Props) => {
   return (
     <Grid item className={classes.pagination}>
       <Latest classesDisable={classes.disable} classesIcon={classes.icon} />
       <Prev classesDisable={classes.disable} classesIcon={classes.icon} />
-      <DisplayNumbers />
+      <DisplayNumbers dispatchLoading={dispatchLoading}/>
       <Next classesDisable={classes.disable} classesIcon={classes.icon} />
       <Oldest classesDisable={classes.disable} classesIcon={classes.icon} />
     </Grid>

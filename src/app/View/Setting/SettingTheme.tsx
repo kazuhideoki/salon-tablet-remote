@@ -30,7 +30,7 @@ export const SettingThemePresenter:React.FC<props> = (props) => {
   return (
     <div>
       <FormControl component="fieldset">
-        <FormLabel component="legend">フッターアイテム機能切り替え</FormLabel>
+        <FormLabel component="legend">テーマ変更</FormLabel>
         <RadioGroup
           row
           aria-label="setting-theme"

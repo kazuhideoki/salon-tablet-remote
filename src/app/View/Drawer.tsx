@@ -6,7 +6,7 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import { Drawer as MuiDrawer, useMediaQuery } from "@material-ui/core";
+import { Drawer as MuiDrawer, useMediaQuery, Typography } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -201,7 +201,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           onChange={(e) => setPass(e.target.value)}
         />
         <Button onClick={() => props.handleSubmitPassword(pass)}>
-          編集モードに切り替える
+          <Typography variant="body1">
+            編集モードに切り替える
+          </Typography>
         </Button>
       </>
     );
@@ -210,7 +212,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   const BeforeIsSettingDrawerMenuMobile = () => {
     return (
       <Button onClick={() => props.handleSwitchIsSetting()}>
-        編集モードに切り替える
+        <Typography variant="body1">
+          編集モードに切り替える
+        </Typography>
       </Button>
     );
   }
@@ -293,7 +297,8 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   else if (props.appState.isSetting) {
     DrawerHeader = () => (
       <Button onClick={props.handleDrawerClose}>
-        観覧モードに切り替える
+        <Typography variant="body1">観覧モードに切り替える</Typography>
+
         {props.theme.direction === "ltr" ? (
           <ChevronLeftIcon />
         ) : (
