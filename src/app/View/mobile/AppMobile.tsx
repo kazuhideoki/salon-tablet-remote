@@ -8,6 +8,8 @@ import { PModal } from '../PModal/PModal';
 import { makeStyles, createStyles, Theme, Button, CircularProgress } from "@material-ui/core";
 import { HomeButton } from '../PFooter/Pagination/HomeButton';
 import { Store } from '../../Store/Store';
+import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
+import { Home } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -23,9 +25,6 @@ const useStyles = makeStyles((theme: Theme) => {
       width: "100%",
       backgroundColor: "whitesmoke",
     },
-    homeAndPagination: {
-      display: "flex",
-    },
     tabMobile: {
       position: "absolute",
       bottom: 0,
@@ -37,6 +36,7 @@ export const AppMobile = () => {
   const classes = useStyles()
   const [tab, setTab] = React.useState(0)
   const { dispatchAppState, loading } = React.useContext(Store)
+  const getArticles = useGetArticles()
 
   const onClickOffIsSetting = () => {
     dispatchAppState({ type: "OFF_IS_SETTING" })
@@ -49,10 +49,7 @@ export const AppMobile = () => {
       Display = () => (
         <>
           <MainMobile />
-          <div className={classes.homeAndPagination}>
-            <HomeButton />
-            <PaginationMobile />
-          </div>
+          <PaginationMobile />
         </>
       );
       break;

@@ -1,19 +1,18 @@
 import React from "react";
 import { LastPage } from "@material-ui/icons";
-import { pageArrowProps } from "./PPagination";
 import { Store } from "../../../Store/Store";
 import { PaginationParamsAction } from "../../../Reducer/paginationParamsReducer";
 import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
+import { Typography, SvgIcon } from "@material-ui/core";
+import { TArrowProps } from "./PaginationArrows";
 
 //  ページ数が3より大きい場合latestとoldestを表示
-export const Oldest = (props: pageArrowProps) => {
-  const { paginationParams, dispatchLoading } = React.useContext(Store);
-  const {page, pageCount} = paginationParams;
-  const getArticles = useGetArticles();
+export const Oldest = (props: TArrowProps) => {
+  const { page, pageCount } = props.paginationParams;
 
   const hundleOnClick = () => {
-   dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-    getArticles(pageCount);
+    props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
+    props.getArticles(props.paginationParams.pageCount);
   };
 
   let onClick;
@@ -26,6 +25,27 @@ export const Oldest = (props: pageArrowProps) => {
     disable = props.classesDisable;
   }
   return (
-    <LastPage onClick={onClick} className={`${props.classesIcon} ${disable}`} />
+    <SvgIcon fontSize="inherit" onClick={onClick}>
+      <LastPage
+        className={`${disable}`}
+      />
+    </SvgIcon>
   );
 };
+
+// export const Oldest = ({ classesDisable }) => {
+//   const props = usePPaginationProps();
+
+//   const hundleOnClick = () => {
+//     props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
+//     props.getArticles(props.paginationParams.pageCount);
+//   };
+
+//   return (
+//     <OldestPresenter
+//       hundleOnClick={hundleOnClick}
+//       classesDisable={classesDisable}
+//       {...props}
+//     />
+//   );
+// };

@@ -13,6 +13,10 @@ const props = {
       pageSize: 5,
       rowCount: 18,
   },
+  
+  dispatchLoading: null,
+  handleOnNumClick: null,
+  
 }
 
 export const Normal = () => {

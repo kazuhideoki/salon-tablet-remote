@@ -4,6 +4,7 @@ import {
   CssBaseline,
   MuiThemeProvider,
 } from "@material-ui/core";
+import { themeMinimal } from "./themeMinimal";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -65,38 +66,24 @@ type TThemeContext = {
 
 export const ThemeContext = React.createContext({} as TThemeContext);
 
-const theme = createMuiTheme({
-  overrides: {
-    MuiCssBaseline: {
-      "@global": {
-        html: {
-          // WebkitFontSmoothing: 'auto',
-          fontFamily: ['"ヒラギノ角ゴ ProN"', "futura-pt"].join(","),
-        },
-      },
-    },
-  },
-  typography: {
-    fontFamily: [
-      "futura-pt",
-      '"ヒラギノ角ゴ ProN"',
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-  },
-});
+
 
 export const ThemeProvider = ({ children }: any) => {
 
     const [selectedTheme, setSelectedTheme] = React.useState("nonTheme");
+
+    let theme
+    switch (selectedTheme) {
+      case "nonTheme":
+      theme = null;
+        break;
+      case "minimal":
+      theme = themeMinimal;
+        break;
+
+      default:
+        break;
+    } 
 
     const themeValue = {
       ...themeArgs,

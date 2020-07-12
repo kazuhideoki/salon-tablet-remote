@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme, SvgIconTypeMap } from '@material-ui/core'
-import { ThemeType, ThemeContext } from '../../Store/ThemeContext'
+import { ThemeContext } from '../../Store/ThemeContext'
 import { Store } from '../../Store/Store'
 import { Autorenew } from '@material-ui/icons'
 import { OverridableComponent } from '@material-ui/core/OverridableComponent'

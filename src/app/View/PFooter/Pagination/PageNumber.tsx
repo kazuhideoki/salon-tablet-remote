@@ -15,8 +15,10 @@ type Props = {
 export const PageNumber = ({ className, paginationParams}: Props) => {
 
   return (
-    <span className={className}>
-      【 {paginationParams.page}/{paginationParams.pageCount} 】
-    </span>
+    // <span className={className}>
+      <Typography variant="subtitle1" component="span" className={className}>
+        【 {paginationParams.page}/{paginationParams.pageCount} 】
+      </Typography>
+    // </span>
   );
 };

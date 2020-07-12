@@ -1,6 +1,7 @@
 import React from 'react'
 import { Home } from '@material-ui/icons';
 import { useGetArticles } from '../../../ActionCreator/articles/useGetArticles';
+import { Typography } from '@material-ui/core';
 
 type Props = {
   className?: string
@@ -10,5 +11,9 @@ type Props = {
 export const HomeButton = ({ className, getArticles}: Props) => {
   
 
-  return <Home onClick={() => getArticles(1)} className={className ? className : ""} />
+  return ( 
+    <Typography variant="subtitle1" component="span">
+      <Home onClick={() => getArticles(1)} className={className ? className : ""} />
+    </Typography>
+    )
 }
