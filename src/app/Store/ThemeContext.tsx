@@ -4,7 +4,7 @@ import {
   CssBaseline,
   MuiThemeProvider,
 } from "@material-ui/core";
-import { themeMinimal } from "./themeMinimal";
+import { themeMinimal } from "./themes/themeMinimal";
 
 const screenWidth = 100
 const screenHeight = 100

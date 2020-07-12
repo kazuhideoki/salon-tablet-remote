@@ -49,8 +49,8 @@ export const PaginationMobilePresenter:React.FC<TUsePPaginationProps> = (props) 
 
   return (
     <div className={classes.root}>
-      <Home onClick={() => props.getArticles(1)} />
-      <PaginationArrows {...props} classes={classes}/>
+      <Home onClick={() => props.getArticles(1)} className={classes.home} />
+      <PaginationArrows {...props} classes={classes} />
     </div>
   );
 }

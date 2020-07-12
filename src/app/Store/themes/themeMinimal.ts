@@ -27,4 +27,14 @@ export const themeMinimal = createMuiTheme({
       '"Segoe UI Symbol"',
     ].join(","),
   },
+   palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: "#134e78",
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#b0c4de', // lightsteelblue
+    },
+  },
 });

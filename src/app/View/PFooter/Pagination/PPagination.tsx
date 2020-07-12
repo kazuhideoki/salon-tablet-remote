@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => {
     displayPage: {
       fontSize: "0.8em",
     },
-    paginationArrows :{
+    paginationArrows: {
       fontSize: "inherit",
     },
 
