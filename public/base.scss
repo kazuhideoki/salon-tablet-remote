@@ -1,3 +1,4 @@
 body {
-  overscroll-behavior-y: none;
+  // スクロールで更新を無効化用
+  overscroll-behavior: none;
 }
