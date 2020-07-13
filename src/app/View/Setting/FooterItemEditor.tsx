@@ -90,7 +90,6 @@ export const FooterItemEditor = () => {
         label="リンクURL"
         value={linkUrl}
         onChange={(e) => setLinkUrl(e.target.value)}
-        variant="outlined"
       />
       </div>
     );
@@ -109,7 +108,6 @@ export const FooterItemEditor = () => {
       <TextField
         id="icon-name-text-field"
         label="アイテム名"
-        variant="outlined"
         value={titleText}
         onChange={(e) => handleOnChangeIconName(e)}
         className={classes.titleText}
@@ -133,7 +131,6 @@ export const FooterItemEditor = () => {
         </Grid> */}
         <Grid item>
           <Button
-            variant="outlined"
             onClick={() => handleSubmit({ isPublishing: true })}
             disabled={
               charCountIconName < 101 && charCountFooterItemContent < 1001
@@ -146,7 +143,6 @@ export const FooterItemEditor = () => {
         </Grid>
         <Grid item>
           <Button
-            variant="outlined"
             onClick={() => handleSubmit({ isPublishing: false })}
             disabled={
               charCountIconName < 101 && charCountFooterItemContent < 1001

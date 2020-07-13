@@ -26,7 +26,7 @@ export const SelectAppLink = ({appLinkUrl, setAppLinkUrl}) => {
   const classes = useStyles()
 
   return (
-    <FormControl variant="outlined" className={classes.formControl}>
+    <FormControl className={classes.formControl}>
       <InputLabel id="select-app-label">アプリ</InputLabel>
       <Select
         labelId="select-app-label"

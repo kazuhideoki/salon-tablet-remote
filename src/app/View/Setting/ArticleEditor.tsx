@@ -69,7 +69,6 @@ const ArticleEditor = () => {
       <TextField
         id="article-title-text-field"
         label="タイトル"
-        variant="outlined"
         value={titleText}
         onChange={(e) => handleOnChangeTitleText(e)}
         className={classes.title}
@@ -101,7 +100,6 @@ const ArticleEditor = () => {
       <Grid container className={classes.submitButtons}>
         <Grid item>
           <Button
-            variant="outlined"
             onClick={() => handleSubmit({ isPublishing: true })}
             disabled={
               charCountArticleTitle < 101 && charCountArticleContent < 1001
@@ -114,7 +112,6 @@ const ArticleEditor = () => {
         </Grid>
         <Grid item>
           <Button
-            variant="outlined"
             onClick={() => handleSubmit({ isPublishing: false })}
             disabled={
               charCountArticleTitle < 101 && charCountArticleContent < 1001

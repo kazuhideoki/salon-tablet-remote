@@ -133,7 +133,7 @@ export const PMainPresenter = (props: Props) => {
               props.openArticle(value.title, value.article_content)
             }
           >
-            <Card variant="outlined" className={classes.card}>
+            <Card className={classes.card}>
               <CardContent>
                 <Typography variant="h5" component="h2">
                   {value.title}
@@ -161,7 +161,6 @@ export const PMainPresenter = (props: Props) => {
   const noArticles = (
     <Grid item >
       <Card
-        variant="outlined"
         className={classes.card}
       >
         記事がありません

@@ -98,7 +98,6 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 fullWidth
                 id="email"
                 label="メールアドレス"
@@ -112,7 +111,6 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
               <TextField
                 autoComplete="fname"
                 name="name"
-                variant="outlined"
                 fullWidth
                 id="name"
                 label="名前"
@@ -122,7 +120,6 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 fullWidth
                 id="shopName"
                 label="お店の名前"
@@ -134,7 +131,6 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 fullWidth
                 name="password"
                 label="パスワード"
@@ -175,7 +171,6 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
 
           <Button
             fullWidth
-            variant="contained"
             color="primary"
             className={classes.submit}
             onClick={() => props.handleOnSubmit()}
@@ -191,7 +186,6 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
         <Divider variant="middle" />
         <Button
           fullWidth
-          variant="contained"
           color="secondary"
           className={classes.submit}
           onClick={() => props.openDeleteAccountForm()}

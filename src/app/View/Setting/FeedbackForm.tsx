@@ -98,7 +98,6 @@ export const FeedbackFormPresenter:React.FC<Props> = (props) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 fullWidth
                 id="contact_form_title"
                 label="タイトル"
@@ -113,7 +112,6 @@ export const FeedbackFormPresenter:React.FC<Props> = (props) => {
                 multiline
                 rows={6}
                 name="contact_form_content"
-                variant="outlined"
                 fullWidth
                 id="contact_form_content"
                 label="内容"
@@ -124,7 +122,6 @@ export const FeedbackFormPresenter:React.FC<Props> = (props) => {
           </Grid>
           <Button
             fullWidth
-            variant="contained"
             color="primary"
             className={classes.submit}
             onClick={() => props.handleOnSubmit()}

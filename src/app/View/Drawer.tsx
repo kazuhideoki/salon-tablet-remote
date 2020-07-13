@@ -196,7 +196,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           label="パスワード"
           type="password"
           autoComplete="current-password"
-          variant="outlined"
           value={pass}
           onChange={(e) => setPass(e.target.value)}
           onKeyPress={e => {
@@ -302,7 +301,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   // Open isSetting 開いて編集モード
   else if (props.appState.isSetting) {
     DrawerHeader = () => (
-      <Button onClick={props.handleDrawerClose}>
+      <Button variant="text" onClick={props.handleDrawerClose}>
         <Typography variant="body1">観覧モードに切り替える</Typography>
 
         {props.theme.direction === "ltr" ? (

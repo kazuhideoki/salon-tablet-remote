@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
 import { TUserInfo, Store } from "./Store";
+import { nonTheme } from "./themes/nonTheme";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -71,7 +72,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
     // user_infoのselected_themeをもとにテーマを適応
     switch (selected_theme) {
       case "nonTheme":
-        theme = null;
+        theme = nonTheme;
         break;
       case "minimal":
         theme = themeMinimal;
@@ -84,6 +85,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
     return (
       // これでmaterial uiのthemeオブジェクトを下へ送る
       <MuiThemeProvider theme={theme}>
+        {/* MuiCssBaseline、@globalが適応 */}
         <CssBaseline />
         {/* 独自設定した変数を下へ送る */}
         <ThemeContext.Provider value={themeArgs}>

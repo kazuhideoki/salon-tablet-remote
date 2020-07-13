@@ -17,7 +17,6 @@ export const SettingPassword = () => {
         label="Password"
         type="password"
         autoComplete="current-password"
-        variant="outlined"
       />
       <Button onClick={() => hancleOnClick()}>設定</Button>
     </div>

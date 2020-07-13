@@ -1,16 +1,27 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core"
 
 export const themeMinimal = createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
-        html: {
-          // WebkitFontSmoothing: 'auto',
-          fontFamily: ['"ヒラギノ角ゴ ProN"', "futura-pt"].join(","),
+        a: {
+          color: "#134e78",
         },
+        h1: {
+          fontWeight: "400",
+          borderBottom: "solid 3px black",
+        },
+        h2: {
+          fontWeight: "400",
+          padding: "0.25em 0.5em",/*上下 左右の余白*/
+          background: "transparent",/*背景透明に*/
+          borderLeft: "solid 5px",/*左線*/
+        },
+        
       },
     },
   },
+
   typography: {
     fontFamily: [
       "futura-pt",
@@ -37,4 +48,20 @@ export const themeMinimal = createMuiTheme({
       main: '#b0c4de', // lightsteelblue
     },
   },
-});
+
+  props: {
+    MuiPaper: {
+      variant: "elevation",
+      elevation: 3,
+    },
+    MuiTextField: {
+      variant: "standard",
+    },
+    MuiButton: {
+      variant: "outlined",
+    },
+    MuiFormControl: {
+      variant: "standard",
+    }
+  }
+})

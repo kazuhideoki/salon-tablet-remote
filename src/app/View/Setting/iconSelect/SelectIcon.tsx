@@ -54,7 +54,6 @@ export const SelectIcon = () => {
     <>
       <Button
         aria-describedby={id}
-        variant="contained"
         color="primary"
         onClick={handleClick}
       >

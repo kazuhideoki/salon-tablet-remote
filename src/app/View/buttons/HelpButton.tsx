@@ -39,8 +39,6 @@ export const HelpButton: React.FC<THelpButton> = ({ className, content }) => {
              <IconButton
                aria-label="help"
                aria-describedby={id}
-               // variant="contained"
-               // color="primary"
                onClick={handleClick}
              >
                <Help />

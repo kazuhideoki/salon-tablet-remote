@@ -69,7 +69,6 @@ export function DeleteAccountForm() {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
-            variant="outlined"
             margin="normal"
             required
             fullWidth
@@ -82,7 +81,6 @@ export function DeleteAccountForm() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-            variant="outlined"
             margin="normal"
             required
             fullWidth
@@ -97,7 +95,6 @@ export function DeleteAccountForm() {
           <Button
             
             fullWidth
-            variant="contained"
             color="primary"
             className={classes.submit}
             onClick={() => handleDeleteAccount({ email, password })}
