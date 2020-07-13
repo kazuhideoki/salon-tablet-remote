@@ -35,13 +35,11 @@ type Props = ReturnType<typeof useMainMobileProps>
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
-      display: "flex",
-      flexDirection: "column",
       overflowY: "scroll",
+      flexGrow: 1,
       width: "100%",
     },
     items: {
-      flexGrow: 1,
       overflowY: "scroll",
     },
     item: {

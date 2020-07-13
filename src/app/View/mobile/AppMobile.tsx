@@ -28,9 +28,6 @@ const useStyles = makeStyles((theme: Theme) => {
     createButton: {
       width: "100%",
     },
-    mainOrItems: {
-      overflowY: "scroll",
-    },
     tabMobile: {
       // position: "absolute",
       // bottom: 0,
@@ -60,9 +57,7 @@ export const AppMobile = () => {
       Display = () => (
         <>
           <Button color="primary" className={classes.createButton} onClick={() => handleOpenArticleEditor()}>記事作成</Button>
-          <div className={classes.mainOrItems}>
-            <MainMobile />
-          </div>
+          <MainMobile />
           <PaginationMobile />
         </>
       );
@@ -77,7 +72,6 @@ export const AppMobile = () => {
           >
             アイテム追加
           </Button>
-          <div className={classes.mainOrItems}></div>
           <FooterMobile />
         </>
       );
