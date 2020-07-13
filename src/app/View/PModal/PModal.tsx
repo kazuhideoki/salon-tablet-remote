@@ -60,11 +60,11 @@ export const PModal = () => {
         let ModalContent = () => <></>;
         // modalStyleにモーダルのサイズやoverflowなどのプロパティを設定する。
         let modalStyle = null;
-        const sizeSmall = {
-            width: '60vw',
-            height: 100,
-            padding: 0,
-            overflow: "hidden",
+        const size70 = {
+          width: "70vw",
+          height: "70vh",
+          padding: 0,
+          overflow: "hidden",
         };
         const size90 = {
             width: "90vw",
@@ -92,7 +92,7 @@ export const PModal = () => {
             ModalContent = () => <FooterItemEditor />;
             break;
           case "setting_theme":
-            modalStyle = size90;
+            modalStyle = sizeSmall;
             ModalContent = () => <SettingTheme />;
             break;
           case "setting_user_info":

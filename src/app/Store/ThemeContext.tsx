@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  createMuiTheme,
   CssBaseline,
   MuiThemeProvider,
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
+import { TUserInfo, Store } from "./Store";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -59,45 +59,35 @@ const themeArgs = {
 
 export type TThemeArgs = typeof themeArgs;
 
-type TThemeContext = {
-  selectedTheme: string,
-  setSelectedTheme: React.Dispatch<React.SetStateAction<string>>,
-} & TThemeArgs
-
-export const ThemeContext = React.createContext({} as TThemeContext);
+export const ThemeContext = React.createContext({} as TThemeArgs);
 
 
+export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
-export const ThemeProvider = ({ children }: any) => {
+    const { userInfo } = React.useContext(Store)
+    const { selected_theme } = userInfo
 
-    const [selectedTheme, setSelectedTheme] = React.useState("nonTheme");
-
-    let theme
-    switch (selectedTheme) {
+    let theme // 型付ける
+    // user_infoのselected_themeをもとにテーマを適応
+    switch (selected_theme) {
       case "nonTheme":
-      theme = null;
+        theme = null;
         break;
       case "minimal":
-      theme = themeMinimal;
+        theme = themeMinimal;
         break;
 
       default:
         break;
     } 
 
-    const themeValue = {
-      ...themeArgs,
-      selectedTheme,
-      setSelectedTheme,
-    };
-
     return (
       // これでmaterial uiのthemeオブジェクトを下へ送る
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         {/* 独自設定した変数を下へ送る */}
-        <ThemeContext.Provider value={themeValue}>
-          {children}
+        <ThemeContext.Provider value={themeArgs}>
+          {props.children}
         </ThemeContext.Provider>
       </MuiThemeProvider>
     );

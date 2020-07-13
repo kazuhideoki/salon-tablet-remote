@@ -4,18 +4,26 @@ import {
   T_shop_name,
   T_user_name,
   T_user_email,
+  T_selected_theme,
 } from "../Store/Store";
 import { reducerLogger } from "./reducerLogger";
 
-export type TUserInfoAction = {
-  type: "SET_USER_INFO";
-  payload: {
-    user_id: T_user_id;
-    user_name: T_user_name;
-    shop_name: T_shop_name;
-    user_email: T_user_email;
-  };
-};
+export type TUserInfoAction =
+  | {
+      type: "SET_USER_INFO";
+      payload: {
+        user_id: T_user_id;
+        user_name: T_user_name;
+        shop_name: T_shop_name;
+        user_email: T_user_email;
+      };
+    }
+  | {
+      type: "SET_THEME";
+      payload: {
+        selectedTheme: T_selected_theme;
+      };
+    };
 
 
 export function userInfoReducer(state: TUserInfo, action: TUserInfoAction) {
@@ -23,7 +31,10 @@ export function userInfoReducer(state: TUserInfo, action: TUserInfoAction) {
   const func = userInfoReducer;
   switch (action.type) {
     case "SET_USER_INFO":
-      newState = {...state, ...action.payload}
+      newState = { ...state, ...action.payload };
+      break;
+    case "SET_THEME":
+      newState = { ...state, selected_theme: action.payload.selectedTheme  };
       break;
 
     default:

@@ -17,20 +17,28 @@ export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
 
   return (
     <div className={classes.root}>
-      <button onClick={() =>
-        props.dispatchAppState({
-          type: "OPEN_MODAL",
-          payload: "setting_theme",
-        })
-      }>テーマ変更</button>
-      <br/>
-      <button onClick={() =>
-        props.dispatchAppState({
-          type: "OPEN_MODAL",
-          payload: "setting_user_info",
-        })
-      }>アカウント</button>
-      <br/>
+      <button
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "setting_theme",
+          })
+        }
+      >
+        テーマ変更(制作中)
+      </button>
+      <br />
+      <button
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "setting_user_info",
+          })
+        }
+      >
+        アカウント
+      </button>
+      <br />
       <button onClick={() => props.handleOnSingOut()}>サインアウト</button>
     </div>
   );
