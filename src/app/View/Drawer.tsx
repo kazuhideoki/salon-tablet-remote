@@ -253,7 +253,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           <ListItemIcon>
             <Wallpaper />
           </ListItemIcon>
-          <ListItemText primary="テーマ変更(制作中)" />
+          <ListItemText primary="テーマ変更" secondary="製作中" />
         </ListItem>
         <ListItem
           button

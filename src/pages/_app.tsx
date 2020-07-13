@@ -3,8 +3,8 @@ import { config, Provider } from "next-auth/client";
 
 // デバイス間のcssをリセットする
 import "normalize.css"
-// ベースのcssの適応
-// import "../../public/base.scss";
+// ベースのcssの適応(スクロールで更新を無効化)
+import "../../public/base.scss";
 
 // editor用のsnowテーマのcss
 import "react-quill/dist/quill.snow.css";
