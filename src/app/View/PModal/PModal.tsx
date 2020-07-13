@@ -12,6 +12,7 @@ import ArticleEditor from "../Setting/ArticleEditor";
 import FooterItemEditor from "../Setting/FooterItemEditor";
 import { DeleteAccountForm } from "../Setting/DeleteAccountForm";
 import { FeedbackForm } from "../Setting/FeedbackForm";
+import { SettingTheme } from "../Setting/SettingTheme";
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
@@ -59,11 +60,11 @@ export const PModal = () => {
         let ModalContent = () => <></>;
         // modalStyleにモーダルのサイズやoverflowなどのプロパティを設定する。
         let modalStyle = null;
-        const sizeSmall = {
-            width: '60vw',
-            height: 100,
-            padding: 0,
-            overflow: "hidden",
+        const size70 = {
+          width: "70vw",
+          height: "70vh",
+          padding: 0,
+          overflow: "hidden",
         };
         const size90 = {
             width: "90vw",
@@ -89,6 +90,10 @@ export const PModal = () => {
           case "edit_footer_item":
             modalStyle = size90;
             ModalContent = () => <FooterItemEditor />;
+            break;
+          case "setting_theme":
+            modalStyle = sizeSmall;
+            ModalContent = () => <SettingTheme />;
             break;
           case "setting_user_info":
             modalStyle = size90;

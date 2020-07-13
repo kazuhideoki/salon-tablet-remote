@@ -6,7 +6,7 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import { Drawer as MuiDrawer, useMediaQuery } from "@material-ui/core";
+import { Drawer as MuiDrawer, useMediaQuery, Typography } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -21,7 +21,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Store } from "../Store/Store";
 import { EditorContext } from "../Store/EditorContext";
-import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback } from "@material-ui/icons";
+import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 //@ts-ignore
 import { signin, signout, useSession, getSession } from "next-auth/client";
@@ -121,19 +121,13 @@ export const useDrawerProps = () => {
     handleSwitchIsSetting,
     handleOpenFeedback,
     handleOnSingOut,
-    // open,
     handleDrawerOpen,
     handleDrawerClose,
     isMobile,
   };
 }
-// type useDrawerProps = ReturnType<typeof useDrawerProps>
-type TUseDrawerProps = ReturnType<typeof useDrawerProps>
-// type TDrawerProps = {
-//   open: boolean
-//   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-// }
-// type PresenterProps = useDrawerProps & DrawerProps
+
+export type TUseDrawerProps = ReturnType<typeof useDrawerProps>
 
 const useStyles = makeStyles((theme: Theme) => {
     const themes = React.useContext(ThemeContext);
@@ -207,7 +201,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           onChange={(e) => setPass(e.target.value)}
         />
         <Button onClick={() => props.handleSubmitPassword(pass)}>
-          編集モードに切り替える
+          <Typography variant="body1">
+            編集モードに切り替える
+          </Typography>
         </Button>
       </>
     );
@@ -216,7 +212,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   const BeforeIsSettingDrawerMenuMobile = () => {
     return (
       <Button onClick={() => props.handleSwitchIsSetting()}>
-        編集モードに切り替える
+        <Typography variant="body1">
+          編集モードに切り替える
+        </Typography>
       </Button>
     );
   }
@@ -236,6 +234,20 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <VideoLabel />
           </ListItemIcon>
           <ListItemText primary="アイテム作成" />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_MODAL",
+              payload: "setting_theme",
+            })
+          }
+        >
+          <ListItemIcon>
+            <Wallpaper />
+          </ListItemIcon>
+          <ListItemText primary="テーマ変更(制作中)" />
         </ListItem>
         <ListItem
           button
@@ -285,7 +297,8 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   else if (props.appState.isSetting) {
     DrawerHeader = () => (
       <Button onClick={props.handleDrawerClose}>
-        観覧モードに切り替える
+        <Typography variant="body1">観覧モードに切り替える</Typography>
+
         {props.theme.direction === "ltr" ? (
           <ChevronLeftIcon />
         ) : (

@@ -146,8 +146,10 @@ export const PMainPresenter = (props: Props) => {
                   src={value.article_img}
                 />
                 <div className={`p-main-article-excerpt ${classes.excerpt}`}>
-                  {value.article_excerpt}
-                  {value.article_excerpt.length === 100 ? "..." : ""}
+                  <Typography gutterBottom variant="body1">
+                    {value.article_excerpt}
+                    {value.article_excerpt.length === 100 ? "..." : ""}
+                  </Typography>
                 </div>
               </CardContent>
             </Card>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles,Theme ,createStyles} from '@material-ui/core';
-import { useDrawerProps } from '../Drawer';
+import { useDrawerProps, TUseDrawerProps } from '../Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -12,19 +12,40 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const SettingMobile = () => {
+export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
   const classes = useStyles()
-  const {dispatchAppState, handleOnSingOut} = useDrawerProps()
 
   return (
     <div className={classes.root}>
-      <button onClick={() =>
-        dispatchAppState({
-          type: "OPEN_MODAL",
-          payload: "setting_user_info",
-        })
-      }>アカウント</button>
-      <button onClick={() => handleOnSingOut()}>サインアウト</button>
+      <button
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "setting_theme",
+          })
+        }
+      >
+        テーマ変更(制作中)
+      </button>
+      <br />
+      <button
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "setting_user_info",
+          })
+        }
+      >
+        アカウント
+      </button>
+      <br />
+      <button onClick={() => props.handleOnSingOut()}>サインアウト</button>
     </div>
   );
+}
+
+export const SettingMobile = () => {
+  const props = useDrawerProps()
+
+  return <SettingMobilePresenter  {...props}/>
 }

@@ -14,6 +14,7 @@ export type T_user_id = number
 export type T_user_name = string
 export type T_shop_name = string
 export type T_user_email = string;
+export type T_selected_theme = string
 export type T_created_at_user = string
 export type T_updated_at_user = string
 
@@ -30,6 +31,7 @@ export type TUserInfo = {
   user_name: T_user_name | null;
   shop_name: T_shop_name | null;
   user_email: T_user_email;
+  selected_theme: T_selected_theme
   is_first_sign_in: boolean;
   bcrypt_password?: string
   created_at: T_created_at_user;
@@ -153,16 +155,17 @@ export type StoreContextProviderProps = {
     articles: TArticles;
     pagination: PaginationParams;
     footerItems: FooterItems;
-    // appState: AppState
     session?: TUserInfo;
   };
-  children?: React.ReactNode;
   csrfToken?: any;
   bcrypt_password?: string
 };
 
-const StoreContextProvider = (props: StoreContextProviderProps) => {
-  const [userInfo, dispatchUserInfo] = useReducer(userInfoReducer, props.data.session)
+const StoreContextProvider: React.FC<StoreContextProviderProps> = (props) => {
+  const [userInfo, dispatchUserInfo] = useReducer(
+    userInfoReducer,
+    props.data.session
+  );
   const [paginationParams, dispatchPaginationParams] = useReducer(
     paginationParamsReducer,
     props.data.pagination
@@ -179,10 +182,7 @@ const StoreContextProvider = (props: StoreContextProviderProps) => {
     appStateReducer,
     initAppState
   );
-  const [loading, dispatchLoading] = useReducer(
-    loadingReducer,
-    initLoading
-  );
+  const [loading, dispatchLoading] = useReducer(loadingReducer, initLoading);
 
   const values = {
     userInfo,

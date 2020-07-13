@@ -10,6 +10,9 @@ const props = {
   appState: {
     isSetting: true
   },
+  loading: {
+    mainArticles: false,
+  },
   articles: sampleData,
   handleOnUpDate: null,
   handleOnDelete: null,

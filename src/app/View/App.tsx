@@ -191,14 +191,16 @@ export const App = (props:StoreContextProviderProps) => {
   
   
   return (
+    // <ThemeProvider >
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
-      <ThemeProvider>
+      <ThemeProvider {...props.data.session}>
         <EditorContextProvider {...props.data.session}>
-          <AppView/>
+          <AppView />
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>
+    // </ThemeProvider>
   );
 }
 
