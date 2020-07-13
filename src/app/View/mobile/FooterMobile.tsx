@@ -16,7 +16,7 @@ export const useFooterMobileProps = () => {
     handleOnDeleteFooterItem,
   } = usePFooterProps();
 
-  const { handleOpenFooterItemEditor } = useDrawerProps();
+  // const { handleOpenFooterItemEditor } = useDrawerProps();
 
   const switchOrder = useSwitchOrder();
 
@@ -27,7 +27,7 @@ export const useFooterMobileProps = () => {
     footerItems,
     handleOnUpDateFooterIcon,
     handleOnDeleteFooterItem,
-    handleOpenFooterItemEditor,
+    // handleOpenFooterItemEditor,
     switchOrder,
   };
 }
@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme: Theme) => {
       flexGrow: 1,
       width: "100%",
     },
-    button: {
-      width: "100%",
+    items: {
+      overflowY: "scroll",
     },
     item: {
       border: "1px solid black",
@@ -63,75 +63,70 @@ export const FooterMobilePresenter:React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <Button
-        color="primary"
-        className={classes.button}
-        onClick={() => props.handleOpenFooterItemEditor()}
-      >
-        アイテム追加
-      </Button>
-      {props.footerItems.length === 0 ? (
-        <div className={classes.item}>アイテムがありません</div>
-      ) : (
-        props.footerItems.map((value, index) => {
-          // アイコン名を該当アイコンコンポーネントに変換
-          const icon = value.displayed_icon_name
-            ? IconsSetting.convertIconComponentFromName(
-                value.displayed_icon_name
-              )[0]
-            : MoodBad;
+      
+      <div className={classes.items}>
+        {props.footerItems.length === 0 ? (
+          <div className={classes.item}>アイテムがありません</div>
+        ) : (
+          props.footerItems.map((value, index) => {
+            // アイコン名を該当アイコンコンポーネントに変換
+            const icon = value.displayed_icon_name
+              ? IconsSetting.convertIconComponentFromName(
+                  value.displayed_icon_name
+                )[0]
+              : MoodBad;
 
-          return (
-            <div
-              key={index}
-              className={classes.item}
-            >
-              <div>
-                <Icon icon={icon} />
-                アイテム名{value.icon_name}
-                {value.is_published || <span className={classes.itemIsDraft}>下書き</span>}
-              </div>
-              {value.on_tap === "modal" ? (
+            return (
+              <div key={index} className={classes.item}>
                 <div>
-                  {value.item_excerpt}
-                  {/* 抜粋が100文字の場合"..."追加" */}
-                  {value.item_excerpt.length === 100 ? "..." : ""}
+                  <Icon icon={icon} />
+                  アイテム名{value.icon_name}
+                  {value.is_published || (
+                    <span className={classes.itemIsDraft}>下書き</span>
+                  )}
                 </div>
-              ) : null}
-              <button
-                onClick={() =>
-                  props.handleOnUpDateFooterIcon(value.footer_item_id)
-                }
-              >
-                編集
-              </button>
-              <button
-                onClick={() =>
-                  props.handleOnDeleteFooterItem(
-                    value.footer_item_id,
-                    value.order
-                  )
-                }
-              >
-                削除
-              </button>
-              {index !== 0 ? (
+                {value.on_tap === "modal" ? (
+                  <div>
+                    {value.item_excerpt}
+                    {/* 抜粋が100文字の場合"..."追加" */}
+                    {value.item_excerpt.length === 100 ? "..." : ""}
+                  </div>
+                ) : null}
                 <button
                   onClick={() =>
-                    props.switchOrder({
-                      footer_item_id: value.footer_item_id,
-                      order: value.order,
-                    })
+                    props.handleOnUpDateFooterIcon(value.footer_item_id)
                   }
                 >
-                  <ArrowUpward />
-                  入れ替え
+                  編集
                 </button>
-              ) : null}
-            </div>
-          );
-        })
-      )}
+                <button
+                  onClick={() =>
+                    props.handleOnDeleteFooterItem(
+                      value.footer_item_id,
+                      value.order
+                    )
+                  }
+                >
+                  削除
+                </button>
+                {index !== 0 ? (
+                  <button
+                    onClick={() =>
+                      props.switchOrder({
+                        footer_item_id: value.footer_item_id,
+                        order: value.order,
+                      })
+                    }
+                  >
+                    <ArrowUpward />
+                    入れ替え
+                  </button>
+                ) : null}
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }

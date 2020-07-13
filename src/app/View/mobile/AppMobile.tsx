@@ -1,6 +1,6 @@
 import React from 'react'
-import { MainMobile } from './MainMobile'
-import { FooterMobile } from './FooterMobile'
+import { MainMobile, useMainMobileProps } from './MainMobile'
+import { FooterMobile, useFooterMobileProps } from './FooterMobile'
 import { SettingMobile } from "./SettingMobile";
 import { TabMobile } from './TabMobile'
 import { PaginationMobile } from './PaginationMobile';
@@ -10,6 +10,7 @@ import { HomeButton } from '../PFooter/Pagination/HomeButton';
 import { Store } from '../../Store/Store';
 import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
 import { Home } from '@material-ui/icons';
+import { useDrawerProps } from '../Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -19,16 +20,22 @@ const useStyles = makeStyles((theme: Theme) => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      
     },
-    quit: {
+    quitButton: {
       width: "100%",
       backgroundColor: "whitesmoke",
     },
+    createButton: {
+      width: "100%",
+    },
+    mainOrItems: {
+      overflowY: "scroll",
+    },
     tabMobile: {
-      position: "absolute",
-      bottom: 0,
-    }
+      // position: "absolute",
+      // bottom: 0,
+      height: "auto",
+    },
   });
 });
 
@@ -37,6 +44,10 @@ export const AppMobile = () => {
   const [tab, setTab] = React.useState(0)
   const { dispatchAppState, loading } = React.useContext(Store)
   const getArticles = useGetArticles()
+  const {
+    handleOpenArticleEditor,
+    handleOpenFooterItemEditor,
+  } = useDrawerProps();
 
   const onClickOffIsSetting = () => {
     dispatchAppState({ type: "OFF_IS_SETTING" })
@@ -48,13 +59,28 @@ export const AppMobile = () => {
     case 0:
       Display = () => (
         <>
-          <MainMobile />
+          <Button color="primary" className={classes.createButton} onClick={() => handleOpenArticleEditor()}>記事作成</Button>
+          <div className={classes.mainOrItems}>
+            <MainMobile />
+          </div>
           <PaginationMobile />
         </>
       );
       break;
     case 1:
-      Display = () => <FooterMobile />;
+      Display = () => (
+        <>
+          <Button
+            color="primary"
+            className={classes.createButton}
+            onClick={() => handleOpenFooterItemEditor()}
+          >
+            アイテム追加
+          </Button>
+          <div className={classes.mainOrItems}></div>
+          <FooterMobile />
+        </>
+      );
       break;
     case 2:
       Display = () => <SettingMobile />;
@@ -67,9 +93,8 @@ export const AppMobile = () => {
   return (
     <>
       <div className={classes.root}>
-        <Button className={classes.quit} onClick={() => onClickOffIsSetting()}>観覧モードに切り替える</Button>
+        <Button className={classes.quitButton} onClick={() => onClickOffIsSetting()}>観覧モードに切り替える</Button>
         <Display />
-        {/* {tab === 0 ? <PaginationMobile /> : null} */}
         <TabMobile tab={tab} setTab={setTab} className={classes.tabMobile}/>
       </div>
       <PModal />

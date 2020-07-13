@@ -92,7 +92,7 @@ export const PModal = () => {
             ModalContent = () => <FooterItemEditor />;
             break;
           case "setting_theme":
-            modalStyle = sizeSmall;
+            modalStyle = size70;
             ModalContent = () => <SettingTheme />;
             break;
           case "setting_user_info":

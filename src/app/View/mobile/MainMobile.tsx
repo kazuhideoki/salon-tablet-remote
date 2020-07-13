@@ -4,6 +4,7 @@ import { usePMainProps } from '../PMain/PMain';
 import { makeStyles,createStyles, Theme, Button, CircularProgress } from '@material-ui/core';
 import { useDrawerProps } from '../Drawer';
 import { Store } from '../../Store/Store';
+import { PaginationMobile } from './PaginationMobile';
 
 export const useMainMobileProps = () => {
   const {
@@ -16,7 +17,7 @@ export const useMainMobileProps = () => {
 
   const { loading } = React.useContext(Store)
 
-  const { handleOpenArticleEditor } = useDrawerProps()
+  // const { handleOpenArticleEditor } = useDrawerProps()
 
   return {
     appState,
@@ -24,7 +25,7 @@ export const useMainMobileProps = () => {
     handleOnUpDate,
     handleOnDelete,
     openArticle,
-    handleOpenArticleEditor,
+    // handleOpenArticleEditor,
     loading,
   }
 }
@@ -34,12 +35,14 @@ type Props = ReturnType<typeof useMainMobileProps>
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
+      display: "flex",
+      flexDirection: "column",
       overflowY: "scroll",
-      flexGrow: 1,
       width: "100%",
     },
-    button: {
-      width: "100%",
+    items: {
+      flexGrow: 1,
+      overflowY: "scroll",
     },
     item: {
       border: "1px solid black",
@@ -72,19 +75,20 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
       
   return (
     <div className={classes.root}>
-      <Button color="primary" className={classes.button} onClick={() => props.handleOpenArticleEditor()}>記事作成</Button>
+      
+      <div className={classes.items}>
       {props.articles.length === 0
       ? <div className={classes.item}>記事がありません</div>
 
       : props.articles.map((value, key) => {
         return (
-          <div
-            key={key}
-            className={classes.item}
-          >
+          <>
+          <div key={key} className={classes.item}>
             <div>
               タイトル:{value.title}
-              {value.is_published || <span className={classes.itemIsDraft}>下書き</span>}
+              {value.is_published || (
+                <span className={classes.itemIsDraft}>下書き</span>
+              )}
             </div>
             <div>作成日:{sqlToDate(value.created_at)}</div>
             {value.updated_at ? (
@@ -102,8 +106,11 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               削除
             </button>
           </div>
+          </>
         );
       })}
+      </div>
+       
     </div>
   );
 }

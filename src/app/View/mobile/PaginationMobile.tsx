@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => {
     root: {
       display: "flex",
       alignItems: "center",
-      fontSize: themes.iconSmall,
+      fontSize: themes.iconSmall * 0.7,
     },
     home: {
       fontSize: "inherit",
@@ -49,7 +49,7 @@ export const PaginationMobilePresenter:React.FC<TUsePPaginationProps> = (props) 
 
   return (
     <div className={classes.root}>
-      <Home onClick={() => props.getArticles(1)} className={classes.home} />
+      {/* <Home onClick={() => props.getArticles(1)} className={classes.home} /> */}
       <PaginationArrows {...props} classes={classes} />
     </div>
   );

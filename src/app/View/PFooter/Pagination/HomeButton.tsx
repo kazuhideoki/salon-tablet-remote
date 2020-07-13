@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 
 type Props = {
   className?: string
-  getArticles: (page: number) => Promise<void>
+  getArticles?: (page: number) => Promise<void>
 }
 
 export const HomeButton = ({ className, getArticles}: Props) => {
