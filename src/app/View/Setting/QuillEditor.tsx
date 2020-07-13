@@ -62,6 +62,7 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       ["bold", "italic", "underline", "strike", "blockquote"],
       [{ color: [] }, { background: [] }],
       [{ list: "ordered" }, { list: "bullet" }],
+      [{ 'align': [] }],
       ["link", image, "video"],
       ["clean"],
     ],
