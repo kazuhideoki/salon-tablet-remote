@@ -108,7 +108,6 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           name="email"
           label="メールアドレス"
           autoComplete="email"
-
           value={props.UserEmail}
           onChange={(e) => props.setUserEmail(e.target.value)}
         />
@@ -121,7 +120,6 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           type="password"
           id="password"
           autoComplete="current-password"
-
           value={props.password}
           onChange={(e) => props.setPassword(e.target.value)}
         />

@@ -199,6 +199,12 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           variant="outlined"
           value={pass}
           onChange={(e) => setPass(e.target.value)}
+          onKeyPress={e => {
+            if (e.key == 'Enter') {
+              e.preventDefault()
+              props.handleSubmitPassword(pass)
+            }
+          }}
         />
         <Button onClick={() => props.handleSubmitPassword(pass)}>
           <Typography variant="body1">
