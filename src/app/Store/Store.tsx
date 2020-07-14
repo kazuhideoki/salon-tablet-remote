@@ -139,6 +139,7 @@ const initAppState = {
   isModalOpen: false,
   isArticleModalOpen: false,
 };
+
 export type AppState = typeof initAppState
 
 const initLoading = {

@@ -1,32 +1,53 @@
 import React from 'react'
 import { AllTags } from './AllTags'
 import { TextField, Button } from '@material-ui/core'
-import { useCreateTags } from '../../ActionCreator/tags/useCreateTag'
+import { useCreateTag } from '../../ActionCreator/tags/useCreateTag'
+import { useUpdateTag } from '../../ActionCreator/tags/useUpdateTag'
 
 export const ManageTags = () => {
-  const [tagName, setTagName] = React.useState('')
-  const createTags = useCreateTags()
+  const [tagNameField, setTagNameField] = React.useState('')
+  const [isEditting, setIsEditting] = React.useState(false)
+  const [edittingTagId, setEditingTagId] = React.useState(0)
+  const [edittingTagName, setEditingTagName] = React.useState('')
+  const createTag = useCreateTag()
+  const updateTag = useUpdateTag()
+
+  const handleOnEditting = (TagId: number, tagName: string) => {
+    setIsEditting(true)
+    setEditingTagId(TagId)
+    setTagNameField(tagName)
+    setEditingTagName(tagName)
+  }
+
+  const handleOnCreateNew = () => {
+    setIsEditting(false)
+    setTagNameField('')
+  }
 
   const handleOnClick = () => {
     console.log("ManageTagsのhandleOnClickだよ");
-    
-    createTags(tagName)
+    if (isEditting) {
+      updateTag({edittingTagId, tagName: tagNameField})
+    } else {
+      createTag(tagNameField)
+    }
   }
 
   return (
     <div>
       <h2>タグの管理を行います。新規追加したり、修正したり</h2>
+      <p>{isEditting ? <>{edittingTagName + "を編集中"}<Button onClick={() => handleOnCreateNew()}>新規作成</Button></>: "新規作成"}</p>
       <TextField
         name="createTag"
         label="タグ名"
         id="create_tag"
-        value={tagName}
-        onChange={(e) => setTagName(e.target.value)}
+        value={tagNameField}
+        onChange={(e) => setTagNameField(e.target.value)}
         />
       <Button onClick={() => handleOnClick()}>
-        作成
+        {isEditting ? "更新" : "作成"}
       </Button>
-      <AllTags edittable/>
+      <AllTags edittable handleOnEditting={handleOnEditting}/>
     </div>
   )
 }

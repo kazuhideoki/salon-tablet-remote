@@ -4,10 +4,12 @@ import { Chip } from '@material-ui/core'
 import { useDeleteTag } from "../../ActionCreator/tags/useDeleteTag";
 
 type Props = {
+  // trueで編集用、falseで選択用
   edittable: boolean
+  handleOnEditting?: (TagId: number, tagName: string) => void
 }
 
-export const AllTags = ({edittable}: Props) => {
+export const AllTags = ({ edittable, handleOnEditting}: Props) => {
   const { tags } = React.useContext(Store)
   const deleteTag = useDeleteTag()
 
@@ -20,7 +22,13 @@ export const AllTags = ({edittable}: Props) => {
     <div>
       tagの一覧表示です
       {tags.map((value) => {
-        return <Chip label={value.tag_name} onDelete={edittable ? () => handleDelete(value.tag_id) : null}/>
+        return (
+          <Chip
+            label={value.tag_name}
+            onClick={edittable ? () => handleOnEditting(value.tag_id, value.tag_name) : null}
+            onDelete={edittable ? () => handleDelete(value.tag_id) : null}
+          />
+        )
       })}
     </div>
   )

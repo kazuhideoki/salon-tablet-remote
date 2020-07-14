@@ -5,7 +5,7 @@ import { Store, T_user_id, T_tag_name } from "../../Store/Store";
 import { T_tags_create } from "../../../pages/api/tags/create";
 import { useGetTags } from "./useGetTags";
 
-export const useCreateTags = () => {
+export const useCreateTag = () => {
   const {userInfo, dispatchTags} = React.useContext(Store)
   const getTags = useGetTags()
 
@@ -14,7 +14,7 @@ export const useCreateTags = () => {
       user_id: userInfo.user_id,
       tag_name: tagName,
     };
-    console.log("useCreateTagsのparamsは" + JSON.stringify(params));
+    console.log("useCreateTagのparamsは" + JSON.stringify(params));
     
 
     console.log(JSON.stringify(params));
