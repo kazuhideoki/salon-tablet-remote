@@ -8,6 +8,8 @@ import {
 } from "../Reducer/paginationParamsReducer";
 import { loadingReducer, LoadingAction } from "../Reducer/loadingReducer";
 import { userInfoReducer, TUserInfoAction } from "../Reducer/userInfoReducer";
+import { tagsReducer, TagsAction } from "../Reducer/tagsReducer";
+import { IndexProps } from "../../pages";
 
 
 export type T_user_id = number
@@ -49,6 +51,7 @@ export type PaginationParams = typeof initPagination;
 export type T_is_sample = boolean
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
+export type T_tag_ids = string;
 export type T_is_published_articles = boolean
 export type T_created_at = string 
 export type T_updated_at = string
@@ -59,6 +62,7 @@ export type T_article_img = string
 
 export type ArticleWithoutArticleId = {
   user_id: T_user_id;
+  tag_ids: T_tag_ids
   is_published: T_is_published_articles;
   created_at: T_created_at;
   updated_at: T_updated_at;
@@ -107,6 +111,23 @@ export type FooterItem = {
 } & FooterItemWithoutId;
 export type FooterItems = FooterItem[]
 
+// ●●●●●● テーブル `tags`
+
+export type T_tag_id = number
+export type T_tag_name = string
+export type T_created_at_tag = string
+export type T_updated_at_tag = string | null
+
+export type TTag = {
+  tag_id: T_tag_id,
+  user_id: T_user_id
+  tag_name: T_tag_name
+  created_at: T_created_at_tag
+  updated_at: T_updated_at_tag
+}
+
+export type TTags = TTag[]
+
 const initAppState = {
   isSetting: true,
   setModal: "edit_article",
@@ -129,6 +150,7 @@ export type Loading = typeof initLoading
 export type DispatchUserInfo = React.Dispatch<TUserInfoAction>;
 export type DispatchArticles = React.Dispatch<ArticlesAction>;
 export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
+export type DispatchTags = React.Dispatch<TagsAction>;
 export type DispatchAppState = React.Dispatch < AppStateAction >
 export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
 export type DispatchLoading = React.Dispatch<LoadingAction>;
@@ -143,6 +165,8 @@ export type ContextProps = {
   dispatchArticles: DispatchArticles;
   footerItems: FooterItems;
   dispatchFooterItems: DispatchFooterItems;
+  tags: TTags
+  dispatchTags: DispatchTags
   appState: AppState;
   dispatchAppState: DispatchAppState;
   loading: Loading;
@@ -150,18 +174,7 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
-export type StoreContextProviderProps = {
-  data: {
-    articles: TArticles;
-    pagination: PaginationParams;
-    footerItems: FooterItems;
-    session?: TUserInfo;
-  };
-  csrfToken?: any;
-  bcrypt_password?: string
-};
-
-const StoreContextProvider: React.FC<StoreContextProviderProps> = (props) => {
+const StoreContextProvider: React.FC<IndexProps> = (props) => {
   const [userInfo, dispatchUserInfo] = useReducer(
     userInfoReducer,
     props.data.session
@@ -178,6 +191,8 @@ const StoreContextProvider: React.FC<StoreContextProviderProps> = (props) => {
     footerItemsReducer,
     props.data.footerItems
   );
+  const [tags, dispatchTags] = useReducer(tagsReducer, props.data.tags)
+
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,
     initAppState
@@ -193,6 +208,8 @@ const StoreContextProvider: React.FC<StoreContextProviderProps> = (props) => {
     dispatchArticles,
     footerItems,
     dispatchFooterItems,
+    tags,
+    dispatchTags,
     appState,
     dispatchAppState,
     loading,

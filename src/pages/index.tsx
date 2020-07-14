@@ -1,5 +1,5 @@
 import React from "react";
-import { StoreContextProviderProps, TUserInfo } from "../app/Store/Store";
+import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags } from "../app/Store/Store";
 import { App } from "../app/View/App";
 //@ts-ignore
 import { getCsrfToken, getSession } from "next-auth/client";
@@ -8,8 +8,19 @@ import { NextPageContext } from "next";
 //@ts-ignore
 import { TopPage } from "../component/TopPage";
 
+export type IndexProps = {
+  data: {
+    articles: TArticles;
+    pagination: PaginationParams;
+    footerItems: FooterItems;
+    tags: TTags
+    session?: TUserInfo;
+  };
+  csrfToken?: any;
+  bcrypt_password?: string
+};
 
-const Index = (props: StoreContextProviderProps) => {
+const Index = (props: IndexProps) => {
   if (!props.data.session) {
     // console.log("Index" + JSON.stringify(props.csrfToken));
 
@@ -73,6 +84,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
       let data
       let data2
+      let data3
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
         console.log("indexのis_first_sign_inのとこだよ");
@@ -88,7 +100,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
       }
 
-      // 記事取得
+      // 記事一覧取得
       const res = await fetch(`http://localhost:3000/api/articles/get`, {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -102,11 +114,18 @@ export async function getServerSideProps(context: NextPageContext) {
 
       data = await res.json();
 
-      // アイテム取得
+      // アイテム一覧取得
       const res2 = await fetch(
         `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
       );
       data2 = await res2.json();
+
+      // タグ一覧取得
+
+      const res3 = await fetch(
+        `http://localhost:3000/api/tags/get?userId=${userInfo.user_id}`
+      );
+      data3 = await res2.json();
 
       return {
         props: {
@@ -114,6 +133,7 @@ export async function getServerSideProps(context: NextPageContext) {
             articles: data ? data.rawData : [],
             pagination: data ? data.pagination : [],
             footerItems: data2 ? data2.rawData : [],
+            tags: data2 ? data3.rawData : [],
             // JSONのエラーになったので、このような書き方↓
             session: userInfo && JSON.parse(JSON.stringify(userInfo)),
           },

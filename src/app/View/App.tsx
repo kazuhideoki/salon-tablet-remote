@@ -7,7 +7,6 @@ import { PFooter } from "./PFooter/PFooter";
 import { Store } from "../Store/Store";
 import { ThemeContext } from "../Store/ThemeContext";
 import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
-import { StoreContextProviderProps } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { EditorContextProvider } from "../Store/EditorContext";
@@ -15,6 +14,7 @@ import { Drawer } from "./Drawer";
 import { PHeader } from "./PHeader";
 import { AppMobile } from "./mobile/AppMobile";
 import { server } from "../../config";
+import { IndexProps } from "../../pages";
 
 // 3段のコンテナの整形に関してのみ記述, 
 // 枠の設定、header,footerの最大値の設定
@@ -187,7 +187,7 @@ const AppView = () => {
 }
 
 
-export const App = (props:StoreContextProviderProps) => {
+export const App = (props: IndexProps) => {
   
   
   return (

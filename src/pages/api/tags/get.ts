@@ -1,0 +1,30 @@
+import { db } from "../lib/db";
+import { NextApiRequest, NextApiResponse } from "next";
+import { TTags } from "../../../app/Store/Store";
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    //@ts-ignore
+    const data: TTags = await db(
+      "SELECT * FROM tags WHERE user_id = ?",
+      // queryは文字列で来るため
+      Number(req.query.userId)
+    );
+
+    console.log("/tags/get/は " + JSON.stringify(data));
+
+    return res.status(200).json({
+      rawData: data,
+    });
+  } catch (err) {
+    console.log("/tags/get/のエラーは " + JSON.stringify(err));
+    return res.status(500).json({ err: true, data: { message: err.message } });
+  }
+};
+
+// socketうんぬんの エラーメッセージを表示させないようにする
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};
