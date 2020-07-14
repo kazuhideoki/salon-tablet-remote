@@ -125,7 +125,7 @@ export async function getServerSideProps(context: NextPageContext) {
       const res3 = await fetch(
         `http://localhost:3000/api/tags/get?userId=${userInfo.user_id}`
       );
-      data3 = await res2.json();
+      data3 = await res3.json();
 
       return {
         props: {

@@ -67,6 +67,10 @@ export const useDrawerProps = () => {
     setCreatedAt(null)
     setUpdatedAt(null)
   };
+
+  const handleOpenTagsManage = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_tags" })
+  }
   
   const checkPassword = useCheckPassword();
   const handleSubmitPassword = async (password: string) => {
@@ -118,6 +122,7 @@ export const useDrawerProps = () => {
     dispatchAppState,
     handleOpenArticleEditor,
     handleOpenFooterItemEditor,
+    handleOpenTagsManage,
     handleSubmitPassword,
     handleSwitchIsSetting,
     handleOpenFeedback,
@@ -241,7 +246,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           </ListItemIcon>
           <ListItemText primary="アイテム作成" />
         </ListItem>
-        <ListItem button onClick={null}>
+          <ListItem button onClick={() => props.handleOpenTagsManage()}>
           <ListItemIcon>
             <TagsButton />
           </ListItemIcon>
