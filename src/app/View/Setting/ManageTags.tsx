@@ -15,7 +15,7 @@ export const ManageTags = () => {
 
   return (
     <div>
-      タグの管理を行います。新規追加したり、修正したり
+      <h2>タグの管理を行います。新規追加したり、修正したり</h2>
       <TextField
         name="createTag"
         label="タグ名"
@@ -23,10 +23,10 @@ export const ManageTags = () => {
         value={tagName}
         onChange={(e) => setTagName(e.target.value)}
         />
-      <AllTags/>
       <Button onClick={() => handleOnClick()}>
         作成
       </Button>
+      <AllTags edittable/>
     </div>
   )
 }
