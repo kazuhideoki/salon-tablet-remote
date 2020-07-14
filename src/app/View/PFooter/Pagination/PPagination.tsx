@@ -17,7 +17,7 @@ import { TagsButton } from "./TagsButton";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
-  const { paginationParams, dispatchLoading } = React.useContext(Store);
+  const { paginationParams, dispatchLoading, dispatchAppState } = React.useContext(Store);
   
   const handleOnNumClick = (num) => {
     dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
@@ -28,6 +28,7 @@ export const usePPaginationProps = () => {
     getArticles,
     paginationParams,
     dispatchLoading,
+    dispatchAppState,
     handleOnNumClick,
   };
 };
@@ -91,7 +92,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
       {/* ↓まとめる？まとめない？ */}
       {/* </Typography>
       <Typography variant="subtitle1" component="span" className={classes.icons}> */}
-        <SvgIcon fontSize="inherit" onClick={null} className={classes.icons}>
+        <SvgIcon fontSize="inherit" onClick={() => props.dispatchAppState({type: "OPEN_MODAL", payload: "select_tags"})} className={classes.icons}>
           <TagsButton />
         </SvgIcon>
       </Typography>

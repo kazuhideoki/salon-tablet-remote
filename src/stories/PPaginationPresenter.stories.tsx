@@ -15,6 +15,7 @@ const props = {
   },
   
   dispatchLoading: null,
+  dispatchAppState: null,
   handleOnNumClick: null,
   
 }

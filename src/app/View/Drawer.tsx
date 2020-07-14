@@ -27,6 +27,7 @@ import { TextField, Button } from "@material-ui/core";
 import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useCheckPassword } from "../ActionCreator/user/useCheckPassword";
 import { cipher } from "../../module/bcrypt";
+import { TagsButton } from "./PFooter/Pagination/TagsButton";
 
 
 // export const useDrawerProps = ({open, setOpen}) => {
@@ -239,6 +240,12 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <VideoLabel />
           </ListItemIcon>
           <ListItemText primary="アイテム作成" />
+        </ListItem>
+        <ListItem button onClick={null}>
+          <ListItemIcon>
+            <TagsButton />
+          </ListItemIcon>
+          <ListItemText primary="タグ管理" secondary="製作中"/>
         </ListItem>
         <ListItem
           button

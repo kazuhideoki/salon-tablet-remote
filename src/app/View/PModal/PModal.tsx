@@ -13,6 +13,9 @@ import FooterItemEditor from "../Setting/FooterItemEditor";
 import { DeleteAccountForm } from "../Setting/DeleteAccountForm";
 import { FeedbackForm } from "../Setting/FeedbackForm";
 import { SettingTheme } from "../Setting/SettingTheme";
+import { AllTags } from "../Setting/AllTags";
+import { SelectTags } from "./SelectTags";
+import { ManageTags } from "../Setting/ManageTags";
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
@@ -83,6 +86,10 @@ export const PModal = () => {
             modalStyle = size90;
             ModalContent = () => <ContentModal />;
             break;
+          case "select_tags":
+            modalStyle = size70;
+            ModalContent = () => <SelectTags />;
+            break;
           case "edit_article":
             modalStyle = size90;
             ModalContent = () => <ArticleEditor />;
@@ -90,6 +97,10 @@ export const PModal = () => {
           case "edit_footer_item":
             modalStyle = size90;
             ModalContent = () => <FooterItemEditor />;
+            break;
+          case "edit_tags":
+            modalStyle = size90;
+            ModalContent = () => <ManageTags />;
             break;
           case "setting_theme":
             modalStyle = size70;
