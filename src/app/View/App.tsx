@@ -139,7 +139,7 @@ const AppTablet = ()=> {
             >
               <PFooter />
             </Grid>
-            <PModal />
+            {/* <PModal /> */}
           </Grid>
         </Drawer>
       </div>
@@ -197,6 +197,7 @@ export const App = (props:StoreContextProviderProps) => {
       <ThemeProvider {...props.data.session}>
         <EditorContextProvider {...props.data.session}>
           <AppView />
+          <PModal />
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>

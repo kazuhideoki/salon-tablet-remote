@@ -91,7 +91,7 @@ export const AppMobile = () => {
         <Display />
         <TabMobile tab={tab} setTab={setTab} className={classes.tabMobile}/>
       </div>
-      <PModal />
+      {/* <PModal /> */}
     </>
   );
 }
