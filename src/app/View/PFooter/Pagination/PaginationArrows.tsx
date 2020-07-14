@@ -9,20 +9,20 @@ import { LoadingAction } from '../../../Reducer/loadingReducer';
 import { ThemeContext } from '../../../Store/ThemeContext';
 import { usePPaginationProps, TUsePPaginationProps, TPPaginationClasses } from './PPagination';
 
-const useStyles = makeStyles((theme: Theme) => {
-  const themes = React.useContext(ThemeContext);
-  return createStyles({
-    disable: {
-      color: "whitesmoke",
-    },
-    pagination: {
-      display: "flex",
-      justifyContent: "center",
-      width: 400,
-      alignItems: "center",
-    },
-  });
-})
+// const useStyles = makeStyles((theme: Theme) => {
+//   const themes = React.useContext(ThemeContext);
+//   return createStyles({
+//     disable: {
+//       color: "whitesmoke",
+//     },
+//     pagination: {
+//       display: "flex",
+//       justifyContent: "center",
+//       width: 400,
+//       alignItems: "center",
+//     },
+//   });
+// })
 
 export type TArrowProps = {
   classesDisable: string;

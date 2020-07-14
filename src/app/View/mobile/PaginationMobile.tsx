@@ -15,8 +15,11 @@ const useStyles = makeStyles((theme: Theme) => {
       alignItems: "center",
       fontSize: themes.iconSmall * 0.7,
     },
-    home: {
+    icons: {
       fontSize: "inherit",
+    },
+    icon: {
+      // margin: "0 8px"
     },
     displayPage: {
       fontSize: "inherit",

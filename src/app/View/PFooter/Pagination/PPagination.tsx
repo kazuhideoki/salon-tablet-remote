@@ -13,6 +13,7 @@ import { HomeButton } from "./HomeButton";
 import { PageNumber } from "./PageNumber";
 import { PaginationArrows } from "./PaginationArrows";
 import { LoadingAction } from "../../../Reducer/loadingReducer";
+import { TagsButton } from "./TagsButton";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
@@ -42,8 +43,11 @@ const useStyles = makeStyles((theme: Theme) => {
       alignItems: "center",
       fontSize: themes.iconSmall,
     },
-    home: {
+    icons: {
       fontSize: "inherit",
+    },
+    icon: {
+      margin: "0 0.5em"
     },
     displayPage: {
       fontSize: "0.8em",
@@ -56,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => {
       border: "none",
       backgroundColor: "transparent",
       fontSize: "0.8em",
-      margin: "0 8px"
+      margin: "0 0.5em"
     },
     numsCurrent: {
       fontWeight: "bold",
@@ -80,9 +84,15 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
   return (
     <Grid container justify="center" spacing={1} className={classes.root}>
-      <Typography variant="subtitle1" component="span" className={classes.home}>
-        <SvgIcon fontSize="inherit" onClick={() => props.getArticles(1)}>
-          <Home />
+      <Typography variant="subtitle1" component="span" className={classes.icons}>
+        <SvgIcon fontSize="inherit" onClick={() => props.getArticles(1)} className={classes.icon}>
+          <HomeButton />
+        </SvgIcon>
+      {/* ↓まとめる？まとめない？ */}
+      {/* </Typography>
+      <Typography variant="subtitle1" component="span" className={classes.icons}> */}
+        <SvgIcon fontSize="inherit" onClick={null} className={classes.icons}>
+          <TagsButton />
         </SvgIcon>
       </Typography>
       <Typography variant="subtitle1" component="span" className={classes.displayPage}>
