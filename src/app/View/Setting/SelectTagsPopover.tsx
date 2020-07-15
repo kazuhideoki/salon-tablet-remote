@@ -93,18 +93,30 @@ export const SelectTagsPopover = () => {
           horizontal: "center",
         }}
       >
-        {tags.map((value, index) => {
+        {tags.length ? tags.map((value, key) => {
           return (
             <>
-            {selectedTags.includes(value.tag_id) ?
-            <Chip label={value.tag_name} onClick={() => handleDelete(value.tag_id)} color="primary"/> :
-            <Chip label={value.tag_name} onClick={() => handleOnClick(value.tag_id)}/>
-            }
+              {selectedTags.includes(value.tag_id) ? (
+                // セレクトされてる
+                <Chip
+                  key={key}
+                  label={value.tag_name}
+                  onClick={() => handleDelete(value.tag_id)}
+                  color="primary"
+                />
+              ) : (
+                // セレクトされてない
+                <Chip
+                  key={key}
+                  label={value.tag_name}
+                  onClick={() => handleOnClick(value.tag_id)}
+                />
+              )}
             </>
           );
-        })}
+        }) : "タグがありません"}
       </Popover>
-      {selectedTags ? <ShowSelectedTagsChip /> : <Chip label="未選択" disabled/>}
+      {selectedTags.length ? <ShowSelectedTagsChip /> : <Chip label="未選択" disabled/>}
     </>
   );
 }
