@@ -51,7 +51,8 @@ export type PaginationParams = typeof initPagination;
 export type T_is_sample = boolean
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
-export type T_tag_ids = string;
+// ※tag_idsはDBから取り出した直後、値がない場合はnullのこともある （tagIdsParseの前）
+export type T_tag_ids = number[] | string
 export type T_is_published_articles = boolean
 export type T_created_at = string 
 export type T_updated_at = string

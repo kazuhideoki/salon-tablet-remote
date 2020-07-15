@@ -8,6 +8,7 @@ import {
   T_article_excerpt,
   T_article_img,
   T_user_id,
+  T_tag_ids,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
@@ -17,9 +18,10 @@ export type T_articles_create = {
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
-  article_excerpt: T_article_excerpt
-  article_img: T_article_img,
-  user_id: T_user_id
+  article_excerpt: T_article_excerpt;
+  article_img: T_article_img;
+  tag_ids: T_tag_ids
+  user_id: T_user_id;
 };
 
 export type TCreateArticle = {
@@ -35,8 +37,13 @@ export const useCreateArticle = () => {
     editorText,
     editorTextExcerpt,
     editorImg,
+    selectedTags,
+    setSelectedTags,
   } = React.useContext(EditorContext);
+  const tag_ids = selectedTags.length ? JSON.stringify(selectedTags) : null
+
   return async (isPublishing: boolean) => {
+
     const params: TCreateArticle = {
       params: {
         is_published: isPublishing,
@@ -44,6 +51,7 @@ export const useCreateArticle = () => {
         article_content: editorText,
         article_excerpt: editorTextExcerpt,
         article_img: editorImg,
+        tag_ids: tag_ids,
         user_id: userInfo.user_id
       }
     };
@@ -66,6 +74,7 @@ export const useCreateArticle = () => {
     } else {
       setEditorText("");
       setTitleText("");
+      setSelectedTags([])
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getArticles(1);

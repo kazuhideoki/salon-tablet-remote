@@ -31,7 +31,7 @@ export const SelectTagsPopover = () => {
 
   
   const handleOnClick = (tagId: number) => {
-    // 重複選択を防ぐ
+    // 重複選択を防ぐため、すでに含まれていなかったらsetState
     if (!selectedTags.includes(tagId)) {
       setSelectedTags(selectedTags.concat(tagId))
     }

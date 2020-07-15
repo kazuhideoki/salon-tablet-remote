@@ -27,7 +27,7 @@ type ContextProps = {
   edittingArticleParams: TArticle
   setEdittingArticleParams: React.Dispatch<React.SetStateAction<TArticle>>
   selectedTags: number[]
-  setSelectedTags: React.Dispatch<React.SetStateAction<number[]>>
+  setSelectedTags: React.Dispatch<React.SetStateAction<number[] | string>>
 
   // FooterItemEditor特有のもの
   selectedIcon: TSelectedIcon

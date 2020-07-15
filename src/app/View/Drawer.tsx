@@ -42,6 +42,7 @@ export const useDrawerProps = () => {
     setAppLinkUrl,
     setIsEdittingContent,
     dispatchSelectedIcon,
+    setSelectedTags,
     setCreatedAt,
     setUpdatedAt,
   } = React.useContext(EditorContext);
@@ -51,6 +52,7 @@ export const useDrawerProps = () => {
     setIsEdittingContent(false);
     setTitleText("");
     setEditorText("");
+    setSelectedTags([])
     setCreatedAt(null)
     setUpdatedAt(null)
   };

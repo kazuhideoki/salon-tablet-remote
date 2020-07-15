@@ -17,6 +17,7 @@ export const useGetSingleArticle = () => {
     setEditorImg,
     setIsEdittingContent,
     setEdittingArticleParams,
+    setSelectedTags,
     setCreatedAt,
     setUpdatedAt,
   } = React.useContext(EditorContext);
@@ -37,6 +38,7 @@ export const useGetSingleArticle = () => {
       setEditorText(article.article_content);
       setEditorTextExcerpt(article.article_excerpt);
       setEditorImg(article.article_img);
+      setSelectedTags(article.tag_ids)
       setCreatedAt(article.created_at);
       setUpdatedAt(article.updated_at);
     }

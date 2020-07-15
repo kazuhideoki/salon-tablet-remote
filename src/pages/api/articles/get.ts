@@ -1,5 +1,6 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+import { tagIdsParse } from "../lib/tagIdsParse";
 // import { session } from "next-auth/client";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -27,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         offSet +
         ` 5`;
         
-      const data = await db(
+      let data:any = await db(
         query
         // [getPublishedOnly, offSet]
       );
@@ -41,12 +42,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       console.log("/articles/get/は " + JSON.stringify(data));
 
+
+      if (data.length) {
+        // tag_idsをnumber[]化する
+        data = tagIdsParse(data)
+      }
+
+
       let pageCount
       if (data2.length) {
         pageCount = Math.ceil(data2.length / 5) // 全row数を5で割って切り上げ
       } else {
         pageCount = 0
       }
+
 
       let rowCount
       if (data2.length) {
