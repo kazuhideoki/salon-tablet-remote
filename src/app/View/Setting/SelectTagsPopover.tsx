@@ -104,7 +104,7 @@ export const SelectTagsPopover = () => {
           );
         })}
       </Popover>
-      {selectedTags ? <ShowSelectedTagsChip /> : null}
+      {selectedTags ? <ShowSelectedTagsChip /> : <Chip label="未選択" disabled/>}
     </>
   );
 }

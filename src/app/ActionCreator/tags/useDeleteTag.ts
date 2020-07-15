@@ -3,19 +3,25 @@ import {
   Store, T_tag_id,
 } from "../../Store/Store";
 import { useGetTags } from "./useGetTags";
+import { T_tags_delete } from "../../../pages/api/tags/delete";
 
 export const useDeleteTag = () => {
-  const { paginationParams, tags } = React.useContext(Store);
+  const { paginationParams, tags, userInfo } = React.useContext(Store);
+  const {user_id} = userInfo
   const getTags = useGetTags()
 
+
   return async (tag_id: T_tag_id) => {
+
+    const params: T_tags_delete = { tag_id: tag_id, user_id: user_id };
+
     const res = await fetch(
       `${location.protocol}//${location.host}/api/tags/delete`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ tag_id }),
+        body: JSON.stringify(params),
       }
     );
     const data = await res.json();
