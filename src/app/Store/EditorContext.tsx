@@ -26,6 +26,8 @@ type ContextProps = {
   setEditorImg: React.Dispatch<React.SetStateAction<string>>
   edittingArticleParams: TArticle
   setEdittingArticleParams: React.Dispatch<React.SetStateAction<TArticle>>
+  selectedTags: number[]
+  setSelectedTags: React.Dispatch<React.SetStateAction<number[]>>
 
   // FooterItemEditor特有のもの
   selectedIcon: TSelectedIcon
@@ -67,6 +69,7 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
   const [edittingArticleParams, setEdittingArticleParams] = React.useState(
     {} as TArticle
   );
+  const [selectedTags, setSelectedTags] = React.useState([])
 
   // FooterItemEditor特有のもの
   // reducerにすることで複雑なオブジェクトを格納できる
@@ -105,6 +108,8 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
     setIsEdittingContent,
     edittingArticleParams,
     setEdittingArticleParams,
+    selectedTags,
+    setSelectedTags,
 
     selectedIcon,
     dispatchSelectedIcon,

@@ -6,7 +6,7 @@ import { getCsrfToken, getSession } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
 //@ts-ignore
-import { TopPage } from "../component/TopPage";
+import { TopPage } from "../pageComponent/TopPage";
 
 export type IndexProps = {
   data: {

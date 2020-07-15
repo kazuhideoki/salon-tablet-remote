@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { HelpButton } from '../buttons/HelpButton';
+import { HelpButton } from '../component/buttons/HelpButton';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

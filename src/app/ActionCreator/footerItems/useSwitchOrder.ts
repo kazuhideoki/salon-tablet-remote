@@ -1,5 +1,5 @@
 import React from "react";
-import { SwitchOrderParams } from "../../View/buttons/SwitchOrderButton";
+import { SwitchOrderParams } from "../../View/component/buttons/SwitchOrderButton";
 import { useGetFooterItems } from "./useGetFooterItems";
 
 export const useSwitchOrder = () => {

@@ -8,6 +8,7 @@ import { Button, TextField, Typography, CircularProgress, makeStyles, createStyl
 import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
+import { SelectTagsPopover } from "./SelectTagsPopover";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -89,6 +90,8 @@ const ArticleEditor = () => {
         <Typography>編集日:{sqlToDate(updatedAt)}</Typography>
       ) : null}
 
+      <SelectTagsPopover/>
+
       <QuillEditor
         editorText={editorText}
         setEditorText={setEditorText}
@@ -98,7 +101,7 @@ const ArticleEditor = () => {
         setCharCount={setCharCountArticlContent}
       />
       <Grid container className={classes.submitButtons}>
-        <Grid item>
+        <Grid item> 
           <Button
             onClick={() => handleSubmit({ isPublishing: true })}
             disabled={

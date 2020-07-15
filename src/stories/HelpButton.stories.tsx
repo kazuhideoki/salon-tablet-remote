@@ -1,5 +1,5 @@
 import React from "react";
-import { HelpButton } from "../app/View/buttons/HelpButton";
+import { HelpButton } from "../app/View/component/buttons/HelpButton";
 import classes from "*.module.css";
 import { makeStyles, createStyles } from "@material-ui/core";
 export default {

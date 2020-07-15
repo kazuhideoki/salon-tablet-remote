@@ -24,14 +24,9 @@ type TIconItem = {
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>
 }
 export const IconItem = (props:TIconItem) => {
-  // const titleText = props.titleText;
-  // if (props === undefined) {
-  //   return <MoodBad />
-  // }
   return <props.icon style={{ fontSize: 50 }} />;
 };
 
-// export const  SelectIcon:React.FC<Props> = ({ selectedIcon, setSelectedIcon}) => {
 export const SelectIcon = () => {
   const classes = useStyles();
   const { selectedIcon, dispatchSelectedIcon } = React.useContext(
