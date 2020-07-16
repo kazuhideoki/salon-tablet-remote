@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme: Theme) => {
       flexGrow: 1,
       width: "100%",
     },
+    button: {
+      marginBottom: 10,
+    }
   });
 });
 
@@ -17,7 +20,12 @@ export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
 
   return (
     <div className={classes.root}>
+      <button disabled className={classes.button}>
+        タグ管理(mobile用未実装)
+      </button>
+      <br />
       <button
+        className={classes.button}
         onClick={() =>
           props.dispatchAppState({
             type: "OPEN_MODAL",
@@ -29,6 +37,7 @@ export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
       </button>
       <br />
       <button
+        className={classes.button}
         onClick={() =>
           props.dispatchAppState({
             type: "OPEN_MODAL",
@@ -39,7 +48,12 @@ export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
         アカウント
       </button>
       <br />
-      <button onClick={() => props.handleOnSingOut()}>サインアウト</button>
+      <button
+        className={classes.button}
+        onClick={() => props.handleOnSingOut()}
+      >
+        サインアウト
+      </button>
     </div>
   );
 }
