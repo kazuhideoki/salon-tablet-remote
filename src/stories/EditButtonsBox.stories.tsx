@@ -1,8 +1,8 @@
 import React from 'react';
-import { EditButtonsBox } from "../app/View/component/buttons/EditButtonsBox";
-import { SwitchOrderButton } from '../app/View/component/buttons/SwitchOrderButton';
-import { UpdateButton } from '../app/View/component/buttons/UpdateButton';
-import { DeleteButton } from "../app/View/component/buttons/DeleteButton";
+import { EditButtonsBox } from "../app/View/viewComponents/buttons/EditButtonsBox";
+import { SwitchOrderButton } from '../app/View/viewComponents/buttons/SwitchOrderButton';
+import { UpdateButton } from '../app/View/viewComponents/buttons/UpdateButton';
+import { DeleteButton } from "../app/View/viewComponents/buttons/DeleteButton";
 export default {
   title: 'EditButtonsBox',
   component: EditButtonsBox,

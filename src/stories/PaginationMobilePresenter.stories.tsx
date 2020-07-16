@@ -14,6 +14,7 @@ const props = {
     rowCount: 18,
   },
   dispatchLoading: null,
+  dispatchAppState: null,
   handleOnNumClick: null,
 };
 

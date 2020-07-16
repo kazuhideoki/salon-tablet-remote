@@ -13,6 +13,7 @@ const props = {
   handleOpenFooterItemEditor: null,
   handleSubmitPassword: null,
   handleSwitchIsSetting: null,
+  handleOpenTagsManage: null,
   handleOpenFeedback: null,
   handleOnSingOut: null,
   handleDrawerOpen: null,

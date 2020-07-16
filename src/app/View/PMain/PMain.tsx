@@ -8,8 +8,8 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core";
-import { UpdateButton } from "../component/buttons/UpdateButton";
-import { DeleteButton } from "../component/buttons/DeleteButton";
+import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
+import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { Store,T_article_id } from "../../Store/Store";
 import {
   useDeleteArticle,
@@ -17,7 +17,7 @@ import {
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
-import { EditButtonsBox } from "../component/buttons/EditButtonsBox";
+import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 
 export type HandleOnUpDate = (params: any) => void;
 export const usePMainProps = () => {

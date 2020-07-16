@@ -5,6 +5,7 @@ import { useCreateTag } from '../../ActionCreator/tags/useCreateTag'
 import { useUpdateTag } from '../../ActionCreator/tags/useUpdateTag'
 import { Store } from '../../Store/Store'
 import { useDeleteTag } from '../../ActionCreator/tags/useDeleteTag'
+import { CharCount } from '../viewComponents/CharCount'
 
 export const ManageTags = () => {
   const {tags} = React.useContext(Store)
@@ -43,6 +44,24 @@ export const ManageTags = () => {
     deleting ? deleteTag(tag_id) : null;
   };
 
+  const isValidTagName = () => {
+    if (tagNameField.length === 0) {
+      return false
+    } else if ( tagNameField.length > 20) {
+      return false
+    }
+    const tagNames = tags.map((value) => {
+      return value.tag_name
+    })
+
+    if (tagNames.includes(tagNameField)) {
+      return false
+    }
+
+    return true
+
+  }
+
   return (
     <div>
       <h2>タグの管理を行います。新規追加したり、修正したり</h2>
@@ -63,7 +82,10 @@ export const ManageTags = () => {
         value={tagNameField}
         onChange={(e) => setTagNameField(e.target.value)}
       />
-      <Button onClick={() => handleOnClick()}>
+
+      <CharCount charCount={tagNameField.length} limitCount={20}/>
+
+      <Button onClick={() => handleOnClick()} disabled={!isValidTagName()}>
         {isEditting ? "更新" : "作成"}
       </Button>
       <div>

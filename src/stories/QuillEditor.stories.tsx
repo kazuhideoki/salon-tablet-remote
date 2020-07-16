@@ -21,7 +21,6 @@ export const Normal = () => {
       editorText={editorText}
       setEditorText={setEditorText}
       setEditorTextExcerpt={setEditorTextExcerpt}
-      charCount={charCount}
       setCharCount={setCharCount}
     />
   );

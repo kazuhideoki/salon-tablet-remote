@@ -8,6 +8,7 @@ import ImageResize from "quill-image-resize";
 import { Typography } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
 import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
+import { CharCount } from '../viewComponents/CharCount';
 
 // ※■■■ReactQuillのスタイルはquill.scssに記述■■■
 
@@ -31,10 +32,9 @@ type Props = {
   setEditorText: React.Dispatch<React.SetStateAction<string>>,
   setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
   setEditorImg?: React.Dispatch<React.SetStateAction<string>>
-  charCount: number
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
 }
-export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }:Props) => {
+export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, setCharCount }:Props) => {
   console.log("QuillEditorだよ");
   
   
@@ -50,7 +50,7 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       // ImgDataをarticle_img用に格納する
       setEditorImg(imgData)
     }
-    // エディターから文字数を取得して文字数カウントのためのcharCountに値を格納
+    // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
     setCharCount(editor.getLength());
     
   }
@@ -96,14 +96,16 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
         modules={modules}
         // formats={formats}
       />
-      <Typography
+      {/* <Typography
         variant="body2"
         align="right"
-        color={charCount < 1001 ? "textPrimary" : "error"}
+        color={editorText.length < 1001 ? "textPrimary" : "error"}
       >
-        {charCount < 1001 ? null : "文字数をオーバーしています"}
-        {`${charCount}/1000`}
-      </Typography>
+        {editorText.length < 1001 ? null : "文字数をオーバーしています"}
+        {`${editorText.length}/1000`}
+      </Typography> */}
+
+      <CharCount charCount={editorText.length} limitCount={1000} align="right" isShowCount/>
     </>
   );
 };

@@ -4,14 +4,14 @@ import { MoodBad } from "@material-ui/icons";
 import { Store, T_footer_item_id, T_order } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
-import { UpdateButton } from "../component/buttons/UpdateButton";
-import { DeleteButton } from "../component/buttons/DeleteButton";
-import { SwitchOrderButton } from "../component/buttons/SwitchOrderButton";
+import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
+import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
+import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";
 import { useGetFooterItem } from "../../ActionCreator/footerItems/useGetFooterItem";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../Setting/iconSelect/icons";
-import { EditButtonsBox } from "../component/buttons/EditButtonsBox";
+import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { yellow } from "@material-ui/core/colors";
 
 export const usePFooterProps = () => {

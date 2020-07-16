@@ -9,6 +9,7 @@ import { useCreateArticle } from "../../ActionCreator/articles/useCreateArticle"
 import { useUpdateArticle } from "../../ActionCreator/articles/useUpdateArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { SelectTagsPopover } from "./SelectTagsPopover";
+import { CharCount } from "../viewComponents/CharCount";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,14 +43,12 @@ const ArticleEditor = () => {
     createdAt,
     updatedAt
   } = React.useContext(EditorContext);
-  const [charCountArticleTitle, setCharCountArticlTitle] = React.useState(0);
   const [charCountArticleContent, setCharCountArticlContent] = React.useState(0);
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
 
   const handleOnChangeTitleText = (e) => {
     setTitleText(e.target.value);
-    setCharCountArticlTitle(e.target.value.length);
   }
 
   const handleSubmit = ({ isPublishing }) => {
@@ -77,11 +76,12 @@ const ArticleEditor = () => {
         autoFocus={isEdittingContent ? false : true}
         // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
       />
-      {charCountArticleTitle < 101 ? null : (
+      {/* {titleText.length < 101 ? null : (
         <Typography variant="body2" color={"error"}>
           文字数をオーバーしています(100文字以下)
         </Typography>
-      )}
+      )} */}
+      <CharCount charCount={titleText.length} limitCount={100} />
 
       {createdAt ? (
         <Typography>作成日:{sqlToDate(createdAt)}</Typography>
@@ -90,22 +90,21 @@ const ArticleEditor = () => {
         <Typography>編集日:{sqlToDate(updatedAt)}</Typography>
       ) : null}
 
-      <SelectTagsPopover/>
+      <SelectTagsPopover />
 
       <QuillEditor
         editorText={editorText}
         setEditorText={setEditorText}
         setEditorTextExcerpt={setEditorTextExcerpt}
         setEditorImg={setEditorImg}
-        charCount={charCountArticleContent}
         setCharCount={setCharCountArticlContent}
       />
       <Grid container className={classes.submitButtons}>
-        <Grid item> 
+        <Grid item>
           <Button
             onClick={() => handleSubmit({ isPublishing: true })}
             disabled={
-              charCountArticleTitle < 101 && charCountArticleContent < 1001
+              titleText.length < 101 && charCountArticleContent < 1001
                 ? false
                 : true
             }
@@ -117,7 +116,7 @@ const ArticleEditor = () => {
           <Button
             onClick={() => handleSubmit({ isPublishing: false })}
             disabled={
-              charCountArticleTitle < 101 && charCountArticleContent < 1001
+              titleText.length < 101 && charCountArticleContent < 1001
                 ? false
                 : true
             }

@@ -2,7 +2,7 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
-import { CloseButton } from "../component/buttons/CloseButton";
+import { CloseButton } from "../viewComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("./ContentModal"), {
   ssr: false,

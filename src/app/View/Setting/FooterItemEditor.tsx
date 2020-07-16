@@ -12,6 +12,7 @@ import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } 
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 import { Store } from '../../Store/Store';
+import { CharCount } from '../viewComponents/CharCount';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +52,7 @@ export const FooterItemEditor = () => {
     updatedAt,
   } = React.useContext(EditorContext);
   const { appState } = React.useContext(Store)
-  const [charCountIconName, setCharCountIconName] = React.useState(0);
+  // const [charCountIconName, setCharCountIconName] = React.useState(0);
   const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
   
   const createFooterItem = useCreateFooterItem();
@@ -59,7 +60,7 @@ export const FooterItemEditor = () => {
 
   const handleOnChangeIconName = (e) => {
     setTitleText(e.target.value);
-    setCharCountIconName(e.target.value.length);
+    // setCharCountIconName(e.target.value.length);
   };
 
 
@@ -78,7 +79,6 @@ export const FooterItemEditor = () => {
         editorText={editorText}
         setEditorText={setEditorText}
         setEditorTextExcerpt={setEditorTextExcerpt}
-        charCount={charCountFooterItemContent}
         setCharCount={setCharCountFooterItemContent}
       />
     );
@@ -114,11 +114,12 @@ export const FooterItemEditor = () => {
         // style={{ marginBottom: "20px" }}
         autoFocus={isEdittingContent ? false : true}
       />
-      {charCountIconName < 101 ? null : (
+      {/* {charCountIconName < 101 ? null : (
         <Typography variant="body2" color={"error"}>
           文字数をオーバーしています(100文字以下)
         </Typography>
-      )}
+      )} */}
+      <CharCount charCount={titleText.length} limitCount={100} />
       <br />
 
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
@@ -133,7 +134,7 @@ export const FooterItemEditor = () => {
           <Button
             onClick={() => handleSubmit({ isPublishing: true })}
             disabled={
-              charCountIconName < 101 && charCountFooterItemContent < 1001
+              titleText.length < 101 && charCountFooterItemContent < 1001
                 ? false
                 : true
             }
@@ -145,7 +146,7 @@ export const FooterItemEditor = () => {
           <Button
             onClick={() => handleSubmit({ isPublishing: false })}
             disabled={
-              charCountIconName < 101 && charCountFooterItemContent < 1001
+              titleText.length < 101 && charCountFooterItemContent < 1001
                 ? false
                 : true
             }

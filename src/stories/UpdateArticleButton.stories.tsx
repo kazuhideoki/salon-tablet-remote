@@ -1,5 +1,5 @@
 import React from 'react';
-import { UpdateButton } from "../app/View/component/buttons/UpdateButton";
+import { UpdateButton } from "../app/View/viewComponents/buttons/UpdateButton";
 export default {
   title: "UpdateButton",
   component: UpdateButton,
