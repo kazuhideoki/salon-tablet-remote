@@ -1,7 +1,7 @@
 import React from 'react';
 import { PPaginationPresenter } from '../app/View/Footer/Pagination/PPagination';
 export default {
-  title: 'PPaginationPresenter',
+  title: "Footer/Pagination/PPagination",
   component: PPaginationPresenter,
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { MainMobilePresenter } from '../app/View/mobile/MainMobile';
 import { sampleData } from './SampleData';
 export default {
-  title: 'MainMobilePresenter',
+  title: "mobile/MainMobile",
   component: MainMobilePresenter,
 };
 

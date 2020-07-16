@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaginationMobilePresenter } from '../app/View/mobile/PaginationMobile';
 export default {
-  title: 'PaginationMobilePresenter',
+  title: "mobile/PaginationMobile",
   component: PaginationMobilePresenter,
 };
 

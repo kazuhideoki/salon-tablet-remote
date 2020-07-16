@@ -2,7 +2,7 @@ import React from 'react';
 import { FooterPresenter } from '../app/View/Footer/Footer';
 import { samplefooterItems } from "./footerItems";
 export default {
-  title: 'FooterPresenter',
+  title: "Footer/Footer",
   component: FooterPresenter,
 };
 

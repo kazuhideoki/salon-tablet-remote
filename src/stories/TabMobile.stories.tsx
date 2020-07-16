@@ -1,8 +1,8 @@
 import React from 'react';
 import { TabMobile } from '../app/View/mobile/TabMobile';
 export default {
-title: 'TabMobile',
-component: TabMobile,
+  title: "mobile/TabMobile",
+  component: TabMobile,
 };
 export const Normal = () => {
   const [tab, setTab] = React.useState("articles");

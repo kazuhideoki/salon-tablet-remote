@@ -2,7 +2,7 @@ import React from 'react';
 import { PMainPresenter } from '../app/View/Main/PMain';
 import { sampleData } from './SampleData';
 export default {
-  title: 'PMainPresenter',
+  title: "Main/PMain",
   component: PMainPresenter,
 };
 

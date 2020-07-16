@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContentModalPresenter } from '../app/View/Main/ContentModal';
 export default {
-  title: 'ContentModalPresenter',
+  title: "Main/ContentModal",
   component: ContentModalPresenter,
 };
 

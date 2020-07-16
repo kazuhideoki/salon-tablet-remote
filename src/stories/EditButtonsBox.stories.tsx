@@ -4,7 +4,7 @@ import { SwitchOrderButton } from '../app/View/viewComponents/buttons/SwitchOrde
 import { UpdateButton } from '../app/View/viewComponents/buttons/UpdateButton';
 import { DeleteButton } from "../app/View/viewComponents/buttons/DeleteButton";
 export default {
-  title: 'EditButtonsBox',
+  title: "viewComponents/buttons/EditButtonsBox",
   component: EditButtonsBox,
 };
 

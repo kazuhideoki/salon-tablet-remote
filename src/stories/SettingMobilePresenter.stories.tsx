@@ -1,7 +1,7 @@
 import React from 'react';
 import { SettingMobilePresenter } from '../app/View/mobile/SettingMobile';
 export default {
-  title: 'SettingMobilePresenter',
+  title: "mobile/SettingMobile",
   component: SettingMobilePresenter,
 };
 

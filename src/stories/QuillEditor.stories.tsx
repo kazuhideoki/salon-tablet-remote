@@ -8,8 +8,8 @@ import "react-quill/dist/quill.snow.css";
 
 
 export default {
-title: 'QuillEditor',
-component: QuillEditor,
+  title: "Drawer/Editor/QuillEditor",
+  component: QuillEditor,
 };
 export const Normal = () => {
   const [editorText, setEditorText] = React.useState("");

@@ -1,7 +1,7 @@
 import React from "react";
 import { CloseButton } from "../app/View/viewComponents/buttons/CloseButton";
 export default {
-  title: "CloseButton",
+  title: "viewComponents/buttons/CloseButton",
   component: CloseButton,
 };
 

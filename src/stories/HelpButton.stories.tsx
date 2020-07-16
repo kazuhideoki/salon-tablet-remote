@@ -3,7 +3,7 @@ import { HelpButton } from "../app/View/viewComponents/buttons/HelpButton";
 import classes from "*.module.css";
 import { makeStyles, createStyles } from "@material-ui/core";
 export default {
-  title: "HelpButton",
+  title: "viewComponents/buttons/HelpButton",
   component: HelpButton,
 };
 const useStyles = makeStyles((theme) =>

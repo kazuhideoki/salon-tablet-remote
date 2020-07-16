@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 export default {
-  title: "SelectIcon",
+  title: "Drawer/ItemEditor/iconSelect/SelectIcon",
   component: SelectIcon,
 };
 export const Normal = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SettingUserInfoPresenter } from '../app/View/Drawer/Account/SettingUserInfo';
 export default {
-  title: 'SettingUserInfoPresenter',
+  title: "Drawer/Account/SettingUserInfo",
   component: SettingUserInfoPresenter,
 };
 

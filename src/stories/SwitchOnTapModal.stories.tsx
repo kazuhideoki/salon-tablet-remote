@@ -1,8 +1,8 @@
 import React from 'react';
 import { SwitchOnTapModal } from '../app/View/Drawer/ItemEditor/SwitchOnTapModal';
 export default {
-title: 'SwitchOnTapModal',
-component: SwitchOnTapModal,
+  title: "Drawer/ItemEditor/SwitchOnTapModal",
+  component: SwitchOnTapModal,
 };
 export const Normal = () => {
   const [onTap, setOnTap] = React.useState("");
