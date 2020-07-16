@@ -7,6 +7,7 @@ import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
 //@ts-ignore
 import { TopPage } from "../pageComponent/TopPage";
+import { T_articles_get } from "./api/articles/get";
 
 export type IndexProps = {
   data: {
@@ -101,15 +102,17 @@ export async function getServerSideProps(context: NextPageContext) {
       }
 
       // 記事一覧取得
+      const articlesParam: T_articles_get = {
+        page: 1,
+        selectingTags: [],
+        isSetting: true,
+        userId: userInfo.user_id,
+      };
       const res = await fetch(`http://localhost:3000/api/articles/get`, {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({
-          page: 1,
-          isSetting: true,
-          userId: userInfo.user_id,
-        }),
+        body: JSON.stringify(articlesParam),
       });
 
       data = await res.json();

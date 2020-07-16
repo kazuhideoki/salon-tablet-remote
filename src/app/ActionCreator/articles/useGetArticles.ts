@@ -2,6 +2,7 @@ import React from "react";
 import {
   Store,
 } from "../../Store/Store";
+import { T_articles_get } from "../../../pages/api/articles/get";
 
 export const useGetArticles = () => {
   const {
@@ -15,21 +16,28 @@ export const useGetArticles = () => {
   const isSetting = appState.isSetting;
   const { dispatchLoading } = React.useContext(Store)
 
-  return async (page: number) => {
+  return async (page: number, selectingTags: number[]) => {
+    const params: T_articles_get= {
+      page,
+      selectingTags,
+      isSetting: isSetting,
+      userId: userInfo.user_id,
+    };
+
     const res = await fetch(
       `${location.protocol}//${location.host}/api/articles/get`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ page, isSetting: isSetting, userId: userInfo.user_id }),
+        body: JSON.stringify(params),
       }
     );
 
     const data = await res.json();
 
     if (data.err === true) {
-      alert("投稿できませんでした");
+      alert("記事を取得できませんでした");
     } else {
       dispatchArticles({
         type: "GET",
