@@ -18,7 +18,7 @@ export const CharCount:React.FC<TCharCount> = (props) => {
           align={props.align}
           color={props.charCount <= props.limitCount ? "textPrimary" : "error"}
         >
-          {`文字数をオーバーしています(${props.limitCount}文字以下)`}
+          {`文字数をオーバーしています、${props.limitCount}文字以下にして下さい`}
         </Typography>
       )}
       {props.isShowCount && (

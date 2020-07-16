@@ -96,14 +96,6 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
         modules={modules}
         // formats={formats}
       />
-      {/* <Typography
-        variant="body2"
-        align="right"
-        color={editorText.length < 1001 ? "textPrimary" : "error"}
-      >
-        {editorText.length < 1001 ? null : "文字数をオーバーしています"}
-        {`${editorText.length}/1000`}
-      </Typography> */}
 
       <CharCount charCount={editorText.length} limitCount={1000} align="right" isShowCount/>
     </>

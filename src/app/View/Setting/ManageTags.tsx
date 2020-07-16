@@ -83,7 +83,7 @@ export const ManageTags = () => {
         onChange={(e) => setTagNameField(e.target.value)}
       />
 
-      <CharCount charCount={tagNameField.length} limitCount={20}/>
+      <CharCount charCount={tagNameField.length} limitCount={20} />
 
       <Button onClick={() => handleOnClick()} disabled={!isValidTagName()}>
         {isEditting ? "更新" : "作成"}
@@ -105,11 +105,6 @@ export const ManageTags = () => {
           );
         })}
       </div>
-      {/* <AllTags
-        edittable
-        handleOnEditting={handleOnEditting}
-        edittingTagId={edittingTagId}
-      /> */}
     </div>
   );
 }

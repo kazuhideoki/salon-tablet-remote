@@ -7,6 +7,7 @@ import {
   Typography,
   makeStyles,
   createStyles,
+  Chip,
 } from "@material-ui/core";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
@@ -21,7 +22,7 @@ import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 
 export type HandleOnUpDate = (params: any) => void;
 export const usePMainProps = () => {
-  const { appState, articles, dispatchAppState } = React.useContext(
+  const { appState, articles, dispatchAppState, tags } = React.useContext(
     Store
   );
   const deleteArticle = useDeleteArticle();
@@ -50,6 +51,7 @@ export const usePMainProps = () => {
   return {
     appState,
     articles,
+    tags,
     handleOnUpDate,
     handleOnDelete,
     openArticle,
@@ -84,6 +86,16 @@ const useStyles = makeStyles((theme) => {
     },
     card: {
       height: "100%",
+    },
+    tagsAndDate: {
+      display: "flex",
+
+    },
+    tags: {
+      flexGrow: 1,
+    },
+    date: {
+
     },
     thumbnail: {
       maxWidth: cardWidth * 0.8,
@@ -138,9 +150,24 @@ export const PMainPresenter = (props: Props) => {
                 <Typography variant="h5" component="h2">
                   {value.title}
                 </Typography>
-                <Typography gutterBottom variant="subtitle1" align="right">
-                  {sqlToDate(value.created_at)}
-                </Typography>
+                <div className={classes.tagsAndDate}>
+                  <div className={classes.tags}>
+                    {value.tag_ids.map((tagId) => {
+                      const targetTag = props.tags.filter((tagsValue) => {
+                        return tagId === tagsValue.tag_id
+                      })
+                      return <Chip label={targetTag[0].tag_name} size="small" />;
+                    })}
+                  </div>
+                  <Typography
+                    gutterBottom
+                    variant="subtitle1"
+                    align="right"
+                    // className={}
+                  >
+                    {sqlToDate(value.created_at)}
+                  </Typography>
+                </div>
                 <img
                   className={`p-main-thumbnail ${classes.thumbnail}`}
                   src={value.article_img}
