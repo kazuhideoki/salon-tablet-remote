@@ -18,7 +18,7 @@ export type T_articles_update = {
   article_content: T_article_content;
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
-  tag_ids: T_tag_ids | null;
+  tag_ids: string;
 };
 export type TUpdateArticle = {
   params: T_articles_update;

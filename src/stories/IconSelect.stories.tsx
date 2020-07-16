@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SelectIcon,
   IconItem,
-} from "../app/View/Setting/iconSelect/SelectIcon";
+} from "../app/View/Drawer/ItemEditor/iconSelect/SelectIcon";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { EditorContext } from "../app/Store/EditorContext";
 

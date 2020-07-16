@@ -20,7 +20,7 @@ export type T_articles_create = {
   article_content: T_article_content;
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
-  tag_ids: T_tag_ids
+  tag_ids: string
   user_id: T_user_id;
 };
 

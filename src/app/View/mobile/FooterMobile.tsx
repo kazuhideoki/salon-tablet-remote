@@ -1,10 +1,10 @@
 import React from 'react'
-import { usePFooterProps } from "../PFooter/PFooter";
-import { IconsSetting } from '../Setting/iconSelect/icons';
+import { useFooterProps } from "../Footer/Footer";
+import { IconsSetting } from '../Drawer/ItemEditor/iconSelect/icons';
 import { makeStyles, Theme, createStyles, Button } from "@material-ui/core";
 import { MoodBad, ArrowUpward } from "@material-ui/icons";
 import { useSwitchOrder } from '../../ActionCreator/footerItems/useSwitchOrder';
-import { useDrawerProps } from '../Drawer';
+import { useDrawerProps } from '../Drawer/Drawer';
 
 export const useFooterMobileProps = () => {
   const {
@@ -14,7 +14,7 @@ export const useFooterMobileProps = () => {
     footerItems,
     handleOnUpDateFooterIcon,
     handleOnDeleteFooterItem,
-  } = usePFooterProps();
+  } = useFooterProps();
 
   // const { handleOpenFooterItemEditor } = useDrawerProps();
 

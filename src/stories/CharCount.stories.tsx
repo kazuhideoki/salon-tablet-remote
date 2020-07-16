@@ -2,7 +2,7 @@ import React from 'react';
 //@ts-ignore
 import { CharCount, TCharCount } from '../app/View/viewComponents/CharCount';
 export default {
-  title: 'CharCount',
+  title: 'viewComponents/CharCount',
   component: CharCount,
 };
 

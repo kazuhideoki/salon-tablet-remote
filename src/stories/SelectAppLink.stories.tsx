@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectAppLink } from '../app/View/Setting/selectAppLink/SelectAppLink';
+import { SelectAppLink } from '../app/View/Drawer/ItemEditor/selectAppLink/SelectAppLink';
 export default {
 title: 'SelectAppLink',
 component: SelectAppLink,

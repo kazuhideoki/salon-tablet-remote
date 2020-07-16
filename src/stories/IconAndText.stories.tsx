@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconAndText } from '../app/View/PFooter/IconAndText';
+import { IconAndText } from '../app/View/Footer/IconAndText';
 import { Settings } from '@material-ui/icons';
 // import { magzter } from "./magzter.png";
 export default {

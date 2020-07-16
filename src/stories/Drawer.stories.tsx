@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerPresenter } from '../app/View/Drawer';
+import { DrawerPresenter } from '../app/View/Drawer/Drawer';
 import { useTheme } from '@material-ui/core';
 export default {
 title: 'DrawerPresenter',

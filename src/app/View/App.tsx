@@ -1,17 +1,17 @@
 import React from "react";
 import clsx from "clsx";
 import { Grid, CircularProgress, makeStyles, createStyles, Theme, useMediaQuery } from "@material-ui/core";
-import { PModal } from "./PModal/PModal";
-import { PMain } from "./PMain/PMain";
-import { PFooter } from "./PFooter/PFooter";
+import { Modal } from "./Modal";
+import { PMain } from "./Main/PMain";
+import { Footer } from "./Footer/Footer";
 import { Store } from "../Store/Store";
 import { ThemeContext } from "../Store/ThemeContext";
 import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { EditorContextProvider } from "../Store/EditorContext";
-import { Drawer } from "./Drawer";
-import { PHeader } from "./PHeader";
+import { Drawer } from "./Drawer/Drawer";
+import { Header } from "./Header";
 import { AppMobile } from "./mobile/AppMobile";
 import { server } from "../../config";
 import { IndexProps } from "../../pages";
@@ -94,9 +94,6 @@ const AppTablet = ()=> {
     const isLoading = loading.mainArticles;
     const getArticles = useGetArticles();
 
-    // Drawer用
-    // const [open, setOpen] = React.useState(false);
-
     return (
       <div className={classes.root}>
         <Drawer>
@@ -111,7 +108,7 @@ const AppTablet = ()=> {
             <Grid item className={`${clsx(classes.content, {
               [classes.contentShift]: open,
             })} ${classes.header} ${open ? classes.headerOpened : null}`}>
-              <PHeader/>
+              <Header/>
             </Grid>
             <Grid
               item
@@ -137,9 +134,8 @@ const AppTablet = ()=> {
                 [classes.contentShift]: open,
               })} ${classes.footer} ${open ? classes.footerOpened : null}`}
             >
-              <PFooter />
+              <Footer />
             </Grid>
-            {/* <PModal /> */}
           </Grid>
         </Drawer>
       </div>
@@ -197,7 +193,7 @@ export const App = (props: IndexProps) => {
       <ThemeProvider {...props.data.session}>
         <EditorContextProvider {...props.data.session}>
           <AppView />
-          <PModal />
+          <Modal />
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>

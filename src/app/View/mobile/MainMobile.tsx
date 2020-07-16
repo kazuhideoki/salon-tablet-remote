@@ -1,8 +1,8 @@
 import React from 'react'
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
-import { usePMainProps } from '../PMain/PMain';
+import { usePMainProps } from '../Main/PMain';
 import { makeStyles,createStyles, Theme, Button, CircularProgress } from '@material-ui/core';
-import { useDrawerProps } from '../Drawer';
+import { useDrawerProps } from '../Drawer/Drawer';
 import { Store } from '../../Store/Store';
 import { PaginationMobile } from './PaginationMobile';
 

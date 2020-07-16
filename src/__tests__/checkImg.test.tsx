@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook, act } from "@testing-library/react-hooks";
-import { removeImg, checkImg } from "../app/View/Setting/handleImg";
+import { removeImg, checkImg } from "../app/View/Drawer/Editor/handleImg";
 
 const delta = {
   ops: [

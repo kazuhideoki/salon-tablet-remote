@@ -4,13 +4,13 @@ import { FooterMobile, useFooterMobileProps } from './FooterMobile'
 import { SettingMobile } from "./SettingMobile";
 import { TabMobile } from './TabMobile'
 import { PaginationMobile } from './PaginationMobile';
-import { PModal } from '../PModal/PModal';
+import { Modal } from '../Modal';
 import { makeStyles, createStyles, Theme, Button, CircularProgress } from "@material-ui/core";
-import { HomeButton } from '../PFooter/Pagination/HomeButton';
+import { HomeButton } from '../Footer/Pagination/HomeButton';
 import { Store } from '../../Store/Store';
 import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
 import { Home } from '@material-ui/icons';
-import { useDrawerProps } from '../Drawer';
+import { useDrawerProps } from '../Drawer/Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -91,7 +91,6 @@ export const AppMobile = () => {
         <Display />
         <TabMobile tab={tab} setTab={setTab} className={classes.tabMobile}/>
       </div>
-      {/* <PModal /> */}
     </>
   );
 }

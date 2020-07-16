@@ -5,7 +5,7 @@ import {
   Store,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
-import { IconsSetting } from "../../View/Setting/iconSelect/icons";
+import { IconsSetting } from "../../View/Drawer/ItemEditor/iconSelect/icons";
 
 
 type UseGetFooterItemRes =
