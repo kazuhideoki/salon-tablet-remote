@@ -47,7 +47,7 @@ export const useGetArticles = () => {
         type: "GET",
         payload: data.rawData,
       });
-      dispatchAppState({type: "SET_SELECTED_ARTICLES_TAGS", payload: selectingTags})
+      dispatchAppState({type: "SET_SELECTED_ARTICLES_TAGS", payload: selectingTags || []})
       //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
         dispatchPaginationParams({

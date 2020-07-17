@@ -9,7 +9,7 @@ import { useCreateArticle } from "../../../ActionCreator/articles/useCreateArtic
 import { useUpdateArticle } from "../../../ActionCreator/articles/useUpdateArticle";
 import { sqlToDate } from "../../../ActionCreator/organizeSql/sqlToDate";
 import { SelectTagsPopover } from "./SelectTagsPopover";
-import { CharCount } from "../../viewComponents/CharCount";
+import { CharCounter } from "../../viewComponents/CharCounter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,7 +77,7 @@ const ArticleEditor = () => {
         // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
       />
 
-      <CharCount charCount={titleText.length} limitCount={100} />
+      <CharCounter charCount={titleText.length} limitCount={100} />
 
       {createdAt ? (
         <Typography>作成日:{sqlToDate(createdAt)}</Typography>

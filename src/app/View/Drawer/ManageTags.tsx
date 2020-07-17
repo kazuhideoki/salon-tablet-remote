@@ -13,7 +13,7 @@ import { useCreateTag } from '../../ActionCreator/tags/useCreateTag'
 import { useUpdateTag } from '../../ActionCreator/tags/useUpdateTag'
 import { Store } from '../../Store/Store'
 import { useDeleteTag } from '../../ActionCreator/tags/useDeleteTag'
-import { CharCount } from '../viewComponents/CharCount'
+import { CharCounter } from "../viewComponents/CharCounter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -102,7 +102,7 @@ export const ManageTags = () => {
         onChange={(e) => setTagNameField(e.target.value)}
       />
 
-      <CharCount charCount={tagNameField.length} limitCount={20} />
+      <CharCounter charCount={tagNameField.length} limitCount={20} />
 
       <Button onClick={() => handleOnClick()} disabled={!isValidTagName()}>
         {isEditting ? "更新" : "作成"}

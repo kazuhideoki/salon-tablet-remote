@@ -13,7 +13,7 @@ export default {
 };
 export const Normal = () => {
   const [editorText, setEditorText] = React.useState("");
-  const [charCount, setCharCount] = React.useState(0);
+  const [charCounts, setCharCount] = React.useState(0);
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState('');
 
   return (
@@ -21,6 +21,7 @@ export const Normal = () => {
       editorText={editorText}
       setEditorText={setEditorText}
       setEditorTextExcerpt={setEditorTextExcerpt}
+      charCount={charCounts}
       setCharCount={setCharCount}
     />
   );

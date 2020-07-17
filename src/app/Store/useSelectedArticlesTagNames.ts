@@ -3,11 +3,15 @@ import React from 'react'
 
 export const useSelectedArticlesTagNames = () => {
   const {tags, appState} = React.useContext(Store)
+  const selectedArticlesTags = appState.selectedArticlesTags
 
+  // if (selectedArticlesTags.length === 0) {
+  //   return []
+  // }
 
   const tagNames = tags.map((value) => {
     // まず該当タグ名を格納して、該当しないものはnullに
-    if (appState.selectedArticlesTags.includes(value.tag_id)) {
+    if (selectedArticlesTags.includes(value.tag_id)) {
       return value.tag_name
     }
     return null

@@ -8,7 +8,7 @@ import ImageResize from "quill-image-resize";
 import { Typography } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
 import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
-import { CharCount } from '../../viewComponents/CharCount';
+import { CharCounter } from '../../viewComponents/CharCounter';
 
 // ※■■■ReactQuillのスタイルはquill.scssに記述■■■
 
@@ -30,11 +30,12 @@ Quill.register("modules/imageResize", ImageResize);
 type Props = {
   editorText: string,
   setEditorText: React.Dispatch<React.SetStateAction<string>>,
-  setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
-  setEditorImg?: React.Dispatch<React.SetStateAction<string>>
+  setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>,
+  charCount: number;
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
+  setEditorImg?: React.Dispatch<React.SetStateAction<string>>,
 }
-export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, setCharCount }:Props) => {
+export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }) => {
   console.log("QuillEditorだよ");
   
   
@@ -51,7 +52,8 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       setEditorImg(imgData)
     }
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
-    setCharCount(editor.getLength());
+    const plainText = editor.getText();
+    setCharCount(plainText.length);
     
   }
   
@@ -97,7 +99,12 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
         // formats={formats}
       />
 
-      <CharCount charCount={editorText.length} limitCount={1000} align="right" isShowCount/>
+      <CharCounter
+        charCount={charCount}
+        limitCount={1000}
+        align="right"
+        isShowCount
+      />
     </>
   );
 };

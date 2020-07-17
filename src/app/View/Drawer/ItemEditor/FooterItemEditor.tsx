@@ -11,7 +11,7 @@ import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdat
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
 import { Store } from '../../../Store/Store';
-import { CharCount } from '../../viewComponents/CharCount';
+import { CharCounter } from "../../viewComponents/CharCounter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,6 +76,7 @@ export const FooterItemEditor = () => {
         editorText={editorText}
         setEditorText={setEditorText}
         setEditorTextExcerpt={setEditorTextExcerpt}
+        charCount={charCountFooterItemContent}
         setCharCount={setCharCountFooterItemContent}
       />
     );
@@ -111,7 +112,7 @@ export const FooterItemEditor = () => {
         // style={{ marginBottom: "20px" }}
         autoFocus={isEdittingContent ? false : true}
       />
-      <CharCount charCount={titleText.length} limitCount={100} />
+      <CharCounter charCount={titleText.length} limitCount={100} />
       <br />
 
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
