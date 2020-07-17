@@ -96,9 +96,12 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           <TagsButton />
         </SvgIcon>
       </Typography>
-      <Typography variant="subtitle1" component="span" className={classes.displayPage}>
+      <div>
+        {}
+      </div>
+      {/* <Typography variant="subtitle1" component="span" className={classes.displayPage}>
         【 {props.paginationParams.page}/{props.paginationParams.pageCount} 】
-      </Typography>
+      </Typography> */}
       <Typography variant="subtitle1" component="span" className={classes.paginationArrows}>
         <PaginationArrows {...props} classes={classes} />
       </Typography>

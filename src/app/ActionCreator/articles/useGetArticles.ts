@@ -16,10 +16,10 @@ export const useGetArticles = () => {
   const isSetting = appState.isSetting;
   const { dispatchLoading } = React.useContext(Store)
 
-  return async (page: number, selectingTags: number[]) => {
-    const params: T_articles_get= {
+  return async (page: number, selectingTags?: number[]) => {
+    const params: T_articles_get = {
       page,
-      selectingTags,
+      selectingTags: selectingTags || appState.selectedArticlestags,
       isSetting: isSetting,
       userId: userInfo.user_id,
     };
@@ -38,6 +38,7 @@ export const useGetArticles = () => {
 
     if (data.err === true) {
       alert("記事を取得できませんでした");
+      return false
     } else {
       dispatchArticles({
         type: "GET",
@@ -52,6 +53,7 @@ export const useGetArticles = () => {
           payload: data.pagination,
         });
       }
+      return true
     }
   };
 };

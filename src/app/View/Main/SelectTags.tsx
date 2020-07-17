@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const SelectTags = () => {
   const classes = useStyles()
-  const {tags} = React.useContext(Store)
+  const {tags, dispatchAppState, dispatchLoading} = React.useContext(Store)
   const [selectingTags, setSelectingTags] = React.useState([] as number[])
   const getArticles = useGetArticles()
   const { paginationParams } = React.useContext(Store)
@@ -47,7 +47,11 @@ export const SelectTags = () => {
   };
 
   const handleGetArticle = () => {
-
+    const isLoaded = getArticles(1, selectingTags);
+    if (isLoaded) {
+      dispatchAppState({type: "CLOSE_MODAL"})
+      dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
+    }
   }
 
   return (
@@ -69,9 +73,7 @@ export const SelectTags = () => {
           );
         })}
       </div>
-      <Button onClick={() => getArticles(1, selectingTags)}>
-        記事を読み込む
-      </Button>
+      <Button onClick={() => handleGetArticle()}>記事を読み込む</Button>
     </div>
   );
 }

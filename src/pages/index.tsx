@@ -70,7 +70,6 @@ export async function getServerSideProps(context: NextPageContext) {
 
     // ★★★ユーザーデータがある
     if (userInfo) {
-      console.log("userInfoは " + JSON.stringify(userInfo.bcrypt_password));
 
       // ★★★ パスワードの有無
       if (userInfo.bcrypt_password) {
