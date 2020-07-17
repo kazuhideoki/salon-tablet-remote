@@ -93,6 +93,8 @@ const ArticleEditor = () => {
         setEditorText={setEditorText}
         setEditorTextExcerpt={setEditorTextExcerpt}
         setEditorImg={setEditorImg}
+        //@ts-ignore
+        charCount={charCountArticleContent}
         setCharCount={setCharCountArticlContent}
       />
       <Grid container className={classes.submitButtons}>

@@ -32,9 +32,10 @@ type Props = {
   setEditorText: React.Dispatch<React.SetStateAction<string>>,
   setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>
   setEditorImg?: React.Dispatch<React.SetStateAction<string>>
+  charCount: number
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
 }
-export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, setCharCount }:Props) => {
+export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount,setCharCount }:Props) => {
   console.log("QuillEditorだよ");
   
   
@@ -51,7 +52,7 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       setEditorImg(imgData)
     }
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
-    setCharCount(editor.getLength());
+    setCharCount(editor.getLength().length);
     
   }
   
@@ -97,7 +98,12 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
         // formats={formats}
       />
 
-      <CharCount charCount={editorText.length} limitCount={1000} align="right" isShowCount/>
+      <CharCount
+        charCount={charCount}
+        limitCount={1000}
+        align="right"
+        isShowCount
+      />
     </>
   );
 };

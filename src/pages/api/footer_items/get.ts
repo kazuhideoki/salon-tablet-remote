@@ -23,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       correctOrders(data)
     }
 
-    console.log("/footer_items/get/は " + JSON.stringify(data));
+    // console.log("/footer_items/get/は " + JSON.stringify(data));
 
     return res.status(200).json({
       rawData: data,

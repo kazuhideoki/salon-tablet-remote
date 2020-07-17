@@ -1,6 +1,5 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { tagIdsParse } from "../lib/tagIdsParse";
 import { T_tag_ids, T_tag_id, T_user_id, T_article_id } from "../../../app/Store/Store";
 import { deleteTagIdInArticle } from "../lib/deleteTagIdInArticle";
 

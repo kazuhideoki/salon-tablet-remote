@@ -25,6 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // 正規表現でタグを検索
+
     let getTagedPages;
     if (selectingTags.length === 0) {
       getTagedPages = ''
@@ -62,14 +63,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const data2: any = await db(query2);
 
-      console.log("/articles/get/は " + JSON.stringify(data));
+      // console.log("/articles/get/のdataは " + JSON.stringify(data));
+      // console.log("/articles/get/のdata2は " + JSON.stringify(data2));
 
-      if (data.length) {
-        
-        data = tagIdsParse(data);
-      }
-
-      res.status(200).json({
+      return res.status(200).json({
         // tag_idsをnumber[]化する、なければnullのまま
         rawData: data.length ? tagIdsParse(data) : data,
         pagination: {
@@ -82,7 +79,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/articles/get/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: { message: err.message } });
     }
   }
 };
