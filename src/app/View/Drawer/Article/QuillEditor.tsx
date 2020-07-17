@@ -52,7 +52,7 @@ export const QuillEditor = ({ editorText, setEditorText, setEditorTextExcerpt, s
       setEditorImg(imgData)
     }
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
-    setCharCount(editor.getLength().length);
+    setCharCount(editor.getText().length);
     
   }
   
