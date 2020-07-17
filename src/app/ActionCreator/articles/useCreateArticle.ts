@@ -77,7 +77,7 @@ export const useCreateArticle =   () => {
       setSelectedTags([])
       dispatchAppState({ type: "CLOSE_MODAL" });
 
-      getArticles(1);
+      getArticles(1, []);
     }
   };
 };

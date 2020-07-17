@@ -17,7 +17,7 @@ export const useGetArticles = () => {
   const { dispatchLoading } = React.useContext(Store)
 
   return async (page: number, selectingTags?: number[]) => {
-
+    dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     
     const params: T_articles_get = {
       page,
