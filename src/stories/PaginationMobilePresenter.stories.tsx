@@ -16,6 +16,7 @@ const props = {
   dispatchLoading: null,
   dispatchAppState: null,
   handleOnNumClick: null,
+  selectedTagNames: ['英語', 'ヘアケア', '商品']
 };
 
 export const Normal = () => {
