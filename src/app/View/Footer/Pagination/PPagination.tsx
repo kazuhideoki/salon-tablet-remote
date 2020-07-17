@@ -2,7 +2,7 @@ import React from "react";
 import { Store } from "../../../Store/Store";
 import { Home } from "@material-ui/icons";
 import { ThemeContext } from "../../../Store/ThemeContext";
-import { Grid, makeStyles, createStyles, Theme, Typography, SvgIcon } from "@material-ui/core";
+import { Grid, makeStyles, createStyles, Theme, Typography, SvgIcon, Chip, IconButton } from "@material-ui/core";
 import { Prev } from "./Prev";
 import { Latest } from "./Latest";
 import { DisplayNumbers } from "./DisplayNumbers";
@@ -14,21 +14,30 @@ import { PageNumber } from "./PageNumber";
 import { PaginationArrows } from "./PaginationArrows";
 import { LoadingAction } from "../../../Reducer/loadingReducer";
 import { TagsButton } from "./TagsButton";
+import { selectedTagIdsToName } from "./selectedTagIdsToName";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
-  const { paginationParams, dispatchLoading, dispatchAppState } = React.useContext(Store);
+  const { paginationParams, dispatchLoading, dispatchAppState, appState } = React.useContext(Store);
   
   const handleOnNumClick = (num) => {
-    dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     getArticles(num);
   };
+
+  const showSelectedTags = () => (
+    <div>
+      {appState.selectedArticlesTags.map((value) => (
+        <Chip label={selectedTagIdsToName(value)} size="small" />
+      ))}
+    </div>
+  );
 
   return {
     getArticles,
     paginationParams,
     dispatchLoading,
     dispatchAppState,
+    showSelectedTags,
     handleOnNumClick,
   };
 };
@@ -48,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => {
       fontSize: "inherit",
     },
     icon: {
-      margin: "0 0.5em"
+      // margin: "0 0.2em"
     },
     displayPage: {
       fontSize: "0.8em",
@@ -85,24 +94,49 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
   return (
     <Grid container justify="center" spacing={1} className={classes.root}>
-      <Typography variant="subtitle1" component="span" className={classes.icons}>
-        <SvgIcon fontSize="inherit" onClick={() => props.getArticles(1)} className={classes.icon}>
+      <Typography
+        variant="subtitle1"
+        component="span"
+        className={classes.icons}
+      >
+        {/* <SvgIcon
+          fontSize="inherit" */}
+        <IconButton
+          onClick={() => props.getArticles(1, [])}
+          className={classes.icon}
+        >
           <HomeButton />
-        </SvgIcon>
-      {/* ↓まとめる？まとめない？ */}
-      {/* </Typography>
+          {/* </IconButton> */}
+        </IconButton>
+        {/* ↓まとめる？まとめない？ */}
+        {/* </Typography>
       <Typography variant="subtitle1" component="span" className={classes.icons}> */}
-        <SvgIcon fontSize="inherit" onClick={() => props.dispatchAppState({type: "OPEN_MODAL", payload: "select_tags"})} className={classes.icons}>
+        {/* <SvgIcon
+          fontSize="inherit" */}
+        <IconButton
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_MODAL",
+              payload: "select_tags",
+            })
+          }
+          className={classes.icon}
+        >
           <TagsButton />
-        </SvgIcon>
+          {/* </SvgIcon> */}
+        </IconButton>
       </Typography>
-      <div>
-        {}
-      </div>
+      
+      {props.showSelectedTags}
+
       {/* <Typography variant="subtitle1" component="span" className={classes.displayPage}>
         【 {props.paginationParams.page}/{props.paginationParams.pageCount} 】
       </Typography> */}
-      <Typography variant="subtitle1" component="span" className={classes.paginationArrows}>
+      <Typography
+        variant="subtitle1"
+        component="span"
+        className={classes.paginationArrows}
+      >
         <PaginationArrows {...props} classes={classes} />
       </Typography>
     </Grid>

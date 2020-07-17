@@ -67,7 +67,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
       case "SET_SELECTED_ARTICLES_TAGS":
         newState = {
           ...state,
-          selectedArticlestags: action.payload,
+          selectedArticlesTags: action.payload,
         };
         break;
       case "CLOSE_MODAL":

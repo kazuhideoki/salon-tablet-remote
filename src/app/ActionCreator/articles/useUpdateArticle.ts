@@ -18,14 +18,18 @@ export type T_articles_update = {
   article_content: T_article_content;
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
-  tag_ids: string;
+  tag_ids: string | null;
 };
 export type TUpdateArticle = {
   params: T_articles_update;
   article_id: T_article_id;
 };
 export const useUpdateArticle = () => {
-  const { dispatchAppState, paginationParams } = React.useContext(Store);
+  const {
+    dispatchAppState,
+    paginationParams,
+    dispatchLoading,
+  } = React.useContext(Store);
   const {
     setTitleText,
     setEditorText,
@@ -68,8 +72,6 @@ export const useUpdateArticle = () => {
       alert("更新できませんでした");
     } else {
       setIsEdittingContent(false);
-      // setTitleText("");
-      // setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getArticles(paginationParams.page);

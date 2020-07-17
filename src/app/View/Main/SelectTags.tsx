@@ -34,7 +34,9 @@ export const SelectTags = () => {
     appState,
   } = React.useContext(Store);
 
-  const [selectingTags, setSelectingTags] = React.useState(appState.selectedArticlestags)
+  const [selectingTags, setSelectingTags] = React.useState(
+    appState.selectedArticlesTags
+  );
 
   const getArticles = useGetArticles()
   const { paginationParams } = React.useContext(Store)
@@ -57,7 +59,6 @@ export const SelectTags = () => {
     const isLoaded = getArticles(1, selectingTags);
     if (isLoaded) {
       dispatchAppState({type: "CLOSE_MODAL"})
-      dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
     }
   }
 

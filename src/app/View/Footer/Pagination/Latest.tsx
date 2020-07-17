@@ -10,7 +10,6 @@ export const Latest = (props: TArrowProps) => {
     const {page, pageCount} = props.paginationParams
 
     const hundleOnClick = () => {
-      props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
       props.getArticles(1);
     };
 
@@ -30,20 +29,3 @@ export const Latest = (props: TArrowProps) => {
       </SvgIcon>
     );
 };
-
-// export const Latest = ({classesDisable}) => {
-//   const props = usePPaginationProps()
-
-//   const hundleOnClick = () => {
-//     props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-//     props.getArticles(1);
-//   };
-
-//   return (
-//     <LatestPresenter
-//       hundleOnClick={hundleOnClick}
-//       classesDisable={classesDisable}
-//       {...props}
-//     />
-//   );
-// }

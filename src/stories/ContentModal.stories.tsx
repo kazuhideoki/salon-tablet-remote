@@ -17,7 +17,7 @@ const props = {
     },
     isModalOpen: true,
     isArticleModalOpen: false,
-    selectedArticlestags: []
+    selectedArticlesTags: [],
   },
 };
 

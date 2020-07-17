@@ -156,10 +156,10 @@ const AppView = () => {
   // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
   const [isFirstLoad, setIsFirstLoad] = React.useState(true);
   // 編集モード[isSetting]を切り替えるたびに記事を読み込み直す
+  // ※※→いずれuseEffect使わないようにするか❓
   React.useEffect(() => {
     if (!isFirstLoad) {  
       // 二回目以降で発火 
-      dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
       getArticles(1);
     }
     setIsFirstLoad(false);

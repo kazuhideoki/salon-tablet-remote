@@ -81,7 +81,6 @@ export const useDrawerProps = () => {
     const result = await checkPassword(password);
     if (result === true) {
       dispatchAppState({ type: "ON_IS_SETTING" });
-      // dispatchAppState({ type: "CLOSE_MODAL" });
       dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
     } else if (result === false) {
       alert("パスワードが間違っています。");

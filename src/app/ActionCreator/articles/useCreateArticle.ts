@@ -20,16 +20,16 @@ export type T_articles_create = {
   article_content: T_article_content;
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
-  tag_ids: string
+  tag_ids: string | null
   user_id: T_user_id;
 };
 
 export type TCreateArticle = {
   params: T_articles_create;
 };
-export const useCreateArticle = () => {
+export const useCreateArticle =   () => {
   const getArticles = useGetArticles();
-  const { dispatchAppState, userInfo } = React.useContext(Store);
+  const { dispatchAppState, userInfo, dispatchLoading } = React.useContext(Store);
   const {
     setEditorText,
     setTitleText,

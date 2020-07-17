@@ -11,7 +11,6 @@ export const Oldest = (props: TArrowProps) => {
   const { page, pageCount } = props.paginationParams;
 
   const hundleOnClick = () => {
-    props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     props.getArticles(props.paginationParams.pageCount);
   };
 
@@ -32,20 +31,3 @@ export const Oldest = (props: TArrowProps) => {
     </SvgIcon>
   );
 };
-
-// export const Oldest = ({ classesDisable }) => {
-//   const props = usePPaginationProps();
-
-//   const hundleOnClick = () => {
-//     props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-//     props.getArticles(props.paginationParams.pageCount);
-//   };
-
-//   return (
-//     <OldestPresenter
-//       hundleOnClick={hundleOnClick}
-//       classesDisable={classesDisable}
-//       {...props}
-//     />
-//   );
-// };

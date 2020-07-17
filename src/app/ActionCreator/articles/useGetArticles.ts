@@ -17,9 +17,11 @@ export const useGetArticles = () => {
   const { dispatchLoading } = React.useContext(Store)
 
   return async (page: number, selectingTags?: number[]) => {
+
+    
     const params: T_articles_get = {
       page,
-      selectingTags: selectingTags,
+      selectingTags: selectingTags || [],
       isSetting: isSetting,
       userId: userInfo.user_id,
     };
@@ -38,6 +40,7 @@ export const useGetArticles = () => {
 
     if (data.err === true) {
       alert("記事を取得できませんでした");
+      dispatchLoading({ type: "OFF_IS_LOADING_MAIN_ARTICLES" });
       return false
     } else {
       dispatchArticles({
@@ -45,7 +48,6 @@ export const useGetArticles = () => {
         payload: data.rawData,
       });
       dispatchAppState({type: "SET_SELECTED_ARTICLES_TAGS", payload: selectingTags})
-      dispatchLoading({type: "OFF_IS_LOADING_MAIN_ARTICLES"})
       //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
         dispatchPaginationParams({
@@ -53,6 +55,7 @@ export const useGetArticles = () => {
           payload: data.pagination,
         });
       }
+      dispatchLoading({ type: "OFF_IS_LOADING_MAIN_ARTICLES" });
       return true
     }
   };

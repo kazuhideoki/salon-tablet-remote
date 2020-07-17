@@ -9,7 +9,6 @@ export const Prev = (props: TArrowProps) => {
   const { page } = props.paginationParams;
 
   const hundleOnClick = () => {
-    props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     props.getArticles(props.paginationParams.page - 1);
   };
 
@@ -29,19 +28,3 @@ export const Prev = (props: TArrowProps) => {
   );
 };
 
-// export const Prev = ({classesDisable}) => {
-//   const props = usePPaginationProps();
-
-//   const hundleOnClick = () => {
-//     props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-//     props.getArticles(props.paginationParams.page - 1);
-//   };
-
-//   return (
-//     <PrevPresenter
-//       hundleOnClick={hundleOnClick}
-//       classesDisable={classesDisable}
-//       {...props}
-//     />
-//   );
-// }

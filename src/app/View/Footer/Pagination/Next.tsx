@@ -10,7 +10,6 @@ export const Next = (props: TArrowProps) => {
   const { page, pageCount, rowCount } = props.paginationParams;
 
   const hundleOnClick = () => {
-    props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     props.getArticles(props.paginationParams.page + 1);
   };
 
@@ -34,20 +33,4 @@ export const Next = (props: TArrowProps) => {
   );
 };
 
-// export const Next = ({ classesDisable }) => {
-//   const props = usePPaginationProps();
 
-
-//   const hundleOnClick = () => {
-//     props.dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
-//     props.getArticles(props.paginationParams.page + 1);
-//   };
-
-//   return (
-//     <NextPresenter
-//       hundleOnClick={hundleOnClick}
-//       classesDisable={classesDisable}
-//       {...props}
-//     />
-//   );
-// };

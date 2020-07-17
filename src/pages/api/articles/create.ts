@@ -13,20 +13,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const data2: any = await db(`SELECT * FROM articles WHERE user_id = ?`, params.user_id);
 
-      res.status(200).json({
+      return res.status(200).json({
         rawData: data,
-        pagination: {
-          page: 1,
-          pageCount: Math.ceil(data2.length / 5), // 全row数を5で割って切り上げ
-          pageSize: 5,
-          rowCount: data2.length,
-        },
+        // pagination: {
+        //   page: 1,
+        //   pageCount: Math.ceil(data2.length / 5), // 全row数を5で割って切り上げ
+        //   pageSize: 5,
+        //   rowCount: data2.length,
+        // },
       });
 
     } catch (err) {
       console.log("/articles/create/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: { message: err.message } });
 
     }
 
