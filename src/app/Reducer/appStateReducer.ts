@@ -13,6 +13,7 @@ export type AppStateAction =
       type: "SET_MODAL_CONTENT";
       payload: { title: string | null; content: string };
     }
+  | { type: "SET_SELECTED_ARTICLES_TAGS", payload: number[]}
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_ARTICLE_MODAL" }
   | { type: "CLOSE_ARTICLE_MODAL" }
@@ -61,6 +62,12 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
             title: action.payload.title || null,
             contnet: action.payload.content,
           },
+        };
+        break;
+      case "SET_SELECTED_ARTICLES_TAGS":
+        newState = {
+          ...state,
+          selectedArticlestags: action.payload,
         };
         break;
       case "CLOSE_MODAL":

@@ -138,6 +138,7 @@ const initAppState = {
     title: "",
     contnet: "",
   },
+  selectedArticlestags: [] as number[],
   isModalOpen: false,
   isArticleModalOpen: false,
 };

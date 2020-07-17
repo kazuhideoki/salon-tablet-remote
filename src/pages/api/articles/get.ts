@@ -23,9 +23,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } else if (isSetting === true) {
       getPublishedOnly = " ";
     }
-    // 正規表現でタグを検索できるよう ex) [14] [3,25]
-    // ^(?=.*(\[|,)?15(,|\])?)(?=.*(\[|,)?32(,|\])?).*$ こんな感じ
-    // ↑tag_idを数字に入れ込んで文字列でつなげる
+
+    // 正規表現でタグを検索
     let getTagedPages;
     if (selectingTags.length === 0) {
       getTagedPages = ''
@@ -39,7 +38,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const skipRows = 5 * (page - 1); // オフセット, 何ページ飛ばすか
-    // const offSet = skipRows === 0 ? "" : skipRows + ","; 
     const offSet = skipRows === 0 ? '' : skipRows + ","; 
 
     const query =
@@ -51,52 +49,37 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       console.log(query);
       
     try {
-          // 例）
-          // SELECT tag_ids FROM articles WHERE tag_ids REGEXP '[[:<:]]15[[:>:]]' AND tag_ids REGEXP '[[:<:]]14[[:>:]]';
+         
+      let data: any = await db(
+        query
+      );
 
-          let data: any = await db(
-            query
-          );
+      const query2 =
+        `SELECT * FROM articles WHERE user_id = ${userId} ` +
+        getPublishedOnly +
+        getTagedPages;
+      console.log(query2);
 
-          const query2 =
-            `SELECT * FROM articles WHERE user_id = ${userId} ` +
-            getPublishedOnly +
-            getTagedPages;
-          console.log(query2);
+      const data2: any = await db(query2);
 
-          const data2: any = await db(query2);
+      console.log("/articles/get/は " + JSON.stringify(data));
 
-          console.log("/articles/get/は " + JSON.stringify(data));
+      if (data.length) {
+        
+        data = tagIdsParse(data);
+      }
 
-          if (data.length) {
-            // tag_idsをnumber[]化する
-            data = tagIdsParse(data);
-          }
-
-          let pageCount;
-          if (data2.length) {
-            pageCount = Math.ceil(data2.length / 5); // 全row数を5で割って切り上げ
-          } else {
-            pageCount = 0;
-          }
-
-          let rowCount;
-          if (data2.length) {
-            rowCount = data2.length;
-          } else {
-            rowCount = 0;
-          }
-
-          res.status(200).json({
-            rawData: data,
-            pagination: {
-              page: page,
-              pageCount: Math.ceil(data2.length / 5), // 全row数を5で割って切り上げ
-              pageSize: 5,
-              rowCount: data2.length,
-            },
-          });
-        } catch (err) {
+      res.status(200).json({
+        // tag_idsをnumber[]化する、なければnullのまま
+        rawData: data.length ? tagIdsParse(data) : data,
+        pagination: {
+          page: page,
+          pageCount: data2.length ? Math.ceil(data2.length / 5) : 0, // 全row数を5で割って切り上げ
+          pageSize: 5,
+          rowCount: data2.length,
+        },
+      });
+    } catch (err) {
       console.log("/articles/get/のエラーは " + JSON.stringify(err));
 
       res.status(500).json({ err: true, data: { message: err.message } });

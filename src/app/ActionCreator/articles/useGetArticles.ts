@@ -43,6 +43,7 @@ export const useGetArticles = () => {
         type: "GET",
         payload: data.rawData,
       });
+      dispatchAppState({type: "SET_SELECTED_ARTICLES_TAGS", payload: selectingTags})
       dispatchLoading({type: "OFF_IS_LOADING_MAIN_ARTICLES"})
       //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
