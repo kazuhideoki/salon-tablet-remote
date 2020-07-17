@@ -16,10 +16,32 @@ import { SelectTags } from "./Main/SelectTags";
 import { ManageTags } from "./Drawer/ManageTags";
 import { SettingUserInfo } from "./Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "./Drawer/Account/DeleteAccountForm";
-const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
+
+const Transition = React.memo(React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
-});
+}));
+
+const useModalProps = () => {
+  const { appState, dispatchAppState } = React.useContext(Store);
+  const setModal = appState.setModal;
+  const isModalOpen = appState.isModalOpen;
+  const openModal = (name: string) => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: name });
+  };
+  const closeModal = () => {
+    dispatchAppState({ type: "CLOSE_MODAL" });
+  };
+
+  return {
+    setModal,
+    isModalOpen,
+    openModal,
+    closeModal,
+  };
+};
+
+type Props = ReturnType<typeof useModalProps>
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -29,36 +51,9 @@ const useStyles = makeStyles((theme) =>
     },
 }))
 
-export const Modal = () => {
+export const ModalPresenter:React.FC<Props> = (props) => {
     const classes = useStyles();
 
-    const { appState, dispatchAppState } = React.useContext(Store)
-    const setModal = appState.setModal;
-    const isModalOpen = appState.isModalOpen
-    const openModal = (name: string) => {
-        dispatchAppState({ type: "OPEN_MODAL", payload: name });
-    }
-    const closeModal = () => {
-      dispatchAppState({ type: "CLOSE_MODAL" });
-    };
-
-    const props = {
-        classes,
-        setModal,
-        isModalOpen,
-        openModal,
-        closeModal,
-    };
-    type Props = typeof props
-
-
-    const ModalPresenter = ({
-        classes,
-        setModal,
-        isModalOpen,
-        openModal,
-        closeModal,
-    }: Props) => {
         // ModalContentは内容モーダルウィンドウの中身の設定
         let ModalContent = () => <></>;
         // modalStyleにモーダルのサイズやoverflowなどのプロパティを設定する。
@@ -81,7 +76,7 @@ export const Modal = () => {
             padding: 0,
         };
 
-        switch (setModal) {
+        switch (props.setModal) {
           case "content_modal":
             modalStyle = size90;
             ModalContent = () => <ContentModal />;
@@ -120,7 +115,7 @@ export const Modal = () => {
             break;
 
           default:
-            console.log("エラーだよ、Modal→ '" + setModal + "'");
+            console.log("エラーだよ、Modal→ '" + props.setModal + "'");
         }
 
         // modalStyleの指定がなければデフォルト値をあてる
@@ -138,22 +133,23 @@ export const Modal = () => {
         })(Dialog);
 
         return (
-            <StyledDialog
-                open={isModalOpen}
-                TransitionComponent={Transition}
-                onClose={closeModal}
-                maxWidth="xl"
-            >
-                <CloseButton onClick={closeModal} />
-                <DialogContent className={classes.dialogContent}>
-                    <ModalContent />
-                </DialogContent>
-            </StyledDialog>
+          <StyledDialog
+            open={props.isModalOpen}
+            TransitionComponent={Transition}
+            onClose={props.closeModal}
+            maxWidth="xl"
+          >
+            <CloseButton onClick={props.closeModal} />
+            <DialogContent className={classes.dialogContent}>
+              <ModalContent />
+            </DialogContent>
+          </StyledDialog>
         );
-    };
+    }
 
 
+export const Modal = () => {
+  const props = useModalProps()
 
-    return ModalPresenter(props);
-
+  return <ModalPresenter {...props}/>
 }
