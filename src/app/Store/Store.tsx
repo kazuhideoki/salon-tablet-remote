@@ -20,14 +20,6 @@ export type T_selected_theme = string
 export type T_created_at_user = string
 export type T_updated_at_user = string
 
-const initUserInfo = {
-  user_id: 0,
-  user_name: "user",
-  shop_name: "salon",
-  user_email: "example@gmail.com",
-  created_at: "",
-  updated_at: "",
-};
 export type TUserInfo = {
   user_id: T_user_id;
   user_name: T_user_name | null;
@@ -52,7 +44,6 @@ export type T_is_sample = boolean
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
 // ※tag_idsはDBから取り出した直後、値がない場合はnullのこともある （tagIdsParseの前）
-// export type T_tag_ids = number[] | string
 export type T_tag_ids = number[]
 export type T_is_published_articles = boolean
 export type T_created_at = string 
@@ -161,20 +152,20 @@ export type DispatchLoading = React.Dispatch<LoadingAction>;
 
 
 export type ContextProps = {
-  userInfo: TUserInfo
-  dispatchUserInfo: DispatchUserInfo
+  userInfo: TUserInfo;
+  dispatchUserInfo: DispatchUserInfo;
   paginationParams: PaginationParams;
   dispatchPaginationParams: dispatchPaginationParams;
   articles: TArticles;
   dispatchArticles: DispatchArticles;
   footerItems: FooterItems;
   dispatchFooterItems: DispatchFooterItems;
-  tags: TTags
-  dispatchTags: DispatchTags
+  tags: TTags;
+  dispatchTags: DispatchTags;
   appState: AppState;
   dispatchAppState: DispatchAppState;
   loading: Loading;
-  dispatchLoading: DispatchLoading
+  dispatchLoading: DispatchLoading;
 };
 const Store = React.createContext({} as ContextProps);
 

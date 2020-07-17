@@ -19,7 +19,7 @@ export const useGetArticles = () => {
   return async (page: number, selectingTags?: number[]) => {
     const params: T_articles_get = {
       page,
-      selectingTags: selectingTags || appState.selectedArticlestags,
+      selectingTags: selectingTags,
       isSetting: isSetting,
       userId: userInfo.user_id,
     };

@@ -34,11 +34,7 @@ export const SelectTags = () => {
     appState,
   } = React.useContext(Store);
 
-  // const [selectingTags, setSelectingTags] = React.useState([] as number[])
-  const selectingTags = appState.selectedArticlestags
-  const setSelectingTags = (value: number[]) => {
-    dispatchAppState({type: "SET_SELECTED_ARTICLES_TAGS", payload: value})
-  }
+  const [selectingTags, setSelectingTags] = React.useState(appState.selectedArticlestags)
 
   const getArticles = useGetArticles()
   const { paginationParams } = React.useContext(Store)
