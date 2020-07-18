@@ -8,6 +8,7 @@ type Props = {
   tags: TTags
 }
 
+// 各記事で選択されているタグを表示
 export const SelectedTags:React.FC<Props> = (props) => {
 
   return (
@@ -16,6 +17,9 @@ export const SelectedTags:React.FC<Props> = (props) => {
         const targetTag = props.tags.filter((tagsValue) => {
           return tagId === tagsValue.tag_id;
         });
+        if (!targetTag.length) {
+          return null
+        }
         return <Chip label={targetTag[0].tag_name} size="small" />;
       })}
     </div>
