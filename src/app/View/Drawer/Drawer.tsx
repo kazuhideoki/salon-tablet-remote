@@ -251,7 +251,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           <ListItemIcon>
             <TagsButton />
           </ListItemIcon>
-          <ListItemText primary="タグ管理" secondary="製作中"/>
+          <ListItemText primary="タグ管理"/>
         </ListItem>
         <ListItem
           button

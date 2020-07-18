@@ -17,8 +17,8 @@ export const tagIdsParse = (data: any) => {
       value.tag_ids = intArray;
       console.log("value.tag_idsは " + JSON.stringify(value.tag_ids) + " typeは " + typeof value.tag_ids);
   
-      console.log(
-        "valueは " + JSON.stringify(value));
+      // console.log(
+      //   "valueは " + JSON.stringify(value));
     } else {
       value.tag_ids = []
       console.log("NULLのときのvalue.tag_idsは " + JSON.stringify(value.tag_ids));

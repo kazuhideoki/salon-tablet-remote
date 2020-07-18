@@ -6,6 +6,7 @@ import {
 import { themeMinimal } from "./themes/themeMinimal";
 import { TUserInfo, Store } from "./Store";
 import { nonTheme } from "./themes/nonTheme";
+import { commonTheme } from "./themes/commonTheme";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -68,11 +69,14 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
     const { userInfo } = React.useContext(Store)
     const { selected_theme } = userInfo
 
-    let theme // 型付ける
+
+
+    let theme // テーマ付ける
     // user_infoのselected_themeをもとにテーマを適応
     switch (selected_theme) {
       case "nonTheme":
-        theme = nonTheme;
+        theme = nonTheme
+        // theme = { ...commonTheme, ...nonTheme}
         break;
       case "minimal":
         theme = themeMinimal;
@@ -81,6 +85,9 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
       default:
         break;
     } 
+
+    console.log(JSON.stringify(theme));
+    
 
     return (
       // これでmaterial uiのthemeオブジェクトを下へ送る

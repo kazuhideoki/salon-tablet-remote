@@ -85,14 +85,7 @@ export const ManageTags = () => {
         タグ管理
       </Typography>
       <p>
-        {isEditting ? (
-          <>
-            {edittingTagName + "を編集中"}
-            <Button onClick={() => handleOnCreateNew()}>新規作成</Button>
-          </>
-        ) : (
-          "新規作成"
-        )}
+        {isEditting ? `タグ"${edittingTagName}"を編集中` :  "新規作成" }
       </p>
       <TextField
         name="createTag"
@@ -100,6 +93,12 @@ export const ManageTags = () => {
         id="create_tag"
         value={tagNameField}
         onChange={(e) => setTagNameField(e.target.value)}
+        onKeyPress={e => {
+          if (e.key == 'Enter') {
+            e.preventDefault()
+            handleOnClick()
+          }
+        }}
       />
 
       <CharCounter charCount={tagNameField.length} limitCount={20} />
