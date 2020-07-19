@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { Grid, CircularProgress, makeStyles, createStyles, Theme, useMediaQuery } from "@material-ui/core";
-import { Modal } from "./Modal";
+import { Modal } from "./Modal/Modal";
 import { PMain } from "./Main/PMain";
 import { Footer } from "./Footer/Footer";
 import { Store } from "../Store/Store";
@@ -15,6 +15,7 @@ import { Header } from "./Header";
 import { AppMobile } from "./mobile/AppMobile";
 import { server } from "../../config";
 import { IndexProps } from "../../pages";
+import { ModalContext, ModalContextProvider } from "./Modal/ModalContext";
 
 // 3段のコンテナの整形に関してのみ記述, 
 // 枠の設定、header,footerの最大値の設定
@@ -193,7 +194,9 @@ export const App = (props: IndexProps) => {
       <ThemeProvider {...props.data.session}>
         <EditorContextProvider {...props.data.session}>
           <AppView />
-          <Modal />
+          <ModalContextProvider>
+            <Modal />
+          </ModalContextProvider>
         </EditorContextProvider>
       </ThemeProvider>
     </StoreContextProvider>

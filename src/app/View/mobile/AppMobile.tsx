@@ -4,7 +4,7 @@ import { FooterMobile, useFooterMobileProps } from './FooterMobile'
 import { SettingMobile } from "./SettingMobile";
 import { TabMobile } from './TabMobile'
 import { PaginationMobile } from './PaginationMobile';
-import { Modal } from '../Modal';
+import { Modal } from '../Modal/Modal';
 import { makeStyles, createStyles, Theme, Button, CircularProgress } from "@material-ui/core";
 import { HomeButton } from '../Footer/Pagination/HomeButton';
 import { Store } from '../../Store/Store';

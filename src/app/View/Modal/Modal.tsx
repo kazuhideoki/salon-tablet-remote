@@ -1,29 +1,31 @@
 import React from "react";
-import { Store } from "../Store/Store";
-import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles } from "@material-ui/core";
+import { Store } from "../../Store/Store";
+import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles, Paper, useTheme } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
-import { CloseButton } from "./viewComponents/buttons/CloseButton";
+import { CloseButton } from "../viewComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
-const ContentModal = dynamic(() => import("./Main/ContentModal"), {
+const ContentModal = dynamic(() => import("../Main/ContentModal"), {
   ssr: false,
 });
-import ArticleEditor from "./Drawer/ArticleEditor/ArticleEditor";
-import FooterItemEditor from "./Drawer/ItemEditor/FooterItemEditor";
-import { FeedbackForm } from "./Drawer/FeedbackForm";
-import { SettingTheme } from "./Drawer/SettingTheme";
-import { AllTags } from "./Main/AllTags";
-import { SelectTags } from "./Main/SelectTags";
-import { ManageTags } from "./Drawer/ManageTags";
-import { SettingUserInfo } from "./Drawer/Account/SettingUserInfo";
-import { DeleteAccountForm } from "./Drawer/Account/DeleteAccountForm";
+import ArticleEditor from "../Drawer/ArticleEditor/ArticleEditor";
+import FooterItemEditor from "../Drawer/ItemEditor/FooterItemEditor";
+import { FeedbackForm } from "../Drawer/FeedbackForm";
+import { SettingTheme } from "../Drawer/SettingTheme";
+import { AllTags } from "../Main/AllTags";
+import { SelectTags } from "../Main/SelectTags";
+import { ManageTags } from "../Drawer/ManageTags";
+import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
+import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
+import { ModalContext } from "./ModalContext";
 
-const Transition = React.memo(React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
+const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
     return <Slide direction="up" ref={ref} {...props} />;
-}));
+});
 
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
+  const { skipTransiton } = React.useContext(ModalContext)
   const setModal = appState.setModal;
   const isModalOpen = appState.isModalOpen;
   const openModal = (name: string) => {
@@ -33,11 +35,16 @@ const useModalProps = () => {
     dispatchAppState({ type: "CLOSE_MODAL" });
   };
 
+  const theme = useTheme()
+  const duration = theme.transitions.duration
+
   return {
+    skipTransiton,
     setModal,
     isModalOpen,
     openModal,
     closeModal,
+    duration,
   };
 };
 
@@ -56,7 +63,8 @@ export const ModalPresenter:React.FC<Props> = (props) => {
 
         // ModalContentは内容モーダルウィンドウの中身の設定
         let ModalContent = () => <></>;
-        // modalStyleにモーダルのサイズやoverflowなどのプロパティを設定する。
+
+        // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。
         let modalStyle = null;
         const size70 = {
           width: "70vw",
@@ -128,14 +136,32 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         paperStyle.maxHeight = "100%";
         paperStyle.margin = 0;
 
+        // 中のcssを変えないといけなかったのでwithStylesで
         const StyledDialog = withStyles({
             paper: paperStyle,
         })(Dialog);
+        const StyledPaper = withStyles({
+            root: paperStyle,
+        })(Paper);
+
+        // storeの値が変化したときに、transitionを起こさせたくないとき。getTagsなど
+        // if (!props.skipTransiton) {
+        //   return (
+        //     <StyledPaper style={{zIndex: 1300}}>
+        //       <CloseButton />
+        //       <DialogContent className={classes.dialogContent}>
+        //         <ModalContent />
+        //       </DialogContent>
+        //     </StyledPaper>
+        //   )
+        // }
 
         return (
           <StyledDialog
             open={props.isModalOpen}
             TransitionComponent={Transition}
+            // 再レンダーのときtransitonアニメーションさせたくないときは、値を0に
+            transitionDuration={props.skipTransiton ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
             onClose={props.closeModal}
             maxWidth="xl"
           >
@@ -148,8 +174,8 @@ export const ModalPresenter:React.FC<Props> = (props) => {
     }
 
 
-export const Modal = () => {
+export const Modal = React.memo(() => {
   const props = useModalProps()
 
   return <ModalPresenter {...props}/>
-}
+})

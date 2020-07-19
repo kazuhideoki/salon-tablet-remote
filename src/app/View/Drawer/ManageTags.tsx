@@ -14,6 +14,7 @@ import { useUpdateTag } from '../../ActionCreator/tags/useUpdateTag'
 import { Store } from '../../Store/Store'
 import { useDeleteTag } from '../../ActionCreator/tags/useDeleteTag'
 import { CharCounter } from "../viewComponents/CharCounter";
+import { ModalContext } from '../Modal/ModalContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ManageTags = () => {
   const classes = useStyles()
   const {tags} = React.useContext(Store)
+  const { setSkipTransiton } = React.useContext(ModalContext) 
   const [tagNameField, setTagNameField] = React.useState('')
   const [isEditting, setIsEditting] = React.useState(false)
   const [edittingTagId, setEditingTagId] = React.useState(0)
@@ -52,6 +54,7 @@ export const ManageTags = () => {
     if (isEditting) {
       updateTag({edittingTagId, tagName: tagNameField})
     } else {
+      setSkipTransiton(false)
       createTag(tagNameField)
     }
   }

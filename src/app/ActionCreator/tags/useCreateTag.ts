@@ -15,7 +15,6 @@ export const useCreateTag = () => {
       tag_name: tagName,
     };
     console.log("useCreateTagのparamsは" + JSON.stringify(params));
-    
 
     console.log(JSON.stringify(params));
 
@@ -25,7 +24,7 @@ export const useCreateTag = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({params}),
+        body: JSON.stringify({ params }),
       }
     );
     const data = await res.json();
@@ -33,7 +32,7 @@ export const useCreateTag = () => {
     if (data.err === true) {
       alert("タグを作成できませんでした");
     } else {
-      getTags()
+      getTags();
     }
   };
 };

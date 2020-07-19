@@ -86,7 +86,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
         break;
     } 
 
-    console.log(JSON.stringify(theme));
+    // console.log(JSON.stringify(theme));
     
 
     return (
