@@ -13,6 +13,7 @@ import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { yellow } from "@material-ui/core/colors";
+import { useCalcFooterPadding } from "./useCalcFooterPadding";
 
 export const useFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
@@ -51,6 +52,9 @@ export const useFooterProps = () => {
 
   const isMobile = useMediaQuery("(max-width:480px)");
 
+  // footerの左右の余白を計算。space-betweenの時用, GridやIconButtonのpaddingにも依存している
+  const footerPadding = useCalcFooterPadding(appState.isDrawerOpen, appState.isSetting);
+
   return {
     appState,
     openModal,
@@ -59,6 +63,7 @@ export const useFooterProps = () => {
     handleOnUpDateFooterIcon,
     handleOnDeleteFooterItem,
     isMobile,
+    footerPadding,
   };
 };
 
@@ -75,6 +80,8 @@ const useStyles = makeStyles((theme) =>
     GridContainer: {
       overflowY: "hidden",
       overflowX: "scroll",
+      // paddingLeft: useCalcFooterPadding(), 
+      // paddingRight: useCalcFooterPadding(), 
     },
     itemIsDraft: {
       height: "100%",
@@ -189,13 +196,22 @@ export const FooterPresenter:React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       {props.children}
-      <Grid container
-      justify={props.footerItems.length > 5 || props.isMobile ? "space-between" : "space-evenly" }
-      wrap='nowrap' spacing={2} className={classes.GridContainer}>
-        {(props.footerItems.length)? displayFooterItems : noItems}       
-      </Grid>            
+      <Grid
+        container
+        // justify={props.footerItems.length > 5 || props.isMobile ? "space-between" : "space-evenly" }
+        justify="space-between"
+        wrap="nowrap"
+        spacing={2}
+        className={classes.GridContainer}
+        style={{
+          paddingLeft: props.footerPadding,
+          paddingRight: props.footerPadding,
+        }}
+      >
+        {props.footerItems.length ? displayFooterItems : noItems}
+      </Grid>
     </div>
-  )
+  );
 
 };
 

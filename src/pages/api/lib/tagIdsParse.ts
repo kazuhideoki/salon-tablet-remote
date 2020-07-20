@@ -21,7 +21,6 @@ export const tagIdsParse = (data: any) => {
       //   "valueは " + JSON.stringify(value));
     } else {
       value.tag_ids = []
-      console.log("NULLのときのvalue.tag_idsは " + JSON.stringify(value.tag_ids));
     }
     
     return value

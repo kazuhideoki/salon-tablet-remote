@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { checkOrders } from "../lib/checkOrders";
 import { FooterItems } from "../../../app/Store/Store";
 import { correctOrders } from "../lib/correctOrders";
+import { changeToBooleanFromNumber } from "../lib/changeToBooleanFromNumber";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -23,7 +24,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       correctOrders(data)
     }
 
+    // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
+    const correctedData = changeToBooleanFromNumber(data)
+
     // console.log("/footer_items/get/は " + JSON.stringify(data));
+
 
     return res.status(200).json({
       rawData: data,
