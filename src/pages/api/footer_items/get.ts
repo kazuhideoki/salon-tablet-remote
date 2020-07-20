@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 
     return res.status(200).json({
-      rawData: data,
+      rawData: correctedData,
     });
   } catch (err) {
     console.log("/footer_items/get/のエラーは " + JSON.stringify(err));
