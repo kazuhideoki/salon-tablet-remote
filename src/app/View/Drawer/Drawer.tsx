@@ -72,6 +72,7 @@ export const useDrawerProps = () => {
 
   const handleOpenTagsManage = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_tags" })
+
   }
   
   const checkPassword = useCheckPassword();

@@ -18,6 +18,7 @@ import { useSubmitFeedback } from "../../ActionCreator/useSubmitFeedback";
 // import { T_submit_feedback } from "../../../pages/api/submit_feedback";
 
 const useFeedbackFormProps = () => {
+  const { dispatchAppState } = React.useContext(Store)
   const [contactFormTitle, setContactFormTitle] = React.useState('')
   const [contactFormContent, setContactFormContent] = React.useState('');
   const submitFeedback = useSubmitFeedback()
@@ -37,6 +38,7 @@ const useFeedbackFormProps = () => {
       alert('送信されました。')
       setContactFormTitle('')
       setContactFormContent('')
+      dispatchAppState({type: "CLOSE_MODAL"})
     } else {
       alert("送信に失敗しました。");
     }

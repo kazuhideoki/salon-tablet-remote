@@ -1,5 +1,4 @@
 import React from 'react'
-import { AllTags } from './AllTags'
 import { Store, T_tag_id } from '../../Store/Store';
 import {
   Chip,
@@ -22,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
     tags: {
       padding: theme.spacing(2),
     },
+    tag: {
+      margin: theme.spacing(1),
+    }
   })
 );
 
@@ -72,6 +74,7 @@ export const SelectTags = () => {
           return (
             <Chip
               key={key}
+              className={classes.tag}
               label={value.tag_name}
               color={
                 selectingTags.includes(value.tag_id) ? "primary" : undefined

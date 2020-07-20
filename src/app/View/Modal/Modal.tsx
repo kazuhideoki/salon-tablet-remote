@@ -11,12 +11,10 @@ import ArticleEditor from "../Drawer/ArticleEditor/ArticleEditor";
 import FooterItemEditor from "../Drawer/ItemEditor/FooterItemEditor";
 import { FeedbackForm } from "../Drawer/FeedbackForm";
 import { SettingTheme } from "../Drawer/SettingTheme";
-import { AllTags } from "../Main/AllTags";
 import { SelectTags } from "../Main/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
-import { ModalContext } from "./ModalContext";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -25,7 +23,6 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
 
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
-  const { skipTransiton } = React.useContext(ModalContext)
   const setModal = appState.setModal;
   const isModalOpen = appState.isModalOpen;
   const openModal = (name: string) => {
@@ -39,7 +36,9 @@ const useModalProps = () => {
   const duration = theme.transitions.duration
 
   return {
-    skipTransiton,
+    appState,
+    // skipTransiton,
+    // setSkipTransiton,
     setModal,
     isModalOpen,
     openModal,
@@ -143,25 +142,27 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         const StyledPaper = withStyles({
             root: paperStyle,
         })(Paper);
-
-        // storeの値が変化したときに、transitionを起こさせたくないとき。getTagsなど
-        // if (!props.skipTransiton) {
-        //   return (
-        //     <StyledPaper style={{zIndex: 1300}}>
-        //       <CloseButton />
-        //       <DialogContent className={classes.dialogContent}>
-        //         <ModalContent />
-        //       </DialogContent>
-        //     </StyledPaper>
-        //   )
-        // }
+        
+        // modalを閉じるまでタグなどを追加しても再レンダーのmodalのアニメーションを表示させないようにする
+        // setTimeoutで時間差でskipTransitonを変える必要あり
+        const [skipTransiton, setSkipTransiton] = React.useState(false);
+        React.useEffect(() => {
+          setTimeout(() => {
+            if (props.appState.isModalOpen) {
+              setSkipTransiton(true)
+            } else {
+              setSkipTransiton(false);
+            }
+          }, props.duration.enteringScreen);
+        },[props.appState.isModalOpen])
 
         return (
           <StyledDialog
             open={props.isModalOpen}
             TransitionComponent={Transition}
             // 再レンダーのときtransitonアニメーションさせたくないときは、値を0に
-            transitionDuration={props.skipTransiton ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
+            transitionDuration={skipTransiton ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
+            // transitionDuration={0}
             onClose={props.closeModal}
             maxWidth="xl"
           >

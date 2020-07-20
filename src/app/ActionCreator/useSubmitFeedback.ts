@@ -1,14 +1,13 @@
 import React from "react";
 import { Store } from "../Store/Store";
 import { server } from "../../config";
-// import { T_submit_feedback } from "../../pages/api/submit_feedback";
+import { T_submit_feedback } from "../../pages/api/submit_feedback";
 
 export const useSubmitFeedback = () => {
   const { userInfo } = React.useContext(Store)
 
   return async ({ contactFormTitle, contactFormContent }) => {
-    const { user_name } = userInfo
-    const params = { contactFormTitle, contactFormContent, user_name };
+    const params: T_submit_feedback = { contactFormTitle, contactFormContent, userInfo };
 
     const res = await fetch(`${server}/api/submit_feedback`,
     {

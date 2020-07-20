@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
+import { TUserInfo } from "../../app/Store/Store";
 
 const receiverEmailAddress = "infosalontablet@gmail.com";
 const senderEmailAddress = "infosalontablet@gmail.com";
@@ -19,16 +20,27 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+export type T_submit_feedback = {
+  contactFormTitle: string;
+  contactFormContent: string;
+  userInfo: TUserInfo;
+};
+
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
 
-    const { contactFormTitle, contactFormContent, user_name } = req.body;
+    const {
+      contactFormTitle,
+      contactFormContent,
+      userInfo,
+    }: T_submit_feedback = req.body;
     
     const mailOptions1 = {
       from: senderEmailAddress,
       to: receiverEmailAddress,
       subject: `【問い合わせ】:${contactFormTitle}`,
-      text: `${contactFormContent} from ${user_name}`,
+      text: `${contactFormContent} \n\n\n\n from \n\n ${JSON.stringify(userInfo)}`,
     };
 
     try {

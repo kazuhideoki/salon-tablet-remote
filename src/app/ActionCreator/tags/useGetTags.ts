@@ -1,12 +1,10 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import { ModalContext } from "../../View/Modal/ModalContext";
 
 export const useGetTags = () => {
   const { dispatchTags, dispatchAppState, userInfo } = React.useContext(
     Store
   );
-  const {setSkipTransiton} = React.useContext(ModalContext)
 
   return async () => {
     const res = await fetch(
@@ -23,6 +21,5 @@ export const useGetTags = () => {
         payload: data.rawData,
       });
     }
-    setSkipTransiton(true)
   };
 };
