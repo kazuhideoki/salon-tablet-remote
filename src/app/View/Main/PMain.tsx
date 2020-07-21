@@ -8,6 +8,7 @@ import {
   makeStyles,
   createStyles,
   Chip,
+  withStyles,
 } from "@material-ui/core";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
@@ -83,41 +84,72 @@ const useStyles = makeStyles((theme) => {
     cardActionArea: {
       width: cardWidth,
       height: "100%",
-      flexGrow: 1
+      flexGrow: 1,
     },
     card: {
       height: "100%",
     },
+    cardContent: {
+      // paddingRight: 0,
+      // paddingLeft: 0,
+      padding: 0,
+    },
+    thumbnailBox: {
+      position: "relative",
+      // marginBottom: theme.spacing(2),
+    },
+    thumbnail: {
+      // maxWidth: cardWidth * 0.8,
+      // maxHeight: cardWidth * 0.6,
+      display: "block",
+      width: "100%",
+      objectFit: "cover",
+      height: "300px",
+      marginRight: "auto",
+      marginLeft: "auto",
+    },
+    title: {
+      width: "100%",
+      bottom: 0,
+      padding: "40px 10px 0 10px",
+      position: "absolute",
+      background:
+        "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5074404761904762) 33%, rgba(255,255,255,1) 100%)",
+    },
     tagsAndDate: {
       display: "flex",
-
+      margin: `${theme.spacing(2)}px ${theme.spacing(1)}px ${theme.spacing(
+        1
+      )}px`,
     },
     tags: {
       flexGrow: 1,
     },
-    date: {
+    date: {},
 
-    },
-    thumbnail: {
-      maxWidth: cardWidth * 0.8,
-      maxHeight: cardWidth * 0.6,
-      display: "block",
-      marginRight: "auto",
-      marginLeft: "auto",
-    },
     excerpt: {
       fontSize: "1rem",
+      margin: `${theme.spacing(1)}px`,
     },
     editButtonsBox: {
       margin: "0 0 0 auto",
       zIndex: 100,
-    },   
+    },
   });
 
 })
 
 export const PMainPresenter = (props: Props) => {
   const classes = useStyles();
+
+  const StyledCardContent = withStyles({
+    root: {
+      '&:last-child': {
+        padding: 0,
+      },
+    },
+  })(CardContent)
+
 
   const displayArticles = props.articles.map((value, key: number) => {
       return (
@@ -147,12 +179,32 @@ export const PMainPresenter = (props: Props) => {
             }
           >
             <Card className={classes.card}>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  {value.title}
-                </Typography>
+              <StyledCardContent className={classes.cardContent}>
+                <div className={classes.thumbnailBox}>
+                  {value.article_img.length ? (
+                    <img
+                      className={`p-main-thumbnail ${classes.thumbnail}`}
+                      src={value.article_img}
+                    />
+                  ) : (
+                    <div
+                      className={`p-main-thumbnail ${classes.thumbnail}`}
+                    ></div>
+                  )}
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    className={classes.title}
+                  >
+                    {value.title}
+                  </Typography>
+                </div>
                 <div className={classes.tagsAndDate}>
-                  <SelectedTags className={classes.tags} article={value} tags={props.tags}/>
+                  <SelectedTags
+                    className={classes.tags}
+                    article={value}
+                    tags={props.tags}
+                  />
                   <Typography
                     gutterBottom
                     variant="subtitle1"
@@ -162,17 +214,13 @@ export const PMainPresenter = (props: Props) => {
                     {sqlToDate(value.created_at)}
                   </Typography>
                 </div>
-                <img
-                  className={`p-main-thumbnail ${classes.thumbnail}`}
-                  src={value.article_img}
-                />
                 <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                   <Typography gutterBottom variant="body1">
                     {value.article_excerpt}
                     {value.article_excerpt.length === 100 ? "..." : ""}
                   </Typography>
                 </div>
-              </CardContent>
+              </StyledCardContent>
             </Card>
           </CardActionArea>
         </Grid>
