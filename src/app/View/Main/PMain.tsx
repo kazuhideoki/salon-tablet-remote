@@ -87,6 +87,7 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1,
     },
     card: {
+      overflowY: "scroll",
       height: "100%",
     },
     cardContent: {
