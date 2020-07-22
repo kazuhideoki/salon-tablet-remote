@@ -69,7 +69,7 @@ const Privacy = () => {
         当サービスが別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。
       </p>
     </div>
-    <Link href="/privacy"><a>Privacy policy</a></Link>
+    <Link href="/"><a>ホーム画面に戻る</a></Link>
     </>
   );
 }

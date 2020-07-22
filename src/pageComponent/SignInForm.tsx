@@ -1,7 +1,6 @@
 import React from "react";
 import { server } from "../config";
 // import { signin } from "next-auth/client";
-import Link from "next/link";
 
 const { signin, getProviders } = require("next-auth/client")
 import {
@@ -145,7 +144,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         </Button>
 
         {/* プライバシーポリシーへのリンク */}
-        <Link href="/privacy"><a>Privacy policy</a></Link>
+        
       </form>
     </>
   );

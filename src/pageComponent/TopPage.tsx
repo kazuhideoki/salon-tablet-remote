@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, makeStyles, createStyles } from "@material-ui/core";
+import Link from "next/link";
 import { SignInForm } from "./SignInForm";
 import { TopPageParagraph } from "./TopPageParagraph";
 
@@ -17,8 +18,11 @@ export const TopPage: React.FC<Props> = (props) => {
   // console.log("TopPage" + JSON.stringify(props.csrfToken));
   return (
     <>
-      <TopPageParagraph/>
+      <TopPageParagraph />
       <SignInForm csrfToken={props.csrfToken} />
+      <Link href="/privacy">
+        <a>Privacy policy</a>
+      </Link>
     </>
   );
 
