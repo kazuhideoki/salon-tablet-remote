@@ -1,7 +1,9 @@
 import React from "react";
 import { server } from "../config";
 // import { signin } from "next-auth/client";
-const { signin } = require("next-auth/client")
+import Link from "next/link";
+
+const { signin, getProviders } = require("next-auth/client")
 import {
   TextField,
   Button,
@@ -41,8 +43,16 @@ const useStyles = makeStyles((theme) =>
 );
 
 
+// const facebookSignIn = async () => {
+//   // const facebookProvider = async () => {
+//   const obj = await getProviders();
+//   return `${obj.facebook.signinUrl}?callbackUrl=${obj.facebook.callbackUrl}`;
+// };
 // type Props = {csrfToken: string }
 type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string };
+
+
+// const facebookSignIn = await facebookProvider()
 
 export const SignInFormPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
@@ -91,6 +101,12 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         </Button>
       </form>
 
+      {/* <a href={facebookSignIn()}>
+        <Button variant="contained" color="primary">
+          Facebookログイン
+        </Button>
+      </a> */}
+
       <Typography
         variant="h5"
         component="h2"
@@ -127,6 +143,9 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         <Button type="submit" variant="contained" color="primary">
           サインイン
         </Button>
+
+        {/* プライバシーポリシーへのリンク */}
+        <Link href="/privacy"><a>Privacy policy</a></Link>
       </form>
     </>
   );
@@ -138,3 +157,27 @@ export const SignInForm = (props) => {
 
   return <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} />;
 };
+
+const log = {
+  "email": {
+    "id": "email",
+    "name": "Email",
+    "type": "email",
+    "signinUrl": "http://localhost:3000/api/auth/signin/email",
+    "callbackUrl": "http://localhost:3000/api/auth/callback/email"
+  },
+  "facebook": {
+    "id": "facebook",
+    "name": "Facebook",
+    "type": "oauth",
+    "signinUrl": "http://localhost:3000/api/auth/signin/facebook",
+    "callbackUrl": "http://localhost:3000/api/auth/callback/facebook"
+  },
+  "credentials": {
+    "id": "credentials",
+    "name": "Credentials",
+    "type": "credentials",
+    "signinUrl": "http://localhost:3000/api/auth/signin/credentials",
+    "callbackUrl": "http://localhost:3000/api/auth/callback/credentials"
+  }
+}
