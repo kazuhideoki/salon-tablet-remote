@@ -56,6 +56,9 @@ type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string };
 export const SignInFormPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
+  // console.log(process.env.FACEBOOK_CLIENT_ID);
+  
+
   return (
     <>
       <form
@@ -100,11 +103,13 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         </Button>
       </form>
 
-      {/* <a href={facebookSignIn()}>
+      <a
+        href={`https://www.facebook.com/v7.0/dialog/oauth?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.SITE}&state=st`}
+      >
         <Button variant="contained" color="primary">
           Facebookログイン
         </Button>
-      </a> */}
+      </a>
 
       <Typography
         variant="h5"
@@ -144,7 +149,6 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         </Button>
 
         {/* プライバシーポリシーへのリンク */}
-        
       </form>
     </>
   );

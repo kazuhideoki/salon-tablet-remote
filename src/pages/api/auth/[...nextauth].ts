@@ -6,6 +6,9 @@ import authorizeCredentials from "../lib/authorizeCredentials";
 import { server } from "../../../config";
 // これで環境変数(.envファイル)が使えるようになる
 
+console.log(process.env.FACEBOOK_CLIENT_ID);
+
+
 const options = {
   // site: process.env.SITE,
   site: server,
