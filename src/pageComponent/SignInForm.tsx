@@ -107,7 +107,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         href={`https://www.facebook.com/v7.0/dialog/oauth?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.SITE}&state=st`}
       > */}
       <a
-        href={`${process.env.SITE}/api/auth/signin/facebook&callbackUrl=${process.env.SITE}`}
+        href={`${process.env.SITE}/api/auth/signin/facebook&callbackUrl=${process.env.SITE}/`}
       >
         <Button variant="contained" color="primary">
           Facebookログイン
