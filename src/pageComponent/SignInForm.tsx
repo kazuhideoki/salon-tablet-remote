@@ -1,8 +1,7 @@
 import React from "react";
 import { server } from "../config";
-// import { signin } from "next-auth/client";
+import { signin } from "next-auth/client";
 
-const { signin, getProviders } = require("next-auth/client")
 import {
   TextField,
   Button,
@@ -38,29 +37,21 @@ const useStyles = makeStyles((theme) =>
     button: {
       marginBottom: theme.spacing(3),
     },
+    a: {
+      fontStyle: "none",
+      color: 'inherit',
+      textDecoration: "none",
+    }
   })
 );
 
-
-// const facebookSignIn = async () => {
-//   // const facebookProvider = async () => {
-//   const obj = await getProviders();
-//   return `${obj.facebook.signinUrl}?callbackUrl=${obj.facebook.callbackUrl}`;
-// };
-// type Props = {csrfToken: string }
-type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string };
-
-
-// const facebookSignIn = await facebookProvider()
+type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string, providers: any };
 
 export const SignInFormPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  // console.log(process.env.FACEBOOK_CLIENT_ID);
-  
-
   return (
-    <>
+    <div>
       <form
         method="post"
         // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 Json Web Tokenの関係か
@@ -103,17 +94,6 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         </Button>
       </form>
 
-      {/* <a
-        href={`https://www.facebook.com/v7.0/dialog/oauth?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.SITE}&state=st`}
-      > */}
-      <a
-        href={`${process.env.SITE}/api/auth/signin/facebook&callbackUrl=${process.env.SITE}/`}
-      >
-        <Button variant="contained" color="primary">
-          Facebookログイン
-        </Button>
-      </a>
-
       <Typography
         variant="h5"
         component="h2"
@@ -147,13 +127,48 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           onChange={(e) => props.setPassword(e.target.value)}
         />
         <br />
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          className={classes.button}
+          variant="contained"
+          color="primary"
+        >
           サインイン
         </Button>
-
-        {/* プライバシーポリシーへのリンク */}
       </form>
-    </>
+
+      {/* Sign in with facebook */}
+      
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={
+            //@ts-ignore
+            () => signin(props.providers.facebook.id)
+          }
+        >
+          <a
+            className={classes.a}
+            href={
+              //@ts-ignore
+              props.providers.facebook.signinUrl
+            }
+            onClick={
+              //@ts-ignore
+              (e) => e.preventDefault()
+            }
+          >
+            Sign in with{" "}
+            {
+              //@ts-ignore
+              props.providers.facebook.name
+            }
+          </a> 
+        </Button>
+      
+
+    </div>
   );
 };
 
@@ -161,7 +176,9 @@ export const SignInForm = (props) => {
   const useProps = useSignInFormProps();
   // console.log("SignInForm" + JSON.stringify(props.csrfToken));
 
-  return <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} />;
+  return (
+    <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} providers={props.providers}/>
+  );
 };
 
 const log = {

@@ -1,9 +1,9 @@
 import React from 'react';
 //@ts-ignore
-import { CharCount, TCharCount } from '../app/View/viewComponents/CharCounter';
+import { CharCounter, TCharCounter } from '../app/View/viewComponents/CharCounter';
 export default {
-  title: 'viewComponents/CharCount',
-  component: CharCount,
+  title: 'viewComponents/CharCounter',
+  component: CharCounter,
 };
 
 export const OK = () => {
@@ -14,7 +14,7 @@ export const OK = () => {
   }
 
   return (
-    <CharCount {...props}/>
+    <CharCounter {...props}/>
   )
 }
 
@@ -26,11 +26,11 @@ export const OverLimit = () => {
   };
 
   return (
-    <CharCount {...props}/>
+    <CharCounter {...props}/>
   )
 }
 export const OverLimitAlignRight = () => {
-  const props: TCharCount = {
+  const props: TCharCounter = {
     charCount: 200,
     limitCount: 100,
     align: "right",
@@ -39,7 +39,7 @@ export const OverLimitAlignRight = () => {
 
   return (
     // <div style={{margin: "0 0 0 auto" }}>
-      <CharCount {...props}/>
+      <CharCounter {...props}/>
     // </div>
   )
 }
@@ -51,6 +51,6 @@ export const OverLimitNoShowCount = () => {
   };
 
   return (
-    <CharCount {...props}/>
+    <CharCounter {...props}/>
   )
 }

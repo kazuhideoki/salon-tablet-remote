@@ -12,14 +12,14 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-type Props = { csrfToken: string };
+type Props = { csrfToken: string, providers: any };
 
 export const TopPage: React.FC<Props> = (props) => {
   // console.log("TopPage" + JSON.stringify(props.csrfToken));
   return (
     <>
       <TopPageParagraph />
-      <SignInForm csrfToken={props.csrfToken} />
+      <SignInForm csrfToken={props.csrfToken} providers={props.providers}/>
       <Link href="/privacy">
         <a>Privacy policy</a>
       </Link>

@@ -2,7 +2,7 @@ import React from "react";
 import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags } from "../app/Store/Store";
 import { App } from "../app/View/App";
 //@ts-ignore
-import { getCsrfToken, getSession } from "next-auth/client";
+import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
 //@ts-ignore
@@ -14,20 +14,21 @@ export type IndexProps = {
     articles: TArticles;
     pagination: PaginationParams;
     footerItems: FooterItems;
-    tags: TTags
+    tags: TTags;
     session?: TUserInfo;
   };
   csrfToken?: any;
-  bcrypt_password?: string
+  providers?: any
+  bcrypt_password?: string;
 };
 
 const Index = (props: IndexProps) => {
   if (!props.data.session) {
-    // console.log("Index" + JSON.stringify(props.csrfToken));
+    console.log("porvidersは" + JSON.stringify(props.providers));
 
     return (
       <>
-        <TopPage csrfToken={props.csrfToken} />
+        <TopPage csrfToken={props.csrfToken} providers={props.providers}/>
       </>
     );
 
@@ -158,6 +159,7 @@ export async function getServerSideProps(context: NextPageContext) {
           session: null,
         },
         csrfToken: token,
+        providers: await providers(context)
       },
     };
   }
