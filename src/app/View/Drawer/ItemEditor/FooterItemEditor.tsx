@@ -75,13 +75,16 @@ export const FooterItemEditor = () => {
   let mainField: JSX.Element
   if (onTap === "modal") {
     mainField = (
-      <QuillEditor
-        editorText={editorText}
-        setEditorText={setEditorText}
-        setEditorTextExcerpt={setEditorTextExcerpt}
-        charCount={charCountFooterItemContent}
-        setCharCount={setCharCountFooterItemContent}
-      />
+      <div>
+        <SelectModalSize modalSize={modalSize} setModalSize={setModalSize} />
+        <QuillEditor
+          editorText={editorText}
+          setEditorText={setEditorText}
+          setEditorTextExcerpt={setEditorTextExcerpt}
+          charCount={charCountFooterItemContent}
+          setCharCount={setCharCountFooterItemContent}
+        />
+      </div>
     );
   } else if (onTap === "link"){
     mainField = (
@@ -119,7 +122,7 @@ export const FooterItemEditor = () => {
       <br />
 
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
-      <SelectModalSize modalSize={modalSize} setModalSize={setModalSize}/>
+      {/* {onTap === 'modal' ? <SelectModalSize modalSize={modalSize} setModalSize={setModalSize}/> : null} */}
       {mainField}
 
       <SelectIcon />
