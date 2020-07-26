@@ -81,6 +81,7 @@ export type T_item_content = string | null
 export type T_item_excerpt = string | null;
 export type T_link_url = string | null
 export type T_app_link_url = string | null;
+export type T_modal_size = number
 export type T_order = number;
 
 export type FooterItemWithoutId = {
@@ -95,6 +96,7 @@ export type FooterItemWithoutId = {
   item_excerpt: T_item_excerpt | null;
   link_url: T_link_url | null;
   app_link_url: T_app_link_url | null;
+  modal_size: T_modal_size
   order: T_order;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
   is_sample_data: T_is_sample;

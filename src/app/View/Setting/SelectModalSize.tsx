@@ -1,0 +1,36 @@
+import React from "react";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) => createStyles({}));
+
+export function SelectModalSize({ modalSize, setModalSize }) {
+  const classes = useStyles();
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setModalSize((event.target as HTMLInputElement).value);
+  };
+
+  return (
+    <FormControl component="fieldset">
+      <FormLabel component="legend">ウィンドウサイズ選択</FormLabel>
+      <RadioGroup
+        row
+        aria-label="modalSize"
+        name="modalSize"
+        value={modalSize}
+        onChange={handleChange}
+      >
+        {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}
+        <FormControlLabel value="100" control={<Radio />} label="全画面" />
+        <FormControlLabel value="90" control={<Radio />} label="大" />
+        <FormControlLabel value="70" control={<Radio />} label="中" />
+        <FormControlLabel value="50" control={<Radio />} label="小" />
+      </RadioGroup>
+    </FormControl>
+  );
+}

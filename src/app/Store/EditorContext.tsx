@@ -38,6 +38,8 @@ type ContextProps = {
   setLinkUrl: React.Dispatch<React.SetStateAction<string>>,
   appLinkUrl: string
   setAppLinkUrl: React.Dispatch<React.SetStateAction<string>>,
+  modalSize: string
+  setModalSize: React.Dispatch<React.SetStateAction<string>>,
   edittingFooterItemParams: FooterItem
   setEdittingFooterItemParams: React.Dispatch<React.SetStateAction<FooterItem>>
 
@@ -80,6 +82,8 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
   const [onTap, setOnTap] = React.useState("modal");
   const [linkUrl, setLinkUrl] = React.useState("");
   const [appLinkUrl, setAppLinkUrl] = React.useState("");
+  // ↓ラジオボタンはstring型じゃないとうまく作動しない？
+  const [modalSize, setModalSize] = React.useState("90")
   const [
     edittingFooterItemParams,
     setEdittingFooterItemParams,
@@ -119,6 +123,8 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
     setLinkUrl,
     appLinkUrl,
     setAppLinkUrl,
+    modalSize,
+    setModalSize,
     edittingFooterItemParams,
     setEdittingFooterItemParams,
 
