@@ -16,7 +16,7 @@ import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
 import { EditorContext } from "../../Store/EditorContext";
-import { useModalSize, medium, large, smallLandscape, smallPortrait } from "../viewComponents/useModalSize";
+import { useModalSize, large, medium } from "../viewComponents/useModalSize";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -26,8 +26,7 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
   const { modalSize } = React.useContext(EditorContext)
-  const setModal = appState.setModal;
-  const isModalOpen = appState.isModalOpen;
+  const { setModal, isModalOpen, currentModalContent} = appState;
   const openModal = (name: string) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: name });
   };
@@ -44,6 +43,7 @@ const useModalProps = () => {
     setModal,
     isModalOpen,
     openModal,
+    currentModalContent,
     closeModal,
     duration,
   };
@@ -73,6 +73,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         
         switch (props.setModal) {
           case "content_modal":
+            modalStyle = useModalSize(props.currentModalContent.modalSize)
             ModalContent = () => <ContentModal />;
             break;
           case "select_tags":
@@ -107,7 +108,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         }
 
         // modalStyleの指定がなければ'large'をあてる
-        let paperStyle: any = modalStyle || large
+        let paperStyle: any =  modalStyle || large
 
         // 中のcssを変えないといけなかったのでwithStylesで
         const StyledDialog = withStyles({

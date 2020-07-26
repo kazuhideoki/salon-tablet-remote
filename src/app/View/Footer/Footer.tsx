@@ -18,11 +18,11 @@ export const useFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにModalで分岐してどのモーダルウィンドウを表示させるか決める
 
-  const openModal = (item_content: string) => {
+  const openModal = (item_content: string, modalSize: string) => {
     // footerItemは記事タイトルがないので、titleはnull
     dispatchAppState({
       type: "SET_MODAL_CONTENT",
-      payload: { title: null, content: item_content },
+      payload: { title: null, content: item_content, modalSize: modalSize},
     });
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };
@@ -157,7 +157,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
                   )[0]
                 : MoodBad
             }
-            onClick={() => props.openModal(value.item_content)}
+            onClick={() => props.openModal(value.item_content, value.modal_size)}
             // fontSize="large"
             text={value.icon_name}
           />

@@ -11,7 +11,7 @@ export type AppStateAction =
   // footerItemの場合はtitleはnullが入る
   | {
       type: "SET_MODAL_CONTENT";
-      payload: { title: string | null; content: string };
+      payload: { title: string | null; content: string, modalSize?: string };
     }
   | { type: "SET_SELECTED_ARTICLES_TAGS", payload: number[]}
   | { type: "CLOSE_MODAL" }
@@ -61,6 +61,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           currentModalContent: {
             title: action.payload.title || null,
             contnet: action.payload.content,
+            modalSize: action.payload.modalSize || 'large'
           },
         };
         break;

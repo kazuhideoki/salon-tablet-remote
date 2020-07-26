@@ -51,7 +51,7 @@ export const small = process.browser ? {
   margin: 0,
 } : null
 
-export const useModalSize  = (modalSize) => {
+export const useModalSize  = (modalSize: string) => {
 
 
   switch (modalSize) {
@@ -61,10 +61,6 @@ export const useModalSize  = (modalSize) => {
       return large;
     case "medium":
       return medium;
-    // case "small":
-    //   return window.innerHeight > window.innerWidth
-    //     ? smallPortrait
-    //     : smallLandscape;
     case "small":
       return small
   }

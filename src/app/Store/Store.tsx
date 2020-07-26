@@ -130,6 +130,7 @@ const initAppState = {
   currentModalContent: {
     title: "",
     contnet: "",
+    modalSize: 'large',
   },
   selectedArticlesTags: [] as number[],
   isModalOpen: false,
