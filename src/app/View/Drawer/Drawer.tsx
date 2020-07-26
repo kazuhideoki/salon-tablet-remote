@@ -21,7 +21,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
-import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper } from "@material-ui/icons";
+import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 //@ts-ignore
 import { signin, signout, useSession, getSession } from "next-auth/client";
@@ -256,6 +256,20 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <TagsButton />
           </ListItemIcon>
           <ListItemText primary="タグ管理"/>
+        </ListItem>
+        <ListItem
+          button
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_MODAL",
+              payload: "manage_instagram",
+            })
+          }
+        >
+          <ListItemIcon>
+            <Instagram />
+          </ListItemIcon>
+          <ListItemText primary="Instagram 連携" secondary="製作中" />
         </ListItem>
         <ListItem
           button
