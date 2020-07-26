@@ -18,6 +18,7 @@ export const useGetFooterItem = () => {
     setEditorTextExcerpt,
     setOnTap,
     setLinkUrl,
+    setModalSize,
     setAppLinkUrl,
     setIsEdittingContent,
     setEdittingFooterItemParams,
@@ -44,6 +45,7 @@ export const useGetFooterItem = () => {
       setEditorTextExcerpt(footerItem.item_excerpt);
       setOnTap(footerItem.on_tap);
       setLinkUrl(footerItem.link_url);
+      setModalSize(footerItem.modal_size)
       setAppLinkUrl(footerItem.app_link_url);
       dispatchSelectedIcon({
         type: "SET_ICON",

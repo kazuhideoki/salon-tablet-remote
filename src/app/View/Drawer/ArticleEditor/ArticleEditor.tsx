@@ -73,7 +73,7 @@ const ArticleEditor = () => {
         onChange={(e) => handleOnChangeTitleText(e)}
         className={classes.title}
         style={{ marginBottom: "20px" }}
-        autoFocus={isEdittingContent ? false : true}
+        // autoFocus={isEdittingContent ? false : true}
         // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
       />
 

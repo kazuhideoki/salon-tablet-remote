@@ -83,7 +83,7 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
   const [linkUrl, setLinkUrl] = React.useState("");
   const [appLinkUrl, setAppLinkUrl] = React.useState("");
   // ↓ラジオボタンはstring型じゃないとうまく作動しない？
-  const [modalSize, setModalSize] = React.useState("90")
+  const [modalSize, setModalSize] = React.useState("large")
   const [
     edittingFooterItemParams,
     setEdittingFooterItemParams,

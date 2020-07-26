@@ -12,6 +12,7 @@ import {
   T_order,
   T_item_excerpt,
   T_app_link_url,
+  T_modal_size,
 } from "../../Store/Store";
 import { useGetFooterItems } from "./useGetFooterItems";
 
@@ -24,6 +25,7 @@ export type T_footer_items_update_item = {
   item_excerpt: T_item_excerpt;
   link_url: T_link_url;
   app_link_url: T_app_link_url;
+  modal_size: T_modal_size;
   order: T_order;
 };
 export type TUpdateFooterItem = {
@@ -48,6 +50,7 @@ export const useUpdateFooterItem = () => {
     editorText,
     editorTextExcerpt,
     linkUrl,
+    modalSize,
     appLinkUrl,
   } = React.useContext(EditorContext);
 
@@ -64,6 +67,7 @@ export const useUpdateFooterItem = () => {
         item_excerpt: editorTextExcerpt,
         link_url: linkUrl,
         app_link_url: appLinkUrl,
+        modal_size: modalSize,
         order: edittingFooterItemParams.order,
       },
     };

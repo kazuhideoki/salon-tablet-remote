@@ -11,6 +11,7 @@ import {
   T_item_excerpt,
   T_app_link_url,
   T_user_id,
+  T_modal_size,
 } from "../../Store/Store";
 import { EditorContext } from "../../Store/EditorContext";
 import { useGetFooterItems } from "./useGetFooterItems";
@@ -24,6 +25,7 @@ export type T_footer_items_create_item = {
   item_excerpt: T_item_excerpt
   link_url: T_link_url;
   app_link_url: T_app_link_url
+  modal_size: T_modal_size,
   order: T_order;
   user_id: T_user_id
 };
@@ -59,6 +61,7 @@ export const useCreateFooterItem = () => {
     editorText,
     editorTextExcerpt,
     linkUrl,
+    modalSize,
     appLinkUrl,
   } = React.useContext(EditorContext);
   const { userInfo } = React.useContext(Store)
@@ -75,6 +78,7 @@ export const useCreateFooterItem = () => {
         item_excerpt: editorTextExcerpt,
         link_url: linkUrl,
         app_link_url: appLinkUrl,
+        modal_size: modalSize,
         order: order,
         user_id: userInfo.user_id,
       },

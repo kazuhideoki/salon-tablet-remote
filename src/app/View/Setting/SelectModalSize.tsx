@@ -26,10 +26,10 @@ export function SelectModalSize({ modalSize, setModalSize }) {
         onChange={handleChange}
       >
         {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}
-        <FormControlLabel value="100" control={<Radio />} label="全画面" />
-        <FormControlLabel value="90" control={<Radio />} label="大" />
-        <FormControlLabel value="70" control={<Radio />} label="中" />
-        <FormControlLabel value="50" control={<Radio />} label="小" />
+        <FormControlLabel value="fullScreen" control={<Radio />} label="全画面" />
+        <FormControlLabel value="large" control={<Radio />} label="大" />
+        <FormControlLabel value="medium" control={<Radio />} label="中" />
+        <FormControlLabel value="small" control={<Radio />} label="小" />
       </RadioGroup>
     </FormControl>
   );

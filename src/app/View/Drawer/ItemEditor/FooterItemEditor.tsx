@@ -12,6 +12,7 @@ import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } 
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
 import { Store } from '../../../Store/Store';
 import { CharCounter } from "../../viewComponents/CharCounter";
+import { SelectModalSize } from '../../Setting/SelectModalSize';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,6 +47,8 @@ export const FooterItemEditor = () => {
     setLinkUrl,
     appLinkUrl,
     setAppLinkUrl,
+    modalSize,
+    setModalSize,
     isEdittingContent,
     createdAt,
     updatedAt,
@@ -110,12 +113,13 @@ export const FooterItemEditor = () => {
         onChange={(e) => handleOnChangeIconName(e)}
         className={classes.titleText}
         // style={{ marginBottom: "20px" }}
-        autoFocus={isEdittingContent ? false : true}
+        // autoFocus={isEdittingContent ? false : true}
       />
       <CharCounter charCount={titleText.length} limitCount={100} />
       <br />
 
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
+      <SelectModalSize modalSize={modalSize} setModalSize={setModalSize}/>
       {mainField}
 
       <SelectIcon />

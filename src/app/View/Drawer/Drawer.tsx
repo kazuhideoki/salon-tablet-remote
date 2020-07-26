@@ -40,6 +40,7 @@ export const useDrawerProps = () => {
     setOnTap,
     setLinkUrl,
     setAppLinkUrl,
+    setModalSize,
     setIsEdittingContent,
     dispatchSelectedIcon,
     setSelectedTags,
@@ -64,7 +65,9 @@ export const useDrawerProps = () => {
     setEditorText("");
     setOnTap("modal");
     setLinkUrl("");
+    setModalSize('large')
     setAppLinkUrl("");
+    
     dispatchSelectedIcon({ type: "SET_ICON", payload: null });
     setCreatedAt(null)
     setUpdatedAt(null)
