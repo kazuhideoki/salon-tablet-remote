@@ -21,7 +21,7 @@ export const useGetFooterItem = () => {
     setModalSize,
     setAppLinkUrl,
     setIsEdittingContent,
-    setEdittingFooterItemParams,
+    // setEdittingFooterItemParams,
     dispatchSelectedIcon,
     setCreatedAt,
     setUpdatedAt,
@@ -39,7 +39,7 @@ export const useGetFooterItem = () => {
       alert("アイテムを取得できませんでした");
     } else {
       setIsEdittingContent(true);
-      setEdittingFooterItemParams(footerItem);
+      // setEdittingFooterItemParams(footerItem);
       setTitleText(footerItem.icon_name);
       setEditorText(footerItem.item_content);
       setEditorTextExcerpt(footerItem.item_excerpt);

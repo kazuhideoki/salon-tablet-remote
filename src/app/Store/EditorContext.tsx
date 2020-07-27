@@ -40,8 +40,8 @@ type ContextProps = {
   setAppLinkUrl: React.Dispatch<React.SetStateAction<string>>,
   modalSize: string
   setModalSize: React.Dispatch<React.SetStateAction<string>>,
-  edittingFooterItemParams: FooterItem
-  setEdittingFooterItemParams: React.Dispatch<React.SetStateAction<FooterItem>>
+  // edittingFooterItemParams: FooterItem
+  // setEdittingFooterItemParams: React.Dispatch<React.SetStateAction<FooterItem>>
 
   // SettingUserInfoのTextField
   name: string
@@ -84,10 +84,10 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
   const [appLinkUrl, setAppLinkUrl] = React.useState("");
   // ↓ラジオボタンはstring型じゃないとうまく作動しない？
   const [modalSize, setModalSize] = React.useState("large")
-  const [
-    edittingFooterItemParams,
-    setEdittingFooterItemParams,
-  ] = React.useState({} as FooterItem);
+  // const [
+  //   edittingFooterItemParams,
+  //   setEdittingFooterItemParams,
+  // ] = React.useState({} as FooterItem);
 
   // SettingUserInfoのTextField
   const [name, setName] = React.useState(props.user_name);
@@ -125,8 +125,8 @@ const EditorContextProvider: React.FC<TUserInfo> = (props) => {
     setAppLinkUrl,
     modalSize,
     setModalSize,
-    edittingFooterItemParams,
-    setEdittingFooterItemParams,
+    // edittingFooterItemParams,
+    // setEdittingFooterItemParams,
 
     name,
     setName,

@@ -25,8 +25,12 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
 
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
-  const { modalSize } = React.useContext(EditorContext)
-  const { setModal, isModalOpen, currentModalContent} = appState;
+  // const { modalSize } = React.useContext(EditorContext)
+  // const edittingParams = appState.edittingPrams
+
+  const { setModal, isModalOpen, currentModalContent, edittingPrams} = appState;
+  // modalSizeは選択時に即モーダルウィンドウのサイズを変えるのでここで値を持つ
+  const [modalSize, setModalSize] = React.useState(edittingPrams.isEditting ? edittingPrams.footerItem.modal_size : "large")
   const openModal = (name: string) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: name });
   };
@@ -40,6 +44,7 @@ const useModalProps = () => {
   return {
     appState,
     modalSize,
+    setModalSize,
     setModal,
     isModalOpen,
     openModal,
@@ -85,7 +90,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             break;
           case "edit_footer_item":
             modalStyle = useModalSize(props.modalSize)
-            ModalContent = () => <FooterItemEditor />;
+            ModalContent = () => <FooterItemEditor modalSize={props.modalSize} setModalSize={props.setModalSize}/>;
             break;
           case "edit_tags":
             ModalContent = () => <ManageTags />;

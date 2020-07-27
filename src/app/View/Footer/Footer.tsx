@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store, T_footer_item_id, T_order } from "../../Store/Store";
+import { Store, T_footer_item_id, T_order, FooterItem } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
@@ -32,14 +32,19 @@ export const useFooterProps = () => {
   const deleteFooterItem = useDeleteFooterItem();
 
   const handleOnUpDateFooterIcon = (
-    footer_item_id: T_footer_item_id
+    footerItem: FooterItem
   ) => {
+    // setIsEdittingContent(true);
+    // getFooterItem(footer_item_id);
+
+    dispatchAppState({
+      type: "SET_EDITTING_PARMS_FOOTERITEM",
+      payload: footerItem,
+    });
     dispatchAppState({
       type: "OPEN_MODAL",
       payload: "edit_footer_item",
     });
-    setIsEdittingContent(true);
-    getFooterItem(footer_item_id);
   };
   const handleOnDeleteFooterItem = (
     footer_item_id: T_footer_item_id,
@@ -130,7 +135,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
             />
             <UpdateButton
               onClick={() =>
-                props.handleOnUpDateFooterIcon(value.footer_item_id)
+                props.handleOnUpDateFooterIcon(value)
               }
             />
             <DeleteButton

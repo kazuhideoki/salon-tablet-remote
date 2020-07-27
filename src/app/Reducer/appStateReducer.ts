@@ -1,4 +1,4 @@
-import { AppState } from '../Store/Store'
+import { AppState, TArticle, FooterItem } from '../Store/Store'
 import { reducerLogger } from "./reducerLogger";
 import { TrendingUpOutlined } from '@material-ui/icons';
 
@@ -13,6 +13,8 @@ export type AppStateAction =
       type: "SET_MODAL_CONTENT";
       payload: { title: string | null; content: string, modalSize?: string };
     }
+  | { type: "SET_EDITTING_PARMS_ARTICLE", payload: TArticle}
+  | { type: "SET_EDITTING_PARMS_FOOTERITEM", payload: FooterItem}
   | { type: "SET_SELECTED_ARTICLES_TAGS", payload: number[]}
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_ARTICLE_MODAL" }
@@ -61,10 +63,31 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           currentModalContent: {
             title: action.payload.title || null,
             contnet: action.payload.content,
-            modalSize: action.payload.modalSize || 'large'
+            modalSize: action.payload.modalSize || "large",
           },
         };
         break;
+      case "SET_EDITTING_PARMS_ARTICLE":
+        newState = {
+          ...state,
+          edittingPrams: {
+            isEditting: true,
+            article: action.payload,
+            footerItem: state.edittingPrams.footerItem,
+          },
+        };
+        break;
+      case "SET_EDITTING_PARMS_FOOTERITEM":
+        newState = {
+          ...state,
+          edittingPrams: {
+            isEditting: true,
+            article: state.edittingPrams.article,
+            footerItem: action.payload
+          },
+        };
+        break;
+
       case "SET_SELECTED_ARTICLES_TAGS":
         newState = {
           ...state,

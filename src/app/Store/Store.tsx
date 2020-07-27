@@ -132,6 +132,12 @@ const initAppState = {
     contnet: "",
     modalSize: 'large',
   },
+
+  edittingPrams: {
+    isEditting: false,
+    article: {} as TArticle,
+    footerItem: {} as FooterItem
+  },
   selectedArticlesTags: [] as number[],
   isModalOpen: false,
   isArticleModalOpen: false,
