@@ -36,33 +36,16 @@ export type TUpdateFooterItem = {
 }
 
 export const useUpdateFooterItem = () => {
-  const { dispatchAppState } = React.useContext(Store);
-  const {
-    setTitleText,
-    setEditorText,
-    setIsEdittingContent,
-  } = React.useContext(EditorContext);
+  const { dispatchAppState, appState } = React.useContext(Store);
   const getFooterItems = useGetFooterItems();
-
-  // const {
-  //   edittingFooterItemParams,
-  //   titleText,
-  //   selectedIcon,
-  //   onTap,
-  //   editorText,
-  //   editorTextExcerpt,
-  //   linkUrl,
-  //   modalSize,
-  //   appLinkUrl,
-  // } = React.useContext(EditorContext);
 
   return async (
     isPublishing: boolean,
     param: TCreateFooterItem,
-    edittingFooterItemParams: FooterItem 
+    // edittingFooterItemParams: FooterItem 
   ) => {
     const params: TUpdateFooterItem = {
-      id: edittingFooterItemParams.footer_item_id,
+      id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
         is_published: isPublishing,
         icon_name: param.titleText,
@@ -74,7 +57,7 @@ export const useUpdateFooterItem = () => {
         link_url: param.linkUrl,
         app_link_url: param.appLinkUrl,
         modal_size: param.modalSize,
-        order: edittingFooterItemParams.order,
+        order: appState.edittingPrams.footerItem.order,
       },
     };
     const res = await fetch(
@@ -91,7 +74,7 @@ export const useUpdateFooterItem = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      setIsEdittingContent(false);
+      // setIsEdittingContent(false);
       // setTitleText("");
       // setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });

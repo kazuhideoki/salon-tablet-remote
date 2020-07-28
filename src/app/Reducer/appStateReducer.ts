@@ -1,4 +1,4 @@
-import { AppState, TArticle, FooterItem } from '../Store/Store'
+import { AppState, TArticle, FooterItem, T_modal_size } from '../Store/Store'
 import { reducerLogger } from "./reducerLogger";
 import { TrendingUpOutlined } from '@material-ui/icons';
 
@@ -11,11 +11,17 @@ export type AppStateAction =
   // footerItemの場合はtitleはnullが入る
   | {
       type: "SET_MODAL_CONTENT";
-      payload: { title: string | null; content: string, modalSize?: string };
+      payload: {
+        title: string | null;
+        content: string;
+        modalSize?: T_modal_size;
+      };
     }
-  | { type: "SET_EDITTING_PARMS_ARTICLE", payload: TArticle}
-  | { type: "SET_EDITTING_PARMS_FOOTERITEM", payload: FooterItem}
-  | { type: "SET_SELECTED_ARTICLES_TAGS", payload: number[]}
+  | { type: "SET_EDITTING_PARMS_ARTICLE"; payload: TArticle }
+  | { type: "SET_EDITTING_PARMS_FOOTERITEM"; payload: FooterItem }
+  | { type: "OFF_EDITTING" }
+  | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
+  | { type: "SET_SELECTED_ARTICLES_TAGS"; payload: number[] }
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_ARTICLE_MODAL" }
   | { type: "CLOSE_ARTICLE_MODAL" }
@@ -72,8 +78,9 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           ...state,
           edittingPrams: {
             isEditting: true,
-            article: action.payload,
+            article: { ...action.payload },
             footerItem: state.edittingPrams.footerItem,
+            modalSize: state.edittingPrams.modalSize,
           },
         };
         break;
@@ -83,7 +90,28 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           edittingPrams: {
             isEditting: true,
             article: state.edittingPrams.article,
-            footerItem: action.payload
+            footerItem: { ...action.payload },
+            modalSize: action.payload.modal_size,
+          },
+        };
+        break;
+      case "OFF_EDITTING":
+        newState = {
+          ...state,
+          edittingPrams: {
+            isEditting: false,
+            article: state.edittingPrams.article,
+            footerItem: state.edittingPrams.footerItem,
+            modalSize: "large",
+          },
+        };
+        break;
+      case "SET_MODAL_SIZE":
+        newState = {
+          ...state,
+          edittingPrams: {
+            ...state.edittingPrams,
+            modalSize: action.payload,
           },
         };
         break;

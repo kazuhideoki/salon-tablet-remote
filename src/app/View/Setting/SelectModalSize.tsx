@@ -5,14 +5,17 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { Store, T_modal_size } from "../../Store/Store";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
-export function SelectModalSize({ modalSize, setModalSize }) {
+export function SelectModalSize() {
   const classes = useStyles();
+  const { appState, dispatchAppState} = React.useContext(Store)
+  const modalSize = appState.edittingPrams.modalSize
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setModalSize((event.target as HTMLInputElement).value);
+    dispatchAppState({ type: "SET_MODAL_SIZE", payload:(event.target as HTMLInputElement).value as T_modal_size});
   };
 
   return (

@@ -191,10 +191,10 @@ export const App = (props: IndexProps) => {
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
       <ThemeProvider {...props.data.session}>
-        <EditorContextProvider {...props.data.session}>
+        {/* <EditorContextProvider {...props.data.session}> */}
           <AppView />
             <Modal />
-        </EditorContextProvider>
+        {/* </EditorContextProvider> */}
       </ThemeProvider>
     </StoreContextProvider>
     // </ThemeProvider>

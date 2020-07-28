@@ -81,7 +81,7 @@ export type T_item_content = string | null
 export type T_item_excerpt = string | null;
 export type T_link_url = string | null
 export type T_app_link_url = string | null;
-export type T_modal_size = string // 数字のstring
+export type T_modal_size = 'fullScreen' | 'large' | 'medium' | 'small'
 export type T_order = number;
 
 export type FooterItemWithoutId = {
@@ -130,13 +130,14 @@ const initAppState = {
   currentModalContent: {
     title: "",
     contnet: "",
-    modalSize: 'large',
+    modalSize: 'large' as T_modal_size,
   },
 
   edittingPrams: {
     isEditting: false,
     article: {} as TArticle,
-    footerItem: {} as FooterItem
+    footerItem: {} as FooterItem,
+    modalSize: 'large' as T_modal_size,
   },
   selectedArticlesTags: [] as number[],
   isModalOpen: false,

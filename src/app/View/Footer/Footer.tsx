@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store, T_footer_item_id, T_order, FooterItem } from "../../Store/Store";
+import { Store, T_footer_item_id, T_order, FooterItem, T_modal_size } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
@@ -18,7 +18,7 @@ export const useFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにModalで分岐してどのモーダルウィンドウを表示させるか決める
 
-  const openModal = (item_content: string, modalSize: string) => {
+  const openModal = (item_content: string, modalSize: T_modal_size) => {
     // footerItemは記事タイトルがないので、titleはnull
     dispatchAppState({
       type: "SET_MODAL_CONTENT",
@@ -34,9 +34,6 @@ export const useFooterProps = () => {
   const handleOnUpDateFooterIcon = (
     footerItem: FooterItem
   ) => {
-    // setIsEdittingContent(true);
-    // getFooterItem(footer_item_id);
-
     dispatchAppState({
       type: "SET_EDITTING_PARMS_FOOTERITEM",
       payload: footerItem,

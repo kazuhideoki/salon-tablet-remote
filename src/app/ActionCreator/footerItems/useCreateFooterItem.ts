@@ -45,9 +45,9 @@ export type TCreateFooterItem = {
 
 export const useCreateFooterItem = () => {
   const { dispatchAppState, footerItems } = React.useContext(Store);
-  const { setEditorText, setTitleText, dispatchSelectedIcon } = React.useContext(
-    EditorContext
-  );
+  // const { setEditorText, setTitleText, dispatchSelectedIcon } = React.useContext(
+  //   EditorContext
+  // );
   const getFooterItems = useGetFooterItems();
 
   let order;
@@ -63,16 +63,6 @@ export const useCreateFooterItem = () => {
     order = 1;
   }
 
-  // const {
-  //   titleText,
-  //   selectedIcon,
-  //   onTap,
-  //   editorText,
-  //   editorTextExcerpt,
-  //   linkUrl,
-  //   modalSize,
-  //   appLinkUrl,
-  // } = React.useContext(EditorContext);
   const { userInfo } = React.useContext(Store)
 
   return async (isPublishing: boolean, param: TCreateFooterItem) => {
@@ -110,12 +100,12 @@ export const useCreateFooterItem = () => {
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      setEditorText("");
-      setTitleText("");
-      dispatchSelectedIcon({
-        type: "SET_ICON",
-        payload: null,
-      });
+      // setEditorText("");
+      // setTitleText("");
+      // dispatchSelectedIcon({
+      //   type: "SET_ICON",
+      //   payload: null,
+      // });
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getFooterItems();

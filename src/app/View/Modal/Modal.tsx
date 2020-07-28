@@ -1,5 +1,5 @@
 import React from "react";
-import { Store } from "../../Store/Store";
+import { Store, T_modal_size } from "../../Store/Store";
 import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles, Paper, useTheme } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 import { CloseButton } from "../viewComponents/buttons/CloseButton";
@@ -17,6 +17,7 @@ import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
 import { EditorContext } from "../../Store/EditorContext";
 import { useModalSize, large, medium } from "../viewComponents/useModalSize";
+import { StyledDialog } from "./StyledDialog";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -25,12 +26,11 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
 
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
-  // const { modalSize } = React.useContext(EditorContext)
-  // const edittingParams = appState.edittingPrams
-
+  const modalSize = appState.edittingPrams.modalSize
+  const setModalSize = (value: T_modal_size) => {
+    dispatchAppState({ type: "SET_MODAL_SIZE", payload: value})
+  }
   const { setModal, isModalOpen, currentModalContent, edittingPrams} = appState;
-  // modalSizeは選択時に即モーダルウィンドウのサイズを変えるのでここで値を持つ
-  const [modalSize, setModalSize] = React.useState(edittingPrams.isEditting ? edittingPrams.footerItem.modal_size : "large")
   const openModal = (name: string) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: name });
   };
@@ -74,7 +74,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         let ModalContent = () => <></>;
 
         // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。
-        let modalStyle;
+        let modalStyle: unknown
         
         switch (props.setModal) {
           case "content_modal":
@@ -89,8 +89,8 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <ArticleEditor />;
             break;
           case "edit_footer_item":
-            modalStyle = useModalSize(props.modalSize)
-            ModalContent = () => <FooterItemEditor modalSize={props.modalSize} setModalSize={props.setModalSize}/>;
+            modalStyle = useModalSize(props.appState.edittingPrams.modalSize)
+            ModalContent = () => <FooterItemEditor />;
             break;
           case "edit_tags":
             ModalContent = () => <ManageTags />;
@@ -111,14 +111,6 @@ export const ModalPresenter:React.FC<Props> = (props) => {
           default:
             console.log("エラーだよ、Modal→ '" + props.setModal + "'");
         }
-
-        // modalStyleの指定がなければ'large'をあてる
-        let paperStyle: any =  modalStyle || large
-
-        // 中のcssを変えないといけなかったのでwithStylesで
-        const StyledDialog = withStyles({
-            paper: paperStyle,
-        })(Dialog);
         
         // modalを閉じるまでタグなどを追加しても再レンダーのmodalのアニメーションを表示させないようにする
         // setTimeoutで時間差でskipTransitonを変える必要あり
@@ -133,14 +125,19 @@ export const ModalPresenter:React.FC<Props> = (props) => {
           }, props.duration.enteringScreen);
         },[props.appState.isModalOpen])
 
+        console.log('modalSizeは ' + props.modalSize);
+        
+
         return (
           <StyledDialog
+            // modalSize={props.modalSize}
+            isEditting={props.appState.edittingPrams.isEditting}
+            modalStyle={modalStyle}
             className={classes.root}
             open={props.isModalOpen}
             TransitionComponent={Transition}
             // 再レンダーのときtransitonアニメーションさせたくないときは、値を0に
             transitionDuration={skipTransiton ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
-            // transitionDuration={0}
             onClose={props.closeModal}
             maxWidth="xl"
           >
@@ -153,8 +150,8 @@ export const ModalPresenter:React.FC<Props> = (props) => {
     }
 
 
-export const Modal = React.memo(() => {
+export const Modal = () => {
   const props = useModalProps()
 
   return <ModalPresenter {...props}/>
-})
+}

@@ -5,12 +5,11 @@ const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
   ssr: false,
 });
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
-import { EditorContext } from "../../../Store/EditorContext";
 import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
-import { Store, FooterItem } from '../../../Store/Store';
+import { Store, FooterItem, T_modal_size } from '../../../Store/Store';
 import { CharCounter } from "../../viewComponents/CharCounter";
 import { SelectModalSize } from '../../Setting/SelectModalSize';
 import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
@@ -35,10 +34,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const FooterItemEditor = ({ modalSize, setModalSize}) => {
+export const FooterItemEditor: React.FC = () => {
   const classes = useStyles()
 
   const { appState } = React.useContext(Store)
+  const modalSize = appState.edittingPrams.modalSize
   const { isEditting, footerItem } = appState.edittingPrams
 
 
@@ -48,7 +48,6 @@ export const FooterItemEditor = ({ modalSize, setModalSize}) => {
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(isEditting ? footerItem.item_excerpt : "");
   const [createdAt, setCreatedAt] = React.useState("");
   const [updatedAt, setUpdatedAt] = React.useState("");
-  // const [isEdittingContent, setIsEdittingContent] = React.useState(false);
   const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
     selectedIconReducer,
     isEditting ? IconsSetting.convertIconComponentFromName(footerItem.displayed_icon_name) : null
@@ -56,12 +55,7 @@ export const FooterItemEditor = ({ modalSize, setModalSize}) => {
   const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
   const [linkUrl, setLinkUrl] = React.useState(isEditting ? footerItem.link_url : "");
   const [appLinkUrl, setAppLinkUrl] = React.useState(isEditting ? footerItem.app_link_url : "");
-  // ↓ラジオボタンはstring型じゃないとうまく作動しない？
-  // const [modalSize, setModalSize] = React.useState(isEditting ? footerItem.modal_size : "large")
-  // const [
-  //   edittingFooterItemParams,
-  //   setEdittingFooterItemParams,
-  // ] = React.useState({} as FooterItem);
+
   // -------------------
   const params: TCreateFooterItem = {
     titleText,
@@ -87,7 +81,7 @@ export const FooterItemEditor = ({ modalSize, setModalSize}) => {
 
   const handleSubmit = ({ isPublishing }) => {
     if (isEditting) {
-      updateFooterItem(isPublishing, params, footerItem);
+      updateFooterItem(isPublishing, params);
     } else {
       createFooterItem(isPublishing, params);
     }
@@ -97,7 +91,7 @@ export const FooterItemEditor = ({ modalSize, setModalSize}) => {
   if (onTap === "modal") {
     mainField = (
       <div>
-        <SelectModalSize modalSize={modalSize} setModalSize={setModalSize} />
+        <SelectModalSize/>
         <QuillEditor
           editorText={editorText}
           setEditorText={setEditorText}
@@ -136,14 +130,11 @@ export const FooterItemEditor = ({ modalSize, setModalSize}) => {
         value={titleText}
         onChange={(e) => handleOnChangeIconName(e)}
         className={classes.titleText}
-        // style={{ marginBottom: "20px" }}
-        // autoFocus={isEdittingContent ? false : true}
       />
       <CharCounter charCount={titleText.length} limitCount={100} />
       <br />
 
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
-      {/* {onTap === 'modal' ? <SelectModalSize modalSize={modalSize} setModalSize={setModalSize}/> : null} */}
       {mainField}
 
       <SelectIcon />

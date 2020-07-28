@@ -1,15 +1,15 @@
 import React from "react";
-import { EditorContext } from "../../../Store/EditorContext";
 import dynamic from "next/dynamic";
 const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
   ssr: false,
 });
 import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
-import { useCreateArticle } from "../../../ActionCreator/articles/useCreateArticle";
+import { useCreateArticle, TCreateArticle } from "../../../ActionCreator/articles/useCreateArticle";
 import { useUpdateArticle } from "../../../ActionCreator/articles/useUpdateArticle";
 import { sqlToDate } from "../../../ActionCreator/organizeSql/sqlToDate";
 import { SelectTagsPopover } from "./SelectTagsPopover";
 import { CharCounter } from "../../viewComponents/CharCounter";
+import { Store } from "../../../Store/Store";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,17 +32,29 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ArticleEditor = () => {
   const classes = useStyles()
-  const {
+  const { appState } = React.useContext(Store)
+  const { isEditting, article } = appState.edittingPrams
+
+  const [titleText, setTitleText] = React.useState(isEditting ? article.title : "");
+  const [editorText, setEditorText] = React.useState(isEditting ? article.article_content : "");
+  const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(isEditting ? article.article_excerpt : "");
+  const [createdAt, setCreatedAt] = React.useState("");
+  const [updatedAt, setUpdatedAt] = React.useState("");
+
+  // ArticleEditor特有のもの
+  const [editorImg, setEditorImg] = React.useState(isEditting ? article.article_img : "");
+  const [selectedTags, setSelectedTags] = React.useState(isEditting ? article.tag_ids : [])
+
+  const params: TCreateArticle = {
     titleText,
-    setTitleText,
     editorText,
-    setEditorText,
-    setEditorTextExcerpt,
-    setEditorImg,
-    isEdittingContent,
-    createdAt,
-    updatedAt
-  } = React.useContext(EditorContext);
+    editorTextExcerpt,
+    editorImg,
+    selectedTags,
+  };
+
+
+
   const [charCountArticleContent, setCharCountArticlContent] = React.useState(0);
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
@@ -53,18 +65,18 @@ const ArticleEditor = () => {
 
   const handleSubmit = ({ isPublishing }) => {
     // 記事編集
-    if (isEdittingContent) {
-      updateArticle(isPublishing);
+    if (isEditting) {
+      updateArticle(isPublishing, params);
       // 記事作成
     } else {
-      createArticle(isPublishing);
+      createArticle(isPublishing, params);
     }
   };
 
   return (
     <>
       <Typography variant="h4" component="h2" className={classes.header}>
-        {isEdittingContent ? "記事編集" : "記事作成"}
+        {isEditting ? "記事編集" : "記事作成"}
       </Typography>
       <TextField
         id="article-title-text-field"
@@ -73,7 +85,6 @@ const ArticleEditor = () => {
         onChange={(e) => handleOnChangeTitleText(e)}
         className={classes.title}
         style={{ marginBottom: "20px" }}
-        // autoFocus={isEdittingContent ? false : true}
         // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
       />
 
@@ -107,7 +118,7 @@ const ArticleEditor = () => {
                 : true
             }
           >
-            {isEdittingContent ? "更新" : "投稿"}
+            {isEditting ? "更新" : "投稿"}
           </Button>
         </Grid>
         <Grid item>
