@@ -1,5 +1,5 @@
 import React from "react";
-import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags } from "../app/Store/Store";
+import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramAccounts } from "../app/Store/Store";
 import { App } from "../app/View/App";
 //@ts-ignore
 import { getCsrfToken, getSession, providers } from "next-auth/client";
@@ -15,6 +15,7 @@ export type IndexProps = {
     pagination: PaginationParams;
     footerItems: FooterItems;
     tags: TTags;
+    instagramAccounts: TInstagramAccounts
     session?: TUserInfo;
   };
   csrfToken?: any;
@@ -86,6 +87,7 @@ export async function getServerSideProps(context: NextPageContext) {
       let data
       let data2
       let data3
+      let data4
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
         console.log("indexのis_first_sign_inのとこだよ");
@@ -130,13 +132,24 @@ export async function getServerSideProps(context: NextPageContext) {
       );
       data3 = await res3.json();
 
+      const res4 = await fetch(
+        `http://localhost:3000/api/instagram_accounts/get?userId=${userInfo.user_id}`
+      );
+      data4 = await res4.json();
+      // access_tokenはフロント側に渡さない access_tokenは削除
+      delete data4.access_token;
+      console.log("instagram_accounts（data4）は " + JSON.stringify(data4));
+
+
+
       return {
         props: {
           data: {
             articles: data ? data.rawData : [],
             pagination: data ? data.pagination : [],
             footerItems: data2 ? data2.rawData : [],
-            tags: data2 ? data3.rawData : [],
+            tags: data3 ? data3.rawData : [],
+            instagramAccounts: data4 ? data4.rawData : [],
             // JSONのエラーになったので、このような書き方↓
             session: userInfo && JSON.parse(JSON.stringify(userInfo)),
           },

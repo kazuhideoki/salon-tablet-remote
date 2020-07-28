@@ -10,6 +10,10 @@ import { loadingReducer, LoadingAction } from "../Reducer/loadingReducer";
 import { userInfoReducer, TUserInfoAction } from "../Reducer/userInfoReducer";
 import { tagsReducer, TagsAction } from "../Reducer/tagsReducer";
 import { IndexProps } from "../../pages";
+import {
+  instagramAccountsReducer,
+  InstagramAccountsAction,
+} from "../Reducer/instagramAccountsReducer";
 
 
 export type T_user_id = number
@@ -168,30 +172,25 @@ const initLoading = {
 }
 export type Loading = typeof initLoading
 
-export type DispatchUserInfo = React.Dispatch<TUserInfoAction>;
-export type DispatchArticles = React.Dispatch<ArticlesAction>;
-export type DispatchFooterItems = React.Dispatch<FooterItemsAction>;
-export type DispatchTags = React.Dispatch<TagsAction>;
-export type DispatchAppState = React.Dispatch < AppStateAction >
-export type dispatchPaginationParams = React.Dispatch<PaginationParamsAction>;
-export type DispatchLoading = React.Dispatch<LoadingAction>;
 
 
 export type ContextProps = {
   userInfo: TUserInfo;
-  dispatchUserInfo: DispatchUserInfo;
+  dispatchUserInfo: React.Dispatch<TUserInfoAction>;
   paginationParams: PaginationParams;
-  dispatchPaginationParams: dispatchPaginationParams;
+  dispatchPaginationParams: React.Dispatch<PaginationParamsAction>;
   articles: TArticles;
-  dispatchArticles: DispatchArticles;
+  dispatchArticles: React.Dispatch<ArticlesAction>;
   footerItems: FooterItems;
-  dispatchFooterItems: DispatchFooterItems;
+  dispatchFooterItems: React.Dispatch<FooterItemsAction>;
   tags: TTags;
-  dispatchTags: DispatchTags;
+  dispatchTags: React.Dispatch<TagsAction>;
+  instagramAccounts: TInstagramAccounts;
+  dispatchInstagramAccounts: React.Dispatch<InstagramAccountsAction>
   appState: AppState;
-  dispatchAppState: DispatchAppState;
+  dispatchAppState: React.Dispatch<AppStateAction>;
   loading: Loading;
-  dispatchLoading: DispatchLoading;
+  dispatchLoading: React.Dispatch<LoadingAction>;
 };
 const Store = React.createContext({} as ContextProps);
 
@@ -214,6 +213,11 @@ const StoreContextProvider: React.FC<IndexProps> = (props) => {
   );
   const [tags, dispatchTags] = useReducer(tagsReducer, props.data.tags)
 
+  const [instagramAccounts, dispatchInstagramAccounts] = useReducer(
+    instagramAccountsReducer,
+    props.data.instagramAccounts
+  );
+
   const [appState, dispatchAppState] = useReducer(
     appStateReducer,
     initAppState
@@ -231,6 +235,8 @@ const StoreContextProvider: React.FC<IndexProps> = (props) => {
     dispatchFooterItems,
     tags,
     dispatchTags,
+    instagramAccounts,
+    dispatchInstagramAccounts,
     appState,
     dispatchAppState,
     loading,
