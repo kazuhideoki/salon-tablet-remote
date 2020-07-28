@@ -7,6 +7,7 @@ import { HomeButton } from "./HomeButton";
 import { PaginationArrows } from "./PaginationArrows";
 import { TagsButton } from "./TagsButton";
 import { useSelectedArticlesTagNames } from "../../../Store/useSelectedArticlesTagNames";
+import { Instagram } from "@material-ui/icons";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
@@ -94,11 +95,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           <HomeButton />
           {/* </IconButton> */}
         </IconButton>
-        {/* ↓まとめる？まとめない？ */}
-        {/* </Typography>
-      <Typography variant="subtitle1" component="span" className={classes.icons}> */}
-        {/* <SvgIcon
-          fontSize="inherit" */}
+
         <IconButton
           onClick={() =>
             props.dispatchAppState({
@@ -111,18 +108,28 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           <TagsButton />
           {/* </SvgIcon> */}
         </IconButton>
+
       </Typography>
 
-      {/* {props.showSelectedTags} */}
       <div>
         {props.selectedTagNames.map((value) => (
           <Chip label={value} size="small" />
         ))}
       </div>
 
-      {/* <Typography variant="subtitle1" component="span" className={classes.displayPage}>
-        【 {props.paginationParams.page}/{props.paginationParams.pageCount} 】
-      </Typography> */}
+      <IconButton
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "select_instagram",
+          })
+        }
+        className={classes.icon}
+      >
+        <Instagram />
+        {/* </SvgIcon> */}
+      </IconButton>
+
       <Typography
         variant="subtitle1"
         component="span"

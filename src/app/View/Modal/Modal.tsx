@@ -11,12 +11,14 @@ import ArticleEditor from "../Drawer/ArticleEditor/ArticleEditor";
 import FooterItemEditor from "../Drawer/ItemEditor/FooterItemEditor";
 import { FeedbackForm } from "../Drawer/FeedbackForm";
 import { SettingTheme } from "../Drawer/SettingTheme";
-import { SelectTags } from "../Main/SelectTags";
+import { SelectTags } from "../Footer/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
 import { useModalSize, large, medium } from "../viewComponents/useModalSize";
 import { StyledDialog } from "./StyledDialog";
+import { ManageInstagmaAccounts } from "../Drawer/ManageInstagmaAccounts";
+import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -84,6 +86,10 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             modalStyle = medium
             ModalContent = () => <SelectTags />;
             break;
+          case "select_instagram":
+            modalStyle = medium
+            ModalContent = () => <SelectInstagramAccounts />;
+            break;
           case "edit_article":
             ModalContent = () => <ArticleEditor />;
             break;
@@ -93,6 +99,9 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             break;
           case "edit_tags":
             ModalContent = () => <ManageTags />;
+            break;
+          case "manage_instagram":
+            ModalContent = () => <ManageInstagmaAccounts />;
             break;
           case "setting_theme":
             ModalContent = () => <SettingTheme />;
