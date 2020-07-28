@@ -12,29 +12,31 @@ import {
 } from "@material-ui/core";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
-import { Store,T_article_id } from "../../Store/Store";
+import { Store,T_article_id, TArticle } from "../../Store/Store";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
-import { EditorContext } from "../../Store/EditorContext";
 import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";
 
-export type HandleOnUpDate = (params: any) => void;
+// export type HandleOnUpDate = (params: any) => void;
 export const usePMainProps = () => {
   const { appState, articles, dispatchAppState, tags } = React.useContext(
     Store
   );
   const deleteArticle = useDeleteArticle();
-  const { setIsEdittingContent } = React.useContext(EditorContext);
   const getSingleArticle = useGetSingleArticle();
 
-  const handleOnUpDate: HandleOnUpDate = (article_id: T_article_id) => {
+  const handleOnUpDate = (article: TArticle) => {
+    dispatchAppState({
+      type: "SET_EDITTING_PARMS_ARTICLE",
+      payload: article,
+    });
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-    setIsEdittingContent(true);
-    getSingleArticle(article_id);
+    // setIsEdittingContent(true);
+    // getSingleArticle(article_id);
   };
 
   const handleOnDelete = (article_id: T_article_id) => {
@@ -165,7 +167,7 @@ export const PMainPresenter = (props: Props) => {
           {props.appState.isSetting ? (
             <EditButtonsBox className={classes.editButtonsBox}>
               <UpdateButton
-                onClick={() => props.handleOnUpDate(value.article_id)}
+                onClick={() => props.handleOnUpDate(value)}
               />
               <DeleteButton
                 onClick={() => props.handleOnDelete(value.article_id)}

@@ -1,6 +1,5 @@
 import React from "react";
 
-import { EditorContext } from "../../Store/EditorContext";
 import { Store, T_user_id, T_tag_name } from "../../Store/Store";
 import { T_tags_create } from "../../../pages/api/tags/create";
 import { useGetTags } from "./useGetTags";

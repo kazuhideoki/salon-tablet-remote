@@ -8,7 +8,6 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import { EditorContext } from '../../../../Store/EditorContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

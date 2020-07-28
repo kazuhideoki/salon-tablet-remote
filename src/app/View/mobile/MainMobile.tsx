@@ -97,7 +97,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               {/* 抜粋が100文字の場合"..."追加" */}
               {value.article_excerpt.length === 100 ? "..." : ""}
             </div>
-            <button onClick={() => props.handleOnUpDate(value.article_id)}>
+            <button onClick={() => props.handleOnUpDate(value)}>
               編集
             </button>
             <button onClick={() => props.handleOnDelete(value.article_id)}>

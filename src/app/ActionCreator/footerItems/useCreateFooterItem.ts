@@ -13,8 +13,9 @@ import {
   T_user_id,
   T_modal_size,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { useGetFooterItems } from "./useGetFooterItems";
+import { OverridableComponent } from "@material-ui/core/OverridableComponent";
+import { SvgIconTypeMap } from "@material-ui/core";
 
 export type T_footer_items_create_item = {
   is_published: T_is_published_footer_items;
@@ -31,14 +32,18 @@ export type T_footer_items_create_item = {
 };
 
 export type TCreateFooterItem = {
-  params: T_footer_items_create_item;
+  titleText: string;
+  selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
+  onTap: string;
+  editorText: string;
+  editorTextExcerpt: string;
+  linkUrl: string;
+  modalSize: T_modal_size;
+  appLinkUrl: string;
 };
 
 export const useCreateFooterItem = () => {
   const { dispatchAppState, footerItems } = React.useContext(Store);
-  const { setEditorText, setTitleText, dispatchSelectedIcon } = React.useContext(
-    EditorContext
-  );
   const getFooterItems = useGetFooterItems();
 
   let order;
@@ -54,48 +59,36 @@ export const useCreateFooterItem = () => {
     order = 1;
   }
 
-  const {
-    titleText,
-    selectedIcon,
-    onTap,
-    editorText,
-    editorTextExcerpt,
-    linkUrl,
-    modalSize,
-    appLinkUrl,
-  } = React.useContext(EditorContext);
   const { userInfo } = React.useContext(Store)
 
-  return async (isPublishing: boolean) => {
-    const params: TCreateFooterItem = {
-      params: {
-        is_published: isPublishing,
-        icon_name: titleText,
-        // 選択されていたらアイコンの名前を返す.
-        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
-        on_tap: onTap,
-        item_content: editorText,
-        item_excerpt: editorTextExcerpt,
-        link_url: linkUrl,
-        app_link_url: appLinkUrl,
-        modal_size: modalSize,
-        order: order,
-        user_id: userInfo.user_id,
-      },
+  return async (isPublishing: boolean, param: TCreateFooterItem) => {
+    const params: T_footer_items_create_item = {
+      is_published: isPublishing,
+      icon_name: param.titleText,
+      // 選択されていたらアイコンの名前を返す.
+      displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
+      on_tap: param.onTap,
+      item_content: param.editorText,
+      item_excerpt: param.editorTextExcerpt,
+      link_url: param.linkUrl,
+      app_link_url: param.appLinkUrl,
+      modal_size: param.modalSize,
+      order: order,
+      user_id: userInfo.user_id,
     };
 
-    console.log(`${location.protocol}//${location.host}/api/footer_items/create`);
+    console.log(
+      `${location.protocol}//${location.host}/api/footer_items/create`
+    );
     console.log(JSON.stringify(params));
-    
 
-    
     const res = await fetch(
       `${location.protocol}//${location.host}/api/footer_items/create`,
       {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify(params),
+        body: JSON.stringify({ params }),
       }
     );
     const data = await res.json();
@@ -103,12 +96,12 @@ export const useCreateFooterItem = () => {
     if (data.err === true) {
       alert("投稿できませんでした");
     } else {
-      setEditorText("");
-      setTitleText("");
-      dispatchSelectedIcon({
-        type: "SET_ICON",
-        payload: null,
-      });
+      // setEditorText("");
+      // setTitleText("");
+      // dispatchSelectedIcon({
+      //   type: "SET_ICON",
+      //   payload: null,
+      // });
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getFooterItems();

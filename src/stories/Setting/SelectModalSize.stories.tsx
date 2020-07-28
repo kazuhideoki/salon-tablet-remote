@@ -7,6 +7,6 @@ export default {
 export const Normal = () =>{ 
 const [modalSize, setModalSize] = React.useState("large")
 
-return <SelectModalSize modalSize={modalSize} setModalSize={setModalSize} />;
+return <SelectModalSize/>;
 
 }

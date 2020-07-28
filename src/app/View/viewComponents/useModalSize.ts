@@ -1,4 +1,5 @@
 import React from 'react'
+import { T_modal_size } from '../../Store/Store';
 
 export const fullScreen = {
   width: "100vw",
@@ -21,20 +22,6 @@ export const medium = {
   // maxHeight: "100%",
   margin: 0,
 };
-// export const smallPortrait = {
-//   width: "70vw",
-//   height: "70vw", // 横と同じ長さ→正方形
-//   // maxWidth: "100%",
-//   // maxHeight: "100%",
-//   margin: 0,
-// };
-// export const smallLandscape = {
-//   width: "70vh",// 縦と同じ長さ→正方形
-//   height: "70vh", 
-//   // maxWidth: "100%",
-//   // maxHeight: "100%",
-//   margin: 0,
-// };
 
 const shortSide = () => {
   if (window.innerHeight > window.innerWidth) {
@@ -51,8 +38,7 @@ export const small = process.browser ? {
   margin: 0,
 } : null
 
-export const useModalSize  = (modalSize: string) => {
-
+export const useModalSize  = (modalSize: T_modal_size) => {
 
   switch (modalSize) {
     case "fullScreen":

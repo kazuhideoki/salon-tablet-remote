@@ -17,7 +17,7 @@ export default {
   component: SelectIcon,
 };
 export const Normal = () => {
-const {selectedIcon, dispatchSelectedIcon} = React.useContext(EditorContext)
+let selectedIcon, dispatchSelectedIcon
 
 return (
   <>
@@ -34,7 +34,8 @@ return (
     <p>a</p>
     {/* fdddddddddddddddddd<SelectIcon selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
     fdddddddddddddddddd
-    <SelectIcon />
+    <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon} />
+
   </>
 );
 };

@@ -6,7 +6,6 @@ import {
   T_article_content,
   T_article_id,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
 
 export const useDeleteArticle = () => {

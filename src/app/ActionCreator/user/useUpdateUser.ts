@@ -6,7 +6,6 @@ import {
   T_shop_name,
   T_user_email,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 
 export type T_update_user = {
   columns: {
@@ -18,6 +17,12 @@ export type T_update_user = {
   plainTextPassword: string
 };
 
+type TUpdateUser = {
+  name: string
+  shopName: string
+  email: string
+  password: string
+}
 
 export const useUpdateUser = () => {
   const {
@@ -26,29 +31,19 @@ export const useUpdateUser = () => {
     userInfo,
   } = React.useContext(Store);
   const {user_id} = userInfo
-  const {
-    name,
-    setName,
-    shopName,
-    setShopName,
-    email,
-    setEmail,
-    password,
-    setPassword,
-  } = React.useContext(EditorContext);
+
   // const cipheredPassword = cipher(password);
-  return async () => {
+  return async (param: TUpdateUser) => {
     const params: T_update_user = {
       columns: {
         user_id: user_id,
-        user_name: name,
-        shop_name: shopName,
-        user_email: email,
+        user_name: param.name,
+        shop_name: param.shopName,
+        user_email: param.email,
       },
-      plainTextPassword: password,
+      plainTextPassword: param.password,
     };
     console.log("useUpdateUserのparamsは " + params);
-    
 
     const res = await fetch(
       `${location.protocol}//${location.host}/api/user_info/update`, //★要変更
@@ -68,9 +63,9 @@ export const useUpdateUser = () => {
         type: "SET_USER_INFO",
         payload: {
           user_id: user_id,
-          user_name: name,
-          shop_name: shopName,
-          user_email: email,
+          user_name: param.name,
+          shop_name: param.shopName,
+          user_email: param.email,
         },
       });
       dispatchAppState({ type: "CLOSE_MODAL" });

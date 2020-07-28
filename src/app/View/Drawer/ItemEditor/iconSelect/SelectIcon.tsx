@@ -3,9 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Popover, Button, TextField, IconButton, SvgIconTypeMap } from '@material-ui/core';
-// import { icons } from "./icons";
 import { IconsSetting } from "./icons";
-import { EditorContext } from "../../../../Store/EditorContext";
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { MoodBad } from '@material-ui/icons';
 
@@ -27,11 +25,19 @@ export const IconItem = (props:TIconItem) => {
   return <props.icon style={{ fontSize: 50 }} />;
 };
 
-export const SelectIcon = () => {
+type Props = {
+  selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string]
+  dispatchSelectedIcon: React.Dispatch<{
+    type: "SET_ICON";
+    payload: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
+  }>
+}
+
+export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon}) => {
   const classes = useStyles();
-  const { selectedIcon, dispatchSelectedIcon } = React.useContext(
-    EditorContext
-  );
+  // const { selectedIcon, dispatchSelectedIcon } = React.useContext(
+  //   EditorContext
+  // );
 
   // 以下アイコン選択のPopoverのための設定
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);

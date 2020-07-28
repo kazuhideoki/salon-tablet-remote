@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store, T_footer_item_id, T_order } from "../../Store/Store";
+import { Store, T_footer_item_id, T_order, FooterItem, T_modal_size } from "../../Store/Store";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
@@ -9,7 +9,6 @@ import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";
 import { useGetFooterItem } from "../../ActionCreator/footerItems/useGetFooterItem";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
-import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 // import { useCalcFooterPadding } from "./useCalcFooterPadding";
@@ -18,7 +17,7 @@ export const useFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにModalで分岐してどのモーダルウィンドウを表示させるか決める
 
-  const openModal = (item_content: string, modalSize: string) => {
+  const openModal = (item_content: string, modalSize: T_modal_size) => {
     // footerItemは記事タイトルがないので、titleはnull
     dispatchAppState({
       type: "SET_MODAL_CONTENT",
@@ -27,19 +26,20 @@ export const useFooterProps = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };
 
-  const { setIsEdittingContent } = React.useContext(EditorContext);
   const getFooterItem = useGetFooterItem();
   const deleteFooterItem = useDeleteFooterItem();
 
   const handleOnUpDateFooterIcon = (
-    footer_item_id: T_footer_item_id
+    footerItem: FooterItem
   ) => {
+    dispatchAppState({
+      type: "SET_EDITTING_PARMS_FOOTERITEM",
+      payload: footerItem,
+    });
     dispatchAppState({
       type: "OPEN_MODAL",
       payload: "edit_footer_item",
     });
-    setIsEdittingContent(true);
-    getFooterItem(footer_item_id);
   };
   const handleOnDeleteFooterItem = (
     footer_item_id: T_footer_item_id,
@@ -130,7 +130,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
             />
             <UpdateButton
               onClick={() =>
-                props.handleOnUpDateFooterIcon(value.footer_item_id)
+                props.handleOnUpDateFooterIcon(value)
               }
             />
             <DeleteButton

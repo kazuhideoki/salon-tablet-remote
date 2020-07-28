@@ -1,5 +1,4 @@
 import React from "react";
-import { EditorContext } from "../../Store/EditorContext";
 import {
   Store,
   T_footer_item_id,
@@ -13,8 +12,10 @@ import {
   T_item_excerpt,
   T_app_link_url,
   T_modal_size,
+  FooterItem,
 } from "../../Store/Store";
 import { useGetFooterItems } from "./useGetFooterItems";
+import { TCreateFooterItem } from "./useCreateFooterItem";
 
 export type T_footer_items_update_item = {
   is_published: T_is_published_footer_items;
@@ -34,41 +35,28 @@ export type TUpdateFooterItem = {
 }
 
 export const useUpdateFooterItem = () => {
-  const { dispatchAppState } = React.useContext(Store);
-  const {
-    setTitleText,
-    setEditorText,
-    setIsEdittingContent,
-  } = React.useContext(EditorContext);
+  const { dispatchAppState, appState } = React.useContext(Store);
   const getFooterItems = useGetFooterItems();
 
-  const {
-    edittingFooterItemParams,
-    titleText,
-    selectedIcon,
-    onTap,
-    editorText,
-    editorTextExcerpt,
-    linkUrl,
-    modalSize,
-    appLinkUrl,
-  } = React.useContext(EditorContext);
-
-  return async (isPublishing: boolean) => {
+  return async (
+    isPublishing: boolean,
+    param: TCreateFooterItem,
+    // edittingFooterItemParams: FooterItem 
+  ) => {
     const params: TUpdateFooterItem = {
-      id: edittingFooterItemParams.footer_item_id,
+      id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
         is_published: isPublishing,
-        icon_name: titleText,
+        icon_name: param.titleText,
         // 選択されていたらアイコンの名前を返す
-        displayed_icon_name: selectedIcon ? selectedIcon[1] : null,
-        on_tap: onTap, // 要確認
-        item_content: editorText,
-        item_excerpt: editorTextExcerpt,
-        link_url: linkUrl,
-        app_link_url: appLinkUrl,
-        modal_size: modalSize,
-        order: edittingFooterItemParams.order,
+        displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
+        on_tap: param.onTap, // 要確認
+        item_content: param.editorText,
+        item_excerpt: param.editorTextExcerpt,
+        link_url: param.linkUrl,
+        app_link_url: param.appLinkUrl,
+        modal_size: param.modalSize,
+        order: appState.edittingPrams.footerItem.order,
       },
     };
     const res = await fetch(
@@ -85,7 +73,7 @@ export const useUpdateFooterItem = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      setIsEdittingContent(false);
+      // setIsEdittingContent(false);
       // setTitleText("");
       // setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });

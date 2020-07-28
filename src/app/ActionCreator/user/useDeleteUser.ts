@@ -2,7 +2,6 @@ import React from "react";
 import {
   Store,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { useCheckPassword } from "./useCheckPassword";
 const { signout } = require("next-auth/client")
 

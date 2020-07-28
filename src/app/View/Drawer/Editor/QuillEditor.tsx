@@ -36,7 +36,7 @@ type Props = {
   setEditorImg?: React.Dispatch<React.SetStateAction<string>>,
 }
 export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }) => {
-  console.log("QuillEditorだよ");
+  // console.log("QuillEditorだよ");
   
   
   const [hasImg, setHasImg] = React.useState(false)

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core'
-import { EditorContext } from '../Store/EditorContext'
 import { Store } from '../Store/Store'
 
 

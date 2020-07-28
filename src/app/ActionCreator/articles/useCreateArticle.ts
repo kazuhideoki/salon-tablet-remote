@@ -10,7 +10,6 @@ import {
   T_user_id,
   T_tag_ids,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
 
 
@@ -25,35 +24,28 @@ export type T_articles_create = {
 };
 
 export type TCreateArticle = {
-  params: T_articles_create;
+  titleText: string;
+  editorText: string;
+  editorTextExcerpt: string;
+  editorImg: string;
+  selectedTags: number[]
 };
 export const useCreateArticle =   () => {
   const getArticles = useGetArticles();
   const { dispatchAppState, userInfo, dispatchLoading } = React.useContext(Store);
-  const {
-    setEditorText,
-    setTitleText,
-    titleText,
-    editorText,
-    editorTextExcerpt,
-    editorImg,
-    selectedTags,
-    setSelectedTags,
-  } = React.useContext(EditorContext);
-  const tag_ids = selectedTags.length ? JSON.stringify(selectedTags) : null
-
-  return async (isPublishing: boolean) => {
-
-    const params: TCreateArticle = {
-      params: {
-        is_published: isPublishing,
-        title: titleText,
-        article_content: editorText,
-        article_excerpt: editorTextExcerpt,
-        article_img: editorImg,
-        tag_ids: tag_ids,
-        user_id: userInfo.user_id
-      }
+  
+  return async (isPublishing: boolean, param: TCreateArticle) => {
+    const tag_ids = param.selectedTags.length
+      ? JSON.stringify(param.selectedTags)
+      : null;
+    const params: T_articles_create = {
+      is_published: isPublishing,
+      title: param.titleText,
+      article_content: param.editorText,
+      article_excerpt: param.editorTextExcerpt,
+      article_img: param.editorImg,
+      tag_ids: tag_ids,
+      user_id: userInfo.user_id,
     };
 
     const res = await fetch(
@@ -62,7 +54,7 @@ export const useCreateArticle =   () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
-        body: JSON.stringify(params),
+        body: JSON.stringify({ params }),
       }
     );
     const data = await res.json();
@@ -72,9 +64,6 @@ export const useCreateArticle =   () => {
 
       alert("投稿できませんでした");
     } else {
-      setEditorText("");
-      setTitleText("");
-      setSelectedTags([])
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getArticles(1, []);

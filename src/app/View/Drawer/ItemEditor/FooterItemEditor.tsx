@@ -5,14 +5,15 @@ const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
   ssr: false,
 });
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
-import { EditorContext } from "../../../Store/EditorContext";
-import { useCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
+import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
-import { Store } from '../../../Store/Store';
+import { Store, FooterItem, T_modal_size } from '../../../Store/Store';
 import { CharCounter } from "../../viewComponents/CharCounter";
 import { SelectModalSize } from '../../Setting/SelectModalSize';
+import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
+import { IconsSetting } from './iconSelect/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,27 +34,41 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const FooterItemEditor = () => {
+export const FooterItemEditor: React.FC = () => {
   const classes = useStyles()
-  const {
-    titleText,
-    setTitleText,
-    editorText,
-    setEditorText,
-    setEditorTextExcerpt,
-    onTap,
-    setOnTap,
-    linkUrl,
-    setLinkUrl,
-    appLinkUrl,
-    setAppLinkUrl,
-    modalSize,
-    setModalSize,
-    isEdittingContent,
-    createdAt,
-    updatedAt,
-  } = React.useContext(EditorContext);
+
   const { appState } = React.useContext(Store)
+  const modalSize = appState.edittingPrams.modalSize
+  const { isEditting, footerItem } = appState.edittingPrams
+
+
+  // -------------------
+  const [titleText, setTitleText] = React.useState(isEditting ? footerItem.icon_name : "");
+  const [editorText, setEditorText] = React.useState(isEditting ? footerItem.item_content : "");
+  const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(isEditting ? footerItem.item_excerpt : "");
+  const [createdAt, setCreatedAt] = React.useState("");
+  const [updatedAt, setUpdatedAt] = React.useState("");
+  const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
+    selectedIconReducer,
+    isEditting ? IconsSetting.convertIconComponentFromName(footerItem.displayed_icon_name) : null
+  );
+  const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
+  const [linkUrl, setLinkUrl] = React.useState(isEditting ? footerItem.link_url : "");
+  const [appLinkUrl, setAppLinkUrl] = React.useState(isEditting ? footerItem.app_link_url : "");
+
+  // -------------------
+  const params: TCreateFooterItem = {
+    titleText,
+    selectedIcon,
+    onTap,
+    editorText,
+    editorTextExcerpt,
+    linkUrl,
+    modalSize,
+    appLinkUrl,
+  }
+
+
   const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
   
   const createFooterItem = useCreateFooterItem();
@@ -65,23 +80,26 @@ export const FooterItemEditor = () => {
 
 
   const handleSubmit = ({ isPublishing }) => {
-    if (isEdittingContent) {
-      updateFooterItem(isPublishing);
+    if (isEditting) {
+      updateFooterItem(isPublishing, params);
     } else {
-      createFooterItem(isPublishing);
+      createFooterItem(isPublishing, params);
     }
   };
 
   let mainField: JSX.Element
   if (onTap === "modal") {
     mainField = (
-      <QuillEditor
-        editorText={editorText}
-        setEditorText={setEditorText}
-        setEditorTextExcerpt={setEditorTextExcerpt}
-        charCount={charCountFooterItemContent}
-        setCharCount={setCharCountFooterItemContent}
-      />
+      <div>
+        <SelectModalSize/>
+        <QuillEditor
+          editorText={editorText}
+          setEditorText={setEditorText}
+          setEditorTextExcerpt={setEditorTextExcerpt}
+          charCount={charCountFooterItemContent}
+          setCharCount={setCharCountFooterItemContent}
+        />
+      </div>
     );
   } else if (onTap === "link"){
     mainField = (
@@ -104,7 +122,7 @@ export const FooterItemEditor = () => {
   return (
     <>
       <Typography variant="h4" component="h2" className={classes.header}>
-        {isEdittingContent ? "アイテム編集" : "アイテム作成"}
+        {isEditting ? "アイテム編集" : "アイテム作成"}
       </Typography>
       <TextField
         id="icon-name-text-field"
@@ -112,17 +130,14 @@ export const FooterItemEditor = () => {
         value={titleText}
         onChange={(e) => handleOnChangeIconName(e)}
         className={classes.titleText}
-        // style={{ marginBottom: "20px" }}
-        // autoFocus={isEdittingContent ? false : true}
       />
       <CharCounter charCount={titleText.length} limitCount={100} />
       <br />
 
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
-      <SelectModalSize modalSize={modalSize} setModalSize={setModalSize}/>
       {mainField}
 
-      <SelectIcon />
+      <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/>
       <Grid container className={classes.submitButtons}>
         <Grid item>
           <Button
@@ -133,7 +148,7 @@ export const FooterItemEditor = () => {
                 : true
             }
           >
-            {isEdittingContent ? "更新" : "投稿"}
+            {isEditting ? "更新" : "投稿"}
           </Button>
         </Grid>
         <Grid item>

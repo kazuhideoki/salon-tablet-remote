@@ -9,7 +9,6 @@ import {
   GridListTile,
   Chip,
 } from "@material-ui/core";
-import { EditorContext } from '../../../Store/EditorContext';
 import { Store } from '../../../Store/Store';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,9 +23,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectTagsPopover = () => {
+export const SelectTagsPopover = ({ selectedTags, setSelectedTags}) => {
   const classes = useStyles();
-  const { selectedTags, setSelectedTags } = React.useContext(EditorContext)
+  // const [selectedTags, setSelectedTags ] = React.useState([])
+
   const { tags } = React.useContext(Store)
 
   

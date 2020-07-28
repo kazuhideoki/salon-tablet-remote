@@ -20,7 +20,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 //@ts-ignore
@@ -34,43 +33,16 @@ import { TagsButton } from "../Footer/Pagination/TagsButton";
 export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState, dispatchLoading } = React.useContext(Store);
-  const {
-    setEditorText,
-    setTitleText,
-    setOnTap,
-    setLinkUrl,
-    setAppLinkUrl,
-    setModalSize,
-    setIsEdittingContent,
-    dispatchSelectedIcon,
-    setSelectedTags,
-    setCreatedAt,
-    setUpdatedAt,
-  } = React.useContext(EditorContext);
 
   const handleOpenArticleEditor = () => {
+
+    dispatchAppState({ type: "OFF_EDITTING" });
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-    setIsEdittingContent(false);
-    setTitleText("");
-    setEditorText("");
-    setSelectedTags([])
-    setCreatedAt(null)
-    setUpdatedAt(null)
   };
 
   const handleOpenFooterItemEditor = () => {
+    dispatchAppState({ type: "OFF_EDITTING" });
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
-    setIsEdittingContent(false);
-    setTitleText("");
-    setEditorText("");
-    setOnTap("modal");
-    setLinkUrl("");
-    setModalSize('large')
-    setAppLinkUrl("");
-    
-    dispatchSelectedIcon({ type: "SET_ICON", payload: null });
-    setCreatedAt(null)
-    setUpdatedAt(null)
   };
 
   const handleOpenTagsManage = () => {
@@ -80,7 +52,6 @@ export const useDrawerProps = () => {
   
   const checkPassword = useCheckPassword();
   const handleSubmitPassword = async (password: string) => {
-    // console.log(cipher(password))
     
     const result = await checkPassword(password);
     if (result === true) {
@@ -105,13 +76,11 @@ export const useDrawerProps = () => {
   }
 
   const handleDrawerOpen = () => {
-    // setOpen(true);
     dispatchAppState({type: "OPEN_DRAWER"})
     dispatchAppState({ type: "CLOSE_MODAL" });
   };
 
   const handleDrawerClose = () => {
-    // setOpen(false);
     dispatchAppState({ type: "CLOSE_DRAWER" });
     // Drawerが閉じきってからisSettingをfalseに
     setTimeout(() => {
