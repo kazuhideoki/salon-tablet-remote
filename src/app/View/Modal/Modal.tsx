@@ -15,7 +15,6 @@ import { SelectTags } from "../Main/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
-import { EditorContext } from "../../Store/EditorContext";
 import { useModalSize, large, medium } from "../viewComponents/useModalSize";
 import { StyledDialog } from "./StyledDialog";
 

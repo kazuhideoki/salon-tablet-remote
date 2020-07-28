@@ -1,5 +1,4 @@
 import React from "react";
-import { EditorContext } from "../../Store/EditorContext";
 import {
   Store,
   T_footer_item_id,

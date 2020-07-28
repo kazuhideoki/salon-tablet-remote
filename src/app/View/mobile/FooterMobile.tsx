@@ -94,7 +94,7 @@ export const FooterMobilePresenter:React.FC<Props> = (props) => {
                 ) : null}
                 <button
                   onClick={() =>
-                    props.handleOnUpDateFooterIcon(value.footer_item_id)
+                    props.handleOnUpDateFooterIcon(value)
                   }
                 >
                   編集

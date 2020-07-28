@@ -9,7 +9,6 @@ import { ThemeContext } from "../Store/ThemeContext";
 import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
-import { EditorContextProvider } from "../Store/EditorContext";
 import { Drawer } from "./Drawer/Drawer";
 import { Header } from "./Header";
 import { AppMobile } from "./mobile/AppMobile";

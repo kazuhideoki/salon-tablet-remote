@@ -9,7 +9,6 @@ import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";
 import { useGetFooterItem } from "../../ActionCreator/footerItems/useGetFooterItem";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
-import { EditorContext } from "../../Store/EditorContext";
 import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 // import { useCalcFooterPadding } from "./useCalcFooterPadding";
@@ -27,7 +26,6 @@ export const useFooterProps = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };
 
-  const { setIsEdittingContent } = React.useContext(EditorContext);
   const getFooterItem = useGetFooterItem();
   const deleteFooterItem = useDeleteFooterItem();
 

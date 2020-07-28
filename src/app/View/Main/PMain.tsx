@@ -16,7 +16,6 @@ import { Store,T_article_id, TArticle } from "../../Store/Store";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
-import { EditorContext } from "../../Store/EditorContext";
 import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
@@ -28,7 +27,6 @@ export const usePMainProps = () => {
     Store
   );
   const deleteArticle = useDeleteArticle();
-  const { setIsEdittingContent } = React.useContext(EditorContext);
   const getSingleArticle = useGetSingleArticle();
 
   const handleOnUpDate = (article: TArticle) => {

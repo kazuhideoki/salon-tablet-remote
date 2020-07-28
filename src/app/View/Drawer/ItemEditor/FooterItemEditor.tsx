@@ -137,7 +137,7 @@ export const FooterItemEditor: React.FC = () => {
       <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
       {mainField}
 
-      <SelectIcon />
+      <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/>
       <Grid container className={classes.submitButtons}>
         <Grid item>
           <Button

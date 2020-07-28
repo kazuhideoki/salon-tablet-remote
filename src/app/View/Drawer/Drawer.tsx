@@ -20,7 +20,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 //@ts-ignore

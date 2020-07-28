@@ -12,7 +12,6 @@ import { ContactMail } from "@material-ui/icons";
 import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useUpdateUser } from "../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { Divider, ListItem } from "@material-ui/core";
 import { useSubmitFeedback } from "../../ActionCreator/useSubmitFeedback";
 // import { T_submit_feedback } from "../../../pages/api/submit_feedback";

@@ -2,7 +2,6 @@ import React from "react";
 import {
   Store, T_user_id,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { T_check_password } from "../../../pages/api/user_info/check_password";
 
 export const useCheckPassword = () => {
@@ -10,9 +9,6 @@ export const useCheckPassword = () => {
     Store
   );
   const { user_id } = userInfo;
-  const {
-    setPassword,
-  } = React.useContext(EditorContext);
   // const cipheredPassword = cipher(password);
   return async (password: string) => {
     const params: T_check_password = { user_id, password };

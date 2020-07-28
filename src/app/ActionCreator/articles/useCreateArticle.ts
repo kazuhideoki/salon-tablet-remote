@@ -10,7 +10,6 @@ import {
   T_user_id,
   T_tag_ids,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { useGetArticles } from "./useGetArticles";
 
 
@@ -65,9 +64,6 @@ export const useCreateArticle =   () => {
 
       alert("投稿できませんでした");
     } else {
-      // setEditorText("");
-      // setTitleText("");
-      // setSelectedTags([]);
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getArticles(1, []);

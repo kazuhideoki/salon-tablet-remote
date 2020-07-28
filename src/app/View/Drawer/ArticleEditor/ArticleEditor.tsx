@@ -97,7 +97,7 @@ const ArticleEditor = () => {
         <Typography>編集日:{sqlToDate(updatedAt)}</Typography>
       ) : null}
 
-      <SelectTagsPopover />
+      <SelectTagsPopover selectedTags={selectedTags} setSelectedTags={setSelectedTags}/>
 
       <QuillEditor
         editorText={editorText}

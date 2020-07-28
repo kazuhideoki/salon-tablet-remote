@@ -13,7 +13,6 @@ import {
   T_user_id,
   T_modal_size,
 } from "../../Store/Store";
-import { EditorContext } from "../../Store/EditorContext";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";
@@ -39,15 +38,12 @@ export type TCreateFooterItem = {
   editorText: string;
   editorTextExcerpt: string;
   linkUrl: string;
-  modalSize: string;
+  modalSize: T_modal_size;
   appLinkUrl: string;
 };
 
 export const useCreateFooterItem = () => {
   const { dispatchAppState, footerItems } = React.useContext(Store);
-  // const { setEditorText, setTitleText, dispatchSelectedIcon } = React.useContext(
-  //   EditorContext
-  // );
   const getFooterItems = useGetFooterItems();
 
   let order;

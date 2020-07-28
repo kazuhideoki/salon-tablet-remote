@@ -9,29 +9,29 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Settings } from "@material-ui/icons";
 import { Divider } from "@material-ui/core";
-import { EditorContext } from "../../../Store/EditorContext";
 import { useUpdateUser } from "../../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../../Store/Store";
 
 const useSettingUserInfoProps = () => {
-  const {
-    name,
-    setName,
-    shopName,
-    setShopName,
-    email,
-    password,
-    setPassword,
-  } = React.useContext(EditorContext);
 
   const { userInfo, dispatchAppState } = React.useContext(Store)
 
   const updateUser = useUpdateUser()
 
+  // SettingUserInfoのTextField
+  const [name, setName] = React.useState(userInfo.user_name);
+  const [shopName, setShopName] = React.useState(userInfo.shop_name);
+  const [email, setEmail] = React.useState(userInfo.user_email);
+  const [password, setPassword] = React.useState('');
+
+  const params = {
+    name, shopName, email, password
+  }
+
   const handleOnSubmit = () => {
     console.log("handleOnSubmitだよ");
 
-    updateUser()
+    updateUser(params)
   }
 
   const openDeleteAccountForm = () => {
