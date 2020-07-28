@@ -1,6 +1,6 @@
 import React from "react";
 import { Store, T_modal_size } from "../../Store/Store";
-import { Dialog, Slide, withStyles, DialogContent, makeStyles, createStyles, Paper, useTheme } from "@material-ui/core";
+import { Slide, DialogContent, makeStyles, createStyles, useTheme } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 import { CloseButton } from "../viewComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
@@ -72,8 +72,8 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         // ModalContentは内容モーダルウィンドウの中身の設定
         let ModalContent = () => <></>;
 
-        // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。
-        let modalStyle: unknown
+        // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。デフォルトはlarge
+        let modalStyle = useModalSize('large')
         
         switch (props.setModal) {
           case "content_modal":
@@ -128,8 +128,10 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         
 
         return (
+          // 受け取ったmodalStyle元にサイズ変更して描画
           <StyledDialog
-            // modalSize={props.modalSize}
+            modalSize={props.modalSize}
+            setModal={props.setModal}
             isEditting={props.appState.edittingPrams.isEditting}
             modalStyle={modalStyle}
             className={classes.root}
