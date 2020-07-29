@@ -21,6 +21,7 @@ export type IndexProps = {
   csrfToken?: any;
   providers?: any
   bcrypt_password?: string;
+  // instagram_access_denied?: boolean
 };
 
 const Index = (props: IndexProps) => {
@@ -34,6 +35,9 @@ const Index = (props: IndexProps) => {
     );
 
   }
+
+  // props.instagram_access_denied ? alert('インスタグラムアカウントのせつぞくができませんでした。') : null
+
   // テーマ、記事データ、appの状態管理を読み込む
   return (
     <>
@@ -172,7 +176,8 @@ export async function getServerSideProps(context: NextPageContext) {
           session: null,
         },
         csrfToken: token,
-        providers: await providers(context)
+        providers: await providers(context),
+        // instagram_access_denied: context.query.instagram_access_denied || false,
       },
     };
   }
