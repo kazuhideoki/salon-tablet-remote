@@ -84,10 +84,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
       default:
         break;
-    } 
-
-    // console.log(JSON.stringify(theme));
-    
+    }     
 
     return (
       // これでmaterial uiのthemeオブジェクトを下へ送る

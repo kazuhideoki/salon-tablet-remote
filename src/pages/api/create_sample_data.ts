@@ -13,9 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       // まずis_sample_dataの記事を取得
       const data: any = await db(
         `SELECT * FROM articles WHERE is_sample_data = '1' ORDER BY created_at DESC`
-      );
-      // console.log(JSON.stringify("dataは " + data));
-      
+      );     
       const params = data.map((article: TArticle) => {
         delete article.article_id;
         delete article.created_at;
@@ -25,9 +23,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         article.user_id = user_id;
         return article
       })
-      console.log(JSON.stringify("params[0].titleは " + params[0].title));
-      console.log(JSON.stringify("params[1].titleは " + params[1].title));
-      console.log(JSON.stringify("params[2].titleは " + params[2].title));
+      // console.log(JSON.stringify("params[0].titleは " + params[0].title));
+      // console.log(JSON.stringify("params[1].titleは " + params[1].title));
+      // console.log(JSON.stringify("params[2].titleは " + params[2].title));
       // is_sample_dataの記事をコピーする
       // ↓記事の数だけ?をつける
       // const data2 = await db(`INSERT INTO articles SET ?,?,?`, [params[0],params[1],params[2]]);
@@ -63,7 +61,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         `UPDATE user_info SET is_first_sign_in = '0' WHERE user_id = ?;`,
         user_id
       );
-      console.log("data3は " + JSON.stringify(data3));
+      // console.log("data3は " + JSON.stringify(data3));
 
 
       res.end()

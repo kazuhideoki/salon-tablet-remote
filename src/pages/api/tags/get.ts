@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       Number(req.query.userId)
     );
 
-    console.log("/tags/get/は " + JSON.stringify(data));
+    // console.log("/tags/get/は " + JSON.stringify(data));
 
     return res.status(200).json({
       rawData: data,

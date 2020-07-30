@@ -1,7 +1,5 @@
 
-function About({ sessionObj }) {
-
-  console.log(sessionObj);
+function About() {
   
   return (
     <div>

@@ -63,9 +63,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const data2: any = await db(query2);
 
-      // console.log("/articles/get/のdataは " + JSON.stringify(data));
-      // console.log("/articles/get/のdata2は " + JSON.stringify(data2));
-
       return res.status(200).json({
         // tag_idsをnumber[]化する、なければnullのまま
         rawData: data.length ? tagIdsParse(data) : data,

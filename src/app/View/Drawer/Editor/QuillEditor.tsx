@@ -35,9 +35,7 @@ type Props = {
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
   setEditorImg?: React.Dispatch<React.SetStateAction<string>>,
 }
-export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }) => {
-  // console.log("QuillEditorだよ");
-  
+export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }) => {  
   
   const [hasImg, setHasImg] = React.useState(false)
   

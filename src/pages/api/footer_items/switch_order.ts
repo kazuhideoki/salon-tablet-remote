@@ -18,12 +18,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         [order, footer_item_id, order - 1]
       );
 
-      console.log(
-        "/api/footer_items/switch_order " +
-          JSON.stringify(date1) +
-          " と " +
-          JSON.stringify(date2)
-      );
+      // console.log(
+      //   "/api/footer_items/switch_order " +
+      //     JSON.stringify(date1) +
+      //     " と " +
+      //     JSON.stringify(date2)
+      // );
 
       res.status(200).json({ err: false });
 

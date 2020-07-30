@@ -11,7 +11,8 @@ import "react-quill/dist/quill.snow.css";
 // ReactQuillの整形
 import "../../public/quill.scss";
 import Head from "next/head";
-require("dotenv").config();
+import { server } from "../config";
+// require("dotenv").config();
 
 export default function MyApp({ Component, pageProps }) {
   // サーバーサイドでnext-authのsessionをつかうための修正項目
@@ -23,9 +24,12 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <title>SALON TABLET</title>
       </Head>
-      {/* ↓たまにprocess.env.SITEをうまく読み込めない */}
-      <Provider options={{ site: process.env.SITE }} session={session}>
-      {/* <Provider options={{ site: server }} session={session}> */}
+      <Provider
+        // options={{ site: process.env.NEXT_PUBLIC_SITE }}
+        options={{ site: server }}
+        session={session}
+      >
+        {/* <Provider options={{ site: server }} session={session}> */}
         <Component {...pageProps} />
       </Provider>
     </>

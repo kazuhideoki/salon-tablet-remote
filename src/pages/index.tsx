@@ -26,7 +26,7 @@ export type IndexProps = {
 
 const Index = (props: IndexProps) => {
   if (!props.data.session) {
-    console.log("porvidersは" + JSON.stringify(props.providers));
+    // console.log("porvidersは" + JSON.stringify(props.providers));
 
     return (
       <>
@@ -62,7 +62,7 @@ export async function getServerSideProps(context: NextPageContext) {
   // const sessionObj: TSessionOnj = await session({ req });
   // ↓document通りだけど、これはうまく行かない?
   const sessionObj: TSessionOnj = await getSession({ req });
-  console.log("sessionObjは " + JSON.stringify(sessionObj));
+  // console.log("sessionObjは " + JSON.stringify(sessionObj));
   let userInfo: TUserInfo;
 
   // ★★★セッションがある
@@ -85,7 +85,7 @@ export async function getServerSideProps(context: NextPageContext) {
       }
       // bcrypt_passwordはフロント側に渡さない bcrypt_passwordは削除
       delete userInfo.bcrypt_password;
-      console.log("userInfoは " + JSON.stringify(userInfo));
+      // console.log("userInfoは " + JSON.stringify(userInfo));
 
 
       let data
@@ -94,7 +94,7 @@ export async function getServerSideProps(context: NextPageContext) {
       let data4
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
-        console.log("indexのis_first_sign_inのとこだよ");
+        // console.log("indexのis_first_sign_inのとこだよ");
         
         const res = await fetch(`http://localhost:3000/api/create_sample_data`, {
           headers: { "Content-Type": "application/json" },
@@ -142,7 +142,7 @@ export async function getServerSideProps(context: NextPageContext) {
       data4 = await res4.json();
       // access_tokenはフロント側に渡さない access_tokenは削除
       delete data4.access_token;
-      console.log("instagram_accounts（data4）は " + JSON.stringify(data4));
+      // console.log("instagram_accounts（data4）は " + JSON.stringify(data4));
 
 
 
@@ -167,9 +167,7 @@ export async function getServerSideProps(context: NextPageContext) {
   // ※もしかしたら↓うまく行かないこともあるかもしれないが、スッキリさせた
   // ★★★セッションがない
   if (sessionObj === null || !userInfo) {
-    // const token = await csrfToken(context);
     const token = await getCsrfToken();
-    console.log("index,getServerSidePropsのcsrfToken" + JSON.stringify(token));
     return {
       props: {
         data: {

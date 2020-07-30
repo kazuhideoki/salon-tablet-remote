@@ -28,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       sessionObj.user.email
     );
 
-    console.log("/user_info/get/は " + data);
+    // console.log("/user_info/get/は " + data);
 
     // return res.status(200).json({
     //   data: data[0],

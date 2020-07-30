@@ -50,9 +50,7 @@ export const IconsSetting = class {
     const targetIcon = this.icons.find((value) => {
       return value[1] == titleText
     });
-
-    // console.log(targetIcon);
-
+    
     if (targetIcon) {
       return targetIcon;
     } else {

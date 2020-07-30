@@ -6,7 +6,7 @@ import {
   Theme,
   Button,
 } from "@material-ui/core";
-import { server } from '../../../config';
+import { server, instagramRedirectHost } from '../../../config';
 import Link from "next/link";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,16 +25,14 @@ export const ManageInstagmaAccounts = () => {
     //   `https://${server}/instagram_accounts/connect_short`
     // );
     fetch(
-      `https://api.instagram.com/oauth/authorize?client_id=298521954536312&redirect_uri=${server}/api/connect_long/&scope=user_profile,user_media&response_type=code`
+      `https://api.instagram.com/oauth/authorize?client_id=298521954536312&redirect_uri=${server}/api/get_token/&scope=user_profile,user_media&response_type=code`
     );
 
   }
 
-  const host = process.env.NODE_ENV === 'production' ? process.env.SITE : "https://localhost:3000"
+  // https://api.instagram.com/oauth/authorize?client_id=298521954536312&redirect_uri=https://localhost:3000/api/instagram_accounts/get_token/&scope=user_profile,user_media&response_type=code
 
-  // https://api.instagram.com/oauth/authorize?client_id=298521954536312&redirect_uri=https://localhost:3000/api/instagram_accounts/connect_long/&scope=user_profile,user_media&response_type=code
-
-  const instaAuth = `https://api.instagram.com/oauth/authorize?client_id=298521954536312&redirect_uri=${host}/api/instagram_accounts/connect_long/&scope=user_profile,user_media&response_type=code`;
+  const instaAuth = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${instagramRedirectHost}/api/instagram_accounts/get_token&scope=user_profile,user_media&response_type=code`;
 
   return (
     <div>
@@ -45,7 +43,7 @@ export const ManageInstagmaAccounts = () => {
         インスタグラムアカウントを登録する
       </Button> */}
       <Button>
-        {/* <Link href="https://api.instagram.com/oauth/authorize?client_id=298521954536312&redirect_uri=${server}/api/instagram_accounts/connect_long/&scope=user_profile,user_media&response_type=code" >
+        {/* <Link href="https://api.instagram.com/oauth/authorize?client_id=298521954536312&redirect_uri=${server}/api/instagram_accounts/get_token/&scope=user_profile,user_media&response_type=code" >
           インスタグラムアカウントを登録する
         </Link> */}
         <a href={instaAuth}>インスタグラムアカウントを登録する</a>

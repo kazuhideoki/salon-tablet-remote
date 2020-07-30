@@ -46,13 +46,13 @@ export const checkImg = (
 
 export const removeImg = (elementName) => {
   const editor = document.getElementsByClassName(elementName);
-  console.log(editor);
+  // console.log(editor);
 
   for (const key in editor) {
     if (editor.hasOwnProperty(key)) {
       const element = editor[key];
       const imgs = element.querySelectorAll("img");
-      console.log(imgs);
+      // console.log(imgs);
 
       if (imgs) {
         imgs.forEach((element) => {

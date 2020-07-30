@@ -8,7 +8,7 @@ import { server } from "../../../config";
 
 
 const options = {
-  // site: process.env.SITE,
+  // site: process.env.NEXT_PUBLIC_SITE,
   site: server,
   providers: [
     Providers.Email({
@@ -17,12 +17,16 @@ const options = {
     }),
     Providers.Facebook({
       clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     }),
     Providers.Credentials({
       authorize: async (credentials) => authorizeCredentials(credentials),
       credentials: {
-        email: { label: "Email", type: "text ", placeholder: "email@example.com" },
+        email: {
+          label: "Email",
+          type: "text ",
+          placeholder: "email@example.com",
+        },
         password: { label: "Password", type: "password" },
       },
     }),
@@ -52,22 +56,22 @@ const options = {
   //       JSON.stringify(
   //         "callbacks jwtだよ tokenは " +
   //           JSON.stringify(token) +
-    //         " oAuthProfileは " +
-    //         JSON.stringify(oAuthProfile)
-    //     )
-    //   );
-    //   return Promise.resolve(token);
-    // },
-    // redirect: async (url, baseUrl) => {
-    //   console.log(
-    //     JSON.stringify(
-    //       "callbacks redirectだよ urlは " + url + " baseUrlは " + baseUrl
-    //     )
-    //   );
-    //   return url.startsWith(baseUrl)
-    //     ? Promise.resolve(url)
-    //     : Promise.resolve(baseUrl);
-    // },
+  //         " oAuthProfileは " +
+  //         JSON.stringify(oAuthProfile)
+  //     )
+  //   );
+  //   return Promise.resolve(token);
+  // },
+  // redirect: async (url, baseUrl) => {
+  //   console.log(
+  //     JSON.stringify(
+  //       "callbacks redirectだよ urlは " + url + " baseUrlは " + baseUrl
+  //     )
+  //   );
+  //   return url.startsWith(baseUrl)
+  //     ? Promise.resolve(url)
+  //     : Promise.resolve(baseUrl);
+  // },
   // },
 
   sessionMaxAge: 24 * 60 * 60 * 1000, // Expire sessions

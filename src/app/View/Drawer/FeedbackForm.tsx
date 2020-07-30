@@ -28,7 +28,6 @@ const useFeedbackFormProps = () => {
     //   contactFormContent,
     // });
     const result = await submitFeedback({ contactFormTitle, contactFormContent });
-    // console.log("FeedbackForm.tsxのresultは " + result);
     console.log("FeedbackForm.tsxのresultは " + result);
     
 
