@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../config";
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { TSessionOnj } from '../../index'
+import { getUserInfoFromEmailServerSide } from "../lib/getUserInfoFromEmail";
 
 var FormData = require("form-data");
 
@@ -65,8 +66,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const userProfile = await response3.json();
         console.log("userProfileは " + JSON.stringify(userProfile));
 
-        const sessionObj2: TSessionOnj = await getSession({ req });
-        console.log("sessionObj2は " + JSON.stringify(sessionObj2));
+        const sessionObj: TSessionOnj = await getSession({ req });
+        console.log("sessionObj2は " + JSON.stringify(sessionObj));
+        const { user_id } = await getUserInfoFromEmailServerSide(
+          sessionObj.user.email
+        );
         
 
         const params = {
@@ -74,18 +78,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           // instagramアカウントのusername
           username: userProfile.username,
           // ↓取得方法がないかも？
-          profile_img: '',
+          profile_img: "",
           access_token: longLived.access_token,
           expires: null, // いつか実装
           // SALON TABLETのuser_id
-          user_id: null, // ★★★要実装★★★
-        }
+          user_id: user_id,
+        };
 
         console.log(JSON.stringify(params));
         
         // DBに保存する
-        // const data3 = db(`INSERT instagram_accounts  = ?, access_token = ?`)
-
+        const data3 = await db(`INSERT INTO instagram_accounts SET ?`, params)
 
         res.writeHead(302, {Location: "/",});
         res.end();

@@ -9,6 +9,8 @@ import { NextPageContext } from "next";
 import { TopPage } from "../pageComponent/TopPage";
 import { T_articles_get } from "./api/articles/get";
 import { localhost } from "../config";
+import { getUserInfoFromEmailServerSide } from "./api/lib/getUserInfoFromEmail";
+import { apiFooterItemsGet } from "./api/footer_items/get";
 
 export type IndexProps = {
   data: {
@@ -58,22 +60,14 @@ export type TSessionOnj = {
 
 export async function getServerSideProps(context: NextPageContext) {  
 
-  // apiでうまく実装できなかったので、とりあえずここに直接書いておく ※要リファクタリング
   const req = context.req;
-  // const sessionObj: TSessionOnj = await session({ req });
-  // ↓document通りだけど、これはうまく行かない?
   const sessionObj: TSessionOnj = await getSession({ req });
-  // console.log("sessionObjは " + JSON.stringify(sessionObj));
+  console.log("index.tsxのsessionObjは " + JSON.stringify(sessionObj));
   let userInfo: TUserInfo;
 
   // ★★★セッションがある
   if (sessionObj !== null) {
-    const res = await db(
-      "select * from `user_info` where `user_email` = ?",
-      sessionObj.user.email
-    );
-    userInfo = res[0];
-    const { user_id } = userInfo
+    const userInfo = await getUserInfoFromEmailServerSide(sessionObj.user.email)
 
     // ★★★ユーザーデータがある
     if (userInfo) {
@@ -90,7 +84,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
 
       let data
-      let data2
+      // let data2
       let data3
       let data4
       // ★★★最初のサインイン サンプルデータの追加
@@ -102,7 +96,7 @@ export async function getServerSideProps(context: NextPageContext) {
           headers: { "Content-Type": "application/json" },
           method: "POST",
           mode: "cors",
-          body: JSON.stringify(user_id),
+          body: JSON.stringify(userInfo.user_id),
         });
 
         
@@ -127,11 +121,7 @@ export async function getServerSideProps(context: NextPageContext) {
       data = await res.json();
 
       // アイテム一覧取得
-      const res2 = await fetch(
-        // `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
-        `${localhost}/api/footer_items/get?userId=${userInfo.user_id}`
-      );
-      data2 = await res2.json();
+      const data2 = await apiFooterItemsGet(userInfo.user_id)
 
       // タグ一覧取得
 
@@ -147,10 +137,8 @@ export async function getServerSideProps(context: NextPageContext) {
       );
       data4 = await res4.json();
       // access_tokenはフロント側に渡さない access_tokenは削除
-      delete data4.access_token;
+      // delete data4.access_token;
       // console.log("instagram_accounts（data4）は " + JSON.stringify(data4));
-
-
 
       return {
         props: {
@@ -172,19 +160,19 @@ export async function getServerSideProps(context: NextPageContext) {
 
   // ※もしかしたら↓うまく行かないこともあるかもしれないが、スッキリさせた
   // ★★★セッションがない
-  if (sessionObj === null || !userInfo) {
-    const token = await getCsrfToken();
-    return {
-      props: {
-        data: {
-          session: null,
-        },
-        csrfToken: token,
-        providers: await providers(context),
-        // instagram_access_denied: context.query.instagram_access_denied || false,
+  
+  const token = await getCsrfToken();
+  return {
+    props: {
+      data: {
+        session: null,
       },
-    };
-  }
+      csrfToken: token,
+      providers: await providers(context),
+      // instagram_access_denied: context.query.instagram_access_denied || false,
+    },
+  };
+  
 }
 
 export default Index;

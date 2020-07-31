@@ -11,6 +11,6 @@ export const server = dev
 
 // instagram apiでは、redirect uriにdev環境でもhttpsが必要。
 export const instagramRedirectHost = dev
-         ? process.env.NEXT_PUBLIC_VAGRANT_HOST
-         : "https://salon-tablet.com";
+  ? process.env.NEXT_PUBLIC_VAGRANT_HOST
+  : "https://salon-tablet.com";
 

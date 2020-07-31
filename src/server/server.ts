@@ -1,3 +1,8 @@
+// 開発環境でinstagram apiのコールバックでhttpsにつなげつ必要がある。
+// そのためにcustom serverを作って https化
+// npm run httpsで起動できる。
+
+
 const { createServer } = require("https");
 const { parse } = require("url");
 const { readFileSync } = require("fs");

@@ -132,15 +132,17 @@ export type T_instagram_username = string
 export type T_profile_img = string
 export type T_expires = string
 export type T_created_at_instagram_account = string
+export type T_updated_at_instagram_account = string
 
 export type TInstagramAccount = {
-  instagram_id: T_instagram_id
-  username: T_instagram_username
-  profile_img: T_profile_img
-  expires: T_expires
-  user_id: T_user_id
-  created_at_instagram_account: T_created_at_instagram_account
-}
+  instagram_id: T_instagram_id;
+  username: T_instagram_username;
+  profile_img: T_profile_img;
+  expires: T_expires;
+  user_id: T_user_id;
+  created_at: T_created_at_instagram_account;
+  updated_at: T_updated_at_instagram_account;
+};
 export type TInstagramAccounts = TInstagramAccount[]
 
 const initAppState = {

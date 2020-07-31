@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     //@ts-ignore
     const data: TInstagramAccounts = await db(
-      "SELECT * FROM instagram_accounts WHERE user_id = ?",
+      "SELECT instagram_id, username, profile_img, expires, user_id, created_at, updated_at FROM instagram_accounts WHERE user_id = ?",
       // queryは文字列で来るため
       Number(req.query.userId)
     );

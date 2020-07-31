@@ -1,9 +1,21 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { checkOrders } from "../lib/checkOrders";
-import { FooterItems } from "../../../app/Store/Store";
+import { FooterItems, T_user_id } from "../../../app/Store/Store";
 import { correctOrders } from "../lib/correctOrders";
 import { changeToBooleanFromNumber } from "../lib/changeToBooleanFromNumber";
+import { localhost, server } from "../../../config";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiFooterItemsGet = async (user_id: T_user_id): Promise<FooterItems> => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(
+      `${str}/api/footer_items/get?userId=${user_id}`
+  )
+
+  return await res.json();
+}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
