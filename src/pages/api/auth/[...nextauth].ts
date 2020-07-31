@@ -1,11 +1,7 @@
-//@ts-ignore
 import NextAuth from "next-auth";
-//@ts-ignore
 import Providers from "next-auth/providers";
 import authorizeCredentials from "../lib/authorizeCredentials";
 import { server } from "../../../config";
-// これで環境変数(.envファイル)が使えるようになる
-
 
 const options = {
   // site: process.env.NEXT_PUBLIC_SITE,

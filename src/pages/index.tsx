@@ -46,7 +46,7 @@ const Index = (props: IndexProps) => {
   );
 };
 
-type TSessionOnj = {
+export type TSessionOnj = {
   user: {
     name: string | null;
     email: string | null;
