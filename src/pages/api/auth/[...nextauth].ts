@@ -4,7 +4,6 @@ import authorizeCredentials from "../lib/authorizeCredentials";
 import { server } from "../../../config";
 
 const options = {
-  // site: process.env.NEXT_PUBLIC_SITE,
   site: server,
   providers: [
     Providers.Email({

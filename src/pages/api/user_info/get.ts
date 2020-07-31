@@ -3,15 +3,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 //@ts-ignore
 import { session } from "next-auth/client";
 
+
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const sessionObj = await session({ req });
   // sessionがなければ(ユーザーがサインインしてなければ)user_infoは渡さない
-  // console.log("sessionObjは" + JSON.stringify(sessionObj));
   
   if (!sessionObj) {
-    // return res.status(200).json({
-    //   data: null
-    // });
+  
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.end(
@@ -22,11 +21,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    // これだめ → ORDER BY user_id, LIMIT 1
     const data = await db(
-      "select * from `user_info` where `user_email` = ?",
+      "select user_id, user_name, shop_name, user_email, created_at, updated_at, is_first_sign_in, selected_theme from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
+
+    const userInfo = data[0];
+
+     // ★★★ パスワードの有無
+      if (userInfo.bcrypt_password) {
+        userInfo.isSetPassword = true;
+      } else {
+        userInfo.isSetPassword = false;
+      }
 
     // console.log("/user_info/get/は " + data);
 

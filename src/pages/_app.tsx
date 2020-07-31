@@ -25,7 +25,6 @@ export default function MyApp({ Component, pageProps }) {
         <title>SALON TABLET</title>
       </Head>
       <Provider
-        // options={{ site: process.env.NEXT_PUBLIC_SITE }}
         options={{ site: server }}
         session={session}
       >

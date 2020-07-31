@@ -9,7 +9,7 @@ import { NextPageContext } from "next";
 import { TopPage } from "../pageComponent/TopPage";
 import { T_articles_get, apiArticlesGet } from "./api/articles/get";
 import { localhost } from "../config";
-import { getUserInfoFromEmailServerSide } from "./api/lib/getUserInfoFromEmail";
+import { getUserInfoFromEmail } from "./api/lib/getUserInfoFromEmail";
 import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
@@ -69,7 +69,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
   // ★★★セッションがある
   if (sessionObj !== null) {
-    const userInfo = await getUserInfoFromEmailServerSide(sessionObj.user.email)
+    const userInfo = await getUserInfoFromEmail(sessionObj.user.email)
 
     // ★★★ユーザーデータがある
     if (userInfo) {

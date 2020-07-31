@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../config";
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { TSessionOnj } from '../../index'
-import { getUserInfoFromEmailServerSide } from "../lib/getUserInfoFromEmail";
+import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 
 var FormData = require("form-data");
 
@@ -68,7 +68,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         const sessionObj: TSessionOnj = await getSession({ req });
         console.log("sessionObj2は " + JSON.stringify(sessionObj));
-        const { user_id } = await getUserInfoFromEmailServerSide(
+        const { user_id } = await getUserInfoFromEmail(
           sessionObj.user.email
         );
         

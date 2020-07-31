@@ -78,7 +78,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       getTagedPages + `ORDER BY created_at DESC LIMIT ` +
       offSet +
       ` 5`;
-      console.log(query);
       
     try {
          
@@ -92,9 +91,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         getTagedPages;
       console.log(query2);
 
-      const data2: any = await db(query2);
-      console.log("長さはあるのかい？ " + data.length);
-      
+      const data2: any = await db(query2);      
 
       const returnData: TApiArticlesGetResponse = {
         // tag_idsをnumber[]化する、なければnullのまま
