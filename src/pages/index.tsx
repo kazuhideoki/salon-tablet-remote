@@ -8,6 +8,7 @@ import { NextPageContext } from "next";
 //@ts-ignore
 import { TopPage } from "../pageComponent/TopPage";
 import { T_articles_get } from "./api/articles/get";
+import { localhost } from "../config";
 
 export type IndexProps = {
   data: {
@@ -96,7 +97,8 @@ export async function getServerSideProps(context: NextPageContext) {
       if (userInfo.is_first_sign_in) {
         // console.log("indexのis_first_sign_inのとこだよ");
         
-        const res = await fetch(`http://localhost:3000/api/create_sample_data`, {
+        // const res = await fetch(`http://localhost:3000/api/create_sample_data`, {
+        const res = await fetch(`${localhost}/api/create_sample_data`, {
           headers: { "Content-Type": "application/json" },
           method: "POST",
           mode: "cors",
@@ -114,7 +116,8 @@ export async function getServerSideProps(context: NextPageContext) {
         isSetting: true,
         userId: userInfo.user_id,
       };
-      const res = await fetch(`http://localhost:3000/api/articles/get`, {
+      // const res = await fetch(`http://localhost:3000/api/articles/get`, {
+      const res = await fetch(`${localhost}/api/articles/get`, {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         mode: "cors",
@@ -125,19 +128,22 @@ export async function getServerSideProps(context: NextPageContext) {
 
       // アイテム一覧取得
       const res2 = await fetch(
-        `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
+        // `http://localhost:3000/api/footer_items/get?userId=${userInfo.user_id}`
+        `${localhost}/api/footer_items/get?userId=${userInfo.user_id}`
       );
       data2 = await res2.json();
 
       // タグ一覧取得
 
       const res3 = await fetch(
-        `http://localhost:3000/api/tags/get?userId=${userInfo.user_id}`
+        // `http://localhost:3000/api/tags/get?userId=${userInfo.user_id}`
+        `${localhost}/api/tags/get?userId=${userInfo.user_id}`
       );
       data3 = await res3.json();
 
       const res4 = await fetch(
-        `http://localhost:3000/api/instagram_accounts/get?userId=${userInfo.user_id}`
+        // `http://localhost:3000/api/instagram_accounts/get?userId=${userInfo.user_id}`
+        `${localhost}/api/instagram_accounts/get?userId=${userInfo.user_id}`
       );
       data4 = await res4.json();
       // access_tokenはフロント側に渡さない access_tokenは削除

@@ -1,6 +1,6 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { server, instagramRedirectHost } from "../../../config";
+import { server, instagramRedirectHost, localhost } from "../../../config";
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { TSessionOnj } from '../../index'
 
@@ -65,13 +65,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const userProfile = await response3.json();
         console.log("userProfileは " + JSON.stringify(userProfile));
 
-        const resopnse4 = await fetch(
-          `${process.env.NEXT_PUBLIC_SITE}/api/auth/session`
-        );
-
-        const sessionObj: TSessionOnj = await resopnse4.json()
-
-        console.log("sessionObjは " + JSON.stringify(sessionObj));
+        const sessionObj2: TSessionOnj = await getSession({ req });
+        console.log("sessionObj2は " + JSON.stringify(sessionObj2));
         
 
         const params = {
@@ -92,8 +87,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         // const data3 = db(`INSERT instagram_accounts  = ?, access_token = ?`)
 
 
-        res.status(302).write("/");
+        res.writeHead(302, {Location: "/",});
         res.end();
+
       } catch (err) {
     console.log(
       "/instagram_accounts/get_token/のエラーは " + JSON.stringify(err)

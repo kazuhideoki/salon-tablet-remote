@@ -9,7 +9,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { ContactMail } from "@material-ui/icons";
 //@ts-ignore
-import { signin, signout, useSession, getSession } from "next-auth/client";
 import { useUpdateUser } from "../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../Store/Store";
 import { Divider, ListItem } from "@material-ui/core";

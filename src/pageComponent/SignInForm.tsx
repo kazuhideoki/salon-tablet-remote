@@ -180,27 +180,3 @@ export const SignInForm = (props) => {
     <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} providers={props.providers}/>
   );
 };
-
-const log = {
-  "email": {
-    "id": "email",
-    "name": "Email",
-    "type": "email",
-    "signinUrl": "http://localhost:3000/api/auth/signin/email",
-    "callbackUrl": "http://localhost:3000/api/auth/callback/email"
-  },
-  "facebook": {
-    "id": "facebook",
-    "name": "Facebook",
-    "type": "oauth",
-    "signinUrl": "http://localhost:3000/api/auth/signin/facebook",
-    "callbackUrl": "http://localhost:3000/api/auth/callback/facebook"
-  },
-  "credentials": {
-    "id": "credentials",
-    "name": "Credentials",
-    "type": "credentials",
-    "signinUrl": "http://localhost:3000/api/auth/signin/credentials",
-    "callbackUrl": "http://localhost:3000/api/auth/callback/credentials"
-  }
-}

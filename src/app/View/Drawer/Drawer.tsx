@@ -17,13 +17,12 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
 import { ThemeContext } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
 //@ts-ignore
-import { signin, signout, useSession, getSession } from "next-auth/client";
+import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
 import { cipher } from "../../../module/bcrypt";
 import { TagsButton } from "../Footer/Pagination/TagsButton";

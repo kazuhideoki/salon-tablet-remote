@@ -6,8 +6,7 @@ import {
   Theme,
   Button,
 } from "@material-ui/core";
-import { server, instagramRedirectHost } from '../../../config';
-import Link from "next/link";
+import { instagramRedirectHost } from '../../../config';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
