@@ -4,7 +4,6 @@ const dev = process.env.NODE_ENV !== "production";
 export const localhost = process.env.HTTPS || "http://localhost:3000";
 
 // フロント側でapiにfetchする時
-
 export const server = dev
   ? process.env.HTTPS || "http://localhost:3000"
   : "https://salon-tablet.com";

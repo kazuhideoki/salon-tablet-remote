@@ -2,7 +2,7 @@ import React from "react";
 import {
   Store,
 } from "../../Store/Store";
-import { T_articles_get } from "../../../pages/api/articles/get";
+import { T_articles_get, apiArticlesGet } from "../../../pages/api/articles/get";
 
 export const useGetArticles = () => {
   const {
@@ -26,17 +26,7 @@ export const useGetArticles = () => {
       userId: userInfo.user_id,
     };
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/articles/get`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(params),
-      }
-    );
-
-    const data = await res.json();
+    const data = await apiArticlesGet(params)
 
     if (data.err === true) {
       alert("記事を取得できませんでした");

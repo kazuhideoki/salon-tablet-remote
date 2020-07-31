@@ -5,9 +5,10 @@ import { FooterItems, T_user_id } from "../../../app/Store/Store";
 import { correctOrders } from "../lib/correctOrders";
 import { changeToBooleanFromNumber } from "../lib/changeToBooleanFromNumber";
 import { localhost, server } from "../../../config";
+import { TApiResponse, TApiError } from "../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiFooterItemsGet = async (user_id: T_user_id): Promise<FooterItems> => {
+export const apiFooterItemsGet = async (user_id: T_user_id): Promise<TApiResponse<FooterItems>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(
@@ -41,13 +42,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     // console.log("/footer_items/get/は " + JSON.stringify(data));
 
+    return res.status(200).json(correctedData);
 
-    return res.status(200).json({
-      rawData: correctedData,
-    });
   } catch (err) {
     console.log("/footer_items/get/のエラーは " + JSON.stringify(err));
-    return res.status(500).json({ err: true, data: { message: err.message } });
+    const errOnj:TApiError = { err: true, data: { message: err.message } }
+    return res.status(500).json(errOnj);
   }
 };
 

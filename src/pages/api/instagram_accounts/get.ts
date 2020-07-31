@@ -1,6 +1,17 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TInstagramAccounts } from "../../../app/Store/Store";
+import { TInstagramAccounts, T_user_id } from "../../../app/Store/Store";
+import { TApiResponse } from "../lib/apiTypes";
+import { server, localhost } from "../../../config";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiResponse<TInstagramAccounts>> => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(`${str}/api/instagram_accounts/get?userId=${user_id}`);
+
+  return await res.json();
+} 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {

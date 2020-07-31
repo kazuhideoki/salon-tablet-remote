@@ -1,6 +1,19 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TTags } from "../../../app/Store/Store";
+import { TTags, T_user_id } from "../../../app/Store/Store";
+import { server, localhost } from "../../../config";
+import { TApiResponse, TApiError } from "../lib/apiTypes";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiTagsGet = async (user_id: T_user_id): Promise<TApiResponse<TTags>> => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(
+      `${str}/api/tags/get?userId=${user_id}`
+  )
+
+  return await res.json();
+}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -13,12 +26,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     // console.log("/tags/get/は " + JSON.stringify(data));
 
-    return res.status(200).json({
-      rawData: data,
-    });
+    return res.status(200).json(data);
   } catch (err) {
     console.log("/tags/get/のエラーは " + JSON.stringify(err));
-    return res.status(500).json({ err: true, data: { message: err.message } });
+    const errOnj: TApiError = { err: true, data: { message: err.message } };
+    return res.status(500).json(errOnj);
   }
 };
 

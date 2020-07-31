@@ -2,23 +2,20 @@ import React from "react";
 import {
   Store,
 } from "../../Store/Store";
+import { apiFooterItemsGet } from "../../../pages/api/footer_items/get";
 
 export const useGetFooterItems = () => {
   const { dispatchFooterItems, dispatchAppState, userInfo } = React.useContext(Store);
 
   return async () => {
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/footer_items/get?userId=${userInfo.user_id}`
-    );
-
-    let data = await res.json();
+    const data = await apiFooterItemsGet(userInfo.user_id)
 
     if (data.err === true) {
       alert("取得できませんでした");
     } else {
       dispatchFooterItems({
         type: "GET",
-        payload: data.rawData,
+        payload: data,
       });
       dispatchAppState({ type: "END_LOADING" });
     }

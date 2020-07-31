@@ -1,8 +1,27 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { tagIdsParse } from "../lib/tagIdsParse";
-import { T_user_id } from "../../../app/Store/Store";
+import { T_user_id, TArticles } from "../../../app/Store/Store";
+import { TApiResponse } from "../lib/apiTypes";
+import { server, localhost } from "../../../config";
 // import { session } from "next-auth/client";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<TApiArticlesGetResponse>> => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(
+    `${str}/api/articles/get?userId=${articlesParam.userId}`,
+    {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify(articlesParam),
+    }
+  );
+
+  return await res.json();
+} 
 
 export type T_articles_get = {
   page: number
@@ -10,6 +29,18 @@ export type T_articles_get = {
   isSetting: boolean;
   userId: T_user_id;
 };
+
+export type TPaginationReturn = {
+  page: number,
+  pageCount: number,
+  pageSize: number,
+  rowCount: number,
+};
+
+export type TApiArticlesGetResponse = {
+  rawData: TArticles,
+  pagination: TPaginationReturn
+}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -62,8 +93,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       console.log(query2);
 
       const data2: any = await db(query2);
+      console.log("長さはあるのかい？ " + data.length);
+      
 
-      return res.status(200).json({
+      const returnData: TApiArticlesGetResponse = {
         // tag_idsをnumber[]化する、なければnullのまま
         rawData: data.length ? tagIdsParse(data) : data,
         pagination: {
@@ -72,7 +105,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           pageSize: 5,
           rowCount: data2.length,
         },
-      });
+      }
+
+      return res.status(200).json(returnData);
+
     } catch (err) {
       console.log("/articles/get/のエラーは " + JSON.stringify(err));
 

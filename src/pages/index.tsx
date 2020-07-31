@@ -7,10 +7,12 @@ import { db } from "./api/lib/db";
 import { NextPageContext } from "next";
 //@ts-ignore
 import { TopPage } from "../pageComponent/TopPage";
-import { T_articles_get } from "./api/articles/get";
+import { T_articles_get, apiArticlesGet } from "./api/articles/get";
 import { localhost } from "../config";
 import { getUserInfoFromEmailServerSide } from "./api/lib/getUserInfoFromEmail";
 import { apiFooterItemsGet } from "./api/footer_items/get";
+import { apiTagsGet } from "./api/tags/get";
+import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 
 export type IndexProps = {
   data: {
@@ -83,10 +85,6 @@ export async function getServerSideProps(context: NextPageContext) {
       // console.log("userInfoは " + JSON.stringify(userInfo));
 
 
-      let data
-      // let data2
-      let data3
-      let data4
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
         // console.log("indexのis_first_sign_inのとこだよ");
@@ -98,9 +96,6 @@ export async function getServerSideProps(context: NextPageContext) {
           mode: "cors",
           body: JSON.stringify(userInfo.user_id),
         });
-
-        
-
       }
 
       // 記事一覧取得
@@ -110,44 +105,25 @@ export async function getServerSideProps(context: NextPageContext) {
         isSetting: true,
         userId: userInfo.user_id,
       };
-      // const res = await fetch(`http://localhost:3000/api/articles/get`, {
-      const res = await fetch(`${localhost}/api/articles/get`, {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(articlesParam),
-      });
-
-      data = await res.json();
+      const data = await apiArticlesGet(articlesParam)      
 
       // アイテム一覧取得
       const data2 = await apiFooterItemsGet(userInfo.user_id)
 
       // タグ一覧取得
+      const data3 = await apiTagsGet(userInfo.user_id)
 
-      const res3 = await fetch(
-        // `http://localhost:3000/api/tags/get?userId=${userInfo.user_id}`
-        `${localhost}/api/tags/get?userId=${userInfo.user_id}`
-      );
-      data3 = await res3.json();
-
-      const res4 = await fetch(
-        // `http://localhost:3000/api/instagram_accounts/get?userId=${userInfo.user_id}`
-        `${localhost}/api/instagram_accounts/get?userId=${userInfo.user_id}`
-      );
-      data4 = await res4.json();
-      // access_tokenはフロント側に渡さない access_tokenは削除
-      // delete data4.access_token;
-      // console.log("instagram_accounts（data4）は " + JSON.stringify(data4));
+      // Instagram連携アカウント一覧取得
+      const data4 = await apiInstagramAccountsGet(userInfo.user_id)
 
       return {
         props: {
           data: {
-            articles: data ? data.rawData : [],
-            pagination: data ? data.pagination : [],
-            footerItems: data2 ? data2.rawData : [],
-            tags: data3 ? data3.rawData : [],
-            instagramAccounts: data4 ? data4.rawData : [],
+            articles: data.err ? [] : data.rawData,
+            pagination: data.err ? [] : data.pagination,
+            footerItems: data2.err ? [] : data2,
+            tags: data3.err ? [] : data3,
+            instagramAccounts: data4.err ? [] : data4,
             // JSONのエラーになったので、このような書き方↓
             session: userInfo && JSON.parse(JSON.stringify(userInfo)),
           },
