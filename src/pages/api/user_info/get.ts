@@ -22,24 +22,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const data = await db(
-      "select user_id, user_name, shop_name, user_email, created_at, updated_at, is_first_sign_in, selected_theme from `user_info` where `user_email` = ?",
+      "select * from `user_info` where `user_email` = ?",
       sessionObj.user.email
     );
 
     const userInfo = data[0];
 
-     // ★★★ パスワードの有無
-      if (userInfo.bcrypt_password) {
-        userInfo.isSetPassword = true;
-      } else {
-        userInfo.isSetPassword = false;
-      }
+    // ★★★ パスワードの有無
+    if (userInfo.bcrypt_password) {
+      userInfo.isSetPassword = true;
+    } else {
+      userInfo.isSetPassword = false;
+    }
+    // bcrypt_passwordはフロント側に渡さない bcrypt_passwordは削除
+    delete userInfo.bcrypt_password;
 
-    // console.log("/user_info/get/は " + data);
-
-    // return res.status(200).json({
-    //   data: data[0],
-    // });
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.end(

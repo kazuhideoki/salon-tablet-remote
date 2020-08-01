@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../config";
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { TSessionOnj } from '../../index'
-import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
+import { ApiUserInfoGetFromEmail } from "../user_info/getUserInfoFromEmail";
 
 var FormData = require("form-data");
 
@@ -68,7 +68,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         const sessionObj: TSessionOnj = await getSession({ req });
         console.log("sessionObj2は " + JSON.stringify(sessionObj));
-        const { user_id } = await getUserInfoFromEmail(
+        const { user_id } = await ApiUserInfoGetFromEmail(
           sessionObj.user.email
         );
         
@@ -88,16 +88,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         console.log(JSON.stringify(params));
         
         // DBに保存する
-        const data3 = await db(`INSERT INTO instagram_accounts SET ?`, params)
+        const data3 = await db(
+          // すでにデータが有れば上書きする（作動している？）
+          `INSERT INTO instagram_accounts SET ? ON DUPLICATE KEY UPDATE ?`,
+          [params, params]
+        );
 
-        res.writeHead(302, {Location: "/",});
+        res.writeHead(302, {Location: `/err=false&msg=Instagramアカウントを登録しました`});
         res.end();
 
       } catch (err) {
     console.log(
       "/instagram_accounts/get_token/のエラーは " + JSON.stringify(err)
     );
-    return res.status(500).json({ err: true, data: { message: err.message } });
+    // ※ エラー処理も追加するひつようあり。。。。
+    res.writeHead(302, { Location: `/?err=true&msg=Instagramアカウント登録エラー` });
+    res.end();
   }
 };
 

@@ -4,15 +4,16 @@ import { App } from "../app/View/App";
 //@ts-ignore
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { db } from "./api/lib/db";
-import { NextPageContext } from "next";
+import { NextPageContext, GetServerSideProps } from "next";
 //@ts-ignore
 import { TopPage } from "../pageComponent/TopPage";
 import { T_articles_get, apiArticlesGet } from "./api/articles/get";
 import { localhost } from "../config";
-import { getUserInfoFromEmail } from "./api/lib/getUserInfoFromEmail";
+import { ApiUserInfoGetFromEmail } from "./api/user_info/getUserInfoFromEmail";
 import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
+import { AddAlert } from "@material-ui/icons";
 
 export type IndexProps = {
   data: {
@@ -26,12 +27,12 @@ export type IndexProps = {
   csrfToken?: any;
   providers?: any
   bcrypt_password?: string;
-  // instagram_access_denied?: boolean
+  message?: string
 };
 
 const Index = (props: IndexProps) => {
+
   if (!props.data.session) {
-    // console.log("porvidersは" + JSON.stringify(props.providers));
 
     return (
       <>
@@ -41,7 +42,11 @@ const Index = (props: IndexProps) => {
 
   }
 
-  // props.instagram_access_denied ? alert('インスタグラムアカウントのせつぞくができませんでした。') : null
+  // React.useEffect(() => {
+  //   if (props.message && process.browser) {
+  //     alert(props.message)
+  //   }    
+  // },[])
 
   // テーマ、記事データ、appの状態管理を読み込む
   return (
@@ -60,7 +65,7 @@ export type TSessionOnj = {
   expires: string | null;
 };
 
-export async function getServerSideProps(context: NextPageContext) {  
+export const getServerSideProps: GetServerSideProps =  async (context) => {  
 
   const req = context.req;
   const sessionObj: TSessionOnj = await getSession({ req });
@@ -69,27 +74,15 @@ export async function getServerSideProps(context: NextPageContext) {
 
   // ★★★セッションがある
   if (sessionObj !== null) {
-    const userInfo = await getUserInfoFromEmail(sessionObj.user.email)
+    const userInfo = await ApiUserInfoGetFromEmail(sessionObj.user.email);
 
     // ★★★ユーザーデータがある
     if (userInfo) {
-
-      // ★★★ パスワードの有無
-      if (userInfo.bcrypt_password) {
-        userInfo.isSetPassword = true;
-      } else {
-        userInfo.isSetPassword = false;
-      }
-      // bcrypt_passwordはフロント側に渡さない bcrypt_passwordは削除
-      delete userInfo.bcrypt_password;
-      // console.log("userInfoは " + JSON.stringify(userInfo));
-
 
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
         // console.log("indexのis_first_sign_inのとこだよ");
         
-        // const res = await fetch(`http://localhost:3000/api/create_sample_data`, {
         const res = await fetch(`${localhost}/api/create_sample_data`, {
           headers: { "Content-Type": "application/json" },
           method: "POST",
@@ -127,6 +120,8 @@ export async function getServerSideProps(context: NextPageContext) {
             // JSONのエラーになったので、このような書き方↓
             session: userInfo && JSON.parse(JSON.stringify(userInfo)),
           },
+          // メッセージがあれば表示
+          message: context.query || null,
         },
       };
 
