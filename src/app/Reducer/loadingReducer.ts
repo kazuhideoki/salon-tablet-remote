@@ -1,4 +1,4 @@
-import { Loading } from "../Store/Store";
+import { Loading } from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 
 export type LoadingAction =

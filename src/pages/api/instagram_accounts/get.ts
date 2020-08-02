@@ -1,6 +1,6 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TInstagramAccounts, T_user_id } from "../../../app/Store/Store";
+import { TInstagramAccounts, T_user_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../lib/apiTypes";
 import { server, localhost } from "../../../config";
 
@@ -24,9 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     console.log("/instagram_accounts/get/は " + JSON.stringify(data));
 
-    return res.status(200).json({
-      rawData: data,
-    });
+    return res.status(200).json(data);
   } catch (err) {
     console.log("/instagram_accounts/get/のエラーは " + JSON.stringify(err));
     return res.status(500).json({ err: true, data: { message: err.message } });

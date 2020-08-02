@@ -1,7 +1,8 @@
 import React from "react";
+import { Store } from "../../Store/Store";
 import {
-  Store, T_tag_id,
-} from "../../Store/Store";
+  T_tag_id,
+} from "../../Store/Types";
 import { useGetTags } from "./useGetTags";
 import { T_tags_delete } from "../../../pages/api/tags/delete";
 

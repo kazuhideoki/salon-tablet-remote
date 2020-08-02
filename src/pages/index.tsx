@@ -1,5 +1,5 @@
 import React from "react";
-import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramAccounts } from "../app/Store/Store";
+import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramAccounts, TInstagramMedias } from "../app/Store/Types";
 import { App } from "../app/View/App";
 //@ts-ignore
 import { getCsrfToken, getSession, providers } from "next-auth/client";
@@ -14,20 +14,24 @@ import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 import { AddAlert } from "@material-ui/icons";
+import { apiInstagramMediasGet } from "./api/instagram_medias/get";
 
-export type IndexProps = {
-  data: {
+type IndexPropsData = {
     articles: TArticles;
     pagination: PaginationParams;
     footerItems: FooterItems;
     tags: TTags;
     instagramAccounts: TInstagramAccounts
+    instagramMedias: TInstagramMedias
     session?: TUserInfo;
   };
+
+export type IndexProps = {
+  data: IndexPropsData;
   csrfToken?: any;
-  providers?: any
+  providers?: any;
   bcrypt_password?: string;
-  message?: string
+  message?: string;
 };
 
 const Index = (props: IndexProps) => {
@@ -41,12 +45,6 @@ const Index = (props: IndexProps) => {
     );
 
   }
-
-  // React.useEffect(() => {
-  //   if (props.message && process.browser) {
-  //     alert(props.message)
-  //   }    
-  // },[])
 
   // テーマ、記事データ、appの状態管理を読み込む
   return (
@@ -109,17 +107,26 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       // Instagram連携アカウント一覧取得
       const data4 = await apiInstagramAccountsGet(userInfo.user_id)
 
+      // Instagram連携アカウント一覧取得
+      // const data5 = await apiInstagramMediasGet(userInfo.user_id)
+      const data5 = {err: true} // テーブル  instagram_medias実装までつなぎ
+
+      // 形付けるとpaginationのところにエラーが出た。未解決
+      // const propsData: IndexPropsData = {
+      const propsData = {
+        articles: data.err ? [] : data.rawData,
+        pagination: data.err ? [] : data.pagination,
+        footerItems: data2.err ? [] : data2,
+        tags: data3.err ? [] : data3,
+        instagramAccounts: data4.err ? [] : data4,
+        instagramMedias: data5.err ? [] : data5,
+        // JSONのエラーになったので、このような書き方↓
+        session: userInfo && JSON.parse(JSON.stringify(userInfo)),
+      }
+
       return {
         props: {
-          data: {
-            articles: data.err ? [] : data.rawData,
-            pagination: data.err ? [] : data.pagination,
-            footerItems: data2.err ? [] : data2,
-            tags: data3.err ? [] : data3,
-            instagramAccounts: data4.err ? [] : data4,
-            // JSONのエラーになったので、このような書き方↓
-            session: userInfo && JSON.parse(JSON.stringify(userInfo)),
-          },
+          data: propsData,
           // メッセージがあれば表示
           message: context.query || null,
         },

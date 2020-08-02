@@ -1,17 +1,18 @@
-import { AppState, TArticle, FooterItem, T_modal_size } from '../Store/Store'
+import { AppState, TArticle, FooterItem, T_modal_size, TSetModal } from '../Store/Types'
 import { reducerLogger } from "./reducerLogger";
 import { TrendingUpOutlined } from '@material-ui/icons';
 
 export type AppStateAction =
   | { type: "ON_IS_SETTING" }
   | { type: "OFF_IS_SETTING" }
-  | { type: "OPEN_MODAL"; payload: string }
+  | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "OPEN_DRAWER" }
   | { type: "CLOSE_DRAWER" }
   // footerItemの場合はtitleはnullが入る
   | {
       type: "SET_MODAL_CONTENT";
       payload: {
+        // showInstagram: boolean
         title: string | null;
         content: string;
         modalSize?: T_modal_size;
@@ -21,12 +22,12 @@ export type AppStateAction =
   | { type: "SET_EDITTING_PARMS_FOOTERITEM"; payload: FooterItem }
   | { type: "OFF_EDITTING" }
   | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
-  | { type: "SET_SELECTED_ARTICLES_TAGS"; payload: number[] }
+  | { type: "SET_TAGS_AND_IS_SHOW_INSTAGRAM"; payload: {selectingTags: number[], isShowInstagram: boolean} }
+  | { type: "IS_SHOW_INSTAGRAM"; payload: boolean }
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_ARTICLE_MODAL" }
   | { type: "CLOSE_ARTICLE_MODAL" }
   | { type: "SET_IS_LOADING" }
-  | { type: "END_LOADING" };
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState
@@ -67,6 +68,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
         newState = {
           ...state,
           currentModalContent: {
+            // IsShowInstagram: action.payload.showInstagram,
             title: action.payload.title || null,
             contnet: action.payload.content,
             modalSize: action.payload.modalSize || "large",
@@ -116,10 +118,17 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
         };
         break;
 
-      case "SET_SELECTED_ARTICLES_TAGS":
+      case "SET_TAGS_AND_IS_SHOW_INSTAGRAM":
         newState = {
           ...state,
-          selectedArticlesTags: action.payload,
+          isShowInstagram: action.payload.isShowInstagram,
+          selectedArticlesTags: action.payload.selectingTags,
+        };
+        break;
+      case "IS_SHOW_INSTAGRAM":
+        newState = {
+          ...state,
+          isShowInstagram: action.payload,
         };
         break;
       case "CLOSE_MODAL":

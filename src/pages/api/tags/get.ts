@@ -1,6 +1,6 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TTags, T_user_id } from "../../../app/Store/Store";
+import { TTags, T_user_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse, TApiError } from "../lib/apiTypes";
 

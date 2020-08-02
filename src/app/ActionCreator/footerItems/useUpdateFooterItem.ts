@@ -1,6 +1,6 @@
 import React from "react";
+import { Store } from "../../Store/Store";
 import {
-  Store,
   T_footer_item_id,
   T_is_published_footer_items,
   T_icon_name,
@@ -13,7 +13,7 @@ import {
   T_app_link_url,
   T_modal_size,
   FooterItem,
-} from "../../Store/Store";
+} from "../../Store/Types";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { TCreateFooterItem } from "./useCreateFooterItem";
 

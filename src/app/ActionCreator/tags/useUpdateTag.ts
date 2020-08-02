@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  Store, T_tag_id, T_tag_name,
-} from "../../Store/Store";
+  T_tag_id, T_tag_name,
+} from "../../Store/Types";
 import { useGetTags } from "./useGetTags";
 
 export type TUpdateTagParams = {

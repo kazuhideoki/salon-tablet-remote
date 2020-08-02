@@ -1,5 +1,6 @@
 import React from 'react'
-import { Store, T_tag_id } from '../../Store/Store';
+import { Store } from "../../Store/Store";
+import { T_tag_id } from '../../Store/Types';
 import {
   Chip,
   Typography,

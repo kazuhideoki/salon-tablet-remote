@@ -2,7 +2,7 @@ import { db } from "../lib/db";
 const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
 import { cipher, checkPassword } from "../../../module/bcrypt";
-import { T_user_email } from "../../../app/Store/Store";
+import { T_user_email } from "../../../app/Store/Types";
 
 export type T_check_credentials = { email: T_user_email, password: string };
 

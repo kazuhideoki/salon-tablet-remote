@@ -12,7 +12,8 @@ import {
 } from "@material-ui/core";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
-import { Store,T_article_id, TArticle } from "../../Store/Store";
+import { Store } from "../../Store/Store";
+import { T_article_id, TArticle } from "../../Store/Types";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
@@ -23,9 +24,10 @@ import { SelectedTags } from "./SelectedTags";
 
 // export type HandleOnUpDate = (params: any) => void;
 export const usePMainProps = () => {
-  const { appState, articles, dispatchAppState, tags } = React.useContext(
+  const { appState, articles, dispatchAppState, tags, instagramMedias } = React.useContext(
     Store
   );
+  const isShowInstagram = appState.isShowInstagram;
   const deleteArticle = useDeleteArticle();
   const getSingleArticle = useGetSingleArticle();
 
@@ -44,21 +46,32 @@ export const usePMainProps = () => {
     deleting ? deleteArticle(article_id) : null;
   };
 
-  const openArticle = (title: string, article_content: string) => {
+  const openArticle = (
+    title: string,
+    article_content: string,
+  ) => {
     dispatchAppState({
       type: "SET_MODAL_CONTENT",
-      payload: { title: title, content: article_content },
+      payload: {
+        // showInstagram: showInstagram,
+        title: title,
+        content: article_content,
+      },
     });
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };
 
+  
+
   return {
     appState,
     articles,
+    instagramMedias,
     tags,
     handleOnUpDate,
     handleOnDelete,
     openArticle,
+    isShowInstagram,
   };
 };
 
@@ -166,9 +179,7 @@ export const PMainPresenter = (props: Props) => {
         >
           {props.appState.isSetting ? (
             <EditButtonsBox className={classes.editButtonsBox}>
-              <UpdateButton
-                onClick={() => props.handleOnUpDate(value)}
-              />
+              <UpdateButton onClick={() => props.handleOnUpDate(value)} />
               <DeleteButton
                 onClick={() => props.handleOnDelete(value.article_id)}
               />
@@ -178,7 +189,10 @@ export const PMainPresenter = (props: Props) => {
           <CardActionArea
             className={classes.cardActionArea}
             onClick={() =>
-              props.openArticle(value.title, value.article_content)
+              props.openArticle(
+                value.title,
+                value.article_content,
+              )
             }
           >
             <Card className={classes.card}>
@@ -235,10 +249,16 @@ export const PMainPresenter = (props: Props) => {
       <Card
         className={classes.card}
       >
-        記事がありません
+        投稿がありません
       </Card>
     </Grid>
   );
+
+  const displayInstagramMedias = props.instagramMedias.map((value) => {
+    return (
+      <img src={value.thumbnail_url}/>
+    )
+  })
 
   return (
     <Grid
@@ -248,8 +268,9 @@ export const PMainPresenter = (props: Props) => {
       className={classes.root}
       spacing={2}
     >
-
-      {props.articles.length ? displayArticles : noArticles}
+      {props.isShowInstagram === false ?
+        props.articles.length ? displayArticles : noArticles
+      : props.instagramMedias.length ? displayInstagramMedias : noArticles}
     </Grid>
   );
 

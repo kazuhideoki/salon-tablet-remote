@@ -1,12 +1,8 @@
 import React from "react";
 import {
-  Store,
-  T_is_published_articles,
-  T_title,
-  T_article_content,
   T_article_id,
-} from "../../Store/Store";
-
+} from "../../Store/Types";
+import { Store } from "../../Store/Store";
 
 export const useGetSingleArticle = () => {
   const { articles } = React.useContext(Store)

@@ -1,5 +1,5 @@
 import React from "react";
-import { Store, T_modal_size } from "../../Store/Store";
+import { Store } from "../../Store/Store";
 import { Slide, DialogContent, makeStyles, createStyles, useTheme } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 import { CloseButton } from "../viewComponents/buttons/CloseButton";
@@ -17,8 +17,10 @@ import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
 import { useModalSize, large, medium } from "../viewComponents/useModalSize";
 import { StyledDialog } from "./StyledDialog";
-import { ManageInstagmaAccounts } from "../Drawer/ManageInstagmaAccounts";
+import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
+import { T_modal_size, TSetModal } from "../../Store/Types";
+import { InstagramMediaModal } from "../Main/InstagramMediaModal";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -32,7 +34,7 @@ const useModalProps = () => {
     dispatchAppState({ type: "SET_MODAL_SIZE", payload: value})
   }
   const { setModal, isModalOpen, currentModalContent, edittingPrams} = appState;
-  const openModal = (name: string) => {
+  const openModal = (name: TSetModal) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: name });
   };
   const closeModal = () => {
@@ -82,6 +84,10 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             modalStyle = useModalSize(props.currentModalContent.modalSize)
             ModalContent = () => <ContentModal />;
             break;
+          case "instagram_media_modal":
+            // modalStyle = useModalSize(props.currentModalContent.modalSize)
+            ModalContent = () => <InstagramMediaModal />;
+            break;
           case "select_tags":
             modalStyle = medium
             ModalContent = () => <SelectTags />;
@@ -101,7 +107,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <ManageTags />;
             break;
           case "manage_instagram":
-            ModalContent = () => <ManageInstagmaAccounts />;
+            ModalContent = () => <ManageInstagramAccounts />;
             break;
           case "setting_theme":
             ModalContent = () => <SettingTheme />;

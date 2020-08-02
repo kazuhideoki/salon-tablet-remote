@@ -1,9 +1,9 @@
 import React from "react";
+import { Store } from "../../Store/Store";
 import {
   FooterItem,
   T_footer_item_id,
-  Store,
-} from "../../Store/Store";
+} from "../../Store/Types";
 import { IconsSetting } from "../../View/Drawer/ItemEditor/iconSelect/icons";
 
 

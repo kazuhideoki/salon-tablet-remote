@@ -9,7 +9,8 @@ import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/f
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
-import { Store, FooterItem, T_modal_size } from '../../../Store/Store';
+import { Store } from "../../../Store/Store";
+import { FooterItem, T_modal_size } from '../../../Store/Types';
 import { CharCounter } from "../../viewComponents/CharCounter";
 import { SelectModalSize } from '../../Setting/SelectModalSize';
 import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';

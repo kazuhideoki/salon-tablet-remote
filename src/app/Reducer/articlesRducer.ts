@@ -1,4 +1,4 @@
-import { TArticles, TArticle } from "../Store/Store";
+import { TArticles, TArticle } from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 
 export type ArticlesAction =

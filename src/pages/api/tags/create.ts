@@ -1,6 +1,6 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_user_id, T_tag_name } from "../../../app/Store/Store";
+import { T_user_id, T_tag_name } from "../../../app/Store/Types";
 
 export type T_tags_create = {
   user_id: T_user_id;

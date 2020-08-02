@@ -1,7 +1,7 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { tagIdsParse } from "../lib/tagIdsParse";
-import { T_user_id, TArticles } from "../../../app/Store/Store";
+import { T_user_id, TArticles } from "../../../app/Store/Types";
 import { TApiResponse } from "../lib/apiTypes";
 import { server, localhost } from "../../../config";
 // import { session } from "next-auth/client";
@@ -11,7 +11,7 @@ export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TAp
   let str = process.browser ? server : localhost
 
   const res = await fetch(
-    `${str}/api/articles/get?userId=${articlesParam.userId}`,
+    `${str}/api/articles/get`,
     {
       headers: { "Content-Type": "application/json" },
       method: "POST",
@@ -86,22 +86,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       );
 
       const query2 =
-        `SELECT * FROM articles WHERE user_id = ${userId} ` +
+        `SELECT user_id FROM articles WHERE user_id = ${userId} ` +
         getPublishedOnly +
         getTagedPages;
       console.log(query2);
 
-      const data2: any = await db(query2);      
+      const data2: any = await db(query2);  
+      
+      const pagination: TPaginationReturn = {
+        page: page,
+        pageCount: data2.length ? Math.ceil(data2.length / 5) : 0, // 全row数を5で割って切り上げ
+        pageSize: 5,
+        rowCount: data2.length,
+      };
 
       const returnData: TApiArticlesGetResponse = {
         // tag_idsをnumber[]化する、なければnullのまま
         rawData: data.length ? tagIdsParse(data) : data,
-        pagination: {
-          page: page,
-          pageCount: data2.length ? Math.ceil(data2.length / 5) : 0, // 全row数を5で割って切り上げ
-          pageSize: 5,
-          rowCount: data2.length,
-        },
+        pagination: pagination,
       }
 
       return res.status(200).json(returnData);

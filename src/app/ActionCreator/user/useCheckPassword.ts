@@ -1,7 +1,8 @@
 import React from "react";
+import { Store } from "../../Store/Store";
 import {
-  Store, T_user_id,
-} from "../../Store/Store";
+  T_user_id,
+} from "../../Store/Types";
 import { T_check_password } from "../../../pages/api/user_info/check_password";
 
 export const useCheckPassword = () => {

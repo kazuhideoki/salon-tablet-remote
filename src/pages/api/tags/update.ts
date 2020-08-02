@@ -1,6 +1,5 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_tag_id } from "../../../app/Store/Store";
 import { TUpdateTagParams } from "../../../app/ActionCreator/tags/useUpdateTag";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

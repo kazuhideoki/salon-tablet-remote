@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
-import { TUserInfo } from "../../app/Store/Store";
+import { TUserInfo } from "../../app/Store/Types";
 
 const receiverEmailAddress = "infosalontablet@gmail.com";
 const senderEmailAddress = "infosalontablet@gmail.com";

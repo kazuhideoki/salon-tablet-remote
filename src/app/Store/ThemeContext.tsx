@@ -4,7 +4,9 @@ import {
   MuiThemeProvider,
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
-import { TUserInfo, Store } from "./Store";
+import { TUserInfo } from "./Types";
+import { Store } from "./Store";
+
 import { nonTheme } from "./themes/nonTheme";
 import { commonTheme } from "./themes/commonTheme";
 

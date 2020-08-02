@@ -1,4 +1,9 @@
-import { FooterItem, FooterItems, T_footer_item_id, T_order } from "../Store/Store";
+import {
+  FooterItem,
+  FooterItems,
+  T_footer_item_id,
+  T_order,
+} from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 
 export type FooterItemsAction =

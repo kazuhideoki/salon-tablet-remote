@@ -67,7 +67,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         console.log("userProfileは " + JSON.stringify(userProfile));
 
         const sessionObj: TSessionOnj = await getSession({ req });
-        console.log("sessionObj2は " + JSON.stringify(sessionObj));
+        console.log("sessionObjは " + JSON.stringify(sessionObj));
         const { user_id } = await ApiUserInfoGetFromEmail(
           sessionObj.user.email
         );
@@ -94,7 +94,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           [params, params]
         );
 
-        res.writeHead(302, {Location: `/err=false&msg=Instagramアカウントを登録しました`});
+        res.writeHead(302, {Location: `/`});
         res.end();
 
       } catch (err) {
@@ -102,7 +102,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       "/instagram_accounts/get_token/のエラーは " + JSON.stringify(err)
     );
     // ※ エラー処理も追加するひつようあり。。。。
-    res.writeHead(302, { Location: `/?err=true&msg=Instagramアカウント登録エラー` });
+    res.writeHead(302, { Location: `/` });
     res.end();
   }
 };

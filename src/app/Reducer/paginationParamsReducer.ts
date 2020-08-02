@@ -1,4 +1,4 @@
-import { PaginationParams } from "../Store/Store";
+import { PaginationParams } from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 
 export type MainHome = { type: "MAINHOME" };

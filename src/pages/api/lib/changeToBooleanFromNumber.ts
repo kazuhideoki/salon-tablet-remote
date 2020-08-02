@@ -1,4 +1,4 @@
-import { FooterItems } from "../../../app/Store/Store";
+import { FooterItems } from "../../../app/Store/Types";
 
 // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
 export const changeToBooleanFromNumber = (data:FooterItems) => {

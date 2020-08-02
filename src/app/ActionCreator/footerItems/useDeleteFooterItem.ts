@@ -1,5 +1,6 @@
 import React from "react";
-import { Store, T_order, T_footer_item_id } from "../../Store/Store";
+import { Store } from "../../Store/Store";
+import { T_order, T_footer_item_id } from "../../Store/Types";
 
 export const useDeleteFooterItem = () => {
   const { dispatchFooterItems } = React.useContext(Store);

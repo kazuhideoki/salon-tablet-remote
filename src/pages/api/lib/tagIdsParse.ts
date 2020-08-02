@@ -1,5 +1,3 @@
-import { TArticles } from "../../../app/Store/Store"
-
 export const tagIdsParse = (data: any) => {
   // tag_idsをnumber[]化する
   const newData = data.map((value) => {

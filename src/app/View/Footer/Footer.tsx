@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { Grid, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store, T_footer_item_id, T_order, FooterItem, T_modal_size } from "../../Store/Store";
+import { Store } from "../../Store/Store";
+import { T_footer_item_id, T_order, FooterItem, T_modal_size } from "../../Store/Types";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from './Pagination/PPagination';
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
@@ -21,7 +22,11 @@ export const useFooterProps = () => {
     // footerItemは記事タイトルがないので、titleはnull
     dispatchAppState({
       type: "SET_MODAL_CONTENT",
-      payload: { title: null, content: item_content, modalSize: modalSize},
+      payload: {
+        // showInstagram:false, 
+        title: null,
+        content: item_content,
+        modalSize: modalSize},
     });
     dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
   };

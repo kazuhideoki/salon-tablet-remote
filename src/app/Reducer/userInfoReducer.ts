@@ -5,7 +5,7 @@ import {
   T_user_name,
   T_user_email,
   T_selected_theme,
-} from "../Store/Store";
+} from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 
 export type TUserInfoAction =

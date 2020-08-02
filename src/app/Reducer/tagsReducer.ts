@@ -1,5 +1,5 @@
 import { reducerLogger } from "./reducerLogger";
-import { TTags } from "../Store/Store";
+import { TTags } from "../Store/Types";
 
 export type TagsAction = {type: "SET_TAGS", payload: TTags}
 

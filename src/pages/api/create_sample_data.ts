@@ -1,6 +1,6 @@
 import { db } from "./lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TArticle, FooterItems, FooterItem } from "../../app/Store/Store";
+import { TArticle, FooterItems, FooterItem } from "../../app/Store/Types";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") { 

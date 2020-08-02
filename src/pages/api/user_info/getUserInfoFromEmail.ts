@@ -1,5 +1,5 @@
 import { db } from "../lib/db";
-import { TUserInfo } from "../../../app/Store/Store";
+import { TUserInfo } from "../../../app/Store/Types";
 
 // ※bcrypt_passwordが入っているのでフロントサイドに持っていく場合はdeleteする必要がある
 export const ApiUserInfoGetFromEmail = async (email: string): Promise<TUserInfo> => {

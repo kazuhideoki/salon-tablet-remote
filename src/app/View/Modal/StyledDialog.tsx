@@ -1,6 +1,7 @@
 import React from 'react'
 import { withStyles, Dialog } from '@material-ui/core';
-import { T_modal_size, Store } from '../../Store/Store';
+
+import { T_modal_size } from '../../Store/Types';
 
 type Props = {
   modalSize: T_modal_size

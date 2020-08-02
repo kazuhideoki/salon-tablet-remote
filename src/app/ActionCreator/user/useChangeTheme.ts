@@ -1,7 +1,8 @@
 import React from "react";
+import { Store } from "../../Store/Store";
 import {
-  Store, T_selected_theme,
-} from "../../Store/Store";
+  T_selected_theme,
+} from "../../Store/Types";
 
 export const useChangeTheme = () => {
   const { dispatchUserInfo, userInfo } = React.useContext(

@@ -1,6 +1,6 @@
 import React from "react";
+import { Store } from "../../Store/Store";
 import {
-  Store,
   T_is_published_footer_items,
   T_icon_name,
   T_displayed_icon_name,
@@ -12,7 +12,7 @@ import {
   T_app_link_url,
   T_user_id,
   T_modal_size,
-} from "../../Store/Store";
+} from "../../Store/Types";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";

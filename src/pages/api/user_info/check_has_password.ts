@@ -1,9 +1,6 @@
 import { db } from "../lib/db";
 const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
-import { cipher, checkPassword } from "../../../module/bcrypt";
-import { T_user_id } from "../../../app/Store/Store";
-
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {

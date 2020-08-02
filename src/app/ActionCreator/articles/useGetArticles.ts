@@ -37,7 +37,10 @@ export const useGetArticles = () => {
         type: "GET",
         payload: data.rawData,
       });
-      dispatchAppState({type: "SET_SELECTED_ARTICLES_TAGS", payload: selectingTags || []})
+      dispatchAppState({
+        type: "SET_TAGS_AND_IS_SHOW_INSTAGRAM",
+        payload: { selectingTags: selectingTags || [], isShowInstagram: false },
+      });
       //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
         dispatchPaginationParams({

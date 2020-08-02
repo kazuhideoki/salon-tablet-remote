@@ -1,11 +1,11 @@
 import React from "react";
+import { Store } from "../../Store/Store";
 import {
-  Store,
   T_user_name,
   T_user_id,
   T_shop_name,
   T_user_email,
-} from "../../Store/Store";
+} from "../../Store/Types";
 
 export type T_update_user = {
   columns: {

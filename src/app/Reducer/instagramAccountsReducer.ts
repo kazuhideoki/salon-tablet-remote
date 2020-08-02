@@ -1,5 +1,5 @@
 import { reducerLogger } from "./reducerLogger";
-import { TInstagramAccounts } from "../Store/Store";
+import { TInstagramAccounts } from "../Store/Types";
 
 export type InstagramAccountsAction = { type: "SET_INSTAGRAM_ACCOUNTS"; payload: TInstagramAccounts };
 
@@ -12,7 +12,7 @@ export function instagramAccountsReducer(state: TInstagramAccounts, action: Inst
       break;
 
     default:
-      console.log("エラーだよ,tagsReducer");
+      console.log("エラーだよ,instagramAccountsReducer");
       newState = { ...state };
   }
   reducerLogger({ state, newState, func, action });
