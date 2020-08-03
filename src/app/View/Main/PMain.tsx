@@ -252,7 +252,11 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
               <div className={classes.thumbnailBox}>
                 <img
                   className={`p-main-thumbnail ${classes.thumbnail}`}
-                  src={value.thumbnail_url}
+                  src={
+                    value.media_type === "VIDEO"
+                      ? value.thumbnail_url
+                      : value.media_url
+                  }
                 />
               </div>
               <div className={classes.tagsAndDate}>
