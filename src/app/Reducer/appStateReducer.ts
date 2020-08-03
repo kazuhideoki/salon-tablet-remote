@@ -1,4 +1,4 @@
-import { AppState, TArticle, FooterItem, T_modal_size, TSetModal } from '../Store/Types'
+import { AppState, TArticle, FooterItem, T_modal_size, TSetModal, TInstagramMedia } from '../Store/Types'
 import { reducerLogger } from "./reducerLogger";
 import { TrendingUpOutlined } from '@material-ui/icons';
 
@@ -9,24 +9,17 @@ export type AppStateAction =
   | { type: "OPEN_DRAWER" }
   | { type: "CLOSE_DRAWER" }
   // footerItemの場合はtitleはnullが入る
-  | {
-      type: "SET_MODAL_CONTENT";
-      payload: {
-        // showInstagram: boolean
-        title: string | null;
-        content: string;
-        modalSize?: T_modal_size;
-      };
-    }
+  | { type: "OPEN_ARTICLE_MODAL", payload: TArticle }
+  | { type: "OPEN_FOOTER_ITEM_MODAL", payload: {footerItem: FooterItem, modalSize: T_modal_size} }
+
+  | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: TInstagramMedia }
+  | { type: "IS_SHOW_INSTAGRAM"; payload: boolean }
   | { type: "SET_EDITTING_PARMS_ARTICLE"; payload: TArticle }
   | { type: "SET_EDITTING_PARMS_FOOTERITEM"; payload: FooterItem }
   | { type: "OFF_EDITTING" }
   | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
-  | { type: "SET_TAGS_AND_IS_SHOW_INSTAGRAM"; payload: {selectingTags: number[], isShowInstagram: boolean} }
-  | { type: "IS_SHOW_INSTAGRAM"; payload: boolean }
+  | { type: "SET_TAGS_AND_SHOW_ARTICLES"; payload: number[]}
   | { type: "CLOSE_MODAL" }
-  | { type: "OPEN_ARTICLE_MODAL" }
-  | { type: "CLOSE_ARTICLE_MODAL" }
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState
@@ -63,15 +56,50 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isDrawerOpen: false,
         };
         break;
-      case "SET_MODAL_CONTENT":
+      case "OPEN_ARTICLE_MODAL":
         newState = {
           ...state,
+          setModal: "content_modal",
+          isModalOpen: true,
+          // isShowInstagram: false,
           currentModalContent: {
-            // IsShowInstagram: action.payload.showInstagram,
-            title: action.payload.title || null,
-            contnet: action.payload.content,
-            modalSize: action.payload.modalSize || "large",
+            ...state.currentModalContent,
+            article: action.payload,
+            modalSize: "large",
           },
+        };
+        break;
+      case "OPEN_FOOTER_ITEM_MODAL":
+        newState = {
+          ...state,
+          setModal: "footer_item_modal",
+          isModalOpen: true,
+          // isShowInstagram: false,
+          currentModalContent: {
+            ...state.currentModalContent,
+            footerItem: action.payload.footerItem,
+            modalSize: action.payload.modalSize,
+          },
+        };
+        break;
+      // ↑↓isShowInstagramはどこで切り替えるのか？再考
+      case "OPEN_INSTAGRAM_MEDIA_MODAL":
+        newState = {
+          ...state,
+          setModal: "instagram_media_modal",
+          isModalOpen: true,
+          // isShowInstagram: true,
+          currentModalContent: {
+            ...state.currentModalContent,
+            instagramMedia: action.payload,
+            modalSize: "medium",
+          },
+        };
+        break;
+      case "IS_SHOW_INSTAGRAM":
+        newState = {
+          ...state,
+          isShowInstagram: action.payload,
         };
         break;
       case "SET_EDITTING_PARMS_ARTICLE":
@@ -117,17 +145,11 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
         };
         break;
 
-      case "SET_TAGS_AND_IS_SHOW_INSTAGRAM":
+      case "SET_TAGS_AND_SHOW_ARTICLES":
         newState = {
           ...state,
-          isShowInstagram: action.payload.isShowInstagram,
-          selectedArticlesTags: action.payload.selectingTags,
-        };
-        break;
-      case "IS_SHOW_INSTAGRAM":
-        newState = {
-          ...state,
-          isShowInstagram: action.payload,
+          isShowInstagram: false,
+          selectedArticlesTags: action.payload,
         };
         break;
       case "CLOSE_MODAL":
@@ -136,18 +158,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isModalOpen: false,
         };
         break;
-      case "OPEN_ARTICLE_MODAL":
-        newState = {
-          ...state,
-          isArticleModalOpen: true,
-        };
-        break;
-      case "CLOSE_ARTICLE_MODAL":
-        newState = {
-          ...state,
-          isArticleModalOpen: false,
-        };
-        break;
+
       default:
         console.log("エラーだよ,appStateReducer");
         newState = { ...state };

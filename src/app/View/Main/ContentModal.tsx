@@ -5,10 +5,11 @@ import ReactQuill, { Quill }from "react-quill";
 
 const useContentModalProps = () => {
   const { appState } = React.useContext(Store)
+  const article = appState.currentModalContent.article
 
   return {
-    appState
-  }
+    article,
+  };
 }
 
 export type TContentModalProps = ReturnType<typeof useContentModalProps>
@@ -23,9 +24,9 @@ export const ContentModalPresenter: React.FC<TContentModalProps> = (props) => {
   
   return (
     <>
-      {props.appState.currentModalContent.title && (
+      {props.article.title && (
         <Typography variant="h5" component="h2">
-          {props.appState.currentModalContent.title}
+          {props.article.title}
         </Typography>
       )}
       <Typography variant="body1" >
@@ -33,7 +34,7 @@ export const ContentModalPresenter: React.FC<TContentModalProps> = (props) => {
           readOnly
           theme="bubble"
           value={
-            props.appState.currentModalContent.contnet
+            props.article.article_content
           }
         />
       </Typography>

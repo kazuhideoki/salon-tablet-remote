@@ -24,7 +24,7 @@ import { TUseMainProps, TMainClasses } from "./PMain";
 // type Props = {props.classes: TMainClasses, props: TUseMainProps}
 type Props = {classes: TMainClasses} & TUseMainProps
 
-export const ArticleMain:React.FC<Props> = (props) => {
+export const ContentMain:React.FC<Props> = (props) => {
 
   const StyledCardContent = withStyles({
     root: {
@@ -43,7 +43,9 @@ export const ArticleMain:React.FC<Props> = (props) => {
           // articlesの場合投稿済みか下書きかで見た目を変える
           className={`${props.classes.gridItem}
             ${
-              props.isShowInstagram! && !value.is_published ? props.classes.itemIsDraft : ""
+              props.isShowInstagram! && !value.is_published
+                ? props.classes.itemIsDraft
+                : ""
             }
           `}
         >
@@ -58,7 +60,10 @@ export const ArticleMain:React.FC<Props> = (props) => {
           <CardActionArea
             className={props.classes.cardActionArea}
             onClick={() =>
-              props.openModal(value.title, value.article_content)
+              props.dispatchAppState({
+                type: "OPEN_ARTICLE_MODAL",
+                payload: value,
+              })
             }
           >
             <Card className={props.classes.card}>
@@ -97,7 +102,9 @@ export const ArticleMain:React.FC<Props> = (props) => {
                     {sqlToDate(value.created_at)}
                   </Typography>
                 </div>
-                <div className={`p-main-article-excerpt ${props.classes.excerpt}`}>
+                <div
+                  className={`p-main-article-excerpt ${props.classes.excerpt}`}
+                >
                   <Typography gutterBottom variant="body1">
                     {value.article_excerpt}
                     {value.article_excerpt.length === 100 ? "..." : ""}

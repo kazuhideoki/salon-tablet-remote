@@ -13,7 +13,7 @@ import {
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { Store } from "../../Store/Store";
-import { T_article_id, TArticle } from "../../Store/Types";
+import { T_article_id, TArticle, TInstagramMedia } from "../../Store/Types";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
@@ -21,8 +21,9 @@ import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleAr
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";
+import { ContentMain } from "./()ContentMain";
+import { InstagramMediaMain } from "./()InstagramMediaMain";
 
-// export type HandleOnUpDate = (params: any) => void;
 export const usePMainProps = () => {
   const { appState, articles, dispatchAppState, tags, instagramMedias } = React.useContext(
     Store
@@ -37,27 +38,12 @@ export const usePMainProps = () => {
       payload: article,
     });
     dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-    // setIsEdittingContent(true);
-    // getSingleArticle(article_id);
   };
 
   const handleOnDelete = (article_id: T_article_id) => {
     const deleting = confirm("本当に削除してよろしいですか？");
     deleting ? deleteArticle(article_id) : null;
   };
-
-  const openModal = (title: string, article_content: string) => {
-    dispatchAppState({
-      type: "SET_MODAL_CONTENT",
-      payload: {
-        // showInstagram: showInstagram,
-        title: title,
-        content: article_content,
-      },
-    });
-    dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
-  };
-
   
 
   return {
@@ -67,7 +53,7 @@ export const usePMainProps = () => {
     tags,
     handleOnUpDate,
     handleOnDelete,
-    openModal,
+    dispatchAppState,
     isShowInstagram,
   };
 };
@@ -103,17 +89,12 @@ const useStyles = makeStyles((theme) => {
       height: "100%",
     },
     cardContent: {
-      // paddingRight: 0,
-      // paddingLeft: 0,
       padding: 0,
     },
     thumbnailBox: {
       position: "relative",
-      // marginBottom: theme.spacing(2),
     },
     thumbnail: {
-      // maxWidth: cardWidth * 0.8,
-      // maxHeight: cardWidth * 0.6,
       display: "block",
       width: "100%",
       objectFit: "cover",
@@ -187,7 +168,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
 
           <CardActionArea
             className={classes.cardActionArea}
-            onClick={() => props.openModal(value.title, value.article_content)}
+            onClick={() => props.dispatchAppState({type: "OPEN_ARTICLE_MODAL", payload: value})}
           >
             <Card className={classes.card}>
               <StyledCardContent className={classes.cardContent}>
@@ -259,7 +240,12 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
       >
         <CardActionArea
           className={classes.cardActionArea}
-          onClick={() => props.openModal("", value.caption)}
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_INSTAGRAM_MEDIA_MODAL",
+              payload: value,
+            })
+          }
         >
           <Card className={classes.card}>
             <StyledCardContent className={classes.cardContent}>
@@ -279,9 +265,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   {sqlToDate(value.timestamp)}
                 </Typography>
               </div>
-              <div
-                className={`p-main-article-excerpt ${classes.excerpt}`}
-              >
+              <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                 <Typography gutterBottom variant="body1">
                   {value.caption.slice(0, 100)}
                   {value.caption.length === 100 ? "..." : ""}
@@ -302,9 +286,25 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
       className={classes.root}
       spacing={2}
     >
-      {props.isShowInstagram === false ?
-        props.articles.length ? displayArticles : noArticles
-      : props.instagramMedias.length ? displayInstagramMedias : noArticles}
+      {/* {props.isShowInstagram === true &&
+        (props.articles.length ? (
+          <InstagramMediaMain classes={classes} {...props} />
+        ) : (
+          noArticles
+        ))}
+      {props.isShowInstagram === false &&
+        (props.articles.length ? (
+          <ContentMain classes={classes} {...props} />
+        ) : (
+          noArticles
+        ))} */}
+      {props.isShowInstagram === false
+        ? props.articles.length
+          ? displayArticles
+          : noArticles
+        : props.instagramMedias.length
+        ? displayInstagramMedias
+        : noArticles}
     </Grid>
   );
 

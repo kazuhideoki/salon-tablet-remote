@@ -38,8 +38,8 @@ export const useGetArticles = () => {
         payload: data.rawData,
       });
       dispatchAppState({
-        type: "SET_TAGS_AND_IS_SHOW_INSTAGRAM",
-        payload: { selectingTags: selectingTags || [], isShowInstagram: false },
+        type: "SET_TAGS_AND_SHOW_ARTICLES",
+        payload: selectingTags,
       });
       //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {

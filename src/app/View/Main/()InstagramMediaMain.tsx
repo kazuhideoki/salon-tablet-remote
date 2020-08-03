@@ -44,7 +44,7 @@ export const InstagramMediaMain: React.FC<Props> = (props) => {
         >
           <CardActionArea
             className={props.classes.cardActionArea}
-            onClick={() => props.openModal('', value.caption)}
+            onClick={() => props.openInstagramModal(value)}
           >
             <Card className={props.classes.card}>
               <StyledCardContent className={props.classes.cardContent}>
@@ -64,19 +64,18 @@ export const InstagramMediaMain: React.FC<Props> = (props) => {
                     {sqlToDate(value.timestamp)}
                   </Typography>
                 </div>
-                <div className={`p-main-article-excerpt ${props.classes.excerpt}`}>
+                <div
+                  className={`p-main-article-excerpt ${props.classes.excerpt}`}
+                >
                   <Typography gutterBottom variant="body1">
-                    {value.caption.slice(0,100)}
+                    {value.caption.slice(0, 100)}
                     {value.caption.length === 100 ? "..." : ""}
                   </Typography>
                 </div>
               </StyledCardContent>
             </Card>
-
           </CardActionArea>
-          
-
-        </Grid>
+        </Grid>;
       })}
     
     </>

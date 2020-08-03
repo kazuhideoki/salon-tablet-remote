@@ -7,6 +7,9 @@ import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("../Main/ContentModal"), {
   ssr: false,
 });
+const FooterItemModal = dynamic(() => import("../Footer/FooterItemModal"), {
+  ssr: false,
+});
 import ArticleEditor from "../Drawer/ArticleEditor/ArticleEditor";
 import FooterItemEditor from "../Drawer/ItemEditor/FooterItemEditor";
 import { FeedbackForm } from "../Drawer/FeedbackForm";
@@ -21,6 +24,7 @@ import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 import { T_modal_size, TSetModal } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
+// import FooterItemModal from "../Footer/FooterItemModal";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -81,8 +85,11 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         
         switch (props.setModal) {
           case "content_modal":
-            modalStyle = useModalSize(props.currentModalContent.modalSize)
             ModalContent = () => <ContentModal />;
+            break;
+          case "footer_item_modal":
+            modalStyle = useModalSize(props.currentModalContent.modalSize)
+            ModalContent = () => <FooterItemModal />;
             break;
           case "instagram_media_modal":
             // modalStyle = useModalSize(props.currentModalContent.modalSize)

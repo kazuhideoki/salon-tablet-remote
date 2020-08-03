@@ -152,18 +152,33 @@ export type TInstagramMedia = {
 
 export type TInstagramMedias = TInstagramMedia[];
 
-export type TSetModal = "content_modal" | "instagram_media_modal" | "select_tags" | "select_instagram" | "edit_article" | "edit_footer_item" | "edit_tags" | "manage_instagram" | "setting_theme" | "setting_user_info" | "feedback_form" | "delete_account_form" 
+export type TSetModal =
+  | "content_modal"
+  | "footer_item_modal"
+  | "instagram_media_modal"
+  | "select_tags"
+  | "select_instagram"
+  | "edit_article"
+  | "edit_footer_item"
+  | "edit_tags"
+  | "manage_instagram"
+  | "setting_theme"
+  | "setting_user_info"
+  | "feedback_form"
+  | "delete_account_form"; 
 
 export const initAppState = {
   isSetting: true,
-  setModal: "edit_article" as TSetModal,
   isDrawerOpen: true,
+  setModal: "edit_article" as TSetModal,
+  isModalOpen: false,
   isShowInstagram: false,
-  // article,items,instagramMediaで共有。必要な値を格納してそれぞれのmodalで表示
+  // modal表示するコンテン情報を格納
   currentModalContent: {
-    title: "",
-    contnet: "",
     modalSize: "large" as T_modal_size,
+    article: {} as TArticle,
+    footerItem: {} as FooterItem,
+    instagramMedia: {} as TInstagramMedia,
   },
 
   edittingPrams: {
@@ -172,9 +187,9 @@ export const initAppState = {
     footerItem: {} as FooterItem,
     modalSize: "large" as T_modal_size,
   },
+  // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
   selectedArticlesTags: [] as number[],
-  isModalOpen: false,
-  isArticleModalOpen: false,
+  
 };
 
 export type AppState = typeof initAppState;

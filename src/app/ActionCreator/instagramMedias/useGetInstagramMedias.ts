@@ -10,6 +10,7 @@ export const useGetInstagramMedias = () => {
 
   return async (instagram_id: T_instagram_id) => {
     dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
+    dispatchAppState({type: "CLOSE_MODAL"})
 
     const data = await apiInstagramMediasGet(instagram_id);
 

@@ -4,9 +4,10 @@ import { makeStyles, createStyles, Typography } from "@material-ui/core";
 
 const useInstagramMediaModalProps = () => {
   const { appState } = React.useContext(Store);
+  const instagramMedia = appState.currentModalContent.instagramMedia
 
   return {
-    appState,
+    instagramMedia,
   };
 };
 
@@ -18,9 +19,13 @@ export const InstagramMediaModalPresenter: React.FC<TContentModalProps> = (props
   return (
     // 画像も
     <>
-      {/* <img src={props.appState.currentModalContent}/> */}
+      <img src={props.instagramMedia.media_url}/>
+
+      <Typography variant="subtitle1" align="right">
+        {props.instagramMedia.timestamp}
+      </Typography>
       <Typography variant="body1">
-        {props.appState.currentModalContent.contnet}
+        {props.instagramMedia.caption}
       </Typography>
     </>
   );

@@ -18,18 +18,18 @@ export const useFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
   // modalNameをもとにModalで分岐してどのモーダルウィンドウを表示させるか決める
 
-  const openModal = (item_content: string, modalSize: T_modal_size) => {
-    // footerItemは記事タイトルがないので、titleはnull
-    dispatchAppState({
-      type: "SET_MODAL_CONTENT",
-      payload: {
-        // showInstagram:false, 
-        title: null,
-        content: item_content,
-        modalSize: modalSize},
-    });
-    dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
-  };
+  // const openModal = (item_content: string, modalSize: T_modal_size) => {
+  //   // footerItemは記事タイトルがないので、titleはnull
+  //   dispatchAppState({
+  //     type: "SET_MODAL_CONTENT",
+  //     payload: {
+  //       // showInstagram:false, 
+  //       title: null,
+  //       content: item_content,
+  //       modalSize: modalSize},
+  //   });
+  //   dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
+  // };
 
   const getFooterItem = useGetFooterItem();
   const deleteFooterItem = useDeleteFooterItem();
@@ -58,7 +58,7 @@ export const useFooterProps = () => {
 
   return {
     appState,
-    openModal,
+    // openModal,
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,
@@ -134,9 +134,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
               }}
             />
             <UpdateButton
-              onClick={() =>
-                props.handleOnUpDateFooterIcon(value)
-              }
+              onClick={() => props.handleOnUpDateFooterIcon(value)}
             />
             <DeleteButton
               onClick={() =>
@@ -162,7 +160,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
                   )[0]
                 : MoodBad
             }
-            onClick={() => props.openModal(value.item_content, value.modal_size)}
+            onClick={() => props.dispatchAppState({type: "OPEN_FOOTER_ITEM_MODAL", payload:{footerItem: value, modalSize: value.modal_size}})}
             // fontSize="large"
             text={value.icon_name}
           />
