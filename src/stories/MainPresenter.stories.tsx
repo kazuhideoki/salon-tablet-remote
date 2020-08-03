@@ -13,7 +13,7 @@ const props = {
   articles: sampleData,
   handleOnUpDate: null,
   handleOnDelete: null,
-  openArticle: null,
+  classes: null,
 };
 
 export const Normal = () => {

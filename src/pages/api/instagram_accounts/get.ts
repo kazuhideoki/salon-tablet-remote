@@ -14,6 +14,8 @@ export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiR
 } 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log('instagram_accounts/getだよ');
+  
   try {
     //@ts-ignore
     const data: TInstagramAccounts = await db(

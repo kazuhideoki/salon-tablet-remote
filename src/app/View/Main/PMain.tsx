@@ -46,10 +46,7 @@ export const usePMainProps = () => {
     deleting ? deleteArticle(article_id) : null;
   };
 
-  const openArticle = (
-    title: string,
-    article_content: string,
-  ) => {
+  const openModal = (title: string, article_content: string) => {
     dispatchAppState({
       type: "SET_MODAL_CONTENT",
       payload: {
@@ -70,12 +67,12 @@ export const usePMainProps = () => {
     tags,
     handleOnUpDate,
     handleOnDelete,
-    openArticle,
+    openModal,
     isShowInstagram,
   };
 };
 
-type Props = ReturnType<typeof usePMainProps>
+export type TUseMainProps = ReturnType<typeof usePMainProps>;
 
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
@@ -155,7 +152,9 @@ const useStyles = makeStyles((theme) => {
 
 })
 
-export const PMainPresenter = (props: Props) => {
+export type TMainClasses = ReturnType<typeof useStyles>;
+
+export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
   const classes = useStyles();
 
   const StyledCardContent = withStyles({
@@ -188,12 +187,7 @@ export const PMainPresenter = (props: Props) => {
 
           <CardActionArea
             className={classes.cardActionArea}
-            onClick={() =>
-              props.openArticle(
-                value.title,
-                value.article_content,
-              )
-            }
+            onClick={() => props.openModal(value.title, value.article_content)}
           >
             <Card className={classes.card}>
               <StyledCardContent className={classes.cardContent}>
@@ -243,6 +237,7 @@ export const PMainPresenter = (props: Props) => {
         </Grid>
       );
     });
+
     // 記事がもしなかった場合の表示
   const noArticles = (
     <Grid item >
@@ -254,10 +249,49 @@ export const PMainPresenter = (props: Props) => {
     </Grid>
   );
 
-  const displayInstagramMedias = props.instagramMedias.map((value) => {
+  const displayInstagramMedias = props.instagramMedias.map((value, key) => {
     return (
-      <img src={value.thumbnail_url}/>
-    )
+      <Grid
+        item
+        key={key}
+        // articlesの場合投稿済みか下書きかで見た目を変える
+        className={classes.gridItem}
+      >
+        <CardActionArea
+          className={classes.cardActionArea}
+          onClick={() => props.openModal("", value.caption)}
+        >
+          <Card className={classes.card}>
+            <StyledCardContent className={classes.cardContent}>
+              <div className={classes.thumbnailBox}>
+                <img
+                  className={`p-main-thumbnail ${classes.thumbnail}`}
+                  src={value.thumbnail_url}
+                />
+              </div>
+              <div className={classes.tagsAndDate}>
+                <Typography
+                  gutterBottom
+                  variant="subtitle1"
+                  align="right"
+                  // className={}
+                >
+                  {sqlToDate(value.timestamp)}
+                </Typography>
+              </div>
+              <div
+                className={`p-main-article-excerpt ${classes.excerpt}`}
+              >
+                <Typography gutterBottom variant="body1">
+                  {value.caption.slice(0, 100)}
+                  {value.caption.length === 100 ? "..." : ""}
+                </Typography>
+              </div>
+            </StyledCardContent>
+          </Card>
+        </CardActionArea>
+      </Grid>
+    );
   })
 
   return (

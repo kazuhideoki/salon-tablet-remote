@@ -159,8 +159,8 @@ export const initAppState = {
   setModal: "edit_article" as TSetModal,
   isDrawerOpen: true,
   isShowInstagram: false,
+  // article,items,instagramMediaで共有。必要な値を格納してそれぞれのmodalで表示
   currentModalContent: {
-    // IsShowInstagram: false,
     title: "",
     contnet: "",
     modalSize: "large" as T_modal_size,

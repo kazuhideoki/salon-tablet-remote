@@ -10,6 +10,7 @@ const props: TContentModalProps = {
     isSetting: true,
     setModal: "content_modal",
     isDrawerOpen: true,
+    isShowInstagram: false,
     currentModalContent: {
       title: "SALON TABLETについて",
       contnet:

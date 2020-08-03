@@ -18,7 +18,7 @@ export const InstagramMediaModalPresenter: React.FC<TContentModalProps> = (props
   return (
     // 画像も
     <>
-      
+      {/* <img src={props.appState.currentModalContent}/> */}
       <Typography variant="body1">
         {props.appState.currentModalContent.contnet}
       </Typography>

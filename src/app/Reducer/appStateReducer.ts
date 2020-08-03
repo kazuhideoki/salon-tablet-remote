@@ -27,7 +27,6 @@ export type AppStateAction =
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_ARTICLE_MODAL" }
   | { type: "CLOSE_ARTICLE_MODAL" }
-  | { type: "SET_IS_LOADING" }
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState

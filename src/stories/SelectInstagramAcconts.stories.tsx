@@ -7,6 +7,7 @@ export default {
 
 const props = {
   instagramAccounts: null,
+  getInstagramMedias: null,
 };
 
 export const Normal = () => {

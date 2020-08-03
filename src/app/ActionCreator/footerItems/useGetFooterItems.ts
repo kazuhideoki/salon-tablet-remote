@@ -17,7 +17,6 @@ export const useGetFooterItems = () => {
         type: "GET",
         payload: data,
       });
-      dispatchAppState({ type: "END_LOADING" });
     }
   };
 };

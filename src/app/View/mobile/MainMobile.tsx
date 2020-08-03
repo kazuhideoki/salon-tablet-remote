@@ -12,7 +12,6 @@ export const useMainMobileProps = () => {
     articles,
     handleOnUpDate,
     handleOnDelete,
-    openArticle,
   } = usePMainProps();
 
   const { loading } = React.useContext(Store)
@@ -24,7 +23,6 @@ export const useMainMobileProps = () => {
     articles,
     handleOnUpDate,
     handleOnDelete,
-    openArticle,
     // handleOpenArticleEditor,
     loading,
   }
