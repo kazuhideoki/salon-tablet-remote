@@ -106,15 +106,15 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
       // // Instagram連携アカウント一覧取得
       // // const data5 = await apiInstagramMediasGet(userInfo.user_id)
-      // const data5 = {err: true} // テーブル  instagram_medias実装までつなぎ
+      const data5 = {err: true} // テーブル  instagram_medias実装までつなぎ
 
       // 並列処理でデータを取ってくる
-      const [data, data2, data3, data4, data5] = await Promise.all([
+      // const [data, data2, data3, data4, data5] = await Promise.all([
+      const [data, data2, data3, data4] = await Promise.all([
         apiArticlesGet(articlesParam),
         apiFooterItemsGet(userInfo.user_id),
         apiTagsGet(userInfo.user_id),
         apiInstagramAccountsGet(userInfo.user_id),
-        { err: true },
       ]);
 
       // 形付けるとpaginationのところにエラーが出た。未解決
