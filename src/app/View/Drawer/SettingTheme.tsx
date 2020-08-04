@@ -9,6 +9,7 @@ import { HelpButton } from "../viewComponents/buttons/HelpButton";
 import { ThemeContext } from "../../Store/ThemeContext";
 import { useChangeTheme } from "../../ActionCreator/user/useChangeTheme";
 import { Store } from "../../Store/Store";
+import { Typography } from "@material-ui/core";
 
 export const useSettingTheme = () => {
 
@@ -30,10 +31,24 @@ export const useSettingTheme = () => {
 
 type props = ReturnType<typeof useSettingTheme>
 
-export const SettingThemePresenter:React.FC<props> = (props) => {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      margin: theme.spacing(2),
+    },
+    header: {
+      margin: theme.spacing(2),
+    },
+  })
+);
 
+export const SettingThemePresenter:React.FC<props> = (props) => {
+  const classes = useStyles()
   return (
-    <div>
+    <div className={classes.root}>
+      <Typography variant="h4" component="h2" className={classes.header}>
+        テーマ選択
+      </Typography>
       <FormControl component="fieldset">
         <FormLabel component="legend">テーマ変更</FormLabel>
         <RadioGroup

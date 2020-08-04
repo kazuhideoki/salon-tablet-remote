@@ -23,7 +23,7 @@ export const useFooterProps = () => {
     footerItem: FooterItem
   ) => {
     dispatchAppState({
-      type: "SET_EDITTING_PARMS_FOOTERITEM",
+      type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT",
       payload: footerItem,
     });
     dispatchAppState({

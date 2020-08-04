@@ -32,22 +32,6 @@ import { TagsButton } from "../Footer/Pagination/TagsButton";
 export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState, dispatchLoading } = React.useContext(Store);
-
-  const handleOpenArticleEditor = () => {
-
-    dispatchAppState({ type: "OFF_EDITTING" });
-    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-  };
-
-  const handleOpenFooterItemEditor = () => {
-    dispatchAppState({ type: "OFF_EDITTING" });
-    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_footer_item" });
-  };
-
-  const handleOpenTagsManage = () => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_tags" })
-
-  }
   
   const checkPassword = useCheckPassword();
   const handleSubmitPassword = async (password: string) => {
@@ -65,19 +49,10 @@ export const useDrawerProps = () => {
     dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
   }
 
-  const handleOpenFeedback = () => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: "feedback_form" });
-  }
-
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
     signOuting ? signout() : null
   }
-
-  const handleDrawerOpen = () => {
-    dispatchAppState({type: "OPEN_DRAWER"})
-    dispatchAppState({ type: "CLOSE_MODAL" });
-  };
 
   const handleDrawerClose = () => {
     dispatchAppState({ type: "CLOSE_DRAWER" });
@@ -93,14 +68,9 @@ export const useDrawerProps = () => {
     theme,
     appState,
     dispatchAppState,
-    handleOpenArticleEditor,
-    handleOpenFooterItemEditor,
-    handleOpenTagsManage,
     handleSubmitPassword,
     handleSwitchIsSetting,
-    handleOpenFeedback,
     handleOnSingOut,
-    handleDrawerOpen,
     handleDrawerClose,
     isMobile,
   };
@@ -206,81 +176,107 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   const IsSettingDrawerMenu: React.FC = () => {
     return (
       <>
-      <List>
-        <ListItem button onClick={() => props.handleOpenArticleEditor()}>
-          <ListItemIcon>
-            <NoteAddOutlined />
-          </ListItemIcon>
-          <ListItemText primary="記事作成" />
-        </ListItem>
-        <ListItem button onClick={() => props.handleOpenFooterItemEditor()}>
-          <ListItemIcon>
-            <VideoLabel />
-          </ListItemIcon>
-          <ListItemText primary="アイテム作成" />
-        </ListItem>
-          <ListItem button onClick={() => props.handleOpenTagsManage()}>
-          <ListItemIcon>
-            <TagsButton />
-          </ListItemIcon>
-          <ListItemText primary="タグ管理"/>
-        </ListItem>
-        <ListItem
-          button
-          onClick={() =>
-            props.dispatchAppState({
-              type: "OPEN_MODAL",
-              payload: "manage_instagram",
-            })
-          }
-        >
-          <ListItemIcon>
-            <Instagram />
-          </ListItemIcon>
-          <ListItemText primary="Instagram 連携" secondary="製作中" />
-        </ListItem>
-        <ListItem
-          button
-          onClick={() =>
-            props.dispatchAppState({
-              type: "OPEN_MODAL",
-              payload: "setting_theme",
-            })
-          }
-        >
-          <ListItemIcon>
-            <Wallpaper />
-          </ListItemIcon>
-          <ListItemText primary="テーマ変更" secondary="製作中" />
-        </ListItem>
-        <ListItem
-          button
-          onClick={() =>
-            props.dispatchAppState({
-              type: "OPEN_MODAL",
-              payload: "setting_user_info",
-            })
-          }
-        >
-          <ListItemIcon>
-            <Settings />
-          </ListItemIcon>
-          <ListItemText primary="アカウント" />
-        </ListItem>
-        <ListItem button onClick={() => props.handleOpenFeedback()}>
-          <ListItemIcon>
-            <Feedback />
-          </ListItemIcon>
-          <ListItemText primary="フィードバック" />
-        </ListItem>
-        <ListItem button onClick={() => props.handleOnSingOut()}>
-          <ListItemIcon>
-            <ExitToApp />
-          </ListItemIcon>
-          <ListItemText primary="サインアウト" />
-        </ListItem>
-      </List>
-    </>
+        <List>
+          <ListItem
+            button
+            onClick={() =>
+              props.dispatchAppState({ type: "OPEN_ARTICLE_EDITOR" })
+            }
+          >
+            <ListItemIcon>
+              <NoteAddOutlined />
+            </ListItemIcon>
+            <ListItemText primary="記事作成" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() =>
+              props.dispatchAppState({ type: "OPEN_FOOTER_ITEM_EDITOR" })
+            }
+          >
+            <ListItemIcon>
+              <VideoLabel />
+            </ListItemIcon>
+            <ListItemText primary="アイテム作成" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_MODAL",
+                payload: "edit_tags",
+              })
+            }
+          >
+            <ListItemIcon>
+              <TagsButton />
+            </ListItemIcon>
+            <ListItemText primary="タグ管理" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_MODAL",
+                payload: "manage_instagram",
+              })
+            }
+          >
+            <ListItemIcon>
+              <Instagram />
+            </ListItemIcon>
+            <ListItemText primary="Instagram 連携" secondary="製作中" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_MODAL",
+                payload: "setting_theme",
+              })
+            }
+          >
+            <ListItemIcon>
+              <Wallpaper />
+            </ListItemIcon>
+            <ListItemText primary="テーマ変更" secondary="製作中" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_MODAL",
+                payload: "setting_user_info",
+              })
+            }
+          >
+            <ListItemIcon>
+              <Settings />
+            </ListItemIcon>
+            <ListItemText primary="アカウント" />
+          </ListItem>
+          <ListItem
+            button
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_MODAL",
+                payload: "feedback_form",
+              })
+            }
+          >
+            <ListItemIcon>
+              <Feedback />
+            </ListItemIcon>
+            <ListItemText primary="フィードバック" />
+          </ListItem>
+          <ListItem button onClick={() => props.handleOnSingOut()}>
+            <ListItemIcon>
+              <ExitToApp />
+            </ListItemIcon>
+            <ListItemText primary="サインアウト" />
+          </ListItem>
+        </List>
+      </>
     );
   };
 
@@ -318,7 +314,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       <IconButton
         color="inherit"
         aria-label="open drawer"
-        onClick={props.handleDrawerOpen}
+        onClick={() => props.dispatchAppState({ type: "OPEN_DRAWER" })}
         edge="start"
         className={clsx(
           classes.menuButton,
@@ -337,7 +333,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          <DrawerHeader/>
+          <DrawerHeader />
         </div>
         <Divider />
 

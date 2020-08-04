@@ -5,27 +5,26 @@ import { makeStyles,createStyles, Theme, Button, CircularProgress } from '@mater
 import { useDrawerProps } from '../Drawer/Drawer';
 import { Store } from '../../Store/Store';
 import { PaginationMobile } from './PaginationMobile';
+import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle';
 
 export const useMainMobileProps = () => {
   const {
-    appState,
     articles,
-    handleOnUpDate,
-    handleOnDelete,
+    dispatchAppState
   } = usePMainProps();
 
   const { loading } = React.useContext(Store)
 
+  const deleteAritlce = useDeleteArticle()
+
   // const { handleOpenArticleEditor } = useDrawerProps()
 
   return {
-    appState,
     articles,
-    handleOnUpDate,
-    handleOnDelete,
-    // handleOpenArticleEditor,
+    dispatchAppState,
     loading,
-  }
+    deleteAritlce,
+  };
 }
 
 type Props = ReturnType<typeof useMainMobileProps>
@@ -95,10 +94,10 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               {/* 抜粋が100文字の場合"..."追加" */}
               {value.article_excerpt.length === 100 ? "..." : ""}
             </div>
-            <button onClick={() => props.handleOnUpDate(value)}>
+            <button onClick={() => props.dispatchAppState({type: "OPEN_ARTICLE_EDITOR_FOR_EDIT", payload: value})}>
               編集
             </button>
-            <button onClick={() => props.handleOnDelete(value.article_id)}>
+            <button onClick={() => props.deleteAritlce(value.article_id)}>
               削除
             </button>
           </div>

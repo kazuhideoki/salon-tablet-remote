@@ -146,8 +146,8 @@ export type TInstagramMedia = {
   timestamp: T_media_timestamp;
   username: T_instagram_username
 
-  instagram_id: T_instagram_id;
-  user_id: T_user_id;
+  instagram_id?: T_instagram_id;
+  user_id?: T_user_id;
 };
 
 export type TInstagramMedias = TInstagramMedia[];
@@ -189,6 +189,7 @@ export const initAppState = {
   },
   // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
   selectedArticlesTags: [] as number[],
+  selectedInstagramAccount: "" as T_instagram_username
   
 };
 

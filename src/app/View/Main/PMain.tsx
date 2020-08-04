@@ -107,7 +107,9 @@ const useStyles = makeStyles((theme) => {
     tags: {
       flexGrow: 1,
     },
-    date: {},
+    date: {
+      margin: theme.spacing(2)
+    },
 
     excerpt: {
       fontSize: "1rem",
@@ -150,7 +152,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
               <UpdateButton
                 onClick={() =>
                   props.dispatchAppState({
-                    type: "OPEN_ARTICLE_MODAL_FOR_EDIT",
+                    type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
                     payload: value,
                   })
                 }
@@ -265,7 +267,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 gutterBottom
                 variant="subtitle1"
                 align="right"
-                // className={}
+                className={classes.date}
               >
                 {sqlToDate(value.timestamp)}
               </Typography>

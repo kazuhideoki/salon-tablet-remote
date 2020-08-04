@@ -34,9 +34,6 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
   const modalSize = appState.edittingPrams.modalSize
-  const setModalSize = (value: T_modal_size) => {
-    dispatchAppState({ type: "SET_MODAL_SIZE", payload: value})
-  }
   const { setModal, isModalOpen, currentModalContent, edittingPrams} = appState;
   const openModal = (name: TSetModal) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: name });
@@ -51,7 +48,6 @@ const useModalProps = () => {
   return {
     appState,
     modalSize,
-    setModalSize,
     setModal,
     isModalOpen,
     openModal,

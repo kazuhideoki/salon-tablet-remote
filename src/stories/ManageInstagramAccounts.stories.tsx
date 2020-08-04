@@ -8,6 +8,7 @@ export default {
 const props = {
   instagramAccounts: null,
   instaAuth: "",
+  deleteInstagramAccount: null,
 };
 
 export const Normal = () => {

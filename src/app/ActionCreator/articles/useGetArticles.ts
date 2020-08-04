@@ -38,7 +38,7 @@ export const useGetArticles = () => {
         payload: data.rawData,
       });
       dispatchAppState({
-        type: "SET_TAGS_AND_SHOW_ARTICLES",
+        type: "SHOW_ARTICLES_AND_SET_TAGS",
         payload: selectingTags || [],
       });
       //   paginationが変わったらセットし直す

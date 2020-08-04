@@ -5,30 +5,28 @@ import { makeStyles, Theme, createStyles, Button } from "@material-ui/core";
 import { MoodBad, ArrowUpward } from "@material-ui/icons";
 import { useSwitchOrder } from '../../ActionCreator/footerItems/useSwitchOrder';
 import { useDrawerProps } from '../Drawer/Drawer';
+import { useDeleteFooterItem } from '../../ActionCreator/footerItems/useDeleteFooterItem';
 
 export const useFooterMobileProps = () => {
   const {
     appState,
-    openModal,
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,
-    handleOnDeleteFooterItem,
   } = useFooterProps();
 
   // const { handleOpenFooterItemEditor } = useDrawerProps();
 
   const switchOrder = useSwitchOrder();
+  const deleteFooterItem = useDeleteFooterItem()
 
   return {
     appState,
-    openModal,
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,
-    handleOnDeleteFooterItem,
-    // handleOpenFooterItemEditor,
     switchOrder,
+    deleteFooterItem,
   };
 }
 
@@ -92,19 +90,12 @@ export const FooterMobilePresenter:React.FC<Props> = (props) => {
                     {value.item_excerpt.length === 100 ? "..." : ""}
                   </div>
                 ) : null}
-                <button
-                  onClick={() =>
-                    props.handleOnUpDateFooterIcon(value)
-                  }
-                >
+                <button onClick={() => props.handleOnUpDateFooterIcon(value)}>
                   編集
                 </button>
                 <button
                   onClick={() =>
-                    props.handleOnDeleteFooterItem(
-                      value.footer_item_id,
-                      value.order
-                    )
+                    props.deleteFooterItem(value.footer_item_id, value.order)
                   }
                 >
                   削除

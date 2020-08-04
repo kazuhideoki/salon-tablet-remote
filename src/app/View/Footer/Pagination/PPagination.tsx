@@ -11,7 +11,8 @@ import { Instagram } from "@material-ui/icons";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
-  const { paginationParams, dispatchLoading, dispatchAppState } = React.useContext(Store);
+  const { paginationParams, dispatchLoading, dispatchAppState, appState } = React.useContext(Store);
+  const { selectedInstagramAccount, isShowInstagram } = appState
   
   const handleOnNumClick = (num) => {
     getArticles(num);
@@ -26,6 +27,8 @@ export const usePPaginationProps = () => {
     dispatchAppState,
     handleOnNumClick,
     selectedTagNames,
+    selectedInstagramAccount,
+    isShowInstagram,
   };
 };
 export type TUsePPaginationProps = ReturnType<typeof usePPaginationProps>
@@ -108,11 +111,10 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           <TagsButton />
           {/* </SvgIcon> */}
         </IconButton>
-
       </Typography>
 
       <div>
-        {props.selectedTagNames.map((value) => (
+        {props.isShowInstagram === false && props.selectedTagNames.map((value) => (
           <Chip label={value} size="small" />
         ))}
       </div>
@@ -129,6 +131,12 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
         <Instagram />
         {/* </SvgIcon> */}
       </IconButton>
+
+      <div>
+        {props.isShowInstagram && (
+          <Chip label={props.selectedInstagramAccount} size="small" />
+        )}
+      </div>
 
       <Typography
         variant="subtitle1"

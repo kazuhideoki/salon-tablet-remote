@@ -18,6 +18,8 @@ const props: TUsePPaginationProps = {
   dispatchAppState: null,
   handleOnNumClick: null,
   selectedTagNames: ["カラー", "パーマ", "英語"],
+  selectedInstagramAccount: null,
+  isShowInstagram: false,
 };
 
 export const Normal = () => {

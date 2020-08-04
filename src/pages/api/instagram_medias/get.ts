@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const data = await db(`select access_token from instagram_accounts where instagram_id = ?`, instagram_id);
       const { access_token } = data[0];
 
-      const response = await fetch(`https://graph.instagram.com/me/media?fields=caption,id,media_type,media_url,permalink,thumbnail_url,timestamp&access_token=${access_token}`);
+      const response = await fetch(`https://graph.instagram.com/me/media?fields=caption,id,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=${access_token}`);
       
       const data2 = await response.json();
 

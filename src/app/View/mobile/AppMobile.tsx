@@ -41,10 +41,10 @@ export const AppMobile = () => {
   const [tab, setTab] = React.useState(0)
   const { dispatchAppState, loading } = React.useContext(Store)
   const getArticles = useGetArticles()
-  const {
-    handleOpenArticleEditor,
-    handleOpenFooterItemEditor,
-  } = useDrawerProps();
+  // const {
+  //   handleOpenArticleEditor,
+  //   handleOpenFooterItemEditor,
+  // } = useDrawerProps();
 
   const onClickOffIsSetting = () => {
     dispatchAppState({ type: "OFF_IS_SETTING" })
@@ -56,7 +56,7 @@ export const AppMobile = () => {
     case 0:
       Display = () => (
         <>
-          <Button color="primary" className={classes.createButton} onClick={() => handleOpenArticleEditor()}>記事作成</Button>
+          <Button color="primary" className={classes.createButton} onClick={() => dispatchAppState({type: "OPEN_ARTICLE_EDITOR"})}>記事作成</Button>
           <MainMobile />
           <PaginationMobile />
         </>
@@ -68,7 +68,7 @@ export const AppMobile = () => {
           <Button
             color="primary"
             className={classes.createButton}
-            onClick={() => handleOpenFooterItemEditor()}
+            onClick={() => dispatchAppState({type: "OPEN_FOOTER_ITEM_EDITOR"})}
           >
             アイテム追加
           </Button>
