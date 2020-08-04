@@ -9,7 +9,7 @@ export const useDeleteFooterItem = () => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
 
-    if (deleting!) {
+    if (deleting === false) {
       return null;
     }
     

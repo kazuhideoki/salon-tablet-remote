@@ -10,16 +10,11 @@ import { instagramRedirectHost } from '../../../config';
 import { Store } from '../../Store/Store';
 import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
 import { useDeleteInstagramAccount } from '../../ActionCreator/instagramAccounts/useDeleteInstagramAccounts'
-import { T_instagram_id } from '../../Store/Types';
 
 export const useManageInstagramAccountsProps = () => {
 
   const { instagramAccounts } = React.useContext(Store);
   const deleteInstagramAccount = useDeleteInstagramAccount()
-  // const handleDeleteAccount = (instagram_id: T_instagram_id) => {
-  //   const deleting = confirm("本当に削除してよろしいですか？");
-  //   deleting ? deleteInstagramAccount(instagram_id) : null;
-  // };
 
   const instaAuth = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${instagramRedirectHost}/api/instagram_accounts/get_token&scope=user_profile,user_media&response_type=code`;
 

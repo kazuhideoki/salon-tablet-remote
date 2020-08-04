@@ -9,9 +9,9 @@ export const useDeleteInstagramAccount = () => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
 
-    if (deleting!) {
-      return null;
-    }
+  if (deleting === false) {
+    return null;
+  }
 
     const res = await fetch(
       `${location.protocol}//${location.host}/api/instagram_accounts/delete`,
