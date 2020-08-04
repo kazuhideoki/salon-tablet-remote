@@ -8,6 +8,7 @@ export const useGetInstagramAccounts = () => {
   );
 
   return async () => {
+
     const data = await apiInstagramAccountsGet(userInfo.user_id);
 
     if (data.err === true) {

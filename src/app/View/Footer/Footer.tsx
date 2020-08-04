@@ -16,22 +16,7 @@ import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 
 export const useFooterProps = () => {
   const { appState, dispatchAppState, footerItems } = useContext(Store);
-  // modalNameをもとにModalで分岐してどのモーダルウィンドウを表示させるか決める
 
-  // const openModal = (item_content: string, modalSize: T_modal_size) => {
-  //   // footerItemは記事タイトルがないので、titleはnull
-  //   dispatchAppState({
-  //     type: "SET_MODAL_CONTENT",
-  //     payload: {
-  //       // showInstagram:false, 
-  //       title: null,
-  //       content: item_content,
-  //       modalSize: modalSize},
-  //   });
-  //   dispatchAppState({ type: "OPEN_MODAL", payload: "content_modal" });
-  // };
-
-  const getFooterItem = useGetFooterItem();
   const deleteFooterItem = useDeleteFooterItem();
 
   const handleOnUpDateFooterIcon = (
@@ -46,13 +31,6 @@ export const useFooterProps = () => {
       payload: "edit_footer_item",
     });
   };
-  const handleOnDeleteFooterItem = (
-    footer_item_id: T_footer_item_id,
-    order: T_order
-  ) => {
-    const deleting = confirm("本当に削除してよろしいですか？");
-    deleting ? deleteFooterItem(footer_item_id, order) : null;
-  };
 
   const isMobile = useMediaQuery("(max-width:480px)");
 
@@ -62,7 +40,7 @@ export const useFooterProps = () => {
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,
-    handleOnDeleteFooterItem,
+    deleteFooterItem,
     isMobile,
   };
 };
@@ -138,10 +116,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
             />
             <DeleteButton
               onClick={() =>
-                props.handleOnDeleteFooterItem(
-                  value.footer_item_id,
-                  value.order
-                )
+                props.deleteFooterItem(value.footer_item_id, value.order)
               }
             />
           </EditButtonsBox>
@@ -160,7 +135,12 @@ export const FooterPresenter:React.FC<Props> = (props) => {
                   )[0]
                 : MoodBad
             }
-            onClick={() => props.dispatchAppState({type: "OPEN_FOOTER_ITEM_MODAL", payload:{footerItem: value, modalSize: value.modal_size}})}
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_FOOTER_ITEM_MODAL",
+                payload: { footerItem: value, modalSize: value.modal_size },
+              })
+            }
             // fontSize="large"
             text={value.icon_name}
           />

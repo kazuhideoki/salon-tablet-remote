@@ -6,6 +6,13 @@ export const useDeleteFooterItem = () => {
   const { dispatchFooterItems } = React.useContext(Store);
 
   return async (footer_item_id: T_footer_item_id, order: T_order) => {
+
+    const deleting = confirm("本当に削除してよろしいですか？");
+
+    if (deleting!) {
+      return null;
+    }
+    
     const res = await fetch(
       `${location.protocol}//${location.host}/api/footer_items/delete`,
       {

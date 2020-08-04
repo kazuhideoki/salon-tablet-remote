@@ -16,17 +16,17 @@ export const useManageInstagramAccountsProps = () => {
 
   const { instagramAccounts } = React.useContext(Store);
   const deleteInstagramAccount = useDeleteInstagramAccount()
-  const handleDeleteAccount = (instagram_id: T_instagram_id) => {
-    const deleting = confirm("本当に削除してよろしいですか？");
-    deleting ? deleteInstagramAccount(instagram_id) : null;
-  };
+  // const handleDeleteAccount = (instagram_id: T_instagram_id) => {
+  //   const deleting = confirm("本当に削除してよろしいですか？");
+  //   deleting ? deleteInstagramAccount(instagram_id) : null;
+  // };
 
   const instaAuth = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${instagramRedirectHost}/api/instagram_accounts/get_token&scope=user_profile,user_media&response_type=code`;
 
   return {
     instagramAccounts,
     instaAuth,
-    handleDeleteAccount,
+    deleteInstagramAccount,
   };
 }
 type Props = ReturnType<typeof useManageInstagramAccountsProps>
@@ -56,14 +56,14 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
       </Typography>
 
       <a href={props.instaAuth}>
-        <Button>インスタグラムアカウントを登録する</Button>
+        <Button>インスタグラムアカウントを追加する</Button>
       </a>
       {props.instagramAccounts.map((value) => {
         return (
           <div className={classes.account}>
             <Button>{value.username}</Button>
             <DeleteButton
-              onClick={() => props.handleDeleteAccount(value.instagram_id)}
+              onClick={() => props.deleteInstagramAccount(value.instagram_id)}
             />
           </div>
         );

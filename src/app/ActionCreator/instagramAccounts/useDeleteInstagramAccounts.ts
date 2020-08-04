@@ -5,8 +5,14 @@ import { Store } from "../../Store/Store";
 
 export const useDeleteInstagramAccount = () => {
   const getInstagramAccounts = useGetInstagramAccounts();
-  const { paginationParams, instagramAccounts } = React.useContext(Store);
   return async (instagram_id: T_instagram_id) => {
+
+    const deleting = confirm("本当に削除してよろしいですか？");
+
+    if (deleting!) {
+      return null;
+    }
+
     const res = await fetch(
       `${location.protocol}//${location.host}/api/instagram_accounts/delete`,
       {

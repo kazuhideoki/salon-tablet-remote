@@ -50,10 +50,6 @@ export function DeleteAccountForm() {
   const [password, setPassword] = React.useState("");
   const deleteUser = useDeleteUser()
 
-  const handleDeleteAccount = ({email, password}) => {
-    deleteUser({ email, password });
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -93,11 +89,10 @@ export function DeleteAccountForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
-            
             fullWidth
             color="primary"
             className={classes.submit}
-            onClick={() => handleDeleteAccount({ email, password })}
+            onClick={() => deleteUser({ email, password })}
           >
             アカウントを本当に削除する
           </Button>

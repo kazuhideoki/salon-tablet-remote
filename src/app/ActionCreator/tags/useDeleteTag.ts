@@ -7,12 +7,18 @@ import { useGetTags } from "./useGetTags";
 import { T_tags_delete } from "../../../pages/api/tags/delete";
 
 export const useDeleteTag = () => {
-  const { paginationParams, tags, userInfo } = React.useContext(Store);
+  const { userInfo } = React.useContext(Store);
   const {user_id} = userInfo
   const getTags = useGetTags()
 
 
   return async (tag_id: T_tag_id) => {
+
+    const deleting = confirm("本当に削除してよろしいですか？");
+
+    if (deleting!) {
+      return null;
+    }
 
     const params: T_tags_delete = { tag_id: tag_id, user_id: user_id };
 

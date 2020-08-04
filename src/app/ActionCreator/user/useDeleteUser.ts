@@ -12,6 +12,12 @@ export const useDeleteUser = () => {
 
   return async ({ email, password }) => {
 
+    const deleting = confirm("本当に削除してよろしいですか？");
+
+    if (deleting!) {
+      return null;
+    }
+
     // メールアドレスが違う場合その時点で弾く
     if (user_email !== email) {
       alert('メールアドレスが間違っています')

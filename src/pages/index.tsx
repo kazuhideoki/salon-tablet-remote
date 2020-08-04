@@ -3,8 +3,7 @@ import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramA
 import { App } from "../app/View/App";
 //@ts-ignore
 import { getCsrfToken, getSession, providers } from "next-auth/client";
-import { db } from "./api/lib/db";
-import { NextPageContext, GetServerSideProps } from "next";
+import { GetServerSideProps } from "next";
 //@ts-ignore
 import { TopPage } from "../pageComponent/TopPage";
 import { T_articles_get, apiArticlesGet } from "./api/articles/get";
@@ -13,8 +12,6 @@ import { ApiUserInfoGetFromEmail } from "./api/user_info/getUserInfoFromEmail";
 import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
-import { AddAlert } from "@material-ui/icons";
-import { apiInstagramMediasGet } from "./api/instagram_medias/get";
 
 type IndexPropsData = {
     articles: TArticles;

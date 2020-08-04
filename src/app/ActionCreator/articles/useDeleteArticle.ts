@@ -8,7 +8,15 @@ import { Store } from "../../Store/Store";
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
   const { paginationParams, articles } = React.useContext(Store);
+  
   return async (article_id: T_article_id) => {
+
+    const deleting = confirm("本当に削除してよろしいですか？");
+
+    if (deleting!) {
+      return null
+    }
+
     const res = await fetch(
       `${location.protocol}//${location.host}/api/articles/delete`,
       {

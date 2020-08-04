@@ -61,11 +61,6 @@ export const ManageTags = () => {
     }
   }
 
-  const handleDelete = (tag_id) => {
-    const deleting = confirm("本当に削除してよろしいですか？");
-    deleting ? deleteTag(tag_id) : null;
-  };
-
   const isValidTagName = () => {
     if (tagNameField.length === 0) {
       return false
@@ -124,7 +119,7 @@ export const ManageTags = () => {
                   ? () => handleOnCreateNew()
                   : () => handleOnEditting(value.tag_id, value.tag_name)
               }
-              onDelete={() => handleDelete(value.tag_id)}
+              onDelete={() => deleteTag(value.tag_id)}
             />
           );
         })}

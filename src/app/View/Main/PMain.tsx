@@ -7,7 +7,6 @@ import {
   Typography,
   makeStyles,
   createStyles,
-  Chip,
   withStyles,
 } from "@material-ui/core";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
@@ -29,18 +28,12 @@ export const usePMainProps = () => {
   const {isShowInstagram, isSetting} = appState;
   const deleteArticle = useDeleteArticle();
 
-  const handleOnDelete = (article_id: T_article_id) => {
-    const deleting = confirm("本当に削除してよろしいですか？");
-    deleting ? deleteArticle(article_id) : null;
-  };
-  
-
   return {
     isSetting,
     articles,
     instagramMedias,
     tags,
-    handleOnDelete,
+    deleteArticle,
     dispatchAppState,
     isShowInstagram,
   };
@@ -154,9 +147,16 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
         >
           {props.isSetting ? (
             <EditButtonsBox className={classes.editButtonsBox}>
-              <UpdateButton onClick={() => props.dispatchAppState({type: "OPEN_ARTICLE_MODAL_FOR_EDIT", payload: value})} />
+              <UpdateButton
+                onClick={() =>
+                  props.dispatchAppState({
+                    type: "OPEN_ARTICLE_MODAL_FOR_EDIT",
+                    payload: value,
+                  })
+                }
+              />
               <DeleteButton
-                onClick={() => props.handleOnDelete(value.article_id)}
+                onClick={() => props.deleteArticle(value.article_id)}
               />
             </EditButtonsBox>
           ) : null}
@@ -177,7 +177,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     <img
                       className={`p-main-thumbnail ${classes.thumbnail}`}
                       src={value.article_img}
-                    />                
+                    />
                   ) : (
                     <div
                       className={`p-main-thumbnail ${classes.thumbnail}`}
