@@ -153,16 +153,16 @@ const AppView = () => {
   
 
   // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
-  const [isFirstLoad, setIsFirstLoad] = React.useState(true);
-  // 編集モード[isSetting]を切り替えるたびに記事を読み込み直す
-  // ※※→いずれuseEffect使わないようにするか❓
-  React.useEffect(() => {
-    if (!isFirstLoad) {  
-      // 二回目以降で発火 
-      getArticles(1);
-    }
-    setIsFirstLoad(false);
-  },[appState.isSetting])
+  // const [isFirstLoad, setIsFirstLoad] = React.useState(true);
+  // // 編集モード[isSetting]を切り替えるたびに記事を読み込み直す
+  // // ※※→いずれuseEffect使わないようにするか❓
+  // React.useEffect(() => {
+  //   if (!isFirstLoad) {  
+  //     // 二回目以降で発火 
+  //     getArticles(1);
+  //   }
+  //   setIsFirstLoad(false);
+  // },[appState.isSetting])
 
   // パスワード未設定でユーザー情報登録へ遷移 → 手間な感じがするので、indexのserverSidePropsでやってもいいかも、要検討
   //@ts-ignore

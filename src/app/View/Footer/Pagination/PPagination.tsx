@@ -84,39 +84,47 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
   return (
     <Grid container justify="center" spacing={1} className={classes.root}>
-      <Typography
+      {/* <Typography
         variant="subtitle1"
         component="span"
         className={classes.icons}
-      >
-        {/* <SvgIcon
+      > */}
+      {/* <SvgIcon
           fontSize="inherit" */}
-        <IconButton
-          onClick={() => props.getArticles(1, [])}
-          className={classes.icon}
-        >
-          <HomeButton />
-          {/* </IconButton> */}
-        </IconButton>
+      <IconButton
+        onClick={() => props.getArticles(1, [])}
+        className={classes.icon}
+        color={
+          props.isShowInstagram === false && props.selectedTagNames.length === 0
+            ? "primary"
+            : "default"
+        }
+      >
+        <HomeButton />
+      </IconButton>
 
-        <IconButton
-          onClick={() =>
-            props.dispatchAppState({
-              type: "OPEN_MODAL",
-              payload: "select_tags",
-            })
-          }
-          className={classes.icon}
-        >
-          <TagsButton />
-          {/* </SvgIcon> */}
-        </IconButton>
-      </Typography>
+      <IconButton
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "select_tags",
+          })
+        }
+        color={
+          props.isShowInstagram === false && props.selectedTagNames.length
+            ? "primary"
+            : "default"
+        }
+        className={classes.icon}
+      >
+        <TagsButton />
+      </IconButton>
 
       <div>
-        {props.isShowInstagram === false && props.selectedTagNames.map((value) => (
-          <Chip label={value} size="small" />
-        ))}
+        {props.isShowInstagram === false &&
+          props.selectedTagNames.map((value) => (
+            <Chip label={value} size="small" />
+          ))}
       </div>
 
       <IconButton
@@ -127,10 +135,12 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           })
         }
         className={classes.icon}
+        color={props.isShowInstagram ? "primary" : "default"}
       >
         <Instagram />
         {/* </SvgIcon> */}
       </IconButton>
+      {/* </Typography> */}
 
       <div>
         {props.isShowInstagram && (

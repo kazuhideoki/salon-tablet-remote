@@ -26,12 +26,14 @@ import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
 import { cipher } from "../../../module/bcrypt";
 import { TagsButton } from "../Footer/Pagination/TagsButton";
+import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 
 
 // export const useDrawerProps = ({open, setOpen}) => {
 export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState, dispatchLoading } = React.useContext(Store);
+  const getArticles = useGetArticles()
   
   const checkPassword = useCheckPassword();
   const handleSubmitPassword = async (password: string) => {
@@ -39,7 +41,7 @@ export const useDrawerProps = () => {
     const result = await checkPassword(password);
     if (result === true) {
       dispatchAppState({ type: "ON_IS_SETTING" });
-      dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
+      getArticles(1, appState.selectedArticlesTags, false)
     } else if (result === false) {
       alert("パスワードが間違っています。");
     }
@@ -47,6 +49,7 @@ export const useDrawerProps = () => {
   const handleSwitchIsSetting = () => {
     dispatchAppState({ type: "ON_IS_SETTING" })
     dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
+    getArticles(1, appState.selectedArticlesTags, false);
   }
 
   const handleOnSingOut = () => {
@@ -60,6 +63,7 @@ export const useDrawerProps = () => {
     setTimeout(() => {
       dispatchAppState({ type: "OFF_IS_SETTING" });
     }, 800);
+    getArticles(1, appState.selectedArticlesTags, false)
   };
 
   const isMobile = useMediaQuery("(max-width:480px)");

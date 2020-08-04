@@ -5,14 +5,13 @@ import { TrendingUpOutlined } from '@material-ui/icons';
 export type AppStateAction =
   | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "CLOSE_MODAL" }
-
   | { type: "ON_IS_SETTING" }
   | { type: "OPEN_DRAWER" }
 
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
   | { type: "OFF_IS_SETTING" }
   | { type: "CLOSE_DRAWER" }
-  
+
   // modalウィンドウを開く時
   | { type: "OPEN_ARTICLE_MODAL"; payload: TArticle }
   | {
@@ -23,15 +22,15 @@ export type AppStateAction =
 
   // mainに表示するのを記事か、instagramか切り替え
   | { type: "SHOW_INSTAGRAM"; payload: T_instagram_username }
-  | { type: "SHOW_ARTICLES_AND_SET_TAGS"; payload: number[] }
+  | { type: "SHOW_ARTICLES" }
+  | { type: "SET_SELECTED_TAGS"; payload: number[] }
 
   // editor modalウィンドウを開く時. 新規と編集
   | { type: "OPEN_ARTICLE_EDITOR" }
   | { type: "OPEN_FOOTER_ITEM_EDITOR" }
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
-
-  | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
+  | { type: "SET_MODAL_SIZE"; payload: T_modal_size };
   
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
@@ -121,12 +120,18 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           ...state,
           isShowInstagram: true,
           selectedInstagramAccount: action.payload,
+          selectedArticlesTags: [],
         };
         break;
-      case "SHOW_ARTICLES_AND_SET_TAGS":
+      case "SHOW_ARTICLES":
         newState = {
           ...state,
           isShowInstagram: false,
+        };
+        break;
+      case "SET_SELECTED_TAGS":
+        newState = {
+          ...state,
           selectedArticlesTags: action.payload,
         };
         break;

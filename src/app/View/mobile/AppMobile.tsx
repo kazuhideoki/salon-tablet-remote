@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const AppMobile = () => {
   const classes = useStyles()
   const [tab, setTab] = React.useState(0)
-  const { dispatchAppState, loading } = React.useContext(Store)
+  const { dispatchAppState, loading, appState} = React.useContext(Store)
   const getArticles = useGetArticles()
   // const {
   //   handleOpenArticleEditor,
@@ -49,6 +49,8 @@ export const AppMobile = () => {
   const onClickOffIsSetting = () => {
     dispatchAppState({ type: "OFF_IS_SETTING" })
     dispatchAppState({type: "CLOSE_DRAWER"})
+    getArticles(1, appState.selectedArticlesTags, false);
+
   }
 
   let Display: React.FC
