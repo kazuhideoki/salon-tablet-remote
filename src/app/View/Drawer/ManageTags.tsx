@@ -16,6 +16,9 @@ import { CharCounter } from "../viewComponents/CharCounter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      margin: theme.spacing(2)
+    },
     header: {
       margin: theme.spacing(2)
     },
@@ -82,7 +85,7 @@ export const ManageTags = () => {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <Typography variant="h4" component="h2" className={classes.header}>
         タグ管理
       </Typography>

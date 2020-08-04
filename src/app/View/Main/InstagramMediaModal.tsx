@@ -1,6 +1,7 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import { makeStyles, createStyles, Typography } from "@material-ui/core";
+import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 
 const useInstagramMediaModalProps = () => {
   const { appState } = React.useContext(Store);
@@ -15,11 +16,17 @@ export type TContentModalProps = ReturnType<typeof useInstagramMediaModalProps>;
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   media: {
-    textAlign: "center",
-    maxWidth: "90%",// modalだから スクリーサイズに対して？
+    maxWidth: "100%",// modalだから スクリーサイズに対して？
+    maxHeight: "100%",// modalだから スクリーサイズに対して？
+  },
+  content: {
+    margin: theme.spacing(3),
   },
 }));
 
@@ -30,28 +37,23 @@ export const InstagramMediaModalPresenter: React.FC<TContentModalProps> = (props
   switch (props.instagramMedia.media_type) {
     case "IMAGE":
       media = (
-        <div>
-          <img src={props.instagramMedia.media_url} />;
-        </div>
+          <img src={props.instagramMedia.media_url} className={classes.media}/>
       );
       break;
     case "VIDEO":
       media = (
-        <div>
-          <video
-            autoPlay
-            muted
-            playsInline
-            src={props.instagramMedia.media_url}
-          ></video>
-        </div>
+        <video
+          autoPlay
+          muted
+          playsInline
+          src={props.instagramMedia.media_url}
+          className={classes.media}
+        />
       );
       break;
     case "CAROUSEL_ALBUM":
       media = (
-        <div>
-          <img src={props.instagramMedia.media_url} />;
-        </div>
+        <img src={props.instagramMedia.media_url} className={classes.media} />
       );
       break;
 
@@ -63,12 +65,15 @@ export const InstagramMediaModalPresenter: React.FC<TContentModalProps> = (props
     // 画像も
     <div className={classes.root}>
       {media}
-      <Typography variant="subtitle1" align="right">
-        {props.instagramMedia.timestamp}
-      </Typography>
-      <Typography variant="body1">
+    <div className={classes.content}>
+      <Typography variant="body1" >
         {props.instagramMedia.caption}
       </Typography>
+      <Typography variant="subtitle1" align="left">
+        {sqlToDate(props.instagramMedia.timestamp)}
+      </Typography>
+
+    </div>
     </div>
   );
 };

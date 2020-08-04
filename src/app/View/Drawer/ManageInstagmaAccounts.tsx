@@ -25,12 +25,16 @@ type Props = ReturnType<typeof useManageInstagramAccountsProps>
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      margin: theme.spacing(2),
+    },
     header: {
       margin: theme.spacing(2),
     },
-    acount: {
+    account: {
       display: "flex",
-    }
+      margin: theme.spacing(1),
+    },
   })
 );
 
@@ -38,7 +42,7 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.root}>
       <Typography variant="h4" component="h2" className={classes.header}>
         Instagram アカウント管理
       </Typography>
@@ -48,7 +52,7 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
       </a>
       {props.instagramAccounts.map((value) => {
         return (
-          <div className={classes.acount}>
+          <div className={classes.account}>
             <Button>{value.username}</Button>
             <DeleteButton />
           </div>

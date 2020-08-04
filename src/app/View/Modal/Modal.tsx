@@ -92,7 +92,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <FooterItemModal />;
             break;
           case "instagram_media_modal":
-            // modalStyle = useModalSize(props.currentModalContent.modalSize)
+            modalStyle = useModalSize(props.currentModalContent.modalSize)
             ModalContent = () => <InstagramMediaModal />;
             break;
           case "select_tags":

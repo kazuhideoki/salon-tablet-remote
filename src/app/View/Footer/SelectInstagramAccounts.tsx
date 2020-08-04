@@ -17,8 +17,14 @@ type Props = ReturnType<typeof useSelectInstagramAccountsProps>
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      padding: theme.spacing(2),
+    },
     header: {
       padding: theme.spacing(2),
+    },
+    account: {
+      margin: theme.spacing(1),
     },
   })
 );
@@ -27,14 +33,18 @@ export const SelectInstagramAccountsPresenter:React.FC<Props> = (props) => {
   const classes = useStyles()
   
   return (
-    <div>
+    <div className={classes.root}>
       <Typography variant="h4" component="h2" className={classes.header}>
         インスタグラムアカウント選択
       </Typography>
       {props.instagramAccounts.map((value) => {
         return (
-          <div>
-            <Button onClick={() => props.getInstagramMedias(value.instagram_id)}>{value.username}</Button>
+          <div className={classes.account}>
+            <Button
+              onClick={() => props.getInstagramMedias(value.instagram_id)}
+            >
+              {value.username}
+            </Button>
           </div>
         );
       })}

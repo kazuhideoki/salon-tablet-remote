@@ -9,17 +9,19 @@ export type AppStateAction =
   | { type: "OPEN_DRAWER" }
   | { type: "CLOSE_DRAWER" }
   // footerItemの場合はtitleはnullが入る
-  | { type: "OPEN_ARTICLE_MODAL", payload: TArticle }
-  | { type: "OPEN_FOOTER_ITEM_MODAL", payload: {footerItem: FooterItem, modalSize: T_modal_size} }
-
+  | { type: "OPEN_ARTICLE_MODAL"; payload: TArticle }
+  | {
+      type: "OPEN_FOOTER_ITEM_MODAL";
+      payload: { footerItem: FooterItem; modalSize: T_modal_size };
+    }
   | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: TInstagramMedia }
   | { type: "IS_SHOW_INSTAGRAM"; payload: boolean }
-  | { type: "SET_EDITTING_PARMS_ARTICLE"; payload: TArticle }
+  | { type: "OPEN_ARTICLE_MODAL_FOR_EDIT"; payload: TArticle }
   | { type: "SET_EDITTING_PARMS_FOOTERITEM"; payload: FooterItem }
   | { type: "OFF_EDITTING" }
   | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
-  | { type: "SET_TAGS_AND_SHOW_ARTICLES"; payload: number[]}
-  | { type: "CLOSE_MODAL" }
+  | { type: "SET_TAGS_AND_SHOW_ARTICLES"; payload: number[] }
+  | { type: "CLOSE_MODAL" };
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState
@@ -102,9 +104,11 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isShowInstagram: action.payload,
         };
         break;
-      case "SET_EDITTING_PARMS_ARTICLE":
+      case "OPEN_ARTICLE_MODAL_FOR_EDIT":
         newState = {
           ...state,
+          setModal: "edit_article",
+          isModalOpen: true,
           edittingPrams: {
             isEditting: true,
             article: { ...action.payload },

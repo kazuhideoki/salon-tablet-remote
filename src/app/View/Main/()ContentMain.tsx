@@ -12,10 +12,6 @@ import {
 } from "@material-ui/core";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
-import { Store } from "../../Store/Store";
-import { T_article_id, TArticle, TArticles, TTags } from "../../Store/Types";
-import { useDeleteArticle } from "../../ActionCreator/articles/useDeleteArticle";
-import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";

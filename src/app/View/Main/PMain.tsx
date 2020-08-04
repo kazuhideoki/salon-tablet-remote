@@ -13,32 +13,21 @@ import {
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { Store } from "../../Store/Store";
-import { T_article_id, TArticle, TInstagramMedia } from "../../Store/Types";
+import { T_article_id } from "../../Store/Types";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
-import { useGetSingleArticle } from "../../ActionCreator/articles/useGetSingleArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";
-import { ContentMain } from "./()ContentMain";
-import { InstagramMediaMain } from "./()InstagramMediaMain";
+import { PlayArrowRounded } from "@material-ui/icons";
 
 export const usePMainProps = () => {
   const { appState, articles, dispatchAppState, tags, instagramMedias } = React.useContext(
     Store
   );
-  const isShowInstagram = appState.isShowInstagram;
+  const {isShowInstagram, isSetting} = appState;
   const deleteArticle = useDeleteArticle();
-  const getSingleArticle = useGetSingleArticle();
-
-  const handleOnUpDate = (article: TArticle) => {
-    dispatchAppState({
-      type: "SET_EDITTING_PARMS_ARTICLE",
-      payload: article,
-    });
-    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_article" });
-  };
 
   const handleOnDelete = (article_id: T_article_id) => {
     const deleting = confirm("本当に削除してよろしいですか？");
@@ -47,11 +36,10 @@ export const usePMainProps = () => {
   
 
   return {
-    appState,
+    isSetting,
     articles,
     instagramMedias,
     tags,
-    handleOnUpDate,
     handleOnDelete,
     dispatchAppState,
     isShowInstagram,
@@ -110,6 +98,13 @@ const useStyles = makeStyles((theme) => {
       background:
         "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5074404761904762) 33%, rgba(255,255,255,1) 100%)",
     },
+    playIcon: {
+      position: "absolute",
+      top: theme.spacing(1),
+      right: theme.spacing(1),
+      color: "white",
+      fontSize: "60px",
+    },
     tagsAndDate: {
       display: "flex",
       margin: `${theme.spacing(2)}px ${theme.spacing(1)}px ${theme.spacing(
@@ -157,9 +152,9 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
             ${!value.is_published ? classes.itemIsDraft : ""}
           `}
         >
-          {props.appState.isSetting ? (
+          {props.isSetting ? (
             <EditButtonsBox className={classes.editButtonsBox}>
-              <UpdateButton onClick={() => props.handleOnUpDate(value)} />
+              <UpdateButton onClick={() => props.dispatchAppState({type: "OPEN_ARTICLE_MODAL_FOR_EDIT", payload: value})} />
               <DeleteButton
                 onClick={() => props.handleOnDelete(value.article_id)}
               />
@@ -168,7 +163,12 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
 
           <CardActionArea
             className={classes.cardActionArea}
-            onClick={() => props.dispatchAppState({type: "OPEN_ARTICLE_MODAL", payload: value})}
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_ARTICLE_MODAL",
+                payload: value,
+              })
+            }
           >
             <Card className={classes.card}>
               <StyledCardContent className={classes.cardContent}>
@@ -177,7 +177,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     <img
                       className={`p-main-thumbnail ${classes.thumbnail}`}
                       src={value.article_img}
-                    />
+                    />                
                   ) : (
                     <div
                       className={`p-main-thumbnail ${classes.thumbnail}`}
@@ -258,17 +258,18 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                       : value.media_url
                   }
                 />
+                {value.media_type === "VIDEO" ? <PlayArrowRounded className={classes.playIcon} /> : null}
               </div>
-              <div className={classes.tagsAndDate}>
-                <Typography
-                  gutterBottom
-                  variant="subtitle1"
-                  align="right"
-                  // className={}
-                >
-                  {sqlToDate(value.timestamp)}
-                </Typography>
-              </div>
+              {/* <div className={classes.tagsAndDate}> */}
+              <Typography
+                gutterBottom
+                variant="subtitle1"
+                align="right"
+                // className={}
+              >
+                {sqlToDate(value.timestamp)}
+              </Typography>
+              {/* </div> */}
               <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                 <Typography gutterBottom variant="body1">
                   {value.caption.slice(0, 100)}
@@ -290,18 +291,6 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
       className={classes.root}
       spacing={2}
     >
-      {/* {props.isShowInstagram === true &&
-        (props.articles.length ? (
-          <InstagramMediaMain classes={classes} {...props} />
-        ) : (
-          noArticles
-        ))}
-      {props.isShowInstagram === false &&
-        (props.articles.length ? (
-          <ContentMain classes={classes} {...props} />
-        ) : (
-          noArticles
-        ))} */}
       {props.isShowInstagram === false
         ? props.articles.length
           ? displayArticles
