@@ -113,6 +113,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <ManageInstagramAccounts />;
             break;
           case "setting_theme":
+            modalStyle = useModalSize('medium'); // ← きかない
             ModalContent = () => <SettingTheme />;
             break;
           case "setting_user_info":

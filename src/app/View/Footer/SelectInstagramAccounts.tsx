@@ -41,7 +41,7 @@ export const SelectInstagramAccountsPresenter:React.FC<Props> = (props) => {
         return (
           <div className={classes.account}>
             <Button
-              onClick={() => props.getInstagramMedias(value.instagram_id, value.username)}
+              onClick={() => props.getInstagramMedias(value.instagram_id, value.username, {})}
             >
               {value.username}
             </Button>

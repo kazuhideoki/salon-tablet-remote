@@ -144,13 +144,25 @@ export type TInstagramMedia = {
   permalink: T_media_permalink;
   thumbnail_url: T_media_thumbnail_url;
   timestamp: T_media_timestamp;
-  username: T_instagram_username
+  username: T_instagram_username;
 
-  instagram_id?: T_instagram_id;
-  user_id?: T_user_id;
+  // instagram_id?: T_instagram_id;
+  // user_id?: T_user_id;
 };
 
-export type TInstagramMedias = TInstagramMedia[];
+export type TInstagramMedias = {
+  data: TInstagramMedia[];
+  paging: {
+    
+    cursors: {
+      before: string;
+      after: string;
+    };
+    // ページ送りがある場合 nextやpreviousが入る。(https〜のget)
+    next: string;
+    previous: string;
+  };
+};
 
 export type TSetModal =
   | "content_modal"
@@ -189,7 +201,10 @@ export const initAppState = {
   },
   // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
   selectedArticlesTags: [] as number[],
-  selectedInstagramAccount: "" as T_instagram_username
+  selectedInstagramAccount: {
+    id: 0 as T_instagram_id,
+    username: "" as T_instagram_username
+  }
   
 };
 

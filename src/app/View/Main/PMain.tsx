@@ -232,7 +232,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
     </Grid>
   );
 
-  const displayInstagramMedias = props.instagramMedias.map((value, key) => {
+  const displayInstagramMedias = props.instagramMedias.data.map((value, key) => {
     return (
       <Grid
         item
@@ -297,7 +297,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
         ? props.articles.length
           ? displayArticles
           : noArticles
-        : props.instagramMedias.length
+        : props.instagramMedias.data.length
         ? displayInstagramMedias
         : noArticles}
     </Grid>

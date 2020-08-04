@@ -1,4 +1,4 @@
-import { AppState, TArticle, FooterItem, T_modal_size, TSetModal, TInstagramMedia, T_instagram_username } from '../Store/Types'
+import { AppState, TArticle, FooterItem, T_modal_size, TSetModal, TInstagramMedia, T_instagram_username, T_instagram_id } from '../Store/Types'
 import { reducerLogger } from "./reducerLogger";
 import { TrendingUpOutlined } from '@material-ui/icons';
 
@@ -21,7 +21,10 @@ export type AppStateAction =
   | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: TInstagramMedia }
 
   // mainに表示するのを記事か、instagramか切り替え
-  | { type: "SHOW_INSTAGRAM"; payload: T_instagram_username }
+  | { type: "SHOW_INSTAGRAM"; payload: {
+    id: T_instagram_id,
+    username: T_instagram_username
+  } }
   | { type: "SHOW_ARTICLES" }
   | { type: "SET_SELECTED_TAGS"; payload: number[] }
 

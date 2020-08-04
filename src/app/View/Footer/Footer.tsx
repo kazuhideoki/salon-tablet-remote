@@ -4,7 +4,7 @@ import { MoodBad } from "@material-ui/icons";
 import { Store } from "../../Store/Store";
 import { T_footer_item_id, T_order, FooterItem, T_modal_size } from "../../Store/Types";
 import { IconAndText } from "./IconAndText";
-import { PPagination } from './Pagination/PPagination';
+import { PPagination } from './PaginationBar/PPagination';
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";

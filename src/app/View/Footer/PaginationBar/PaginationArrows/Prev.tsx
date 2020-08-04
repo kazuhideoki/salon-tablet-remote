@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigateBefore } from "@material-ui/icons";
-import { Store } from "../../../Store/Store";
-import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
+import { Store } from "../../../../Store/Store";
+import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
 import { Typography, SvgIcon } from "@material-ui/core";
-import { TArrowProps } from "./PaginationArrows";
+import { TArrowProps } from "../PaginationArrows";
 
 export const Prev = (props: TArrowProps) => {
   const { page } = props.paginationParams;

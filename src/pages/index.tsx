@@ -125,7 +125,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         footerItems: data2.err ? [] : data2,
         tags: data3.err ? [] : data3,
         instagramAccounts: data4.err ? [] : data4,
-        instagramMedias: data5.err ? [] : data5,
+        instagramMedias: data5.err ? {data: []} : data5,
         // JSONのエラーになったので、このような書き方↓
         session: userInfo && JSON.parse(JSON.stringify(userInfo)),
       }

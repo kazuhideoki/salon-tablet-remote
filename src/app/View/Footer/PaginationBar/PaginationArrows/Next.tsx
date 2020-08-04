@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigateNext } from "@material-ui/icons";
-import { Store } from "../../../Store/Store";
-import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
+import { Store } from "../../../../Store/Store";
+import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
 import { Typography, SvgIcon } from "@material-ui/core";
-import { TArrowProps } from "./PaginationArrows";
+import { TArrowProps } from "../PaginationArrows";
 
 
 export const Next = (props: TArrowProps) => {

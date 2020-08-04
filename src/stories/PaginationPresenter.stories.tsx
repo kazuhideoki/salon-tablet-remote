@@ -1,5 +1,5 @@
 import React from 'react';
-import { PPaginationPresenter, TUsePPaginationProps } from '../app/View/Footer/Pagination/PPagination';
+import { PPaginationPresenter, TUsePPaginationProps } from '../app/View/Footer/PaginationBar/PPagination';
 export default {
   title: "Footer/Pagination/PPagination",
   component: PPaginationPresenter,

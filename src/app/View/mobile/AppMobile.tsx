@@ -6,7 +6,7 @@ import { TabMobile } from './TabMobile'
 import { PaginationMobile } from './PaginationMobile';
 import { Modal } from '../Modal/Modal';
 import { makeStyles, createStyles, Theme, Button, CircularProgress } from "@material-ui/core";
-import { HomeButton } from '../Footer/Pagination/HomeButton';
+import { HomeButton } from '../Footer/PaginationBar/HomeButton';
 import { Store } from '../../Store/Store';
 import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
 import { Home } from '@material-ui/icons';

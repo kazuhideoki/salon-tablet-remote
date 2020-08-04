@@ -1,11 +1,11 @@
 import React from 'react'
-import { HomeButton } from '../Footer/Pagination/HomeButton'
-import { PaginationArrows } from '../Footer/Pagination/PaginationArrows'
+import { HomeButton } from '../Footer/PaginationBar/HomeButton'
+import { PaginationArrows } from '../Footer/PaginationBar/PaginationArrows'
 import { makeStyles,createStyles,Theme } from '@material-ui/core';
 import { ThemeContext } from '../../Store/ThemeContext';
-import { usePPaginationProps } from '../Footer/Pagination/PPagination';
+import { usePPaginationProps } from '../Footer/PaginationBar/PPagination';
 import { Home } from '@material-ui/icons';
-import { TUsePPaginationProps } from "../Footer/Pagination/PPagination";
+import { TUsePPaginationProps } from "../Footer/PaginationBar/PPagination";
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);

@@ -8,6 +8,7 @@ import { PaginationArrows } from "./PaginationArrows";
 import { TagsButton } from "./TagsButton";
 import { useSelectedArticlesTagNames } from "../../../Store/useSelectedArticlesTagNames";
 import { Instagram } from "@material-ui/icons";
+import { PaginationInstagram } from "./PaginationInstagram";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
@@ -144,7 +145,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
       <div>
         {props.isShowInstagram && (
-          <Chip label={props.selectedInstagramAccount} size="small" />
+          <Chip label={props.selectedInstagramAccount.username} size="small" />
         )}
       </div>
 
@@ -153,7 +154,11 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
         component="span"
         className={classes.paginationArrows}
       >
-        <PaginationArrows {...props} classes={classes} />
+        {props.isShowInstagram ? (
+          <PaginationInstagram {...props} classes={classes} />
+        ) : (
+          <PaginationArrows {...props} classes={classes} />
+        )}
       </Typography>
     </Grid>
   );

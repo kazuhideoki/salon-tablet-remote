@@ -8,22 +8,24 @@ export const useGetInstagramMedias = () => {
     Store
   );
 
-  return async (instagram_id: T_instagram_id, username: T_instagram_username) => {
+  // ページ送りでないときは空のオブジェクト
+  return async (instagram_id: T_instagram_id, username: T_instagram_username, paging: {after?: string, before?: string }) => {
     console.log("useGetInstagramMediasだよ");
     
     dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
     dispatchAppState({type: "CLOSE_MODAL"})
 
-    const data = await apiInstagramMediasGet(instagram_id);
+    const data = await apiInstagramMediasGet(instagram_id, paging);
 
     if (data.err === true) {
       alert("取得できませんでした");
+      dispatchLoading({ type: "OFF_IS_LOADING_MAIN_ARTICLES" });
     } else {
       dispatchInstagramMedias({
         type: "GET_INSTAGRAM_MEDIAS",
         payload: data,
       });
-      dispatchAppState({ type: "SHOW_INSTAGRAM", payload: username });
+      dispatchAppState({ type: "SHOW_INSTAGRAM", payload: { id: instagram_id, username} });
       dispatchLoading({type: "OFF_IS_LOADING_MAIN_ARTICLES" });
     }
   };

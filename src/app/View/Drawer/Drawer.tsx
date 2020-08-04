@@ -25,7 +25,7 @@ import { TextField, Button } from "@material-ui/core";
 import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
 import { cipher } from "../../../module/bcrypt";
-import { TagsButton } from "../Footer/Pagination/TagsButton";
+import { TagsButton } from "../Footer/PaginationBar/TagsButton";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 
 
