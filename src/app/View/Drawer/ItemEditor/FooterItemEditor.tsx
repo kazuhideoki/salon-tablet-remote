@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: 20,
       maxWidth: "100%",
     },
+    linkTextField: {
+      minWidth: "80%",
+      maxWidth: "100%",
+    },
     submitButtons: {
       position: "sticky",
       bottom: 0,
@@ -110,6 +114,7 @@ export const FooterItemEditor: React.FC = () => {
         label="リンクURL"
         value={linkUrl}
         onChange={(e) => setLinkUrl(e.target.value)}
+        className={classes.linkTextField}
       />
       </div>
     );
