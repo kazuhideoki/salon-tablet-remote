@@ -5,11 +5,11 @@ import { TrendingUpOutlined } from '@material-ui/icons';
 export type AppStateAction =
   | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "CLOSE_MODAL" }
-  | { type: "ON_IS_SETTING" }
+  // | { type: "ON_IS_SETTING" }
   | { type: "OPEN_DRAWER" }
 
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
-  | { type: "OFF_IS_SETTING" }
+  // | { type: "OFF_IS_SETTING" }
   | { type: "CLOSE_DRAWER" }
 
   // modalウィンドウを開く時
@@ -21,12 +21,15 @@ export type AppStateAction =
   | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: TInstagramMedia }
 
   // mainに表示するのを記事か、instagramか切り替え
-  | { type: "SHOW_INSTAGRAM"; payload: {
-    id: T_instagram_id,
-    username: T_instagram_username
-  } }
+  | {
+      type: "SHOW_INSTAGRAM";
+      payload: {
+        id: T_instagram_id;
+        username: T_instagram_username;
+      };
+    }
   | { type: "SHOW_ARTICLES" }
-  | { type: "SET_SELECTED_TAGS"; payload: number[] }
+  | { type: "SET_SELECTED_TAGS_AND_IS_SETTING"; payload: {selectedArticlesTags: number[], isSetting: boolean} }
 
   // editor modalウィンドウを開く時. 新規と編集
   | { type: "OPEN_ARTICLE_EDITOR" }
@@ -54,12 +57,12 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
         };
         break;
 
-      case "ON_IS_SETTING":
-        newState = {
-          ...state,
-          isSetting: true,
-        };
-        break;
+      // case "ON_IS_SETTING":
+      //   newState = {
+      //     ...state,
+      //     isSetting: true,
+      //   };
+      //   break;
       case "OPEN_DRAWER":
         newState = {
           ...state,
@@ -68,12 +71,12 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
         };
         break;
 
-      case "OFF_IS_SETTING":
-        newState = {
-          ...state,
-          isSetting: false,
-        };
-        break;
+      // case "OFF_IS_SETTING":
+      //   newState = {
+      //     ...state,
+      //     isSetting: false,
+      //   };
+      //   break;
 
       case "CLOSE_DRAWER":
         newState = {
@@ -81,7 +84,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isDrawerOpen: false,
         };
         break;
-        
+
       case "OPEN_ARTICLE_MODAL":
         newState = {
           ...state,
@@ -132,10 +135,11 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isShowInstagram: false,
         };
         break;
-      case "SET_SELECTED_TAGS":
+      case "SET_SELECTED_TAGS_AND_IS_SETTING":
         newState = {
           ...state,
-          selectedArticlesTags: action.payload,
+          selectedArticlesTags: action.payload.selectedArticlesTags,
+          isSetting: action.payload.isSetting,
         };
         break;
       case "OPEN_ARTICLE_EDITOR":
@@ -170,7 +174,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
             isEditting: true,
             article: { ...action.payload },
             footerItem: state.edittingPrams.footerItem,
-            modalSize: 'large',
+            modalSize: "large",
           },
         };
         break;

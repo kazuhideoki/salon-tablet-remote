@@ -6,6 +6,7 @@ export default {
 };
 
 const props: TUsePPaginationProps = {
+  isSetting: true,
   getArticles: null,
   paginationParams: {
     page: 3,

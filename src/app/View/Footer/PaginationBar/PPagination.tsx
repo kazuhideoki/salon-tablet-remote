@@ -13,15 +13,17 @@ import { PaginationInstagram } from "./PaginationInstagram";
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
   const { paginationParams, dispatchLoading, dispatchAppState, appState } = React.useContext(Store);
+  const { isSetting } = appState
   const { selectedInstagramAccount, isShowInstagram } = appState
   
   const handleOnNumClick = (num) => {
-    getArticles(num);
+    getArticles(isSetting, num);
   };
 
   const selectedTagNames = useSelectedArticlesTagNames();
 
   return {
+    isSetting,
     getArticles,
     paginationParams,
     dispatchLoading,
@@ -93,7 +95,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
       {/* <SvgIcon
           fontSize="inherit" */}
       <IconButton
-        onClick={() => props.getArticles(1, [])}
+        onClick={() => props.getArticles(props.isSetting, 1, [])}
         className={classes.icon}
         color={
           props.isShowInstagram === false && props.selectedTagNames.length === 0

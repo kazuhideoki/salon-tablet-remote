@@ -11,7 +11,7 @@ export const Oldest = (props: TArrowProps) => {
   const { page, pageCount } = props.paginationParams;
 
   const hundleOnClick = () => {
-    props.getArticles(props.paginationParams.pageCount);
+    props.getArticles(props.isSetting, props.paginationParams.pageCount);
   };
 
   let onClick;

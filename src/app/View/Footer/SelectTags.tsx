@@ -59,7 +59,7 @@ export const SelectTags = () => {
   };
 
   const handleGetArticle = () => {
-    const isLoaded = getArticles(1, selectingTags);
+    const isLoaded = getArticles(appState.isSetting, 1, selectingTags);
     if (isLoaded) {
       dispatchAppState({type: "CLOSE_MODAL"})
     }

@@ -12,13 +12,16 @@ export const useGetArticles = () => {
     dispatchAppState,
     appState,
     userInfo,
+    dispatchLoading,
   } = React.useContext(Store);
-  const isSetting = appState.isSetting;
-  const { dispatchLoading } = React.useContext(Store)
-
-  return async (page: number, selectingTags?: number[], showArticles = true) => {
+  // const isSetting = appState.isSetting;
+  // console.log('1 ' + isSetting);
+  
+  return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
+    console.log("2 " + isSetting);
 
     appState.isShowInstagram || dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
+    console.log("3 " + isSetting);
     
     const params: T_articles_get = {
       page,
@@ -26,6 +29,7 @@ export const useGetArticles = () => {
       isSetting: isSetting,
       userId: userInfo.user_id,
     };
+    console.log("4 " + isSetting);
 
     const data = await apiArticlesGet(params)
 
@@ -39,8 +43,8 @@ export const useGetArticles = () => {
         payload: data.rawData,
       });
       dispatchAppState({
-        type: "SET_SELECTED_TAGS",
-        payload: selectingTags || [],
+        type: "SET_SELECTED_TAGS_AND_IS_SETTING",
+        payload: {selectedArticlesTags: selectingTags || [], isSetting}
       });
       showArticles && dispatchAppState({ type: "SHOW_ARTICLES" });
       //   paginationが変わったらセットし直す

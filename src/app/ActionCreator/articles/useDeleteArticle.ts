@@ -7,7 +7,7 @@ import { Store } from "../../Store/Store";
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
-  const { paginationParams, articles } = React.useContext(Store);
+  const { paginationParams, articles, appState } = React.useContext(Store);
   
   return async (article_id: T_article_id) => {
 
@@ -34,9 +34,9 @@ export const useDeleteArticle = () => {
       //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (articles.length === 1 && paginationParams.rowCount > 1) {
         const targetPage = paginationParams.page - 1;
-        getArticles(targetPage);
+        getArticles(appState.isSetting,targetPage);
       } else {
-        getArticles(paginationParams.page);
+        getArticles(appState.isSetting, paginationParams.page);
       }
     }
   };

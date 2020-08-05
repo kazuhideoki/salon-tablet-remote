@@ -7,10 +7,11 @@ import { TArrowProps } from "../PaginationArrows";
 
 //  ページ数が3より大きい場合latestとoldestを表示
 export const Latest = (props: TArrowProps) => {
+
     const {page, pageCount} = props.paginationParams
 
     const hundleOnClick = () => {
-      props.getArticles(1);
+      props.getArticles(props.isSetting, 1);
     };
 
     let onClick;

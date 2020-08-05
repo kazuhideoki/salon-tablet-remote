@@ -40,16 +40,13 @@ export const useDrawerProps = () => {
     
     const result = await checkPassword(password);
     if (result === true) {
-      dispatchAppState({ type: "ON_IS_SETTING" });
-      getArticles(1, appState.selectedArticlesTags, false)
+      getArticles(true, 1, appState.selectedArticlesTags, false)
     } else if (result === false) {
       alert("パスワードが間違っています。");
     }
   };
   const handleSwitchIsSetting = () => {
-    dispatchAppState({ type: "ON_IS_SETTING" })
-    dispatchLoading({type: "ON_IS_LOADING_MAIN_ARTICLES"})
-    getArticles(1, appState.selectedArticlesTags, false);
+    getArticles(true, 1, appState.selectedArticlesTags, false);
   }
 
   const handleOnSingOut = () => {
@@ -58,12 +55,8 @@ export const useDrawerProps = () => {
   }
 
   const handleDrawerClose = () => {
-    dispatchAppState({ type: "CLOSE_DRAWER" });
-    // Drawerが閉じきってからisSettingをfalseに
-    setTimeout(() => {
-      dispatchAppState({ type: "OFF_IS_SETTING" });
-    }, 800);
-    getArticles(1, appState.selectedArticlesTags, false)
+    dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
+    getArticles(false, 1, appState.selectedArticlesTags, false)
   };
 
   const isMobile = useMediaQuery("(max-width:480px)");

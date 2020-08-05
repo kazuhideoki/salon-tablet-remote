@@ -6,6 +6,7 @@ export default {
 };
 
 const props = {
+  isSetting: false,
   getArticles: null,
   paginationParams: {
     page: 3,

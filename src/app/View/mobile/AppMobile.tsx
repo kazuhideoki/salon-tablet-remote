@@ -41,15 +41,11 @@ export const AppMobile = () => {
   const [tab, setTab] = React.useState(0)
   const { dispatchAppState, loading, appState} = React.useContext(Store)
   const getArticles = useGetArticles()
-  // const {
-  //   handleOpenArticleEditor,
-  //   handleOpenFooterItemEditor,
-  // } = useDrawerProps();
 
   const onClickOffIsSetting = () => {
-    dispatchAppState({ type: "OFF_IS_SETTING" })
+    // dispatchAppState({ type: "OFF_IS_SETTING" })
     dispatchAppState({type: "CLOSE_DRAWER"})
-    getArticles(1, appState.selectedArticlesTags, false);
+    getArticles(false, 1, appState.selectedArticlesTags, false);
 
   }
 

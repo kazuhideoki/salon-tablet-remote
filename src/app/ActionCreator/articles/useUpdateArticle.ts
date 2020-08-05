@@ -70,7 +70,7 @@ export const useUpdateArticle = () => {
       // setIsEdittingContent(false);
       dispatchAppState({ type: "CLOSE_MODAL" });
 
-      getArticles(paginationParams.page);
+      getArticles(appState.isSetting, paginationParams.page);
     }
   };
 };

@@ -10,7 +10,7 @@ export const Next = (props: TArrowProps) => {
   const { page, pageCount, rowCount } = props.paginationParams;
 
   const hundleOnClick = () => {
-    props.getArticles(props.paginationParams.page + 1);
+    props.getArticles(props.isSetting, props.paginationParams.page + 1);
   };
 
   let onClick;

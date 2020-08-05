@@ -32,7 +32,7 @@ export type TCreateArticle = {
 };
 export const useCreateArticle =   () => {
   const getArticles = useGetArticles();
-  const { dispatchAppState, userInfo, dispatchLoading } = React.useContext(
+  const { dispatchAppState, userInfo, dispatchLoading,appState } = React.useContext(
     Store
   );
   
@@ -68,7 +68,7 @@ export const useCreateArticle =   () => {
     } else {
       dispatchAppState({ type: "CLOSE_MODAL" });
 
-      getArticles(1, []);
+      getArticles(appState.isSetting, 1, []);
     }
   };
 };
