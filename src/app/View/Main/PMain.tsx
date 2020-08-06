@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => {
       border: "3px solid red",
     },
     cardActionArea: {
+      position: "relative",
       width: cardWidth,
       height: "100%",
       flexGrow: 1,
@@ -71,6 +72,7 @@ const useStyles = makeStyles((theme) => {
       height: "100%",
     },
     cardContent: {
+      position: "relative",
       padding: 0,
     },
     thumbnailBox: {
@@ -109,7 +111,7 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1,
     },
     date: {
-      margin: theme.spacing(2)
+      margin: theme.spacing(2),
     },
 
     excerpt: {
@@ -117,8 +119,12 @@ const useStyles = makeStyles((theme) => {
       margin: `${theme.spacing(1)}px`,
     },
     readMore: {
-      marginleft: theme.spacing(1),
-      marginRight: theme.spacing(1),
+      // marginleft: theme.spacing(1),
+      // marginRight: theme.spacing(1),
+      position: "absolute",
+      bottom: theme.spacing(2),
+      right: theme.spacing(3),
+      left: theme.spacing(3),
     },
     editButtonsBox: {
       margin: "0 0 0 auto",
@@ -216,17 +222,20 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                   <Typography gutterBottom variant="body1">
                     {value.article_excerpt}
-                    {value.article_excerpt.length === 100 ? "..." : ""}
-                    <Button
-                      color="primary"
-                      size="small"
-                      // className={classes.readMore}
-                    >
-                      Read More
-                    </Button>
+                    {value.article_excerpt.length > 100 ? "..." : ""}
                   </Typography>
                 </div>
               </StyledCardContent>
+              <Button
+                // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
+                component="div"
+                variant="contained"
+                color="primary"
+                size="small"
+                className={classes.readMore}
+              >
+                Read More
+              </Button>
             </Card>
           </CardActionArea>
         </Grid>
