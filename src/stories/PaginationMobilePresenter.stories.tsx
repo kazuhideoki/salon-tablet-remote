@@ -1,5 +1,7 @@
 import React from 'react';
 import { PaginationMobilePresenter } from '../app/View/mobile/PaginationMobile';
+import { sampleInstagramAccounts } from './sampleInstagramAccounts';
+import { sampleTags } from './sampleTags';
 export default {
   title: "mobile/PaginationMobile",
   component: PaginationMobilePresenter,
@@ -20,8 +22,8 @@ const props = {
   selectedTagNames: ["英語", "ヘアケア", "商品"],
   selectedInstagramAccount: null,
   isShowInstagram: false,
-  tags: [],
-  instagramAccounts: [],
+  tags: sampleTags,
+  instagramAccounts: sampleInstagramAccounts,
 }
 
 export const Normal = () => {

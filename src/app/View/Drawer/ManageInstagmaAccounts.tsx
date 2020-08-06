@@ -13,7 +13,8 @@ import { useDeleteInstagramAccount } from '../../ActionCreator/instagramAccounts
 
 export const useManageInstagramAccountsProps = () => {
 
-  const { instagramAccounts } = React.useContext(Store);
+  const { appState } = React.useContext(Store);
+  const {instagramAccounts} = appState
   const deleteInstagramAccount = useDeleteInstagramAccount()
 
   const instaAuth = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${instagramRedirectHost}/api/instagram_accounts/get_token&scope=user_profile,user_media&response_type=code`;

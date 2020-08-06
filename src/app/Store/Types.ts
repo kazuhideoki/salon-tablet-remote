@@ -1,3 +1,5 @@
+import { IndexPropsData } from "../../pages";
+
 export type T_user_id = number;
 export type T_user_name = string;
 export type T_shop_name = string;
@@ -26,7 +28,9 @@ const initPagination = {
   rowCount: 0,
 };
 export type PaginationParams = typeof initPagination;
+
 export type T_is_sample = boolean;
+
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
 // ※tag_idsはDBから取り出した直後、値がない場合はnullのこともある （tagIdsParseの前）
@@ -179,36 +183,42 @@ export type TSetModal =
   | "feedback_form"
   | "delete_account_form"; 
 
-export const initAppState = {
-  isSetting: true,
-  isDrawerOpen: true,
-  setModal: "edit_article" as TSetModal,
-  isModalOpen: false,
-  isShowInstagram: false,
-  // modal表示するコンテン情報を格納
-  currentModalContent: {
-    modalSize: "large" as T_modal_size,
-    article: {} as TArticle,
-    footerItem: {} as FooterItem,
-    instagramMedia: {} as TInstagramMedia,
-  },
+export const initAppState = (data: IndexPropsData) => ({
+    isSetting: true,
+    isDrawerOpen: true,
+    setModal: "edit_article" as TSetModal,
+    isModalOpen: false,
+    isShowInstagram: false,
+    // modal表示するコンテン情報を格納
+    currentModalContent: {
+      modalSize: "large" as T_modal_size,
+      article: {} as TArticle,
+      footerItem: {} as FooterItem,
+      instagramMedia: {} as TInstagramMedia,
+    },
 
-  edittingPrams: {
-    isEditting: false,
-    article: {} as TArticle,
-    footerItem: {} as FooterItem,
-    modalSize: "large" as T_modal_size,
-  },
-  // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
-  selectedArticlesTags: [] as number[],
-  selectedInstagramAccount: {
-    id: 0 as T_instagram_id,
-    username: "" as T_instagram_username
-  }
-  
-};
+    edittingPrams: {
+      isEditting: false,
+      article: {} as TArticle,
+      footerItem: {} as FooterItem,
+      modalSize: "large" as T_modal_size,
+    },
+    // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
+    selectedArticlesTags: [] as number[],
+    selectedInstagramAccount: {
+      id: 0 as T_instagram_id,
+      username: "" as T_instagram_username,
+    },
 
-export type AppState = typeof initAppState;
+    userInfo: data.session as TUserInfo,
+    articles: data.articles as TArticles,
+    footerItems: data.footerItems as FooterItems,
+    tags: data.tags as TTags,
+    instagramAccounts: data.instagramAccounts as TInstagramAccounts,
+    instagramMedias: { data: [] } as TInstagramMedias,
+  })
+
+export type AppState = ReturnType<typeof initAppState> ;
 
 export const initLoading = {
   mainArticles: false,

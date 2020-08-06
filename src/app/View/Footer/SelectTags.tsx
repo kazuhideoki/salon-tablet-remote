@@ -31,11 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export const SelectTags = () => {
   const classes = useStyles()
   const {
-    tags,
     dispatchAppState,
-    dispatchLoading,
     appState,
   } = React.useContext(Store);
+  const {tags} = appState
 
   const [selectingTags, setSelectingTags] = React.useState(
     appState.selectedArticlesTags

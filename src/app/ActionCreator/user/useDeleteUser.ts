@@ -6,8 +6,8 @@ import { useCheckPassword } from "./useCheckPassword";
 const { signout } = require("next-auth/client")
 
 export const useDeleteUser = () => {
-  const { userInfo } = React.useContext(Store)
-  const {user_email, user_id} = userInfo
+  const { appState } = React.useContext(Store);
+  const { user_email, user_id } = appState.userInfo;
   const checkPassword = useCheckPassword()
 
   return async ({ email, password }) => {

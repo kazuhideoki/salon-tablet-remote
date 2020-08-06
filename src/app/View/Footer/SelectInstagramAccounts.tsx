@@ -5,7 +5,8 @@ import { useGetInstagramMedias } from '../../ActionCreator/instagramMedias/useGe
 
 export const useSelectInstagramAccountsProps = () => {
 
-  const { instagramAccounts, dispatchAppState } = React.useContext(Store);
+  const { appState, dispatchAppState } = React.useContext(Store);
+  const {instagramAccounts} = appState
   const getInstagramMedias = useGetInstagramMedias()
 
   return {

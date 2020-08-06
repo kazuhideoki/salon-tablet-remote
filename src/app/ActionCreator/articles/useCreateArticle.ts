@@ -32,7 +32,7 @@ export type TCreateArticle = {
 };
 export const useCreateArticle =   () => {
   const getArticles = useGetArticles();
-  const { dispatchAppState, userInfo, dispatchLoading,appState } = React.useContext(
+  const { dispatchAppState, dispatchLoading, appState } = React.useContext(
     Store
   );
   
@@ -47,7 +47,7 @@ export const useCreateArticle =   () => {
       article_excerpt: param.editorTextExcerpt,
       article_img: param.editorImg,
       tag_ids: tag_ids,
-      user_id: userInfo.user_id,
+      user_id: appState.userInfo.user_id,
     };
 
     const res = await fetch(

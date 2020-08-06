@@ -5,12 +5,12 @@ import { T_tags_create } from "../../../pages/api/tags/create";
 import { useGetTags } from "./useGetTags";
 
 export const useCreateTag = () => {
-  const {userInfo, dispatchTags} = React.useContext(Store)
+  const { appState } = React.useContext(Store);
   const getTags = useGetTags()
 
   return async (tagName: string) => {
     const params: T_tags_create = {
-      user_id: userInfo.user_id,
+      user_id: appState.userInfo.user_id,
       tag_name: tagName,
     };
     console.log("useCreateTagのparamsは" + JSON.stringify(params));

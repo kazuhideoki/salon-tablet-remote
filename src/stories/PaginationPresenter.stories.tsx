@@ -1,5 +1,7 @@
 import React from 'react';
 import { PPaginationPresenter, TUsePPaginationProps } from '../app/View/Footer/PaginationBar/PPagination';
+import { sampleInstagramAccounts } from './sampleInstagramAccounts';
+import { sampleTags } from './sampleTags';
 export default {
   title: "Footer/Pagination/PPagination",
   component: PPaginationPresenter,
@@ -21,8 +23,8 @@ const props: TUsePPaginationProps = {
   selectedTagNames: ["カラー", "パーマ", "英語"],
   selectedInstagramAccount: null,
   isShowInstagram: false,
-  tags: [],
-  instagramAccounts: [],
+  tags: sampleTags,
+  instagramAccounts: sampleInstagramAccounts,
 };
 
 export const Normal = () => {

@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const ManageTags = () => {
   const classes = useStyles()
-  const {tags} = React.useContext(Store)
+  const { appState } = React.useContext(Store)
+  const {tags} = appState
   const [tagNameField, setTagNameField] = React.useState('')
   const [isEditting, setIsEditting] = React.useState(false)
   const [edittingTagId, setEditingTagId] = React.useState(0)

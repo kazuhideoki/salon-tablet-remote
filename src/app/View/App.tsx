@@ -12,7 +12,6 @@ import { StoreContextProvider } from "../Store/Store";
 import { Drawer } from "./Drawer/Drawer";
 import { Header } from "./Header";
 import { AppMobile } from "./mobile/AppMobile";
-import { server } from "../../config";
 import { IndexProps } from "../../pages";
 
 // 3段のコンテナの整形に関してのみ記述, 
@@ -146,15 +145,19 @@ const AppTablet = ()=> {
 const AppView = () => {
 
   const isMobile = useMediaQuery("(max-width:480px)");
-  const { appState, dispatchAppState, dispatchLoading, userInfo } = React.useContext(Store);
+  const {
+    dispatchAppState,
+    appState,
+  } = React.useContext(Store);
+  const { } = appState.userInfo
   const getArticles = useGetArticles()
-  const { user_id, is_first_sign_in } = userInfo
+  const { user_id, is_first_sign_in, isSetPassword } = appState.userInfo;
   console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
 
   // パスワード未設定でユーザー情報登録へ遷移
   //@ts-ignore
   React.useEffect(async() => {
-    if (userInfo.isSetPassword === false) {
+    if (isSetPassword === false) {
       dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
     }
 

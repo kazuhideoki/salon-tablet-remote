@@ -8,14 +8,14 @@ import { PPagination } from './PaginationBar/PPagination';
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";
-import { useGetFooterItem } from "../../ActionCreator/footerItems/useGetFooterItem";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 // import { useCalcFooterPadding } from "./useCalcFooterPadding";
 
 export const useFooterProps = () => {
-  const { appState, dispatchAppState, footerItems } = useContext(Store);
+  const { appState, dispatchAppState } = useContext(Store);
+  const {footerItems} = appState
 
   const deleteFooterItem = useDeleteFooterItem();
 

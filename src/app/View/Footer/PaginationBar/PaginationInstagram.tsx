@@ -1,16 +1,15 @@
 import React from 'react'
 import { SvgIcon } from "@material-ui/core";
 import { NavigateBefore, NavigateNext } from "@material-ui/icons";
-import { TArrowProps } from './PaginationArrows';
 import { Store } from '../../../Store/Store';
 import { useGetInstagramMedias } from '../../../ActionCreator/instagramMedias/useGetInstagramMedias';
-import { instagramMediasReducer } from '../../../Reducer/instagramMediasReducer';
 import { TPaginationArrows } from "./PaginationArrows";
 
 
 export const PaginationInstagram:React.FC<TPaginationArrows> = (props) => {
 
-  const { instagramMedias, appState } = React.useContext(Store)
+  const { appState } = React.useContext(Store)
+  const { instagramMedias } = appState
   const getInstagramMedias = useGetInstagramMedias()
   const { cursors, next, previous} = instagramMedias.paging
 

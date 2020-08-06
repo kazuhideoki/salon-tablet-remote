@@ -13,7 +13,7 @@ import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 
-type IndexPropsData = {
+export type IndexPropsData = {
     articles: TArticles;
     pagination: PaginationParams;
     footerItems: FooterItems;

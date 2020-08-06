@@ -27,7 +27,8 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags}) => {
   const classes = useStyles();
   // const [selectedTags, setSelectedTags ] = React.useState([])
 
-  const { tags } = React.useContext(Store)
+  const { appState } = React.useContext(Store)
+  const {tags} = appState
 
   
   const handleOnClick = (tagId: number) => {

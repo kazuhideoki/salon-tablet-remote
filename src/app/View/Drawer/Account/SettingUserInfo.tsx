@@ -14,7 +14,8 @@ import { Store } from "../../../Store/Store";
 
 const useSettingUserInfoProps = () => {
 
-  const { userInfo, dispatchAppState } = React.useContext(Store)
+  const { appState, dispatchAppState } = React.useContext(Store)
+  const {userInfo} = appState
 
   const updateUser = useUpdateUser()
 

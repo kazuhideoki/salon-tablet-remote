@@ -27,10 +27,9 @@ type TUpdateUser = {
 export const useUpdateUser = () => {
   const {
     dispatchAppState,
-    dispatchUserInfo,
-    userInfo,
+    appState,
   } = React.useContext(Store);
-  const {user_id} = userInfo
+  const { user_id } = appState.userInfo
 
   // const cipheredPassword = cipher(password);
   return async (param: TUpdateUser) => {
@@ -59,8 +58,8 @@ export const useUpdateUser = () => {
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      dispatchUserInfo({
-        type: "GET_USER_INFO",
+      dispatchAppState({
+        type: "SET_USER_INFO",
         payload: {
           user_id: user_id,
           user_name: param.name,

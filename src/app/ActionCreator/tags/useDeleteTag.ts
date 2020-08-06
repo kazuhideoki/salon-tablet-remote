@@ -7,8 +7,8 @@ import { useGetTags } from "./useGetTags";
 import { T_tags_delete } from "../../../pages/api/tags/delete";
 
 export const useDeleteTag = () => {
-  const { userInfo } = React.useContext(Store);
-  const {user_id} = userInfo
+  const { appState } = React.useContext(Store);
+  const { user_id } = appState.userInfo;
   const getTags = useGetTags()
 
 

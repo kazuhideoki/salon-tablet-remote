@@ -68,8 +68,8 @@ export const ThemeContext = React.createContext({} as TThemeArgs);
 
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
-    const { userInfo } = React.useContext(Store)
-    const { selected_theme } = userInfo
+    const { appState } = React.useContext(Store);
+    const { selected_theme } = appState.userInfo;
 
 
 

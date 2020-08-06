@@ -3,7 +3,7 @@ import { Store } from "../../Store/Store";
 import { T_order, T_footer_item_id } from "../../Store/Types";
 
 export const useDeleteFooterItem = () => {
-  const { dispatchFooterItems } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(Store);
 
   return async (footer_item_id: T_footer_item_id, order: T_order) => {
 
@@ -28,9 +28,9 @@ export const useDeleteFooterItem = () => {
     if (data.err === true) {
       alert("削除できませんでした");
     } else {
-      dispatchFooterItems({
+      dispatchAppState({
         type: "DELETE_FOOTER_ITEM",
-        payload: {footer_item_id, order},
+        payload: { footer_item_id, order },
       });
     }
   };

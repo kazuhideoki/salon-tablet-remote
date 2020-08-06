@@ -5,10 +5,8 @@ import {
 } from "../../Store/Types";
 
 export const useChangeTheme = () => {
-  const { dispatchUserInfo, userInfo } = React.useContext(
-    Store
-  );
-  const { user_id } = userInfo;
+  const { dispatchAppState, appState } = React.useContext(Store);
+  const { user_id } = appState.userInfo;
   
   return async (selectedTheme: T_selected_theme) => {
     const params = {
@@ -31,7 +29,7 @@ export const useChangeTheme = () => {
     if (data.err === true) {
       alert("変更できませんでした");
     } else {
-      dispatchUserInfo({
+      dispatchAppState({
         type: "SET_THEME",
         payload: { selectedTheme },
       });

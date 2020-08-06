@@ -5,16 +5,16 @@ import {
 import { apiFooterItemsGet } from "../../../pages/api/footer_items/get";
 
 export const useGetFooterItems = () => {
-  const { dispatchFooterItems, dispatchAppState, userInfo } = React.useContext(Store);
+  const { dispatchAppState, appState } = React.useContext(Store);
 
   return async () => {
-    const data = await apiFooterItemsGet(userInfo.user_id)
+    const data = await apiFooterItemsGet(appState.userInfo.user_id);
 
     if (data.err === true) {
       alert("取得できませんでした");
     } else {
-      dispatchFooterItems({
-        type: "GET_FOOTER_ITEMS",
+      dispatchAppState({
+        type: "SET_FOOTER_ITEMS",
         payload: data,
       });
     }

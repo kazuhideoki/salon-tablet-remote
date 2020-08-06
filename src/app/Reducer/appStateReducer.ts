@@ -1,6 +1,5 @@
-import { AppState, TArticle, FooterItem, T_modal_size, TSetModal, TInstagramMedia, T_instagram_username, T_instagram_id } from '../Store/Types'
+import { AppState, TArticle, FooterItem, T_modal_size, TSetModal, TInstagramMedia, T_instagram_username, T_instagram_id, TArticles, FooterItems, T_footer_item_id, T_order, TTags, TInstagramAccounts, T_user_id, T_user_name, T_shop_name, T_user_email, T_selected_theme, TInstagramMedias } from '../Store/Types'
 import { reducerLogger } from "./reducerLogger";
-import { TrendingUpOutlined } from '@material-ui/icons';
 
 export type AppStateAction =
   | { type: "OPEN_MODAL"; payload: TSetModal }
@@ -29,15 +28,50 @@ export type AppStateAction =
       };
     }
   | { type: "SHOW_ARTICLES" }
-  | { type: "SET_SELECTED_TAGS_AND_IS_SETTING"; payload: {selectedArticlesTags: number[], isSetting: boolean} }
 
   // editor modalウィンドウを開く時. 新規と編集
   | { type: "OPEN_ARTICLE_EDITOR" }
   | { type: "OPEN_FOOTER_ITEM_EDITOR" }
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
-  | { type: "SET_MODAL_SIZE"; payload: T_modal_size };
-  
+  | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
+  | {
+      type: "SET_USER_INFO";
+      payload: {
+        user_id: T_user_id;
+        user_name: T_user_name;
+        shop_name: T_shop_name;
+        user_email: T_user_email;
+      };
+    }
+  | {
+      type: "SET_THEME";
+      payload: {
+        selectedTheme: T_selected_theme;
+      };
+    }
+  | {
+      type: "SET_ARTICLES";
+      payload: {
+        articles: TArticles;
+        selectedArticlesTags: number[];
+        isSetting: boolean;
+      };
+    }
+  | { type: "SET_FOOTER_ITEMS"; payload: FooterItems }
+  | {
+      type: "DELETE_FOOTER_ITEM";
+      payload: { footer_item_id: T_footer_item_id; order: T_order };
+    }
+  | { type: "SET_TAGS"; payload: TTags }
+  | { type: "SET_INSTAGRAM_ACCOUNTS"; payload: TInstagramAccounts }
+  | {
+      type: "SET_INSTAGRAM_MEDIAS";
+      payload: {
+        data: TInstagramMedias;
+        selectedInstagramAccount: { id: T_instagram_id; username: T_instagram_username };
+      };
+    };
 
 export function appStateReducer(state: AppState, action: AppStateAction) {
     let newState: AppState
@@ -57,12 +91,6 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
         };
         break;
 
-      // case "ON_IS_SETTING":
-      //   newState = {
-      //     ...state,
-      //     isSetting: true,
-      //   };
-      //   break;
       case "OPEN_DRAWER":
         newState = {
           ...state,
@@ -70,13 +98,6 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isModalOpen: false,
         };
         break;
-
-      // case "OFF_IS_SETTING":
-      //   newState = {
-      //     ...state,
-      //     isSetting: false,
-      //   };
-      //   break;
 
       case "CLOSE_DRAWER":
         newState = {
@@ -135,13 +156,7 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           isShowInstagram: false,
         };
         break;
-      case "SET_SELECTED_TAGS_AND_IS_SETTING":
-        newState = {
-          ...state,
-          selectedArticlesTags: action.payload.selectedArticlesTags,
-          isSetting: action.payload.isSetting,
-        };
-        break;
+
       case "OPEN_ARTICLE_EDITOR":
         newState = {
           ...state,
@@ -198,6 +213,77 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
             ...state.edittingPrams,
             modalSize: action.payload,
           },
+        };
+        break;
+
+      case "SET_USER_INFO":
+        newState = {
+          ...state,
+          userInfo: { ...state.userInfo, ...action.payload },
+        };
+        break;
+      case "SET_THEME":
+        newState = {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            selected_theme: action.payload.selectedTheme,
+          },
+        };
+        break;
+      case "SET_ARTICLES":
+        newState = {
+          ...state,
+          selectedArticlesTags: action.payload.selectedArticlesTags,
+          isSetting: action.payload.isSetting,
+          articles: action.payload.articles,
+        };
+        break;
+      case "SET_FOOTER_ITEMS":
+        newState = {
+          ...state,
+          footerItems: action.payload,
+        };
+        break;
+
+      case "DELETE_FOOTER_ITEM":
+        const deletedState = state.footerItems.filter((value, index) => {
+          // 削除するアイテムは含めない
+          return value.footer_item_id !== action.payload.footer_item_id;
+        });
+        newState = {
+          ...state,
+          footerItems: deletedState.map((value, index) => {
+            // 削除されたアイテムの左側のorderはそのまま出力
+            if (value.order < action.payload.order) {
+              return value;
+              // 削除されたアイテムの右側はorderの調整のためそれぞれ-1する
+            } else if (value.order > action.payload.order) {
+              value.order -= 1;
+              return value;
+            }
+          }),
+        };
+        break;
+      case "SET_TAGS":
+        newState = {
+          ...state,
+          tags: action.payload,
+        };
+        break;
+      case "SET_INSTAGRAM_ACCOUNTS":
+        newState = {
+          ...state,
+          instagramAccounts: action.payload,
+        };
+        break;
+      case "SET_INSTAGRAM_MEDIAS":
+        newState = {
+          ...state,
+          isShowInstagram: true,
+          selectedInstagramAccount: action.payload.selectedInstagramAccount,
+          selectedArticlesTags: [],
+          instagramMedias: action.payload.data,
         };
         break;
 

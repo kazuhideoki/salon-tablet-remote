@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme: Theme) => {
 
 export const Header = () => {
   const classes = useStyles()
-  const { userInfo } = React.useContext(Store)
+  const { appState } = React.useContext(Store)
 
   return (
     <div className={classes.root}>
       <Typography align="center" variant="h5">
-        {userInfo.shop_name || "SALON TABLET"}
+        {appState.userInfo.shop_name || "SALON TABLET"}
       </Typography>
     </div>
   )

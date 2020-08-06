@@ -7,7 +7,8 @@ import { Store } from "../../Store/Store";
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
-  const { paginationParams, articles, appState } = React.useContext(Store);
+  const { paginationParams, appState } = React.useContext(Store);
+  const articles = appState.articles
   
   return async (article_id: T_article_id) => {
 

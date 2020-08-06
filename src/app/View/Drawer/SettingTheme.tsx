@@ -14,8 +14,8 @@ import { Typography } from "@material-ui/core";
 export const useSettingTheme = () => {
 
   // const { selectedTheme, setSelectedTheme } = React.useContext(ThemeContext);
-  const { userInfo } = React.useContext(Store)
-  const { selected_theme } = userInfo
+  const { appState } = React.useContext(Store)
+  const { selected_theme } = appState.userInfo
   const changeTheme = useChangeTheme()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

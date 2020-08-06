@@ -6,10 +6,8 @@ import {
 import { T_check_password } from "../../../pages/api/user_info/check_password";
 
 export const useCheckPassword = () => {
-  const { dispatchAppState, dispatchUserInfo, userInfo } = React.useContext(
-    Store
-  );
-  const { user_id } = userInfo;
+  const { appState } = React.useContext(Store);
+  const { user_id } = appState.userInfo;
   // const cipheredPassword = cipher(password);
   return async (password: string) => {
     const params: T_check_password = { user_id, password };

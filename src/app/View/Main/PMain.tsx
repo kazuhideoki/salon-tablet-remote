@@ -12,19 +12,19 @@ import {
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { Store } from "../../Store/Store";
-import { T_article_id } from "../../Store/Types";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";
-import { PlayArrowRounded } from "@material-ui/icons";
+import { PlayArrowRounded, Apps } from "@material-ui/icons";
 
 export const usePMainProps = () => {
-  const { appState, articles, dispatchAppState, tags, instagramMedias } = React.useContext(
+  const { appState, dispatchAppState } = React.useContext(
     Store
   );
+  const { articles, tags, instagramMedias } = appState;
   const {isShowInstagram, isSetting} = appState;
   const deleteArticle = useDeleteArticle();
 

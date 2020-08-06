@@ -4,7 +4,8 @@ import { server } from "../../config";
 import { T_submit_feedback } from "../../pages/api/submit_feedback";
 
 export const useSubmitFeedback = () => {
-  const { userInfo } = React.useContext(Store)
+  const { appState } = React.useContext(Store)
+  const { userInfo } = appState
 
   return async ({ contactFormTitle, contactFormContent }) => {
     const params: T_submit_feedback = { contactFormTitle, contactFormContent, userInfo };
