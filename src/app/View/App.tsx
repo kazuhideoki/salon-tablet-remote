@@ -87,9 +87,9 @@ const AppTablet = ()=> {
   // スタイルを反映させたclassNameを出力
     const classes = useStyles();
 
-    const { appState, dispatchAppState, loading, dispatchLoading } = React.useContext(Store);
+    const { appState } = React.useContext(Store);
     const open = appState.isDrawerOpen
-    const isLoading = loading.mainArticles;
+    const isLoading = appState.loading.mainArticles;
     const getArticles = useGetArticles();
 
     return (
@@ -115,7 +115,7 @@ const AppTablet = ()=> {
                 [classes.contentShift]: open,
               })} ${classes.main} ${open ? classes.mainOpened : null}`}
             >
-              {loading.mainArticles ? (
+              {isLoading ? (
                 <CircularProgress
                   className={classes.circularProgress}
                   size={100}
@@ -155,8 +155,7 @@ const AppView = () => {
   console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
 
   // パスワード未設定でユーザー情報登録へ遷移
-  //@ts-ignore
-  React.useEffect(async() => {
+  React.useEffect(() => {
     if (isSetPassword === false) {
       dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
     }

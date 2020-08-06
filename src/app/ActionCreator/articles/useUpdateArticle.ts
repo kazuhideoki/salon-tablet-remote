@@ -26,10 +26,9 @@ export type TUpdateArticle = {
 export const useUpdateArticle = () => {
   const {
     dispatchAppState,
-    paginationParams,
-    dispatchLoading,
     appState
   } = React.useContext(Store);
+  const { paginationParams } = appState
 
   const getArticles = useGetArticles();
   

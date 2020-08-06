@@ -13,11 +13,10 @@ export const useMainMobileProps = () => {
     dispatchAppState
   } = usePMainProps();
 
-  const { loading } = React.useContext(Store)
+  const { appState } = React.useContext(Store)
+  const {loading} = appState
 
   const deleteAritlce = useDeleteArticle()
-
-  // const { handleOpenArticleEditor } = useDrawerProps()
 
   return {
     articles,

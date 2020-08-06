@@ -6,27 +6,25 @@ import { T_instagram_id, T_instagram_username } from "../../Store/Types";
 export const useGetInstagramMedias = () => {
   const {
     dispatchAppState,
-    dispatchLoading,
   } = React.useContext(Store);
 
   // ページ送りでないときは空のオブジェクト
   return async (instagram_id: T_instagram_id, username: T_instagram_username, paging: {after?: string, before?: string }) => {
     console.log("useGetInstagramMediasだよ");
     
-    dispatchLoading({ type: "ON_IS_LOADING_MAIN_ARTICLES" });
+    dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
     dispatchAppState({type: "CLOSE_MODAL"})
 
     const data = await apiInstagramMediasGet(instagram_id, paging);
 
     if (data.err === true) {
       alert("取得できませんでした");
-      dispatchLoading({ type: "OFF_IS_LOADING_MAIN_ARTICLES" });
+      dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {
       dispatchAppState({
         type: "SET_INSTAGRAM_MEDIAS",
         payload: {data: data, selectedInstagramAccount: {id: instagram_id, username}}
       });
-      dispatchLoading({type: "OFF_IS_LOADING_MAIN_ARTICLES" });
     }
   };
 };

@@ -1,46 +1,21 @@
 import React, { useReducer } from "react";
 import { AppStateAction, appStateReducer } from "../Reducer/appStateReducer";
-import {
-  PaginationParamsAction,
-  paginationParamsReducer,
-} from "../Reducer/paginationParamsReducer";
-import { loadingReducer, LoadingAction } from "../Reducer/loadingReducer";
 import { IndexProps } from "../../pages";
 
-import {
-  Loading,
-  PaginationParams,
-  AppState,
-  initAppState,
-  initLoading,
-} from "./Types";
+import { TAppState, initAppState } from "./Types";
 
 export type ContextProps = {
-  paginationParams: PaginationParams;
-  dispatchPaginationParams: React.Dispatch<PaginationParamsAction>;
-  appState: AppState;
+  appState: TAppState;
   dispatchAppState: React.Dispatch<AppStateAction>;
-  loading: Loading;
-  dispatchLoading: React.Dispatch<LoadingAction>;
 };
 const Store = React.createContext({} as ContextProps);
 
 const StoreContextProvider: React.FC<IndexProps> = (props) => {
-  const [paginationParams, dispatchPaginationParams] = useReducer(
-    paginationParamsReducer,
-    props.data.pagination
-  );
-
   const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState(props.data));
-  const [loading, dispatchLoading] = useReducer(loadingReducer, initLoading);
 
   const values = {
-    paginationParams,
-    dispatchPaginationParams,
     appState,
     dispatchAppState,
-    loading,
-    dispatchLoading,
   };
 
   return <Store.Provider value={values}>{props.children}</Store.Provider>;

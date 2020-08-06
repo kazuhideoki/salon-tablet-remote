@@ -1,9 +1,4 @@
 import React from "react";
-import { Store } from "../../../../Store/Store";
-import { ThemeContext } from "../../../../Store/ThemeContext";
-import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
-import { makeStyles, createStyles, Theme, Typography, Icon } from "@material-ui/core";
-import { LoadingAction } from "../../../../Reducer/loadingReducer";
 
 type Props = {
   paginationParams: {

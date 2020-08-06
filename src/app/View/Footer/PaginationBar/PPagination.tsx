@@ -12,8 +12,8 @@ import { PaginationInstagram } from "./PaginationInstagram";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
-  const { paginationParams, dispatchLoading, dispatchAppState, appState} = React.useContext(Store);
-  const { isSetting, tags, instagramAccounts } = appState;
+  const { dispatchAppState, appState} = React.useContext(Store);
+  const { isSetting, tags, instagramAccounts, paginationParams } = appState;
   const { selectedInstagramAccount, isShowInstagram } = appState
   
   const handleOnNumClick = (num) => {
@@ -28,7 +28,6 @@ export const usePPaginationProps = () => {
     isSetting,
     getArticles,
     paginationParams,
-    dispatchLoading,
     dispatchAppState,
     handleOnNumClick,
     selectedTagNames,

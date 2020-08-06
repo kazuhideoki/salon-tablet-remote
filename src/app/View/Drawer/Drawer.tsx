@@ -32,7 +32,7 @@ import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 // export const useDrawerProps = ({open, setOpen}) => {
 export const useDrawerProps = () => {
   const theme = useTheme();
-  const { dispatchAppState, appState, dispatchLoading } = React.useContext(Store);
+  const { dispatchAppState, appState } = React.useContext(Store);
   const getArticles = useGetArticles()
   
   const checkPassword = useCheckPassword();

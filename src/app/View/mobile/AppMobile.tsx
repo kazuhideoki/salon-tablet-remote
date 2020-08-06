@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const AppMobile = () => {
   const classes = useStyles()
   const [tab, setTab] = React.useState(0)
-  const { dispatchAppState, loading, appState} = React.useContext(Store)
+  const { dispatchAppState, appState} = React.useContext(Store)
   const getArticles = useGetArticles()
 
   const onClickOffIsSetting = () => {
@@ -70,7 +70,7 @@ export const AppMobile = () => {
           >
             記事作成
           </Button>
-          {loading.mainArticles ? (
+          {appState.loading.mainArticles ? (
             <div className={classes.emptyMain}>
               <CircularProgress className={classes.circularProgress} />
             </div>

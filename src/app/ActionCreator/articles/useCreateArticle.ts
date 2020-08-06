@@ -32,7 +32,7 @@ export type TCreateArticle = {
 };
 export const useCreateArticle =   () => {
   const getArticles = useGetArticles();
-  const { dispatchAppState, dispatchLoading, appState } = React.useContext(
+  const { dispatchAppState, appState } = React.useContext(
     Store
   );
   

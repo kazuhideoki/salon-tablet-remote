@@ -13,14 +13,14 @@ export const SelectedTags:React.FC<Props> = (props) => {
 
   return (
     <div className={props.className}>
-      {props.article.tag_ids.map((tagId) => {
+      {props.article.tag_ids.map((tagId, key) => {
         const targetTag = props.tags.filter((tagsValue) => {
           return tagId === tagsValue.tag_id;
         });
         if (!targetTag.length) {
           return null
         }
-        return <Chip label={targetTag[0].tag_name} size="small" />;
+        return <Chip key={key} label={targetTag[0].tag_name} size="small" />;
       })}
     </div>
   );

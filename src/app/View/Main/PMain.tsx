@@ -8,6 +8,7 @@ import {
   makeStyles,
   createStyles,
   withStyles,
+  Button,
 } from "@material-ui/core";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
@@ -115,6 +116,10 @@ const useStyles = makeStyles((theme) => {
       fontSize: "1rem",
       margin: `${theme.spacing(1)}px`,
     },
+    readMore: {
+      marginleft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
     editButtonsBox: {
       margin: "0 0 0 auto",
       zIndex: 100,
@@ -212,6 +217,13 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   <Typography gutterBottom variant="body1">
                     {value.article_excerpt}
                     {value.article_excerpt.length === 100 ? "..." : ""}
+                    <Button
+                      color="primary"
+                      size="small"
+                      // className={classes.readMore}
+                    >
+                      Read More
+                    </Button>
                   </Typography>
                 </div>
               </StyledCardContent>
@@ -275,7 +287,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
               <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                 <Typography gutterBottom variant="body1">
                   {value.caption.slice(0, 100)}
-                  {value.caption.length === 100 ? "..." : ""}
+                  {value.caption.length > 100 ? "..." : ""}
                 </Typography>
               </div>
             </StyledCardContent>

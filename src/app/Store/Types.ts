@@ -150,8 +150,6 @@ export type TInstagramMedia = {
   timestamp: T_media_timestamp;
   username: T_instagram_username;
 
-  // instagram_id?: T_instagram_id;
-  // user_id?: T_user_id;
 };
 
 export type TInstagramMedias = {
@@ -209,19 +207,18 @@ export const initAppState = (data: IndexPropsData) => ({
       id: 0 as T_instagram_id,
       username: "" as T_instagram_username,
     },
+    loading: {
+      mainArticles: false,
+    },
 
     userInfo: data.session as TUserInfo,
     articles: data.articles as TArticles,
+    paginationParams: data.pagination,
     footerItems: data.footerItems as FooterItems,
     tags: data.tags as TTags,
     instagramAccounts: data.instagramAccounts as TInstagramAccounts,
     instagramMedias: { data: [] } as TInstagramMedias,
   })
 
-export type AppState = ReturnType<typeof initAppState> ;
+export type TAppState = ReturnType<typeof initAppState> ;
 
-export const initLoading = {
-  mainArticles: false,
-  modalEditor: false,
-};
-export type Loading = typeof initLoading;

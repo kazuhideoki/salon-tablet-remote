@@ -17,7 +17,6 @@ const props: TUsePPaginationProps = {
     rowCount: 18,
   },
 
-  dispatchLoading: null,
   dispatchAppState: null,
   handleOnNumClick: null,
   selectedTagNames: ["カラー", "パーマ", "英語"],

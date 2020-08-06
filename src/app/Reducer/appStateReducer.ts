@@ -1,4 +1,26 @@
-import { AppState, TArticle, FooterItem, T_modal_size, TSetModal, TInstagramMedia, T_instagram_username, T_instagram_id, TArticles, FooterItems, T_footer_item_id, T_order, TTags, TInstagramAccounts, T_user_id, T_user_name, T_shop_name, T_user_email, T_selected_theme, TInstagramMedias } from '../Store/Types'
+import {
+  TAppState,
+  TArticle,
+  FooterItem,
+  T_modal_size,
+  TSetModal,
+  TInstagramMedia,
+  T_instagram_username,
+  T_instagram_id,
+  TArticles,
+  FooterItems,
+  T_footer_item_id,
+  T_order,
+  TTags,
+  TInstagramAccounts,
+  T_user_id,
+  T_user_name,
+  T_shop_name,
+  T_user_email,
+  T_selected_theme,
+  TInstagramMedias,
+  PaginationParams,
+} from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 
 export type AppStateAction =
@@ -10,9 +32,11 @@ export type AppStateAction =
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
   // | { type: "OFF_IS_SETTING" }
   | { type: "CLOSE_DRAWER" }
+  | { type: "ON_IS_LOADING_MAIN" }
+  | { type: "OFF_IS_LOADING_MAIN" }
 
   // modalウィンドウを開く時
-  | { type: "OPEN_ARTICLE_MODAL"; payload: TArticle }
+  | { type: "OPEN_ARTICLE_MODAL";  payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL";
       payload: { footerItem: FooterItem; modalSize: T_modal_size };
@@ -58,6 +82,10 @@ export type AppStateAction =
         isSetting: boolean;
       };
     }
+  | {
+    type: "SET_PAGINATION_PARAMS";
+    payload: PaginationParams;
+  }
   | { type: "SET_FOOTER_ITEMS"; payload: FooterItems }
   | {
       type: "DELETE_FOOTER_ITEM";
@@ -69,12 +97,15 @@ export type AppStateAction =
       type: "SET_INSTAGRAM_MEDIAS";
       payload: {
         data: TInstagramMedias;
-        selectedInstagramAccount: { id: T_instagram_id; username: T_instagram_username };
+        selectedInstagramAccount: {
+          id: T_instagram_id;
+          username: T_instagram_username;
+        };
       };
     };
 
-export function appStateReducer(state: AppState, action: AppStateAction) {
-    let newState: AppState
+export function appStateReducer(state: TAppState, action: AppStateAction) {
+    let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
       case "OPEN_MODAL":
@@ -103,6 +134,24 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
         newState = {
           ...state,
           isDrawerOpen: false,
+        };
+        break;
+      case "ON_IS_LOADING_MAIN":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            mainArticles: true,
+          },
+        };
+        break;
+      case "OFF_IS_LOADING_MAIN":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            mainArticles: false,
+          },
         };
         break;
 
@@ -237,6 +286,16 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           selectedArticlesTags: action.payload.selectedArticlesTags,
           isSetting: action.payload.isSetting,
           articles: action.payload.articles,
+          loading: {
+            ...state.loading,
+            mainArticles: false,
+          },
+        };
+        break;
+      case "SET_PAGINATION_PARAMS":
+        newState = {
+          ...state,
+          paginationParams: action.payload
         };
         break;
       case "SET_FOOTER_ITEMS":
@@ -284,6 +343,10 @@ export function appStateReducer(state: AppState, action: AppStateAction) {
           selectedInstagramAccount: action.payload.selectedInstagramAccount,
           selectedArticlesTags: [],
           instagramMedias: action.payload.data,
+          loading: {
+            ...state.loading,
+            mainArticles: false,
+          },
         };
         break;
 

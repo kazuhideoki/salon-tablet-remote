@@ -41,8 +41,6 @@ export const SelectTags = () => {
   );
 
   const getArticles = useGetArticles()
-  const { paginationParams } = React.useContext(Store)
-
   const handleSelectTag = (tagId: T_tag_id) => {
     let newValue;
 
