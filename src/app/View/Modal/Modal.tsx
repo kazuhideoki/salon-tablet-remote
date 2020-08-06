@@ -78,6 +78,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
 
         // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。デフォルトはlarge
         let modalStyle = useModalSize('large')
+        let modalStyleMobile = useModalSize("fullScreen");
         
         switch (props.setModal) {
           case "content_modal":
@@ -153,6 +154,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             setModal={props.setModal}
             isEditting={props.appState.edittingPrams.isEditting}
             modalStyle={modalStyle}
+            modalStyleMobile={modalStyleMobile}
             className={classes.root}
             open={props.isModalOpen}
             TransitionComponent={Transition}

@@ -60,7 +60,7 @@ export const useUpdateUser = () => {
       alert("更新できませんでした");
     } else {
       dispatchUserInfo({
-        type: "SET_USER_INFO",
+        type: "GET_USER_INFO",
         payload: {
           user_id: user_id,
           user_name: param.name,

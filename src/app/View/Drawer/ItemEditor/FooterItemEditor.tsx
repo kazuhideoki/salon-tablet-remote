@@ -7,7 +7,7 @@ const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
-import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
+import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, useMediaQuery } from '@material-ui/core';
 import { SelectAppLink } from './selectAppLink/SelectAppLink';
 import { Store } from "../../../Store/Store";
 import { FooterItem, T_modal_size } from '../../../Store/Types';
@@ -15,6 +15,7 @@ import { CharCounter } from "../../viewComponents/CharCounter";
 import { SelectModalSize } from '../../Setting/SelectModalSize';
 import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
 import { IconsSetting } from './iconSelect/icons';
+import { HelpButton } from '../../viewComponents/buttons/HelpButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,7 +46,6 @@ export const FooterItemEditor: React.FC = () => {
   const { appState } = React.useContext(Store)
   const modalSize = appState.edittingPrams.modalSize
   const { isEditting, footerItem } = appState.edittingPrams
-
 
   // -------------------
   const [titleText, setTitleText] = React.useState(isEditting ? footerItem.icon_name : "");
@@ -96,7 +96,7 @@ export const FooterItemEditor: React.FC = () => {
   if (onTap === "modal") {
     mainField = (
       <div>
-        <SelectModalSize/>
+        <SelectModalSize />
         <QuillEditor
           editorText={editorText}
           setEditorText={setEditorText}

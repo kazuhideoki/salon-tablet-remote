@@ -7,6 +7,8 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Store } from "../../Store/Store";
 import { T_modal_size } from "../../Store/Types";
+import { HelpButton } from "../viewComponents/buttons/HelpButton";
+import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
@@ -14,6 +16,8 @@ export function SelectModalSize() {
   const classes = useStyles();
   const { appState, dispatchAppState} = React.useContext(Store)
   const modalSize = appState.edittingPrams.modalSize
+  const isMobile = useMediaQuery("(max-width:480px)");
+
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatchAppState({ type: "SET_MODAL_SIZE", payload:(event.target as HTMLInputElement).value as T_modal_size});
@@ -30,11 +34,18 @@ export function SelectModalSize() {
         onChange={handleChange}
       >
         {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}
-        <FormControlLabel value="fullScreen" control={<Radio />} label="全画面" />
+        <FormControlLabel
+          value="fullScreen"
+          control={<Radio />}
+          label="全画面"
+        />
         <FormControlLabel value="large" control={<Radio />} label="大" />
         <FormControlLabel value="medium" control={<Radio />} label="中" />
         <FormControlLabel value="small" control={<Radio />} label="小" />
       </RadioGroup>
+      {isMobile && (
+        <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" />
+      )}
     </FormControl>
   );
 }

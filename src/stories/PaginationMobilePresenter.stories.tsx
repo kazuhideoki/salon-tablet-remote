@@ -17,10 +17,12 @@ const props = {
   dispatchLoading: null,
   dispatchAppState: null,
   handleOnNumClick: null,
-  selectedTagNames: ['英語', 'ヘアケア', '商品'],
+  selectedTagNames: ["英語", "ヘアケア", "商品"],
   selectedInstagramAccount: null,
   isShowInstagram: false,
-};
+  tags: [],
+  instagramAccounts: [],
+}
 
 export const Normal = () => {
 

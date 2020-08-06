@@ -39,7 +39,7 @@ export const useGetArticles = () => {
       return false
     } else {
       dispatchArticles({
-        type: "GET",
+        type: "GET_ARTICLES",
         payload: data.rawData,
       });
       dispatchAppState({
@@ -50,7 +50,7 @@ export const useGetArticles = () => {
       //   paginationが変わったらセットし直す
       if (paginationParams !== data.pagination) {
         dispatchPaginationParams({
-          type: "SET_PAGINATION_PARAMS",
+          type: "GET_PAGINATION_PARAMS",
           payload: data.pagination,
         });
       }

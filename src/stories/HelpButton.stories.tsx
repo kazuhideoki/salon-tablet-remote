@@ -41,7 +41,7 @@ export const Center = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <HelpButton className={classes.button} content={"中央に配置できたかな？"}/>
+      <HelpButton content={"中央に配置できたかな？"}/>
     </div>
   );
 };

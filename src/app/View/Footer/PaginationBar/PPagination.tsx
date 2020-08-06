@@ -12,7 +12,7 @@ import { PaginationInstagram } from "./PaginationInstagram";
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
-  const { paginationParams, dispatchLoading, dispatchAppState, appState } = React.useContext(Store);
+  const { paginationParams, dispatchLoading, dispatchAppState, appState, tags, instagramAccounts } = React.useContext(Store);
   const { isSetting } = appState
   const { selectedInstagramAccount, isShowInstagram } = appState
   
@@ -23,6 +23,8 @@ export const usePPaginationProps = () => {
   const selectedTagNames = useSelectedArticlesTagNames();
 
   return {
+    tags,
+    instagramAccounts,
     isSetting,
     getArticles,
     paginationParams,
@@ -106,22 +108,24 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
         <HomeButton />
       </IconButton>
 
-      <IconButton
-        onClick={() =>
-          props.dispatchAppState({
-            type: "OPEN_MODAL",
-            payload: "select_tags",
-          })
-        }
-        color={
-          props.isShowInstagram === false && props.selectedTagNames.length
-            ? "primary"
-            : "default"
-        }
-        className={classes.icon}
-      >
-        <TagsButton />
-      </IconButton>
+      {props.tags.length ? (
+        <IconButton
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_MODAL",
+              payload: "select_tags",
+            })
+          }
+          color={
+            props.isShowInstagram === false && props.selectedTagNames.length
+              ? "primary"
+              : "default"
+          }
+          className={classes.icon}
+        >
+          <TagsButton />
+        </IconButton>
+      ) : null}
 
       <div>
         {props.isShowInstagram === false &&
@@ -130,20 +134,20 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           ))}
       </div>
 
-      <IconButton
-        onClick={() =>
-          props.dispatchAppState({
-            type: "OPEN_MODAL",
-            payload: "select_instagram",
-          })
-        }
-        className={classes.icon}
-        color={props.isShowInstagram ? "primary" : "default"}
-      >
-        <Instagram />
-        {/* </SvgIcon> */}
-      </IconButton>
-      {/* </Typography> */}
+      {props.instagramAccounts.length ? (
+        <IconButton
+          onClick={() =>
+            props.dispatchAppState({
+              type: "OPEN_MODAL",
+              payload: "select_instagram",
+            })
+          }
+          className={classes.icon}
+          color={props.isShowInstagram ? "primary" : "default"}
+        >
+          <Instagram />
+        </IconButton>
+      ) : null}
 
       <div>
         {props.isShowInstagram && (

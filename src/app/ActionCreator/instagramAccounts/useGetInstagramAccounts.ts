@@ -15,7 +15,7 @@ export const useGetInstagramAccounts = () => {
       alert("取得できませんでした");
     } else {
       dispatchInstagramAccounts({
-        type: "SET_INSTAGRAM_ACCOUNTS",
+        type: "GET_INSTAGRAM_ACCOUNTS",
         payload: data,
       });
     }

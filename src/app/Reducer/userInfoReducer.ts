@@ -10,7 +10,7 @@ import { reducerLogger } from "./reducerLogger";
 
 export type TUserInfoAction =
   | {
-      type: "SET_USER_INFO";
+      type: "GET_USER_INFO";
       payload: {
         user_id: T_user_id;
         user_name: T_user_name;
@@ -30,7 +30,7 @@ export function userInfoReducer(state: TUserInfo, action: TUserInfoAction) {
   let newState: TUserInfo;
   const func = userInfoReducer;
   switch (action.type) {
-    case "SET_USER_INFO":
+    case "GET_USER_INFO":
       newState = { ...state, ...action.payload };
       break;
     case "SET_THEME":

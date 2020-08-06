@@ -28,6 +28,16 @@ const useStyles = makeStyles((theme: Theme) => {
     createButton: {
       width: "100%",
     },
+    emptyMain: {
+      flexGrow: 1,
+    },
+    circularProgress: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+      },
     tabMobile: {
       // position: "absolute",
       // bottom: 0,
@@ -43,7 +53,6 @@ export const AppMobile = () => {
   const getArticles = useGetArticles()
 
   const onClickOffIsSetting = () => {
-    // dispatchAppState({ type: "OFF_IS_SETTING" })
     dispatchAppState({type: "CLOSE_DRAWER"})
     getArticles(false, 1, appState.selectedArticlesTags, false);
 
@@ -54,8 +63,20 @@ export const AppMobile = () => {
     case 0:
       Display = () => (
         <>
-          <Button color="primary" className={classes.createButton} onClick={() => dispatchAppState({type: "OPEN_ARTICLE_EDITOR"})}>記事作成</Button>
-          <MainMobile />
+          <Button
+            color="primary"
+            className={classes.createButton}
+            onClick={() => dispatchAppState({ type: "OPEN_ARTICLE_EDITOR" })}
+          >
+            記事作成
+          </Button>
+          {loading.mainArticles ? (
+            <div className={classes.emptyMain}>
+              <CircularProgress className={classes.circularProgress} />
+            </div>
+          ) : (
+            <MainMobile />
+          )}
           <PaginationMobile />
         </>
       );

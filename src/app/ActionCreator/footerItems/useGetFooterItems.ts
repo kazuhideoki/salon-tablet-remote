@@ -14,7 +14,7 @@ export const useGetFooterItems = () => {
       alert("取得できませんでした");
     } else {
       dispatchFooterItems({
-        type: "GET",
+        type: "GET_FOOTER_ITEMS",
         payload: data,
       });
     }

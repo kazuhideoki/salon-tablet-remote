@@ -150,21 +150,8 @@ const AppView = () => {
   const getArticles = useGetArticles()
   const { user_id, is_first_sign_in } = userInfo
   console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
-  
 
-  // 初回ロード時に二回ロードしてしまうので、応急処置的に初回読み込みをしないようにした。
-  // const [isFirstLoad, setIsFirstLoad] = React.useState(true);
-  // // 編集モード[isSetting]を切り替えるたびに記事を読み込み直す
-  // // ※※→いずれuseEffect使わないようにするか❓
-  // React.useEffect(() => {
-  //   if (!isFirstLoad) {  
-  //     // 二回目以降で発火 
-  //     getArticles(1);
-  //   }
-  //   setIsFirstLoad(false);
-  // },[appState.isSetting])
-
-  // パスワード未設定でユーザー情報登録へ遷移 → 手間な感じがするので、indexのserverSidePropsでやってもいいかも、要検討
+  // パスワード未設定でユーザー情報登録へ遷移
   //@ts-ignore
   React.useEffect(async() => {
     if (userInfo.isSetPassword === false) {
@@ -186,7 +173,6 @@ export const App = (props: IndexProps) => {
   
   
   return (
-    // <ThemeProvider >
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
       <ThemeProvider {...props.data.session}>
@@ -194,7 +180,6 @@ export const App = (props: IndexProps) => {
         <Modal />
       </ThemeProvider>
     </StoreContextProvider>
-    // </ThemeProvider>
   );
 }
 

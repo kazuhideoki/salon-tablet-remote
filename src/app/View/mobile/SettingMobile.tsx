@@ -20,8 +20,28 @@ export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
 
   return (
     <div className={classes.root}>
-      <button disabled className={classes.button}>
-        タグ管理(mobile用未実装)
+      <button
+        className={classes.button}
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "edit_tags",
+          })
+        }
+      >
+        タグ管理
+      </button>
+      <br />
+      <button
+        className={classes.button}
+        onClick={() =>
+          props.dispatchAppState({
+            type: "OPEN_MODAL",
+            payload: "manage_instagram",
+          })
+        }
+      >
+        Instagram 連携
       </button>
       <br />
       <button

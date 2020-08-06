@@ -15,7 +15,7 @@ export const useGetTags = () => {
       alert("取得できませんでした");
     } else {
       dispatchTags({
-        type: "SET_TAGS",
+        type: "GET_TAGS",
         payload: data,
       });
     }
