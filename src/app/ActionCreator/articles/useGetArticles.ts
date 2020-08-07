@@ -35,7 +35,7 @@ export const useGetArticles = () => {
           data,
           selectedArticlesTags: selectingTags || [],
           isSetting,
-          showArticles,
+          showArticles: showArticles,
         },
       });
 

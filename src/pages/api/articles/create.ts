@@ -44,7 +44,7 @@ export type T_articles_create_return = {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST") {
-    const params: T_articles_create = req.body.params;
+    const params: T_articles_create = req.body;
 
     try {
       const data = await db(`INSERT INTO articles SET ?`, params);

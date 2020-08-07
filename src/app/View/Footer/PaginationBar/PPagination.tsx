@@ -88,13 +88,6 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
   return (
     <Grid container justify="center" spacing={1} className={classes.root}>
-      {/* <Typography
-        variant="subtitle1"
-        component="span"
-        className={classes.icons}
-      > */}
-      {/* <SvgIcon
-          fontSize="inherit" */}
       <IconButton
         onClick={() => props.getArticles(props.isSetting, 1, [])}
         className={classes.icon}

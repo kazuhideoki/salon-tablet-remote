@@ -217,7 +217,17 @@ export const initAppState = (data: IndexPropsData) => ({
     footerItems: data.footerItems as FooterItems,
     tags: data.tags as TTags,
     instagramAccounts: data.instagramAccounts as TInstagramAccounts,
-    instagramMedias: { data: [] } as TInstagramMedias,
+    instagramMedias: {
+    data: [],
+    paging: {
+        cursors: {
+            before: '',
+            after: '',
+        },
+        next: '',
+        previous: '',
+      },
+    } as TInstagramMedias,
   })
 
 export type TAppState = ReturnType<typeof initAppState> ;

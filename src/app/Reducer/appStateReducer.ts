@@ -168,13 +168,15 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         };
         break;
       case "SET_ARTICLES":
+        // ! を使うとうまく行かなかった。。。        
+        const isShowInstagram = action.payload.showArticles === true ? false : true;
         newState = {
           ...state,
           selectedArticlesTags: action.payload.selectedArticlesTags,
           isSetting: action.payload.isSetting,
           articles: action.payload.data.rawData,
           paginationParams: action.payload.data.pagination,
-          isShowInstagram: action.payload.showArticles!,
+          isShowInstagram: isShowInstagram,
           loading: {
             ...state.loading,
             mainArticles: false,

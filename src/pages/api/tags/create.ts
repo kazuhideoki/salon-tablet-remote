@@ -10,7 +10,7 @@ export type T_tags_create = {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     
-    const params: T_tags_create = req.body.params;
+    const params: T_tags_create = req.body;
     console.log(JSON.stringify("/tags/createのreq.body.paramsは " + params));
 
     try {
