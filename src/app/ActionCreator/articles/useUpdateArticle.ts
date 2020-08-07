@@ -11,7 +11,7 @@ import {
 import { useGetArticles } from "./useGetArticles";
 import { TCreateArticle } from "./useCreateArticle";
 
-export type T_articles_update = {
+export type TUpdateArticle = {
   is_published: T_is_published_articles;
   title: T_title;
   article_content: T_article_content;
@@ -19,8 +19,8 @@ export type T_articles_update = {
   article_img: T_article_img;
   tag_ids: string | null;
 };
-export type TUpdateArticle = {
-  params: T_articles_update;
+export type T_articles_update = {
+  params: TUpdateArticle;
   article_id: T_article_id;
 };
 export const useUpdateArticle = () => {
@@ -33,16 +33,16 @@ export const useUpdateArticle = () => {
   const getArticles = useGetArticles();
   
   return async (
-    isPublishing: boolean,
+    is_published: boolean,
     param: TCreateArticle,
     // edittingArticleParams: TArticle,
   ) => {
     const tag_ids = param.selectedTags.length
       ? JSON.stringify(param.selectedTags)
       : null;
-    const params: TUpdateArticle = {
+    const params: T_articles_update = {
       params: {
-        is_published: isPublishing,
+        is_published: is_published,
         title: param.titleText,
         article_content: param.editorText,
         article_excerpt: param.editorTextExcerpt,

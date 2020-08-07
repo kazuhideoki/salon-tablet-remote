@@ -1,34 +1,15 @@
 import React from "react";
-import {
-  T_is_published_articles,
-  T_title,
-  T_article_content,
-  T_article_id,
-  T_article_excerpt,
-  T_article_img,
-  T_user_id,
-  T_tag_ids,
-} from "../../Store/Types";
 import { useGetArticles } from "./useGetArticles";
 import { Store } from "../../Store/Store";
-
-
-export type T_articles_create = {
-  is_published: T_is_published_articles;
-  title: T_title;
-  article_content: T_article_content;
-  article_excerpt: T_article_excerpt;
-  article_img: T_article_img;
-  tag_ids: string | null
-  user_id: T_user_id;
-};
+import { T_articles_create, apiArticlesCreate } from "../../../pages/api/articles/create";
 
 export type TCreateArticle = {
+  is_published: boolean
   titleText: string;
   editorText: string;
   editorTextExcerpt: string;
   editorImg: string;
-  selectedTags: number[]
+  selectedTags: number[];
 };
 export const useCreateArticle =   () => {
   const getArticles = useGetArticles();
@@ -36,12 +17,14 @@ export const useCreateArticle =   () => {
     Store
   );
   
-  return async (isPublishing: boolean, param: TCreateArticle) => {
+  return async ( param: TCreateArticle) => {
+    
     const tag_ids = param.selectedTags.length
       ? JSON.stringify(param.selectedTags)
       : null;
+
     const params: T_articles_create = {
-      is_published: isPublishing,
+      is_published: param.is_published,
       title: param.titleText,
       article_content: param.editorText,
       article_excerpt: param.editorTextExcerpt,
@@ -50,16 +33,7 @@ export const useCreateArticle =   () => {
       user_id: appState.userInfo.user_id,
     };
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/articles/create`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ params }),
-      }
-    );
-    const data = await res.json();
+    const data = await apiArticlesCreate(params)
 
     if (data.err === true) {
       console.log(data);

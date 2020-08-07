@@ -19,7 +19,7 @@ import {
 import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";
-import { PlayArrowRounded, Apps } from "@material-ui/icons";
+import { PlayArrowRounded } from "@material-ui/icons";
 
 export const usePMainProps = () => {
   const { appState, dispatchAppState } = React.useContext(
@@ -179,7 +179,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
             onClick={() =>
               props.dispatchAppState({
                 type: "OPEN_ARTICLE_MODAL",
-                payload: value,
+                payload: key,
               })
             }
           >
@@ -266,7 +266,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
           onClick={() =>
             props.dispatchAppState({
               type: "OPEN_INSTAGRAM_MEDIA_MODAL",
-              payload: value,
+              payload: key,
             })
           }
         >

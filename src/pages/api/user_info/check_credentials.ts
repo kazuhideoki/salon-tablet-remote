@@ -25,11 +25,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         email
       );
 
-      console.log("入力されたpasswordは " + JSON.stringify(password));
-      console.log(
-        "bcrypt_passwordは " + JSON.stringify(data[0].bcrypt_password)
-      );
-
       const result = await checkPassword(password, data[0].bcrypt_password);
 
       // console.log("パスワードをcipherすると " + JSON.stringify(cipher(password)));

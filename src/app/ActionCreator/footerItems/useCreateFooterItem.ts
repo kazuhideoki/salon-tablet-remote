@@ -60,9 +60,9 @@ export const useCreateFooterItem = () => {
     order = 1;
   }
 
-  return async (isPublishing: boolean, param: TCreateFooterItem) => {
+  return async (is_published: boolean, param: TCreateFooterItem) => {
     const params: T_footer_items_create_item = {
-      is_published: isPublishing,
+      is_published: is_published,
       icon_name: param.titleText,
       // 選択されていたらアイコンの名前を返す.
       displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,

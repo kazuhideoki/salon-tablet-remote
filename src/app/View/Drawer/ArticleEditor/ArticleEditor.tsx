@@ -45,16 +45,6 @@ const ArticleEditor = () => {
   const [editorImg, setEditorImg] = React.useState(isEditting ? article.article_img : "");
   const [selectedTags, setSelectedTags] = React.useState(isEditting ? article.tag_ids : [])
 
-  const params: TCreateArticle = {
-    titleText,
-    editorText,
-    editorTextExcerpt,
-    editorImg,
-    selectedTags,
-  };
-
-
-
   const [charCountArticleContent, setCharCountArticlContent] = React.useState(0);
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
@@ -63,13 +53,21 @@ const ArticleEditor = () => {
     setTitleText(e.target.value);
   }
 
-  const handleSubmit = ({ isPublishing }) => {
+  const handleSubmit = ({ is_published }) => {
+    const params: TCreateArticle = {
+      is_published: is_published,
+      titleText,
+      editorText,
+      editorTextExcerpt,
+      editorImg,
+      selectedTags,
+    };
     // 記事編集
     if (isEditting) {
-      updateArticle(isPublishing, params);
+      updateArticle(is_published, params);
       // 記事作成
     } else {
-      createArticle(isPublishing, params);
+      createArticle(params);
     }
   };
 
@@ -111,7 +109,7 @@ const ArticleEditor = () => {
       <Grid container className={classes.submitButtons}>
         <Grid item>
           <Button
-            onClick={() => handleSubmit({ isPublishing: true })}
+            onClick={() => handleSubmit({ is_published: true })}
             disabled={
               titleText.length < 101 && charCountArticleContent < 1001
                 ? false
@@ -123,7 +121,7 @@ const ArticleEditor = () => {
         </Grid>
         <Grid item>
           <Button
-            onClick={() => handleSubmit({ isPublishing: false })}
+            onClick={() => handleSubmit({ is_published: false })}
             disabled={
               titleText.length < 101 && charCountArticleContent < 1001
                 ? false

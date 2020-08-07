@@ -39,14 +39,14 @@ export const useUpdateFooterItem = () => {
   const getFooterItems = useGetFooterItems();
 
   return async (
-    isPublishing: boolean,
+    is_published: boolean,
     param: TCreateFooterItem,
     // edittingFooterItemParams: FooterItem 
   ) => {
     const params: TUpdateFooterItem = {
       id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
-        is_published: isPublishing,
+        is_published: is_published,
         icon_name: param.titleText,
         // 選択されていたらアイコンの名前を返す
         displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,

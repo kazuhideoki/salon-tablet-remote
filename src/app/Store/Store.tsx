@@ -1,8 +1,9 @@
 import React, { useReducer } from "react";
-import { AppStateAction, appStateReducer } from "../Reducer/appStateReducer";
+import { appStateReducer } from "../Reducer/appStateReducer";
 import { IndexProps } from "../../pages";
 
 import { TAppState, initAppState } from "./Types";
+import { AppStateAction } from "../Reducer/AppStateAction";
 
 export type ContextProps = {
   appState: TAppState;

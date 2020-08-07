@@ -138,7 +138,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
             onClick={() =>
               props.dispatchAppState({
                 type: "OPEN_FOOTER_ITEM_MODAL",
-                payload: { footerItem: value, modalSize: value.modal_size },
+                payload: index,
               })
             }
             // fontSize="large"

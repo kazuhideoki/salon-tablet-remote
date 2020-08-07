@@ -84,11 +84,11 @@ export const FooterItemEditor: React.FC = () => {
   };
 
 
-  const handleSubmit = ({ isPublishing }) => {
+  const handleSubmit = ({ is_published }) => {
     if (isEditting) {
-      updateFooterItem(isPublishing, params);
+      updateFooterItem(is_published, params);
     } else {
-      createFooterItem(isPublishing, params);
+      createFooterItem(is_published, params);
     }
   };
 
@@ -147,7 +147,7 @@ export const FooterItemEditor: React.FC = () => {
       <Grid container className={classes.submitButtons}>
         <Grid item>
           <Button
-            onClick={() => handleSubmit({ isPublishing: true })}
+            onClick={() => handleSubmit({ is_published: true })}
             disabled={
               titleText.length < 101 && charCountFooterItemContent < 1001
                 ? false
@@ -159,7 +159,7 @@ export const FooterItemEditor: React.FC = () => {
         </Grid>
         <Grid item>
           <Button
-            onClick={() => handleSubmit({ isPublishing: false })}
+            onClick={() => handleSubmit({ is_published: false })}
             disabled={
               titleText.length < 101 && charCountFooterItemContent < 1001
                 ? false

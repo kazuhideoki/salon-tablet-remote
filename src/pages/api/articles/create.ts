@@ -1,6 +1,40 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_articles_create } from "../../../app/ActionCreator/articles/useCreateArticle";
+import {
+  T_is_published_articles,
+  T_title,
+  T_article_content,
+  T_article_id,
+  T_article_excerpt,
+  T_article_img,
+  T_user_id,
+  T_tag_ids,
+} from "../../../app/Store/Types";
+import { server, localhost } from "../../../config";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiArticlesCreate = async (params: T_articles_create) => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(`${str}/api/articles/create`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+} 
+
+export type T_articles_create = {
+  is_published: T_is_published_articles;
+  title: T_title;
+  article_content: T_article_content;
+  article_excerpt: T_article_excerpt;
+  article_img: T_article_img;
+  tag_ids: string | null;
+  user_id: T_user_id;
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
@@ -15,12 +49,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       return res.status(200).json({
         rawData: data,
-        // pagination: {
-        //   page: 1,
-        //   pageCount: Math.ceil(data2.length / 5), // 全row数を5で割って切り上げ
-        //   pageSize: 5,
-        //   rowCount: data2.length,
-        // },
       });
 
     } catch (err) {
