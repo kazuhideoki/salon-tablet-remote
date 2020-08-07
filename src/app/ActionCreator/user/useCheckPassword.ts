@@ -3,25 +3,16 @@ import { Store } from "../../Store/Store";
 import {
   T_user_id,
 } from "../../Store/Types";
-import { T_check_password } from "../../../pages/api/user_info/check_password";
+import { T_user_info_check_password, apiUserInfoCheckPassword } from "../../../pages/api/user_info/check_password";
 
 export const useCheckPassword = () => {
   const { appState } = React.useContext(Store);
   const { user_id } = appState.userInfo;
   // const cipheredPassword = cipher(password);
   return async (password: string) => {
-    const params: T_check_password = { user_id, password };
+    const params: T_user_info_check_password = { user_id, password };
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/user_info/check_password`, //★要変更
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(params),
-      }
-    );
-    const data = await res.json();
+    const data = await apiUserInfoCheckPassword(params);
 
     if (data.err === true) {
       return alert("チェックできませんでした");

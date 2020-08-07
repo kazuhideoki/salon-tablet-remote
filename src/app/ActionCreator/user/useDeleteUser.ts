@@ -3,6 +3,7 @@ import {
   Store,
 } from "../../Store/Store";
 import { useCheckPassword } from "./useCheckPassword";
+import { apiUserInfoDelete } from "../../../pages/api/user_info/delete";
 const { signout } = require("next-auth/client")
 
 export const useDeleteUser = () => {
@@ -29,16 +30,7 @@ export const useDeleteUser = () => {
 
       } else if(result === true) {
         // ここにアカウント削除処理実装
-        const res = await fetch(
-          `${location.protocol}//${location.host}/api/user_info/delete`,  
-          {
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-            mode: "cors",
-            body: JSON.stringify(user_id),
-          }
-        );
-        const data = await res.json();
+        const data = await apiUserInfoDelete({user_id})
 
         if (data.err === true) {
           alert("削除できませんでした");

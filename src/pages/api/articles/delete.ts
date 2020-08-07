@@ -7,7 +7,7 @@ import { TApiResponse } from "../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesDelete = async (params: T_articles_delete):Promise<TApiResponse<T_articles_delete_return>> => {
-  let str = process.browser ? server : localhost
+  const str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/articles/delete`, {
     headers: { "Content-Type": "application/json" },

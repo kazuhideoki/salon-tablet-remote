@@ -1,9 +1,35 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+import { server, localhost } from "../../../config";
+import { TApiResponse } from "../lib/apiTypes";
+import { T_user_id } from "../../../app/Store/Types";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiUserInfoDelete = async (
+  params: T_user_info_delete
+): Promise<TApiResponse<T_user_info_delete_return>> => {
+  let str = process.browser ? server : localhost;
+
+  const res = await fetch(`${str}/api/user_info/delete`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+};
+
+export type T_user_info_delete = {
+  user_id: T_user_id;
+};
+export type T_user_info_delete_return = {
+  rawData: unknown;
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const user_id = req.body;
+    const user_id: T_user_info_delete = req.body;
 
     try {
       const data = await db(
@@ -38,9 +64,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       
       console.log("/user_info/delete/は " + JSON.stringify({data, data2}));
 
-      res.status(200).json({
+      const returnData: T_user_info_delete_return = {
         rawData: data,
-      });
+      };
+      res.status(200).json(returnData);
+
     } catch (err) {
       console.log("/user_info/delete/のエラーは " + JSON.stringify(err));
 

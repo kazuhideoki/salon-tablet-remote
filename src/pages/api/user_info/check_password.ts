@@ -3,15 +3,32 @@ const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
 import { cipher,checkPassword } from "../../../module/bcrypt";
 import { T_user_id } from "../../../app/Store/Types";
+import { server, localhost } from "../../../config";
+import { TApiResponse } from "../lib/apiTypes";
 
-export type T_check_password = {
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiUserInfoCheckPassword = async (params: T_user_info_check_password):Promise<TApiResponse<T_user_info_check_password_return>> => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(`${str}/api/user_info/check_password`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+} 
+
+export type T_user_info_check_password = {
   user_id: T_user_id;
   password: string;
 };
+export type T_user_info_check_password_return = boolean
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { user_id, password}: T_check_password = req.body
+    const { user_id, password }: T_user_info_check_password = req.body;
 
     try {
       // ※db(``)の返り値は常に[]
@@ -23,13 +40,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       } else {
 
         const result = await checkPassword(password, data[0].bcrypt_password)
-       
-  
-        
-        
-        // console.log("パスワードをcipherすると " + JSON.stringify(cipher(password)));
-  
-        
   
         console.log(
           "/user_info/check_password/は " + JSON.stringify(result)

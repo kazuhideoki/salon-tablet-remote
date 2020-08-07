@@ -4,7 +4,7 @@ import {
   T_tag_id,
 } from "../../Store/Types";
 import { useGetTags } from "./useGetTags";
-import { T_tags_delete } from "../../../pages/api/tags/delete";
+import { T_tags_delete, apiTagsDelete } from "../../../pages/api/tags/delete";
 
 export const useDeleteTag = () => {
   const { appState } = React.useContext(Store);
@@ -22,16 +22,7 @@ export const useDeleteTag = () => {
 
     const params: T_tags_delete = { tag_id: tag_id, user_id: user_id };
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/tags/delete`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(params),
-      }
-    );
-    const data = await res.json();
+    const data = await apiTagsDelete(params);
 
     if (data.err === true) {
       alert("削除できませんでした");

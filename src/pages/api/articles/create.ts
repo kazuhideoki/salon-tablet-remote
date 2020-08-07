@@ -15,7 +15,7 @@ import { TApiResponse } from "../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesCreate = async (params: T_articles_create):Promise<TApiResponse<T_articles_create_return>> => {
-  let str = process.browser ? server : localhost
+  const str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/articles/create`, {
     headers: { "Content-Type": "application/json" },

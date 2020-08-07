@@ -12,6 +12,7 @@ import { ApiUserInfoGetFromEmail } from "./api/user_info/getUserInfoFromEmail";
 import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
+import { apiCreateSampleData } from "./api/create_sample_data";
 
 export type IndexPropsData = {
     articles: TArticles;
@@ -76,14 +77,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
-        // console.log("indexのis_first_sign_inのとこだよ");
-        
-        const res = await fetch(`${localhost}/api/create_sample_data`, {
-          headers: { "Content-Type": "application/json" },
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify(userInfo.user_id),
-        });
+        apiCreateSampleData({user_id: userInfo.user_id})
       }
 
       // 記事一覧取得
@@ -93,19 +87,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         isSetting: true,
         userId: userInfo.user_id,
       };
-      // const data = await apiArticlesGet(articlesParam)      
-
-      // // アイテム一覧取得
-      // const data2 = await apiFooterItemsGet(userInfo.user_id)
-
-      // // タグ一覧取得
-      // const data3 = await apiTagsGet(userInfo.user_id)
-
-      // // Instagram連携アカウント一覧取得
-      // const data4 = await apiInstagramAccountsGet(userInfo.user_id)
-
-      // // Instagram連携アカウント一覧取得
-      // // const data5 = await apiInstagramMediasGet(userInfo.user_id)
+      
       const data5 = {err: true} // テーブル  instagram_medias実装までつなぎ
 
       // 並列処理でデータを取ってくる

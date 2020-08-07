@@ -30,8 +30,6 @@ const useSettingUserInfoProps = () => {
   }
 
   const handleOnSubmit = () => {
-    console.log("handleOnSubmitだよ");
-
     updateUser(params)
   }
 

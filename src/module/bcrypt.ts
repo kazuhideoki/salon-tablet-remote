@@ -10,7 +10,7 @@ export const cipher = (password: string) => {
   })
 }
 
-export const checkPassword = (password:string, hash:string) => {
+export const checkPassword = (password:string, hash:string):boolean => {
   // パスワードとハッシュを比較する
   return bcrypt.compare(password, hash).then(res => {
       if (res) {

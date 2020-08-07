@@ -9,11 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { ContactMail } from "@material-ui/icons";
 //@ts-ignore
-import { useUpdateUser } from "../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../Store/Store";
-import { Divider, ListItem } from "@material-ui/core";
 import { useSubmitFeedback } from "../../ActionCreator/useSubmitFeedback";
-// import { T_submit_feedback } from "../../../pages/api/submit_feedback";
 
 const useFeedbackFormProps = () => {
   const { dispatchAppState } = React.useContext(Store)
@@ -22,15 +19,10 @@ const useFeedbackFormProps = () => {
   const submitFeedback = useSubmitFeedback()
 
   const handleOnSubmit = async () => {
-    // const result: T_submit_feedback = await submitFeedback({
-    //   contactFormTitle,
-    //   contactFormContent,
-    // });
+
     const result = await submitFeedback({ contactFormTitle, contactFormContent });
     console.log("FeedbackForm.tsxのresultは " + result);
     
-
-    // if (result.sent === true) {
     if (result.sent === true) {
       alert('送信されました。')
       setContactFormTitle('')
@@ -39,7 +31,6 @@ const useFeedbackFormProps = () => {
     } else {
       alert("送信に失敗しました。");
     }
-    // 完了したら 「完了メッセージ」と「フォーム消す」
   }
 
   return {

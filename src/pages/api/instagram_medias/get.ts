@@ -54,6 +54,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         `https://graph.instagram.com/v1.0/me/media?fields=caption,id,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=${access_token}&${pagingParam}`
       );
       
+      // const data2: TInstagramMedias | {error: boolean} = await response.json();
       const data2 = await response.json();
 
       console.log("/instagram_medias/getは " + JSON.stringify(data2));
@@ -64,8 +65,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           .json({ err: true, data: { message: data2.error } });
       }
 
+      const returnData:TInstagramMedias = data2
       // {data: []}の形で取得
-      return res.status(200).json(data2);
+      return res.status(200).json(returnData);
 
     } catch (err) {
       console.log("/instagram_medias/get/のエラーは " + JSON.stringify(err));

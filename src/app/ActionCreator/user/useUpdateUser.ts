@@ -1,21 +1,6 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import {
-  T_user_name,
-  T_user_id,
-  T_shop_name,
-  T_user_email,
-} from "../../Store/Types";
-
-export type T_update_user = {
-  columns: {
-    user_id: T_user_id;
-    user_name: T_user_name;
-    shop_name: T_shop_name;
-    user_email: T_user_email;
-  },
-  plainTextPassword: string
-};
+import { apiUserInfoUpdate, T_user_info_update } from "../../../pages/api/user_info/update";
 
 type TUpdateUser = {
   name: string
@@ -33,7 +18,7 @@ export const useUpdateUser = () => {
 
   // const cipheredPassword = cipher(password);
   return async (param: TUpdateUser) => {
-    const params: T_update_user = {
+    const params: T_user_info_update = {
       columns: {
         user_id: user_id,
         user_name: param.name,
@@ -42,19 +27,8 @@ export const useUpdateUser = () => {
       },
       plainTextPassword: param.password,
     };
-    console.log("useUpdateUserのparamsは " + params);
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/user_info/update`, //★要変更
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(params),
-      }
-    );
-    const data = await res.json();
-
+    const data = await apiUserInfoUpdate(params);
     if (data.err === true) {
       alert("更新できませんでした");
     } else {

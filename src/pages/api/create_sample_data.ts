@@ -1,13 +1,35 @@
 import { db } from "./lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TArticle, FooterItems, FooterItem } from "../../app/Store/Types";
+import { TArticle, FooterItems, FooterItem, T_user_id } from "../../app/Store/Types";
+import { TApiResponse } from "./lib/apiTypes";
+import { server, localhost } from "../../config";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiCreateSampleData = async (
+  params: T_create_sample_data
+): Promise<TApiResponse<void>> => {
+  const str = process.browser ? server : localhost;
+
+  const res = await fetch(`${str}/api/create_sample_data`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+};
+
+export type T_create_sample_data = {
+  user_id: T_user_id
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") { 
     console.log("create_sample_data.tsだよ");
     
 
-  const user_id = req.body
+  const { user_id }: T_create_sample_data = req.body;
 
     try {
       // まずis_sample_dataの記事を取得

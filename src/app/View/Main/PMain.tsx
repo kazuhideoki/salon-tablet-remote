@@ -281,7 +281,9 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                       : value.media_url
                   }
                 />
-                {value.media_type === "VIDEO" ? <PlayArrowRounded className={classes.playIcon} /> : null}
+                {value.media_type === "VIDEO" ? (
+                  <PlayArrowRounded className={classes.playIcon} />
+                ) : null}
               </div>
               {/* <div className={classes.tagsAndDate}> */}
               <Typography
@@ -300,6 +302,16 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 </Typography>
               </div>
             </StyledCardContent>
+            <Button
+              // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
+              component="div"
+              variant="contained"
+              color="primary"
+              size="small"
+              className={classes.readMore}
+            >
+              Read More
+            </Button>
           </Card>
         </CardActionArea>
       </Grid>

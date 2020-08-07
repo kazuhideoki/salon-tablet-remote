@@ -1,4 +1,4 @@
-import { T_check_credentials } from "../user_info/check_credentials";
+import { T_user_info_check_credentials, apiUserInfoCheckCredentials } from "../user_info/check_credentials";
 import { db } from "./db";
 import { server } from "../../../config";
 
@@ -9,7 +9,7 @@ type TCredentials = {
 
 export default async (credentials: TCredentials) => {
   
-  const params: T_check_credentials = {
+  const params: T_user_info_check_credentials = {
     email: credentials.email,
     password: credentials.password,
   };
@@ -20,17 +20,8 @@ export default async (credentials: TCredentials) => {
   );
 
   try {
-    const res = await fetch(
-      // `${location.protocol}//${location.host}/api/user_info/check_credentials`,
-      `${server}/api/user_info/check_credentials`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(params),
-      }
-    );
-    const data: boolean = await res.json();
+    const data = await apiUserInfoCheckCredentials(params);
+
     console.log(
       "authorizeCredentialsでcheck_credentialsからの戻り値は " + JSON.stringify(data)
     );

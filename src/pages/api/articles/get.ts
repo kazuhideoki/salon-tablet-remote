@@ -8,7 +8,7 @@ import { server, localhost } from "../../../config";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
-  let str = process.browser ? server : localhost
+  const str = process.browser ? server : localhost
 
   const res = await fetch(
     `${str}/api/articles/get`,

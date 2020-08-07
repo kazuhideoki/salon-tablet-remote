@@ -1,34 +1,19 @@
 import React from "react";
-import {
-  T_tag_id, T_tag_name,
-} from "../../Store/Types";
-import { useGetTags } from "./useGetTags";
 
-export type TUpdateTagParams = {
-  tag_id: T_tag_id,
-  tag_name: T_tag_name,
-}
+import { useGetTags } from "./useGetTags";
+import { T_tags_update, apiTagsUpdata } from "../../../pages/api/tags/update";
 
 export const useUpdateTag = () => {
 
   const getTags = useGetTags();
 
   return async ({edittingTagId, tagName}) => {
-    const params: TUpdateTagParams = {
+    const params: T_tags_update = {
       tag_id: edittingTagId,
       tag_name: tagName,
     };
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/tags/update`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({params}),
-      }
-    );
-    const data = await res.json();
+    const data = await apiTagsUpdata(params)
 
     if (data.err === true) {
       alert("更新できませんでした");

@@ -86,7 +86,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isModalOpen: true,
           currentModalContent: {
             ...state.currentModalContent,
-            instagramMedia: state.instagramMedias[action.payload],
+            instagramMedia: state.instagramMedias.data[action.payload],
             modalSize: "medium",
           },
         };

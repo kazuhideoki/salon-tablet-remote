@@ -2,6 +2,7 @@ import React from "react";
 import { T_instagram_id } from "../../Store/Types";
 import { useGetInstagramAccounts } from "./useGetInstagramAccounts";
 import { Store } from "../../Store/Store";
+import { apiInstagramAccountsDelete } from "../../../pages/api/instagram_accounts/delete";
 
 export const useDeleteInstagramAccount = () => {
   const getInstagramAccounts = useGetInstagramAccounts();
@@ -9,20 +10,11 @@ export const useDeleteInstagramAccount = () => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
 
-  if (deleting === false) {
-    return null;
-  }
+    if (deleting === false) {
+      return null;
+    }
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/instagram_accounts/delete`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ instagram_id }),
-      }
-    );
-    const data = await res.json();
+    const data = await apiInstagramAccountsDelete({ instagram_id });
 
     if (data.err === true) {
       alert("削除できませんでした");

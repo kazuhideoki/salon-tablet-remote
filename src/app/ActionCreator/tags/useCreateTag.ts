@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Store } from "../../Store/Store";
-import { T_tags_create } from "../../../pages/api/tags/create";
+import { T_tags_create, apiTagsCreate } from "../../../pages/api/tags/create";
 import { useGetTags } from "./useGetTags";
 
 export const useCreateTag = () => {
@@ -9,24 +9,17 @@ export const useCreateTag = () => {
   const getTags = useGetTags()
 
   return async (tagName: string) => {
+
     const params: T_tags_create = {
       user_id: appState.userInfo.user_id,
       tag_name: tagName,
     };
+    
     console.log("useCreateTagのparamsは" + JSON.stringify(params));
 
     console.log(JSON.stringify(params));
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/tags/create`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ params }),
-      }
-    );
-    const data = await res.json();
+    const data = await apiTagsCreate(params);
 
     if (data.err === true) {
       alert("タグを作成できませんでした");
