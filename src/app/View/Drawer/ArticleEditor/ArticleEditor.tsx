@@ -64,7 +64,7 @@ const ArticleEditor = () => {
     };
     // 記事編集
     if (isEditting) {
-      updateArticle(is_published, params);
+      updateArticle(params);
       // 記事作成
     } else {
       createArticle(params);

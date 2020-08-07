@@ -4,6 +4,7 @@ import {
 } from "../../Store/Types";
 import { useGetArticles } from "./useGetArticles";
 import { Store } from "../../Store/Store";
+import { apiArticlesDelete } from "../../../pages/api/articles/delete";
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
@@ -18,16 +19,7 @@ export const useDeleteArticle = () => {
       return null
     }
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/articles/delete`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ article_id }),
-      }
-    );
-    const data = await res.json();
+    const data = await apiArticlesDelete({ article_id });
 
     if (data.err === true) {
       alert("削除できませんでした");

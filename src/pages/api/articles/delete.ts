@@ -1,9 +1,30 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+import { server, localhost } from "../../../config";
+import { T_article_id } from "../../../app/Store/Types";
+
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiArticlesDelete = async (params: T_articles_delete) => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(`${str}/api/articles/delete`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+} 
+
+export type T_articles_delete = {
+  article_id: T_article_id
+}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const article_id = req.body.article_id;
+    const { article_id }: T_articles_delete = req.body;
 
     try {
       const data = await db(

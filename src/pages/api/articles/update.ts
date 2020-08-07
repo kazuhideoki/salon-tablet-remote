@@ -1,13 +1,48 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_articles_update } from "../../../app/ActionCreator/articles/useUpdateArticle";
-import { T_article_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse } from "../lib/apiTypes";
+import {
+  T_is_published_articles,
+  T_title,
+  T_article_content,
+  T_article_id,
+  T_article_excerpt,
+  T_article_img,
+} from "../../../app/Store/Types";
+import { T_articles_create } from "./create";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiArticlesUpdate = async (params: T_articles_update) => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(`${str}/api/articles/update`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+} 
+
+export type T_articles_update_params = {
+  is_published: T_is_published_articles;
+  title: T_title;
+  article_content: T_article_content;
+  article_excerpt: T_article_excerpt;
+  article_img: T_article_img;
+  tag_ids: string | null;
+};
+// dbに そのまま入れられるように paramsとwhereに使うidは分けておく
+export type T_articles_update = {
+  params: T_articles_update_params;
+  article_id: T_article_id;
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const params: T_articles_update = req.body.params;
+    const params: T_articles_update_params = req.body.params;
     const id: T_article_id = req.body.article_id;
 
     try {

@@ -19,17 +19,15 @@ export const useCreateArticle =   () => {
   
   return async ( param: TCreateArticle) => {
     
-    const tag_ids = param.selectedTags.length
-      ? JSON.stringify(param.selectedTags)
-      : null;
-
     const params: T_articles_create = {
       is_published: param.is_published,
       title: param.titleText,
       article_content: param.editorText,
       article_excerpt: param.editorTextExcerpt,
       article_img: param.editorImg,
-      tag_ids: tag_ids,
+      tag_ids: param.selectedTags.length
+      ? JSON.stringify(param.selectedTags)
+      : null,
       user_id: appState.userInfo.user_id,
     };
 
