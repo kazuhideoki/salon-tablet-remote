@@ -11,9 +11,10 @@ import {
   T_tag_ids,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
+import { TApiResponse } from "../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesCreate = async (params: T_articles_create) => {
+export const apiArticlesCreate = async (params: T_articles_create):Promise<TApiResponse<T_articles_create_return>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/articles/create`, {
@@ -36,6 +37,10 @@ export type T_articles_create = {
   user_id: T_user_id;
 };
 
+export type T_articles_create_return = {
+  rawData: unknown;
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST") {
@@ -47,9 +52,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const data2: any = await db(`SELECT * FROM articles WHERE user_id = ?`, params.user_id);
 
-      return res.status(200).json({
+      const returnData: T_articles_create_return = {
         rawData: data,
-      });
+      };
+      return res.status(200).json(returnData);
 
     } catch (err) {
       console.log("/articles/create/のエラーは " + JSON.stringify(err));

@@ -7,7 +7,7 @@ import { server, localhost } from "../../../config";
 // import { session } from "next-auth/client";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<TApiArticlesGetResponse>> => {
+export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(
@@ -37,7 +37,7 @@ export type TPaginationReturn = {
   rowCount: number,
 };
 
-export type TApiArticlesGetResponse = {
+export type T_articles_get_return = {
   rawData: TArticles,
   pagination: TPaginationReturn
 }
@@ -100,11 +100,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         rowCount: data2.length,
       };
 
-      const returnData: TApiArticlesGetResponse = {
+      const returnData: T_articles_get_return = {
         // tag_idsをnumber[]化する、なければnullのまま
         rawData: data.length ? tagIdsParse(data) : data,
         pagination: pagination,
-      }
+      };
 
       return res.status(200).json(returnData);
 

@@ -1,23 +1,17 @@
 import React from "react";
-import { SwitchOrderParams } from "../../View/viewComponents/buttons/SwitchOrderButton";
 import { useGetFooterItems } from "./useGetFooterItems";
+import {
+  T_footer_items_switch_order,
+  apiFooterItemsSwitchOrder,
+} from "../../../pages/api/footer_items/switch_order";
 
 export const useSwitchOrder = () => {
   const getFooterItems = useGetFooterItems();
 
-  return async (params: SwitchOrderParams) => {
+  return async (params: T_footer_items_switch_order) => {
     console.log("useSwitchOrderのparamsは " + params);
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/footer_items/switch_order`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(params),
-      }
-    );
-    const data = await res.json();
+    const data = await apiFooterItemsSwitchOrder(params)
 
     if (data.err === true) {
       alert("アイテムを入れ替えることができませんでした");

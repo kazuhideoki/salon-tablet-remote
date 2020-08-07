@@ -1,20 +1,68 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_footer_items_create_item } from "../../../app/ActionCreator/footerItems/useCreateFooterItem";
+import {
+  T_is_published_footer_items,
+  T_icon_name,
+  T_displayed_icon_name,
+  T_on_tap,
+  T_item_content,
+  T_link_url,
+  T_order,
+  T_item_excerpt,
+  T_app_link_url,
+  T_user_id,
+  T_modal_size,
+} from "../../../app/Store/Types";
+import { server, localhost } from "../../../config";
+import { TApiResponse } from "../lib/apiTypes";
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiFooterItemsCreate = async (params:T_footer_items_create):Promise<TApiResponse<T_footer_items_create_return>> => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(`${str}/api/footer_items/create`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+}
+
+export type T_footer_items_create = {
+  is_published: T_is_published_footer_items;
+  icon_name: T_icon_name;
+  displayed_icon_name: T_displayed_icon_name | null;
+  on_tap: T_on_tap;
+  item_content: T_item_content;
+  item_excerpt: T_item_excerpt;
+  link_url: T_link_url;
+  app_link_url: T_app_link_url;
+  modal_size: T_modal_size;
+  order: T_order;
+  user_id: T_user_id;
+};
+
+export type T_footer_items_create_return = {
+  rawData: unknown;
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   
   if (req.method === "POST") {
 
-    const params: T_footer_items_create_item = req.body.params;
+    const params: T_footer_items_create = req.body;
+
     try {
       const data = await db(`INSERT INTO footer_items SET ?`, params);
   
       console.log("/footer_items/create/は " + JSON.stringify(data));
   
-      res.status(200).json({
+      const returnData: T_footer_items_create_return = {
         rawData: data,
-      });
+      };
+      res.status(200).json(returnData);
 
     } catch (err) {
 

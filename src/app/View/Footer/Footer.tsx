@@ -106,10 +106,8 @@ export const FooterPresenter:React.FC<Props> = (props) => {
         {props.appState.isSetting ? (
           <EditButtonsBox className={classes.editButtonsBox}>
             <SwitchOrderButton
-              params={{
-                footer_item_id: value.footer_item_id,
-                order: value.order,
-              }}
+              footer_item_id={value.footer_item_id}
+              order={value.order}
             />
             <UpdateButton
               onClick={() => props.handleOnUpDateFooterIcon(value)}

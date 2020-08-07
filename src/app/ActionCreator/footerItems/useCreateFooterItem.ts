@@ -1,37 +1,16 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import {
-  T_is_published_footer_items,
-  T_icon_name,
-  T_displayed_icon_name,
-  T_on_tap,
-  T_item_content,
-  T_link_url,
-  T_order,
-  T_item_excerpt,
-  T_app_link_url,
-  T_user_id,
-  T_modal_size,
+  T_modal_size, T_is_published_footer_items,
 } from "../../Store/Types";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";
+import { T_footer_items_create, apiFooterItemsCreate } from "../../../pages/api/footer_items/create";
 
-export type T_footer_items_create_item = {
-  is_published: T_is_published_footer_items;
-  icon_name: T_icon_name;
-  displayed_icon_name: T_displayed_icon_name | null; 
-  on_tap: T_on_tap;
-  item_content: T_item_content;
-  item_excerpt: T_item_excerpt
-  link_url: T_link_url;
-  app_link_url: T_app_link_url
-  modal_size: T_modal_size,
-  order: T_order;
-  user_id: T_user_id
-};
 
 export type TCreateFooterItem = {
+  is_published: T_is_published_footer_items,
   titleText: string;
   selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
   onTap: string;
@@ -60,9 +39,9 @@ export const useCreateFooterItem = () => {
     order = 1;
   }
 
-  return async (is_published: boolean, param: TCreateFooterItem) => {
-    const params: T_footer_items_create_item = {
-      is_published: is_published,
+  return async (param: TCreateFooterItem) => {
+    const params: T_footer_items_create = {
+      is_published: param.is_published,
       icon_name: param.titleText,
       // 選択されていたらアイコンの名前を返す.
       displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
@@ -76,21 +55,9 @@ export const useCreateFooterItem = () => {
       user_id: appState.userInfo.user_id,
     };
 
-    console.log(
-      `${location.protocol}//${location.host}/api/footer_items/create`
-    );
     console.log(JSON.stringify(params));
 
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/footer_items/create`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify({ params }),
-      }
-    );
-    const data = await res.json();
+    const data = await apiFooterItemsCreate(params)
 
     if (data.err === true) {
       alert("投稿できませんでした");

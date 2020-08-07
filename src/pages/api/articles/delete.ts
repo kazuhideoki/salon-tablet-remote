@@ -2,10 +2,11 @@ import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../config";
 import { T_article_id } from "../../../app/Store/Types";
+import { TApiResponse } from "../lib/apiTypes";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesDelete = async (params: T_articles_delete) => {
+export const apiArticlesDelete = async (params: T_articles_delete):Promise<TApiResponse<T_articles_delete_return>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/articles/delete`, {
@@ -21,6 +22,11 @@ export const apiArticlesDelete = async (params: T_articles_delete) => {
 export type T_articles_delete = {
   article_id: T_article_id
 }
+export type T_articles_delete_return = {
+  rawData: unknown;
+};
+
+
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -33,9 +39,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       );
       console.log("/articles/delete/は " + JSON.stringify(data));
 
-      res.status(200).json({
+      const returnData: T_articles_delete_return = {
         rawData: data,
-      });
+      };
+      res.status(200).json(returnData);
       
     } catch (err) {
       console.log("/articles/delete/のエラーは " + JSON.stringify(err));

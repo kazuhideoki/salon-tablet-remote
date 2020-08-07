@@ -17,7 +17,7 @@ import {
   T_selected_theme,
   TInstagramMedias,
 } from "../Store/Types";
-import { TApiArticlesGetResponse } from "../../pages/api/articles/get";
+import { T_articles_get_return } from "../../pages/api/articles/get";
 export type AppStateAction =
   | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "CLOSE_MODAL" }
@@ -60,7 +60,7 @@ export type AppStateAction =
   | {
       type: "SET_ARTICLES";
       payload: {
-        data: TApiArticlesGetResponse;
+        data: T_articles_get_return;
         selectedArticlesTags: number[];
         isSetting: boolean;
         showArticles: boolean;

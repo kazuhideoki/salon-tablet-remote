@@ -61,19 +61,6 @@ export const FooterItemEditor: React.FC = () => {
   const [linkUrl, setLinkUrl] = React.useState(isEditting ? footerItem.link_url : "");
   const [appLinkUrl, setAppLinkUrl] = React.useState(isEditting ? footerItem.app_link_url : "");
 
-  // -------------------
-  const params: TCreateFooterItem = {
-    titleText,
-    selectedIcon,
-    onTap,
-    editorText,
-    editorTextExcerpt,
-    linkUrl,
-    modalSize,
-    appLinkUrl,
-  }
-
-
   const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
   
   const createFooterItem = useCreateFooterItem();
@@ -85,10 +72,21 @@ export const FooterItemEditor: React.FC = () => {
 
 
   const handleSubmit = ({ is_published }) => {
+    const params: TCreateFooterItem = {
+      is_published,
+      titleText,
+      selectedIcon,
+      onTap,
+      editorText,
+      editorTextExcerpt,
+      linkUrl,
+      modalSize,
+      appLinkUrl,
+    };
     if (isEditting) {
-      updateFooterItem(is_published, params);
+      updateFooterItem(params);
     } else {
-      createFooterItem(is_published, params);
+      createFooterItem(params);
     }
   };
 

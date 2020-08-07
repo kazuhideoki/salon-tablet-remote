@@ -38,9 +38,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
-    const correctedData = changeToBooleanFromNumber(data)
+    const returnData: FooterItems = changeToBooleanFromNumber(data);
 
-    return res.status(200).json(correctedData);
+    return res.status(200).json(returnData);
 
   } catch (err) {
     console.log("/footer_items/get/のエラーは " + JSON.stringify(err));

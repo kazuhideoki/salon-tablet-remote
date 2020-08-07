@@ -1,52 +1,21 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import {
-  T_footer_item_id,
-  T_is_published_footer_items,
-  T_icon_name,
-  T_displayed_icon_name,
-  T_on_tap,
-  T_item_content,
-  T_link_url,
-  T_order,
-  T_item_excerpt,
-  T_app_link_url,
-  T_modal_size,
-  FooterItem,
-} from "../../Store/Types";
+
 import { useGetFooterItems } from "./useGetFooterItems";
 import { TCreateFooterItem } from "./useCreateFooterItem";
+import { T_footer_items_update, apiFooterItemsUpdate } from "../../../pages/api/footer_items/update";
 
-export type T_footer_items_update_item = {
-  is_published: T_is_published_footer_items;
-  icon_name: T_icon_name;
-  displayed_icon_name: T_displayed_icon_name | null;
-  on_tap: T_on_tap;
-  item_content: T_item_content;
-  item_excerpt: T_item_excerpt;
-  link_url: T_link_url;
-  app_link_url: T_app_link_url;
-  modal_size: T_modal_size;
-  order: T_order;
-};
-export type TUpdateFooterItem = {
-  params: T_footer_items_update_item
-  id: T_footer_item_id
-}
+export type TUpdateFooterItem = TCreateFooterItem;
 
 export const useUpdateFooterItem = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
   const getFooterItems = useGetFooterItems();
 
-  return async (
-    is_published: boolean,
-    param: TCreateFooterItem,
-    // edittingFooterItemParams: FooterItem 
-  ) => {
-    const params: TUpdateFooterItem = {
+  return async (param: TUpdateFooterItem) => {
+    const params: T_footer_items_update = {
       id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
-        is_published: is_published,
+        is_published: param.is_published,
         icon_name: param.titleText,
         // 選択されていたらアイコンの名前を返す
         displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
@@ -59,23 +28,12 @@ export const useUpdateFooterItem = () => {
         order: appState.edittingPrams.footerItem.order,
       },
     };
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/footer_items/update`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(params),
-      }
-    );
-    const data = await res.json();
+
+    const data = await apiFooterItemsUpdate(params);
 
     if (data.err === true) {
       alert("更新できませんでした");
     } else {
-      // setIsEdittingContent(false);
-      // setTitleText("");
-      // setEditorText("");
       dispatchAppState({ type: "CLOSE_MODAL" });
 
       getFooterItems();

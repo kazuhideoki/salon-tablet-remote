@@ -1,9 +1,33 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+import { server, localhost } from "../../../config";
+import { TApiResponse } from "../lib/apiTypes";
+
+
+// サーバーサイドとフロントサイド考えずに使えるようにラップする
+export const apiFooterItemsSwitchOrder = async (params:T_footer_items_switch_order):Promise<TApiResponse<T_footer_items_switch_order_return>> => {
+  let str = process.browser ? server : localhost
+
+  const res = await fetch(`${str}/api/footer_items/switch_order`, {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify(params),
+  });
+
+  return await res.json();
+}
+
+export type T_footer_items_switch_order = {
+  footer_item_id: number;
+  order: number;
+};
+
+export type T_footer_items_switch_order_return = { err: boolean };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-   const { footer_item_id, order } = req.body;
+   const { footer_item_id, order }: T_footer_items_switch_order = req.body;
 
     // orderが連番じゃなかったらエラー出す
 
@@ -17,15 +41,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         "UPDATE `footer_items` SET `order`=? WHERE `footer_item_id`!=? AND `order`=?",
         [order, footer_item_id, order - 1]
       );
+      
+      const returnData: T_footer_items_switch_order_return = { err: false }
 
-      // console.log(
-      //   "/api/footer_items/switch_order " +
-      //     JSON.stringify(date1) +
-      //     " と " +
-      //     JSON.stringify(date2)
-      // );
-
-      res.status(200).json({ err: false });
+      res.status(200).json(returnData);
 
     } catch (err) {
       console.log("/footer_items/switch_order/のエラーは " + JSON.stringify(err));

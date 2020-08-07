@@ -1,6 +1,7 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import { T_order, T_footer_item_id } from "../../Store/Types";
+import { apiFooterItemsDelete } from "../../../pages/api/footer_items/delete";
 
 export const useDeleteFooterItem = () => {
   const { dispatchAppState } = React.useContext(Store);
@@ -13,17 +14,7 @@ export const useDeleteFooterItem = () => {
       return null;
     }
     
-    const res = await fetch(
-      `${location.protocol}//${location.host}/api/footer_items/delete`,
-      {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        mode: "cors",
-        // jsonに変換するので数字でも{}で囲む
-        body: JSON.stringify({ footer_item_id, order }),
-      }
-    );
-    const data = await res.json();
+    const data = await apiFooterItemsDelete({footer_item_id, order})
 
     if (data.err === true) {
       alert("削除できませんでした");

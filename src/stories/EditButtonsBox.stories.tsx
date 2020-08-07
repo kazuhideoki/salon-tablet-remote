@@ -15,7 +15,7 @@ export const Normal = () => {
 
   return (
     <EditButtonsBox className={className}>
-      <SwitchOrderButton params={{footer_item_id: 1, order:2}} />
+      <SwitchOrderButton footer_item_id={1} order={2} />
       <UpdateButton onClick={null} />
       <DeleteButton onClick={null} />
     </EditButtonsBox>

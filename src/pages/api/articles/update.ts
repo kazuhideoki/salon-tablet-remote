@@ -13,7 +13,7 @@ import {
 import { T_articles_create } from "./create";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesUpdate = async (params: T_articles_update) => {
+export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiResponse<T_articles_update_return>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/articles/update`, {
@@ -39,6 +39,9 @@ export type T_articles_update = {
   params: T_articles_update_params;
   article_id: T_article_id;
 };
+export type T_articles_update_return = {
+  rawData: unknown;
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -52,9 +55,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       ]);
       console.log("/articles/update/は " + JSON.stringify(data));
 
-      res.status(200).json({
+      const returnData: T_articles_update_return = {
         rawData: data,
-      });
+      };
+      res.status(200).json(returnData);
       
     } catch (err) {
       console.log("/articles/update/のエラーは " + JSON.stringify(err));
