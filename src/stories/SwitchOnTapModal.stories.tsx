@@ -4,6 +4,8 @@ export default {
   title: "Drawer/ItemEditor/SwitchOnTapModal",
   component: SwitchOnTapModal,
 };
+
+
 export const Normal = () => {
   const [onTap, setOnTap] = React.useState("");
 
@@ -13,6 +15,6 @@ export const Normal = () => {
   <p>d</p>
   <p>d</p>
   <p>d</p>
-  <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />;
+  <SwitchOnTapModal onTap={onTap} dispatchAppState={null} />;
   </>)
 }

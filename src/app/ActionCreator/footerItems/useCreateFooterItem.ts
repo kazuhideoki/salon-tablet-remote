@@ -1,7 +1,7 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import {
-  T_modal_size, T_is_published_footer_items,
+  T_modal_size, T_is_published_footer_items, T_on_tap,
 } from "../../Store/Types";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
@@ -13,7 +13,7 @@ export type TCreateFooterItem = {
   is_published: T_is_published_footer_items,
   titleText: string;
   selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
-  onTap: string;
+  onTap: T_on_tap;
   editorText: string;
   editorTextExcerpt: string;
   linkUrl: string;
