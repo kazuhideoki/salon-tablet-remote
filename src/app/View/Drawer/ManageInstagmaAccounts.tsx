@@ -11,17 +11,20 @@ import { Store } from '../../Store/Store';
 import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
 import { useDeleteInstagramAccount } from '../../ActionCreator/instagramAccounts/useDeleteInstagramAccounts'
 import { grey } from '@material-ui/core/colors';
+import { useGetInstagramMedias } from '../../ActionCreator/instagramMedias/useGetInstagramMedias';
 
 export const useManageInstagramAccountsProps = () => {
 
   const { appState } = React.useContext(Store);
   const {instagramAccounts} = appState
   const deleteInstagramAccount = useDeleteInstagramAccount()
+  const getInstagramMedias = useGetInstagramMedias()
 
   const instaAuth = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${instagramRedirectHost}/api/instagram_accounts/get_token&scope=user_profile,user_media&response_type=code`;
 
   return {
     instagramAccounts,
+    getInstagramMedias,
     instaAuth,
     deleteInstagramAccount,
   };
@@ -65,7 +68,13 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
       {props.instagramAccounts.map((value) => {
         return (
           <div className={classes.account}>
-            <Button>{value.username}</Button>
+            <Button
+              onClick={() =>
+                props.getInstagramMedias(value.instagram_id, value.username, {})
+              }
+            >
+              {value.username}
+            </Button>
             <DeleteButton
               onClick={() => props.deleteInstagramAccount(value.instagram_id)}
             />
