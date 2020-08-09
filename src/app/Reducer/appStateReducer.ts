@@ -112,6 +112,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
             ...state.edittingPrams,
             isEditting: false,
             modalSize: "large",
+            onTap: "modal",
           },
         };
         break;
@@ -121,9 +122,9 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           setModal: "edit_article",
           isModalOpen: true,
           edittingPrams: {
+            ...state.edittingPrams,
             isEditting: true,
             article: { ...action.payload },
-            footerItem: state.edittingPrams.footerItem,
             modalSize: "large",
           },
         };
@@ -134,10 +135,11 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           setModal: "edit_footer_item",
           isModalOpen: true,
           edittingPrams: {
+            ...state.edittingPrams,
             isEditting: true,
-            article: state.edittingPrams.article,
             footerItem: { ...action.payload },
             modalSize: action.payload.modal_size,
+            onTap: action.payload.on_tap,
           },
         };
         break;
@@ -147,6 +149,15 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           edittingPrams: {
             ...state.edittingPrams,
             modalSize: action.payload,
+          },
+        };
+        break;
+      case "SET_ON_TAP":
+        newState = {
+          ...state,
+          edittingPrams: {
+            ...state.edittingPrams,
+            onTap: action.payload,
           },
         };
         break;

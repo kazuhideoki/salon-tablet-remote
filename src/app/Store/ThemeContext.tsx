@@ -71,14 +71,11 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
     const { appState } = React.useContext(Store);
     const { selected_theme } = appState.userInfo;
 
-
-
     let theme // テーマ付ける
     // user_infoのselected_themeをもとにテーマを適応
     switch (selected_theme) {
       case "nonTheme":
         theme = nonTheme
-        // theme = { ...commonTheme, ...nonTheme}
         break;
       case "minimal":
         theme = themeMinimal;

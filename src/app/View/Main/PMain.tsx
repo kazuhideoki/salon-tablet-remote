@@ -119,8 +119,6 @@ const useStyles = makeStyles((theme) => {
       margin: `${theme.spacing(1)}px`,
     },
     readMore: {
-      // marginleft: theme.spacing(1),
-      // marginRight: theme.spacing(1),
       position: "absolute",
       bottom: theme.spacing(2),
       right: theme.spacing(3),

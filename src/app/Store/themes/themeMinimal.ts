@@ -1,5 +1,7 @@
 import { createMuiTheme } from "@material-ui/core"
 
+const theme = createMuiTheme()
+
 export const themeMinimal = createMuiTheme({
   overrides: {
     MuiCssBaseline: {
@@ -19,6 +21,16 @@ export const themeMinimal = createMuiTheme({
         },
         
       },
+    },
+    MuiPaper: {
+      rounded: {
+        borderRadius: theme.spacing(3),
+      },
+    },
+    MuiDrawer: {
+      paper: {
+        borderRadius: theme.spacing(3),
+      }
     },
   },
 
@@ -40,11 +52,9 @@ export const themeMinimal = createMuiTheme({
   },
    palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#134e78",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: '#b0c4de', // lightsteelblue
     },
   },

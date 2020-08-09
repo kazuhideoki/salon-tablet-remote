@@ -66,7 +66,7 @@ export type T_created_at_footer_items = string;
 export type T_updated_at_footer_items = string | null;
 export type T_icon_name = string | null;
 export type T_displayed_icon_name = string | null;
-export type T_on_tap = string;
+export type T_on_tap = "modal" | "link" | "appLink";
 export type T_item_content = string | null;
 export type T_item_excerpt = string | null;
 export type T_link_url = string | null;
@@ -199,7 +199,9 @@ export const initAppState = (data: IndexPropsData) => ({
       isEditting: false,
       article: {} as TArticle,
       footerItem: {} as FooterItem,
+      // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
       modalSize: "large" as T_modal_size,
+      onTap: "modal" as T_on_tap
     },
     // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
     selectedArticlesTags: [] as number[],

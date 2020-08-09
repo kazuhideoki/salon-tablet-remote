@@ -16,29 +16,30 @@ export type TContentModalProps = ReturnType<typeof useContentModalProps>
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-
+    header: {
+      margin: theme.spacing(2),
+    }
   })
 )
 
 export const ContentModalPresenter: React.FC<TContentModalProps> = (props) => {
+  const classes = useStyles()
   
   return (
-    <>
+    <div>
       {props.article.title && (
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h2" className={classes.header}>
           {props.article.title}
         </Typography>
       )}
-      <Typography variant="body1" >
+      <Typography variant="body1">
         <ReactQuill
           readOnly
           theme="bubble"
-          value={
-            props.article.article_content
-          }
+          value={props.article.article_content}
         />
       </Typography>
-    </>
+    </div>
   );
 }
 

@@ -18,11 +18,11 @@ import { SelectTags } from "../Footer/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
-import { useModalSize, large, medium } from "../viewComponents/useModalSize";
+import { useModalSize, medium } from "../viewComponents/useModalSize";
 import { StyledDialog } from "./StyledDialog";
 import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
-import { T_modal_size, TSetModal } from "../../Store/Types";
+import { TSetModal } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
 // import FooterItemModal from "../Footer/FooterItemModal";
 

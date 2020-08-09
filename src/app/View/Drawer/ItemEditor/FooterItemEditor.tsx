@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const FooterItemEditor: React.FC = () => {
   const classes = useStyles()
 
-  const { appState } = React.useContext(Store)
-  const modalSize = appState.edittingPrams.modalSize
+  const { appState, dispatchAppState } = React.useContext(Store)
+  const {modalSize, onTap} = appState.edittingPrams
   const { isEditting, footerItem } = appState.edittingPrams
 
   // -------------------
@@ -57,7 +57,10 @@ export const FooterItemEditor: React.FC = () => {
     selectedIconReducer,
     isEditting ? IconsSetting.convertIconComponentFromName(footerItem.displayed_icon_name) : null
   );
-  const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
+
+  // 変更した値を保存する？ or...
+  // const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
+
   const [linkUrl, setLinkUrl] = React.useState(isEditting ? footerItem.link_url : "");
   const [appLinkUrl, setAppLinkUrl] = React.useState(isEditting ? footerItem.app_link_url : "");
 
@@ -138,10 +141,13 @@ export const FooterItemEditor: React.FC = () => {
       <CharCounter charCount={titleText.length} limitCount={100} />
       <br />
 
-      <SwitchOnTapModal onTap={onTap} setOnTap={setOnTap} />
+      <SwitchOnTapModal onTap={onTap} dispatchAppState={dispatchAppState} />
       {mainField}
 
-      <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/>
+      <SelectIcon
+        selectedIcon={selectedIcon}
+        dispatchSelectedIcon={dispatchSelectedIcon}
+      />
       <Grid container className={classes.submitButtons}>
         <Grid item>
           <Button

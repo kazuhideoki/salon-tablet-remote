@@ -93,7 +93,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
         className={classes.icon}
         color={
           props.isShowInstagram === false && props.selectedTagNames.length === 0
-            ? "primary"
+            ? "secondary"
             : "default"
         }
       >
@@ -110,7 +110,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           }
           color={
             props.isShowInstagram === false && props.selectedTagNames.length
-              ? "primary"
+              ? "secondary"
               : "default"
           }
           className={classes.icon}

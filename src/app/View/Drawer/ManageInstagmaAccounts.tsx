@@ -10,6 +10,7 @@ import { instagramRedirectHost } from '../../../config';
 import { Store } from '../../Store/Store';
 import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
 import { useDeleteInstagramAccount } from '../../ActionCreator/instagramAccounts/useDeleteInstagramAccounts'
+import { grey } from '@material-ui/core/colors';
 
 export const useManageInstagramAccountsProps = () => {
 
@@ -35,6 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       margin: theme.spacing(2),
     },
+    txt: {
+      margin: theme.spacing(2),
+      color: 'grey',
+    },
     account: {
       display: "flex",
       margin: theme.spacing(1),
@@ -54,6 +59,9 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
       <a href={props.instaAuth}>
         <Button>インスタグラムアカウントを追加する</Button>
       </a>
+      <Typography variant="subtitle1" component="p" className={classes.txt}>
+        現在Instagramの連携は招待制になっています。ご希望の方はご連絡下さい。
+      </Typography>
       {props.instagramAccounts.map((value) => {
         return (
           <div className={classes.account}>

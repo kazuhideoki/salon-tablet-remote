@@ -6,17 +6,28 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { HelpButton } from '../../viewComponents/buttons/HelpButton';
+import { T_on_tap } from '../../../Store/Types';
+import { AppStateAction } from '../../../Reducer/AppStateAction';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 
 }));
 
-export function SwitchOnTapModal({ onTap, setOnTap }) {
+type Type = {
+  onTap: T_on_tap,
+  dispatchAppState: React.Dispatch<AppStateAction>,
+}
+
+// export const SwitchOnTapModal = ({ onTap, setOnTap }) => {
+export const SwitchOnTapModal = ({ onTap, dispatchAppState }) => {
   const classes = useStyles()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOnTap((event.target as HTMLInputElement).value);
+    dispatchAppState({
+      type: "SET_ON_TAP",
+      payload: (event.target as HTMLInputElement).value,
+    });
   };
 
   return (

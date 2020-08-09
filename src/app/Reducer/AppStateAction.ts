@@ -16,6 +16,7 @@ import {
   T_user_email,
   T_selected_theme,
   TInstagramMedias,
+  T_on_tap,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 export type AppStateAction =
@@ -42,6 +43,7 @@ export type AppStateAction =
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
   | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
+  | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {
       type: "SET_USER_INFO";
       payload: {

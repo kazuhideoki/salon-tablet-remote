@@ -1,8 +1,6 @@
 import React from 'react'
-import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme, SvgIconTypeMap } from '@material-ui/core'
+import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme, SvgIconTypeMap, createMuiTheme, useTheme } from '@material-ui/core'
 import { ThemeContext } from '../../Store/ThemeContext'
-import { Store } from '../../Store/Store'
-import { Autorenew } from '@material-ui/icons'
 import { OverridableComponent } from '@material-ui/core/OverridableComponent'
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -20,20 +18,6 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 })
 
-const StyledIconButton = withStyles({
-  root: {
-    // もともと定義されているcolorではなくopacityで設定。aタグのカラーを残すことができる
-    color: 'inherit',
-    opacity: 0.75,
-    borderRadius: "15%",
-  },
-  label: {
-    // アイコンと文字を縦に並べて整形する
-    display: "flex",
-    flexDirection: "column",
-  },
-})(IconButton)
-
 // 表示させるアイコンはprops.icon→Material-uiのicon、もしくはprops.img→imgのsrcで切り替えることが出来る。
 type Props = {
   icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
@@ -46,7 +30,26 @@ type Props = {
 
 export const IconAndText:React.FC<Props> = (props) => {
     const classes = useStyles()
-    const {dispatchAppState} = React.useContext(Store)
+
+    const theme = useTheme()
+
+    const StyledIconButton = withStyles({
+      root: {
+        // もともと定義されているcolorではなくopacityで設定。aタグのカラーを残すことができる
+        color: theme.palette.primary.main,
+        // opacity: 0.75,
+        opacity: 1,
+        // borderRadius: "15%",
+        fontStyle: "none",
+      },
+      label: {
+        // アイコンと文字を縦に並べて整形する
+        display: "flex",
+        flexDirection: "column",
+      },
+    })(IconButton);
+
+    // theme読み込んで withStyleでつくる
 
     const handleOnClick = () => props.onClick();
 
