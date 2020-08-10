@@ -152,19 +152,19 @@ export type TInstagramMedia = {
 
 };
 
-export type TInstagramMedias = {
-  data: TInstagramMedia[];
+export const initInstagramMedias = {
+  data: [] as TInstagramMedia[],
   paging: {
-    
     cursors: {
-      before: string;
-      after: string;
-    };
-    // ページ送りがある場合 nextやpreviousが入る。(https〜のget)
-    next: string;
-    previous: string;
-  };
-};
+      before: "",
+      after: "",
+    },
+    next: "",
+    previous: "",
+  },
+}
+
+export type TInstagramMedias = typeof initInstagramMedias
 
 export type TSetModal =
   | "content_modal"
@@ -180,6 +180,8 @@ export type TSetModal =
   | "setting_user_info"
   | "feedback_form"
   | "delete_account_form"; 
+
+
 
 export const initAppState = (data: IndexPropsData) => ({
     isSetting: true,
@@ -219,17 +221,7 @@ export const initAppState = (data: IndexPropsData) => ({
     footerItems: data.footerItems as FooterItems,
     tags: data.tags as TTags,
     instagramAccounts: data.instagramAccounts as TInstagramAccounts,
-    instagramMedias: {
-    data: [],
-    paging: {
-        cursors: {
-            before: '',
-            after: '',
-        },
-        next: '',
-        previous: '',
-      },
-    } as TInstagramMedias,
+    instagramMedias: initInstagramMedias
   })
 
 export type TAppState = ReturnType<typeof initAppState> ;

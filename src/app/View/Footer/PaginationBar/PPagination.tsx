@@ -149,7 +149,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
       <Typography
         variant="subtitle1"
-        component="span"
+        component="div"
         className={classes.paginationArrows}
       >
         {props.isShowInstagram ? (

@@ -25,7 +25,7 @@ const pHeaderHeight = 7
 
 const pFooterMarginTop = 1
 const pFooterWidth = screenWidth - portalPadding * 2
-const pFooterHeight = 23
+const pFooterHeight = 26
 
 const pMainMargin = 1
 const pMainWidth = screenWidth - pMainMargin * 2

@@ -134,10 +134,12 @@ export const FooterItemEditor: React.FC = () => {
       <TextField
         id="icon-name-text-field"
         label="アイテム名"
+        multiline
         value={titleText}
         onChange={(e) => handleOnChangeIconName(e)}
         className={classes.titleText}
       />
+      <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。"/>
       <CharCounter charCount={titleText.length} limitCount={100} />
       <br />
 

@@ -79,7 +79,7 @@ export const IconAndText:React.FC<Props> = (props) => {
     return (
         <StyledIconButton className={props.className}>
           {icon}
-          <Typography variant="body2" className={classes.titleText}>{props.text}</Typography>
+          <Typography variant="body1" className={classes.titleText}>{props.text}</Typography>
         </StyledIconButton>
     );
 }

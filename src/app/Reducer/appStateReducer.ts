@@ -1,5 +1,5 @@
 import {
-  TAppState,
+  TAppState, TInstagramMedias, TInstagramMedia, initInstagramMedias,
 } from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 import { AppStateAction } from "./AppStateAction";
@@ -180,9 +180,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         break;
       case "SET_ARTICLES":
         console.log(action.payload);
-        
-        // ! を使うとうまく行かなかった。。。        
-        const isShowInstagram = action.payload.showArticles === true ? false : state.isShowInstagram;
+
+        // ! を使うとうまく行かなかった。。。
+        const isShowInstagram =
+          action.payload.showArticles === true ? false : state.isShowInstagram;
         newState = {
           ...state,
           selectedArticlesTags: action.payload.selectedArticlesTags,
@@ -245,6 +246,12 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
             ...state.loading,
             mainArticles: false,
           },
+        };
+        break;
+      case "DELETE_INSTAGRAM_MEDIAS":
+        newState = {
+          ...state,
+          instagramMedias: initInstagramMedias,
         };
         break;
 

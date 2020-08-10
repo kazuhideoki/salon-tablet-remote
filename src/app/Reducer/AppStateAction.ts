@@ -84,4 +84,5 @@ export type AppStateAction =
           username: T_instagram_username;
         };
       };
-    };
+    }
+  | { type: "DELETE_INSTAGRAM_MEDIAS" }

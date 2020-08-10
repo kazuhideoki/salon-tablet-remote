@@ -17,7 +17,7 @@ export const PaginationInstagram:React.FC<TPaginationArrows> = (props) => {
   // ページ送りがある場合 nextやpreviousが入る。(https〜のget)
 
   return (
-    <div>
+    <>
       <SvgIcon
         fontSize="inherit"
         onClick={
@@ -48,6 +48,6 @@ export const PaginationInstagram:React.FC<TPaginationArrows> = (props) => {
       >
         <NavigateNext className={next ? null : props.classes.disable} />
       </SvgIcon>
-    </div>
+    </>
   );
 }
