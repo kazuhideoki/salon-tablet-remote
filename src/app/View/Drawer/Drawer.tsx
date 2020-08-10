@@ -55,8 +55,8 @@ export const useDrawerProps = () => {
   }
 
   const handleDrawerClose = () => {
-    dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
     getArticles(false, 1, appState.selectedArticlesTags, false)
+    dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
   };
 
   const isMobile = useMediaQuery("(max-width:480px)");
