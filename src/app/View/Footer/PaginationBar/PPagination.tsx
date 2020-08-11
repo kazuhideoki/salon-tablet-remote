@@ -13,7 +13,7 @@ import { PaginationInstagram } from "./PaginationInstagram";
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
   const { dispatchAppState, appState} = React.useContext(Store);
-  const { isSetting, tags, instagramAccounts, paginationParams } = appState;
+  const { isSetting, tags, instagramAccounts, paginationParams, selectedArticlesTags } = appState;
   const { selectedInstagramAccount, isShowInstagram } = appState
   
   const handleOnNumClick = (num) => {
@@ -33,6 +33,7 @@ export const usePPaginationProps = () => {
     selectedTagNames,
     selectedInstagramAccount,
     isShowInstagram,
+    selectedArticlesTags,
   };
 };
 export type TUsePPaginationProps = ReturnType<typeof usePPaginationProps>
@@ -88,76 +89,80 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
   return (
     <Grid container justify="center" spacing={1} className={classes.root}>
-      <IconButton
-        onClick={() => props.getArticles(props.isSetting, 1, [])}
-        className={classes.icon}
-        color={
-          props.isShowInstagram === false && props.selectedTagNames.length === 0
-            ? "secondary"
-            : "default"
-        }
-      >
-        <HomeButton />
-      </IconButton>
-
-      {props.tags.length ? (
+      <Grid item>
         <IconButton
-          onClick={() =>
-            props.dispatchAppState({
-              type: "OPEN_MODAL",
-              payload: "select_tags",
-            })
-          }
+          onClick={() => props.getArticles(props.isSetting, 1, [])}
+          className={classes.icon}
           color={
-            props.isShowInstagram === false && props.selectedTagNames.length
+            props.isShowInstagram === false &&
+            props.selectedTagNames.length === 0
               ? "secondary"
               : "default"
           }
-          className={classes.icon}
         >
-          <TagsButton />
+          <HomeButton />
         </IconButton>
+      </Grid>
+
+      {props.tags.length ? (
+        <Grid item>
+          <IconButton
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_MODAL",
+                payload: "select_tags",
+              })
+            }
+            color={
+              props.isShowInstagram === false && props.selectedTagNames.length
+                ? "secondary"
+                : "default"
+            }
+            className={classes.icon}
+          >
+            <TagsButton />
+          </IconButton>
+        </Grid>
       ) : null}
 
-      <div>
-        {props.isShowInstagram === false &&
-          props.selectedTagNames.map((value) => (
+      {props.isShowInstagram === false && 
+        <Grid item>
+         {props.selectedTagNames.map((value) => (
             <Chip label={value} size="small" />
           ))}
-      </div>
+        </Grid>
+      }
 
       {props.instagramAccounts.length ? (
-        <IconButton
-          onClick={() =>
-            props.dispatchAppState({
-              type: "OPEN_MODAL",
-              payload: "select_instagram",
-            })
-          }
-          className={classes.icon}
-          color={props.isShowInstagram ? "primary" : "default"}
-        >
-          <Instagram />
-        </IconButton>
+        <Grid item>
+          <IconButton
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_MODAL",
+                payload: "select_instagram",
+              })
+            }
+            className={classes.icon}
+            color={props.isShowInstagram ? "primary" : "default"}
+          >
+            <Instagram />
+          </IconButton>
+        </Grid>
       ) : null}
 
-      <div>
-        {props.isShowInstagram && (
+      {props.isShowInstagram && (
+        <Grid item>
           <Chip label={props.selectedInstagramAccount.username} size="small" />
-        )}
-      </div>
+        </Grid>
+      )}
 
-      <Typography
-        variant="subtitle1"
-        component="div"
-        className={classes.paginationArrows}
-      >
+      <Grid item>
         {props.isShowInstagram ? (
           <PaginationInstagram {...props} classes={classes} />
         ) : (
           <PaginationArrows {...props} classes={classes} />
         )}
-      </Typography>
+      </Grid>
     </Grid>
   );
 };

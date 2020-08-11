@@ -125,7 +125,13 @@ const useStyles = makeStyles((theme) => {
       left: theme.spacing(3),
     },
     editButtonsBox: {
-      margin: "0 0 0 auto",
+      position: "absolute",
+      top: 0,
+      right: 0,
+      borderRadius: theme.spacing(3),
+      backgroundColor: "rgba(255,255,255,0.8)",
+
+      // margin: "0 0 0 auto",
       zIndex: 100,
     },
   });
@@ -156,22 +162,6 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
             ${!value.is_published ? classes.itemIsDraft : ""}
           `}
         >
-          {props.isSetting ? (
-            <EditButtonsBox className={classes.editButtonsBox}>
-              <UpdateButton
-                onClick={() =>
-                  props.dispatchAppState({
-                    type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
-                    payload: value,
-                  })
-                }
-              />
-              <DeleteButton
-                onClick={() => props.deleteArticle(value.article_id)}
-              />
-            </EditButtonsBox>
-          ) : null}
-
           <CardActionArea
             className={classes.cardActionArea}
             onClick={() =>
@@ -183,6 +173,21 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
           >
             <Card className={classes.card}>
               <StyledCardContent className={classes.cardContent}>
+                {props.isSetting ? (
+                  <EditButtonsBox className={classes.editButtonsBox}>
+                    <UpdateButton
+                      onClick={() =>
+                        props.dispatchAppState({
+                          type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
+                          payload: value,
+                        })
+                      }
+                    />
+                    <DeleteButton
+                      onClick={() => props.deleteArticle(value.article_id)}
+                    />
+                  </EditButtonsBox>
+                ) : null}
                 <div className={classes.thumbnailBox}>
                   {value.article_img.length ? (
                     <img

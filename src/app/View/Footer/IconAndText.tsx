@@ -35,11 +35,9 @@ export const IconAndText:React.FC<Props> = (props) => {
 
     const StyledIconButton = withStyles({
       root: {
-        // もともと定義されているcolorではなくopacityで設定。aタグのカラーを残すことができる
         color: theme.palette.primary.main,
-        // opacity: 0.75,
         opacity: 1,
-        // borderRadius: "15%",
+        borderRadius: theme.spacing(3),
         fontStyle: "none",
       },
       label: {

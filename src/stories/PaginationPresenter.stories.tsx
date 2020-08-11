@@ -24,6 +24,7 @@ const props: TUsePPaginationProps = {
   isShowInstagram: false,
   tags: sampleTags,
   instagramAccounts: sampleInstagramAccounts,
+  selectedArticlesTags: [],
 };
 
 export const Normal = () => {
