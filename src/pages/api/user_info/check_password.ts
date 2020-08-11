@@ -26,7 +26,7 @@ export type T_user_info_check_password = {
 };
 export type T_user_info_check_password_return = boolean
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const check_password = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { user_id, password }: T_user_info_check_password = req.body;
 
@@ -68,3 +68,5 @@ export const config = {
     },
   },
 };
+
+export default check_password

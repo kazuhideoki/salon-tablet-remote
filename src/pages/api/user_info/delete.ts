@@ -27,7 +27,7 @@ export type T_user_info_delete_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const user_id: T_user_info_delete = req.body;
 
@@ -87,3 +87,5 @@ export const config = {
     },
   },
 };
+
+export default user_info_delete

@@ -29,7 +29,7 @@ export type T_tags_delete_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { tag_id, user_id }: T_tags_delete = req.body;
 
@@ -66,3 +66,5 @@ export const config = {
     },
   },
 };
+
+export default tags_delete

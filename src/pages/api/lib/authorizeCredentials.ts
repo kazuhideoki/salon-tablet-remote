@@ -7,7 +7,7 @@ type TCredentials = {
   password: string
 }
 
-export default async (credentials: TCredentials) => {
+const authorizeCredentials = async (credentials: TCredentials) => {
   
   const params: T_user_info_check_credentials = {
     email: credentials.email,
@@ -48,3 +48,5 @@ export default async (credentials: TCredentials) => {
     return Promise.reject(err);
   }
 };
+
+export default authorizeCredentials

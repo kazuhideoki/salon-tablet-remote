@@ -25,7 +25,7 @@ export type T_instagram_accounts_delete_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const instagram_accounts_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { instagram_id }: T_instagram_accounts_delete = req.body;
 
@@ -58,3 +58,5 @@ export const config = {
     },
   },
 };
+
+export default instagram_accounts_delete

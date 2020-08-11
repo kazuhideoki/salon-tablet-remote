@@ -7,7 +7,7 @@ import { ApiUserInfoGetFromEmail } from "../user_info/getUserInfoFromEmail";
 
 var FormData = require("form-data");
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log("get_tokenだよ");
 
@@ -117,4 +117,4 @@ export const config = {
   },
 };
 
-
+export default get_token

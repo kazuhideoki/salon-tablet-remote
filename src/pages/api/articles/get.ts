@@ -42,7 +42,7 @@ export type T_articles_get_return = {
   pagination: TPaginationReturn
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     
     const { page, selectingTags, isSetting, userId }: T_articles_get = req.body;
@@ -126,3 +126,5 @@ export const config = {
     },
   },
 };
+
+export default get

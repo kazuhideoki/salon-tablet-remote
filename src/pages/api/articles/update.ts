@@ -43,7 +43,7 @@ export type T_articles_update_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { params }: T_articles_update = req.body;
     const id: T_article_id = req.body.article_id;
@@ -78,3 +78,5 @@ export const config = {
     },
   },
 };
+
+export default update

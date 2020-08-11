@@ -53,7 +53,7 @@ export type T_footer_items_update_return = {
 };
 
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
 
     const { params, id }: T_footer_items_update = req.body;
@@ -89,3 +89,4 @@ export const config = {
   },
 };
 
+export default update

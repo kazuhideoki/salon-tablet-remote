@@ -28,7 +28,7 @@ export type T_footer_items_delete_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const footer_items_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
 
     const { footer_item_id, order }:T_footer_items_delete = req.body;
@@ -73,3 +73,4 @@ export const config = {
   },
 };
 
+export default footer_items_delete;

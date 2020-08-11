@@ -24,7 +24,7 @@ export type T_create_sample_data = {
   user_id: T_user_id
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") { 
     console.log("create_sample_data.tsだよ");
     
@@ -107,3 +107,5 @@ export const config = {
     },
   },
 };
+
+export default create_sample_data;

@@ -27,7 +27,7 @@ export type T_tags_create_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     
     const params: T_tags_create = req.body;
@@ -59,3 +59,5 @@ export const config = {
     },
   },
 };
+
+export default create

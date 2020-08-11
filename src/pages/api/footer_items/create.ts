@@ -48,7 +48,7 @@ export type T_footer_items_create_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const create = async (req: NextApiRequest, res: NextApiResponse) => {
   
   if (req.method === "POST") {
 
@@ -88,3 +88,5 @@ export const config = {
     },
   },
 };
+
+export default create;

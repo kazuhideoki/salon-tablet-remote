@@ -28,7 +28,7 @@ export type T_articles_delete_return = {
 
 
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const articles_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { article_id }: T_articles_delete = req.body;
 
@@ -62,3 +62,5 @@ export const config = {
     },
   },
 };
+
+export default articles_delete

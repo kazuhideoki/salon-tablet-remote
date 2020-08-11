@@ -26,7 +26,7 @@ export type T_user_info_check_credentials = { email: T_user_email, password: str
 
 export type T_user_info_check_credentials_return = boolean
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const check_credentials = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { email, password }: T_user_info_check_credentials = req.body;
 
@@ -69,3 +69,5 @@ export const config = {
     },
   },
 };
+
+export default check_credentials

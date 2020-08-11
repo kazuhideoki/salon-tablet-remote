@@ -25,7 +25,7 @@ export type T_footer_items_switch_order = {
 
 export type T_footer_items_switch_order_return = { err: boolean };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
    const { footer_item_id, order }: T_footer_items_switch_order = req.body;
 
@@ -65,3 +65,4 @@ export const config = {
   },
 };
 
+export default switch_order

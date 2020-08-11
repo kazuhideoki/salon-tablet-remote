@@ -34,7 +34,7 @@ export type T_user_info_update_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { columns, plainTextPassword }: T_user_info_update = req.body;
 
@@ -87,3 +87,4 @@ export const config = {
     },
   },
 };
+export default update

@@ -30,7 +30,7 @@ export type T_instagram_medias_get = {
   paging: { after?: string; before?: string };
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     console.log("/instagram_medias/getだよ");
     
@@ -82,3 +82,5 @@ export const config = {
     externalResolver: true,
   },
 };
+
+export default get

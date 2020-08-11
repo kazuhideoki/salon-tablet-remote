@@ -28,7 +28,7 @@ export type T_user_info_change_theme_return = {
   rawData: unknown;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const change_theme = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { user_id, selectedTheme }: T_user_info_change_theme = req.body;
 
@@ -68,3 +68,5 @@ export const config = {
     },
   },
 };
+
+export default change_theme

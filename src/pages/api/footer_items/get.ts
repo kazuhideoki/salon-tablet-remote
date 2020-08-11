@@ -18,7 +18,7 @@ export const apiFooterItemsGet = async (user_id: T_user_id): Promise<TApiRespons
   return await res.json();
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     //@ts-ignore
     const data: FooterItems = await db(
@@ -55,3 +55,5 @@ export const config = {
     externalResolver: true,
   },
 };
+
+export default get

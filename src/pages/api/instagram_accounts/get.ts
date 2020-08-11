@@ -13,7 +13,7 @@ export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiR
   return await res.json();
 } 
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('instagram_accounts/getだよ');
   
   try {
@@ -39,3 +39,5 @@ export const config = {
     externalResolver: true,
   },
 };
+
+export default get

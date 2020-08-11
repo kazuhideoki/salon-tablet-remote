@@ -50,20 +50,21 @@ export type T_submit_feedback_return_no_error = { sent: true };
 export type T_submit_feedback_return = {sent: boolean, err: true, data: { message: string } }
 
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-
     const {
       contactFormTitle,
       contactFormContent,
       userInfo,
     }: T_submit_feedback = req.body;
-    
+
     const mailOptions1 = {
       from: senderEmailAddress,
       to: receiverEmailAddress,
       subject: `【問い合わせ】:${contactFormTitle}`,
-      text: `${contactFormContent} \n\n\n\n from \n\n ${JSON.stringify(userInfo)}`,
+      text: `${contactFormContent} \n\n\n\n from \n\n ${JSON.stringify(
+        userInfo
+      )}`,
     };
 
     try {
@@ -73,10 +74,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       // return Promise.resolve({ sent: true });
       // return { sent: true }
       console.log("infoは " + JSON.stringify(info));
-      
+
       const retrunData: T_submit_feedback_return_no_error = { sent: true };
       return res.status(200).json(retrunData);
-
     } catch (err) {
       const returnData: T_submit_feedback_return = {
         sent: false,
@@ -100,3 +100,5 @@ export const config = {
     },
   },
 };
+
+export default submit_feedback;
