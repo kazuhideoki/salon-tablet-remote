@@ -110,12 +110,12 @@ export const FooterPresenter:React.FC<Props> = (props) => {
               order={value.order}
             />
             <UpdateButton
-              onClick={() => props.handleOnUpDateFooterIcon(value)}
+              onClick={props.handleOnUpDateFooterIcon}
+              value={value}
             />
             <DeleteButton
-              onClick={() =>
-                props.deleteFooterItem(value.footer_item_id, value.order)
-              }
+              onClick={props.deleteFooterItem}
+              value={{footer_item_id: value.footer_item_id, order: value.order}}
             />
           </EditButtonsBox>
         ) : null}

@@ -1,12 +1,12 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import { T_order, T_footer_item_id } from "../../Store/Types";
-import { apiFooterItemsDelete } from "../../../pages/api/footer_items/delete";
+import { apiFooterItemsDelete, T_footer_items_delete } from "../../../pages/api/footer_items/delete";
 
 export const useDeleteFooterItem = () => {
   const { dispatchAppState } = React.useContext(Store);
 
-  return async (footer_item_id: T_footer_item_id, order: T_order) => {
+  return async ({footer_item_id,order}:T_footer_items_delete) => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
 

@@ -95,7 +95,10 @@ export const FooterMobilePresenter:React.FC<Props> = (props) => {
                 </button>
                 <button
                   onClick={() =>
-                    props.deleteFooterItem(value.footer_item_id, value.order)
+                    props.deleteFooterItem({
+                      footer_item_id: value.footer_item_id,
+                      order: value.order,
+                    })
                   }
                 >
                   削除

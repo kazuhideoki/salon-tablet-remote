@@ -30,22 +30,13 @@ export const usePMainProps = () => {
   const {isShowInstagram, isSetting} = appState;
   const deleteArticle = useDeleteArticle();
 
-  const onClickUpdate = (
-    e,
-    value: TArticle
-  ) => {
-    e.stopImmediatePropagation();
+  const onClickUpdate = (value: TArticle) => {
     dispatchAppState({
       type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
       payload: value,
     });
   };
-
-  const onClickDelete = (e, value: TArticle) => {
-    e.stopPropagation();
-    deleteArticle(value.article_id);
-  };
-
+  
   return {
     isSetting,
     articles,
@@ -55,7 +46,6 @@ export const usePMainProps = () => {
     dispatchAppState,
     isShowInstagram,
     onClickUpdate,
-    onClickDelete,
   };
 };
 
@@ -196,10 +186,12 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 {props.isSetting ? (
                   <EditButtonsBox className={classes.editButtonsBox}>
                     <UpdateButton
-                      onClick={(e) => props.onClickUpdate(e, value)}
+                      onClick={props.onClickUpdate}
+                      value={value}
                     />
                     <DeleteButton
-                      onClick={(e) => props.onClickDelete(e, value)}
+                      onClick={props.deleteArticle}
+                      value={value.article_id}
                     />
                   </EditButtonsBox>
                 ) : null}

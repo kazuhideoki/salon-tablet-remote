@@ -10,7 +10,7 @@ import { useSelectedArticlesTagNames } from "../../../Store/useSelectedArticlesT
 import { Instagram } from "@material-ui/icons";
 import { PaginationInstagram } from "./PaginationInstagram";
 
-const gridSelectedTagsWidth = 100;
+// const gridSelectedTagsWidth = 100;
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
@@ -96,8 +96,8 @@ const useStyles = makeStyles((theme: Theme) => {
       border: "none",
     },
     girdSelectedTags: {
-      overflow: "hidden",
-      minWidth: gridSelectedTagsWidth,
+      overflowX: "scroll",
+      // minWidth: gridSelectedTagsWidth,
       flexShrink: 1,
     },
     selectedTags: {
@@ -107,17 +107,17 @@ const useStyles = makeStyles((theme: Theme) => {
       width: "fit-content",
       height: "100%",
     },
-    selectedTagsAnimation: {
-      animation: "$infinity-loop 4s infinite linear 1s both",
-    },
-    "@keyframes infinity-loop": {
-      from: {
-        transform: "translateX(0px)",
-      },
-      to: {
-        transform: "translateX(-100px)",
-      },
-    },
+    // selectedTagsAnimation: {
+    //   animation: "$infinity-loop 4s infinite linear 1s both",
+    // },
+    // "@keyframes infinity-loop": {
+    //   from: {
+    //     transform: "translateX(0px)",
+    //   },
+    //   to: {
+    //     transform: "translateX(-100px)",
+    //   },
+    // },
 
     instagramAccount: {
       display: "flex",
@@ -194,7 +194,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
               {/* {props.isShowSelectedTags && ( */}
                 <div
                   id="pagination_selectecd_tags_div" 
-                  className={`${classes.selectedTags} ${classes.selectedTagsAnimation}` }
+                  className={`${classes.selectedTags}`}
                 >
                   {props.selectedTagNames.map((value) => (
                     <Chip label={value} size="small" />

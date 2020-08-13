@@ -76,7 +76,8 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
               {value.username}
             </Button>
             <DeleteButton
-              onClick={() => props.deleteInstagramAccount(value.instagram_id)}
+              onClick={props.deleteInstagramAccount}
+              value={value.instagram_id}
             />
           </div>
         );

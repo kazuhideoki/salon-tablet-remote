@@ -16,8 +16,8 @@ export const Normal = () => {
   return (
     <EditButtonsBox className={className}>
       <SwitchOrderButton footer_item_id={1} order={2} />
-      <UpdateButton onClick={null} />
-      <DeleteButton onClick={null} />
+      <UpdateButton onClick={null} value={null} />
+      <DeleteButton onClick={null} value={null} />
     </EditButtonsBox>
   );
 }

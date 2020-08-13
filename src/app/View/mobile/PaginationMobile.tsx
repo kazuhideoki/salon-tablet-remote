@@ -47,6 +47,10 @@ const useStyles = makeStyles((theme: Theme) => {
       justifyContent: "center",
       // width: 400,
     },
+    girdSelectedTags: {
+      overflowX: "scroll",
+      flexShrink: 1,
+    },
   });
 })
 

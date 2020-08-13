@@ -4,6 +4,4 @@ export default {
   title: "viewComponents/buttons/UpdateButton",
   component: UpdateButton,
 };
-export const Normal = () => (
-         <UpdateButton onClick={undefined} />
-       );
+export const Normal = () => <UpdateButton onClick={undefined} value={null} />;
