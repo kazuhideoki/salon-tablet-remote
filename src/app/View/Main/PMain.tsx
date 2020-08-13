@@ -20,6 +20,7 @@ import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";
 import { PlayArrowRounded } from "@material-ui/icons";
+import { TArticle } from "../../Store/Types";
 
 export const usePMainProps = () => {
   const { appState, dispatchAppState } = React.useContext(
@@ -29,6 +30,22 @@ export const usePMainProps = () => {
   const {isShowInstagram, isSetting} = appState;
   const deleteArticle = useDeleteArticle();
 
+  const onClickUpdate = (
+    e,
+    value: TArticle
+  ) => {
+    e.stopImmediatePropagation();
+    dispatchAppState({
+      type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
+      payload: value,
+    });
+  };
+
+  const onClickDelete = (e, value: TArticle) => {
+    e.stopPropagation();
+    deleteArticle(value.article_id);
+  };
+
   return {
     isSetting,
     articles,
@@ -37,6 +54,8 @@ export const usePMainProps = () => {
     deleteArticle,
     dispatchAppState,
     isShowInstagram,
+    onClickUpdate,
+    onClickDelete,
   };
 };
 
@@ -132,7 +151,7 @@ const useStyles = makeStyles((theme) => {
       backgroundColor: "rgba(255,255,255,0.8)",
 
       // margin: "0 0 0 auto",
-      zIndex: 100,
+      zIndex: theme.zIndex.snackbar,
     },
   });
 
@@ -176,15 +195,10 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 {props.isSetting ? (
                   <EditButtonsBox className={classes.editButtonsBox}>
                     <UpdateButton
-                      onClick={() =>
-                        props.dispatchAppState({
-                          type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
-                          payload: value,
-                        })
-                      }
+                      onClick={(e) => props.onClickUpdate(e, value)}
                     />
                     <DeleteButton
-                      onClick={() => props.deleteArticle(value.article_id)}
+                      onClick={(e) => props.onClickDelete(e, value)}
                     />
                   </EditButtonsBox>
                 ) : null}

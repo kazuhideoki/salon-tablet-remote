@@ -39,7 +39,14 @@ const useModalProps = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: name });
   };
   const closeModal = () => {
-    dispatchAppState({ type: "CLOSE_MODAL" });
+    let closing = true
+    if (setModal === "edit_article" || setModal === "edit_footer_item" ) {
+      closing = confirm('編集中ですが保存せずにウィンドウを閉じますか？')
+    }
+
+    if (closing) {
+      dispatchAppState({ type: "CLOSE_MODAL" });
+    }
   };
 
   const theme = useTheme()
@@ -59,16 +66,23 @@ const useModalProps = () => {
 
 type Props = ReturnType<typeof useModalProps>
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
+const useStyles = makeStyles((theme) => {
+  const { appState } = React.useContext(Store)
+  return createStyles({
     root: {
       padding: 0,
+      // 効いてない
+      overflow: "hidden",
     },
     dialogContent: {
-        padding: "0!important",
-        
+      padding: "0!important",
+      // 効いてない
+      overflowX:
+        appState.currentModalContent.modalSize === "fullScreen"
+          ? "scroll"
+          : "hidden",
     },
-}))
+  });})
 
 export const ModalPresenter:React.FC<Props> = (props) => {
     const classes = useStyles();

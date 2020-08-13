@@ -2,11 +2,11 @@ import React from "react";
 import { FirstPage } from "@material-ui/icons";
 import { Store } from "../../../../Store/Store";
 import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
-import { Typography, SvgIcon } from "@material-ui/core";
-import { TArrowProps } from "../PaginationArrows";
+import { Typography, SvgIcon, Button } from "@material-ui/core";
+import { TPaginationPropsAndClasses } from "../PPagination";
 
 //  ページ数が3より大きい場合latestとoldestを表示
-export const Latest = (props: TArrowProps) => {
+export const Latest:React.FC<TPaginationPropsAndClasses> = (props) => {
 
     const {page, pageCount} = props.paginationParams
 
@@ -14,19 +14,26 @@ export const Latest = (props: TArrowProps) => {
       props.getArticles(props.isSetting, 1);
     };
 
+    let className
     let onClick;
-    let disable;
+    let disabled;
     if (page > 3 && pageCount > 3) {
+      className = props.classes.button
       onClick = () => hundleOnClick();
-      disable = null;
+      disabled = false;
     } else {
+      className = `${props.classes.button} ${props.classes.disabled}`;
       onClick = undefined;
-      disable = props.classesDisable;
+      disabled = true
     }
     
     return (
-      <SvgIcon fontSize="inherit" onClick={onClick}>
-        <FirstPage className={`${disable}`} />
-      </SvgIcon>
+      <props.StyledIconButton
+        className={className}
+        onClick={onClick}
+        disabled={disabled}
+      >
+        <FirstPage />
+      </props.StyledIconButton>
     );
 };

@@ -2,10 +2,22 @@ import React from 'react';
 import { PaginationMobilePresenter } from '../app/View/mobile/PaginationMobile';
 import { sampleInstagramAccounts } from './sampleInstagramAccounts';
 import { sampleTags } from './sampleTags';
+import { IconButton, withStyles } from '@material-ui/core';
 export default {
   title: "mobile/PaginationMobile",
   component: PaginationMobilePresenter,
 };
+
+const StyledIconButton = withStyles({
+  root: {
+    margin: 8,
+    // border: "1px solid",
+  },
+  label: {
+    width: "1rem",
+    height: "1rem",
+  },
+})(IconButton);
 
 const props = {
   isSetting: false,
@@ -24,12 +36,18 @@ const props = {
   isShowInstagram: false,
   tags: sampleTags,
   instagramAccounts: sampleInstagramAccounts,
-  selectedArticlesTags: [],
+  selectedArticlesTags: [3],
+  StyledIconButton,
 };
 
 export const Normal = () => {
 
   return (
-    <PaginationMobilePresenter {...props}/>
-  )
+    <>
+      <PaginationMobilePresenter
+        {...props}
+      />
+      ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
+    </>
+  );
 }

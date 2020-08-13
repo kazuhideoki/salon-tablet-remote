@@ -21,12 +21,15 @@ const useStyles = makeStyles((theme: Theme) => {
     icon: {
       // margin: "0 8px"
     },
-    displayPage: {
-      fontSize: "inherit",
-    },
-    paginationArrows:{
-
-    },
+    button: {},
+    disabled: {},
+    gridContainer: {},
+    gridHome: {},
+    gridPagination: {},
+    selectedButton: {},
+    selectedTags: {},
+    "@keyframes slidein": {},
+    instagramAccount: {},
     nums: {
       // fontSize: themes.iconSmall * 0.7,
       border: "none",

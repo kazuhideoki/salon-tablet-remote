@@ -2,10 +2,23 @@ import React from 'react';
 import { PPaginationPresenter, TUsePPaginationProps } from '../app/View/Footer/PaginationBar/PPagination';
 import { sampleInstagramAccounts } from './sampleInstagramAccounts';
 import { sampleTags } from './sampleTags';
+import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';
+import { themeMinimal } from '../app/Store/themes/themeMinimal';
 export default {
   title: "Footer/Pagination/PPagination",
   component: PPaginationPresenter,
 };
+
+const StyledIconButton = withStyles({
+  root: {
+    margin: 8,
+    // border: "1px solid",
+  },
+  label: {
+    width: "1rem",
+    height: "1rem",
+  },
+})(IconButton);
 
 const props: TUsePPaginationProps = {
   isSetting: true,
@@ -24,12 +37,21 @@ const props: TUsePPaginationProps = {
   isShowInstagram: false,
   tags: sampleTags,
   instagramAccounts: sampleInstagramAccounts,
-  selectedArticlesTags: [],
+  selectedArticlesTags: [1],
+  StyledIconButton,
 };
 
 export const Normal = () => {
+  const [isShowSelectedTags, setIsShowSelectedTags] = React.useState(false);
 
   return (
-    <PPaginationPresenter {...props}/>
-  )
+    <MuiThemeProvider theme={themeMinimal}>
+      <PPaginationPresenter
+        {...props}
+        // isShowSelectedTags
+        // setIsShowSelectedTags={setIsShowSelectedTags}
+      />
+      ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
+    </MuiThemeProvider>
+  );
 }

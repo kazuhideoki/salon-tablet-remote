@@ -1,4 +1,6 @@
 import React from "react";
+import { Button, Typography, IconButton } from "@material-ui/core";
+import { TPaginationPropsAndClasses } from "../PPagination";
 
 type Props = {
   paginationParams: {
@@ -12,7 +14,7 @@ type Props = {
   numsCurrent: string
 }
 
-export const DisplayNumbers = (props: Props) => {
+export const DisplayNumbers:React.FC<TPaginationPropsAndClasses> = (props) => {
     const { page, pageCount } = props.paginationParams;
 
     const number1 = page - 2;
@@ -30,23 +32,26 @@ export const DisplayNumbers = (props: Props) => {
 
     } else if (num === page) {
       return (
-        <button key={num} className={`${props.nums} ${props.numsCurrent}`}>
-          {/* <Icon fontSize="inherit">{num}</Icon> */}
+        <props.StyledIconButton
+          key={num}
+          className={`${props.classes.button} ${props.classes.selectedButton}`}
+        >
           {num}
-        </button>
+        </props.StyledIconButton>
       );
     }
 
     return (
-      <button
+      <props.StyledIconButton
         key={num}
         onClick={() => props.handleOnNumClick(num)}
-        className={props.nums}
+        className={props.classes.button}
       >
-
-        {/* <Icon fontSize="inherit">{num}</Icon> */}
+        {/* <Typography variant='button' >
+          {num}
+        </Typography> */}
         {num}
-      </button>
+      </props.StyledIconButton>
     );
   });
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Store } from "../../../Store/Store";
 import { ThemeContext } from "../../../Store/ThemeContext";
-import { Grid, makeStyles, createStyles, Theme, Typography, SvgIcon, Chip, IconButton } from "@material-ui/core";
+import { Grid, makeStyles, createStyles, Theme, Typography, SvgIcon, Chip, IconButton, withStyles, useTheme, Card } from "@material-ui/core";
 import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
 import { HomeButton } from "./HomeButton";
 import { PaginationArrows } from "./PaginationArrows";
@@ -9,6 +9,8 @@ import { TagsButton } from "./TagsButton";
 import { useSelectedArticlesTagNames } from "../../../Store/useSelectedArticlesTagNames";
 import { Instagram } from "@material-ui/icons";
 import { PaginationInstagram } from "./PaginationInstagram";
+
+const gridSelectedTagsWidth = 100;
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
@@ -22,7 +24,19 @@ export const usePPaginationProps = () => {
 
   const selectedTagNames = useSelectedArticlesTagNames();
 
+  const theme = useTheme()
+  const StyledIconButton = withStyles({
+    root: {
+      margin: theme.spacing(1),
+    },
+    label: {
+      width: "1rem",
+      height: "1rem",
+    },
+  })(IconButton);
+
   return {
+    StyledIconButton,
     tags,
     instagramAccounts,
     isSetting,
@@ -38,45 +52,76 @@ export const usePPaginationProps = () => {
 };
 export type TUsePPaginationProps = ReturnType<typeof usePPaginationProps>
 
+export type TPaginationPropsAndClasses = TUsePPaginationProps & {
+  classes: TPPaginationClasses;
+};
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
   return createStyles({
-    // Grid containerのroot
     root: {
-      display: "flex",
-      alignItems: "center",
-      fontSize: themes.iconSmall,
+      borderRadius: 0,
+      width: "100%",
     },
-    icons: {
-      fontSize: "inherit",
+    gridContainer: {
+      overflowX: "scroll",
+      width: "100%",
     },
-    icon: {
-      // margin: "0 0.2em"
+    gridHome: {
+      marginLeft: "auto",
     },
-    displayPage: {
-      fontSize: "0.8em",
-    },
-    paginationArrows: {
-      fontSize: "inherit",
-    },
-
-    nums: {
-      border: "none",
-      backgroundColor: "transparent",
-      fontSize: "0.8em",
-      margin: "0 0.5em"
-    },
-    numsCurrent: {
-      fontWeight: "bold",
-    },
-    disable: {
-      color: "whitesmoke",
+    gridPagination: {
+      marginRight: "auto",
     },
     pagination: {
       display: "flex",
       justifyContent: "center",
-      width: 400,
+      // width: 400,
+      alignItems: "center",
+    },
+
+    icons: {
+      fontSize: "inherit",
+    },
+
+    button: {
+      border: "1px solid",
+    },
+    selectedButton: {
+      fontWeight: "bold",
+      color: theme.palette.secondary.main,
+    },
+    disabled: {
+      color: theme.palette.text.disabled,
+      border: "none",
+    },
+    girdSelectedTags: {
+      overflow: "hidden",
+      minWidth: gridSelectedTagsWidth,
+      flexShrink: 1,
+    },
+    selectedTags: {
+      display: "flex",
+      flexWrap: "nowrap",
+      alignItems: "center",
+      width: "fit-content",
+      height: "100%",
+    },
+    selectedTagsAnimation: {
+      animation: "$infinity-loop 4s infinite linear 1s both",
+    },
+    "@keyframes infinity-loop": {
+      from: {
+        transform: "translateX(0px)",
+      },
+      to: {
+        transform: "translateX(-100px)",
+      },
+    },
+
+    instagramAccount: {
+      display: "flex",
+      flexWrap: "nowrap",
       alignItems: "center",
     },
   });
@@ -85,85 +130,118 @@ const useStyles = makeStyles((theme: Theme) => {
 export type TPPaginationClasses = ReturnType<typeof useStyles>
 
 export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
+
   const classes = useStyles();
 
+
   return (
-    <Grid container justify="center" spacing={1} className={classes.root}>
-      <Grid item>
-        <IconButton
-          onClick={() => props.getArticles(props.isSetting, 1, [])}
-          className={classes.icon}
-          color={
-            props.isShowInstagram === false &&
-            props.selectedTagNames.length === 0
-              ? "secondary"
-              : "default"
-          }
-        >
-          <HomeButton />
-        </IconButton>
-      </Grid>
-
-      {props.tags.length ? (
-        <Grid item>
-          <IconButton
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "select_tags",
-              })
+    <Card className={classes.root}>
+      <Grid
+        container
+        // justify="center"
+        spacing={1}
+        wrap="nowrap"
+        className={classes.gridContainer}
+      >
+        <Grid item className={classes.gridHome}>
+          <props.StyledIconButton
+            className={
+              props.isShowInstagram === false &&
+              props.selectedTagNames.length === 0
+                ? `${classes.button} ${classes.selectedButton}`
+                : classes.button
             }
-            color={
-              props.isShowInstagram === false && props.selectedTagNames.length
-                ? "secondary"
-                : "default"
-            }
-            className={classes.icon}
+            onClick={() => props.getArticles(props.isSetting, 1, [])}
+            // color={
+            //   props.isShowInstagram === false &&
+            //   props.selectedTagNames.length === 0
+            //     ? "secondary"
+            //     : "default"
+            // }
           >
-            <TagsButton />
-          </IconButton>
+            <HomeButton />
+          </props.StyledIconButton>
         </Grid>
-      ) : null}
 
-      {props.isShowInstagram === false && 
-        <Grid item>
-         {props.selectedTagNames.map((value) => (
-            <Chip label={value} size="small" />
-          ))}
-        </Grid>
-      }
+        {props.tags.length ? (
+          <Grid item>
+            <props.StyledIconButton
+              className={
+                props.isShowInstagram === false && props.selectedTagNames.length
+                  ? `${classes.button} ${classes.selectedButton}`
+                  : classes.button
+              }
+              onClick={() =>
+                props.dispatchAppState({
+                  type: "OPEN_MODAL",
+                  payload: "select_tags",
+                })
+              }
+              // color={
+              //   props.isShowInstagram === false && props.selectedTagNames.length
+              //     ? "secondary"
+              //     : "default"
+              // }
+            >
+              <TagsButton />
+            </props.StyledIconButton>
+          </Grid>
+        ) : null}
 
-      {props.instagramAccounts.length ? (
-        <Grid item>
-          <IconButton
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "select_instagram",
-              })
-            }
-            className={classes.icon}
-            color={props.isShowInstagram ? "primary" : "default"}
-          >
-            <Instagram />
-          </IconButton>
-        </Grid>
-      ) : null}
+        {props.isShowInstagram === false &&
+          props.selectedArticlesTags.length !== 0 && (
+            <Grid item className={classes.girdSelectedTags}>
+              {/* {props.isShowSelectedTags && ( */}
+                <div
+                  id="pagination_selectecd_tags_div" 
+                  className={`${classes.selectedTags} ${classes.selectedTagsAnimation}` }
+                >
+                  {props.selectedTagNames.map((value) => (
+                    <Chip label={value} size="small" />
+                  ))}
+                </div>
+            </Grid>
+          )}
 
-      {props.isShowInstagram && (
-        <Grid item>
-          <Chip label={props.selectedInstagramAccount.username} size="small" />
-        </Grid>
-      )}
+        {props.instagramAccounts.length ? (
+          <Grid item>
+            <props.StyledIconButton
+              className={
+                props.isShowInstagram
+                  ? `${classes.button} ${classes.selectedButton}`
+                  : classes.button
+              }
+              onClick={() =>
+                props.dispatchAppState({
+                  type: "OPEN_MODAL",
+                  payload: "select_instagram",
+                })
+              }
+              // color={props.isShowInstagram ? "primary" : "default"}
+            >
+              <Instagram />
+            </props.StyledIconButton>
+          </Grid>
+        ) : null}
 
-      <Grid item>
-        {props.isShowInstagram ? (
-          <PaginationInstagram {...props} classes={classes} />
-        ) : (
-          <PaginationArrows {...props} classes={classes} />
+        {props.isShowInstagram && (
+          <Grid item className={classes.instagramAccount}>
+            <Chip
+              label={props.selectedInstagramAccount.username}
+              size="small"
+            />
+          </Grid>
         )}
+
+        <Grid item className={classes.gridPagination}>
+          {props.isShowInstagram ? (
+            <PaginationInstagram {...props} classes={classes} />
+          ) : (
+            <PaginationArrows {...props} classes={classes} />
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </Card>
   );
 };
 
