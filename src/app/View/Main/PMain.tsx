@@ -189,6 +189,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 payload: key,
               })
             }
+            component="div"
           >
             <Card className={classes.card}>
               <StyledCardContent className={classes.cardContent}>

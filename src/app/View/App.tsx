@@ -86,11 +86,9 @@ const useStyles = makeStyles((theme: Theme) => {
 const AppTablet = ()=> {
   // スタイルを反映させたclassNameを出力
     const classes = useStyles();
-
     const { appState } = React.useContext(Store);
     const open = appState.isDrawerOpen
     const isLoading = appState.loading.mainArticles;
-    const getArticles = useGetArticles();
 
     return (
       <div className={classes.root}>
@@ -149,18 +147,16 @@ const AppView = () => {
     dispatchAppState,
     appState,
   } = React.useContext(Store);
-  const { } = appState.userInfo
-  const getArticles = useGetArticles()
-  const { user_id, is_first_sign_in, isSetPassword } = appState.userInfo;
+  const { is_first_sign_in, isSetPassword } = appState.userInfo;
   console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
 
   // パスワード未設定でユーザー情報登録へ遷移
-  React.useEffect(() => {
-    if (isSetPassword === false) {
-      dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
-    }
+  // React.useEffect(function settingPassword() {
+  //   if (isSetPassword === false) {
+  //     dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
+  //   }
 
-  },[])
+  // },[])
 
   if (isMobile && appState.isSetting) {
     return <AppMobile/>

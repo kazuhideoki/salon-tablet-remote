@@ -32,13 +32,13 @@ export const ContentModalPresenter: React.FC<TContentModalProps> = (props) => {
           {props.article.title}
         </Typography>
       )}
-      <Typography variant="body1">
+      {/* <Typography variant="body1" componetn> */}
         <ReactQuill
           readOnly
           theme="bubble"
           value={props.article.article_content}
         />
-      </Typography>
+      {/* </Typography> */}
     </>
   );
 }

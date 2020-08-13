@@ -52,30 +52,31 @@ export const IconAndText:React.FC<Props> = (props) => {
     const handleOnClick = () => props.onClick();
 
     let icon 
+    let onClick
     // svgのアイコンはiconに入れる
     if (props.icon) {
-        icon = (
-          <props.icon
-            onClick={props.onClick ? () => handleOnClick() : null}
-            // onClick={() => onClick()}
-            className={classes.icon}
-          />
-        );
+      onClick = props.onClick ? () => handleOnClick() : null
+      icon = (
+        <props.icon
+          // onClick={() => onClick()}
+          className={classes.icon}
+        />
+      );
     // 画像はurlをimgに入れる。
     }else if(props.img) {
-        icon = (
-          <img
-            src={props.img}
-            alt=""
-            onClick={props.onClick ? () => handleOnClick() : null}
-            // onClick={() => onClick()}
-            className={`${classes.img} ${props.className}`}
-          />
-        );
+      onClick = props.onClick ? () => handleOnClick() : null
+      icon = (
+        <img
+          src={props.img}
+          alt=""
+          // onClick={() => onClick()}
+          className={`${classes.img} ${props.className}`}
+        />
+      );
     }
 
     return (
-        <StyledIconButton className={props.className}>
+        <StyledIconButton className={props.className} onClick={onClick}>
           {icon}
           <Typography variant="body1" className={classes.titleText}>{props.text}</Typography>
         </StyledIconButton>

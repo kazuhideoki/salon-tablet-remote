@@ -148,7 +148,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         // modalを閉じるまでタグなどを追加しても再レンダーのmodalのアニメーションを表示させないようにする
         // setTimeoutで時間差でskipTransitonを変える必要あり
         const [skipTransiton, setSkipTransiton] = React.useState(false);
-        React.useEffect(() => {
+        React.useEffect(function offTransition() {
           setTimeout(() => {
             if (props.appState.isModalOpen) {
               setSkipTransiton(true)
