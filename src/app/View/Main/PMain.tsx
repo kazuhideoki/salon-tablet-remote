@@ -21,13 +21,20 @@ import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { SelectedTags } from "./SelectedTags";
 import { PlayArrowRounded } from "@material-ui/icons";
 import { TArticle } from "../../Store/Types";
+import { Skeleton } from "@material-ui/lab";
 
 export const usePMainProps = () => {
   const { appState, dispatchAppState } = React.useContext(
     Store
   );
-  const { articles, tags, instagramMedias } = appState;
-  const {isShowInstagram, isSetting} = appState;
+  const {
+    articles,
+    tags,
+    instagramMedias,
+    loading,
+    isShowInstagram,
+    isSetting,
+  } = appState;
   const deleteArticle = useDeleteArticle();
 
   const onClickUpdate = (value: TArticle) => {
@@ -46,6 +53,7 @@ export const usePMainProps = () => {
     dispatchAppState,
     isShowInstagram,
     onClickUpdate,
+    loading,
   };
 };
 
@@ -137,9 +145,7 @@ const useStyles = makeStyles((theme) => {
       position: "absolute",
       top: 0,
       right: 0,
-      // backgroundColor: "rgba(255,255,255,0.8)",
 
-      // margin: "0 0 0 auto",
       zIndex: theme.zIndex.snackbar,
     },
   });
@@ -148,16 +154,17 @@ const useStyles = makeStyles((theme) => {
 
 export type TMainClasses = ReturnType<typeof useStyles>;
 
+export const StyledCardContent = withStyles({
+  root: {
+    '&:last-child': {
+      padding: 0,
+    },
+  },
+})(CardContent)
+
 export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
   const classes = useStyles();
 
-  const StyledCardContent = withStyles({
-    root: {
-      '&:last-child': {
-        padding: 0,
-      },
-    },
-  })(CardContent)
 
 
   const displayArticles = props.articles.map((value, key: number) => {
@@ -184,10 +191,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
               <StyledCardContent className={classes.cardContent}>
                 {props.isSetting ? (
                   <EditButtonsBox className={classes.editButtonsBox}>
-                    <UpdateButton
-                      onClick={props.onClickUpdate}
-                      value={value}
-                    />
+                    <UpdateButton onClick={props.onClickUpdate} value={value} />
                     <DeleteButton
                       onClick={props.deleteArticle}
                       value={value.article_id}
@@ -195,7 +199,9 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   </EditButtonsBox>
                 ) : null}
                 <div className={classes.thumbnailBox}>
-                  {value.article_img.length ? (
+                  {props.loading.mainArticles ? (
+                    <Skeleton variant="rect" className={classes.thumbnail} />
+                  ) : value.article_img.length ? (
                     <img
                       className={`p-main-thumbnail ${classes.thumbnail}`}
                       src={value.article_img}
@@ -210,41 +216,56 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     component="h2"
                     className={classes.title}
                   >
-                    {value.title}
+                    {props.loading.mainArticles ? null : <>{value.title}</>}
                   </Typography>
                 </div>
-                <div className={classes.tagsAndDate}>
-                  <SelectedTags
-                    className={classes.tags}
-                    article={value}
-                    tags={props.tags}
-                  />
-                  <Typography
-                    gutterBottom
-                    variant="subtitle1"
-                    align="right"
-                    // className={}
-                  >
-                    {sqlToDate(value.created_at)}
-                  </Typography>
-                </div>
+                {props.loading.mainArticles ? null : (
+                  <div className={classes.tagsAndDate}>
+                    <SelectedTags
+                      className={classes.tags}
+                      article={value}
+                      tags={props.tags}
+                    />
+                    <Typography
+                      gutterBottom
+                      variant="subtitle1"
+                      align="right"
+                      // className={}
+                    >
+                      {sqlToDate(value.created_at)}
+                    </Typography>
+                  </div>
+                )}
+
                 <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                   <Typography gutterBottom variant="body1">
-                    {value.article_excerpt}
-                    {value.article_excerpt.length > 100 ? "..." : ""}
+                    {props.loading.mainArticles ? (
+                      <>
+                        <Skeleton width="80%" style={{ margin: "auto" }} />
+                        <Skeleton width="80%" style={{ margin: "auto" }} />
+                        <Skeleton width="80%" style={{ margin: "auto" }} />
+                      </>
+                    ) : (
+                      <>
+                        {value.article_excerpt}
+                        {value.article_excerpt.length > 100 ? "..." : ""}
+                      </>
+                    )}
                   </Typography>
                 </div>
               </StyledCardContent>
-              <Button
-                // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
-                component="div"
-                variant="contained"
-                color="primary"
-                size="small"
-                className={classes.readMore}
-              >
-                Read More
-              </Button>
+              {props.loading.mainArticles ? null : (
+                <Button
+                  // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
+                  component="div"
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  className={classes.readMore}
+                >
+                  Read More
+                </Button>
+              )}
             </Card>
           </CardActionArea>
         </Grid>
@@ -294,8 +315,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   <PlayArrowRounded className={classes.playIcon} />
                 ) : null}
               </div>
-              {/* <div className={classes.tagsAndDate}> */}
-              <Typography
+\              <Typography
                 gutterBottom
                 variant="subtitle1"
                 align="right"

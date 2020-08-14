@@ -113,15 +113,15 @@ const AppTablet = ()=> {
                 [classes.contentShift]: open,
               })} ${classes.main} ${open ? classes.mainOpened : null}`}
             >
-              {isLoading ? (
+              {/* {isLoading ? (
                 <CircularProgress
                   className={classes.circularProgress}
                   size={100}
                   thickness={5}
                 />
-              ) : (
+              ) : ( */}
                 <PMain />
-              )}
+              {/* )} */}
             </Grid>
             <Grid
               item
@@ -151,12 +151,17 @@ const AppView = () => {
   console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
 
   // パスワード未設定でユーザー情報登録へ遷移
-  // React.useEffect(function settingPassword() {
-  //   if (isSetPassword === false) {
-  //     dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
-  //   }
+  React.useEffect(function settingPassword() {
+    if (isSetPassword === false) {
+      dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" })
+    }
 
-  // },[])
+  },[])
+  React.useEffect(function setTitle() {
+    if (process.browser) {
+      document.title = `${appState.userInfo.shop_name} | SALON TABLET`
+    }
+  },[appState.userInfo.shop_name])
 
   if (isMobile && appState.isSetting) {
     return <AppMobile/>

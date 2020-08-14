@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     icon: {
       fontSize: themes.icon,
+      marginTop: 0,
     },
     img: {
       height: themes.icon,

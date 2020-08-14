@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) =>
     },
     editButtonsBox: {
       position: "absolute",
-      top: 0,
+      top: theme.spacing(1),
       right: 0,
       left: 0,
       // display: "flex",
