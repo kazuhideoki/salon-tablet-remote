@@ -189,6 +189,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
           >
             <Card className={classes.card}>
               <StyledCardContent className={classes.cardContent}>
+
                 {props.isSetting ? (
                   <EditButtonsBox className={classes.editButtonsBox}>
                     <UpdateButton onClick={props.onClickUpdate} value={value} />
@@ -198,9 +199,10 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     />
                   </EditButtonsBox>
                 ) : null}
+
                 <div className={classes.thumbnailBox}>
                   {props.loading ? (
-                    <Skeleton variant="rect" className={classes.thumbnail} />
+                    <Skeleton variant="rect" className={classes.thumbnail} style={{marginBottom: "32px"}}/>
                   ) : value.article_img.length ? (
                     <img
                       className={`p-main-thumbnail ${classes.thumbnail}`}
@@ -211,14 +213,17 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                       className={`p-main-thumbnail ${classes.thumbnail}`}
                     ></div>
                   )}
-                  <Typography
-                    variant="h5"
-                    component="h2"
-                    className={classes.title}
-                  >
-                    {props.loading ? null : <>{value.title}</>}
-                  </Typography>
+                  {props.loading ? null : (
+                    <Typography
+                      variant="h5"
+                      component="h2"
+                      className={classes.title}
+                    >
+                      {props.loading ? null : <>{value.title}</>}
+                    </Typography>
+                  )}
                 </div>
+
                 {props.loading ? null : (
                   <div className={classes.tagsAndDate}>
                     <SelectedTags
@@ -253,7 +258,9 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     )}
                   </Typography>
                 </div>
+
               </StyledCardContent>
+
               {props.loading ? null : (
                 <Button
                   // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
@@ -266,6 +273,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   Read More
                 </Button>
               )}
+
             </Card>
           </CardActionArea>
         </Grid>
@@ -304,7 +312,11 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
             <StyledCardContent className={classes.cardContent}>
               <div className={classes.thumbnailBox}>
                 {props.loading ? (
-                  <Skeleton variant="rect" className={classes.thumbnail} />
+                  <Skeleton
+                    variant="rect"
+                    className={classes.thumbnail}
+                    style={{ marginBottom: "32px" }}
+                  />
                 ) : (
                   <>
                     <img
@@ -321,16 +333,18 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   </>
                 )}
               </div>
-              \{" "}
-              <Typography
-                gutterBottom
-                variant="subtitle1"
-                align="right"
-                className={classes.date}
-              >
-                {sqlToDate(value.timestamp)}
-              </Typography>
-              {/* </div> */}
+
+              {props.loading ? null : (
+                <Typography
+                  gutterBottom
+                  variant="subtitle1"
+                  align="right"
+                  className={classes.date}
+                >
+                  {sqlToDate(value.timestamp)}
+                </Typography>
+              )}
+
               <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                 <Typography gutterBottom variant="body1">
                   {props.loading ? (
@@ -348,16 +362,19 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 </Typography>
               </div>
             </StyledCardContent>
-            <Button
-              // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
-              component="div"
-              variant="contained"
-              color="primary"
-              size="small"
-              className={classes.readMore}
-            >
-              Read More
-            </Button>
+
+            {props.loading ? null : (
+              <Button
+                // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
+                component="div"
+                variant="contained"
+                color="primary"
+                size="small"
+                className={classes.readMore}
+              >
+                Read More
+              </Button>
+            )}
           </Card>
         </CardActionArea>
       </Grid>

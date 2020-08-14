@@ -279,6 +279,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
               return value;
             }
           }),
+          loading: {
+            ...state.loading,
+            footer: false,
+          }
         };
         break;
       case "SET_TAGS":

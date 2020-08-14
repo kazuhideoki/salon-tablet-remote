@@ -9,7 +9,7 @@ import { useDeleteFooterItem } from '../../ActionCreator/footerItems/useDeleteFo
 
 export const useFooterMobileProps = () => {
   const {
-    appState,
+    isSetting,
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,
@@ -21,7 +21,7 @@ export const useFooterMobileProps = () => {
   const deleteFooterItem = useDeleteFooterItem()
 
   return {
-    appState,
+    isSetting,
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,

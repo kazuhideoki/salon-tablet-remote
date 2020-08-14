@@ -5,6 +5,6 @@ export default {
   title: "Footer/IconAndText",
   component: IconAndText,
 };
-export const Normal = () => <IconAndText icon={Settings}/>;
-export const textつき = () => <IconAndText icon={Settings} text="アイコン名"/>;
-export const アイコン名長い = () => <IconAndText icon={Settings} text="長いアイコン名だとどのように表示させるのか？それが問題"/>;
+export const Normal = () => <IconAndText icon={Settings} loading={false}/>;
+export const textつき = () => <IconAndText icon={Settings} text="アイコン名" loading={false}/>;
+export const アイコン名長い = () => <IconAndText icon={Settings} text="長いアイコン名だとどのように表示させるのか？それが問題" loading={false}/>;
