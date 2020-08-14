@@ -137,8 +137,7 @@ const useStyles = makeStyles((theme) => {
       position: "absolute",
       top: 0,
       right: 0,
-      borderRadius: theme.spacing(3),
-      backgroundColor: "rgba(255,255,255,0.8)",
+      // backgroundColor: "rgba(255,255,255,0.8)",
 
       // margin: "0 0 0 auto",
       zIndex: theme.zIndex.snackbar,

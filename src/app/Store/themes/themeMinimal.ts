@@ -57,7 +57,7 @@ export const themeMinimal = createMuiTheme({
     secondary: {
       main: '#b0c4de', // lightsteelblue
     },
-    tonalOffset: 0.2,
+    // tonalOffset: 0.2,
   },
 
   props: {

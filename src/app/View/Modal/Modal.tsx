@@ -71,16 +71,9 @@ const useStyles = makeStyles((theme) => {
   return createStyles({
     root: {
       padding: 0,
-      // 効いてない
-      overflow: "hidden",
     },
     dialogContent: {
       padding: "0!important",
-      // 効いてない
-      overflowX:
-        appState.currentModalContent.modalSize === "fullScreen"
-          ? "scroll"
-          : "hidden",
     },
   });})
 

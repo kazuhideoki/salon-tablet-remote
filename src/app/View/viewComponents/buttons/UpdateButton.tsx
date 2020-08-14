@@ -1,6 +1,15 @@
 import React from 'react'
-import { IconButton } from "@material-ui/core";
+import { IconButton, makeStyles, createStyles } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
+import { StyledIconButton } from './EditButtonsBox';
+
+// const useStyles = makeStyles((theme) =>
+//   createStyles({
+//     root: {
+//       padding: theme.spacing(1),
+//     },
+//   })
+// );
 
 type Type = {
   // 記事とアイテムで共有するのでonClickまるごと渡す
@@ -9,6 +18,7 @@ type Type = {
 }
 
 export const UpdateButton = (props: Type) => { 
+    // const classes = useStyles()
 
     const handleOnClick = (e) => {
       e.stopPropagation()
@@ -16,9 +26,9 @@ export const UpdateButton = (props: Type) => {
     }
 
     return (
-      <IconButton onClick={(e) => handleOnClick(e)}>
+      <StyledIconButton onClick={(e) => handleOnClick(e)}>
         <EditTwoTone />
-      </IconButton>
+      </StyledIconButton>
     );
 };
 

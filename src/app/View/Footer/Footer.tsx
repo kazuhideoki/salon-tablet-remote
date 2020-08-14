@@ -73,14 +73,15 @@ const useStyles = makeStyles((theme) =>
       position: "absolute",
       top: 0,
       right: 0,
-      width: "100%",
-      display: "flex",
+      left: 0,
+      // display: "flex",
       justifyContent: "center",
       zIndex: 100,
+      // backgroundColor: "rgba(255,255,255,0.8)",
     },
     isSettingIconAndText: {
-      margin: "0 20px"
-    }
+      margin: "0 20px",
+    },
   })
 );
 

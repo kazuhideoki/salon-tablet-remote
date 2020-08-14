@@ -26,7 +26,7 @@ export const ContentModalPresenter: React.FC<TContentModalProps> = (props) => {
   const classes = useStyles()
   
   return (
-    <>
+    <div>
       {props.article.title && (
         <Typography variant="h5" component="h2" className={classes.header}>
           {props.article.title}
@@ -39,7 +39,7 @@ export const ContentModalPresenter: React.FC<TContentModalProps> = (props) => {
           value={props.article.article_content}
         />
       {/* </Typography> */}
-    </>
+    </div>
   );
 }
 
