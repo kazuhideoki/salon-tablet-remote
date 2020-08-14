@@ -222,8 +222,9 @@ export const initAppState = (data: IndexPropsData) => ({
       username: "" as T_instagram_username,
     },
     loading: {
-      mainArticles: false,
+      main: false,
       manageTags: false,
+      manageInstagramAccounts: false,
     },
 
     userInfo: data.session as TUserInfo,

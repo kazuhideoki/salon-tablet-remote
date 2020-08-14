@@ -41,7 +41,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           ...state,
           loading: {
             ...state.loading,
-            mainArticles: true,
+            main: true,
           },
         };
         break;
@@ -50,7 +50,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           ...state,
           loading: {
             ...state.loading,
-            mainArticles: false,
+            main: false,
           },
         };
         break;
@@ -69,6 +69,24 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           loading: {
             ...state.loading,
             manageTags: false,
+          },
+        };
+        break;
+      case "ON_IS_LOADING_INSTAGRAM_ACCOUNTS":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            manageInstagramAccounts: true,
+          },
+        };
+        break;
+      case "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            manageInstagramAccounts: false,
           },
         };
         break;
@@ -211,7 +229,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isShowInstagram: isShowInstagram,
           loading: {
             ...state.loading,
-            mainArticles: false,
+            main: false,
           },
         };
         break;
@@ -255,6 +273,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           instagramAccounts: action.payload,
+          loading:{
+            ...state.loading,
+            manageInstagramAccounts: false
+          }
         };
         break;
       case "SET_INSTAGRAM_MEDIAS":
@@ -266,7 +288,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           instagramMedias: action.payload.data,
           loading: {
             ...state.loading,
-            mainArticles: false,
+            main: false,
           },
         };
         break;

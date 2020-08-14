@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const MainMobilePresenter:React.FC<Props> = (props) => {
   const classes = useStyles()
 
-  if (props.loading.mainArticles) {
+  if (props.loading.main) {
     return <CircularProgress
       className={classes.circularProgress}
       size={50}

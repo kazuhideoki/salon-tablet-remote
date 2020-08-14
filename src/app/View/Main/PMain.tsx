@@ -53,7 +53,7 @@ export const usePMainProps = () => {
     dispatchAppState,
     isShowInstagram,
     onClickUpdate,
-    loading: loading.mainArticles,
+    loading: loading.main,
   };
 };
 
@@ -303,19 +303,26 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
           <Card className={classes.card}>
             <StyledCardContent className={classes.cardContent}>
               <div className={classes.thumbnailBox}>
-                <img
-                  className={`p-main-thumbnail ${classes.thumbnail}`}
-                  src={
-                    value.media_type === "VIDEO"
-                      ? value.thumbnail_url
-                      : value.media_url
-                  }
-                />
-                {value.media_type === "VIDEO" ? (
-                  <PlayArrowRounded className={classes.playIcon} />
-                ) : null}
+                {props.loading ? (
+                  <Skeleton variant="rect" className={classes.thumbnail} />
+                ) : (
+                  <>
+                    <img
+                      className={`p-main-thumbnail ${classes.thumbnail}`}
+                      src={
+                        value.media_type === "VIDEO"
+                          ? value.thumbnail_url
+                          : value.media_url
+                      }
+                    />
+                    {value.media_type === "VIDEO" ? (
+                      <PlayArrowRounded className={classes.playIcon} />
+                    ) : null}
+                  </>
+                )}
               </div>
-\              <Typography
+              \{" "}
+              <Typography
                 gutterBottom
                 variant="subtitle1"
                 align="right"
@@ -326,8 +333,18 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
               {/* </div> */}
               <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                 <Typography gutterBottom variant="body1">
-                  {value.caption.slice(0, 100)}
-                  {value.caption.length > 100 ? "..." : ""}
+                  {props.loading ? (
+                    <>
+                      <Skeleton width="80%" style={{ margin: "auto" }} />
+                      <Skeleton width="80%" style={{ margin: "auto" }} />
+                      <Skeleton width="80%" style={{ margin: "auto" }} />
+                    </>
+                  ) : (
+                    <>
+                      {value.caption.slice(0, 100)}
+                      {value.caption.length > 100 ? "..." : ""}
+                    </>
+                  )}
                 </Typography>
               </div>
             </StyledCardContent>

@@ -19,6 +19,7 @@ export const useDeleteInstagramAccount = () => {
 
     if (data.err === true) {
       alert("削除できませんでした");
+       dispatchAppState({ type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" });
     } else {
       dispatchAppState({type: 'DELETE_INSTAGRAM_MEDIAS'})
       getInstagramAccounts();

@@ -12,11 +12,13 @@ import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
 import { useDeleteInstagramAccount } from '../../ActionCreator/instagramAccounts/useDeleteInstagramAccounts'
 import { grey } from '@material-ui/core/colors';
 import { useGetInstagramMedias } from '../../ActionCreator/instagramMedias/useGetInstagramMedias';
+import { loadComponents } from 'next/dist/next-server/server/load-components';
+import { Skeleton } from '@material-ui/lab';
 
 export const useManageInstagramAccountsProps = () => {
 
   const { appState } = React.useContext(Store);
-  const {instagramAccounts} = appState
+  const {instagramAccounts, loading} = appState
   const deleteInstagramAccount = useDeleteInstagramAccount()
   const getInstagramMedias = useGetInstagramMedias()
 
@@ -27,6 +29,7 @@ export const useManageInstagramAccountsProps = () => {
     getInstagramMedias,
     instaAuth,
     deleteInstagramAccount,
+    loading: loading.manageInstagramAccounts,
   };
 }
 type Props = ReturnType<typeof useManageInstagramAccountsProps>
@@ -47,6 +50,11 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       margin: theme.spacing(1),
     },
+    skeleton: {
+      width: 160,
+      height: 38,
+      borderRadius: 4,
+    }
   })
 );
 
@@ -66,6 +74,15 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
         現在Instagramの連携は招待制になっています。ご希望の方はご連絡下さい。
       </Typography>
       {props.instagramAccounts.map((value) => {
+        if (props.loading) {
+          return (
+            <Skeleton
+              variant="rect"
+              className={`${classes.account} ${classes.skeleton}`}
+            />
+          );
+        }
+
         return (
           <div className={classes.account}>
             <Button

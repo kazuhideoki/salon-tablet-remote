@@ -9,10 +9,13 @@ export const useGetInstagramAccounts = () => {
 
   return async () => {
 
+    dispatchAppState({type: "ON_IS_LOADING_INSTAGRAM_ACCOUNTS"})
+
     const data = await apiInstagramAccountsGet(appState.userInfo.user_id);
 
     if (data.err === true) {
       alert("取得できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" });
     } else {
       dispatchAppState({
         type: "SET_INSTAGRAM_ACCOUNTS",

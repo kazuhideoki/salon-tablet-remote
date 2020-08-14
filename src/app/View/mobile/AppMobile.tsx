@@ -70,7 +70,7 @@ export const AppMobile = () => {
           >
             記事作成
           </Button>
-          {appState.loading.mainArticles ? (
+          {appState.loading.main ? (
             <div className={classes.emptyMain}>
               <CircularProgress className={classes.circularProgress} />
             </div>

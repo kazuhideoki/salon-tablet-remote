@@ -88,7 +88,7 @@ const AppTablet = ()=> {
     const classes = useStyles();
     const { appState } = React.useContext(Store);
     const open = appState.isDrawerOpen
-    const isLoading = appState.loading.mainArticles;
+    const isLoading = appState.loading.main;
 
     return (
       <div className={classes.root}>

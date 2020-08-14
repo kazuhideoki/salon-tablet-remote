@@ -30,6 +30,8 @@ export type AppStateAction =
   | { type: "OFF_IS_LOADING_MAIN" }
   | { type: "ON_IS_LOADING_TAGS" }
   | { type: "OFF_IS_LOADING_TAGS" }
+  | { type: "ON_IS_LOADING_INSTAGRAM_ACCOUNTS" }
+  | { type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" }
 
   // modalウィンドウを開く時
   | { type: "OPEN_ARTICLE_MODAL"; payload: number }
@@ -87,4 +89,4 @@ export type AppStateAction =
         };
       };
     }
-  | { type: "DELETE_INSTAGRAM_MEDIAS" }
+  | { type: "DELETE_INSTAGRAM_MEDIAS" };
