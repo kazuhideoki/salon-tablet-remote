@@ -15,6 +15,8 @@ export const useDeleteInstagramAccount = () => {
       return null;
     }
 
+    dispatchAppState({ type: "ON_IS_LOADING_INSTAGRAM_ACCOUNTS" });
+
     const data = await apiInstagramAccountsDelete({ instagram_id });
 
     if (data.err === true) {
