@@ -33,7 +33,7 @@ const pMainHeight = screenHeight - pHeaderHeight - pHeaderMarginBottom - pFooter
 
 
 // ThemeContext.Providerを通して渡される値
-const themeArgs = {
+export const themeArgs = {
   app: {
     padding: portalPadding,
     width: portalWidth,

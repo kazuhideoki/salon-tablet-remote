@@ -223,6 +223,7 @@ export const initAppState = (data: IndexPropsData) => ({
     },
     loading: {
       main: false,
+      footer: false,
       manageTags: false,
       manageInstagramAccounts: false,
     },

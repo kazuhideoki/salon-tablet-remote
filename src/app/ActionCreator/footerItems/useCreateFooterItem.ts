@@ -40,6 +40,9 @@ export const useCreateFooterItem = () => {
   }
 
   return async (param: TCreateFooterItem) => {
+
+    dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
+
     const params: T_footer_items_create = {
       is_published: param.is_published,
       icon_name: param.titleText,
@@ -61,6 +64,7 @@ export const useCreateFooterItem = () => {
 
     if (data.err === true) {
       alert("投稿できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
       dispatchAppState({ type: "CLOSE_MODAL" });
 

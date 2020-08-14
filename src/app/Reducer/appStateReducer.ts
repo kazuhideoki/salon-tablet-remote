@@ -54,6 +54,24 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "ON_IS_LOADING_FOOTER":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            footer: true,
+          },
+        };
+        break;
+      case "OFF_IS_LOADING_FOOTER":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            footer: false,
+          },
+        };
+        break;
       case "ON_IS_LOADING_TAGS":
         newState = {
           ...state,
@@ -237,6 +255,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           footerItems: action.payload,
+          loading: {
+            ...state.loading,
+            footer: false,
+          }
         };
         break;
 

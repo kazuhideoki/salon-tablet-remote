@@ -15,7 +15,7 @@ import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 
 export const useFooterProps = () => {
   const { appState, dispatchAppState } = useContext(Store);
-  const {footerItems} = appState
+  const {footerItems, loading, isSetting} = appState
 
   const deleteFooterItem = useDeleteFooterItem();
 
@@ -35,13 +35,14 @@ export const useFooterProps = () => {
   const isMobile = useMediaQuery("(max-width:480px)");
 
   return {
-    appState,
+    isSetting,
     // openModal,
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,
     deleteFooterItem,
     isMobile,
+    loading: loading.footer,
   };
 };
 
@@ -90,7 +91,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
 
   const displayFooterItems = props.footerItems.map((value, index) => {
     // 通常画面で下書き記事は表示させない
-    if (props.appState.isSetting === false && value.is_published == false) {
+    if (props.isSetting === false && value.is_published == false) {
       return null;
     }
 
@@ -104,7 +105,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
           `}
       >
         {/* セッティング画面で順番を入れ替えるボタンなどを表示 */}
-        {props.appState.isSetting ? (
+        {props.isSetting ? (
           <EditButtonsBox className={classes.editButtonsBox}>
             <SwitchOrderButton
               footer_item_id={value.footer_item_id}
@@ -125,7 +126,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
         {value.on_tap === "modal" ? (
           <IconAndText
             className={
-              props.appState.isSetting ? classes.isSettingIconAndText : null
+              props.isSetting ? classes.isSettingIconAndText : null
             }
             icon={
               value.displayed_icon_name
@@ -142,6 +143,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
             }
             // fontSize="large"
             text={value.icon_name}
+            loading={props.loading}
           />
         ) : (
           // "modal"以外→"link"か"appLink"の時
@@ -150,7 +152,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
           >
             <IconAndText
               className={
-                props.appState.isSetting ? classes.isSettingIconAndText : null
+                props.isSetting ? classes.isSettingIconAndText : null
               }
               icon={
                 value.displayed_icon_name
@@ -161,6 +163,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
               }
               // fontSize="large"
               text={value.icon_name}
+              loading={props.loading}
             />
           </a>
         )}

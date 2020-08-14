@@ -13,11 +13,14 @@ export const useDeleteFooterItem = () => {
     if (deleting === false) {
       return null;
     }
+
+    dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
     
     const data = await apiFooterItemsDelete({footer_item_id, order})
 
     if (data.err === true) {
       alert("削除できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
       dispatchAppState({
         type: "DELETE_FOOTER_ITEM",

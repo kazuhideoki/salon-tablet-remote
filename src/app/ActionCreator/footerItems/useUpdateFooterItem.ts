@@ -12,6 +12,9 @@ export const useUpdateFooterItem = () => {
   const getFooterItems = useGetFooterItems();
 
   return async (param: TUpdateFooterItem) => {
+
+    dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
+
     const params: T_footer_items_update = {
       id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
@@ -33,6 +36,7 @@ export const useUpdateFooterItem = () => {
 
     if (data.err === true) {
       alert("更新できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
       dispatchAppState({ type: "CLOSE_MODAL" });
 

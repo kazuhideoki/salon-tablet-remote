@@ -23,11 +23,13 @@ export type AppStateAction =
   | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_DRAWER" }
-
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
   | { type: "CLOSE_DRAWER" }
+
   | { type: "ON_IS_LOADING_MAIN" }
   | { type: "OFF_IS_LOADING_MAIN" }
+  | { type: "ON_IS_LOADING_FOOTER" }
+  | { type: "OFF_IS_LOADING_FOOTER" }
   | { type: "ON_IS_LOADING_TAGS" }
   | { type: "OFF_IS_LOADING_TAGS" }
   | { type: "ON_IS_LOADING_INSTAGRAM_ACCOUNTS" }

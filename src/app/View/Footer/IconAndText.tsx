@@ -2,6 +2,8 @@ import React from 'react'
 import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme, SvgIconTypeMap, createMuiTheme, useTheme } from '@material-ui/core'
 import { ThemeContext } from '../../Store/ThemeContext'
 import { OverridableComponent } from '@material-ui/core/OverridableComponent'
+import { Skeleton } from '@material-ui/lab'
+import { Height } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
@@ -9,6 +11,10 @@ const useStyles = makeStyles((theme: Theme) => {
     icon: {
       fontSize: themes.icon,
       marginTop: 0,
+    },
+    skeleton: {
+      width: themes.icon,
+      height: themes.icon,
     },
     img: {
       height: themes.icon,
@@ -22,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => {
 // 表示させるアイコンはprops.icon→Material-uiのicon、もしくはprops.img→imgのsrcで切り替えることが出来る。
 type Props = {
   icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
+  loading: boolean,
   text?: string,
   onClick?: () => void
 
@@ -73,6 +80,17 @@ export const IconAndText:React.FC<Props> = (props) => {
           // onClick={() => onClick()}
           className={`${classes.img} ${props.className}`}
         />
+      );
+    }
+
+    if (props.loading) {
+      return (
+        <StyledIconButton className={props.className}>
+          <Skeleton variant="circle" component='div' className={`${classes.icon} ${classes.skeleton}`} />
+          <Typography variant="body1" className={classes.titleText}>
+            <Skeleton width={50}/>
+          </Typography>
+        </StyledIconButton>
       );
     }
 
