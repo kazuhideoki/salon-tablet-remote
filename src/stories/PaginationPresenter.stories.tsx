@@ -4,6 +4,7 @@ import { sampleInstagramAccounts } from './sampleInstagramAccounts';
 import { sampleTags } from './sampleTags';
 import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';
 import { themeMinimal } from '../app/Store/themes/themeMinimal';
+import { initInstagramMedias } from '../app/Store/Types';
 export default {
   title: "Footer/Pagination/PPagination",
   component: PPaginationPresenter,
@@ -39,17 +40,64 @@ const props: TUsePPaginationProps = {
   instagramAccounts: sampleInstagramAccounts,
   selectedArticlesTags: [1],
   StyledIconButton,
+  getInstagramMedias: null,
+  instagramMedias: null,
 };
 
 export const Normal = () => {
-  const [isShowSelectedTags, setIsShowSelectedTags] = React.useState(false);
 
   return (
     <MuiThemeProvider theme={themeMinimal}>
       <PPaginationPresenter
         {...props}
-        // isShowSelectedTags
-        // setIsShowSelectedTags={setIsShowSelectedTags}
+
+      />
+      ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
+    </MuiThemeProvider>
+  );
+}
+const props2: TUsePPaginationProps = {
+  isSetting: true,
+  getArticles: null,
+  paginationParams: {
+    page: 3,
+    pageCount: 4,
+    pageSize: 5,
+    rowCount: 18,
+  },
+
+  dispatchAppState: null,
+  handleOnNumClick: null,
+  selectedTagNames: ["カラー", "パーマ", "英語"],
+  selectedInstagramAccount: {
+    id: 0,
+    username: "instagramさん",
+  },
+  isShowInstagram: true,
+  tags: sampleTags,
+  instagramAccounts: sampleInstagramAccounts,
+  selectedArticlesTags: [1],
+  StyledIconButton,
+  getInstagramMedias: null,
+  instagramMedias: {
+    data: [],
+    paging: {
+        cursors: {
+            before: 'string',
+            after: 'string',
+        },
+        next: "string",
+    },
+  },
+};
+
+export const Instagram表示 = () => {
+
+  return (
+    <MuiThemeProvider theme={themeMinimal}>
+      <PPaginationPresenter
+        {...props2}
+  
       />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
     </MuiThemeProvider>

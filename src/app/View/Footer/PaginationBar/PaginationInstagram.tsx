@@ -17,24 +17,25 @@ const useStyles = makeStyles((theme: Theme) => {
 
 export const PaginationInstagram:React.FC<TPaginationPropsAndClasses> = (props) => {
 
-  const { appState } = React.useContext(Store)
-  const { instagramMedias } = appState
-  const getInstagramMedias = useGetInstagramMedias()
-  const { cursors, next, previous} = instagramMedias.paging
+  // const { appState } = React.useContext(Store)
+  // const { instagramMedias } = appState
+  // const getInstagramMedias = useGetInstagramMedias()
+  const { cursors, next, previous} = props.instagramMedias.paging
 
   // 最初か最後のページでdisable
   // ページ送りがある場合 nextやpreviousが入る。(https〜のget)
 
   return (
-    <div >
+    <div>
       <props.StyledIconButton
-        className={props.classes.button}
+        className={`${props.classes.button} ${previous ||
+          props.classes.disabled}`}
         onClick={
           previous
             ? () =>
-                getInstagramMedias(
-                  appState.selectedInstagramAccount.id,
-                  appState.selectedInstagramAccount.username,
+                props.getInstagramMedias(
+                  props.selectedInstagramAccount.id,
+                  props.selectedInstagramAccount.username,
                   { before: cursors.before }
                 )
             : null
@@ -43,13 +44,14 @@ export const PaginationInstagram:React.FC<TPaginationPropsAndClasses> = (props) 
         <NavigateBefore className={previous ? null : props.classes.disabled} />
       </props.StyledIconButton>
       <props.StyledIconButton
-        className={props.classes.button}
+        className={`${props.classes.button} ${next ||
+          props.classes.disabled}`}
         onClick={
           next
             ? () =>
-                getInstagramMedias(
-                  appState.selectedInstagramAccount.id,
-                  appState.selectedInstagramAccount.username,
+                props.getInstagramMedias(
+                  props.selectedInstagramAccount.id,
+                  props.selectedInstagramAccount.username,
                   { after: cursors.after }
                 )
             : null

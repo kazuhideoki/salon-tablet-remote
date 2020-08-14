@@ -38,6 +38,8 @@ const props = {
   instagramAccounts: sampleInstagramAccounts,
   selectedArticlesTags: [3],
   StyledIconButton,
+  getInstagramMedias: null,
+  instagramMedias: null,
 };
 
 export const Normal = () => {

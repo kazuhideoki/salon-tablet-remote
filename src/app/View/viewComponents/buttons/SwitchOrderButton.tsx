@@ -3,7 +3,7 @@ import { useSwitchOrder } from "../../../ActionCreator/footerItems/useSwitchOrde
 import { SwapHorizontalCircleOutlined } from "@material-ui/icons";
 import { IconButton } from '@material-ui/core';
 import { T_footer_items_switch_order } from '../../../../pages/api/footer_items/switch_order';
-import { StyledIconButton } from './EditButtonsBox';
+import { StyledIconButtonEditButton } from "./EditButtonsBox";
 
 
 export const SwitchOrderButton = (props: T_footer_items_switch_order) => {
@@ -16,11 +16,11 @@ export const SwitchOrderButton = (props: T_footer_items_switch_order) => {
   }
 
   return (
-    <StyledIconButton
+    <StyledIconButtonEditButton
       // className={props.position}
       onClick={() => switchOrder(props)}
     >
       <SwapHorizontalCircleOutlined />
-    </StyledIconButton>
+    </StyledIconButtonEditButton>
   );
 }

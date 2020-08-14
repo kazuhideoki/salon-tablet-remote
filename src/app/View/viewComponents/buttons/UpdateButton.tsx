@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconButton, makeStyles, createStyles } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
-import { StyledIconButton } from './EditButtonsBox';
+import { StyledIconButtonEditButton } from "./EditButtonsBox";
 
 // const useStyles = makeStyles((theme) =>
 //   createStyles({
@@ -26,9 +26,9 @@ export const UpdateButton = (props: Type) => {
     }
 
     return (
-      <StyledIconButton onClick={(e) => handleOnClick(e)}>
+      <StyledIconButtonEditButton onClick={(e) => handleOnClick(e)}>
         <EditTwoTone />
-      </StyledIconButton>
+      </StyledIconButtonEditButton>
     );
 };
 

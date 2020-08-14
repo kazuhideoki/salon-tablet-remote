@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const StyledIconButton = withStyles({
+export const StyledIconButtonEditButton = withStyles({
   root: {
     padding: 8,
     margin: "0 4px",

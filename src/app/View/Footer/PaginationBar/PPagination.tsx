@@ -9,14 +9,25 @@ import { TagsButton } from "./TagsButton";
 import { useSelectedArticlesTagNames } from "../../../Store/useSelectedArticlesTagNames";
 import { Instagram } from "@material-ui/icons";
 import { PaginationInstagram } from "./PaginationInstagram";
+import { useGetInstagramMedias } from "../../../ActionCreator/instagramMedias/useGetInstagramMedias";
 
 // const gridSelectedTagsWidth = 100;
 
 export const usePPaginationProps = () => {
   const getArticles = useGetArticles();
   const { dispatchAppState, appState} = React.useContext(Store);
-  const { isSetting, tags, instagramAccounts, paginationParams, selectedArticlesTags } = appState;
-  const { selectedInstagramAccount, isShowInstagram } = appState
+  const {
+    isSetting,
+    tags,
+    instagramAccounts,
+    instagramMedias,
+    paginationParams,
+    selectedArticlesTags,
+    selectedInstagramAccount,
+    isShowInstagram,
+  } = appState;
+  const {  } = appState
+  const getInstagramMedias = useGetInstagramMedias();
   
   const handleOnNumClick = (num) => {
     getArticles(isSetting, num);
@@ -48,6 +59,9 @@ export const usePPaginationProps = () => {
     selectedInstagramAccount,
     isShowInstagram,
     selectedArticlesTags,
+
+    getInstagramMedias,
+    instagramMedias,
   };
 };
 export type TUsePPaginationProps = ReturnType<typeof usePPaginationProps>
@@ -97,6 +111,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     girdSelectedTags: {
       overflowX: "scroll",
+      overflowY: "hidden",
       // minWidth: gridSelectedTagsWidth,
       flexShrink: 1,
     },

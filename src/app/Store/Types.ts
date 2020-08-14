@@ -159,12 +159,22 @@ export const initInstagramMedias = {
       before: "",
       after: "",
     },
-    next: "",
+    next: "" ,
     previous: "",
   },
-}
+} as TInstagramMedias
 
-export type TInstagramMedias = typeof initInstagramMedias
+export type TInstagramMedias = {
+  data: TInstagramMedia[];
+  paging: {
+    cursors: {
+      before: string;
+      after: string;
+    };
+    next?: string;
+    previous?: string;
+  };
+};
 
 export type TSetModal =
   | "content_modal"
