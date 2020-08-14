@@ -53,7 +53,7 @@ export const usePMainProps = () => {
     dispatchAppState,
     isShowInstagram,
     onClickUpdate,
-    loading,
+    loading: loading.mainArticles,
   };
 };
 
@@ -199,7 +199,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   </EditButtonsBox>
                 ) : null}
                 <div className={classes.thumbnailBox}>
-                  {props.loading.mainArticles ? (
+                  {props.loading ? (
                     <Skeleton variant="rect" className={classes.thumbnail} />
                   ) : value.article_img.length ? (
                     <img
@@ -216,10 +216,10 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     component="h2"
                     className={classes.title}
                   >
-                    {props.loading.mainArticles ? null : <>{value.title}</>}
+                    {props.loading ? null : <>{value.title}</>}
                   </Typography>
                 </div>
-                {props.loading.mainArticles ? null : (
+                {props.loading ? null : (
                   <div className={classes.tagsAndDate}>
                     <SelectedTags
                       className={classes.tags}
@@ -239,7 +239,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
 
                 <div className={`p-main-article-excerpt ${classes.excerpt}`}>
                   <Typography gutterBottom variant="body1">
-                    {props.loading.mainArticles ? (
+                    {props.loading ? (
                       <>
                         <Skeleton width="80%" style={{ margin: "auto" }} />
                         <Skeleton width="80%" style={{ margin: "auto" }} />
@@ -254,7 +254,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                   </Typography>
                 </div>
               </StyledCardContent>
-              {props.loading.mainArticles ? null : (
+              {props.loading ? null : (
                 <Button
                   // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
                   component="div"

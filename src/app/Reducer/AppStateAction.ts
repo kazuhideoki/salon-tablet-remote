@@ -28,6 +28,8 @@ export type AppStateAction =
   | { type: "CLOSE_DRAWER" }
   | { type: "ON_IS_LOADING_MAIN" }
   | { type: "OFF_IS_LOADING_MAIN" }
+  | { type: "ON_IS_LOADING_TAGS" }
+  | { type: "OFF_IS_LOADING_TAGS" }
 
   // modalウィンドウを開く時
   | { type: "OPEN_ARTICLE_MODAL"; payload: number }

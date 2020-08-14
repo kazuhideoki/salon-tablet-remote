@@ -223,6 +223,7 @@ export const initAppState = (data: IndexPropsData) => ({
     },
     loading: {
       mainArticles: false,
+      manageTags: false,
     },
 
     userInfo: data.session as TUserInfo,

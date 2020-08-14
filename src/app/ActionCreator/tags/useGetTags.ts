@@ -7,10 +7,13 @@ export const useGetTags = () => {
 
   return async () => {
 
+    dispatchAppState({type: "ON_IS_LOADING_TAGS"})
+
     const data = await apiTagsGet(appState.userInfo.user_id);
 
     if (data.err === true) {
       alert("取得できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_TAGS" });
     } else {
       dispatchAppState({
         type: "SET_TAGS",

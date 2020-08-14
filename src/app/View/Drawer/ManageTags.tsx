@@ -13,6 +13,75 @@ import { useUpdateTag } from '../../ActionCreator/tags/useUpdateTag'
 import { Store } from '../../Store/Store'
 import { useDeleteTag } from '../../ActionCreator/tags/useDeleteTag'
 import { CharCounter } from "../viewComponents/CharCounter";
+import { Skeleton } from '@material-ui/lab';
+
+const useManageTagsProps = () => {
+  const { appState } = React.useContext(Store);
+  const { tags, loading } = appState;
+  const [tagNameField, setTagNameField] = React.useState("");
+  const [isEditting, setIsEditting] = React.useState(false);
+  const [edittingTagId, setEditingTagId] = React.useState(0);
+  const [edittingTagName, setEditingTagName] = React.useState("");
+  const createTag = useCreateTag();
+  const updateTag = useUpdateTag();
+  const deleteTag = useDeleteTag();
+
+  const handleOnEditting = (TagId: number, tagName: string) => {
+    setIsEditting(true);
+    setEditingTagId(TagId);
+    setTagNameField(tagName);
+    setEditingTagName(tagName);
+  };
+
+  const handleOnCreateNew = () => {
+    setIsEditting(false);
+    setEditingTagId(null);
+    setTagNameField("");
+  };
+
+  const handleOnClick = () => {
+    console.log("ManageTagsのhandleOnClickだよ");
+    if (isEditting) {
+      updateTag({ edittingTagId, tagName: tagNameField });
+    } else {
+      createTag(tagNameField);
+    }
+  };
+
+  const isValidTagName = () => {
+    if (tagNameField.length === 0) {
+      return false;
+    } else if (tagNameField.length > 20) {
+      return false;
+    }
+    const tagNames = tags.map((value) => {
+      return value.tag_name;
+    });
+
+    if (tagNames.includes(tagNameField)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  return {
+    tags,
+    loading: loading.manageTags,
+    edittingTagName,
+    isEditting,
+    tagNameField,
+    setTagNameField,
+    edittingTagId,
+    handleOnClick,
+    handleOnCreateNew,
+    handleOnEditting,
+    deleteTag,
+    isValidTagName,
+  };
+}
+
+type Props = ReturnType<typeof useManageTagsProps>
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,63 +91,23 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       margin: theme.spacing(2)
     },
+    tagsWrap: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
     tag: {
       margin: theme.spacing(1)
     },
+    skeleton: {
+      width: 80,
+      height: 32,
+      borderRadius: 16,
+    }
   })
 )
 
-export const ManageTags = () => {
-  const classes = useStyles()
-  const { appState } = React.useContext(Store)
-  const {tags} = appState
-  const [tagNameField, setTagNameField] = React.useState('')
-  const [isEditting, setIsEditting] = React.useState(false)
-  const [edittingTagId, setEditingTagId] = React.useState(0)
-  const [edittingTagName, setEditingTagName] = React.useState('')
-  const createTag = useCreateTag()
-  const updateTag = useUpdateTag()
-  const deleteTag = useDeleteTag();
-
-  const handleOnEditting = (TagId: number, tagName: string) => {
-    setIsEditting(true)
-    setEditingTagId(TagId)
-    setTagNameField(tagName)
-    setEditingTagName(tagName)
-  }
-
-  const handleOnCreateNew = () => {
-    setIsEditting(false)
-    setEditingTagId(null);
-    setTagNameField('')
-  }
-
-  const handleOnClick = () => {
-    console.log("ManageTagsのhandleOnClickだよ");
-    if (isEditting) {
-      updateTag({edittingTagId, tagName: tagNameField})
-    } else {
-      createTag(tagNameField)
-    }
-  }
-
-  const isValidTagName = () => {
-    if (tagNameField.length === 0) {
-      return false
-    } else if ( tagNameField.length > 20) {
-      return false
-    }
-    const tagNames = tags.map((value) => {
-      return value.tag_name
-    })
-
-    if (tagNames.includes(tagNameField)) {
-      return false
-    }
-
-    return true
-
-  }
+export const ManageTagsPresenter:React.FC<Props> = (props) => {
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -86,45 +115,62 @@ export const ManageTags = () => {
         タグ管理
       </Typography>
       <p>
-        {isEditting ? `タグ"${edittingTagName}"を編集中` :  "新規作成" }
+        {props.isEditting
+          ? `タグ"${props.edittingTagName}"を編集中`
+          : "新規作成"}
       </p>
       <TextField
         name="createTag"
         label="タグ名"
         id="create_tag"
-        value={tagNameField}
-        onChange={(e) => setTagNameField(e.target.value)}
-        onKeyPress={e => {
-          if (e.key == 'Enter') {
-            e.preventDefault()
-            handleOnClick()
+        value={props.tagNameField}
+        onChange={(e) => props.setTagNameField(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key == "Enter") {
+            e.preventDefault();
+            props.handleOnClick();
           }
         }}
       />
 
-      <CharCounter charCount={tagNameField.length} limitCount={20} />
+      <CharCounter charCount={props.tagNameField.length} limitCount={20} />
 
-      <Button onClick={() => handleOnClick()} disabled={!isValidTagName()}>
-        {isEditting ? "更新" : "作成"}
+      <Button
+        onClick={() => props.handleOnClick()}
+        disabled={!props.isValidTagName()}
+      >
+        {props.isEditting ? "更新" : "作成"}
       </Button>
-      <div>
-        {tags.map((value, key) => {
+      <div className={classes.tagsWrap}>
+        {props.tags.map((value, key) => {
+          if (props.loading) {
+            return <Skeleton variant="rect" className={`${classes.tag} ${classes.skeleton}`} />;
+          }
+
           return (
             <Chip
               key={key}
               className={classes.tag}
               label={value.tag_name}
-              color={value.tag_id === edittingTagId ? "primary" : undefined}
-              onClick={
-                isEditting && value.tag_id === edittingTagId // 編集中にもう一度タップすると新規作成に戻る
-                  ? () => handleOnCreateNew()
-                  : () => handleOnEditting(value.tag_id, value.tag_name)
+              color={
+                value.tag_id === props.edittingTagId ? "primary" : undefined
               }
-              onDelete={() => deleteTag(value.tag_id)}
+              onClick={
+                props.isEditting && value.tag_id === props.edittingTagId // 編集中にもう一度タップすると新規作成に戻る
+                  ? () => props.handleOnCreateNew()
+                  : () => props.handleOnEditting(value.tag_id, value.tag_name)
+              }
+              onDelete={() => props.deleteTag(value.tag_id)}
             />
           );
         })}
       </div>
     </div>
   );
+}
+
+export const ManageTags = () => {
+  const props = useManageTagsProps()
+
+  return <ManageTagsPresenter {...props}/>
 }

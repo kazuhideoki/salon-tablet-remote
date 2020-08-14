@@ -22,9 +22,7 @@ const props = {
   dispatchAppState: null,
   isShowInstagram: false,
   onClickUpdate: null,
-  loading: {
-    mainArticles: false,
-  },
+  loading: false,
 };
 
 export const Normal = () => {
@@ -44,7 +42,7 @@ export const Loading = () => {
   return (
     <>
       <div style={{height: "65vh"}}>
-        <PMainPresenter {...props} loading={{ mainArticles: true }} />
+        <PMainPresenter {...props} loading={true} />
       </div>
       ※全画面にして表示を確認
     </>

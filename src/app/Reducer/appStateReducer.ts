@@ -54,6 +54,24 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "ON_IS_LOADING_TAGS":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            manageTags: true,
+          },
+        };
+        break;
+      case "OFF_IS_LOADING_TAGS":
+        newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            manageTags: false,
+          },
+        };
+        break;
 
       case "OPEN_ARTICLE_MODAL":
         newState = {
@@ -227,6 +245,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           tags: action.payload,
+          loading: {
+            ...state.loading,
+            manageTags: false,
+          },
         };
         break;
       case "SET_INSTAGRAM_ACCOUNTS":

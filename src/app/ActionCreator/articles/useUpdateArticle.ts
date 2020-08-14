@@ -19,6 +19,8 @@ export const useUpdateArticle = () => {
   const getArticles = useGetArticles();
   
   return async (param: TUpdateArticle) => {
+
+    dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
    
     const params: T_articles_update = {
       // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
@@ -39,6 +41,7 @@ export const useUpdateArticle = () => {
 
     if (data.err === true) {
       alert("更新できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {
       dispatchAppState({ type: "CLOSE_MODAL" });
 

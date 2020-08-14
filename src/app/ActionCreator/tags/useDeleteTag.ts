@@ -7,7 +7,7 @@ import { useGetTags } from "./useGetTags";
 import { T_tags_delete, apiTagsDelete } from "../../../pages/api/tags/delete";
 
 export const useDeleteTag = () => {
-  const { appState } = React.useContext(Store);
+  const { appState, dispatchAppState } = React.useContext(Store);
   const { user_id } = appState.userInfo;
   const getTags = useGetTags()
 
@@ -15,10 +15,12 @@ export const useDeleteTag = () => {
   return async (tag_id: T_tag_id) => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
-
+    
     if (deleting === false) {
       return null;
     }
+
+    dispatchAppState({ type: "ON_IS_LOADING_TAGS" });
 
     const params: T_tags_delete = { tag_id: tag_id, user_id: user_id };
 
@@ -26,6 +28,7 @@ export const useDeleteTag = () => {
 
     if (data.err === true) {
       alert("削除できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_TAGS" });
     } else {
       getTags()
     }

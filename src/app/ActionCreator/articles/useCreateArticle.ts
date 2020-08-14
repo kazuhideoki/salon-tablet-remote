@@ -18,6 +18,8 @@ export const useCreateArticle =   () => {
   );
   
   return async ( param: TCreateArticle) => {
+
+    dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
     
     const params: T_articles_create = {
       is_published: param.is_published,
@@ -37,6 +39,7 @@ export const useCreateArticle =   () => {
       console.log(data);
 
       alert("投稿できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {
       dispatchAppState({ type: "CLOSE_MODAL" });
 

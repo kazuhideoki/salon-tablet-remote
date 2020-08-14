@@ -115,13 +115,14 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <FooterItemEditor />;
             break;
           case "edit_tags":
+            modalStyle = useModalSize("medium");
             ModalContent = () => <ManageTags />;
             break;
           case "manage_instagram":
             ModalContent = () => <ManageInstagramAccounts />;
             break;
           case "setting_theme":
-            modalStyle = useModalSize('medium'); // ← きかない
+            modalStyle = useModalSize('medium');
             ModalContent = () => <SettingTheme />;
             break;
           case "setting_user_info":

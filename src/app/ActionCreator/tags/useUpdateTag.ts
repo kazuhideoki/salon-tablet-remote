@@ -2,12 +2,17 @@ import React from "react";
 
 import { useGetTags } from "./useGetTags";
 import { T_tags_update, apiTagsUpdata } from "../../../pages/api/tags/update";
+import { Store } from "../../Store/Store";
 
 export const useUpdateTag = () => {
 
+  const { dispatchAppState } = React.useContext(Store)
   const getTags = useGetTags();
 
   return async ({edittingTagId, tagName}) => {
+
+    dispatchAppState({ type: "ON_IS_LOADING_TAGS" });
+
     const params: T_tags_update = {
       tag_id: edittingTagId,
       tag_name: tagName,
@@ -17,6 +22,7 @@ export const useUpdateTag = () => {
 
     if (data.err === true) {
       alert("更新できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_TAGS" });
     } else {
       getTags();
     }

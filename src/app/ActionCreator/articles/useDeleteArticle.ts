@@ -8,7 +8,7 @@ import { apiArticlesDelete } from "../../../pages/api/articles/delete";
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
-  const { appState } = React.useContext(Store);
+  const { appState ,dispatchAppState } = React.useContext(Store);
   const {articles, paginationParams} = appState
   
   return async (article_id: T_article_id) => {
@@ -18,11 +18,14 @@ export const useDeleteArticle = () => {
     if (deleting === false) {
       return null
     }
+    
+    dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
 
     const data = await apiArticlesDelete({ article_id });
 
     if (data.err === true) {
       alert("削除できませんでした");
+      dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {
       //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (articles.length === 1 && paginationParams.rowCount > 1) {
