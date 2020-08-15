@@ -17,6 +17,95 @@ import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
 import { IconsSetting } from './iconSelect/icons';
 import { HelpButton } from '../../viewComponents/buttons/HelpButton';
 
+const useFooterItemEditorProps = () => {
+
+  const { appState, dispatchAppState } = React.useContext(Store);
+  const { modalSize, onTap, isEditting, footerItem } = appState.edittingPrams;
+
+  // -------------------
+  const [titleText, setTitleText] = React.useState(
+    isEditting ? footerItem.icon_name : ""
+  );
+  const [editorText, setEditorText] = React.useState(
+    isEditting ? footerItem.item_content : ""
+  );
+  const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(
+    isEditting ? footerItem.item_excerpt : ""
+  );
+  const [createdAt, setCreatedAt] = React.useState("");
+  const [updatedAt, setUpdatedAt] = React.useState("");
+  const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
+    selectedIconReducer,
+    isEditting
+      ? IconsSetting.convertIconComponentFromName(
+          footerItem.displayed_icon_name
+        )
+      : null
+  );
+
+  // 変更した値を保存する？ or...
+  // const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
+
+  const [linkUrl, setLinkUrl] = React.useState(
+    isEditting ? footerItem.link_url : ""
+  );
+  const [appLinkUrl, setAppLinkUrl] = React.useState(
+    isEditting ? footerItem.app_link_url : ""
+  );
+
+  const [
+    charCountFooterItemContent,
+    setCharCountFooterItemContent,
+  ] = React.useState(0);
+
+  const createFooterItem = useCreateFooterItem();
+  const updateFooterItem = useUpdateFooterItem();
+
+  const handleOnChangeIconName = (e) => {
+    setTitleText(e.target.value);
+  };
+
+  const handleSubmit = ({ is_published }) => {
+    const params: TCreateFooterItem = {
+      is_published,
+      titleText,
+      selectedIcon,
+      onTap,
+      editorText,
+      editorTextExcerpt,
+      linkUrl,
+      modalSize,
+      appLinkUrl,
+    };
+    if (isEditting) {
+      updateFooterItem(params);
+    } else {
+      createFooterItem(params);
+    }
+  };
+
+  return {
+    dispatchAppState,
+    onTap,
+    isEditting,
+    titleText,
+    editorText,
+    setEditorText,
+    setEditorTextExcerpt,
+    selectedIcon,
+    dispatchSelectedIcon,
+    linkUrl,
+    setLinkUrl,
+    appLinkUrl,
+    setAppLinkUrl,
+    charCountFooterItemContent,
+    setCharCountFooterItemContent,
+    handleOnChangeIconName,
+    handleSubmit,
+    modalSize,
+  };
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -40,144 +129,113 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const FooterItemEditor: React.FC = () => {
-  const classes = useStyles()
+export type TUseFooterItemEditorProps = ReturnType<typeof useFooterItemEditorProps>
 
-  const { appState, dispatchAppState } = React.useContext(Store)
-  const {modalSize, onTap} = appState.edittingPrams
-  const { isEditting, footerItem } = appState.edittingPrams
+export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
+         props
+       ) => {
+         const classes = useStyles();
 
-  // -------------------
-  const [titleText, setTitleText] = React.useState(isEditting ? footerItem.icon_name : "");
-  const [editorText, setEditorText] = React.useState(isEditting ? footerItem.item_content : "");
-  const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(isEditting ? footerItem.item_excerpt : "");
-  const [createdAt, setCreatedAt] = React.useState("");
-  const [updatedAt, setUpdatedAt] = React.useState("");
-  const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
-    selectedIconReducer,
-    isEditting ? IconsSetting.convertIconComponentFromName(footerItem.displayed_icon_name) : null
-  );
+         let mainField: JSX.Element;
+         if (props.onTap === "modal") {
+           mainField = (
+             <div>
+               <SelectModalSize modalSize={props.modalSize}/>
+               <QuillEditor
+                 editorText={props.editorText}
+                 setEditorText={props.setEditorText}
+                 setEditorTextExcerpt={props.setEditorTextExcerpt}
+                 charCount={props.charCountFooterItemContent}
+                 setCharCount={props.setCharCountFooterItemContent}
+               />
+             </div>
+           );
+         } else if (props.onTap === "link") {
+           mainField = (
+             <div>
+               <TextField
+                 id="linkUrl"
+                 label="リンクURL"
+                 value={props.linkUrl}
+                 onChange={(e) => props.setLinkUrl(e.target.value)}
+                 className={classes.linkTextField}
+               />
+             </div>
+           );
+         } else if (props.onTap === "appLink") {
+           mainField = (
+             <div>
+               <SelectAppLink
+                 appLinkUrl={props.appLinkUrl}
+                 setAppLinkUrl={props.setAppLinkUrl}
+               />
+             </div>
+           );
+         }
 
-  // 変更した値を保存する？ or...
-  // const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
+         return (
+           <>
+             <Typography variant="h4" component="h2" className={classes.header}>
+               {props.isEditting ? "アイテム編集" : "アイテム作成"}
+             </Typography>
+             <TextField
+               id="icon-name-text-field"
+               label="アイテム名"
+               multiline
+               value={props.titleText}
+               onChange={(e) => props.handleOnChangeIconName(e)}
+               className={classes.titleText}
+             />
+             <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。" />
+             <CharCounter charCount={props.titleText.length} limitCount={100} />
+             <br />
 
-  const [linkUrl, setLinkUrl] = React.useState(isEditting ? footerItem.link_url : "");
-  const [appLinkUrl, setAppLinkUrl] = React.useState(isEditting ? footerItem.app_link_url : "");
+             <SwitchOnTapModal
+               onTap={props.onTap}
+               dispatchAppState={props.dispatchAppState}
+             />
+             {mainField}
 
-  const [charCountFooterItemContent, setCharCountFooterItemContent] = React.useState(0);
-  
-  const createFooterItem = useCreateFooterItem();
-  const updateFooterItem = useUpdateFooterItem();
+             <SelectIcon
+               selectedIcon={props.selectedIcon}
+               dispatchSelectedIcon={props.dispatchSelectedIcon}
+             />
+             <Grid container className={classes.submitButtons}>
+               <Grid item>
+                 <Button
+                   onClick={() => props.handleSubmit({ is_published: true })}
+                   disabled={
+                     props.titleText.length < 101 &&
+                     props.charCountFooterItemContent < 1001
+                       ? false
+                       : true
+                   }
+                 >
+                   {props.isEditting ? "更新" : "投稿"}
+                 </Button>
+               </Grid>
+               <Grid item>
+                 <Button
+                   onClick={() => props.handleSubmit({ is_published: false })}
+                   disabled={
+                     props.titleText.length < 101 &&
+                     props.charCountFooterItemContent < 1001
+                       ? false
+                       : true
+                   }
+                 >
+                   下書き保存
+                 </Button>
+               </Grid>
+             </Grid>
+           </>
+         );
+       };
 
-  const handleOnChangeIconName = (e) => {
-    setTitleText(e.target.value);
-  };
+const FooterItemEditor = () => {
+  const props = useFooterItemEditorProps()
 
-
-  const handleSubmit = ({ is_published }) => {
-    const params: TCreateFooterItem = {
-      is_published,
-      titleText,
-      selectedIcon,
-      onTap,
-      editorText,
-      editorTextExcerpt,
-      linkUrl,
-      modalSize,
-      appLinkUrl,
-    };
-    if (isEditting) {
-      updateFooterItem(params);
-    } else {
-      createFooterItem(params);
-    }
-  };
-
-  let mainField: JSX.Element
-  if (onTap === "modal") {
-    mainField = (
-      <div>
-        <SelectModalSize />
-        <QuillEditor
-          editorText={editorText}
-          setEditorText={setEditorText}
-          setEditorTextExcerpt={setEditorTextExcerpt}
-          charCount={charCountFooterItemContent}
-          setCharCount={setCharCountFooterItemContent}
-        />
-      </div>
-    );
-  } else if (onTap === "link"){
-    mainField = (
-      <div>
-      <TextField
-        id="linkUrl"
-        label="リンクURL"
-        value={linkUrl}
-        onChange={(e) => setLinkUrl(e.target.value)}
-        className={classes.linkTextField}
-      />
-      </div>
-    );
-  } else if (onTap === "appLink") {
-    mainField = (
-      <div>
-        <SelectAppLink appLinkUrl={appLinkUrl} setAppLinkUrl={setAppLinkUrl} />
-      </div>
-    ); }
-
-  return (
-    <>
-      <Typography variant="h4" component="h2" className={classes.header}>
-        {isEditting ? "アイテム編集" : "アイテム作成"}
-      </Typography>
-      <TextField
-        id="icon-name-text-field"
-        label="アイテム名"
-        multiline
-        value={titleText}
-        onChange={(e) => handleOnChangeIconName(e)}
-        className={classes.titleText}
-      />
-      <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。"/>
-      <CharCounter charCount={titleText.length} limitCount={100} />
-      <br />
-
-      <SwitchOnTapModal onTap={onTap} dispatchAppState={dispatchAppState} />
-      {mainField}
-
-      <SelectIcon
-        selectedIcon={selectedIcon}
-        dispatchSelectedIcon={dispatchSelectedIcon}
-      />
-      <Grid container className={classes.submitButtons}>
-        <Grid item>
-          <Button
-            onClick={() => handleSubmit({ is_published: true })}
-            disabled={
-              titleText.length < 101 && charCountFooterItemContent < 1001
-                ? false
-                : true
-            }
-          >
-            {isEditting ? "更新" : "投稿"}
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            onClick={() => handleSubmit({ is_published: false })}
-            disabled={
-              titleText.length < 101 && charCountFooterItemContent < 1001
-                ? false
-                : true
-            }
-          >
-            下書き保存
-          </Button>
-        </Grid>
-      </Grid>
-    </>
-  );
-};
+  return <FooterItemEditorPresenter {...props}/>
+}
 
 export default FooterItemEditor
