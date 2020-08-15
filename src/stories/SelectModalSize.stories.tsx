@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectModalSize } from '../../app/View/Setting/SelectModalSize';
+import { SelectModalSize } from '../app/View/Setting/SelectModalSize';
 export default {
   title: "Setting/SelectModalSize",
   component: SelectModalSize,

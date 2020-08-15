@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectTagsPopover = ({ selectedTags, setSelectedTags}) => {
+export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags}) => {
   const classes = useStyles();
   // const [selectedTags, setSelectedTags ] = React.useState([])
 
-  const { appState } = React.useContext(Store)
-  const {tags} = appState
+  // const { appState } = React.useContext(Store)
+  // const {tags} = appState
 
   
   const handleOnClick = (tagId: number) => {
