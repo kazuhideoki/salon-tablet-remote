@@ -1,6 +1,6 @@
 import React from 'react';
 import { FooterPresenter } from '../app/View/Footer/Footer';
-import { samplefooterItems } from "./footerItems";
+import { samplefooterItems } from "./lib/sampleFooterItems";
 import ThemeProvider, { ThemeContext } from '../app/Store/ThemeContext';
 import { MuiThemeProvider } from '@material-ui/core';
 import { themeMinimal } from '../app/Store/themes/themeMinimal';

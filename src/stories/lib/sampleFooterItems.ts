@@ -1,4 +1,4 @@
-import { FooterItems } from "../app/Store/Types";
+import { FooterItems } from "../../app/Store/Types";
 
 export const samplefooterItems: FooterItems = [
   {

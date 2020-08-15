@@ -8,8 +8,10 @@ import {
   Theme,
   GridListTile,
   Chip,
+  useTheme,
 } from "@material-ui/core";
 import { Store } from '../../../Store/Store';
+import { themeArgs } from '../../../Store/ThemeContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,15 +22,20 @@ const useStyles = makeStyles((theme: Theme) =>
     selectedTagsField: {
       width: 70,
     },
+    noTag: {
+      color: theme.palette.text.disabled
+    }
   })
 );
 
-export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags}) => {
+export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, className}) => {
   const classes = useStyles();
   // const [selectedTags, setSelectedTags ] = React.useState([])
 
   // const { appState } = React.useContext(Store)
   // const {tags} = appState
+
+  const theme = useTheme()
 
   
   const handleOnClick = (tagId: number) => {
@@ -75,9 +82,14 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags}) => {
   // 以上アイコン選択のPopoverのための設定
   
   return (
-    <>
-      <Button aria-describedby={id} color="primary" onClick={handleClick}>
-        タグ選択
+    <div className={className}>
+      <Button
+        aria-describedby={id}
+        color="primary"
+        onClick={handleClick}
+        size="large"
+      >
+        タグ
       </Button>
       {/* ButtonをタップするとPopoverが表示される */}
       <Popover
@@ -94,30 +106,38 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags}) => {
           horizontal: "center",
         }}
       >
-        {tags.length ? tags.map((value, key) => {
-          return (
-            <>
-              {selectedTags.includes(value.tag_id) ? (
-                // セレクトされてる
-                <Chip
-                  key={key}
-                  label={value.tag_name}
-                  onClick={() => handleDelete(value.tag_id)}
-                  color="primary"
-                />
-              ) : (
-                // セレクトされてない
-                <Chip
-                  key={key}
-                  label={value.tag_name}
-                  onClick={() => handleOnClick(value.tag_id)}
-                />
-              )}
-            </>
-          );
-        }) : "タグがありません"}
+        {tags.length ? (
+          tags.map((value, key) => {
+            return (
+              <>
+                {selectedTags.includes(value.tag_id) ? (
+                  // セレクトされてる
+                  <Chip
+                    key={key}
+                    label={value.tag_name}
+                    onClick={() => handleDelete(value.tag_id)}
+                    color="primary"
+                  />
+                ) : (
+                  // セレクトされてない
+                  <Chip
+                    key={key}
+                    label={value.tag_name}
+                    onClick={() => handleOnClick(value.tag_id)}
+                  />
+                )}
+              </>
+            );
+          })
+        ) : (
+          <Chip label="タグがありません" className={classes.noTag} />
+        )}
       </Popover>
-      {selectedTags.length ? <ShowSelectedTagsChip /> : <Chip label="未選択" disabled/>}
-    </>
+      {selectedTags.length ? (
+        <ShowSelectedTagsChip />
+      ) : (
+        <Chip label="未選択" disabled />
+      )}
+    </div>
   );
 }

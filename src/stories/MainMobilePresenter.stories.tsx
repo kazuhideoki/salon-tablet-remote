@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainMobilePresenter } from '../app/View/mobile/MainMobile';
-import { sampleData } from './SampleData';
+import { sampleData } from './lib/sampleArticles';
 export default {
   title: "mobile/MainMobile",
   component: MainMobilePresenter,

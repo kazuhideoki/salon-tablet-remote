@@ -35,7 +35,7 @@ export const HelpButton: React.FC<THelpButton> = ({ content }) => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div >
+    <>
       <IconButton
         aria-label="help"
         aria-describedby={id}
@@ -59,6 +59,6 @@ export const HelpButton: React.FC<THelpButton> = ({ content }) => {
       >
         <Typography className={classes.typography}>{content}</Typography>
       </Popover>
-    </div>
+    </>
   );
 };

@@ -10,6 +10,7 @@ import { sqlToDate } from "../../../ActionCreator/organizeSql/sqlToDate";
 import { SelectTagsPopover } from "./SelectTagsPopover";
 import { CharCounter } from "../../viewComponents/CharCounter";
 import { Store } from "../../../Store/Store";
+import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
 
 const useArticleEditorProps = () => {
   const { appState } = React.useContext(Store);
@@ -88,12 +89,15 @@ const useArticleEditorProps = () => {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
-      margin: theme.spacing(2)
+      margin: theme.spacing(2),
     },
     title: {
       width: 350,
-      marginBottom: 20,
+      marginBottom: theme.spacing(2),
       maxWidth: "100%",
+    },
+    selectTagsPopover: {
+      marginBottom: theme.spacing(2),
     },
     submitButtons: {
       position: "sticky",
@@ -120,7 +124,6 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
         value={props.titleText}
         onChange={(e) => props.handleOnChangeTitleText(e)}
         className={classes.title}
-        style={{ marginBottom: "20px" }}
         // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
       />
 
@@ -134,6 +137,7 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
       ) : null}
 
       <SelectTagsPopover
+        className={classes.selectTagsPopover}
         selectedTags={props.selectedTags}
         setSelectedTags={props.setSelectedTags}
         tags={props.tags}
@@ -151,7 +155,10 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
       <Grid container className={classes.submitButtons}>
         <Grid item>
           <Button
+            variant="contained"
+            color="primary"
             onClick={() => props.handleSubmit({ is_published: true })}
+            startIcon={<PublishTwoTone />}
             disabled={
               props.titleText.length < 101 &&
               props.charCountArticleContent < 1001
@@ -165,6 +172,7 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
         <Grid item>
           <Button
             onClick={() => props.handleSubmit({ is_published: false })}
+            startIcon={<SaveTwoTone />}
             disabled={
               props.titleText.length < 101 &&
               props.charCountArticleContent < 1001

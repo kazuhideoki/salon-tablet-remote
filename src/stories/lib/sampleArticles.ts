@@ -1,6 +1,6 @@
 //@ts-ignore
 
-import { TArticles } from "../app/Store/Store";
+import { TArticles } from "../../app/Store/Store";
 
 // export const sampleData = JSON.parse({
 export const sampleData: TArticles = [

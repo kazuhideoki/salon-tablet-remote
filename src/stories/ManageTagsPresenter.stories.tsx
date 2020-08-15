@@ -1,6 +1,6 @@
 import React from 'react';
 import { ManageTagsPresenter } from '../app/View/Drawer/ManageTags';
-import { sampleTags } from './sampleTags';
+import { sampleTags } from './lib/sampleTags';
 export default {
   title: 'Drawer/ManageTagsPresenter',
   component: ManageTagsPresenter,

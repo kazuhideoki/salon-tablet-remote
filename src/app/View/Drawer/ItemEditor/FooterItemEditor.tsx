@@ -16,13 +16,12 @@ import { SelectModalSize } from '../../Setting/SelectModalSize';
 import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
 import { IconsSetting } from './iconSelect/icons';
 import { HelpButton } from '../../viewComponents/buttons/HelpButton';
+import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
 
 const useFooterItemEditorProps = () => {
 
   const { appState, dispatchAppState } = React.useContext(Store);
   const { modalSize, onTap, isEditting, footerItem } = appState.edittingPrams;
-
-  // -------------------
   const [titleText, setTitleText] = React.useState(
     isEditting ? footerItem.icon_name : ""
   );
@@ -111,10 +110,19 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       margin: theme.spacing(2),
     },
-    titleText: {
+    title: {
       width: 350,
-      marginBottom: 20,
+      marginBottom: theme.spacing(2),
       maxWidth: "100%",
+    },
+    selectIcon: {
+      marginBottom: theme.spacing(2),
+    },
+    switchOnTapModal: {
+      marginBottom: theme.spacing(1),
+    },
+    selectModalSize: {
+      marginBottom: theme.spacing(1),
     },
     linkTextField: {
       minWidth: "80%",
@@ -140,7 +148,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
          if (props.onTap === "modal") {
            mainField = (
              <div>
-               <SelectModalSize modalSize={props.modalSize}/>
+               <SelectModalSize modalSize={props.modalSize} className={classes.selectModalSize}/>
                <QuillEditor
                  editorText={props.editorText}
                  setEditorText={props.setEditorText}
@@ -184,26 +192,33 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                multiline
                value={props.titleText}
                onChange={(e) => props.handleOnChangeIconName(e)}
-               className={classes.titleText}
+               className={classes.title}
              />
              <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。" />
              <CharCounter charCount={props.titleText.length} limitCount={100} />
              <br />
 
-             <SwitchOnTapModal
-               onTap={props.onTap}
-               dispatchAppState={props.dispatchAppState}
-             />
-             {mainField}
-
              <SelectIcon
+               className={classes.selectIcon}
                selectedIcon={props.selectedIcon}
                dispatchSelectedIcon={props.dispatchSelectedIcon}
              />
+
+             <SwitchOnTapModal
+               className={classes.switchOnTapModal}
+               onTap={props.onTap}
+               dispatchAppState={props.dispatchAppState}
+             />
+
+             {mainField}
+
              <Grid container className={classes.submitButtons}>
                <Grid item>
                  <Button
+                  variant='contained'
+                  color='primary'
                    onClick={() => props.handleSubmit({ is_published: true })}
+                   startIcon={<PublishTwoTone/>}
                    disabled={
                      props.titleText.length < 101 &&
                      props.charCountFooterItemContent < 1001
@@ -217,6 +232,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                <Grid item>
                  <Button
                    onClick={() => props.handleSubmit({ is_published: false })}
+                   startIcon={<SaveTwoTone/>}
                    disabled={
                      props.titleText.length < 101 &&
                      props.charCountFooterItemContent < 1001

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PPaginationPresenter, TUsePPaginationProps } from '../app/View/Footer/PaginationBar/PPagination';
-import { sampleInstagramAccounts } from './sampleInstagramAccounts';
-import { sampleTags } from './sampleTags';
+import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
+import { sampleTags } from './lib/sampleTags';
 import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';
 import { themeMinimal } from '../app/Store/themes/themeMinimal';
 import { initInstagramMedias } from '../app/Store/Types';

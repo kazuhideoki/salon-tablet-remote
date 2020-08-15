@@ -1,6 +1,6 @@
 import React from 'react';
 import { FooterMobilePresenter } from '../app/View/mobile/FooterMobile';
-import { samplefooterItems } from './footerItems';
+import { samplefooterItems } from './lib/sampleFooterItems';
 export default {
   title: "mobile/FooterMobile",
   component: FooterMobilePresenter,

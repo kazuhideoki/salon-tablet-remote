@@ -12,10 +12,9 @@ import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
-export function SelectModalSize({modalSize}) {
+export function SelectModalSize({modalSize, className}) {
   const classes = useStyles();
   const { appState, dispatchAppState} = React.useContext(Store)
-  // const modalSize = appState.edittingPrams.modalSize
   const isMobile = useMediaQuery("(max-width:480px)");
 
 
@@ -24,28 +23,30 @@ export function SelectModalSize({modalSize}) {
   };
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">ウィンドウサイズ選択</FormLabel>
-      <RadioGroup
-        row
-        aria-label="modalSize"
-        name="modalSize"
-        value={modalSize}
-        onChange={handleChange}
-      >
-        {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}
-        <FormControlLabel
-          value="fullScreen"
-          control={<Radio />}
-          label="全画面"
-        />
-        <FormControlLabel value="large" control={<Radio />} label="大" />
-        <FormControlLabel value="medium" control={<Radio />} label="中" />
-        <FormControlLabel value="small" control={<Radio />} label="小" />
-      </RadioGroup>
-      {isMobile && (
-        <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" />
-      )}
-    </FormControl>
+    <div className={className}>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">ウィンドウサイズ選択</FormLabel>
+        <RadioGroup
+          row
+          aria-label="modalSize"
+          name="modalSize"
+          value={modalSize}
+          onChange={handleChange}
+        >
+          {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}
+          <FormControlLabel
+            value="fullScreen"
+            control={<Radio />}
+            label="全画面"
+          />
+          <FormControlLabel value="large" control={<Radio />} label="大" />
+          <FormControlLabel value="medium" control={<Radio />} label="中" />
+          <FormControlLabel value="small" control={<Radio />} label="小" />
+        </RadioGroup>
+        {isMobile && (
+          <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" />
+        )}
+      </FormControl>
+    </div>
   );
 }

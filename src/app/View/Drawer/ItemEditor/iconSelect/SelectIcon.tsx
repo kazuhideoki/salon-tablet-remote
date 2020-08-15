@@ -2,10 +2,10 @@ import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { Popover, Button, TextField, IconButton, SvgIconTypeMap } from '@material-ui/core';
+import { Popover, Button, TextField, IconButton, SvgIconTypeMap, Typography } from '@material-ui/core';
 import { IconsSetting } from "./icons";
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { MoodBad } from '@material-ui/icons';
+import { MoodBad, AddCircleOutlineOutlined, SentimentSatisfiedTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,13 +31,11 @@ type Props = {
     type: "SET_ICON";
     payload: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
   }>
+  className?: string,
 }
 
-export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon}) => {
+export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon, className}) => {
   const classes = useStyles();
-  // const { selectedIcon, dispatchSelectedIcon } = React.useContext(
-  //   EditorContext
-  // );
 
   // 以下アイコン選択のPopoverのための設定
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -52,13 +50,16 @@ export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon}
   // 以上アイコン選択のPopoverのための設定
   
   return (
-    <>
+    <div className={className}>
+      {/* <Button aria-describedby={id} color="primary" onClick={handleClick} startIcon={<SentimentSatisfiedTwoTone/>}> */}
       <Button
         aria-describedby={id}
         color="primary"
         onClick={handleClick}
+        endIcon={ selectedIcon ? <IconItem icon={selectedIcon[0]} /> : '未選択'}
+        size='large'
       >
-        アイコン選択
+        アイコン
       </Button>
       {/* ButtonをタップするとPopoverが表示される */}
       <Popover
@@ -103,7 +104,18 @@ export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon}
           })}
         </GridList>
       </Popover>
-      {selectedIcon ? <IconItem icon={selectedIcon[0]} /> : null}
-    </>
+      {/* {selectedIcon ? (
+        <IconItem icon={selectedIcon[0]} />
+      ) : (
+        <>
+          <Typography variant="subtitle1" component="span">
+            未選択
+          </Typography>
+          <IconButton onClick={handleClick}>
+            <AddCircleOutlineOutlined />
+          </IconButton>
+        </>
+      )} */}
+    </div>
   );
 }

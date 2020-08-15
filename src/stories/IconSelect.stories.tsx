@@ -5,6 +5,7 @@ import {
 } from "../app/View/Drawer/ItemEditor/iconSelect/SelectIcon";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { EditorContext } from "../app/Store/EditorContext";
+import { WifiTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,44 +18,25 @@ export default {
   component: SelectIcon,
 };
 export const Normal = () => {
-let selectedIcon, dispatchSelectedIcon
+  let selectedIcon = null, dispatchSelectedIcon
 
-return (
-  <>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    <p>a</p>
-    {/* fdddddddddddddddddd<SelectIcon selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
-    fdddddddddddddddddd
-    <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon} />
+  return (
+    <>
+      <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/>
 
-  </>
+    </>
 );
+};
+export const Selected = () => {
+  const selectedIcon = [WifiTwoTone, "WifiTwoTone"]
+  let dispatchSelectedIcon;
+
+  return (
+    //@ts-ignore
+      <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/>
+  );
 };
 
 
 
 
-// export const bottomSet = () => {
-//   const { selectedIcon, dispatchSelectedIcon } = React.useContext(
-//     EditorContext
-//   );
-//   const classes = useStyles()
-
-//   return (
-//     <div className={classes.root}>
-//       fdsa
-//       {/* <SelectIcon selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon}/> */}
-//       <SelectIcon />
-//       {(selectedIcon)? <IconItem icon={selectedIcon}/> : null}
-//     </div>
-//   );
-// }

@@ -1,5 +1,5 @@
 import { checkOrders } from "../pages/api/lib/checkOrders";
-import { samplefooterItems } from "../stories/footerItems";
+import { samplefooterItems } from "../stories/lib/sampleFooterItems";
 
 const footerItems1 = [
   {

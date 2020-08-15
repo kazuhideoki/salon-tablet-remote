@@ -1,8 +1,9 @@
 import React from 'react';
 import { FooterItemEditorPresenter, TUseFooterItemEditorProps } from '../app/View/Drawer/ItemEditor/FooterItemEditor';
 import { Provider } from './lib/ThemeProvider';
+import { WifiTwoTone } from '@material-ui/icons';
 export default {
-  title: 'FooterItemEditorPresenter',
+  title: 'Drawer/ItemEditor/FooterItemEditorPresenter',
   component: FooterItemEditorPresenter,
 };
 
@@ -14,6 +15,7 @@ const props: TUseFooterItemEditorProps = {
   editorText: "",
   setEditorText: null,
   setEditorTextExcerpt: null,
+  // selectedIcon: [WifiTwoTone, "WifiTwoTone"],
   selectedIcon: null,
   dispatchSelectedIcon: null,
   linkUrl: null,
@@ -24,7 +26,7 @@ const props: TUseFooterItemEditorProps = {
   setCharCountFooterItemContent: null,
   handleOnChangeIconName: null,
   handleSubmit: null,
-  modalSize: 'large',
+  modalSize: "large",
 };
 
 export const Normal = () => {

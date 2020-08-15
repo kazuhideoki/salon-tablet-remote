@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaginationMobilePresenter } from '../app/View/mobile/PaginationMobile';
-import { sampleInstagramAccounts } from './sampleInstagramAccounts';
-import { sampleTags } from './sampleTags';
+import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
+import { sampleTags } from './lib/sampleTags';
 import { IconButton, withStyles } from '@material-ui/core';
 export default {
   title: "mobile/PaginationMobile",

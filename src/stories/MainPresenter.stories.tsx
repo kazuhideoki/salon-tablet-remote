@@ -1,6 +1,6 @@
 import React from 'react';
 import { PMainPresenter } from '../app/View/Main/PMain';
-import { sampleData } from './SampleData';
+import { sampleData } from './lib/sampleArticles';
 import { initInstagramMedias } from '../app/Store/Types';
 export default {
   title: "Main/PMain",
