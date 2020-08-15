@@ -61,6 +61,37 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
 
+  const displayInstagramAccounts = props.instagramAccounts.map((value) => {
+    if (props.loading) {
+      return (
+        <Skeleton
+          variant="rect"
+          className={`${classes.account} ${classes.skeleton}`}
+        />
+      );
+    }
+
+    return (
+      <div className={classes.account}>
+        <Button
+          onClick={() =>
+            props.getInstagramMedias(value.instagram_id, value.username, {})
+          }
+        >
+          {value.username}
+        </Button>
+        <DeleteButton
+          onClick={props.deleteInstagramAccount}
+          value={value.instagram_id}
+        />
+      </div>
+    );
+  });
+
+  const noInstagramAccounts = (
+    <Typography variant="subtitle1">Instagramと連携されていません</Typography>
+  );
+
   return (
     <div className={classes.root}>
       <Typography variant="h4" component="h2" className={classes.header}>
@@ -73,32 +104,7 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
       <Typography variant="subtitle1" component="p" className={classes.txt}>
         現在Instagramの連携は招待制になっています。ご希望の方はご連絡下さい。
       </Typography>
-      {props.instagramAccounts.map((value) => {
-        if (props.loading) {
-          return (
-            <Skeleton
-              variant="rect"
-              className={`${classes.account} ${classes.skeleton}`}
-            />
-          );
-        }
-
-        return (
-          <div className={classes.account}>
-            <Button
-              onClick={() =>
-                props.getInstagramMedias(value.instagram_id, value.username, {})
-              }
-            >
-              {value.username}
-            </Button>
-            <DeleteButton
-              onClick={props.deleteInstagramAccount}
-              value={value.instagram_id}
-            />
-          </div>
-        );
-      })}
+      {props.instagramAccounts.length ? displayInstagramAccounts : noInstagramAccounts}
     </div>
   );
 };

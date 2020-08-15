@@ -27,3 +27,9 @@ export const Loading = () => {
     <ManageInstagramAccountsPresenter {...props} loading={true}/>
   )
 }
+export const noInstagramAccounts = () => {
+
+  return (
+    <ManageInstagramAccountsPresenter {...props} instagramAccounts={[]}/>
+  )
+}

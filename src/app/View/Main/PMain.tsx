@@ -280,14 +280,45 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
       );
     });
 
-    // 記事がもしなかった場合の表示
+    // 記事がなかった場合の表示
   const noArticles = (
-    <Grid item >
-      <Card
-        className={classes.card}
+    <Grid item>
+      <CardActionArea
+        className={classes.cardActionArea}
+        component="div"
       >
-        投稿がありません
-      </Card>
+        <Card className={classes.card}>
+          <StyledCardContent className={classes.cardContent}>
+            <div className={classes.thumbnailBox}>
+              <div className={`p-main-thumbnail ${classes.thumbnail}`}></div>
+            </div>
+
+            {/* {props.loading ? null : (
+            <div className={classes.tagsAndDate}>
+              <SelectedTags
+                className={classes.tags}
+                article={value}
+                tags={props.tags}
+              />
+              <Typography
+                gutterBottom
+                variant="subtitle1"
+                align="right"
+                // className={}
+              >
+                {sqlToDate(value.created_at)}
+              </Typography>
+            </div>
+          )} */}
+
+            <div className={`p-main-article-excerpt ${classes.excerpt}`}>
+              <Typography gutterBottom variant="subtitle1" align="center">
+                記事がありません
+              </Typography>
+            </div>
+          </StyledCardContent>
+        </Card>
+      </CardActionArea>
     </Grid>
   );
 

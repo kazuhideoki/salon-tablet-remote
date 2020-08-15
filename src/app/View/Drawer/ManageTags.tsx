@@ -14,6 +14,7 @@ import { Store } from '../../Store/Store'
 import { useDeleteTag } from '../../ActionCreator/tags/useDeleteTag'
 import { CharCounter } from "../viewComponents/CharCounter";
 import { Skeleton } from '@material-ui/lab';
+import tags_delete from '../../../pages/api/tags/delete';
 
 const useManageTagsProps = () => {
   const { appState } = React.useContext(Store);
@@ -109,6 +110,30 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ManageTagsPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
 
+  const displayTags = props.tags.map((value, key) => {
+          if (props.loading) {
+            return <Skeleton variant="rect" className={`${classes.tag} ${classes.skeleton}`} />;
+          }
+
+          return (
+            <Chip
+              key={key}
+              className={classes.tag}
+              label={value.tag_name}
+              color={
+                value.tag_id === props.edittingTagId ? "primary" : undefined
+              }
+              onClick={
+                props.isEditting && value.tag_id === props.edittingTagId // 編集中にもう一度タップすると新規作成に戻る
+                  ? () => props.handleOnCreateNew()
+                  : () => props.handleOnEditting(value.tag_id, value.tag_name)
+              }
+              onDelete={() => props.deleteTag(value.tag_id)}
+            />
+          );
+        })
+  const noTags = <Typography variant="subtitle1">タグが作成されていません</Typography>
+
   return (
     <div className={classes.root}>
       <Typography variant="h4" component="h2" className={classes.header}>
@@ -142,28 +167,9 @@ export const ManageTagsPresenter:React.FC<Props> = (props) => {
         {props.isEditting ? "更新" : "作成"}
       </Button>
       <div className={classes.tagsWrap}>
-        {props.tags.map((value, key) => {
-          if (props.loading) {
-            return <Skeleton variant="rect" className={`${classes.tag} ${classes.skeleton}`} />;
-          }
 
-          return (
-            <Chip
-              key={key}
-              className={classes.tag}
-              label={value.tag_name}
-              color={
-                value.tag_id === props.edittingTagId ? "primary" : undefined
-              }
-              onClick={
-                props.isEditting && value.tag_id === props.edittingTagId // 編集中にもう一度タップすると新規作成に戻る
-                  ? () => props.handleOnCreateNew()
-                  : () => props.handleOnEditting(value.tag_id, value.tag_name)
-              }
-              onDelete={() => props.deleteTag(value.tag_id)}
-            />
-          );
-        })}
+        {props.tags.length ? displayTags : noTags}
+
       </div>
     </div>
   );

@@ -48,3 +48,15 @@ export const Loading = () => {
     </>
   );
 }
+
+
+export const NoArticles = () => {
+  return (
+    <>
+      <div style={{ height: "65vh" }}>
+        <PMainPresenter {...props} articles={[]} />
+      </div>
+      ※全画面にして表示を確認
+    </>
+  );
+};

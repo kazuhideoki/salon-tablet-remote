@@ -33,3 +33,9 @@ export const Loading = () => {
     <ManageTagsPresenter {...props} loading={true}/>
   )
 }
+export const noTags = () => {
+
+  return (
+    <ManageTagsPresenter {...props} tags={[]}/>
+  )
+}
