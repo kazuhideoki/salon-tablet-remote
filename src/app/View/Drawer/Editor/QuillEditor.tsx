@@ -97,12 +97,12 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
         // formats={formats}
       />
 
-      <CharCounter
+      {/* <CharCounter
         charCount={charCount}
         limitCount={1000}
         align="right"
         isShowCount
-      />
+      /> */}
     </>
   );
 };

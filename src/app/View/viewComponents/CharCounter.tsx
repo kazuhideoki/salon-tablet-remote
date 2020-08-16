@@ -11,10 +11,11 @@ export type TCharCounter = {
 export const CharCounter:React.FC<TCharCounter> = (props) => {
   return (
     //@ts-ignore
-    <div>
+    <>
       {props.charCount <= props.limitCount || (
         <Typography
           variant="subtitle1"
+          component="span"
           align={props.align}
           color={props.charCount <= props.limitCount ? "textPrimary" : "error"}
         >
@@ -22,7 +23,7 @@ export const CharCounter:React.FC<TCharCounter> = (props) => {
         </Typography>
       )}
       {props.isShowCount && (
-        <Typography align={props.align}>
+        <Typography component="span" align={props.align}>
           <Typography
             variant="subtitle1"
             component="span"
@@ -32,15 +33,11 @@ export const CharCounter:React.FC<TCharCounter> = (props) => {
           >
             {props.charCount}
           </Typography>
-          <Typography
-            variant="subtitle1"
-            component="span"
-            color="textPrimary"
-          >
+          <Typography variant="subtitle1" component="span" color="textPrimary">
             /{props.limitCount}
           </Typography>
         </Typography>
       )}
-    </div>
+    </>
   );
 }

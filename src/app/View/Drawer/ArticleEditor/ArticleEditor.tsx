@@ -99,11 +99,17 @@ const useStyles = makeStyles((theme: Theme) =>
     selectTagsPopover: {
       marginBottom: theme.spacing(2),
     },
+    quillEditor: {
+      height: "auto",
+    },
     submitButtons: {
       position: "sticky",
       bottom: 0,
       zIndex: 100,
-      background: "white",
+      // background: "white",
+    },
+    charCounter: {
+      marginLeft: 'auto',
     },
   })
 );
@@ -143,16 +149,18 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
         tags={props.tags}
       />
 
-      <QuillEditor
-        editorText={props.editorText}
-        setEditorText={props.setEditorText}
-        setEditorTextExcerpt={props.setEditorTextExcerpt}
-        setEditorImg={props.setEditorImg}
-        //@ts-ignore
-        charCount={props.charCountArticleContent}
-        setCharCount={props.setCharCountArticlContent}
-      />
+      <div className={classes.quillEditor}>
+        <QuillEditor
+          editorText={props.editorText}
+          setEditorText={props.setEditorText}
+          setEditorTextExcerpt={props.setEditorTextExcerpt}
+          setEditorImg={props.setEditorImg}
+          charCount={props.charCountArticleContent}
+          setCharCount={props.setCharCountArticlContent}
+        />
+      </div>
       <Grid container className={classes.submitButtons}>
+      {/* <div className={classes.submitButtons}> */}
         <Grid item>
           <Button
             variant="contained"
@@ -183,7 +191,17 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
             下書き保存
           </Button>
         </Grid>
+        <Grid item className={classes.charCounter}>
+        {/* <Grid item> */}
+          <CharCounter
+            charCount={props.charCountArticleContent}
+            limitCount={1000}
+            align="right"
+            isShowCount
+          />
+        </Grid>
       </Grid>
+      {/* </div> */}
     </>
   );
 };

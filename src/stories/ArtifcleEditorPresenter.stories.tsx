@@ -27,11 +27,12 @@ const props = {
 };
 
 export const Normal = () => {
+  const [editorText,setEditorText] = React.useState('')
 
   return (
     <Provider>
 
-      <ArticleEditorPresenter {...props}/>
+      <ArticleEditorPresenter {...props} editorText={editorText} setEditorText={setEditorText}/>
     </Provider>
   )
 }
