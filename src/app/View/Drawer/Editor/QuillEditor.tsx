@@ -10,6 +10,7 @@ import { checkImg, removeImg } from "./handleImg";
 import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
 import { CharCounter } from '../../viewComponents/CharCounter';
 
+
 // ※■■■ReactQuillのスタイルはquill.scssに記述■■■
 
 
@@ -80,6 +81,7 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
       // modules: ["Resize", "DisplaySize", "Toolbar", Resize],
       modules: ["Resize", "DisplaySize", Resize],
     },
+    
     // imageDrop: true,
   };
 
@@ -94,7 +96,9 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
         }
         theme="snow"
         modules={modules}
+        scrollingContainer='body'
         // formats={formats}
+        
       />
 
       {/* <CharCounter

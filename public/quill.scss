@@ -2,6 +2,7 @@
 
 .quill {
   font-family: inherit; // Typographyのthemeを適応するためのinherit
+  border-radius: 24px; // Paperに合わせて
   .ql-container {
     font-family: inherit; // Typographyのthemeを適応するためのinherit
     .ql-editor {

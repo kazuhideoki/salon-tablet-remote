@@ -15,6 +15,9 @@ import { themeArgs } from '../../../Store/ThemeContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    button: {
+      marginRight: theme.spacing(1),
+    },
     gridList: {
       width: 300,
       height: 300,
@@ -84,6 +87,7 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, classNa
   return (
     <div className={className}>
       <Button
+        className={classes.button}
         aria-describedby={id}
         color="primary"
         onClick={handleClick}
