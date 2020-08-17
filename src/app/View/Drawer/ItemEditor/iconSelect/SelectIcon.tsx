@@ -5,7 +5,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import { Popover, Button, TextField, IconButton, SvgIconTypeMap, Typography } from '@material-ui/core';
 import { IconsSetting } from "./icons";
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { MoodBad, AddCircleOutlineOutlined, SentimentSatisfiedTwoTone } from '@material-ui/icons';
+import { MoodBad, AddCircleOutlineOutlined, SentimentSatisfiedTwoTone, EmojiEmotionsTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,6 +58,7 @@ export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon,
         onClick={handleClick}
         endIcon={ selectedIcon ? <IconItem icon={selectedIcon[0]} /> : '未選択'}
         size='large'
+        startIcon={<EmojiEmotionsTwoTone/>}
       >
         アイコン
       </Button>

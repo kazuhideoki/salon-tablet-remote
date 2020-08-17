@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { Store } from '../../../Store/Store';
 import { themeArgs } from '../../../Store/ThemeContext';
+import { TagsButton } from '../../Footer/PaginationBar/TagsButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -92,6 +93,7 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, classNa
         color="primary"
         onClick={handleClick}
         size="large"
+        startIcon={<TagsButton/>}
       >
         タグ
       </Button>

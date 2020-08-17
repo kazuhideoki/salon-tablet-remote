@@ -12,7 +12,7 @@ import {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
-      margin: theme.spacing(1),
+      // margin: theme.spacing(1),
       minWidth: 120,
     },
     selectEmpty: {
@@ -21,11 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectAppLink = ({appLinkUrl, setAppLinkUrl}) => {
+type Props = {
+  appLinkUrl: string
+  setAppLinkUrl: React.Dispatch<React.SetStateAction<string>>
+  className?: string
+}
+
+export const SelectAppLink:React.FC<Props> = ({appLinkUrl, setAppLinkUrl, className}) => {
   const classes = useStyles()
 
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl className={`${classes.formControl} ${className}`}>
       <InputLabel id="select-app-label">アプリ</InputLabel>
       <Select
         labelId="select-app-label"

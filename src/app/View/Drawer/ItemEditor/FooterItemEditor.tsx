@@ -8,7 +8,7 @@ import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, useMediaQuery } from '@material-ui/core';
-import { SelectAppLink } from './selectAppLink/SelectAppLink';
+import { SelectAppLink } from './SelectAppLink';
 import { Store } from "../../../Store/Store";
 import { FooterItem, T_modal_size } from '../../../Store/Types';
 import { CharCounter } from "../../viewComponents/CharCounter";
@@ -110,29 +110,47 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       margin: theme.spacing(2),
     },
-    title: {
-      width: 350,
+    topDiv: {
+      display: "flex",
       marginBottom: theme.spacing(2),
+    },
+    title: {
+      width: "50%",
+      margin: `0 ${theme.spacing(2)}px`,
       maxWidth: "100%",
     },
     selectIcon: {
-      marginBottom: theme.spacing(2),
+      margin: `0 ${theme.spacing(2)}px`,
     },
+
     switchOnTapModal: {
-      marginBottom: theme.spacing(1),
+      margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
     selectModalSize: {
-      marginBottom: theme.spacing(1),
+      margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
+
     linkTextField: {
       minWidth: "80%",
       maxWidth: "100%",
+      margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
-    submitButtons: {
+    appLink: {
+      margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
+    },
+
+    bottomDiv: {
       position: "sticky",
       bottom: 0,
       zIndex: 100,
-      background: "white",
+    },
+    charCounter: {
+      // marginLeft: "auto",
+      textAlign: "right",
+    },
+    submitButton: {
+      marginLeft: "auto",
+      marginRight: theme.spacing(1),
     },
   })
 );
@@ -176,6 +194,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                <SelectAppLink
                  appLinkUrl={props.appLinkUrl}
                  setAppLinkUrl={props.setAppLinkUrl}
+                 className={classes.appLink}
                />
              </div>
            );
@@ -186,23 +205,29 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              <Typography variant="h4" component="h2" className={classes.header}>
                {props.isEditting ? "アイテム編集" : "アイテム作成"}
              </Typography>
-             <TextField
-               id="icon-name-text-field"
-               label="アイテム名"
-               multiline
-               value={props.titleText}
-               onChange={(e) => props.handleOnChangeIconName(e)}
-               className={classes.title}
-             />
-             <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。" />
-             <CharCounter charCount={props.titleText.length} limitCount={100} />
-             <br />
 
-             <SelectIcon
-               className={classes.selectIcon}
-               selectedIcon={props.selectedIcon}
-               dispatchSelectedIcon={props.dispatchSelectedIcon}
-             />
+             <div className={classes.topDiv}>
+               <TextField
+                 id="icon-name-text-field"
+                 label="アイテム名"
+                 multiline
+                 value={props.titleText}
+                 onChange={(e) => props.handleOnChangeIconName(e)}
+                 className={classes.title}
+               />
+               <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。" />
+               <CharCounter
+                 charCount={props.titleText.length}
+                 limitCount={100}
+               />
+               <br />
+
+               <SelectIcon
+                 className={classes.selectIcon}
+                 selectedIcon={props.selectedIcon}
+                 dispatchSelectedIcon={props.dispatchSelectedIcon}
+               />
+             </div>
 
              <SwitchOnTapModal
                className={classes.switchOnTapModal}
@@ -212,38 +237,48 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
 
              {mainField}
 
-             <Grid container className={classes.submitButtons}>
-               <Grid item>
-                 <Button
-                  variant='contained'
-                  color='primary'
-                   onClick={() => props.handleSubmit({ is_published: true })}
-                   startIcon={<PublishTwoTone/>}
-                   disabled={
-                     props.titleText.length < 101 &&
-                     props.charCountFooterItemContent < 1001
-                       ? false
-                       : true
-                   }
-                 >
-                   {props.isEditting ? "更新" : "投稿"}
-                 </Button>
+             <div className={classes.bottomDiv}>
+               <div className={classes.charCounter}>
+                 <CharCounter
+                   charCount={props.charCountFooterItemContent}
+                   limitCount={1000}
+                   align="right"
+                   isShowCount
+                 />
+               </div>
+               <Grid container>
+                 <Grid item className={classes.submitButton}>
+                   <Button
+                     variant="contained"
+                     color="primary"
+                     onClick={() => props.handleSubmit({ is_published: true })}
+                     startIcon={<PublishTwoTone />}
+                     disabled={
+                       props.titleText.length < 101 &&
+                       props.charCountFooterItemContent < 1001
+                         ? false
+                         : true
+                     }
+                   >
+                     {props.isEditting ? "更新" : "投稿"}
+                   </Button>
+                 </Grid>
+                 <Grid item>
+                   <Button
+                     onClick={() => props.handleSubmit({ is_published: false })}
+                     startIcon={<SaveTwoTone />}
+                     disabled={
+                       props.titleText.length < 101 &&
+                       props.charCountFooterItemContent < 1001
+                         ? false
+                         : true
+                     }
+                   >
+                     下書き保存
+                   </Button>
+                 </Grid>
                </Grid>
-               <Grid item>
-                 <Button
-                   onClick={() => props.handleSubmit({ is_published: false })}
-                   startIcon={<SaveTwoTone/>}
-                   disabled={
-                     props.titleText.length < 101 &&
-                     props.charCountFooterItemContent < 1001
-                       ? false
-                       : true
-                   }
-                 >
-                   下書き保存
-                 </Button>
-               </Grid>
-             </Grid>
+             </div>
            </>
          );
        };

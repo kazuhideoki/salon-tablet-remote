@@ -97,33 +97,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     topDiv: {
       display: 'flex',
-      // margin: `0 ${theme.spacing(2)}px ${theme.spacing(2)}px`
       marginBottom: theme.spacing(2),
     },
     title: {
       width: "50%",
-      // marginBottom: theme.spacing(2),
       marginLeft: theme.spacing(2),
       maxWidth: "100%",
     },
     selectTagsPopover: {
       margin: `0 ${theme.spacing(2)}px`,
-      // margin: theme.spacing(2),
     },
 
-    quillEditor: {
-      // height: "auto",
-      // position: "sticky",
-      // top: 0,
-      // bottom: 40,
-    },
     bottomDiv: {
       position: "sticky",
       bottom: 0,
       zIndex: 100,
     },
     charCounter: {
-      // marginLeft: "auto",
       textAlign: "right",
     },
     submitButton: {
@@ -159,7 +149,7 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
           setSelectedTags={props.setSelectedTags}
           tags={props.tags}
         />
-
+      </div>
 
         {/* {props.createdAt ? (
           <Typography>作成日:{sqlToDate(props.createdAt)}</Typography>
@@ -167,9 +157,7 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
         {props.updatedAt ? (
           <Typography>編集日:{sqlToDate(props.updatedAt)}</Typography>
         ) : null} */}
-      </div>
 
-      {/* <div className={classes.quillEditor}> */}
       <QuillEditor
         editorText={props.editorText}
         setEditorText={props.setEditorText}
@@ -178,7 +166,6 @@ export const ArticleEditorPresenter:React.FC<Props> = (props) => {
         charCount={props.charCountArticleContent}
         setCharCount={props.setCharCountArticlContent}
       />
-      {/* </div> */}
 
       <div className={classes.bottomDiv}>
         <div className={classes.charCounter}>
