@@ -214,4 +214,5 @@ export class Resize {
       el.style.cursor = value; // eslint-disable-line no-param-reassign
     });
   };
+  onUpdate = () => {};
 }

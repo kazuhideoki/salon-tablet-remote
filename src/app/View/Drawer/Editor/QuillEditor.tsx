@@ -77,9 +77,7 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
     imageResize: {
       parchment: Quill.import("parchment"),
       // ResizeはimageのResizeをtouchイベントでも適応
-      // ※画像をタップしたときに t.onUpdateのエラーが出るが、動作に問題はない？
-      // modules: ["Resize", "DisplaySize", "Toolbar", Resize],
-      modules: ["Resize", "DisplaySize", Resize],
+      modules: [ "DisplaySize", "Toolbar", Resize],
     },
     
     // imageDrop: true,
@@ -100,13 +98,6 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
         // formats={formats}
         
       />
-
-      {/* <CharCounter
-        charCount={charCount}
-        limitCount={1000}
-        align="right"
-        isShowCount
-      /> */}
     </>
   );
 };
