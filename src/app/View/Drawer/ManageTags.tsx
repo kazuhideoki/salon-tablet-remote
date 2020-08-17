@@ -87,25 +87,38 @@ type Props = ReturnType<typeof useManageTagsProps>
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      margin: theme.spacing(2)
+      // margin: theme.spacing(2)
     },
     header: {
-      margin: theme.spacing(2)
+      margin: theme.spacing(2),
+    },
+    edittingInfo: {
+      margin: `0 ${theme.spacing(2)}px ${theme.spacing(2)}px`,
+    },
+    textFieldAndButton: {
+      display: "flex",
+      marginBottom: theme.spacing(2),
+    },
+    textField: {
+      marginLeft: theme.spacing(2),
+    },
+    button: {
+      margin: `0 ${theme.spacing(2)}px`,
     },
     tagsWrap: {
       display: "flex",
       flexWrap: "wrap",
     },
     tag: {
-      margin: theme.spacing(1)
+      margin: theme.spacing(1),
     },
     skeleton: {
       width: 80,
       height: 32,
       borderRadius: 16,
-    }
+    },
   })
-)
+);
 
 export const ManageTagsPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
@@ -139,37 +152,40 @@ export const ManageTagsPresenter:React.FC<Props> = (props) => {
       <Typography variant="h4" component="h2" className={classes.header}>
         タグ管理
       </Typography>
-      <p>
+      <Typography variant="h5" component="p" className={classes.edittingInfo}>
         {props.isEditting
           ? `タグ"${props.edittingTagName}"を編集中`
           : "新規作成"}
-      </p>
-      <TextField
-        name="createTag"
-        label="タグ名"
-        id="create_tag"
-        value={props.tagNameField}
-        onChange={(e) => props.setTagNameField(e.target.value)}
-        onKeyPress={(e) => {
-          if (e.key == "Enter") {
-            e.preventDefault();
-            props.handleOnClick();
-          }
-        }}
-      />
+      </Typography>
+      <div className={classes.textFieldAndButton}>
+        <TextField
+          name="createTag"
+          label="タグ名"
+          id="create_tag"
+          value={props.tagNameField}
+          onChange={(e) => props.setTagNameField(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key == "Enter") {
+              e.preventDefault();
+              props.handleOnClick();
+            }
+          }}
+          className={classes.textField}
+        />
 
-      <CharCounter charCount={props.tagNameField.length} limitCount={20} />
+        <CharCounter charCount={props.tagNameField.length} limitCount={20} />
 
-      <Button
-        onClick={() => props.handleOnClick()}
-        disabled={!props.isValidTagName()}
-      >
-        {props.isEditting ? "更新" : "作成"}
-      </Button>
+        <Button
+          onClick={() => props.handleOnClick()}
+          disabled={!props.isValidTagName()}
+          className={classes.button}
+        >
+          {props.isEditting ? "更新" : "作成"}
+        </Button>
+      </div>
+
       <div className={classes.tagsWrap}>
-
         {props.tags.length ? displayTags : noTags}
-
       </div>
     </div>
   );

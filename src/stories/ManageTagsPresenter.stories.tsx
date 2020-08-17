@@ -1,6 +1,7 @@
 import React from 'react';
 import { ManageTagsPresenter } from '../app/View/Drawer/ManageTags';
 import { sampleTags } from './lib/sampleTags';
+import { Provider } from './lib/ThemeProvider';
 export default {
   title: 'Drawer/ManageTagsPresenter',
   component: ManageTagsPresenter,
@@ -24,18 +25,26 @@ const props = {
 export const Normal = () => {
 
   return (
+    <Provider>
     <ManageTagsPresenter {...props}/>
+    </Provider>
   )
 }
 export const Loading = () => {
 
   return (
-    <ManageTagsPresenter {...props} loading={true}/>
+    <Provider>
+
+      <ManageTagsPresenter {...props} loading={true}/>
+    </Provider>
   )
 }
 export const noTags = () => {
 
   return (
-    <ManageTagsPresenter {...props} tags={[]}/>
+    <Provider>
+      <ManageTagsPresenter {...props} tags={[]}/>
+
+    </Provider>
   )
 }
