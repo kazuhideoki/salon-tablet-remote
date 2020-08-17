@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme: Theme) =>
     tagsWrap: {
       display: "flex",
       flexWrap: "wrap",
+      margin: `0 ${theme.spacing(2)}px`,
     },
     tag: {
       margin: theme.spacing(1),
