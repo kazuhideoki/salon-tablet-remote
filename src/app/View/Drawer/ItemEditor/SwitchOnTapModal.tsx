@@ -14,19 +14,20 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 }));
 
-type Type = {
+type Props = {
   onTap: T_on_tap,
   dispatchAppState: React.Dispatch<AppStateAction>,
+  className?: string
 }
 
 // export const SwitchOnTapModal = ({ onTap, setOnTap }) => {
-export const SwitchOnTapModal = ({ onTap, dispatchAppState, className}) => {
+export const SwitchOnTapModal:React.FC<Props> = ({ onTap, dispatchAppState, className}) => {
   const classes = useStyles()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatchAppState({
       type: "SET_ON_TAP",
-      payload: (event.target as HTMLInputElement).value,
+      payload: (event.target as HTMLInputElement).value as T_on_tap,
     });
   };
 

@@ -12,7 +12,9 @@ import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
-export function SelectModalSize({modalSize, className}) {
+type Props = {modalSize: T_modal_size, className?: string}
+
+export const SelectModalSize:React.FC<Props> = ({modalSize, className}) => {
   const classes = useStyles();
   const { appState, dispatchAppState} = React.useContext(Store)
   const isMobile = useMediaQuery("(max-width:480px)");
