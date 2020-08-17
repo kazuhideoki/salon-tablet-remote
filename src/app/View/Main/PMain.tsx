@@ -386,8 +386,8 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     </>
                   ) : (
                     <>
-                      {value.caption.slice(0, 100)}
-                      {value.caption.length > 100 ? "..." : ""}
+                      {value.caption && value.caption.slice(0, 100)}
+                      {value.caption && value.caption.length > 100 ? "..." : ""}
                     </>
                   )}
                 </Typography>
