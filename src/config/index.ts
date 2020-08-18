@@ -8,7 +8,7 @@ const port = test
 
 
     
-// HTTPSは "npm run https" のときに env変数として "https://localhoset:3000"で設定
+// HTTPSは "npm run https" のときに env変数として "https://localhost:3000"で設定
 // サーバーサイドでapi通信をするときに、sslの有無で切り替える
 export const localhost = process.env.NEXT_PUBLIC_SITE_DEV_HTTPS
          ? process.env.NEXT_PUBLIC_SITE_DEV_HTTPS + port

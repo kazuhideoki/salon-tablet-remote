@@ -8,6 +8,8 @@ import { server, localhost } from "../../../config";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
+  console.log("apiArticlesGetだよ");
+  
   const str = process.browser ? server : localhost
 
   const res = await fetch(
@@ -44,6 +46,8 @@ export type T_articles_get_return = {
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+    console.log('articles/getだよ');
+    
     
     const { page, selectingTags, isSetting, userId }: T_articles_get = req.body;
     // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
