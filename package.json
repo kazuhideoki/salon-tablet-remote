@@ -6,9 +6,10 @@
     "tsc": "tsc",
     "test": "jest src/__tests__/.*/*.test.tsx?$",
     "dev": "NODE_OPTIONS=--max_old_space_size=4096 next",
-    "https": "HTTPS=https://localhost:3000 NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json src/server/server.ts",
+    "https": "NEXT_PUBLIC_SITE_DEV_HTTPS=https://localhost: NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json src/server/server.ts",
     "build": "NODE_OPTIONS=--max_old_space_size=4096 next build",
     "start": "NODE_ENV=production next start",
+    "tstart": "NODE_ENV=production TEST=true next start -p 3001",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
