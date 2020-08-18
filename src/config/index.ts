@@ -31,3 +31,18 @@ export const instagramRedirectHost = dev
          : test
            ? process.env.NEXT_PUBLIC_SITE_TEST
            : process.env.NEXT_PUBLIC_SITE;
+
+console.log(
+    "devは " +
+    dev +
+    " testは " +
+    test +
+    " portは " +
+    port +
+    " localhostは " +
+    localhost +
+    " serverは " +
+    server +
+    " instagramRedirectHostは " +
+    instagramRedirectHost
+);
