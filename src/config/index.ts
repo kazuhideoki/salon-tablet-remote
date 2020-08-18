@@ -22,12 +22,12 @@ export const server = dev
            : process.env.NEXT_PUBLIC_SITE_DEV + port
            
          : test
-           ? process.env.NEXT_PUBLIC_SITE
-           : process.env.NEXT_PUBLIC_SITE_TEST;
+           ? process.env.NEXT_PUBLIC_SITE_TEST
+           : process.env.NEXT_PUBLIC_SITE;
 
 // instagram apiでは、redirect uriにdev環境でもhttpsが必要。
 export const instagramRedirectHost = dev
          ? process.env.NEXT_PUBLIC_SITE_DEV_HTTPS + port
          : test
-           ? process.env.NEXT_PUBLIC_SITE
-           : process.env.NEXT_PUBLIC_SITE_TEST;
+           ? process.env.NEXT_PUBLIC_SITE_TEST
+           : process.env.NEXT_PUBLIC_SITE;
