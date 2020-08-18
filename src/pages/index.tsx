@@ -7,7 +7,7 @@ import { GetServerSideProps } from "next";
 //@ts-ignore
 import { TopPage } from "../pageComponent/TopPage";
 import { T_articles_get, apiArticlesGet } from "./api/articles/get";
-import { localhost } from "../config";
+import { localhost, server } from "../config";
 import { ApiUserInfoGetFromEmail } from "./api/user_info/getUserInfoFromEmail";
 import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
@@ -36,6 +36,9 @@ const Index = (props: IndexProps) => {
 
   if (!props.data.session) {
 
+    console.log('serverは ' + server);
+    
+
     return (
       <>
         <TopPage csrfToken={props.csrfToken} providers={props.providers}/>
@@ -43,6 +46,8 @@ const Index = (props: IndexProps) => {
     );
 
   }
+
+  console.log("serverは " + server);
 
   // テーマ、記事データ、appの状態管理を読み込む
   return (
