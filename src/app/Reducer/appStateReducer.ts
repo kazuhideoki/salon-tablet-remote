@@ -322,6 +322,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           instagramMedias: initInstagramMedias,
+          isShowInstagram: false,
         };
         break;
 
