@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     topDiv: {
-      display: 'flex',
+      display: "flex",
       marginBottom: theme.spacing(2),
     },
     title: {
@@ -111,6 +111,8 @@ const useStyles = makeStyles((theme: Theme) =>
     bottomDiv: {
       position: "sticky",
       bottom: 0,
+      // right: theme.spacing(2),
+      marginRight: theme.spacing(2),
       zIndex: 100,
     },
     charCounter: {
@@ -118,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     submitButton: {
       marginLeft: "auto",
-      marginRight: theme.spacing(1)
+      marginRight: theme.spacing(1),
     },
   })
 );

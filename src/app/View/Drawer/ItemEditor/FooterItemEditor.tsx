@@ -142,6 +142,7 @@ const useStyles = makeStyles((theme: Theme) =>
     bottomDiv: {
       position: "sticky",
       bottom: 0,
+      marginRight: theme.spacing(2),
       zIndex: 100,
     },
     charCounter: {
