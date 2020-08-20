@@ -15,6 +15,7 @@ export const Normal = () => {
   const [editorText, setEditorText] = React.useState("");
   const [charCounts, setCharCount] = React.useState(0);
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState('');
+  const [editorImg, setEditorImg] = React.useState('');
 
   return (
     <QuillEditor
@@ -23,6 +24,7 @@ export const Normal = () => {
       setEditorTextExcerpt={setEditorTextExcerpt}
       charCount={charCounts}
       setCharCount={setCharCount}
+      setEditorImg={setEditorImg}
     />
   );
 }

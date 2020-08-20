@@ -10,6 +10,11 @@ module.exports = {
       use: ["style-loader", "css-loader", "sass-loader"],
       include: path.resolve(__dirname, "../"),
     });
+    // use svgr for svg files
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack", "url-loader"],
+    })
 
     // Return the altered config
     return config;
