@@ -9,12 +9,13 @@ import { Typography } from '@material-ui/core';
 import { checkImg, removeImg } from "./handleImg";
 import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
 import { CharCounter } from '../../viewComponents/CharCounter';
+import { removeExceededImgs } from './removeExceededImgs';
 
 
 // ※■■■ReactQuillのスタイルはquill.scssに記述■■■
 
 
-
+const maxNumberOfImgs = 3
 
 // コピペ、ドラック/ドロップのモジュール
 // import { ImageDrop } from "quill-image-drop-module";
@@ -38,25 +39,50 @@ type Props = {
 }
 export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }) => {  
   
-  const [hasImg, setHasImg] = React.useState(false)
+  const [hasMaxImgs, setHasMaxImgs] = React.useState(false)
   
   const handleOnChange = (content, delta, source, editor) => {
     setEditorText(content)
     setEditorTextExcerpt(editor.getText(0, 100)) 
-
-    // checkImgで２個以上画像がある場合一つにする。画像データが返り値
-    const imgData = checkImg(editor.getContents(), setHasImg, () => removeImg('react_quill_editor'));
-    if (setEditorImg) {
-      // ImgDataをarticle_img用に格納する
-      setEditorImg(imgData)
-    }
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
     const plainText = editor.getText();
     setCharCount(plainText.length);
+
+    
+    const ImgNode = document.querySelectorAll("#react_quill_editor .ql-editor img");
+    removeExceededImgs(ImgNode,maxNumberOfImgs);
+    setEditorImg(ImgNode[0]['src']);
+
+
+    
+    // const ImgBlot = Quill.find(ImgNode);
+    // console.log(ImgBlot);
+
+    // while (ImgNode.length > maxNumberOfImgs) {
+    //   ImgNode.forEach((value, key) => {
+    //     if (key > maxNumberOfImgs) {
+    //       return null
+    //     }
+    //     return value
+    //   })
+     
+    // }
+    // setEditorImg(document.querySelector("#react_quill_editor .ql-editor img"));
+
+
+
+    // // checkImgで２個以上画像がある場合一つにする。画像データが返り値
+    // const imgData = checkImg(editor.getContents(), setHasMaxImgs, () =>
+    //   removeImg("react_quill_editor")
+    // );
+    // if (setEditorImg) {
+    //   // ImgDataをarticle_img用に格納する
+    //   setEditorImg(imgData)
+    // }
     
   }
   
-  const image = hasImg ? "" : "image"; // 画像が挿入されているか判定して、なければ画像追加ボタンを表示
+  const image = hasMaxImgs ? "" : "image"; // 画像が挿入されているか判定して、なければ画像追加ボタンを表示
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -88,6 +114,7 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
     <>
       <ReactQuill
         className="react_quill_editor"
+        id="react_quill_editor"
         value={editorText}
         onChange={(content, delta, source, editor) =>
           handleOnChange(content, delta, source, editor)
