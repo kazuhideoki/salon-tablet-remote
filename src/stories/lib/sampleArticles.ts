@@ -16,7 +16,7 @@ export const sampleData: TArticles = [
            article_excerpt:
              "左上のメニューから編集モードに切り替えてください。\n",
            article_img: "",
-           is_sample_data: true,
+           data_type: "default_data",
            tag_ids: [],
          },
          {
@@ -31,7 +31,7 @@ export const sampleData: TArticles = [
            article_excerpt:
              "SALON TABLETとは 美容師とお客さんをつなぐタブレット専用webアプリケーションです。 始め方 ユーザー情報の登録。「名前」「お店の名前」「パスワード」は設定しましたか？ ホーム画面に追加...\n",
            article_img: "",
-           is_sample_data: true,
+           data_type: "default_data",
            tag_ids: [],
          },
        ];

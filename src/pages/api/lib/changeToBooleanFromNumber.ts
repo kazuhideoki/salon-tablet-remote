@@ -10,13 +10,6 @@ export const changeToBooleanFromNumber = (data:FooterItems) => {
       value.is_published = false
     }
 
-    //@ts-ignore
-    if (value.is_sample_data === 1) {
-      value.is_sample_data = true;
-    } else {
-      value.is_sample_data = false;
-    }
-
     return value
     
   })

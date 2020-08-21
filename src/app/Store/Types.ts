@@ -29,7 +29,8 @@ const initPagination = {
 };
 export type PaginationParams = typeof initPagination;
 
-export type T_is_sample = boolean;
+export type T_data_type_footer_item = 'default_data' | 'sample_data'
+export type T_data_type_article = T_data_type_footer_item | 'web_article'
 
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
@@ -54,7 +55,7 @@ export type ArticleWithoutArticleId = {
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  is_sample_data: T_is_sample;
+  data_type: T_data_type_article;
 };
 export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
 export type TArticles = TArticle[];
@@ -89,7 +90,7 @@ export type FooterItemWithoutId = {
   modal_size: T_modal_size;
   order: T_order;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  is_sample_data: T_is_sample;
+  data_type: T_data_type_footer_item;
 };
 export type FooterItem = {
   footer_item_id: T_footer_item_id;
