@@ -2,6 +2,7 @@ import React from "react";
 import { useGetArticles } from "./useGetArticles";
 import { Store } from "../../Store/Store";
 import { T_articles_create, apiArticlesCreate } from "../../../pages/api/articles/create";
+import { T_data_type_article } from "../../Store/Types";
 
 export type TCreateArticle = {
   is_published: boolean
@@ -10,6 +11,7 @@ export type TCreateArticle = {
   editorTextExcerpt: string;
   editorImg: string;
   selectedTags: number[];
+  dataType: T_data_type_article
 };
 export const useCreateArticle =   () => {
   const getArticles = useGetArticles();
@@ -30,6 +32,7 @@ export const useCreateArticle =   () => {
       tag_ids: param.selectedTags.length
       ? JSON.stringify(param.selectedTags)
       : null,
+      data_type: param.dataType,
       user_id: appState.userInfo.user_id,
     };
 

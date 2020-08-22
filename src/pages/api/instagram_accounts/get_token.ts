@@ -67,7 +67,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         console.log("userProfileは " + JSON.stringify(userProfile));
 
         const sessionObj: TSessionOnj = await getSession({ req });
-        console.log("sessionObjは " + JSON.stringify(sessionObj));
+        console.log("get_tokenのsessionObjは " + JSON.stringify(sessionObj));
         const { user_id } = await ApiUserInfoGetFromEmail(
           sessionObj.user.email
         );

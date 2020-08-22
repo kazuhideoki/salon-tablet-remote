@@ -33,6 +33,7 @@ export const useUpdateArticle = () => {
         tag_ids: param.selectedTags.length
           ? JSON.stringify(param.selectedTags)
           : null,
+        data_type: param.dataType,
       },
       article_id: appState.edittingPrams.article.article_id,
     };

@@ -9,6 +9,7 @@ import {
   T_article_id,
   T_article_excerpt,
   T_article_img,
+  T_data_type_article,
 } from "../../../app/Store/Types";
 import { T_articles_create } from "./create";
 
@@ -33,6 +34,7 @@ export type T_articles_update_params = {
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
   tag_ids: string | null;
+  data_type: T_data_type_article;
 };
 // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
 export type T_articles_update = {
