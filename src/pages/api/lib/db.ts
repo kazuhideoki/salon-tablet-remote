@@ -2,16 +2,11 @@ import serverlessMysql from "serverless-mysql";
 
 const mysql = serverlessMysql({
   config: {
-    // host: process.env.MYSQL_HOST,
-    // database: process.env.MYSQL_DATABASE,
-    // user: process.env.MYSQL_USER,
-    // password: process.env.MYSQL_PASSWORD,
-
-    // .envファイル読み込めずとりあえず直接設定
-    host: "localhost",
-    database: "salon_tablet",
-    user: "root",
-    password: "root",
+    
+    host: process.env.NEXT_PUBLIC_MYSQL_HOST,
+    database: process.env.NEXT_PUBLIC_MYSQL_DATABASE,
+    user: process.env.NEXT_PUBLIC_MYSQL_USER,
+    password: process.env.NEXT_PUBLIC_MYSQL_PASSWORD,
   },
 });
 
