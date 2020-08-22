@@ -15,6 +15,7 @@ type Props = {
   dataType: T_data_type_article | T_data_type_footer_item
   setDataType: React.Dispatch<React.SetStateAction<T_data_type_article | T_data_type_footer_item>>
   className?: string;
+  forFooter?: boolean
 };
 
 // export const SwitchOnTapModal = ({ onTap, setOnTap }) => {
@@ -22,6 +23,7 @@ export const SwitchDataTypeBox: React.FC<Props> = ({
          dataType,
          setDataType,
          className,
+         forFooter = false,
        }) => {
          const classes = useStyles();
 
@@ -53,11 +55,13 @@ export const SwitchDataTypeBox: React.FC<Props> = ({
                    control={<Radio />}
                    label="サンプルデータ"
                  />
-                 <FormControlLabel
-                   value="web_article"
-                   control={<Radio />}
-                   label="ウェブ記事"
-                 />
+                 {forFooter === true ? null : (
+                   <FormControlLabel
+                     value="web_article"
+                     control={<Radio />}
+                     label="ウェブ記事"
+                   />
+                 )}
                </RadioGroup>
              </FormControl>
            </div>

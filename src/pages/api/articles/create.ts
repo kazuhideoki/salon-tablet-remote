@@ -13,7 +13,6 @@ import {
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse } from "../lib/apiTypes";
-import { apiCheckIsAdmin } from "../user_info/check_is_admin";
 import { TSessionOnj } from "../..";
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { ApiUserInfoGetFromEmail } from "../user_info/getUserInfoFromEmail";

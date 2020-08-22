@@ -131,6 +131,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
         ) : null}
 
         {showDataType(value.data_type, classes.showDataType)}
+        
         {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
         {value.on_tap === "modal" ? (
           <IconAndText
