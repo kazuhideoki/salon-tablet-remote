@@ -13,7 +13,7 @@ export type TCreateArticle = {
   selectedTags: number[];
   dataType: T_data_type_article
 };
-export const useCreateArticle =   () => {
+export const useCreateArticle =  () => {
   const getArticles = useGetArticles();
   const { dispatchAppState, appState } = React.useContext(
     Store
@@ -21,6 +21,7 @@ export const useCreateArticle =   () => {
   
   return async ( param: TCreateArticle) => {
 
+    dispatchAppState({ type: "CLOSE_MODAL" });
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
     
     const params: T_articles_create = {

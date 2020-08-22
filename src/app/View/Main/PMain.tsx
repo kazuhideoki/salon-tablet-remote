@@ -22,6 +22,7 @@ import { SelectedTags } from "./SelectedTags";
 import { PlayArrowRounded } from "@material-ui/icons";
 import { TArticle } from "../../Store/Types";
 import { Skeleton } from "@material-ui/lab";
+import { showDataType } from "./showDataType";
 
 export const usePMainProps = () => {
   const { appState, dispatchAppState } = React.useContext(
@@ -88,6 +89,20 @@ const useStyles = makeStyles((theme) => {
       overflowY: "scroll",
       height: "100%",
     },
+    editButtonsBox: {
+      position: "absolute",
+      top: 0,
+      right: 0,
+
+      zIndex: theme.zIndex.snackbar,
+    },
+    showDataType: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+
+      zIndex: theme.zIndex.snackbar,
+    },
     cardContent: {
       position: "relative",
       padding: 0,
@@ -141,13 +156,7 @@ const useStyles = makeStyles((theme) => {
       right: theme.spacing(3),
       left: theme.spacing(3),
     },
-    editButtonsBox: {
-      position: "absolute",
-      top: 0,
-      right: 0,
-
-      zIndex: theme.zIndex.snackbar,
-    },
+    
   });
 
 })
@@ -199,6 +208,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                     />
                   </EditButtonsBox>
                 ) : null}
+                {showDataType(value.data_type, classes.showDataType)}
 
                 <div className={classes.thumbnailBox}>
                   {props.loading ? (

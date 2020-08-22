@@ -20,6 +20,7 @@ export const useUpdateArticle = () => {
   
   return async (param: TUpdateArticle) => {
 
+    dispatchAppState({ type: "CLOSE_MODAL" });
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
    
     const params: T_articles_update = {

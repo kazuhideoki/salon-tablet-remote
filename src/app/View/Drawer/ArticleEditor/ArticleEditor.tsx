@@ -12,6 +12,8 @@ import { CharCounter } from "../../viewComponents/CharCounter";
 import { Store } from "../../../Store/Store";
 import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
 import { SwitchDataTypeBox } from "../Editor/SwitchDataTypeBox";
+import pure from "recompose/pure";
+
 
 const useArticleEditorProps = () => {
   const { appState } = React.useContext(Store);
@@ -135,7 +137,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type TUseArticleEditorProps = ReturnType<typeof useArticleEditorProps>
 
-export const ArticleEditorPresenter: React.FC<TUseArticleEditorProps> = (
+export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = (
          props
        ) => {
          const classes = useStyles();
@@ -233,6 +235,8 @@ export const ArticleEditorPresenter: React.FC<TUseArticleEditorProps> = (
            </div>
          );
        };
+// export const ArticleEditorPresenter = React.memo(ArticleEditorPresenterOriginal)
+export const ArticleEditorPresenter = pure(ArticleEditorPresenterOriginal)
 
 const ArticleEditor = () => {
   const props = useArticleEditorProps()
@@ -240,3 +244,4 @@ const ArticleEditor = () => {
   return <ArticleEditorPresenter {...props}/>
 }
 export default ArticleEditor
+
