@@ -11,6 +11,7 @@ import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
+import { showDataType } from "../Main/showDataType";
 // import { useCalcFooterPadding } from "./useCalcFooterPadding";
 
 export const useFooterProps = () => {
@@ -80,6 +81,13 @@ const useStyles = makeStyles((theme) =>
       zIndex: 100,
       // backgroundColor: "rgba(255,255,255,0.8)",
     },
+    showDataType: {
+      position: "absolute",
+      top: 48,
+      left: 0,
+
+      zIndex: theme.zIndex.snackbar,
+    },
     isSettingIconAndText: {
       margin: "0 20px",
     },
@@ -122,6 +130,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
           </EditButtonsBox>
         ) : null}
 
+        {showDataType(value.data_type, classes.showDataType)}
         {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
         {value.on_tap === "modal" ? (
           <IconAndText

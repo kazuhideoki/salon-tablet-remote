@@ -33,7 +33,7 @@ export const samplefooterItems: FooterItems = [
            user_id: 1,
            app_link_url: "",
            modal_size: "large",
-           data_type: "default_data",
+           data_type: "sample_data",
          },
          {
            footer_item_id: 4,
