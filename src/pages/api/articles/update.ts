@@ -12,6 +12,7 @@ import {
   T_data_type_article,
 } from "../../../app/Store/Types";
 import { T_articles_create } from "./create";
+import { checkIsAdmin } from "../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiResponse<T_articles_update_return>> => {
@@ -51,6 +52,12 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     const id: T_article_id = req.body.article_id;
 
     try {
+      const isAdmin = await checkIsAdmin(req);
+
+      if (isAdmin === false) {
+        params.data_type = "default_data";
+      }
+
       const data = await db(`UPDATE articles SET ? WHERE article_id = ?`, [
         params,
         id,

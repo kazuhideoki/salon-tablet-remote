@@ -42,6 +42,7 @@ export const useCreateFooterItem = () => {
 
   return async (param: TCreateFooterItem) => {
 
+    dispatchAppState({ type: "CLOSE_MODAL" });
     dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
 
     const params: T_footer_items_create = {
