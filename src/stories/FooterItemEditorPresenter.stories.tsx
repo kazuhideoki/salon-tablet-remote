@@ -27,6 +27,8 @@ const props: TUseFooterItemEditorProps = {
   handleOnChangeIconName: null,
   handleSubmit: null,
   modalSize: "large",
+  dataType: "default_data",
+  setDataType: null,
 };
 
 export const Normal = () => {

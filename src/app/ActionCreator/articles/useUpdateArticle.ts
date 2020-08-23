@@ -20,6 +20,7 @@ export const useUpdateArticle = () => {
   
   return async (param: TUpdateArticle) => {
 
+    dispatchAppState({ type: "CLOSE_MODAL" });
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
    
     const params: T_articles_update = {
@@ -33,6 +34,7 @@ export const useUpdateArticle = () => {
         tag_ids: param.selectedTags.length
           ? JSON.stringify(param.selectedTags)
           : null,
+        data_type: param.dataType,
       },
       article_id: appState.edittingPrams.article.article_id,
     };

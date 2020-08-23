@@ -12,9 +12,11 @@ import {
   T_item_excerpt,
   T_app_link_url,
   T_modal_size,
+  T_data_type_footer_item,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse } from "../lib/apiTypes";
+import { checkIsAdmin } from "../lib/checkIsAdmin";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -42,6 +44,7 @@ export type T_footer_items_update_params = {
   app_link_url: T_app_link_url;
   modal_size: T_modal_size;
   order: T_order;
+  data_type: T_data_type_footer_item,
 };
 export type T_footer_items_update = {
   params: T_footer_items_update_params;
@@ -59,6 +62,12 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     const { params, id }: T_footer_items_update = req.body;
 
     try {
+      const isAdmin = await checkIsAdmin(req);
+
+      if (isAdmin === false) {
+        params.data_type = "default_data";
+      }
+
       const data = await db(
         `UPDATE footer_items SET ? WHERE footer_item_id = ?`,
         [params, id]

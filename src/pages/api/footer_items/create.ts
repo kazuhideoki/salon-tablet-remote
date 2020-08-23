@@ -12,9 +12,11 @@ import {
   T_app_link_url,
   T_user_id,
   T_modal_size,
+  T_data_type_footer_item,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse } from "../lib/apiTypes";
+import { checkIsAdmin } from "../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (params:T_footer_items_create):Promise<TApiResponse<T_footer_items_create_return>> => {
@@ -41,6 +43,7 @@ export type T_footer_items_create = {
   app_link_url: T_app_link_url;
   modal_size: T_modal_size;
   order: T_order;
+  data_type: T_data_type_footer_item
   user_id: T_user_id;
 };
 
@@ -55,6 +58,12 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const params: T_footer_items_create = req.body;
 
     try {
+      const isAdmin = await checkIsAdmin(req);
+
+      if (isAdmin === false) {
+        params.data_type = "default_data";
+      }
+
       const data = await db(`INSERT INTO footer_items SET ?`, params);
   
       console.log("/footer_items/create/は " + JSON.stringify(data));

@@ -1,7 +1,7 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import {
-  T_modal_size, T_is_published_footer_items, T_on_tap,
+  T_modal_size, T_is_published_footer_items, T_on_tap, T_data_type_footer_item,
 } from "../../Store/Types";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
@@ -19,6 +19,7 @@ export type TCreateFooterItem = {
   linkUrl: string;
   modalSize: T_modal_size;
   appLinkUrl: string;
+  dataType: T_data_type_footer_item
 };
 
 export const useCreateFooterItem = () => {
@@ -41,6 +42,7 @@ export const useCreateFooterItem = () => {
 
   return async (param: TCreateFooterItem) => {
 
+    dispatchAppState({ type: "CLOSE_MODAL" });
     dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
 
     const params: T_footer_items_create = {
@@ -55,6 +57,7 @@ export const useCreateFooterItem = () => {
       app_link_url: param.appLinkUrl,
       modal_size: param.modalSize,
       order: order,
+      data_type: param.dataType,
       user_id: appState.userInfo.user_id,
     };
 

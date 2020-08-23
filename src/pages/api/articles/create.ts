@@ -9,9 +9,15 @@ import {
   T_article_img,
   T_user_id,
   T_tag_ids,
+  T_data_type_article,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse } from "../lib/apiTypes";
+import { TSessionOnj } from "../..";
+import { getCsrfToken, getSession, providers } from "next-auth/client";
+import { ApiUserInfoGetFromEmail } from "../user_info/getUserInfoFromEmail";
+import { checkIsAdmin } from "../lib/checkIsAdmin";
+
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesCreate = async (params: T_articles_create):Promise<TApiResponse<T_articles_create_return>> => {
@@ -34,6 +40,7 @@ export type T_articles_create = {
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
   tag_ids: string | null;
+  data_type: T_data_type_article,
   user_id: T_user_id;
 };
 
@@ -47,6 +54,12 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const params: T_articles_create = req.body;
 
     try {
+      const isAdmin = await checkIsAdmin(req)
+      
+      if (isAdmin === false) { 
+        params.data_type = 'default_data'
+      }
+
       const data = await db(`INSERT INTO articles SET ?`, params);
       console.log("/articles/create/は " + JSON.stringify(data));
 

@@ -9,8 +9,10 @@ import {
   T_article_id,
   T_article_excerpt,
   T_article_img,
+  T_data_type_article,
 } from "../../../app/Store/Types";
 import { T_articles_create } from "./create";
+import { checkIsAdmin } from "../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiResponse<T_articles_update_return>> => {
@@ -33,6 +35,7 @@ export type T_articles_update_params = {
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
   tag_ids: string | null;
+  data_type: T_data_type_article;
 };
 // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
 export type T_articles_update = {
@@ -49,6 +52,12 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     const id: T_article_id = req.body.article_id;
 
     try {
+      const isAdmin = await checkIsAdmin(req);
+
+      if (isAdmin === false) {
+        params.data_type = "default_data";
+      }
+
       const data = await db(`UPDATE articles SET ? WHERE article_id = ?`, [
         params,
         id,

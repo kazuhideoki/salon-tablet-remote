@@ -13,6 +13,7 @@ export const useUpdateFooterItem = () => {
 
   return async (param: TUpdateFooterItem) => {
 
+    dispatchAppState({ type: "CLOSE_MODAL" });
     dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
 
     const params: T_footer_items_update = {
@@ -29,6 +30,7 @@ export const useUpdateFooterItem = () => {
         app_link_url: param.appLinkUrl,
         modal_size: param.modalSize,
         order: appState.edittingPrams.footerItem.order,
+        data_type: param.dataType
       },
     };
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import { ArticleEditorPresenter } from '../app/View/Drawer/ArticleEditor/ArticleEditor';
+import { ArticleEditorPresenter, TUseArticleEditorProps } from '../app/View/Drawer/ArticleEditor/ArticleEditor';
 import { Provider } from './lib/ThemeProvider';
 export default {
   title: "Drawer/ArticleEditorPresenter",
   component: ArticleEditorPresenter
 };
 
-const props = {
+const props: TUseArticleEditorProps = {
   isEditting: false,
   titleText: "",
   editorText: "",
@@ -24,6 +24,9 @@ const props = {
   handleOnChangeTitleText: null,
   handleSubmit: null,
   tags: [],
+  is_admin: false,
+  dataType: 'default_data',
+  setDataType: null,
 };
 
 export const Normal = () => {
@@ -33,6 +36,16 @@ export const Normal = () => {
     <Provider>
 
       <ArticleEditorPresenter {...props} editorText={editorText} setEditorText={setEditorText}/>
+    </Provider>
+  )
+}
+export const is_Admin = () => {
+  const [editorText,setEditorText] = React.useState('')
+
+  return (
+    <Provider>
+
+      <ArticleEditorPresenter {...props} editorText={editorText} setEditorText={setEditorText} is_admin={true}/>
     </Provider>
   )
 }

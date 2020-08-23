@@ -17,6 +17,7 @@ import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
 import { IconsSetting } from './iconSelect/icons';
 import { HelpButton } from '../../viewComponents/buttons/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
+import { SwitchDataTypeBox } from '../Editor/SwitchDataTypeBox';
 
 const useFooterItemEditorProps = () => {
 
@@ -41,6 +42,11 @@ const useFooterItemEditorProps = () => {
         )
       : null
   );
+
+    const [dataType, setDataType] = React.useState(
+      isEditting ? footerItem.data_type : "default_data"
+    );
+
 
   // 変更した値を保存する？ or...
   // const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
@@ -75,6 +81,7 @@ const useFooterItemEditorProps = () => {
       linkUrl,
       modalSize,
       appLinkUrl,
+      dataType,
     };
     if (isEditting) {
       updateFooterItem(params);
@@ -102,6 +109,8 @@ const useFooterItemEditorProps = () => {
     handleOnChangeIconName,
     handleSubmit,
     modalSize,
+    dataType,
+    setDataType,
   };
 }
 
@@ -206,6 +215,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              <Typography variant="h4" component="h2" className={classes.header}>
                {props.isEditting ? "アイテム編集" : "アイテム作成"}
              </Typography>
+             <SwitchDataTypeBox dataType={props.dataType} setDataType={props.setDataType} forFooter/>
 
              <div className={classes.topDiv}>
                <TextField

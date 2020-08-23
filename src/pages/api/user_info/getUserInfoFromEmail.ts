@@ -8,7 +8,11 @@ export const ApiUserInfoGetFromEmail = async (email: string): Promise<TUserInfo>
     email
   );
 
-  const userInfo = res[0];
+  const userInfo: TUserInfo = res[0];
+  //@ts-ignore
+  userInfo.is_first_sign_in = userInfo.is_first_sign_in === 1 ? true : false
+  //@ts-ignore
+  userInfo.is_admin = userInfo.is_admin === 1 ? true : false;
 
   // ★★★ パスワードの有無
   if (userInfo.bcrypt_password) {

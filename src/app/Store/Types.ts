@@ -5,6 +5,7 @@ export type T_user_name = string;
 export type T_shop_name = string;
 export type T_user_email = string;
 export type T_selected_theme = string;
+export type T_is_admin = boolean;
 export type T_created_at_user = string;
 export type T_updated_at_user = string;
 
@@ -15,6 +16,7 @@ export type TUserInfo = {
   user_email: T_user_email;
   selected_theme: T_selected_theme;
   is_first_sign_in: boolean;
+  is_admin: T_is_admin
   bcrypt_password?: string;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
@@ -29,7 +31,8 @@ const initPagination = {
 };
 export type PaginationParams = typeof initPagination;
 
-export type T_is_sample = boolean;
+export type T_data_type_footer_item = 'default_data' | 'sample_data'
+export type T_data_type_article = T_data_type_footer_item | 'web_article'
 
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
@@ -54,7 +57,7 @@ export type ArticleWithoutArticleId = {
   article_excerpt: T_article_excerpt;
   article_img: T_article_img;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  is_sample_data: T_is_sample;
+  data_type: T_data_type_article;
 };
 export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
 export type TArticles = TArticle[];
@@ -89,7 +92,7 @@ export type FooterItemWithoutId = {
   modal_size: T_modal_size;
   order: T_order;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  is_sample_data: T_is_sample;
+  data_type: T_data_type_footer_item;
 };
 export type FooterItem = {
   footer_item_id: T_footer_item_id;
