@@ -1,5 +1,5 @@
 import React from "react";
-import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramAccounts, TInstagramMedias } from "../app/Store/Types";
+import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramAccounts, TInstagramMedias, TInfoBar, TAllArticles } from "../app/Store/Types";
 import { App } from "../app/View/App";
 //@ts-ignore
 import { getCsrfToken, getSession, providers } from "next-auth/client";
@@ -15,14 +15,16 @@ import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 import { apiCreateSampleData } from "./api/create_sample_data";
 
 export type IndexPropsData = {
-    articles: TArticles;
-    pagination: PaginationParams;
-    footerItems: FooterItems;
-    tags: TTags;
-    instagramAccounts: TInstagramAccounts
-    instagramMedias: TInstagramMedias
-    session?: TUserInfo;
-  };
+  articles: TArticles;
+  allArticles: TAllArticles
+  pagination: PaginationParams;
+  footerItems: FooterItems;
+  infoBar: TInfoBar;
+  tags: TTags;
+  instagramAccounts: TInstagramAccounts;
+  // instagramMedias: TInstagramMedias
+  session?: TUserInfo;
+};
 
 export type IndexProps = {
   data: IndexPropsData;
@@ -93,13 +95,14 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         userId: userInfo.user_id,
       };
       
-      const data5 = {err: true} // テーブル  instagram_medias実装までつなぎ
+      // const data6 = {err: true} // テーブル  instagram_medias実装までつなぎ
 
       // 並列処理でデータを取ってくる
       // const [data, data2, data3, data4, data5] = await Promise.all([
-      const [data, data2, data3, data4] = await Promise.all([
-        apiArticlesGet(articlesParam),
+      const [data, data2, data4, data5] = await Promise.all([
+        apiArticlesGet(articlesParam),        
         apiFooterItemsGet(userInfo.user_id),
+        // apiInfoBarGet(userInfo.user_id), // ※data3も追加する
         apiTagsGet(userInfo.user_id),
         apiInstagramAccountsGet(userInfo.user_id),
       ]);
@@ -108,14 +111,18 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       // const propsData: IndexPropsData = {
       const propsData = {
         articles: data.err ? [] : data.rawData,
+        allArticles: data.err ? [] : data.allArticles,
         pagination: data.err ? [] : data.pagination,
         footerItems: data2.err ? [] : data2,
-        tags: data3.err ? [] : data3,
-        instagramAccounts: data4.err ? [] : data4,
-        instagramMedias: data5.err ? {data: []} : data5,
+
+        // infoBar: data3.err ? [] : data3,
+
+        tags: data4.err ? [] : data4,
+        instagramAccounts: data5.err ? [] : data5,
+        // instagramMedias: data6.err ? {data: []} : data6,
         // JSONのエラーになったので、このような書き方↓
         session: userInfo && JSON.parse(JSON.stringify(userInfo)),
-      }
+      };
 
       return {
         props: {
