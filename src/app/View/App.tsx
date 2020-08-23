@@ -159,7 +159,7 @@ const AppView = () => {
   },[])
   React.useEffect(function setTitle() {
     if (process.browser) {
-      document.title = `${appState.userInfo.shop_name} | SALON TABLET`
+      document.title = appState.userInfo.shop_name ? `${appState.userInfo.shop_name} | SALON TABLET` : 'SALON TABLET'
     }
   },[appState.userInfo.shop_name])
 
