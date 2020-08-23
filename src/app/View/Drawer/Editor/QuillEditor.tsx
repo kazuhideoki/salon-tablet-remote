@@ -58,7 +58,9 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
     }
     // サムネイルのセット
     // ↓パフォーマンスが悪いときはuseMemoか？
-    setEditorImg(ImgNode.length ? ImgNode[0]["src"] : '');
+    if (setEditorImg) {
+      setEditorImg(ImgNode.length ? ImgNode[0]["src"] : '');
+    }
     
   }
   
