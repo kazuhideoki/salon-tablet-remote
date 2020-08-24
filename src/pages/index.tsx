@@ -16,8 +16,8 @@ import { apiCreateSampleData } from "./api/create_sample_data";
 
 export type IndexPropsData = {
   articles: TArticles;
-  allArticles: TAllArticles
   pagination: PaginationParams;
+  allArticles: TAllArticles
   footerItems: FooterItems;
   infoBar: TInfoBar;
   tags: TTags;
@@ -111,8 +111,8 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       // const propsData: IndexPropsData = {
       const propsData = {
         articles: data.err ? [] : data.rawData,
-        allArticles: data.err ? [] : data.allArticles,
         pagination: data.err ? [] : data.pagination,
+        allArticles: data.err ? [] : data.allArticles,
         footerItems: data2.err ? [] : data2,
 
         // infoBar: data3.err ? [] : data3,
