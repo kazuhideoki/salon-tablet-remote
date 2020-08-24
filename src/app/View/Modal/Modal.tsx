@@ -24,6 +24,7 @@ import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 import { TSetModal } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
+import InfoBarEditor from "../Drawer/InfoBarEditor";
 // import FooterItemModal from "../Footer/FooterItemModal";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
@@ -106,6 +107,9 @@ export const ModalPresenter:React.FC<Props> = (props) => {
           case "select_instagram":
             modalStyle = medium
             ModalContent = () => <SelectInstagramAccounts />;
+            break;
+          case "edit_info_bar":
+            ModalContent = () => <InfoBarEditor />;
             break;
           case "edit_article":
             ModalContent = () => <ArticleEditor />;

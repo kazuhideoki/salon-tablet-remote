@@ -14,7 +14,7 @@ import { StyledIconButtonEditButton } from "./EditButtonsBox";
 type Type = {
   // 記事とアイテムで共有するのでonClickまるごと渡す
   onClick: any
-  value: any
+  value?: any
 }
 
 export const UpdateButton = (props: Type) => { 

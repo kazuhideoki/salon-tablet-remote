@@ -205,6 +205,7 @@ export type TSetModal =
   | "instagram_media_modal"
   | "select_tags"
   | "select_instagram"
+  | "edit_info_bar"
   | "edit_article"
   | "edit_footer_item"
   | "edit_tags"
