@@ -24,7 +24,7 @@ import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 import { TSetModal } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
-import InfoBarEditor from "../Drawer/InfoBarEditor";
+import InfoBarEditor from "../Drawer/InfoBar/InfoBarEditor";
 // import FooterItemModal from "../Footer/FooterItemModal";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
