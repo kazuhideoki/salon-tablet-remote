@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme: Theme) => {
 export const Header = () => {
   const classes = useStyles()
   const { appState, dispatchAppState } = React.useContext(Store)
-  const { infoBar } = appState
+  const { infoBar, isSetting } = appState
 
   return (
     <div className={classes.root}>
-      <UpdateButton onClick={dispatchAppState({type: 'OPEN_MODAL', payload: 'edit_info_bar' }) }/>
+      {isSetting ? <UpdateButton onClick={dispatchAppState({type: 'OPEN_MODAL', payload: 'edit_info_bar' }) }/> : null}
       <Typography align="center" variant="h5">
         {appState.userInfo.shop_name || "SALON TABLET"}
       </Typography>

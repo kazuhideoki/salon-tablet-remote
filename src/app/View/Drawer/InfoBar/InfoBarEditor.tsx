@@ -7,14 +7,18 @@ import { Button, TextField, Typography, CircularProgress, makeStyles, createStyl
 import { Store } from "../../../Store/Store";
 import { CharCounter } from "../../viewComponents/CharCounter";
 import { SwitchOnTapInfoBar } from "./SwitchOnTapInfoBar";
+import { SelectArticleInfoBar } from "./SelectArticleInfoBar";
 
 
 const useInfoBarEditorProps = () => {
   const { appState } = React.useContext(Store)
-  const { info_bar_type, scrolling_sentence } = appState.infoBar;
+  const { info_bar_type, scrolling_sentence, selected_article_on_info_bar } = appState.infoBar;
   
   const [infoBarType, setInfoBarType] = React.useState(info_bar_type);
   const [editorText, setEditorText] = React.useState(scrolling_sentence);
+  const [articleInfoBar, setArticleInfoBar] = React.useState(
+    selected_article_on_info_bar as number
+  );
   const [charCount, setCharCount] = React.useState(0);
 
 
@@ -25,6 +29,9 @@ const useInfoBarEditorProps = () => {
     setEditorText,
     charCount,
     setCharCount,
+    articleInfoBar,
+    setArticleInfoBar,
+    allArticles: appState.allArticles
   };
 
 }
@@ -35,9 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     charCounter: {
-      // position: 'relative',
-      // right: 0,
-      // bottom: 0,
       textAlign: 'right'
     }
   })
@@ -72,7 +76,7 @@ export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
              </>
              break;
            case 'article':
-             mainField = <></>
+             mainField = <><SelectArticleInfoBar articleInfoBar={props.articleInfoBar} setArticleInfoBar={props.setArticleInfoBar} AllArticles={props.allArticles}/></>
              break;
          
            default:
