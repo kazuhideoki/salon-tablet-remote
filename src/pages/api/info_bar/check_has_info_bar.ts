@@ -15,18 +15,19 @@ import {
   T_scrolling_sentence,
   T_selected_article_on_info_bar,
   T_user_id,
+  TInfoBar,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse } from "../lib/apiTypes";
 import { checkIsAdmin } from "../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiInfoBarUpdate = async (
-  params: T_info_bar_update
-): Promise<TApiResponse<T_info_bar_update_return>> => {
+export const apiCheckHasInfoBar = async (
+  params: T_check_has_info_bar
+): Promise<TApiResponse<T_check_has_info_bar_return>> => {
   let str = process.browser ? server : localhost;
 
-  const res = await fetch(`${str}/api/info_bar/update`, {
+  const res = await fetch(`${str}/api/info_bar/check_has_info_bar`, {
     headers: { "Content-Type": "application/json" },
     method: "POST",
     mode: "cors",
@@ -36,36 +37,27 @@ export const apiInfoBarUpdate = async (
   return await res.json();
 };
 
-export type T_info_bar_update = {
+export type T_check_has_info_bar = {
   user_id: T_user_id;
-  info_bar_type: T_info_bar_type;
-  scrolling_sentence: T_scrolling_sentence;
-  selected_article_on_info_bar: T_selected_article_on_info_bar;
 };
 
-export type T_info_bar_update_return = {
-  rawData: unknown;
-};
+export type T_check_has_info_bar_return = boolean
 
-const update = async (req: NextApiRequest, res: NextApiResponse) => {
+const check_has_info_bar = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const params: T_info_bar_update = req.body;
+    const {user_id}: T_check_has_info_bar = req.body;
 
     try {
+      const data: any = await db(`SELECT * FROM info_bar WHERE user_id = ?`, user_id);
 
-      const data = await db(`UPDATE info_bar SET ? WHERE user_id = ?`, [
-        params,
-        params.user_id,
-      ]);
+      console.log("/info_bar/check_has_info_bar/は " + JSON.stringify(data));
 
-      console.log("/info_bar/update/は " + JSON.stringify(data));
+      const returnData = data.length !== 0
 
-      const returnData = {
-        rawData: data,
-      };
       res.status(200).json(returnData);
+
     } catch (err) {
-      console.log("/info_bar/update/のエラーは " + JSON.stringify(err));
+      console.log("/info_bar/check_has_info_bar/のエラーは " + JSON.stringify(err));
 
       res.status(500).json({ err: true, data: { message: err.message } });
     }
@@ -83,4 +75,4 @@ export const config = {
   },
 };
 
-export default update;
+export default check_has_info_bar;

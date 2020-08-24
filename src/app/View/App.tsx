@@ -157,11 +157,11 @@ const AppView = () => {
     }
 
   },[])
-  React.useEffect(function setTitle() {
-    if (process.browser) {
-      document.title = `${appState.userInfo.shop_name} | SALON TABLET`
-    }
-  },[appState.userInfo.shop_name])
+  // React.useEffect(function setTitle() {
+  //   if (process.browser) {
+  //     document.title = `${appState.userInfo.shop_name} | SALON TABLET`
+  //   }
+  // },[appState.userInfo.shop_name])
 
   if (isMobile && appState.isSetting) {
     return <AppMobile/>

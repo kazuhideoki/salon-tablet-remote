@@ -13,6 +13,8 @@ import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 import { apiCreateSampleData } from "./api/create_sample_data";
+import { apiCreateInfoBar } from "./api/info_bar/create_init";
+import { apiCheckHasInfoBar } from "./api/info_bar/check_has_info_bar";
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -85,6 +87,12 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
         apiCreateSampleData({user_id: userInfo.user_id})
+        apiCreateInfoBar({user_id: userInfo.user_id})
+      }
+
+      const hasInfoBar = await apiCheckHasInfoBar({ user_id: userInfo.user_id });
+      if (hasInfoBar === false) {
+         apiCreateInfoBar({ user_id: userInfo.user_id });
       }
 
       // 記事一覧取得

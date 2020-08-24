@@ -111,13 +111,14 @@ export type T_info_bar_type = 'shop_name' | 'scrolling_sentence' | 'article'
 export type T_scrolling_sentence = string
 export type T_selected_article_on_info_bar = T_article_id;
 
-export type TInfoBar = {
-  info_bar_id: T_info_bar_id;
+export type TInfoBarWithoutId = {
   user_id: T_user_id;
   info_bar_type: T_info_bar_type;
   scrolling_sentence: T_scrolling_sentence;
   selected_article_on_info_bar: T_selected_article_on_info_bar
 };
+
+export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id}
 
 // ●●●●●● テーブル `tags`
 

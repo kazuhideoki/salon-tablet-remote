@@ -8,6 +8,8 @@ import { Store } from "../../../Store/Store";
 import { CharCounter } from "../../viewComponents/CharCounter";
 import { SwitchOnTapInfoBar } from "./SwitchOnTapInfoBar";
 import { SelectArticleInfoBar } from "./SelectArticleInfoBar";
+import { T_info_bar_update } from "../../../../pages/api/info_bar/update";
+import { useUpdateInfoBar } from "../../../ActionCreator/infoBar/useUpdateInfoBar";
 
 
 const useInfoBarEditorProps = () => {
@@ -20,6 +22,20 @@ const useInfoBarEditorProps = () => {
     selected_article_on_info_bar as number
   );
   const [charCount, setCharCount] = React.useState(0);
+
+  const updateInfoBar = useUpdateInfoBar()
+
+  const handleSubmit = () => {
+    const params: T_info_bar_update = {
+      user_id: appState.userInfo.user_id,
+      info_bar_type: info_bar_type,
+      scrolling_sentence: scrolling_sentence,
+      selected_article_on_info_bar: selected_article_on_info_bar,
+    };
+
+    updateInfoBar(params)
+    
+  };
 
 
   return {
