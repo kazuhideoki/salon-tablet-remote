@@ -243,6 +243,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           selectedArticlesTags: action.payload.selectedArticlesTags,
           isSetting: action.payload.isSetting,
           articles: action.payload.data.rawData,
+          allArticles: action.payload.data.allArticles,
           paginationParams: action.payload.data.pagination,
           isShowInstagram: isShowInstagram,
           loading: {
@@ -258,7 +259,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           loading: {
             ...state.loading,
             footer: false,
-          }
+          },
         };
         break;
 
@@ -282,7 +283,13 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           loading: {
             ...state.loading,
             footer: false,
-          }
+          },
+        };
+        break;
+      case "SET_INFO_BAR":
+        newState = {
+          ...state,
+          infoBar: action.payload,
         };
         break;
       case "SET_TAGS":
@@ -299,10 +306,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           instagramAccounts: action.payload,
-          loading:{
+          loading: {
             ...state.loading,
-            manageInstagramAccounts: false
-          }
+            manageInstagramAccounts: false,
+          },
         };
         break;
       case "SET_INSTAGRAM_MEDIAS":
