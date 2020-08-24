@@ -15,6 +15,7 @@ import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 import { apiCreateSampleData } from "./api/create_sample_data";
 import { apiCreateInfoBar } from "./api/info_bar/create_init";
 import { apiCheckHasInfoBar } from "./api/info_bar/check_has_info_bar";
+import { apiInfoBarGet } from "./api/info_bar/get";
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -87,9 +88,9 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
         apiCreateSampleData({user_id: userInfo.user_id})
-        apiCreateInfoBar({user_id: userInfo.user_id})
       }
 
+      // info_barのデータがない場合追加する（初回サインインか古いユーザー）
       const hasInfoBar = await apiCheckHasInfoBar({ user_id: userInfo.user_id });
       if (hasInfoBar === false) {
          apiCreateInfoBar({ user_id: userInfo.user_id });
@@ -107,10 +108,10 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
       // 並列処理でデータを取ってくる
       // const [data, data2, data3, data4, data5] = await Promise.all([
-      const [data, data2, data4, data5] = await Promise.all([
+      const [data, data2, data3, data4, data5] = await Promise.all([
         apiArticlesGet(articlesParam),        
         apiFooterItemsGet(userInfo.user_id),
-        // apiInfoBarGet(userInfo.user_id), // ※data3も追加する
+        apiInfoBarGet(userInfo.user_id),
         apiTagsGet(userInfo.user_id),
         apiInstagramAccountsGet(userInfo.user_id),
       ]);
@@ -122,9 +123,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         pagination: data.err ? [] : data.pagination,
         allArticles: data.err ? [] : data.allArticles,
         footerItems: data2.err ? [] : data2,
-
-        // infoBar: data3.err ? [] : data3,
-
+        infoBar: data3.err ? [] : data3,
         tags: data4.err ? [] : data4,
         instagramAccounts: data5.err ? [] : data5,
         // instagramMedias: data6.err ? {data: []} : data6,

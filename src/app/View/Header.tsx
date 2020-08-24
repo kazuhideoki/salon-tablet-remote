@@ -21,12 +21,16 @@ export const Header = () => {
   const { appState, dispatchAppState } = React.useContext(Store)
   const { infoBar, isSetting } = appState
 
+  const handleOnClick = () => {
+    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_info_bar" });
+  }
+
   return (
     <div className={classes.root}>
-      {isSetting ? <UpdateButton onClick={dispatchAppState({type: 'OPEN_MODAL', payload: 'edit_info_bar' }) }/> : null}
+      {isSetting ? <UpdateButton onClick={handleOnClick} /> : null}
       <Typography align="center" variant="h5">
         {appState.userInfo.shop_name || "SALON TABLET"}
       </Typography>
     </div>
-  )
+  );
 }

@@ -22,7 +22,11 @@ export const UpdateButton = (props: Type) => {
 
     const handleOnClick = (e) => {
       e.stopPropagation()
-      props.onClick(props.value)
+      if (props.value) {
+        props.onClick(props.value)
+      } else {
+        props.onClick()
+      }
     }
 
     return (
