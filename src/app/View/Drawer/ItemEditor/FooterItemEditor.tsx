@@ -176,7 +176,10 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
          if (props.onTap === "modal") {
            mainField = (
              <div>
-               <SelectModalSize modalSize={props.modalSize} className={classes.selectModalSize}/>
+               <SelectModalSize
+                 modalSize={props.modalSize}
+                 className={classes.selectModalSize}
+               />
                <QuillEditor
                  editorText={props.editorText}
                  setEditorText={props.setEditorText}
@@ -184,6 +187,14 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                  charCount={props.charCountFooterItemContent}
                  setCharCount={props.setCharCountFooterItemContent}
                />
+               <div className={classes.charCounter}>
+                 <CharCounter
+                   charCount={props.charCountFooterItemContent}
+                   limitCount={1000}
+                   align="right"
+                   isShowCount
+                 />
+               </div>
              </div>
            );
          } else if (props.onTap === "link") {
@@ -249,14 +260,6 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              {mainField}
 
              <div className={classes.bottomDiv}>
-               <div className={classes.charCounter}>
-                 <CharCounter
-                   charCount={props.charCountFooterItemContent}
-                   limitCount={1000}
-                   align="right"
-                   isShowCount
-                 />
-               </div>
                <Grid container>
                  <Grid item className={classes.submitButton}>
                    <Button

@@ -10,7 +10,7 @@ import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { Drawer } from "./Drawer/Drawer";
-import { Header } from "./Header";
+import { InfoBar } from "./InfoBar";
 import { AppMobile } from "./mobile/AppMobile";
 import { IndexProps } from "../../pages";
 
@@ -34,13 +34,13 @@ const useStyles = makeStyles((theme: Theme) => {
         position: "relative",
       },
       header: {
-        width: themes.pHeader.width + "vw",
-        height: themes.pHeader.height + "vh",
-        marginBottom: themes.pHeader.marginBottom + "vh",
+        width: themes.pInfoBar.width + "vw",
+        height: themes.pInfoBar.height + "vh",
+        marginBottom: themes.pInfoBar.marginBottom + "vh",
 
       },
       headerOpened:{
-        width: `calc(${themes.pHeader.width}vw - ${themes.drawerWidth}px)`,
+        width: `calc(${themes.pInfoBar.width}vw - ${themes.drawerWidth}px)`,
       },
       main: {
         width: themes.pMain.width + "vw",
@@ -104,7 +104,7 @@ const AppTablet = ()=> {
             <Grid item className={`${clsx(classes.content, {
               [classes.contentShift]: open,
             })} ${classes.header} ${open ? classes.headerOpened : null}`}>
-              <Header/>
+              <InfoBar/>
             </Grid>
             <Grid
               item

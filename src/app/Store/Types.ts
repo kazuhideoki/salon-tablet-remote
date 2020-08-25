@@ -253,14 +253,17 @@ export const initAppState = (data: IndexPropsData) => ({
       manageInstagramAccounts: false,
     },
 
-    userInfo: data.session as TUserInfo,
-    articles: data.articles as TArticles,
-    allArticles: data.allArticles as TAllArticles,
+    userInfo: data.session,
+    articles: data.articles,
+    allArticles: data.allArticles,
     paginationParams: data.pagination,
-    footerItems: data.footerItems as FooterItems,
-    infoBar: data.infoBar as TInfoBar,
-    tags: data.tags as TTags,
-    instagramAccounts: data.instagramAccounts as TInstagramAccounts,
+    footerItems: data.footerItems,
+    infoBarData: {
+      infoBar: data.infoBarData.rawData as TInfoBar,
+      targetArticle: data.infoBarData.targetArticle as TArticle,
+    },
+    tags: data.tags,
+    instagramAccounts: data.instagramAccounts,
     instagramMedias: initInstagramMedias
   })
 

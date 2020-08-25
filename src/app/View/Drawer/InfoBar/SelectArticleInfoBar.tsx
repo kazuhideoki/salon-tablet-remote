@@ -8,7 +8,7 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import { TInfoBar, TAllArticles } from "../../../Store/Types";
+import { TAllArticles } from "../../../Store/Types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

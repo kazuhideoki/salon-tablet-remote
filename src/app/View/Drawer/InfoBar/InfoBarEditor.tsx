@@ -10,11 +10,12 @@ import { SwitchOnTapInfoBar } from "./SwitchOnTapInfoBar";
 import { SelectArticleInfoBar } from "./SelectArticleInfoBar";
 import { T_info_bar_update } from "../../../../pages/api/info_bar/update";
 import { useUpdateInfoBar } from "../../../ActionCreator/infoBar/useUpdateInfoBar";
+import { PublishTwoTone } from "@material-ui/icons";
 
 
 const useInfoBarEditorProps = () => {
   const { appState } = React.useContext(Store)
-  const { info_bar_type, scrolling_sentence, selected_article_on_info_bar } = appState.infoBar;
+  const { info_bar_type, scrolling_sentence, selected_article_on_info_bar } = appState.infoBarData.infoBar;
   
   const [infoBarType, setInfoBarType] = React.useState(info_bar_type);
   const [editorText, setEditorText] = React.useState(scrolling_sentence);
@@ -26,15 +27,15 @@ const useInfoBarEditorProps = () => {
   const updateInfoBar = useUpdateInfoBar()
 
   const handleSubmit = () => {
-    const params: T_info_bar_update = {
-      user_id: appState.userInfo.user_id,
-      info_bar_type: info_bar_type,
-      scrolling_sentence: scrolling_sentence,
-      selected_article_on_info_bar: selected_article_on_info_bar,
-    };
-
-    updateInfoBar(params)
     
+    const params = {
+      infoBarType,
+      editorText,
+      articleInfoBar,
+    };
+    // console.log("handleSubmitのparamsだよ " + JSON.stringify(params));
+    
+    updateInfoBar(params)  
   };
 
 
@@ -47,7 +48,8 @@ const useInfoBarEditorProps = () => {
     setCharCount,
     articleInfoBar,
     setArticleInfoBar,
-    allArticles: appState.allArticles
+    allArticles: appState.allArticles,
+    handleSubmit,
   };
 
 }
@@ -58,8 +60,18 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     charCounter: {
-      textAlign: 'right'
-    }
+      textAlign: "right",
+    },
+    bottomDiv: {
+      position: "sticky",
+      bottom: 0,
+      marginRight: theme.spacing(2),
+      zIndex: 100,
+    },
+    submitButton: {
+      marginLeft: "auto",
+      marginRight: theme.spacing(1),
+    },
   })
 );
 
@@ -106,11 +118,35 @@ export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
                インフォの設定
              </Typography>
 
-             <SwitchOnTapInfoBar infoBarType={props.infoBarType} setInfoBarType={props.setInfoBarType}/>
+             <SwitchOnTapInfoBar
+               infoBarType={props.infoBarType}
+               setInfoBarType={props.setInfoBarType}
+             />
 
              {mainField}
 
-             
+             <div className={classes.bottomDiv}>
+               <Grid container>
+                 <Grid item className={classes.submitButton}>
+                   <Button
+                     variant="contained"
+                     color="primary"
+                     onClick={() => props.handleSubmit()}
+                     startIcon={<PublishTwoTone />}
+                     disabled={
+                       props.charCount < 501
+                         ? false
+                         : true
+                     }
+                   >
+                     更新
+                   </Button>
+                 </Grid>
+                 <Grid item>
+
+                 </Grid>
+               </Grid>
+             </div>
            </div>
          );
        };

@@ -121,6 +121,18 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "OPEN_ARTICLE_MODAL_FROM_INFO_BAR":
+        newState = {
+          ...state,
+          setModal: "content_modal",
+          isModalOpen: true,
+          currentModalContent: {
+            ...state.currentModalContent,
+            article: action.payload,
+            modalSize: "large",
+          },
+        };
+        break;
       case "OPEN_FOOTER_ITEM_MODAL":
         newState = {
           ...state,
@@ -289,7 +301,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "SET_INFO_BAR":
         newState = {
           ...state,
-          infoBar: action.payload,
+          infoBarData: {
+            ...state.infoBarData,
+            infoBar: action.payload,
+          },
         };
         break;
       case "SET_TAGS":

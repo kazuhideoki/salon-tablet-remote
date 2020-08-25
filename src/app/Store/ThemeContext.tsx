@@ -19,9 +19,9 @@ const portalPadding = 0
 const portalWidth = screenWidth - portalPadding * 2
 const portalHeight = screenHeight - portalPadding * 2
 
-const pHeaderMarginBottom = 1
-const pHeaderWidth = screenWidth - portalPadding * 2
-const pHeaderHeight = 7
+const pInfoBarMarginBottom = 1
+const pInfoBarWidth = screenWidth - portalPadding * 2
+const pInfoBarHeight = 7
 
 const pFooterMarginTop = 1
 const pFooterWidth = screenWidth - portalPadding * 2
@@ -29,7 +29,7 @@ const pFooterHeight = 26
 
 const pMainMargin = 1
 const pMainWidth = screenWidth - pMainMargin * 2
-const pMainHeight = screenHeight - pHeaderHeight - pHeaderMarginBottom - pFooterHeight - pFooterMarginTop - portalPadding * 2
+const pMainHeight = screenHeight - pInfoBarHeight - pInfoBarMarginBottom - pFooterHeight - pFooterMarginTop - portalPadding * 2
 
 
 // ThemeContext.Providerを通して渡される値
@@ -39,10 +39,10 @@ export const themeArgs = {
     width: portalWidth,
     height: portalHeight,
   },
-  pHeader: {
-    marginBottom: pHeaderMarginBottom,
-    width: pHeaderWidth,
-    height: pHeaderHeight,
+  pInfoBar: {
+    marginBottom: pInfoBarMarginBottom,
+    width: pInfoBarWidth,
+    height: pInfoBarHeight,
   },
   pMain: {
     width: pMainWidth,

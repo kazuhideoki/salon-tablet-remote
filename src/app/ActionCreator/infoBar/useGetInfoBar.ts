@@ -1,7 +1,6 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import { apiInfoBarGet } from "../../../pages/api/info_bar/get";
-import { TInfoBar } from "../../Store/Types";
 
 export const useGetInfoBar = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
@@ -15,9 +14,11 @@ export const useGetInfoBar = () => {
       alert("取得できませんでした");
       dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
+      // console.log("useGetInfoBarのdata.rawDataは " + JSON.stringify(data.rawData));
+      
       dispatchAppState({
         type: 'SET_INFO_BAR',
-        payload: data,
+        payload: data.rawData,
       });
     }
   };

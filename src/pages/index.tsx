@@ -15,14 +15,14 @@ import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 import { apiCreateSampleData } from "./api/create_sample_data";
 import { apiCreateInfoBar } from "./api/info_bar/create_init";
 import { apiCheckHasInfoBar } from "./api/info_bar/check_has_info_bar";
-import { apiInfoBarGet } from "./api/info_bar/get";
+import { apiInfoBarGet, T_info_bar_get_return } from "./api/info_bar/get";
 
 export type IndexPropsData = {
   articles: TArticles;
   pagination: PaginationParams;
-  allArticles: TAllArticles
+  allArticles: TAllArticles;
   footerItems: FooterItems;
-  infoBar: TInfoBar;
+  infoBarData: T_info_bar_get_return;
   tags: TTags;
   instagramAccounts: TInstagramAccounts;
   // instagramMedias: TInstagramMedias
@@ -123,7 +123,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         pagination: data.err ? [] : data.pagination,
         allArticles: data.err ? [] : data.allArticles,
         footerItems: data2.err ? [] : data2,
-        infoBar: data3.err ? [] : data3,
+        infoBarData: data3.err ? [] : data3,
         tags: data4.err ? [] : data4,
         instagramAccounts: data5.err ? [] : data5,
         // instagramMedias: data6.err ? {data: []} : data6,

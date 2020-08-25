@@ -24,6 +24,8 @@ import { checkIsAdmin } from "../lib/checkIsAdmin";
 export const apiInfoBarUpdate = async (
   params: T_info_bar_update
 ): Promise<TApiResponse<T_info_bar_update_return>> => {
+  // console.log("apiInfoBarUpdateだよ " + params);
+  
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/info_bar/update`, {

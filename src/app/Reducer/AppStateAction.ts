@@ -26,7 +26,6 @@ export type AppStateAction =
   | { type: "OPEN_DRAWER" }
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
   | { type: "CLOSE_DRAWER" }
-
   | { type: "ON_IS_LOADING_MAIN" }
   | { type: "OFF_IS_LOADING_MAIN" }
   | { type: "ON_IS_LOADING_FOOTER" }
@@ -38,6 +37,7 @@ export type AppStateAction =
 
   // modalウィンドウを開く時
   | { type: "OPEN_ARTICLE_MODAL"; payload: number }
+  | { type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR"; payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL";
       payload: number;
