@@ -10,7 +10,11 @@ import { useGetArticles } from "../ActionCreator/articles/useGetArticles";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { Drawer } from "./Drawer/Drawer";
-import { InfoBar } from "./InfoBar";
+// import { InfoBar } from "./InfoBar";
+import dynamic from "next/dynamic";
+const InfoBar = dynamic(() => import("./InfoBar"), {
+  ssr: false,
+});
 import { AppMobile } from "./mobile/AppMobile";
 import { IndexProps } from "../../pages";
 
@@ -148,7 +152,7 @@ const AppView = () => {
     appState,
   } = React.useContext(Store);
   const { is_first_sign_in, isSetPassword } = appState.userInfo;
-  console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
+  // console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
 
   // パスワード未設定でユーザー情報登録へ遷移
   React.useEffect(function settingPassword() {

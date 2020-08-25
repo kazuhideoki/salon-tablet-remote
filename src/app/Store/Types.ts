@@ -119,6 +119,7 @@ export type TInfoBarWithoutId = {
 };
 
 export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id}
+export type TInfoBarData = {infoBar: TInfoBar;  targetArticle: TArticle}
 
 // ●●●●●● テーブル `tags`
 
@@ -259,7 +260,7 @@ export const initAppState = (data: IndexPropsData) => ({
     paginationParams: data.pagination,
     footerItems: data.footerItems,
     infoBarData: {
-      infoBar: data.infoBarData.rawData as TInfoBar,
+      infoBar: data.infoBarData.infoBar as TInfoBar,
       targetArticle: data.infoBarData.targetArticle as TArticle,
     },
     tags: data.tags,

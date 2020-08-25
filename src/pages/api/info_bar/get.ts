@@ -21,7 +21,7 @@ export const apiInfoBarGet = async (
 
 export type T_info_bar_get = T_user_id
 export type T_info_bar_get_return = {
-  rawData: TInfoBar
+  infoBar: TInfoBar
   targetArticle: TArticle
 }
 
@@ -51,9 +51,9 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log("info_bar/getのdata2は " + JSON.stringify(data2));
 
     const returnData: T_info_bar_get_return = {
-      rawData: data[0],
+      infoBar: data[0] as TInfoBar,
       targetArticle: data2.length ? data2[0] : [],
-    }
+    };
 
     return res.status(200).json(returnData);
 

@@ -153,10 +153,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
               setSkipTransiton(false);
             }
           }, props.duration.enteringScreen);
-        },[props.appState.isModalOpen])
-
-        console.log('modalSizeは ' + props.modalSize);
-        
+        },[props.appState.isModalOpen])        
 
         return (
           // 受け取ったmodalStyle元にサイズ変更して描画

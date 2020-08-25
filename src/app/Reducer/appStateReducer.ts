@@ -302,8 +302,8 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           infoBarData: {
-            ...state.infoBarData,
-            infoBar: action.payload,
+            infoBar: action.payload.infoBar,
+            targetArticle: action.payload.targetArticle,
           },
         };
         break;

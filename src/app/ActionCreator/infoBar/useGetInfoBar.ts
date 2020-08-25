@@ -1,6 +1,7 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import { apiInfoBarGet } from "../../../pages/api/info_bar/get";
+import { TInfoBarData } from "../../Store/Types";
 
 export const useGetInfoBar = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
@@ -17,8 +18,9 @@ export const useGetInfoBar = () => {
       // console.log("useGetInfoBarのdata.rawDataは " + JSON.stringify(data.rawData));
       
       dispatchAppState({
-        type: 'SET_INFO_BAR',
-        payload: data.rawData,
+        type: "SET_INFO_BAR",
+        // payload: { infoBar: data.infoBar, targetArticle: data.targetArticle },
+        payload: data,
       });
     }
   };

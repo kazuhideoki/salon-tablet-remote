@@ -39,10 +39,7 @@ export type IndexProps = {
 
 const Index = (props: IndexProps) => {
 
-  if (!props.data.session) {
-
-    console.log('serverは ' + server);
-    
+  if (!props.data.session) {    
 
     return (
       <>
@@ -51,8 +48,6 @@ const Index = (props: IndexProps) => {
     );
 
   }
-
-  console.log("serverは " + server);
 
   // テーマ、記事データ、appの状態管理を読み込む
   return (

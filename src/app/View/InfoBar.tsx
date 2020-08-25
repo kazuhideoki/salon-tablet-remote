@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { DOMElement } from 'react'
 import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core'
 import { Store } from '../Store/Store'
 import { UpdateButton } from './viewComponents/buttons/UpdateButton'
 import dynamic from 'next/dynamic';
 import { Edit } from '@material-ui/icons';
 import { EditButtonsBox } from './viewComponents/buttons/EditButtonsBox';
-const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
-});
+// const ReactQuill = dynamic(() => import("react-quill"), {
+//   ssr: false,
+// });
 
 const useInfoBarProps = () => {
 
@@ -53,6 +53,8 @@ const useStyles = makeStyles((theme: Theme) => {
 export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
          const classes = useStyles();
 
+         const ref = React.useRef(null)
+
          let displayInfoBar = <></>;
          switch (props.infoBar.info_bar_type) {
            case "shop_name":
@@ -67,8 +69,9 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
                <>
                  <div
                    dangerouslySetInnerHTML={{
-                     __html: props.infoBar.scrolling_sentence,
+                     __html: `<nobr>${props.infoBar.scrolling_sentence}</nobr>`,
                    }}
+                   style={{display: 'flex', flexWrap: 'wrap'}}
                  />
                </>
              );
@@ -84,8 +87,11 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
                  }
                >
                  <Typography variant="caption">
-                   {props.targetArticle.title}{" "}
-                   {props.targetArticle.article_excerpt}
+                   <span id="scrolling_sentence" ref={ref}>
+                     <b>{props.targetArticle.title}</b>
+                     {"  "}
+                     {props.targetArticle.article_excerpt}
+                   </span>
                  </Typography>
                  {/* <Typography variant="caption"></Typography> */}
                </div>
@@ -95,6 +101,32 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
            default:
              break;
          }
+
+        //  React.useEffect(() => {
+        //    if (process.browser) {
+        //      console.log('infoBarのuseEffect,process.browserだよ');
+             
+        //      const scrollingSentence = document.getElementById(
+        //        "scrolling_sentence"
+        //      );
+        //      console.log("scrollingSentenceは " + scrollingSentence);
+        //      console.log("refは " + JSON.stringify(ref));
+             
+        //     //  if (ref) {
+        //     //    ref.あcurrent.scrollTo({
+        //     //      left: 500,
+        //     //      behavior: "smooth",
+        //     //    });
+        //     //  }
+        //     if (scrollingSentence) {
+        //       scrollingSentence.scrollTo({
+        //         left: 500,
+        //         behavior: "smooth",
+        //       });
+        //     }
+             
+        //    }
+        //  },[ref])
 
          return (
            <div className={classes.root}>
@@ -113,3 +145,5 @@ export const InfoBar = () => {
 
   return <InfoBarPresenter {...props}/>
 }
+
+export default InfoBar
