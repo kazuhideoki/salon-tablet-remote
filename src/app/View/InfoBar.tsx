@@ -45,7 +45,35 @@ const useStyles = makeStyles((theme: Theme) => {
       top: theme.spacing(1),
       right: 0,
       zIndex: 100,
-
+    },
+    scrollingSentenceDiv: {
+      margin: 'auto',
+      width: '96%',
+      lineHeight: '1.5em',
+      textAlign : 'center',
+      // border     : '1px solid #666';
+      // color      : '#000000';
+      // background : '#fff';
+      overflow   : 'hidden',
+    },
+    scrollingSentence: {
+      display     : 'inline-block',
+      // display     : 'inline',
+      paddingLeft: '100%',
+      whiteSpace : 'nowrap',
+      lineHeight : '1em',
+      animation   : '$scrollAnime 24s linear infinite',
+    },
+    "@keyframes scrollAnime": {
+      // '0%': { transform: 'translateX(0)'},
+      from: { transform: 'translateX(0)'},
+      // '100%': { transform: 'translateX(-100%)'},
+      to: { transform: 'translateX(-100%)'},
+    },
+    '@global': {
+      '#scrolling_sentence_dangerously_set_inner_html > *': {
+        display: 'inline-block',
+      }
     },
   });
 })
@@ -66,14 +94,16 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
              break;
            case "scrolling_sentence":
              displayInfoBar = (
-               <>
+               <div className={classes.scrollingSentenceDiv}>
                  <div
                    dangerouslySetInnerHTML={{
-                     __html: `<nobr>${props.infoBar.scrolling_sentence}</nobr>`,
+                    //  __html: `<nobr>${props.infoBar.scrolling_sentence}</nobr>`,
+                     __html: `${props.infoBar.scrolling_sentence}`,
                    }}
-                   style={{display: 'flex', flexWrap: 'wrap'}}
+                   className={classes.scrollingSentence}
+                   id='scrolling_sentence_dangerously_set_inner_html'
                  />
-               </>
+               </div>
              );
              break;
            case "article":
