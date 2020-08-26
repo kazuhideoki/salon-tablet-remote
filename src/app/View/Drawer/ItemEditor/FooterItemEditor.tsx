@@ -111,6 +111,7 @@ const useFooterItemEditorProps = () => {
     modalSize,
     dataType,
     setDataType,
+    is_admin: appState.userInfo.is_admin,
   };
 }
 
@@ -226,7 +227,8 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              <Typography variant="h4" component="h2" className={classes.header}>
                {props.isEditting ? "アイテム編集" : "アイテム作成"}
              </Typography>
-             <SwitchDataTypeBox dataType={props.dataType} setDataType={props.setDataType} forFooter/>
+             {props.is_admin ? <SwitchDataTypeBox dataType={props.dataType} setDataType={props.setDataType} forFooter/> : null}
+             
 
              <div className={classes.topDiv}>
                <TextField

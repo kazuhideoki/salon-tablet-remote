@@ -15,12 +15,12 @@ import { PublishTwoTone } from "@material-ui/icons";
 
 const useInfoBarEditorProps = () => {
   const { appState } = React.useContext(Store)
-  const { info_bar_type, scrolling_sentence, selected_article_on_info_bar } = appState.infoBarData.infoBar;
+  const { info_bar_type, scrolling_sentence, selected_article_id } = appState.infoBarData.infoBar;
   
   const [infoBarType, setInfoBarType] = React.useState(info_bar_type);
   const [editorText, setEditorText] = React.useState(scrolling_sentence);
   const [articleInfoBar, setArticleInfoBar] = React.useState(
-    selected_article_on_info_bar as number
+    selected_article_id as number
   );
   const [charCount, setCharCount] = React.useState(0);
 
@@ -32,7 +32,7 @@ const useInfoBarEditorProps = () => {
       infoBarType,
       editorText,
       articleInfoBar,
-      charCount,
+      ScrollingAnimationDuration: (32 * charCount) / 245 + 8,
     };
     // console.log("handleSubmitのparamsだよ " + JSON.stringify(params));
     

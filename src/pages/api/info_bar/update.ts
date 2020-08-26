@@ -13,8 +13,9 @@ import {
   T_modal_size,
   T_info_bar_type,
   T_scrolling_sentence,
-  T_selected_article_on_info_bar,
+  T_selected_article_id,
   T_user_id,
+  T_scrolling_animation_duration,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
 import { TApiResponse } from "../lib/apiTypes";
@@ -42,7 +43,8 @@ export type T_info_bar_update = {
   user_id: T_user_id;
   info_bar_type: T_info_bar_type;
   scrolling_sentence: T_scrolling_sentence;
-  selected_article_on_info_bar: T_selected_article_on_info_bar;
+  scrolling_animation_duration: T_scrolling_animation_duration
+  selected_article_id: T_selected_article_id;
 };
 
 export type T_info_bar_update_return = {

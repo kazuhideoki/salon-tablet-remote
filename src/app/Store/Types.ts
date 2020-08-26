@@ -109,17 +109,23 @@ export type FooterItems = FooterItem[];
 export type T_info_bar_id = number
 export type T_info_bar_type = 'shop_name' | 'scrolling_sentence' | 'article'
 export type T_scrolling_sentence = string
-export type T_selected_article_on_info_bar = T_article_id;
+export type T_scrolling_animation_duration = number
+export type T_selected_article_id = T_article_id;
 
 export type TInfoBarWithoutId = {
   user_id: T_user_id;
   info_bar_type: T_info_bar_type;
   scrolling_sentence: T_scrolling_sentence;
-  selected_article_on_info_bar: T_selected_article_on_info_bar
+  scrolling_animation_duration: T_scrolling_animation_duration;
+  selected_article_id: T_selected_article_id;
 };
 
 export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id, }
-export type TInfoBarData = {infoBar: TInfoBar;  scrollingSentenceLength: number; targetArticle: TArticle}
+export type TInfoBarData = {
+  infoBar: TInfoBar;
+  // scrolling_animation_duration: number;
+  targetArticle: TArticle;
+};
 
 // ●●●●●● テーブル `tags`
 
@@ -259,11 +265,12 @@ export const initAppState = (data: IndexPropsData) => ({
     allArticles: data.allArticles,
     paginationParams: data.pagination,
     footerItems: data.footerItems,
-    infoBarData: {
-      infoBar: data.infoBarData.infoBar as TInfoBar,
-      scrollingSentenceLength: null as number,
-      targetArticle: data.infoBarData.targetArticle as TArticle,
-    },
+    // infoBarData: {
+    //   infoBar: data.infoBarData.infoBar as TInfoBar,
+    //   // scrolling_animation_duration: null as number,
+    //   targetArticle: data.infoBarData.targetArticle as TArticle,
+    // },
+    infoBarData: data.infoBarData,
     tags: data.tags,
     instagramAccounts: data.instagramAccounts,
     instagramMedias: initInstagramMedias

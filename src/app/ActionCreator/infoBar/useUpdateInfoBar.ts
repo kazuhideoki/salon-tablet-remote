@@ -12,7 +12,7 @@ export type TUseUpdateInfoBar = {
   infoBarType: T_info_bar_type;
   editorText: string;
   articleInfoBar: number;
-  charCount: number;
+  ScrollingAnimationDuration: number;
 };
 
 export const useUpdateInfoBar = () => {
@@ -29,7 +29,8 @@ export const useUpdateInfoBar = () => {
         user_id: appState.userInfo.user_id,
         info_bar_type: param.infoBarType,
         scrolling_sentence: param.editorText,
-        selected_article_on_info_bar: param.articleInfoBar,
+        scrolling_animation_duration: param.ScrollingAnimationDuration,
+        selected_article_id: param.articleInfoBar,
     }
 
     const data = await apiInfoBarUpdate(params);
@@ -40,7 +41,7 @@ export const useUpdateInfoBar = () => {
     } else {
       dispatchAppState({ type: "CLOSE_MODAL" });
 
-      getInfoBar(param.charCount);
+      getInfoBar();
     }
   };
 };

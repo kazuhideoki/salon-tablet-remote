@@ -28,6 +28,9 @@ export const SmallQuillEditor: React.FC<Props> = ({
     ],
 
   };
+  const formats = 
+    ["bold", "italic", "underline", "strike", 'color', 'background', 'clean']
+  
 
   return (
     // ※ReactQuillのスタイルはquill.scssに記述
@@ -41,6 +44,8 @@ export const SmallQuillEditor: React.FC<Props> = ({
         }
         theme="snow"
         modules={modules}
+        // コピペなどで他のformatのせいで一行表示ができなくなるのを防ぐ
+        formats={formats}
         scrollingContainer="body"
         // formats={formats}
       />

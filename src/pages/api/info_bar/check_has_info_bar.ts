@@ -13,7 +13,7 @@ import {
   T_modal_size,
   T_info_bar_type,
   T_scrolling_sentence,
-  T_selected_article_on_info_bar,
+  T_selected_article_id,
   T_user_id,
   TInfoBar,
 } from "../../../app/Store/Types";

@@ -13,7 +13,7 @@ const useInfoBarProps = () => {
 
   const { appState, dispatchAppState } = React.useContext(Store);
   const { infoBarData, isSetting } = appState;
-  const { infoBar, targetArticle, scrollingSentenceLength } = infoBarData;
+  const { infoBar, targetArticle } = infoBarData;
   const { shop_name } = appState.userInfo
 
   const handleOnClick = () => {
@@ -27,7 +27,6 @@ const useInfoBarProps = () => {
     targetArticle,
     handleOnClick,
     shop_name,
-    scrollingSentenceLength,
   };
 }
 
@@ -60,8 +59,8 @@ const useStyles = makeStyles((theme: Theme) => {
       whiteSpace: "nowrap",
       lineHeight: "1em",
       animationName: "infoBarscrollAnime",
-      animationDuration: (props: { scrollingSentenceLength: number }) =>
-        `${(32 * props.scrollingSentenceLength) / 245 + 8}s`,
+      animationDuration: (props: { scrolling_animation_duration: number }) =>
+        `${props.scrolling_animation_duration}s`,
       animationTimingFunction: "linear",
       animationIterationCount: "infinite",
     },
@@ -79,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
-         const classes = useStyles({ scrollingSentenceLength: props.scrollingSentenceLength });
+         const classes = useStyles({ scrolling_animation_duration: props.infoBar.scrolling_animation_duration });
 
          let displayInfoBar = <></>;
          switch (props.infoBar.info_bar_type) {

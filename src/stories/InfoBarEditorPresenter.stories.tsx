@@ -26,6 +26,7 @@ export const Normal = () => {
     articleInfoBar,
     setArticleInfoBar,
     allArticles: sampleAllArticles,
+    handleSubmit: null,
   };
 
 

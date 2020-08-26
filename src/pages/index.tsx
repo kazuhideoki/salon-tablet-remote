@@ -1,5 +1,5 @@
 import React from "react";
-import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramAccounts, TInstagramMedias, TInfoBar, TAllArticles } from "../app/Store/Types";
+import { TUserInfo, TArticles, PaginationParams, FooterItems, TTags, TInstagramAccounts, TInstagramMedias, TInfoBar, TAllArticles, TInfoBarData } from "../app/Store/Types";
 import { App } from "../app/View/App";
 //@ts-ignore
 import { getCsrfToken, getSession, providers } from "next-auth/client";
@@ -22,7 +22,7 @@ export type IndexPropsData = {
   pagination: PaginationParams;
   allArticles: TAllArticles;
   footerItems: FooterItems;
-  infoBarData: T_info_bar_get_return;
+  infoBarData: TInfoBarData;
   tags: TTags;
   instagramAccounts: TInstagramAccounts;
   // instagramMedias: TInstagramMedias

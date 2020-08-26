@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_user_id,
   TInfoBar,
-  T_selected_article_on_info_bar,
+  T_selected_article_id,
   TInfoBarWithoutId,
 } from "../../../app/Store/Types";
 import { TApiResponse } from "../lib/apiTypes";
@@ -44,7 +44,8 @@ const info_bar_create_init = async (
         user_id: user_id,
         info_bar_type: "shop_name",
         scrolling_sentence: "",
-        selected_article_on_info_bar: null as T_selected_article_on_info_bar,
+        scrolling_animation_duration: 8,
+        selected_article_id: null as T_selected_article_id,
       };
 
       await db(`INSERT INTO info_bar SET ?`, params)

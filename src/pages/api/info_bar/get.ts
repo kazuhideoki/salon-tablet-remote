@@ -1,12 +1,13 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { checkOrders } from "../lib/checkOrders";
-import { TInfoBar, T_user_id, TArticle } from "../../../app/Store/Types";
+import { TInfoBar, T_user_id, TArticle, TInfoBarData } from "../../../app/Store/Types";
 import { correctOrders } from "../lib/correctOrders";
 import { changeToBooleanFromNumber } from "../lib/changeToBooleanFromNumber";
 import { localhost, server } from "../../../config";
 import { TApiResponse, TApiError } from "../lib/apiTypes";
 import { T_info_bar_update_return } from "./update";
+import { createInitInfoBar } from "../lib/createInitInfoBar";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
@@ -20,11 +21,13 @@ export const apiInfoBarGet = async (
        };
 
 export type T_info_bar_get = T_user_id
-export type T_info_bar_get_return = {
-  infoBar: TInfoBar;
-  scrollingSentenceLength: number, // 後から入れて、SETされる
-  targetArticle: TArticle;
-};
+// export type T_info_bar_get_return = {
+//   infoBar: TInfoBar;
+//   // scrolling_animation_duration: number, // 後から入れて、SETされる
+//   targetArticle: TArticle;
+// };
+export type T_info_bar_get_return = TInfoBarData;
+;
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const userId:T_info_bar_get = Number(req.query.userId)
@@ -38,9 +41,13 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     );
     console.log('info_bar/getのdataは ' + JSON.stringify(data));
 
-    const article_id = data[0].selected_article_on_info_bar;
+    if (data.length === 0) {
+      await createInitInfoBar(userId)
+    }
 
-    // selected_article_on_info_barがセットされていれば該当記事取得
+    const article_id = data[0].selected_article_id;
+
+    // selected_article_idがセットされていれば該当記事取得
     let data2 = [] as any
     if (article_id) {
       data2 = await db(
@@ -53,7 +60,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const returnData: T_info_bar_get_return = {
       infoBar: data[0] as TInfoBar,
-      scrollingSentenceLength: null,
+      // scrolling_animation_duration: null,
       targetArticle: data2.length ? data2[0] : [],
     };
 
