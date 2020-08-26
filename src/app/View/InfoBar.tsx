@@ -13,7 +13,7 @@ const useInfoBarProps = () => {
 
   const { appState, dispatchAppState } = React.useContext(Store);
   const { infoBarData, isSetting } = appState;
-  const { infoBar, targetArticle } = infoBarData;
+  const { infoBar, targetArticle, scrollingSentenceLength } = infoBarData;
   const { shop_name } = appState.userInfo
 
   const handleOnClick = () => {
@@ -27,6 +27,7 @@ const useInfoBarProps = () => {
     targetArticle,
     handleOnClick,
     shop_name,
+    scrollingSentenceLength,
   };
 }
 
@@ -47,41 +48,41 @@ const useStyles = makeStyles((theme: Theme) => {
       zIndex: 100,
     },
     scrollingSentenceDiv: {
-      margin: 'auto',
-      width: '96%',
-      lineHeight: '1.5em',
-      textAlign : 'center',
-      // border     : '1px solid #666';
-      // color      : '#000000';
-      // background : '#fff';
-      overflow   : 'hidden',
+      margin: "auto",
+      width: "96%",
+      lineHeight: "1.5em",
+      textAlign: "center",
+      overflow: "hidden",
     },
     scrollingSentence: {
-      display     : 'inline-block',
-      // display     : 'inline',
-      paddingLeft: '100%',
-      whiteSpace : 'nowrap',
-      lineHeight : '1em',
-      animation   : '$scrollAnime 24s linear infinite',
+      display: "inline-block",
+      paddingLeft: "100%",
+      whiteSpace: "nowrap",
+      lineHeight: "1em",
+      animationName: "infoBarscrollAnime",
+      animationDuration: (props: { stringLength: number }) => `${props.stringLength}s`,
+      animationTimingFunction: "linear",
+      animationIterationCount: "infinite",
     },
-    "@keyframes scrollAnime": {
-      // '0%': { transform: 'translateX(0)'},
-      from: { transform: 'translateX(0)'},
-      // '100%': { transform: 'translateX(-100%)'},
-      to: { transform: 'translateX(-100%)'},
-    },
-    '@global': {
-      '#scrolling_sentence_dangerously_set_inner_html > *': {
-        display: 'inline-block',
-      }
+
+    "@global": {
+      "#scrolling_sentence_dangerously_set_inner_html > *": {
+        display: "inline-block",
+      },
+      "@keyframes infoBarscrollAnime": {
+        // '0%': { transform: 'translateX(0)'},
+        from: { transform: "translateX(0)" },
+        // '100%': { transform: 'translateX(-100%)'},
+        to: { transform: "translateX(-100%)" },
+      },
     },
   });
-})
+});
 
 export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
-         const classes = useStyles();
+        const stringLength = 32 * props.scrollingSentenceLength / 245
 
-         const ref = React.useRef(null)
+         const classes = useStyles({stringLength});
 
          let displayInfoBar = <></>;
          switch (props.infoBar.info_bar_type) {
@@ -97,11 +98,10 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
                <div className={classes.scrollingSentenceDiv}>
                  <div
                    dangerouslySetInnerHTML={{
-                    //  __html: `<nobr>${props.infoBar.scrolling_sentence}</nobr>`,
                      __html: `${props.infoBar.scrolling_sentence}`,
                    }}
                    className={classes.scrollingSentence}
-                   id='scrolling_sentence_dangerously_set_inner_html'
+                   id="scrolling_sentence_dangerously_set_inner_html"
                  />
                </div>
              );
@@ -117,13 +117,12 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
                  }
                >
                  <Typography variant="caption">
-                   <span id="scrolling_sentence" ref={ref}>
+                   <span id="scrolling_sentence">
                      <b>{props.targetArticle.title}</b>
                      {"  "}
                      {props.targetArticle.article_excerpt}
                    </span>
                  </Typography>
-                 {/* <Typography variant="caption"></Typography> */}
                </div>
              );
              break;

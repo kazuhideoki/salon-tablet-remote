@@ -301,10 +301,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "SET_INFO_BAR":
         newState = {
           ...state,
-          infoBarData: {
-            infoBar: action.payload.infoBar,
-            targetArticle: action.payload.targetArticle,
-          },
+          infoBarData: action.payload,
         };
         break;
       case "SET_TAGS":

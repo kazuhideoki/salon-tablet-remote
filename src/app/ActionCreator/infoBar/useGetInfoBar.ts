@@ -6,7 +6,7 @@ import { TInfoBarData } from "../../Store/Types";
 export const useGetInfoBar = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
 
-  return async () => {
+  return async (charCount: number) => {
     // dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
 
     const data = await apiInfoBarGet(appState.userInfo.user_id);
@@ -16,7 +16,8 @@ export const useGetInfoBar = () => {
       dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
       // console.log("useGetInfoBarのdata.rawDataは " + JSON.stringify(data.rawData));
-      
+
+      data.scrollingSentenceLength = charCount;
       dispatchAppState({
         type: "SET_INFO_BAR",
         // payload: { infoBar: data.infoBar, targetArticle: data.targetArticle },

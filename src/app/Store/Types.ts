@@ -118,8 +118,8 @@ export type TInfoBarWithoutId = {
   selected_article_on_info_bar: T_selected_article_on_info_bar
 };
 
-export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id}
-export type TInfoBarData = {infoBar: TInfoBar;  targetArticle: TArticle}
+export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id, }
+export type TInfoBarData = {infoBar: TInfoBar;  scrollingSentenceLength: number; targetArticle: TArticle}
 
 // ●●●●●● テーブル `tags`
 
@@ -261,6 +261,7 @@ export const initAppState = (data: IndexPropsData) => ({
     footerItems: data.footerItems,
     infoBarData: {
       infoBar: data.infoBarData.infoBar as TInfoBar,
+      scrollingSentenceLength: null as number,
       targetArticle: data.infoBarData.targetArticle as TArticle,
     },
     tags: data.tags,

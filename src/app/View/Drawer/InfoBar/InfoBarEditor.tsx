@@ -9,7 +9,7 @@ import { CharCounter } from "../../viewComponents/CharCounter";
 import { SwitchOnTapInfoBar } from "./SwitchOnTapInfoBar";
 import { SelectArticleInfoBar } from "./SelectArticleInfoBar";
 import { T_info_bar_update } from "../../../../pages/api/info_bar/update";
-import { useUpdateInfoBar } from "../../../ActionCreator/infoBar/useUpdateInfoBar";
+import { useUpdateInfoBar, TUseUpdateInfoBar } from "../../../ActionCreator/infoBar/useUpdateInfoBar";
 import { PublishTwoTone } from "@material-ui/icons";
 
 
@@ -28,10 +28,11 @@ const useInfoBarEditorProps = () => {
 
   const handleSubmit = () => {
     
-    const params = {
+    const params: TUseUpdateInfoBar = {
       infoBarType,
       editorText,
       articleInfoBar,
+      charCount,
     };
     // console.log("handleSubmitのparamsだよ " + JSON.stringify(params));
     
@@ -87,21 +88,22 @@ export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
            case 'shop_name':
              break;
            case 'scrolling_sentence':
-             mainField = <>
-              <SmallQuillEditor
-                editorText={props.editorText}
-                setEditorText={props.setEditorText}
-                setCharCount={props.setCharCount}
-              />
-              <div className={classes.charCounter}>
-                <CharCounter
-                  charCount={props.charCount}
-                  limitCount={500}
-                  isShowCount
-                />
-
-              </div>
-             </>
+             mainField = (
+               <>
+                 <SmallQuillEditor
+                   editorText={props.editorText}
+                   setEditorText={props.setEditorText}
+                   setCharCount={props.setCharCount}
+                 />
+                 <div className={classes.charCounter}>
+                   <CharCounter
+                     charCount={props.charCount}
+                     limitCount={500}
+                     isShowCount
+                   />
+                 </div>
+               </>
+             );
              break;
            case 'article':
              mainField = <><SelectArticleInfoBar articleInfoBar={props.articleInfoBar} setArticleInfoBar={props.setArticleInfoBar} AllArticles={props.allArticles}/></>

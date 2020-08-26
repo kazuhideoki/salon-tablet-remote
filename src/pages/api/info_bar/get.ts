@@ -21,9 +21,10 @@ export const apiInfoBarGet = async (
 
 export type T_info_bar_get = T_user_id
 export type T_info_bar_get_return = {
-  infoBar: TInfoBar
-  targetArticle: TArticle
-}
+  infoBar: TInfoBar;
+  scrollingSentenceLength: number, // 後から入れて、SETされる
+  targetArticle: TArticle;
+};
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const userId:T_info_bar_get = Number(req.query.userId)
@@ -52,6 +53,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const returnData: T_info_bar_get_return = {
       infoBar: data[0] as TInfoBar,
+      scrollingSentenceLength: null,
       targetArticle: data2.length ? data2[0] : [],
     };
 

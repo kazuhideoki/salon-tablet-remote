@@ -9,10 +9,11 @@ import {
 import { T_info_bar_type } from "../../Store/Types";
 
 export type TUseUpdateInfoBar = {
-    infoBarType: T_info_bar_type;
-    editorText: string;
-    articleInfoBar: number;
-}
+  infoBarType: T_info_bar_type;
+  editorText: string;
+  articleInfoBar: number;
+  charCount: number;
+};
 
 export const useUpdateInfoBar = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
@@ -39,7 +40,7 @@ export const useUpdateInfoBar = () => {
     } else {
       dispatchAppState({ type: "CLOSE_MODAL" });
 
-      getInfoBar();
+      getInfoBar(param.charCount);
     }
   };
 };
