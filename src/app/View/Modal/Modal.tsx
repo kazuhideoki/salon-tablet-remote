@@ -24,7 +24,7 @@ import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 import { TSetModal } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
-// import FooterItemModal from "../Footer/FooterItemModal";
+import InfoBarEditor from "../Drawer/InfoBar/InfoBarEditor";
 
 const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
     //@ts-ignore
@@ -40,7 +40,7 @@ const useModalProps = () => {
   };
   const closeModal = () => {
     let closing = true
-    if (setModal === "edit_article" || setModal === "edit_footer_item" ) {
+    if (setModal === "edit_article" || "edit_footer_item" || 'edit') {
       closing = confirm('編集中ですが保存せずにウィンドウを閉じますか？')
     }
 
@@ -107,6 +107,9 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             modalStyle = medium
             ModalContent = () => <SelectInstagramAccounts />;
             break;
+          case "edit_info_bar":
+            ModalContent = () => <InfoBarEditor />;
+            break;
           case "edit_article":
             ModalContent = () => <ArticleEditor />;
             break;
@@ -150,10 +153,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
               setSkipTransiton(false);
             }
           }, props.duration.enteringScreen);
-        },[props.appState.isModalOpen])
-
-        console.log('modalSizeは ' + props.modalSize);
-        
+        },[props.appState.isModalOpen])        
 
         return (
           // 受け取ったmodalStyle元にサイズ変更して描画

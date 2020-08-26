@@ -17,6 +17,8 @@ import {
   T_selected_theme,
   TInstagramMedias,
   T_on_tap,
+  TInfoBar,
+  TInfoBarData,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 export type AppStateAction =
@@ -25,7 +27,6 @@ export type AppStateAction =
   | { type: "OPEN_DRAWER" }
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
   | { type: "CLOSE_DRAWER" }
-
   | { type: "ON_IS_LOADING_MAIN" }
   | { type: "OFF_IS_LOADING_MAIN" }
   | { type: "ON_IS_LOADING_FOOTER" }
@@ -37,6 +38,7 @@ export type AppStateAction =
 
   // modalウィンドウを開く時
   | { type: "OPEN_ARTICLE_MODAL"; payload: number }
+  | { type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR"; payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL";
       payload: number;
@@ -79,6 +81,7 @@ export type AppStateAction =
       type: "DELETE_FOOTER_ITEM";
       payload: { footer_item_id: T_footer_item_id; order: T_order };
     }
+  | { type: "SET_INFO_BAR"; payload: TInfoBarData }
   | { type: "SET_TAGS"; payload: TTags }
   | { type: "SET_INSTAGRAM_ACCOUNTS"; payload: TInstagramAccounts }
   | {

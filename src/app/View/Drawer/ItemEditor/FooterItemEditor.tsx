@@ -111,6 +111,7 @@ const useFooterItemEditorProps = () => {
     modalSize,
     dataType,
     setDataType,
+    is_admin: appState.userInfo.is_admin,
   };
 }
 
@@ -176,7 +177,10 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
          if (props.onTap === "modal") {
            mainField = (
              <div>
-               <SelectModalSize modalSize={props.modalSize} className={classes.selectModalSize}/>
+               <SelectModalSize
+                 modalSize={props.modalSize}
+                 className={classes.selectModalSize}
+               />
                <QuillEditor
                  editorText={props.editorText}
                  setEditorText={props.setEditorText}
@@ -184,6 +188,14 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                  charCount={props.charCountFooterItemContent}
                  setCharCount={props.setCharCountFooterItemContent}
                />
+               <div className={classes.charCounter}>
+                 <CharCounter
+                   charCount={props.charCountFooterItemContent}
+                   limitCount={1000}
+                   align="right"
+                   isShowCount
+                 />
+               </div>
              </div>
            );
          } else if (props.onTap === "link") {
@@ -215,7 +227,8 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              <Typography variant="h4" component="h2" className={classes.header}>
                {props.isEditting ? "アイテム編集" : "アイテム作成"}
              </Typography>
-             <SwitchDataTypeBox dataType={props.dataType} setDataType={props.setDataType} forFooter/>
+             {props.is_admin ? <SwitchDataTypeBox dataType={props.dataType} setDataType={props.setDataType} forFooter/> : null}
+             
 
              <div className={classes.topDiv}>
                <TextField
@@ -249,14 +262,6 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              {mainField}
 
              <div className={classes.bottomDiv}>
-               <div className={classes.charCounter}>
-                 <CharCounter
-                   charCount={props.charCountFooterItemContent}
-                   limitCount={1000}
-                   align="right"
-                   isShowCount
-                 />
-               </div>
                <Grid container>
                  <Grid item className={classes.submitButton}>
                    <Button

@@ -29,6 +29,7 @@ const props: TUseFooterItemEditorProps = {
   modalSize: "large",
   dataType: "default_data",
   setDataType: null,
+  is_admin: false,
 };
 
 export const Normal = () => {

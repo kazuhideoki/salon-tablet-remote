@@ -62,6 +62,11 @@ export type ArticleWithoutArticleId = {
 export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
 export type TArticles = TArticle[];
 
+export type TAllArticles = {
+  article_id: T_article_id
+  title: T_title
+}[]
+
 // ●●●●●● テーブル `footer_items`
 export type T_footer_item_id = number;
 export type T_is_published_footer_items = boolean;
@@ -98,6 +103,29 @@ export type FooterItem = {
   footer_item_id: T_footer_item_id;
 } & FooterItemWithoutId;
 export type FooterItems = FooterItem[];
+
+// ●●●●●● テーブル `info_bar`
+
+export type T_info_bar_id = number
+export type T_info_bar_type = 'shop_name' | 'scrolling_sentence' | 'article'
+export type T_scrolling_sentence = string
+export type T_scrolling_animation_duration = number
+export type T_selected_article_id = T_article_id;
+
+export type TInfoBarWithoutId = {
+  user_id: T_user_id;
+  info_bar_type: T_info_bar_type;
+  scrolling_sentence: T_scrolling_sentence;
+  scrolling_animation_duration: T_scrolling_animation_duration;
+  selected_article_id: T_selected_article_id;
+};
+
+export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id, }
+export type TInfoBarData = {
+  infoBar: TInfoBar;
+  // scrolling_animation_duration: number;
+  targetArticle: TArticle;
+};
 
 // ●●●●●● テーブル `tags`
 
@@ -185,6 +213,7 @@ export type TSetModal =
   | "instagram_media_modal"
   | "select_tags"
   | "select_instagram"
+  | "edit_info_bar"
   | "edit_article"
   | "edit_footer_item"
   | "edit_tags"
@@ -231,12 +260,19 @@ export const initAppState = (data: IndexPropsData) => ({
       manageInstagramAccounts: false,
     },
 
-    userInfo: data.session as TUserInfo,
-    articles: data.articles as TArticles,
+    userInfo: data.session,
+    articles: data.articles,
+    allArticles: data.allArticles,
     paginationParams: data.pagination,
-    footerItems: data.footerItems as FooterItems,
-    tags: data.tags as TTags,
-    instagramAccounts: data.instagramAccounts as TInstagramAccounts,
+    footerItems: data.footerItems,
+    // infoBarData: {
+    //   infoBar: data.infoBarData.infoBar as TInfoBar,
+    //   // scrolling_animation_duration: null as number,
+    //   targetArticle: data.infoBarData.targetArticle as TArticle,
+    // },
+    infoBarData: data.infoBarData,
+    tags: data.tags,
+    instagramAccounts: data.instagramAccounts,
     instagramMedias: initInstagramMedias
   })
 
