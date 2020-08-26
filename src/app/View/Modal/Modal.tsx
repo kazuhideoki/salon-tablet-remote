@@ -40,7 +40,7 @@ const useModalProps = () => {
   };
   const closeModal = () => {
     let closing = true
-    if (setModal === "edit_article" || setModal === "edit_footer_item" ) {
+    if (setModal === "edit_article" || "edit_footer_item" || 'edit') {
       closing = confirm('編集中ですが保存せずにウィンドウを閉じますか？')
     }
 

@@ -1,12 +1,8 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { checkOrders } from "../lib/checkOrders";
-import { TInfoBar, T_user_id, TArticle, TInfoBarData } from "../../../app/Store/Types";
-import { correctOrders } from "../lib/correctOrders";
-import { changeToBooleanFromNumber } from "../lib/changeToBooleanFromNumber";
+import { TInfoBar, T_user_id, TInfoBarData } from "../../../app/Store/Types";
 import { localhost, server } from "../../../config";
 import { TApiResponse, TApiError } from "../lib/apiTypes";
-import { T_info_bar_update_return } from "./update";
 import { createInitInfoBar } from "../lib/createInitInfoBar";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -21,11 +17,6 @@ export const apiInfoBarGet = async (
        };
 
 export type T_info_bar_get = T_user_id
-// export type T_info_bar_get_return = {
-//   infoBar: TInfoBar;
-//   // scrolling_animation_duration: number, // 後から入れて、SETされる
-//   targetArticle: TArticle;
-// };
 export type T_info_bar_get_return = TInfoBarData;
 ;
 
@@ -34,15 +25,16 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     //@ts-ignore
-    const data: TInfoBar[] = await db(
+    let data: TInfoBar[] = await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
       "SELECT * FROM info_bar WHERE user_id = ?",
       userId
     );
-    console.log('info_bar/getのdataは ' + JSON.stringify(data));
+    // console.log('info_bar/getのdataは ' + JSON.stringify(data));
 
+    // 初回サインインのときなどでinfo_barがない場合、新しく作る。作ったデータが返ってくる
     if (data.length === 0) {
-      await createInitInfoBar(userId)
+      data = await createInitInfoBar(userId)
     }
 
     const article_id = data[0].selected_article_id;
@@ -55,8 +47,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         article_id
       );
     }
-
-    console.log("info_bar/getのdata2は " + JSON.stringify(data2));
 
     const returnData: T_info_bar_get_return = {
       infoBar: data[0] as TInfoBar,

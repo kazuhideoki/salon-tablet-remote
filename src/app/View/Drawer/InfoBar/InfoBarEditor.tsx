@@ -3,12 +3,11 @@ import dynamic from "next/dynamic";
 const SmallQuillEditor = dynamic(() => import("./SmallQuillEditor"), {
   ssr: false,
 });
-import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
+import { Button, Typography, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
 import { Store } from "../../../Store/Store";
 import { CharCounter } from "../../viewComponents/CharCounter";
 import { SwitchOnTapInfoBar } from "./SwitchOnTapInfoBar";
 import { SelectArticleInfoBar } from "./SelectArticleInfoBar";
-import { T_info_bar_update } from "../../../../pages/api/info_bar/update";
 import { useUpdateInfoBar, TUseUpdateInfoBar } from "../../../ActionCreator/infoBar/useUpdateInfoBar";
 import { PublishTwoTone } from "@material-ui/icons";
 
@@ -32,10 +31,8 @@ const useInfoBarEditorProps = () => {
       infoBarType,
       editorText,
       articleInfoBar,
-      ScrollingAnimationDuration: (32 * charCount) / 245 + 8,
-    };
-    // console.log("handleSubmitのparamsだよ " + JSON.stringify(params));
-    
+      ScrollingAnimationDuration: (32 * charCount) / 245 + 8, // アニメーションの再生時間がが文字数に応じて増え、どの文字数でもある程度同じスピードで再生されるように調整
+    };    
     updateInfoBar(params)  
   };
 

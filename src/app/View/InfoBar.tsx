@@ -1,13 +1,8 @@
-import React, { DOMElement } from 'react'
+import React from 'react'
 import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core'
 import { Store } from '../Store/Store'
 import { UpdateButton } from './viewComponents/buttons/UpdateButton'
-import dynamic from 'next/dynamic';
-import { Edit } from '@material-ui/icons';
 import { EditButtonsBox } from './viewComponents/buttons/EditButtonsBox';
-// const ReactQuill = dynamic(() => import("react-quill"), {
-//   ssr: false,
-// });
 
 const useInfoBarProps = () => {
 
@@ -59,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) => {
       whiteSpace: "nowrap",
       lineHeight: "1em",
       animationName: "infoBarscrollAnime",
+      // データベースに保存したscrolling_animation_durationを適応。文字数に応じて自動で計算されている
       animationDuration: (props: { scrolling_animation_duration: number }) =>
         `${props.scrolling_animation_duration}s`,
       animationTimingFunction: "linear",
@@ -126,32 +122,6 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
            default:
              break;
          }
-
-        //  React.useEffect(() => {
-        //    if (process.browser) {
-        //      console.log('infoBarのuseEffect,process.browserだよ');
-             
-        //      const scrollingSentence = document.getElementById(
-        //        "scrolling_sentence"
-        //      );
-        //      console.log("scrollingSentenceは " + scrollingSentence);
-        //      console.log("refは " + JSON.stringify(ref));
-             
-        //     //  if (ref) {
-        //     //    ref.あcurrent.scrollTo({
-        //     //      left: 500,
-        //     //      behavior: "smooth",
-        //     //    });
-        //     //  }
-        //     if (scrollingSentence) {
-        //       scrollingSentence.scrollTo({
-        //         left: 500,
-        //         behavior: "smooth",
-        //       });
-        //     }
-             
-        //    }
-        //  },[ref])
 
          return (
            <div className={classes.root}>

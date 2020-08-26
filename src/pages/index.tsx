@@ -13,8 +13,6 @@ import { apiFooterItemsGet } from "./api/footer_items/get";
 import { apiTagsGet } from "./api/tags/get";
 import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 import { apiCreateSampleData } from "./api/create_sample_data";
-import { apiCreateInfoBar } from "./api/info_bar/create_init";
-import { apiCheckHasInfoBar } from "./api/info_bar/check_has_info_bar";
 import { apiInfoBarGet, T_info_bar_get_return } from "./api/info_bar/get";
 
 export type IndexPropsData = {
@@ -25,7 +23,6 @@ export type IndexPropsData = {
   infoBarData: TInfoBarData;
   tags: TTags;
   instagramAccounts: TInstagramAccounts;
-  // instagramMedias: TInstagramMedias
   session?: TUserInfo;
 };
 
@@ -85,12 +82,6 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         apiCreateSampleData({user_id: userInfo.user_id})
       }
 
-      // info_barのデータがない場合追加する（初回サインインか古いユーザー）
-      const hasInfoBar = await apiCheckHasInfoBar({ user_id: userInfo.user_id });
-      if (hasInfoBar === false) {
-         apiCreateInfoBar({ user_id: userInfo.user_id });
-      }
-
       // 記事一覧取得
       const articlesParam: T_articles_get = {
         page: 1,
@@ -99,10 +90,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         userId: userInfo.user_id,
       };
       
-      // const data6 = {err: true} // テーブル  instagram_medias実装までつなぎ
-
       // 並列処理でデータを取ってくる
-      // const [data, data2, data3, data4, data5] = await Promise.all([
       const [data, data2, data3, data4, data5] = await Promise.all([
         apiArticlesGet(articlesParam),        
         apiFooterItemsGet(userInfo.user_id),
@@ -121,7 +109,6 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         infoBarData: data3.err ? [] : data3,
         tags: data4.err ? [] : data4,
         instagramAccounts: data5.err ? [] : data5,
-        // instagramMedias: data6.err ? {data: []} : data6,
         // JSONのエラーになったので、このような書き方↓
         session: userInfo && JSON.parse(JSON.stringify(userInfo)),
       };
