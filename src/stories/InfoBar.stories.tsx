@@ -44,7 +44,24 @@ export const scrolling_sentence = () => {
   props.infoBar.info_bar_type = 'scrolling_sentence';
   return <InfoBarPresenter {...props} />;
 }
-export const scrolling_sentence_midium = () => {
+export const scrolling_sentence_1文字 = () => {
+  const infoBarProps = {
+    info_bar_id: null,
+    user_id: null,
+    info_bar_type: "scrolling_sentence" as T_info_bar_type,
+    scrolling_sentence:
+      "あ",
+    selected_article_on_info_bar: null,
+  };
+  return (
+    <InfoBarPresenter
+      {...props}
+      infoBar={infoBarProps}
+       scrollingSentenceLength={1}
+    />
+  );
+}
+export const scrolling_sentence_172文字 = () => {
   const infoBarProps = {
     info_bar_id: null,
     user_id: null,
@@ -55,7 +72,7 @@ export const scrolling_sentence_midium = () => {
   };
   return <InfoBarPresenter {...props} infoBar={infoBarProps} scrollingSentenceLength={172}/>;
 }
-export const scrolling_sentence_long = () => {
+export const scrolling_sentence_495文字 = () => {
   const infoBarProps = {
     info_bar_id: null,
     user_id: null,

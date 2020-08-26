@@ -60,7 +60,8 @@ const useStyles = makeStyles((theme: Theme) => {
       whiteSpace: "nowrap",
       lineHeight: "1em",
       animationName: "infoBarscrollAnime",
-      animationDuration: (props: { stringLength: number }) => `${props.stringLength}s`,
+      animationDuration: (props: { scrollingSentenceLength: number }) =>
+        `${(32 * props.scrollingSentenceLength) / 245 + 8}s`,
       animationTimingFunction: "linear",
       animationIterationCount: "infinite",
     },
@@ -70,9 +71,7 @@ const useStyles = makeStyles((theme: Theme) => {
         display: "inline-block",
       },
       "@keyframes infoBarscrollAnime": {
-        // '0%': { transform: 'translateX(0)'},
         from: { transform: "translateX(0)" },
-        // '100%': { transform: 'translateX(-100%)'},
         to: { transform: "translateX(-100%)" },
       },
     },
@@ -80,9 +79,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
-        const stringLength = 32 * props.scrollingSentenceLength / 245
-
-         const classes = useStyles({stringLength});
+         const classes = useStyles({ scrollingSentenceLength: props.scrollingSentenceLength });
 
          let displayInfoBar = <></>;
          switch (props.infoBar.info_bar_type) {
