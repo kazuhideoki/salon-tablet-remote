@@ -121,6 +121,18 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "OPEN_ARTICLE_MODAL_FROM_INFO_BAR":
+        newState = {
+          ...state,
+          setModal: "content_modal",
+          isModalOpen: true,
+          currentModalContent: {
+            ...state.currentModalContent,
+            article: action.payload,
+            modalSize: "large",
+          },
+        };
+        break;
       case "OPEN_FOOTER_ITEM_MODAL":
         newState = {
           ...state,
@@ -243,6 +255,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           selectedArticlesTags: action.payload.selectedArticlesTags,
           isSetting: action.payload.isSetting,
           articles: action.payload.data.rawData,
+          allArticles: action.payload.data.allArticles,
           paginationParams: action.payload.data.pagination,
           isShowInstagram: isShowInstagram,
           loading: {
@@ -258,7 +271,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           loading: {
             ...state.loading,
             footer: false,
-          }
+          },
         };
         break;
 
@@ -282,7 +295,13 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           loading: {
             ...state.loading,
             footer: false,
-          }
+          },
+        };
+        break;
+      case "SET_INFO_BAR":
+        newState = {
+          ...state,
+          infoBarData: action.payload,
         };
         break;
       case "SET_TAGS":
@@ -299,10 +318,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           instagramAccounts: action.payload,
-          loading:{
+          loading: {
             ...state.loading,
-            manageInstagramAccounts: false
-          }
+            manageInstagramAccounts: false,
+          },
         };
         break;
       case "SET_INSTAGRAM_MEDIAS":

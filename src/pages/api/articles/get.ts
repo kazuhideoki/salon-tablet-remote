@@ -1,7 +1,7 @@
 import { db } from "../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { tagIdsParse } from "../lib/tagIdsParse";
-import { T_user_id, TArticles } from "../../../app/Store/Types";
+import { T_user_id, TArticles, TAllArticles } from "../../../app/Store/Types";
 import { TApiResponse } from "../lib/apiTypes";
 import { server, localhost } from "../../../config";
 // import { session } from "next-auth/client";
@@ -42,6 +42,7 @@ export type TPaginationReturn = {
 export type T_articles_get_return = {
   rawData: TArticles,
   pagination: TPaginationReturn
+  allArticles: TAllArticles
 }
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -96,6 +97,9 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log(query2);
 
       const data2: any = await db(query2);  
+
+      const query3 = `SELECT article_id, title FROM articles WHERE user_id = ${userId}`;
+      const data3 = await db(query3);
       
       const pagination: TPaginationReturn = {
         page: page,
@@ -108,6 +112,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         // tag_idsをnumber[]化する、なければnullのまま
         rawData: data.length ? tagIdsParse(data) : data,
         pagination: pagination,
+        allArticles: data3 as TAllArticles
       };
 
       return res.status(200).json(returnData);
