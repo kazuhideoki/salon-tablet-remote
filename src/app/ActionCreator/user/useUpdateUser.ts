@@ -2,11 +2,12 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { apiUserInfoUpdate, T_user_info_update } from "../../../pages/api/user_info/update";
 
-type TUpdateUser = {
+export type TUpdateUser = {
   name: string
   shopName: string
   email: string
   password: string
+  isShowMobile: boolean
 }
 
 export const useUpdateUser = () => {
@@ -24,6 +25,7 @@ export const useUpdateUser = () => {
         user_name: param.name,
         shop_name: param.shopName,
         user_email: param.email,
+        is_show_mobile_page: param.isShowMobile,
       },
       plainTextPassword: param.password,
     };

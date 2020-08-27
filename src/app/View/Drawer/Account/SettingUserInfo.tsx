@@ -9,7 +9,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Settings } from "@material-ui/icons";
 import { Divider, Switch, FormControlLabel, FormGroup } from "@material-ui/core";
-import { useUpdateUser } from "../../../ActionCreator/user/useUpdateUser";
+import {
+  useUpdateUser,
+  TUpdateUser,
+} from "../../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../../Store/Store";
 
 const useSettingUserInfoProps = () => {
@@ -24,11 +27,15 @@ const useSettingUserInfoProps = () => {
   const [shopName, setShopName] = React.useState(userInfo.shop_name);
   const [email, setEmail] = React.useState(userInfo.user_email);
   const [password, setPassword] = React.useState('');
-  const [isShowMobile, setIsShowMobile] = React.useState(false)
+  const [isShowMobile, setIsShowMobile] = React.useState(userInfo.is_show_mobile_page)
 
-  const params = {
-    name, shopName, email, password
-  }
+  const params: TUpdateUser = {
+    name,
+    shopName,
+    email,
+    password,
+    isShowMobile,
+  };
 
   const handleOnSubmit = () => {
     updateUser(params)
