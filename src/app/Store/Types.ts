@@ -5,6 +5,8 @@ export type T_user_name = string;
 export type T_shop_name = string;
 export type T_user_email = string;
 export type T_selected_theme = string;
+export type T_is_show_mobile_page = boolean;
+export type T_mobile_page_slug = string;
 export type T_is_admin = boolean;
 export type T_created_at_user = string;
 export type T_updated_at_user = string;
@@ -16,7 +18,9 @@ export type TUserInfo = {
   user_email: T_user_email;
   selected_theme: T_selected_theme;
   is_first_sign_in: boolean;
-  is_admin: T_is_admin
+  is_show_mobile_page: T_is_show_mobile_page;
+  mobile_page_slug: T_mobile_page_slug;
+  is_admin: T_is_admin;
   bcrypt_password?: string;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
