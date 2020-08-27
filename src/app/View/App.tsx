@@ -183,7 +183,7 @@ export const App = (props: IndexProps) => {
   return (
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider data={props.data}>
-      <ThemeProvider {...props.data.session}>
+      <ThemeProvider {...props.data.userInfo}>
         <AppView />
         <Modal />
       </ThemeProvider>

@@ -23,7 +23,7 @@ export type IndexPropsData = {
   infoBarData: TInfoBarData;
   tags: TTags;
   instagramAccounts: TInstagramAccounts;
-  session?: TUserInfo;
+  userInfo?: TUserInfo;
 };
 
 export type IndexProps = {
@@ -36,14 +36,12 @@ export type IndexProps = {
 
 const Index = (props: IndexProps) => {
 
-  if (!props.data.session) {    
-
+  if (!props.data.userInfo) {
     return (
       <>
-        <TopPage csrfToken={props.csrfToken} providers={props.providers}/>
+        <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       </>
     );
-
   }
 
   // テーマ、記事データ、appの状態管理を読み込む
@@ -110,7 +108,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         tags: data4.err ? [] : data4,
         instagramAccounts: data5.err ? [] : data5,
         // JSONのエラーになったので、このような書き方↓
-        session: userInfo && JSON.parse(JSON.stringify(userInfo)),
+        userInfo: userInfo && JSON.parse(JSON.stringify(userInfo)),
       };
 
       return {

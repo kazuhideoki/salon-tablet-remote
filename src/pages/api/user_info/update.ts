@@ -21,7 +21,7 @@ export const apiUserInfoUpdate = async (
   return await res.json();
 };
 
-type T_columns_without_password = {
+export type T_user_info_columns_without_password = {
   user_id: T_user_id;
   user_name: T_user_name;
   shop_name: T_shop_name;
@@ -30,10 +30,10 @@ type T_columns_without_password = {
 }
 
 export type T_user_info_update = {
-  columns: T_columns_without_password;
+  columns: T_user_info_columns_without_password;
   plainTextPassword: string;
 };
-type T_user_info_update_params = T_columns_without_password & {bcrypt_password?: any }
+type T_user_info_update_params = T_user_info_columns_without_password & {bcrypt_password?: any }
 
 
 export type T_user_info_update_return = {

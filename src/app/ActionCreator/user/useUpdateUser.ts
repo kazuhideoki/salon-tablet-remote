@@ -19,14 +19,16 @@ export const useUpdateUser = () => {
 
   // const cipheredPassword = cipher(password);
   return async (param: TUpdateUser) => {
+    const columns = {
+      user_id: user_id,
+      user_name: param.name,
+      shop_name: param.shopName,
+      user_email: param.email,
+      is_show_mobile_page: param.isShowMobile,
+    };
+
     const params: T_user_info_update = {
-      columns: {
-        user_id: user_id,
-        user_name: param.name,
-        shop_name: param.shopName,
-        user_email: param.email,
-        is_show_mobile_page: param.isShowMobile,
-      },
+      columns: columns,
       plainTextPassword: param.password,
     };
 
@@ -36,16 +38,10 @@ export const useUpdateUser = () => {
     } else {
       dispatchAppState({
         type: "SET_USER_INFO",
-        payload: {
-          user_id: user_id,
-          user_name: param.name,
-          shop_name: param.shopName,
-          user_email: param.email,
-        },
+        payload: columns,
       });
       alert("ユーザーデータを更新しました。");
-      // ↓modalを閉じるとTextFieldの値をうまく保持できない
-      // そもそも必要ない
+
     }
   };
 };

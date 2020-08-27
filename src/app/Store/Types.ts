@@ -230,55 +230,50 @@ export type TSetModal =
 
 
 export const initAppState = (data: IndexPropsData) => ({
-    isSetting: true,
-    isDrawerOpen: true,
-    setModal: "edit_article" as TSetModal,
-    isModalOpen: false,
-    isShowInstagram: false,
-    // modal表示するコンテン情報を格納
-    currentModalContent: {
-      modalSize: "large" as T_modal_size,
-      article: {} as TArticle,
-      footerItem: {} as FooterItem,
-      instagramMedia: {} as TInstagramMedia,
-    },
+         isSetting: true,
+         isDrawerOpen: true,
+         setModal: "edit_article" as TSetModal,
+         isModalOpen: false,
+         isShowInstagram: false,
+         // modal表示するコンテン情報を格納
+         currentModalContent: {
+           modalSize: "large" as T_modal_size,
+           article: {} as TArticle,
+           footerItem: {} as FooterItem,
+           instagramMedia: {} as TInstagramMedia,
+         },
 
-    edittingPrams: {
-      isEditting: false,
-      article: {} as TArticle,
-      footerItem: {} as FooterItem,
-      // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
-      modalSize: "large" as T_modal_size,
-      onTap: "modal" as T_on_tap
-    },
-    // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
-    selectedArticlesTags: [] as number[],
-    selectedInstagramAccount: {
-      id: 0 as T_instagram_id,
-      username: "" as T_instagram_username,
-    },
-    loading: {
-      main: false,
-      footer: false,
-      manageTags: false,
-      manageInstagramAccounts: false,
-    },
+         edittingPrams: {
+           isEditting: false,
+           article: {} as TArticle,
+           footerItem: {} as FooterItem,
+           // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
+           modalSize: "large" as T_modal_size,
+           onTap: "modal" as T_on_tap,
+         },
+         // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
+         selectedArticlesTags: [] as number[],
+         selectedInstagramAccount: {
+           id: 0 as T_instagram_id,
+           username: "" as T_instagram_username,
+         },
+         loading: {
+           main: false,
+           footer: false,
+           manageTags: false,
+           manageInstagramAccounts: false,
+         },
 
-    userInfo: data.session,
-    articles: data.articles,
-    allArticles: data.allArticles,
-    paginationParams: data.pagination,
-    footerItems: data.footerItems,
-    // infoBarData: {
-    //   infoBar: data.infoBarData.infoBar as TInfoBar,
-    //   // scrolling_animation_duration: null as number,
-    //   targetArticle: data.infoBarData.targetArticle as TArticle,
-    // },
-    infoBarData: data.infoBarData,
-    tags: data.tags,
-    instagramAccounts: data.instagramAccounts,
-    instagramMedias: initInstagramMedias
-  })
+         userInfo: data.userInfo,
+         articles: data.articles,
+         allArticles: data.allArticles,
+         paginationParams: data.pagination,
+         footerItems: data.footerItems,
+         infoBarData: data.infoBarData,
+         tags: data.tags,
+         instagramAccounts: data.instagramAccounts,
+         instagramMedias: initInstagramMedias,
+       });
 
 export type TAppState = ReturnType<typeof initAppState> ;
 
