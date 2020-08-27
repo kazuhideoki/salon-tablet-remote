@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Settings } from "@material-ui/icons";
-import { Divider } from "@material-ui/core";
+import { Divider, Switch, FormControlLabel, FormGroup } from "@material-ui/core";
 import { useUpdateUser } from "../../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../../Store/Store";
 
@@ -24,6 +24,7 @@ const useSettingUserInfoProps = () => {
   const [shopName, setShopName] = React.useState(userInfo.shop_name);
   const [email, setEmail] = React.useState(userInfo.user_email);
   const [password, setPassword] = React.useState('');
+  const [isShowMobile, setIsShowMobile] = React.useState(false)
 
   const params = {
     name, shopName, email, password
@@ -49,7 +50,9 @@ const useSettingUserInfoProps = () => {
     updateUser,
     handleOnSubmit,
     openDeleteAccountForm,
-  }
+    isShowMobile,
+    setIsShowMobile,
+  };
 }
 
 type Props = ReturnType<typeof useSettingUserInfoProps>
@@ -153,11 +156,9 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
           {isValidPassword(props.password) ? (
             <Typography component="h3" variant="body1" color={"primary"}>
               {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
-              <b>
-                有効なパスワードです。
-              </b>
+              <b>有効なパスワードです。</b>
             </Typography>
-          ): null}
+          ) : null}
           {props.userInfo.isSetPassword ? (
             <Typography component="h3" variant="body1" color={"error"}>
               ※パスワードは変更時のみご入力下さい。
@@ -167,6 +168,19 @@ export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
               ※パスワードを設定して下さい。(サインインや各種設定で使用)
             </Typography>
           )}
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={props.isShowMobile}
+                  onChange={(e) => props.setIsShowMobile(e.target.checked)}
+                  name="isShowMobile"
+                  color="primary"
+                />
+              }
+              label="モバイルページの出力"
+            />
+          </FormGroup>
 
           <Button
             fullWidth
