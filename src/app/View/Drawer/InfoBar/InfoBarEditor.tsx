@@ -57,8 +57,14 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       margin: theme.spacing(2),
     },
+    switchOnTapInfoBar: {
+      margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
+    },
     charCounter: {
       textAlign: "right",
+    },
+    selectArticleInfoBar: {
+      margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
     bottomDiv: {
       position: "sticky",
@@ -103,7 +109,16 @@ export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
              );
              break;
            case 'article':
-             mainField = <><SelectArticleInfoBar articleInfoBar={props.articleInfoBar} setArticleInfoBar={props.setArticleInfoBar} AllArticles={props.allArticles}/></>
+             mainField = (
+               <>
+                 <SelectArticleInfoBar
+                   articleInfoBar={props.articleInfoBar}
+                   setArticleInfoBar={props.setArticleInfoBar}
+                   AllArticles={props.allArticles}
+                   className={classes.selectArticleInfoBar}
+                 />
+               </>
+             );
              break;
          
            default:
@@ -120,6 +135,7 @@ export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
              <SwitchOnTapInfoBar
                infoBarType={props.infoBarType}
                setInfoBarType={props.setInfoBarType}
+               className={classes.switchOnTapInfoBar}
              />
 
              {mainField}
