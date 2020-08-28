@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core'
+import { Typography, makeStyles, createStyles, Theme, CardActionArea } from '@material-ui/core'
 import { Store } from '../Store/Store'
 import { UpdateButton } from './viewComponents/buttons/UpdateButton'
 import { EditButtonsBox } from './viewComponents/buttons/EditButtonsBox';
@@ -34,12 +34,13 @@ const useStyles = makeStyles((theme: Theme) => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
+      position: 'relative',
     },
     editButtonsBox: {
       position: "absolute",
       top: theme.spacing(1),
       right: 0,
-      zIndex: 100,
+      zIndex: 200,
     },
     scrollingSentenceDiv: {
       margin: "auto",
@@ -47,6 +48,16 @@ const useStyles = makeStyles((theme: Theme) => {
       lineHeight: "1.5em",
       textAlign: "center",
       overflow: "hidden",
+    },
+    shadow: {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      zIndex: 100,
+      background:
+        "linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 80%, rgba(255,255,255,1) 100%)",
     },
     scrollingSentence: {
       display: "inline-block",
@@ -59,6 +70,9 @@ const useStyles = makeStyles((theme: Theme) => {
         `${props.scrolling_animation_duration}s`,
       animationTimingFunction: "linear",
       animationIterationCount: "infinite",
+    },
+    article: {
+      margin: `0 ${theme.spacing(2)}`
     },
 
     "@global": {
@@ -87,6 +101,8 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
              break;
            case "scrolling_sentence":
              displayInfoBar = (
+               <>
+               <div className={classes.shadow}></div>
                <div className={classes.scrollingSentenceDiv}>
                  <div
                    dangerouslySetInnerHTML={{
@@ -96,17 +112,19 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
                    id="scrolling_sentence_dangerously_set_inner_html"
                  />
                </div>
+               </>
              );
              break;
            case "article":
              displayInfoBar = (
-               <div
+               <CardActionArea
                  onClick={() =>
                    props.dispatchAppState({
                      type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR",
                      payload: props.targetArticle,
                    })
                  }
+                 className={classes.article}
                >
                  <Typography variant="caption">
                    <span id="scrolling_sentence">
@@ -115,7 +133,7 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
                      {props.targetArticle.article_excerpt}
                    </span>
                  </Typography>
-               </div>
+               </CardActionArea>
              );
              break;
 
