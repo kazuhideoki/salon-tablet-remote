@@ -27,7 +27,7 @@ const useSettingUserInfoProps = () => {
   const [shopName, setShopName] = React.useState(userInfo.shop_name);
   const [email, setEmail] = React.useState(userInfo.user_email);
   const [password, setPassword] = React.useState('');
-  const [isShowMobile, setIsShowMobile] = React.useState(userInfo.is_show_mobile_page)
+  const [isShowMobile, setIsShowMobile] = React.useState(userInfo.is_generate_public_page)
 
   const params: TUpdateUser = {
     name,

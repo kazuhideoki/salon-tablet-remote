@@ -1,8 +1,8 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../config";
 import { T_footer_item_id, T_order } from "../../../app/Store/Types";
-import { TApiResponse } from "../lib/apiTypes";
+import { TApiResponse } from "../../../lib/apiTypes";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

@@ -1,6 +1,6 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TApiResponse } from "../lib/apiTypes";
+import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../config";
 import { T_instagram_id, TInstagramMedias } from "../../../app/Store/Types";
 

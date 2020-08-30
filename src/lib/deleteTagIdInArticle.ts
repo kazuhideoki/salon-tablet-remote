@@ -1,11 +1,11 @@
 import { db } from "./db";
-import { tagIdsParse } from "../lib/tagIdsParse";
+import { tagIdsParse } from "./tagIdsParse";
 import {
   T_tag_ids,
   T_tag_id,
   T_user_id,
   T_article_id,
-} from "../../../app/Store/Types";
+} from "../app/Store/Types";
 
 export const deleteTagIdInArticle = async (tag_id: T_tag_id, user_id: T_user_id) => {
   // ★まずarticleのtag_idsの該当タグを消す

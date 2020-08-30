@@ -1,9 +1,9 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { cipher } from "../../../module/bcrypt";
 import { server, localhost } from "../../../config";
-import { TApiResponse } from "../lib/apiTypes";
-import { T_user_id, T_user_name, T_shop_name, T_user_email, T_is_show_mobile_page } from "../../../app/Store/Types";
+import { TApiResponse } from "../../../lib/apiTypes";
+import { T_user_id, T_user_name, T_shop_name, T_user_email, T_is_generate_public_page } from "../../../app/Store/Types";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoUpdate = async (
@@ -26,7 +26,7 @@ export type T_user_info_columns_without_password = {
   user_name: T_user_name;
   shop_name: T_shop_name;
   user_email: T_user_email;
-  is_show_mobile_page: T_is_show_mobile_page
+  is_generate_public_page: T_is_generate_public_page
 }
 
 export type T_user_info_update = {

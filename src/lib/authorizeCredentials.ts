@@ -1,6 +1,6 @@
-import { T_user_info_check_credentials, apiUserInfoCheckCredentials } from "../user_info/check_credentials";
+import { T_user_info_check_credentials, apiUserInfoCheckCredentials } from "../pages/api/user_info/check_credentials";
 import { db } from "./db";
-import { server } from "../../../config";
+import { server } from "../config";
 
 type TCredentials = {
   email: string

@@ -24,7 +24,7 @@ export const useUpdateUser = () => {
       user_name: param.name,
       shop_name: param.shopName,
       user_email: param.email,
-      is_show_mobile_page: param.isShowMobile,
+      is_generate_public_page: param.isShowMobile,
     };
 
     const params: T_user_info_update = {

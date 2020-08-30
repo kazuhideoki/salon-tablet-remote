@@ -11,8 +11,8 @@ const MobileLinkWrong = (props) => {
       <p>間違ったurlは {wrong_slug}</p>
 
       <button>ぼたん</button>
-      <p>slugは {props.mobile_page_slug}</p>
-      <p>is_show_mobile_pageは {props.is_show_mobile_page}</p>
+      <p>slugは {props.public_page_slug}</p>
+      <p>is_generate_public_pageは {props.is_generate_public_page}</p>
     </>
   );
 };

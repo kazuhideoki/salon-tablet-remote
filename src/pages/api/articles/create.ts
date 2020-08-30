@@ -1,22 +1,17 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_is_published_articles,
   T_title,
   T_article_content,
-  T_article_id,
   T_article_excerpt,
   T_article_img,
   T_user_id,
-  T_tag_ids,
   T_data_type_article,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
-import { TApiResponse } from "../lib/apiTypes";
-import { TSessionOnj } from "../..";
-import { getCsrfToken, getSession, providers } from "next-auth/client";
-import { ApiUserInfoGetFromEmail } from "../user_info/getUserInfoFromEmail";
-import { checkIsAdmin } from "../lib/checkIsAdmin";
+import { TApiResponse } from "../../../lib/apiTypes";
+import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

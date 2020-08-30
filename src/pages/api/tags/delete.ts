@@ -1,4 +1,4 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_tag_ids,
@@ -6,9 +6,9 @@ import {
   T_user_id,
   T_article_id,
 } from "../../../app/Store/Types";
-import { deleteTagIdInArticle } from "../lib/deleteTagIdInArticle";
+import { deleteTagIdInArticle } from "../../../lib/deleteTagIdInArticle";
 import { server, localhost } from "../../../config";
-import { TApiResponse } from "../lib/apiTypes";
+import { TApiResponse } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (params: T_tags_delete):Promise<TApiResponse<T_tags_delete_return>> => {
