@@ -1,4 +1,5 @@
 import { IndexPropsData } from "../../pages";
+import { TStoreProps } from "./Store";
 
 export type T_user_id = number;
 export type T_user_name = string;
@@ -229,9 +230,9 @@ export type TSetModal =
 
 
 
-export const initAppState = (data: IndexPropsData) => ({
-         isSetting: true,
-         isDrawerOpen: true,
+export const initAppState = (data: TStoreProps) => ({
+         isSetting: !data.isPublicPage,
+         isDrawerOpen: !data.isPublicPage,
          setModal: "edit_article" as TSetModal,
          isModalOpen: false,
          isShowInstagram: false,

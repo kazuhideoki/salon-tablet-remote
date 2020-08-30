@@ -12,7 +12,7 @@ const PublicPage = (props: IndexProps) => {
 
   return (
     <>
-      <App {...props.data} />
+      <App {...props} />
     </>
   )
 };
@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
 
   const returnData: IndexProps = {
     data: await generateProps(userInfo),
-    isPublicWeb: true,
+    isPublicPage: true,
   }
 
   return { props: returnData }

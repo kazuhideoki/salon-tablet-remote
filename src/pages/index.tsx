@@ -37,7 +37,7 @@ export type IndexPropsData = {
 
 export type IndexProps = {
   data?: IndexPropsData;
-  isPublicWeb: boolean
+  isPublicPage: boolean
   csrfToken?: any;
   providers?: any;
   // bcrypt_password?: string;
@@ -49,7 +49,7 @@ const Index = (props: IndexProps) => {
   if (props.data) {
     return (
       <>
-        <App {...props.data} />
+        <App {...props} />
       </>
     );
   } else {
@@ -92,7 +92,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
       const returnData: IndexProps = {
         data: await generateProps(userInfo),
-        isPublicWeb: false,
+        isPublicPage: false,
       };
 
       return { props: returnData }
@@ -106,7 +106,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
   const returnData: IndexProps = {
       data: null,
-      isPublicWeb: false,
+      isPublicPage: false,
       csrfToken: await getCsrfToken(),
       providers: await providers(context),
   };

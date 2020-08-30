@@ -40,12 +40,12 @@ const AppView = () => {
 
 }
 
-export const App = (props: IndexPropsData) => {
+export const App = (props: IndexProps) => {
   
   return (
     // Storeの情報をContextから読み込んで出力
-    <StoreContextProvider {...props}>
-      <ThemeProvider {...props.userInfo}>
+    <StoreContextProvider {...props.data} isPublicPage={props.isPublicPage}>
+      <ThemeProvider {...props.data.userInfo}>
         <AppView />
         <Modal />
       </ThemeProvider>

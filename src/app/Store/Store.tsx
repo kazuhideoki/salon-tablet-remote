@@ -11,8 +11,13 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
-const StoreContextProvider: React.FC<IndexPropsData> = (props) => {
-  const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState(props));
+export type TStoreProps = IndexPropsData & {isPublicPage: boolean}
+
+const StoreContextProvider: React.FC<TStoreProps> = (props) => {
+  const [appState, dispatchAppState] = useReducer(
+    appStateReducer,
+    initAppState(props)
+  );
 
   const values = {
     appState,
