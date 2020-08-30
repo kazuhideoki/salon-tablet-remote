@@ -231,6 +231,7 @@ export type TSetModal =
 
 
 export const initAppState = (data: TStoreProps) => ({
+         isPublicPage: data.isPublicPage,
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,
          setModal: "edit_article" as TSetModal,

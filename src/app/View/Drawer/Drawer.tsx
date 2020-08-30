@@ -29,7 +29,6 @@ import { TagsButton } from "../Footer/PaginationBar/TagsButton";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 
 
-// export const useDrawerProps = ({open, setOpen}) => {
 export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState } = React.useContext(Store);
@@ -61,6 +60,8 @@ export const useDrawerProps = () => {
 
   const isMobile = useMediaQuery("(max-width:480px)");
 
+  const [pass, setPass] = React.useState('')
+
   return {
     theme,
     appState,
@@ -70,6 +71,8 @@ export const useDrawerProps = () => {
     handleOnSingOut,
     handleDrawerClose,
     isMobile,
+    pass,
+    setPass,
   };
 }
 
@@ -132,47 +135,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   const classes = useStyles();
 
 
-
-  const BeforeIsSettingDrawerMenu = () => {
-    const [pass, setPass] = React.useState('')
-    return (
-      <>
-        <TextField
-          id="setting-password-input"
-          label="パスワード"
-          type="password"
-          autoComplete="current-password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          onKeyPress={e => {
-            if (e.key == 'Enter') {
-              e.preventDefault()
-              props.handleSubmitPassword(pass)
-            }
-          }}
-        />
-        <Button onClick={() => props.handleSubmitPassword(pass)}>
-          <Typography variant="body1">
-            編集モードに切り替える
-          </Typography>
-        </Button>
-      </>
-    );
-  }
-
-  const BeforeIsSettingDrawerMenuMobile = () => {
-    return (
-      <Button onClick={() => props.handleSwitchIsSetting()}>
-        <Typography variant="body1">
-          編集モードに切り替える
-        </Typography>
-      </Button>
-    );
-  }
-
-  const IsSettingDrawerMenu: React.FC = () => {
-    return (
-      <>
+  let drawerSetting: JSX.Element
+  if (props.appState.isSetting) {
+    drawerSetting = <>
         <List>
           <ListItem
             button
@@ -274,8 +239,37 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           </ListItem>
         </List>
       </>
-    );
-  };
+  } else {
+    if (props.isMobile) {
+      drawerSetting = <Button onClick={() => props.handleSwitchIsSetting()}>
+        <Typography variant="body1">
+          編集モードに切り替える
+        </Typography>
+      </Button>
+    } else {
+      drawerSetting = (
+        <>
+          <TextField
+            id="setting-password-input"
+            label="パスワード"
+            type="password"
+            autoComplete="current-password"
+            value={props.pass}
+            onChange={(e) => props.setPass(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key == "Enter") {
+                e.preventDefault();
+                props.handleSubmitPassword(props.pass);
+              }
+            }}
+          />
+          <Button onClick={() => props.handleSubmitPassword(props.pass)}>
+            <Typography variant="body1">編集モードに切り替える</Typography>
+          </Button>
+        </>
+      );
+    }
+  }
 
   let DrawerHeader
   // Open 開いてパスワード入力画面
@@ -334,13 +328,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         </div>
         <Divider />
 
-        {!props.appState.isSetting && !props.isMobile ? (
-          <BeforeIsSettingDrawerMenu />
-        ) : null}
-        {!props.appState.isSetting && props.isMobile ? (
-          <BeforeIsSettingDrawerMenuMobile />
-        ) : null}
-        {props.appState.isSetting ? <IsSettingDrawerMenu /> : null}
+        {props.appState.isPublicPage ? null : drawerSetting}
 
         <Divider />
       </MuiDrawer>

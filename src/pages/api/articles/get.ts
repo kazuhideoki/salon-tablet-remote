@@ -4,6 +4,7 @@ import { tagIdsParse } from "../../../lib/tagIdsParse";
 import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../config";
+import { isSession } from "../../../lib/isSession";
 // import { session } from "next-auth/client";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -79,6 +80,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       ` 5`;
       
     try {
+      // await isSession(req)
          
       let data: any = await db(
         query

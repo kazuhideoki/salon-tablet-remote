@@ -1,26 +1,10 @@
-import React from "react";
 import {
   TUserInfo,
-  TArticles,
-  TPaginationParams,
-  FooterItems,
-  TTags,
-  TInstagramAccounts,
-  TInstagramMedias,
-  TInfoBar,
-  TAllArticles,
-  TInfoBarData,
 } from "../app/Store/Types";
-import { App } from "../app/View/App";
-import { getCsrfToken, getSession, providers } from "next-auth/client";
-import { GetServerSideProps } from "next";
-import { TopPage } from "../pageComponent/TopPage";
 import { T_articles_get, apiArticlesGet } from "../pages/api/articles/get";
-import { getUserInfoFromEmail } from "./getUserInfoFromEmail";
 import { apiFooterItemsGet } from "../pages/api/footer_items/get";
 import { apiTagsGet } from "../pages/api/tags/get";
 import { apiInstagramAccountsGet } from "../pages/api/instagram_accounts/get";
-import { apiCreateSampleData } from "../pages/api/create_sample_data";
 import { apiInfoBarGet } from "../pages/api/info_bar/get";
 import { IndexPropsData } from "../pages";
 
