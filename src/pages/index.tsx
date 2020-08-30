@@ -36,7 +36,8 @@ export type IndexPropsData = {
 };
 
 export type IndexProps = {
-  data: IndexPropsData;
+  data?: IndexPropsData;
+  isPublicWeb: boolean
   csrfToken?: any;
   providers?: any;
   // bcrypt_password?: string;
@@ -45,7 +46,13 @@ export type IndexProps = {
 
 const Index = (props: IndexProps) => {
 
-  if (!props.data.userInfo) {
+  if (props.data) {
+    return (
+      <>
+        <App {...props.data} />
+      </>
+    );
+  } else {
     return (
       <>
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
@@ -53,12 +60,6 @@ const Index = (props: IndexProps) => {
     );
   }
 
-  // テーマ、記事データ、appの状態管理を読み込む
-  return (
-    <>
-      <App data={props.data} />
-    </>
-  );
 };
 
 export type TSessionOnj = {
@@ -89,15 +90,12 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
         apiCreateSampleData({user_id: userInfo.user_id})
       }
 
-      const propsData: IndexPropsData = await generateProps(userInfo)
-
-      return {
-        props: {
-          data: propsData,
-          // メッセージがあれば表示
-          message: context.query || null,
-        },
+      const returnData: IndexProps = {
+        data: await generateProps(userInfo),
+        isPublicWeb: false,
       };
+
+      return { props: returnData }
 
     } // ★★★ユーザーデータがある
 
@@ -105,19 +103,15 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
   // ※もしかしたら↓うまく行かないこともあるかもしれないが、スッキリさせた
   // ★★★セッションがない
-  
-  const token = await getCsrfToken();
 
-  return {
-    props: {
-      data: {
-        userInfo: null,
-      },
-      csrfToken: token,
+  const returnData: IndexProps = {
+      data: null,
+      isPublicWeb: false,
+      csrfToken: await getCsrfToken(),
       providers: await providers(context),
-      // instagram_access_denied: context.query.instagram_access_denied || false,
-    },
   };
+
+  return { props: returnData }
   
 }
 

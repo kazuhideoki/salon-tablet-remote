@@ -4,7 +4,7 @@ import { Store } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { AppMobile } from "./mobile/AppMobile";
-import { IndexProps } from "../../pages";
+import { IndexProps, IndexPropsData } from "../../pages";
 import { AppTablet } from "./AppTablet";
 import { useMediaQuery } from "@material-ui/core";
 
@@ -40,12 +40,12 @@ const AppView = () => {
 
 }
 
-export const App = (props: IndexProps) => {
+export const App = (props: IndexPropsData) => {
   
   return (
     // Storeの情報をContextから読み込んで出力
-    <StoreContextProvider data={props.data}>
-      <ThemeProvider {...props.data.userInfo}>
+    <StoreContextProvider {...props}>
+      <ThemeProvider {...props.userInfo}>
         <AppView />
         <Modal />
       </ThemeProvider>

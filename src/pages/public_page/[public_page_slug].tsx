@@ -12,7 +12,7 @@ const PublicPage = (props: IndexProps) => {
 
   return (
     <>
-      <App data={props.data} />
+      <App {...props.data} />
     </>
   )
 };
@@ -32,21 +32,17 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
     res.setHeader(
       "Location",
       `/public_page/wrong_url?wrong_slug=${slicedSlug}`
-    ); // Replace <link> with your url link
-    // return { props: { slug: slug } }; 
+    ); 
     res.end()
     return { props: null };
   }
 
-  const propsData: IndexPropsData = await generateProps(userInfo);
+  const returnData: IndexProps = {
+    data: await generateProps(userInfo),
+    isPublicWeb: true,
+  }
 
-  return {
-    props: {
-      data: propsData,
-      // メッセージがあれば表示
-      // message: context.query || null,
-    },
-  };
+  return { props: returnData }
 
 
 
