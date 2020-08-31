@@ -32,7 +32,8 @@ const AppView = () => {
   },[appState.userInfo.shop_name])
 
 
-  if (isMobile && appState.isSetting) {
+  // if (isMobile && appState.isSetting) {
+  if (isMobile) {
     return <AppMobile/>
   } else {
     return <AppTablet/>

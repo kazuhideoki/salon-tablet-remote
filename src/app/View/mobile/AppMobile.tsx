@@ -5,7 +5,7 @@ import { SettingMobile } from "./SettingMobile";
 import { TabMobile } from './TabMobile'
 import { PaginationMobile } from './PaginationMobile';
 import { Modal } from '../Modal/Modal';
-import { makeStyles, createStyles, Theme, Button, CircularProgress } from "@material-ui/core";
+import { makeStyles, createStyles, Theme, Button, CircularProgress, Drawer } from "@material-ui/core";
 import { HomeButton } from '../Footer/PaginationBar/HomeButton';
 import { Store } from '../../Store/Store';
 import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
@@ -106,9 +106,11 @@ export const AppMobile = () => {
   return (
     <>
       <div className={classes.root}>
-        <Button className={classes.quitButton} onClick={() => onClickOffIsSetting()}>観覧モードに切り替える</Button>
-        <Display />
-        <TabMobile tab={tab} setTab={setTab} className={classes.tabMobile}/>
+        <Drawer>
+          <Button className={classes.quitButton} onClick={() => onClickOffIsSetting()}>観覧モードに切り替える</Button>
+          <Display />
+          <TabMobile tab={tab} setTab={setTab} className={classes.tabMobile}/>
+        </Drawer>
       </div>
     </>
   );

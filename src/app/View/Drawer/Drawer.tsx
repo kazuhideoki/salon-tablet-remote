@@ -79,7 +79,13 @@ export const useDrawerProps = () => {
 export type TUseDrawerProps = ReturnType<typeof useDrawerProps>
 
 const useStyles = makeStyles((theme: Theme) => {
+
+
+    const tabletDrawerWidth = 210
+    const mobileDrawerWidth = 60
+
     const themes = React.useContext(ThemeContext);
+
     return createStyles({
       root: {
         display: "flex",
@@ -87,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) => {
       },
       menuButton: {
         // marginRight: theme.spacing(2),
-        zIndex: 50,
+        zIndex: theme.zIndex.drawer,
         marginTop: theme.spacing(1),
         marginLeft: theme.spacing(1),
         position: "absolute",
@@ -98,11 +104,15 @@ const useStyles = makeStyles((theme: Theme) => {
         display: "none",
       },
       drawer: {
-        width: themes.drawerWidth,
+        width: (styleProps: any) =>
+          styleProps.isMobile === true ? mobileDrawerWidth : tabletDrawerWidth,
+        // width: themes.drawerWidth,
         flexShrink: 0,
       },
       drawerPaper: {
-        width: themes.drawerWidth,
+        width: (styleProps) =>
+          styleProps.isMobile === true ? mobileDrawerWidth : tabletDrawerWidth,
+        // width: themes.drawerWidth,
       },
       drawerHeader: {
         display: "flex",
@@ -114,12 +124,18 @@ const useStyles = makeStyles((theme: Theme) => {
       },
       content: {
         flexGrow: 1,
-        // padding: theme.spacing(3),
         transition: theme.transitions.create("margin", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft: -themes.drawerWidth,
+        // makeStylesの中で関数を使うとcssの優先度が高くなってしまうのでclassNameを分けてうまく切り替えができない。
+        // 最初からclassNameの中で分岐しておく
+        marginLeft: (styleProps) =>
+          styleProps.isDrawerOpen ? 0 :
+          styleProps.isMobile === true
+            ? -mobileDrawerWidth
+            : -tabletDrawerWidth,
+        // marginLeft: -themes.drawerWidth,
       },
       contentShift: {
         transition: theme.transitions.create("margin", {
@@ -128,16 +144,24 @@ const useStyles = makeStyles((theme: Theme) => {
         }),
         marginLeft: 0,
       },
-    })}
+      contentShiftWidth: {
+        marginLeft: 0,
+      },
+    });}
   )
 
 export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
-  const classes = useStyles();
+  const styleProps = {
+    isMobile: props.isMobile,
+    isDrawerOpen: props.appState.isDrawerOpen
+  }
+  const classes = useStyles(styleProps);
 
 
   let drawerSetting: JSX.Element
   if (props.appState.isSetting) {
-    drawerSetting = <>
+    drawerSetting = (
+      <>
         <List>
           <ListItem
             button
@@ -148,7 +172,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <ListItemIcon>
               <NoteAddOutlined />
             </ListItemIcon>
-            <ListItemText primary="記事作成" />
+            {props.isMobile ? null : <ListItemText primary="記事作成" />}
           </ListItem>
           <ListItem
             button
@@ -159,7 +183,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <ListItemIcon>
               <VideoLabel />
             </ListItemIcon>
-            <ListItemText primary="アイテム作成" />
+            {props.isMobile ? null : <ListItemText primary="アイテム作成" />}
           </ListItem>
           <ListItem
             button
@@ -173,7 +197,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <ListItemIcon>
               <TagsButton />
             </ListItemIcon>
-            <ListItemText primary="タグ管理" />
+            {props.isMobile ? null : <ListItemText primary="タグ管理" />}
           </ListItem>
           <ListItem
             button
@@ -187,7 +211,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <ListItemIcon>
               <Instagram />
             </ListItemIcon>
-            <ListItemText primary="Instagram 連携" secondary="製作中" />
+            {props.isMobile ? null : (
+              <ListItemText primary="Instagram 連携" secondary="製作中" />
+            )}
           </ListItem>
           <ListItem
             button
@@ -201,7 +227,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <ListItemIcon>
               <Wallpaper />
             </ListItemIcon>
-            <ListItemText primary="テーマ変更" secondary="製作中" />
+            {props.isMobile ? null : (
+              <ListItemText primary="テーマ変更" secondary="製作中" />
+            )}
           </ListItem>
           <ListItem
             button
@@ -215,7 +243,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <ListItemIcon>
               <Settings />
             </ListItemIcon>
-            <ListItemText primary="アカウント" />
+            {props.isMobile ? null : <ListItemText primary="アカウント" />}
           </ListItem>
           <ListItem
             button
@@ -229,16 +257,17 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <ListItemIcon>
               <Feedback />
             </ListItemIcon>
-            <ListItemText primary="フィードバック" />
+            {props.isMobile ? null : <ListItemText primary="フィードバック" />}
           </ListItem>
           <ListItem button onClick={() => props.handleOnSingOut()}>
             <ListItemIcon>
               <ExitToApp />
             </ListItemIcon>
-            <ListItemText primary="サインアウト" />
+            {props.isMobile ? null : <ListItemText primary="サインアウト" />}
           </ListItem>
         </List>
       </>
+    );
   } else {
     if (props.isMobile) {
       drawerSetting = <Button onClick={() => props.handleSwitchIsSetting()}>
@@ -263,8 +292,8 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
               }
             }}
           />
-          <Button onClick={() => props.handleSubmitPassword(props.pass)}>
-            <Typography variant="body1">編集モードに切り替える</Typography>
+          <Button onClick={() => props.handleSubmitPassword(props.pass)} startIcon={<Settings/>}>
+            <Typography variant="body1">編集モードに切り替え</Typography>
           </Button>
         </>
       );
@@ -288,7 +317,11 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   else if (props.appState.isSetting) {
     DrawerHeader = () => (
       <Button variant="text" onClick={props.handleDrawerClose}>
-        <Typography variant="body1">観覧モードに切り替える</Typography>
+        {props.isMobile ? null : (
+          <Typography variant="body1">観覧モードに切り替え</Typography>
+        )}
+
+        {/* <Button startIcon={<Settings/>}> */}
 
         {props.theme.direction === "ltr" ? (
           <ChevronLeftIcon />
@@ -333,9 +366,10 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <Divider />
       </MuiDrawer>
       <main
-        className={`${clsx(classes.content, {
-          [classes.contentShift]: props.appState.isDrawerOpen,
-        })}`}
+        // className={`${clsx(classes.content, {
+        //   [classes.contentShift]: props.appState.isDrawerOpen,
+        // })} ${props.appState.isDrawerOpen ? classes.contentShiftWidth : null}`}
+        className={`${classes.content} ${props.appState.isDrawerOpen ? classes.contentShift : null}`}
       >
         {props.children}
       </main>
