@@ -76,7 +76,7 @@ export const useDrawerProps = () => {
   };
 }
 
-export type TUseDrawerProps = ReturnType<typeof useDrawerProps>
+export type TUseDrawerProps = ReturnType<typeof useDrawerProps> & {className: string}
 
 const useStyles = makeStyles((theme: Theme) => {
 
@@ -270,11 +270,15 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
     );
   } else {
     if (props.isMobile) {
-      drawerSetting = <Button onClick={() => props.handleSwitchIsSetting()}>
-        <Typography variant="body1">
-          編集モードに切り替える
-        </Typography>
-      </Button>
+      drawerSetting = (
+        <List>
+          <ListItem button onClick={() => props.handleSwitchIsSetting()}>
+            <ListItemIcon>
+              <Settings />
+            </ListItemIcon>
+          </ListItem>
+        </List>
+      );
     } else {
       drawerSetting = (
         <>
@@ -333,7 +337,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   } 
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${props.className}`}>
       <CssBaseline />
       <IconButton
         color="inherit"
@@ -377,11 +381,11 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   );
 }
 
-export const Drawer: React.FC = (props) => {
+export const Drawer = (props) => {
   const useProps = useDrawerProps();
 
   return (
-    <DrawerPresenter {...useProps}>
+    <DrawerPresenter {...useProps} className={props.className}>
       {props.children}
     </DrawerPresenter>
   );
