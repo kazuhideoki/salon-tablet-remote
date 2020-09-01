@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) => {
     gridRootOpen: {
       width: `calc(100% - 60px)`
     },
+    item: {
+      width: '100%',
+    },
     infoBar: {
       height: 60,
     },
@@ -60,18 +63,19 @@ export const AppMobile = () => {
           direction="column"
           justify="center"
           alignItems="center"
-          className={`${classes.gridRoot} ${appState.isDrawerOpen ? classes.gridRootOpen : ''}`}
+          className={`${classes.gridRoot} ${
+            appState.isDrawerOpen ? classes.gridRootOpen : ""
+          }`}
         >
-          <Grid item >
+          <Grid item className={classes.item}>
             <InfoBar className={classes.infoBar} />
           </Grid>
-          <Grid item >
+          <Grid item className={classes.item}>
             <MainMobile />
           </Grid>
-          <Grid item >
+          <Grid item className={classes.item}>
             <PPagination />
           </Grid>
-
         </Grid>
       </Drawer>
     </>
