@@ -25,7 +25,7 @@ const useInfoBarProps = () => {
   };
 }
 
-export type TUseInfoBarProps = ReturnType<typeof useInfoBarProps> & {className: string}
+export type TUseInfoBarProps = ReturnType<typeof useInfoBarProps> & {className?: string}
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -135,7 +135,7 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
          );
        };
 
-export const InfoBar = ({className}) => {
+export const InfoBar = ({className = ''}) => {
   const props = useInfoBarProps()
 
   return <InfoBarPresenter {...props} className={className}/>

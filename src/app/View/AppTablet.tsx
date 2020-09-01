@@ -116,13 +116,7 @@ export const AppTablet = () => {
               [classes.contentShift]: open,
             })} ${classes.main} ${open ? classes.mainOpened : null}`}
           >
-            {/* {isLoading ? (
-                <CircularProgress
-                  className={classes.circularProgress}
-                  size={100}
-                  thickness={5}
-                />
-              ) : ( */}
+       
             <PMain />
             {/* )} */}
           </Grid>

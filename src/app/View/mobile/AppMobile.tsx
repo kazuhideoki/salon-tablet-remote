@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainMobile } from './MainMobile'
-import { makeStyles, createStyles, Theme } from "@material-ui/core";
+import { makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
 import { Store } from '../../Store/Store';
 import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
 import { Drawer } from '../Drawer/Drawer';
@@ -10,25 +10,32 @@ import { PPagination } from '../Footer/PaginationBar/PPagination';
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
-      width: "100vw",
+      // width: "100vw",
       height: "100vh",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
     },
+    gridRoot: {
+      width: '100%',
+      position: "relative",
+    },
+    gridRootOpen: {
+      width: `calc(100% - 60px)`
+    },
     infoBar: {
-      height: 80,
+      height: 60,
     },
     emptyMain: {
       flexGrow: 1,
     },
     circularProgress: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
-      },
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
   });
 });
 
@@ -47,9 +54,25 @@ export const AppMobile = () => {
   return (
     <>
       <Drawer className={classes.root}>
-        <InfoBar className={classes.infoBar} />
-        <MainMobile />
-        <PPagination />
+        <Grid
+          spacing={0}
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          className={`${classes.gridRoot} ${appState.isDrawerOpen ? classes.gridRootOpen : ''}`}
+        >
+          <Grid item >
+            <InfoBar className={classes.infoBar} />
+          </Grid>
+          <Grid item >
+            <MainMobile />
+          </Grid>
+          <Grid item >
+            <PPagination />
+          </Grid>
+
+        </Grid>
       </Drawer>
     </>
   );
