@@ -10,6 +10,10 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
       <List>
         {props.appState.footerItems.map((value, index) => {
 
+          if (props.appState.isSetting === false && value.is_published == false) {
+            return null;
+          }
+
           if (value.on_tap === 'appLink') {
             return null
           }
@@ -27,32 +31,33 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
               <ListItem
                 key={index}
                 button
-                onClick={() => props.dispatchAppState({
+                onClick={() =>
+                  props.dispatchAppState({
                     type: "OPEN_FOOTER_ITEM_MODAL",
                     payload: index,
-                  })}
+                  })
+                }
               >
                 <ListItemIcon>
-                  <Icon/>
+                  <Icon />
                 </ListItemIcon>
-                {/* {props.appState.} */}
-                <ListItemText primary={value.icon_name} />
+                {props.isMobile ? null : (
+                  <ListItemText primary={value.icon_name} />
+                )}
               </ListItem>
             );
           }
 
           if (value.on_tap === 'link') {
             return (
-              <ListItem
-                key={index}
-                button
-              >
+              <ListItem key={index} button>
                 <a href={value.link_url}>
                   <ListItemIcon>
-                    <Icon/>
+                    <Icon />
                   </ListItemIcon>
-                  <ListItemText primary={value.icon_name} />
-
+                  {props.isMobile ? null : (
+                    <ListItemText primary={value.icon_name} />
+                  )}
                 </a>
               </ListItem>
             );

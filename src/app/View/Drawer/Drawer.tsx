@@ -190,12 +190,25 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <div className={classes.drawerHeader}>{drawerHeader}</div>
         <Divider />
 
-        {props.appState.isSetting ? null : drawerItems}
-        <Divider />
+        {props.isMobile && !props.appState.isSetting ? (
+          <>
+            {drawerItems}
+            <Divider />
+          </>
+        ) : null}
 
         {props.appState.isPublicPage ? null : drawerSetting}
 
         <Divider />
+
+        {/* 編集モードではアイテムは下にずらす */}
+        {props.isMobile && props.appState.isSetting ? (
+          <>
+            {drawerItems}
+            <Divider />
+          </>
+        ) : null}
+
       </MuiDrawer>
       <main
         className={clsx(classes.content, {

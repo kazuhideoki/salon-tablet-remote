@@ -84,8 +84,8 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     gridIcons: {
       marginLeft: "auto",
-      display: 'flex',
-      wrap: 'nowrap',
+      display: "flex",
+      wrap: "nowrap",
     },
     isTabletPortrait: {
       marginLeft: "auto",
@@ -227,7 +227,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
           ) : null}
 
           {props.isShowInstagram && (
-            <div className={classes.item}>
+            <div className={`${classes.item} ${classes.instagramAccount}`}>
               <Chip
                 label={props.selectedInstagramAccount.username}
                 size="small"
