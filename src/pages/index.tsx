@@ -6,8 +6,6 @@ import {
   FooterItems,
   TTags,
   TInstagramAccounts,
-  TInstagramMedias,
-  TInfoBar,
   TAllArticles,
   TInfoBarData,
 } from "../app/Store/Types";
@@ -15,13 +13,8 @@ import { App } from "../app/View/App";
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { GetServerSideProps } from "next";
 import { TopPage } from "../pageComponent/TopPage";
-import { T_articles_get, apiArticlesGet } from "./api/articles/get";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
-import { apiFooterItemsGet } from "./api/footer_items/get";
-import { apiTagsGet } from "./api/tags/get";
-import { apiInstagramAccountsGet } from "./api/instagram_accounts/get";
 import { apiCreateSampleData } from "./api/create_sample_data";
-import { apiInfoBarGet } from "./api/info_bar/get";
 import { generateProps } from "../lib/generateProps";
 
 export type IndexPropsData = {

@@ -1,10 +1,8 @@
 import React from 'react'
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 import { usePMainProps } from '../Main/PMain';
-import { makeStyles,createStyles, Theme, Button, CircularProgress, List, ListItem, Typography, CardActionArea } from '@material-ui/core';
-import { useDrawerProps } from '../Drawer/Drawer';
+import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea } from '@material-ui/core';
 import { Store } from '../../Store/Store';
-import { PaginationMobile } from './PaginationMobile';
 import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle';
 import { EditButtonsBox } from '../viewComponents/buttons/EditButtonsBox';
 import { UpdateButton } from '../viewComponents/buttons/UpdateButton';
@@ -107,18 +105,17 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
       {props.articles.map((value, key) => {
         return (
           <>
-            {/* <ListItem key={key} className={classes.item}> */}
-              <CardActionArea
-            className={classes.item}
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_ARTICLE_MODAL",
-                payload: key,
-              })
-            }
-            component="li"
-          >
-
+            <CardActionArea
+              key={key}
+              className={classes.item}
+              onClick={() =>
+                props.dispatchAppState({
+                  type: "OPEN_ARTICLE_MODAL",
+                  payload: key,
+                })
+              }
+              component="li"
+            >
               <div className={classes.thumbnailDiv}>
                 {value.article_img.length ? (
                   <img
@@ -142,24 +139,20 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                   {value.article_excerpt}
                   {value.article_excerpt.length > 100 ? "..." : ""}
                 </Typography>
-                <Typography
-                  gutterBottom
-                  variant="subtitle1"
-                  align="right"
-                >
+                <Typography gutterBottom variant="subtitle1" align="right">
                   {sqlToDate(value.created_at)}
                 </Typography>
               </div>
-          </CardActionArea>
-              {props.isSetting ? (
-                <EditButtonsBox className={classes.editButtonsBox}>
-                  <UpdateButton onClick={props.onClickUpdate} value={value} />
-                  <DeleteButton
-                    onClick={props.deleteArticle}
-                    value={value.article_id}
-                  />
-                </EditButtonsBox>
-              ) : null}
+            </CardActionArea>
+            {props.isSetting ? (
+              <EditButtonsBox className={classes.editButtonsBox}>
+                <UpdateButton onClick={props.onClickUpdate} value={value} />
+                <DeleteButton
+                  onClick={props.deleteArticle}
+                  value={value.article_id}
+                />
+              </EditButtonsBox>
+            ) : null}
           </>
         );
       })}

@@ -1,12 +1,11 @@
 import React from 'react'
 import { MainMobile } from './MainMobile'
-import { makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import { Store } from '../../Store/Store';
-import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
 import { Drawer } from '../Drawer/Drawer';
 import InfoBar from '../InfoBar';
 import { PPagination } from '../Footer/PaginationBar/PPagination';
-import { themeArgs, TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
+import { TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -44,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) => {
     footerOpened: {
       width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
     },
+    isLoadingFooter: {
+      position: 'fixed',
+    },
     emptyMain: {
       flexGrow: 1,
     },
@@ -60,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const AppMobile = () => {
   const themes = React.useContext(ThemeContext)
   const classes = useStyles(themes);
-  const { appState} = React.useContext(Store)
+  const { appState } = React.useContext(Store)
   const open = appState.isDrawerOpen
 
   return (
@@ -71,19 +73,19 @@ export const AppMobile = () => {
             appState.isDrawerOpen ? classes.gridRootOpen : ""
           }`}
         >
-
           <InfoBar
-            className={`${classes.infoBar} ${open ? classes.infoBarOpened : null}`}
-            // className={`${classes.infoBar}`}
+            className={`${classes.infoBar} ${
+              open ? classes.infoBarOpened : null
+            }`}
           />
           <MainMobile
             className={`${classes.main} ${open ? classes.mainOpened : null}`}
-            // className={`${classes.main}`}
           />
         </div>
         <PPagination
-          className={`${classes.footer} ${open ? classes.footerOpened : null}`}
-          // className={`${classes.footer}`}
+          className={`${classes.footer} ${open ? classes.footerOpened : null} ${
+            appState.loading.main ? classes.isLoadingFooter : null
+          }`}
         />
       </Drawer>
     </div>

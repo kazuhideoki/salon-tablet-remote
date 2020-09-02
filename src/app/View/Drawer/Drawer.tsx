@@ -128,13 +128,14 @@ const useStyles = makeStyles((theme: Theme) => {
         justifyContent: "flex-end",
       },
       content: {
+
         flexGrow: 1,
         transition: theme.transitions.create("margin", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: (themes: TThemeArgs) => -themes.drawerWidth,
-        overflowY: 'scroll',
+        overflow: 'visible',
       },
       contentShift: {
         transition: theme.transitions.create("margin", {
