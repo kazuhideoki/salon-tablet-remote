@@ -133,6 +133,7 @@ const useStyles = makeStyles((theme: Theme) => {
           duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: (themes: TThemeArgs) => -themes.drawerWidth,
+        overflowY: 'scroll',
       },
       contentShift: {
         transition: theme.transitions.create("margin", {

@@ -64,8 +64,9 @@ export const usePPaginationProps = () => {
     instagramMedias,
   };
 };
-export type TUsePPaginationProps = ReturnType<typeof usePPaginationProps>
-
+export type TUsePPaginationProps = ReturnType<typeof usePPaginationProps> & {
+  className: string
+};
 export type TPaginationPropsAndClasses = TUsePPaginationProps & {
   classes: TPPaginationClasses;
 };
@@ -252,8 +253,8 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
   );
 };
 
-export const PPagination = () => {
+export const PPagination = ({className = ''}) => {
   const props = usePPaginationProps()
   
-  return <PPaginationPresenter {...props}/>
+  return <PPaginationPresenter {...props} className={className}/>
 }

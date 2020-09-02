@@ -8,14 +8,17 @@ import { apiInstagramAccountsGet } from "../pages/api/instagram_accounts/get";
 import { apiInfoBarGet } from "../pages/api/info_bar/get";
 import { IndexPropsData } from "../pages";
 
-export const generateProps = async (userInfo: TUserInfo) => {
+export const generateProps = async (userInfo: TUserInfo, getPublishedOnly: boolean) => {
   // 記事一覧取得
       const articlesParam: T_articles_get = {
         page: 1,
         selectingTags: [],
-        isSetting: true,
+        isSetting: getPublishedOnly ? false : true,
         userId: userInfo.user_id,
       };
+
+      console.log("articlesParamは " + JSON.stringify(articlesParam)); 
+      
       
       // 並列処理でデータを取ってくる
       const [data, data2, data3, data4, data5] = await Promise.all([

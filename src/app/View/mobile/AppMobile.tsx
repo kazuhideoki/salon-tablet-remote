@@ -11,16 +11,10 @@ import { themeArgs, TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
-      overflow: "hidden",
-      position: "fixed",
       left: 0,
       top: 0,
       width: "100vw",
       height: "100vh",
-      display: "flex",
-      // flexDirection: "column",
-      // alignItems: "center",
-      alignItems: "stretch",
     },
     gridRoot: {
       width: "100vw",
@@ -29,12 +23,6 @@ const useStyles = makeStyles((theme: Theme) => {
     gridRootOpen: {
       width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
     },
-    // item: {
-    //   width: '100vw',
-    // },
-    // infoBar: {
-    //   height: 60,
-    // },
     infoBar: {
       width: "100vw",
       height: 60,
@@ -49,6 +37,8 @@ const useStyles = makeStyles((theme: Theme) => {
       width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
     },
     footer: {
+      position: 'sticky',
+      bottom: 0,
       width: "100vw",
     },
     footerOpened: {
@@ -70,52 +60,29 @@ const useStyles = makeStyles((theme: Theme) => {
 export const AppMobile = () => {
   const themes = React.useContext(ThemeContext)
   const classes = useStyles(themes);
-  const [tab, setTab] = React.useState(0)
-  const { dispatchAppState, appState} = React.useContext(Store)
+  const { appState} = React.useContext(Store)
   const open = appState.isDrawerOpen
-  const getArticles = useGetArticles()
-
-  const onClickOffIsSetting = () => {
-    dispatchAppState({type: "CLOSE_DRAWER"})
-    getArticles(false, 1, appState.selectedArticlesTags, false);
-
-  }
 
   return (
-    <>
-      <Drawer className={classes.root}>
-        <Grid
-          spacing={0}
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
+    <div className={classes.root}>
+      <Drawer>
+        <div
           className={`${classes.gridRoot} ${
             appState.isDrawerOpen ? classes.gridRootOpen : ""
           }`}
         >
-          <Grid
-            item
-            className={`${classes.infoBar} ${
-              open ? classes.infoBarOpened : null
-            }`}
-          >
-            <InfoBar />
-          </Grid>
-          <Grid
-            item
+
+          <InfoBar
+            className={`${classes.infoBar} ${open ? classes.infoBarOpened : null}`}
+          />
+          <MainMobile
             className={`${classes.main} ${open ? classes.mainOpened : null}`}
-          >
-            <MainMobile />
-          </Grid>
-          <Grid
-            item
+          />
+          <PPagination
             className={`${classes.footer} ${open ? classes.footerOpened : null}`}
-          >
-            <PPagination />
-          </Grid>
-        </Grid>
+          />
+        </div>
       </Drawer>
-    </>
+    </div>
   );
 }

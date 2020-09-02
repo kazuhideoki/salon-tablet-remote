@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
   }
 
   const returnData: IndexProps = {
-    data: await generateProps(userInfo),
+    data: await generateProps(userInfo, true),
     isPublicPage: true,
   }
 

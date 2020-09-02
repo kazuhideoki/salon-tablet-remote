@@ -91,7 +91,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       }
 
       const returnData: IndexProps = {
-        data: await generateProps(userInfo),
+        data: await generateProps(userInfo, false),
         isPublicPage: false,
       };
 

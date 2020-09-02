@@ -48,7 +48,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
     let getPublishedOnly: string;
     if (isSetting === false) {
-      // getPublishedOnly = `WHERE 'is_published' = true`
       getPublishedOnly = `AND is_published = true `;
     } else if (isSetting === true) {
       getPublishedOnly = " ";
