@@ -147,13 +147,13 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
 
 
   return (
-    <Card className={classes.root}>
+    <Card className={`${classes.root} ${props.className}`}>
       <Grid
         container
         spacing={1}
         wrap="nowrap"
         direction={props.isTabletPortrait ? "column" : undefined}
-        className={classes.gridContainer}
+        className={`${classes.gridContainer}`}
       >
         <Grid
           item

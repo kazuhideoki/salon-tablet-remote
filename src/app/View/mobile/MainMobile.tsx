@@ -99,7 +99,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
   }
       
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${props.className}`}>
       
       {/* ↓スクロール可のためにrootと分けてある */}
       <List className={classes.items}>

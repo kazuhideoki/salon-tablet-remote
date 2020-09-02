@@ -74,14 +74,17 @@ export const AppMobile = () => {
 
           <InfoBar
             className={`${classes.infoBar} ${open ? classes.infoBarOpened : null}`}
+            // className={`${classes.infoBar}`}
           />
           <MainMobile
             className={`${classes.main} ${open ? classes.mainOpened : null}`}
-          />
-          <PPagination
-            className={`${classes.footer} ${open ? classes.footerOpened : null}`}
+            // className={`${classes.main}`}
           />
         </div>
+        <PPagination
+          className={`${classes.footer} ${open ? classes.footerOpened : null}`}
+          // className={`${classes.footer}`}
+        />
       </Drawer>
     </div>
   );

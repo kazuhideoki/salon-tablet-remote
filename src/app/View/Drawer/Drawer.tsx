@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme: Theme) => {
         zIndex: theme.zIndex.drawer,
         marginTop: theme.spacing(1),
         marginLeft: theme.spacing(1),
-        position: "absolute",
+        position: "fixed",
         top: 0,
         left: 0,
       },
@@ -119,6 +119,7 @@ const useStyles = makeStyles((theme: Theme) => {
         width: (themes: TThemeArgs) => themes.drawerWidth,
       },
       drawerHeader: {
+        overflow: 'visible',
         display: "flex",
         alignItems: "center",
         padding: theme.spacing(0, 1),
