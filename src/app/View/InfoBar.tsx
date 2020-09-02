@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => {
       overflow: "hidden",
     },
     scrollingSentence: {
+      // maxWidth: '100vw'
       display: "inline-block",
       paddingLeft: "100%",
       whiteSpace: "nowrap",

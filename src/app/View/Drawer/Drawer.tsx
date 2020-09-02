@@ -6,7 +6,7 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import { Drawer as MuiDrawer, useMediaQuery, Typography, AppBar } from "@material-ui/core";
+import { Drawer as MuiDrawer, useMediaQuery, Typography } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -21,10 +21,8 @@ import { ThemeContext, TThemeArgs } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
-//@ts-ignore
 import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
-import { cipher } from "../../../module/bcrypt";
 import { TagsButton } from "../Footer/PaginationBar/TagsButton";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 
@@ -83,8 +81,6 @@ export type TUseDrawerProps = ReturnType<typeof useDrawerProps> & {className: st
 
 const useStyles = makeStyles((theme: Theme) => {
 
-    // const themes = React.useContext(ThemeContext);
-
     return createStyles({
       root: {
         display: "flex",
@@ -97,8 +93,6 @@ const useStyles = makeStyles((theme: Theme) => {
         }),
       },
       appBarShift: {
-        // width: `calc(100% - ${themes.drawerWidth}px)`,
-        // marginLeft: themes.drawerWidth,
         width: (themes: TThemeArgs) => `calc(100% - ${themes.drawerWidth}px)`,
         marginLeft: (themes: TThemeArgs) => themes.drawerWidth,
         transition: theme.transitions.create(["margin", "width"], {
@@ -107,7 +101,6 @@ const useStyles = makeStyles((theme: Theme) => {
         }),
       },
       menuButton: {
-        // marginRight: theme.spacing(2),
         zIndex: theme.zIndex.drawer,
         marginTop: theme.spacing(1),
         marginLeft: theme.spacing(1),
@@ -119,16 +112,10 @@ const useStyles = makeStyles((theme: Theme) => {
         display: "none",
       },
       drawer: {
-        // width: (styleProps: any) =>
-        //   styleProps.isMobile === true ? mobileDrawerWidth : tabletDrawerWidth,
-        // width: themes.drawerWidth,
         width: (themes: TThemeArgs) => themes.drawerWidth,
         flexShrink: 0,
       },
       drawerPaper: {
-        // width: (styleProps) =>
-        //   styleProps.isMobile === true ? mobileDrawerWidth : tabletDrawerWidth,
-        // width: themes.drawerWidth,
         width: (themes: TThemeArgs) => themes.drawerWidth,
       },
       drawerHeader: {
@@ -140,16 +127,11 @@ const useStyles = makeStyles((theme: Theme) => {
         justifyContent: "flex-end",
       },
       content: {
-        // width: "100%",
         flexGrow: 1,
         transition: theme.transitions.create("margin", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        // makeStylesの中で関数を使うとcssの優先度が高くなってしまうのでclassNameを分けてうまく切り替えができない。
-        // 最初からclassNameの中で分岐しておく
-        // marginLeft: (isDrawerOpen) => (isDrawerOpen ? 0 : -themes.drawerWidth),
-        // marginLeft: -themes.drawerWidth,
         marginLeft: (themes: TThemeArgs) => -themes.drawerWidth,
       },
       contentShift: {
@@ -157,7 +139,6 @@ const useStyles = makeStyles((theme: Theme) => {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
         }),
-        // marginLeft: 0,
         marginLeft: (themes: TThemeArgs) => 0,
       },
       contentShiftWidth: {
@@ -167,10 +148,7 @@ const useStyles = makeStyles((theme: Theme) => {
   )
 
 export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
-  // const styleProps = {
-  //   isMobile: props.isMobile,
-  //   isDrawerOpen: props.appState.isDrawerOpen
-  // }
+  
   const classes = useStyles(props.themes);
 
 
@@ -341,8 +319,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           <Typography variant="body1">観覧モードに切り替え</Typography>
         )}
 
-        {/* <Button startIcon={<Settings/>}> */}
-
         {props.theme.direction === "ltr" ? (
           <ChevronLeftIcon />
         ) : (
@@ -355,12 +331,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   return (
     <div className={`${classes.root} ${props.className}`}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: props.appState.isDrawerOpen,
-        })}
-      >
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -373,7 +343,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         >
           <MenuIcon />
         </IconButton>
-      </AppBar>
       <MuiDrawer
         className={classes.drawer}
         variant="persistent"
