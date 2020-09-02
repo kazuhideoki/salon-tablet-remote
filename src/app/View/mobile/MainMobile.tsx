@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => {
     item: {
       display: "flex",
       flexWrap: "nowrap",
+      justifyContent: 'flex-start',
       borderBottom: "1px solid grey",
       padding: theme.spacing(1),
     },
@@ -135,10 +136,10 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                     <span className={classes.itemIsDraft}>下書き</span>
                   )}
                 </Typography>
-                <Typography gutterBottom variant="body1">
+                {/* <Typography gutterBottom variant="body1">
                   {value.article_excerpt}
                   {value.article_excerpt.length > 100 ? "..." : ""}
-                </Typography>
+                </Typography> */}
                 <Typography gutterBottom variant="subtitle1" align="right">
                   {sqlToDate(value.created_at)}
                 </Typography>

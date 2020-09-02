@@ -25,6 +25,9 @@ import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
 import { TagsButton } from "../Footer/PaginationBar/TagsButton";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
+import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
+import { drawerHeaderJsx } from "./DrawerComponent/drawerHeaderJsx";
+import { drawerItemsJsx } from "./DrawerComponent/drawerItemsJsx";
 
 
 export const useDrawerProps = () => {
@@ -117,6 +120,7 @@ const useStyles = makeStyles((theme: Theme) => {
       },
       drawerPaper: {
         width: (themes: TThemeArgs) => themes.drawerWidth,
+        overflow: 'visible',
       },
       drawerHeader: {
         overflow: 'visible',
@@ -154,198 +158,26 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   
   const classes = useStyles(props.themes);
 
-
-  let drawerSetting: JSX.Element
-  if (props.appState.isSetting) {
-    drawerSetting = (
-      <>
-        <List>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({ type: "OPEN_ARTICLE_EDITOR" })
-            }
-          >
-            <ListItemIcon>
-              <NoteAddOutlined />
-            </ListItemIcon>
-            {props.isMobile ? null : <ListItemText primary="記事作成" />}
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({ type: "OPEN_FOOTER_ITEM_EDITOR" })
-            }
-          >
-            <ListItemIcon>
-              <VideoLabel />
-            </ListItemIcon>
-            {props.isMobile ? null : <ListItemText primary="アイテム作成" />}
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "edit_tags",
-              })
-            }
-          >
-            <ListItemIcon>
-              <TagsButton />
-            </ListItemIcon>
-            {props.isMobile ? null : <ListItemText primary="タグ管理" />}
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "manage_instagram",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Instagram />
-            </ListItemIcon>
-            {props.isMobile ? null : (
-              <ListItemText primary="Instagram 連携" secondary="製作中" />
-            )}
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "setting_theme",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Wallpaper />
-            </ListItemIcon>
-            {props.isMobile ? null : (
-              <ListItemText primary="テーマ変更" secondary="製作中" />
-            )}
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "setting_user_info",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            {props.isMobile ? null : <ListItemText primary="アカウント" />}
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "feedback_form",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Feedback />
-            </ListItemIcon>
-            {props.isMobile ? null : <ListItemText primary="フィードバック" />}
-          </ListItem>
-          <ListItem button onClick={() => props.handleOnSingOut()}>
-            <ListItemIcon>
-              <ExitToApp />
-            </ListItemIcon>
-            {props.isMobile ? null : <ListItemText primary="サインアウト" />}
-          </ListItem>
-        </List>
-      </>
-    );
-  } else {
-    if (props.isMobile) {
-      drawerSetting = (
-        <List>
-          <ListItem button onClick={() => props.handleSwitchIsSetting()}>
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-          </ListItem>
-        </List>
-      );
-    } else {
-      drawerSetting = (
-        <>
-          <TextField
-            id="setting-password-input"
-            label="パスワード"
-            type="password"
-            autoComplete="current-password"
-            value={props.pass}
-            onChange={(e) => props.setPass(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key == "Enter") {
-                e.preventDefault();
-                props.handleSubmitPassword(props.pass);
-              }
-            }}
-          />
-          <Button onClick={() => props.handleSubmitPassword(props.pass)} startIcon={<Settings/>}>
-            <Typography variant="body1">編集モードに切り替え</Typography>
-          </Button>
-        </>
-      );
-    }
-  }
-
-  let DrawerHeader
-  // Open 開いてパスワード入力画面
-  if (!props.appState.isSetting) {
-    DrawerHeader = () => (
-      <IconButton onClick={props.handleDrawerClose}>
-        {props.theme.direction === "ltr" ? (
-          <ChevronLeftIcon />
-        ) : (
-          <ChevronRightIcon />
-        )}
-      </IconButton>
-    );
-  } 
-  // Open isSetting 開いて編集モード
-  else if (props.appState.isSetting) {
-    DrawerHeader = () => (
-      <Button variant="text" onClick={props.handleDrawerClose}>
-        {props.isMobile ? null : (
-          <Typography variant="body1">観覧モードに切り替え</Typography>
-        )}
-
-        {props.theme.direction === "ltr" ? (
-          <ChevronLeftIcon />
-        ) : (
-          <ChevronRightIcon />
-        )}
-      </Button>
-    );
-  } 
+  const drawerHeader = drawerHeaderJsx(props)
+  const drawerItems = drawerItemsJsx(props)
+  const drawerSetting = drawerSettingJsx(props);
+  
 
   return (
     <div className={`${classes.root} ${props.className}`}>
       <CssBaseline />
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={() => props.dispatchAppState({ type: "OPEN_DRAWER" })}
-          edge="start"
-          className={clsx(
-            classes.menuButton,
-            props.appState.isDrawerOpen && classes.hide
-          )}
-        >
-          <MenuIcon />
-        </IconButton>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={() => props.dispatchAppState({ type: "OPEN_DRAWER" })}
+        edge="start"
+        className={clsx(
+          classes.menuButton,
+          props.appState.isDrawerOpen && classes.hide
+        )}
+      >
+        <MenuIcon />
+      </IconButton>
       <MuiDrawer
         className={classes.drawer}
         variant="persistent"
@@ -355,9 +187,10 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
-          <DrawerHeader />
-        </div>
+        <div className={classes.drawerHeader}>{drawerHeader}</div>
+        <Divider />
+
+        {props.appState.isSetting ? null : drawerItems}
         <Divider />
 
         {props.appState.isPublicPage ? null : drawerSetting}
@@ -365,10 +198,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <Divider />
       </MuiDrawer>
       <main
-        // className={`${clsx(classes.content, {
-        //   [classes.contentShift]: props.appState.isDrawerOpen,
-        // })} ${props.appState.isDrawerOpen ? classes.contentShiftWidth : null}`}
-        // className={`${classes.content} ${props.appState.isDrawerOpen ? classes.contentShift : null}`}
         className={clsx(classes.content, {
           [classes.contentShift]: props.appState.isDrawerOpen,
         })}

@@ -42,7 +42,7 @@ export type AppStateAction =
   | { type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR"; payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL";
-      payload: number;
+      payload: number; // indexをいれる
     }
   | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: number }
 
