@@ -48,6 +48,8 @@ const useStyles = makeStyles((theme: Theme) => {
       justifyContent: 'flex-start',
       borderBottom: "1px solid grey",
       padding: theme.spacing(1),
+
+      position: 'relative',
     },
     thumbnailDiv: {
       margin: theme.spacing(1),
@@ -77,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) => {
       top: 0,
       right: 0,
 
-      zIndex: theme.zIndex.snackbar,
+      // zIndex: theme.zIndex.snackbar,
     },
   });
 })
@@ -144,7 +146,6 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                   {sqlToDate(value.created_at)}
                 </Typography>
               </div>
-            </CardActionArea>
             {props.isSetting ? (
               <EditButtonsBox className={classes.editButtonsBox}>
                 <UpdateButton onClick={props.onClickUpdate} value={value} />
@@ -154,6 +155,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                 />
               </EditButtonsBox>
             ) : null}
+            </CardActionArea>
           </>
         );
       })}

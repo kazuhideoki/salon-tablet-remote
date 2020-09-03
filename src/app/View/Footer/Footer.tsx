@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) =>
       top: 48,
       left: 0,
 
-      zIndex: theme.zIndex.snackbar,
+      // zIndex: theme.zIndex.snackbar,
     },
     isSettingIconAndText: {
       margin: "0 20px",

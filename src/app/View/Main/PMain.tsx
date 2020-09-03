@@ -94,14 +94,14 @@ const useStyles = makeStyles((theme) => {
       top: 0,
       right: 0,
 
-      zIndex: theme.zIndex.snackbar,
+      // zIndex: theme.zIndex.snackbar,
     },
     showDataType: {
       position: "absolute",
       top: 0,
       left: 0,
 
-      zIndex: theme.zIndex.snackbar,
+      // zIndex: theme.zIndex.snackbar,
     },
     cardContent: {
       position: "relative",
