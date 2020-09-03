@@ -1,32 +1,36 @@
 import React from 'react'
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 import { usePMainProps } from '../Main/PMain';
-import { makeStyles,createStyles, Theme, Button, CircularProgress } from '@material-ui/core';
-import { useDrawerProps } from '../Drawer/Drawer';
+import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea } from '@material-ui/core';
 import { Store } from '../../Store/Store';
-import { PaginationMobile } from './PaginationMobile';
 import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle';
+import { EditButtonsBox } from '../viewComponents/buttons/EditButtonsBox';
+import { UpdateButton } from '../viewComponents/buttons/UpdateButton';
+import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
 
 export const useMainMobileProps = () => {
   const {
     articles,
-    dispatchAppState
+    dispatchAppState,
+    onClickUpdate,
   } = usePMainProps();
 
   const { appState } = React.useContext(Store)
-  const {loading} = appState
+  const {loading, isSetting} = appState
 
-  const deleteAritlce = useDeleteArticle()
+  const deleteArticle = useDeleteArticle();
 
   return {
     articles,
     dispatchAppState,
     loading,
-    deleteAritlce,
+    isSetting,
+    deleteArticle,
+    onClickUpdate,
   };
 }
 
-type Props = ReturnType<typeof useMainMobileProps>
+type Props = ReturnType<typeof useMainMobileProps> & {className?: string}
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -39,10 +43,25 @@ const useStyles = makeStyles((theme: Theme) => {
       overflowY: "scroll",
     },
     item: {
-      border: "1px solid black",
+      display: "flex",
+      flexWrap: "nowrap",
+      justifyContent: 'flex-start',
+      borderBottom: "1px solid grey",
+      padding: theme.spacing(1),
+    },
+    thumbnailDiv: {
+      margin: theme.spacing(1),
+    },
+    thumbnail: {
+      objectFit: "cover",
+      width: "150px",
+      height: "150px",
+    },
+    contents: {
+      margin: theme.spacing(1),
     },
     itemIsDraft: {
-      border: "1px solid red",
+      border: "2px solid red",
       borderRadius: 2,
       fontStyle: "italic",
     },
@@ -52,6 +71,13 @@ const useStyles = makeStyles((theme: Theme) => {
       left: "50%",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+    },
+    editButtonsBox: {
+      position: "absolute",
+      top: 0,
+      right: 0,
+
+      zIndex: theme.zIndex.snackbar,
     },
   });
 })
@@ -66,51 +92,79 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
       thickness={4}
     />
   }
+
+  if (props.articles.length === 0) {
+    return <div className={classes.item}>記事がありません</div>;
+  }
       
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${props.className}`}>
       
-      <div className={classes.items}>
-      {props.articles.length === 0
-      ? <div className={classes.item}>記事がありません</div>
+      {/* ↓スクロール可のためにrootと分けてある */}
+      <List className={classes.items}>
 
-      : props.articles.map((value, key) => {
+      {props.articles.map((value, key) => {
         return (
           <>
-          <div key={key} className={classes.item}>
-            <div>
-              タイトル:{value.title}
-              {value.is_published || (
-                <span className={classes.itemIsDraft}>下書き</span>
-              )}
-            </div>
-            <div>作成日:{sqlToDate(value.created_at)}</div>
-            {value.updated_at ? (
-              <div>編集日:{sqlToDate(value.updated_at)}</div>
+            <CardActionArea
+              key={key}
+              className={classes.item}
+              onClick={() =>
+                props.dispatchAppState({
+                  type: "OPEN_ARTICLE_MODAL",
+                  payload: key,
+                })
+              }
+              component="li"
+            >
+              <div className={classes.thumbnailDiv}>
+                {value.article_img.length ? (
+                  <img
+                    className={`p-main-thumbnail ${classes.thumbnail}`}
+                    src={value.article_img}
+                  />
+                ) : (
+                  <div
+                    className={`p-main-thumbnail ${classes.thumbnail}`}
+                  ></div>
+                )}
+              </div>
+              <div className={classes.contents}>
+                <Typography variant="h6" component="h2">
+                  {value.title}
+                  {value.is_published || (
+                    <span className={classes.itemIsDraft}>下書き</span>
+                  )}
+                </Typography>
+                {/* <Typography gutterBottom variant="body1">
+                  {value.article_excerpt}
+                  {value.article_excerpt.length > 100 ? "..." : ""}
+                </Typography> */}
+                <Typography gutterBottom variant="subtitle1" align="right">
+                  {sqlToDate(value.created_at)}
+                </Typography>
+              </div>
+            </CardActionArea>
+            {props.isSetting ? (
+              <EditButtonsBox className={classes.editButtonsBox}>
+                <UpdateButton onClick={props.onClickUpdate} value={value} />
+                <DeleteButton
+                  onClick={props.deleteArticle}
+                  value={value.article_id}
+                />
+              </EditButtonsBox>
             ) : null}
-            <div>
-              {value.article_excerpt}
-              {/* 抜粋が100文字の場合"..."追加" */}
-              {value.article_excerpt.length === 100 ? "..." : ""}
-            </div>
-            <button onClick={() => props.dispatchAppState({type: "OPEN_ARTICLE_EDITOR_FOR_EDIT", payload: value})}>
-              編集
-            </button>
-            <button onClick={() => props.deleteAritlce(value.article_id)}>
-              削除
-            </button>
-          </div>
           </>
         );
       })}
-      </div>
+      </List>
        
     </div>
   );
 }
 
-export const MainMobile = () => {
+export const MainMobile = ({className = ''}) => {
   const props = useMainMobileProps()
 
-  return <MainMobilePresenter {...props}/>
+  return <MainMobilePresenter {...props} className={className}/>
 }

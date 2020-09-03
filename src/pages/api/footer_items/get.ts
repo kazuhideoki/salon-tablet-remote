@@ -1,11 +1,11 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { checkOrders } from "../lib/checkOrders";
+import { checkOrders } from "../../../lib/checkOrders";
 import { FooterItems, T_user_id } from "../../../app/Store/Types";
-import { correctOrders } from "../lib/correctOrders";
-import { changeToBooleanFromNumber } from "../lib/changeToBooleanFromNumber";
+import { correctOrders } from "../../../lib/correctOrders";
+import { changeToBooleanFromNumber } from "../../../lib/changeToBooleanFromNumber";
 import { localhost, server } from "../../../config";
-import { TApiResponse, TApiError } from "../lib/apiTypes";
+import { TApiResponse, TApiError } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsGet = async (user_id: T_user_id): Promise<TApiResponse<FooterItems>> => {

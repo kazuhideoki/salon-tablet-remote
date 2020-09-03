@@ -19,6 +19,8 @@ const props = {
   handleDrawerOpen: null,
   handleDrawerClose: null,
   isMobile: null,
+  pass: null,
+  setPass: null,
 };
 
 export const Normal = () => {

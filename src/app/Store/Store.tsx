@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { appStateReducer } from "../Reducer/appStateReducer";
-import { IndexProps } from "../../pages";
+import { IndexProps, IndexPropsData } from "../../pages";
 
 import { TAppState, initAppState } from "./Types";
 import { AppStateAction } from "../Reducer/AppStateAction";
@@ -11,8 +11,13 @@ export type ContextProps = {
 };
 const Store = React.createContext({} as ContextProps);
 
-const StoreContextProvider: React.FC<IndexProps> = (props) => {
-  const [appState, dispatchAppState] = useReducer(appStateReducer, initAppState(props.data));
+export type TStoreProps = IndexPropsData & {isPublicPage: boolean}
+
+const StoreContextProvider: React.FC<TStoreProps> = (props) => {
+  const [appState, dispatchAppState] = useReducer(
+    appStateReducer,
+    initAppState(props)
+  );
 
   const values = {
     appState,

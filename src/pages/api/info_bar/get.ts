@@ -1,14 +1,14 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { TInfoBar, T_user_id, TInfoBarData } from "../../../app/Store/Types";
 import { localhost, server } from "../../../config";
-import { TApiResponse, TApiError } from "../lib/apiTypes";
-import { createInitInfoBar } from "../lib/createInitInfoBar";
+import { TApiResponse, TApiError } from "../../../lib/apiTypes";
+import { createInitInfoBar } from "../../../lib/createInitInfoBar";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
-         user_id: T_info_bar_get
-       ): Promise<TApiResponse<T_info_bar_get_return>> => {
+         user_id: T_user_id
+       ): Promise<TApiResponse<TInfoBarData>> => {
          let str = process.browser ? server : localhost;
 
          const res = await fetch(`${str}/api/info_bar/get?userId=${user_id}`);
@@ -16,12 +16,8 @@ export const apiInfoBarGet = async (
          return await res.json();
        };
 
-export type T_info_bar_get = T_user_id
-export type T_info_bar_get_return = TInfoBarData;
-;
-
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  const userId:T_info_bar_get = Number(req.query.userId)
+  const userId: T_user_id = Number(req.query.userId);
 
   try {
     //@ts-ignore
@@ -48,7 +44,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       );
     }
 
-    const returnData: T_info_bar_get_return = {
+    const returnData: TInfoBarData = {
       infoBar: data[0] as TInfoBar,
       // scrolling_animation_duration: null,
       targetArticle: data2.length ? data2[0] : [],

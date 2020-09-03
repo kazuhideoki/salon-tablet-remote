@@ -1,14 +1,13 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { tagIdsParse } from "../lib/tagIdsParse";
-import { T_user_id, TArticles, TAllArticles } from "../../../app/Store/Types";
-import { TApiResponse } from "../lib/apiTypes";
+import { tagIdsParse } from "../../../lib/tagIdsParse";
+import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Types";
+import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../config";
 // import { session } from "next-auth/client";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
-  console.log("apiArticlesGetだよ");
   
   const str = process.browser ? server : localhost
 
@@ -32,16 +31,10 @@ export type T_articles_get = {
   userId: T_user_id;
 };
 
-export type TPaginationReturn = {
-  page: number,
-  pageCount: number,
-  pageSize: number,
-  rowCount: number,
-};
 
 export type T_articles_get_return = {
   rawData: TArticles,
-  pagination: TPaginationReturn
+  pagination: TPaginationParams
   allArticles: TAllArticles
 }
 
@@ -54,7 +47,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
     let getPublishedOnly: string;
     if (isSetting === false) {
-      // getPublishedOnly = `WHERE 'is_published' = true`
       getPublishedOnly = `AND is_published = true `;
     } else if (isSetting === true) {
       getPublishedOnly = " ";
@@ -85,6 +77,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       ` 5`;
       
     try {
+      // await isSession(req)
          
       let data: any = await db(
         query
@@ -101,7 +94,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       const query3 = `SELECT article_id, title FROM articles WHERE user_id = ${userId}`;
       const data3 = await db(query3);
       
-      const pagination: TPaginationReturn = {
+      const pagination: TPaginationParams = {
         page: page,
         pageCount: data2.length ? Math.ceil(data2.length / 5) : 0, // 全row数を5で割って切り上げ
         pageSize: 5,

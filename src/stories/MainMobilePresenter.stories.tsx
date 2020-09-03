@@ -10,6 +10,7 @@ const props = {
   appState: {
     isSetting: true
   },
+  isSetting: false,
   loading: {
     mainArticles: false,
   },
@@ -25,5 +26,12 @@ export const Normal = () => {
   return (
     //@ts-ignore
     <MainMobilePresenter {...props}/>
+  )
+}
+export const isSetting = () => {
+
+  return (
+    //@ts-ignore
+    <MainMobilePresenter {...props} isSetting={true} />
   )
 }

@@ -1,4 +1,4 @@
-import { checkOrders } from "../pages/api/lib/checkOrders";
+import { checkOrders } from "../lib/checkOrders";
 import { samplefooterItems } from "../stories/lib/sampleFooterItems";
 
 const footerItems1 = [

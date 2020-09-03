@@ -5,7 +5,7 @@ import { Prev } from './PaginationArrows/Prev';
 import { DisplayNumbers } from './PaginationArrows/DisplayNumbers';
 import { Next } from './PaginationArrows/Next';
 import { Oldest } from "./PaginationArrows/Oldest";
-import { TUsePPaginationProps, TPPaginationClasses, TPaginationPropsAndClasses } from './PPagination';
+import { TPaginationPropsAndClasses } from './PPagination';
 
 export const PaginationArrows:React.FC<TPaginationPropsAndClasses> = (props) => {
 
