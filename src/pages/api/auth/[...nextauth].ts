@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import authorizeCredentials from "../lib/authorizeCredentials";
+import authorizeCredentials from "../../../lib/authorizeCredentials";
 import { server } from "../../../config";
 
 const options = {

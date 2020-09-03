@@ -25,7 +25,7 @@ const useInfoBarProps = () => {
   };
 }
 
-export type TUseInfoBarProps = ReturnType<typeof useInfoBarProps>
+export type TUseInfoBarProps = ReturnType<typeof useInfoBarProps> & {className?: string}
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) => {
         "linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 80%, rgba(255,255,255,1) 100%)",
     },
     scrollingSentence: {
+      // maxWidth: '100vw'
       display: "inline-block",
       paddingLeft: "100%",
       whiteSpace: "nowrap",
@@ -142,7 +143,7 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
          }
 
          return (
-           <div className={classes.root}>
+           <div className={`${classes.root} ${props.className}`}>
              {props.isSetting ? (
                <EditButtonsBox className={classes.editButtonsBox}>
                  <UpdateButton onClick={props.handleOnClick} />
@@ -153,10 +154,10 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
          );
        };
 
-export const InfoBar = () => {
+export const InfoBar = ({className = ''}) => {
   const props = useInfoBarProps()
 
-  return <InfoBarPresenter {...props}/>
+  return <InfoBarPresenter {...props} className={className}/>
 }
 
 export default InfoBar

@@ -1,4 +1,4 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_is_published_footer_items,
@@ -15,8 +15,8 @@ import {
   T_data_type_footer_item,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
-import { TApiResponse } from "../lib/apiTypes";
-import { checkIsAdmin } from "../lib/checkIsAdmin";
+import { TApiResponse } from "../../../lib/apiTypes";
+import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (params:T_footer_items_create):Promise<TApiResponse<T_footer_items_create_return>> => {

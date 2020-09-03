@@ -1,10 +1,13 @@
 import { IndexPropsData } from "../../pages";
+import { TStoreProps } from "./Store";
 
 export type T_user_id = number;
 export type T_user_name = string;
 export type T_shop_name = string;
 export type T_user_email = string;
 export type T_selected_theme = string;
+export type T_is_generate_public_page = boolean;
+export type T_public_page_slug = string;
 export type T_is_admin = boolean;
 export type T_created_at_user = string;
 export type T_updated_at_user = string;
@@ -16,8 +19,10 @@ export type TUserInfo = {
   user_email: T_user_email;
   selected_theme: T_selected_theme;
   is_first_sign_in: boolean;
-  is_admin: T_is_admin
-  bcrypt_password?: string;
+  is_generate_public_page: T_is_generate_public_page;
+  public_page_slug: T_public_page_slug;
+  is_admin: T_is_admin;
+  // bcrypt_password?: string;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
   isSetPassword: boolean;
@@ -29,7 +34,7 @@ const initPagination = {
   pageSize: 0,
   rowCount: 0,
 };
-export type PaginationParams = typeof initPagination;
+export type TPaginationParams = typeof initPagination;
 
 export type T_data_type_footer_item = 'default_data' | 'sample_data'
 export type T_data_type_article = T_data_type_footer_item | 'web_article'
@@ -225,56 +230,52 @@ export type TSetModal =
 
 
 
-export const initAppState = (data: IndexPropsData) => ({
-    isSetting: true,
-    isDrawerOpen: true,
-    setModal: "edit_article" as TSetModal,
-    isModalOpen: false,
-    isShowInstagram: false,
-    // modal表示するコンテン情報を格納
-    currentModalContent: {
-      modalSize: "large" as T_modal_size,
-      article: {} as TArticle,
-      footerItem: {} as FooterItem,
-      instagramMedia: {} as TInstagramMedia,
-    },
+export const initAppState = (data: TStoreProps) => ({
+         isPublicPage: data.isPublicPage,
+         isSetting: !data.isPublicPage,
+         isDrawerOpen: !data.isPublicPage,
+         setModal: "edit_article" as TSetModal,
+         isModalOpen: false,
+         isShowInstagram: false,
+         // modal表示するコンテン情報を格納
+         currentModalContent: {
+           modalSize: "large" as T_modal_size,
+           article: {} as TArticle,
+           footerItem: {} as FooterItem,
+           instagramMedia: {} as TInstagramMedia,
+         },
 
-    edittingPrams: {
-      isEditting: false,
-      article: {} as TArticle,
-      footerItem: {} as FooterItem,
-      // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
-      modalSize: "large" as T_modal_size,
-      onTap: "modal" as T_on_tap
-    },
-    // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
-    selectedArticlesTags: [] as number[],
-    selectedInstagramAccount: {
-      id: 0 as T_instagram_id,
-      username: "" as T_instagram_username,
-    },
-    loading: {
-      main: false,
-      footer: false,
-      manageTags: false,
-      manageInstagramAccounts: false,
-    },
+         edittingPrams: {
+           isEditting: false,
+           article: {} as TArticle,
+           footerItem: {} as FooterItem,
+           // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
+           modalSize: "large" as T_modal_size,
+           onTap: "modal" as T_on_tap,
+         },
+         // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
+         selectedArticlesTags: [] as number[],
+         selectedInstagramAccount: {
+           id: 0 as T_instagram_id,
+           username: "" as T_instagram_username,
+         },
+         loading: {
+           main: false,
+           footer: false,
+           manageTags: false,
+           manageInstagramAccounts: false,
+         },
 
-    userInfo: data.session,
-    articles: data.articles,
-    allArticles: data.allArticles,
-    paginationParams: data.pagination,
-    footerItems: data.footerItems,
-    // infoBarData: {
-    //   infoBar: data.infoBarData.infoBar as TInfoBar,
-    //   // scrolling_animation_duration: null as number,
-    //   targetArticle: data.infoBarData.targetArticle as TArticle,
-    // },
-    infoBarData: data.infoBarData,
-    tags: data.tags,
-    instagramAccounts: data.instagramAccounts,
-    instagramMedias: initInstagramMedias
-  })
+         userInfo: data.userInfo,
+         articles: data.articles,
+         allArticles: data.allArticles,
+         paginationParams: data.pagination,
+         footerItems: data.footerItems,
+         infoBarData: data.infoBarData,
+         tags: data.tags,
+         instagramAccounts: data.instagramAccounts,
+         instagramMedias: initInstagramMedias,
+       });
 
 export type TAppState = ReturnType<typeof initAppState> ;
 

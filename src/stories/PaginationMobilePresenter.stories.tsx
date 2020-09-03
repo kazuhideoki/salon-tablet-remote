@@ -40,6 +40,7 @@ const props = {
   StyledIconButton,
   getInstagramMedias: null,
   instagramMedias: null,
+  isTabletPortrait: false,
 };
 
 export const Normal = () => {

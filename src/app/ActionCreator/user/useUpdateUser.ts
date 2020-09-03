@@ -2,11 +2,12 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { apiUserInfoUpdate, T_user_info_update } from "../../../pages/api/user_info/update";
 
-type TUpdateUser = {
+export type TUpdateUser = {
   name: string
   shopName: string
   email: string
   password: string
+  isShowMobile: boolean
 }
 
 export const useUpdateUser = () => {
@@ -18,13 +19,16 @@ export const useUpdateUser = () => {
 
   // const cipheredPassword = cipher(password);
   return async (param: TUpdateUser) => {
+    const columns = {
+      user_id: user_id,
+      user_name: param.name,
+      shop_name: param.shopName,
+      user_email: param.email,
+      is_generate_public_page: param.isShowMobile,
+    };
+
     const params: T_user_info_update = {
-      columns: {
-        user_id: user_id,
-        user_name: param.name,
-        shop_name: param.shopName,
-        user_email: param.email,
-      },
+      columns: columns,
       plainTextPassword: param.password,
     };
 
@@ -34,16 +38,10 @@ export const useUpdateUser = () => {
     } else {
       dispatchAppState({
         type: "SET_USER_INFO",
-        payload: {
-          user_id: user_id,
-          user_name: param.name,
-          shop_name: param.shopName,
-          user_email: param.email,
-        },
+        payload: columns,
       });
       alert("ユーザーデータを更新しました。");
-      // ↓modalを閉じるとTextFieldの値をうまく保持できない
-      // そもそも必要ない
+
     }
   };
 };

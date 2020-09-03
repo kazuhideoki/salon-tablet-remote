@@ -1,5 +1,6 @@
 import React from 'react';
 import { SettingMobilePresenter } from '../app/View/mobile/SettingMobile';
+import { themeArgs } from '../app/Store/ThemeContext';
 export default {
   title: "mobile/SettingMobile",
   component: SettingMobilePresenter,
@@ -19,6 +20,9 @@ const props = {
   handleDrawerOpen: null,
   handleDrawerClose: null,
   isMobile: null,
+  pass: null,
+  setPass: null,
+  themes: themeArgs(false),
 };
 
 export const Normal = () => {

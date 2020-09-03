@@ -2,6 +2,7 @@ import React from "react";
 import {
   CssBaseline,
   MuiThemeProvider,
+  useMediaQuery,
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
 import { TUserInfo } from "./Types";
@@ -33,35 +34,38 @@ const pMainHeight = screenHeight - pInfoBarHeight - pInfoBarMarginBottom - pFoot
 
 
 // ThemeContext.Providerを通して渡される値
-export const themeArgs = {
-  app: {
-    padding: portalPadding,
-    width: portalWidth,
-    height: portalHeight,
-  },
-  pInfoBar: {
-    marginBottom: pInfoBarMarginBottom,
-    width: pInfoBarWidth,
-    height: pInfoBarHeight,
-  },
-  pMain: {
-    width: pMainWidth,
-    height: pMainHeight,
-  },
-  pFooter: {
-    marginTop: pFooterMarginTop,
-    width: pFooterWidth,
-    height: pFooterHeight,
-  },
+export const themeArgs = (isMobile) => {
+  
+  return {
+    app: {
+      padding: portalPadding,
+      width: portalWidth,
+      height: portalHeight,
+    },
+    pInfoBar: {
+      marginBottom: pInfoBarMarginBottom,
+      width: pInfoBarWidth,
+      height: pInfoBarHeight,
+    },
+    pMain: {
+      width: pMainWidth,
+      height: pMainHeight,
+    },
+    pFooter: {
+      marginTop: pFooterMarginTop,
+      width: pFooterWidth,
+      height: pFooterHeight,
+    },
 
-  drawerWidth: 210,
+    drawerWidth: isMobile ? 60: 210,
 
-  // fontSize
-  icon: 85,
-  iconSmall: 38,
+    // fontSize
+    icon: 85,
+    iconSmall: 38,
+  }
 }
 
-export type TThemeArgs = typeof themeArgs;
+export type TThemeArgs = ReturnType<typeof themeArgs>
 
 export const ThemeContext = React.createContext({} as TThemeArgs);
 
@@ -70,6 +74,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
     const { selected_theme } = appState.userInfo;
+    const isMobile = useMediaQuery("(max-width:480px)");
 
     let theme // テーマ付ける
     // user_infoのselected_themeをもとにテーマを適応
@@ -91,7 +96,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
         {/* MuiCssBaseline、@globalが適応 */}
         <CssBaseline />
         {/* 独自設定した変数を下へ送る */}
-        <ThemeContext.Provider value={themeArgs}>
+        <ThemeContext.Provider value={themeArgs(isMobile)}>
           {props.children}
         </ThemeContext.Provider>
       </MuiThemeProvider>

@@ -42,6 +42,7 @@ const props: TUsePPaginationProps = {
   StyledIconButton,
   getInstagramMedias: null,
   instagramMedias: null,
+  isTabletPortrait: false,
 };
 
 export const Normal = () => {
@@ -52,6 +53,15 @@ export const Normal = () => {
         {...props}
 
       />
+      ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
+    </MuiThemeProvider>
+  );
+}
+export const isTabletPortrait = () => {
+
+  return (
+    <MuiThemeProvider theme={themeMinimal}>
+      <PPaginationPresenter {...props} isTabletPortrait={true} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
     </MuiThemeProvider>
   );
@@ -89,6 +99,7 @@ const props2: TUsePPaginationProps = {
         next: "string",
     },
   },
+  isTabletPortrait: false,
 };
 
 export const Instagram表示 = () => {

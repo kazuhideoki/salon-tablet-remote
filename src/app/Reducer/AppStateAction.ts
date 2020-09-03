@@ -21,6 +21,7 @@ import {
   TInfoBarData,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
+import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
 export type AppStateAction =
   | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "CLOSE_MODAL" }
@@ -41,7 +42,7 @@ export type AppStateAction =
   | { type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR"; payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL";
-      payload: number;
+      payload: number; // indexをいれる
     }
   | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: number }
 
@@ -54,12 +55,7 @@ export type AppStateAction =
   | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {
       type: "SET_USER_INFO";
-      payload: {
-        user_id: T_user_id;
-        user_name: T_user_name;
-        shop_name: T_shop_name;
-        user_email: T_user_email;
-      };
+      payload: T_user_info_columns_without_password;
     }
   | {
       type: "SET_THEME";

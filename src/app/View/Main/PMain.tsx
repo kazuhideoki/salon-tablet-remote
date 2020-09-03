@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme) => {
       position: "relative",
       padding: 0,
     },
-    thumbnailBox: {
+    thumbnailDiv: {
       position: "relative",
     },
     thumbnail: {
@@ -210,7 +210,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
                 ) : null}
                 {showDataType(value.data_type, classes.showDataType)}
 
-                <div className={classes.thumbnailBox}>
+                <div className={classes.thumbnailDiv}>
                   {props.loading ? (
                     <Skeleton variant="rect" className={classes.thumbnail} style={{marginBottom: "32px"}}/>
                   ) : value.article_img.length ? (
@@ -299,7 +299,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
       >
         <Card className={classes.card}>
           <StyledCardContent className={classes.cardContent}>
-            <div className={classes.thumbnailBox}>
+            <div className={classes.thumbnailDiv}>
               <div className={`p-main-thumbnail ${classes.thumbnail}`}></div>
             </div>
 
@@ -351,7 +351,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
         >
           <Card className={classes.card}>
             <StyledCardContent className={classes.cardContent}>
-              <div className={classes.thumbnailBox}>
+              <div className={classes.thumbnailDiv}>
                 {props.loading ? (
                   <Skeleton
                     variant="rect"

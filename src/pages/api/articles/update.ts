@@ -1,7 +1,7 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../config";
-import { TApiResponse } from "../lib/apiTypes";
+import { TApiResponse } from "../../../lib/apiTypes";
 import {
   T_is_published_articles,
   T_title,
@@ -12,7 +12,7 @@ import {
   T_data_type_article,
 } from "../../../app/Store/Types";
 import { T_articles_create } from "./create";
-import { checkIsAdmin } from "../lib/checkIsAdmin";
+import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiResponse<T_articles_update_return>> => {

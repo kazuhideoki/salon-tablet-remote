@@ -1,10 +1,10 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_tag_id, T_tag_name,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
-import { TApiResponse } from "../lib/apiTypes";
+import { TApiResponse } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsUpdata = async (

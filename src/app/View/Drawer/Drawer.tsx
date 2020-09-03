@@ -17,19 +17,19 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { ThemeContext } from "../../Store/ThemeContext";
+import { ThemeContext, TThemeArgs } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
 import { TextField, Button } from "@material-ui/core";
-//@ts-ignore
 import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
-import { cipher } from "../../../module/bcrypt";
 import { TagsButton } from "../Footer/PaginationBar/TagsButton";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
+import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
+import { drawerHeaderJsx } from "./DrawerComponent/drawerHeaderJsx";
+import { drawerItemsJsx } from "./DrawerComponent/drawerItemsJsx";
 
 
-// export const useDrawerProps = ({open, setOpen}) => {
 export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState } = React.useContext(Store);
@@ -61,6 +61,10 @@ export const useDrawerProps = () => {
 
   const isMobile = useMediaQuery("(max-width:480px)");
 
+  const [pass, setPass] = React.useState('')
+
+  const themes = React.useContext(ThemeContext);
+
   return {
     theme,
     appState,
@@ -70,24 +74,40 @@ export const useDrawerProps = () => {
     handleOnSingOut,
     handleDrawerClose,
     isMobile,
+    pass,
+    setPass,
+    themes,
   };
 }
 
-export type TUseDrawerProps = ReturnType<typeof useDrawerProps>
+export type TUseDrawerProps = ReturnType<typeof useDrawerProps> & {className?: string}
 
 const useStyles = makeStyles((theme: Theme) => {
-    const themes = React.useContext(ThemeContext);
+
     return createStyles({
       root: {
         display: "flex",
         position: "absolute",
       },
+      appBar: {
+        transition: theme.transitions.create(["margin", "width"], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+      },
+      appBarShift: {
+        width: (themes: TThemeArgs) => `calc(100% - ${themes.drawerWidth}px)`,
+        marginLeft: (themes: TThemeArgs) => themes.drawerWidth,
+        transition: theme.transitions.create(["margin", "width"], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
       menuButton: {
-        // marginRight: theme.spacing(2),
         zIndex: theme.zIndex.drawer,
         marginTop: theme.spacing(1),
         marginLeft: theme.spacing(1),
-        position: "absolute",
+        position: "fixed",
         top: 0,
         left: 0,
       },
@@ -95,13 +115,15 @@ const useStyles = makeStyles((theme: Theme) => {
         display: "none",
       },
       drawer: {
-        width: themes.drawerWidth,
+        width: (themes: TThemeArgs) => themes.drawerWidth,
         flexShrink: 0,
       },
       drawerPaper: {
-        width: themes.drawerWidth,
+        width: (themes: TThemeArgs) => themes.drawerWidth,
+        overflow: 'visible',
       },
       drawerHeader: {
+        overflow: 'visible',
         display: "flex",
         alignItems: "center",
         padding: theme.spacing(0, 1),
@@ -110,203 +132,39 @@ const useStyles = makeStyles((theme: Theme) => {
         justifyContent: "flex-end",
       },
       content: {
+
         flexGrow: 1,
-        // padding: theme.spacing(3),
         transition: theme.transitions.create("margin", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft: -themes.drawerWidth,
+        marginLeft: (themes: TThemeArgs) => -themes.drawerWidth,
+        overflow: 'visible',
       },
       contentShift: {
         transition: theme.transitions.create("margin", {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
         }),
+        marginLeft: (themes: TThemeArgs) => 0,
+      },
+      contentShiftWidth: {
         marginLeft: 0,
       },
-    })}
+    });}
   )
 
 export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
-  const classes = useStyles();
+  
+  const classes = useStyles(props.themes);
 
-
-
-  const BeforeIsSettingDrawerMenu = () => {
-    const [pass, setPass] = React.useState('')
-    return (
-      <>
-        <TextField
-          id="setting-password-input"
-          label="パスワード"
-          type="password"
-          autoComplete="current-password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          onKeyPress={e => {
-            if (e.key == 'Enter') {
-              e.preventDefault()
-              props.handleSubmitPassword(pass)
-            }
-          }}
-        />
-        <Button onClick={() => props.handleSubmitPassword(pass)}>
-          <Typography variant="body1">
-            編集モードに切り替える
-          </Typography>
-        </Button>
-      </>
-    );
-  }
-
-  const BeforeIsSettingDrawerMenuMobile = () => {
-    return (
-      <Button onClick={() => props.handleSwitchIsSetting()}>
-        <Typography variant="body1">
-          編集モードに切り替える
-        </Typography>
-      </Button>
-    );
-  }
-
-  const IsSettingDrawerMenu: React.FC = () => {
-    return (
-      <>
-        <List>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({ type: "OPEN_ARTICLE_EDITOR" })
-            }
-          >
-            <ListItemIcon>
-              <NoteAddOutlined />
-            </ListItemIcon>
-            <ListItemText primary="記事作成" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({ type: "OPEN_FOOTER_ITEM_EDITOR" })
-            }
-          >
-            <ListItemIcon>
-              <VideoLabel />
-            </ListItemIcon>
-            <ListItemText primary="アイテム作成" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "edit_tags",
-              })
-            }
-          >
-            <ListItemIcon>
-              <TagsButton />
-            </ListItemIcon>
-            <ListItemText primary="タグ管理" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "manage_instagram",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Instagram />
-            </ListItemIcon>
-            <ListItemText primary="Instagram 連携" secondary="製作中" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "setting_theme",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Wallpaper />
-            </ListItemIcon>
-            <ListItemText primary="テーマ変更" secondary="製作中" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "setting_user_info",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            <ListItemText primary="アカウント" />
-          </ListItem>
-          <ListItem
-            button
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_MODAL",
-                payload: "feedback_form",
-              })
-            }
-          >
-            <ListItemIcon>
-              <Feedback />
-            </ListItemIcon>
-            <ListItemText primary="フィードバック" />
-          </ListItem>
-          <ListItem button onClick={() => props.handleOnSingOut()}>
-            <ListItemIcon>
-              <ExitToApp />
-            </ListItemIcon>
-            <ListItemText primary="サインアウト" />
-          </ListItem>
-        </List>
-      </>
-    );
-  };
-
-  let DrawerHeader
-  // Open 開いてパスワード入力画面
-  if (!props.appState.isSetting) {
-    DrawerHeader = () => (
-      <IconButton onClick={props.handleDrawerClose}>
-        {props.theme.direction === "ltr" ? (
-          <ChevronLeftIcon />
-        ) : (
-          <ChevronRightIcon />
-        )}
-      </IconButton>
-    );
-  } 
-  // Open isSetting 開いて編集モード
-  else if (props.appState.isSetting) {
-    DrawerHeader = () => (
-      <Button variant="text" onClick={props.handleDrawerClose}>
-        <Typography variant="body1">観覧モードに切り替える</Typography>
-
-        {props.theme.direction === "ltr" ? (
-          <ChevronLeftIcon />
-        ) : (
-          <ChevronRightIcon />
-        )}
-      </Button>
-    );
-  } 
+  const drawerHeader = drawerHeaderJsx(props)
+  const drawerItems = drawerItemsJsx(props)
+  const drawerSetting = drawerSettingJsx(props);
+  
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${props.className}`}>
       <CssBaseline />
       <IconButton
         color="inherit"
@@ -329,25 +187,33 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
-          <DrawerHeader />
-        </div>
+        <div className={classes.drawerHeader}>{drawerHeader}</div>
         <Divider />
 
-        {!props.appState.isSetting && !props.isMobile ? (
-          <BeforeIsSettingDrawerMenu />
+        {props.isMobile && !props.appState.isSetting ? (
+          <>
+            {drawerItems}
+            <Divider />
+          </>
         ) : null}
-        {!props.appState.isSetting && props.isMobile ? (
-          <BeforeIsSettingDrawerMenuMobile />
-        ) : null}
-        {props.appState.isSetting ? <IsSettingDrawerMenu /> : null}
+
+        {props.appState.isPublicPage ? null : drawerSetting}
 
         <Divider />
+
+        {/* 編集モードではアイテムは下にずらす */}
+        {props.isMobile && props.appState.isSetting ? (
+          <>
+            {drawerItems}
+            <Divider />
+          </>
+        ) : null}
+
       </MuiDrawer>
       <main
-        className={`${clsx(classes.content, {
+        className={clsx(classes.content, {
           [classes.contentShift]: props.appState.isDrawerOpen,
-        })}`}
+        })}
       >
         {props.children}
       </main>
@@ -355,11 +221,11 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
   );
 }
 
-export const Drawer: React.FC = (props) => {
+export const Drawer = (props) => {
   const useProps = useDrawerProps();
 
   return (
-    <DrawerPresenter {...useProps}>
+    <DrawerPresenter {...useProps} className={props.className}>
       {props.children}
     </DrawerPresenter>
   );

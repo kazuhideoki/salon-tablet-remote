@@ -24,7 +24,7 @@ export const Close = () => {
     open: false,
     handleDrawerOpen: null,
     handleDrawerClose: null,
-    isMobile: null,
+    isMobile: false,
   };
 
   //@ts-ignore
@@ -46,7 +46,7 @@ export const Open = () => {
     // open: true,
     handleDrawerOpen: null,
     handleDrawerClose: null,
-    isMobile: null,
+    isMobile: false,
   };
 
   //@ts-ignore
@@ -90,7 +90,29 @@ export const OpenIsSetting = () => {
     // open: true,
     handleDrawerOpen: null,
     handleDrawerClose: null,
-    isMobile: null,
+    isMobile: false,
+  };
+
+  //@ts-ignore
+  return <DrawerPresenter {...props}/>
+}
+export const OpenIsSettingMobile = () => {
+  const theme = useTheme()
+  const props = {
+    theme: theme,
+    appState: {
+      isSetting: true,
+      isDrawerOpen: true,
+    },
+    dispatchAppState: null,
+    handleOpenArticleEditor: null,
+    handleOpenFooterItemEditor: null,
+    handleSubmitPassword: null,
+    handleOnSingOut: null,
+    // open: true,
+    handleDrawerOpen: null,
+    handleDrawerClose: null,
+    isMobile: true,
   };
 
   //@ts-ignore

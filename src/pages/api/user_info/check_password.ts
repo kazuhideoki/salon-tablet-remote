@@ -1,10 +1,10 @@
-import { db } from "../lib/db";
+import { db } from "../../../lib/db";
 const bcrypt = require("bcryptjs"); 
 import { NextApiRequest, NextApiResponse } from "next";
 import { cipher,checkPassword } from "../../../module/bcrypt";
 import { T_user_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../config";
-import { TApiResponse } from "../lib/apiTypes";
+import { TApiResponse } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoCheckPassword = async (params: T_user_info_check_password):Promise<TApiResponse<T_user_info_check_password_return>> => {
