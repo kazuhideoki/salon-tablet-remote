@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     thumbnail: {
       objectFit: "cover",
-      width: "150px",
-      height: "150px",
+      width: "130px",
+      height: "130px",
     },
     contents: {
       margin: theme.spacing(1),

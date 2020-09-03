@@ -9,6 +9,7 @@ import { Store } from "../../Store/Store";
 import { T_modal_size } from "../../Store/Types";
 import { HelpButton } from "../viewComponents/buttons/HelpButton";
 import { useMediaQuery } from "@material-ui/core";
+import { useIsMobile } from "../../../lib/useIsMobile";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
@@ -17,7 +18,8 @@ type Props = {modalSize: T_modal_size, className?: string}
 export const SelectModalSize:React.FC<Props> = ({modalSize, className}) => {
   const classes = useStyles();
   const { appState, dispatchAppState} = React.useContext(Store)
-  const isMobile = useMediaQuery("(max-width:480px)");
+  // const isMobile = useMediaQuery("(max-width:480px)");
+  const isMobile = useIsMobile()
 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

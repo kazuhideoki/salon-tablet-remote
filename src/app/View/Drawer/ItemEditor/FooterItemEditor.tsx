@@ -7,7 +7,7 @@ const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
-import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, useMediaQuery } from '@material-ui/core';
+import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
 import { SelectAppLink } from './SelectAppLink';
 import { Store } from "../../../Store/Store";
 import { FooterItem, T_modal_size } from '../../../Store/Types';

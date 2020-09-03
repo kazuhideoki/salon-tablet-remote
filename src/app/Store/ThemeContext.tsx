@@ -10,6 +10,7 @@ import { Store } from "./Store";
 
 import { nonTheme } from "./themes/nonTheme";
 import { commonTheme } from "./themes/commonTheme";
+import { useIsMobile } from "../../lib/useIsMobile";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -74,7 +75,8 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
     const { selected_theme } = appState.userInfo;
-    const isMobile = useMediaQuery("(max-width:480px)");
+    // const isMobile = useMediaQuery("(max-width:480px)");
+    const isMobile = useIsMobile()
 
     let theme // テーマ付ける
     // user_infoのselected_themeをもとにテーマを適応

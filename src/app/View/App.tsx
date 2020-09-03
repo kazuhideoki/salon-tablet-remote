@@ -7,10 +7,12 @@ import { AppMobile } from "./mobile/AppMobile";
 import { IndexProps, IndexPropsData } from "../../pages";
 import { AppTablet } from "./AppTablet";
 import { useMediaQuery } from "@material-ui/core";
+import { useIsMobile } from "../../lib/useIsMobile";
 
 const AppView = () => {
 
-  const isMobile = useMediaQuery("(max-width:480px)");
+  // const isMobile = useMediaQuery("(max-width:480px)");
+  const isMobile = useIsMobile()
   const {
     dispatchAppState,
     appState,

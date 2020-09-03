@@ -6,28 +6,21 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import { Drawer as MuiDrawer, useMediaQuery, Typography } from "@material-ui/core";
+import { Drawer as MuiDrawer, useMediaQuery } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+
 import { ThemeContext, TThemeArgs } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
-import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
-import { TextField, Button } from "@material-ui/core";
 import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
-import { TagsButton } from "../Footer/PaginationBar/TagsButton";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
 import { drawerHeaderJsx } from "./DrawerComponent/drawerHeaderJsx";
 import { drawerItemsJsx } from "./DrawerComponent/drawerItemsJsx";
+import { useIsMobile } from "../../../lib/useIsMobile";
 
 
 export const useDrawerProps = () => {
@@ -60,8 +53,8 @@ export const useDrawerProps = () => {
     dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
   };
 
-  const isMobile = useMediaQuery("(max-width:480px)");
-
+  // const isMobile = useMediaQuery("(max-width:480px)");
+  const isMobile = useIsMobile()
   const [pass, setPass] = React.useState('')
 
   const themes = React.useContext(ThemeContext);
@@ -126,6 +119,7 @@ const useStyles = makeStyles((theme: Theme) => {
       drawerPaper: {
         width: (themes: TThemeArgs) => themes.drawerWidth,
         overflow: 'visible',
+        overflowY: 'scroll',
       },
       drawerHeader: {
         overflow: 'visible',

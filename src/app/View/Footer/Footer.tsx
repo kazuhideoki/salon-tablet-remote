@@ -12,6 +12,7 @@ import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFo
 import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
 import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
 import { showDataType } from "../Main/showDataType";
+import { useIsMobile } from "../../../lib/useIsMobile";
 // import { useCalcFooterPadding } from "./useCalcFooterPadding";
 
 export const useFooterProps = () => {
@@ -33,7 +34,8 @@ export const useFooterProps = () => {
     });
   };
 
-  const isMobile = useMediaQuery("(max-width:480px)");
+  // const isMobile = useMediaQuery("(max-width:480px)");
+  const isMobile = useIsMobile();
 
   return {
     isSetting,
