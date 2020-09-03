@@ -11,7 +11,7 @@ import "react-quill/dist/quill.snow.css";
 // ReactQuillの整形
 import "../../public/quill.scss";
 import Head from "next/head";
-import { server } from "../config";
+import { server } from "../lib/loadUrl";
 // require("dotenv").config();
 
 export default function MyApp({ Component, pageProps }) {

@@ -4,7 +4,7 @@ import { checkOrders } from "../../../lib/checkOrders";
 import { FooterItems, T_user_id } from "../../../app/Store/Types";
 import { correctOrders } from "../../../lib/correctOrders";
 import { changeToBooleanFromNumber } from "../../../lib/changeToBooleanFromNumber";
-import { localhost, server } from "../../../config";
+import { localhost, server } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

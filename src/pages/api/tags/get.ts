@@ -1,7 +1,7 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { TTags, T_user_id } from "../../../app/Store/Types";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

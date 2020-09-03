@@ -14,7 +14,7 @@ import {
   T_modal_size,
   T_data_type_footer_item,
 } from "../../../app/Store/Types";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 

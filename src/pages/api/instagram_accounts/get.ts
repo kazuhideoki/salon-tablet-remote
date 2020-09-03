@@ -2,7 +2,7 @@ import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { TInstagramAccounts, T_user_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiResponse<TInstagramAccounts>> => {

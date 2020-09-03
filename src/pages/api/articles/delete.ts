@@ -1,6 +1,6 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { T_article_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 

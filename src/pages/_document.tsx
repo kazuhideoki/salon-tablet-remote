@@ -5,7 +5,7 @@ import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/styles'
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import { server } from '../config'
+import { server } from '../lib/loadUrl'
 
 const theme = responsiveFontSizes(createMuiTheme())
 

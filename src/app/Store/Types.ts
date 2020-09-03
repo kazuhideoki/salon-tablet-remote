@@ -232,6 +232,7 @@ export type TSetModal =
 
 export const initAppState = (data: TStoreProps) => ({
          isPublicPage: data.isPublicPage,
+         selectedDevice: 'responsive' as 'responsive' | 'mobile' | 'tablet',
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,
          setModal: "edit_article" as TSetModal,

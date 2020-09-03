@@ -4,7 +4,7 @@ import { checkOrders } from "./checkOrders";
 import { T_user_id, T_is_generate_public_page, T_public_page_slug, TUserInfo } from "../app/Store/Types";
 import { correctOrders } from "./correctOrders";
 import { changeToBooleanFromNumber } from "./changeToBooleanFromNumber";
-import { localhost, server } from "../config";
+import { localhost, server } from "./loadUrl";
 import { TApiResponse, TApiError } from "./apiTypes";
 import { userInfoParamsFromSql } from "./userInfoParamsFromSql";
 

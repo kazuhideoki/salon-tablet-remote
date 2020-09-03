@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_tag_id, T_tag_name,
 } from "../../../app/Store/Types";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

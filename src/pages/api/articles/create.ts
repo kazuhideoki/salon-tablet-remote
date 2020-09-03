@@ -9,7 +9,7 @@ import {
   T_user_id,
   T_data_type_article,
 } from "../../../app/Store/Types";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 

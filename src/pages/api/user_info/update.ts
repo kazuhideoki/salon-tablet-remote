@@ -1,7 +1,7 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { cipher } from "../../../module/bcrypt";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id, T_user_name, T_shop_name, T_user_email, T_is_generate_public_page } from "../../../app/Store/Types";
 

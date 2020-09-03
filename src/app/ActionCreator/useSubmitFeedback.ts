@@ -1,6 +1,6 @@
 import React from "react";
 import { Store } from "../Store/Store";
-import { server, localhost } from "../../config";
+import { server, localhost } from "../../lib/loadUrl";
 import { T_submit_feedback, apiSubmitFeedback } from "../../pages/api/submit_feedback";
 
 export const useSubmitFeedback = () => {

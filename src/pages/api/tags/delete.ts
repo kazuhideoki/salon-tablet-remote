@@ -7,7 +7,7 @@ import {
   T_article_id,
 } from "../../../app/Store/Types";
 import { deleteTagIdInArticle } from "../../../lib/deleteTagIdInArticle";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

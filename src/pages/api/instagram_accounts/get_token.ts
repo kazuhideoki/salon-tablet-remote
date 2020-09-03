@@ -1,6 +1,6 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { server, instagramRedirectHost, localhost } from "../../../config";
+import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
 import { getSession } from "next-auth/client";
 import { TSessionOnj } from '../../index'
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";

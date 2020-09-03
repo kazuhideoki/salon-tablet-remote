@@ -17,7 +17,7 @@ import {
   T_user_id,
   T_scrolling_animation_duration,
 } from "../../../app/Store/Types";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 

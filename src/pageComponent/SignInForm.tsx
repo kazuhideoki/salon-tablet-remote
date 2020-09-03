@@ -1,5 +1,5 @@
 import React from "react";
-import { server } from "../config";
+import { server } from "../lib/loadUrl";
 import { signin } from "next-auth/client";
 
 import {

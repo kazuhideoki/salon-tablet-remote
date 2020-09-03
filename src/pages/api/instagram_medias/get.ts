@@ -1,7 +1,7 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { server, localhost } from "../../../config";
+import { server, localhost } from "../../../lib/loadUrl";
 import { T_instagram_id, TInstagramMedias } from "../../../app/Store/Types";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
