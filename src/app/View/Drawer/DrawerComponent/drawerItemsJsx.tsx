@@ -1,6 +1,6 @@
-import { List, ListItem, ListItemIcon, Typography, Button, TextField, ListItemText } from "@material-ui/core";
-import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram, MoodBad } from "@material-ui/icons";
-import { TagsButton } from "../../Footer/PaginationBar/TagsButton";
+import React from "react";
+import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { MoodBad } from "@material-ui/icons";
 import { TUseDrawerProps } from "../Drawer";
 import { IconsSetting } from "../ItemEditor/iconSelect/icons";
 
@@ -8,9 +8,9 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
   return (
     <>
       <List>
-        {props.appState.footerItems.map((value, index) => {
+        {props.footerItems.map((value, index) => {
 
-          if (props.appState.isSetting === false && value.is_published == false) {
+          if (props.isSetting === false && value.is_published == false) {
             return null;
           }
 

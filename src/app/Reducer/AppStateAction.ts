@@ -19,10 +19,13 @@ import {
   T_on_tap,
   TInfoBar,
   TInfoBarData,
+  T_selected_device,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
+
 export type AppStateAction =
+  | { type: "SELECT_DEVICE"; payload: T_selected_device }
   | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_DRAWER" }

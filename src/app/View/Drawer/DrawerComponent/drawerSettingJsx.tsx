@@ -1,10 +1,11 @@
+import React from 'react'
 import { List, ListItem, ListItemIcon, Typography, Button, TextField, ListItemText } from "@material-ui/core";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
 import { TagsButton } from "../../Footer/PaginationBar/TagsButton";
 import { TUseDrawerProps } from "../Drawer";
 
 export const drawerSettingJsx = (props: TUseDrawerProps) => {
-         if (props.appState.isSetting) {
+         if (props.isSetting) {
            return (
              <>
                <List>

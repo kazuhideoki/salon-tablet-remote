@@ -8,6 +8,12 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
+      case "SELECT_DEVICE":
+        newState = {
+          ...state,
+          selectedDevice: action.payload,
+        };
+        break;
       case "OPEN_MODAL":
         newState = {
           ...state,

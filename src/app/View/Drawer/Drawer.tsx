@@ -33,6 +33,7 @@ import { drawerItemsJsx } from "./DrawerComponent/drawerItemsJsx";
 export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState } = React.useContext(Store);
+  const { isSetting, isPublicPage, isDrawerOpen, footerItems} = appState
   const getArticles = useGetArticles()
   
   const checkPassword = useCheckPassword();
@@ -67,7 +68,11 @@ export const useDrawerProps = () => {
 
   return {
     theme,
-    appState,
+    // appState,
+    isSetting,
+    isPublicPage,
+    isDrawerOpen,
+    footerItems,
     dispatchAppState,
     handleSubmitPassword,
     handleSwitchIsSetting,
@@ -173,7 +178,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         edge="start"
         className={clsx(
           classes.menuButton,
-          props.appState.isDrawerOpen && classes.hide
+          props.isDrawerOpen && classes.hide
         )}
       >
         <MenuIcon />
@@ -182,7 +187,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         className={classes.drawer}
         variant="persistent"
         anchor="left"
-        open={props.appState.isDrawerOpen}
+        open={props.isDrawerOpen}
         classes={{
           paper: classes.drawerPaper,
         }}
@@ -190,19 +195,19 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <div className={classes.drawerHeader}>{drawerHeader}</div>
         <Divider />
 
-        {props.isMobile && !props.appState.isSetting ? (
+        {props.isMobile && !props.isSetting ? (
           <>
             {drawerItems}
             <Divider />
           </>
         ) : null}
 
-        {props.appState.isPublicPage ? null : drawerSetting}
+        {props.isPublicPage ? null : drawerSetting}
 
         <Divider />
 
         {/* 編集モードではアイテムは下にずらす */}
-        {props.isMobile && props.appState.isSetting ? (
+        {props.isMobile && props.isSetting ? (
           <>
             {drawerItems}
             <Divider />
@@ -212,7 +217,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       </MuiDrawer>
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: props.appState.isDrawerOpen,
+          [classes.contentShift]: props.isDrawerOpen,
         })}
       >
         {props.children}
