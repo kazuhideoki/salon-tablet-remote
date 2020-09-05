@@ -59,6 +59,15 @@ export const useDrawerProps = () => {
 
   const themes = React.useContext(ThemeContext);
 
+  const closeDrawerTapMain = (e) => {
+    // e.stopPropagation()
+    dispatchAppState({type: 'CLOSE_DRAWER'})
+  }
+  // function closeDrawerTapMain(e) {
+  //   e.stopPropagation()
+  //   dispatchAppState({type: 'CLOSE_DRAWER'})
+  // }
+
   return {
     theme,
     // appState,
@@ -75,6 +84,7 @@ export const useDrawerProps = () => {
     pass,
     setPass,
     themes,
+    closeDrawerTapMain,
   };
 }
 
@@ -86,20 +96,6 @@ const useStyles = makeStyles((theme: Theme) => {
       root: {
         display: "flex",
         position: "absolute",
-      },
-      appBar: {
-        transition: theme.transitions.create(["margin", "width"], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-      },
-      appBarShift: {
-        width: (themes: TThemeArgs) => `calc(100% - ${themes.drawerWidth}px)`,
-        marginLeft: (themes: TThemeArgs) => themes.drawerWidth,
-        transition: theme.transitions.create(["margin", "width"], {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
       },
       menuButton: {
         zIndex: theme.zIndex.drawer,
@@ -113,16 +109,25 @@ const useStyles = makeStyles((theme: Theme) => {
         display: "none",
       },
       drawer: {
+        // zIndex: theme.zIndex.drawer,
         width: (themes: TThemeArgs) => themes.drawerWidth,
         flexShrink: 0,
       },
       drawerPaper: {
         width: (themes: TThemeArgs) => themes.drawerWidth,
-        overflow: 'visible',
-        overflowY: 'scroll',
+        overflowX: "visible",
+        overflowY: "scroll",
+        // borderTopLeftRadius: 0,
+        // borderTopRightRadius: 0,
       },
+      // drawerPaperIsSetting: {
+      //   width: (themes: TThemeArgs) => themes.drawerWidth,
+      //   overflowX: "visible",
+      //   overflowY: "scroll",
+      //   background: "rgba(225,225,225,0.5)",
+      // },
       drawerHeader: {
-        overflow: 'visible',
+        overflow: "visible",
         display: "flex",
         alignItems: "center",
         padding: theme.spacing(0, 1),
@@ -131,14 +136,13 @@ const useStyles = makeStyles((theme: Theme) => {
         justifyContent: "flex-end",
       },
       content: {
-
         flexGrow: 1,
         transition: theme.transitions.create("margin", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: (themes: TThemeArgs) => -themes.drawerWidth,
-        overflow: 'visible',
+        overflow: "visible",
       },
       contentShift: {
         transition: theme.transitions.create("margin", {
@@ -149,6 +153,16 @@ const useStyles = makeStyles((theme: Theme) => {
       },
       contentShiftWidth: {
         marginLeft: 0,
+      },
+      greyScreen: {
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        right: 0,
+        // left: (themes: TThemeArgs) => themes.drawerWidth,
+        left: 0,
+        background: "rgba(0,0,0,0.5)",
+        zIndex: 100,
       },
     });}
   )
@@ -170,10 +184,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         aria-label="open drawer"
         onClick={() => props.dispatchAppState({ type: "OPEN_DRAWER" })}
         edge="start"
-        className={clsx(
-          classes.menuButton,
-          props.isDrawerOpen && classes.hide
-        )}
+        className={clsx(classes.menuButton, props.isDrawerOpen && classes.hide)}
       >
         <MenuIcon />
       </IconButton>
@@ -182,6 +193,12 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         variant="persistent"
         anchor="left"
         open={props.isDrawerOpen}
+        
+        // classes={{
+        //   paper: `${classes.drawerPaper} ${
+        //     props.isSetting ? classes.drawerPaperIsSetting : null
+        //   }`,
+        // }}
         classes={{
           paper: classes.drawerPaper,
         }}
@@ -207,7 +224,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
             <Divider />
           </>
         ) : null}
-
       </MuiDrawer>
       <main
         className={clsx(classes.content, {
@@ -216,6 +232,12 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       >
         {props.children}
       </main>
+      {props.isDrawerOpen && (props.isSetting === false) && props.isMobile ? (
+        <div
+          className={classes.greyScreen}
+          onClick={props.isDrawerOpen ? props.closeDrawerTapMain : null}
+        ></div>
+      ) : null}
     </div>
   );
 }

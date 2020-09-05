@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => {
       position: "absolute",
       top: theme.spacing(1),
       right: 0,
-      zIndex: 200,
+      zIndex: 101,
     },
     scrollingSentenceDiv: {
       margin: "auto",

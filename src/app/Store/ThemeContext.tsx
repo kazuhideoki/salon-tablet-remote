@@ -58,7 +58,9 @@ export const themeArgs = (isMobile) => {
       height: pFooterHeight,
     },
 
-    drawerWidth: isMobile ? 60: 210,
+    // drawerWidth: isMobile ? 60: 210,
+    // drawerWidth: isMobile ? '60vw': 210,
+    drawerWidth: 210,
 
     // fontSize
     icon: 85,

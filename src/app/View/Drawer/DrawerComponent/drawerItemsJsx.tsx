@@ -1,10 +1,37 @@
 import React from "react";
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Chip,
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
 import { TUseDrawerProps } from "../Drawer";
 import { IconsSetting } from "../ItemEditor/iconSelect/icons";
+import { TThemeArgs } from "../../../Store/ThemeContext";
+
+const useStyles = makeStyles((theme: Theme) => {
+
+    return createStyles({
+      chipItemName: {
+        position: "absolute",
+        left: (themes: TThemeArgs) => themes.drawerWidth,
+        // zIndex: 100,
+      },
+      listItemText: {
+        textOverflow: "ellipsis",
+      },
+    });
+})
 
 export const drawerItemsJsx = (props: TUseDrawerProps) => {
+
+  const classes = useStyles(props.themes)
+
   return (
     <>
       <List>
@@ -41,9 +68,10 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 <ListItemIcon>
                   <Icon />
                 </ListItemIcon>
-                {props.isMobile ? null : (
+                {/* {props.isMobile ? <Chip size='small' label={value.icon_name} className={classes.chipItemName}/> : (
                   <ListItemText primary={value.icon_name} />
-                )}
+                )} */}
+                  <ListItemText primary={value.icon_name} className={classes.listItemText}/>
               </ListItem>
             );
           }

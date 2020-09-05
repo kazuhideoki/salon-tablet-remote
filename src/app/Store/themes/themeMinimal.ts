@@ -29,7 +29,8 @@ export const themeMinimal = createMuiTheme({
     },
     MuiDrawer: {
       paper: {
-        borderRadius: theme.spacing(3),
+        MozBorderRadiusTopright: theme.spacing(3),
+        MozBorderRadiusBottomright: theme.spacing(3),
       }
     },
   },
