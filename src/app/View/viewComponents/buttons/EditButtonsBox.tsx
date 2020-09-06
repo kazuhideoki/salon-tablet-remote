@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles,createStyles, withStyles, IconButton } from '@material-ui/core'
 
 type props = {
-  className: string
+  className?: string
 }
 
 const useStyles = makeStyles((theme) =>

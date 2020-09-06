@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme: Theme) => {
       height: 60,
     },
     infoBarOpened: {
-      width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
+      // width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
     },
     main: {
       width: "100vw",
     },
     mainOpened: {
-      width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
+      // width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
     },
     footer: {
       position: 'sticky',
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => {
       width: "100vw",
     },
     footerOpened: {
-      width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
+      // width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
     },
     isLoadingFooter: {
       position: 'fixed',

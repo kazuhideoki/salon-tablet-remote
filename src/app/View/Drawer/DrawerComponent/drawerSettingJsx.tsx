@@ -18,7 +18,8 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <NoteAddOutlined />
                    </ListItemIcon>
-                   {props.isMobile ? null : <ListItemText primary="記事作成" />}
+                   {/* {props.isMobile ? null : <ListItemText primary="記事作成" />} */}
+                   <ListItemText primary="記事作成" />
                  </ListItem>
                  <ListItem
                    button
@@ -29,9 +30,10 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <VideoLabel />
                    </ListItemIcon>
-                   {props.isMobile ? null : (
+                   {/* {props.isMobile ? null : (
                      <ListItemText primary="アイテム作成" />
-                   )}
+                   )} */}
+                     <ListItemText primary="アイテム作成" />
                  </ListItem>
                  <ListItem
                    button
@@ -45,7 +47,8 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <TagsButton />
                    </ListItemIcon>
-                   {props.isMobile ? null : <ListItemText primary="タグ管理" />}
+                   {/* {props.isMobile ? null : <ListItemText primary="タグ管理" />} */}
+                   <ListItemText primary="タグ管理" />
                  </ListItem>
                  <ListItem
                    button
@@ -59,12 +62,10 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Instagram />
                    </ListItemIcon>
-                   {props.isMobile ? null : (
                      <ListItemText
                        primary="Instagram 連携"
                        secondary="製作中"
                      />
-                   )}
                  </ListItem>
                  <ListItem
                    button
@@ -78,9 +79,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Wallpaper />
                    </ListItemIcon>
-                   {props.isMobile ? null : (
                      <ListItemText primary="テーマ変更" secondary="製作中" />
-                   )}
                  </ListItem>
                  <ListItem
                    button
@@ -94,9 +93,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Settings />
                    </ListItemIcon>
-                   {props.isMobile ? null : (
                      <ListItemText primary="アカウント" />
-                   )}
                  </ListItem>
                  <ListItem
                    button
@@ -110,17 +107,13 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Feedback />
                    </ListItemIcon>
-                   {props.isMobile ? null : (
                      <ListItemText primary="フィードバック" />
-                   )}
                  </ListItem>
                  <ListItem button onClick={() => props.handleOnSingOut()}>
                    <ListItemIcon>
                      <ExitToApp />
                    </ListItemIcon>
-                   {props.isMobile ? null : (
                      <ListItemText primary="サインアウト" />
-                   )}
                  </ListItem>
                </List>
              </>
@@ -133,6 +126,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Settings />
                    </ListItemIcon>
+                   <ListItemText secondary='編集モード' />
                  </ListItem>
                </List>
              );

@@ -21,6 +21,8 @@ import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
 import { drawerHeaderJsx } from "./DrawerComponent/drawerHeaderJsx";
 import { drawerItemsJsx } from "./DrawerComponent/drawerItemsJsx";
 import { useIsMobile } from "../../../lib/useIsMobile";
+import { useFooterProps } from "../Footer/Footer";
+import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 
 
 export const useDrawerProps = () => {
@@ -52,6 +54,10 @@ export const useDrawerProps = () => {
     getArticles(false, 1, appState.selectedArticlesTags, false)
     dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
   };
+  const handleDrawerCloseKeepIsSetting = () => {
+    // getArticles(false, 1, appState.selectedArticlesTags, false)
+    dispatchAppState({ type: "CLOSE_DRAWER" }); 
+  };
 
   // const isMobile = useMediaQuery("(max-width:480px)");
   const isMobile = useIsMobile()
@@ -68,6 +74,9 @@ export const useDrawerProps = () => {
   //   dispatchAppState({type: 'CLOSE_DRAWER'})
   // }
 
+  const { handleOnUpDateFooterIcon } = useFooterProps()
+  const deleteItem = useDeleteFooterItem()
+
   return {
     theme,
     // appState,
@@ -80,11 +89,14 @@ export const useDrawerProps = () => {
     handleSwitchIsSetting,
     handleOnSingOut,
     handleDrawerClose,
+    handleDrawerCloseKeepIsSetting,
     isMobile,
     pass,
     setPass,
     themes,
     closeDrawerTapMain,
+    handleOnUpDateFooterIcon,
+    deleteItem,
   };
 }
 
@@ -117,15 +129,7 @@ const useStyles = makeStyles((theme: Theme) => {
         width: (themes: TThemeArgs) => themes.drawerWidth,
         overflowX: "visible",
         overflowY: "scroll",
-        // borderTopLeftRadius: 0,
-        // borderTopRightRadius: 0,
       },
-      // drawerPaperIsSetting: {
-      //   width: (themes: TThemeArgs) => themes.drawerWidth,
-      //   overflowX: "visible",
-      //   overflowY: "scroll",
-      //   background: "rgba(225,225,225,0.5)",
-      // },
       drawerHeader: {
         overflow: "visible",
         display: "flex",
@@ -134,6 +138,9 @@ const useStyles = makeStyles((theme: Theme) => {
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
         justifyContent: "flex-end",
+      },
+      underItem: {
+        marginBottom: theme.spacing(3)
       },
       content: {
         flexGrow: 1,
@@ -149,7 +156,7 @@ const useStyles = makeStyles((theme: Theme) => {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
         }),
-        marginLeft: (themes: TThemeArgs) => 0,
+        // marginLeft: (themes: TThemeArgs) => 0,
       },
       contentShiftWidth: {
         marginLeft: 0,
@@ -162,7 +169,7 @@ const useStyles = makeStyles((theme: Theme) => {
         // left: (themes: TThemeArgs) => themes.drawerWidth,
         left: 0,
         background: "rgba(0,0,0,0.5)",
-        zIndex: 100,
+        zIndex: 500,
       },
     });}
   )
@@ -194,11 +201,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         anchor="left"
         open={props.isDrawerOpen}
         
-        // classes={{
-        //   paper: `${classes.drawerPaper} ${
-        //     props.isSetting ? classes.drawerPaperIsSetting : null
-        //   }`,
-        // }}
         classes={{
           paper: classes.drawerPaper,
         }}
@@ -209,7 +211,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         {props.isMobile && !props.isSetting ? (
           <>
             {drawerItems}
-            <Divider />
+            <Divider className={classes.underItem}/>
           </>
         ) : null}
 
@@ -232,7 +234,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       >
         {props.children}
       </main>
-      {props.isDrawerOpen && (props.isSetting === false) && props.isMobile ? (
+      {props.isMobile && props.isDrawerOpen ? (
         <div
           className={classes.greyScreen}
           onClick={props.isDrawerOpen ? props.closeDrawerTapMain : null}
