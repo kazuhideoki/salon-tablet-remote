@@ -1,7 +1,7 @@
 import React from 'react'
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
 import { usePMainProps } from '../Main/PMain';
-import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea } from '@material-ui/core';
+import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea, Chip } from '@material-ui/core';
 import { Store } from '../../Store/Store';
 import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle';
 import { EditButtonsBox } from '../viewComponents/buttons/EditButtonsBox';
@@ -133,7 +133,8 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                 <Typography variant="h6" component="h2">
                   {value.title}
                   {value.is_published || (
-                    <span className={classes.itemIsDraft}>下書き</span>
+                    // <span className={classes.itemIsDraft}>下書き</span>
+                    <Chip size="small" label="下書き" className={classes.itemIsDraft} />
                   )}
                 </Typography>
                 {/* <Typography gutterBottom variant="body1">

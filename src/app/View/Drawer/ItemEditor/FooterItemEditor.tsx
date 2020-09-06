@@ -18,6 +18,7 @@ import { IconsSetting } from './iconSelect/icons';
 import { HelpButton } from '../../viewComponents/buttons/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
 import { SwitchDataTypeBox } from '../Editor/SwitchDataTypeBox';
+import { useIsMobile } from '../../../../lib/useIsMobile';
 
 const useFooterItemEditorProps = () => {
 
@@ -43,13 +44,9 @@ const useFooterItemEditorProps = () => {
       : null
   );
 
-    const [dataType, setDataType] = React.useState(
-      isEditting ? footerItem.data_type : "default_data"
-    );
-
-
-  // 変更した値を保存する？ or...
-  // const [onTap, setOnTap] = React.useState(isEditting ? footerItem.on_tap : "modal");
+  const [dataType, setDataType] = React.useState(
+    isEditting ? footerItem.data_type : "default_data"
+  );
 
   const [linkUrl, setLinkUrl] = React.useState(
     isEditting ? footerItem.link_url : ""
@@ -90,6 +87,8 @@ const useFooterItemEditorProps = () => {
     }
   };
 
+  const isMobile = useIsMobile();
+
   return {
     dispatchAppState,
     onTap,
@@ -112,6 +111,7 @@ const useFooterItemEditorProps = () => {
     dataType,
     setDataType,
     is_admin: appState.userInfo.is_admin,
+    isMobile,
   };
 }
 
@@ -181,6 +181,9 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                  modalSize={props.modalSize}
                  className={classes.selectModalSize}
                />
+               {props.isMobile ? (
+                 <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" />
+               ) : null}
                <QuillEditor
                  editorText={props.editorText}
                  setEditorText={props.setEditorText}
@@ -227,8 +230,13 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              <Typography variant="h4" component="h2" className={classes.header}>
                {props.isEditting ? "アイテム編集" : "アイテム作成"}
              </Typography>
-             {props.is_admin ? <SwitchDataTypeBox dataType={props.dataType} setDataType={props.setDataType} forFooter/> : null}
-             
+             {props.is_admin ? (
+               <SwitchDataTypeBox
+                 dataType={props.dataType}
+                 setDataType={props.setDataType}
+                 forFooter
+               />
+             ) : null}
 
              <div className={classes.topDiv}>
                <TextField
@@ -258,6 +266,9 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                onTap={props.onTap}
                dispatchAppState={props.dispatchAppState}
              />
+             {props.isMobile ? (
+               <HelpButton content="該当アプリケーションが端末内にインストールされてない場合「アプリ」のショートカットは機能しません。また、「パブリックモード」「スマートフォン表示」では表示されません" />
+             ) : null}
 
              {mainField}
 

@@ -24,6 +24,10 @@ const props: TUseDrawerProps = {
   pass: null,
   setPass: null,
   themes: themeArgs(false),
+  handleDrawerCloseKeepIsSetting: null,
+  closeDrawerTapMain: null,
+  handleOnUpDateFooterIcon: null,
+  deleteItem: null,
 };
 
 export const Close = () => {

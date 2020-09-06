@@ -2,16 +2,23 @@ import React from 'react'
 import { Typography, makeStyles, Theme, createStyles, Button } from "@material-ui/core";
 import { Store } from '../../Store/Store';
 import { useGetInstagramMedias } from '../../ActionCreator/instagramMedias/useGetInstagramMedias';
+import { useIsMobile } from '../../../lib/useIsMobile';
+import { HelpButton } from '../viewComponents/buttons/HelpButton';
 
 export const useSelectInstagramAccountsProps = () => {
 
   const { appState, dispatchAppState } = React.useContext(Store);
-  const {instagramAccounts} = appState
+  const {instagramAccounts, isSetting} = appState
   const getInstagramMedias = useGetInstagramMedias()
+  const isMobile = useIsMobile()
+
+
 
   return {
+    isSetting,
     instagramAccounts,
     getInstagramMedias,
+    isMobile,
   };
 }
 type Props = ReturnType<typeof useSelectInstagramAccountsProps>
@@ -22,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
     },
     header: {
-      padding: theme.spacing(2),
+      margin: theme.spacing(2),
     },
     account: {
       margin: theme.spacing(1),
@@ -38,7 +45,17 @@ export const SelectInstagramAccountsPresenter:React.FC<Props> = (props) => {
       <Typography variant="h4" component="h2" className={classes.header}>
         インスタグラムアカウント選択
       </Typography>
+      {props.isMobile && props.isSetting ? <><br/><HelpButton content='「スマートフォン表示」ではInstagram公式サイト（アプリ）へ遷移します。(※タブレットモード同様に専用画面を実装予定)' /></> : null}
       {props.instagramAccounts.map((value) => {
+        if (props.isMobile) {
+          return (
+            <a className={classes.account} href={`https://www.instagram.com/${value.username}/`}>
+              <Button>
+                {value.username}
+              </Button>
+            </a>
+          );
+        }
         return (
           <div className={classes.account}>
             <Button

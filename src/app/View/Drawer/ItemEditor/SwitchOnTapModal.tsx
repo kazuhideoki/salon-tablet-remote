@@ -39,7 +39,7 @@ export const SwitchOnTapModal:React.FC<Props> = ({ onTap, dispatchAppState, clas
           <FormControlLabel value="modal" control={<Radio />} label="ウィンドウ" />
           {/* <HelpButton content="ブログ記事のようにウィンドウが開きます。"/> */}
           <FormControlLabel value="link" control={<Radio />} label="リンク" />
-          <FormControlLabel value="appLink" control={<Radio />} label="ショートカット" />
+          <FormControlLabel value="appLink" control={<Radio />} label="アプリ" />
         </RadioGroup>
       </FormControl>
     </div>

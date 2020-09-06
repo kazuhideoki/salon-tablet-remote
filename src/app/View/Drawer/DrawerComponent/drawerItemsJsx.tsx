@@ -8,6 +8,7 @@ import {
   createStyles,
   makeStyles,
   Theme,
+  Typography,
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
 import { TUseDrawerProps } from "../Drawer";
@@ -24,9 +25,19 @@ const useStyles = makeStyles((theme: Theme) => {
       listItemText: {
         textOverflow: "ellipsis",
       },
+      itemIsDraft: {
+        border: "2px solid red",
+        borderRadius: 2,
+        fontStyle: "italic",
+      },
+      itemIsAppLink: {
+        border: "2px solid green",
+        borderRadius: 2,
+        fontStyle: "italic",
+      },
       editButtonsBox: {
-        width: 'fit-content',
-        marginLeft: 'auto',
+        width: "fit-content",
+        marginLeft: "auto",
       },
     });
 })
@@ -34,6 +45,23 @@ const useStyles = makeStyles((theme: Theme) => {
 export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
   const classes = useStyles(props.themes)
+
+  const ShowStatus = (value: FooterItem) => {
+    
+    return (
+      <Typography variant="body1" component="span">
+        {value.is_published === false ? (
+          // <span className={classes.itemIsDraft}>下書き</span>
+          <Chip size="small" label="下書き" className={classes.itemIsDraft} />
+        ) : null}
+        {value.on_tap === "appLink" ? (
+          // <span className={classes.itemIsAppLink}>アプリ</span>
+          <Chip size="small" label="アプリ" className={classes.itemIsAppLink} />
+        ) : null}
+      </Typography>
+    );
+
+  }
 
   const ItemEditButtonsBox = (value: FooterItem) => (
     <>
@@ -80,6 +108,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
               >
                 <ListItemIcon>
                   <Icon />
+                  <ShowStatus {...value}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={value.icon_name}
@@ -104,10 +133,9 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
               >
                 <ListItemIcon>
                   <Icon />
+                  <ShowStatus {...value} />
                 </ListItemIcon>
-                {props.isMobile ? null : (
-                  <ListItemText primary={value.icon_name} />
-                )}
+                <ListItemText primary={value.icon_name} />
               </a>
               {props.isSetting ? <ItemEditButtonsBox {...value} /> : null}
             </ListItem>

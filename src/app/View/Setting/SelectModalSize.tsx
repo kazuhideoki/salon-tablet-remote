@@ -47,9 +47,6 @@ export const SelectModalSize:React.FC<Props> = ({modalSize, className}) => {
           <FormControlLabel value="medium" control={<Radio />} label="中" />
           <FormControlLabel value="small" control={<Radio />} label="小" />
         </RadioGroup>
-        {isMobile && (
-          <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" />
-        )}
       </FormControl>
     </div>
   );
