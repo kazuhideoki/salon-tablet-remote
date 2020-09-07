@@ -8,6 +8,7 @@ export type T_user_email = string;
 export type T_selected_theme = string;
 export type T_is_generate_public_page = boolean;
 export type T_public_page_slug = string;
+export type T_public_page_url = string;
 export type T_is_admin = boolean;
 export type T_created_at_user = string;
 export type T_updated_at_user = string;
@@ -19,8 +20,11 @@ export type TUserInfo = {
   user_email: T_user_email;
   selected_theme: T_selected_theme;
   is_first_sign_in: boolean;
+
   is_generate_public_page: T_is_generate_public_page;
   public_page_slug: T_public_page_slug;
+  public_page_url: T_public_page_url
+
   is_admin: T_is_admin;
   // bcrypt_password?: string;
   created_at: T_created_at_user;
