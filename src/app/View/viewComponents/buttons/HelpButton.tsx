@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-type THelpButton = {content: string}
+type THelpButton = {content: string, size?: "medium" | 'small'}
 
-export const HelpButton: React.FC<THelpButton> = ({ content }) => {
+export const HelpButton: React.FC<THelpButton> = ({ content, size }) => {
   const classes = useStyles();
   const [
     anchorEl,
@@ -40,6 +40,7 @@ export const HelpButton: React.FC<THelpButton> = ({ content }) => {
         aria-label="help"
         aria-describedby={id}
         onClick={handleClick}
+        size={size || 'medium'}
       >
         <Help />
       </IconButton>

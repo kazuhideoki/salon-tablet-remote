@@ -18,7 +18,6 @@ type Props = {
   forFooter?: boolean
 };
 
-// export const SwitchOnTapModal = ({ onTap, setOnTap }) => {
 export const SwitchDataTypeBox: React.FC<Props> = ({
          dataType,
          setDataType,

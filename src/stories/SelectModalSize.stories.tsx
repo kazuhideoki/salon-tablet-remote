@@ -1,6 +1,7 @@
 import React from 'react';
 import { SelectModalSize } from '../app/View/Setting/SelectModalSize';
 import { T_modal_size } from '../app/Store/Types';
+import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 export default {
   title: "Setting/SelectModalSize",
   component: SelectModalSize,
@@ -8,6 +9,12 @@ export default {
 export const Normal = () =>{ 
 const [modalSize, setModalSize] = React.useState("large" as T_modal_size)
 
-return <SelectModalSize modalSize={modalSize} />;
+return <SelectModalSize {...propsFooterItemEditor} modalSize={modalSize} />;
+
+}
+export const isMobile = () =>{ 
+const [modalSize, setModalSize] = React.useState("large" as T_modal_size)
+
+return <SelectModalSize {...propsFooterItemEditor} modalSize={modalSize} isMobile={true}/>;
 
 }

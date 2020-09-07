@@ -10,31 +10,35 @@ import { T_modal_size } from "../../Store/Types";
 import { HelpButton } from "../viewComponents/buttons/HelpButton";
 import { useMediaQuery } from "@material-ui/core";
 import { useIsMobile } from "../../../lib/useIsMobile";
+import { TUseFooterItemEditorProps } from "../Drawer/ItemEditor/FooterItemEditor";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
-type Props = {modalSize: T_modal_size, className?: string}
+type Props = TUseFooterItemEditorProps & {className?: string}
 
-export const SelectModalSize:React.FC<Props> = ({modalSize, className}) => {
+export const SelectModalSize:React.FC<Props> = (props) => {
   const classes = useStyles();
   const { appState, dispatchAppState} = React.useContext(Store)
   // const isMobile = useMediaQuery("(max-width:480px)");
-  const isMobile = useIsMobile()
-
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatchAppState({ type: "SET_MODAL_SIZE", payload:(event.target as HTMLInputElement).value as T_modal_size});
   };
 
   return (
-    <div className={className}>
+    <div className={props.className}>
       <FormControl component="fieldset">
-        <FormLabel component="legend">ウィンドウサイズ選択</FormLabel>
+        <FormLabel component="legend">
+          ウィンドウサイズ選択
+          {props.isMobile ? (
+            <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" size='small'/>
+          ) : null}
+        </FormLabel>
         <RadioGroup
           row
           aria-label="modalSize"
           name="modalSize"
-          value={modalSize}
+          value={props.modalSize}
           onChange={handleChange}
         >
           {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}

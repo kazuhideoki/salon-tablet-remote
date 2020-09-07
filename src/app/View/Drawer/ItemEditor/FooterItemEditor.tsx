@@ -178,12 +178,10 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
            mainField = (
              <div>
                <SelectModalSize
-                 modalSize={props.modalSize}
+                 {...props}
                  className={classes.selectModalSize}
                />
-               {props.isMobile ? (
-                 <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" />
-               ) : null}
+               
                <QuillEditor
                  editorText={props.editorText}
                  setEditorText={props.setEditorText}
@@ -263,12 +261,8 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
 
              <SwitchOnTapModal
                className={classes.switchOnTapModal}
-               onTap={props.onTap}
-               dispatchAppState={props.dispatchAppState}
+               {...props}
              />
-             {props.isMobile ? (
-               <HelpButton content="該当アプリケーションが端末内にインストールされてない場合「アプリ」のショートカットは機能しません。また、「パブリックモード」「スマートフォン表示」では表示されません" />
-             ) : null}
 
              {mainField}
 
