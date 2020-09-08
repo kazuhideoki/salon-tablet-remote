@@ -250,6 +250,15 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "SET_IS_GENERATE_PUBLIC_PAGE":
+        newState = {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            is_generate_public_page: action.payload.is_generate_public_page,
+          },
+        };
+        break;
       case "SET_ARTICLES":
         console.log(action.payload);
 

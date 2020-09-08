@@ -5,13 +5,13 @@ import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { TSessionOnj } from "../..";
 import { getSession } from "next-auth/client";
-import { T_user_id, T_public_page_slug } from "../../../app/Store/Types";
+import { T_user_id, T_public_page_slug, T_user_email } from "../../../app/Store/Types";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreatePublicPageSlug = async (
          params: T_user_info_create_public_page_slug
-       ): Promise<TApiResponse<T_user_info_create_public_page_slug_return>> => {
+       ): Promise<TApiResponse<void>> => {
          let str = process.browser ? server : localhost;
 
          const res = await fetch(
@@ -23,35 +23,33 @@ export const apiCreatePublicPageSlug = async (
              body: JSON.stringify(params),
            }
          );
-
-         return await res.json();
+         
+         console.log("apiCreatePublicPageSlug完了");
+        //  return await res.json();
        };
 
 
-export type T_user_info_create_public_page_slug = {user_id: T_user_id}
-export type T_user_info_create_public_page_slug_return = {
-  publlic_page_slug: T_public_page_slug;
-};
+export type T_user_info_create_public_page_slug = {user_id: T_user_id, user_email: T_user_email}
+// export type T_user_info_create_public_page_slug_return = {
+//   publlic_page_slug: T_public_page_slug;
+// };
 
 const create_public_page_slug = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { user_id } = req.body as T_user_info_create_public_page_slug
-
-    const sessionObj: TSessionOnj = await getSession({ req });
-    const { email } = sessionObj.user
-
-    // slug生成
-    const publlic_page_slug = await cipher(email + user_id)
+    const { user_id, user_email } = req.body as T_user_info_create_public_page_slug
     
     try {
+      // slug生成
+      const publlic_page_slug = await cipher(user_email + user_id);
 
       await db(`UPDATE user_info SET public_page_slug = ? WHERE user_id = ?`, [publlic_page_slug, user_id])
       
-      const returnData: T_user_info_create_public_page_slug_return = {
-        publlic_page_slug: publlic_page_slug,
-      };
+      // const returnData: T_user_info_create_public_page_slug_return = {
+      //   publlic_page_slug: publlic_page_slug,
+      // };
 
-      res.status(200).json(returnData);
+      // return res.status(200).json(returnData);
+      res.end()
 
     } catch (err) {
       console.log(

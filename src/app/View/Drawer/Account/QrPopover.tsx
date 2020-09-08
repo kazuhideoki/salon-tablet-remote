@@ -6,6 +6,8 @@ import Button from "@material-ui/core/Button";
 import { TUseSettingUserInfoProps } from "./SettingUserInfo";
 import QRCode from 'qrcode.react'
 import { server } from "../../../../lib/loadUrl";
+import { useReactToPrint } from "react-to-print";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     typography: {
       padding: theme.spacing(2),
+    },
+    qrCode: {
+      margin: theme.spacing(2),
     },
   })
 );
@@ -35,6 +40,11 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
 
          const open = Boolean(qrAnchorEl);
          const id = open ? "qr-popover" : undefined;
+
+         const ref = React.useRef()
+         const handlePrint = useReactToPrint({
+           content: () => ref.current,
+         });
 
          return (
            <>
@@ -65,7 +75,12 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
                  アクセスQRコード
                </Typography>
                {/* QRこーど */}
-               <QRCode value={`${server}/public_page/${props.userInfo.public_page_slug}`} />
+               <QRCode
+                 value={`${server}/public_page/${props.userInfo.public_page_slug}`}
+                 ref={ref}
+                 className={classes.qrCode}
+               />
+               <Button onClick={() => handlePrint()}>印刷する</Button>
              </Popover>
            </>
          );

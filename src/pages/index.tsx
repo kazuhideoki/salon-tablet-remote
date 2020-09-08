@@ -16,6 +16,7 @@ import { TopPage } from "../pageComponent/TopPage";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { apiCreateSampleData } from "./api/create_sample_data";
 import { generateProps } from "../lib/generateProps";
+import { apiCreatePublicPageSlug } from "./api/user_info/create_public_page_slug";
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -73,14 +74,21 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
   // ★★★セッションがある
   if (sessionObj !== null) {
-    const userInfo = await getUserInfoFromEmail(sessionObj.user.email);
+    let userInfo = await getUserInfoFromEmail(sessionObj.user.email);
 
     // ★★★ユーザーデータがある
     if (userInfo) {
 
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
-        apiCreateSampleData({user_id: userInfo.user_id})
+        await apiCreateSampleData({user_id: userInfo.user_id})
+      }
+      if (userInfo.public_page_slug === "") {
+        console.log("public_page_slug === ''だから slug生成");
+
+        await apiCreatePublicPageSlug({ user_id: userInfo.user_id, user_email: userInfo.user_email });
+        // 更新したのでuserInfoを取り直す
+        userInfo = await getUserInfoFromEmail(sessionObj.user.email);
       }
 
       const returnData: IndexProps = {

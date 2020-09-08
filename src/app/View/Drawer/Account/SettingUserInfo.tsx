@@ -16,6 +16,7 @@ import {
 import { Store } from "../../../Store/Store";
 import { apiCreatePublicPageSlug } from "../../../../pages/api/user_info/create_public_page_slug";
 import { QrPopover } from "./QrPopover";
+import { apiUserInfoSwitchGeneratePublicPage } from "../../../../pages/api/user_info/switch_generate_public_page";
 
 const useSettingUserInfoProps = () => {
 
@@ -47,10 +48,18 @@ const useSettingUserInfoProps = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "delete_account_form" });
   }
 
-  const showMobileAndCreateSlug = async (checked) => {
-    await apiCreatePublicPageSlug({user_id: userInfo.user_id})
-    setIsShowMobile(checked)
-  }
+  const handleSwitch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const result = await apiUserInfoSwitchGeneratePublicPage({
+      is_generate_public_page: e.target.checked,
+      user_id: userInfo.user_id,
+    });
+
+    dispatchAppState({
+      type: "SET_IS_GENERATE_PUBLIC_PAGE",
+      payload: { is_generate_public_page: result.is_generate_public_page },
+    });
+  };
 
   return {
     name,
@@ -66,7 +75,8 @@ const useSettingUserInfoProps = () => {
     openDeleteAccountForm,
     isShowMobile,
     setIsShowMobile,
-    showMobileAndCreateSlug,
+    // showMobileAndCreateSlug,
+    handleSwitch,
   };
 }
 
@@ -191,26 +201,6 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                      ※パスワードを設定して下さい。(サインインや各種設定で使用)
                    </Typography>
                  )}
-                 <FormGroup row>
-                   <FormControlLabel
-                     control={
-                       <Switch
-                         checked={props.isShowMobile}
-                         // 初めてオンにするときはpublic_page_urlを生成
-                         onChange={
-                           props.userInfo.public_page_slug
-                             ? (e) => props.setIsShowMobile(e.target.checked)
-                             : (e) =>
-                                 props.showMobileAndCreateSlug(e.target.checked)
-                         }
-                         name="isShowMobile"
-                         color="primary"
-                       />
-                     }
-                     label="モバイルページの出力"
-                   />
-                   <QrPopover {...props}>QRコードを表示する</QrPopover>
-                 </FormGroup>
 
                  <Button
                    fullWidth
@@ -227,6 +217,21 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                    更新
                  </Button>
                </form>
+               <FormGroup row>
+                 <FormControlLabel
+                   control={
+                     <Switch
+                       checked={props.isShowMobile}
+                       // 初めてオンにするときはpublic_page_urlを生成
+                       onChange={props.handleSwitch}
+                       name="isShowMobile"
+                       color="primary"
+                     />
+                   }
+                   label="モバイルページの出力"
+                 />
+                 <QrPopover {...props}>QRコードを表示する</QrPopover>
+               </FormGroup>
                <Divider variant="middle" />
                <Button
                  fullWidth

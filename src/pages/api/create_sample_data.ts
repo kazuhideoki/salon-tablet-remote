@@ -17,7 +17,8 @@ export const apiCreateSampleData = async (
     body: JSON.stringify(params),
   });
 
-  return await res.json();
+  console.log("apiCreateSampleData完了");
+  // return await res.json();
 };
 
 export type T_create_sample_data = {
