@@ -1,7 +1,7 @@
 import React from 'react';
 import { SwitchOnTapModal } from '../app/View/Drawer/ItemEditor/SwitchOnTapModal';
 import { T_on_tap } from '../app/Store/Types';
-import { propsFooterItemEditor } from "./FooterItemEditorPresenter.stories";
+import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 export default {
   title: "Drawer/ItemEditor/SwitchOnTapModal",
   component: SwitchOnTapModal,
@@ -9,7 +9,7 @@ export default {
 
 
 export const Normal = () => {
-  const [onTap, setOnTap] = React.useState("" as T_on_tap);
+  // const [onTap, setOnTap] = React.useState("" as T_on_tap);
 
   return (
     <>
@@ -18,7 +18,7 @@ export const Normal = () => {
       <p>d</p>
       <p>d</p>
       <p>d</p>
-      <SwitchOnTapModal {...propsFooterItemEditor} onTap={onTap} setOnTap={setOnTap}/>;
+      <SwitchOnTapModal {...propsFooterItemEditor} onTap={'modal'} />;
     </>
   );
 }
@@ -32,7 +32,12 @@ export const isMobile = () => {
       <p>d</p>
       <p>d</p>
       <p>d</p>
-      <SwitchOnTapModal {...propsFooterItemEditor} onTap={onTap} setOnTap={setOnTap} isMobile={true}/>;
+      <SwitchOnTapModal
+        {...propsFooterItemEditor}
+        onTap={"modal"}
+        isMobile={true}
+      />
+      ;
     </>
   );
 }

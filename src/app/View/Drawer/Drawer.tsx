@@ -6,7 +6,7 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import { Drawer as MuiDrawer, useMediaQuery } from "@material-ui/core";
+import { Drawer as MuiDrawer } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -55,31 +55,24 @@ export const useDrawerProps = () => {
     dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
   };
   const handleDrawerCloseKeepIsSetting = () => {
-    // getArticles(false, 1, appState.selectedArticlesTags, false)
     dispatchAppState({ type: "CLOSE_DRAWER" }); 
   };
 
-  // const isMobile = useMediaQuery("(max-width:480px)");
   const isMobile = useIsMobile()
   const [pass, setPass] = React.useState('')
 
   const themes = React.useContext(ThemeContext);
 
   const closeDrawerTapMain = (e) => {
-    // e.stopPropagation()
     dispatchAppState({type: 'CLOSE_DRAWER'})
   }
-  // function closeDrawerTapMain(e) {
-  //   e.stopPropagation()
-  //   dispatchAppState({type: 'CLOSE_DRAWER'})
-  // }
+
 
   const { handleOnUpDateFooterIcon } = useFooterProps()
   const deleteItem = useDeleteFooterItem()
 
   return {
     theme,
-    // appState,
     isSetting,
     isPublicPage,
     isDrawerOpen,
@@ -156,17 +149,17 @@ const useStyles = makeStyles((theme: Theme) => {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
         }),
-        // marginLeft: (themes: TThemeArgs) => 0,
+        
       },
-      contentShiftWidth: {
-        marginLeft: 0,
+      // 関数は優先度が高くなってしまうので別に切り分け。tabletようのmargin調整
+      contentShiftTablet: {
+        marginLeft: (themes: TThemeArgs) => 0,
       },
       greyScreen: {
         position: "absolute",
         top: 0,
         bottom: 0,
         right: 0,
-        // left: (themes: TThemeArgs) => themes.drawerWidth,
         left: 0,
         background: "rgba(0,0,0,0.5)",
         zIndex: 500,
@@ -228,9 +221,9 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         ) : null}
       </MuiDrawer>
       <main
-        className={clsx(classes.content, {
+        className={`${clsx(classes.content, {
           [classes.contentShift]: props.isDrawerOpen,
-        })}
+        })} ${props.isMobile === false && props.isDrawerOpen ? classes.contentShiftTablet : ''}`}
       >
         {props.children}
       </main>

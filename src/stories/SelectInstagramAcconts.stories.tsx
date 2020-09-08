@@ -8,6 +8,8 @@ export default {
 const props = {
   instagramAccounts: null,
   getInstagramMedias: null,
+  isSetting: false,
+  isMobile: false,
 };
 
 export const Normal = () => {

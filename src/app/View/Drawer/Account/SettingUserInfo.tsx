@@ -15,7 +15,7 @@ import {
 } from "../../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../../Store/Store";
 import { apiCreatePublicPageSlug } from "../../../../pages/api/user_info/create_public_page_slug";
-import { QrPopover } from "./qrPopover";
+import { QrPopover } from "./QrPopover";
 
 const useSettingUserInfoProps = () => {
 
