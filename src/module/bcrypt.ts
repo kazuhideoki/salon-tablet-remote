@@ -1,7 +1,7 @@
 // bcryptのライブラリを読み込む
 const bcrypt = require('bcryptjs'); 
 
-export const cipher = (password: string) => {
+export const cipher = (password: string): string => {
   console.log("cipherの引数のpasswordは " + password);
   // パスワードの強度を上げるにはsaltの数字を上げる
   var salt = bcrypt.genSaltSync(10);

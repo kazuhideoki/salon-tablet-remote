@@ -32,7 +32,7 @@ export const HelpButton: React.FC<THelpButton> = ({ content, size }) => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? "help-popover" : undefined;
 
   return (
     <>

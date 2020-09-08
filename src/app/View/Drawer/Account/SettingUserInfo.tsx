@@ -14,6 +14,8 @@ import {
   TUpdateUser,
 } from "../../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../../Store/Store";
+import { apiCreatePublicPageSlug } from "../../../../pages/api/user_info/create_public_page_slug";
+import { QrPopover } from "./qrPopover";
 
 const useSettingUserInfoProps = () => {
 
@@ -45,6 +47,11 @@ const useSettingUserInfoProps = () => {
     dispatchAppState({ type: "OPEN_MODAL", payload: "delete_account_form" });
   }
 
+  const showMobileAndCreateSlug = async (checked) => {
+    await apiCreatePublicPageSlug({user_id: userInfo.user_id})
+    setIsShowMobile(checked)
+  }
+
   return {
     name,
     setName,
@@ -59,10 +66,13 @@ const useSettingUserInfoProps = () => {
     openDeleteAccountForm,
     isShowMobile,
     setIsShowMobile,
+    showMobileAndCreateSlug,
   };
 }
 
-type Props = ReturnType<typeof useSettingUserInfoProps>
+export type TUseSettingUserInfoProps = ReturnType<
+  typeof useSettingUserInfoProps
+>;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -90,133 +100,147 @@ const isValidPassword = (password) => {
   return regrex.test(password)
 }
 
-export const SettingUserInfoPresenter:React.FC<Props> = (props) => {
-  const classes = useStyles();
+export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
+         props
+       ) => {
+         const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <Settings />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          アカウント
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="email"
-                label="メールアドレス"
-                name="email"
-                autoComplete="email"
-                value={props.email}
-                disabled
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                autoComplete="fname"
-                name="name"
-                fullWidth
-                id="name"
-                label="名前"
-                value={props.name}
-                onChange={(e) => props.setName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="shopName"
-                label="お店の名前"
-                name="shopName"
-                autoComplete="lname"
-                value={props.shopName}
-                onChange={(e) => props.setShopName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                name="password"
-                label="パスワード"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={props.password}
-                onChange={(e) => props.setPassword(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          {isValidPassword(props.password) ||
-          props.password.length === 0 ? null : (
-            <Typography component="h3" variant="body1" color={"error"}>
-              {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
-              <b>
-                ※パスワードは【0-9】【a-z】【A-Z】を含む【8文字以上】でご入力下さい
-              </b>
-            </Typography>
-          )}
-          {isValidPassword(props.password) ? (
-            <Typography component="h3" variant="body1" color={"primary"}>
-              {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
-              <b>有効なパスワードです。</b>
-            </Typography>
-          ) : null}
-          {props.userInfo.isSetPassword ? (
-            <Typography component="h3" variant="body1" color={"error"}>
-              ※パスワードは変更時のみご入力下さい。
-            </Typography>
-          ) : (
-            <Typography component="h3" variant="body1" color={"secondary"}>
-              ※パスワードを設定して下さい。(サインインや各種設定で使用)
-            </Typography>
-          )}
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={props.isShowMobile}
-                  onChange={(e) => props.setIsShowMobile(e.target.checked)}
-                  name="isShowMobile"
-                  color="primary"
-                />
-              }
-              label="モバイルページの出力"
-            />
-          </FormGroup>
+         return (
+           <Container component="main" maxWidth="xs">
+             <CssBaseline />
+             <div className={classes.paper}>
+               <Avatar className={classes.avatar}>
+                 <Settings />
+               </Avatar>
+               <Typography component="h1" variant="h5">
+                 アカウント
+               </Typography>
+               <form className={classes.form} noValidate>
+                 <Grid container spacing={2}>
+                   <Grid item xs={12}>
+                     <TextField
+                       fullWidth
+                       id="email"
+                       label="メールアドレス"
+                       name="email"
+                       autoComplete="email"
+                       value={props.email}
+                       disabled
+                     />
+                   </Grid>
+                   <Grid item xs={12}>
+                     <TextField
+                       autoComplete="fname"
+                       name="name"
+                       fullWidth
+                       id="name"
+                       label="名前"
+                       value={props.name}
+                       onChange={(e) => props.setName(e.target.value)}
+                     />
+                   </Grid>
+                   <Grid item xs={12}>
+                     <TextField
+                       fullWidth
+                       id="shopName"
+                       label="お店の名前"
+                       name="shopName"
+                       autoComplete="lname"
+                       value={props.shopName}
+                       onChange={(e) => props.setShopName(e.target.value)}
+                     />
+                   </Grid>
+                   <Grid item xs={12}>
+                     <TextField
+                       fullWidth
+                       name="password"
+                       label="パスワード"
+                       type="password"
+                       id="password"
+                       autoComplete="current-password"
+                       value={props.password}
+                       onChange={(e) => props.setPassword(e.target.value)}
+                     />
+                   </Grid>
+                 </Grid>
+                 {isValidPassword(props.password) ||
+                 props.password.length === 0 ? null : (
+                   <Typography component="h3" variant="body1" color={"error"}>
+                     {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
+                     <b>
+                       ※パスワードは【0-9】【a-z】【A-Z】を含む【8文字以上】でご入力下さい
+                     </b>
+                   </Typography>
+                 )}
+                 {isValidPassword(props.password) ? (
+                   <Typography component="h3" variant="body1" color={"primary"}>
+                     {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
+                     <b>有効なパスワードです。</b>
+                   </Typography>
+                 ) : null}
+                 {props.userInfo.isSetPassword ? (
+                   <Typography component="h3" variant="body1" color={"error"}>
+                     ※パスワードは変更時のみご入力下さい。
+                   </Typography>
+                 ) : (
+                   <Typography
+                     component="h3"
+                     variant="body1"
+                     color={"secondary"}
+                   >
+                     ※パスワードを設定して下さい。(サインインや各種設定で使用)
+                   </Typography>
+                 )}
+                 <FormGroup row>
+                   <FormControlLabel
+                     control={
+                       <Switch
+                         checked={props.isShowMobile}
+                         // 初めてオンにするときはpublic_page_urlを生成
+                         onChange={
+                           props.userInfo.public_page_slug
+                             ? (e) => props.setIsShowMobile(e.target.checked)
+                             : (e) =>
+                                 props.showMobileAndCreateSlug(e.target.checked)
+                         }
+                         name="isShowMobile"
+                         color="primary"
+                       />
+                     }
+                     label="モバイルページの出力"
+                   />
+                   <QrPopover {...props}>QRコードを表示する</QrPopover>
+                 </FormGroup>
 
-          <Button
-            fullWidth
-            color="primary"
-            className={classes.submit}
-            onClick={() => props.handleOnSubmit()}
-            disabled={
-              isValidPassword(props.password) || props.password.length === 0
-                ? false
-                : true
-            }
-          >
-            更新
-          </Button>
-        </form>
-        <Divider variant="middle" />
-        <Button
-          fullWidth
-          color="secondary"
-          className={classes.submit}
-          onClick={() => props.openDeleteAccountForm()}
-          disabled
-        >
-          アカウントを削除する
-        </Button>
-      </div>
-    </Container>
-  );
-}
+                 <Button
+                   fullWidth
+                   color="primary"
+                   className={classes.submit}
+                   onClick={() => props.handleOnSubmit()}
+                   disabled={
+                     isValidPassword(props.password) ||
+                     props.password.length === 0
+                       ? false
+                       : true
+                   }
+                 >
+                   更新
+                 </Button>
+               </form>
+               <Divider variant="middle" />
+               <Button
+                 fullWidth
+                 color="secondary"
+                 className={classes.submit}
+                 onClick={() => props.openDeleteAccountForm()}
+                 disabled
+               >
+                 アカウントを削除する
+               </Button>
+             </div>
+           </Container>
+         );
+       };
 
 export const SettingUserInfo = () => {
   const props = useSettingUserInfoProps()
