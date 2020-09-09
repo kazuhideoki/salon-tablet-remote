@@ -7,6 +7,7 @@ import { TUseSettingUserInfoProps } from "./SettingUserInfo";
 import QRCode from 'qrcode.react'
 import { server } from "../../../../lib/loadUrl";
 import { useReactToPrint } from "react-to-print";
+import { qrCodeForPrint } from "./qrCodeForPrint";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,6 +45,7 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
          const ref = React.useRef()
          const handlePrint = useReactToPrint({
            content: () => ref.current,
+           documentTitle: props.userInfo.shop_name,
          });
 
          return (
@@ -75,12 +77,18 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
                  アクセスQRコード
                </Typography>
                {/* QRこーど */}
-               <QRCode
-                 value={`${server}/public_page/${props.userInfo.public_page_slug}`}
-                 ref={ref}
-                 className={classes.qrCode}
-               />
-               <Button onClick={() => handlePrint()}>印刷する</Button>
+               <div className={classes.qrCode}>
+                 <QRCode
+                   value={`${server}/public_page/${props.userInfo.public_page_slug}`}
+                   size={256}
+                 />
+               </div>
+               <Button onClick={handlePrint}>印刷する</Button>
+
+               <div style={{ display: "none" }}>
+                 {/* <QrCodeForPrint {...props} ref={ref} /> */}
+                 {qrCodeForPrint(props, ref)}
+               </div>
              </Popover>
            </>
          );

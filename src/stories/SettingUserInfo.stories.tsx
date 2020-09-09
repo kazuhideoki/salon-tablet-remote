@@ -15,6 +15,7 @@ const props = {
   setPassword: null,
   userInfo: {
     isSetPassword: true,
+    shop_name: '美容室ABC',
   },
   updateUser: null,
   handleOnSubmit: null,
