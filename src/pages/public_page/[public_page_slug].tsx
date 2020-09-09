@@ -6,15 +6,19 @@ import { getUserInfoFromSlug } from "../../lib/getUserInfoFromSlug";
 import { IndexPropsData, IndexProps } from '..';
 import { generateProps } from '../../lib/generateProps';
 import App from '../../app/View/App';
+import Head from 'next/head';
 
 
 const PublicPage = (props: IndexProps) => {
 
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>
       <App {...props} />
     </>
-  )
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
