@@ -80,7 +80,7 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
                <div className={classes.qrCode}>
                  <QRCode
                    value={`${server}/public_page/${props.userInfo.public_page_slug}`}
-                   size={256}
+                  //  size={256} defalt 128
                  />
                </div>
                <Button onClick={handlePrint}>印刷する</Button>

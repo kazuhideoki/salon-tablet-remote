@@ -12,6 +12,7 @@ import {
 import { App } from "../app/View/App";
 import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { GetServerSideProps } from "next";
+import parser from "ua-parser-js";
 import { TopPage } from "../pageComponent/TopPage";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { apiCreateSampleData } from "./api/create_sample_data";
@@ -32,6 +33,7 @@ export type IndexPropsData = {
 export type IndexProps = {
   data?: IndexPropsData;
   isPublicPage: boolean
+  device: string
   csrfToken?: any;
   providers?: any;
   // bcrypt_password?: string;
@@ -70,7 +72,16 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   const req = context.req;
   const sessionObj: TSessionOnj = await getSession({ req });
   console.log("index.tsxのsessionObjは " + JSON.stringify(sessionObj));
-  let userInfo: TUserInfo;
+  // let userInfo: TUserInfo;
+
+  const ua = new parser.UAParser(req.headers["user-agent"]);
+  const device = ua.getDevice().type
+  console.log('ua.getDevice().typeは' + device);
+  
+
+  console.log('uaのgetResultは ' + JSON.stringify(ua.getResult()));
+  
+
 
   // ★★★セッションがある
   if (sessionObj !== null) {
@@ -94,6 +105,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       const returnData: IndexProps = {
         data: await generateProps(userInfo, false),
         isPublicPage: false,
+        device: device || null,
       };
 
       return { props: returnData }
@@ -106,10 +118,11 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   // ★★★セッションがない
 
   const returnData: IndexProps = {
-      data: null,
-      isPublicPage: false,
-      csrfToken: await getCsrfToken(),
-      providers: await providers(context),
+    data: null,
+    isPublicPage: false,
+    device: device || null,
+    csrfToken: await getCsrfToken(),
+    providers: await providers(context),
   };
 
   return { props: returnData }

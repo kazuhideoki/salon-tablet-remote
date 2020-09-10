@@ -14,7 +14,6 @@ export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiR
 } 
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('instagram_accounts/getだよ');
   
   try {
     //@ts-ignore
@@ -24,7 +23,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       Number(req.query.userId)
     );
 
-    console.log("/instagram_accounts/get/は " + JSON.stringify(data));
+    // console.log("/instagram_accounts/get/は " + JSON.stringify(data));
 
     return res.status(200).json(data);
   } catch (err) {

@@ -233,9 +233,17 @@ export type TSetModal =
   | "delete_account_form"; 
 
 
+// export type T_possible_device =
+//   | "mobile"
+//   | "tablet"
+//   | "console"
+//   | "smarttv"
+//   | "wearable"
+//   | "embedded";
 export type T_selected_device = 'responsive' | 'mobile' | 'tablet'
 export const initAppState = (data: TStoreProps) => ({
          isPublicPage: data.isPublicPage,
+         uaDevice: data.device,
          selectedDevice: 'responsive' as T_selected_device,
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,

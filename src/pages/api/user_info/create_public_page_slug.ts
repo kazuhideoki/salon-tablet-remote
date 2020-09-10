@@ -1,11 +1,8 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { cipher } from "../../../module/bcrypt";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { TSessionOnj } from "../..";
-import { getSession } from "next-auth/client";
-import { T_user_id, T_public_page_slug, T_user_email } from "../../../app/Store/Types";
+import { T_user_id, T_user_email } from "../../../app/Store/Types";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -25,14 +22,10 @@ export const apiCreatePublicPageSlug = async (
          );
          
          console.log("apiCreatePublicPageSlug完了");
-        //  return await res.json();
        };
 
 
 export type T_user_info_create_public_page_slug = {user_id: T_user_id, user_email: T_user_email}
-// export type T_user_info_create_public_page_slug_return = {
-//   publlic_page_slug: T_public_page_slug;
-// };
 
 const create_public_page_slug = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -40,18 +33,12 @@ const create_public_page_slug = async (req: NextApiRequest, res: NextApiResponse
     
     try {
       // slug生成
-      // const publlic_page_slug = await cipher(user_email + user_id);
       const publlic_page_slug = Math.random()
         .toString(32)
         .substring(2) + user_id
 
       await db(`UPDATE user_info SET public_page_slug = ? WHERE user_id = ?`, [publlic_page_slug, user_id])
       
-      // const returnData: T_user_info_create_public_page_slug_return = {
-      //   publlic_page_slug: publlic_page_slug,
-      // };
-
-      // return res.status(200).json(returnData);
       res.end()
 
     } catch (err) {

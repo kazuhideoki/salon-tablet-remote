@@ -6,7 +6,7 @@ import { server } from '../../../../lib/loadUrl';
 
 type Props = TUseSettingUserInfoProps &  {ref: React.MutableRefObject<undefined>}
 
-const width = 600
+const width = 400
 // const theme = useTheme()
 
 export const qrCodeForPrint = (

@@ -7,6 +7,8 @@ import { IndexPropsData, IndexProps } from '..';
 import { generateProps } from '../../lib/generateProps';
 import App from '../../app/View/App';
 import Head from 'next/head';
+import parser from "ua-parser-js";
+
 
 
 const PublicPage = (props: IndexProps) => {
@@ -23,10 +25,14 @@ const PublicPage = (props: IndexProps) => {
 
 export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
   const slug = req.url
-  console.log(slug);
+  // console.log(slug);
   
   const slicedSlug = slug.replace("/public_page/", "");
-  console.log(slicedSlug);
+  // console.log(slicedSlug);
+
+  const ua = new parser.UAParser(req.headers["user-agent"]);
+  const device = ua.getDevice().type;
+  console.log(device);
   
   // slugがDBにあるかどうかチェックして、「表示させているか？」「slug」を返す
   const userInfo = await getUserInfoFromSlug(slicedSlug);
@@ -44,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
   const returnData: IndexProps = {
     data: await generateProps(userInfo, true),
     isPublicPage: true,
+    device: device || null,
   }
 
   return { props: returnData }

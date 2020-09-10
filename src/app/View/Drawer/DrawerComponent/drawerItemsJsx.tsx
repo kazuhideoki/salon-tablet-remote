@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => {
         border: "2px solid green",
         borderRadius: 2,
         fontStyle: "italic",
-      },
+      }, 
       editButtonsBox: {
         width: "fit-content",
         marginLeft: "auto",
@@ -95,9 +95,9 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
         if (value.on_tap === "modal") {
           return (
-            <>
+            <div key={index}>
               <ListItem
-                key={index}
+                // key={index}
                 button
                 onClick={() =>
                   props.dispatchAppState({
@@ -108,7 +108,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
               >
                 <ListItemIcon>
                   <Icon />
-                  <ShowStatus {...value}/>
+                  <ShowStatus {...value} />
                 </ListItemIcon>
                 <ListItemText
                   primary={value.icon_name}
@@ -116,7 +116,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 />
               </ListItem>
               {props.isSetting ? <ItemEditButtonsBox {...value} /> : null}
-            </>
+            </div>
           );
         }
 

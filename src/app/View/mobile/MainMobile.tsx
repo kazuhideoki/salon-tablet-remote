@@ -105,9 +105,9 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
 
       {props.articles.map((value, key) => {
         return (
-          <>
+          <div key={key}>
             <CardActionArea
-              key={key}
+              // key={key}
               className={classes.item}
               onClick={() =>
                 props.dispatchAppState({
@@ -155,7 +155,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               </EditButtonsBox>
             ) : null}
             </CardActionArea>
-          </>
+          </div>
         );
       })}
       </List>
