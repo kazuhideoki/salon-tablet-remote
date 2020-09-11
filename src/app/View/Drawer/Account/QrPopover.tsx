@@ -8,6 +8,8 @@ import QRCode from 'qrcode.react'
 import { server } from "../../../../lib/loadUrl";
 import { useReactToPrint } from "react-to-print";
 import { qrCodeForPrint } from "./qrCodeForPrint";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -48,6 +50,10 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
            documentTitle: props.userInfo.shop_name,
          });
 
+         const publicPageUrl = `${server}/public_page/${props.userInfo.public_page_slug}`
+
+         const [isCopied, setIsCopied] = React.useState(false)
+
          return (
            <>
              <Button
@@ -76,15 +82,24 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
                <Typography className={classes.typography}>
                  アクセスQRコード
                </Typography>
-               {/* QRこーど */}
+               {/* QRコード */}
                <div className={classes.qrCode}>
-                 <QRCode
-                   value={`${server}/public_page/${props.userInfo.public_page_slug}`}
-                   size={256}
-                 />
+                 <QRCode value={publicPageUrl} size={256} />
                </div>
+               <Typography>{publicPageUrl}</Typography>
+               <CopyToClipboard
+                 text={publicPageUrl}
+                 onCopy={() => setIsCopied(true)}
+               >
+                 <Button>URLをコピー</Button>
+               </CopyToClipboard>
+               {isCopied ? (
+                 <span style={{ color: "red" }}>Copied.</span>
+               ) : null}
+
                <Button onClick={handlePrint}>印刷する</Button>
 
+               {/* 印刷用。 */}
                <div style={{ display: "none" }}>
                  {/* <QrCodeForPrint {...props} ref={ref} /> */}
                  {qrCodeForPrint(props, ref)}

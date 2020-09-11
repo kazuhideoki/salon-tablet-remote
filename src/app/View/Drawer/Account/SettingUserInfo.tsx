@@ -228,7 +228,7 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                        color="primary"
                      />
                    }
-                   label="モバイルページの出力"
+                   label="パブリックページの出力"
                  />
                  <QrPopover {...props}>QRコードを表示する</QrPopover>
                </FormGroup>

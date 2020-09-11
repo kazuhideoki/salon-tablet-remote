@@ -132,7 +132,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               <div className={classes.contents}>
                 <Typography variant="h6" component="h2">
                   {value.title}
-                  {value.is_published || (
+                  {value.is_published ? null : (
                     // <span className={classes.itemIsDraft}>下書き</span>
                     <Chip size="small" label="下書き" className={classes.itemIsDraft} />
                   )}
