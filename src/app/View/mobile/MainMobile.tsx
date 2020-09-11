@@ -7,6 +7,7 @@ import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle'
 import { EditButtonsBox } from '../viewComponents/buttons/EditButtonsBox';
 import { UpdateButton } from '../viewComponents/buttons/UpdateButton';
 import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
+import { showDataType } from '../Main/showDataType';
 
 export const useMainMobileProps = () => {
   const {
@@ -132,10 +133,15 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               <div className={classes.contents}>
                 <Typography variant="h6" component="h2">
                   {value.title}
-                  {value.is_published || (
+                  {value.is_published ? null : (
                     // <span className={classes.itemIsDraft}>下書き</span>
-                    <Chip size="small" label="下書き" className={classes.itemIsDraft} />
+                    <Chip
+                      size="small"
+                      label="下書き"
+                      className={classes.itemIsDraft}
+                    />
                   )}
+                  {showDataType(value.data_type)}
                 </Typography>
                 {/* <Typography gutterBottom variant="body1">
                   {value.article_excerpt}
@@ -145,15 +151,15 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                   {sqlToDate(value.created_at)}
                 </Typography>
               </div>
-            {props.isSetting ? (
-              <EditButtonsBox className={classes.editButtonsBox}>
-                <UpdateButton onClick={props.onClickUpdate} value={value} />
-                <DeleteButton
-                  onClick={props.deleteArticle}
-                  value={value.article_id}
-                />
-              </EditButtonsBox>
-            ) : null}
+              {props.isSetting ? (
+                <EditButtonsBox className={classes.editButtonsBox}>
+                  <UpdateButton onClick={props.onClickUpdate} value={value} />
+                  <DeleteButton
+                    onClick={props.deleteArticle}
+                    value={value.article_id}
+                  />
+                </EditButtonsBox>
+              ) : null}
             </CardActionArea>
           </div>
         );

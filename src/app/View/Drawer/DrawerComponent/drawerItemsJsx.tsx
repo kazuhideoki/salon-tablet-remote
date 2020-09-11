@@ -18,6 +18,7 @@ import { EditButtonsBox } from "../../viewComponents/buttons/EditButtonsBox";
 import { UpdateButton } from "../../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../../viewComponents/buttons/DeleteButton";
 import { FooterItem } from "../../../Store/Types";
+import { showDataType } from "../../Main/showDataType";
 
 const useStyles = makeStyles((theme: Theme) => {
 
@@ -49,6 +50,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
   const ShowStatus = (value: FooterItem) => {
     
     return (
+      <>
       <Typography variant="body1" component="span">
         {value.is_published === false ? (
           // <span className={classes.itemIsDraft}>下書き</span>
@@ -59,6 +61,8 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
           <Chip size="small" label="アプリ" className={classes.itemIsAppLink} />
         ) : null}
       </Typography>
+
+      </>
     );
 
   }
@@ -109,6 +113,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 <ListItemIcon>
                   <Icon />
                   <ShowStatus {...value} />
+                  {showDataType(value.data_type)}
                 </ListItemIcon>
                 <ListItemText
                   primary={value.icon_name}

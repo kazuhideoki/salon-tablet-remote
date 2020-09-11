@@ -17,6 +17,7 @@ import { Store } from "../../../Store/Store";
 import { apiCreatePublicPageSlug } from "../../../../pages/api/user_info/create_public_page_slug";
 import { QrPopover } from "./QrPopover";
 import { apiUserInfoSwitchGeneratePublicPage } from "../../../../pages/api/user_info/switch_generate_public_page";
+import { HelpButton } from "../../viewComponents/buttons/HelpButton";
 
 const useSettingUserInfoProps = () => {
 
@@ -228,8 +229,9 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                        color="primary"
                      />
                    }
-                   label="モバイルページの出力"
+                   label="パブリックページの出力"
                  />
+                 <HelpButton content='パブリックページを出力すると①URLがあればパスワードなしで誰でもアクセスできるようになります。②観覧用のページのみです。'/>
                  <QrPopover {...props}>QRコードを表示する</QrPopover>
                </FormGroup>
                <Divider variant="middle" />
