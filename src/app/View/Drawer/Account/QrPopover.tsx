@@ -9,19 +9,25 @@ import { server } from "../../../../lib/loadUrl";
 import { useReactToPrint } from "react-to-print";
 import { qrCodeForPrint } from "./qrCodeForPrint";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { IconButton } from "@material-ui/core";
+import { FileCopyOutlined, PrintOutlined } from "@material-ui/icons";
 
 
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    popOverRoot: {
       margin: theme.spacing(2),
+      maxWidth: '90vw'
     },
     typography: {
-      padding: theme.spacing(2),
+      // padding: theme.spacing(2),
     },
     qrCode: {
       margin: theme.spacing(2),
+    },
+    url: {
+      wordBreak: 'break-all',
     },
   })
 );
@@ -77,32 +83,34 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
                  vertical: "bottom",
                  horizontal: "center",
                }}
-               className={classes.root}
+              //  className={classes.popOverRoot}
              >
-               <Typography className={classes.typography}>
-                 アクセスQRコード
-               </Typography>
-               {/* QRコード */}
-               <div className={classes.qrCode}>
-                 <QRCode value={publicPageUrl} size={256} />
-               </div>
-               <Typography>{publicPageUrl}</Typography>
-               <CopyToClipboard
-                 text={publicPageUrl}
-                 onCopy={() => setIsCopied(true)}
-               >
-                 <Button>URLをコピー</Button>
-               </CopyToClipboard>
-               {isCopied ? (
-                 <span style={{ color: "red" }}>Copied.</span>
-               ) : null}
+               <div className={classes.popOverRoot}>
+                  <Typography className={classes.typography}>
+                    アクセスQRコード
+                  </Typography>
+                  {/* QRコード */}
+                  <div className={classes.qrCode}>
+                    <QRCode value={publicPageUrl} size={256} />
+                  </div>
+                  <Typography className={classes.url}>URL: {publicPageUrl}</Typography>
+                  <CopyToClipboard
+                    text={publicPageUrl}
+                    onCopy={() => setIsCopied(true)}
+                  >
+                    <IconButton color='primary'><FileCopyOutlined/></IconButton>
+                  </CopyToClipboard>
+                  {isCopied ? <span style={{ color: "red" }}>Copied.</span> : null}
 
-               <Button onClick={handlePrint}>印刷する</Button>
+                  {/* <Button onClick={handlePrint}>印刷する</Button> */}
+                  <IconButton onClick={handlePrint} color='primary'><PrintOutlined/></IconButton>
 
-               {/* 印刷用。 */}
-               <div style={{ display: "none" }}>
-                 {/* <QrCodeForPrint {...props} ref={ref} /> */}
-                 {qrCodeForPrint(props, ref)}
+                  {/* 印刷用。 */}
+                  <div style={{ display: "none" }}>
+                    {/* <QrCodeForPrint {...props} ref={ref} /> */}
+                    {qrCodeForPrint(props, ref)}
+                  </div>
+
                </div>
              </Popover>
            </>

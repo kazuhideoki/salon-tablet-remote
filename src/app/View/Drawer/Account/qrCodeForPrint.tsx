@@ -6,7 +6,7 @@ import { server } from '../../../../lib/loadUrl';
 
 type Props = TUseSettingUserInfoProps &  {ref: React.MutableRefObject<undefined>}
 
-const width = 600
+const width = 450
 // const theme = useTheme()
 
 export const qrCodeForPrint = (
@@ -16,9 +16,9 @@ export const qrCodeForPrint = (
          const theme = useTheme();
 
          return (
-           <div ref={ref} style={{ width: width, padding: theme.spacing(2)}}>
+           <div ref={ref} style={{ width: width, padding: theme.spacing(4)}}>
              <Typography
-               variant="h1"
+               variant="h2"
                component="h1"
                align="center"
                gutterBottom
@@ -31,7 +31,7 @@ export const qrCodeForPrint = (
                  size={width}
                />
              </Typography>
-             <Typography variant="h3" component="p" align="center">
+             <Typography variant="h4" component="p" align="center">
                QRコードを読み取って{props.userInfo.shop_name}
                の更新情報をチェックしよう！
              </Typography>
