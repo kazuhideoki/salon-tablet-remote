@@ -2,11 +2,19 @@ import React from 'react'
 import { useMediaQuery } from "@material-ui/core";
 import { Store } from '../app/Store/Store';
 
-export const useIsMobile = () => {
+export const useIsMobile = (props) => {
   const { appState } = React.useContext(Store)
   const { uaDevice, selectedDevice } = appState
-  const smallWidth = useMediaQuery("(max-width:480px)")
-  const smallHeight = useMediaQuery("(max-height:480px)")
+  const smallWidth = useMediaQuery("(max-width:480px)");
+  // const smallWidth = useMediaQuery("(max-width:480px)", {
+  //   defaultMatches: props.window().matchMedia,
+  // });
+  const smallHeight = useMediaQuery("(max-height:480px)");
+  // const smallHeight = useMediaQuery("(max-height:480px)", {
+  //   matchMedia: props.window().matchMedia,
+  // });
+
+
 
   // SSRで初期表示させるときの処理 + フロントの最初の描画ではmediaQuerryの情報がないのでuaDeviceをもとに描画
   if (process.browser === false || !smallWidth || !smallHeight) {

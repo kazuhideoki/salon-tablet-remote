@@ -1,9 +1,11 @@
+import WebSiteDrawer from '../pageComponent/WebsiteDrawer'
 
 function About() {
   
   return (
     <div>
-      About
+      <WebSiteDrawer/>
+      Aboutだよ
     </div>
   );
 }

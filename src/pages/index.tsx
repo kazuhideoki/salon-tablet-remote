@@ -18,6 +18,7 @@ import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { apiCreateSampleData } from "./api/create_sample_data";
 import { generateProps } from "../lib/generateProps";
 import { apiCreatePublicPageSlug } from "./api/user_info/create_public_page_slug";
+import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -51,6 +52,7 @@ const Index = (props: IndexProps) => {
   } else {
     return (
       <>
+        <WebSiteDrawer/>
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       </>
     );
