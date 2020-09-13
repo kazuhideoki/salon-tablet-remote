@@ -23,12 +23,15 @@ const PublicPage = (props: IndexProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
+export const getServerSideProps: GetServerSideProps = async ({req, res, query}) => {
   const slug = req.url
   // console.log(slug);
+  const samplePage = query.sample
   
-  const slicedSlug = slug.replace("/public_page/", "");
+  let slicedSlug = slug.replace("/public_page/", "");
   // console.log(slicedSlug);
+  const pos = slicedSlug.indexOf("?");
+  slicedSlug = slicedSlug.substring(0, pos != -1 ? pos : slicedSlug.length);
 
   const ua = new parser.UAParser(req.headers["user-agent"]);
   const device = ua.getDevice().type;
@@ -51,7 +54,10 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
     data: await generateProps(userInfo, true),
     isPublicPage: true,
     device: device || null,
+    samplePage: samplePage as string,
   }
+  console.log(JSON.stringify(returnData));
+  
 
   return { props: returnData }
 

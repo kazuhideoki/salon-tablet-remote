@@ -1,5 +1,6 @@
 import WebSiteDrawer from "../../pageComponent/WebsiteDrawer";
 import { makeStyles,Theme,createStyles } from "@material-ui/core";
+import { server } from "../../lib/loadUrl";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +21,7 @@ function Tablet() {
       <iframe
         id="sample-tablet"
         className={classes.iframe}
-        src="http://localhost:3000/public_page/bu2j6bfup547"
+        src={`${server}/public_page/bu2j6bfup547?sample=tablet`}
       ></iframe>
     </div>
   );

@@ -17,11 +17,4 @@ const MobileLinkWrong = (props) => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-//   const slug = req.querry.slug;
-//   return { props: { slug: slug } };
-
-
-// };
-
 export default MobileLinkWrong;

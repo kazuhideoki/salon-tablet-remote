@@ -2,7 +2,7 @@ import React from 'react'
 import { useMediaQuery } from "@material-ui/core";
 import { Store } from '../app/Store/Store';
 
-export const useIsMobile = (props) => {
+export const useIsMobile = () => {
   const { appState } = React.useContext(Store)
   const { uaDevice, selectedDevice } = appState
   const smallWidth = useMediaQuery("(max-width:480px)");
@@ -14,6 +14,15 @@ export const useIsMobile = (props) => {
   //   matchMedia: props.window().matchMedia,
   // });
 
+  if (selectedDevice === "mobile") {
+    console.log('selectedDevice === "mobile"');
+
+    return true;
+  }
+  if (selectedDevice === "tablet") {
+    console.log('selectedDevice === "tablet"');
+    return false;
+  }
 
 
   // SSRで初期表示させるときの処理 + フロントの最初の描画ではmediaQuerryの情報がないのでuaDeviceをもとに描画
@@ -27,15 +36,15 @@ export const useIsMobile = (props) => {
     }
   }
 
-  if (selectedDevice === 'mobile') {
-    console.log('selectedDevice === "mobile"');
+  // if (selectedDevice === 'mobile') {
+  //   console.log('selectedDevice === "mobile"');
     
-    return true
-  }
-  if (selectedDevice === 'tablet') {
-    console.log('selectedDevice === "tablet"');
-    return false
-  }
+  //   return true
+  // }
+  // if (selectedDevice === 'tablet') {
+  //   console.log('selectedDevice === "tablet"');
+  //   return false
+  // }
 
   if (smallWidth || smallHeight) {
     console.log("(smallWidth || smallHeight)");

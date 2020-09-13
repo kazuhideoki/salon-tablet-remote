@@ -244,7 +244,7 @@ export type T_selected_device = 'responsive' | 'mobile' | 'tablet'
 export const initAppState = (data: TStoreProps) => ({
          isPublicPage: data.isPublicPage,
          uaDevice: data.device,
-         selectedDevice: 'responsive' as T_selected_device,
+         selectedDevice: data.samplePage || 'responsive' as T_selected_device,
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,
          setModal: "edit_article" as TSetModal,

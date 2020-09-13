@@ -35,6 +35,7 @@ export type IndexProps = {
   data?: IndexPropsData;
   isPublicPage: boolean
   device: string
+  samplePage?: string
   csrfToken?: any;
   providers?: any;
   // bcrypt_password?: string;

@@ -59,6 +59,7 @@ export const App = (props: IndexProps) => {
       {...props.data}
       isPublicPage={props.isPublicPage}
       device={props.device}
+      samplePage={props.samplePage}
     >
       <ThemeProvider {...props.data.userInfo}>
         <AppView device={props.device} />
