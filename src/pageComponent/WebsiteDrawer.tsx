@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
-export default function WebSiteDrawer() {
+export default function WebSiteDrawer(props) {
                  const classes = useStyles();
                  const [state, setState] = React.useState({
                    top: false,
@@ -92,7 +92,7 @@ export default function WebSiteDrawer() {
                  );
 
                  return (
-                   <div>
+                   <div id={props.id}>
                      {/* {(["left", "right", "top", "bottom"] as Anchor[]).map((anchor) => ( */}
                      <React.Fragment>
                        {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}

@@ -33,6 +33,7 @@ const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => 
   const { user_id }: T_create_sample_data = req.body;
 
     try {
+          // ★今のところarticle, itemともにともに3つづつ挿入
           // まずdata_type === 'sample_data'の記事を取得
           const data: any = await db(
             `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`

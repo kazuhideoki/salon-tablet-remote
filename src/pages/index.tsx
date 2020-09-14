@@ -95,6 +95,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
       // ★★★最初のサインイン サンプルデータの追加
       if (userInfo.is_first_sign_in) {
+        // is_first_sign_inもfalseにされる
         await apiCreateSampleData({user_id: userInfo.user_id})
       }
       if (userInfo.public_page_slug === "") {
