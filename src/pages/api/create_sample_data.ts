@@ -84,7 +84,7 @@ const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => 
             `UPDATE user_info SET is_first_sign_in = '0' WHERE user_id = ?;`,
             user_id
           );
-          // console.log("data3は " + JSON.stringify(data3));
+          console.log("data3は " + JSON.stringify(data3));
 
           res.end();
         } catch (err) {
