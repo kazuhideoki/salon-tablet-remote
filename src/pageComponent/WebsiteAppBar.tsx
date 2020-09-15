@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function WebsiteAppBar({onClick}) {
+export default function WebsiteAppBar({onClick, id}) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id={id}>
       <AppBar position="static">
         <Toolbar>
           <IconButton

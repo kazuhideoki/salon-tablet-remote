@@ -58,7 +58,7 @@ export default function MyApp({ Component, pageProps }) {
         /> */}
       </Head>
       <Provider options={{ site: server }} session={session}>
-      <WebSiteDrawer id="back-to-top-anchor">
+      <WebSiteDrawer id="back-to-top-anchor" >
         <Component {...pageProps} />
       </WebSiteDrawer>
       </Provider>

@@ -39,8 +39,8 @@ export function ScrollTop(props: Props) {
   // will default to window.
   // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-    disableHysteresis: true,
+    // target: window ? window() : undefined,
+    // disableHysteresis: true,
     threshold: 1,
   });
 

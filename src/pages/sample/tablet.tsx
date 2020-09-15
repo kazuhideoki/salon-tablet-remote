@@ -9,16 +9,20 @@ const useStyles = makeStyles((theme: Theme) =>
     iframe: {
       width: "100vw",
       height: "100vh",
+      borderLeft: '10px solid darkgrey',
+      borderRight: '10px solid darkgrey',
+      borderTop: 'none',
+      borderBottom: 'none',
     },
   })
 );
+
 
 function Tablet() {
   const classes = useStyles()
 
   return (
-    <div>
-      {/* <WebSiteDrawer id="back-to-top-anchor" /> */}
+    <>
       <iframe
         id="sample-tablet"
         className={classes.iframe}
@@ -29,7 +33,7 @@ function Tablet() {
           <KeyboardArrowUp />
         </Fab>
       </ScrollTop>
-    </div>
+    </>
   );
 }
 

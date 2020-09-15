@@ -92,16 +92,19 @@ export default function WebSiteDrawer(props) {
                  );
 
                  return (
-                   <div id={props.id}>
-                       <WebsiteAppBar onClick={toggleDrawer("top", true)} />
-                       <Drawer
-                         anchor={"top"}
-                         open={state["top"]}
-                         onClose={toggleDrawer("top", false)}
-                       >
-                         {list("top")}
-                       </Drawer>
-                       {props.children}
-                   </div>
+                   <>
+                     <WebsiteAppBar
+                       onClick={toggleDrawer("top", true)}
+                       id={props.id}
+                     />
+                     <Drawer
+                       anchor={"top"}
+                       open={state["top"]}
+                       onClose={toggleDrawer("top", false)}
+                     >
+                       {list("top")}
+                     </Drawer>
+                     {props.children}
+                   </>
                  );
                }
