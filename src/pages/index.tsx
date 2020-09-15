@@ -53,7 +53,7 @@ const Index = (props: IndexProps) => {
   } else {
     return (
       <>
-        <WebSiteDrawer/>
+        {/* <WebSiteDrawer/> */}
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       </>
     );
@@ -122,7 +122,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   // ★★★セッションがない
 
   const returnData: IndexProps = {
-    data: null,
+    // data: null,
     isPublicPage: false,
     device: device || null,
     csrfToken: await getCsrfToken(),

@@ -93,9 +93,6 @@ export default function WebSiteDrawer(props) {
 
                  return (
                    <div id={props.id}>
-                     {/* {(["left", "right", "top", "bottom"] as Anchor[]).map((anchor) => ( */}
-                     <React.Fragment>
-                       {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
                        <WebsiteAppBar onClick={toggleDrawer("top", true)} />
                        <Drawer
                          anchor={"top"}
@@ -104,8 +101,7 @@ export default function WebSiteDrawer(props) {
                        >
                          {list("top")}
                        </Drawer>
-                     </React.Fragment>
-                     {/* ))} */}
+                       {props.children}
                    </div>
                  );
                }

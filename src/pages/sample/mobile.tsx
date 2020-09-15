@@ -18,7 +18,7 @@ function Mobile() {
 
   return (
     <div>
-      <WebSiteDrawer id="back-to-top-anchor" />
+      {/* <WebSiteDrawer id="back-to-top-anchor" /> */}
       Mobileだよ 試してみてね。
       <iframe
         id="sample-mobile"

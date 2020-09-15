@@ -18,7 +18,7 @@ function Tablet() {
 
   return (
     <div>
-      <WebSiteDrawer id="back-to-top-anchor" />
+      {/* <WebSiteDrawer id="back-to-top-anchor" /> */}
       <iframe
         id="sample-tablet"
         className={classes.iframe}
