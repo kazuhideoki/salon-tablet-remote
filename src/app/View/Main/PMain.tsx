@@ -24,6 +24,7 @@ import { TArticle } from "../../Store/Types";
 import { Skeleton } from "@material-ui/lab";
 import { showDataType } from "./components/showDataType";
 import { displayArticlesScrollJsx } from "./components/displayArticlesScrollJsx";
+import { displayArticlesGrid6Jsx } from "./components/displayArticlesGrid6Jsx";
 import { displayInstagramMediasJsx } from "./components/displayInstagramMediasJsx";
 import { noArticlesJsx } from "./components/noArticlesJsx";
 
@@ -37,6 +38,7 @@ export const usePMainProps = () => {
     instagramMedias,
     loading,
     isShowInstagram,
+    userInfo,
     isSetting,
   } = appState;
   const deleteArticle = useDeleteArticle();
@@ -56,6 +58,7 @@ export const usePMainProps = () => {
     deleteArticle,
     dispatchAppState,
     isShowInstagram,
+    show_article_type: userInfo.show_article_type,
     onClickUpdate,
     loading: loading.main,
   };
@@ -72,6 +75,9 @@ const useStyles = makeStyles((theme) => {
     root: {
       overflow: "scroll",
       height: "100%",
+    },
+    rootGrid6: {
+      overflowY: 'hidden',
     },
     gridItem: {
       position: "relative",
@@ -178,26 +184,54 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
   const classes = useStyles();
 
   const displayArticlesScroll = displayArticlesScrollJsx(props, classes, StyledCardContent);
+  const displayArticlesGrid6 = displayArticlesGrid6Jsx(
+    props,
+    classes,
+    StyledCardContent
+  );
 
   const displayInstagramMedias = displayInstagramMediasJsx(props, classes, StyledCardContent);
   
   const noArticles = noArticlesJsx(classes, StyledCardContent)
 
+  let displayContent
+
+  if (props.isShowInstagram) {
+    if (props.articles.length) {
+      displayContent = displayInstagramMedias;
+    } else {
+      displayContent = noArticles
+    }
+  } else {
+    if (props.articles.length) {
+      switch (props.show_article_type) {
+        case 'scroll':
+          displayContent = displayArticlesScroll
+          break;
+        case 'grid6':
+          displayContent = displayArticlesGrid6
+          break;
+      
+        default:
+          displayContent = displayArticlesScroll
+          break;
+      }
+    } else {
+      displayContent = noArticles
+    }
+  }
+
+
   return (
     <Grid
       id="p_main"
       container
+      direction={props.show_article_type === 'scroll' ? 'row' : 'column'}
       wrap="nowrap"
-      className={classes.root}
+      className={`${classes.root} ${props.show_article_type === 'grid6' ? classes.rootGrid6 : ''}`}
       spacing={2}
     >
-      {props.isShowInstagram === false
-        ? props.articles.length
-          ? displayArticlesScroll
-          : noArticles
-        : props.instagramMedias.data.length
-        ? displayInstagramMedias
-        : noArticles}
+      {displayContent}
     </Grid>
   );
 

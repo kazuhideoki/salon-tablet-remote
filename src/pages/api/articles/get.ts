@@ -39,6 +39,7 @@ export type T_articles_get_return = {
 }
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
+  const pageSize = 6
   if (req.method === "POST") {
     console.log('articles/getだよ');
     
@@ -66,15 +67,18 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       getTagedPages = `AND tag_ids REGEXP ${regExpTagsArray.join(" AND tag_ids REGEXP ")} `;
     }
 
-    const skipRows = 5 * (page - 1); // オフセット, 何ページ飛ばすか
+    // const skipRows = 5 * (page - 1); // オフセット, 何ページ飛ばすか
+    const skipRows = pageSize * (page - 1); // オフセット, 何ページ飛ばすか
     const offSet = skipRows === 0 ? '' : skipRows + ","; 
 
     const query =
       `SELECT * FROM articles WHERE user_id = ${userId} ` +
       getPublishedOnly +
-      getTagedPages + `ORDER BY created_at DESC LIMIT ` +
+      getTagedPages +
+      `ORDER BY created_at DESC LIMIT ` +
       offSet +
-      ` 5`;
+      // ` 5`;
+      ` ${pageSize}`;
       
     try {
       // await isSession(req)
@@ -96,8 +100,8 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       
       const pagination: TPaginationParams = {
         page: page,
-        pageCount: data2.length ? Math.ceil(data2.length / 5) : 0, // 全row数を5で割って切り上げ
-        pageSize: 5,
+        pageCount: data2.length ? Math.ceil(data2.length / pageSize) : 0, // 全row数をpageSizeで割って切り上げ
+        pageSize: pageSize,
         rowCount: data2.length,
       };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PMainPresenter } from '../app/View/Main/PMain';
+import { PMainPresenter, TUseMainProps } from '../app/View/Main/PMain';
 import { sampleData } from './lib/sampleArticles';
 import { initInstagramMedias } from '../app/Store/Types';
 export default {
@@ -7,14 +7,8 @@ export default {
   component: PMainPresenter,
 };
 
-const props = {
-  appState: {
-    isSetting: true,
-  },
+const props: TUseMainProps = {
   articles: sampleData,
-  handleOnUpDate: null,
-  handleOnDelete: null,
-  classes: null,
   isSetting: false,
   instagramMedias: initInstagramMedias,
   tags: [],
@@ -23,6 +17,7 @@ const props = {
   isShowInstagram: false,
   onClickUpdate: null,
   loading: false,
+  show_article_type: 'scroll',
 };
 
 export const Normal = () => {
