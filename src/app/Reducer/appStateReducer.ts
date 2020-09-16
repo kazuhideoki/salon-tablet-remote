@@ -250,6 +250,15 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "SET_SHOW_ARTICLE_TYPE":
+        newState = {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            show_article_type: action.payload.showArticleType,
+          },
+        };
+        break;
       case "SET_IS_GENERATE_PUBLIC_PAGE":
         newState = {
           ...state,

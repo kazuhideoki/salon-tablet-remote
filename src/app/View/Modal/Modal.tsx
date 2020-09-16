@@ -13,7 +13,7 @@ const FooterItemModal = dynamic(() => import("../Footer/FooterItemModal"), {
 import ArticleEditor from "../Drawer/ArticleEditor/ArticleEditor";
 import FooterItemEditor from "../Drawer/ItemEditor/FooterItemEditor";
 import { FeedbackForm } from "../Drawer/FeedbackForm";
-import { SettingTheme } from "../Drawer/SettingTheme";
+import { ManageTheme } from "../Drawer/ManageTheme/ManageTheme";
 import { SelectTags } from "../Footer/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
@@ -130,7 +130,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             break;
           case "setting_theme":
             modalStyle = useModalSize('medium');
-            ModalContent = () => <SettingTheme />;
+            ModalContent = () => <ManageTheme />;
             break;
           case "setting_user_info":
             ModalContent = () => <SettingUserInfo />;

@@ -20,6 +20,7 @@ import {
   TInfoBar,
   TInfoBarData,
   T_selected_device,
+  T_show_article_type,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
@@ -65,6 +66,12 @@ export type AppStateAction =
       type: "SET_THEME";
       payload: {
         selectedTheme: T_selected_theme;
+      };
+    }
+  | {
+      type: "SET_SHOW_ARTICLE_TYPE";
+      payload: {
+        showArticleType: T_show_article_type;
       };
     }
   | {
