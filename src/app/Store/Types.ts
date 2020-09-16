@@ -6,6 +6,7 @@ export type T_user_name = string;
 export type T_shop_name = string;
 export type T_user_email = string;
 export type T_selected_theme = string;
+export type T_show_article_type = 'scroll' | 'grid6'
 export type T_is_generate_public_page = boolean;
 export type T_public_page_slug = string;
 // export type T_public_page_url = string;
@@ -19,6 +20,7 @@ export type TUserInfo = {
   shop_name: T_shop_name | null;
   user_email: T_user_email;
   selected_theme: T_selected_theme;
+  show_article_type: T_show_article_type;
   is_first_sign_in: boolean;
 
   is_generate_public_page: T_is_generate_public_page;

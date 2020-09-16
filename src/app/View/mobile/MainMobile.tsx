@@ -7,7 +7,7 @@ import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle'
 import { EditButtonsBox } from '../viewComponents/buttons/EditButtonsBox';
 import { UpdateButton } from '../viewComponents/buttons/UpdateButton';
 import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
-import { showDataType } from '../Main/showDataType';
+import { showDataType } from '../Main/components/showDataType';
 
 export const useMainMobileProps = () => {
   const {

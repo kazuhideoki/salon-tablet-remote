@@ -18,7 +18,7 @@ import { EditButtonsBox } from "../../viewComponents/buttons/EditButtonsBox";
 import { UpdateButton } from "../../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../../viewComponents/buttons/DeleteButton";
 import { FooterItem } from "../../../Store/Types";
-import { showDataType } from "../../Main/showDataType";
+import { showDataType } from "../../Main/components/showDataType";
 
 const useStyles = makeStyles((theme: Theme) => {
 

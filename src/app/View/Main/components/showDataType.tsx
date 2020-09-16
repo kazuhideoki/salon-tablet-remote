@@ -2,7 +2,7 @@ import React from 'react'
 import {
   T_data_type_article,
   T_data_type_footer_item,
-} from "../../Store/Types";
+} from "../../../Store/Types";
 import { Chip } from "@material-ui/core";
 
 export const showDataType = (dataType: T_data_type_article | T_data_type_footer_item, className?: string) => {
