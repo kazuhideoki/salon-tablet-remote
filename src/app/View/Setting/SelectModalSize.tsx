@@ -29,7 +29,7 @@ export const SelectModalSize:React.FC<Props> = (props) => {
     <div className={props.className}>
       <FormControl component="fieldset">
         <FormLabel component="legend">
-          ウィンドウサイズ選択
+          ウィンドウサイズ
           {props.isMobile ? (
             <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" size='small'/>
           ) : null}

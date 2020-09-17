@@ -34,7 +34,7 @@ export const SwitchDataTypeBox: React.FC<Props> = ({
            <div className={className}>
              <FormControl component="fieldset">
                <FormLabel component="legend">
-                 フッターアイテム機能切り替え
+                 記事タイプ
                </FormLabel>
                <RadioGroup
                  row

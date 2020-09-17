@@ -7,7 +7,7 @@ const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
 import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
-import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
+import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, Switch, useTheme } from '@material-ui/core';
 import { SelectAppLink } from './SelectAppLink';
 import { Store } from "../../../Store/Store";
 import { FooterItem, T_modal_size } from '../../../Store/Types';
@@ -22,6 +22,7 @@ import { useIsMobile } from '../../../../lib/useIsMobile';
 
 const useFooterItemEditorProps = () => {
 
+  // const theme = useTheme()
   const { appState, dispatchAppState } = React.useContext(Store);
   const { modalSize, onTap, isEditting, footerItem } = appState.edittingPrams;
   const [titleText, setTitleText] = React.useState(
@@ -67,6 +68,13 @@ const useFooterItemEditorProps = () => {
     setTitleText(e.target.value);
   };
 
+  const [onSidebar, setOnSidebar] = React.useState(
+    isEditting ? footerItem.on_sidebar : false
+  );
+  const handleOnSidebar = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOnSidebar(e.target.checked)
+  }
+
   const handleSubmit = ({ is_published }) => {
     const params: TCreateFooterItem = {
       is_published,
@@ -90,6 +98,7 @@ const useFooterItemEditorProps = () => {
   const isMobile = useIsMobile();
 
   return {
+    // theme,
     dispatchAppState,
     onTap,
     isEditting,
@@ -112,6 +121,8 @@ const useFooterItemEditorProps = () => {
     setDataType,
     is_admin: appState.userInfo.is_admin,
     isMobile,
+    onSidebar,
+    handleOnSidebar,
   };
 }
 
@@ -263,6 +274,25 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                className={classes.switchOnTapModal}
                {...props}
              />
+             <div style={{display: 'inline-block'}}>
+              <Typography
+                variant="body1"
+                component="p"
+                color="textSecondary"
+              >
+                サイドバーに表示
+                <HelpButton
+                  content="タブレットビューでのみ適応。モバイルビューでは全てサイドバーに表示されます。"
+                  size="small"
+                />
+              </Typography>
+              <Switch
+                checked={props.onSidebar}
+                onChange={props.handleOnSidebar}
+                name="onSidebar"
+                color="primary"
+              />
+             </div>
 
              {mainField}
 

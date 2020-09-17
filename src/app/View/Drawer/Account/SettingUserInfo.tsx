@@ -223,7 +223,6 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                    control={
                      <Switch
                        checked={props.isShowMobile}
-                       // 初めてオンにするときはpublic_page_urlを生成
                        onChange={props.handleSwitch}
                        name="isShowMobile"
                        color="primary"

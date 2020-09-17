@@ -30,12 +30,15 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
   };
 
   return (
-    <div className={props.className}>
-      <FormControl component="fieldset">
+    // <div className={props.className}>
+      <FormControl component="fieldset" className={props.className}>
         <FormLabel component="legend">
-          フッターアイテム機能切り替え
+          アイテム機能
           {props.isMobile ? (
-            <HelpButton content="該当アプリケーションが端末内にインストールされてない場合「アプリ」のショートカットは機能しません。また、「パブリックモード」「スマートフォン表示」では表示されません" size='small'/>
+            <HelpButton
+              content="該当アプリケーションが端末内にインストールされてない場合「アプリ」のショートカットは機能しません。また、「パブリックモード」「スマートフォン表示」では表示されません"
+              size="small"
+            />
           ) : null}
         </FormLabel>
         <RadioGroup
@@ -55,10 +58,10 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
           <FormControlLabel
             value="appLink"
             control={<Radio />}
-            label={`${props.isMobile ? "※" : ''}アプリ`}
+            label={`${props.isMobile ? "※" : ""}アプリ`}
           />
         </RadioGroup>
       </FormControl>
-    </div>
+    // </div>
   );
 }
