@@ -86,6 +86,7 @@ export type T_updated_at_footer_items = string | null;
 export type T_icon_name = string | null;
 export type T_displayed_icon_name = string | null;
 export type T_on_tap = "modal" | "link" | "appLink";
+export type T_on_sidebar = boolean
 export type T_item_content = string | null;
 export type T_item_excerpt = string | null;
 export type T_link_url = string | null;
@@ -101,6 +102,7 @@ export type FooterItemWithoutId = {
   icon_name: T_icon_name | null;
   displayed_icon_name: T_displayed_icon_name | null;
   on_tap: T_on_tap;
+  on_sidebar: T_on_sidebar
   item_content: T_item_content | null;
   item_excerpt: T_item_excerpt | null;
   link_url: T_link_url | null;
