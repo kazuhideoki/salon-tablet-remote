@@ -5,7 +5,7 @@ import { TUseManageThemeProps } from './ManageTheme'
 export const SelectTheme = (props: TUseManageThemeProps) => {
          return (
            <FormControl component="fieldset">
-             <FormLabel component="legend">テーマ変更</FormLabel>
+             <FormLabel component="legend">テーマ</FormLabel>
              <RadioGroup
                row
                aria-label="setting-theme"

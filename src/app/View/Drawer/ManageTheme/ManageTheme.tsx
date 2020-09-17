@@ -59,9 +59,10 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
          return (
            <div className={classes.root}>
              <Typography variant="h4" component="h2" className={classes.header}>
-               テーマ選択
+               デザイン
              </Typography>
              <SelectTheme {...props} />
+             <br/>
              <SelectShowArticleType {...props} />
            </div>
          );

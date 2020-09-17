@@ -53,7 +53,7 @@ export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
           })
         }
       >
-        テーマ変更(制作中)
+        あああ
       </button>
       <br />
       <button

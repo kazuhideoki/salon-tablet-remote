@@ -79,7 +79,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Wallpaper />
                    </ListItemIcon>
-                     <ListItemText primary="テーマ変更" secondary="製作中" />
+                     <ListItemText primary="デザイン" secondary="製作中" />
                  </ListItem>
                  <ListItem
                    button
