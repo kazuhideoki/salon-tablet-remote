@@ -29,6 +29,7 @@ export const useUpdateFooterItem = () => {
         link_url: param.linkUrl,
         app_link_url: param.appLinkUrl,
         modal_size: param.modalSize,
+        on_sidebar: param.onSidebar,
         order: appState.edittingPrams.footerItem.order,
         data_type: param.dataType
       },

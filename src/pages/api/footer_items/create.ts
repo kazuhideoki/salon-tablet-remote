@@ -13,6 +13,7 @@ import {
   T_user_id,
   T_modal_size,
   T_data_type_footer_item,
+  T_on_sidebar,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
@@ -32,7 +33,7 @@ export const apiFooterItemsCreate = async (params:T_footer_items_create):Promise
   return await res.json();
 }
 
-export type T_footer_items_create = {
+export type T_footer_items_params = {
   is_published: T_is_published_footer_items;
   icon_name: T_icon_name;
   displayed_icon_name: T_displayed_icon_name | null;
@@ -42,8 +43,12 @@ export type T_footer_items_create = {
   link_url: T_link_url;
   app_link_url: T_app_link_url;
   modal_size: T_modal_size;
+  on_sidebar: T_on_sidebar
   order: T_order;
   data_type: T_data_type_footer_item
+};
+
+export type T_footer_items_create = T_footer_items_params & {
   user_id: T_user_id;
 };
 
@@ -63,6 +68,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       if (isAdmin === false) {
         params.data_type = "default_data";
       }
+
+      console.log(
+        'dbに入れる直前のparamsは ' + JSON.stringify(params)
+      );
+      
 
       const data = await db(`INSERT INTO footer_items SET ?`, params);
   

@@ -1,7 +1,7 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import {
-  T_modal_size, T_is_published_footer_items, T_on_tap, T_data_type_footer_item,
+  T_modal_size, T_is_published_footer_items, T_on_tap, T_data_type_footer_item, T_on_sidebar,
 } from "../../Store/Types";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
@@ -10,7 +10,7 @@ import { T_footer_items_create, apiFooterItemsCreate } from "../../../pages/api/
 
 
 export type TCreateFooterItem = {
-  is_published: T_is_published_footer_items,
+  is_published: T_is_published_footer_items;
   titleText: string;
   selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
   onTap: T_on_tap;
@@ -19,7 +19,8 @@ export type TCreateFooterItem = {
   linkUrl: string;
   modalSize: T_modal_size;
   appLinkUrl: string;
-  dataType: T_data_type_footer_item
+  onSidebar: T_on_sidebar
+  dataType: T_data_type_footer_item;
 };
 
 export const useCreateFooterItem = () => {
@@ -56,6 +57,7 @@ export const useCreateFooterItem = () => {
       link_url: param.linkUrl,
       app_link_url: param.appLinkUrl,
       modal_size: param.modalSize,
+      on_sidebar: param.onSidebar,
       order: order,
       data_type: param.dataType,
       user_id: appState.userInfo.user_id,

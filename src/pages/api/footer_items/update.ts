@@ -17,6 +17,7 @@ import {
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
+import { T_footer_items_params } from "./create";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -33,19 +34,7 @@ export const apiFooterItemsUpdate = async (params: T_footer_items_update):Promis
   return await res.json();
 }
 
-export type T_footer_items_update_params = {
-  is_published: T_is_published_footer_items;
-  icon_name: T_icon_name;
-  displayed_icon_name: T_displayed_icon_name | null;
-  on_tap: T_on_tap;
-  item_content: T_item_content;
-  item_excerpt: T_item_excerpt;
-  link_url: T_link_url;
-  app_link_url: T_app_link_url;
-  modal_size: T_modal_size;
-  order: T_order;
-  data_type: T_data_type_footer_item,
-};
+export type T_footer_items_update_params = T_footer_items_params
 export type T_footer_items_update = {
   params: T_footer_items_update_params;
   id: T_footer_item_id;

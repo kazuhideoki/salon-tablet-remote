@@ -86,6 +86,7 @@ const useFooterItemEditorProps = () => {
       linkUrl,
       modalSize,
       appLinkUrl,
+      onSidebar,
       dataType,
     };
     if (isEditting) {
