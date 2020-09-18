@@ -61,17 +61,24 @@ export default function WebSiteDrawer(props) {
                      <List>
                        {[
                          ["Home", "/", <Home />],
-                         ["About", "/about", <AdbOutlined />],
-                         ["Sample Tablet", "/sample/tablet", <Tablet />],
-                         ["Sample Mobile", "/sample/mobile", <MobileFriendly />],
-                         ["FAQ", "/faq", <FormatQuote />],
+                         ["About (製作中)", "/about", <AdbOutlined />],
+                         [
+                           "Sample Tablet (製作中)",
+                           "/sample/tablet",
+                           <Tablet />,
+                         ],
+                         [
+                           "Sample Mobile (製作中)",
+                           "/sample/mobile",
+                           <MobileFriendly />,
+                         ],
+                         ["About (製作中)", "/about", <AdbOutlined />],
+                         ["FAQ ", "/faq", <FormatQuote />],
                        ].map((value, index) => (
                          //@ts-ignore
                          <Link href={value[1]} key={index}>
                            <ListItem button>
-                             <ListItemIcon>
-                               {value[2]}
-                             </ListItemIcon>
+                             <ListItemIcon>{value[2]}</ListItemIcon>
                              <ListItemText primary={value[0]} />
                            </ListItem>
                          </Link>
