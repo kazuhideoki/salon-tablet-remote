@@ -6,16 +6,16 @@ export const checkOrdersSidebar = (footerItems: FooterItems) => {
   const footerItemsOnSidebar = footerItems.filter((value) => {
     return value.order_sidebar !== 0
   })
-  const onSidebars = footerItemsOnSidebar.map((value) => {
+  const orderSidebar = footerItemsOnSidebar.map((value) => {
     return value.order_sidebar
   })
+  orderSidebar.sort((a, b) => a - b);
 
-  //重複した値があったら resultはfalse
-  // 重複のみをリスト + それがあるか？(length)
-  result =
-    onSidebars.filter(function(x, i, self) {
-      return self.indexOf(x) !== self.lastIndexOf(x);
-    }).length === 0;
+  orderSidebar.forEach((value, index) => {
+    if (value !== index + 1) {
+      result = false
+    }
+  })
 
   return result;
 };

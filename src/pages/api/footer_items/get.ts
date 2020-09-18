@@ -7,6 +7,7 @@ import { changeToBooleanFromNumber } from "../../../lib/changeToBooleanFromNumbe
 import { localhost, server } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
 import { checkOrdersSidebar } from "../../../lib/checkOrdersSidebar";
+import { correctOrdersSidebar } from "../../../lib/correctOrdersSidebar";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsGet = async (user_id: T_user_id): Promise<TApiResponse<FooterItems>> => {
@@ -39,9 +40,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const isCorrectOrdersSidebar = checkOrdersSidebar(data)
+    console.log("isCorrectOrdersSidebarは " + isCorrectOrdersSidebar);
 
     if (isCorrectOrdersSidebar) {
-      // order_sidebarの修正
+      correctOrdersSidebar(data)
     }
 
 
