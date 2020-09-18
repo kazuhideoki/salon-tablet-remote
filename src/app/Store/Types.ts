@@ -93,6 +93,7 @@ export type T_link_url = string | null;
 export type T_app_link_url = string | null;
 export type T_modal_size = "fullScreen" | "large" | "medium" | "small";
 export type T_order = number;
+export type T_order_sidebar = number;
 
 export type FooterItemWithoutId = {
   user_id: T_user_id;
@@ -109,6 +110,7 @@ export type FooterItemWithoutId = {
   app_link_url: T_app_link_url | null;
   modal_size: T_modal_size;
   order: T_order;
+  order_sidebar: T_order_sidebar
   // 初回サインイン時のサンプルデータのコピー元をtrueに
   data_type: T_data_type_footer_item;
 };

@@ -6,6 +6,7 @@ import { correctOrders } from "../../../lib/correctOrders";
 import { changeToBooleanFromNumber } from "../../../lib/changeToBooleanFromNumber";
 import { localhost, server } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
+import { checkOrdersSidebar } from "../../../lib/checkOrdersSidebar";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsGet = async (user_id: T_user_id): Promise<TApiResponse<FooterItems>> => {
@@ -36,6 +37,14 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     if (isCorrectOrders === false) {
       correctOrders(data)
     }
+
+    const isCorrectOrdersSidebar = checkOrdersSidebar(data)
+
+    if (isCorrectOrdersSidebar) {
+      // order_sidebarの修正
+    }
+
+
 
     // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
     const returnData: FooterItems = changeToBooleanFromNumber(data);

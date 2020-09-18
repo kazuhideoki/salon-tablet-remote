@@ -80,10 +80,20 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
       <br />
       <EditButtonsBox className={classes.editButtonsBox}>
         <UpdateButton onClick={props.handleOnUpDateFooterIcon} value={value} />
-        <DeleteButton onClick={props.deleteItem} value={value.footer_item_id} />
+        <DeleteButton onClick={props.deleteItem} value={{footer_item_id: value.footer_item_id, order: value.order}} />
       </EditButtonsBox>
     </>
   );
+
+  // order_sidebarの順に並べ替える
+  const compareFunc = (a: FooterItem, b: FooterItem) => {
+    // Use toUpperCase() to ignore character casing
+    const aOrderSidebar = a.order_sidebar
+    const bOrderSidebar = b.order_sidebar;
+
+    return aOrderSidebar - bOrderSidebar
+  }
+  displayItem.sort(compareFunc);
 
   return (
     <List>

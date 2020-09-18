@@ -2,7 +2,7 @@ import React from "react";
 import { Store } from "../../Store/Store";
 
 import { useGetFooterItems } from "./useGetFooterItems";
-import { TCreateFooterItem } from "./useCreateFooterItem";
+import { TCreateFooterItem, calcOrder } from "./useCreateFooterItem";
 import { T_footer_items_update, apiFooterItemsUpdate } from "../../../pages/api/footer_items/update";
 
 export type TUpdateFooterItem = TCreateFooterItem;
@@ -31,7 +31,8 @@ export const useUpdateFooterItem = () => {
         modal_size: param.modalSize,
         on_sidebar: param.onSidebar,
         order: appState.edittingPrams.footerItem.order,
-        data_type: param.dataType
+        order_sidebar: appState.edittingPrams.footerItem.order_sidebar,
+        data_type: param.dataType,
       },
     };
 

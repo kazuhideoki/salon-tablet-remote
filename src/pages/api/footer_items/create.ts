@@ -14,6 +14,7 @@ import {
   T_modal_size,
   T_data_type_footer_item,
   T_on_sidebar,
+  T_order_sidebar,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
@@ -45,6 +46,7 @@ export type T_footer_items_params = {
   modal_size: T_modal_size;
   on_sidebar: T_on_sidebar
   order: T_order;
+  order_sidebar: T_order_sidebar
   data_type: T_data_type_footer_item
 };
 
