@@ -2,6 +2,7 @@ import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { T_order_sidebar, T_footer_item_id, T_order } from "../../../app/Store/Types";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -19,8 +20,9 @@ export const apiFooterItemsSwitchOrder = async (params:T_footer_items_switch_ord
 }
 
 export type T_footer_items_switch_order = {
-  footer_item_id: number;
-  order: number;
+  footer_item_id: T_footer_item_id;
+  order: T_order;
+  order_sidebar: T_order_sidebar
 };
 
 export type T_footer_items_switch_order_return = { err: boolean };

@@ -106,7 +106,8 @@ export const FooterPresenter:React.FC<Props> = (props) => {
       return null;
     }
     // on_sidebarの場合はDrawerに表示させるため
-    if (value.on_sidebar === true) {
+    // if (value.on_sidebar === true) {
+    if (value.order_sidebar !== 0) {
       return null
     }
 
@@ -125,6 +126,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
             <SwitchOrderButton
               footer_item_id={value.footer_item_id}
               order={value.order}
+              order_sidebar={value.order_sidebar}
             />
             <UpdateButton
               onClick={props.handleOnUpDateFooterIcon}

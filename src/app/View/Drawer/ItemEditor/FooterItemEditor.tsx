@@ -67,10 +67,20 @@ const useFooterItemEditorProps = () => {
   const handleOnChangeIconName = (e) => {
     setTitleText(e.target.value);
   };
-
-  const [onSidebar, setOnSidebar] = React.useState(
-    isEditting ? footerItem.on_sidebar : false
-  );
+  const initSidebar = () => {
+    if (isEditting === false) {
+      return false
+    }
+    if (footerItem.order_sidebar === 0) {
+      return false
+    }
+    return true
+  }
+  // const [onSidebar, setOnSidebar] = React.useState(
+  //   isEditting ? footerItem.on_sidebar : false
+  // );
+  const [onSidebar, setOnSidebar] = React.useState(initSidebar());
+  
   const handleOnSidebar = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOnSidebar(e.target.checked)
   }

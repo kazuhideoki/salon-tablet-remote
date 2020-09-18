@@ -1,7 +1,7 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import {
-  T_modal_size, T_is_published_footer_items, T_on_tap, T_data_type_footer_item, T_on_sidebar, FooterItems,
+  T_modal_size, T_is_published_footer_items, T_on_tap, T_data_type_footer_item, FooterItems,
 } from "../../Store/Types";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
@@ -19,7 +19,7 @@ export type TCreateFooterItem = {
   linkUrl: string;
   modalSize: T_modal_size;
   appLinkUrl: string;
-  onSidebar: T_on_sidebar
+  onSidebar: boolean
   dataType: T_data_type_footer_item;
 };
 
@@ -44,19 +44,6 @@ export const useCreateFooterItem = () => {
   const { footerItems } = appState
   const getFooterItems = useGetFooterItems();
 
-  // let order;
-  // // footerItemsの配列の中身を判定
-  // if (footerItems.length) {
-  //   // orderの最大値を取得
-  //   const orders = footerItems.map((value) => {
-  //     return value.order;
-  //   });
-  //   order = Math.max(...orders) + 1; // orderの最大値＋1を代入する
-  // } else {
-  //   // 記事がないときは 1にする
-  //   order = 1;
-  // }
-
   return async (param: TCreateFooterItem) => {
 
     dispatchAppState({ type: "CLOSE_MODAL" });
@@ -75,7 +62,7 @@ export const useCreateFooterItem = () => {
       link_url: param.linkUrl,
       app_link_url: param.appLinkUrl,
       modal_size: param.modalSize,
-      on_sidebar: param.onSidebar,
+      // on_sidebar: param.onSidebar,
       order: calcOrder(footerItems, false),
       order_sidebar: param.onSidebar ? calcOrder(footerItems, true) : 0,
       data_type: param.dataType,

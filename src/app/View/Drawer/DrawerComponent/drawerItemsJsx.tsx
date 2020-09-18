@@ -51,7 +51,8 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
   // タブレットビューではon_sidebarのみDrawerに表示させる
   if (props.isMobile === false) {
     displayItem = props.footerItems.filter((value) => {
-      return value.on_sidebar === true
+      // return value.on_sidebar === true
+      return value.order_sidebar !== 0
     })
   }
 

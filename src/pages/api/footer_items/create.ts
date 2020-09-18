@@ -13,7 +13,6 @@ import {
   T_user_id,
   T_modal_size,
   T_data_type_footer_item,
-  T_on_sidebar,
   T_order_sidebar,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
@@ -44,7 +43,7 @@ export type T_footer_items_params = {
   link_url: T_link_url;
   app_link_url: T_app_link_url;
   modal_size: T_modal_size;
-  on_sidebar: T_on_sidebar
+  // on_sidebar: T_on_sidebar
   order: T_order;
   order_sidebar: T_order_sidebar
   data_type: T_data_type_footer_item

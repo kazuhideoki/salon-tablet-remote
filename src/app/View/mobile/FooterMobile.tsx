@@ -109,6 +109,7 @@ export const FooterMobilePresenter:React.FC<Props> = (props) => {
                       props.switchOrder({
                         footer_item_id: value.footer_item_id,
                         order: value.order,
+                        order_sidebar: value.order_sidebar,
                       })
                     }
                   >

@@ -3,7 +3,8 @@ import { FooterItems } from "../app/Store/Types";
 
 export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
   const onSidebar = data.filter((value, index) => {
-    return value.on_sidebar === true
+    // return value.on_sidebar === true
+    return value.order_sidebar !== 0
   });
   const correctedData = onSidebar.map((value, index) => {
     value.order_sidebar = index + 1;
