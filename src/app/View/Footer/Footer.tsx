@@ -100,9 +100,14 @@ export const FooterPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const displayFooterItems = props.footerItems.map((value, index) => {
+
     // 通常画面で下書き記事は表示させない
     if (props.isSetting === false && value.is_published == false) {
       return null;
+    }
+    // on_sidebarの場合はDrawerに表示させるため
+    if (value.on_sidebar === true) {
+      return null
     }
 
     return (

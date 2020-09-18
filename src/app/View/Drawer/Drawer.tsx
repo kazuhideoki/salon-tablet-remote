@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme: Theme) => {
         justifyContent: "flex-end",
       },
       underItem: {
-        marginBottom: theme.spacing(3)
+        marginBottom: 'auto',
       },
       content: {
         flexGrow: 1,
@@ -201,7 +201,8 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <div className={classes.drawerHeader}>{drawerHeader}</div>
         <Divider />
 
-        {props.isMobile && !props.isSetting ? (
+        {/* {props.isMobile && !props.isSetting ? ( */}
+        {!props.isSetting ? (
           <>
             {drawerItems}
             <Divider className={classes.underItem}/>
@@ -213,7 +214,8 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <Divider />
 
         {/* 編集モードではアイテムは下にずらす */}
-        {props.isMobile && props.isSetting ? (
+        {/* {props.isMobile && props.isSetting ? ( */}
+        {props.isSetting ? (
           <>
             {drawerItems}
             <Divider />

@@ -47,6 +47,14 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
   const classes = useStyles(props.themes)
 
+  let displayItem = props.footerItems
+  // タブレットビューではon_sidebarのみDrawerに表示させる
+  if (props.isMobile === false) {
+    displayItem = props.footerItems.filter((value) => {
+      return value.on_sidebar === true
+    })
+  }
+
   const ShowStatus = (value: FooterItem) => {
     
     return (
@@ -79,7 +87,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
   return (
     <List>
-      {props.footerItems.map((value, index) => {
+      {displayItem.map((value, index) => {
         if (props.isSetting === false && value.is_published == false) {
           return null;
         }
@@ -87,7 +95,6 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
         if (props.isSetting === false && value.on_tap === "appLink") {
           return null;
         }
-        
 
         const ItemIcon = value.displayed_icon_name
           ? IconsSetting.convertIconComponentFromName(
@@ -146,7 +153,6 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
             </ListItem>
           );
         }
-
       })}
     </List>
   );
