@@ -31,7 +31,7 @@ export const useUpdateFooterItem = () => {
         modal_size: param.modalSize,
         on_sidebar: param.onSidebar,
         order: appState.edittingPrams.footerItem.order,
-        order_sidebar: appState.edittingPrams.footerItem.order_sidebar,
+        order_sidebar: param.onSidebar ? calcOrder(appState.footerItems, true) : 0,
         data_type: param.dataType,
       },
     };

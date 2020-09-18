@@ -1,14 +1,14 @@
 import { db } from "./db";
 import { FooterItems } from "../app/Store/Types";
 
-export const correctOrdersSidebar = async (data: FooterItems) => {
-  const wrogValues = data.filter((value, index) => {
-    return value.order_sidebar !== 0
+export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
+  const onSidebar = data.filter((value, index) => {
+    return value.on_sidebar === true
   });
-  const correctedData = wrogValues.map((value, index) => {
-    value.footer_item_id = index + 1
+  const correctedData = onSidebar.map((value, index) => {
+    value.order_sidebar = index + 1;
     return {
-      order_sidebar: value.on_sidebar,
+      order_sidebar: value.order_sidebar,
       footer_item_id: value.footer_item_id,
     };
   });
@@ -24,9 +24,14 @@ export const correctOrdersSidebar = async (data: FooterItems) => {
   });
   const updateParamInCase = updateParamList.join(" ");
 
+  return { updateParamInCase, idParam, correctedData };
 
+};
 
-  const data2 = await db(
+export const correctOrdersSidebar = async (data: FooterItems) => {
+  const { updateParamInCase, idParam } = generateCorrectOrdersSidebarParams(data);
+
+  await db(
     // ↓文字列を?に挿入しようとすると前後に''が入ってしまうので ＋ で連結した。
     "UPDATE `footer_items` SET `order_sidebar` = CASE `footer_item_id` " +
       updateParamInCase +

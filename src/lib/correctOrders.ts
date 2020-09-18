@@ -1,7 +1,7 @@
 import { db } from "./db";
+import { FooterItems } from "../app/Store/Types";
 
-export const correctOrders = async (data) => {
-
+export const generateCorrectOrdersParams = (data: FooterItems) => {
   const correctedData = data.map((value, index) => {
     value.order = index + 1;
     // return value;
@@ -19,12 +19,20 @@ export const correctOrders = async (data) => {
   });
   const updateParamInCase = updateParamList.join(" ");
 
-  const data2 = await db(
-    // ↓文字列を?に挿入しようとすると前後に''が入ってしまうので ＋ で連結した。
-    "UPDATE `footer_items` SET `order` = CASE `footer_item_id` " +
-      updateParamInCase +
-      " END WHERE `footer_item_id` IN (?)",
-    // queryは文字列で来るため
-    [idParam]
-  );
-}
+  return { updateParamInCase, idParam, correctedData };
+};
+
+export const correctOrders = async (data: FooterItems) => {
+        const { updateParamInCase, idParam } = generateCorrectOrdersParams(
+          data
+        );
+
+         await db(
+           // ↓文字列を?に挿入しようとすると前後に''が入ってしまうので ＋ で連結した。
+           "UPDATE `footer_items` SET `order` = CASE `footer_item_id` " +
+             updateParamInCase +
+             " END WHERE `footer_item_id` IN (?)",
+           // queryは文字列で来るため
+           [idParam]
+         );
+       };

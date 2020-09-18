@@ -42,7 +42,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     const isCorrectOrdersSidebar = checkOrdersSidebar(data)
     console.log("isCorrectOrdersSidebarは " + isCorrectOrdersSidebar);
 
-    if (isCorrectOrdersSidebar) {
+    if (isCorrectOrdersSidebar === false) {
       correctOrdersSidebar(data)
     }
 
