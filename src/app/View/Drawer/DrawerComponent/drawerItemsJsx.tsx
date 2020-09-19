@@ -19,6 +19,7 @@ import { UpdateButton } from "../../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../../viewComponents/buttons/DeleteButton";
 import { FooterItem } from "../../../Store/Types";
 import { showDataType } from "../../Main/components/showDataType";
+import { SwitchOrderButton } from "../../viewComponents/buttons/SwitchOrderButton";
 
 const useStyles = makeStyles((theme: Theme) => {
 
@@ -75,13 +76,17 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
     );
 
   }
-
-  const ItemEditButtonsBox = (value: FooterItem) => (
+  type TItemEditButtonsBox = {value: FooterItem, smallerValue: FooterItem}
+  const ItemEditButtonsBox = ({ value, smallerValue }: TItemEditButtonsBox) => (
     <>
       <br />
       <EditButtonsBox className={classes.editButtonsBox}>
+        <SwitchOrderButton smaller={smallerValue} larger={value} />
         <UpdateButton onClick={props.handleOnUpDateFooterIcon} value={value} />
-        <DeleteButton onClick={props.deleteItem} value={{footer_item_id: value.footer_item_id, order: value.order}} />
+        <DeleteButton
+          onClick={props.deleteItem}
+          value={{ footer_item_id: value.footer_item_id, order: value.order }}
+        />
       </EditButtonsBox>
     </>
   );
@@ -98,7 +103,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
   return (
     <List>
-      {displayItem.map((value, index) => {
+      {displayItem.map((value, index, footerItem) => {
         if (props.isSetting === false && value.is_published == false) {
           return null;
         }
@@ -138,7 +143,12 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                   className={classes.listItemText}
                 />
               </ListItem>
-              {props.isSetting ? <ItemEditButtonsBox {...value} /> : null}
+              {props.isSetting ? (
+                <ItemEditButtonsBox
+                  value={value}
+                  smallerValue={footerItem[index - 1]}
+                />
+              ) : null}
             </div>
           );
         }
@@ -160,7 +170,12 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 </ListItemIcon>
                 <ListItemText primary={value.icon_name} />
               </a>
-              {props.isSetting ? <ItemEditButtonsBox {...value} /> : null}
+              {props.isSetting ? (
+                <ItemEditButtonsBox
+                  value={value}
+                  smallerValue={footerItem[index - 1]}
+                />
+              ) : null}
             </ListItem>
           );
         }

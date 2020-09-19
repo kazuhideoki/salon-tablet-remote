@@ -3,6 +3,7 @@ import { EditButtonsBox } from "../app/View/viewComponents/buttons/EditButtonsBo
 import { SwitchOrderButton } from '../app/View/viewComponents/buttons/SwitchOrderButton';
 import { UpdateButton } from '../app/View/viewComponents/buttons/UpdateButton';
 import { DeleteButton } from "../app/View/viewComponents/buttons/DeleteButton";
+import { samplefooterItems } from './lib/sampleFooterItems';
 export default {
   title: "viewComponents/buttons/EditButtonsBox",
   component: EditButtonsBox,
@@ -15,7 +16,7 @@ export const Normal = () => {
 
   return (
     <EditButtonsBox className={className}>
-      <SwitchOrderButton footer_item_id={1} order={2} order_sidebar={0}/>
+      <SwitchOrderButton smaller={samplefooterItems[0]} larger={samplefooterItems[1]}/>
       <UpdateButton onClick={null} value={null} />
       <DeleteButton onClick={null} value={null} />
     </EditButtonsBox>

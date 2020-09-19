@@ -99,79 +99,58 @@ const useStyles = makeStyles((theme) =>
 export const FooterPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const displayFooterItems = props.footerItems.map((value, index, footerItem) => {
+  const selectedDisplayFooterItems = props.footerItems.filter((value) => {
+    return value.order_sidebar === 0
+  })
 
-    // 通常画面で下書き記事は表示させない
-    if (props.isSetting === false && value.is_published == false) {
-      return null;
-    }
-    // on_sidebarの場合はDrawerに表示させるため
-    // if (value.on_sidebar === true) {
-    if (value.order_sidebar !== 0) {
-      return null
-    }
+  const displayFooterItems = selectedDisplayFooterItems.map(
+    (value, index, footerItem) => {
+      // 通常画面で下書き記事は表示させない
+      if (props.isSetting === false && value.is_published == false) {
+        return null;
+      }
+      // on_sidebarの場合はDrawerに表示させるため
+      // if (value.on_sidebar === true) {
+      if (value.order_sidebar !== 0) {
+        return null;
+      }
 
-    return (
-      <Grid
-        item
-        key={index}
-        // 投稿済みか下書きかで見た目を変える
-        className={`${classes.gridItem}
+      return (
+        <Grid
+          item
+          key={index}
+          // 投稿済みか下書きかで見た目を変える
+          className={`${classes.gridItem}
             ${value.is_published == true ? null : classes.itemIsDraft}
           `}
-      >
-        {/* セッティング画面で順番を入れ替えるボタンなどを表示 */}
-        {props.isSetting ? (
-          <EditButtonsBox className={classes.editButtonsBox}>
-            <SwitchOrderButton
-              smaller={footerItem[index - 1]}
-              larger={value}
-            />
-            <UpdateButton
-              onClick={props.handleOnUpDateFooterIcon}
-              value={value}
-            />
-            <DeleteButton
-              onClick={props.deleteFooterItem}
-              value={{footer_item_id: value.footer_item_id, order: value.order}}
-            />
-          </EditButtonsBox>
-        ) : null}
+        >
+          {/* セッティング画面で順番を入れ替えるボタンなどを表示 */}
+          {props.isSetting ? (
+            <EditButtonsBox className={classes.editButtonsBox}>
+              <SwitchOrderButton
+                smaller={footerItem[index - 1]}
+                larger={value}
+              />
+              <UpdateButton
+                onClick={props.handleOnUpDateFooterIcon}
+                value={value}
+              />
+              <DeleteButton
+                onClick={props.deleteFooterItem}
+                value={{
+                  footer_item_id: value.footer_item_id,
+                  order: value.order,
+                }}
+              />
+            </EditButtonsBox>
+          ) : null}
 
-        {showDataType(value.data_type, classes.showDataType)}
-        
-        {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
-        {value.on_tap === "modal" ? (
-          <IconAndText
-            className={
-              props.isSetting ? classes.isSettingIconAndText : null
-            }
-            icon={
-              value.displayed_icon_name
-                ? IconsSetting.convertIconComponentFromName(
-                    value.displayed_icon_name
-                  )[0]
-                : MoodBad
-            }
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_FOOTER_ITEM_MODAL",
-                payload: index,
-              })
-            }
-            // fontSize="large"
-            text={value.icon_name}
-            loading={props.loading}
-          />
-        ) : (
-          // "modal"以外→"link"か"appLink"の時
-          <a
-            href={value.on_tap === "link" ? value.link_url : value.app_link_url}
-          >
+          {showDataType(value.data_type, classes.showDataType)}
+
+          {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
+          {value.on_tap === "modal" ? (
             <IconAndText
-              className={
-                props.isSetting ? classes.isSettingIconAndText : null
-              }
+              className={props.isSetting ? classes.isSettingIconAndText : null}
               icon={
                 value.displayed_icon_name
                   ? IconsSetting.convertIconComponentFromName(
@@ -179,15 +158,44 @@ export const FooterPresenter:React.FC<Props> = (props) => {
                     )[0]
                   : MoodBad
               }
+              onClick={() =>
+                props.dispatchAppState({
+                  type: "OPEN_FOOTER_ITEM_MODAL",
+                  payload: index,
+                })
+              }
               // fontSize="large"
               text={value.icon_name}
               loading={props.loading}
             />
-          </a>
-        )}
-      </Grid>
-    );
-  });
+          ) : (
+            // "modal"以外→"link"か"appLink"の時
+            <a
+              href={
+                value.on_tap === "link" ? value.link_url : value.app_link_url
+              }
+            >
+              <IconAndText
+                className={
+                  props.isSetting ? classes.isSettingIconAndText : null
+                }
+                icon={
+                  value.displayed_icon_name
+                    ? IconsSetting.convertIconComponentFromName(
+                        value.displayed_icon_name
+                      )[0]
+                    : MoodBad
+                }
+                // fontSize="large"
+                text={value.icon_name}
+                loading={props.loading}
+              />
+            </a>
+          )}
+        </Grid>
+      );
+    }
+  );
 
   const noItems = <Grid item >No items</Grid>;
 
