@@ -72,7 +72,6 @@ export default function WebSiteDrawer(props) {
                            "/sample/mobile",
                            <MobileFriendly />,
                          ],
-                         ["About (製作中)", "/about", <AdbOutlined />],
                          ["FAQ ", "/faq", <FormatQuote />],
                        ].map((value, index) => (
                          //@ts-ignore
