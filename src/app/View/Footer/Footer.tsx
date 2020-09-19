@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) =>
 export const FooterPresenter:React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const displayFooterItems = props.footerItems.map((value, index) => {
+  const displayFooterItems = props.footerItems.map((value, index, footerItem) => {
 
     // 通常画面で下書き記事は表示させない
     if (props.isSetting === false && value.is_published == false) {
@@ -124,9 +124,8 @@ export const FooterPresenter:React.FC<Props> = (props) => {
         {props.isSetting ? (
           <EditButtonsBox className={classes.editButtonsBox}>
             <SwitchOrderButton
-              footer_item_id={value.footer_item_id}
-              order={value.order}
-              order_sidebar={value.order_sidebar}
+              smaller={footerItem[index - 1]}
+              larger={value}
             />
             <UpdateButton
               onClick={props.handleOnUpDateFooterIcon}
