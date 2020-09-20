@@ -1,8 +1,9 @@
 import { createMuiTheme } from "@material-ui/core"
+import { TThemePrams } from "../ThemeContext"
 
 const theme = createMuiTheme()
 
-export const themeMinimal = createMuiTheme({
+export const themeMinimal = (params: TThemePrams) => createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
@@ -37,7 +38,10 @@ export const themeMinimal = createMuiTheme({
 
   typography: {
     fontFamily: [
-      "futura-pt",
+      // "futura-pt",
+      params.theme_font1,
+      // '"ヒラギノ角ゴ ProN"',
+      params.theme_font2,
       '"ヒラギノ角ゴ ProN"',
       "-apple-system",
       "BlinkMacSystemFont",
@@ -53,7 +57,7 @@ export const themeMinimal = createMuiTheme({
   },
    palette: {
     primary: {
-      main: "#134e78",
+      main: params.theme_color,
     },
     secondary: {
       main: '#b0c4de', // lightsteelblue

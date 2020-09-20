@@ -5,7 +5,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
-import { TUserInfo } from "./Types";
+import { TUserInfo, T_theme_font1, T_theme_font2, T_theme_color } from "./Types";
 import { Store } from "./Store";
 
 import { nonTheme } from "./themes/nonTheme";
@@ -72,22 +72,27 @@ export type TThemeArgs = ReturnType<typeof themeArgs>
 
 export const ThemeContext = React.createContext({} as TThemeArgs);
 
+export type TThemePrams = {
+  theme_color: T_theme_color;
+  theme_font1: T_theme_font1;
+  theme_font2: T_theme_font2;
+};
 
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
-    const { selected_theme } = appState.userInfo;
-    // const isMobile = useMediaQuery("(max-width:480px)");
+    const { selected_theme, theme_color, theme_font1, theme_font2 } = appState.userInfo;
+    const params: TThemePrams = { theme_color, theme_font1, theme_font2 };
     const isMobile = useIsMobile()
 
     let theme // テーマ付ける
     // user_infoのselected_themeをもとにテーマを適応
     switch (selected_theme) {
       case "nonTheme":
-        theme = nonTheme
+        theme = nonTheme(params)
         break;
       case "minimal":
-        theme = themeMinimal;
+        theme = themeMinimal(params)
         break;
 
       default:
