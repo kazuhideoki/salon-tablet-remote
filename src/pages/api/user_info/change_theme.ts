@@ -5,6 +5,7 @@ import { cipher, checkPassword } from "../../../module/bcrypt";
 import { T_user_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { TThemePrams } from "../../../app/Store/ThemeContext";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):Promise<TApiResponse<T_user_info_change_theme_return>> => {
@@ -22,22 +23,24 @@ export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):P
 
 export type T_user_info_change_theme = {
   user_id: T_user_id
-  selectedTheme: string
-};
+  themeParams: TThemePrams
+}; 
 export type T_user_info_change_theme_return = {
   rawData: unknown;
 };
 
 const change_theme = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { user_id, selectedTheme }: T_user_info_change_theme = req.body;
+    const { user_id, themeParams }: T_user_info_change_theme = req.body;
+
+    // ※selectedTheme,
+    //   paramsFromTheme,※全部一緒にしてupdate↓
 
     try {
-      // ※db(``)の返り値は常に[]
-      const data = await db(
-        `UPDATE user_info SET selected_theme = ? where user_id = ?`,
-        [selectedTheme, user_id]
-      );
+      const data = await db(`UPDATE user_info SET ? where user_id = ?`, [
+        themeParams,
+        user_id,
+      ]);
 
       console.log(
         "change_themeの返り値は " +

@@ -7,7 +7,7 @@ export type T_shop_name = string;
 export type T_user_email = string;
 export type T_show_article_type = 'scroll' | 'grid6'
 
-export type T_selected_theme = string;
+export type T_selected_theme = 'nonTheme' | 'minimal';
 export type T_theme_color = string;
 export type T_theme_font1 = string;
 export type T_theme_font2 = string;

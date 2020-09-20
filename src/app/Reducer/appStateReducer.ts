@@ -246,7 +246,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           ...state,
           userInfo: {
             ...state.userInfo,
-            selected_theme: action.payload.selectedTheme,
+            selected_theme: action.payload.themeParams.selected_theme,
+            theme_color: action.payload.themeParams.theme_color,
+            theme_font1: action.payload.themeParams.theme_font1,
+            theme_font2: action.payload.themeParams.theme_font2,
           },
         };
         break;

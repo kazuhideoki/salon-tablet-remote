@@ -13,7 +13,7 @@ import { Typography } from "@material-ui/core";
 import { SelectTheme } from "./SelectTheme";
 import { SelectShowArticleType } from "./SelectShowArticleType";
 import { useChangeShowArticleType } from "../../../ActionCreator/user/useChangeShowArticleType";
-import { T_show_article_type } from "../../../Store/Types";
+import { T_show_article_type, T_selected_theme } from "../../../Store/Types";
 
 export const useManageTheme = () => {
 
@@ -24,7 +24,7 @@ export const useManageTheme = () => {
   const changeShowArticleType = useChangeShowArticleType()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    changeTheme((event.target as HTMLInputElement).value);
+    changeTheme((event.target as HTMLInputElement).value as T_selected_theme);
   };
   const handleChangeShowArticleType = (
     event: React.ChangeEvent<HTMLInputElement>

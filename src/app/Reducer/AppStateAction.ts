@@ -25,6 +25,7 @@ import {
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
+import { TThemePrams } from "../Store/ThemeContext";
 
 export type AppStateAction =
   | { type: "SELECT_DEVICE"; payload: T_selected_device }
@@ -65,7 +66,7 @@ export type AppStateAction =
   | {
       type: "SET_THEME";
       payload: {
-        selectedTheme: T_selected_theme;
+        themeParams: TThemePrams;
       };
     }
   | {
