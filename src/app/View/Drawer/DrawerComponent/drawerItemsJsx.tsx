@@ -129,7 +129,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 onClick={() =>
                   props.dispatchAppState({
                     type: "OPEN_FOOTER_ITEM_MODAL",
-                    payload: index,
+                    payload: value.footer_item_id,
                   })
                 }
               >

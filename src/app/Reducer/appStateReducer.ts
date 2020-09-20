@@ -140,14 +140,17 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         };
         break;
       case "OPEN_FOOTER_ITEM_MODAL":
+        const target = state.footerItems.filter((value) => {
+          return action.payload === value.footer_item_id
+        })
         newState = {
           ...state,
           setModal: "footer_item_modal",
           isModalOpen: true,
           currentModalContent: {
             ...state.currentModalContent,
-            footerItem: state.footerItems[action.payload],
-            modalSize: state.footerItems[action.payload].modal_size,
+            footerItem: target[0],
+            modalSize: target[0].modal_size,
           },
         };
         break;
