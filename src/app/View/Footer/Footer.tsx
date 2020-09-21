@@ -174,6 +174,8 @@ export const FooterPresenter:React.FC<Props> = (props) => {
               href={
                 value.on_tap === "link" ? value.link_url : value.app_link_url
               }
+              rel='noopener noreferrer'
+              target='_blank'
             >
               <IconAndText
                 className={
