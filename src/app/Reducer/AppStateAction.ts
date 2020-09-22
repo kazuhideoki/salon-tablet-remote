@@ -21,6 +21,7 @@ import {
   TInfoBarData,
   T_selected_device,
   T_show_article_type,
+  T_theme_color,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
@@ -67,6 +68,12 @@ export type AppStateAction =
       type: "SET_THEME";
       payload: {
         themeParams: TThemePrams;
+      };
+    }
+  | {
+      type: "SET_THEME_COLOR";
+      payload: {
+        themeColor: T_theme_color;
       };
     }
   | {

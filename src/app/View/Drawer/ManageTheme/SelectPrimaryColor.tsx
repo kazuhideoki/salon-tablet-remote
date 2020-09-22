@@ -1,0 +1,47 @@
+import React from 'react'
+import { TextField, Popover } from '@material-ui/core'
+import { SketchPicker, SwatchesPicker } from "react-color";
+import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import { FiberManualRecord } from '@material-ui/icons';
+import { TUseManageThemeProps } from './ManageTheme';
+
+type Props = TUseManageThemeProps & {className?: string}
+
+export const SelectPrimaryColor = (props: Props) => {
+         console.log("SelectPrimaryColorのpropsは " + JSON.stringify(props));
+
+         return (
+           <PopupState variant="popover" popupId="theme-color-popup-popover">
+             {(popupState) => (
+               <>
+                 <TextField
+                   value={props.color.hex}
+                   // value={color}
+                   inputProps={{ style: { color: props.color.hex } }}
+                   // inputProps={{ style: { color: color } }}
+                   {...bindTrigger(popupState)}
+                   className={props.className}
+                 />
+                 <FiberManualRecord style={{ color: props.color.hex }} />
+                 {/* <FiberManualRecord style={{ color: color }} /> */}
+                 <Popover
+                   {...bindPopover(popupState)}
+                   anchorOrigin={{
+                     vertical: "bottom",
+                     horizontal: "center",
+                   }}
+                   transformOrigin={{
+                     vertical: "top",
+                     horizontal: "center",
+                   }}
+                 >
+                   <SwatchesPicker
+                     color={props.color}
+                     onChangeComplete={props.handleChangeThemeColor}
+                   />
+                 </Popover>
+               </>
+             )}
+           </PopupState>
+         );
+       };

@@ -13,19 +13,33 @@ import { Typography } from "@material-ui/core";
 import { SelectTheme } from "./SelectTheme";
 import { SelectShowArticleType } from "./SelectShowArticleType";
 import { useChangeShowArticleType } from "../../../ActionCreator/user/useChangeShowArticleType";
-import { T_show_article_type, T_selected_theme } from "../../../Store/Types";
+import { T_show_article_type, T_selected_theme, T_theme_color } from "../../../Store/Types";
+import { SelectPrimaryColor } from "./SelectPrimaryColor";
+import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeColor";
+
+export type TColor = {hex: T_theme_color}
 
 export const useManageTheme = () => {
 
   // const { selectedTheme, setSelectedTheme } = React.useContext(ThemeContext);
   const { appState } = React.useContext(Store)
-  const { selected_theme, show_article_type } = appState.userInfo
+  const { selected_theme, theme_color, show_article_type } = appState.userInfo
+  const [color, setColor] = React.useState({ hex: theme_color });
+
   const changeTheme = useChangeTheme()
+  const changeThemeColor = useChangeThemeColor()
   const changeShowArticleType = useChangeShowArticleType()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     changeTheme((event.target as HTMLInputElement).value as T_selected_theme);
   };
+  const handleChangeThemeColor = async (value: TColor) => {
+    const isChanged = await changeThemeColor(value)
+    if (isChanged) {
+      setColor(value)
+    }
+  }
+
   const handleChangeShowArticleType = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -34,6 +48,8 @@ export const useManageTheme = () => {
 
   return {
     selected_theme,
+    color,
+    handleChangeThemeColor,
     show_article_type,
     handleChange,
     handleChangeShowArticleType,
@@ -51,18 +67,28 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       margin: theme.spacing(2),
     },
+    selectPrimaryColor: {
+      width: 80,
+      marginLeft: theme.spacing(2),
+    }
   })
 );
 
 export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
          const classes = useStyles();
+         
          return (
            <div className={classes.root}>
              <Typography variant="h4" component="h2" className={classes.header}>
                デザイン
              </Typography>
              <SelectTheme {...props} />
-             <br/>
+             <br />
+             <Typography variant="body1" component="p" color="textSecondary">
+               メインカラー
+               <SelectPrimaryColor {...props} className={classes.selectPrimaryColor} />
+             </Typography>
+             <br />
              <SelectShowArticleType {...props} />
            </div>
          );

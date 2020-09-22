@@ -253,6 +253,15 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "SET_THEME_COLOR":
+        newState = {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            theme_color: action.payload.themeColor,
+          },
+        };
+        break;
       case "SET_SHOW_ARTICLE_TYPE":
         newState = {
           ...state,

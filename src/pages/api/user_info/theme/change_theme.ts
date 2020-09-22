@@ -1,17 +1,17 @@
-import { db } from "../../../lib/db";
+import { db } from "../../../../lib/db";
 const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
-import { cipher, checkPassword } from "../../../module/bcrypt";
-import { T_user_id } from "../../../app/Store/Types";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { TThemePrams } from "../../../app/Store/ThemeContext";
+import { cipher, checkPassword } from "../../../../module/bcrypt";
+import { T_user_id } from "../../../../app/Store/Types";
+import { server, localhost } from "../../../../lib/loadUrl";
+import { TApiResponse } from "../../../../lib/apiTypes";
+import { TThemePrams } from "../../../../app/Store/ThemeContext";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):Promise<TApiResponse<T_user_info_change_theme_return>> => {
   let str = process.browser ? server : localhost
 
-  const res = await fetch(`${str}/api/user_info/change_theme`, {
+  const res = await fetch(`${str}/api/user_info/theme/change_theme`, {
     headers: { "Content-Type": "application/json" },
     method: "POST",
     mode: "cors",
