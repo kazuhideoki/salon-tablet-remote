@@ -14,7 +14,6 @@ export const displayInstagramMediasJsx = (props: TUseMainProps, classes: TMainCl
     <Grid
       item
       key={key}
-      // articlesの場合投稿済みか下書きかで見た目を変える
       className={classes.gridItem}
     >
       <CardActionArea

@@ -226,7 +226,7 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
     <Grid
       id="p_main"
       container
-      direction={props.show_article_type === 'scroll' ? 'row' : 'column'}
+      direction={props.show_article_type !== 'scroll' && props.isShowInstagram === false ? 'column' : 'row'}
       wrap="nowrap"
       className={`${classes.root} ${props.show_article_type === 'grid6' ? classes.rootGrid6 : ''}`}
       spacing={2}
