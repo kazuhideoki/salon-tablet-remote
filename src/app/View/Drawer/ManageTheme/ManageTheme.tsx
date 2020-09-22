@@ -88,6 +88,10 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
                メインカラー
                <SelectPrimaryColor {...props} className={classes.selectPrimaryColor} />
              </Typography>
+             <Typography variant="body1" component="p" color="textSecondary">
+               フォント
+               <SelectFont {...props} className={classes.selectPrimaryColor} />
+             </Typography>
              <br />
              <SelectShowArticleType {...props} />
            </div>
