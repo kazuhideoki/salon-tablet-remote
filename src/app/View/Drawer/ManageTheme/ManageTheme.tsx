@@ -26,9 +26,10 @@ export const useManageTheme = () => {
 
   // const { selectedTheme, setSelectedTheme } = React.useContext(ThemeContext);
   const { appState } = React.useContext(Store)
-  const { selected_theme, theme_color, theme_font1, show_article_type } = appState.userInfo
+  const { selected_theme, theme_color, theme_font1, theme_font2, show_article_type } = appState.userInfo
   const [color, setColor] = React.useState({ hex: theme_color });
   const [font1, setFont1] = React.useState(theme_font1)
+  const [font2, setFont2] = React.useState(theme_font2)
 
   const changeTheme = useChangeTheme()
   const changeThemeColor = useChangeThemeColor()
@@ -45,9 +46,15 @@ export const useManageTheme = () => {
     }
   }
   const handleChangeThemeFont = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont);
+    const isChanged = await changeThemeFont(event.target.value as TFont, false);
     if (isChanged) {
       setFont1(event.target.value as TFont);
+    }
+  };
+  const handleChangeThemeFont2 = async (event: React.ChangeEvent<{ value: unknown }>) => {
+    const isChanged = await changeThemeFont(event.target.value as TFont, true);
+    if (isChanged) {
+      setFont2(event.target.value as TFont);
     }
   };
 
@@ -62,7 +69,9 @@ export const useManageTheme = () => {
     color,
     handleChangeThemeColor,
     font1,
+    font2,
     handleChangeThemeFont,
+    handleChangeThemeFont2,
     show_article_type,
     handleChange,
     handleChangeShowArticleType,
@@ -81,9 +90,11 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     param: {
-      width: 80,
       marginLeft: theme.spacing(2),
-    }
+    },
+    selectPrimaryColor: {
+      width: 80,
+    },
   })
 );
 
@@ -99,11 +110,15 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
              <br />
              <Typography variant="body1" component="p" color="textSecondary">
                メインカラー
-               <SelectPrimaryColor {...props} className={classes.param} />
+               <SelectPrimaryColor {...props} className={`${classes.param} ${classes.selectPrimaryColor}`} />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">
-               フォント
+               フォント1
                <SelectFont {...props} className={classes.param} />
+             </Typography>
+             <Typography variant="body1" component="p" color="textSecondary">
+               フォント2
+               <SelectFont {...props} isFont2={true} className={classes.param} />
              </Typography>
              <br />
              <SelectShowArticleType {...props} />

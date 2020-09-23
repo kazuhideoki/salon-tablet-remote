@@ -72,7 +72,13 @@ export type AppStateAction =
       };
     }
   | {
-      type: "SET_THEME_FONT";
+      type: "SET_THEME_FONT1";
+      payload: {
+        themeFont: T_theme_font;
+      };
+    }
+  | {
+      type: "SET_THEME_FONT2";
       payload: {
         themeFont: T_theme_font;
       };

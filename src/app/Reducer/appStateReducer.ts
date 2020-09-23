@@ -262,12 +262,21 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      case "SET_THEME_FONT":
+      case "SET_THEME_FONT1":
         newState = {
           ...state,
           userInfo: {
             ...state.userInfo,
             theme_font1: action.payload.themeFont,
+          },
+        };
+        break;
+      case "SET_THEME_FONT2":
+        newState = {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            theme_font2: action.payload.themeFont,
           },
         };
         break;

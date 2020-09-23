@@ -26,6 +26,7 @@ export const apiUserInfoThemeFont = async (
 export type T_user_info_theme_font = {
   user_id: T_user_id;
   theme_font: T_theme_font;
+  isFont2: boolean
 };
 export type T_user_info_theme_font_return = {
   rawData: unknown;
@@ -33,16 +34,26 @@ export type T_user_info_theme_font_return = {
 
 const font = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { user_id, theme_font }: T_user_info_theme_font = req.body;
+    const { user_id, theme_font, isFont2 }: T_user_info_theme_font = req.body;
 
     // ※selectedTheme,
     //   paramsFromTheme,※全部一緒にしてupdate↓
 
     try {
-      const data = await db(
-        `UPDATE user_info SET theme_font1 = ? where user_id = ?`,
-        [theme_font, user_id]
-      );
+      let data
+      if (isFont2) {
+        data = await db(
+          `UPDATE user_info SET theme_font2 = ? where user_id = ?`,
+          [theme_font, user_id]
+        );
+        
+      } else {
+        data = await db(
+          `UPDATE user_info SET theme_font1 = ? where user_id = ?`,
+          [theme_font, user_id]
+        );
+
+      }
 
       console.log("theme/fontの返り値は " + JSON.stringify(data));
 
