@@ -1,6 +1,7 @@
 import React from 'react'
 import { Select, MenuItem } from '@material-ui/core';
 import { TUseManageThemeProps } from './ManageTheme';
+import { fonts } from '../../../Store/themes/fonts';
 
 type Props = TUseManageThemeProps & {className?: string}
 
@@ -14,7 +15,7 @@ export const SelectFont = (props: Props) => {
         onChange={props.handleChangeThemeFont}
         className={props.className}
       >
-        {["Roboto", "futura-pt", '"ヒラギノ角ゴ ProN"'].map((value) => {
+        {fonts.map((value) => {
           return(<MenuItem value={value}>{value}</MenuItem>)
         })}
       </Select>

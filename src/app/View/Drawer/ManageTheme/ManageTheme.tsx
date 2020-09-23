@@ -17,6 +17,8 @@ import { T_show_article_type, T_selected_theme, T_theme_color } from "../../../S
 import { SelectPrimaryColor } from "./SelectPrimaryColor";
 import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeColor";
 import { SelectFont } from "./SelectFont";
+import { TFont } from "../../../Store/themes/fonts";
+import { useChangeThemeFont } from "../../../ActionCreator/user/useChangeThemeFont";
 
 export type TColor = {hex: T_theme_color}
 
@@ -30,6 +32,7 @@ export const useManageTheme = () => {
 
   const changeTheme = useChangeTheme()
   const changeThemeColor = useChangeThemeColor()
+  const changeThemeFont = useChangeThemeFont()
   const changeShowArticleType = useChangeShowArticleType()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +44,11 @@ export const useManageTheme = () => {
       setColor(value)
     }
   }
-  const handleChangeThemeFont = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setFont1(event.target.value as string);
+  const handleChangeThemeFont = async (event: React.ChangeEvent<{ value: unknown }>) => {
+    const isChanged = await changeThemeFont(event.target.value as TFont);
+    if (isChanged) {
+      setFont1(event.target.value as TFont);
+    }
   };
 
   const handleChangeShowArticleType = (
