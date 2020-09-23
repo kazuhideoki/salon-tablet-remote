@@ -5,7 +5,7 @@ import { cipher, checkPassword } from "../../../../module/bcrypt";
 import { T_user_id } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
-import { TThemePrams } from "../../../../app/Store/ThemeContext";
+import { TThemeParams } from "../../../../app/Store/ThemeContext";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):Promise<TApiResponse<T_user_info_change_theme_return>> => {
@@ -22,8 +22,8 @@ export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):P
 } 
 
 export type T_user_info_change_theme = {
-  user_id: T_user_id
-  themeParams: TThemePrams
+  user_id: T_user_id;
+  themeParams: TThemeParams;
 }; 
 export type T_user_info_change_theme_return = {
   rawData: unknown;

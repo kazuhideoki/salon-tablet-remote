@@ -5,7 +5,7 @@ import { cipher, checkPassword } from "../../../../module/bcrypt";
 import { T_user_id, T_theme_color } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
-import { TThemePrams } from "../../../../app/Store/ThemeContext";
+import { TThemeParams } from "../../../../app/Store/ThemeContext";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeColor = async (

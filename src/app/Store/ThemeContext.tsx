@@ -72,7 +72,7 @@ export type TThemeArgs = ReturnType<typeof themeArgs>
 
 export const ThemeContext = React.createContext({} as TThemeArgs);
 
-export type TThemePrams = {
+export type TThemeParams = {
   selected_theme: T_selected_theme
   theme_color: T_theme_color;
   theme_font1: T_theme_font1;
@@ -83,7 +83,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
     const { selected_theme, theme_color, theme_font1, theme_font2 } = appState.userInfo;
-    const params: TThemePrams = {
+    const params: TThemeParams = {
       selected_theme,
       theme_color,
       theme_font1,

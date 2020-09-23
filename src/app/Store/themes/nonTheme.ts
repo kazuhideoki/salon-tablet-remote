@@ -1,8 +1,8 @@
 import { createMuiTheme } from "@material-ui/core";
-import { TThemePrams, themeArgs } from "../ThemeContext";
+import { TThemeParams, themeArgs } from "../ThemeContext";
 import { PanoramaSharp } from "@material-ui/icons";
 
-export const nonTheme = (params: TThemePrams) =>
+export const nonTheme = (params: TThemeParams) =>
          createMuiTheme({
            // overrides: {
            //   MuiCssBaseline: {

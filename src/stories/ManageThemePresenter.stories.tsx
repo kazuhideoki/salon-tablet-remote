@@ -5,10 +5,17 @@ export default {
   component: ManageThemePresenter,
 };
 
-
-
 export const Normal = () => {
-  const props = useManageTheme()
+  const props = {
+    selected_theme: null,
+    color: null,
+    handleChangeThemeColor: null,
+    font1: null,
+    handleChangeThemeFont: null,
+    show_article_type: null,
+    handleChange: null,
+    handleChangeShowArticleType: null,
+  };
 
   return (
     <ManageThemePresenter {...props}/>

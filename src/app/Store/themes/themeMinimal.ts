@@ -1,9 +1,9 @@
 import { createMuiTheme } from "@material-ui/core"
-import { TThemePrams } from "../ThemeContext"
+import { TThemeParams } from "../ThemeContext"
 
 const theme = createMuiTheme()
 
-export const themeMinimal = (params: TThemePrams) => createMuiTheme({
+export const themeMinimal = (params: TThemeParams) => createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {

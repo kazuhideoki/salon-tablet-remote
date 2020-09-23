@@ -10,14 +10,8 @@ import {
   T_order,
   TTags,
   TInstagramAccounts,
-  T_user_id,
-  T_user_name,
-  T_shop_name,
-  T_user_email,
-  T_selected_theme,
   TInstagramMedias,
   T_on_tap,
-  TInfoBar,
   TInfoBarData,
   T_selected_device,
   T_show_article_type,
@@ -26,7 +20,7 @@ import {
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
-import { TThemePrams } from "../Store/ThemeContext";
+import { TThemeParams } from "../Store/ThemeContext";
 
 export type AppStateAction =
   | { type: "SELECT_DEVICE"; payload: T_selected_device }
@@ -67,7 +61,7 @@ export type AppStateAction =
   | {
       type: "SET_THEME";
       payload: {
-        themeParams: TThemePrams;
+        themeParams: TThemeParams;
       };
     }
   | {
