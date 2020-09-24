@@ -42,7 +42,6 @@ export const themeMinimal = (params: TThemeParams) => createMuiTheme({
       params.theme_font1,
       // '"ヒラギノ角ゴ ProN"',
       params.theme_font2,
-      '"ヒラギノ角ゴ ProN"',
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',

@@ -22,7 +22,13 @@ export const SelectFont = (props: Props) => {
         className={props.className}
       >
         {fonts.map((value) => {
-          return <MenuItem value={value}>{value}</MenuItem>;
+          return (
+            <MenuItem value={value}>
+              <span style={{ fontFamily: value }}>
+                {value}
+              </span>
+            </MenuItem>
+          );
         })}
       </Select>
     </>
