@@ -8,8 +8,13 @@ import "../../public/base.scss";
 
 // editor用のsnowテーマのcss
 import "react-quill/dist/quill.snow.css";
+
+// ダウンロードフォント用設定 public/fontsにフォントファイルを入れる
+import "../../public/fonts.css";
+
 // ReactQuillの整形
 import "../../public/quill.scss";
+
 import Head from "next/head";
 import { server } from "../lib/loadUrl";
 import { TUserInfo } from "../app/Store/Types";
@@ -37,6 +42,9 @@ export default function MyApp({ Component, pageProps }) {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
           />
+          {/* "webフォント" */}
+          {/* google fontsより */}
+          <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+Rounded+1c:wght@300&display=swap" rel="stylesheet"></link>
         </Head>
         <Provider options={{ site: server }} session={session}>
           <Component {...pageProps} />
