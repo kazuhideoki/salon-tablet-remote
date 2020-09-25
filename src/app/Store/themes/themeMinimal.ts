@@ -1,5 +1,6 @@
 import { createMuiTheme } from "@material-ui/core"
 import { TThemeParams } from "../ThemeContext"
+import { FontNameToFontFamily } from "./fonts"
 
 const theme = createMuiTheme()
 
@@ -39,9 +40,9 @@ export const themeMinimal = (params: TThemeParams) => createMuiTheme({
   typography: {
     fontFamily: [
       // "futura-pt",
-      params.theme_font1,
+      FontNameToFontFamily(params.theme_font1),
       // '"ヒラギノ角ゴ ProN"',
-      params.theme_font2,
+      FontNameToFontFamily(params.theme_font2),
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',

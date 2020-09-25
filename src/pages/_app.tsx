@@ -10,7 +10,7 @@ import "../../public/base.scss";
 import "react-quill/dist/quill.snow.css";
 
 // ダウンロードフォント用設定 public/fontsにフォントファイルを入れる
-import "../../public/fonts.css";
+import "../../public/fonts/fonts.css";
 
 // ReactQuillの整形
 import "../../public/quill.scss";
@@ -21,6 +21,7 @@ import { TUserInfo } from "../app/Store/Types";
 import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 import { TSessionOnj } from ".";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
+import { googleFontsUrl } from "../lib/googleFontsUrl";
 // require("dotenv").config();
 
 export default function MyApp({ Component, pageProps }) {
@@ -44,7 +45,7 @@ export default function MyApp({ Component, pageProps }) {
           />
           {/* "webフォント" */}
           {/* google fontsより */}
-          <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+Rounded+1c:wght@300&display=swap" rel="stylesheet"></link>
+          <link href={googleFontsUrl} rel="stylesheet"></link>
         </Head>
         <Provider options={{ site: server }} session={session}>
           <Component {...pageProps} />

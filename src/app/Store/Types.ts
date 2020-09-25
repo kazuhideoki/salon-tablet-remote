@@ -1,6 +1,6 @@
 import { IndexPropsData } from "../../pages";
 import { TStoreProps } from "./Store";
-import { TFont } from "./themes/fonts";
+import { TFont1, TFont2 } from "./themes/fonts";
 
 export type T_user_id = number;
 export type T_user_name = string;
@@ -10,7 +10,7 @@ export type T_show_article_type = 'scroll' | 'grid6'
 
 export type T_selected_theme = 'nonTheme' | 'minimal';
 export type T_theme_color = string;
-export type T_theme_font = TFont;
+export type T_theme_font = TFont1[0] | TFont2[0];
 
 export type T_is_generate_public_page = boolean;
 export type T_public_page_slug = string;

@@ -5,13 +5,13 @@ import {
   apiUserInfoThemeFont,
   T_user_info_theme_font,
 } from "../../../pages/api/user_info/theme/font";
-import { TFont } from "../../Store/themes/fonts";
+import { TFont1,TFont2 } from "../../Store/themes/fonts";
 
 export const useChangeThemeFont = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
   const { user_id } = appState.userInfo;
 
-  return async (font: TFont, isFont2: boolean) => {
+  return async (font: TFont1[0] | TFont2[0], isFont2: boolean) => {
     const params: T_user_info_theme_font = {
       user_id,
       theme_font: font,

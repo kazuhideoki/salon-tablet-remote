@@ -17,7 +17,7 @@ import { T_show_article_type, T_selected_theme, T_theme_color } from "../../../S
 import { SelectPrimaryColor } from "./SelectPrimaryColor";
 import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeColor";
 import { SelectFont } from "./SelectFont";
-import { TFont } from "../../../Store/themes/fonts";
+import { TFont1, TFont2 } from "../../../Store/themes/fonts";
 import { useChangeThemeFont } from "../../../ActionCreator/user/useChangeThemeFont";
 
 export type TColor = {hex: T_theme_color}
@@ -46,15 +46,15 @@ export const useManageTheme = () => {
     }
   }
   const handleChangeThemeFont = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont, false);
+    const isChanged = await changeThemeFont(event.target.value as TFont1[0], false);
     if (isChanged) {
-      setFont1(event.target.value as TFont);
+      setFont1(event.target.value as TFont1[0]);
     }
   };
   const handleChangeThemeFont2 = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont, true);
+    const isChanged = await changeThemeFont(event.target.value as TFont2[0], true);
     if (isChanged) {
-      setFont2(event.target.value as TFont);
+      setFont2(event.target.value as TFont2[0]);
     }
   };
 
@@ -113,12 +113,13 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
                <SelectPrimaryColor {...props} className={`${classes.param} ${classes.selectPrimaryColor}`} />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">
-               フォント1
-               <SelectFont {...props} className={classes.param} />
+               日本語フォント
+               <SelectFont {...props} isFont2={true} className={classes.param} />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">
-               フォント2
-               <SelectFont {...props} isFont2={true} className={classes.param} />
+               英数字フォント
+               <HelpButton content='英数字を別にフォントを指定する場合は、こちらで設定できます。'/>
+               <SelectFont {...props} className={classes.param} />
              </Typography>
              <br />
              <SelectShowArticleType {...props} />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select, MenuItem } from '@material-ui/core';
 import { TUseManageThemeProps } from './ManageTheme';
-import { fonts } from '../../../Store/themes/fonts';
+import { fonts1, fonts2, FontNameToFontFamily } from '../../../Store/themes/fonts';
 
 type Props = TUseManageThemeProps & {isFont2?: boolean, className?: string}
 
@@ -12,6 +12,8 @@ export const SelectFont = (props: Props) => {
     : props.handleChangeThemeFont;
   const id = props.isFont2 ? "select_font_2" : "select_font_1";
 
+  const fonts = props.isFont2 ? fonts2 : fonts1
+
   return (
     <>
       <Select
@@ -21,11 +23,13 @@ export const SelectFont = (props: Props) => {
         onChange={handleOnChange}
         className={props.className}
       >
-        {fonts.map((value) => {
+        
+        {//@ts-ignore
+        fonts.map((value) => {
           return (
-            <MenuItem value={value}>
-              <span style={{ fontFamily: value }}>
-                {value}
+            <MenuItem value={value[0]}>
+              <span style={{ fontFamily: FontNameToFontFamily(value[0]) }}>
+                {value[0]}
               </span>
             </MenuItem>
           );

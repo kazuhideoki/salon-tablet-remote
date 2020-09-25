@@ -5,7 +5,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
-import { TUserInfo, T_theme_font1, T_theme_font2, T_theme_color, T_selected_theme } from "./Types";
+import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme } from "./Types";
 import { Store } from "./Store";
 
 import { nonTheme } from "./themes/nonTheme";
@@ -75,8 +75,8 @@ export const ThemeContext = React.createContext({} as TThemeArgs);
 export type TThemeParams = {
   selected_theme: T_selected_theme
   theme_color: T_theme_color;
-  theme_font1: T_theme_font1;
-  theme_font2: T_theme_font2;
+  theme_font1: T_theme_font;
+  theme_font2: T_theme_font;
 };
 
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
