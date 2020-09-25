@@ -10,21 +10,18 @@ import {
   T_order,
   TTags,
   TInstagramAccounts,
-  T_user_id,
-  T_user_name,
-  T_shop_name,
-  T_user_email,
-  T_selected_theme,
   TInstagramMedias,
   T_on_tap,
-  TInfoBar,
   TInfoBarData,
   T_selected_device,
   T_show_article_type,
+  T_theme_color,
+  T_theme_font,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
+import { TThemeParams } from "../Store/ThemeContext";
 
 export type AppStateAction =
   | { type: "SELECT_DEVICE"; payload: T_selected_device }
@@ -65,7 +62,25 @@ export type AppStateAction =
   | {
       type: "SET_THEME";
       payload: {
-        selectedTheme: T_selected_theme;
+        themeParams: TThemeParams;
+      };
+    }
+  | {
+      type: "SET_THEME_COLOR";
+      payload: {
+        themeColor: T_theme_color;
+      };
+    }
+  | {
+      type: "SET_THEME_FONT1";
+      payload: {
+        themeFont: T_theme_font;
+      };
+    }
+  | {
+      type: "SET_THEME_FONT2";
+      payload: {
+        themeFont: T_theme_font;
       };
     }
   | {

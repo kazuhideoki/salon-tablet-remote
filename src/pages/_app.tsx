@@ -8,14 +8,20 @@ import "../../public/base.scss";
 
 // editor用のsnowテーマのcss
 import "react-quill/dist/quill.snow.css";
+
+// ダウンロードフォント用設定 public/fontsにフォントファイルを入れる
+import "../../public/fonts/fonts.css";
+
 // ReactQuillの整形
 import "../../public/quill.scss";
+
 import Head from "next/head";
 import { server } from "../lib/loadUrl";
 import { TUserInfo } from "../app/Store/Types";
 import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 import { TSessionOnj } from ".";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
+import { googleFontsUrl } from "../lib/googleFontsUrl";
 // require("dotenv").config();
 
 export default function MyApp({ Component, pageProps }) {
@@ -37,6 +43,9 @@ export default function MyApp({ Component, pageProps }) {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
           />
+          {/* "webフォント" */}
+          {/* google fontsより */}
+          <link href={googleFontsUrl} rel="stylesheet"></link>
         </Head>
         <Provider options={{ site: server }} session={session}>
           <Component {...pageProps} />

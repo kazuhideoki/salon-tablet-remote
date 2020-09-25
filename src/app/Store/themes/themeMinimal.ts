@@ -1,8 +1,10 @@
 import { createMuiTheme } from "@material-ui/core"
+import { TThemeParams } from "../ThemeContext"
+import { FontNameToFontFamily } from "./fonts"
 
 const theme = createMuiTheme()
 
-export const themeMinimal = createMuiTheme({
+export const themeMinimal = (params: TThemeParams) => createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
@@ -37,8 +39,10 @@ export const themeMinimal = createMuiTheme({
 
   typography: {
     fontFamily: [
-      "futura-pt",
-      '"ヒラギノ角ゴ ProN"',
+      // "futura-pt",
+      FontNameToFontFamily(params.theme_font1),
+      // '"ヒラギノ角ゴ ProN"',
+      FontNameToFontFamily(params.theme_font2),
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',
@@ -53,7 +57,7 @@ export const themeMinimal = createMuiTheme({
   },
    palette: {
     primary: {
-      main: "#134e78",
+      main: params.theme_color,
     },
     secondary: {
       main: '#b0c4de', // lightsteelblue

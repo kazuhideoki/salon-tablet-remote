@@ -1,12 +1,17 @@
 import { IndexPropsData } from "../../pages";
 import { TStoreProps } from "./Store";
+import { TFont1, TFont2 } from "./themes/fonts";
 
 export type T_user_id = number;
 export type T_user_name = string;
 export type T_shop_name = string;
 export type T_user_email = string;
-export type T_selected_theme = string;
 export type T_show_article_type = 'scroll' | 'grid6'
+
+export type T_selected_theme = 'nonTheme' | 'minimal';
+export type T_theme_color = string;
+export type T_theme_font = TFont1[0] | TFont2[0];
+
 export type T_is_generate_public_page = boolean;
 export type T_public_page_slug = string;
 // export type T_public_page_url = string;
@@ -19,16 +24,18 @@ export type TUserInfo = {
   user_name: T_user_name | null;
   shop_name: T_shop_name | null;
   user_email: T_user_email;
-  selected_theme: T_selected_theme;
   show_article_type: T_show_article_type;
   is_first_sign_in: boolean;
 
+  selected_theme: T_selected_theme;
+  theme_color: T_theme_color;
+  theme_font1: T_theme_font;
+  theme_font2: T_theme_font;
+
   is_generate_public_page: T_is_generate_public_page;
   public_page_slug: T_public_page_slug;
-  // public_page_url: T_public_page_url
 
   is_admin: T_is_admin;
-  // bcrypt_password?: string;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
   isSetPassword: boolean;
