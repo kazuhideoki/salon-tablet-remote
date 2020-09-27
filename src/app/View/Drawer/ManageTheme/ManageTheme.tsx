@@ -19,15 +19,23 @@ import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeC
 import { SelectFont } from "./SelectFont";
 import { TFont1, TFont2 } from "../../../Store/themes/fonts";
 import { useChangeThemeFont } from "../../../ActionCreator/user/useChangeThemeFont";
+import { FiberManualRecord } from "@material-ui/icons";
+var colorConvert = require("color-convert");
 
-export type TColor = {hex: T_theme_color}
+
+export type TColor = {hex: T_theme_color, hsl: {
+  h: number, s: number, l: number
+}}
 
 export const useManageTheme = () => {
 
   // const { selectedTheme, setSelectedTheme } = React.useContext(ThemeContext);
   const { appState } = React.useContext(Store)
   const { selected_theme, theme_color, theme_font1, theme_font2, show_article_type } = appState.userInfo
-  const [color, setColor] = React.useState({ hex: theme_color });
+  const [color, setColor] = React.useState({
+    hex: theme_color,
+    hsl: colorConvert.hex.hsl(theme_color),
+  });
   const [font1, setFont1] = React.useState(theme_font1)
   const [font2, setFont2] = React.useState(theme_font2)
 
@@ -40,6 +48,8 @@ export const useManageTheme = () => {
     changeTheme((event.target as HTMLInputElement).value as T_selected_theme);
   };
   const handleChangeThemeColor = async (value: TColor) => {
+    console.log("handleChangeThemeColorのvalueは " + JSON.stringify(value));
+    
     const isChanged = await changeThemeColor(value)
     if (isChanged) {
       setColor(value)
@@ -110,15 +120,26 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
              <br />
              <Typography variant="body1" component="p" color="textSecondary">
                メインカラー
-               <SelectPrimaryColor {...props} className={`${classes.param} ${classes.selectPrimaryColor}`} />
+               <SelectPrimaryColor
+                 {...props}
+                 className={`${classes.param} ${classes.selectPrimaryColor}`}
+               />
+               セカンダリカラー？
+               <FiberManualRecord
+                 style={{ color: colorConvert.hsl.hex(props.color.hsl) }}
+               />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">
                日本語フォント
-               <SelectFont {...props} isFont2={true} className={classes.param} />
+               <SelectFont
+                 {...props}
+                 isFont2={true}
+                 className={classes.param}
+               />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">
                英数字フォント
-               <HelpButton content='英数字を別にフォントを指定する場合は、こちらで設定できます。'/>
+               <HelpButton content="英数字を別にフォントを指定する場合は、こちらで設定できます。" />
                <SelectFont {...props} className={classes.param} />
              </Typography>
              <br />

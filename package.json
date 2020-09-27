@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bookshelf": "^1.1.1",
+    "color-convert": "^2.0.1",
     "cors": "^2.8.5",
     "form-data": "^3.0.0",
     "isomorphic-unfetch": "^3.0.0",
