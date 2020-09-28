@@ -20,22 +20,31 @@ import { SelectFont } from "./SelectFont";
 import { TFont1, TFont2 } from "../../../Store/themes/fonts";
 import { useChangeThemeFont } from "../../../ActionCreator/user/useChangeThemeFont";
 import { FiberManualRecord } from "@material-ui/icons";
+import { generateSecondaryColor } from "../../../../lib/color/generateSecondaryColor";
+import { selectColorReducer } from "../../../Reducer/selectColorReducer";
+import { selectedIconReducer } from "../../../Reducer/selectedIconReducer";
+import { secondaryColor } from "../../../../lib/color/secondaryColor";
 var colorConvert = require("color-convert");
 
-
-export type TColor = {hex: T_theme_color, hsl: {
-  h: number, s: number, l: number
-}}
+export type THsl = {
+  h: number;
+  s: number;
+  l: number;
+}
+export type TColor = {hex: T_theme_color, hsl: THsl}
 
 export const useManageTheme = () => {
 
-  // const { selectedTheme, setSelectedTheme } = React.useContext(ThemeContext);
   const { appState } = React.useContext(Store)
   const { selected_theme, theme_color, theme_font1, theme_font2, show_article_type } = appState.userInfo
-  const [color, setColor] = React.useState({
-    hex: theme_color,
-    hsl: colorConvert.hex.hsl(theme_color),
-  });
+
+  // const hsl = colorConvert.hex.hsl("#0000FF");
+  // console.log("hslは " + hsl);
+  // const generated = generateSecondaryColor(hsl);
+  // console.log("generatedは " + JSON.stringify(generated));
+  // const hex2 = colorConvert.hsl.hex(generated);
+  // console.log("hex2は " + hex2);
+
   const [font1, setFont1] = React.useState(theme_font1)
   const [font2, setFont2] = React.useState(theme_font2)
 
@@ -48,11 +57,18 @@ export const useManageTheme = () => {
     changeTheme((event.target as HTMLInputElement).value as T_selected_theme);
   };
   const handleChangeThemeColor = async (value: TColor) => {
-    console.log("handleChangeThemeColorのvalueは " + JSON.stringify(value));
+    // console.log("handleChangeThemeColorのvalueは " + JSON.stringify(value));
     
     const isChanged = await changeThemeColor(value)
     if (isChanged) {
-      setColor(value)
+      const params = {
+        hex: value.hex,
+        hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`
+      }
+      // console.log('【】value.hslは '  + JSON.stringify(value.hsl));
+      // console.log('【】generateSecondaryColorは ' + generateSecondaryColor(value.hsl));
+      // console.log('【】colorConvert.hsl.hex(generateSecondaryColor(value.hsl))は ' + colorConvert.hsl.hex(generateSecondaryColor(value.hsl)));
+
     }
   }
   const handleChangeThemeFont = async (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -76,7 +92,7 @@ export const useManageTheme = () => {
 
   return {
     selected_theme,
-    color,
+    theme_color,
     handleChangeThemeColor,
     font1,
     font2,
@@ -126,7 +142,10 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
                />
                セカンダリカラー？
                <FiberManualRecord
-                 style={{ color: colorConvert.hsl.hex(props.color.hsl) }}
+                 //  style={{ color: colorConvert.hsl.hex(props.color.hsl) }}
+                 style={{
+                   color: secondaryColor(props.theme_color),
+                 }}
                />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">

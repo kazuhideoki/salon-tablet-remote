@@ -3,49 +3,63 @@ import React from 'react';
 import "../../public/fonts/fonts.css";
 
 import { ManageThemePresenter, useManageTheme, TUseManageThemeProps, TColor } from '../app/View/Drawer/ManageTheme/ManageTheme';
-import { useChangeThemeColor } from '../app/ActionCreator/user/useChangeThemeColor';
-import { useChangeThemeFont } from '../app/ActionCreator/user/useChangeThemeFont';
 import { TFont1, TFont2, FontNameToFontFamily } from '../app/Store/themes/fonts';
 import { googleFontsUrl } from '../lib/googleFontsUrl';
+import { generateSecondaryColor } from '../lib/color/generateSecondaryColor';
 export default {
   title: "Drawer/ManageTheme",
   component: ManageThemePresenter,
 };
+var colorConvert = require("color-convert");
+
 
 export const Normal = () => {
-  // const changeThemeColor = useChangeThemeColor()
-  // const changeThemeFont = useChangeThemeFont()
 
-  const [color, setColor] = React.useState({ hex: '#000000' });
+  const hsl = colorConvert.hex.hsl("#0000FF");
+  console.log('hslは ' + hsl);
+  const generated = generateSecondaryColor(hsl)
+  console.log('generatedは ' + JSON.stringify(generated));
+  const hex2 = colorConvert.hsl.hex(generated)
+  console.log('hex2は ' + hex2);
+  
+  
+
+  const [color, dispatchColor] = React.useState('#0000FF');
+    console.log("colorは " + JSON.stringify(color));
+
   const [font1, setFont1] = React.useState('未設定' as TFont1[0])
   const [font2, setFont2] = React.useState("ヒラギノ角ゴシック" as TFont2[0]);
 
   const props: TUseManageThemeProps = {
     selected_theme: null,
-    color: color,
+    theme_color: color,
     handleChangeThemeColor: async (value: TColor) => {
-      // const isChanged = await changeThemeColor(value);
-      // if (isChanged) {
-        setColor(value);
-      // }
+      const params = {
+        hex: value.hex,
+        hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`,
+      };
+      console.log("【】value.hslは " + JSON.stringify(value.hsl));
+      console.log(
+        "【】generateSecondaryColorは " + generateSecondaryColor(value.hsl)
+      );
+      console.log(
+        "【】colorConvert.hsl.hex(generateSecondaryColor(value.hsl))は " +
+          colorConvert.hsl.hex(generateSecondaryColor(value.hsl))
+      );
+      dispatchColor(value.hex);
     },
     font1: font1,
     handleChangeThemeFont: async (
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
-      // const isChanged = await changeThemeFont(event.target.value as TFont1[0], false);
-      // if (isChanged) {
+
       setFont1(event.target.value as TFont1[0]);
-      // }
     },
     font2: font2,
     handleChangeThemeFont2: async (
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
-      // const isChanged = await changeThemeFont(event.target.value as TFont2[0], true);
-      // if (isChanged) {
       setFont2(event.target.value as TFont2[0]);
-      // }
     },
     show_article_type: null,
     handleChange: null,
@@ -106,11 +120,6 @@ export const Normal = () => {
           <p>Why don’t you try it for one month?</p>
         </div>
         <div
-          // style={{
-          //   fontFamily: `${FontNameToFontFamily(font1)}  ${FontNameToFontFamily(
-          //     font2
-          //   )}`,
-          // }}
           //@ts-ignore
           style={{
             //@ts-ignore

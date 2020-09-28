@@ -8,22 +8,18 @@ import { TUseManageThemeProps } from './ManageTheme';
 type Props = TUseManageThemeProps & {className?: string}
 
 export const SelectPrimaryColor = (props: Props) => {
-         console.log("SelectPrimaryColorのpropsは " + JSON.stringify(props));
 
          return (
            <PopupState variant="popover" popupId="theme-color-popup-popover">
              {(popupState) => (
                <>
                  <TextField
-                   value={props.color.hex}
-                   // value={color}
-                   inputProps={{ style: { color: props.color.hex } }}
-                   // inputProps={{ style: { color: color } }}
+                   value={props.theme_color}
+                   inputProps={{ style: { color: props.theme_color } }}
                    {...bindTrigger(popupState)}
                    className={props.className}
                  />
-                 <FiberManualRecord style={{ color: props.color.hex }} />
-                 {/* <FiberManualRecord style={{ color: color }} /> */}
+                 <FiberManualRecord style={{ color: props.theme_color }} />
                  <Popover
                    {...bindPopover(popupState)}
                    anchorOrigin={{
@@ -36,7 +32,7 @@ export const SelectPrimaryColor = (props: Props) => {
                    }}
                  >
                    <SwatchesPicker
-                     color={props.color}
+                     color={props.theme_color}
                      onChangeComplete={props.handleChangeThemeColor}
                    />
                  </Popover>

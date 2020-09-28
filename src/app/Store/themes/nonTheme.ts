@@ -2,6 +2,7 @@ import { createMuiTheme } from "@material-ui/core";
 import { TThemeParams, themeArgs } from "../ThemeContext";
 import { PanoramaSharp } from "@material-ui/icons";
 import { FontNameToFontFamily } from "./fonts";
+import { secondaryColor } from "../../../lib/color/secondaryColor";
 
 export const nonTheme = (params: TThemeParams) =>
          createMuiTheme({
@@ -31,7 +32,8 @@ export const nonTheme = (params: TThemeParams) =>
                main: params.theme_color,
              },
              secondary: {
-               main: "#f50057", // デフォルト
+              //  main: "#f50057", // デフォルト
+               main: secondaryColor(params.theme_color),
              },
              // tonalOffset: 0.2,
            },
