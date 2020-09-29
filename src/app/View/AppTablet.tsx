@@ -21,6 +21,9 @@ const InfoBar = dynamic(() => import("./InfoBar"), {
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
+
+  // const margin = theme.spacing(1);
+
   return createStyles({
     root: {
       overflow: "hidden",
@@ -37,24 +40,27 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     header: {
       width: themes.pInfoBar.width + "vw",
-      height: themes.pInfoBar.height + "vh",
-      marginBottom: themes.pInfoBar.marginBottom + "vh",
+      height: themes.pInfoBar.height,
+      // marginBottom: themes.pInfoBar.marginBottom + "vh",
+      marginBottom: themes.margin,
     },
     headerOpened: {
       width: `calc(${themes.pInfoBar.width}vw - ${themes.drawerWidth}px)`,
     },
     main: {
       width: themes.pMain.width + "vw",
-      height: themes.pMain.height + "vh",
+      height: `calc(${themes.pMain.height(themes.margin)})`,
+      // height: `calc(100% - ${themes.pFooter.height} - ${themes.pInfoBar.height} - ${theme.spacing(1) * 2}px)` ,
       position: "relative",
     },
     mainOpened: {
       width: `calc(${themes.pMain.width}vw - ${themes.drawerWidth}px)`,
     },
     footer: {
-      marginTop: themes.pFooter.marginTop + "vh",
+      // marginTop: themes.pFooter.marginTop + "vh",
+      marginTop: themes.margin,
       width: themes.pFooter.width + "vw",
-      height: themes.pFooter.height + "vh",
+      height: themes.pFooter.height,
     },
     footerOpened: {
       width: `calc(${themes.pFooter.width}vw - ${themes.drawerWidth}px)`,

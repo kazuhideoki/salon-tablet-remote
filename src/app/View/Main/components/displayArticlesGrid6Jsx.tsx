@@ -30,14 +30,15 @@ const useStyles = makeStyles((theme) => {
   return createStyles({
     itemRoot: {
       height: "50%",
-      paddin: 0,
+      padding: 0,
     },
     rowRoot: {
       // height: '50%',
     },
     gridItem: {
       position: "relative",
-      height: `calc(${themes.pMain.height}vh / 2)`,
+      // height: `calc(${themes.pMain.height}vh / 2)`,
+      // height: `calc(${themes.pMain.height(themes.margin)})`,
       width: "33%",
       padding: itemPadding,
     },
@@ -52,8 +53,8 @@ const useStyles = makeStyles((theme) => {
     thumbnail: {
       display: "block",
       width: "100%",
-      height: `calc((${themes.pMain.height}vh / 2) - ${itemPadding * 2}px)`,
-      objectFit: 'cover',
+      height: `calc((${themes.pMain.height(themes.margin)}) / 2 - ${itemPadding * 2}px)`,
+      objectFit: "cover",
       marginRight: "auto",
       marginLeft: "auto",
     },
