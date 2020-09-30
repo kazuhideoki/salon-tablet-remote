@@ -2,16 +2,13 @@ import React from 'react'
 import {
   Button,
   Popover,
-  GridList,
   makeStyles,
   createStyles,
   Theme,
-  GridListTile,
   Chip,
   useTheme,
 } from "@material-ui/core";
-import { Store } from '../../../Store/Store';
-import { themeArgs } from '../../../Store/ThemeContext';
+
 import { TagsButton } from '../../Footer/PaginationBar/TagsButton';
 
 const useStyles = makeStyles((theme: Theme) =>

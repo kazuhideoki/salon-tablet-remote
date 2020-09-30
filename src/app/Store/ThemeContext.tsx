@@ -3,6 +3,7 @@ import {
   CssBaseline,
   MuiThemeProvider,
   useTheme,
+  useMediaQuery,
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
 import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme } from "./Types";
@@ -20,22 +21,24 @@ const portalPadding = 0
 const portalWidth = screenWidth - portalPadding * 2
 const portalHeight = screenHeight - portalPadding * 2
 
-const pInfoBarMarginBottom = 1
+// const pInfoBarMarginBottom = 1
 const pInfoBarWidth = screenWidth - portalPadding * 2
-const pInfoBarHeight = 7
+// const pInfoBarHeight = 7
 
-const pFooterMarginTop = 1
+// const pFooterMarginTop = 1
 const pFooterWidth = screenWidth - portalPadding * 2
 // const pFooterHeight = 26
-const pFooterHeight = 26
+// const pFooterHeight = 26
 
 const pMainMargin = 1
 const pMainWidth = screenWidth - pMainMargin * 2
-const pMainHeight = screenHeight - pInfoBarHeight - pInfoBarMarginBottom - pFooterHeight - pFooterMarginTop - portalPadding * 2
+// const pMainHeight = screenHeight - pInfoBarHeight - pInfoBarMarginBottom - pFooterHeight - pFooterMarginTop - portalPadding * 2
 
 
 // ThemeContext.Providerを通して渡される値
-export const useThemeArgs = (isMobile) => {
+export const useThemeArgs = () => {
+
+  const isTabletPortrait = useMediaQuery("(max-width:800px)");
 
   const theme = useTheme()
   
@@ -45,42 +48,29 @@ export const useThemeArgs = (isMobile) => {
       width: portalWidth,
       height: portalHeight,
     },
-    // pInfoBar: {
-    //   marginBottom: pInfoBarMarginBottom,
-    //   width: pInfoBarWidth,
-    //   height: pInfoBarHeight,
-    // },
     pInfoBar: {
-      // marginBottom: pInfoBarMarginBottom,
       width: pInfoBarWidth,
       height: "50px",
     },
     pMain: {
       width: pMainWidth,
-      // height: pMainHeight,
-      // height: (margin) =>
-      //   `calc(100% - ${parent.pFooter.height} - ${
-      //     themes.pInfoBar.height
-      //   } - ${theme.spacing(1) * 2}px)`,
       height: function(margin){ 
-        return `100vh - ${args.pFooter.height} - ${
+        return `100vh - ${args.pFooter.height} - ${args.pagination.height} - ${
           args.pInfoBar.height
-        } - ${margin * 2}px`},
+        } - ${margin * 2}px`;},
     },
-    // pFooter: {
-    //   marginTop: pFooterMarginTop,
-    //   width: pFooterWidth,
-    //   height: pFooterHeight,
-    // },
-    pFooter: {
-      // marginTop: pFooterMarginTop,
+
+    pagination: {
       width: pFooterWidth,
-      height: "280px",
+      // ※アイコンのサイズなどを変えると変わる可能性ある、ぴったりなので
+      height: isTabletPortrait? '140px' : "74px",
+    },
+    pFooter: {
+      width: pFooterWidth,
+      height: "155px",
     },
     margin: theme.spacing(1),
 
-    // drawerWidth: isMobile ? 60: 210,
-    // drawerWidth: isMobile ? '60vw': 210,
     drawerWidth: 210,
 
     // fontSize
@@ -135,7 +125,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
         {/* MuiCssBaseline、@globalが適応 */}
         <CssBaseline />
         {/* 独自設定した変数を下へ送る */}
-        <ThemeContext.Provider value={useThemeArgs(isMobile)}>
+        <ThemeContext.Provider value={useThemeArgs()}>
           {props.children}
         </ThemeContext.Provider>
       </MuiThemeProvider>

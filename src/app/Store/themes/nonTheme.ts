@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
-import { TThemeParams, themeArgs } from "../ThemeContext";
+import { TThemeParams } from "../ThemeContext";
 import { PanoramaSharp } from "@material-ui/icons";
 import { FontNameToFontFamily } from "./fonts";
 import { secondaryColor } from "../../../lib/color/secondaryColor";

@@ -203,7 +203,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      {props.children}
+      {/* {props.children} */}
       <Grid
         container
         alignItems="center"
@@ -221,8 +221,10 @@ export const FooterPresenter:React.FC<Props> = (props) => {
 export const Footer = () => {
   const props = useFooterProps()
   return (
-    <FooterPresenter {...props}>
-      <PPagination />
-    </FooterPresenter>
+    <>
+    <FooterPresenter {...props}/>
+      {/* <PPagination />
+    </FooterPresenter> */}
+    </>
   );
 }

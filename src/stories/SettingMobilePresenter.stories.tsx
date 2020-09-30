@@ -1,6 +1,6 @@
 import React from 'react';
 import { SettingMobilePresenter } from '../app/View/mobile/SettingMobile';
-import { themeArgs } from '../app/Store/ThemeContext';
+import { useThemeArgs } from '../app/Store/ThemeContext';
 import { samplefooterItems } from './lib/sampleFooterItems';
 import { TUseDrawerProps } from '../app/View/Drawer/Drawer';
 export default {
@@ -18,7 +18,7 @@ const props: TUseDrawerProps = {
   isMobile: null,
   pass: null,
   setPass: null,
-  themes: themeArgs(false),
+  themes: useThemeArgs(),
   isSetting: false,
   isPublicPage: false,
   isDrawerOpen: false,

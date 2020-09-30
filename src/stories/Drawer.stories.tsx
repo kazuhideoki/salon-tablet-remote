@@ -2,7 +2,7 @@ import React from 'react';
 import { DrawerPresenter, TUseDrawerProps } from '../app/View/Drawer/Drawer';
 import { useTheme } from '@material-ui/core';
 import { samplefooterItems } from './lib/sampleFooterItems';
-import { themeArgs } from '../app/Store/ThemeContext';
+import { useThemeArgs } from '../app/Store/ThemeContext';
 export default {
   title: "Drawer/Drawer",
   component: DrawerPresenter,
@@ -23,7 +23,7 @@ const props: TUseDrawerProps = {
   handleSwitchIsSetting: null,
   pass: null,
   setPass: null,
-  themes: themeArgs(false),
+  themes: useThemeArgs(),
   handleDrawerCloseKeepIsSetting: null,
   closeDrawerTapMain: null,
   handleOnUpDateFooterIcon: null,
@@ -43,7 +43,7 @@ export const Open = () => {
 export const OpenMobile = () => {
   const theme = useTheme()
 
-  return <DrawerPresenter {...props} theme={theme} isDrawerOpen={true} isMobile={true} themes={themeArgs(true)}/>;
+  return <DrawerPresenter {...props} theme={theme} isDrawerOpen={true} isMobile={true} themes={useThemeArgs()}/>;
 }
 export const OpenIsSetting = () => {
   const theme = useTheme()
@@ -60,7 +60,7 @@ export const OpenIsSettingMobile = () => {
       isDrawerOpen={true}
       isSetting={true}
       isMobile={true}
-      themes={themeArgs(true)}
+      themes={useThemeArgs()}
     />
   );
 }

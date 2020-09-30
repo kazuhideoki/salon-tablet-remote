@@ -12,6 +12,7 @@ import { Store } from "../Store/Store";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Drawer } from "./Drawer/Drawer";
 import dynamic from "next/dynamic";
+import { PPagination } from "./Footer/PaginationBar/PPagination";
 const InfoBar = dynamic(() => import("./InfoBar"), {
   ssr: false,
 });
@@ -56,9 +57,18 @@ const useStyles = makeStyles((theme: Theme) => {
     mainOpened: {
       width: `calc(${themes.pMain.width}vw - ${themes.drawerWidth}px)`,
     },
-    footer: {
+    pagination: {
       // marginTop: themes.pFooter.marginTop + "vh",
       marginTop: themes.margin,
+      width: themes.pagination.width + "vw",
+      height: themes.pagination.height,
+    },
+    paginationOpened: {
+      width: `calc(${themes.pagination.width}vw - ${themes.drawerWidth}px)`,
+    },
+    footer: {
+      // marginTop: themes.pFooter.marginTop + "vh",
+      // marginTop: themes.margin,
       width: themes.pFooter.width + "vw",
       height: themes.pFooter.height,
     },
@@ -74,6 +84,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     //  drawerの開閉のアニメーション
     content: {
+      height: 'auto',
       flexGrow: 1,
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
@@ -124,7 +135,15 @@ export const AppTablet = () => {
           >
        
             <PMain />
-            {/* )} */}
+          </Grid>
+          <Grid
+            item
+            // footerOpenedでDrawerの開閉時のCSSを適応
+            className={`${clsx(classes.content, {
+              [classes.contentShift]: open,
+            })} ${classes.pagination} ${open ? classes.paginationOpened : null}`}
+          >
+            <PPagination />
           </Grid>
           <Grid
             item
