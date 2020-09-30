@@ -8,7 +8,7 @@ export const Provider: React.FC = (props) => {
   return (
     <MuiThemeProvider theme={minimal}>
       <CssBaseline />
-      <ThemeContext.Provider value={useThemeArgs()}>
+      <ThemeContext.Provider value={useThemeArgs('medium')}>
         {props.children}
       </ThemeContext.Provider>
     </MuiThemeProvider>

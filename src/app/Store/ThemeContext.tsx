@@ -6,7 +6,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { themeMinimal } from "./themes/themeMinimal";
-import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme } from "./Types";
+import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme, T_footer_icon_size } from "./Types";
 import { Store } from "./Store";
 
 import { nonTheme } from "./themes/nonTheme";
@@ -36,7 +36,7 @@ const pMainWidth = screenWidth - pMainMargin * 2
 
 
 // ThemeContext.Providerを通して渡される値
-export const useThemeArgs = () => {
+export const useThemeArgs = (footer_icon_size: T_footer_icon_size) => {
 
   const isTabletPortrait = useMediaQuery("(max-width:800px)");
 
@@ -67,7 +67,7 @@ export const useThemeArgs = () => {
     },
     pFooter: {
       width: pFooterWidth,
-      height: "155px",
+      height: footer_icon_size === 'medium' ? "145px" : '120px',
     },
     margin: theme.spacing(1),
 
@@ -75,7 +75,7 @@ export const useThemeArgs = () => {
 
     // fontSize
     // icon: 85,
-    icon: 85,
+    icon: footer_icon_size === 'medium' ? 85 : 60,
     iconSmall: 38,
   };
 
@@ -96,7 +96,7 @@ export type TThemeParams = {
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
-    const { selected_theme, theme_color, theme_font1, theme_font2 } = appState.userInfo;
+    const { selected_theme, theme_color, theme_font1, theme_font2, footer_icon_size } = appState.userInfo;
     const params: TThemeParams = {
       selected_theme,
       theme_color,
@@ -125,7 +125,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
         {/* MuiCssBaseline、@globalが適応 */}
         <CssBaseline />
         {/* 独自設定した変数を下へ送る */}
-        <ThemeContext.Provider value={useThemeArgs()}>
+        <ThemeContext.Provider value={useThemeArgs(footer_icon_size)}>
           {props.children}
         </ThemeContext.Provider>
       </MuiThemeProvider>

@@ -52,7 +52,6 @@ export const Normal = () => {
     handleChangeThemeFont: async (
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
-
       setFont1(event.target.value as TFont1[0]);
     },
     font2: font2,
@@ -64,6 +63,8 @@ export const Normal = () => {
     show_article_type: null,
     handleChange: null,
     handleChangeShowArticleType: null,
+    footerIconSize: "medium",
+    handleChangeFooterIconSize: null,
   };
 
   return (

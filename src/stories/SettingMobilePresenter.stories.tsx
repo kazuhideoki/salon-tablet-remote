@@ -18,7 +18,7 @@ const props: TUseDrawerProps = {
   isMobile: null,
   pass: null,
   setPass: null,
-  themes: useThemeArgs(),
+  themes: useThemeArgs('medium'),
   isSetting: false,
   isPublicPage: false,
   isDrawerOpen: false,

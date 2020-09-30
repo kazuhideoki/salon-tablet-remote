@@ -23,7 +23,7 @@ const props: TUseDrawerProps = {
   handleSwitchIsSetting: null,
   pass: null,
   setPass: null,
-  themes: useThemeArgs(),
+  themes: useThemeArgs('medium'),
   handleDrawerCloseKeepIsSetting: null,
   closeDrawerTapMain: null,
   handleOnUpDateFooterIcon: null,
@@ -43,7 +43,7 @@ export const Open = () => {
 export const OpenMobile = () => {
   const theme = useTheme()
 
-  return <DrawerPresenter {...props} theme={theme} isDrawerOpen={true} isMobile={true} themes={useThemeArgs()}/>;
+  return <DrawerPresenter {...props} theme={theme} isDrawerOpen={true} isMobile={true} themes={useThemeArgs('medium')}/>;
 }
 export const OpenIsSetting = () => {
   const theme = useTheme()
@@ -60,7 +60,7 @@ export const OpenIsSettingMobile = () => {
       isDrawerOpen={true}
       isSetting={true}
       isMobile={true}
-      themes={useThemeArgs()}
+      themes={useThemeArgs('medium')}
     />
   );
 }
