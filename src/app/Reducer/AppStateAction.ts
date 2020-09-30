@@ -17,6 +17,7 @@ import {
   T_show_article_type,
   T_theme_color,
   T_theme_font,
+  T_footer_icon_size,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
@@ -81,6 +82,12 @@ export type AppStateAction =
       type: "SET_THEME_FONT2";
       payload: {
         themeFont: T_theme_font;
+      };
+    }
+  | {
+      type: "SET_FOOTER_ICON_SIZE";
+      payload: {
+        footerIconSize: T_footer_icon_size;
       };
     }
   | {

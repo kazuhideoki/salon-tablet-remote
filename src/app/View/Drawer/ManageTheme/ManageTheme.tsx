@@ -13,7 +13,7 @@ import { Typography } from "@material-ui/core";
 import { SelectTheme } from "./SelectTheme";
 import { SelectShowArticleType } from "./SelectShowArticleType";
 import { useChangeShowArticleType } from "../../../ActionCreator/user/useChangeShowArticleType";
-import { T_show_article_type, T_selected_theme, T_theme_color, T_theme_footer_icon_size } from "../../../Store/Types";
+import { T_show_article_type, T_selected_theme, T_theme_color, T_footer_icon_size } from "../../../Store/Types";
 import { SelectPrimaryColor } from "./SelectPrimaryColor";
 import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeColor";
 import { SelectFont } from "./SelectFont";
@@ -25,6 +25,7 @@ import { selectColorReducer } from "../../../Reducer/selectColorReducer";
 import { selectedIconReducer } from "../../../Reducer/selectedIconReducer";
 import { secondaryColor } from "../../../../lib/color/secondaryColor";
 import { SelectFooterIconSize } from "./SelectFooterIconSize";
+import { useChangeFooterIconSize } from "../../../ActionCreator/user/useChangeFooterIconSize";
 var colorConvert = require("color-convert");
 
 export type THsl = {
@@ -37,7 +38,7 @@ export type TColor = {hex: T_theme_color, hsl: THsl}
 export const useManageTheme = () => {
 
   const { appState } = React.useContext(Store)
-  const { selected_theme, theme_color, theme_font1, theme_font2, theme_footer_icon_size, show_article_type } = appState.userInfo
+  const { selected_theme, theme_color, theme_font1, theme_font2, footer_icon_size, show_article_type } = appState.userInfo
 
   // const hsl = colorConvert.hex.hsl("#0000FF");
   // console.log("hslは " + hsl);
@@ -49,12 +50,13 @@ export const useManageTheme = () => {
   const [font1, setFont1] = React.useState(theme_font1)
   const [font2, setFont2] = React.useState(theme_font2)
   const [footerIconSize, setFooterIconSize] = React.useState(
-    theme_footer_icon_size
+    footer_icon_size
   );
 
   const changeTheme = useChangeTheme()
   const changeThemeColor = useChangeThemeColor()
   const changeThemeFont = useChangeThemeFont()
+  const changeFooterIconSize = useChangeFooterIconSize()
   const changeShowArticleType = useChangeShowArticleType()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,10 +100,10 @@ export const useManageTheme = () => {
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     const isChanged = await changeFooterIconSize(
-      event.target.value,
+      event.target.value as T_footer_icon_size
     );
     if (isChanged) {
-      setFooterIconSize(event.target.value as T_theme_footer_icon_size);
+      setFooterIconSize(event.target.value as T_footer_icon_size);
     }
   };
 

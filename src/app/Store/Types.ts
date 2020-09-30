@@ -11,7 +11,7 @@ export type T_show_article_type = 'scroll' | 'grid6'
 export type T_selected_theme = 'nonTheme' | 'minimal';
 export type T_theme_color = string;
 export type T_theme_font = TFont1[0] | TFont2[0];
-export type T_theme_footer_icon_size = 'medium' | 'small'
+export type T_footer_icon_size = "medium" | "small";
 
 export type T_is_generate_public_page = boolean;
 export type T_public_page_slug = string;
@@ -32,7 +32,7 @@ export type TUserInfo = {
   theme_color: T_theme_color;
   theme_font1: T_theme_font;
   theme_font2: T_theme_font;
-  theme_footer_icon_size: T_theme_footer_icon_size;
+  footer_icon_size: T_footer_icon_size;
 
   is_generate_public_page: T_is_generate_public_page;
   public_page_slug: T_public_page_slug;

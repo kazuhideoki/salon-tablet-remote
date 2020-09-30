@@ -141,8 +141,8 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         break;
       case "OPEN_FOOTER_ITEM_MODAL":
         const target = state.footerItems.filter((value) => {
-          return action.payload === value.footer_item_id
-        })
+          return action.payload === value.footer_item_id;
+        });
         newState = {
           ...state,
           setModal: "footer_item_modal",
@@ -280,6 +280,15 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           userInfo: {
             ...state.userInfo,
             theme_font2: action.payload.themeFont,
+          },
+        };
+        break;
+      case "SET_FOOTER_ICON_SIZE":
+        newState = {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            footer_icon_size: action.payload.footerIconSize,
           },
         };
         break;
