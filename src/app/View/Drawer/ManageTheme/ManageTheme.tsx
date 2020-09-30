@@ -13,7 +13,7 @@ import { Typography } from "@material-ui/core";
 import { SelectTheme } from "./SelectTheme";
 import { SelectShowArticleType } from "./SelectShowArticleType";
 import { useChangeShowArticleType } from "../../../ActionCreator/user/useChangeShowArticleType";
-import { T_show_article_type, T_selected_theme, T_theme_color } from "../../../Store/Types";
+import { T_show_article_type, T_selected_theme, T_theme_color, T_theme_footer_icon_size } from "../../../Store/Types";
 import { SelectPrimaryColor } from "./SelectPrimaryColor";
 import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeColor";
 import { SelectFont } from "./SelectFont";
@@ -24,6 +24,7 @@ import { generateSecondaryColor } from "../../../../lib/color/generateSecondaryC
 import { selectColorReducer } from "../../../Reducer/selectColorReducer";
 import { selectedIconReducer } from "../../../Reducer/selectedIconReducer";
 import { secondaryColor } from "../../../../lib/color/secondaryColor";
+import { SelectFooterIconSize } from "./SelectFooterIconSize";
 var colorConvert = require("color-convert");
 
 export type THsl = {
@@ -36,7 +37,7 @@ export type TColor = {hex: T_theme_color, hsl: THsl}
 export const useManageTheme = () => {
 
   const { appState } = React.useContext(Store)
-  const { selected_theme, theme_color, theme_font1, theme_font2, show_article_type } = appState.userInfo
+  const { selected_theme, theme_color, theme_font1, theme_font2, theme_footer_icon_size, show_article_type } = appState.userInfo
 
   // const hsl = colorConvert.hex.hsl("#0000FF");
   // console.log("hslは " + hsl);
@@ -47,6 +48,9 @@ export const useManageTheme = () => {
 
   const [font1, setFont1] = React.useState(theme_font1)
   const [font2, setFont2] = React.useState(theme_font2)
+  const [footerIconSize, setFooterIconSize] = React.useState(
+    theme_footer_icon_size
+  );
 
   const changeTheme = useChangeTheme()
   const changeThemeColor = useChangeThemeColor()
@@ -90,14 +94,27 @@ export const useManageTheme = () => {
          changeShowArticleType((event.target as HTMLInputElement).value as T_show_article_type);
        };
 
+  const handleChangeFooterIconSize = async (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    const isChanged = await changeFooterIconSize(
+      event.target.value,
+    );
+    if (isChanged) {
+      setFooterIconSize(event.target.value as T_theme_footer_icon_size);
+    }
+  };
+
   return {
     selected_theme,
     theme_color,
     handleChangeThemeColor,
     font1,
     font2,
+    footerIconSize,
     handleChangeThemeFont,
     handleChangeThemeFont2,
+    handleChangeFooterIconSize,
     show_article_type,
     handleChange,
     handleChangeShowArticleType,
@@ -160,6 +177,10 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
                英数字フォント
                <HelpButton content="英数字を別にフォントを指定する場合は、こちらで設定できます。" />
                <SelectFont {...props} className={classes.param} />
+             </Typography>
+             <Typography variant="body1" component="p" color="textSecondary">
+               フッターアイコンのサイズ
+               <SelectFooterIconSize {...props} className={classes.param} />
              </Typography>
              <br />
              <SelectShowArticleType {...props} />
