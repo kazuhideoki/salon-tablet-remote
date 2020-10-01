@@ -18,7 +18,7 @@ const props: TUseDrawerProps = {
   isMobile: null,
   pass: null,
   setPass: null,
-  themes: useThemeArgs('medium'),
+  themes: null,
   isSetting: false,
   isPublicPage: false,
   isDrawerOpen: false,
@@ -31,7 +31,5 @@ const props: TUseDrawerProps = {
 
 export const Normal = () => {
 
-  return (
-    <SettingMobilePresenter {...props}/>
-  )
+  return <SettingMobilePresenter {...props} themes={useThemeArgs("medium")} />;
 }

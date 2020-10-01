@@ -23,7 +23,7 @@ const props: TUseDrawerProps = {
   handleSwitchIsSetting: null,
   pass: null,
   setPass: null,
-  themes: useThemeArgs('medium'),
+  themes: null,
   handleDrawerCloseKeepIsSetting: null,
   closeDrawerTapMain: null,
   handleOnUpDateFooterIcon: null,
@@ -31,36 +31,78 @@ const props: TUseDrawerProps = {
 };
 
 export const Close = () => {
-  const theme = useTheme()
+  function test() {
+    const today = new Date();
 
-  return <DrawerPresenter {...props} theme={theme}/>
+    const year = today.getFullYear()
+    const month = today.getMonth() + 1
+    const day = today.getDate()
+    
+    // Browser.msgBox();
+    console.log(year + '年' + month + '月' + day + '日');
+    
+  }
+  test()
+
+  const theme = useTheme()
+  const themes = useThemeArgs("medium");
+
+  return <DrawerPresenter {...props} theme={theme} themes={themes} />;
 }
 export const Open = () => {
   const theme = useTheme()
-
-  return <DrawerPresenter {...props} theme={theme} isDrawerOpen={true}/>;
-}
-export const OpenMobile = () => {
-  const theme = useTheme()
-
-  return <DrawerPresenter {...props} theme={theme} isDrawerOpen={true} isMobile={true} themes={useThemeArgs('medium')}/>;
-}
-export const OpenIsSetting = () => {
-  const theme = useTheme()
-
-  return <DrawerPresenter {...props} theme={theme} isDrawerOpen={true} isSetting={true}/>;
-}
-export const OpenIsSettingMobile = () => {
-  const theme = useTheme()
+  const themes = useThemeArgs("medium");
 
   return (
     <DrawerPresenter
       {...props}
       theme={theme}
+      themes={themes}
+      isDrawerOpen={true}
+    />
+  );
+}
+export const OpenMobile = () => {
+  const theme = useTheme()
+  const themes = useThemeArgs("medium");
+
+  return (
+    <DrawerPresenter
+      {...props}
+      theme={theme}
+      themes={themes}
+      isDrawerOpen={true}
+      isMobile={true}
+      themes={useThemeArgs("medium")}
+    />
+  );
+}
+export const OpenIsSetting = () => {
+  const theme = useTheme()
+  const themes = useThemeArgs("medium");
+
+  return (
+    <DrawerPresenter
+      {...props}
+      theme={theme}
+      themes={themes}
+      isDrawerOpen={true}
+      isSetting={true}
+    />
+  );
+}
+export const OpenIsSettingMobile = () => {
+  const theme = useTheme()
+  const themes = useThemeArgs("medium");
+
+  return (
+    <DrawerPresenter
+      {...props}
+      theme={theme}
+      themes={themes}
       isDrawerOpen={true}
       isSetting={true}
       isMobile={true}
-      themes={useThemeArgs('medium')}
     />
   );
 }

@@ -158,7 +158,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
           (value.on_tap === "appLink" && props.isSetting === true)
         ) {
           return (
-            <ListItem key={index} button>
+            <>
               <a
                 href={
                   value.on_tap === "link" ? value.link_url : value.app_link_url
@@ -166,11 +166,13 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <ListItemIcon>
-                  <Icon />
-                  <ShowStatus {...value} />
-                </ListItemIcon>
-                <ListItemText primary={value.icon_name} />
+                <ListItem key={index} button>
+                  <ListItemIcon>
+                    <Icon />
+                    <ShowStatus {...value} />
+                  </ListItemIcon>
+                  <ListItemText primary={value.icon_name} />
+                </ListItem>
               </a>
               {props.isSetting ? (
                 <ItemEditButtonsBox
@@ -178,7 +180,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                   smallerValue={footerItem[index - 1]}
                 />
               ) : null}
-            </ListItem>
+            </>
           );
         }
       })}
