@@ -140,6 +140,9 @@ const useStyles = makeStyles((theme: Theme) =>
     selectPrimaryColor: {
       width: 80,
     },
+    msg: {
+      marginTop: theme.spacing(3),
+    }
   })
 );
 
@@ -186,6 +189,9 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
              </Typography>
              <br />
              <SelectShowArticleType {...props} />
+             <Typography variant="h5" component="p" color="textSecondary" className={classes.msg}>
+               ※随時機能を追加中です。ご希望があればぜひお知らせください。
+             </Typography>
            </div>
          );
        };
