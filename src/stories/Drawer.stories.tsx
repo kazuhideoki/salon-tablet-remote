@@ -73,7 +73,6 @@ export const OpenMobile = () => {
       themes={themes}
       isDrawerOpen={true}
       isMobile={true}
-      themes={useThemeArgs("medium")}
     />
   );
 }

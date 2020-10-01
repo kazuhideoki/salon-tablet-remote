@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     titleText: {
       maxWidth: themes.icon * 2,
-      whiteSpace: 'nowrap',
+      // whiteSpace: 'nowrap',
     },
   });
 })
