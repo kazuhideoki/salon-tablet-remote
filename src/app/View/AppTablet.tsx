@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     //  drawerの開閉のアニメーション
     content: {
-      height: 'auto',
+      // height: 'auto', これを指定すると scrollの方でfooter_icon_sizeの変更に対応できなくなる
       flexGrow: 1,
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
