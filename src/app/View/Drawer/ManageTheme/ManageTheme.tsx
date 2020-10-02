@@ -162,9 +162,8 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
                  {...props}
                  className={`${classes.param} ${classes.selectPrimaryColor}`}
                />
-               セカンダリカラー？
+               セカンダリカラー
                <FiberManualRecord
-                 //  style={{ color: colorConvert.hsl.hex(props.color.hsl) }}
                  style={{
                    color: secondaryColor(props.theme_color),
                  }}

@@ -8,6 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Link from "next/link";
 import { Facebook } from "@material-ui/icons";
+import { pageList } from "./WebsiteDrawer";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +27,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function WebsiteAppBar({onClick, id}) {
   const classes = useStyles();
+  
+  const router = useRouter();
+  const slug = router.asPath;
+  // console.log("pidは " + slug);
+
+
+  const headerStringArray = pageList.filter((value) => {
+    return value[1] === slug
+  })
 
   return (
     <div className={classes.root} id={id}>
@@ -40,10 +51,15 @@ export default function WebsiteAppBar({onClick, id}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            SALON TABLET
+            {/* ここをページ名に変えたい */}
+            {headerStringArray[0][0]}
           </Typography>
           <IconButton>
-            <a href="https://www.facebook.com/salontablet/">
+            <a
+              href="https://www.facebook.com/salontablet/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <Facebook />
             </a>
           </IconButton>

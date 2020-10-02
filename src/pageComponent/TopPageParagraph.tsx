@@ -1,23 +1,40 @@
 import React from 'react'
-import { Typography } from '@material-ui/core';
+import { Typography, makeStyles, createStyles, Theme } from "@material-ui/core";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    typography: {
+      margin: theme.spacing(2),
+    },
+  })
+);
 
 export const TopPageParagraph = () => {
+  const classes = useStyles()
   return (
     <>
-      <Typography
-        variant="h2"
-        component="h1"
-        gutterBottom
-        // className={classes.typography}
-      >
+      <Typography align="center" variant="h1" component="h1" gutterBottom>
         SALON TABLET
       </Typography>
-      <Typography variant="h4" component="h2" gutterBottom>
-        〜美容師がサロンワークでタブレットを使いこなすためのウェブサービス〜
+      <Typography
+        className={classes.typography}
+        align="center"
+        variant="h4"
+        component="h2"
+        gutterBottom
+      >
+        〜タブレットにも美容室の世界観を〜
       </Typography>
-      <Typography variant="body1" component="h2" gutterBottom>
+      <Typography
+        className={classes.typography}
+        variant="body1"
+        component="h2"
+        gutterBottom
+      >
         美容室でタブレットをどのように活用していますか？雑誌のアプリでしょうか？スタイル写真を見せたり？
-        ごちゃごちゃしがちなタブレットを一画面で管理します。更に美容師からの情報発信をサポートすることで、美容師のサロンワークの手助けをします！
+        SALON
+        TABLETは無機質なタブレットを美容室のインテリア似合わせてカスタマイズできるウェブアプリです。
+        ごちゃごちゃしがちなタブレットの中身をを一画面で管理、更に美容師からの情報発信をサポートすることで美容師のサロンワークの手助けをします！
       </Typography>
     </>
   );

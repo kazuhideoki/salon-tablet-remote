@@ -22,7 +22,6 @@ function Mobile() {
 
   return (
     <div>
-      Mobileだよ 試してみてね。
       <iframe
         id="sample-mobile"
         className={classes.iframe}

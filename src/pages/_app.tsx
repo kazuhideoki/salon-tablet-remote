@@ -22,9 +22,10 @@ import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 import { TSessionOnj } from ".";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { googleFontsUrl } from "../lib/googleFontsUrl";
+import { GetStaticProps, GetServerSideProps } from "next";
 // require("dotenv").config();
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps, slug }) {
   // サーバーサイドでnext-authのsessionをつかうための修正項目
   // "^2.1.0-beta.0",より
   // https://github.com/iaincollins/next-auth/pull/315
@@ -77,3 +78,13 @@ export default function MyApp({ Component, pageProps }) {
 
 
 }
+
+// export const getServerSideProps: GetServerSideProps = async ({req}) => {
+
+//   console.log('slugは ' + req.url);
+  
+
+//   return {
+//     props: { slug: req.url }, // will be passed to the page component as props
+//   };
+// }

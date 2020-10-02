@@ -45,13 +45,13 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string, providers: any };
+type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string, providers: any, className: string };
 
 export const SignInFormPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className={props.className}>
       <form
         method="post"
         // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 Json Web Tokenの関係か
@@ -177,6 +177,6 @@ export const SignInForm = (props) => {
   // console.log("SignInForm" + JSON.stringify(props.csrfToken));
 
   return (
-    <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} providers={props.providers}/>
+    <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} providers={props.providers} className={props.className} />
   );
 };

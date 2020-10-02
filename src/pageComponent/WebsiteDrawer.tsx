@@ -25,7 +25,20 @@ const useStyles = makeStyles({
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
-export default function WebSiteDrawer(props) {
+export const pageList = [
+         ["Home", "/", <Home />],
+         ["About (製作中)", "/about", <AdbOutlined />],
+         ["サンプル Tablet (製作中)", "/sample/tablet", <Tablet />],
+         ["サンプル Mobile (製作中)", "/sample/mobile", <MobileFriendly />],
+         ["FAQ ", "/faq", <FormatQuote />],
+       ];
+
+type Props = {
+  id: string
+}
+
+
+export const WebSiteDrawer: React.FC<Props> = (props) => {
                  const classes = useStyles();
                  const [state, setState] = React.useState({
                    top: false,
@@ -59,21 +72,7 @@ export default function WebSiteDrawer(props) {
                      onKeyDown={toggleDrawer(anchor, false)}
                    >
                      <List>
-                       {[
-                         ["Home", "/", <Home />],
-                         ["About (製作中)", "/about", <AdbOutlined />],
-                         [
-                           "Sample Tablet (製作中)",
-                           "/sample/tablet",
-                           <Tablet />,
-                         ],
-                         [
-                           "Sample Mobile (製作中)",
-                           "/sample/mobile",
-                           <MobileFriendly />,
-                         ],
-                         ["FAQ ", "/faq", <FormatQuote />],
-                       ].map((value, index) => (
+                       {pageList.map((value, index) => (
                          //@ts-ignore
                          <Link href={value[1]} key={index}>
                            <ListItem button>
@@ -83,25 +82,14 @@ export default function WebSiteDrawer(props) {
                          </Link>
                        ))}
                      </List>
-                     {/* <Divider />
-                     <List>
-                       {["All mail", "Trash", "Spam"].map((text, index) => (
-                         <ListItem button key={text}>
-                           <ListItemIcon>
-                             {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                           </ListItemIcon>
-                           <ListItemText primary={text} />
-                         </ListItem>
-                       ))}
-                     </List> */}
                    </div>
                  );
 
                  return (
                    <>
                      <WebsiteAppBar
+                       {...props}
                        onClick={toggleDrawer("top", true)}
-                       id={props.id}
                      />
                      <Drawer
                        anchor={"top"}
@@ -114,3 +102,4 @@ export default function WebSiteDrawer(props) {
                    </>
                  );
                }
+export default WebSiteDrawer
