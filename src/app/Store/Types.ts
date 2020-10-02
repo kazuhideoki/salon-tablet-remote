@@ -1,4 +1,3 @@
-import { IndexPropsData } from "../../pages";
 import { TStoreProps } from "./Store";
 import { TFont1, TFont2 } from "./themes/fonts";
 
@@ -259,7 +258,7 @@ export type T_selected_device = 'responsive' | 'mobile' | 'tablet'
 export const initAppState = (data: TStoreProps) => ({
          isPublicPage: data.isPublicPage,
          uaDevice: data.device,
-        //  ※DBには selected_deviceは入ってない, pablic_pageからの値。reducerはある
+        //  ※DBには selected_deviceは入ってない, pablic_pageからの値。reducerは作ってある
          selectedDevice: data.samplePage || 'responsive' as T_selected_device,
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function WebsiteAppBar({onClick, id}) {
   const classes = useStyles();
-  
+
   const router = useRouter();
   const slug = router.asPath;
   // console.log("pidは " + slug);
@@ -36,6 +36,8 @@ export default function WebsiteAppBar({onClick, id}) {
   const headerStringArray = pageList.filter((value) => {
     return value[1] === slug
   })
+  // ifram内でエラーになるので、ない場合は空文字に
+  const header = headerStringArray.length ? headerStringArray[0][0] : ''
 
   return (
     <div className={classes.root} id={id}>
@@ -52,7 +54,7 @@ export default function WebsiteAppBar({onClick, id}) {
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             {/* ここをページ名に変えたい */}
-            {headerStringArray[0][0]}
+            {header}
           </Typography>
           <IconButton>
             <a
