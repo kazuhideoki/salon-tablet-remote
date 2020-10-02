@@ -26,7 +26,7 @@ export const pageList = [
          ["About (製作中)", "/about", <AdbOutlined />],
          ["サンプル Tablet (製作中)", "/sample/tablet", <Tablet />],
          ["サンプル Mobile (製作中)", "/sample/mobile", <MobileFriendly />],
-         ["FAQ ", "/faq", <FormatQuote />],
+         ["FAQ (製作中)", "/faq", <FormatQuote />],
        ];
 
 type Props = {
