@@ -9,8 +9,8 @@ const useStyles = makeStyles((theme: Theme) =>
     iframe: {
       width: "100vw",
       height: "100vh",
-      borderLeft: '10px solid darkgrey',
-      borderRight: '10px solid darkgrey',
+      // borderLeft: '10px solid darkgrey',
+      // borderRight: '10px solid darkgrey',
       borderTop: 'none',
       borderBottom: 'none',
     },

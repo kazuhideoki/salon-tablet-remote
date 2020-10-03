@@ -136,7 +136,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 <ListItemIcon>
                   <Icon />
                   <ShowStatus {...value} />
-                  {showDataType(value.data_type)}
+                  {showDataType(value.data_type, "", true)}
                 </ListItemIcon>
                 <ListItemText
                   primary={value.icon_name}
@@ -170,6 +170,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                   <ListItemIcon>
                     <Icon />
                     <ShowStatus {...value} />
+                    {showDataType(value.data_type, "", true)}
                   </ListItemIcon>
                   <ListItemText primary={value.icon_name} />
                 </ListItem>
