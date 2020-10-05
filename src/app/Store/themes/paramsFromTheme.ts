@@ -22,6 +22,14 @@ export const generateParamsFromTheme = (
                theme_font2: '"M PLUS Rounded 1c"',
              };
              break;
+           case "white":
+             params = {
+               selected_theme: selectedTheme,
+               theme_color: "#263238",
+               theme_font1: "未設定",
+               theme_font2: '"M PLUS Rounded 1c"',
+             };
+             break;
 
            default:
              break;

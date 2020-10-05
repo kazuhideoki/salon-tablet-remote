@@ -23,6 +23,11 @@ export const SelectTheme = (props: TUseManageThemeProps) => {
                  control={<Radio />}
                  label="ミニマル"
                />
+               <FormControlLabel
+                 value="white"
+                 control={<Radio />}
+                 label="白"
+               />
              </RadioGroup>
            </FormControl>
          );

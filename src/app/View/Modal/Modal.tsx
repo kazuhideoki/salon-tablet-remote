@@ -1,6 +1,6 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import { Slide, DialogContent, makeStyles, createStyles, useTheme } from "@material-ui/core";
+import { Slide, DialogContent, makeStyles, createStyles, useTheme, Fade } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
 import { CloseButton } from "../viewComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
@@ -26,15 +26,15 @@ import { TSetModal } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
 import InfoBarEditor from "../Drawer/InfoBar/InfoBarEditor";
 
-const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-    //@ts-ignore
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
+//     //@ts-ignore
+//     return <Slide direction="up" ref={ref} {...props} />;
+// });
 
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
   const modalSize = appState.edittingPrams.modalSize
-  const { setModal, isModalOpen, currentModalContent, edittingPrams} = appState;
+  const { setModal, isModalOpen, currentModalContent } = appState;
   const openModal = (name: TSetModal) => {
     dispatchAppState({ type: "OPEN_MODAL", payload: name });
   };
@@ -65,6 +65,7 @@ const useModalProps = () => {
     currentModalContent,
     closeModal,
     duration,
+    selected_theme: appState.userInfo.selected_theme
   };
 };
 
@@ -144,6 +145,27 @@ export const ModalPresenter:React.FC<Props> = (props) => {
 
           default:
             console.log("エラーだよ、Modal→ '" + props.setModal + "'");
+        }
+        let Transition;
+        switch (props.selected_theme) {
+          case 'white':
+             Transition = React.forwardRef<unknown, TransitionProps>(
+               function Transition(props, ref) {
+                 //@ts-ignore
+                 return <Fade direction="up" ref={ref} {...props} />;
+               }
+             );
+            
+            break;
+        
+          default:
+            Transition = React.forwardRef<unknown, TransitionProps>(
+              function Transition(props, ref) {
+                //@ts-ignore
+                return <Slide direction="up" ref={ref} {...props} />;
+              }
+            );
+            break;
         }
         
         // modalを閉じるまでタグなどを追加しても再レンダーのmodalのアニメーションを表示させないようにする
