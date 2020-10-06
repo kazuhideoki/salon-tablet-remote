@@ -89,21 +89,23 @@ export type TThemeArgs = ReturnType<typeof useThemeArgs>
 export const ThemeContext = React.createContext({} as TThemeArgs);
 
 export type TThemeParams = {
-  selected_theme: T_selected_theme
+  selected_theme: T_selected_theme;
   theme_color: T_theme_color;
   theme_font1: T_theme_font;
   theme_font2: T_theme_font;
+  theme_font_heading?: T_theme_font;
 };
 
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
-    const { selected_theme, theme_color, theme_font1, theme_font2, footer_icon_size } = appState.userInfo;
+    const { selected_theme, theme_color, theme_font1, theme_font2, theme_font_heading, footer_icon_size } = appState.userInfo;
     const params: TThemeParams = {
       selected_theme,
       theme_color,
       theme_font1,
       theme_font2,
+      theme_font_heading,
     };
     const isMobile = useIsMobile()
 

@@ -17,7 +17,7 @@ import { T_show_article_type, T_selected_theme, T_theme_color, T_footer_icon_siz
 import { SelectPrimaryColor } from "./SelectPrimaryColor";
 import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeColor";
 import { SelectFont } from "./SelectFont";
-import { TFont1, TFont2 } from "../../../Store/themes/fonts";
+import { TFont1, TFont2, fonts2, fonts1 } from "../../../Store/themes/fonts";
 import { useChangeThemeFont } from "../../../ActionCreator/user/useChangeThemeFont";
 import { FiberManualRecord } from "@material-ui/icons";
 import { generateSecondaryColor } from "../../../../lib/color/generateSecondaryColor";
@@ -38,7 +38,7 @@ export type TColor = {hex: T_theme_color, hsl: THsl}
 export const useManageTheme = () => {
 
   const { appState } = React.useContext(Store)
-  const { selected_theme, theme_color, theme_font1, theme_font2, footer_icon_size, show_article_type } = appState.userInfo
+  const { selected_theme, theme_color, theme_font1, theme_font2, theme_font_heading, footer_icon_size, show_article_type } = appState.userInfo
 
   // const hsl = colorConvert.hex.hsl("#0000FF");
   // console.log("hslは " + hsl);
@@ -49,6 +49,7 @@ export const useManageTheme = () => {
 
   const [font1, setFont1] = React.useState(theme_font1)
   const [font2, setFont2] = React.useState(theme_font2)
+  const [fontHeading, setFontHeading] = React.useState(theme_font_heading);
   const [footerIconSize, setFooterIconSize] = React.useState(
     footer_icon_size
   );
@@ -77,16 +78,22 @@ export const useManageTheme = () => {
 
     }
   }
-  const handleChangeThemeFont = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont1[0], false);
+  const handleChangeThemeFont1 = async (event: React.ChangeEvent<{ value: unknown }>) => {
+    const isChanged = await changeThemeFont(event.target.value as TFont1[0], 'theme_font1');
     if (isChanged) {
       setFont1(event.target.value as TFont1[0]);
     }
   };
   const handleChangeThemeFont2 = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont2[0], true);
+    const isChanged = await changeThemeFont(event.target.value as TFont2[0], 'theme_font2');
     if (isChanged) {
       setFont2(event.target.value as TFont2[0]);
+    }
+  };
+  const handleChangeThemeFontHeading = async (event: React.ChangeEvent<{ value: unknown }>) => {
+    const isChanged = await changeThemeFont(event.target.value as TFont2[0], 'theme_font_heading');
+    if (isChanged) {
+      setFontHeading(event.target.value as TFont2[0]);
     }
   };
 
@@ -113,9 +120,11 @@ export const useManageTheme = () => {
     handleChangeThemeColor,
     font1,
     font2,
+    fontHeading,
     footerIconSize,
-    handleChangeThemeFont,
+    handleChangeThemeFont1,
     handleChangeThemeFont2,
+    handleChangeThemeFontHeading,
     handleChangeFooterIconSize,
     show_article_type,
     handleChange,
@@ -173,14 +182,35 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
                日本語フォント
                <SelectFont
                  {...props}
-                 isFont2={true}
+                 whichFont="theme_font2"
                  className={classes.param}
+                 value={props.font2}
+                 fonts={fonts2}
+                 handleOnChange={props.handleChangeThemeFont2}
+               />
+             </Typography>
+             <Typography variant="body1" component="p" color="textSecondary">
+               日本語フォント 見出し
+               <SelectFont
+                 {...props}
+                 whichFont="theme_font_heading"
+                 className={classes.param}
+                 value={props.fontHeading}
+                 fonts={fonts2}
+                 handleOnChange={props.handleChangeThemeFontHeading}
                />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">
                英数字フォント
                <HelpButton content="英数字を別にフォントを指定する場合は、こちらで設定できます。" />
-               <SelectFont {...props} className={classes.param} />
+               <SelectFont
+                 {...props}
+                 whichFont="theme_font1"
+                 className={classes.param}
+                 value={props.font1}
+                 fonts={fonts1}
+                 handleOnChange={props.handleChangeThemeFont1}
+               />
              </Typography>
              <Typography variant="body1" component="p" color="textSecondary">
                フッターアイコンのサイズ
@@ -188,7 +218,12 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
              </Typography>
              <br />
              <SelectShowArticleType {...props} />
-             <Typography variant="h5" component="p" color="textSecondary" className={classes.msg}>
+             <Typography
+               variant="h5"
+               component="p"
+               color="textSecondary"
+               className={classes.msg}
+             >
                ※随時機能を追加中です。ご希望があればぜひお知らせください。
              </Typography>
            </div>

@@ -253,6 +253,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
             theme_color: action.payload.themeParams.theme_color,
             theme_font1: action.payload.themeParams.theme_font1,
             theme_font2: action.payload.themeParams.theme_font2,
+            theme_font_heading: action.payload.themeParams.theme_font_heading,
           },
         };
         break;
@@ -280,6 +281,15 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           userInfo: {
             ...state.userInfo,
             theme_font2: action.payload.themeFont,
+          },
+        };
+        break;
+      case "SET_THEME_FONT_HEADING":
+        newState = {
+          ...state,
+          userInfo: {
+            ...state.userInfo,
+            theme_font_heading: action.payload.themeFont,
           },
         };
         break;
