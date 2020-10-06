@@ -31,6 +31,7 @@ export type TUserInfo = {
   theme_color: T_theme_color;
   theme_font1: T_theme_font;
   theme_font2: T_theme_font;
+  theme_font_heading: T_theme_font;
   footer_icon_size: T_footer_icon_size;
 
   is_generate_public_page: T_is_generate_public_page;

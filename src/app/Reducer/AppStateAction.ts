@@ -85,6 +85,12 @@ export type AppStateAction =
       };
     }
   | {
+      type: "SET_THEME_FONT_HEADING";
+      payload: {
+        themeFont: T_theme_font;
+      };
+    }
+  | {
       type: "SET_FOOTER_ICON_SIZE";
       payload: {
         footerIconSize: T_footer_icon_size;

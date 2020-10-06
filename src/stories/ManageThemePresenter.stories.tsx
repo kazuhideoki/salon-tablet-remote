@@ -29,6 +29,8 @@ export const Normal = () => {
 
   const [font1, setFont1] = React.useState('未設定' as TFont1[0])
   const [font2, setFont2] = React.useState("ヒラギノ角ゴシック" as TFont2[0]);
+    const [fontHeading, setFontHeading] = React.useState("" as TFont2[0]);
+
 
   const props: TUseManageThemeProps = {
     selected_theme: null,
@@ -49,7 +51,7 @@ export const Normal = () => {
       dispatchColor(value.hex);
     },
     font1: font1,
-    handleChangeThemeFont: async (
+    handleChangeThemeFont1: async (
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
       setFont1(event.target.value as TFont1[0]);
@@ -59,6 +61,12 @@ export const Normal = () => {
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
       setFont2(event.target.value as TFont2[0]);
+    },
+    fontHeading,
+    handleChangeThemeFontHeading: async (
+      event: React.ChangeEvent<{ value: unknown }>
+    ) => {
+      setFontHeading(event.target.value as TFont2[0]);
     },
     show_article_type: null,
     handleChange: null,

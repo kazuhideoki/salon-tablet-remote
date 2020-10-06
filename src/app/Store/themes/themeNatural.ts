@@ -46,22 +46,31 @@ export const themeNatural = (params: TThemeParams) =>
              fontWeightRegular: 300,
              fontWeightMedium: 400,
              fontWeightBold: 500,
-             //  h1: {
-             //    fontWeight:
-             //  },
-             //  h2: {
-             //    fontWeight:
-             //  },
-             //  h3: {
-             //    fontWeight:
-             //  },
+             h1: {
+               //  fontFamily: params.theme_font_heading,
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h2: {
+               //  fontFamily: params.theme_font_heading,
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h3: {
+               //  fontFamily: params.theme_font_heading,
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
              h4: {
+               //  fontFamily: params.theme_font_heading,
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
                fontWeight: 400,
              },
              h5: {
+               //  fontFamily: params.theme_font_heading,
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
                fontWeight: 400,
              },
              h6: {
+               //  fontFamily: params.theme_font_heading,
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
                fontWeight: 500,
              },
            },
