@@ -46,6 +46,31 @@ export const themeMinimal = (params: TThemeParams) =>
                '"游ゴシック体"',
                "sans-serif",
              ].join(","),
+             fontWeightLight: 200,
+             fontWeightRegular: 300,
+             fontWeightMedium: 400,
+             fontWeightBold: 500,
+             h1: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h2: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h3: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h4: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+               fontWeight: 400,
+             },
+             h5: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+               fontWeight: 400,
+             },
+             h6: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+               fontWeight: 500,
+             },
            },
            palette: {
              primary: {

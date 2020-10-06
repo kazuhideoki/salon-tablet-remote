@@ -26,13 +26,38 @@ export const nonTheme = (params: TThemeParams) =>
                '"Segoe UI Emoji"',
                '"Segoe UI Symbol"',
              ].join(","),
+             fontWeightLight: 200,
+             fontWeightRegular: 300,
+             fontWeightMedium: 400,
+             fontWeightBold: 500,
+             h1: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h2: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h3: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+             },
+             h4: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+               fontWeight: 400,
+             },
+             h5: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+               fontWeight: 400,
+             },
+             h6: {
+               fontFamily: `${params.theme_font1}, ${params.theme_font_heading}`,
+               fontWeight: 500,
+             },
            },
            palette: {
              primary: {
                main: params.theme_color,
              },
              secondary: {
-              //  main: "#f50057", // デフォルト
+               //  main: "#f50057", // デフォルト
                main: secondaryColor(params.theme_color),
              },
              // tonalOffset: 0.2,
