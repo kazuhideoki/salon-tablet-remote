@@ -1,6 +1,6 @@
 import { createMuiTheme } from "@material-ui/core"
 import { TThemeParams } from "../ThemeContext"
-import { FontNameToFontFamily } from "./fonts";
+import { Deprecated_FontNameToFontFamily } from "./fonts";
 import { secondaryColor } from "../../../lib/color/secondaryColor";
 
 const theme = createMuiTheme()
@@ -41,9 +41,9 @@ export const themeMinimal = (params: TThemeParams) =>
            typography: {
              fontFamily: [
                // "未設定",
-               FontNameToFontFamily(params.theme_font1),
+               Deprecated_FontNameToFontFamily(params.theme_font1),
                // '"M PLUS Rounded 1c"',
-               FontNameToFontFamily(params.theme_font2),
+               Deprecated_FontNameToFontFamily(params.theme_font2),
                '"游ゴシック体"',
                "sans-serif",
              ].join(","),

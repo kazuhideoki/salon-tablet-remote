@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select, MenuItem } from '@material-ui/core';
 import { TUseManageThemeProps } from './ManageTheme';
-import { fonts1, fonts2, FontNameToFontFamily } from '../../../Store/themes/fonts';
+import { fonts1, fonts2, Deprecated_FontNameToFontFamily } from '../../../Store/themes/fonts';
 
 type Props = TUseManageThemeProps & {isFont2?: boolean, className?: string}
 
@@ -28,7 +28,7 @@ export const SelectFont = (props: Props) => {
         fonts.map((value) => {
           return (
             <MenuItem value={value[0]}>
-              <span style={{ fontFamily: FontNameToFontFamily(value[0]) }}>
+              <span style={{ fontFamily: Deprecated_FontNameToFontFamily(value[0]) }}>
                 {value[0]}
               </span>
             </MenuItem>

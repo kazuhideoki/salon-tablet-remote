@@ -30,6 +30,15 @@ export const generateParamsFromTheme = (
                theme_font2: '"M PLUS Rounded 1c"',
              };
              break;
+           case "natural":
+             params = {
+               selected_theme: selectedTheme,
+               theme_color: "#5d4037",
+               theme_font1: "未設定",
+               theme_font2: "源ノ明朝",
+               //  theme_font2: '"Noto Serif JP"',
+             };
+             break;
 
            default:
              break;

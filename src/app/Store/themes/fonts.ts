@@ -20,7 +20,9 @@ export type TFont2 =
   | ["えんぴつ楷書"]
   | ["まきばフォント"]
   | ["ふい字"]
-  | ["ヒラギノ角ゴシック", '"ヒラギノ角ゴ ProN"'];
+  | ["ヒラギノ角ゴシック", '"ヒラギノ角ゴ ProN"']
+  | ["源ノ明朝", '"Noto Serif JP"']
+  // | ['"Noto Serif JP"']
 export const fonts2: TFont2[] = [
          ['"M PLUS Rounded 1c"'],
          ['"Kosugi Maru"'],
@@ -28,9 +30,11 @@ export const fonts2: TFont2[] = [
          ["まきばフォント"],
          ["ふい字"],
          ["ヒラギノ角ゴシック", '"ヒラギノ角ゴ ProN"'],
+         ["源ノ明朝", '"Noto Serif JP"'],
+        //  ['"Noto Serif JP"'],
        ];
 
-export const FontNameToFontFamily = (fontName: TFont1[0] | TFont2[0]) => {
+export const Deprecated_FontNameToFontFamily = (fontName: TFont1[0] | TFont2[0]) => {
 
   const target1 = fonts1.filter((value) => {
     return value[0] === fontName

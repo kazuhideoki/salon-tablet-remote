@@ -1,7 +1,7 @@
 import { createMuiTheme } from "@material-ui/core";
 import { TThemeParams } from "../ThemeContext";
 import { PanoramaSharp } from "@material-ui/icons";
-import { FontNameToFontFamily } from "./fonts";
+import { Deprecated_FontNameToFontFamily } from "./fonts";
 import { secondaryColor } from "../../../lib/color/secondaryColor";
 
 export const nonTheme = (params: TThemeParams) =>
@@ -18,8 +18,8 @@ export const nonTheme = (params: TThemeParams) =>
 
            typography: {
              fontFamily: [
-               FontNameToFontFamily(params.theme_font1),
-               FontNameToFontFamily(params.theme_font2),
+               Deprecated_FontNameToFontFamily(params.theme_font1),
+               Deprecated_FontNameToFontFamily(params.theme_font2),
                "Arial",
                "sans-serif",
                '"Apple Color Emoji"',

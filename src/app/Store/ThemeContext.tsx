@@ -12,6 +12,7 @@ import { Store } from "./Store";
 import { nonTheme } from "./themes/nonTheme";
 import { useIsMobile } from "../../lib/useIsMobile";
 import { themeWhite } from "./themes/themeWhite";
+import { themeNatural } from "./themes/themeNatural";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -117,6 +118,9 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
         break;
       case "white":
         theme = themeWhite(params)
+        break;
+      case "natural":
+        theme = themeNatural(params)
         break;
 
       default:

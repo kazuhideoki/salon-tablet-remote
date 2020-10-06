@@ -1,6 +1,6 @@
 import { createMuiTheme } from "@material-ui/core";
 import { TThemeParams } from "../ThemeContext";
-import { FontNameToFontFamily } from "./fonts";
+import { Deprecated_FontNameToFontFamily } from "./fonts";
 import { secondaryColor } from "../../../lib/color/secondaryColor";
 
 const theme = createMuiTheme();
@@ -11,7 +11,7 @@ export const themeWhite = (params: TThemeParams) =>
              MuiCssBaseline: {
                "@global": {
                  a: {
-                   color: "##607d8b",
+                   color: "#607d8b",
                  },
                  h1: {
                    fontWeight: "400",
@@ -37,9 +37,9 @@ export const themeWhite = (params: TThemeParams) =>
            typography: {
              fontFamily: [
                // "未設定",
-               FontNameToFontFamily(params.theme_font1),
+               Deprecated_FontNameToFontFamily(params.theme_font1),
                // '"M PLUS Rounded 1c"',
-               FontNameToFontFamily(params.theme_font2),
+               Deprecated_FontNameToFontFamily(params.theme_font2),
                '"游ゴシック体"',
                "sans-serif",
              ].join(","),

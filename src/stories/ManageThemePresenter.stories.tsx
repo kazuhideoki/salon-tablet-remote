@@ -3,7 +3,7 @@ import React from 'react';
 import "../../public/fonts/fonts.css";
 
 import { ManageThemePresenter, useManageTheme, TUseManageThemeProps, TColor } from '../app/View/Drawer/ManageTheme/ManageTheme';
-import { TFont1, TFont2, FontNameToFontFamily } from '../app/Store/themes/fonts';
+import { TFont1, TFont2, Deprecated_FontNameToFontFamily } from '../app/Store/themes/fonts';
 import { googleFontsUrl } from '../lib/googleFontsUrl';
 import { generateSecondaryColor } from '../lib/color/generateSecondaryColor';
 export default {
@@ -74,7 +74,7 @@ export const Normal = () => {
       <div style={{ display: "flex" }}>
         <div
           style={{
-            fontFamily: FontNameToFontFamily(font1),
+            fontFamily: Deprecated_FontNameToFontFamily(font1),
             lineHeight: 1.5,
             fontSize: "1.3rem",
           }}
@@ -125,8 +125,8 @@ export const Normal = () => {
           style={{
             //@ts-ignore
             fontFamily: [
-              FontNameToFontFamily(font1),
-              FontNameToFontFamily(font2),
+              Deprecated_FontNameToFontFamily(font1),
+              Deprecated_FontNameToFontFamily(font2),
             ],
             lineHeight: 1.5,
             fontSize: "1.1rem",
