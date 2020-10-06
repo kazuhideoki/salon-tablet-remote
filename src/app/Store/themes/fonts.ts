@@ -11,7 +11,8 @@ export const fonts1: TFont1[] = [
          ["futura-pt"],
        ];
 
-// ※保存されるのは[0]の方。[1]がある場合は0が名前,1が実際のfont-family
+// ※保存されるのは[0]の方。[1]がある場合は1が名前0になる,
+
 
 // 日本語用フォント theme_font2
 export type TFont2 =
@@ -20,8 +21,10 @@ export type TFont2 =
   | ["えんぴつ楷書"]
   | ["まきばフォント"]
   | ["ふい字"]
-  | ["ヒラギノ角ゴシック", '"ヒラギノ角ゴ ProN"']
-  | ["源ノ明朝", '"Noto Serif JP"']
+  // | ["ヒラギノ角ゴシック", '"ヒラギノ角ゴ ProN"']
+  | ['"ヒラギノ角ゴ ProN"', "ヒラギノ角ゴシック"]
+  // | ["源ノ明朝", '"Noto Serif JP"'];
+  | ['"Noto Serif JP"', "源ノ明朝"];
   // | ['"Noto Serif JP"']
 export const fonts2: TFont2[] = [
          ['"M PLUS Rounded 1c"'],
@@ -29,9 +32,9 @@ export const fonts2: TFont2[] = [
          ["えんぴつ楷書"],
          ["まきばフォント"],
          ["ふい字"],
-         ["ヒラギノ角ゴシック", '"ヒラギノ角ゴ ProN"'],
-         ["源ノ明朝", '"Noto Serif JP"'],
-        //  ['"Noto Serif JP"'],
+         ['"ヒラギノ角ゴ ProN"', "ヒラギノ角ゴシック"],
+         ['"Noto Serif JP"', "源ノ明朝"],
+         //  ['"Noto Serif JP"'],
        ];
 
 export const Deprecated_FontNameToFontFamily = (fontName: TFont1[0] | TFont2[0]) => {

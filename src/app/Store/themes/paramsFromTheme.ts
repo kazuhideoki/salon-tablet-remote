@@ -11,7 +11,7 @@ export const generateParamsFromTheme = (
                selected_theme: selectedTheme,
                theme_color: "#3f51b5",
                theme_font1: "未設定",
-               theme_font2: "ヒラギノ角ゴシック",
+               theme_font2: '"ヒラギノ角ゴ ProN"',
              };
              break;
            case "minimal":
@@ -35,7 +35,7 @@ export const generateParamsFromTheme = (
                selected_theme: selectedTheme,
                theme_color: "#5d4037",
                theme_font1: "未設定",
-               theme_font2: "源ノ明朝",
+               theme_font2: '"Noto Serif JP"',
                //  theme_font2: '"Noto Serif JP"',
              };
              break;

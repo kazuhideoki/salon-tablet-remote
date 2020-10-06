@@ -28,8 +28,9 @@ export const SelectFont = (props: Props) => {
         fonts.map((value) => {
           return (
             <MenuItem value={value[0]}>
-              <span style={{ fontFamily: Deprecated_FontNameToFontFamily(value[0]) }}>
-                {value[0]}
+              <span style={{ fontFamily: value[0] }}>
+                
+                {value[1] || value[0]}
               </span>
             </MenuItem>
           );

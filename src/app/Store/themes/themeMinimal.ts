@@ -41,9 +41,8 @@ export const themeMinimal = (params: TThemeParams) =>
            typography: {
              fontFamily: [
                // "未設定",
-               Deprecated_FontNameToFontFamily(params.theme_font1),
-               // '"M PLUS Rounded 1c"',
-               Deprecated_FontNameToFontFamily(params.theme_font2),
+               params.theme_font1,
+               params.theme_font2,
                '"游ゴシック体"',
                "sans-serif",
              ].join(","),

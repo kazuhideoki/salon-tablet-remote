@@ -37,9 +37,8 @@ export const themeWhite = (params: TThemeParams) =>
            typography: {
              fontFamily: [
                // "未設定",
-               Deprecated_FontNameToFontFamily(params.theme_font1),
-               // '"M PLUS Rounded 1c"',
-               Deprecated_FontNameToFontFamily(params.theme_font2),
+               params.theme_font1,
+               params.theme_font2,
                '"游ゴシック体"',
                "sans-serif",
              ].join(","),
@@ -52,11 +51,10 @@ export const themeWhite = (params: TThemeParams) =>
                main: secondaryColor(params.theme_color),
              },
              text: {
-               primary: 'rgba(0, 0, 0, 0.95)',
-               secondary: 'rgba(0, 0, 0, 0.77)',
-               disabled: 'rgba(0, 0, 0, 0.54)',
-               hint: 'rgba(0, 0, 0, 0.54)',
-
+               primary: "rgba(0, 0, 0, 0.95)",
+               secondary: "rgba(0, 0, 0, 0.77)",
+               disabled: "rgba(0, 0, 0, 0.54)",
+               hint: "rgba(0, 0, 0, 0.54)",
              },
            },
 

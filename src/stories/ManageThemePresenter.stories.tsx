@@ -74,7 +74,7 @@ export const Normal = () => {
       <div style={{ display: "flex" }}>
         <div
           style={{
-            fontFamily: Deprecated_FontNameToFontFamily(font1),
+            fontFamily: font1,
             lineHeight: 1.5,
             fontSize: "1.3rem",
           }}
@@ -125,8 +125,7 @@ export const Normal = () => {
           style={{
             //@ts-ignore
             fontFamily: [
-              Deprecated_FontNameToFontFamily(font1),
-              Deprecated_FontNameToFontFamily(font2),
+              font1,font2
             ],
             lineHeight: 1.5,
             fontSize: "1.1rem",

@@ -18,8 +18,8 @@ export const nonTheme = (params: TThemeParams) =>
 
            typography: {
              fontFamily: [
-               Deprecated_FontNameToFontFamily(params.theme_font1),
-               Deprecated_FontNameToFontFamily(params.theme_font2),
+               params.theme_font1,
+               params.theme_font2,
                "Arial",
                "sans-serif",
                '"Apple Color Emoji"',
