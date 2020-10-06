@@ -14,10 +14,10 @@ export const themeWhite = (params: TThemeParams) =>
                    color: "#607d8b",
                  },
                  h1: {
-                   fontWeight: "400",
+                   fontWeight: "500",
                  },
                  h2: {
-                   fontWeight: "400",
+                   fontWeight: "500",
                  },
                },
              },
@@ -38,10 +38,34 @@ export const themeWhite = (params: TThemeParams) =>
              fontFamily: [
                // "未設定",
                params.theme_font1,
+
                params.theme_font2,
                '"游ゴシック体"',
                "sans-serif",
              ].join(","),
+             fontWeightLight: 200, // 使われてない？
+             fontWeightRegular: 300,
+             fontWeightMedium: 400,
+             fontWeightBold: 500,
+             //  h1: {
+             //    fontWeight:
+             //  },
+             //  h2: {
+             //    fontWeight:
+             //  },
+             //  h3: {
+             //    fontWeight:
+             //  },
+            //  これを上書きさせないとfont-weightが反映されない
+             h4: {
+               fontWeight: 400,
+             },
+             h5: {
+               fontWeight: 400,
+             },
+             h6: {
+               fontWeight: 500,
+             },
            },
            palette: {
              primary: {
@@ -72,5 +96,6 @@ export const themeWhite = (params: TThemeParams) =>
              MuiFormControl: {
                variant: "standard",
              },
+          
            },
          });

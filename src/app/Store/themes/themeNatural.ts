@@ -14,10 +14,10 @@ export const themeNatural = (params: TThemeParams) =>
                    color: "##607d8b",
                  },
                  h1: {
-                   fontWeight: "400",
+                   fontWeight: "500",
                  },
                  h2: {
-                   fontWeight: "400",
+                   fontWeight: "500",
                  },
                },
              },
@@ -38,10 +38,32 @@ export const themeNatural = (params: TThemeParams) =>
              fontFamily: [
                // "未設定",
                params.theme_font1,
+               // セリフ体 源ノ明朝
                params.theme_font2,
-               '"游ゴシック体"',
-               "sans-serif",
+               "serif",
              ].join(","),
+             fontWeightLight: 200,
+             fontWeightRegular: 300,
+             fontWeightMedium: 400,
+             fontWeightBold: 500,
+             //  h1: {
+             //    fontWeight:
+             //  },
+             //  h2: {
+             //    fontWeight:
+             //  },
+             //  h3: {
+             //    fontWeight:
+             //  },
+             h4: {
+               fontWeight: 400,
+             },
+             h5: {
+               fontWeight: 400,
+             },
+             h6: {
+               fontWeight: 500,
+             },
            },
            palette: {
              primary: {
@@ -50,27 +72,31 @@ export const themeNatural = (params: TThemeParams) =>
              secondary: {
                main: secondaryColor(params.theme_color),
              },
-             // text: {
-             //   primary: "rgba(0, 0, 0, 0.95)",
-             //   secondary: "rgba(0, 0, 0, 0.77)",
-             //   disabled: "rgba(0, 0, 0, 0.54)",
-             //   hint: "rgba(0, 0, 0, 0.54)",
-             // },
+             text: {
+               primary: "rgba(0, 0, 0, 0.95)",
+               secondary: "rgba(0, 0, 0, 0.77)",
+               disabled: "rgba(0, 0, 0, 0.54)",
+               hint: "rgba(0, 0, 0, 0.54)",
+             },
+             background: {
+               paper: "#fffff9",
+               default: "#fbfbf4",
+             },
            },
 
            props: {
              MuiPaper: {
                variant: "elevation",
-               elevation: 2,
+               elevation: 5,
              },
              MuiTextField: {
                variant: "standard",
              },
              MuiButton: {
-               variant: "outlined",
+               variant: "contained",
              },
              MuiFormControl: {
-               variant: "standard",
+               variant: "filled",
              },
            },
          });
