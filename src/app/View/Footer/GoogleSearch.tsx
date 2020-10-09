@@ -6,11 +6,22 @@ import { Button, makeStyles, Theme, createStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
-      display: 'flex',
+      // display: 'flex',
+      padding: theme.spacing(2),
     },
     textField: {
+      marginRight: theme.spacing(2),
       minWidth: 300,
       maxWidth: '90vw',
+    },
+    button: {
+    },
+    a: {
+      textDecoration: 'none',
+      color: theme.palette.text.primary,
+      // display: 'block',
+      // width: '100%',
+      // height: '100%',
     }
   });
 });
@@ -41,6 +52,7 @@ export const GoogleSearch = () => {
             className={classes.textField}
             value={field}
             onChange={(e) => setField(e.target.value)}
+            autoFocus
             label="Google 検索"
             margin="normal"
             InputProps={{ ...params.InputProps, type: "search" }}
@@ -51,8 +63,15 @@ export const GoogleSearch = () => {
         href={`https://www.google.com/search?newwindow=1&q=${query}`}
         rel="noopener noreferrer"
         target="_blank"
+        className={classes.a}
       >
-        <Button color="primary">検索</Button>
+        <Button
+          // className={classes.button}
+          variant="contained"
+          color="primary"
+        >
+          検索
+        </Button>
       </a>
     </div>
   );
