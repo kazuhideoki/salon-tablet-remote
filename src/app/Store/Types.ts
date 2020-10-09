@@ -100,7 +100,7 @@ export type T_item_content = string | null;
 export type T_item_excerpt = string | null;
 export type T_link_url = string | null;
 export type T_app_link_url = string | null;
-export type T_modal_size = "fullScreen" | "large" | "medium" | "small";
+export type T_modal_size = "fullScreen" | "large" | "medium" | "small" | 'upperSide';
 export type T_order = number;
 export type T_order_sidebar = number;
 

@@ -101,7 +101,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <FooterItemModal />;
             break;
           case "google_search":
-            modalStyle = useModalSize("small");
+            modalStyle = useModalSize("upperSide");
             ModalContent = () => <GoogleSearch/>
             break;
           case "instagram_media_modal":

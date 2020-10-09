@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     textField: {
       minWidth: 300,
+      maxWidth: '90vw',
     }
   });
 });
@@ -17,9 +18,13 @@ const useStyles = makeStyles((theme: Theme) => {
 export const GoogleSearch = () => {
   const classes = useStyles()
 
+  const [field, setField] = React.useState('')
+  const query = field.replace(/ /g, "+");
+
   // onClick + onEnter
   const handleSearch = () => {
     // google サーチする
+    fetch(`https://www.google.com/search?newwindow=1&q=${query}`);
     // 検索履歴 の登録
   }
 
@@ -34,13 +39,21 @@ export const GoogleSearch = () => {
           <TextField
             {...params}
             className={classes.textField}
+            value={field}
+            onChange={(e) => setField(e.target.value)}
             label="Google 検索"
             margin="normal"
             InputProps={{ ...params.InputProps, type: "search" }}
           />
         )}
       />
-      <Button color="primary">検索</Button>
+      <a
+        href={`https://www.google.com/search?newwindow=1&q=${query}`}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <Button color="primary">検索</Button>
+      </a>
     </div>
   );
 }

@@ -4,22 +4,17 @@ import { T_modal_size } from "../../Store/Types";
 export const fullScreen = {
   width: "100vw",
   height: "100vh",
-  // maxWidth: "100%",
   maxHeight: "100%",
   margin: 0,
 };
 export const large = {
   width: "90vw",
   height: "90vh",
-  // maxWidth: "100%",
-  // maxHeight: "100%",
   margin: 0,
 };
 export const medium = {
   width: "75vw",
   height: "75vh",
-  // maxWidth: "100%",
-  // maxHeight: "100%",
   margin: 0,
 };
 
@@ -38,6 +33,14 @@ export const small = process.browser ? {
   margin: 0,
 } : null
 
+const upperSide = {
+  width: '90vw',
+  height: 'fit-content',
+  margin: 0,
+  marginBottom: 'auto',
+  marginTop: 50,
+}
+
 export const useModalSize  = (modalSize: T_modal_size) => {
 
   switch (modalSize) {
@@ -49,5 +52,7 @@ export const useModalSize  = (modalSize: T_modal_size) => {
       return medium;
     case "small":
       return small
+    case 'upperSide':
+      return upperSide
   }
 }
