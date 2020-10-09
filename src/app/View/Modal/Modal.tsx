@@ -201,7 +201,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             onClose={props.closeModal}
             maxWidth="xl"
           >
-            <CloseButton onClick={props.closeModal} />
+            {props.setModal === 'google_search' ? null : <CloseButton onClick={props.closeModal} /> }
             <DialogContent className={classes.dialogContent}>
               <ModalContent />
             </DialogContent>

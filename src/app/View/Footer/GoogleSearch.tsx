@@ -4,14 +4,14 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Button, makeStyles, Theme, createStyles } from "@material-ui/core";
 
 export const useGoogleSearchProps = () => {
-  const [update, setUpdate] = React.useState(false)
+  // const [update, setUpdate] = React.useState(false)
   const [field, setField] = React.useState('')
   const [query, setQuery] = React.useState('')
-  console.log('queryは ' + query)
 
   const [searchHistoryStr, setSearchHistoryStr] = React.useState(localStorage.getItem(
     "googleSearchHistory")
   )
+  console.log('searchHistoryStrは ' + searchHistoryStr)
 
   const searchHistoryArr = searchHistoryStr ? searchHistoryStr.split(',') : []
 
@@ -21,6 +21,7 @@ export const useGoogleSearchProps = () => {
   }
 
   const hancleOnClick = () => {
+    setField('')
 
     const str: TGoogleSearchHistory = localStorage.getItem(
       "googleSearchHistory"
@@ -42,8 +43,10 @@ export const useGoogleSearchProps = () => {
     console.log('newStrは ' + newStr)
     localStorage.setItem("googleSearchHistory", newStr);
 
-    setField('')
-    setUpdate(!update)
+    
+    setSearchHistoryStr(localStorage.getItem(
+      "googleSearchHistory"))
+    // setUpdate(!update)
 
   }
 
@@ -52,7 +55,7 @@ export const useGoogleSearchProps = () => {
   }
 
   return {
-    update,
+    // update,
     field,
     setField,
     query,
@@ -96,14 +99,14 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
         freeSolo
         id="google-search"
         disableClearable
-        // options={top100Films.map((option) => option.title)}
         options={props.searchHistoryArr.map((value) => value)}
+        // options={props.searchHistoryArr.map((value) => <span onClick={() => props.handleOnChange(value)}>{value}</span>)}
+        onChange={(e, value) => props.handleOnChange(value)}
         renderInput={(params) => (
           <TextField
             {...params}
             className={classes.textField}
             value={props.field}
-            // onChange={(e) => props.setField(e.target.value)}
             onChange={(e) => props.handleOnChange(e.target.value)}
             // onKeyPress={(e) => {
             //   if (e.key == "Enter") {
@@ -120,10 +123,10 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
       />
       <a
         href={`https://www.google.com/search?newwindow=1&q=${props.query}`}
-        // href={`https://www.google.com/webhp?ion=1&espv=2&es_th=1&ie=UTF-8#q=${props.field.replace(/ /g, "+")}`}
         rel="noopener noreferrer"
         target="_blank"
         className={classes.a}
+        // onClick={() => props.setField('')}
       >
         <Button
           className={classes.button}
