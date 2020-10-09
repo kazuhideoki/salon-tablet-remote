@@ -2,7 +2,8 @@ import { TUseFooterItemEditorProps } from "../../app/View/Drawer/ItemEditor/Foot
 
 export const propsFooterItemEditor: TUseFooterItemEditorProps = {
          dispatchAppState: null,
-         onTap: "modal",
+         onTapRadio: "modal",
+         setOnTapRadio: null,
          isEditting: false,
          titleText: "",
          editorText: "",

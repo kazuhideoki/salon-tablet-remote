@@ -6,6 +6,9 @@ import {
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { EditorContext } from "../app/Store/EditorContext";
 import { WifiTwoTone } from '@material-ui/icons';
+import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
+
+const props = propsFooterItemEditor
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +25,8 @@ export const Normal = () => {
 
   return (
     <>
-      <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/>
+      {/* <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/> */}
+      <SelectIcon {...props}/>
 
     </>
 );
@@ -33,7 +37,7 @@ export const Selected = () => {
 
   return (
     //@ts-ignore
-      <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/>
+      <SelectIcon {...props} selectedIcon={selectedIcon} />
   );
 };
 

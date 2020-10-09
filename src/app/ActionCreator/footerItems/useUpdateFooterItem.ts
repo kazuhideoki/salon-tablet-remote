@@ -23,7 +23,7 @@ export const useUpdateFooterItem = () => {
         icon_name: param.titleText,
         // 選択されていたらアイコンの名前を返す
         displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
-        on_tap: param.onTap, // 要確認
+        on_tap: param.onTapRadio,
         item_content: param.editorText,
         item_excerpt: param.editorTextExcerpt,
         link_url: param.linkUrl,

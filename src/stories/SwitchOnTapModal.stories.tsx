@@ -18,7 +18,7 @@ export const Normal = () => {
       <p>d</p>
       <p>d</p>
       <p>d</p>
-      <SwitchOnTapModal {...propsFooterItemEditor} onTap={'modal'} />;
+      <SwitchOnTapModal {...propsFooterItemEditor} onTapRadio={'modal'} />;
     </>
   );
 }
@@ -34,7 +34,7 @@ export const isMobile = () => {
       <p>d</p>
       <SwitchOnTapModal
         {...propsFooterItemEditor}
-        onTap={"modal"}
+        onTapRadio={"modal"}
         isMobile={true}
       />
       ;

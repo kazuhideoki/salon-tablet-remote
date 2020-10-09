@@ -100,8 +100,7 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
         id="google-search"
         disableClearable
         options={props.searchHistoryArr.map((value) => value)}
-        // options={props.searchHistoryArr.map((value) => <span onClick={() => props.handleOnChange(value)}>{value}</span>)}
-        onChange={(e, value) => props.handleOnChange(value)}
+        onChange={(e, value) => props.handleOnChange(value)} // 選択時にfieldとqueryに反映させるために必要
         renderInput={(params) => (
           <TextField
             {...params}

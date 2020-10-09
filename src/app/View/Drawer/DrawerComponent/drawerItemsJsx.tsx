@@ -120,7 +120,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
         const Icon = () => <ItemIcon />;
 
-        if (value.on_tap === "modal") {
+        if ((value.on_tap === "modal") || (value.on_tap === "google")) {
           return (
             <div key={index}>
               <ListItem

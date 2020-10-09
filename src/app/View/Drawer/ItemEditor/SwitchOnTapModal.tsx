@@ -9,6 +9,7 @@ import { HelpButton } from '../../viewComponents/buttons/HelpButton';
 import { T_on_tap } from '../../../Store/Types';
 import { AppStateAction } from '../../../Reducer/AppStateAction';
 import { TUseFooterItemEditorProps } from './FooterItemEditor';
+import { Search } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -23,10 +24,17 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
   const classes = useStyles()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.dispatchAppState({
-      type: "SET_ON_TAP",
-      payload: (event.target as HTMLInputElement).value as T_on_tap,
-    });
+    // if (event.target.value === 'google') {
+    //   console.log('googleだよ');
+      
+    //   props.dispatchSelectedIcon({ type: 'SET_ICON', payload: [Search, "Search"]})
+    // }
+
+    // props.dispatchAppState({
+    //   type: "SET_ON_TAP",
+    //   payload: event.target.value as T_on_tap,
+    // });
+    props.setOnTapRadio(event.target.value as T_on_tap)
   };
 
   return (
@@ -45,7 +53,7 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
           row
           aria-label="switch-on-tap"
           name="switch-on-tap"
-          value={props.onTap}
+          value={props.onTapRadio}
           onChange={handleChange}
         >
           <FormControlLabel
@@ -63,7 +71,7 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
           <FormControlLabel
             value="google"
             control={<Radio />}
-            label={`Google検索`}
+            label={`Google検索(実験機能)`}
           />
         </RadioGroup>
       </FormControl>

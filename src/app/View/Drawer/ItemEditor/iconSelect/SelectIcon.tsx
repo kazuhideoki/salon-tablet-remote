@@ -6,6 +6,7 @@ import { Popover, Button, TextField, IconButton, SvgIconTypeMap, Typography } fr
 import { IconsSetting } from "./icons";
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { MoodBad, AddCircleOutlineOutlined, SentimentSatisfiedTwoTone, EmojiEmotionsTwoTone } from '@material-ui/icons';
+import { TUseFooterItemEditorProps } from '../FooterItemEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,16 +26,9 @@ export const IconItem = (props:TIconItem) => {
   return <props.icon style={{ fontSize: 50 }} />;
 };
 
-type Props = {
-  selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string]
-  dispatchSelectedIcon: React.Dispatch<{
-    type: "SET_ICON";
-    payload: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
-  }>
-  className?: string,
-}
+type Props = TUseFooterItemEditorProps & { className?: string }
 
-export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon, className}) => {
+export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon, className, onTapRadio}) => {
   const classes = useStyles();
 
   // 以下アイコン選択のPopoverのための設定
@@ -51,14 +45,13 @@ export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon,
   
   return (
     <div className={className}>
-      {/* <Button aria-describedby={id} color="primary" onClick={handleClick} startIcon={<SentimentSatisfiedTwoTone/>}> */}
       <Button
         aria-describedby={id}
         color="primary"
         onClick={handleClick}
-        endIcon={ selectedIcon ? <IconItem icon={selectedIcon[0]} /> : '未選択'}
         size='large'
         startIcon={<EmojiEmotionsTwoTone/>}
+        endIcon={ selectedIcon ? <IconItem icon={selectedIcon[0]} /> : '未選択'}
       >
         アイコン
       </Button>

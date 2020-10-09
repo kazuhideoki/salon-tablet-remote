@@ -49,6 +49,8 @@ const useFooterItemEditorProps = () => {
     isEditting ? footerItem.data_type : "default_data"
   );
 
+  const [onTapRadio, setOnTapRadio] = React.useState(onTap)
+
   const [linkUrl, setLinkUrl] = React.useState(
     isEditting ? footerItem.link_url : ""
   );
@@ -90,7 +92,7 @@ const useFooterItemEditorProps = () => {
       is_published,
       titleText,
       selectedIcon,
-      onTap,
+      onTapRadio,
       editorText,
       editorTextExcerpt,
       linkUrl,
@@ -111,7 +113,8 @@ const useFooterItemEditorProps = () => {
   return {
     // theme,
     dispatchAppState,
-    onTap,
+    onTapRadio,
+    setOnTapRadio,
     isEditting,
     titleText,
     editorText,
@@ -136,6 +139,8 @@ const useFooterItemEditorProps = () => {
     handleOnSidebar,
   };
 }
+
+export type TUseFooterItemEditorProps = ReturnType<typeof useFooterItemEditorProps>
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -191,15 +196,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type TUseFooterItemEditorProps = ReturnType<typeof useFooterItemEditorProps>
-
 export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
          props
        ) => {
          const classes = useStyles();
 
          let mainField: JSX.Element;
-         switch (props.onTap) {
+         switch (props.onTapRadio) {
            case 'modal':
              mainField = (
                <div>
@@ -254,7 +257,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
              mainField = (
                <div className={classes.googleSearch}>
                  <Typography variant='h4' color='textSecondary' align='center'>
-                  Google検索機能
+                  Google検索機能（実験機能）
                  </Typography>
                </div>
              )
@@ -296,8 +299,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
 
                <SelectIcon
                  className={classes.selectIcon}
-                 selectedIcon={props.selectedIcon}
-                 dispatchSelectedIcon={props.dispatchSelectedIcon}
+                 {...props}
                />
              </div>
 

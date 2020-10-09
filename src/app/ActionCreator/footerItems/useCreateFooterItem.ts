@@ -13,7 +13,7 @@ export type TCreateFooterItem = {
   is_published: T_is_published_footer_items;
   titleText: string;
   selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string];
-  onTap: T_on_tap;
+  onTapRadio: T_on_tap;
   editorText: string;
   editorTextExcerpt: string;
   linkUrl: string;
@@ -56,7 +56,7 @@ export const useCreateFooterItem = () => {
       icon_name: param.titleText,
       // 選択されていたらアイコンの名前を返す.
       displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
-      on_tap: param.onTap,
+      on_tap: param.onTapRadio,
       item_content: param.editorText,
       item_excerpt: param.editorTextExcerpt,
       link_url: param.linkUrl,
