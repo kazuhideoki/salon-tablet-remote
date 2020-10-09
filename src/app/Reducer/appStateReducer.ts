@@ -145,7 +145,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         });
         newState = {
           ...state,
-          setModal: "footer_item_modal",
+          setModal: target[0].on_tap === 'modal' ? "footer_item_modal" : 'google_search',
           isModalOpen: true,
           currentModalContent: {
             ...state.currentModalContent,

@@ -148,7 +148,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
           {showDataType(value.data_type, classes.showDataType)}
 
           {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
-          {value.on_tap === "modal" ? (
+          {(value.on_tap === "modal") || (value.on_tap === "google") ? (
             <IconAndText
               className={props.isSetting ? classes.isSettingIconAndText : null}
               icon={
@@ -169,13 +169,13 @@ export const FooterPresenter:React.FC<Props> = (props) => {
               loading={props.loading}
             />
           ) : (
-            // "modal"以外→"link"か"appLink"の時
+            // "modal", 'google'以外→"link"か"appLink"の時
             <a
               href={
                 value.on_tap === "link" ? value.link_url : value.app_link_url
               }
-              rel='noopener noreferrer'
-              target='_blank'
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <IconAndText
                 className={

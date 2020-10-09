@@ -25,6 +25,7 @@ import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 import { TSetModal } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
 import InfoBarEditor from "../Drawer/InfoBar/InfoBarEditor";
+import { GoogleSearch } from "../Footer/GoogleSearch";
 
 // const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
 //     //@ts-ignore
@@ -72,7 +73,6 @@ const useModalProps = () => {
 type Props = ReturnType<typeof useModalProps>
 
 const useStyles = makeStyles((theme) => {
-  const { appState } = React.useContext(Store)
   return createStyles({
     root: {
       padding: 0,
@@ -99,6 +99,10 @@ export const ModalPresenter:React.FC<Props> = (props) => {
           case "footer_item_modal":
             modalStyle = useModalSize(props.currentModalContent.modalSize)
             ModalContent = () => <FooterItemModal />;
+            break;
+          case "google_search":
+            modalStyle = useModalSize("small");
+            ModalContent = () => <GoogleSearch/>
             break;
           case "instagram_media_modal":
             modalStyle = useModalSize(props.currentModalContent.modalSize)

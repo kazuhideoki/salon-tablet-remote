@@ -60,6 +60,11 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
             control={<Radio />}
             label={`${props.isMobile ? "※" : ""}アプリ`}
           />
+          <FormControlLabel
+            value="google"
+            control={<Radio />}
+            label={`Google検索`}
+          />
         </RadioGroup>
       </FormControl>
     // </div>

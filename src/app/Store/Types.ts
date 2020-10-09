@@ -94,7 +94,7 @@ export type T_created_at_footer_items = string;
 export type T_updated_at_footer_items = string | null;
 export type T_icon_name = string | null;
 export type T_displayed_icon_name = string | null;
-export type T_on_tap = "modal" | "link" | "appLink";
+export type T_on_tap = "modal" | "link" | "appLink" | 'google';
 // export type T_on_sidebar = boolean
 export type T_item_content = string | null;
 export type T_item_excerpt = string | null;
@@ -234,6 +234,7 @@ export type TInstagramMedias = {
 export type TSetModal =
   | "content_modal"
   | "footer_item_modal"
+  | "google_search"
   | "instagram_media_modal"
   | "select_tags"
   | "select_instagram"

@@ -170,6 +170,9 @@ const useStyles = makeStyles((theme: Theme) =>
     appLink: {
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
+    googleSearch: {
+      margin: theme.spacing(4),
+    },
 
     bottomDiv: {
       position: "sticky",
@@ -196,54 +199,71 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
          const classes = useStyles();
 
          let mainField: JSX.Element;
-         if (props.onTap === "modal") {
-           mainField = (
-             <div>
-               <SelectModalSize
-                 {...props}
-                 className={classes.selectModalSize}
-               />
-               
-               <QuillEditor
-                 editorText={props.editorText}
-                 setEditorText={props.setEditorText}
-                 setEditorTextExcerpt={props.setEditorTextExcerpt}
-                 charCount={props.charCountFooterItemContent}
-                 setCharCount={props.setCharCountFooterItemContent}
-               />
-               <div className={classes.charCounter}>
-                 <CharCounter
+         switch (props.onTap) {
+           case 'modal':
+             mainField = (
+               <div>
+                 <SelectModalSize
+                   {...props}
+                   className={classes.selectModalSize}
+                 />
+
+                 <QuillEditor
+                   editorText={props.editorText}
+                   setEditorText={props.setEditorText}
+                   setEditorTextExcerpt={props.setEditorTextExcerpt}
                    charCount={props.charCountFooterItemContent}
-                   limitCount={1000}
-                   align="right"
-                   isShowCount
+                   setCharCount={props.setCharCountFooterItemContent}
+                 />
+                 <div className={classes.charCounter}>
+                   <CharCounter
+                     charCount={props.charCountFooterItemContent}
+                     limitCount={1000}
+                     align="right"
+                     isShowCount
+                   />
+                 </div>
+               </div>
+             );
+             break;
+           case 'link':
+             mainField = (
+               <div>
+                 <TextField
+                   id="linkUrl"
+                   label="リンクURL"
+                   value={props.linkUrl}
+                   onChange={(e) => props.setLinkUrl(e.target.value)}
+                   className={classes.linkTextField}
                  />
                </div>
-             </div>
-           );
-         } else if (props.onTap === "link") {
-           mainField = (
-             <div>
-               <TextField
-                 id="linkUrl"
-                 label="リンクURL"
-                 value={props.linkUrl}
-                 onChange={(e) => props.setLinkUrl(e.target.value)}
-                 className={classes.linkTextField}
-               />
-             </div>
-           );
-         } else if (props.onTap === "appLink") {
-           mainField = (
-             <div>
-               <SelectAppLink
-                 appLinkUrl={props.appLinkUrl}
-                 setAppLinkUrl={props.setAppLinkUrl}
-                 className={classes.appLink}
-               />
-             </div>
-           );
+             );
+             break;
+           case 'appLink':
+             mainField = (
+               <div>
+                 <SelectAppLink
+                   appLinkUrl={props.appLinkUrl}
+                   setAppLinkUrl={props.setAppLinkUrl}
+                   className={classes.appLink}
+                 />
+               </div>
+             );
+             break;
+           case 'google':
+             mainField = (
+               <div className={classes.googleSearch}>
+                 <Typography variant='h4' color='textSecondary' align='center'>
+                  Google検索機能
+                 </Typography>
+               </div>
+             )
+             break;
+
+           default:
+             break;
          }
+     
 
          return (
            <>
