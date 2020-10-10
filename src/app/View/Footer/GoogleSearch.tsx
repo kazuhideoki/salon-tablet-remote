@@ -3,6 +3,11 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Button, makeStyles, Theme, createStyles } from "@material-ui/core";
 
+ const deleteExcessSpace = (str: string) => {
+   let newStr = str.trim()
+   return newStr.replace(/\s+/g, " ");
+ }
+
 export const useGoogleSearchProps = () => {
   // const [update, setUpdate] = React.useState(false)
   const [field, setField] = React.useState('')
@@ -17,11 +22,11 @@ export const useGoogleSearchProps = () => {
 
   const handleOnChange = value => {
     setField(value)
-    setQuery(value.replace(/ /g, "+"))
+    setQuery(deleteExcessSpace(value).replace(/ /g, "+"))
   }
 
   const hancleOnClick = () => {
-    setField('')
+    setField('') // 効かない？
 
     const str: TGoogleSearchHistory = localStorage.getItem(
       "googleSearchHistory"
@@ -29,15 +34,21 @@ export const useGoogleSearchProps = () => {
     console.log('strは ' + str);
 
     let newStr
+    let fieldStr = deleteExcessSpace(field)
+    console.log('fieldStrは ' + fieldStr)
+    
+    if (!fieldStr) {
+      return null      
+    }
 
     if (str) {
       let arr = []
       arr = str.split(',')
-      const newArr = arr.includes(field) ? arr : arr.concat(field)
+      const newArr = arr.includes(fieldStr) ? arr : arr.concat(fieldStr)
       newStr = newArr.toString()
 
     } else {
-      newStr = field
+      newStr = fieldStr
     }
 
     console.log('newStrは ' + newStr)
