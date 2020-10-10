@@ -18,6 +18,7 @@ import { apiCreatePublicPageSlug } from "../../../../pages/api/user_info/create_
 import { QrPopover } from "./QrPopover";
 import { apiUserInfoSwitchGeneratePublicPage } from "../../../../pages/api/user_info/switch_generate_public_page";
 import { HelpButton } from "../../viewComponents/buttons/HelpButton";
+import { useGoogleSearchProps } from "../../Footer/GoogleSearch";
 
 const useSettingUserInfoProps = () => {
 
@@ -62,6 +63,8 @@ const useSettingUserInfoProps = () => {
     });
   };
 
+  const { clearHistory } = useGoogleSearchProps()
+
   return {
     name,
     setName,
@@ -78,6 +81,7 @@ const useSettingUserInfoProps = () => {
     setIsShowMobile,
     // showMobileAndCreateSlug,
     handleSwitch,
+    clearHistory,
   };
 }
 
@@ -104,6 +108,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  button: {
+    margin: theme.spacing(2,0),
+  },
+
 }));
 
 const isValidPassword = (password) => {
@@ -233,6 +241,9 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                  <HelpButton content='パブリックページを出力すると①URLがあればパスワードなしで誰でもアクセスできるようになります。②観覧用のページのみです。'/>
                  <QrPopover {...props}>QRコードを表示する</QrPopover>
                </FormGroup>
+                <Button fullWidth onClick={props.clearHistory} variant='outlined' className={classes.button}>
+                  Google検索履歴クリア
+                </Button>
                <Divider variant="middle" />
                <Button
                  fullWidth

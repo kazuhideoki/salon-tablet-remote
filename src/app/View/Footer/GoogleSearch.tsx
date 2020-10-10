@@ -62,7 +62,11 @@ export const useGoogleSearchProps = () => {
   }
 
   const clearHistory = () => {
-    localStorage.setItem("googleSearchHistory", '');
+    const deleting = confirm('Googleの検索履歴を削除してもよろしいですか？')
+    if (deleting) {
+      localStorage.setItem("googleSearchHistory", '');
+      alert('履歴を削除しました。')
+    }
   }
 
   return {
@@ -147,9 +151,25 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
           検索
         </Button>
       </a>
-      <Button onClick={props.clearHistory} variant='outlined'>
+      <a
+        href={`https://www.google.com/search?newwindow=1&tbm=isch&q=${props.query}`}
+        rel="noopener noreferrer"
+        target="_blank"
+        className={classes.a}
+        // onClick={() => props.setField('')}
+      >
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          onClick={props.hancleOnClick}
+        >
+          画像検索
+        </Button>
+      </a>
+      {/* <Button onClick={props.clearHistory} variant='outlined'>
         検索履歴クリア
-      </Button>
+      </Button> */}
     </div>
   );
 }

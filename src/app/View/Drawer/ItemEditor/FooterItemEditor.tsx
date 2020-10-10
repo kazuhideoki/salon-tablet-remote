@@ -163,6 +163,9 @@ const useStyles = makeStyles((theme: Theme) =>
     switchOnTapModal: {
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
+    switchSidebar: {
+      margin: theme.spacing(0,2),
+    },
     selectModalSize: {
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
@@ -307,7 +310,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                className={classes.switchOnTapModal}
                {...props}
              />
-             <div style={{display: 'inline-block'}}>
+             <div style={{display: 'inline-block'}} className={classes.switchSidebar}>
               <Typography
                 variant="body1"
                 component="p"
