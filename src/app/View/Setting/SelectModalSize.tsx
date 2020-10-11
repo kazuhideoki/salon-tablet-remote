@@ -11,6 +11,7 @@ import { HelpButton } from "../viewComponents/buttons/HelpButton";
 import { useMediaQuery } from "@material-ui/core";
 import { useIsMobile } from "../../../lib/useIsMobile";
 import { TUseFooterItemEditorProps } from "../Drawer/ItemEditor/FooterItemEditor";
+import { TFooterItemEdittingParams } from "../../ActionCreator/footerItems/useCreateFooterItem";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
@@ -22,7 +23,9 @@ export const SelectModalSize:React.FC<Props> = (props) => {
   // const isMobile = useMediaQuery("(max-width:480px)");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatchAppState({ type: "SET_MODAL_SIZE", payload:(event.target as HTMLInputElement).value as T_modal_size});
+    // 変更後のmodalSizeも一緒にedittingParams.footerItemsに格納
+    const params:TFooterItemEdittingParams = {...props.edittingFooterItemParams, modalSizeRadio: event.target.value as T_modal_size}
+    dispatchAppState({ type: "SET_MODAL_SIZE", payload: params})
   };
 
   return (
@@ -38,7 +41,7 @@ export const SelectModalSize:React.FC<Props> = (props) => {
           row
           aria-label="modalSize"
           name="modalSize"
-          value={props.modalSize}
+          value={props.modalSizeRadio}
           onChange={handleChange}
         >
           {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}

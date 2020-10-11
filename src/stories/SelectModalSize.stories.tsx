@@ -9,12 +9,12 @@ export default {
 export const Normal = () =>{ 
 const [modalSize, setModalSize] = React.useState("large" as T_modal_size)
 
-return <SelectModalSize {...propsFooterItemEditor} modalSize={modalSize} />;
+return <SelectModalSize {...propsFooterItemEditor} modalSizeRadio={modalSize} />;
 
 }
 export const isMobile = () =>{ 
 const [modalSize, setModalSize] = React.useState("large" as T_modal_size)
 
-return <SelectModalSize {...propsFooterItemEditor} modalSize={modalSize} isMobile={true}/>;
+return <SelectModalSize {...propsFooterItemEditor} modalSizeRadio={modalSize} isMobile={true}/>;
 
 }

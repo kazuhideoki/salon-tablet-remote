@@ -5,7 +5,7 @@ const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
   ssr: false,
 });
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
-import { useCreateFooterItem, TCreateFooterItem } from "../../../ActionCreator/footerItems/useCreateFooterItem";
+import { useCreateFooterItem, TCreateFooterItem, TFooterItemEdittingParams } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, Switch, useTheme } from '@material-ui/core';
 import { SelectAppLink } from './SelectAppLink';
@@ -24,21 +24,21 @@ const useFooterItemEditorProps = () => {
 
   // const theme = useTheme()
   const { appState, dispatchAppState } = React.useContext(Store);
-  const { modalSize, onTap, isEditting, footerItem } = appState.edittingPrams;
+  const { modalSize, isModalSizeChanged, onTap, isEditting, footerItem } = appState.edittingPrams;
   const [titleText, setTitleText] = React.useState(
-    isEditting ? footerItem.icon_name : ""
+    isEditting || isModalSizeChanged ? footerItem.icon_name : ""
   );
   const [editorText, setEditorText] = React.useState(
-    isEditting ? footerItem.item_content : ""
+    isEditting || isModalSizeChanged ? footerItem.item_content : ""
   );
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(
-    isEditting ? footerItem.item_excerpt : ""
+    isEditting || isModalSizeChanged ? footerItem.item_excerpt : ""
   );
   const [createdAt, setCreatedAt] = React.useState("");
   const [updatedAt, setUpdatedAt] = React.useState("");
   const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
     selectedIconReducer,
-    isEditting
+    isEditting || isModalSizeChanged
       ? IconsSetting.convertIconComponentFromName(
           footerItem.displayed_icon_name
         )
@@ -46,16 +46,18 @@ const useFooterItemEditorProps = () => {
   );
 
   const [dataType, setDataType] = React.useState(
-    isEditting ? footerItem.data_type : "default_data"
+    isEditting || isModalSizeChanged ? footerItem.data_type : "default_data"
   );
 
   const [onTapRadio, setOnTapRadio] = React.useState(onTap)
 
+  const [modalSizeRadio, setModalSizeRadio] = React.useState(modalSize)
+
   const [linkUrl, setLinkUrl] = React.useState(
-    isEditting ? footerItem.link_url : ""
+    isEditting || isModalSizeChanged ? footerItem.link_url : ""
   );
   const [appLinkUrl, setAppLinkUrl] = React.useState(
-    isEditting ? footerItem.app_link_url : ""
+    isEditting || isModalSizeChanged ? footerItem.app_link_url : ""
   );
 
   const [
@@ -87,20 +89,22 @@ const useFooterItemEditorProps = () => {
     setOnSidebar(e.target.checked)
   }
 
+  const edittingFooterItemParams: TFooterItemEdittingParams = {
+    titleText,
+    selectedIcon,
+    onTapRadio,
+    modalSizeRadio,
+    editorText,
+    editorTextExcerpt,
+    linkUrl,
+    appLinkUrl,
+    onSidebar,
+    dataType,
+  };
+
   const handleSubmit = ({ is_published }) => {
-    const params: TCreateFooterItem = {
-      is_published,
-      titleText,
-      selectedIcon,
-      onTapRadio,
-      editorText,
-      editorTextExcerpt,
-      linkUrl,
-      modalSize,
-      appLinkUrl,
-      onSidebar,
-      dataType,
-    };
+    const params = {...edittingFooterItemParams, is_published }
+
     if (isEditting) {
       updateFooterItem(params);
     } else {
@@ -115,6 +119,8 @@ const useFooterItemEditorProps = () => {
     dispatchAppState,
     onTapRadio,
     setOnTapRadio,
+    modalSizeRadio,
+    setModalSizeRadio,
     isEditting,
     titleText,
     editorText,
@@ -130,13 +136,13 @@ const useFooterItemEditorProps = () => {
     setCharCountFooterItemContent,
     handleOnChangeIconName,
     handleSubmit,
-    modalSize,
     dataType,
     setDataType,
     is_admin: appState.userInfo.is_admin,
     isMobile,
     onSidebar,
     handleOnSidebar,
+    edittingFooterItemParams,
   };
 }
 
@@ -311,7 +317,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                {...props}
              />
              <div style={{display: 'inline-block'}} className={classes.switchSidebar}>
-              <Typography
+\              <Typography
                 variant="body1"
                 component="p"
                 color="textSecondary"

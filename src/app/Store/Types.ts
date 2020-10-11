@@ -277,6 +277,7 @@ export const initAppState = (data: TStoreProps) => ({
 
          edittingPrams: {
            isEditting: false,
+           isModalSizeChanged: false,
            article: {} as TArticle,
            footerItem: {} as FooterItem,
            // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑

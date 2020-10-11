@@ -2,13 +2,14 @@ import React from "react";
 import { Store } from "../../Store/Store";
 
 import { useGetFooterItems } from "./useGetFooterItems";
-import { TCreateFooterItem, calcOrder } from "./useCreateFooterItem";
+import { TCreateFooterItem, calcOrder, generateFooterItemEdittingParams } from "./useCreateFooterItem";
 import { T_footer_items_update, apiFooterItemsUpdate } from "../../../pages/api/footer_items/update";
 
 export type TUpdateFooterItem = TCreateFooterItem;
 
 export const useUpdateFooterItem = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
+  const { footerItems} = appState
   const getFooterItems = useGetFooterItems();
 
   return async (param: TUpdateFooterItem) => {
@@ -19,20 +20,8 @@ export const useUpdateFooterItem = () => {
     const params: T_footer_items_update = {
       id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
+        ...generateFooterItemEdittingParams(param, footerItems),
         is_published: param.is_published,
-        icon_name: param.titleText,
-        // 選択されていたらアイコンの名前を返す
-        displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
-        on_tap: param.onTapRadio,
-        item_content: param.editorText,
-        item_excerpt: param.editorTextExcerpt,
-        link_url: param.linkUrl,
-        app_link_url: param.appLinkUrl,
-        modal_size: param.modalSize,
-        // on_sidebar: param.onSidebar,
-        order: appState.edittingPrams.footerItem.order,
-        order_sidebar: param.onSidebar ? calcOrder(appState.footerItems, true) : 0,
-        data_type: param.dataType,
       },
     };
 
