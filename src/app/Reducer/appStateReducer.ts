@@ -3,6 +3,7 @@ import {
 } from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 import { AppStateAction } from "./AppStateAction";
+import { calcOrder, generateFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 
 export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
@@ -25,6 +26,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           isModalOpen: false,
+          edittingPrams: {
+            ...state.edittingPrams,
+            isModalSizeChanged: false,
+          },
         };
         break;
 
@@ -187,6 +192,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
             ...state.edittingPrams,
             isEditting: false,
             modalSize: "large",
+            isModalSizeChanged: false,
             onTap: "modal",
           },
         };
@@ -214,16 +220,23 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
             isEditting: true,
             footerItem: { ...action.payload },
             modalSize: action.payload.modal_size,
+            isModalSizeChanged: false,
             onTap: action.payload.on_tap,
           },
         };
         break;
+      // modalSizeの変更をViewに反映させつつ、入力中の値も保持しておくためのロジック
       case "SET_MODAL_SIZE":
         newState = {
           ...state,
           edittingPrams: {
             ...state.edittingPrams,
-            modalSize: action.payload,
+            modalSize: action.payload.modalSizeRadio,
+            isModalSizeChanged: true,
+            footerItem: {
+              ...state.edittingPrams.footerItem,
+              ...generateFooterItemEdittingParams(action.payload, state.footerItems),
+            },
           },
         };
         break;

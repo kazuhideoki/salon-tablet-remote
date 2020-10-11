@@ -24,21 +24,10 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
   const classes = useStyles()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // if (event.target.value === 'google') {
-    //   console.log('googleだよ');
-      
-    //   props.dispatchSelectedIcon({ type: 'SET_ICON', payload: [Search, "Search"]})
-    // }
-
-    // props.dispatchAppState({
-    //   type: "SET_ON_TAP",
-    //   payload: event.target.value as T_on_tap,
-    // });
     props.setOnTapRadio(event.target.value as T_on_tap)
   };
 
   return (
-    // <div className={props.className}>
       <FormControl component="fieldset" className={props.className}>
         <FormLabel component="legend">
           アイテム機能
@@ -75,6 +64,5 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
           />
         </RadioGroup>
       </FormControl>
-    // </div>
   );
 }

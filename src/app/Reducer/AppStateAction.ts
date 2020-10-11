@@ -23,6 +23,7 @@ import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
 import { TThemeParams } from "../Store/ThemeContext";
+import { TCreateFooterItem, TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 
 export type AppStateAction =
   | { type: "SELECT_DEVICE"; payload: T_selected_device }
@@ -54,7 +55,8 @@ export type AppStateAction =
   | { type: "OPEN_FOOTER_ITEM_EDITOR" }
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
-  | { type: "SET_MODAL_SIZE"; payload: T_modal_size }
+  // | { type: "SET_MODAL_SIZE"; payload: TCreateFooterItem }
+  | { type: "SET_MODAL_SIZE"; payload: TFooterItemEdittingParams }
   | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {
       type: "SET_USER_INFO";
