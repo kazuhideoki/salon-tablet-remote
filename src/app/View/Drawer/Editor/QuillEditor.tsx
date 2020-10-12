@@ -1,12 +1,9 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
-import ImageCompress from "quill-image-compress";
 
-import ImageResize from "quill-image-resize";
 
 import { Typography } from '@material-ui/core';
 import { checkImg, removeImg } from "./()handleImg";
-import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
 import { CharCounter } from '../../viewComponents/CharCounter';
 import { removeExceededImgs } from './removeExceededImgs';
 
@@ -21,13 +18,18 @@ const maxNumberOfImgs = 5
 // import { ImageDrop } from "quill-image-drop-module";
 // Quill.register("modules/imageDrop", ImageDrop);
 
+// コピペ、ドラック/ドロップのモジュール 動作確認
 import QuillImageDropAndPaste from 'quill-image-drop-and-paste'
 Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste)
 
 // 画像圧縮のモジュールを利用可能にimageCompress;
+import ImageCompress from "quill-image-compress";
 Quill.register("modules/imageCompress", ImageCompress);
 
 // 画像サイズ変更のモジュールregister
+import ImageResize from "quill-image-resize";
+import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
+import { Toolbar } from './toolbar';
 Quill.register("modules/imageResize", ImageResize);
 
 
@@ -94,7 +96,9 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
     imageResize: {
       parchment: Quill.import("parchment"),
       // ResizeはimageのResizeをtouchイベントでも適応
-      modules: [ "DisplaySize", "Toolbar", Resize],
+      // modules: [ "DisplaySize", "Toolbar", Resize],
+      // modules: [ "DisplaySize", Toolbar, Resize],
+      modules: [ "DisplaySize", Toolbar, Resize],
     },
     
     // imageDrop: true,
