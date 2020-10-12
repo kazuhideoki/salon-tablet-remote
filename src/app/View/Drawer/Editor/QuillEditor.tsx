@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
 import ImageCompress from "quill-image-compress";
-// import ImageResize from "quill-image-resize-module-react";
 
 import ImageResize from "quill-image-resize";
 
@@ -18,9 +17,9 @@ import { removeExceededImgs } from './removeExceededImgs';
 const maxNumberOfImgs = 5
 
 // コピペ、ドラック/ドロップのモジュール
-// import { ImageDrop } from "quill-image-drop-module";
-// Quill.register("modules/imageDrop", ImageDrop);
-
+// ※これを有効にするとサイズ変更がうまくいかない、横のみの伸び縮してしまう。。。。
+import { ImageDrop } from "quill-image-drop-module";
+Quill.register("modules/imageDrop", ImageDrop);
 
 // 画像圧縮のモジュールを利用可能にimageCompress;
 Quill.register("modules/imageCompress", ImageCompress);
@@ -56,6 +55,13 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
     } else {
       setHasMaxImgs(false)
     }
+
+    //imgタグ内のheightを削除
+    ImgNode.forEach(element => {
+      element.removeAttribute("height")
+    });
+
+
     // サムネイルのセット
     // ↓パフォーマンスが悪いときはuseMemoか？
     if (setEditorImg) {
@@ -88,7 +94,7 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
       modules: [ "DisplaySize", "Toolbar", Resize],
     },
     
-    // imageDrop: true,
+    imageDrop: true,
   };
 
   return (
