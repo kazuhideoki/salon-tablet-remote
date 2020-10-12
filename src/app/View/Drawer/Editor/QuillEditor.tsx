@@ -16,10 +16,13 @@ import { removeExceededImgs } from './removeExceededImgs';
 
 const maxNumberOfImgs = 5
 
-// コピペ、ドラック/ドロップのモジュール
-// ※これを有効にするとサイズ変更がうまくいかない、横のみの伸び縮してしまう。。。。
-import { ImageDrop } from "quill-image-drop-module";
-Quill.register("modules/imageDrop", ImageDrop);
+// コピペ、ドラック/ドロップのモジュール 
+// ※コピペはできるが、ドラック/ドロップができない？
+// import { ImageDrop } from "quill-image-drop-module";
+// Quill.register("modules/imageDrop", ImageDrop);
+
+import QuillImageDropAndPaste from 'quill-image-drop-and-paste'
+Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste)
 
 // 画像圧縮のモジュールを利用可能にimageCompress;
 Quill.register("modules/imageCompress", ImageCompress);
@@ -94,7 +97,12 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
       modules: [ "DisplaySize", "Toolbar", Resize],
     },
     
-    imageDrop: true,
+    // imageDrop: true,
+
+    // imageDropAndPaste: {
+    //   // add an custom image handler
+    //   handler: imageHandler,
+    // }
   };
 
   return (

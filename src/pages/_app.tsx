@@ -15,6 +15,8 @@ import "../../public/fonts/fonts.css";
 // ReactQuillの整形
 import "../../public/quill.scss";
 
+
+
 import Head from "next/head";
 import { server } from "../lib/loadUrl";
 import { TUserInfo } from "../app/Store/Types";
@@ -47,6 +49,10 @@ export default function MyApp({ Component, pageProps, slug }) {
           {/* "webフォント" */}
           {/* google fontsより */}
           <link href={googleFontsUrl} rel="stylesheet"></link>
+
+          {/* quillのmodule */}
+          {/* <script src="/node_modules/quill-image-drop-module/image-drop.min.js"></script> */}
+
         </Head>
         <Provider options={{ site: server }} session={session}>
           <Component {...pageProps} />
