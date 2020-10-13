@@ -15,6 +15,12 @@ var colorConvert = require("color-convert");
 
 export const Normal = () => {
 
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+
+  const handleAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   const hsl = colorConvert.hex.hsl("#0000FF");
   console.log('hslは ' + hsl);
   const generated = generateSecondaryColor(hsl)
@@ -34,6 +40,8 @@ export const Normal = () => {
 
   const props: TUseManageThemeProps = {
     selected_theme: null,
+    expanded,
+    handleAccordion,
     theme_color: color,
     handleChangeThemeColor: async (value: TColor) => {
       const params = {
