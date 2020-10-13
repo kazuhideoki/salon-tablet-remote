@@ -15,10 +15,10 @@ var colorConvert = require("color-convert");
 
 export const Normal = () => {
 
-  const [expanded, setExpanded] = React.useState<string | false>(false);
+  const [expanded, setExpanded] = React.useState(false);
 
-  const handleAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false);
+  const handleAccordion = (panel: boolean) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+    setExpanded(isExpanded ? true : false);
   };
 
   const hsl = colorConvert.hex.hsl("#0000FF");

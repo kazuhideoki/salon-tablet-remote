@@ -4,12 +4,12 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme, withStyles } from "@material-ui/core/styles";
 import { HelpButton } from "../../viewComponents/buttons/HelpButton";
-import { ThemeContext } from "../../../Store/ThemeContext";
+import { ThemeContext, TThemeParams } from "../../../Store/ThemeContext";
 import { useChangeTheme } from "../../../ActionCreator/user/useChangeTheme";
 import { Store } from "../../../Store/Store";
-import { Typography } from "@material-ui/core";
+import { Divider, Typography } from "@material-ui/core";
 import { SelectTheme } from "./SelectTheme";
 import { SelectShowArticleType } from "./SelectShowArticleType";
 import { useChangeShowArticleType } from "../../../ActionCreator/user/useChangeShowArticleType";
@@ -30,6 +30,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {isThemeParamsChanged} from '../../../Store/themes/paramsFromTheme'
 var colorConvert = require("color-convert");
 
 export type THsl = {
@@ -63,10 +64,18 @@ export const useManageTheme = () => {
   const changeFooterIconSize = useChangeFooterIconSize()
   const changeShowArticleType = useChangeShowArticleType()
 
-  const [expanded, setExpanded] = React.useState<string | false>(false);
+  const themeParams: TThemeParams = {
+    selected_theme: selected_theme,
+    theme_color: theme_color,
+    theme_font1: theme_font1,
+    theme_font2: theme_font2,
+    theme_font_heading: theme_font_heading,
+}
 
-  const handleAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false);
+  const [expanded, setExpanded] = React.useState(isThemeParamsChanged(themeParams));
+
+  const handleAccordion = (panel: boolean) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+    setExpanded(isExpanded ? true : false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,6 +135,7 @@ export const useManageTheme = () => {
   return {
     selected_theme,
     expanded,
+    // setExpanded,
     handleAccordion,
     theme_color,
     handleChangeThemeColor,
@@ -155,7 +165,10 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     accordionRoot: {
-      border: 'none',
+      boxShadow: 'none',
+      '&::before': {
+        height: 0,
+      },
     },
     accordiondetails: {
       display: 'block', // デフォルトのflexを消す
@@ -182,13 +195,17 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
              </Typography>
              <SelectTheme {...props} />
              <br />
-             <Accordion expanded={props.expanded === 'panel1'} onChange={props.handleAccordion('panel1')} className={classes.accordionRoot} >
+
+             <Divider/>
+
+             {/* <Accordion expanded={props.expanded === 'panel1'} onChange={props.handleAccordion('panel1')} className={classes.accordionRoot} > */}
+             <Accordion expanded={props.expanded === true} onChange={props.handleAccordion(true)} className={classes.accordionRoot} >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
-                <Typography variant="body2" color="textSecondary">テーマ詳細設定</Typography>
+                <Typography variant="body1" color="textSecondary">テーマ詳細設定</Typography>
               </AccordionSummary>
               <AccordionDetails className={classes.accordiondetails}>
                 
@@ -242,6 +259,9 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
 
              </AccordionDetails>
             </Accordion>
+
+            <Divider/>
+
              <Typography variant="body1" component="p" color="textSecondary">
                フッターアイコンのサイズ
                <SelectFooterIconSize {...props} className={classes.param} />

@@ -50,6 +50,28 @@ export const generateParamsFromTheme = (
          }
        };
 
-export const isParamsChanged = (themeParams: TThemeParams) => {
-  return themeParams === generateParamsFromTheme(themeParams.selected_theme);
+// export const isThemeParamsChanged = (themeParams: TThemeParams) => {
+//   console.log('themeParamsは ' + themeParams)
+//   const result =
+//     themeParams === generateParamsFromTheme(themeParams.selected_theme);
+//   console.log('isThemePapramsChangedのreturnは ' + result)
+//   return result
+// }
+export const isThemeParamsChanged = (themeParams: TThemeParams) => {
+  console.log('themeParamsは ' + JSON.stringify(themeParams))
+  const originalThemeParams = generateParamsFromTheme(themeParams.selected_theme)
+
+  let resultArr: boolean[] = []
+  for (const [key, value] of Object.entries(themeParams)) {
+    console.log('keyは ' + key)
+    resultArr.push(themeParams[key] !== originalThemeParams[key]);
+  } 
+
+  console.log("resultArrは " + JSON.stringify(resultArr));
+
+  const result = resultArr.includes(true);
+
+  console.log('resultは ' + result)
+
+  return result;
 }
