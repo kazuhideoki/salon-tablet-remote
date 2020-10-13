@@ -24,6 +24,9 @@ import { SwitchOrderButton } from "../../viewComponents/buttons/SwitchOrderButto
 const useStyles = makeStyles((theme: Theme) => {
 
     return createStyles({
+      listItem: {
+        display: 'block',
+      },
       listItemText: {
         textOverflow: "ellipsis",
       },
@@ -166,7 +169,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <ListItem key={index} button>
+                <ListItem key={index} button className={classes.listItem}>
                   <ListItemIcon>
                     <Icon />
                     <ShowStatus {...value} />
