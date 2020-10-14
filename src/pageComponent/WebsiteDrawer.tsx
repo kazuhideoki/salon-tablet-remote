@@ -23,10 +23,10 @@ type Anchor = "top" | "left" | "bottom" | "right";
 
 export const pageList = [
          ["Home", "/", <Home />],
-         ["About (製作中)", "/about", <AdbOutlined />],
-         ["サンプル Tablet (製作中)", "/sample/tablet", <Tablet />],
-         ["サンプル Mobile (製作中)", "/sample/mobile", <MobileFriendly />],
-         ["FAQ (製作中)", "/faq", <FormatQuote />],
+        //  ["About (製作中)", "/about", <AdbOutlined />],
+         ["サンプル Tablet", "/sample/tablet", <Tablet />],
+         ["サンプル Mobile(製作中)", "/sample/mobile", <MobileFriendly />],
+         ["FAQ(製作中)", "/faq", <FormatQuote />],
        ];
 
 type Props = {

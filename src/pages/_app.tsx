@@ -84,13 +84,3 @@ export default function MyApp({ Component, pageProps, slug }) {
 
 
 }
-
-// export const getServerSideProps: GetServerSideProps = async ({req}) => {
-
-//   console.log('slugは ' + req.url);
-  
-
-//   return {
-//     props: { slug: req.url }, // will be passed to the page component as props
-//   };
-// }

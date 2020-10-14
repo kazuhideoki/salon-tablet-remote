@@ -20,6 +20,9 @@ export const TopPage: React.FC<Props> = (props) => {
   return (
     <>
       <TopPageParagraph />
+
+      {/* ここに3つの「STとは？を」 */}
+      
       <SignInForm className={classes.signInForm} csrfToken={props.csrfToken} providers={props.providers}/>
       <Link href="/privacy">
         <a>Privacy policy</a>

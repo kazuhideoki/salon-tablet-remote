@@ -19,6 +19,8 @@ import { apiCreateSampleData } from "./api/create_sample_data";
 import { generateProps } from "../lib/generateProps";
 import { apiCreatePublicPageSlug } from "./api/user_info/create_public_page_slug";
 import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
+import classes from "*.module.css";
+import { makeStyles, Theme, createStyles } from "@material-ui/core";
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -42,7 +44,20 @@ export type IndexProps = {
   message?: string;
 };
 
+const useStyles = makeStyles((theme: Theme) => {
+
+    return createStyles({
+      sideSpace: {
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        maxWidth: 800,
+      },
+   
+    });
+})
+
 const Index = (props: IndexProps) => {
+  const classes = useStyles()
 
   if (props.data) {
     return (
@@ -53,8 +68,11 @@ const Index = (props: IndexProps) => {
   } else {
     return (
       <>
-        {/* <WebSiteDrawer/> */}
+        <div className={classes.sideSpace}>
+          
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
+        </div>
+
       </>
     );
   }
