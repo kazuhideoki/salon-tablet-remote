@@ -3,7 +3,7 @@ import { Typography, makeStyles, createStyles } from "@material-ui/core";
 import Link from "next/link";
 import { SignInForm } from "./SignInForm";
 import { TopPageParagraph } from "./TopPageParagraph";
-import classes from "*.module.css";
+import { AboutST } from "./AboutST";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -21,7 +21,7 @@ export const TopPage: React.FC<Props> = (props) => {
     <>
       <TopPageParagraph />
 
-      {/* ここに3つの「STとは？を」 */}
+      <AboutST/>
       
       <SignInForm className={classes.signInForm} csrfToken={props.csrfToken} providers={props.providers}/>
       <Link href="/privacy">
