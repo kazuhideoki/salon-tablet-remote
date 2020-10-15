@@ -90,7 +90,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
 
         // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。デフォルトはlarge
         let modalStyle = useModalSize('large')
-        let modalStyleMobile = useModalSize("fullScreen");
+        let modalStyleMobile = props.setModal === 'google_search' ? useModalSize("upperSide") : useModalSize("fullScreen");
         
         switch (props.setModal) {
           case "content_modal":

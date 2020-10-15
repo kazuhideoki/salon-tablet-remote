@@ -16,7 +16,7 @@ export const useGoogleSearchProps = () => {
   const [searchHistoryStr, setSearchHistoryStr] = React.useState(localStorage.getItem(
     "googleSearchHistory")
   )
-  console.log('searchHistoryStrは ' + searchHistoryStr)
+  // console.log('searchHistoryStrは ' + searchHistoryStr)
 
   const searchHistoryArr = searchHistoryStr ? searchHistoryStr.split(',') : []
 
@@ -31,11 +31,11 @@ export const useGoogleSearchProps = () => {
     const str: TGoogleSearchHistory = localStorage.getItem(
       "googleSearchHistory"
     )
-    console.log('strは ' + str);
+    // console.log('strは ' + str);
 
     let newStr
     let fieldStr = deleteExcessSpace(field)
-    console.log('fieldStrは ' + fieldStr)
+    // console.log('fieldStrは ' + fieldStr)
     
     if (!fieldStr) {
       return null      
@@ -51,7 +51,7 @@ export const useGoogleSearchProps = () => {
       newStr = fieldStr
     }
 
-    console.log('newStrは ' + newStr)
+    // console.log('newStrは ' + newStr)
     localStorage.setItem("googleSearchHistory", newStr);
 
     
