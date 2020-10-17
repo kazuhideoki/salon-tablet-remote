@@ -21,6 +21,8 @@ import { apiCreatePublicPageSlug } from "./api/user_info/create_public_page_slug
 import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 import classes from "*.module.css";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -47,11 +49,7 @@ export type IndexProps = {
 const useStyles = makeStyles((theme: Theme) => {
 
     return createStyles({
-      sideSpace: {
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        maxWidth: 800,
-      },
+      
    
     });
 })
@@ -68,11 +66,10 @@ const Index = (props: IndexProps) => {
   } else {
     return (
       <>
-        <div className={classes.sideSpace}>
-          
-        <TopPage csrfToken={props.csrfToken} providers={props.providers} />
-        </div>
+      {/* <ParallaxProvider> */}
 
+        <TopPage csrfToken={props.csrfToken} providers={props.providers} />
+      {/* </ParallaxProvider> */}
       </>
     );
   }

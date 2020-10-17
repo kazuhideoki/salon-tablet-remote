@@ -1,5 +1,7 @@
 import React from 'react';
 import { TopPage } from '../pageComponent/TopPage';
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+
 export default {
   title: 'pageComponent/TopPage',
   component: TopPage,
@@ -9,11 +11,14 @@ export default {
 export const Normal = () => {
   const props = {
     csrfToken: null,
-    providers: null, // 指定必要
+    providers: {facebook:  {signinUrl: 'abc'}},
   }
 
 
   return (
-    <TopPage {...props}/>
+    // <ParallaxProvider>
+      <TopPage {...props}/>
+
+    // </ParallaxProvider>
   )
 }

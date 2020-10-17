@@ -1,5 +1,7 @@
 import React from 'react';
 import { AboutST } from '../pageComponent/AboutST';
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+
 export default {
   title: 'pageComponent/AboutST',
   component: AboutST,
@@ -8,6 +10,9 @@ export default {
 export const Normal = () => {
 
   return (
-    <AboutST />
+    <ParallaxProvider>
+
+      <AboutST />
+    </ParallaxProvider>
   )
 }

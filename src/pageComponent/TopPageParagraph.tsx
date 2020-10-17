@@ -9,10 +9,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const TopPageParagraph = () => {
+type Props = {
+  className?: string
+}
+
+export const TopPageParagraph:React.FC<Props> = ({className}) => {
   const classes = useStyles()
   return (
-    <>
+    <div className={className}>
       <Typography align="center" variant="h1" component="h1" gutterBottom>
         SALON TABLET
       </Typography>
@@ -36,6 +40,6 @@ export const TopPageParagraph = () => {
         TABLETは無機質なタブレットを美容室のインテリア似合わせてカスタマイズできるウェブアプリです。
         ごちゃごちゃしがちなタブレットの中身をを一画面で管理、更に美容師からの情報発信をサポートすることで美容師のサロンワークの手助けをします！
       </Typography>
-    </>
+    </div>
   );
 }
