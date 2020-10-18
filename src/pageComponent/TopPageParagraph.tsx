@@ -18,17 +18,17 @@ export const TopPageParagraph:React.FC<Props> = ({className}) => {
   const classes = useStyles()
   return (
     <div className={className}>
-      <Typography align="center" variant="h1" component="h1" gutterBottom>
+      {/* <Typography align="center" variant="h1" component="h1" gutterBottom>
         SALON TABLET
-      </Typography>
+      </Typography> */}
       <Typography
         className={classes.typography}
         align="center"
-        variant="h4"
-        component="h2"
+        variant="h3"
+        component="h1"
         gutterBottom
       >
-        〜タブレットにも美容室の世界観を〜
+        「美容室」×「タブレット」の正解
       </Typography>
       <Typography
         className={classes.typography}

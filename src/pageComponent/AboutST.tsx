@@ -31,7 +31,7 @@ export const AboutST = () => {
       </Typography>
       <img src={`${server}/images/hair_stylist.jpg`} className={classes.img}/>
       <Typography variant='body1' component='p' gutterBottom align='center' className={classes.typo}>
-        雑誌を読みながらリラックス。美容師さんとの楽しいいおしゃべり。これらも当然美容室が提供する価値。そして、美容師だからこそできる「ヘア」「美容」の話も提供できる価値ですよね。SALON TABLETは美容室におけるデジタル版ポップの役割を果たすことで単価アップのお手伝いをします。
+        雑誌を読みながらリラックス。美容師さんとの楽しいいおしゃべり。これらも当然美容室が提供する価値。そして、美容師だからこそできる「ヘア」「美容」の話も提供できる価値ですよね。SALON TABLETは美容室におけるデジタル版ポップ作成プラットフォームの役割を果たすことで単価アップのお手伝いをします。
       </Typography>
         {/* <Parallax y={[-50, 50]}> */}
 

@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
     },
+    appBarNotTop: {
+      position: 'static',
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -41,7 +44,7 @@ export default function WebsiteAppBar({onClick, id}) {
 
   return (
     <div className={classes.root} id={id}>
-      <AppBar>
+      <AppBar className={slug !== '/' && classes.appBarNotTop}>
         <Toolbar>
           <IconButton
             edge="start"
