@@ -25,6 +25,8 @@ import { TSessionOnj } from ".";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { GetStaticProps, GetServerSideProps } from "next";
+import { MuiThemeProvider } from "@material-ui/core";
+import { websiteTheme } from "../app/Store/themes/websiteTheme";
 // require("dotenv").config();
 
 export default function MyApp({ Component, pageProps, slug }) {
@@ -74,9 +76,11 @@ export default function MyApp({ Component, pageProps, slug }) {
         /> */}
       </Head>
       <Provider options={{ site: server }} session={session}>
-      <WebSiteDrawer id="back-to-top-anchor" >
-        <Component {...pageProps} />
-      </WebSiteDrawer>
+        <MuiThemeProvider theme={websiteTheme}>
+          <WebSiteDrawer id="back-to-top-anchor" >
+            <Component {...pageProps} />
+          </WebSiteDrawer>
+        </MuiThemeProvider>
       </Provider>
     </>
   );
