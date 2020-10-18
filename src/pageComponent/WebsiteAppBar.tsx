@@ -41,7 +41,7 @@ export default function WebsiteAppBar({onClick, id}) {
 
   return (
     <div className={classes.root} id={id}>
-      <AppBar position="static">
+      <AppBar>
         <Toolbar>
           <IconButton
             edge="start"

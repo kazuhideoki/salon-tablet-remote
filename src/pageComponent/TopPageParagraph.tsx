@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     typography: {
       margin: theme.spacing(2),
+      marginBottom: 200,
     },
   })
 );
