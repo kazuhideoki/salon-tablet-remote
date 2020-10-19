@@ -27,7 +27,7 @@ import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { GetStaticProps, GetServerSideProps } from "next";
 import { MuiThemeProvider } from "@material-ui/core";
 import { websiteTheme } from "../app/Store/themes/websiteTheme";
-// require("dotenv").config();
+import { ParallaxProvider, Parallax, useController, } from 'react-scroll-parallax';
 
 export default function MyApp({ Component, pageProps, slug }) {
   // サーバーサイドでnext-authのsessionをつかうための修正項目
@@ -77,9 +77,12 @@ export default function MyApp({ Component, pageProps, slug }) {
       </Head>
       <Provider options={{ site: server }} session={session}>
         <MuiThemeProvider theme={websiteTheme}>
-          <WebSiteDrawer id="back-to-top-anchor" >
-            <Component {...pageProps} />
-          </WebSiteDrawer>
+          <ParallaxProvider>
+
+            <WebSiteDrawer id="back-to-top-anchor" >
+              <Component {...pageProps} />
+            </WebSiteDrawer>
+          </ParallaxProvider>
         </MuiThemeProvider>
       </Provider>
     </>

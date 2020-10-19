@@ -17,10 +17,10 @@ export const Normal = () => {
 
   return (
     <>
-    {/* <ParallaxProvider> */}
+    <ParallaxProvider>
       <TopPage {...props}/>
 
-    {/* </ParallaxProvider> */}
+    </ParallaxProvider>
     </>
   )
 }

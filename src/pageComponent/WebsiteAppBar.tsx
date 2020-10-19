@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
     },
+    // トップページ以外ではAppBarはスクロールとともに隠れるように、sampleとかあるので
     appBarNotTop: {
       position: 'static',
     },
