@@ -12,6 +12,14 @@ import { Parallax, Background } from 'react-parallax';
 
 const useStyles = makeStyles((theme) =>
 createStyles({
+    h1: {
+      background: "white",
+      padding: 20,
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%,-50%)"
+    },
     img: {
       zIndex: 0,
       opacity: 0.5,
@@ -97,14 +105,14 @@ export const TopPage: React.FC<Props> = (props) => {
         {/* <img src={`${server}/images/hair-stylist-combing-womans-hair.jpg`} className={classes.img}/> */}
         
       {/* </Parallax> */}
-      <Parallax bgImage={`${server}/images/hair-stylist-combing-womans-hair.jpg`} strength={500}>
+      <Parallax bgImage={`${server}/images/hair-stylist-combing-womans-hair.jpg`} strength={100}>
       <div style={{ height: 500 }}>
-        {/* <div style={insideStyles}>HTML inside the parallax</div> */}
+        <div className={classes.h1}>「美容室」×「タブレット」の正解</div>
       </div>
     </Parallax>
     <div className={classes.mainContents}>
 
-      <TopPageParagraph className={classes.topPageParagraph}/>
+      {/* <TopPageParagraph className={classes.topPageParagraph}/> */}
 
       <AboutST/>
       

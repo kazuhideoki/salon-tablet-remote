@@ -77,12 +77,12 @@ export default function MyApp({ Component, pageProps, slug }) {
       </Head>
       <Provider options={{ site: server }} session={session}>
         <MuiThemeProvider theme={websiteTheme}>
-          <ParallaxProvider>
+          {/* <ParallaxProvider> */}
 
             <WebSiteDrawer id="back-to-top-anchor" >
               <Component {...pageProps} />
             </WebSiteDrawer>
-          </ParallaxProvider>
+          {/* </ParallaxProvider> */}
         </MuiThemeProvider>
       </Provider>
     </>
