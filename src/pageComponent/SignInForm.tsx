@@ -31,11 +31,17 @@ const useStyles = makeStyles((theme) =>
       marginBottom: theme.spacing(2),
     },
     textField: {
-      minWidth: 350,
-      marginBottom: theme.spacing(1),
+      width: 300,
+      // marginBottom: theme.spacing(1),
+      display: 'flex',
+      marginLeft: 'auto',
+      marginRight: 'auto',
     },
     button: {
       marginBottom: theme.spacing(3),
+      display: 'flex',
+      marginLeft: 'auto',
+      marginRight: 'auto',
     },
     a: {
       fontStyle: "none",
@@ -65,11 +71,12 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
       >
         <Typography
           variant="h5"
-          component="h2"
+          component="p"
+          align='center'
           gutterBottom
           className={classes.typography}
         >
-          ・初めての方
+          初めての方
         </Typography>
         <input name="csrfToken" type="hidden" defaultValue={props.csrfToken} />
         <TextField
@@ -96,11 +103,12 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
 
       <Typography
         variant="h5"
-        component="h2"
+        component="p"
+        align='center'
         gutterBottom
         className={classes.typography}
       >
-        ・アカウントをお持ちの方
+        アカウントをお持ちの方
       </Typography>
       <form method="post" action={`${server}/api/auth/callback/credentials/`}>
         {/* メールアドレス */}
@@ -133,11 +141,20 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           variant="contained"
           color="primary"
         >
-          サインイン
+          サインインする
         </Button>
       </form>
 
       {/* Sign in with facebook */}
+      <Typography
+        variant="h5"
+        component="p"
+        align='center'
+        gutterBottom
+        className={classes.typography}
+      >
+        SNSでサインイン
+      </Typography>
       
         <Button
           variant="contained"
@@ -159,11 +176,11 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
               (e) => e.preventDefault()
             }
           >
-            Sign in with{" "}
             {
               //@ts-ignore
               props.providers.facebook.name
             }
+            {" "}でサインインする
           </a> 
         </Button>
       
