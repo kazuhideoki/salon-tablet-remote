@@ -68,7 +68,6 @@ const html = ({ url, site, email }) => {
     <tr>
       <td align="center" style="padding: 10px 0px 0px 0px; font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: ${textColor};">
         <strong>${escapedEmail}</strong>でサインインする
->>>>>>> カスタムメール
       </td>
     </tr>
     <tr>
@@ -83,7 +82,6 @@ const html = ({ url, site, email }) => {
     <tr>
       <td align="center" style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${textColor};">
         もしお心当たりのない場合、本メールは破棄して頂けるようお願いいたします。
->>>>>>> カスタムメール
       </td>
     </tr>
   </table>
