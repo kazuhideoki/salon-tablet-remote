@@ -1,12 +1,12 @@
 import React from 'react';
 import { TopPage } from '../pageComponent/TopPage';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import { WebsiteThemeProvider } from '../app/Store/themes/websiteTheme';
 
 export default {
   title: 'pageComponent/TopPage',
   component: TopPage,
 };
-
 
 export const Normal = () => {
   const props = {
@@ -17,10 +17,13 @@ export const Normal = () => {
 
   return (
     <>
+    <WebsiteThemeProvider>
+
     <ParallaxProvider>
       <TopPage {...props}/>
 
     </ParallaxProvider>
+    </WebsiteThemeProvider>
     </>
   )
 }

@@ -26,7 +26,7 @@ import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { GetStaticProps, GetServerSideProps } from "next";
 import { MuiThemeProvider } from "@material-ui/core";
-import { websiteTheme } from "../app/Store/themes/websiteTheme";
+import { websiteTheme, WebsiteThemeProvider } from "../app/Store/themes/websiteTheme";
 import { ParallaxProvider, Parallax, useController, } from 'react-scroll-parallax';
 
 export default function MyApp({ Component, pageProps, slug }) {
@@ -70,20 +70,17 @@ export default function MyApp({ Component, pageProps, slug }) {
     <>
       <Head>
         <title>{`SALON TABLET`}</title>
-        {/* <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-        /> */}
+        <link href={googleFontsUrl} rel="stylesheet"></link>
       </Head>
+
       <Provider options={{ site: server }} session={session}>
-        <MuiThemeProvider theme={websiteTheme}>
-          {/* <ParallaxProvider> */}
+        <WebsiteThemeProvider>
 
             <WebSiteDrawer id="back-to-top-anchor" >
               <Component {...pageProps} />
             </WebSiteDrawer>
-          {/* </ParallaxProvider> */}
-        </MuiThemeProvider>
+
+        </WebsiteThemeProvider>
       </Provider>
     </>
   );

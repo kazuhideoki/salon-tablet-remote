@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, makeStyles, createStyles } from "@material-ui/core";
+import { Typography, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
 import Link from "next/link";
 import { SignInForm } from "./SignInForm";
 import { TopPageParagraph } from "./TopPageParagraph";
@@ -12,12 +12,18 @@ import { Parallax, Background } from 'react-parallax';
 
 const useStyles = makeStyles((theme) =>
 createStyles({
+  featureImgDiv: {
+    height: 800,
+    minHeight: '80%',
+    maxHeight: '100%',
+  },
     h1: {
-      background: "white",
+      fontFamily: 'serif',
+      background: "rgba(255,255,255,0.6);",
       padding: 20,
       position: "absolute",
-      top: "50%",
-      left: "50%",
+      top: "45%",
+      left: "20%",
       transform: "translate(-50%,-50%)"
     },
     img: {
@@ -27,12 +33,8 @@ createStyles({
       maxWidth: 1000,
       marginLeft: "calc((-1000px + 100%) / 2)",
 
-      // height: 'auto',
-      
-
     },
     mainContents: {
-      // marginTop: '-200px',
         marginRight: 'auto',
         marginLeft: 'auto',
         maxWidth: 800,
@@ -51,63 +53,26 @@ createStyles({
   }
 ))
 
-const styleInner = { // https://tnyk.jp/frontend/centering-wide-img/ を参考に途中まで
-  maxWidth: "100%",
-  overflow: 'hidden',
-  // visibility: 'visible',
-
-}
-const styleOuter = {
-  // overflow: 'hidden',
-  // visibility: 'hidden',
-  
-}
-// const ParallaxCache = ({children}) => {
-//       const parallaxController = typeof window !== 'undefined' ? useController().parallaxController : null;
-
-//       // React.useLayoutEffect(() => {
-//       React.useEffect(() => {
-//         const handler = () => parallaxController.update();
-//         window.addEventListener('load', handler);
-//         // return () => window.removeEventListener('load', handler);
-//     }, [parallaxController]);
-  
-//       return <>{children}</>
-//   };
-
- const insideStyles = {
-  background: "white",
-  padding: 20,
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%,-50%)"
-};
-
 type Props = { csrfToken: string, providers: any };
 
 export const TopPage: React.FC<Props> = (props) => {
   const classes = useStyles()
 
+  const isMobile = useMediaQuery("(max-width:480px)");
+
  
+  // const imgFile = isMobile ? 'feature_img_original.jpg' : 'feature_img_lower.jpg'
+  const imgFile = 'feature_img_lower.jpg'
 
   return (
     <>
-    {/* <ParallaxProvider> */}
-      {/* <ParallaxCache> */}
+      <Parallax bgImage={`${server}/images/${imgFile}`} strength={300}>
+      <div className={classes.featureImgDiv}>
+        <Typography variant='h5' component='h1' align='center' className={classes.h1}>
+          「美容室」<br/>×<br/>「タブレット」<br/>の正解
+        </Typography>
 
-      {/* <Parallax y={[-30, 0]} styleInner={styleInner} styleOuter={styleOuter} > */}
-      {/* <Parallax 
-            blur={10}
-            bgImage={`${server}/images/hair-stylist-combing-womans-hair.jpg`}
-            bgImageAlt="the cat"
-            strength={200} > */}
-        {/* <img src={`${server}/images/hair-stylist-combing-womans-hair.jpg`} className={classes.img}/> */}
-        
-      {/* </Parallax> */}
-      <Parallax bgImage={`${server}/images/hair-stylist-combing-womans-hair.jpg`} strength={100}>
-      <div style={{ height: 500 }}>
-        <div className={classes.h1}>「美容室」×「タブレット」の正解</div>
+        {/* <div className={classes.h1}>「美容室」<br/>×<br/>「タブレット」<br/>の正解</div> */}
       </div>
     </Parallax>
     <div className={classes.mainContents}>
@@ -121,8 +86,6 @@ export const TopPage: React.FC<Props> = (props) => {
         <a>Privacy policy</a>
       </Link>
     </div>
-    {/* </ParallaxCache> */}
-    {/* </ParallaxProvider> */}
     </>
   );
 

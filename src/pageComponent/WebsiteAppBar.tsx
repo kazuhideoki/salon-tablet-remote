@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
     },
+    appBarRoot: {
+      boxShadow: 'none',
+    },
     // トップページ以外ではAppBarはスクロールとともに隠れるように、sampleとかあるので
     appBarNotTop: {
       position: 'static',
@@ -45,7 +48,7 @@ export default function WebsiteAppBar({onClick, id}) {
 
   return (
     <div className={classes.root} id={id}>
-      <AppBar className={slug !== '/' && classes.appBarNotTop}>
+      <AppBar color='transparent' className={`${classes.appBarRoot} ${slug !== '/' && classes.appBarNotTop}`}>
         <Toolbar>
           <IconButton
             edge="start"
