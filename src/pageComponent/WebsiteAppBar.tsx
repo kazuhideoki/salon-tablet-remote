@@ -43,7 +43,7 @@ export default function WebsiteAppBar({onClick, id}) {
   const headerStringArray = pageList.filter((value) => {
     return value[1] === slug
   })
-  // ifram内でエラーになるので、ない場合は空文字に
+  // iframe内でエラーになるので、ない場合は空文字に
   const header = headerStringArray.length ? headerStringArray[0][0] : ''
 
   return (
@@ -73,7 +73,7 @@ export default function WebsiteAppBar({onClick, id}) {
             </a>
           </IconButton>
           <Link href="/api/auth/signin">
-            <Button color="inherit">Login</Button>
+            <Button color="inherit">Sign In</Button>
           </Link>
         </Toolbar>
       </AppBar>

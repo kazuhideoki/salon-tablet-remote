@@ -28,7 +28,7 @@ export const TopPageParagraph:React.FC<Props> = ({className}) => {
         component="h1"
         gutterBottom
       >
-        「美容室」×「タブレット」の正解
+        「美容室」×「タブレット」をよりよく
       </Typography>
       <Typography
         className={classes.typography}

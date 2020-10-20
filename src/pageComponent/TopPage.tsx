@@ -69,10 +69,8 @@ export const TopPage: React.FC<Props> = (props) => {
       <Parallax bgImage={`${server}/images/${imgFile}`} strength={300}>
       <div className={classes.featureImgDiv}>
         <Typography variant='h5' component='h1' align='center' className={classes.h1}>
-          「美容室」<br/>×<br/>「タブレット」<br/>の正解
+          「美容室」<br/>×<br/>「タブレット」<br/>をより良く
         </Typography>
-
-        {/* <div className={classes.h1}>「美容室」<br/>×<br/>「タブレット」<br/>の正解</div> */}
       </div>
     </Parallax>
     <div className={classes.mainContents}>
