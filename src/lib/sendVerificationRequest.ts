@@ -1,32 +1,10 @@
 import nodemailer from "nodemailer";
 import { server as serverUrl } from "./loadUrl";
-// import logger from "../lib/logger";
-
-export default (options) => {
-  return {
-    id: "email",
-    type: "email",
-    name: "Email",
-    // Server can be an SMTP connection string or a nodemailer config object
-    server: {
-      host: "localhost",
-      port: 25,
-      auth: {
-        user: "",
-        pass: "",
-      },
-    },
-    from: "NextAuth <no-reply@example.com>",
-    maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
-    sendVerificationRequest,
-    ...options,
-  };
-};
+import logger  from "next-auth/dist/lib/logger";
 
 export const sendVerificationRequest = ({
   identifier: email,
   url,
-  // baseUrl,
   provider,
 }) => {
   const baseUrl = serverUrl;
@@ -51,8 +29,8 @@ export const sendVerificationRequest = ({
       },
       (error) => {
         if (error) {
-          // logger.error("SEND_VERIFICATION_EMAIL_ERROR", email, error);
-          return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR", error));
+          logger.error("SEND_VERIFICATION_EMAIL_ERROR", email, error);
+          return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR"));
         }
         return resolve();
       }
@@ -89,7 +67,8 @@ const html = ({ url, site, email }) => {
   <table width="100%" border="0" cellspacing="20" cellpadding="0" style="background: ${mainBackgroundColor}; max-width: 600px; margin: auto; border-radius: 10px;">
     <tr>
       <td align="center" style="padding: 10px 0px 0px 0px; font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: ${textColor};">
-        Sign in as <strong>${escapedEmail}</strong>
+        <strong>${escapedEmail}</strong>でサインインする
+>>>>>>> カスタムメール
       </td>
     </tr>
     <tr>
@@ -103,7 +82,8 @@ const html = ({ url, site, email }) => {
     </tr>
     <tr>
       <td align="center" style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${textColor};">
-        If you did not request this email you can safely ignore it.
+        もしお心当たりのない場合、本メールは破棄して頂けるようお願いいたします。
+>>>>>>> カスタムメール
       </td>
     </tr>
   </table>

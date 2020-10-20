@@ -14,15 +14,11 @@ const options = {
       sendVerificationRequest: ({
         identifier: email,
         url,
-        token,
-        baseUrl,
         provider,
       }) =>
         sendVerificationRequest({
           identifier: email,
           url,
-          // token,
-          baseUrl,
           provider,
         }),
     }),
