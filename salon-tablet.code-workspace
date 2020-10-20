@@ -9,6 +9,11 @@
     ],
     "settings": {
       "workbench.tree.indent": 12,
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "cSpell.words": [
+          "csrf",
+          "infosalontablet",
+          "mixins"
+        ]
     }
 }

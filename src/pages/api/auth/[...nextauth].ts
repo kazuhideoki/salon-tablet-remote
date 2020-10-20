@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import authorizeCredentials from "../../../lib/authorizeCredentials";
 import { server } from "../../../lib/loadUrl";
+import { sendVerificationRequest } from "../../../lib/sendVerificationRequest";
+// import sendVerificationRequest from "../../../lib/sendVerificationRequest";
 
 const options = {
   site: server,
@@ -9,6 +11,16 @@ const options = {
     Providers.Email({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest: ({
+        identifier: email,
+        url,
+        provider,
+      }) =>
+        sendVerificationRequest({
+          identifier: email,
+          url,
+          provider,
+        }),
     }),
     Providers.Facebook({
       clientId: process.env.FACEBOOK_CLIENT_ID,
