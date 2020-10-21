@@ -1,6 +1,6 @@
 import React from "react";
-import { server } from "../lib/loadUrl";
-import { signin } from "next-auth/client";
+import { signin, providers, csrfToken } from "next-auth/client";
+
 
 import {
   TextField,
@@ -9,6 +9,7 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
+import { server } from "../../lib/loadUrl";
 
 const useSignInFormProps = () => {
   const [newEmail, setNewEmail] = React.useState("");
@@ -33,25 +34,29 @@ const useStyles = makeStyles((theme) =>
     textField: {
       width: 300,
       // marginBottom: theme.spacing(1),
-      display: 'flex',
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      display: "flex",
+      marginLeft: "auto",
+      marginRight: "auto",
     },
     button: {
       marginBottom: theme.spacing(3),
-      display: 'flex',
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      display: "flex",
+      marginLeft: "auto",
+      marginRight: "auto",
     },
     a: {
       fontStyle: "none",
-      color: 'inherit',
+      color: "inherit",
       textDecoration: "none",
-    }
+    },
   })
 );
 
-type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string, providers: any, className: string };
+type Props = ReturnType<typeof useSignInFormProps> & {
+  csrfToken: string;
+  providers: any;
+  className: string;
+};
 
 export const SignInFormPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
@@ -72,7 +77,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         <Typography
           variant="h5"
           component="p"
-          align='center'
+          align="center"
           gutterBottom
           className={classes.typography}
         >
@@ -104,7 +109,7 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
       <Typography
         variant="h5"
         component="p"
-        align='center'
+        align="center"
         gutterBottom
         className={classes.typography}
       >
@@ -149,42 +154,40 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
       <Typography
         variant="h5"
         component="p"
-        align='center'
+        align="center"
         gutterBottom
         className={classes.typography}
       >
         SNSでサインイン
       </Typography>
-      
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
+
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={
+          //@ts-ignore
+          () => signin(props.providers.facebook.id)
+        }
+      >
+        <a
+          className={classes.a}
+          href={
+            //@ts-ignore
+            props.providers.facebook.signinUrl
+          }
           onClick={
             //@ts-ignore
-            () => signin(props.providers.facebook.id)
+            (e) => e.preventDefault()
           }
         >
-          <a
-            className={classes.a}
-            href={
-              //@ts-ignore
-              props.providers.facebook.signinUrl
-            }
-            onClick={
-              //@ts-ignore
-              (e) => e.preventDefault()
-            }
-          >
-            {
-              //@ts-ignore
-              props.providers.facebook.name
-            }
-            {" "}でサインインする
-          </a> 
-        </Button>
-      
-
+          {
+            //@ts-ignore
+            props.providers.facebook.name
+          }{" "}
+          でサインインする
+        </a>
+      </Button>
     </div>
   );
 };
@@ -194,6 +197,23 @@ export const SignInForm = (props) => {
   // console.log("SignInForm" + JSON.stringify(props.csrfToken));
 
   return (
-    <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} providers={props.providers} className={props.className} />
+    <SignInFormPresenter
+      {...useProps}
+      csrfToken={props.csrfToken}
+      providers={props.providers}
+      className={props.className}
+    />
   );
 };
+const SignIn = (props) => {
+  return <SignInForm {...props}/>
+}
+
+
+SignIn.getInitialProps = async (context) => {
+  return {
+    csrfToken: await csrfToken(context),
+    providers: await providers(context)
+  }
+}
+export default SignIn

@@ -1,12 +1,12 @@
 import React from "react";
 import { Typography, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
 import Link from "next/link";
-import { SignInForm } from "./SignInForm";
 import { TopPageParagraph } from "./TopPageParagraph";
 import { AboutST } from "./AboutST";
 import { server } from "../lib/loadUrl";
 // import { ParallaxProvider, Parallax, useController, } from 'react-scroll-parallax';
 import { Parallax, Background } from 'react-parallax';
+import { SignInForm } from "../pages/auth/signin";
 
 
 
