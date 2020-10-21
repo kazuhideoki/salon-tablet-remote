@@ -36,10 +36,15 @@ createStyles({
       // left: "15%",
       // transform: "translate(-50%,-50%)"
     },
+    startButtonA: {
+      textDecoration: 'none',
+      display: 'contents',
+    },
     startButton: {
       fontFamily: 'serif',
       fontSize: '1.5em',
       background: "rgba(255,255,255,0.6);",
+      textDecoration: 'none',
     },
     img: {
       zIndex: 0,
@@ -91,9 +96,11 @@ export const TopPage: React.FC<Props> = (props) => {
             「美容室」<br/>×<br/>「タブレット」<br/>をより良く
           </Typography>
           <Link href="/auth/signin">
+            <a className={classes.startButtonA}>
             <PlainButton className={classes.startButton} variant='text'>
               無料で始める
             </PlainButton>
+            </a>
           </Link>
 
         </div>

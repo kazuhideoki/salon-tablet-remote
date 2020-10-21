@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    signin: {
+      textDecoration: 'none',
+    },
   })
 );
 
@@ -77,9 +80,11 @@ export default function WebsiteAppBar({onClick, id}) {
           </IconButton>
           {/* <Link href="/api/auth/signin"> */}
           <Link href="/auth/signin">
+              <a className={classes.signin}>
             <PlainButton variant='text'>
-              Sign In
+                Sign In
             </PlainButton>
+              </a>
           </Link>
             {/* <Button color="inherit" onClick={() => signIn('signin')}>Sign In</Button> */}
         </Toolbar>
