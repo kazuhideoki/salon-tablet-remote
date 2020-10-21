@@ -25,7 +25,7 @@ export const Error = () => {
         <Typography variant="body1" component="p" align="center" className="message" gutterBottom>
         入力内容をご確認ください。
       </Typography>
-       <Button className={classes.signinButton} variant="outlined">
+       <Button className={classes.signinButton}>
         <Link href="/auth/signin">
           <Typography variant='button'>
             Sign in

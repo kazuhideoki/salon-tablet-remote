@@ -16,11 +16,20 @@ export const websiteTheme = createMuiTheme({
          palette: {
            primary: {
              //  main: "#ff9800", // オレンジ
-             main: "#ffeb3b", //黄色
+             main: "#1a237e", // 紺色
            },
            secondary: {
              //  main: "#4fc3f7",
-             main: "#4dd0e1", // ターコイズブルー
+             main: "#fbc02d", // 黄色系オレンジ
            },
          },
+         props: {
+           MuiButton: {
+             variant: 'contained',
+             style: {
+              //  backgroundImage: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)"
+               backgroundImage: "linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%)"
+             }
+           }
+         }
        });

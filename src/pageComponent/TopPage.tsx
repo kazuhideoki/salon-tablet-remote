@@ -50,6 +50,11 @@ createStyles({
     signInForm: {
       margin: theme.spacing(2),
     },
+    // privacy: {
+    //   display: 'block',
+    //   marginRight: 'auto',
+    //   marginLeft: 'auto',
+    // }
   }
 ))
 
@@ -80,8 +85,12 @@ export const TopPage: React.FC<Props> = (props) => {
       <AboutST/>
       
       <SignInForm className={classes.signInForm} csrfToken={props.csrfToken} providers={props.providers}/>
-      <Link href="/privacy">
-        <a>Privacy policy</a>
+      <Link href="/privacy" >
+        <a style={{textAlign: 'center'}}>
+        <Typography >
+          Privacy policy
+        </Typography>
+        </a>
       </Link>
     </div>
     </>
