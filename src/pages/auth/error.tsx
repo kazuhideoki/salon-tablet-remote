@@ -2,6 +2,7 @@ import { makeStyles, Theme,createStyles, Typography, Button } from '@material-ui
 import Link from 'next/link'
 import React from 'react'
 import { server } from '../../lib/loadUrl'
+import { PlainButton } from '../../pageComponent/PlainButton'
 
 const useStyles = makeStyles((theme: Theme) =>
 createStyles({
@@ -25,13 +26,11 @@ export const Error = () => {
         <Typography variant="body1" component="p" align="center" className="message" gutterBottom>
         入力内容をご確認ください。
       </Typography>
-       <Button className={classes.signinButton}>
         <Link href="/auth/signin">
-          <Typography variant='button'>
-            Sign in
-          </Typography>
+       <PlainButton className={classes.signinButton} variant='outlined'>
+          Sign In
+      </PlainButton>
         </Link>
-      </Button>
     </div>
   )
 }

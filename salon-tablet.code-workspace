@@ -11,6 +11,8 @@
       "workbench.tree.indent": 12,
         "editor.tabSize": 2,
         "cSpell.words": [
+          "Bottomright",
+          "Topright",
           "csrf",
           "infosalontablet",
           "mixins"

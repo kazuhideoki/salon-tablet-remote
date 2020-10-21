@@ -11,6 +11,7 @@ import { Facebook } from "@material-ui/icons";
 import { pageList } from "./WebsiteDrawer";
 import { useRouter } from "next/router";
 import { signIn, providers, csrfToken } from "next-auth/client";
+import { PlainButton } from "./PlainButton";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,7 +77,9 @@ export default function WebsiteAppBar({onClick, id}) {
           </IconButton>
           {/* <Link href="/api/auth/signin"> */}
           <Link href="/auth/signin">
-            <Button color="inherit" onClick={signIn}>Sign In</Button>
+            <PlainButton variant='text'>
+              Sign In
+            </PlainButton>
           </Link>
             {/* <Button color="inherit" onClick={() => signIn('signin')}>Sign In</Button> */}
         </Toolbar>

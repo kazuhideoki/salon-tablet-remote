@@ -20,11 +20,11 @@ createStyles({
     h1: {
       fontFamily: 'serif',
       background: "rgba(255,255,255,0.6);",
-      padding: 20,
+      padding: theme.spacing(3),
       position: "absolute",
-      top: "45%",
-      left: "20%",
-      transform: "translate(-50%,-50%)"
+      top: "30%",
+      left: "15%",
+      // transform: "translate(-50%,-50%)"
     },
     img: {
       zIndex: 0,
@@ -50,11 +50,6 @@ createStyles({
     signInForm: {
       margin: theme.spacing(2),
     },
-    // privacy: {
-    //   display: 'block',
-    //   marginRight: 'auto',
-    //   marginLeft: 'auto',
-    // }
   }
 ))
 
@@ -71,6 +66,7 @@ export const TopPage: React.FC<Props> = (props) => {
 
   return (
     <>
+    <div className={classes.mainContents}>
       <Parallax bgImage={`${server}/images/${imgFile}`} strength={300}>
       <div className={classes.featureImgDiv}>
         <Typography variant='h5' component='h1' align='center' className={classes.h1}>
@@ -78,20 +74,13 @@ export const TopPage: React.FC<Props> = (props) => {
         </Typography>
       </div>
     </Parallax>
-    <div className={classes.mainContents}>
 
       {/* <TopPageParagraph className={classes.topPageParagraph}/> */}
 
       <AboutST/>
       
       <SignInForm className={classes.signInForm} csrfToken={props.csrfToken} providers={props.providers}/>
-      <Link href="/privacy" >
-        <a style={{textAlign: 'center'}}>
-        <Typography >
-          Privacy policy
-        </Typography>
-        </a>
-      </Link>
+      
     </div>
     </>
   );

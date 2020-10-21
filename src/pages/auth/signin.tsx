@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { server } from "../../lib/loadUrl";
+import Link from "next/link";
 
 const useSignInFormProps = () => {
   const [newEmail, setNewEmail] = React.useState("");
@@ -188,6 +189,13 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           でサインインする
         </a>
       </Button>
+      <Link href="/privacy" >
+        <a style={{textAlign: 'center'}}>
+        <Typography >
+          Privacy policy
+        </Typography>
+        </a>
+      </Link>
     </div>
   );
 };
