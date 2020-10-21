@@ -1,6 +1,6 @@
 import React from "react";
-import { server } from "../lib/loadUrl";
-import { signin } from "next-auth/client";
+import { signin, providers, csrfToken } from "next-auth/client";
+
 
 import {
   TextField,
@@ -9,6 +9,8 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
+import { server } from "../../lib/loadUrl";
+import Link from "next/link";
 
 const useSignInFormProps = () => {
   const [newEmail, setNewEmail] = React.useState("");
@@ -31,28 +33,43 @@ const useStyles = makeStyles((theme) =>
       marginBottom: theme.spacing(2),
     },
     textField: {
-      minWidth: 350,
-      marginBottom: theme.spacing(1),
+      width: 300,
+      // marginBottom: theme.spacing(1),
+      display: "flex",
+      marginLeft: "auto",
+      marginRight: "auto",
     },
     button: {
       marginBottom: theme.spacing(3),
+      display: "flex",
+      marginLeft: "auto",
+      marginRight: "auto",
     },
     a: {
       fontStyle: "none",
-      color: 'inherit',
+      color: "inherit",
       textDecoration: "none",
-    }
+    },
   })
 );
 
-type Props = ReturnType<typeof useSignInFormProps> & { csrfToken: string, providers: any, className: string };
+type Props = ReturnType<typeof useSignInFormProps> & {
+  csrfToken: string;
+  providers: any;
+  className: string;
+};
 
-export const SignInFormPresenter: React.FC<Props> = (props) => {
-  const classes = useStyles();
+type TSignInFormMailProps = {
+  newEmail: string
+  setNewEmail: React.Dispatch<React.SetStateAction<string>>
+  csrfToken: string
+}
 
+export const SignInFormMail: React.FC<TSignInFormMailProps> = (props) => {
+  const classes = useStyles()
+  
   return (
-    <div className={props.className}>
-      <form
+    <form
         method="post"
         // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 Json Web Tokenの関係か
         action={`${server}/api/auth/signin/email/`}
@@ -65,11 +82,12 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
       >
         <Typography
           variant="h5"
-          component="h2"
+          component="p"
+          align="center"
           gutterBottom
           className={classes.typography}
         >
-          ・初めての方
+          初めての方
         </Typography>
         <input name="csrfToken" type="hidden" defaultValue={props.csrfToken} />
         <TextField
@@ -90,17 +108,27 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           color="primary"
           className={classes.button}
         >
-          メールアドレスで登録する
+          メールアドレスを登録して無料で始める
         </Button>
       </form>
+  )
+}
+
+export const SignInFormPresenter: React.FC<Props> = (props) => {
+  const classes = useStyles();
+
+  return (
+    <div className={props.className}>
+      <SignInFormMail {...props}/>
 
       <Typography
         variant="h5"
-        component="h2"
+        component="p"
+        align="center"
         gutterBottom
         className={classes.typography}
       >
-        ・アカウントをお持ちの方
+        アカウントをお持ちの方
       </Typography>
       <form method="post" action={`${server}/api/auth/callback/credentials/`}>
         {/* メールアドレス */}
@@ -133,41 +161,55 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           variant="contained"
           color="primary"
         >
-          サインイン
+          サインインする
         </Button>
       </form>
 
       {/* Sign in with facebook */}
-      
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
+      <Typography
+        variant="h5"
+        component="p"
+        align="center"
+        gutterBottom
+        className={classes.typography}
+      >
+        SNSでサインイン
+      </Typography>
+
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={
+          //@ts-ignore
+          () => signin(props.providers.facebook.id)
+        }
+      >
+        <a
+          className={classes.a}
+          href={
+            //@ts-ignore
+            props.providers.facebook.signinUrl
+          }
           onClick={
             //@ts-ignore
-            () => signin(props.providers.facebook.id)
+            (e) => e.preventDefault()
           }
         >
-          <a
-            className={classes.a}
-            href={
-              //@ts-ignore
-              props.providers.facebook.signinUrl
-            }
-            onClick={
-              //@ts-ignore
-              (e) => e.preventDefault()
-            }
-          >
-            Sign in with{" "}
-            {
-              //@ts-ignore
-              props.providers.facebook.name
-            }
-          </a> 
-        </Button>
-      
-
+          {
+            //@ts-ignore
+            props.providers.facebook.name
+          }{" "}
+          でサインインする
+        </a>
+      </Button>
+      <Link href="/privacy" >
+        <a style={{textAlign: 'center'}}>
+        <Typography >
+          Privacy policy
+        </Typography>
+        </a>
+      </Link>
     </div>
   );
 };
@@ -177,6 +219,23 @@ export const SignInForm = (props) => {
   // console.log("SignInForm" + JSON.stringify(props.csrfToken));
 
   return (
-    <SignInFormPresenter {...useProps} csrfToken={props.csrfToken} providers={props.providers} className={props.className} />
+    <SignInFormPresenter
+      {...useProps}
+      csrfToken={props.csrfToken}
+      providers={props.providers}
+      className={props.className}
+    />
   );
 };
+const SignIn = (props) => {
+  return <SignInForm {...props}/>
+}
+
+
+SignIn.getInitialProps = async (context) => {
+  return {
+    csrfToken: await csrfToken(context),
+    providers: await providers(context)
+  }
+}
+export default SignIn

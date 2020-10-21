@@ -1,6 +1,6 @@
 import React from 'react';
+import { SignInFormPresenter } from '../pages/auth/signin';
 //@ts-ignore
-import { SignInFormPresenter } from "../pageComponent/SignInForm";
 export default {
   title: "pageComponent/SignInForm",
   component: SignInFormPresenter,
