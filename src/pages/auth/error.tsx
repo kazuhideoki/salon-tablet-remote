@@ -26,11 +26,11 @@ export const Error = () => {
         <Typography variant="body1" component="p" align="center" className="message" gutterBottom>
         入力内容をご確認ください。
       </Typography>
-        <Link href="/auth/signin">
+      <Link href="/auth/signin">
        <PlainButton className={classes.signinButton} variant='outlined'>
           Sign In
-      </PlainButton>
-        </Link>
+        </PlainButton>
+      </Link>
     </div>
   )
 }

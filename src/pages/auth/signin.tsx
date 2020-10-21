@@ -59,12 +59,17 @@ type Props = ReturnType<typeof useSignInFormProps> & {
   className: string;
 };
 
-export const SignInFormPresenter: React.FC<Props> = (props) => {
-  const classes = useStyles();
+type TSignInFormMailProps = {
+  newEmail: string
+  setNewEmail: React.Dispatch<React.SetStateAction<string>>
+  csrfToken: string
+}
 
+export const SignInFormMail: React.FC<TSignInFormMailProps> = (props) => {
+  const classes = useStyles()
+  
   return (
-    <div className={props.className}>
-      <form
+    <form
         method="post"
         // 末尾に「/」をつけてsafariでのCLIENT_FETCH_ERRORを回避 Json Web Tokenの関係か
         action={`${server}/api/auth/signin/email/`}
@@ -103,9 +108,18 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
           color="primary"
           className={classes.button}
         >
-          メールアドレスで登録する
+          メールアドレスを登録して無料で始める
         </Button>
       </form>
+  )
+}
+
+export const SignInFormPresenter: React.FC<Props> = (props) => {
+  const classes = useStyles();
+
+  return (
+    <div className={props.className}>
+      <SignInFormMail {...props}/>
 
       <Typography
         variant="h5"
