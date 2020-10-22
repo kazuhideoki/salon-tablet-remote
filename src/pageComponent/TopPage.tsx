@@ -31,10 +31,6 @@ createStyles({
       background: "rgba(255,255,255,0.6);",
       padding: theme.spacing(3),
       marginBottom: theme.spacing(3),
-      // position: "absolute",
-      // top: "30%",
-      // left: "15%",
-      // transform: "translate(-50%,-50%)"
     },
     startButtonA: {
       textDecoration: 'none',

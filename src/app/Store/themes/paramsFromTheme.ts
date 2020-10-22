@@ -50,13 +50,6 @@ export const generateDefaultParamsFromTheme = (
          }
        };
 
-// export const isThemeParamsChanged = (themeParams: TThemeParams) => {
-//   console.log('themeParamsは ' + themeParams)
-//   const result =
-//     themeParams === generateDefaultParamsFromTheme(themeParams.selected_theme);
-//   console.log('isThemePapramsChangedのreturnは ' + result)
-//   return result
-// }
 export const isThemeParamsChanged = (themeParams: TThemeParams) => {
   console.log('themeParamsは ' + JSON.stringify(themeParams))
   const originalThemeParams = generateDefaultParamsFromTheme(themeParams.selected_theme)

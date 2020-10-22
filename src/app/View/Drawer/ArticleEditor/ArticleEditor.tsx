@@ -42,7 +42,7 @@ const useArticleEditorProps = () => {
     isEditting ? article.tag_ids : []
   );
 
-  const [charCountArticleContent, setCharCountArticlContent] = React.useState(
+  const [charCountArticleContent, setCharCountArticleContent] = React.useState(
     0
   );
   const createArticle = useCreateArticle();
@@ -86,7 +86,7 @@ const useArticleEditorProps = () => {
     selectedTags,
     setSelectedTags,
     charCountArticleContent,
-    setCharCountArticlContent,
+    setCharCountArticleContent,
     handleOnChangeTitleText,
     handleSubmit,
     tags: appState.tags,
@@ -187,7 +187,7 @@ export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = 
                setEditorTextExcerpt={props.setEditorTextExcerpt}
                setEditorImg={props.setEditorImg}
                charCount={props.charCountArticleContent}
-               setCharCount={props.setCharCountArticlContent}
+               setCharCount={props.setCharCountArticleContent}
              />
 
              <div className={classes.bottomDiv}>

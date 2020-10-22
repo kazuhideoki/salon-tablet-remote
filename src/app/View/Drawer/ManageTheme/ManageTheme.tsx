@@ -170,7 +170,7 @@ const useStyles = makeStyles((theme: Theme) =>
         height: 0,
       },
     },
-    accordiondetails: {
+    accordionDetails: {
       display: 'block', // デフォルトのflexを消す
     },
     param: {
@@ -207,7 +207,7 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
               >
                 <Typography variant="body1" color="textSecondary">テーマ詳細設定</Typography>
               </AccordionSummary>
-              <AccordionDetails className={classes.accordiondetails}>
+              <AccordionDetails className={classes.accordionDetails}>
                 
               <Typography variant="body1" component="p" color="textSecondary">
                 メインカラー

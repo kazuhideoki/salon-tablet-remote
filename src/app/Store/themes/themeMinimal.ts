@@ -77,7 +77,6 @@ export const themeMinimal = (params: TThemeParams) =>
                main: params.theme_color,
              },
              secondary: {
-               //  main: "#b0c4de", // lightsteelblue
                main: secondaryColor(params.theme_color),
              },
              // tonalOffset: 0.2,

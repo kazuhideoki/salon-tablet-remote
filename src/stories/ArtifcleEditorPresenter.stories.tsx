@@ -21,7 +21,7 @@ const props: TUseArticleEditorProps = {
   selectedTags: [],
   setSelectedTags: null,
   charCountArticleContent: 0,
-  setCharCountArticlContent: null,
+  setCharCountArticleContent: null,
   handleOnChangeTitleText: null,
   handleSubmit: null,
   tags: [],
@@ -34,20 +34,14 @@ export const Normal = () => {
   const [editorText,setEditorText] = React.useState('')
 
   return (
-    <Provider>
-
       <ArticleEditorPresenter {...props} editorText={editorText} setEditorText={setEditorText}/>
-    </Provider>
   )
 }
 export const is_Admin = () => {
   const [editorText,setEditorText] = React.useState('')
 
   return (
-    <Provider>
-
       <ArticleEditorPresenter {...props} editorText={editorText} setEditorText={setEditorText} is_admin={true}/>
-    </Provider>
   )
 }
 
