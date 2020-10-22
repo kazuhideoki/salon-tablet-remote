@@ -23,6 +23,7 @@ import { drawerItemsJsx } from "./DrawerComponent/drawerItemsJsx";
 import { useIsMobile } from "../../../lib/useIsMobile";
 import { useFooterProps } from "../Footer/Footer";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
+import { Settings } from "@material-ui/icons";
 
 
 export const useDrawerProps = () => {
@@ -180,13 +181,14 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
     <div className={`${classes.root} ${props.className}`}>
       <CssBaseline />
       <IconButton
-        color="inherit"
+        // color="inherit"
         aria-label="open drawer"
         onClick={() => props.dispatchAppState({ type: "OPEN_DRAWER" })}
         edge="start"
         className={clsx(classes.menuButton, props.isDrawerOpen && classes.hide)}
       >
-        <MenuIcon />
+        {/* <MenuIcon /> */}
+        <Settings/>
       </IconButton>
       <MuiDrawer
         className={classes.drawer}
