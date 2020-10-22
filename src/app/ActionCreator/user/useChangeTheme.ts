@@ -4,7 +4,7 @@ import {
   T_selected_theme,
 } from "../../Store/Types";
 import { apiUserInfoChangeTheme, T_user_info_change_theme } from "../../../pages/api/user_info/theme/change_theme";
-import { generateParamsFromTheme } from "../../Store/themes/paramsFromTheme";
+import { generateDefaultParamsFromTheme } from "../../Store/themes/paramsFromTheme";
 
 export const useChangeTheme = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
@@ -12,7 +12,7 @@ export const useChangeTheme = () => {
   
   return async (selectedTheme: T_selected_theme) => {
 
-    const themeParams = generateParamsFromTheme(selectedTheme);
+    const themeParams = generateDefaultParamsFromTheme(selectedTheme);
 
     const params = {
       user_id,

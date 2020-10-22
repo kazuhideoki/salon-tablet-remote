@@ -3,7 +3,8 @@ import { ArticleEditorPresenter, TUseArticleEditorProps } from '../app/View/Draw
 import { Provider } from './lib/ThemeProvider';
 export default {
   title: "Drawer/ArticleEditorPresenter",
-  component: ArticleEditorPresenter
+  component: ArticleEditorPresenter,
+  decorators: [story => <Provider >{story()}</Provider>],
 };
 
 const props: TUseArticleEditorProps = {

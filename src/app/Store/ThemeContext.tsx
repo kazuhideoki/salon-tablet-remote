@@ -96,6 +96,28 @@ export type TThemeParams = {
   theme_font_heading?: T_theme_font;
 };
 
+export const switchingTheme = (params: TThemeParams) => {
+    // user_infoのselected_themeをもとにテーマを適応
+    switch (params.selected_theme) {
+      case "nonTheme":
+        return nonTheme(params)
+        break;
+      case "minimal":
+        return themeMinimal(params)
+        break;
+      case "white":
+        return themeWhite(params)
+        break;
+      case "natural":
+        return themeNatural(params)
+        break;
+
+      default:
+        return nonTheme(params)
+    }
+
+}
+
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
@@ -109,25 +131,7 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
     };
     const isMobile = useIsMobile()
 
-    let theme // テーマ付ける
-    // user_infoのselected_themeをもとにテーマを適応
-    switch (selected_theme) {
-      case "nonTheme":
-        theme = nonTheme(params)
-        break;
-      case "minimal":
-        theme = themeMinimal(params)
-        break;
-      case "white":
-        theme = themeWhite(params)
-        break;
-      case "natural":
-        theme = themeNatural(params)
-        break;
-
-      default:
-        break;
-    }     
+    const theme = switchingTheme(params)
 
     return (
       // これでmaterial uiのthemeオブジェクトを下へ送る

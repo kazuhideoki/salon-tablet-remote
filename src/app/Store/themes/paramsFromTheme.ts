@@ -32,7 +32,7 @@ const natural: TThemeParams = {
   theme_font_heading: '"M PLUS Rounded 1c"',
 };
 
-export const generateParamsFromTheme = (
+export const generateDefaultParamsFromTheme = (
          selectedTheme: T_selected_theme
        ): TThemeParams => {
          switch (selectedTheme) {
@@ -53,13 +53,13 @@ export const generateParamsFromTheme = (
 // export const isThemeParamsChanged = (themeParams: TThemeParams) => {
 //   console.log('themeParamsは ' + themeParams)
 //   const result =
-//     themeParams === generateParamsFromTheme(themeParams.selected_theme);
+//     themeParams === generateDefaultParamsFromTheme(themeParams.selected_theme);
 //   console.log('isThemePapramsChangedのreturnは ' + result)
 //   return result
 // }
 export const isThemeParamsChanged = (themeParams: TThemeParams) => {
   console.log('themeParamsは ' + JSON.stringify(themeParams))
-  const originalThemeParams = generateParamsFromTheme(themeParams.selected_theme)
+  const originalThemeParams = generateDefaultParamsFromTheme(themeParams.selected_theme)
 
   let resultArr: boolean[] = []
   for (const [key, value] of Object.entries(themeParams)) {
