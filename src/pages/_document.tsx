@@ -12,7 +12,7 @@ const theme = responsiveFontSizes(createMuiTheme())
 class MyDocument extends Document {
   domain = "https://salon-tablet.com";
   appName = "SALON TABLET";
-  content = "Best App for intaraction between hairdressers and their customers";
+  content = "美容室のためのタブレット専用ウェブサービスです。美容師と顧客のコミュニケーションプラットフォームを提供し、単価アップ、タブレット内の整理、美容室の雰囲気作りに貢献します。"
 
   render() {
     return (

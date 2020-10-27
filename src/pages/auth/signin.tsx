@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { server } from "../../lib/loadUrl";
 import Link from "next/link";
+import { SEO } from "../../pageComponent/SEO";
 
 const useSignInFormProps = () => {
   const [newEmail, setNewEmail] = React.useState("");
@@ -228,7 +229,12 @@ export const SignInForm = (props) => {
   );
 };
 const SignIn = (props) => {
-  return <SignInForm {...props}/>
+  return (
+    <>
+      <SEO title="サインイン"/>
+      <SignInForm {...props}/>
+    </>
+  )
 }
 
 

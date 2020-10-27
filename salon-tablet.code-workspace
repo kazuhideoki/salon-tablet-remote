@@ -15,9 +15,13 @@
           "Editting",
           "Noto",
           "Topright",
+          "bfup",
+          "browserconfig",
           "csrf",
           "infosalontablet",
-          "mixins"
+          "mixins",
+          "msapplication",
+          "noindex"
         ]
     }
 }

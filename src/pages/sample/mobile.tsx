@@ -2,6 +2,7 @@ import { makeStyles, Theme, createStyles, Fab } from "@material-ui/core";
 import { server } from "../../lib/loadUrl";
 import { ScrollTop } from "../../pageComponent/ScrollTop";
 import { KeyboardArrowUp } from "@material-ui/icons";
+import { SEO } from "../../pageComponent/SEO";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,6 +22,7 @@ function Mobile() {
 
   return (
     <div>
+      <SEO title="サンプルページ Mobile"/>
       <iframe
         id="sample-mobile"
         className={classes.iframe}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { server } from '../../lib/loadUrl'
 import { PlainButton } from '../../pageComponent/PlainButton'
+import { SEO } from '../../pageComponent/SEO'
 
 const useStyles = makeStyles((theme: Theme) =>
 createStyles({
@@ -19,6 +20,8 @@ createStyles({
 export const Error = () => {
   const classes = useStyles()
   return (
+    <>
+    <SEO noindex={false} nofollow={false}/>
     <div className="error">
       <Typography variant="h5" component="h2" align="center" gutterBottom>
         サインインに失敗しました
@@ -32,6 +35,7 @@ export const Error = () => {
         </PlainButton>
       </Link>
     </div>
+    </>
   )
 }
 

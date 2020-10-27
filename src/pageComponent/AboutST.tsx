@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       objectFit: 'cover',
     },
     typo: {
-      // margin: theme.spacing(5, 2),
-      margin: theme.spacing(5, 0),
+      margin: theme.spacing(6, 0),
     },
   })
 );

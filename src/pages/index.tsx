@@ -22,6 +22,7 @@ import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 import classes from "*.module.css";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import { SEO } from "../pageComponent/SEO";
 
 
 export type IndexPropsData = {
@@ -67,7 +68,7 @@ const Index = (props: IndexProps) => {
     return (
       <>
       {/* <ParallaxProvider> */}
-
+        <SEO/>
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       {/* </ParallaxProvider> */}
       </>

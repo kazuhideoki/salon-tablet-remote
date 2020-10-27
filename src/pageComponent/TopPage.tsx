@@ -61,7 +61,7 @@ createStyles({
 
       },
     topPageParagraph: {
-      margin: theme.spacing(7,0),
+      margin: theme.spacing(8,0),
     },
     signInForm: {
       margin: theme.spacing(2),
