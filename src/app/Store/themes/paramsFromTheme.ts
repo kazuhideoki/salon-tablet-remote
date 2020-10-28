@@ -11,11 +11,11 @@ const white: TThemeParams = {
 };             
 
 const natural: TThemeParams = {
-  selected_theme: 'natural',
+  selected_theme: "natural",
   theme_color: "#5d4037",
   theme_font1: "未設定",
   theme_font2: '"Noto Serif JP"',
-  theme_font_heading: '"M PLUS Rounded 1c"',
+  theme_font_heading: '"Noto Serif JP"',
 };
 
 export const generateDefaultParamsFromTheme = (
