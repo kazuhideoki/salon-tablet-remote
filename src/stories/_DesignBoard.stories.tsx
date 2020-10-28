@@ -1,7 +1,16 @@
 import { Button, createStyles, makeStyles, Typography, Theme, TextField, Paper, useTheme, Box, Chip } from '@material-ui/core';
 import React from 'react';
-import { Provider } from './lib/ThemeProvider';
+import { Provider, StorybookStore } from './lib/ThemeProvider';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import { TransitionProps } from '@material-ui/core/transitions';
+
 import "../../public/fonts/fonts.css";
+import { switchingTransition } from '../app/View/Modal/Modal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +52,20 @@ const useStyles = makeStyles((theme: Theme) =>
 const DesignBoard:React.FC = () => {
   const classes = useStyles() 
 
+  const { selected_theme } = React.useContext(StorybookStore)
   const theme = useTheme()
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const Transition = switchingTransition(selected_theme)
 
   return (
     <div className={classes.root}>
@@ -102,6 +124,35 @@ const DesignBoard:React.FC = () => {
       </div>
       <div className={classes.itemBox}>
       </div>
+      <div>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Slide in alert dialog
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Let Google help apps determine location. This means sending anonymous location data to
+            Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>
+            Disagree
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
     </div>
   )
 }

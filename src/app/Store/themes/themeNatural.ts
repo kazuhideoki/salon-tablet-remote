@@ -98,6 +98,11 @@ export const themeNatural = (params: TThemeParams) =>
              MuiButton: {
                variant: "contained",
              },
+             MuiChip: {
+               style: {
+                  boxShadow: theme.shadows[2],
+               },
+             },
              MuiFormControl: {
                variant: "filled",
              },

@@ -30,6 +30,12 @@ const selectThemeProps = {
 
 const border = {backgroundColor: 'white', borderTop: '5px dotted darkgrey', borderBottom: '5px dotted darkgrey', height: 10, marginTop: 40, marginBottom: 40}
 
+type TStorybookStore = {
+  selected_theme: T_selected_theme
+}
+
+export const StorybookStore = React.createContext({} as TStorybookStore);
+
 
 export const Provider: React.FC = (props) => {
 
@@ -41,17 +47,24 @@ export const Provider: React.FC = (props) => {
 
   const theme = switchingTheme(generateDefaultParamsFromTheme(selected_theme))
 
+  const values = {
+    selected_theme
+  }
+
 
   return (
     <>
     <link href={googleFontsUrl} rel="stylesheet"></link>
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <ThemeContext.Provider value={useThemeArgs('medium')}>
-        <SelectTheme {...selectThemeProps}  selected_theme={selected_theme} handleChange={handleChange}/>
-        <div style={border} ></div>
-        {props.children}
-      </ThemeContext.Provider>
+      <StorybookStore.Provider value={values}>
+        <ThemeContext.Provider value={useThemeArgs('medium')}>
+          <SelectTheme {...selectThemeProps}  selected_theme={selected_theme} handleChange={handleChange}/>
+          <div style={border} ></div>
+          {props.children}
+        </ThemeContext.Provider>
+
+      </StorybookStore.Provider>
     </MuiThemeProvider>
     </>
   );

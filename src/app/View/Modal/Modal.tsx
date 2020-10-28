@@ -22,15 +22,33 @@ import { useModalSize, medium } from "../viewComponents/useModalSize";
 import { StyledDialog } from "./StyledDialog";
 import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
-import { TSetModal } from "../../Store/Types";
+import { TSetModal, T_selected_theme } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
 import InfoBarEditor from "../Drawer/InfoBar/InfoBarEditor";
 import { GoogleSearch } from "../Footer/GoogleSearch";
 
-// const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-//     //@ts-ignore
-//     return <Slide direction="up" ref={ref} {...props} />;
-// });
+export const switchingTransition = (selected_theme: T_selected_theme) => {
+  switch (selected_theme) {
+    case 'white':
+        return React.forwardRef<unknown, TransitionProps>(
+          function Transition(props, ref) {
+            //@ts-ignore
+            return <Fade direction="up" ref={ref} {...props} />;
+          }
+        );
+      
+      break;
+  
+    default:
+      return React.forwardRef<unknown, TransitionProps>(
+        function Transition(props, ref) {
+          //@ts-ignore
+          return <Slide direction="up" ref={ref} {...props} />;
+        }
+      );
+      break;
+  } 
+}
 
 const useModalProps = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
@@ -150,37 +168,18 @@ export const ModalPresenter:React.FC<Props> = (props) => {
           default:
             console.log("エラーだよ、Modal→ '" + props.setModal + "'");
         }
-        let Transition;
-        switch (props.selected_theme) {
-          case 'white':
-             Transition = React.forwardRef<unknown, TransitionProps>(
-               function Transition(props, ref) {
-                 //@ts-ignore
-                 return <Fade direction="up" ref={ref} {...props} />;
-               }
-             );
-            
-            break;
         
-          default:
-            Transition = React.forwardRef<unknown, TransitionProps>(
-              function Transition(props, ref) {
-                //@ts-ignore
-                return <Slide direction="up" ref={ref} {...props} />;
-              }
-            );
-            break;
-        }
+        const Transition = switchingTransition(props.selected_theme)
         
         // modalを閉じるまでタグなどを追加しても再レンダーのmodalのアニメーションを表示させないようにする
-        // setTimeoutで時間差でskipTransitonを変える必要あり
-        const [skipTransiton, setSkipTransiton] = React.useState(false);
+        // setTimeoutで時間差でskipTransitionを変える必要あり
+        const [skipTransition, setSkipTransition] = React.useState(false);
         React.useEffect(function offTransition() {
           setTimeout(() => {
             if (props.appState.isModalOpen) {
-              setSkipTransiton(true)
+              setSkipTransition(true)
             } else {
-              setSkipTransiton(false);
+              setSkipTransition(false);
             }
           }, props.duration.enteringScreen);
         },[props.appState.isModalOpen])        
@@ -197,7 +196,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             open={props.isModalOpen}
             TransitionComponent={Transition}
             // 再レンダーのときtransitonアニメーションさせたくないときは、値を0に
-            transitionDuration={skipTransiton ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
+            transitionDuration={skipTransition ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
             onClose={props.closeModal}
             maxWidth="xl"
           >
