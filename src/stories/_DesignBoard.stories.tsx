@@ -1,4 +1,4 @@
-import { Button, createStyles, makeStyles, Typography, Theme, TextField, Paper, useTheme, Box } from '@material-ui/core';
+import { Button, createStyles, makeStyles, Typography, Theme, TextField, Paper, useTheme, Box, Chip } from '@material-ui/core';
 import React from 'react';
 import { Provider } from './lib/ThemeProvider';
 import "../../public/fonts/fonts.css";
@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(3),
     },
     button: {
+      marginRight: theme.spacing(1),
+    },
+    chip: {
       marginRight: theme.spacing(1),
     },
     paper: {
@@ -69,6 +72,11 @@ const DesignBoard:React.FC = () => {
           ■テキストフィールド
         </Typography> */}
         <TextField/>
+      </div>
+      <div className={classes.itemBox}>
+        <Chip className={classes.chip} label='通常ラベル' />
+        <Chip className={classes.chip} label='選択時ラベル' color='primary' />
+        <Chip className={classes.chip} label='未選択ラベル' disabled />
       </div>
       <div className={classes.itemBox}>
         {/* <Typography component="h2" variant='h5' gutterBottom>
