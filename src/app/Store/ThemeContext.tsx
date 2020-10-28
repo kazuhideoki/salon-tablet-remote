@@ -5,11 +5,9 @@ import {
   useTheme,
   useMediaQuery,
 } from "@material-ui/core";
-import { themeMinimal } from "./themes/themeMinimal";
 import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme, T_footer_icon_size } from "./Types";
 import { Store } from "./Store";
 
-import { nonTheme } from "./themes/nonTheme";
 import { useIsMobile } from "../../lib/useIsMobile";
 import { themeWhite } from "./themes/themeWhite";
 import { themeNatural } from "./themes/themeNatural";
@@ -99,12 +97,6 @@ export type TThemeParams = {
 export const switchingTheme = (params: TThemeParams) => {
     // user_infoのselected_themeをもとにテーマを適応
     switch (params.selected_theme) {
-      case "nonTheme":
-        return nonTheme(params)
-        break;
-      case "minimal":
-        return themeMinimal(params)
-        break;
       case "white":
         return themeWhite(params)
         break;
@@ -113,7 +105,7 @@ export const switchingTheme = (params: TThemeParams) => {
         break;
 
       default:
-        return nonTheme(params)
+        return themeWhite(params)
     }
 
 }

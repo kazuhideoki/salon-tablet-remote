@@ -3,9 +3,7 @@ import { PPaginationPresenter, TUsePPaginationProps } from '../app/View/Footer/P
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 import { sampleTags } from './lib/sampleTags';
 import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';
-import { themeMinimal } from '../app/Store/themes/themeMinimal';
 import { initInstagramMedias } from '../app/Store/Types';
-import { minimal } from './lib/themeMinimal';
 export default {
   title: "Footer/Pagination/PPagination",
   component: PPaginationPresenter,
@@ -49,19 +47,19 @@ const props: TUsePPaginationProps = {
 export const Normal = () => {
 
   return (
-    <MuiThemeProvider theme={minimal}>
+    <>
       <PPaginationPresenter {...props} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
-    </MuiThemeProvider>
+      </>
   );
 }
 export const isTabletPortrait = () => {
 
   return (
-    <MuiThemeProvider theme={minimal}>
+    <>
       <PPaginationPresenter {...props} isTabletPortrait={true} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
-    </MuiThemeProvider>
+      </>
   );
 }
 const props2: TUsePPaginationProps = {
@@ -103,9 +101,9 @@ const props2: TUsePPaginationProps = {
 export const Instagram表示 = () => {
 
   return (
-    <MuiThemeProvider theme={minimal}>
+    <>
       <PPaginationPresenter {...props2} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
-    </MuiThemeProvider>
+    </>
   );
 }

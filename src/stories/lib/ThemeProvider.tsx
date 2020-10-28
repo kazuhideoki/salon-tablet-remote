@@ -1,8 +1,6 @@
 import React from 'react'
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core";
-import { themeMinimal } from "../../app/Store/themes/themeMinimal";
 import { useThemeArgs, ThemeContext, switchingTheme } from "../../app/Store/ThemeContext";
-import { minimal } from './themeMinimal';
 import { SelectTheme } from '../../app/View/Drawer/ManageTheme/SelectTheme';
 import { useManageTheme } from '../../app/View/Drawer/ManageTheme/ManageTheme';
 import { generateDefaultParamsFromTheme } from '../../app/Store/themes/paramsFromTheme';
@@ -35,7 +33,7 @@ const border = {backgroundColor: 'white', borderTop: '5px dotted darkgrey', bord
 
 export const Provider: React.FC = (props) => {
 
-  const [selected_theme, setSelected_theme] = React.useState('nonTheme' as T_selected_theme)
+  const [selected_theme, setSelected_theme] = React.useState('white' as T_selected_theme)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected_theme((event.target as HTMLInputElement).value as T_selected_theme);

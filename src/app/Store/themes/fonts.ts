@@ -18,8 +18,6 @@ export const fonts1: TFont1[] = [
 export type TFont2 =
   | ['"M PLUS Rounded 1c"']
   | ['"Kosugi Maru"']
-  | ["えんぴつ楷書"]
-  | ["まきばフォント"]
   | ["ふい字"]
   // | ["ヒラギノ角ゴシック", '"ヒラギノ角ゴ ProN"']
   | ['"ヒラギノ角ゴ ProN"', "ヒラギノ角ゴシック"]
@@ -29,8 +27,6 @@ export type TFont2 =
 export const fonts2: TFont2[] = [
          ['"M PLUS Rounded 1c"'],
          ['"Kosugi Maru"'],
-         ["えんぴつ楷書"],
-         ["まきばフォント"],
          ["ふい字"],
          ['"ヒラギノ角ゴ ProN"', "ヒラギノ角ゴシック"],
          ['"Noto Serif JP"', "源ノ明朝"],
