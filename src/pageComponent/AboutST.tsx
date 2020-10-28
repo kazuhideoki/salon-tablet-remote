@@ -65,7 +65,7 @@ export const AboutST = () => {
 
         <div className={`${classes.item} ${isLargeDisplay ? classes.itemFlex : ''}`}>
         {/* <div item > */}
-          <img src={`${server}/images/hair_stylist.jpg`} className={classes.img}/>
+          <img src={`${server}/images/tablet_desk.jpg`} className={classes.img}/>
           <Typography variant='body1' component='p' gutterBottom align='center' className={classes.typo}>
             おしゃれな美容室のインテリア、無機質なタブレット。<br/>SALON TABLETはマッチングさせます。
           </Typography>
