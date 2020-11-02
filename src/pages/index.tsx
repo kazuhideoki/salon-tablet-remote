@@ -89,15 +89,20 @@ export type TSessionOnj = {
 export const getServerSideProps: GetServerSideProps =  async (context) => {  
 
   const req = context.req;
-  const sessionObj: TSessionOnj = await getSession({ req });
-  console.log("index.tsxのsessionObjは " + JSON.stringify(sessionObj));
-  // let userInfo: TUserInfo;
+  // const sessionObj: TSessionOnj = await getSession({ req });
+  // console.log("index.tsxのsessionObjは " + JSON.stringify(sessionObj));
+  // // let userInfo: TUserInfo;
 
   const ua = new parser.UAParser(req.headers["user-agent"]);
+
+  const sessionObj = {
+    user: {
+      email: 'cutterkaz@gmail.com'
+    }
+  }
+  
   const device = ua.getDevice().type
   console.log('ua.getDevice().typeは' + device);
-  
-
   console.log('uaのgetResultは ' + JSON.stringify(ua.getResult()));
   
 
