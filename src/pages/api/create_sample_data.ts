@@ -11,7 +11,7 @@ export const apiCreateSampleData = async (
   const str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/create_sample_data`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

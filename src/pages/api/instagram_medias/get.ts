@@ -16,7 +16,7 @@ export const apiInstagramMediasGet = async (instagram_id: T_instagram_id, paging
   };
   // pagingCursorがあるときはページ送り用のfetch
   const res = await fetch(`${str}/api/instagram_medias/get`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

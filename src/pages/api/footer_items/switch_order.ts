@@ -10,7 +10,7 @@ export const apiFooterItemsSwitchOrder = async (params:T_footer_items_switch_ord
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/footer_items/switch_order`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

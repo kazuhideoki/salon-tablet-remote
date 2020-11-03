@@ -14,7 +14,7 @@ export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TAp
   const res = await fetch(
     `${str}/api/articles/get`,
     {
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
       method: "POST",
       mode: "cors",
       body: JSON.stringify(articlesParam),

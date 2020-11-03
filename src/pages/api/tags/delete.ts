@@ -15,7 +15,7 @@ export const apiTagsDelete = async (params: T_tags_delete):Promise<TApiResponse<
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/tags/delete`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

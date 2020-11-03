@@ -6,7 +6,8 @@ export const localhost = "http://localhost:8080";
 
 // フロント側でapiにfetchする時
 // ※"npm run https"起動で serverではサーバー側で動作するが、client側では読み込まれない...→最初の読み込みに必要
-export const server = process.env.HTTPS || process.env.NEXT_PUBLIC_SITE;
+// export const server = process.env.HTTPS || process.env.NEXT_PUBLIC_SITE;
+export const server = process.env.NEXT_PUBLIC_SITE;
 
 // instagram apiでは、redirect uriにdev環境でもhttpsが必要。
 export const instagramRedirectHost = dev

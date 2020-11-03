@@ -13,7 +13,7 @@ export const apiUserInfoCheckCredentials = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/user_info/check_credentials`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

@@ -12,7 +12,7 @@ export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):P
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/user_info/theme/change_theme`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

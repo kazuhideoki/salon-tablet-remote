@@ -13,7 +13,7 @@ export const apiUserInfoChangeShowArticleType = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/user_info/change_show_article_type`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

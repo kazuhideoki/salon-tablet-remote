@@ -24,7 +24,7 @@ export const apiFooterItemsCreate = async (params:T_footer_items_create):Promise
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/footer_items/create`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
