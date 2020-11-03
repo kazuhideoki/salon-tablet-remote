@@ -1,0 +1,44 @@
+# Copyright 2018, Google, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# [START app_yaml]
+runtime: nodejs12
+# entrypoint: npm run start
+env: standard
+service: test
+
+env_variables:
+  NEXT_PUBLIC_PORT: "8080"
+  LOCALHOST: "http://localhost:$PORT"
+  NEXT_PUBLIC_SITE: "https://test.salon-tablet.com"
+  EMAIL_SERVER: "smtp://infosalontablet:2356Sp!p@smtp.gmail.com:587"
+
+  DATABASE_URL: "mysql://root:root@127.0.0.1:3306/test_salon_tablet?synchronize:true"
+
+  NEXT_PUBLIC_MYSQL_HOST: "127.0.0.1"
+  NEXT_PUBLIC_MYSQL_DATABASE: "test_salon_tablet"
+  NEXT_PUBLIC_MYSQL_USER: "root"
+  NEXT_PUBLIC_MYSQL_PASSWORD: "root"
+  CLOUD_SQL_CONNECTION_NAME: "salon-tablet-294401:asia-northeast1:salon-tablet"
+
+  FACEBOOK_CLIENT_ID: "631712900782659"
+  FACEBOOK_CLIENT_SECRET: "2a9223706f5fbe3040a88c970cfe79be"
+
+  NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: "298521954536312"
+  INSTAGRAM_APP_SECRET: "c574fa4778a36d4d1573cc761a68f16f"
+
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
+# [END app_yaml]

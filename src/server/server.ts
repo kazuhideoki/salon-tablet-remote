@@ -8,7 +8,7 @@ const { parse } = require("url");
 const { readFileSync } = require("fs");
 import next from "next";
 
-const port = 3000;
+const port = process.env.NEXT_PUBLIC_PORT;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();

@@ -11,7 +11,7 @@ export const server = process.env.HTTPS || process.env.NEXT_PUBLIC_SITE;
 
 // instagram apiでは、redirect uriにdev環境でもhttpsが必要。
 export const instagramRedirectHost = dev
-         ? "https://localhost:3000"
+         ? `https://localhost:${process.env.NEXT_PUBLIC_PORT}`
          : process.env.NEXT_PUBLIC_SITE;
 
 console.log(
