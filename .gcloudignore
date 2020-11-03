@@ -13,10 +13,7 @@
 
 node_modules
 
-.next
-
-
-
+/src/
 
 
 # Node.js dependencies:

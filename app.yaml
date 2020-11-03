@@ -12,9 +12,14 @@
 # limitations under the License.
 
 # [START app_yaml]
-runtime: nodejs12
 env: standard
+runtime: nodejs12
 service: default
+
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
 
 env_variables:
   PORT: 8080
@@ -37,8 +42,4 @@ env_variables:
   NEXT_PUBLIC_INSTAGRAM_CLIENT_ID: "298521954536312"
   INSTAGRAM_APP_SECRET: "c574fa4778a36d4d1573cc761a68f16f"
 
-handlers:
-  - url: /.*
-    secure: always
-    script: auto
 # [END app_yaml]
