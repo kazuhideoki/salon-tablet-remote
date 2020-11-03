@@ -5,7 +5,7 @@
   "scripts": {
     "tsc": "tsc",
     "test": "jest src/__tests__/.*/*.test.tsx?$",
-    "dev": "NODE_OPTIONS=--max_old_space_size=4096 next",
+    "dev": "NODE_OPTIONS=--max_old_space_size=4096 next -p 8080",
 
     "https": "HTTPS=https://localhost:3000 NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json src/server/serverHttps.ts",
     
@@ -13,7 +13,7 @@
     "build:server": "tsc --project tsconfig.server.json",
     "build": "rm -rf ./build && NODE_ENV=production next build",
     "start": "next start -p 8080",
-    "deploy": "npm run build && gcloud app deploy",
+    "deploy": "npm run build && gcloud app deploy --quiet ",
 
     "storybook": "start-storybook -p 6006"
   },
