@@ -13,11 +13,11 @@
 
 # [START app_yaml]
 runtime: nodejs12
-# entrypoint: npm run start
 env: standard
-service: test
+service: default
 
 env_variables:
+  PORT: 8080
   NEXT_PUBLIC_PORT: "8080"
   LOCALHOST: "http://localhost:$PORT"
   NEXT_PUBLIC_SITE: "https://test.salon-tablet.com"
