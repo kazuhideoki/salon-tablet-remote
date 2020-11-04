@@ -1,5 +1,5 @@
 //@ts-ignore
-import { config, Provider } from "next-auth/client";
+// import { config, Provider } from "next-auth/client";
 
 // デバイス間のcssをリセットする
 import "normalize.css"
@@ -56,9 +56,9 @@ export default function MyApp({ Component, pageProps, slug }) {
           {/* <script src="/node_modules/quill-image-drop-module/image-drop.min.js"></script> */}
 
         </Head>
-        <Provider options={{ site: server }} session={session}>
+        {/* <Provider options={{ site: server }} session={session}> */}
           <Component {...pageProps} />
-        </Provider>
+        {/* </Provider> */}
       </>
     );
   }
@@ -73,7 +73,7 @@ export default function MyApp({ Component, pageProps, slug }) {
         <link href={googleFontsUrl} rel="stylesheet"></link>
       </Head>
 
-      <Provider options={{ site: server }} session={session}>
+      {/* <Provider options={{ site: server }} session={session}> */}
         <WebsiteThemeProvider>
 
             <WebSiteDrawer id="back-to-top-anchor" >
@@ -81,7 +81,7 @@ export default function MyApp({ Component, pageProps, slug }) {
             </WebSiteDrawer>
 
         </WebsiteThemeProvider>
-      </Provider>
+      {/* </Provider> */}
     </>
   );
 

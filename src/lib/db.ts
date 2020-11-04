@@ -10,7 +10,7 @@ const config =
           // password: process.env.NEXT_PUBLIC_MYSQL_PASSWORD,
           // // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
           // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-          host: 'localhost',
+          host: 'localhost', 
           // host: "34.84.102.102",
           database: "test_salon_tablet",
           user: "root",

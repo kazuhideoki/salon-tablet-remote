@@ -6,6 +6,7 @@ import { T_user_id, T_theme_color } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
 import { TThemeParams } from "../../../../app/Store/ThemeContext";
+import { runMiddleware } from "../../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeColor = async (
@@ -14,7 +15,7 @@ export const apiUserInfoThemeColor = async (
          let str = process.browser ? server : localhost;
 
          const res = await fetch(`${str}/api/user_info/theme/color`, {
-           headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+           headers: { "Content-Type": "application/json"},
            method: "POST",
            mode: "cors",
            body: JSON.stringify(params),
@@ -33,6 +34,9 @@ export type T_user_info_theme_color_return = {
 
 const color = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { user_id, theme_color }: T_user_info_theme_color = req.body;
 
     // ※selectedTheme,

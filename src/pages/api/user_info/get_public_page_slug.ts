@@ -4,7 +4,7 @@ import { cipher } from "../../../module/bcrypt";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { TSessionOnj } from "../..";
-import { getCsrfToken, getSession, providers } from "next-auth/client";
+// import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { T_user_id, T_public_page_slug } from "../../../app/Store/Types";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -29,8 +29,11 @@ const get_public_page_slug = async (
 ) => {
     const user_id = req.query.userId 
 
-    const sessionObj: TSessionOnj = await getSession({ req });
-    const { email } = sessionObj.user;
+    // 【要修正】
+    // const sessionObj: TSessionOnj = await getSession({ req });
+    // const { email } = sessionObj.user;
+
+    const email = 'cutterkaz@gmail.com'
 
     // slug生成
     const publlic_page_slug = cipher(email + user_id);

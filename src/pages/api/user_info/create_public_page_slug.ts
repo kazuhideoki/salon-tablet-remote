@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id, T_user_email } from "../../../app/Store/Types";
+import { runMiddleware } from "../../../module/corsSetting";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -14,7 +15,7 @@ export const apiCreatePublicPageSlug = async (
          const res = await fetch(
            `${str}/api/user_info/create_public_page_slug`,
            {
-             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+             headers: { "Content-Type": "application/json"},
              method: "POST",
              mode: "cors",
              body: JSON.stringify(params),
@@ -29,6 +30,9 @@ export type T_user_info_create_public_page_slug = {user_id: T_user_id, user_emai
 
 const create_public_page_slug = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { user_id, user_email } = req.body as T_user_info_create_public_page_slug
     
     try {

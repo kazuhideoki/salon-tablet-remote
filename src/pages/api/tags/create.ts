@@ -3,13 +3,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { T_user_id, T_tag_name } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsCreate = async (params: T_tags_create):Promise<TApiResponse<T_tags_create>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/tags/create`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -29,6 +30,8 @@ export type T_tags_create_return = {
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
     
     const params: T_tags_create = req.body;
     console.log(JSON.stringify("/tags/createのreq.body.paramsは " + params));

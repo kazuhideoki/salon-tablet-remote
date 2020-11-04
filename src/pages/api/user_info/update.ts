@@ -4,6 +4,7 @@ import { cipher } from "../../../module/bcrypt";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id, T_user_name, T_shop_name, T_user_email, T_is_generate_public_page } from "../../../app/Store/Types";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoUpdate = async (
@@ -12,7 +13,7 @@ export const apiUserInfoUpdate = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/user_info/update`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -42,6 +43,9 @@ export type T_user_info_update_return = {
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { columns, plainTextPassword }: T_user_info_update = req.body;
 
     const params: T_user_info_update_params = columns;

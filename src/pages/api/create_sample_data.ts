@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TArticle, FooterItems, FooterItem, T_user_id } from "../../app/Store/Types";
 import { TApiResponse } from "../../lib/apiTypes";
 import { server, localhost } from "../../lib/loadUrl";
+import { runMiddleware } from "../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
@@ -11,7 +12,7 @@ export const apiCreateSampleData = async (
   const str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/create_sample_data`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -28,6 +29,8 @@ export type T_create_sample_data = {
 const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") { 
     console.log("create_sample_data.tsだよ");
+
+    // await runMiddleware(req, res);
     
 
   const { user_id }: T_create_sample_data = req.body;

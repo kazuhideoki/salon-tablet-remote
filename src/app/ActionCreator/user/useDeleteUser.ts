@@ -4,7 +4,7 @@ import {
 } from "../../Store/Store";
 import { useCheckPassword } from "./useCheckPassword";
 import { apiUserInfoDelete } from "../../../pages/api/user_info/delete";
-const { signout } = require("next-auth/client")
+// const { signout } = require("next-auth/client")
 
 export const useDeleteUser = () => {
   const { appState } = React.useContext(Store);
@@ -36,7 +36,7 @@ export const useDeleteUser = () => {
           alert("削除できませんでした");
         } else {
           // ↓signout()が先、alertが後で正しく動作した
-          signout()        
+          // signout()        
           alert('アカウントを削除しました。')
         }
 

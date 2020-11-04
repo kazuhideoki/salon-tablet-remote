@@ -6,6 +6,7 @@ import { T_user_id, T_theme_font } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
 import { TThemeParams } from "../../../../app/Store/ThemeContext";
+import { runMiddleware } from "../../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeFont = async (
@@ -14,7 +15,7 @@ export const apiUserInfoThemeFont = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/user_info/theme/font`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -36,6 +37,9 @@ export type T_user_info_theme_font_return = {
 
 const font = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { user_id, theme_font, whichFont }: T_user_info_theme_font = req.body;
 
     // ※selectedTheme,

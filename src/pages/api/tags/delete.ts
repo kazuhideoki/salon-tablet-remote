@@ -9,13 +9,14 @@ import {
 import { deleteTagIdInArticle } from "../../../lib/deleteTagIdInArticle";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (params: T_tags_delete):Promise<TApiResponse<T_tags_delete_return>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/tags/delete`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -31,6 +32,9 @@ export type T_tags_delete_return = {
 
 const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { tag_id, user_id }: T_tags_delete = req.body;
 
     try {

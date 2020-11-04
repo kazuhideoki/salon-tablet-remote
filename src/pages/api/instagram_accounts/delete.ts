@@ -3,13 +3,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { T_instagram_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsDelete = async (params: T_instagram_accounts_delete ):Promise<TApiResponse<T_instagram_accounts_delete_return>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/instagram_accounts/delete`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -27,6 +28,9 @@ export type T_instagram_accounts_delete_return = {
 
 const instagram_accounts_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { instagram_id }: T_instagram_accounts_delete = req.body;
 
     try {

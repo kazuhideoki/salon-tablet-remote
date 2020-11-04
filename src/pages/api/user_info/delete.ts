@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id } from "../../../app/Store/Types";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoDelete = async (
@@ -11,7 +12,7 @@ export const apiUserInfoDelete = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/user_info/delete`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -29,6 +30,9 @@ export type T_user_info_delete_return = {
 
 const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const user_id: T_user_info_delete = req.body;
 
     try {

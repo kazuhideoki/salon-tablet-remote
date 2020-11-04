@@ -1,5 +1,6 @@
 import React from "react";
-import { signin, providers, csrfToken } from "next-auth/client";
+// 【要修正】
+// import { signin, providers, csrfToken } from "next-auth/client";
 
 
 import {
@@ -78,7 +79,8 @@ export const SignInFormMail: React.FC<TSignInFormMailProps> = (props) => {
           e.preventDefault();
           //@ts-ignore
           // signin("email", { email: document.getElementById("email").value });
-          signin("email", { email: props.newEmail });
+          
+          // signin("email", { email: props.newEmail });
         }}
       >
         <Typography
@@ -181,9 +183,9 @@ export const SignInFormPresenter: React.FC<Props> = (props) => {
         variant="contained"
         color="primary"
         className={classes.button}
-        onClick={
+        onClick={()=> null
           //@ts-ignore
-          () => signin(props.providers.facebook.id)
+          // () => signin(props.providers.facebook.id)
         }
       >
         <a
@@ -240,8 +242,8 @@ const SignIn = (props) => {
 
 SignIn.getInitialProps = async (context) => {
   return {
-    csrfToken: await csrfToken(context),
-    providers: await providers(context)
+    // csrfToken: await csrfToken(context),
+    // providers: await providers(context)
   }
 }
 export default SignIn

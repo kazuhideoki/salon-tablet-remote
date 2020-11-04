@@ -13,7 +13,7 @@ export const apiUserInfoChangeFooterIconSize = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/user_info/change_footer_icon_size`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

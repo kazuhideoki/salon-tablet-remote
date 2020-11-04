@@ -5,6 +5,7 @@ import {
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsUpdata = async (
@@ -13,7 +14,7 @@ export const apiTagsUpdata = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/tags/update`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -32,6 +33,9 @@ export type T_tags_update_return = {
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const params: T_tags_update = req.body;
   
 

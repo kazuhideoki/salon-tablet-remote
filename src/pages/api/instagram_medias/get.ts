@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
 import { T_instagram_id, TInstagramMedias } from "../../../app/Store/Types";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (instagram_id: T_instagram_id, paging: { after?: string; before?: string } | null):Promise<TApiResponse<TInstagramMedias>> => {
@@ -16,7 +17,7 @@ export const apiInstagramMediasGet = async (instagram_id: T_instagram_id, paging
   };
   // pagingCursorがあるときはページ送り用のfetch
   const res = await fetch(`${str}/api/instagram_medias/get`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -33,6 +34,8 @@ export type T_instagram_medias_get = {
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     console.log("/instagram_medias/getだよ");
+
+    // await runMiddleware(req, res);
     
     const { instagram_id, paging }: T_instagram_medias_get = req.body;
 

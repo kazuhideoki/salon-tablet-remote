@@ -5,6 +5,7 @@ import { checkPassword } from "../../../module/bcrypt";
 import { T_user_email } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoCheckCredentials = async (
@@ -13,7 +14,7 @@ export const apiUserInfoCheckCredentials = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/user_info/check_credentials`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -28,6 +29,9 @@ export type T_user_info_check_credentials_return = boolean
 
 const check_credentials = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { email, password }: T_user_info_check_credentials = req.body;
 
     // 念の為、パスワード未設定で、パスワード未入力ログインを弾く

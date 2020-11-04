@@ -6,13 +6,14 @@ import { T_user_id } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
 import { TThemeParams } from "../../../../app/Store/ThemeContext";
+import { runMiddleware } from "../../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):Promise<TApiResponse<T_user_info_change_theme_return>> => {
   let str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/user_info/theme/change_theme`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
@@ -31,6 +32,9 @@ export type T_user_info_change_theme_return = {
 
 const change_theme = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+
+    // await runMiddleware(req, res);
+
     const { user_id, themeParams }: T_user_info_change_theme = req.body;
 
     // ※selectedTheme,

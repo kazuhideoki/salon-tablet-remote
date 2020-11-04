@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TInstagramAccounts, T_user_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
+import { runMiddleware } from "../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiResponse<TInstagramAccounts>> => {
@@ -14,6 +15,8 @@ export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiR
 } 
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  // await runMiddleware(req, res);
   
   try {
     //@ts-ignore

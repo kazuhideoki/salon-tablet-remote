@@ -1,15 +1,18 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
-import { getSession } from "next-auth/client";
+// import { getSession } from "next-auth/client";
 import { TSessionOnj } from '../../index'
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";
+import { runMiddleware } from "../../../module/corsSetting";
 
 var FormData = require("form-data");
 
 const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log("get_tokenだよ");
+
+  // await runMiddleware(req, res);
 
   if (req.query.error) {
     console.log();
@@ -45,7 +48,8 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         const shortLived = await response.json();
 
         console.log(
-          "get_token, short lived tokenでの返り値は " + JSON.stringify(shortLived)
+          "get_token, short lived tokenでの返り値は " +
+            JSON.stringify(shortLived)
         );
 
         // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -62,14 +66,16 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         const response3 = await fetch(
           `https://graph.instagram.com/me/?fields=username&access_token=${longLived.access_token}`
         );
-        
+
         const userProfile = await response3.json();
         console.log("userProfileは " + JSON.stringify(userProfile));
 
-        const sessionObj: TSessionOnj = await getSession({ req });
-        console.log("get_tokenのsessionObjは " + JSON.stringify(sessionObj));
-        const { user_id } = await getUserInfoFromEmail(sessionObj.user.email);
-        
+        // 【要修正】
+        // const sessionObj: TSessionOnj = await getSession({ req });
+        // console.log("get_tokenのsessionObjは " + JSON.stringify(sessionObj));
+        // const { user_id } = await getUserInfoFromEmail(sessionObj.user.email);
+
+        const user_id = 14;
 
         const params = {
           instagram_id: shortLived.user_id,
@@ -84,7 +90,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         };
 
         console.log(JSON.stringify(params));
-        
+
         // DBに保存する
         const data3 = await db(
           // すでにデータが有れば上書きする（作動している？）
@@ -92,9 +98,8 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
           [params, params]
         );
 
-        res.writeHead(302, {Location: `/`});
+        res.writeHead(302, { Location: `/` });
         res.end();
-
       } catch (err) {
     console.log(
       "/instagram_accounts/get_token/のエラーは " + JSON.stringify(err)

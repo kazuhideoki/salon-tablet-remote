@@ -10,11 +10,9 @@ import { Drawer as MuiDrawer } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-
 import { ThemeContext, TThemeArgs } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
-import { signout } from "next-auth/client";
+// import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
@@ -48,7 +46,7 @@ export const useDrawerProps = () => {
 
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
-    signOuting ? signout() : null
+    // signOuting ? signout() : null
   }
 
   const handleDrawerClose = () => {

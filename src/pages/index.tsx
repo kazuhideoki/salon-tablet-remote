@@ -10,7 +10,7 @@ import {
   TInfoBarData,
 } from "../app/Store/Types";
 import { App } from "../app/View/App";
-import { getCsrfToken, getSession, providers } from "next-auth/client";
+// import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { GetServerSideProps } from "next";
 import parser from "ua-parser-js";
 import { TopPage } from "../pageComponent/TopPage";
@@ -89,6 +89,7 @@ export type TSessionOnj = {
 export const getServerSideProps: GetServerSideProps =  async (context) => {  
 
   const req = context.req;
+  // 【要修正】
   // const sessionObj: TSessionOnj = await getSession({ req });
   // console.log("index.tsxのsessionObjは " + JSON.stringify(sessionObj));
   // // let userInfo: TUserInfo;
@@ -146,8 +147,8 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
     // data: null,
     isPublicPage: false,
     device: device || null,
-    csrfToken: await getCsrfToken(),
-    providers: await providers(context),
+    // csrfToken: await getCsrfToken(),
+    // providers: await providers(context),
   };
 
   return { props: returnData }
