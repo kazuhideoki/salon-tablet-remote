@@ -30,7 +30,7 @@ export const apiInfoBarUpdate = async (
   let str = process.browser ? server : localhost;
 
   const res = await fetch(`${str}/api/info_bar/update`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json" },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

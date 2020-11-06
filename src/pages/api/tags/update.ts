@@ -5,7 +5,7 @@ import {
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { runMiddleware } from "../../../module/corsSetting";
+
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsUpdata = async (

@@ -6,7 +6,6 @@ import { T_user_id, T_theme_font } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
 import { TThemeParams } from "../../../../app/Store/ThemeContext";
-import { runMiddleware } from "../../../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeFont = async (

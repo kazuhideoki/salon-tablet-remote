@@ -19,7 +19,7 @@ export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiR
   const str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/articles/update`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json" },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id } from "../../../app/Store/Types";
-import { runMiddleware } from "../../../module/corsSetting";
+
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoDelete = async (

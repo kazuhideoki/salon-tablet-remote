@@ -24,13 +24,8 @@ import { T_footer_items_params } from "./create";
 export const apiFooterItemsUpdate = async (params: T_footer_items_update):Promise<TApiResponse<T_footer_items_update_return>> => {
   let str = process.browser ? server : localhost
 
-  let header = new Headers({
-    "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com",
-    "Content-Type": "multipart/form-data",
-  });
-
   const res = await fetch(`${str}/api/footer_items/update`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json" },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

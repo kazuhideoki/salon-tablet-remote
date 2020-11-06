@@ -4,7 +4,7 @@ import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
 // import { getSession } from "next-auth/client";
 import { TSessionOnj } from '../../index'
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";
-import { runMiddleware } from "../../../module/corsSetting";
+
 
 var FormData = require("form-data");
 

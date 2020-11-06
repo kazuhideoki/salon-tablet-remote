@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
 import { T_instagram_id, TInstagramMedias } from "../../../app/Store/Types";
-import { runMiddleware } from "../../../module/corsSetting";
+
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (instagram_id: T_instagram_id, paging: { after?: string; before?: string } | null):Promise<TApiResponse<TInstagramMedias>> => {

@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { T_instagram_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { runMiddleware } from "../../../module/corsSetting";
+
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsDelete = async (params: T_instagram_accounts_delete ):Promise<TApiResponse<T_instagram_accounts_delete_return>> => {

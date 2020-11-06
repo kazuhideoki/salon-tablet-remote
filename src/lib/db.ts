@@ -4,20 +4,12 @@ const config =
   process.env.NODE_ENV === "production"
     ? {
         config: {
-          // host: process.env.NEXT_PUBLIC_MYSQL_HOST,
-          // database: process.env.NEXT_PUBLIC_MYSQL_DATABASE,
-          // user: process.env.NEXT_PUBLIC_MYSQL_USER,
-          // password: process.env.NEXT_PUBLIC_MYSQL_PASSWORD,
-          // // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-          // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-          host: 'localhost', 
-          // host: "34.84.102.102",
+
           database: "test_salon_tablet",
           user: "root",
           password: "root",
-          // port: 3306,
           // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-          socketPath: "/cloudsql/salon-tablet-294401:asia-northeast1:salon-tablet",
+          socketPath: "/cloudsql/salon-tablet-2:us-central1:salon-tablet-2",
         },
       }
     : {
@@ -26,7 +18,7 @@ const config =
           database: "test_salon_tablet",
           user: "root",
           password: "root",
-          port: 3306,
+          // port: 3306,
         },
       };
 

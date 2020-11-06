@@ -10,7 +10,7 @@ export const apiArticlesDelete = async (params: T_articles_delete):Promise<TApiR
   const str = process.browser ? server : localhost
 
   const res = await fetch(`${str}/api/articles/delete`, {
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://salon-tablet.an.r.appspot.com", },
+    headers: { "Content-Type": "application/json" },
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),

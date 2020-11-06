@@ -36,8 +36,6 @@ export default function MyApp({ Component, pageProps, slug }) {
   const session = pageProps.data ? pageProps.data.userInfo : null;
 
   if (session) {
-    console.log(`_app if(session) session = ${JSON.stringify(session)}` );
-    console.log('pagePropsは ' + JSON.stringify(Object.keys(pageProps)));
     
     return (
       <>
@@ -63,8 +61,6 @@ export default function MyApp({ Component, pageProps, slug }) {
     );
   }
 
-  console.log(`_app if(session) ではない session = ${session}`);
-  console.log("pagePropsは " + JSON.stringify(Object.keys(pageProps)));
 
   return (
     <>

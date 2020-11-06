@@ -26,7 +26,7 @@ module.exports = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://salon-tablet.an.r.appspot.com",
+            value: "https://salon-tablet-2.an.r.appspot.com",
 
           },
           {

@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id, T_user_email } from "../../../app/Store/Types";
-import { runMiddleware } from "../../../module/corsSetting";
+
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

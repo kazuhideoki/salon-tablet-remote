@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TTags, T_user_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
-import { runMiddleware } from "../../../module/corsSetting";
+
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsGet = async (user_id: T_user_id): Promise<TApiResponse<TTags>> => {

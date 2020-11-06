@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TArticle, FooterItems, FooterItem, T_user_id } from "../../app/Store/Types";
 import { TApiResponse } from "../../lib/apiTypes";
 import { server, localhost } from "../../lib/loadUrl";
-import { runMiddleware } from "../../module/corsSetting";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
