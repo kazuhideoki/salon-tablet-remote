@@ -4,12 +4,11 @@ const config =
   process.env.NODE_ENV === "production"
     ? {
         config: {
-
           database: "test_salon_tablet",
           user: "root",
           password: "root",
           // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-          socketPath: "/cloudsql/salon-tablet-2:us-central1:salon-tablet-2",
+          socketPath: "/cloudsql/salon-tablet-2:asia-northeast1:salon-tablet-db",
         },
       }
     : {
