@@ -12,7 +12,7 @@
     "build:test": "rm -rf ./build && NODE_ENV=test next build",
     "build:production": "rm -rf ./build && NODE_ENV=production next build",
     "start": "next start -p 8080",
-    "deploy:test": "npm run build:test && gcloud app deploy appTest.yaml --quiet",
+    "deploy:test": "npm run build:test && gcloud app deploy appTest.yaml --quiet && git commit -m ",
     "deploy:production": "npm run build:production && gcloud app deploy app.yaml --quiet"
   },
   "author": "kazuhideoki",
