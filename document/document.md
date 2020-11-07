@@ -8,10 +8,4 @@
    `./cloud_sql_proxy -instances=salon-tablet-2:asia-northeast1:salon-tablet-db=tcp:3306`
 5. 別のターミナルウィンドウから `npm run dev`
 
-
-
-  それぞれのフォルダから
-  開発(vagrantのsalon-tablet or localのhome)： ./cloud_sql_proxy -instances=salon-tablet-2:asia-northeast1:salon-tablet-db=tcp:3306
-
-
-  本番?： ./../cloud_sql_proxy -instances=salon-tablet-2:asia-northeast1:salon-tablet-db=tcp:3306 \ -credential_file=~/.ssh/salon-tablet-2-da074a755124.json &
+  <!-- 本番?： ./../cloud_sql_proxy -instances=salon-tablet-2:asia-northeast1:salon-tablet-db=tcp:3306 \ -credential_file=~/.ssh/salon-tablet-2-da074a755124.json & -->

@@ -6,13 +6,14 @@
     "tsc": "tsc",
     "test": "jest src/__tests__/.*/*.test.tsx?$",
     "dev": "NODE_OPTIONS=--max_old_space_size=4096 next -p 8080",
-    "https": "HTTPS=https://localhost:3000 NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json src/server/serverHttps.ts",
-    "build:test": "rm -rf ./next && NODE_ENV=test NODE_OPTIONS=--max_old_space_size=4096 next build",
-    "build:server": "tsc --project tsconfig.server.json",
-    "build": "rm -rf ./build && NODE_ENV=production next build",
+    "https": "HTTPS=https://localhost:8080 NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json src/server/serverHttps.ts",
+    "storybook": "start-storybook -p 6006",
+
+    "build:test": "rm -rf ./build && NODE_ENV=test next build",
+    "build:production": "rm -rf ./build && NODE_ENV=production next build",
     "start": "next start -p 8080",
-    "deploy": "npm run build && gcloud app deploy --quiet ",
-    "storybook": "start-storybook -p 6006"
+    "deploy:test": "npm run build:test && gcloud app deploy testAppYaml/app.yaml --quiet",
+    "deploy:production": "npm run build:production && gcloud app deploy app.yaml --quiet"
   },
   "author": "kazuhideoki",
   "license": "ISC",

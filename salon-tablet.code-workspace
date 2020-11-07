@@ -24,7 +24,8 @@
           "infosalontablet",
           "mixins",
           "msapplication",
-          "noindex"
+          "noindex",
+          "qrcode"
         ]
     }
 }

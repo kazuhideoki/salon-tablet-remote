@@ -1,0 +1,5 @@
+dispatch:
+  - url: "salon-tablet.com/*"
+    service: default
+  - url: "test.salon-tablet.com/*"
+    service: test
