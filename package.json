@@ -9,7 +9,6 @@
     "https": "HTTPS=https://localhost:3000 NODE_OPTIONS=--max_old_space_size=4096 ts-node --project tsconfig.server.json src/server/serverHttps.ts",
     "build:test": "rm -rf ./next && NODE_ENV=test NODE_OPTIONS=--max_old_space_size=4096 next build",
     "build:server": "tsc --project tsconfig.server.json",
-    
     "build": "rm -rf ./build && NODE_ENV=production next build",
     "start": "next start -p 8080",
     "deploy": "npm run build && gcloud app deploy --quiet ",
@@ -91,6 +90,7 @@
     "jest": "^26.0.1",
     "jest-css-modules": "^2.1.0",
     "jest-dom": "^4.0.0",
+    "mysql": "^2.18.1",
     "react-test-renderer": "^16.13.1",
     "ts-jest": "^25.5.1",
     "ts-loader": "^7.0.1",

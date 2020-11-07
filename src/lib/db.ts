@@ -1,25 +1,15 @@
 import serverlessMysql from "serverless-mysql";
 
-const config =
-  process.env.NODE_ENV === "production"
-    ? {
+const config = {
         config: {
-          database: "test_salon_tablet",
-          user: "root",
-          password: "root",
-          // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-          socketPath: "/cloudsql/salon-tablet-2:asia-northeast1:salon-tablet-db",
-        },
-      }
-    : {
-        config: {
-          host: "localhost",
-          database: "test_salon_tablet",
-          user: "root",
-          password: "root",
-          // port: 3306,
+          host: process.env.NEXT_PUBLIC_MYSQL_HOST,
+          database: process.env.NEXT_PUBLIC_MYSQL_DATABASE,
+          user: process.env.NEXT_PUBLIC_MYSQL_USER,
+          password: process.env.NEXT_PUBLIC_MYSQL_PASSWORD,
+          socketPath: undefined,
         },
       };
+config.config.socketPath = process.env.NODE_ENV === "production" && process.env.CLOUD_SQL_CONNECTION_NAME
 
 const mysql = serverlessMysql(config)
 
