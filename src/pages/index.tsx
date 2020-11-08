@@ -24,6 +24,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { SEO } from "../pageComponent/SEO";
 import dynamic from "next/dynamic";
+import { getSession } from "../lib/Auth";
 const Auth = dynamic(() => import("../lib/Auth"), {
   ssr: false,
 });
@@ -105,7 +106,9 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   //     email: 'cutterkaz@gmail.com'
   //   }
   // }
-  const sessionObj = null
+  const sessionObj = getSession()
+  console.log('sessionObjは ' + sessionObj)
+
   
   const device = ua.getDevice().type
   console.log('ua.getDevice().typeは' + device);
@@ -115,7 +118,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
   // ★★★セッションがある
   if (sessionObj !== null) {
-    let userInfo = await getUserInfoFromEmail(sessionObj.user.email);
+    let userInfo = await getUserInfoFromEmail(sessionObj.email);
 
     // ★★★ユーザーデータがある
     if (userInfo) {
@@ -130,7 +133,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
         await apiCreatePublicPageSlug({ user_id: userInfo.user_id, user_email: userInfo.user_email });
         // 更新したのでuserInfoを取り直す
-        userInfo = await getUserInfoFromEmail(sessionObj.user.email);
+        userInfo = await getUserInfoFromEmail(sessionObj.email);
       }
 
       const returnData: IndexProps = {

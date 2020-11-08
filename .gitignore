@@ -4,6 +4,7 @@ _next
 build
 dist
 .cache
-.env.local
 .env.test
 .env.production
+.env
+.env.development

@@ -20,6 +20,7 @@ import Head from 'next/head';
 // Add the Firebase services that you want to use
 // import "firebase/auth";
 
+export const getSession = () => firebase.auth().currentUser;
 
 export const uiConfig = {
   callbacks: {
