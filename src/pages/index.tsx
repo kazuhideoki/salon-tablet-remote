@@ -23,7 +23,10 @@ import classes from "*.module.css";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { SEO } from "../pageComponent/SEO";
-
+import dynamic from "next/dynamic";
+const Auth = dynamic(() => import("../lib/Auth"), {
+  ssr: false,
+});
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -69,7 +72,8 @@ const Index = (props: IndexProps) => {
       <>
       {/* <ParallaxProvider> */}
         <SEO/>
-        <TopPage csrfToken={props.csrfToken} providers={props.providers} />
+        {/* <TopPage csrfToken={props.csrfToken} providers={props.providers} /> */}
+        <Auth/>
       {/* </ParallaxProvider> */}
       </>
     );
@@ -96,11 +100,12 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
   const ua = new parser.UAParser(req.headers["user-agent"]);
 
-  const sessionObj = {
-    user: {
-      email: 'cutterkaz@gmail.com'
-    }
-  }
+  // const sessionObj = {
+  //   user: {
+  //     email: 'cutterkaz@gmail.com'
+  //   }
+  // }
+  const sessionObj = null
   
   const device = ua.getDevice().type
   console.log('ua.getDevice().typeは' + device);
