@@ -4,7 +4,7 @@ import { Store } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { AppMobile } from "./mobile/AppMobile";
-import { IndexProps, IndexPropsData } from "../../pages";
+import { IndexProps, IndexPropsData } from "../../pages/index3";
 import { AppTablet } from "./AppTablet";
 import { useMediaQuery } from "@material-ui/core";
 import { useIsMobile } from "../../lib/useIsMobile";

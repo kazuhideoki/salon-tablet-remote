@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { cipher } from "../../../module/bcrypt";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { TSessionOnj } from "../..";
+import { TSessionOnj } from "../../index3";
 // import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { T_user_id, T_public_page_slug } from "../../../app/Store/Types";
 

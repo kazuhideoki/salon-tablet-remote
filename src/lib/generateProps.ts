@@ -6,7 +6,7 @@ import { apiFooterItemsGet } from "../pages/api/footer_items/get";
 import { apiTagsGet } from "../pages/api/tags/get";
 import { apiInstagramAccountsGet } from "../pages/api/instagram_accounts/get";
 import { apiInfoBarGet } from "../pages/api/info_bar/get";
-import { IndexPropsData } from "../pages";
+import { IndexPropsData } from "../pages/index3";
 
 export const generateProps = async (userInfo: TUserInfo, getPublishedOnly: boolean) => {
   // 記事一覧取得

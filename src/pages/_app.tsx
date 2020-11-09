@@ -21,7 +21,7 @@ import Head from "next/head";
 import { server } from "../lib/loadUrl";
 import { TUserInfo } from "../app/Store/Types";
 import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
-import { TSessionOnj } from ".";
+import { TSessionOnj } from "./index3";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { GetStaticProps, GetServerSideProps } from "next";

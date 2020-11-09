@@ -2,7 +2,7 @@ import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
 // import { getSession } from "next-auth/client";
-import { TSessionOnj } from '../../index'
+import { TSessionOnj } from '../../index3'
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";
 
 

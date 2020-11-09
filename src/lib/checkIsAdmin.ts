@@ -1,4 +1,4 @@
-import { TSessionOnj } from "../pages";
+import { TSessionOnj } from "../pages/index3";
 // import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { NextApiRequest } from "next";
 import { getUserInfoFromEmail } from "./getUserInfoFromEmail";

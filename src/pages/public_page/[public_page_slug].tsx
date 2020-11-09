@@ -1,7 +1,7 @@
 import React from 'react'
 import { GetServerSideProps } from "next";
 import { getUserInfoFromSlug } from "../../lib/getUserInfoFromSlug";
-import { IndexProps } from '..';
+import { IndexProps } from '../index3';
 import { generateProps } from '../../lib/generateProps';
 import App from '../../app/View/App';
 import Head from 'next/head';

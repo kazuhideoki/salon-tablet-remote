@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { appStateReducer } from "../Reducer/appStateReducer";
-import { IndexProps, IndexPropsData } from "../../pages";
+import { IndexProps, IndexPropsData } from "../../pages/index3";
 
 import { TAppState, initAppState } from "./Types";
 import { AppStateAction } from "../Reducer/AppStateAction";

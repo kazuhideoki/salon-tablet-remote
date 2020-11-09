@@ -1,12 +1,14 @@
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import initFirebase from '../utils/auth/initFirebase'
-import { setUserCookie } from '../utils/auth/userCookies'
-import { mapUserData } from '../utils/auth/mapUserData'
+import initFirebase from '../lib/auth/initFirebase'
+import { setUserCookie } from '../lib/auth/userCookies'
+import { mapUserData } from '../lib/auth/mapUserData'
 
 // Init the Firebase app.
 initFirebase()
+
+export const getSession = () => firebase.auth().currentUser;
 
 const firebaseAuthConfig = {
   signInFlow: 'popup',
