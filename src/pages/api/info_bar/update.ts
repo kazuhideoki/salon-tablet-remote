@@ -1,16 +1,6 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
-  T_info_bar_id,
-  T_icon_name,
-  T_displayed_icon_name,
-  T_on_tap,
-  T_item_content,
-  T_link_url,
-  T_order,
-  T_item_excerpt,
-  T_app_link_url,
-  T_modal_size,
   T_info_bar_type,
   T_scrolling_sentence,
   T_selected_article_id,
@@ -19,7 +9,6 @@ import {
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarUpdate = async (

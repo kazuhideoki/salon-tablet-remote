@@ -4,7 +4,6 @@ import { tagIdsParse } from "../../../lib/tagIdsParse";
 import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
-// import { session } from "next-auth/client";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {

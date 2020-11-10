@@ -1,37 +1,39 @@
-import { GetServerSidePropsContext } from "next";
-import { ParsedUrlQuery } from "querystring";
+import { NextApiRequest, NextApiResponse } from "next";
 import { firebaseAdmin } from "./firebaseAdmin";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { parseCookies } from "nookies";
+import { IncomingMessage, ServerResponse } from "http";
 
-// export type TSession = ReturnType<typeof getSession>
 export type TSession = {
   email: string;
 };
 
-export const getSession = async (
-         context: GetServerSidePropsContext<ParsedUrlQuery>,
-         failAndRedirect = false
-       ) => {
-         try {
+type TGetSession = {
+  req: NextApiRequest | IncomingMessage,
+  res: NextApiResponse | ServerResponse,
+  failAndRedirect?: boolean
+}
 
-           const cookies = parseCookies(context);
+export const getSession = async ({
+         req,
+         res,
+         failAndRedirect = false,
+       }: TGetSession): Promise<TSession> => {
+         try {
+           const cookies = parseCookies({ req });
            // console.log('cookiesは ' + JSON.stringify(cookies))
            const token = await firebaseAdmin
              .auth()
              .verifyIdToken(cookies["token"]);
            // console.log('tokenは ' + JSON.stringify(token))
            return { email: token.email };
-
          } catch (err) {
-
            console.log("errは " + JSON.stringify(err));
 
            if (failAndRedirect) {
-             context.res.writeHead(302, { Location: "/auth/signin" });
-             context.res.end();
+             res.writeHead(302, { Location: "/auth/signin" });
+             res.end();
            }
 
            return null;
-           
          }
        };

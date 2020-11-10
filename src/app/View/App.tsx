@@ -4,17 +4,14 @@ import { Store } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { AppMobile } from "./mobile/AppMobile";
-import { IndexProps, IndexPropsData } from "../../pages/index3";
 import { AppTablet } from "./AppTablet";
-import { useMediaQuery } from "@material-ui/core";
 import { useIsMobile } from "../../lib/useIsMobile";
+import { IndexProps } from "../../pages";
 
 const AppView = (props: {device: string}) => {
-  // const isMobile = useMediaQuery("(max-width:480px)");
   const isMobile = useIsMobile();
   const { dispatchAppState, appState } = React.useContext(Store);
   const { isSetPassword } = appState.userInfo;
-  // console.log("AppViewのis_first_sign_inは " + is_first_sign_in);
 
   // パスワード未設定でユーザー情報登録へ遷移
   React.useEffect(function settingPassword() {
@@ -32,17 +29,6 @@ const AppView = (props: {device: string}) => {
     },
     [appState.userInfo.shop_name]
   );
-
-  // // SSRで初期表示させるときの処理
-  // if (process.browser === false) {
-  //   if (props.device === 'mobile' || 'wearable') {
-  //     console.log('★mobile');   
-  //     return <AppMobile />;
-  //   } else {
-  //     console.log("★tablet");
-  //     return <AppTablet />;
-  //   }
-  // }
 
   if (isMobile) {
     return <AppMobile />;

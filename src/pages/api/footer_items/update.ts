@@ -2,17 +2,6 @@ import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_footer_item_id,
-  T_is_published_footer_items,
-  T_icon_name,
-  T_displayed_icon_name,
-  T_on_tap,
-  T_item_content,
-  T_link_url,
-  T_order,
-  T_item_excerpt,
-  T_app_link_url,
-  T_modal_size,
-  T_data_type_footer_item,
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
@@ -52,7 +41,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     const { params, id }: T_footer_items_update = req.body;
 
     try {
-      const isAdmin = await checkIsAdmin(req);
+      const isAdmin = await checkIsAdmin({ req, res });
 
       if (isAdmin === false) {
         params.data_type = "default_data";

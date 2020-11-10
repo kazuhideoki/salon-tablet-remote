@@ -49,7 +49,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const params: T_articles_create = req.body;
 
     try {
-      const isAdmin = await checkIsAdmin(req)
+      const isAdmin = await checkIsAdmin({req, res})
       
       if (isAdmin === false) { 
         params.data_type = 'default_data'

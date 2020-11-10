@@ -1,21 +1,19 @@
-import { TSessionOnj } from "../pages/index3";
-// import { getCsrfToken, getSession, providers } from "next-auth/client";
-import { NextApiRequest } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
+import { getSession } from "./auth/getSession";
 import { getUserInfoFromEmail } from "./getUserInfoFromEmail";
 
-// 【要修正】
-// export const checkIsAdmin = async (req: NextApiRequest) => {
-//          const sessionObj: TSessionOnj = await getSession({ req });
-
-//          console.log(
-//            "checkIsAminの sessionObjは " + JSON.stringify(sessionObj)
-//          );
-
-//          const userInfo = await getUserInfoFromEmail(sessionObj.user.email);
-//          console.log('checkIsAdminの userInfoは ' + JSON.stringify(userInfo));
-
-//          return userInfo.is_admin;
-//        };
-export const checkIsAdmin = async (req: NextApiRequest) => {
-  return false
+type TCheckIsAdmin = {
+  req: NextApiRequest,
+  res: NextApiResponse
 }
+
+export const checkIsAdmin = async ({ req, res }: TCheckIsAdmin) => {
+         const { email } = await getSession({ req, res });
+
+         console.log("checkIsAminの emailは " + JSON.stringify(email));
+
+         const userInfo = await getUserInfoFromEmail(email);
+         console.log("checkIsAdminの userInfoは " + JSON.stringify(userInfo));
+
+         return userInfo.is_admin;
+       };
