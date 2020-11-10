@@ -1,15 +1,29 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import nookies from 'nookies';
+import firebase from 'firebase'
 import { firebaseClient } from './firebaseClient';
 
 //@ts-ignore
-const AuthContext = createContext<{ user: firebaseClient.User | null }>({
+const AuthContext = createContext<TAuthContext>({
   user: null,
 });
+type TAuthContext = {
+  user: firebaseClient.User | null
+  signout: typeof signout
+}
+
+const signout = () => {
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+  }).catch(function(error) {
+    // An error happened.
+  });
+}
 
 export function AuthProvider({ children }: any) {
   //@ts-ignore
   const [user, setUser] = useState<firebaseClient.User | null>(null);
+
 
   useEffect(() => {
     // tokenが変わるのをチェックするリスナーを登録する。
@@ -30,8 +44,10 @@ export function AuthProvider({ children }: any) {
     });
   }, []);
 
+  const values = { user, signout }
+
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
   );
 }
 

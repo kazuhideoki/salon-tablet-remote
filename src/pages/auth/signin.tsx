@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from "next/dynamic";
-// import { FirebaseAuth } from '../../lib/auth/FirebaseAuth';
+// クライアント側でないと動かないため
 const FirebaseAuth = dynamic(() => import('../../lib/auth/FirebaseAuth'), {
   ssr: false,
 });

@@ -71,14 +71,16 @@ const useStyles = makeStyles((theme: Theme) => {
 
 const Index = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const classes = useStyles()
-  const user = useAuth()
+  const {user, signout} = useAuth()
 
   if (user) {
     return (
       <>
       ``{props.message}
       さいんいんしてるよ
-      
+
+      <button onClick={signout}>サインアウト</button>
+
         {/* <App {...props} /> */}
       </>
     );
@@ -94,7 +96,7 @@ const Index = (props: InferGetServerSidePropsType<typeof getServerSideProps>) =>
         <p>df</p>
         <p>df</p>
         <p>df</p>
-        <Link href="/auth">
+        <Link href="/auth/signin">
           サインインページへ
         </Link>
       {/* </ParallaxProvider> */}
