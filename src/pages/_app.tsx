@@ -29,6 +29,7 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { websiteTheme, WebsiteThemeProvider } from "../app/Store/themes/websiteTheme";
 import { ParallaxProvider, Parallax, useController, } from 'react-scroll-parallax';
 import { AuthProvider } from "../lib/auth/AuthProvider";
+import { SwitchAppBar } from "../pageComponent/SwitchAppBar";
 
 export default function MyApp({ Component, pageProps, slug }) {
   // サーバーサイドでnext-authのsessionをつかうための修正項目
@@ -56,7 +57,9 @@ export default function MyApp({ Component, pageProps, slug }) {
 
         </Head>
         <AuthProvider>
-          <Component {...pageProps} />
+          <SwitchAppBar>
+            <Component {...pageProps} />
+          </SwitchAppBar>
         </AuthProvider>
 
       </>

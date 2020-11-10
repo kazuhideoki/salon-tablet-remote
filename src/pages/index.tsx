@@ -30,12 +30,11 @@ import Link from "next/link";
 const Auth = dynamic(() => import("../lib/Auth"), {
   ssr: false,
 });
-import nookies from 'nookies';
-import { firebaseAdmin } from '../lib/auth/firebaseAdmin';
-import { parseCookies, setCookie, destroyCookie } from 'nookies'
+
 // import cookies from 'next-cookies'
 import cookies from 'cookies'
 import { useAuth } from "../lib/auth/AuthProvider";
+import { getSession } from "../lib/auth/getSession";
 
 
 
@@ -69,37 +68,21 @@ const useStyles = makeStyles((theme: Theme) => {
     });
 })
 
-const Index = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Index = (props: IndexProps) => {
   const classes = useStyles()
   const {user, signout} = useAuth()
 
-  if (user) {
+  if (props.data.userInfo) {
     return (
       <>
-      ``{props.message}
-      さいんいんしてるよ
-
-      <button onClick={signout}>サインアウト</button>
-
-        {/* <App {...props} /> */}
+        <App {...props} />
       </>
     );
   } else {
     return (
       <>
-      {/* <ParallaxProvider> */}
         <SEO/>
-        {/* <TopPage csrfToken={props.csrfToken} providers={props.providers} /> */}
-        <p>df</p>
-        <p>df</p>
-        <p>df</p>
-        <p>df</p>
-        <p>df</p>
-        <p>df</p>
-        <Link href="/auth/signin">
-          サインインページへ
-        </Link>
-      {/* </ParallaxProvider> */}
+        <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       </>
     );
   }
@@ -117,56 +100,16 @@ export type TSessionOnj = {
 
 export const getServerSideProps: GetServerSideProps =  async (context) => {
   
-  try {
-    const cookies = parseCookies(context)
-    // const cookies = new Cookies(context.req, context.res)
-    // Get a cookie
-    
-    // const cks = cookies(context)
-    // const cks = cookies.parse(context.req.headers.cookie)
-  
-    console.log('cookiesは ' + JSON.stringify(cookies))
-    // const authCookie = cookies.get('token')
-    // console.log('authCookieは ' + authCookie)
-    const token = await firebaseAdmin.auth().verifyIdToken(cookies['token']);
-    console.log('tokenは ' + JSON.stringify(token))
-
-    // the user is authenticated!
-    const { uid, email } = token;
-
-    // FETCH STUFF HERE!! 🚀
-
-    return {
-      props: { message: `Your email is ${email} and your UID is ${uid}.` },
-    };
-  } catch (err) {
-    console.log('errは ' + JSON.stringify(err))
-    // either the `token` cookie didn't exist
-    // or token verification failed
-    // either way: redirect to the login page
-    context.res.writeHead(302, { Location: '/auth/signin' })
-    context.res.end();
-
-    // `as never` prevents inference issues 
-    // with InferGetServerSidePropsType.
-    // The props returned here don't matter because we've 
-    // already redirected the user.
-    return { props: {} as never };
-  }
+  const sessionObj = await getSession(context)
 
 
 
   const req = context.req;
-  // 【要修正】
-  // const sessionObj: TSessionOnj = await getSession({ req });
-  // console.log("index.tsxのsessionObjは " + JSON.stringify(sessionObj));
-  // // let userInfo: TUserInfo;
-
   const ua = new parser.UAParser(req.headers["user-agent"]);
 
-  const sessionObj = {
-      email: 'cutterkaz@gmail.com'
-  }
+  // const sessionObj = {
+  //     email: 'cutterkaz@gmail.com'
+  // }
   // const result = await getSession()
   // const sessionObj = result.user
 
@@ -180,7 +123,7 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
 
   // ★★★セッションがある
-  if (!(sessionObj === null)) {
+  if (sessionObj !== null) {
     let userInfo = await getUserInfoFromEmail(sessionObj.email);
 
     // ★★★ユーザーデータがある

@@ -79,13 +79,13 @@ export default function WebsiteAppBar({onClick, id}) {
             </a>
           </IconButton>
           {/* <Link href="/api/auth/signin"> */}
-          <Link href="/auth/signin">
+          {/* <Link href="/auth/signin">
               <a className={classes.signin}>
             <PlainButton variant='text'>
                 Sign In
             </PlainButton>
               </a>
-          </Link>
+          </Link> */}
             {/* <Button color="inherit" onClick={() => signIn('signin')}>Sign In</Button> */}
         </Toolbar>
       </AppBar>

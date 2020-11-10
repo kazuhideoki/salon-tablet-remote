@@ -1,15 +1,10 @@
 import React from "react";
 import { Typography, makeStyles, createStyles, useMediaQuery, Button } from "@material-ui/core";
 import Link from "next/link";
-import { TopPageParagraph } from "./TopPageParagraph";
 import { AboutST } from "./AboutST";
 import { server } from "../lib/loadUrl";
-// import { ParallaxProvider, Parallax, useController, } from 'react-scroll-parallax';
-import { Parallax, Background } from 'react-parallax';
-import { SignInForm, SignInFormMail } from "../pages/auth/signin";
+import { Parallax } from 'react-parallax';
 import { PlainButton } from "./PlainButton";
-
-
 
 const useStyles = makeStyles((theme) =>
 createStyles({
@@ -103,11 +98,7 @@ export const TopPage: React.FC<Props> = (props) => {
       </div>
     </Parallax>
 
-      {/* <TopPageParagraph className={classes.topPageParagraph}/> */}
-
-      <AboutST/>
-      {/* <SignInForm className={classes.signInForm} csrfToken={props.csrfToken} providers={props.providers}/> */}
-      <SignInFormMail csrfToken={props.csrfToken} newEmail={newEmail} setNewEmail={setNewEmail}/>
+    <AboutST/>
       
     </div>
     </>

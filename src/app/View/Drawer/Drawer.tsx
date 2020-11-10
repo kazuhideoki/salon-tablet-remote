@@ -12,7 +12,6 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import { ThemeContext, TThemeArgs } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
-// import { signout } from "next-auth/client";
 import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
@@ -22,11 +21,13 @@ import { useIsMobile } from "../../../lib/useIsMobile";
 import { useFooterProps } from "../Footer/Footer";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { Settings } from "@material-ui/icons";
+import { useAuth } from "../../../lib/auth/AuthProvider";
 
 
 export const useDrawerProps = () => {
   const theme = useTheme();
   const { dispatchAppState, appState } = React.useContext(Store);
+  const { signout } = useAuth()
   const { isSetting, isPublicPage, isDrawerOpen, footerItems} = appState
   const getArticles = useGetArticles()
   
@@ -46,7 +47,7 @@ export const useDrawerProps = () => {
 
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
-    // signOuting ? signout() : null
+    signOuting ? signout() : null
   }
 
   const handleDrawerClose = () => {

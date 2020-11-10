@@ -2,28 +2,33 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import nookies from 'nookies';
 import firebase from 'firebase'
 import { firebaseClient } from './firebaseClient';
+import initFirebase from './initFirebase';
+import { router } from 'next/link';
+import { useRouter } from 'next/router';
 
-//@ts-ignore
 const AuthContext = createContext<TAuthContext>({
   user: null,
-});
+} as TAuthContext);
 type TAuthContext = {
+  //@ts-ignore
   user: firebaseClient.User | null
   signout: typeof signout
 }
 
-const signout = () => {
-  firebase.auth().signOut().then(function() {
-    // Sign-out successful.
-  }).catch(function(error) {
-    // An error happened.
-  });
-}
 
 export function AuthProvider({ children }: any) {
   //@ts-ignore
   const [user, setUser] = useState<firebaseClient.User | null>(null);
-
+  const router = useRouter()
+  
+  const signout = () => {
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      router.push('/')
+    }).catch(function(error) {
+      // An error happened.
+    });
+  }
 
   useEffect(() => {
     // tokenが変わるのをチェックするリスナーを登録する。
