@@ -11,7 +11,6 @@ import {
   T_article_img,
   T_data_type_article,
 } from "../../../app/Store/Types";
-import { T_articles_create } from "./create";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -52,7 +51,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     const id: T_article_id = req.body.article_id;
 
     try {
-      const isAdmin = await checkIsAdmin(req);
+      const isAdmin = await checkIsAdmin({req, res});
 
       if (isAdmin === false) {
         params.data_type = "default_data";

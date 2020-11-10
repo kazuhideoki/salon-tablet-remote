@@ -1,11 +1,11 @@
 import React from 'react'
 import { GetServerSideProps } from "next";
 import { getUserInfoFromSlug } from "../../lib/getUserInfoFromSlug";
-import { IndexProps } from '../index3';
 import { generateProps } from '../../lib/generateProps';
 import App from '../../app/View/App';
 import Head from 'next/head';
 import parser from "ua-parser-js";
+import { IndexProps } from '..';
 
 
 
@@ -53,12 +53,11 @@ export const getServerSideProps: GetServerSideProps = async ({req, res, query}) 
     isPublicPage: true,
     samplePage: query.sample as string || null,
     device: device || null,
+    // sessionを入れてAppBarを表示させなくする
+    session: {email: 'sample@sample.com'},
   }
 
   return { props: returnData }
-
-
-
 
 }
 

@@ -1,4 +1,3 @@
-import WebSiteDrawer from "../../pageComponent/WebsiteDrawer";
 import { makeStyles,Theme,createStyles, Fab } from "@material-ui/core";
 import { server } from "../../lib/loadUrl";
 import { ScrollTop } from "../../pageComponent/ScrollTop";
@@ -10,8 +9,6 @@ const useStyles = makeStyles((theme: Theme) =>
     iframe: {
       width: "100vw",
       height: "100vh",
-      // borderLeft: '10px solid darkgrey',
-      // borderRight: '10px solid darkgrey',
       borderTop: 'none',
       borderBottom: 'none',
     },

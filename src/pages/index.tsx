@@ -8,31 +8,16 @@ import {
   TInstagramAccounts,
   TAllArticles,
   TInfoBarData,
-  T_user_email,
 } from "../app/Store/Types";
 import { App } from "../app/View/App";
-// import { getCsrfToken, getSession, providers } from "next-auth/client";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetServerSideProps } from "next";
 import { TopPage } from "../pageComponent/TopPage";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { apiCreateSampleData } from "./api/create_sample_data";
 import { generateProps } from "../lib/generateProps";
 import { apiCreatePublicPageSlug } from "./api/user_info/create_public_page_slug";
-import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
-import classes from "*.module.css";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
-import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { SEO } from "../pageComponent/SEO";
-import dynamic from "next/dynamic";
-// import FirebaseAuth  from "../pageComponent/FirebaseAuth";
-import Link from "next/link";
-// import { getSession } from "./api/auth/get_session";
-const Auth = dynamic(() => import("../lib/Auth"), {
-  ssr: false,
-});
-
-// import cookies from 'next-cookies'
-import cookies from 'cookies'
 import { useAuth } from "../lib/auth/AuthProvider";
 import { getSession, TSession } from "../lib/auth/getSession";
 import { getDeviceType } from "../lib/getDeviceType";
@@ -103,8 +88,9 @@ export type TSessionOnj = {
 };
 
 export const getServerSideProps: GetServerSideProps =  async (context) => {
+  const {req,res} = context
   
-  const session = await getSession(context)
+  const session = await getSession({req, res})
   console.log('index gSSR,sessionは ' + JSON.stringify(session))
 
   const device = getDeviceType(context)

@@ -1,8 +1,7 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
-// import { getSession } from "next-auth/client";
-import { TSessionOnj } from '../../index3'
+import { getSession } from "../../../lib/auth/getSession";
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";
 
 
@@ -71,11 +70,11 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         console.log("userProfileは " + JSON.stringify(userProfile));
 
         // 【要修正】
-        // const sessionObj: TSessionOnj = await getSession({ req });
+        const { email } = await getSession({req, res})
+        const { user_id } = await getUserInfoFromEmail(email);
         // console.log("get_tokenのsessionObjは " + JSON.stringify(sessionObj));
         // const { user_id } = await getUserInfoFromEmail(sessionObj.user.email);
 
-        const user_id = 14;
 
         const params = {
           instagram_id: shortLived.user_id,

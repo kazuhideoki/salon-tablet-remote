@@ -14,7 +14,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 // httpsでlocalhostにアクセスしたときの鍵認証エラーの回避 next-auth用
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
+// process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
 
 // https接続にするためmkcertを使って鍵を作る (参考) https://kifarunix.com/how-to-create-self-signed-ssl-certificate-with-mkcert-on-ubuntu-18-04/
 const httpsOptions = {

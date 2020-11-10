@@ -3,15 +3,11 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import Link from "next/link";
 import { Facebook } from "@material-ui/icons";
 import { pageList } from "./WebsiteDrawer";
 import { useRouter } from "next/router";
-// import { signIn, providers, csrfToken } from "next-auth/client";
-import { PlainButton } from "./PlainButton";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -78,15 +74,6 @@ export default function WebsiteAppBar({onClick, id}) {
               <Facebook />
             </a>
           </IconButton>
-          {/* <Link href="/api/auth/signin"> */}
-          {/* <Link href="/auth/signin">
-              <a className={classes.signin}>
-            <PlainButton variant='text'>
-                Sign In
-            </PlainButton>
-              </a>
-          </Link> */}
-            {/* <Button color="inherit" onClick={() => signIn('signin')}>Sign In</Button> */}
         </Toolbar>
       </AppBar>
     </div>
