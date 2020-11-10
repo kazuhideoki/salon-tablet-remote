@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import nookies from 'nookies';
 import firebase from 'firebase'
 import { firebaseClient } from './firebaseClient';
-import initFirebase from './initFirebase';
-import { router } from 'next/link';
 import { useRouter } from 'next/router';
 
 const AuthContext = createContext<TAuthContext>({
@@ -12,7 +10,7 @@ const AuthContext = createContext<TAuthContext>({
 type TAuthContext = {
   //@ts-ignore
   user: firebaseClient.User | null
-  signout: typeof signout
+  signout: () => void
 }
 
 

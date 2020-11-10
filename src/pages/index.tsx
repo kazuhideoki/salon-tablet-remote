@@ -39,18 +39,18 @@ import { getSession } from "../lib/auth/getSession";
 
 
 export type IndexPropsData = {
-  articles: TArticles;
-  pagination: TPaginationParams;
-  allArticles: TAllArticles;
-  footerItems: FooterItems;
-  infoBarData: TInfoBarData;
-  tags: TTags;
-  instagramAccounts: TInstagramAccounts;
-  userInfo?: TUserInfo;
-};
+  articles?: TArticles;
+  pagination?: TPaginationParams;
+  allArticles?: TAllArticles;
+  footerItems?: FooterItems;
+  infoBarData?: TInfoBarData;
+  tags?: TTags;
+  instagramAccounts?: TInstagramAccounts;
+  userInfo: TUserInfo;
+}
 
 export type IndexProps = {
-  data?: IndexPropsData;
+  data: IndexPropsData;
   isPublicPage: boolean
   device: string
   samplePage?: string
@@ -158,7 +158,9 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   // ★★★セッションがない
 
   const returnData: IndexProps = {
-    // data: null,
+    data: {
+      userInfo: null
+    },
     isPublicPage: false,
     device: device || null,
     // csrfToken: await getCsrfToken(),

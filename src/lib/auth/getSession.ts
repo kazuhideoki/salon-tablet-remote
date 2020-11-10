@@ -4,7 +4,8 @@ import { firebaseAdmin } from "./firebaseAdmin";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 export const getSession = async (
-         context: GetServerSidePropsContext<ParsedUrlQuery>
+         context: GetServerSidePropsContext<ParsedUrlQuery>,
+         failAndRedirect = false
        ) => {
          try {
            const cookies = parseCookies(context);
@@ -20,11 +21,13 @@ export const getSession = async (
 
          } catch (err) {
            console.log("errは " + JSON.stringify(err));
-           // either the `token` cookie didn't exist
-           // or token verification failed
-           // either way: redirect to the login page
-           context.res.writeHead(302, { Location: "/auth/signin" });
-           context.res.end();
+
+           if (failAndRedirect) {
+             context.res.writeHead(302, { Location: "/auth/signin" });
+             context.res.end();
+           }
+
+           return null
 
          }
        };
