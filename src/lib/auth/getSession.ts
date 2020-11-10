@@ -3,10 +3,16 @@ import { ParsedUrlQuery } from "querystring";
 import { firebaseAdmin } from "./firebaseAdmin";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 
+// export type TSession = ReturnType<typeof getSession>
+export type TSession = {
+  email: string;
+};
+
 export const getSession = async (
          context: GetServerSidePropsContext<ParsedUrlQuery>,
          failAndRedirect = false
        ) => {
+         //  let email
          try {
            const cookies = parseCookies(context);
            // console.log('cookiesは ' + JSON.stringify(cookies))
@@ -15,10 +21,8 @@ export const getSession = async (
              .verifyIdToken(cookies["token"]);
            // console.log('tokenは ' + JSON.stringify(token))
            // the user is authenticated!
-           const { uid, email } = token;
-
-           return { email }
-
+           const { email } = token;
+           return { email };
          } catch (err) {
            console.log("errは " + JSON.stringify(err));
 
@@ -27,7 +31,6 @@ export const getSession = async (
              context.res.end();
            }
 
-           return null
-
+           return null;
          }
        };

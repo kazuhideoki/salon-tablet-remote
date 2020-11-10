@@ -8,6 +8,7 @@ import {
   TInstagramAccounts,
   TAllArticles,
   TInfoBarData,
+  T_user_email,
 } from "../app/Store/Types";
 import { App } from "../app/View/App";
 // import { getCsrfToken, getSession, providers } from "next-auth/client";
@@ -34,23 +35,23 @@ const Auth = dynamic(() => import("../lib/Auth"), {
 // import cookies from 'next-cookies'
 import cookies from 'cookies'
 import { useAuth } from "../lib/auth/AuthProvider";
-import { getSession } from "../lib/auth/getSession";
+import { getSession, TSession } from "../lib/auth/getSession";
 
 
 
 export type IndexPropsData = {
-  articles?: TArticles;
-  pagination?: TPaginationParams;
-  allArticles?: TAllArticles;
-  footerItems?: FooterItems;
-  infoBarData?: TInfoBarData;
-  tags?: TTags;
-  instagramAccounts?: TInstagramAccounts;
+  articles: TArticles;
+  pagination: TPaginationParams;
+  allArticles: TAllArticles;
+  footerItems: FooterItems;
+  infoBarData: TInfoBarData;
+  tags: TTags;
+  instagramAccounts: TInstagramAccounts;
   userInfo: TUserInfo;
 }
 
 export type IndexProps = {
-  data: IndexPropsData;
+  data?: IndexPropsData;
   isPublicPage: boolean
   device: string
   samplePage?: string
@@ -58,6 +59,7 @@ export type IndexProps = {
   providers?: any;
   // bcrypt_password?: string;
   message?: string;
+  session?: TSession 
 };
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -72,7 +74,9 @@ const Index = (props: IndexProps) => {
   const classes = useStyles()
   const {user, signout} = useAuth()
 
-  if (props.data.userInfo) {
+  console.log('Index props.sessionは ' + props.session)
+
+  if (props.session) {
     return (
       <>
         <App {...props} />
@@ -100,31 +104,19 @@ export type TSessionOnj = {
 
 export const getServerSideProps: GetServerSideProps =  async (context) => {
   
-  const sessionObj = await getSession(context)
-
-
+  const session = await getSession(context)
+  console.log('index gSSR,sessionは ' + JSON.stringify(session))
 
   const req = context.req;
   const ua = new parser.UAParser(req.headers["user-agent"]);
-
-  // const sessionObj = {
-  //     email: 'cutterkaz@gmail.com'
-  // }
-  // const result = await getSession()
-  // const sessionObj = result.user
-
-  console.log('sessionObjは ' + JSON.stringify(sessionObj))
-
-  
   const device = ua.getDevice().type
   // console.log('ua.getDevice().typeは' + device);
   // console.log('uaのgetResultは ' + JSON.stringify(ua.getResult()));
   
-
-
+    
   // ★★★セッションがある
-  if (sessionObj !== null) {
-    let userInfo = await getUserInfoFromEmail(sessionObj.email);
+  if (session !== null) {
+    let userInfo = await getUserInfoFromEmail(session.email);
 
     // ★★★ユーザーデータがある
     if (userInfo) {
@@ -139,13 +131,14 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
         await apiCreatePublicPageSlug({ user_id: userInfo.user_id, user_email: userInfo.user_email });
         // 更新したのでuserInfoを取り直す
-        userInfo = await getUserInfoFromEmail(sessionObj.email);
+        userInfo = await getUserInfoFromEmail(session.email);
       }
 
       const returnData: IndexProps = {
         data: await generateProps(userInfo, false),
         isPublicPage: false,
         device: device || null,
+        session
       };
 
       return { props: returnData }
@@ -154,13 +147,13 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
   } // ★★★セッションがある
 
-  // ※もしかしたら↓うまく行かないこともあるかもしれないが、スッキリさせた
   // ★★★セッションがない
 
   const returnData: IndexProps = {
-    data: {
-      userInfo: null
-    },
+    // data: {
+    //   userInfo: null
+    // },
+    session: null,
     isPublicPage: false,
     device: device || null,
     // csrfToken: await getCsrfToken(),

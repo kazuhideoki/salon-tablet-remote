@@ -30,14 +30,15 @@ import { websiteTheme, WebsiteThemeProvider } from "../app/Store/themes/websiteT
 import { ParallaxProvider, Parallax, useController, } from 'react-scroll-parallax';
 import { AuthProvider } from "../lib/auth/AuthProvider";
 import { SwitchAppBar } from "../pageComponent/SwitchAppBar";
+import { getSession, TSession } from "../lib/auth/getSession";
+import { AppProps } from "next/dist/next-server/lib/router/router";
+import { getServerSideProps } from "./public_page/[public_page_slug]";
+import App from 'next/app'
 
-export default function MyApp({ Component, pageProps, slug }) {
-  // サーバーサイドでnext-authのsessionをつかうための修正項目
-  // "^2.1.0-beta.0",より
-  // https://github.com/iaincollins/next-auth/pull/315
-  // const session = pageProps.data ? pageProps.data.userInfo : null;
 
-  // if (session) {
+export default function MyApp({ Component, pageProps, slug }: AppProps) {
+  const session = pageProps.session
+  console.log('pageProps.sessionは ' + session)
     
     return (
       <>
@@ -57,35 +58,20 @@ export default function MyApp({ Component, pageProps, slug }) {
 
         </Head>
         <AuthProvider>
-          <SwitchAppBar>
+          {session ? 
+          <Component {...pageProps} />
+          : 
+          <WebSiteDrawer id="back-to-top-anchor">
             <Component {...pageProps} />
-          </SwitchAppBar>
+          </WebSiteDrawer>
+          }
+          {/* <SwitchAppBar session={session}>
+            
+          </SwitchAppBar> */}
         </AuthProvider>
 
       </>
     );
-  // }
-
-
-  // return (
-  //   <>
-  //     <Head>
-  //       <title>{`SALON TABLET`}</title>
-  //       <link href={googleFontsUrl} rel="stylesheet"></link>
-  //     </Head>
-
-  //     {/* <Provider options={{ site: server }} session={session}> */}
-  //       <WebsiteThemeProvider>
-
-  //           <WebSiteDrawer id="back-to-top-anchor" >
-  //             <Component {...pageProps} />
-  //           </WebSiteDrawer>
-
-  //       </WebsiteThemeProvider>
-  //     {/* </Provider> */}
-  //   </>
-  // );
-
 
 
 }
