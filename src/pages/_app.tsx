@@ -21,21 +21,22 @@ import Head from "next/head";
 import { server } from "../lib/loadUrl";
 import { TUserInfo } from "../app/Store/Types";
 import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
-import { TSessionOnj } from "./index3";
+// import { TSessionOnj } from "./index3";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { GetStaticProps, GetServerSideProps } from "next";
 import { MuiThemeProvider } from "@material-ui/core";
 import { websiteTheme, WebsiteThemeProvider } from "../app/Store/themes/websiteTheme";
 import { ParallaxProvider, Parallax, useController, } from 'react-scroll-parallax';
+import { AuthProvider } from "../lib/auth/AuthProvider";
 
 export default function MyApp({ Component, pageProps, slug }) {
   // サーバーサイドでnext-authのsessionをつかうための修正項目
   // "^2.1.0-beta.0",より
   // https://github.com/iaincollins/next-auth/pull/315
-  const session = pageProps.data ? pageProps.data.userInfo : null;
+  // const session = pageProps.data ? pageProps.data.userInfo : null;
 
-  if (session) {
+  // if (session) {
     
     return (
       <>
@@ -54,32 +55,33 @@ export default function MyApp({ Component, pageProps, slug }) {
           {/* <script src="/node_modules/quill-image-drop-module/image-drop.min.js"></script> */}
 
         </Head>
-        {/* <Provider options={{ site: server }} session={session}> */}
+        <AuthProvider>
           <Component {...pageProps} />
-        {/* </Provider> */}
+        </AuthProvider>
+
       </>
     );
-  }
+  // }
 
 
-  return (
-    <>
-      <Head>
-        <title>{`SALON TABLET`}</title>
-        <link href={googleFontsUrl} rel="stylesheet"></link>
-      </Head>
+  // return (
+  //   <>
+  //     <Head>
+  //       <title>{`SALON TABLET`}</title>
+  //       <link href={googleFontsUrl} rel="stylesheet"></link>
+  //     </Head>
 
-      {/* <Provider options={{ site: server }} session={session}> */}
-        <WebsiteThemeProvider>
+  //     {/* <Provider options={{ site: server }} session={session}> */}
+  //       <WebsiteThemeProvider>
 
-            <WebSiteDrawer id="back-to-top-anchor" >
-              <Component {...pageProps} />
-            </WebSiteDrawer>
+  //           <WebSiteDrawer id="back-to-top-anchor" >
+  //             <Component {...pageProps} />
+  //           </WebSiteDrawer>
 
-        </WebsiteThemeProvider>
-      {/* </Provider> */}
-    </>
-  );
+  //       </WebsiteThemeProvider>
+  //     {/* </Provider> */}
+  //   </>
+  // );
 
 
 

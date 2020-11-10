@@ -11,7 +11,7 @@ import {
 } from "../app/Store/Types";
 import { App } from "../app/View/App";
 // import { getCsrfToken, getSession, providers } from "next-auth/client";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import parser from "ua-parser-js";
 import { TopPage } from "../pageComponent/TopPage";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
@@ -24,10 +24,20 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { SEO } from "../pageComponent/SEO";
 import dynamic from "next/dynamic";
-import FirebaseAuth, { getSession } from "../pageComponent/FirebaseAuth";
+// import FirebaseAuth  from "../pageComponent/FirebaseAuth";
+import Link from "next/link";
+// import { getSession } from "./api/auth/get_session";
 const Auth = dynamic(() => import("../lib/Auth"), {
   ssr: false,
 });
+import nookies from 'nookies';
+import { firebaseAdmin } from '../lib/auth/firebaseAdmin';
+import { parseCookies, setCookie, destroyCookie } from 'nookies'
+// import cookies from 'next-cookies'
+import cookies from 'cookies'
+import { useAuth } from "../lib/auth/AuthProvider";
+
+
 
 export type IndexPropsData = {
   articles: TArticles;
@@ -59,13 +69,17 @@ const useStyles = makeStyles((theme: Theme) => {
     });
 })
 
-const Index = (props: IndexProps) => {
+const Index = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const classes = useStyles()
+  const user = useAuth()
 
-  if (props.data) {
+  if (user) {
     return (
       <>
-        <App {...props} />
+      ``{props.message}
+      さいんいんしてるよ
+      
+        {/* <App {...props} /> */}
       </>
     );
   } else {
@@ -74,8 +88,15 @@ const Index = (props: IndexProps) => {
       {/* <ParallaxProvider> */}
         <SEO/>
         {/* <TopPage csrfToken={props.csrfToken} providers={props.providers} /> */}
-        <FirebaseAuth/>
-        サインしてない
+        <p>df</p>
+        <p>df</p>
+        <p>df</p>
+        <p>df</p>
+        <p>df</p>
+        <p>df</p>
+        <Link href="/auth">
+          サインインページへ
+        </Link>
       {/* </ParallaxProvider> */}
       </>
     );
@@ -92,7 +113,46 @@ export type TSessionOnj = {
   expires: string | null;
 };
 
-export const getServerSideProps: GetServerSideProps =  async (context) => {  
+export const getServerSideProps: GetServerSideProps =  async (context) => {
+  
+  try {
+    const cookies = parseCookies(context)
+    // const cookies = new Cookies(context.req, context.res)
+    // Get a cookie
+    
+    // const cks = cookies(context)
+    // const cks = cookies.parse(context.req.headers.cookie)
+  
+    console.log('cookiesは ' + JSON.stringify(cookies))
+    // const authCookie = cookies.get('token')
+    // console.log('authCookieは ' + authCookie)
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies['token']);
+    console.log('tokenは ' + JSON.stringify(token))
+
+    // the user is authenticated!
+    const { uid, email } = token;
+
+    // FETCH STUFF HERE!! 🚀
+
+    return {
+      props: { message: `Your email is ${email} and your UID is ${uid}.` },
+    };
+  } catch (err) {
+    console.log('errは ' + JSON.stringify(err))
+    // either the `token` cookie didn't exist
+    // or token verification failed
+    // either way: redirect to the login page
+    context.res.writeHead(302, { Location: '/auth/signin' })
+    context.res.end();
+
+    // `as never` prevents inference issues 
+    // with InferGetServerSidePropsType.
+    // The props returned here don't matter because we've 
+    // already redirected the user.
+    return { props: {} as never };
+  }
+
+
 
   const req = context.req;
   // 【要修正】
@@ -102,24 +162,23 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
   const ua = new parser.UAParser(req.headers["user-agent"]);
 
-  // const sessionObj = {
-  //   user: {
-  //     email: 'cutterkaz@gmail.com'
-  //   }
-  // }
-  const sessionObj = getSession()
+  const sessionObj = {
+      email: 'cutterkaz@gmail.com'
+  }
+  // const result = await getSession()
+  // const sessionObj = result.user
 
   console.log('sessionObjは ' + JSON.stringify(sessionObj))
 
   
   const device = ua.getDevice().type
-  console.log('ua.getDevice().typeは' + device);
-  console.log('uaのgetResultは ' + JSON.stringify(ua.getResult()));
+  // console.log('ua.getDevice().typeは' + device);
+  // console.log('uaのgetResultは ' + JSON.stringify(ua.getResult()));
   
 
 
   // ★★★セッションがある
-  if (sessionObj !== null) {
+  if (!(sessionObj === null)) {
     let userInfo = await getUserInfoFromEmail(sessionObj.email);
 
     // ★★★ユーザーデータがある

@@ -8,3 +8,4 @@ dist
 .env.production
 .env
 .env.development
+firebase_secret.json
