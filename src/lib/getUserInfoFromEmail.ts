@@ -15,11 +15,4 @@ export const getUserInfoFromEmail = async (email: string): Promise<TUserInfo> =>
     return null
   }
 
-
-
-  // const userInfo: TUserInfo = res[0];
-
-  // const userInfoParams = userInfoParamsFromSql(userInfo)
-
-  // return userInfoParams;
 }

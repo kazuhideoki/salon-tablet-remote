@@ -49,27 +49,19 @@ export default function MyApp({ Component, pageProps, slug }: AppProps) {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
           />
-          {/* "webフォント" */}
-          {/* google fontsより */}
+          {/* "webフォント" google fontsより*/}
           <link href={googleFontsUrl} rel="stylesheet"></link>
-
-          {/* quillのmodule */}
-          {/* <script src="/node_modules/quill-image-drop-module/image-drop.min.js"></script> */}
-
         </Head>
+
         <AuthProvider>
           {session ? 
-          <Component {...pageProps} />
-          : 
-          <WebSiteDrawer id="back-to-top-anchor">
             <Component {...pageProps} />
-          </WebSiteDrawer>
+            : 
+            <WebSiteDrawer id="back-to-top-anchor">
+              <Component {...pageProps} />
+            </WebSiteDrawer>
           }
-          {/* <SwitchAppBar session={session}>
-            
-          </SwitchAppBar> */}
         </AuthProvider>
-
       </>
     );
 

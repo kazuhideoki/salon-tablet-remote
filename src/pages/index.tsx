@@ -13,7 +13,6 @@ import {
 import { App } from "../app/View/App";
 // import { getCsrfToken, getSession, providers } from "next-auth/client";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import parser from "ua-parser-js";
 import { TopPage } from "../pageComponent/TopPage";
 import { getUserInfoFromEmail } from "../lib/getUserInfoFromEmail";
 import { apiCreateSampleData } from "./api/create_sample_data";
@@ -36,6 +35,7 @@ const Auth = dynamic(() => import("../lib/Auth"), {
 import cookies from 'cookies'
 import { useAuth } from "../lib/auth/AuthProvider";
 import { getSession, TSession } from "../lib/auth/getSession";
+import { getDeviceType } from "../lib/getDeviceType";
 
 
 
@@ -107,57 +107,45 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   const session = await getSession(context)
   console.log('index gSSR,sessionは ' + JSON.stringify(session))
 
-  const req = context.req;
-  const ua = new parser.UAParser(req.headers["user-agent"]);
-  const device = ua.getDevice().type
-  // console.log('ua.getDevice().typeは' + device);
-  // console.log('uaのgetResultは ' + JSON.stringify(ua.getResult()));
-  
-    
-  // ★★★セッションがある
-  if (session !== null) {
-    let userInfo = await getUserInfoFromEmail(session.email);
-
-    // ★★★ユーザーデータがある
-    if (userInfo) {
-
-      // ★★★最初のサインイン サンプルデータの追加
-      if (userInfo.is_first_sign_in) {
-        // is_first_sign_inもfalseにされる
-        await apiCreateSampleData({user_id: userInfo.user_id})
-      }
-      if (userInfo.public_page_slug === "") {
-        console.log("public_page_slug === ''だから slug生成");
-
-        await apiCreatePublicPageSlug({ user_id: userInfo.user_id, user_email: userInfo.user_email });
-        // 更新したのでuserInfoを取り直す
-        userInfo = await getUserInfoFromEmail(session.email);
-      }
-
-      const returnData: IndexProps = {
-        data: await generateProps(userInfo, false),
-        isPublicPage: false,
-        device: device || null,
-        session
-      };
-
-      return { props: returnData }
-
-    } // ★★★ユーザーデータがある
-
-  } // ★★★セッションがある
+  const device = getDeviceType(context)
 
   // ★★★セッションがない
+  if (session === null) {
+    return { 
+      props: {
+        session: null,
+        isPublicPage: false,
+        device: device || null,
+      } as IndexProps
+    }
+  }
+
+  
+  // ★★★セッションがある
+  let userInfo = await getUserInfoFromEmail(session.email);
+  if (userInfo === null) {
+    console.log('userInfoがない')
+    throw 'No user information, please ask support.'}
+
+
+  // ★★★最初のサインイン サンプルデータの追加
+  if (userInfo.is_first_sign_in) {
+    // is_first_sign_inもfalseにされる
+    await apiCreateSampleData({user_id: userInfo.user_id})
+  }
+  if (userInfo.public_page_slug === "") {
+    console.log("public_page_slug === ''だから slug生成");
+
+    await apiCreatePublicPageSlug({ user_id: userInfo.user_id, user_email: userInfo.user_email });
+    // 更新したのでuserInfoを取り直す
+    userInfo = await getUserInfoFromEmail(session.email);
+  }
 
   const returnData: IndexProps = {
-    // data: {
-    //   userInfo: null
-    // },
-    session: null,
+    data: await generateProps(userInfo, false),
     isPublicPage: false,
     device: device || null,
-    // csrfToken: await getCsrfToken(),
-    // providers: await providers(context),
+    session
   };
 
   return { props: returnData }
