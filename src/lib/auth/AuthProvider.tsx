@@ -33,8 +33,7 @@ export function AuthProvider({ children }: any) {
     //@ts-ignore
     return firebaseClient.auth().onIdTokenChanged(async (user) => {
       console.log(`auth changed`);
-      // console.log('userは ' + JSON.stringify(user))
-      // console.log(user ? user.uid : 'NO USER');
+      console.log('userは ' + JSON.stringify(user))
       if (!user) {
         setUser(null);
         nookies.set(undefined, 'token', '', {});

@@ -1,7 +1,6 @@
 import { db } from "../../../lib/db";
-const bcrypt = require("bcryptjs"); 
 import { NextApiRequest, NextApiResponse } from "next";
-import { cipher,checkPassword } from "../../../module/bcrypt";
+import { checkPassword } from "../../../module/bcrypt";
 import { T_user_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";

@@ -1,14 +1,11 @@
-const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
 import { TUserInfo } from "../../app/Store/Types";
-import { TApiResponse } from "../../lib/apiTypes";
 import { server, localhost } from "../../lib/loadUrl";
 
 const receiverEmailAddress = "infosalontablet@gmail.com";
 const senderEmailAddress = "infosalontablet@gmail.com";
 const senderEmailPassword = "2356Sp!p";
 
-// const nodemailer = require("nodemailer");
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",

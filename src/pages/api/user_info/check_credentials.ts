@@ -1,5 +1,4 @@
 import { db } from "../../../lib/db";
-const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
 import { checkPassword } from "../../../module/bcrypt";
 import { T_user_email } from "../../../app/Store/Types";

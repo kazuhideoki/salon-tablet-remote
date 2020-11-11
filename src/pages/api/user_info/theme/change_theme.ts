@@ -1,7 +1,5 @@
 import { db } from "../../../../lib/db";
-const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
-import { cipher, checkPassword } from "../../../../module/bcrypt";
 import { T_user_id } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
@@ -32,12 +30,7 @@ export type T_user_info_change_theme_return = {
 const change_theme = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
 
-    // await runMiddleware(req, res);
-
     const { user_id, themeParams }: T_user_info_change_theme = req.body;
-
-    // ※selectedTheme,
-    //   paramsFromTheme,※全部一緒にしてupdate↓
 
     try {
       const data = await db(`UPDATE user_info SET ? where user_id = ?`, [

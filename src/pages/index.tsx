@@ -21,6 +21,7 @@ import { SEO } from "../pageComponent/SEO";
 import { useAuth } from "../lib/auth/AuthProvider";
 import { getSession, TSession } from "../lib/auth/getSession";
 import { getDeviceType } from "../lib/getDeviceType";
+import { apiUserInfoCreate } from "./api/user_info/create";
 
 
 
@@ -54,10 +55,6 @@ const useStyles = makeStyles((theme: Theme) => {
 })
 
 const Index = (props: IndexProps) => {
-  const classes = useStyles()
-  const {user, signout} = useAuth()
-
-  console.log('Index props.sessionは ' + props.session)
 
   if (props.session) {
     return (
@@ -109,8 +106,16 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   let userInfo = await getUserInfoFromEmail(session.email);
   if (userInfo === null) {
     console.log('userInfoがない')
-    throw 'No user information, please ask support.'}
+    // throw 'No user information, please ask support.'}
 
+    await apiUserInfoCreate({
+      user_email: session.email,
+      bcrypt_password: 'bcrypt',
+    })
+
+    userInfo = await getUserInfoFromEmail(session.email);
+    console.log('getUserInfoFromEmail後のuserInfoは ' + JSON.stringify(userInfo))
+  }
 
   // ★★★最初のサインイン サンプルデータの追加
   if (userInfo.is_first_sign_in) {

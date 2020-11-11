@@ -1,7 +1,5 @@
 import { db } from "../../../lib/db";
-const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
-import { cipher, checkPassword } from "../../../module/bcrypt";
 import { T_user_id, T_is_generate_public_page } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
@@ -33,8 +31,6 @@ export type T_user_info_switch_generate_public_page_return = {
 
 const switch_generate_public_page = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-
-    // await runMiddleware(req, res);
 
     console.log('switch_generate_public_pageのreq.bodyは ' + JSON.stringify(req.body));
     

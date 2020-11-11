@@ -44,8 +44,6 @@ export type T_user_info_update_return = {
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
 
-    // await runMiddleware(req, res);
-
     const { columns, plainTextPassword }: T_user_info_update = req.body;
 
     const params: T_user_info_update_params = columns;

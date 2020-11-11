@@ -25,7 +25,7 @@ import { AppProps } from "next/dist/next-server/lib/router/router";
 
 export default function MyApp({ Component, pageProps, slug }: AppProps) {
   const session = pageProps.session
-  console.log('pageProps.sessionは ' + session)
+  console.log('pageProps.sessionは ' + JSON.stringify(session))
     
     return (
       <>

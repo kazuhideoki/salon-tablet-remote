@@ -1,11 +1,8 @@
 import { db } from "../../../../lib/db";
-const bcrypt = require("bcryptjs");
 import { NextApiRequest, NextApiResponse } from "next";
-import { cipher, checkPassword } from "../../../../module/bcrypt";
 import { T_user_id, T_theme_font } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
-import { TThemeParams } from "../../../../app/Store/ThemeContext";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeFont = async (
