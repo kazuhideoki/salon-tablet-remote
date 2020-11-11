@@ -65,6 +65,11 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
         "DELETE FROM `instagram_accounts` WHERE `user_id`=?",
         user_id
       );
+
+      const data7 = await db(
+        "DELETE FROM `info_bar` WHERE `user_id`=?",
+        user_id
+      );
       
       console.log("/user_info/delete/は " + JSON.stringify({data, data2}));
 

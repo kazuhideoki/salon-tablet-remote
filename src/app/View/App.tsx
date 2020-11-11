@@ -14,11 +14,11 @@ const AppView = (props: {device: string}) => {
   const { isSetPassword } = appState.userInfo;
 
   // パスワード未設定でユーザー情報登録へ遷移
-  React.useEffect(function settingPassword() {
-    if (isSetPassword === false) {
-      dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" });
-    }
-  }, []);
+  // React.useEffect(function settingPassword() {
+  //   if (isSetPassword === false) {
+  //     dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" });
+  //   }
+  // }, []);
   React.useEffect(
     function setTitle() {
       if (process.browser) {

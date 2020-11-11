@@ -125,20 +125,17 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
       await apiCreateSampleData({user_id: userInfo.user_id})
 
+      await apiCreatePublicPageSlug({ user_id: userInfo.user_id, user_email: userInfo.user_email });
+      
       // 最後にis_first_sign_inのフラグをオフにする
       await apiIsFirsSigninFalse({user_id: userInfo.user_id})
+
+      // 更新したのでuserInfoを取り直す
+      userInfo = await getUserInfoFromEmail(session.email); 
 
     } catch (err) {
       console.log(err);  
     }
-  }
-
-  if (userInfo.public_page_slug === "") {
-    console.log("public_page_slug === ''だから slug生成");
-
-    await apiCreatePublicPageSlug({ user_id: userInfo.user_id, user_email: userInfo.user_email });
-    // 更新したのでuserInfoを取り直す
-    userInfo = await getUserInfoFromEmail(session.email);
   }
 
   const returnData: IndexProps = {
