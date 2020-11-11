@@ -17,7 +17,7 @@ const mysql = serverlessMysql(config)
 export const db = async (query, params?) => {
 
 
-    console.log('mysqlのconfigは ' + JSON.stringify(config))
+    // console.log('mysqlのconfigは ' + JSON.stringify(config))
  
     const results = await mysql.query(query, params);
     await mysql.end();

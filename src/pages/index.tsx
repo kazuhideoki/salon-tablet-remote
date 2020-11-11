@@ -22,6 +22,7 @@ import { useAuth } from "../lib/auth/AuthProvider";
 import { getSession, TSession } from "../lib/auth/getSession";
 import { getDeviceType } from "../lib/getDeviceType";
 import { apiUserInfoCreate } from "./api/user_info/create";
+import { apiIsFirsSigninFalse } from "./api/user_info/is_first_signin_false";
 
 
 
@@ -120,8 +121,18 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   // ★★★最初のサインイン サンプルデータの追加
   if (userInfo.is_first_sign_in) {
     // is_first_sign_inもfalseにされる
-    await apiCreateSampleData({user_id: userInfo.user_id})
+    try {
+
+      await apiCreateSampleData({user_id: userInfo.user_id})
+
+      // 最後にis_first_sign_inのフラグをオフにする
+      await apiIsFirsSigninFalse({user_id: userInfo.user_id})
+
+    } catch (err) {
+      console.log(err);  
+    }
   }
+
   if (userInfo.public_page_slug === "") {
     console.log("public_page_slug === ''だから slug生成");
 

@@ -92,16 +92,11 @@ const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => 
             insertSampleFooterItems(itemParams),
           ]);
 
-          const data3 = await db(
-            `UPDATE user_info SET is_first_sign_in = '0' WHERE user_id = ?;`,
-            user_id
-          );
-          console.log("data3は " + JSON.stringify(data3));
-
           res.end();
         } catch (err) {
       console.log("/create_sample_dataのエラーは " + JSON.stringify(err));
-      res.status(500).json({ err: true, data: { message: err.message } });
+      // res.status(500).json({ err: true, data: { message: err.message } });
+      throw 'create_sample_dataでエラー。'
     }
 
   }
