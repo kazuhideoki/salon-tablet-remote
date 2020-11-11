@@ -250,7 +250,7 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                  color="secondary"
                  className={classes.submit}
                  onClick={() => props.openDeleteAccountForm()}
-                 disabled
+                //  disabled
                >
                  アカウントを削除する
                </Button>

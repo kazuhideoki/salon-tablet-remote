@@ -5,6 +5,7 @@ import {
 import { useCheckPassword } from "./useCheckPassword";
 import { apiUserInfoDelete } from "../../../pages/api/user_info/delete";
 import { useAuth } from "../../../lib/auth/AuthProvider";
+import { deleteUserInFirebase } from "../../../lib/auth/deleteUserInFirebase";
 
 export const useDeleteUser = () => {
   const { appState } = React.useContext(Store);
@@ -12,38 +13,30 @@ export const useDeleteUser = () => {
   const { signout } = useAuth()
   const checkPassword = useCheckPassword()
 
-  return async ({ email, password }) => {
+  return async ({ email }) => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
 
     if (deleting === false) {
       return null;
     }
+    if (email !== user_email) {
+      alert('メールアドレスが間違っています。')
+      return null
+    }
 
-    // メールアドレスが違う場合その時点で弾く
-    if (user_email !== email) {
-      alert('メールアドレスが間違っています')
-    } else {
-      const result = await checkPassword(password);
+        try {
+          await apiUserInfoDelete({user_id})
   
-      if (result === false){
-        alert("パスワードが間違っています");
+          await deleteUserInFirebase()
 
-      } else if(result === true) {
-        // ここにアカウント削除処理実装
-        const data = await apiUserInfoDelete({user_id})
-
-        if (data.err === true) {
-          alert("削除できませんでした");
-        } else {
-          // ↓signout()が先、alertが後で正しく動作した
           signout()        
           alert('アカウントを削除しました。')
-        }
 
-      }
+        } catch (err) {
+          alert("エラーが発生しました。" + err);
 
-    }
+        }  
 
 
   };

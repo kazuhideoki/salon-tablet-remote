@@ -76,7 +76,7 @@ export function DeleteAccountForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField
+          {/* <TextField
             margin="normal"
             required
             fullWidth
@@ -87,12 +87,12 @@ export function DeleteAccountForm() {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
+          /> */}
           <Button
             fullWidth
             color="primary"
             className={classes.submit}
-            onClick={() => deleteUser({ email, password })}
+            onClick={() => deleteUser({ email })}
           >
             アカウントを本当に削除する
           </Button>

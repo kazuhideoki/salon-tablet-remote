@@ -33,7 +33,7 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // await runMiddleware(req, res);
 
-    const user_id: T_user_info_delete = req.body;
+    const { user_id }: T_user_info_delete = req.body;
 
     try {
       const data = await db(
