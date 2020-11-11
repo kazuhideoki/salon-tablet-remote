@@ -23,6 +23,7 @@
           "cloudsql",
           "csrf",
           "entrypoint",
+          "esnext",
           "gcloud",
           "infosalontablet",
           "mixins",

@@ -8,7 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import WebsiteAppBar from './WebsiteAppBar'
 import Link from "next/link";
-import { Home, Tablet, MobileFriendly, FormatQuote, AdbOutlined } from "@material-ui/icons";
+import { Home, Tablet, MobileFriendly, FormatQuote, AdbOutlined, AccountCircle } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   list: {
@@ -27,6 +27,7 @@ export const pageList = [
          ["サンプル Tablet", "/sample/tablet", <Tablet />],
          ["サンプル Mobile(製作中)", "/sample/mobile", <MobileFriendly />],
          ["FAQ(製作中)", "/faq", <FormatQuote />],
+         ["サインイン", 'auth/signin', <AccountCircle/>]
        ];
 
 type Props = {

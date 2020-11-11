@@ -48,10 +48,8 @@ export type IndexProps = {
 };
 
 const useStyles = makeStyles((theme: Theme) => {
-
     return createStyles({
       
-   
     });
 })
 
