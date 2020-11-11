@@ -1,6 +1,6 @@
 import { db } from "../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TArticle, FooterItems, FooterItem, T_user_id } from "../../app/Store/Types";
+import { TArticle, FooterItems, FooterItem, T_user_id, TArticles } from "../../app/Store/Types";
 import { TApiResponse } from "../../lib/apiTypes";
 import { server, localhost } from "../../lib/loadUrl";
 
@@ -10,78 +10,87 @@ export const apiCreateSampleData = async (
 ): Promise<TApiResponse<void>> => {
   const str = process.browser ? server : localhost;
 
-  const res = await fetch(`${str}/api/create_sample_data`, {
+  await fetch(`${str}/api/create_sample_data`, {
     headers: { "Content-Type": "application/json"},
     method: "POST",
     mode: "cors",
     body: JSON.stringify(params),
   });
-
-  console.log("apiCreateSampleData完了");
-  // return await res.json();
 };
 
 export type T_create_sample_data = {
   user_id: T_user_id
 };
 
+export const getSampleArticles = async (user_id: T_user_id) => {
+  //@ts-ignore
+  const data: any[] = await db(
+    `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`
+  );
+  const params = data.map((article: TArticle) => {
+    delete article.article_id;
+    delete article.created_at;
+    delete article.updated_at;
+
+    article.data_type = "default_data";
+    article.user_id = user_id;
+    return article;
+  });
+
+  return params
+};
+
+export const insertSampleArticles = async (params: TArticles) => {
+  params.forEach( async (article) => {
+    await db(`INSERT INTO articles SET ?`, article)
+  });
+}
+
+export const getSampleFooterItems = async (user_id: T_user_id) => {
+  const data: any = await db(
+    `SELECT * FROM footer_items WHERE data_type = 'sample_data' ORDER BY created_at DESC`
+  );
+
+  const params = data.map((item: FooterItem) => {
+    delete item.footer_item_id;
+    delete item.created_at;
+    delete item.updated_at;
+
+    item.data_type = "default_data";
+    item.user_id = user_id;
+    return item;
+  });
+
+  return params
+}
+
+export const insertSampleFooterItems = async (params: FooterItems) => {
+  params.forEach(async (footerItem) => {
+    await db(`INSERT INTO footer_items SET ?`, footerItem);
+  });
+};
+
+
 const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") { 
     console.log("create_sample_data.tsだよ");
-
-    // await runMiddleware(req, res);
     
-
   const { user_id }: T_create_sample_data = req.body;
 
     try {
-          // ★今のところarticle, itemともにともに3つづつ挿入
-          // まずdata_type === 'sample_data'の記事を取得
-          const data: any = await db(
-            `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`
-          );
-          const params = data.map((article: TArticle) => {
-            delete article.article_id;
-            delete article.created_at;
-            delete article.updated_at;
-
-            article.data_type = "default_data";
-            article.user_id = user_id;
-            return article;
-          });
-
-          // ↓全部いっぺんにやる方法あるはず
-          const data20 = await db(`INSERT INTO articles SET ?`, params[0]);
-          const data21 = await db(`INSERT INTO articles SET ?`, params[1]);
-          const data22 = await db(`INSERT INTO articles SET ?`, params[2]);
-
-          // sample_dataのアイテムを取得
-          const itemData: any = await db(
-            `SELECT * FROM footer_items WHERE data_type = 'sample_data' ORDER BY created_at DESC`
-          );
-
-          const itemParams = itemData.map((item: FooterItem) => {
-            delete item.footer_item_id;
-            delete item.created_at;
-            delete item.updated_at;
-
-            item.data_type = "default_data";
-            item.user_id = user_id;
-            return item;
-          });
-
-          const itemsData20 = await db(
-            `INSERT INTO footer_items SET ?`,
-            itemParams[0]
-          );
-          const itemsData21 = await db(
-            `INSERT INTO footer_items SET ?`,
-            itemParams[1]
-          );
-          const itemsData22 = await db(
-            `INSERT INTO footer_items SET ?`,
-            itemParams[2]
-          );
+          // const params = await getSampleArticles(user_id)
+          // const itemParams = await getSampleFooterItems(user_id)
+          const [params, itemParams] = await Promise.all([
+            getSampleArticles(user_id),
+            getSampleFooterItems(user_id),
+          ]);
+          
+          // await insertSampleArticles(params)
+          // await insertSampleFooterItems(itemParams)
+          await Promise.all([
+            insertSampleArticles(params),
+            insertSampleFooterItems(itemParams),
+          ]);
 
           const data3 = await db(
             `UPDATE user_info SET is_first_sign_in = '0' WHERE user_id = ?;`,
