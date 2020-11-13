@@ -246,7 +246,8 @@ export type TSetModal =
   | "setting_theme"
   | "setting_user_info"
   | "feedback_form"
-  | "delete_account_form"; 
+  | "delete_account_form"
+  | 'popup_not_email_verified'
 
 
 // export type T_possible_device =

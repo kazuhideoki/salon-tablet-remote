@@ -7,18 +7,23 @@ import { AppMobile } from "./mobile/AppMobile";
 import { AppTablet } from "./AppTablet";
 import { useIsMobile } from "../../lib/useIsMobile";
 import { IndexProps } from "../../pages";
+import { TSession } from "../../lib/auth/getSession";
 
-const AppView = (props: {device: string}) => {
+type TAppViewPRops = {
+  device: any,
+  session: TSession,
+}
+
+const AppView = ({device, session}: TAppViewPRops) => {
   const isMobile = useIsMobile();
   const { dispatchAppState, appState } = React.useContext(Store);
   const { isSetPassword } = appState.userInfo;
 
-  // パスワード未設定でユーザー情報登録へ遷移
-  // React.useEffect(function settingPassword() {
-  //   if (isSetPassword === false) {
-  //     dispatchAppState({ type: "OPEN_MODAL", payload: "setting_user_info" });
-  //   }
-  // }, []);
+  React.useEffect(function settingPassword() {
+    if (session.emailVerified === false) {
+      dispatchAppState({ type: "OPEN_MODAL", payload: "popup_not_email_verified" });
+    }
+  }, []);
   React.useEffect(
     function setTitle() {
       if (process.browser) {
@@ -48,7 +53,7 @@ export const App = (props: IndexProps) => {
       samplePage={props.samplePage}
     >
       <ThemeProvider {...props.data.userInfo}>
-        <AppView device={props.device} />
+        <AppView device={props.device} session={props.session} />
         <Modal />
       </ThemeProvider>
     </StoreContextProvider>

@@ -26,10 +26,6 @@ const firebaseAuthConfig = {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
       
       const token = await user.getIdToken();
-      // if (token.emailVerified === false) {
-      //   const result = sendVerificationMail(user)
-      //   console.log('sendVerificationMailのresultは ' + result)
-      // }
 
       nookies.set(undefined, 'token', token, {
         maxAge: 30 * 24 * 60 * 60,
@@ -50,9 +46,6 @@ const FirebaseAuth = () => {
       />
     </div>
 
-    // // Initialize the FirebaseUI Widget using Firebase.
-    // <div id='firebaseui-auth-container'>
-    // </div>
   )
 }
 

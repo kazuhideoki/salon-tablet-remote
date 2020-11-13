@@ -10,7 +10,7 @@ const AuthContext = createContext<TAuthContext>({
 type TAuthContext = {
   //@ts-ignore
   user: firebaseClient.User | null
-  signout: () => void
+  signout: (path: string) => void
 }
 
 
@@ -19,10 +19,10 @@ export function AuthProvider({ children }: any) {
   const [user, setUser] = useState<firebaseClient.User | null>(null);
   const router = useRouter()
   
-  const signout = () => {
+  const signout = (path: string) => {
     firebase.auth().signOut().then(function() {
       // Sign-out successful.
-      router.push('/')
+      router.push(path)
     }).catch(function(error) {
       // An error happened.
     });
@@ -33,21 +33,23 @@ export function AuthProvider({ children }: any) {
     //@ts-ignore
     return firebaseClient.auth().onIdTokenChanged(async (user) => {
       console.log(`auth changed`);
+      console.log(user);
+      
       if (!user) {
         setUser(null);
         nookies.set(undefined, 'token', '', {});
-        nookies.set(undefined, 'emailVerified', '', {});
+        // nookies.set(undefined, 'emailVerified', '', {});
         return;
       }
 
-      const emailVerified = user.emailVerified === true ? 'true' :  'false'
+      const emailVerified = user.emailVerified === true ? 'true' :  user.emailVerified === false ?'false' : ''
 
       console.log('user.emailVerifiedは ' + JSON.stringify(user.emailVerified))
 
       const token = await user.getIdToken();
       setUser(user);
       nookies.set(undefined, 'token', token, {});
-      nookies.set(undefined, 'emailVerified', emailVerified, {});
+      // nookies.set(undefined, 'emailVerified', emailVerified, {});
     });
   }, []);
 

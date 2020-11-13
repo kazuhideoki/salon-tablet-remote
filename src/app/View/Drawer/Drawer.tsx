@@ -47,7 +47,7 @@ export const useDrawerProps = () => {
 
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
-    signOuting ? signout() : null
+    signOuting ? signout('/') : null
   }
 
   const handleDrawerClose = () => {

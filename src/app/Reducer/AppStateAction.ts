@@ -135,4 +135,4 @@ export type AppStateAction =
         };
       };
     }
-  | { type: "DELETE_INSTAGRAM_MEDIAS" };
+  | { type: "DELETE_INSTAGRAM_MEDIAS" }

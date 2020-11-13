@@ -25,23 +25,22 @@ export const getSession = async ({
            const token = await firebaseAdmin
              .auth()
              .verifyIdToken(cookies["token"]);
-           const emailVerified = cookies['email_verified'] === 'true' ? true : false
-           console.log('getSessionのtoken.email_verifiedは ' + token.email_verified)
-           console.log('getSessionのemailVerifiedは ' + emailVerified)
+          //  const emailVerified = cookies['emailVerified'] === 'true' ? true : cookies['emailVerified'] === 'false' ? false : null
+          //  console.log('getSessionのtoken.email_verifiedは ' + token.email_verified)
+          //  console.log('getSessionのemailVerifiedは ' + emailVerified)
           //  const result = { email: token.email, emailVerified: emailVerified };
-           const result = { email: token.email, emailVerified: emailVerified };
+           const result = { email: token.email, emailVerified: token.email_verified };
 
            console.log('getSessionのresultは ' + JSON.stringify(result))
-           res.end()
            return result
 
          } catch (err) {
            console.log("errは " + JSON.stringify(err));
 
-           if (failAndRedirect) {
-             res.writeHead(302, { Location: "/auth/signin" });
-             res.end();
-           }
+          //  if (failAndRedirect) {
+          //    res.writeHead(302, { Location: "/auth/signin" });
+          //    res.end();
+          //  }
 
            return null;
          }

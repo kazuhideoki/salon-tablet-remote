@@ -22,21 +22,16 @@ export const PageNotEmailVerified = () => {
     <div>
       <div>
         <Typography variant='h4' component='h2' gutterBottom>
-          メールアドレスの確認をしてページを再読み込みしてください。
+          確認メールを受け取り、メールアドレスの確認を済ませてからサインインをし直してください。
         </Typography>
-        <Button variant='outlined' onClick={() => location.reload()}>
-          <Typography variant='body1' component='span'>
-            再読み込みする
-          </Typography>
-        </Button>
         <Button variant='outlined' onClick={() => sendVerificationMail(user)}>
           <Typography variant='body1' component='span'>
             確認メールを再送する
           </Typography>
         </Button>
-        <Button variant='outlined' onClick={() => signout()}>
+        <Button variant='outlined' onClick={() => signout('/auth/signin')}>
           <Typography variant='body1' component='span'>
-            トップページに戻る
+            サインインし直す
           </Typography>
         </Button>
       </div>

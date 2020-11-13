@@ -30,7 +30,7 @@ export const useDeleteUser = () => {
   
           await deleteUserInFirebase()
 
-          signout()        
+          signout('/')        
           alert('アカウントを削除しました。')
 
         } catch (err) {

@@ -26,6 +26,7 @@ import { TSetModal, T_selected_theme } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
 import InfoBarEditor from "../Drawer/InfoBar/InfoBarEditor";
 import { GoogleSearch } from "../Footer/GoogleSearch";
+import { PageNotEmailVerified } from "../../../pageComponent/PageNotEmailVerified";
 
 export const switchingTransition = (selected_theme: T_selected_theme) => {
   switch (selected_theme) {
@@ -163,6 +164,9 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             break;
           case "delete_account_form":
             ModalContent = () => <DeleteAccountForm />;
+            break;
+          case "popup_not_email_verified":
+            ModalContent = () => <PageNotEmailVerified />;
             break;
 
           default:

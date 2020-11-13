@@ -66,10 +66,10 @@ const Index = (props: IndexProps) => {
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       </>
     );
-  } else if (props.session.emailVerified === false) {
-    return (
-      <PageNotEmailVerified/>
-    )
+  // } else if (props.session.emailVerified === false) {
+  //   return (
+  //     <PageNotEmailVerified/>
+  //   )
   } else {
         return (
           <>
@@ -112,15 +112,15 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   const cookies = parseCookies({ req });
 
   // アカウント作成直後,確認メールでurlクリックしたが、session情報が更新されてない場合にスキップ
-  if (session.emailVerified === false) {
-    return { 
-      props: {
-        session,
-        isPublicPage: false,
-        device: device || null,
-      } as IndexProps
-    }
-  }
+  // if (session.emailVerified === false) {
+  //   return { 
+  //     props: {
+  //       session,
+  //       isPublicPage: false,
+  //       device: device || null,
+  //     } as IndexProps
+  //   }
+  // }
 
   
   // ★★★セッションがある
