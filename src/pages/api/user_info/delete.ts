@@ -41,10 +41,10 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
         user_id
       );
 
-      const data2 = await db(
-        "DELETE FROM `users` WHERE `id`=?",
-        user_id
-      );
+      // const data2 = await db(
+      //   "DELETE FROM `users` WHERE `id`=?",
+      //   user_id
+      // );
 
       const data3 = await db(
         "DELETE FROM `articles` WHERE `user_id`=?",
@@ -71,8 +71,6 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
         user_id
       );
       
-      console.log("/user_info/delete/は " + JSON.stringify({data, data2}));
-
       const returnData: T_user_info_delete_return = {
         rawData: data,
       };
@@ -81,7 +79,9 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/user_info/delete/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      // res.status(500).json({ err: true, data: { message: err.message } });
+      throw new Error(`/user_info/deleteでエラー ${err}`);
+      
     }
   }
 };

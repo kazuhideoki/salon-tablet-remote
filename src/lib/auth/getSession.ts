@@ -24,7 +24,7 @@ export const getSession = async ({
            const cookies = parseCookies({ req });
            const token = await firebaseAdmin
              .auth()
-             .verifyIdToken(cookies["token"]);
+             .verifyIdToken(cookies["st_token"]);
           //  const emailVerified = cookies['emailVerified'] === 'true' ? true : cookies['emailVerified'] === 'false' ? false : null
           //  console.log('getSessionのtoken.email_verifiedは ' + token.email_verified)
           //  console.log('getSessionのemailVerifiedは ' + emailVerified)

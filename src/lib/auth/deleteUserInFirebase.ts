@@ -6,6 +6,7 @@ export const deleteUserInFirebase = async () => {
   await user.delete().then(function() {
     // User deleted.
   }).catch(function(error) {
-    // An error happened.
+    throw new Error("deleteUserInFirebaseでエラー");
+    
   });
 }

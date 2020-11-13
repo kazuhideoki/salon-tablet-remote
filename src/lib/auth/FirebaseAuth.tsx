@@ -7,13 +7,10 @@ import initFirebase from '../../lib/auth/initFirebase'
 import nookies from 'nookies'
 import { sendVerificationMail } from './sendVerificationMail'
 
-// Init the Firebase app.
 initFirebase()
 
 const firebaseAuthConfig = {
   signInFlow: 'popup',
-  // Auth providers
-  // https://github.com/firebase/firebaseui-web#configure-oauth-providers
   signInOptions: [
     {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,

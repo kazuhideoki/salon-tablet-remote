@@ -37,19 +37,15 @@ export function AuthProvider({ children }: any) {
       
       if (!user) {
         setUser(null);
-        nookies.set(undefined, 'token', '', {});
-        // nookies.set(undefined, 'emailVerified', '', {});
+        nookies.set(undefined, 'st_token', '', {});
         return;
       }
-
-      const emailVerified = user.emailVerified === true ? 'true' :  user.emailVerified === false ?'false' : ''
 
       console.log('user.emailVerifiedは ' + JSON.stringify(user.emailVerified))
 
       const token = await user.getIdToken();
       setUser(user);
-      nookies.set(undefined, 'token', token, {});
-      // nookies.set(undefined, 'emailVerified', emailVerified, {});
+      nookies.set(undefined, 'st_token', token, {});
     });
   }, []);
 

@@ -166,6 +166,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <DeleteAccountForm />;
             break;
           case "popup_not_email_verified":
+            modalStyle = useModalSize('medium');
             ModalContent = () => <PageNotEmailVerified />;
             break;
 

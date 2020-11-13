@@ -7,7 +7,7 @@ export const generateCorrectOrdersParams = (data: FooterItems) => {
     // return value;
     return { order: value.order, footer_item_id: value.footer_item_id };
   });
-  console.log("correctedDataは " + JSON.stringify(correctedData));
+  // console.log("correctedDataは " + JSON.stringify(correctedData));
 
   const idParam = correctedData.map((value) => {
     return value.footer_item_id;

@@ -6,7 +6,7 @@ import { T_user_id } from "../../../app/Store/Types";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiIsFirsSigninFalse = async (
-         user_id: user_info_is_first_signin_false
+         param: user_info_is_first_signin_false
        ) => {
          let str = process.browser ? server : localhost;
 
@@ -14,7 +14,7 @@ export const apiIsFirsSigninFalse = async (
            headers: { "Content-Type": "application/json" },
            method: "POST",
            mode: "cors",
-           body: JSON.stringify({ user_id }),
+           body: JSON.stringify(param),
          });
        };
 
@@ -26,12 +26,17 @@ const is_first_signin_false = async (req: NextApiRequest, res: NextApiResponse) 
   if (req.method === "POST") {
     const { user_id } = req.body as user_info_is_first_signin_false
     try{
+      const query = `UPDATE user_info SET is_first_sign_in = 0 WHERE user_id = ${user_id}`
+      console.log('queryは ' + query)
+      
       const data = await db(
-        `UPDATE user_info SET is_first_sign_in = 0 WHERE user_id = ?`,
-        user_id
+        query,
+        // [false, user_id]
       );
-      console.log("is_first_signin_falseのdataは " + data);
-      res.end()
+      console.log("is_first_signin_falseのdataは " + JSON.stringify(data));
+      // res.end()
+      return
+
     } catch (err) {
       console.log("/user_info/is_first_signin_false/のエラーは " + JSON.stringify(err));
 
