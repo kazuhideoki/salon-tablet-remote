@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import initFirebase from '../../lib/auth/initFirebase'
 import nookies from 'nookies'
+import { sendVerificationMail } from './sendVerificationMail'
 
 // Init the Firebase app.
 initFirebase()
@@ -23,7 +24,13 @@ const firebaseAuthConfig = {
   credentialHelper: 'none',
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
+      
       const token = await user.getIdToken();
+      // if (token.emailVerified === false) {
+      //   const result = sendVerificationMail(user)
+      //   console.log('sendVerificationMailのresultは ' + result)
+      // }
+
       nookies.set(undefined, 'token', token, {
         maxAge: 30 * 24 * 60 * 60,
         // pathを指定したらcookieがgSSRで取得できた
@@ -32,31 +39,6 @@ const firebaseAuthConfig = {
     },
   },
 }
-// var ui = new firebaseui.auth.AuthUI(firebase.auth());   
-// ui.start('#firebaseui-auth-container', {
-//   signInOptions: [
-//     firebase.auth.EmailAuthProvider.PROVIDER_ID
-//   ],
-//   // signInFlow: 'popup',
-//   signInFlow: 'redirect',
-//   // Auth providers
-//   // https://github.com/firebase/firebaseui-web#configure-oauth-providers
-//   signInSuccessUrl: '/',
-//   credentialHelper: 'none',
-//   callbacks: {
-//     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
-//       // console.log('userは ' + JSON.stringify(user))
-//       // console.log('redirectUrlは ' + redirectUrl)
-
-//       const token = await user.getIdToken();
-//       nookies.set(undefined, 'token', token, {
-//         maxAge: 30 * 24 * 60 * 60,
-//         // pathを指定したらcookieがgSSRで取得できた
-//         path: '/',
-//       });
-//     },
-//   },
-// });
 
 const FirebaseAuth = () => {
   return (

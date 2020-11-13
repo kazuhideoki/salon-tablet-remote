@@ -16,7 +16,7 @@ import { FeedbackForm } from "../Drawer/FeedbackForm";
 import { ManageTheme } from "../Drawer/ManageTheme/ManageTheme";
 import { SelectTags } from "../Footer/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
-import { SettingUserInfo } from "../Drawer/Account/SettingUserInfo";
+import { SettingUserInfo } from "../Drawer/Account/ManageUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
 import { useModalSize, medium } from "../viewComponents/useModalSize";
 import { StyledDialog } from "./StyledDialog";

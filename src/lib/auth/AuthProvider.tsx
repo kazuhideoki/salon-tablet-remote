@@ -33,16 +33,21 @@ export function AuthProvider({ children }: any) {
     //@ts-ignore
     return firebaseClient.auth().onIdTokenChanged(async (user) => {
       console.log(`auth changed`);
-      console.log('userは ' + JSON.stringify(user))
       if (!user) {
         setUser(null);
         nookies.set(undefined, 'token', '', {});
+        nookies.set(undefined, 'emailVerified', '', {});
         return;
       }
+
+      const emailVerified = user.emailVerified === true ? 'true' :  'false'
+
+      console.log('user.emailVerifiedは ' + JSON.stringify(user.emailVerified))
 
       const token = await user.getIdToken();
       setUser(user);
       nookies.set(undefined, 'token', token, {});
+      nookies.set(undefined, 'emailVerified', emailVerified, {});
     });
   }, []);
 

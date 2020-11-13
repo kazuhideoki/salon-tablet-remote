@@ -5,7 +5,9 @@ import { IncomingMessage, ServerResponse } from "http";
 
 export type TSession = {
   email: string;
+  emailVerified: boolean
 };
+// export type TSession = firebase.admin.auth.DecodedIdToke;
 
 type TGetSession = {
   req: NextApiRequest | IncomingMessage,
@@ -20,12 +22,19 @@ export const getSession = async ({
        }: TGetSession): Promise<TSession> => {
          try {
            const cookies = parseCookies({ req });
-           // console.log('cookiesは ' + JSON.stringify(cookies))
            const token = await firebaseAdmin
              .auth()
              .verifyIdToken(cookies["token"]);
-           // console.log('tokenは ' + JSON.stringify(token))
-           return { email: token.email };
+           const emailVerified = cookies['email_verified'] === 'true' ? true : false
+           console.log('getSessionのtoken.email_verifiedは ' + token.email_verified)
+           console.log('getSessionのemailVerifiedは ' + emailVerified)
+          //  const result = { email: token.email, emailVerified: emailVerified };
+           const result = { email: token.email, emailVerified: emailVerified };
+
+           console.log('getSessionのresultは ' + JSON.stringify(result))
+           res.end()
+           return result
+
          } catch (err) {
            console.log("errは " + JSON.stringify(err));
 

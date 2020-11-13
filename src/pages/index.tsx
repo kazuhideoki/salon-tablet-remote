@@ -23,6 +23,8 @@ import { getSession, TSession } from "../lib/auth/getSession";
 import { getDeviceType } from "../lib/getDeviceType";
 import { apiUserInfoCreate } from "./api/user_info/create";
 import { apiIsFirsSigninFalse } from "./api/user_info/is_first_signin_false";
+import { PageNotEmailVerified } from "../pageComponent/PageNotEmailVerified";
+import { parseCookies } from "nookies";
 
 
 
@@ -57,19 +59,24 @@ const useStyles = makeStyles((theme: Theme) => {
 
 const Index = (props: IndexProps) => {
 
-  if (props.session) {
-    return (
-      <>
-        <App {...props} />
-      </>
-    );
-  } else {
+  if (props.session === null) {
     return (
       <>
         <SEO/>
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       </>
     );
+  } else if (props.session.emailVerified === false) {
+    return (
+      <PageNotEmailVerified/>
+    )
+  } else {
+        return (
+          <>
+            <App {...props} />
+          </>
+        );
+
   }
 
 };
@@ -96,6 +103,19 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
     return { 
       props: {
         session: null,
+        isPublicPage: false,
+        device: device || null,
+      } as IndexProps
+    }
+  }
+
+  const cookies = parseCookies({ req });
+
+  // アカウント作成直後,確認メールでurlクリックしたが、session情報が更新されてない場合にスキップ
+  if (session.emailVerified === false) {
+    return { 
+      props: {
+        session,
         isPublicPage: false,
         device: device || null,
       } as IndexProps
@@ -138,11 +158,14 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
     }
   }
 
+  // アカウント作成直後,確認メールでurlクリックしたが、session情報が更新されてない場合に対応
+  // session.emailVerified = true
+
   const returnData: IndexProps = {
     data: await generateProps(userInfo, false),
     isPublicPage: false,
     device: device || null,
-    session
+    session 
   };
 
   return { props: returnData }

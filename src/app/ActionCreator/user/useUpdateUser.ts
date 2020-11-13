@@ -17,7 +17,6 @@ export const useUpdateUser = () => {
   } = React.useContext(Store);
   const { user_id } = appState.userInfo
 
-  // const cipheredPassword = cipher(password);
   return async (param: TUpdateUser) => {
     const columns = {
       user_id: user_id,
@@ -33,6 +32,7 @@ export const useUpdateUser = () => {
     };
 
     const data = await apiUserInfoUpdate(params);
+    
     if (data.err === true) {
       alert("更新できませんでした");
     } else {

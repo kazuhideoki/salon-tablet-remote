@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, useTheme } from '@material-ui/core';
-import { TUseSettingUserInfoProps } from './SettingUserInfo';
+import { TUseSettingUserInfoProps } from './ManageUserInfo';
 import QRCode from 'qrcode.react'
 import { server } from '../../../../lib/loadUrl';
 
