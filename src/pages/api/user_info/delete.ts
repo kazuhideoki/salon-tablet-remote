@@ -78,10 +78,12 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
 
     } catch (err) {
       console.log("/user_info/delete/のエラーは " + JSON.stringify(err));
+      // throw new Error("");
+      
 
       // res.status(500).json({ err: true, data: { message: err.message } });
-      throw new Error(`/user_info/deleteでエラー ${err}`);
-      
+      // throw new Error(`/user_info/deleteでエラー ${err}`);
+      res.end()
     }
   }
 };

@@ -24,6 +24,7 @@
           "csrf",
           "entrypoint",
           "esnext",
+          "formdata",
           "gcloud",
           "infosalontablet",
           "mixins",

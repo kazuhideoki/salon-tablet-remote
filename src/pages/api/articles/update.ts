@@ -51,7 +51,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     const id: T_article_id = req.body.article_id;
 
     try {
-      const isAdmin = await checkIsAdmin({req, res});
+      const isAdmin = await checkIsAdmin({req});
 
       if (isAdmin === false) {
         params.data_type = "default_data";

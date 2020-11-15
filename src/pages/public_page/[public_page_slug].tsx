@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res, query}) 
   
   const slicedSlug = slug.replace("/public_page/", "");
   console.log(slicedSlug);
-  // サンプルページのiframでで間違い半手せれてしまうため?以降のqueryとる
+  // サンプルページのiframeでで間違い半手せれてしまうため?以降のqueryとる
   const SlugArray = slicedSlug.split('?')
   console.log(SlugArray);
 
@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res, query}) 
     samplePage: query.sample as string || null,
     device: device || null,
     // sessionを入れてAppBarを表示させなくする
-    session: {email: 'sample@sample.com'},
+    session: {email: 'sample@sample.com', emailVerified: true},
   }
 
   return { props: returnData }

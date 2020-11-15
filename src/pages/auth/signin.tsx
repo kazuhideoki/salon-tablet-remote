@@ -1,9 +1,9 @@
 import React from 'react'
 import dynamic from "next/dynamic";
 import { GetServerSideProps } from 'next';
-import { getSession } from '../../lib/auth/getSession';
 import { Router } from 'next/router';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { getSession } from '../api/auth/get_session';
 // クライアント側でないと動かないため
 const FirebaseAuth = dynamic(() => import('../../lib/auth/FirebaseAuth'), {
   ssr: false,
@@ -39,7 +39,7 @@ const signin = () => {
 }
 
 export const getServerSideProps =  async (context) => {
-  const session = await getSession(context)
+  const session = await getSession({req: context.req})
   if (session) {
     context.res.writeHead(302, { Location: "/" });
     context.res.end();

@@ -18,13 +18,12 @@ import { generateProps } from "../lib/generateProps";
 import { apiCreatePublicPageSlug } from "./api/user_info/create_public_page_slug";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import { SEO } from "../pageComponent/SEO";
-import { useAuth } from "../lib/auth/AuthProvider";
-import { getSession, TSession } from "../lib/auth/getSession";
 import { getDeviceType } from "../lib/getDeviceType";
 import { apiUserInfoCreate } from "./api/user_info/create";
 import { apiIsFirsSigninFalse } from "./api/user_info/is_first_signin_false";
 import { PageNotEmailVerified } from "../pageComponent/PageNotEmailVerified";
 import { parseCookies } from "nookies";
+import { getSession, T_auth_get_session_return } from "./api/auth/get_session";
 
 
 
@@ -48,7 +47,7 @@ export type IndexProps = {
   providers?: any;
   // bcrypt_password?: string;
   message?: string;
-  session?: TSession 
+  session?: T_auth_get_session_return 
 };
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -93,7 +92,8 @@ export type TSessionOnj = {
 export const getServerSideProps: GetServerSideProps =  async (context) => {
   const {req,res} = context
   
-  const session = await getSession({req, res})
+
+  const session = await getSession({req})
   console.log('index gSSR,sessionは ' + JSON.stringify(session))
 
   const device = getDeviceType(context)
@@ -109,7 +109,6 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
     }
   }
 
-  const cookies = parseCookies({ req });
 
   // アカウント作成直後,確認メールでurlクリックしたが、session情報が更新されてない場合にスキップ
   // if (session.emailVerified === false) {

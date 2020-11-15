@@ -7,14 +7,14 @@ import { AppMobile } from "./mobile/AppMobile";
 import { AppTablet } from "./AppTablet";
 import { useIsMobile } from "../../lib/useIsMobile";
 import { IndexProps } from "../../pages";
-import { TSession } from "../../lib/auth/getSession";
+import { T_auth_get_session_return } from "../../pages/api/auth/get_session";
 
-type TAppViewPRops = {
+type TAppViewProps = {
   device: any,
-  session: TSession,
+  session: T_auth_get_session_return,
 }
 
-const AppView = ({device, session}: TAppViewPRops) => {
+const AppView = ({device, session}: TAppViewProps) => {
   const isMobile = useIsMobile();
   const { dispatchAppState, appState } = React.useContext(Store);
   const { isSetPassword } = appState.userInfo;

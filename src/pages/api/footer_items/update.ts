@@ -41,7 +41,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     const { params, id }: T_footer_items_update = req.body;
 
     try {
-      const isAdmin = await checkIsAdmin({ req, res });
+      const isAdmin = await checkIsAdmin({ req });
 
       if (isAdmin === false) {
         params.data_type = "default_data";

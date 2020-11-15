@@ -4,9 +4,12 @@ export const deleteUserInFirebase = async () => {
   const user = firebase.auth().currentUser;
 
   await user.delete().then(function() {
+    console.log("deleteUserInFirebase成功");
+    
     // User deleted.
+    return
   }).catch(function(error) {
-    throw new Error("deleteUserInFirebaseでエラー");
+    console.log("deleteUserInFirebaseでエラー" + error);
     
   });
 }

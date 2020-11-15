@@ -28,13 +28,13 @@ export const useDeleteUser = () => {
         try {
           await apiUserInfoDelete({user_id})
   
-          await deleteUserInFirebase()
+          await deleteUserInFirebase();
 
           signout('/')        
           alert('アカウントを削除しました。')
 
         } catch (err) {
-          alert("エラーが発生しました。" + err);
+          alert("エラーが発生しました" + err);
 
         }  
 

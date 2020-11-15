@@ -1,8 +1,8 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
-import { getSession } from "../../../lib/auth/getSession";
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";
+import { getSession } from "../auth/get_session";
 
 
 var FormData = require("form-data");
@@ -70,7 +70,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         console.log("userProfileは " + JSON.stringify(userProfile));
 
         // 【要修正】
-        const { email } = await getSession({req, res})
+        const { email } = await getSession({ req });
         const { user_id } = await getUserInfoFromEmail(email);
         // console.log("get_tokenのsessionObjは " + JSON.stringify(sessionObj));
         // const { user_id } = await getUserInfoFromEmail(sessionObj.user.email);

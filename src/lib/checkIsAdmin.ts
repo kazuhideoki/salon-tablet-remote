@@ -1,14 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "./auth/getSession";
+import { getSession } from "../pages/api/auth/get_session";
 import { getUserInfoFromEmail } from "./getUserInfoFromEmail";
 
 type TCheckIsAdmin = {
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: NextApiRequest
 }
 
-export const checkIsAdmin = async ({ req, res }: TCheckIsAdmin) => {
-         const { email } = await getSession({ req, res });
+export const checkIsAdmin = async ({ req }: TCheckIsAdmin) => {
+         const { email } = await getSession({ req });
 
          console.log("checkIsAminの emailは " + JSON.stringify(email));
 

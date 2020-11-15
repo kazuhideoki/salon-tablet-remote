@@ -37,11 +37,14 @@ const create_public_page_slug = async (req: NextApiRequest, res: NextApiResponse
     
     try {
       // slug生成
-      const publlic_page_slug = Math.random()
+      const public_page_slug = Math.random()
         .toString(32)
         .substring(2) + user_id
 
-      await db(`UPDATE user_info SET public_page_slug = ? WHERE user_id = ?`, [publlic_page_slug, user_id])
+      await db(`UPDATE user_info SET public_page_slug = ? WHERE user_id = ?`, [
+        public_page_slug,
+        user_id,
+      ]);
       
       res.end()
 
