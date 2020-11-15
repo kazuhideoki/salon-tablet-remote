@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import nookies from 'nookies';
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 import { firebaseClient } from './firebaseClient';
 import { useRouter } from 'next/router';
 

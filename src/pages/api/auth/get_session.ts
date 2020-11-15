@@ -4,6 +4,9 @@ import { TApiResponse } from "../../../lib/apiTypes";
 import { IncomingMessage } from "http";
 import { parseCookies } from "nookies";
 import { firebaseAdmin } from "../../../lib/auth/firebaseAdmin";
+// import firebase from 'firebase/app'
+// import "firebase/app";
+import initFirebase from "../../../lib/auth/initFirebase";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -14,6 +17,9 @@ export const getSession = async (
 
   const st_token = parseCookies({ req: params.req })["st_token"];
   console.log('getSessionのst_tokenは ' + st_token)
+  // initFirebase()
+  // const st_token = await firebase.auth().currentUser.getIdToken();
+  console.log('getSessionのst_tokenは ' + st_token)
 
   const res = await fetch(`${str}/api/auth/get_session`, {
     headers: { "Content-Type": "application/json" },
@@ -21,7 +27,6 @@ export const getSession = async (
     mode: "cors",
     body: JSON.stringify({st_token}),
   });
-  // const res = await fetch(`${str}/api/auth/get_session`);
 
   const result =  await res.json();
 
@@ -56,6 +61,8 @@ const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
         .auth()
         // .verifyIdToken(cookies["st_token"]);
         .verifyIdToken(st_token);
+      // const token = await firebaseAdmin.auth().getIdToken(st_token);
+      // const token = await firebase.auth().currentUser.getIdToken()
 
       console.log("get_sessionのtokenは " + token);
 
