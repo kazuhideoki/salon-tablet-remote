@@ -4,6 +4,7 @@ module.exports = {
   distDir: "build",
   // エラー Module not found: Can't resolve 'fs' in のエラーが出たのでこれで無効化
   webpack: (config, { isServer }) => {
+  // webpack: (config) => {
     // eslint-disable-line
     // Fixes npm packages that depend on `fs` module
     if (!isServer) {
@@ -12,6 +13,8 @@ module.exports = {
         child_process: "empty",
         net: "empty",
         tls: "empty",
+        // "fast-crc32c": "empty",
+        // worker_threads: "empty",
       };
     }
 
@@ -21,7 +24,7 @@ module.exports = {
   async headers() {
     return [
       {
-        // mathching all API routes
+        // matching all API routes
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },

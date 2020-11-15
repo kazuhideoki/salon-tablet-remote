@@ -2,7 +2,7 @@ import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";
-import { getSession } from "../auth/get_session";
+import { getSession } from "../../../lib/auth/getSession";
 
 
 var FormData = require("form-data");

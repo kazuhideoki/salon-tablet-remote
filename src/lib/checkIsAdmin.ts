@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "../pages/api/auth/get_session";
+import { getSession } from "./auth/getSession";
 import { getUserInfoFromEmail } from "./getUserInfoFromEmail";
 
 type TCheckIsAdmin = {

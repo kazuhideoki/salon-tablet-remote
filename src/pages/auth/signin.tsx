@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { GetServerSideProps } from 'next';
 import { Router } from 'next/router';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { getSession } from '../api/auth/get_session';
+import { getSession } from '../../lib/auth/getSession';
 // クライアント側でないと動かないため
 const FirebaseAuth = dynamic(() => import('../../lib/auth/FirebaseAuth'), {
   ssr: false,

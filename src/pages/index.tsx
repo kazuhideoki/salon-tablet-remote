@@ -23,7 +23,8 @@ import { apiUserInfoCreate } from "./api/user_info/create";
 import { apiIsFirsSigninFalse } from "./api/user_info/is_first_signin_false";
 import { PageNotEmailVerified } from "../pageComponent/PageNotEmailVerified";
 import { parseCookies } from "nookies";
-import { getSession, T_auth_get_session_return } from "./api/auth/get_session";
+import { T_auth_get_session_return } from "./api/auth/get_session";
+import { getSession } from "../lib/auth/getSession";
 
 
 

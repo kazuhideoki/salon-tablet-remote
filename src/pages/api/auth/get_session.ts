@@ -3,39 +3,32 @@ import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { IncomingMessage } from "http";
 import { parseCookies } from "nookies";
+
 import { firebaseAdmin } from "../../../lib/auth/firebaseAdmin";
-// import firebase from 'firebase/app'
-// import "firebase/app";
-import initFirebase from "../../../lib/auth/initFirebase";
 
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const getSession = async (
-  params: T_auth_get_session
-): Promise<TApiResponse<T_auth_get_session_return>> => {
-  let str = process.browser ? server : localhost;
+// export const getSession = async (
+//   params: T_auth_get_session
+// ): Promise<TApiResponse<T_auth_get_session_return>> => {
+//   let str = process.browser ? server : localhost;
 
-  const st_token = parseCookies({ req: params.req })["st_token"];
-  console.log('getSessionのst_tokenは ' + st_token)
-  // initFirebase()
-  // const st_token = await firebase.auth().currentUser.getIdToken();
-  console.log('getSessionのst_tokenは ' + st_token)
+//   const st_token = parseCookies({ req: params.req })["st_token"];
 
-  const res = await fetch(`${str}/api/auth/get_session`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify({st_token}),
-  });
+//   const res = await fetch(`${str}/api/auth/get_session`, {
+//     headers: { "Content-Type": "application/json" },
+//     method: "POST",
+//     mode: "cors",
+//     body: JSON.stringify({st_token}),
+//   });
 
-  const result =  await res.json();
+//   const result =  await res.json();
 
-  if (result.err) {
-    return null
-  }
+//   if (result.err) {
+//     return null
+//   }
 
-  return result
-};
+//   return result
+// };
 
 export type T_auth_get_session = {
   req: NextApiRequest | IncomingMessage
@@ -55,14 +48,15 @@ const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       
-      // const cookies = parseCookies({ req });
-      // console.log('get_sessionのcookiesは ' + JSON.stringify(cookies))
       const token = await firebaseAdmin
         .auth()
         // .verifyIdToken(cookies["st_token"]);
         .verifyIdToken(st_token);
-      // const token = await firebaseAdmin.auth().getIdToken(st_token);
-      // const token = await firebase.auth().currentUser.getIdToken()
+      // const token = {
+      //   email: null,
+      //   email_verified: false
+      // }
+
 
       console.log("get_sessionのtokenは " + token);
 
