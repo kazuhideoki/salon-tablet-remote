@@ -15,7 +15,6 @@ const props: TUseDrawerProps = {
   isPublicPage: false,
   isDrawerOpen: false,
   dispatchAppState: null,
-  handleSubmitPassword: null,
   handleOnSingOut: null,
   handleDrawerClose: null,
   isMobile: false,

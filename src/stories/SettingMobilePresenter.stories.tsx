@@ -11,7 +11,6 @@ export default {
 const props: TUseDrawerProps = {
   theme: null,
   dispatchAppState: null,
-  handleSubmitPassword: null,
   handleSwitchIsSetting: null,
   handleOnSingOut: null,
   handleDrawerClose: null,

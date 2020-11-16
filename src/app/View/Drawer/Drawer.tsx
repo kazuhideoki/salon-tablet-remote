@@ -12,7 +12,6 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import { ThemeContext, TThemeArgs } from "../../Store/ThemeContext";
 import { Store } from "../../Store/Store";
-import { useCheckPassword } from "../../ActionCreator/user/useCheckPassword";
 import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
 import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
 import { drawerHeaderJsx } from "./DrawerComponent/drawerHeaderJsx";
@@ -31,16 +30,6 @@ export const useDrawerProps = () => {
   const { isSetting, isPublicPage, isDrawerOpen, footerItems} = appState
   const getArticles = useGetArticles()
   
-  const checkPassword = useCheckPassword();
-  const handleSubmitPassword = async (password: string) => {
-    
-    const result = await checkPassword(password);
-    if (result === true) {
-      getArticles(true, 1, appState.selectedArticlesTags, false)
-    } else if (result === false) {
-      alert("パスワードが間違っています。");
-    }
-  };
   const handleSwitchIsSetting = () => {
     getArticles(true, 1, appState.selectedArticlesTags, false);
   }
@@ -78,7 +67,6 @@ export const useDrawerProps = () => {
     isDrawerOpen,
     footerItems,
     dispatchAppState,
-    handleSubmitPassword,
     handleSwitchIsSetting,
     handleOnSingOut,
     handleDrawerClose,

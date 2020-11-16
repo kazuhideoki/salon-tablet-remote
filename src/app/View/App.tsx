@@ -17,7 +17,6 @@ type TAppViewProps = {
 const AppView = ({device, session}: TAppViewProps) => {
   const isMobile = useIsMobile();
   const { dispatchAppState, appState } = React.useContext(Store);
-  const { isSetPassword } = appState.userInfo;
 
   React.useEffect(function settingPassword() {
     if (session.emailVerified === false) {

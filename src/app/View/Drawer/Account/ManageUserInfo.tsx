@@ -196,19 +196,10 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                      <b>有効なパスワードです。</b>
                    </Typography>
                  ) : null}
-                 {props.userInfo.isSetPassword ? (
                    <Typography component="h3" variant="body1" color={"error"}>
                      ※パスワードは変更時のみご入力下さい。
                    </Typography>
-                 ) : (
-                   <Typography
-                     component="h3"
-                     variant="body1"
-                     color={"secondary"}
-                   >
-                     ※パスワードを設定して下さい。(サインインや各種設定で使用)
-                   </Typography>
-                 )}
+                 
 
                  <Button
                    fullWidth

@@ -40,7 +40,6 @@ export type TUserInfo = {
   is_admin: T_is_admin;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
-  isSetPassword: boolean;
 };
 
 const initPagination = {

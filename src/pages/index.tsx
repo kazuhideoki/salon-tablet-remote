@@ -44,7 +44,6 @@ export type IndexProps = {
   samplePage?: string
   csrfToken?: any;
   providers?: any;
-  // bcrypt_password?: string;
   message?: string;
   session?: T_auth_get_session_return 
 };
@@ -114,7 +113,6 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
 
     await apiUserInfoCreate({
       user_email: session.email,
-      bcrypt_password: 'bcrypt',
     })
 
     userInfo = await getUserInfoFromEmail(session.email);

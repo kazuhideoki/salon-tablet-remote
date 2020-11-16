@@ -119,42 +119,15 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
              </>
            );
          } else {
-           if (props.isMobile) {
-             return (
-               <List>
-                 <ListItem button onClick={() => props.handleSwitchIsSetting()}>
-                   <ListItemIcon>
-                     <Settings />
-                   </ListItemIcon>
-                   <ListItemText secondary='編集モード' />
-                 </ListItem>
-               </List>
-             );
-           } else {
-             return (
-               <>
-                 <TextField
-                   id="setting-password-input"
-                   label="パスワード"
-                   type="password"
-                   autoComplete="current-password"
-                   value={props.pass}
-                   onChange={(e) => props.setPass(e.target.value)}
-                   onKeyPress={(e) => {
-                     if (e.key == "Enter") {
-                       e.preventDefault();
-                       props.handleSubmitPassword(props.pass);
-                     }
-                   }}
-                 />
-                 <Button
-                   onClick={() => props.handleSubmitPassword(props.pass)}
-                   startIcon={<Settings />}
-                 >
-                   <Typography variant="body1">編集モードに切り替え</Typography>
-                 </Button>
-               </>
-             );
-           }
+            return (
+              <List>
+                <ListItem button onClick={() => props.handleSwitchIsSetting()}>
+                  <ListItemIcon>
+                    <Settings />
+                  </ListItemIcon>
+                  <ListItemText secondary='設定（staff only）' />
+                </ListItem>
+              </List>
+            );
          }
        };
