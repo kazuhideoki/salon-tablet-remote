@@ -21,8 +21,6 @@ import { SEO } from "../pageComponent/SEO";
 import { getDeviceType } from "../lib/getDeviceType";
 import { apiUserInfoCreate } from "./api/user_info/create";
 import { apiIsFirsSigninFalse } from "./api/user_info/is_first_signin_false";
-import { PageNotEmailVerified } from "../pageComponent/PageNotEmailVerified";
-import { parseCookies } from "nookies";
 import { T_auth_get_session_return } from "./api/auth/get_session";
 import { getSession } from "../lib/auth/getSession";
 
@@ -66,10 +64,7 @@ const Index = (props: IndexProps) => {
         <TopPage csrfToken={props.csrfToken} providers={props.providers} />
       </>
     );
-  // } else if (props.session.emailVerified === false) {
-  //   return (
-  //     <PageNotEmailVerified/>
-  //   )
+
   } else {
         return (
           <>
@@ -109,18 +104,6 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
       } as IndexProps
     }
   }
-
-
-  // アカウント作成直後,確認メールでurlクリックしたが、session情報が更新されてない場合にスキップ
-  // if (session.emailVerified === false) {
-  //   return { 
-  //     props: {
-  //       session,
-  //       isPublicPage: false,
-  //       device: device || null,
-  //     } as IndexProps
-  //   }
-  // }
 
   
   // ★★★セッションがある

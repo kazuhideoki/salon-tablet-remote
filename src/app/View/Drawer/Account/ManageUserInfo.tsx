@@ -14,7 +14,6 @@ import {
   TUpdateUser,
 } from "../../../ActionCreator/user/useUpdateUser";
 import { Store } from "../../../Store/Store";
-import { apiCreatePublicPageSlug } from "../../../../pages/api/user_info/create_public_page_slug";
 import { QrPopover } from "./QrPopover";
 import { apiUserInfoSwitchGeneratePublicPage } from "../../../../pages/api/user_info/switch_generate_public_page";
 import { HelpButton } from "../../viewComponents/buttons/HelpButton";

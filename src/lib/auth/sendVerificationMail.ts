@@ -1,5 +1,8 @@
-export const sendVerificationMail = (user) => {
-  
+import firebase from "firebase/app";
+import "firebase/auth";
+
+export const sendVerificationMail = (user: firebase.User) => {
+
   user
     .sendEmailVerification()
     .then(function() {

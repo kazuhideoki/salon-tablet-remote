@@ -19,8 +19,6 @@ export const PageNotEmailVerified = () => {
   const classes = useStyles()
   const { user, signout } = useAuth()
 
-
-
   return (
       <div className={classes.root}> 
         <Typography variant='h4' component='h2' gutterBottom align='center'>

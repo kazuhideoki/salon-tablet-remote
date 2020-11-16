@@ -20,10 +20,10 @@ import {
   T_footer_icon_size,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
-import { T_user_info_columns_without_password } from "../../pages/api/user_info/update";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
 import { TThemeParams } from "../Store/ThemeContext";
 import { TCreateFooterItem, TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
+import { T_user_info_update } from "../../pages/api/user_info/update";
 
 export type AppStateAction =
   | { type: "SELECT_DEVICE"; payload: T_selected_device }
@@ -60,7 +60,7 @@ export type AppStateAction =
   | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {
       type: "SET_USER_INFO";
-      payload: T_user_info_columns_without_password;
+      payload: T_user_info_update;
     }
   | {
       type: "SET_THEME";

@@ -26,21 +26,17 @@ const is_first_signin_false = async (req: NextApiRequest, res: NextApiResponse) 
   if (req.method === "POST") {
     const { user_id } = req.body as user_info_is_first_signin_false
     try{
-      const query = `UPDATE user_info SET is_first_sign_in = 0 WHERE user_id = ${user_id}`
-      console.log('queryは ' + query)
       
       const data = await db(
-        query,
-        // [false, user_id]
+        `UPDATE user_info SET is_first_sign_in = 0 WHERE user_id = ?`,
+        user_id
       );
       console.log("is_first_signin_falseのdataは " + JSON.stringify(data));
-      // res.end()
-      return
+      res.end()
 
     } catch (err) {
       console.log("/user_info/is_first_signin_false/のエラーは " + JSON.stringify(err));
 
-      // res.status(500).json({ err: true, data: { message: err.message } });
       throw "is_first_signin_falseでエラー。";
     }
   }
