@@ -14,6 +14,7 @@ const firebaseAuthConfig = {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
       requireDisplayName: false,
     },
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
   ],
   signInSuccessUrl: '/',
   credentialHelper: 'none',
@@ -22,7 +23,7 @@ const firebaseAuthConfig = {
       
       const token = await user.getIdToken();
 
-      nookies.set(undefined, 'token', token, {
+      nookies.set(undefined, 'st_token', token, {
         maxAge: 30 * 24 * 60 * 60,
         // pathを指定したらcookieがgSSRで取得できた
         path: '/',
