@@ -10,13 +10,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Info } from "@material-ui/icons";
 import { useDeleteUser } from "../../../ActionCreator/user/useDeleteUser";
+import { server } from "../../../../lib/loadUrl";
 
 function Copyright() {
   return (
     <Typography variant="body1" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href={server}>
+        SALON TABLET
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
