@@ -1,9 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
-export const sendVerificationMail = (user: firebase.User) => {
+export const sendVerificationMail = async (user: firebase.User) => {
 
-  user
+  return user
     .sendEmailVerification()
     .then(function() {
     
