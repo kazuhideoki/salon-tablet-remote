@@ -46,7 +46,7 @@ export const PageNotEmailVerified = () => {
       <Typography variant="h5" component="h3" gutterBottom align="center">
         確認メールを受け取り、リンクをクリックしてください。
       </Typography>
-      <Typography variant="h5" component="h3" gutterBottom align="center">
+      <Typography variant="h5" component="h3" gutterBottom align="center" >
         その後サインインし直すとこのポップアップウィンドウは表示されなくなります。
       </Typography>
       <div className={classes.buttons}>
