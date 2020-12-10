@@ -25,12 +25,10 @@ import { AppProps } from "next/dist/next-server/lib/router/router";
 
 export default function MyApp({ Component, pageProps, slug }: AppProps) {
   const session = pageProps.session
-  console.log('pageProps.sessionは ' + JSON.stringify(session))
     
     return (
       <>
         <Head>
-          {/* <title>{`${userInfo.shop_name} | SALON TABLET`}</title> */}
           <title>{`SALON TABLET`}</title>
           <meta
             name="viewport"
