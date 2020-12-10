@@ -73,7 +73,6 @@ export const insertSampleFooterItems = async (params: FooterItems) => {
 
 const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") { 
-    console.log("create_sample_data.tsだよ");
     
   const { user_id }: T_create_sample_data = req.body;
 

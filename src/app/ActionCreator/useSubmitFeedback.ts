@@ -20,10 +20,8 @@ export const useSubmitFeedback = () => {
       mode: "cors",
       body: JSON.stringify(params),
     });
-
     const result = await res.json();
 
-    console.log("useSubmitFeedbackのresultは " + result);
     
     return result
 

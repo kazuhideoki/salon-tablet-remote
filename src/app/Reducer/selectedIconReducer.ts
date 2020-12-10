@@ -16,7 +16,7 @@ export const selectedIconReducer = (
     break;
 
     default:
-      console.log("エラーだよ, selectedIconReducer");
+      console.log("エラー, selectedIconReducer");
         newState = { ...state };
   }
   reducerLogger({ state, newState, func, action });

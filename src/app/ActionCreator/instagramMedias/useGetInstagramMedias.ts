@@ -10,7 +10,6 @@ export const useGetInstagramMedias = () => {
 
   // ページ送りでないときは空のオブジェクト
   return async (instagram_id: T_instagram_id, username: T_instagram_username, paging: {after?: string, before?: string }) => {
-    console.log("useGetInstagramMediasだよ");
     
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
     dispatchAppState({type: "CLOSE_MODAL"})

@@ -4,7 +4,7 @@ function Faq() {
   
   return (
     <div>
-      FAQだよ
+      FAQ
       製作中
     </div>
   );

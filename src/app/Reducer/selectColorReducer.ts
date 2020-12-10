@@ -21,7 +21,7 @@ export const selectColorReducer = (
              break;
 
            default:
-             console.log("エラーだよ, selectColorReducer");
+             console.log("エラー, selectColorReducer");
              newState = { ...state };
          }
          reducerLogger({ state, newState, func, action });

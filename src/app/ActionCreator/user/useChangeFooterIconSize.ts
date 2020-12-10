@@ -15,7 +15,6 @@ export const useChangeFooterIconSize = () => {
       user_id,
       footer_icon_size: footerIconSize,
     };
-    console.log("useChangeFooterIconSizeのparamsは " + JSON.stringify(params));
 
     const data = await apiUserInfoChangeFooterIconSize(params);
 

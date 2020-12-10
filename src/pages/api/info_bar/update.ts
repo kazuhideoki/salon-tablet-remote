@@ -14,7 +14,6 @@ import { TApiResponse } from "../../../lib/apiTypes";
 export const apiInfoBarUpdate = async (
   params: T_info_bar_update
 ): Promise<TApiResponse<T_info_bar_update_return>> => {
-  // console.log("apiInfoBarUpdateだよ " + params);
   
   let str = process.browser ? server : localhost;
 

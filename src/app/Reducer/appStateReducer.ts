@@ -435,7 +435,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         break;
 
       default:
-        console.log("エラーだよ,appStateReducer");
+        console.log("エラー,appStateReducer");
         newState = { ...state };
     }
     reducerLogger({ state, newState, func, action })

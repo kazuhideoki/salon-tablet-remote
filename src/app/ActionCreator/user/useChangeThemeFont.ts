@@ -19,8 +19,6 @@ export const useChangeThemeFont = () => {
       whichFont,
     };
 
-    console.log("useChangeThemeFontのparamsは " + JSON.stringify(params));
-
     const data = await apiUserInfoThemeFont(params);
 
     if (data.err === true) {

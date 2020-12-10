@@ -11,7 +11,6 @@ export const useGetArticles = () => {
   } = React.useContext(Store);
   
   return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
-    console.log("useGetArticlesだよ");
     
     dispatchAppState({ type: "CLOSE_MODAL" });
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });

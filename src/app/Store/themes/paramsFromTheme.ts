@@ -33,20 +33,14 @@ export const generateDefaultParamsFromTheme = (
        };
 
 export const isThemeParamsChanged = (themeParams: TThemeParams) => {
-  console.log('themeParamsは ' + JSON.stringify(themeParams))
   const originalThemeParams = generateDefaultParamsFromTheme(themeParams.selected_theme)
 
   let resultArr: boolean[] = []
   for (const [key, value] of Object.entries(themeParams)) {
-    console.log('keyは ' + key)
     resultArr.push(themeParams[key] !== originalThemeParams[key]);
   } 
 
-  console.log("resultArrは " + JSON.stringify(resultArr));
-
   const result = resultArr.includes(true);
-
-  console.log('resultは ' + result)
 
   return result;
 }

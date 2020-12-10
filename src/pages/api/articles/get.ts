@@ -40,9 +40,7 @@ export type T_articles_get_return = {
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const pageSize = 6
   if (req.method === "POST") {
-    console.log('articles/getだよ');
-    
-    
+        
     const { page, selectingTags, isSetting, userId }: T_articles_get = req.body;
     // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
     let getPublishedOnly: string;

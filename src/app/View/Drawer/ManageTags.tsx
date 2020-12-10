@@ -41,7 +41,6 @@ const useManageTagsProps = () => {
   };
 
   const handleOnClick = () => {
-    console.log("ManageTagsのhandleOnClickだよ");
     if (isEditting) {
       updateTag({ edittingTagId, tagName: tagNameField });
     } else {

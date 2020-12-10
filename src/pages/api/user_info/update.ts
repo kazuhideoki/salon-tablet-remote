@@ -38,8 +38,6 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const params: T_user_info_update = req.body;
 
-    console.log("/user_info/update/のsqlに入れるparamsは " + JSON.stringify(params));
-
     try {
       const data = await db(`UPDATE user_info SET ? WHERE user_id = ?`, [
         params,

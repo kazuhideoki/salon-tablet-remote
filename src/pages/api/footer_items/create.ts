@@ -70,11 +70,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
         params.data_type = "default_data";
       }
 
-      console.log(
-        'dbに入れる直前のparamsは ' + JSON.stringify(params)
-      );
-      
-
       const data = await db(`INSERT INTO footer_items SET ?`, params);
   
       console.log("/footer_items/create/は " + JSON.stringify(data));
@@ -93,7 +88,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
   } else if (req.method === "GET") {
-    console.log("GETだよ");
     
   }
 };

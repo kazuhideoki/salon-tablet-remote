@@ -19,8 +19,6 @@ export const useChangeThemeColor = () => {
       theme_color: color.hex,
     };
 
-    console.log("useChangeThemeColorのparamsは " + JSON.stringify(params));
-
     const data = await apiUserInfoThemeColor(params);
 
     if (data.err === true) {

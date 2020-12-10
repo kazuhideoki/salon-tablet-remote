@@ -7,7 +7,6 @@ import { T_instagram_id, TInstagramMedias } from "../../../app/Store/Types";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (instagram_id: T_instagram_id, paging: { after?: string; before?: string } | null):Promise<TApiResponse<TInstagramMedias>> => {
-  console.log("apiInstagramMediasGetだよ instagram_idは " + instagram_id);
   
   let str = process.browser ? server : localhost
 
@@ -33,9 +32,6 @@ export type T_instagram_medias_get = {
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    console.log("/instagram_medias/getだよ");
-
-    // await runMiddleware(req, res);
     
     const { instagram_id, paging }: T_instagram_medias_get = req.body;
 

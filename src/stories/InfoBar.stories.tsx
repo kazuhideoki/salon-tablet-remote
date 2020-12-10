@@ -20,7 +20,7 @@ const props: TUseInfoBarProps = {
     user_id: null,
     info_bar_type: "shop_name",
     scrolling_sentence:
-      "この文章がすくろーるします <B>お知らせの表示などに使います。</B><p>pタグ内だよ</p>",
+      "この文章がすくろーるします <B>お知らせの表示などに使います。</B>",
     selected_article_id: null,
     scrolling_animation_duration: (32 * 35) / 245 + 8
   },

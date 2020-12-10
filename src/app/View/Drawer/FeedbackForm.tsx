@@ -21,7 +21,6 @@ const useFeedbackFormProps = () => {
   const handleOnSubmit = async () => {
 
     const result = await submitFeedback({ contactFormTitle, contactFormContent });
-    console.log("FeedbackForm.tsxのresultは " + result);
     
     if (result.sent === true) {
       alert('送信されました。')

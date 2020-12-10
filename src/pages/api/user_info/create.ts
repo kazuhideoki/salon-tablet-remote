@@ -33,10 +33,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const { user_email }: T_user_info_create = req.body;
     const params = { user_email };
 
-    console.log(
-      "/user_info/create/のsqlに入れるparamsは " + JSON.stringify(params)
-    );
-
     try {
       const data = await db(`INSERT INTO user_info (user_email) VALUES (?)`, [
         user_email,

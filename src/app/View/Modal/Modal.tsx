@@ -171,7 +171,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             break;
 
           default:
-            console.log("エラーだよ、Modal→ '" + props.setModal + "'");
+            console.log("エラー、Modal→ '" + props.setModal + "'");
         }
         
         const Transition = switchingTransition(props.selected_theme)

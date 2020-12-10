@@ -32,8 +32,6 @@ export const useSwitchOrder = () => {
       }
     };
 
-    console.log("useSwitchOrderのparamsは " + params);
-
     const data = await apiFooterItemsSwitchOrder(params);
 
     if (data.err === true) {

@@ -9,10 +9,6 @@ var FormData = require("form-data");
 
 const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  console.log("get_tokenだよ");
-
-  // await runMiddleware(req, res);
-
   if (req.query.error) {
     console.log();
     ("インスタグラムアカウントの接続ができませんでした。");
@@ -30,10 +26,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
     "redirect_uri",
     `${instagramRedirectHost}/api/instagram_accounts/get_token`
   );
-
-  console.log("paramsは " + JSON.stringify(form));
   
-
   try {
         const response = await fetch(
           `https://api.instagram.com/oauth/access_token`,
@@ -72,9 +65,6 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         // 【要修正】
         const { email } = await getSession({ req });
         const { user_id } = await getUserInfoFromEmail(email);
-        // console.log("get_tokenのsessionObjは " + JSON.stringify(sessionObj));
-        // const { user_id } = await getUserInfoFromEmail(sessionObj.user.email);
-
 
         const params = {
           instagram_id: shortLived.user_id,

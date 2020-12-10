@@ -20,7 +20,6 @@ export const useUpdateInfoBar = () => {
   const getInfoBar = useGetInfoBar();
 
   return async (param: TUseUpdateInfoBar) => {
-    console.log("useUpdateInfoBarだよ" + JSON.stringify(param));
 
     dispatchAppState({ type: "CLOSE_MODAL" });
     // dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });

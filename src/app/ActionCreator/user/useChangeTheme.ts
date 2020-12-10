@@ -19,8 +19,6 @@ export const useChangeTheme = () => {
       themeParams: themeParams,
     };
     
-    console.log("useChangeThemeのparamsは " + JSON.stringify(params));
-
     const data = await apiUserInfoChangeTheme(params);
 
     if (data.err === true) {

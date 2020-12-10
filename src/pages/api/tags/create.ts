@@ -30,11 +30,8 @@ export type T_tags_create_return = {
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-
-    // await runMiddleware(req, res);
     
     const params: T_tags_create = req.body;
-    console.log(JSON.stringify("/tags/createのreq.body.paramsは " + params));
 
     try {
       const data = await db(`INSERT INTO tags SET ?`, params);

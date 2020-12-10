@@ -30,12 +30,8 @@ export const generateSecondaryColor = (props: props) => {
   if (h > 360) {
     h = h - 360;
   }
-  
     
   newParams = [h,s,l]
-
-  // console.log('★もとの値hslは★ ' + JSON.stringify(props));
-  // console.log('★生成後のparamは★ ' + JSON.stringify(newParams));
 
   return newParams
 

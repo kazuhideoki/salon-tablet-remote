@@ -15,7 +15,6 @@ export const useChangeShowArticleType = () => {
       user_id,
       showArticleType,
     };
-    console.log("useChangeShowArticleTypeのparamsは " + JSON.stringify(params));
 
     const data = await apiUserInfoChangeShowArticleType(params);
 

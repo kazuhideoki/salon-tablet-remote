@@ -248,14 +248,6 @@ export type TSetModal =
   | "delete_account_form"
   | 'popup_not_email_verified'
 
-
-// export type T_possible_device =
-//   | "mobile"
-//   | "tablet"
-//   | "console"
-//   | "smarttv"
-//   | "wearable"
-//   | "embedded";
 export type T_selected_device = 'responsive' | 'mobile' | 'tablet'
 export const initAppState = (data: TStoreProps) => ({
          isPublicPage: data.isPublicPage,
