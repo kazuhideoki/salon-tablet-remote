@@ -91,6 +91,9 @@ const useStyles = makeStyles((theme) =>
       zIndex: 100,
       // backgroundColor: "rgba(255,255,255,0.8)",
     },
+    editButtonsBoxButtons: {
+      left: 'auto'
+    },
     showDataType: {
       position: "absolute",
       top: 48,
@@ -136,6 +139,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
           {props.isSetting ? (
             <EditButtonsBox
               className={classes.editButtonsBox}
+              classNameButtons={classes.editButtonsBoxButtons}
               switch
               switchProps={{ smaller: footerItem[index - 1], larger: value }}
               update

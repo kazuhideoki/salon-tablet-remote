@@ -86,10 +86,8 @@ export type TSessionOnj = {
 
 export const getServerSideProps: GetServerSideProps =  async (context) => {
   const {req,res} = context
-  
 
   const session = await getSession({req})
-  console.log('index gSSR,sessionは ' + JSON.stringify(session))
 
   const device = getDeviceType(context)
 

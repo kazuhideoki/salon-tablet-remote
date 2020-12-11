@@ -14,6 +14,8 @@ import { DeleteButton, TDeleteButton } from "./DeleteButton";
 
 type Props = {
   className?: string;
+  classNameButtons?: string;
+  show?: boolean
   update?: boolean
   updateProps?: TUpdateButton
   delete?: boolean;
@@ -45,20 +47,18 @@ export const StyledIconButtonEditButton = withStyles({
 
 export const EditButtonsBox: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(props.show ? true : false);
 
   const openBox = () => {
-    setChecked(true);
+    if(props.show !== true) setChecked(true);
   };
   const closeBox = () => {
-    setChecked(false)
+    if (props.show !== true) setChecked(false);
   }
-
-  const Children = props.children
 
   return (
     <>
-      <div className={`${classes.root} ${props.className}`}>
+      <div className={`${classes.root} ${props.className} ${props.classNameButtons}`}>
         {checked ? null : (
           <IconButton onClick={() => openBox()}>
             <MoreVert />
@@ -67,7 +67,6 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
         {checked ? (
           <Fade in={checked}>
             <div>
-              {/* {props.children} */}
               {props.switch ? (
                 <SwitchOrderButton {...props.switchProps} closeBox={closeBox} />
               ) : null}

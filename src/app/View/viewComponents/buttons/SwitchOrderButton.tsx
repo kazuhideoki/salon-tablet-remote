@@ -10,22 +10,21 @@ export type TSwitchButton = TUseSwitchOrders & {
   closeBox: () => void;
 };
 
-export const SwitchOrderButton = ({ smaller, larger, closeBox }: TSwitchButton) => {
+export const SwitchOrderButton = (props: TSwitchButton) => {
          const switchOrder = useSwitchOrder();
 
          // 一番目のアイテムには必要ないので表示させない
-         if (!smaller) {
+         if (!props.smaller) {
            return null;
          }
 
          return (
            <StyledIconButtonEditButton
-             // className={props.position}
              onClick={() => {
-               closeBox()
+               props.closeBox()
                switchOrder({
-                 smaller,
-                 larger,
+                 smaller: props.smaller,
+                 larger: props.larger,
                });
              }}
            >
