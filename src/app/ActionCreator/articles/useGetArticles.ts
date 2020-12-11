@@ -21,7 +21,6 @@ export const useGetArticles = () => {
       isSetting: isSetting,
       userId: appState.userInfo.user_id,
     };
-    console.log("4 " + isSetting);
 
     const data = await apiArticlesGet(params)
 

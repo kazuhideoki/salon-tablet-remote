@@ -13,13 +13,9 @@ export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
       footer_item_id: value.footer_item_id,
     };
   });
-  // console.log("correctedDataは " + JSON.stringify(correctedData));
-
   const idParam = correctedData.map((value) => {
     return value.footer_item_id;
   });
-  console.log("idParamは " + JSON.stringify(idParam));
-
   const updateParamList = correctedData.map((value) => {
     return `WHEN ${value.footer_item_id} THEN ${value.order_sidebar}`;
   });

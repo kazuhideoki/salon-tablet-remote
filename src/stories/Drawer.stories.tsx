@@ -36,10 +36,7 @@ export const Close = () => {
     const year = today.getFullYear()
     const month = today.getMonth() + 1
     const day = today.getDate()
-    
-    // Browser.msgBox();
-    console.log(year + '年' + month + '月' + day + '日');
-    
+
   }
   test()
 

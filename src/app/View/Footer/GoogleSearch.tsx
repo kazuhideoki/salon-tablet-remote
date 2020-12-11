@@ -9,14 +9,12 @@ import { Button, makeStyles, Theme, createStyles } from "@material-ui/core";
  }
 
 export const useGoogleSearchProps = () => {
-  // const [update, setUpdate] = React.useState(false)
   const [field, setField] = React.useState('')
   const [query, setQuery] = React.useState('')
 
   const [searchHistoryStr, setSearchHistoryStr] = React.useState(localStorage.getItem(
     "googleSearchHistory")
   )
-  // console.log('searchHistoryStrは ' + searchHistoryStr)
 
   const searchHistoryArr = searchHistoryStr ? searchHistoryStr.split(',') : []
 
@@ -31,11 +29,9 @@ export const useGoogleSearchProps = () => {
     const str: TGoogleSearchHistory = localStorage.getItem(
       "googleSearchHistory"
     )
-    // console.log('strは ' + str);
 
     let newStr
     let fieldStr = deleteExcessSpace(field)
-    // console.log('fieldStrは ' + fieldStr)
     
     if (!fieldStr) {
       return null      
@@ -51,14 +47,11 @@ export const useGoogleSearchProps = () => {
       newStr = fieldStr
     }
 
-    // console.log('newStrは ' + newStr)
     localStorage.setItem("googleSearchHistory", newStr);
 
     
     setSearchHistoryStr(localStorage.getItem(
       "googleSearchHistory"))
-    // setUpdate(!update)
-
   }
 
   const clearHistory = () => {

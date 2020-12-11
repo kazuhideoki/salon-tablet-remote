@@ -44,8 +44,6 @@ export const useUpdateUser = () => {
   
     } catch (err) {
       console.log('useUpdateUserでエラー ' + err);
-      
-
     }
 
   };

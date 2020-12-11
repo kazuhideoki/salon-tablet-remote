@@ -40,7 +40,6 @@ export const useCreateArticle =  () => {
     const data = await apiArticlesCreate(params)
 
     if (data.err === true) {
-      console.log(data);
 
       alert("投稿できませんでした");
       dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });

@@ -22,22 +22,16 @@ export const useIsMobile = () => {
     defaultMatches: defaultMatches(),
   });
 
-  
-
   if (selectedDevice === "mobile") {
-    // console.log('selectedDevice === "mobile"');
     return true;
   }
   if (selectedDevice === "tablet") {
-    // console.log('selectedDevice === "tablet"');
     return false;
   }
 
   if (smallWidth || smallHeight) {
-    // console.log("(smallWidth || smallHeight)");
     return true
   } else {
-    // console.log('useIsMobileの一番下でfalse');
     
     return false
   }

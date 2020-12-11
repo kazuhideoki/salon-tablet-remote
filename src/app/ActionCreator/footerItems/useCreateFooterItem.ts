@@ -75,8 +75,6 @@ export const useCreateFooterItem = () => {
       user_id: appState.userInfo.user_id,
     };
 
-    console.log(JSON.stringify(params));
-
     const data = await apiFooterItemsCreate(params)
 
     if (data.err === true) {

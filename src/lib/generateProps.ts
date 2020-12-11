@@ -15,10 +15,7 @@ export const generateProps = async (userInfo: TUserInfo, getPublishedOnly: boole
         selectingTags: [],
         isSetting: getPublishedOnly ? false : true,
         userId: userInfo.user_id,
-      };
-
-      console.log("articlesParamは " + JSON.stringify(articlesParam)); 
-      
+      };      
       
       // 並列処理でデータを取ってくる
       const [data, data2, data3, data4, data5] = await Promise.all([

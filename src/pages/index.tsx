@@ -106,15 +106,10 @@ export const getServerSideProps: GetServerSideProps =  async (context) => {
   // ★★★セッションがある
   let userInfo = await getUserInfoFromEmail(session.email);
   if (userInfo === null) {
-    console.log('userInfoがない')
-    // throw 'No user information, please ask support.'}
-
     await apiUserInfoCreate({
       user_email: session.email,
     })
-
     userInfo = await getUserInfoFromEmail(session.email);
-    console.log('getUserInfoFromEmail後のuserInfoは ' + JSON.stringify(userInfo))
   }
 
   // ★★★最初のサインイン サンプルデータの追加

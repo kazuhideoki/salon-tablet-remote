@@ -10,16 +10,11 @@ import {
 export const deleteTagIdInArticle = async (tag_id: T_tag_id, user_id: T_user_id) => {
   // ★まずarticleのtag_idsの該当タグを消す
       const data0: any = await db(`SELECT article_id, tag_ids FROM articles WHERE user_id = ?`, user_id);
-      console.log("data0は " + JSON.stringify(data0)); 
-
       const article_ids: T_article_id[] = data0.map((value) => {
         return value.article_id;
       });
-
       // パースしてtag_idsをnumber[]にする
-      const parsedData: {article_id: T_article_id, tag_ids: number[] }[] = tagIdsParse(data0);
-      console.log("parsedDataは " + JSON.stringify(parsedData))
-      
+      const parsedData: {article_id: T_article_id, tag_ids: number[] }[] = tagIdsParse(data0);      
       // 該当tag_idを取り除いたtag_idsの入ったdataを新たに生成
       const newData = parsedData.map((value) => {
       
@@ -36,7 +31,6 @@ export const deleteTagIdInArticle = async (tag_id: T_tag_id, user_id: T_user_id)
         }
 
       })
-      console.log("tags/deleteのnewDataは " + JSON.stringify(newData));
 
       // DBのデータ型似合わせてstring化
       const stringifiedNewData:{article_id: T_article_id,tag_ids: T_tag_ids}[] = newData.map((value) => {
@@ -51,11 +45,6 @@ export const deleteTagIdInArticle = async (tag_id: T_tag_id, user_id: T_user_id)
         value.tag_ids = JSON.stringify(value.tag_ids);
         return value
       })
-      console.log(
-        "tags/deleteのstringifiedNewDataは " +
-          JSON.stringify(stringifiedNewData)
-      );
-
       const newTagIds = stringifiedNewData.map((value) => {
         return value.tag_ids
       })

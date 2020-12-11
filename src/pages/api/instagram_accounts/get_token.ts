@@ -35,14 +35,8 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
             body: form,
           }
         );
-        console.log(JSON.stringify(response));
 
         const shortLived = await response.json();
-
-        console.log(
-          "get_token, short lived tokenでの返り値は " +
-            JSON.stringify(shortLived)
-        );
 
         // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -51,16 +45,11 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         );
         const longLived = await response2.json();
 
-        console.log(
-          "get_token, long lived tokenでの返り値は " + JSON.stringify(longLived)
-        );
-
         const response3 = await fetch(
           `https://graph.instagram.com/me/?fields=username&access_token=${longLived.access_token}`
         );
 
         const userProfile = await response3.json();
-        console.log("userProfileは " + JSON.stringify(userProfile));
 
         // 【要修正】
         const { email } = await getSession({ req });
@@ -70,7 +59,6 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
           instagram_id: shortLived.user_id,
           // instagramアカウントのusername
           username: userProfile.username,
-          // ↓取得方法がないかも？
           profile_img: "",
           access_token: longLived.access_token,
           expires: null, // いつか実装
@@ -93,7 +81,6 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(
       "/instagram_accounts/get_token/のエラーは " + JSON.stringify(err)
     );
-    // ※ エラー処理も追加するひつようあり。。。。
     res.writeHead(302, { Location: `/` });
     res.end();
   }

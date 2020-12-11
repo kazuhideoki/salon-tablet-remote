@@ -39,7 +39,6 @@ export default function WebsiteAppBar({onClick, id}) {
 
   const router = useRouter();
   const slug = router.asPath;
-  // console.log("pidは " + slug);
 
 
   const headerStringArray = pageList.filter((value) => {

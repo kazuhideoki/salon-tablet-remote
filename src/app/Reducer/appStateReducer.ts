@@ -1,9 +1,9 @@
 import {
-  TAppState, TInstagramMedias, TInstagramMedia, initInstagramMedias,
+  TAppState, initInstagramMedias,
 } from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 import { AppStateAction } from "./AppStateAction";
-import { calcOrder, generateFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
+import { generateFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 
 export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
@@ -334,9 +334,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         };
         break;
       case "SET_ARTICLES":
-        console.log(action.payload);
-
-        // ! を使うとうまく行かなかった。。。
         const isShowInstagram =
           action.payload.showArticles === true ? false : state.isShowInstagram;
         newState = {

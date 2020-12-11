@@ -17,8 +17,6 @@ export const useCreateTag = () => {
       tag_name: tagName,
     };
     
-    console.log(JSON.stringify(params));
-
     const data = await apiTagsCreate(params);
 
     if (data.err === true) {

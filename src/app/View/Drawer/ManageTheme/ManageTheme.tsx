@@ -1,12 +1,7 @@
 import React from "react";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import { makeStyles, createStyles, Theme, withStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { HelpButton } from "../../viewComponents/buttons/HelpButton";
-import { ThemeContext, TThemeParams } from "../../../Store/ThemeContext";
+import { TThemeParams } from "../../../Store/ThemeContext";
 import { useChangeTheme } from "../../../ActionCreator/user/useChangeTheme";
 import { Store } from "../../../Store/Store";
 import { Divider, Typography } from "@material-ui/core";
@@ -21,8 +16,6 @@ import { TFont1, TFont2, fonts2, fonts1 } from "../../../Store/themes/fonts";
 import { useChangeThemeFont } from "../../../ActionCreator/user/useChangeThemeFont";
 import { FiberManualRecord } from "@material-ui/icons";
 import { generateSecondaryColor } from "../../../../lib/color/generateSecondaryColor";
-import { selectColorReducer } from "../../../Reducer/selectColorReducer";
-import { selectedIconReducer } from "../../../Reducer/selectedIconReducer";
 import { secondaryColor } from "../../../../lib/color/secondaryColor";
 import { SelectFooterIconSize } from "./SelectFooterIconSize";
 import { useChangeFooterIconSize } from "../../../ActionCreator/user/useChangeFooterIconSize";
@@ -44,14 +37,6 @@ export const useManageTheme = () => {
 
   const { appState } = React.useContext(Store)
   const { selected_theme, theme_color, theme_font1, theme_font2, theme_font_heading, footer_icon_size, show_article_type } = appState.userInfo
-
-  // const hsl = colorConvert.hex.hsl("#0000FF");
-  // console.log("hslは " + hsl);
-  // const generated = generateSecondaryColor(hsl);
-  // console.log("generatedは " + JSON.stringify(generated));
-  // const hex2 = colorConvert.hsl.hex(generated);
-  // console.log("hex2は " + hex2);
-
   const [font1, setFont1] = React.useState(theme_font1)
   const [font2, setFont2] = React.useState(theme_font2)
   const [fontHeading, setFontHeading] = React.useState(theme_font_heading);
@@ -82,7 +67,6 @@ export const useManageTheme = () => {
     changeTheme((event.target as HTMLInputElement).value as T_selected_theme);
   };
   const handleChangeThemeColor = async (value: TColor) => {
-    // console.log("handleChangeThemeColorのvalueは " + JSON.stringify(value));
     
     const isChanged = await changeThemeColor(value)
     if (isChanged) {
@@ -90,10 +74,6 @@ export const useManageTheme = () => {
         hex: value.hex,
         hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`
       }
-      // console.log('【】value.hslは '  + JSON.stringify(value.hsl));
-      // console.log('【】generateSecondaryColorは ' + generateSecondaryColor(value.hsl));
-      // console.log('【】colorConvert.hsl.hex(generateSecondaryColor(value.hsl))は ' + colorConvert.hsl.hex(generateSecondaryColor(value.hsl)));
-
     }
   }
   const handleChangeThemeFont1 = async (event: React.ChangeEvent<{ value: unknown }>) => {

@@ -13,12 +13,7 @@ config.config.socketPath = process.env.NODE_ENV === "production" && process.env.
 
 const mysql = serverlessMysql(config)
 
-// ※db(``)の返り値は常に[]
-export const db = async (query, params?) => {
-
-
-    // console.log('mysqlのconfigは ' + JSON.stringify(config))
- 
+export const db = async (query, params?) => { 
     const results = await mysql.query(query, params);
     await mysql.end();
     return results;

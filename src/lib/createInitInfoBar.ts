@@ -1,9 +1,7 @@
 import { T_user_id, TInfoBarWithoutId, T_selected_article_id, TInfoBar } from "../app/Store/Types";
 import { db } from "./db";
 
-export const createInitInfoBar = async (user_id: T_user_id) => {
-  console.log("createInitInfoBarで新しく作成");
-  
+export const createInitInfoBar = async (user_id: T_user_id) => {  
   const params: TInfoBarWithoutId = {
     user_id: user_id,
     info_bar_type: "shop_name",

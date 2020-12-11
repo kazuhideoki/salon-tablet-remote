@@ -12,16 +12,11 @@ import "../../public/fonts/fonts.css";
 // ReactQuillの整形
 import "../../public/quill.scss";
 
-
-
 import Head from "next/head";
 import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { AuthProvider } from "../lib/auth/AuthProvider";
-
 import { AppProps } from "next/dist/next-server/lib/router/router";
-
-
 
 export default function MyApp({ Component, pageProps, slug }: AppProps) {
   const session = pageProps.session

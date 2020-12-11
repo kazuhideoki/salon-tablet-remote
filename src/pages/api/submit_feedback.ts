@@ -9,8 +9,6 @@ const senderEmailPassword = "2356Sp!p";
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  // port: 465,
-  // secure: true, // SSL
   port: 587,
   secure: false,
   auth: {
@@ -68,9 +66,6 @@ const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
       const info = await transporter.sendMail(mailOptions1);
 
       console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      // return Promise.resolve({ sent: true });
-      // return { sent: true }
-      console.log("infoは " + JSON.stringify(info));
 
       const retrunData: T_submit_feedback_return_no_error = { sent: true };
       return res.status(200).json(retrunData);
@@ -84,8 +79,6 @@ const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
-
-// export type T_submit_feedback = {sent: boolean, err?: any}
 
 // socketうんぬんの エラーメッセージを表示させないようにする
 // jsonのパーサー

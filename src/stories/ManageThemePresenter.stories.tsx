@@ -2,8 +2,8 @@ import React from 'react';
 
 import "../../public/fonts/fonts.css";
 
-import { ManageThemePresenter, useManageTheme, TUseManageThemeProps, TColor } from '../app/View/Drawer/ManageTheme/ManageTheme';
-import { TFont1, TFont2, Deprecated_FontNameToFontFamily } from '../app/Store/themes/fonts';
+import { ManageThemePresenter, TUseManageThemeProps, TColor } from '../app/View/Drawer/ManageTheme/ManageTheme';
+import { TFont1, TFont2 } from '../app/Store/themes/fonts';
 import { googleFontsUrl } from '../lib/googleFontsUrl';
 import { generateSecondaryColor } from '../lib/color/generateSecondaryColor';
 export default {

@@ -5,8 +5,6 @@ import WebSiteDrawer from './WebsiteDrawer'
 export const SwitchAppBar:React.FC = ({children}) => {
   const {user} = useAuth()
 
-  console.log('_appのuserは ' + user)
-
   if (user !== null) {
     <>
       {children}

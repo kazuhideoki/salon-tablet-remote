@@ -10,15 +10,3 @@ export const server = process.env.NEXT_PUBLIC_SITE;
 export const instagramRedirectHost = dev
          ? `https://localhost:${process.env.NEXT_PUBLIC_PORT}`
          : process.env.NEXT_PUBLIC_SITE;
-
-// console.log(
-//     "devは " +
-//     dev +
-//     " localhostは " +
-//     localhost +
-//     " serverは " +
-//     server +
-//     " instagramRedirectHostは " +
-//     instagramRedirectHost
-// );
-
