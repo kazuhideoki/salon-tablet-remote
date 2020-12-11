@@ -15,10 +15,17 @@ const className = ""
 export const Normal = () => {
 
   return (
-    <EditButtonsBox className={className}>
-      <SwitchOrderButton smaller={samplefooterItems[0]} larger={samplefooterItems[1]}/>
-      <UpdateButton onClick={null} value={null} />
-      <DeleteButton onClick={null} value={null} />
-    </EditButtonsBox>
+    <EditButtonsBox
+      className={className}
+      switch
+      switchProps={{
+        smaller: samplefooterItems[0],
+        larger: samplefooterItems[1],
+      }}
+      update
+      updateProps={{ onClick: null, value: null }}
+      delete
+      deleteProps={{ onClick: null, value: null }}
+    />
   );
 }

@@ -1,10 +1,20 @@
 import React, { useContext } from "react";
-import { Grid, makeStyles, createStyles, useMediaQuery } from "@material-ui/core";
+import {
+  Grid,
+  makeStyles,
+  createStyles,
+  useMediaQuery,
+} from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
 import { Store } from "../../Store/Store";
-import { T_footer_item_id, T_order, FooterItem, T_modal_size } from "../../Store/Types";
+import {
+  T_footer_item_id,
+  T_order,
+  FooterItem,
+  T_modal_size,
+} from "../../Store/Types";
 import { IconAndText } from "./IconAndText";
-import { PPagination } from './PaginationBar/PPagination';
+import { PPagination } from "./PaginationBar/PPagination";
 import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
 import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";
@@ -17,13 +27,11 @@ import { useIsMobile } from "../../../lib/useIsMobile";
 
 export const useFooterProps = () => {
   const { appState, dispatchAppState } = useContext(Store);
-  const {footerItems, loading, isSetting} = appState
+  const { footerItems, loading, isSetting } = appState;
 
   const deleteFooterItem = useDeleteFooterItem();
 
-  const handleOnUpDateFooterIcon = (
-    footerItem: FooterItem
-  ) => {
+  const handleOnUpDateFooterIcon = (footerItem: FooterItem) => {
     dispatchAppState({
       type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT",
       payload: footerItem,
@@ -49,7 +57,7 @@ export const useFooterProps = () => {
   };
 };
 
-type Props = ReturnType<typeof useFooterProps>
+type Props = ReturnType<typeof useFooterProps>;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -96,12 +104,12 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const FooterPresenter:React.FC<Props> = (props) => {
+export const FooterPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const selectedDisplayFooterItems = props.footerItems.filter((value) => {
-    return value.order_sidebar === 0
-  })
+    return value.order_sidebar === 0;
+  });
 
   const displayFooterItems = selectedDisplayFooterItems.map(
     (value, index, footerItem) => {
@@ -126,29 +134,27 @@ export const FooterPresenter:React.FC<Props> = (props) => {
         >
           {/* セッティング画面で順番を入れ替えるボタンなどを表示 */}
           {props.isSetting ? (
-            <EditButtonsBox className={classes.editButtonsBox}>
-              <SwitchOrderButton
-                smaller={footerItem[index - 1]}
-                larger={value}
-              />
-              <UpdateButton
-                onClick={props.handleOnUpDateFooterIcon}
-                value={value}
-              />
-              <DeleteButton
-                onClick={props.deleteFooterItem}
-                value={{
-                  footer_item_id: value.footer_item_id,
-                  order: value.order,
-                }}
-              />
-            </EditButtonsBox>
+            <EditButtonsBox
+              className={classes.editButtonsBox}
+              switch
+              switchProps={{ smaller: footerItem[index - 1], larger: value }}
+              update
+              updateProps={{
+                onClick: props.handleOnUpDateFooterIcon,
+                value: value,
+              }}
+              delete
+              deleteProps={{
+                onClick: props.deleteFooterItem,
+                value: value.order,
+              }}
+            />
           ) : null}
 
           {showDataType(value.data_type, classes.showDataType)}
 
           {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
-          {(value.on_tap === "modal") || (value.on_tap === "google") ? (
+          {value.on_tap === "modal" || value.on_tap === "google" ? (
             <IconAndText
               className={props.isSetting ? classes.isSettingIconAndText : null}
               icon={
@@ -199,7 +205,7 @@ export const FooterPresenter:React.FC<Props> = (props) => {
     }
   );
 
-  const noItems = <Grid item >No items</Grid>;
+  const noItems = <Grid item>No items</Grid>;
 
   return (
     <div className={classes.root}>
@@ -215,16 +221,15 @@ export const FooterPresenter:React.FC<Props> = (props) => {
       </Grid>
     </div>
   );
-
 };
 
 export const Footer = () => {
-  const props = useFooterProps()
+  const props = useFooterProps();
   return (
     <>
-    <FooterPresenter {...props}/>
+      <FooterPresenter {...props} />
       {/* <PPagination />
     </FooterPresenter> */}
     </>
   );
-}
+};

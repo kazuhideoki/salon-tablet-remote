@@ -32,16 +32,8 @@ export const displayArticlesScrollJsx = (props: TUseMainProps, classes: TMainCla
                  <Card className={classes.card}>
                    <StyledCardContent className={classes.cardContent}>
                      {props.isSetting ? (
-                       <EditButtonsBox className={classes.editButtonsBox}>
-                         <UpdateButton
-                           onClick={props.onClickUpdate}
-                           value={value}
-                         />
-                         <DeleteButton
-                           onClick={props.deleteArticle}
-                           value={value.article_id}
-                         />
-                       </EditButtonsBox>
+                       <EditButtonsBox className={classes.editButtonsBox} update updateProps={{onClick: props.onClickUpdate, value: value}} delete deleteProps={{onClick:props.deleteArticle, value: value.article_id}}/>
+                    
                      ) : null}
                      {showDataType(value.data_type, classes.showDataType)}
 

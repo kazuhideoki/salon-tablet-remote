@@ -153,13 +153,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                 </Typography>
               </div>
               {props.isSetting ? (
-                <EditButtonsBox className={classes.editButtonsBox}>
-                  <UpdateButton onClick={props.onClickUpdate} value={value} />
-                  <DeleteButton
-                    onClick={props.deleteArticle}
-                    value={value.article_id}
-                  />
-                </EditButtonsBox>
+                <EditButtonsBox className={classes.editButtonsBox}/>
               ) : null}
             </CardActionArea>
           </div>

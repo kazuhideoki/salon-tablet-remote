@@ -6,10 +6,11 @@ import { T_footer_items_switch_order } from '../../../../pages/api/footer_items/
 import { StyledIconButtonEditButton } from "./EditButtonsBox";
 import { FooterItem } from '../../../Store/Types';
 
-export const SwitchOrderButton = ({
-         smaller,
-         larger,
-       }:TUseSwitchOrders) => {
+export type TSwitchButton = TUseSwitchOrders & {
+  closeBox: () => void;
+};
+
+export const SwitchOrderButton = ({ smaller, larger, closeBox }: TSwitchButton) => {
          const switchOrder = useSwitchOrder();
 
          // 一番目のアイテムには必要ないので表示させない
@@ -20,12 +21,13 @@ export const SwitchOrderButton = ({
          return (
            <StyledIconButtonEditButton
              // className={props.position}
-             onClick={() =>
+             onClick={() => {
+               closeBox()
                switchOrder({
                  smaller,
                  larger,
-               })
-             }
+               });
+             }}
            >
              <SwapHorizontalCircleOutlined />
            </StyledIconButtonEditButton>

@@ -22,86 +22,89 @@ import { showDataType } from "../../Main/components/showDataType";
 import { SwitchOrderButton } from "../../viewComponents/buttons/SwitchOrderButton";
 
 const useStyles = makeStyles((theme: Theme) => {
-
-    return createStyles({
-      listItem: {
-        display: 'block',
-      },
-      listItemText: {
-        textOverflow: "ellipsis",
-      },
-      itemIsDraft: {
-        border: "2px solid red",
-        borderRadius: 2,
-        fontStyle: "italic",
-      },
-      itemIsAppLink: {
-        border: "2px solid green",
-        borderRadius: 2,
-        fontStyle: "italic",
-      }, 
-      editButtonsBox: {
-        width: "fit-content",
-        marginLeft: "auto",
-      },
-    });
-})
+  return createStyles({
+    listItem: {
+      display: "block",
+    },
+    listItemText: {
+      textOverflow: "ellipsis",
+    },
+    itemIsDraft: {
+      border: "2px solid red",
+      borderRadius: 2,
+      fontStyle: "italic",
+    },
+    itemIsAppLink: {
+      border: "2px solid green",
+      borderRadius: 2,
+      fontStyle: "italic",
+    },
+    editButtonsBox: {
+      width: "fit-content",
+      marginLeft: "auto",
+    },
+  });
+});
 
 export const drawerItemsJsx = (props: TUseDrawerProps) => {
+  const classes = useStyles(props.themes);
 
-  const classes = useStyles(props.themes)
-
-  let displayItem = props.footerItems
+  let displayItem = props.footerItems;
   // タブレットビューではon_sidebarのみDrawerに表示させる
   if (props.isMobile === false) {
     displayItem = props.footerItems.filter((value) => {
       // return value.on_sidebar === true
-      return value.order_sidebar !== 0
-    })
+      return value.order_sidebar !== 0;
+    });
   }
 
   const ShowStatus = (value: FooterItem) => {
-    
     return (
       <>
-      <Typography variant="body1" component="span">
-        {value.is_published === false ? (
-          // <span className={classes.itemIsDraft}>下書き</span>
-          <Chip size="small" label="下書き" className={classes.itemIsDraft} />
-        ) : null}
-        {value.on_tap === "appLink" ? (
-          // <span className={classes.itemIsAppLink}>アプリ</span>
-          <Chip size="small" label="アプリ" className={classes.itemIsAppLink} />
-        ) : null}
-      </Typography>
-
+        <Typography variant="body1" component="span">
+          {value.is_published === false ? (
+            // <span className={classes.itemIsDraft}>下書き</span>
+            <Chip size="small" label="下書き" className={classes.itemIsDraft} />
+          ) : null}
+          {value.on_tap === "appLink" ? (
+            // <span className={classes.itemIsAppLink}>アプリ</span>
+            <Chip
+              size="small"
+              label="アプリ"
+              className={classes.itemIsAppLink}
+            />
+          ) : null}
+        </Typography>
       </>
     );
-
-  }
-  type TItemEditButtonsBox = {value: FooterItem, smallerValue: FooterItem}
+  };
+  type TItemEditButtonsBox = { value: FooterItem; smallerValue: FooterItem };
   const ItemEditButtonsBox = ({ value, smallerValue }: TItemEditButtonsBox) => (
     <>
       <br />
-      <EditButtonsBox className={classes.editButtonsBox}>
-        <SwitchOrderButton smaller={smallerValue} larger={value} />
-        <UpdateButton onClick={props.handleOnUpDateFooterIcon} value={value} />
-        <DeleteButton
-          onClick={props.deleteItem}
-          value={{ footer_item_id: value.footer_item_id, order: value.order }}
-        />
-      </EditButtonsBox>
+      <EditButtonsBox
+        className={classes.editButtonsBox}
+        switch
+        switchProps={{ smaller: smallerValue, larger: value }}
+        update
+        updateProps={{ onClick: props.handleOnUpDateFooterIcon, value: value }}
+        delete
+        deleteProps={{
+          onClick: props.deleteItem,
+          value: { footer_item_id: value.footer_item_id, order: value.order },
+        }}
+      />
     </>
   );
 
   // order_sidebarの順に並べ替える
   const compareFunc = (a: FooterItem, b: FooterItem) => {
     // Use toUpperCase() to ignore character casing
-    const aOrderSidebar = a.order_sidebar
+    const aOrderSidebar = a.order_sidebar;
     const bOrderSidebar = b.order_sidebar;
 
-    return aOrderSidebar - bOrderSidebar
-  }
+    return aOrderSidebar - bOrderSidebar;
+  };
   displayItem.sort(compareFunc);
 
   return (
@@ -123,7 +126,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
         const Icon = () => <ItemIcon />;
 
-        if ((value.on_tap === "modal") || (value.on_tap === "google")) {
+        if (value.on_tap === "modal" || value.on_tap === "google") {
           return (
             <div key={index}>
               <ListItem
@@ -190,5 +193,4 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
       })}
     </List>
   );
-
-}
+};

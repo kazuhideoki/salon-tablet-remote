@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Grid,
   CardActionArea,
@@ -20,7 +20,6 @@ import { TArticles } from "../../../Store/Types";
 import { ThemeContext } from "../../../Store/ThemeContext";
 
 const useStyles = makeStyles((theme) => {
-
   const themes = React.useContext(ThemeContext);
 
   // 画像にかかるpaddingはここで決める
@@ -53,7 +52,9 @@ const useStyles = makeStyles((theme) => {
     thumbnail: {
       display: "block",
       width: "100%",
-      height: `calc((${themes.pMain.height(themes.margin)}) / 2 - ${itemPadding * 2}px)`,
+      height: `calc((${themes.pMain.height(
+        themes.margin
+      )}) / 2 - ${itemPadding * 2}px)`,
       objectFit: "cover",
       marginRight: "auto",
       marginLeft: "auto",
@@ -65,80 +66,83 @@ const useStyles = makeStyles((theme) => {
       left: theme.spacing(4),
     },
   });
-})
+});
 
 export const displayArticlesGrid6Jsx = (
   props: TUseMainProps,
   classes: TMainClasses,
   StyledCardContent: any
 ) => {
-  const classesGrid6 = useStyles()
+  const classesGrid6 = useStyles();
 
-  const row = (articles: TArticles, row2: boolean) => articles.map((value, key: number) => {
-
-    return (
-      <Grid
-        item
-        key={key}
-        // 投稿済みか下書きかで見た目を変える
-        className={`${classesGrid6.gridItem}
+  const row = (articles: TArticles, row2: boolean) =>
+    articles.map((value, key: number) => {
+      return (
+        <Grid
+          item
+          key={key}
+          // 投稿済みか下書きかで見た目を変える
+          className={`${classesGrid6.gridItem}
             ${!value.is_published ? classes.itemIsDraft : ""}
           `}
-      >
-        <CardActionArea
-          className={classesGrid6.cardActionArea}
-          onClick={() =>
-            props.dispatchAppState({
-              type: "OPEN_ARTICLE_MODAL",
-              payload: row2 ? key + 3 : key,
-            })
-          }
-          component="div"
         >
-          <Card className={classes.card}>
-            <StyledCardContent
-              className={`${classes.cardContent} ${classesGrid6.cardContent}`}
-            >
-              {props.isSetting ? (
-                <EditButtonsBox className={classes.editButtonsBox}>
-                  <UpdateButton onClick={props.onClickUpdate} value={value} />
-                  <DeleteButton
-                    onClick={props.deleteArticle}
-                    value={value.article_id}
+          <CardActionArea
+            className={classesGrid6.cardActionArea}
+            onClick={() =>
+              props.dispatchAppState({
+                type: "OPEN_ARTICLE_MODAL",
+                payload: row2 ? key + 3 : key,
+              })
+            }
+            component="div"
+          >
+            <Card className={classes.card}>
+              <StyledCardContent
+                className={`${classes.cardContent} ${classesGrid6.cardContent}`}
+              >
+                {props.isSetting ? (
+                  <EditButtonsBox
+                    className={classes.editButtonsBox}
+                    update
+                    updateProps={{ onClick: props.onClickUpdate, value: value }}
+                    delete
+                    deleteProps={{
+                      onClick: props.deleteArticle,
+                      value: value.article_id,
+                    }}
                   />
-                </EditButtonsBox>
-              ) : null}
-              {showDataType(value.data_type, classes.showDataType)}
+                ) : null}
+                {showDataType(value.data_type, classes.showDataType)}
 
-              <div className={classes.thumbnailDiv}>
-                {props.loading ? (
-                  <Skeleton
-                    variant="rect"
-                    className={classesGrid6.thumbnail}
-                    style={{ marginBottom: "32px" }}
-                  />
-                ) : value.article_img.length ? (
-                  <img
-                    className={`p-main-thumbnail-grid6 ${classesGrid6.thumbnail}`}
-                    src={value.article_img}
-                  />
-                ) : (
-                  <div
-                    className={`p-main-thumbnail-grid6 ${classesGrid6.thumbnail}`}
-                  ></div>
-                )}
-                {props.loading ? null : (
-                  <Typography
-                    variant="h5"
-                    component="h2"
-                    className={classes.title}
-                  >
-                    {props.loading ? null : <>{value.title}</>}
-                  </Typography>
-                )}
-              </div>
-            </StyledCardContent>
-            {/* 
+                <div className={classes.thumbnailDiv}>
+                  {props.loading ? (
+                    <Skeleton
+                      variant="rect"
+                      className={classesGrid6.thumbnail}
+                      style={{ marginBottom: "32px" }}
+                    />
+                  ) : value.article_img.length ? (
+                    <img
+                      className={`p-main-thumbnail-grid6 ${classesGrid6.thumbnail}`}
+                      src={value.article_img}
+                    />
+                  ) : (
+                    <div
+                      className={`p-main-thumbnail-grid6 ${classesGrid6.thumbnail}`}
+                    ></div>
+                  )}
+                  {props.loading ? null : (
+                    <Typography
+                      variant="h5"
+                      component="h2"
+                      className={classes.title}
+                    >
+                      {props.loading ? null : <>{value.title}</>}
+                    </Typography>
+                  )}
+                </div>
+              </StyledCardContent>
+              {/* 
             {props.loading ? null : (
               <Button
                 // エラーが出る、表示がバグる原因かもしれないのでcomponent指定してみた。
@@ -151,18 +155,18 @@ export const displayArticlesGrid6Jsx = (
                 Read
               </Button>
             )} */}
-          </Card>
-        </CardActionArea>
-      </Grid>
-    );
-  });
+            </Card>
+          </CardActionArea>
+        </Grid>
+      );
+    });
 
   const row1Articles = props.articles.filter((value, index) => {
-    return index < 3
-  })
+    return index < 3;
+  });
   const row2Articles = props.articles.filter((value, index) => {
-    return index >= 3
-  })
+    return index >= 3;
+  });
 
   return (
     <>
@@ -188,4 +192,4 @@ export const displayArticlesGrid6Jsx = (
       </Grid>
     </>
   );
-}
+};

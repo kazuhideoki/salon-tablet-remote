@@ -7,9 +7,19 @@ import {
   Fade,
 } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
+import { SwitchOrderButton } from "./SwitchOrderButton";
+import { TUseSwitchOrders } from "../../../ActionCreator/footerItems/useSwitchOrder";
+import { UpdateButton, TUpdateButton } from "./UpdateButton";
+import { DeleteButton, TDeleteButton } from "./DeleteButton";
 
-type props = {
+type Props = {
   className?: string;
+  update?: boolean
+  updateProps?: TUpdateButton
+  delete?: boolean;
+  deleteProps?: TDeleteButton
+  switch?: boolean
+  switchProps?: TUseSwitchOrders
 };
 
 const useStyles = makeStyles((theme) =>
@@ -33,13 +43,16 @@ export const StyledIconButtonEditButton = withStyles({
   },
 })(IconButton);
 
-export const EditButtonsBox: React.FC<props> = (props) => {
+export const EditButtonsBox: React.FC<Props> = (props) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(false);
 
-  const onClickHandle = () => {
-    setChecked(!checked);
+  const openBox = () => {
+    setChecked(true);
   };
+  const closeBox = () => {
+    setChecked(false)
+  }
 
   const Children = props.children
 
@@ -47,14 +60,23 @@ export const EditButtonsBox: React.FC<props> = (props) => {
     <>
       <div className={`${classes.root} ${props.className}`}>
         {checked ? null : (
-          <IconButton onClick={() => onClickHandle()}>
+          <IconButton onClick={() => openBox()}>
             <MoreVert />
           </IconButton>
         )}
         {checked ? (
           <Fade in={checked}>
-            <div onClick={() => onClickHandle()}>
-              {props.children}
+            <div>
+              {/* {props.children} */}
+              {props.switch ? (
+                <SwitchOrderButton {...props.switchProps} closeBox={closeBox} />
+              ) : null}
+              {props.update ? (
+                <UpdateButton {...props.updateProps} closeBox={closeBox} />
+              ) : null}
+              {props.delete ? (
+                <DeleteButton {...props.deleteProps} closeBox={closeBox} />
+              ) : null}
             </div>
           </Fade>
         ) : null}

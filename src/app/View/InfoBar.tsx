@@ -145,9 +145,7 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
          return (
            <div className={`${classes.root} ${props.className}`}>
              {props.isSetting ? (
-               <EditButtonsBox className={classes.editButtonsBox}>
-                 <UpdateButton onClick={props.handleOnClick} />
-               </EditButtonsBox>
+               <EditButtonsBox className={classes.editButtonsBox} update updateProps={{onClick: props.handleOnClick}}/>
              ) : null}
              {displayInfoBar}
            </div>
