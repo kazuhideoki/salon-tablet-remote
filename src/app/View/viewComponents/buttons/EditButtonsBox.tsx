@@ -49,7 +49,8 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(props.show ? true : false);
 
-  const openBox = () => {
+  const openBox = (e) => {
+    e.stopPropagation();
     if(props.show !== true) setChecked(true);
   };
   const closeBox = () => {
@@ -60,7 +61,7 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
     <>
       <div className={`${classes.root} ${props.className} ${props.classNameButtons}`}>
         {checked ? null : (
-          <IconButton onClick={() => openBox()}>
+          <IconButton onClick={(e) => openBox(e)}>
             <MoreVert />
           </IconButton>
         )}
