@@ -1,28 +1,16 @@
 import React from "react";
 import {
   Grid,
-  Card,
-  CardActionArea,
   CardContent,
-  Typography,
   makeStyles,
   createStyles,
   withStyles,
-  Button,
 } from "@material-ui/core";
-import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
-import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
 import { Store } from "../../Store/Store";
 import {
   useDeleteArticle,
 } from "../../ActionCreator/articles/useDeleteArticle";
-import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
-import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
-import { SelectedTags } from "./components/SelectedTags";
-import { PlayArrowRounded } from "@material-ui/icons";
 import { TArticle } from "../../Store/Types";
-import { Skeleton } from "@material-ui/lab";
-import { showDataType } from "./components/showDataType";
 import { displayArticlesScrollJsx } from "./components/displayArticlesScrollJsx";
 import { displayArticlesGrid6Jsx } from "./components/displayArticlesGrid6Jsx";
 import { displayInstagramMediasJsx } from "./components/displayInstagramMediasJsx";
@@ -77,7 +65,7 @@ const useStyles = makeStyles((theme) => {
       height: "100%",
     },
     rootGrid6: {
-      overflowY: 'hidden',
+      overflowY: "hidden",
     },
     gridItem: {
       position: "relative",
@@ -100,8 +88,8 @@ const useStyles = makeStyles((theme) => {
     },
     editButtonsBox: {
       position: "absolute",
-      top: 0,
-      right: 0,
+      top: theme.spacing(2),
+      right: theme.spacing(2),
 
       zIndex: 10,
     },
@@ -165,7 +153,6 @@ const useStyles = makeStyles((theme) => {
       right: theme.spacing(3),
       left: theme.spacing(3),
     },
-    
   });
 
 })

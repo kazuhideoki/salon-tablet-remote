@@ -1,7 +1,5 @@
 import { Grid, CardActionArea, Card, Button, Typography } from "@material-ui/core";
 import { EditButtonsBox } from "../../viewComponents/buttons/EditButtonsBox";
-import { DeleteButton } from "../../viewComponents/buttons/DeleteButton";
-import { UpdateButton } from "../../viewComponents/buttons/UpdateButton";
 import { TUseMainProps, TMainClasses } from "../PMain";
 import { showDataType } from "./showDataType";
 import { Skeleton } from "@material-ui/lab";
@@ -19,6 +17,18 @@ export const displayArticlesScrollJsx = (props: TUseMainProps, classes: TMainCla
             ${!value.is_published ? classes.itemIsDraft : ""}
           `}
              >
+               {props.isSetting ? (
+                 <EditButtonsBox
+                   className={classes.editButtonsBox}
+                   update
+                   updateProps={{ onClick: props.onClickUpdate, value: value }}
+                   delete
+                   deleteProps={{
+                     onClick: props.deleteArticle,
+                     value: value.article_id,
+                   }}
+                 />
+               ) : null}
                <CardActionArea
                  className={classes.cardActionArea}
                  onClick={() =>
@@ -31,10 +41,6 @@ export const displayArticlesScrollJsx = (props: TUseMainProps, classes: TMainCla
                >
                  <Card className={classes.card}>
                    <StyledCardContent className={classes.cardContent}>
-                     {props.isSetting ? (
-                       <EditButtonsBox className={classes.editButtonsBox} update updateProps={{onClick: props.onClickUpdate, value: value}} delete deleteProps={{onClick:props.deleteArticle, value: value.article_id}}/>
-                    
-                     ) : null}
                      {showDataType(value.data_type, classes.showDataType)}
 
                      <div className={classes.thumbnailDiv}>

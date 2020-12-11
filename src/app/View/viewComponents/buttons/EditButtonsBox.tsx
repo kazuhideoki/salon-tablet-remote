@@ -5,6 +5,7 @@ import {
   withStyles,
   IconButton,
   Fade,
+  Popover,
 } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
 import { SwitchOrderButton } from "./SwitchOrderButton";
@@ -26,14 +27,8 @@ type Props = {
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      display: "flex",
-      flexWrap: "nowrap",
-      // gap: `${theme.spacing(1)}px`,
-      borderRadius: theme.spacing(3),
-      boxShadow: theme.shadows[3],
-      backgroundColor: "rgba(255,255,255,0.8)",
-      border: "2px solid grey",
+    buttonOnPopover: {
+      display: 'none',
     },
   })
 );
@@ -47,44 +42,47 @@ export const StyledIconButtonEditButton = withStyles({
 
 export const EditButtonsBox: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState(props.show ? true : false);
-
-  const openBox = (e) => {
-    e.stopPropagation();
-    if(props.show !== true) setChecked(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    event.stopPropagation()
+    setAnchorEl(event.currentTarget);
   };
-  const closeBox = () => {
-    if (props.show !== true) setChecked(false);
-  }
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const id = open ? "edit-buttons-box-popover" : undefined;
 
   return (
     <>
-      <div className={`${classes.root} ${props.className} ${props.classNameButtons}`}>
-        {checked ? null : (
-          <IconButton onClick={(e) => openBox(e)}>
-            <MoreVert />
-          </IconButton>
-        )}
-        {checked ? (
-          <Fade in={checked}>
-            <div>
-              {props.switch ? (
-                <SwitchOrderButton {...props.switchProps} closeBox={closeBox} />
-              ) : null}
-              {props.update ? (
-                <UpdateButton {...props.updateProps} closeBox={closeBox} />
-              ) : null}
-              {props.delete ? (
-                <DeleteButton {...props.deleteProps} closeBox={closeBox} />
-              ) : null}
-            </div>
-          </Fade>
-        ) : null}
+      <div
+        className={`${props.className} ${props.classNameButtons}`}
+      >
+        <IconButton
+          aria-describedby={id}
+          onClick={(e) => handleClick(e)}
+        >
+          <MoreVert />
+        </IconButton>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          {props.switch ? <SwitchOrderButton {...props.switchProps} /> : null}
+          {props.update ? <UpdateButton {...props.updateProps} /> : null}
+          {props.delete ? <DeleteButton {...props.deleteProps} /> : null}
+        </Popover>
       </div>
     </>
   );
 };
-
-// EditbuttonsBoxに props渡すだけにする
-// → propsはどのbuttonにするか？隠すか最初から表示するか？
-// → それぞれのonClickを渡す

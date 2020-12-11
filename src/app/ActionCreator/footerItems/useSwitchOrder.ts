@@ -5,7 +5,7 @@ import {
   apiFooterItemsSwitchOrder,
 } from "../../../pages/api/footer_items/switch_order";
 import { Store } from "../../Store/Store";
-import { T_footer_item_id, T_order, T_order_sidebar, FooterItem } from "../../Store/Types";
+import { FooterItem } from "../../Store/Types";
 
 export type TUseSwitchOrders = {
   smaller: FooterItem

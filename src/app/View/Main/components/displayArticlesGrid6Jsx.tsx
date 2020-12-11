@@ -86,6 +86,18 @@ export const displayArticlesGrid6Jsx = (
             ${!value.is_published ? classes.itemIsDraft : ""}
           `}
         >
+          {props.isSetting ? (
+            <EditButtonsBox
+              className={classes.editButtonsBox}
+              update
+              updateProps={{ onClick: props.onClickUpdate, value: value }}
+              delete
+              deleteProps={{
+                onClick: props.deleteArticle,
+                value: value.article_id,
+              }}
+            />
+          ) : null}
           <CardActionArea
             className={classesGrid6.cardActionArea}
             onClick={() =>
@@ -100,18 +112,6 @@ export const displayArticlesGrid6Jsx = (
               <StyledCardContent
                 className={`${classes.cardContent} ${classesGrid6.cardContent}`}
               >
-                {props.isSetting ? (
-                  <EditButtonsBox
-                    className={classes.editButtonsBox}
-                    update
-                    updateProps={{ onClick: props.onClickUpdate, value: value }}
-                    delete
-                    deleteProps={{
-                      onClick: props.deleteArticle,
-                      value: value.article_id,
-                    }}
-                  />
-                ) : null}
                 {showDataType(value.data_type, classes.showDataType)}
 
                 <div className={classes.thumbnailDiv}>

@@ -24,7 +24,7 @@ import { SwitchOrderButton } from "../../viewComponents/buttons/SwitchOrderButto
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     listItem: {
-      display: "block",
+      display: "flex",
     },
     listItemText: {
       textOverflow: "ellipsis",
@@ -40,8 +40,9 @@ const useStyles = makeStyles((theme: Theme) => {
       fontStyle: "italic",
     },
     editButtonsBox: {
-      width: "fit-content",
-      marginLeft: "auto",
+      position: "absolute",
+      right: theme.spacing(1),
+      zIndex: 10,
     },
   });
 });
@@ -81,7 +82,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
   type TItemEditButtonsBox = { value: FooterItem; smallerValue: FooterItem };
   const ItemEditButtonsBox = ({ value, smallerValue }: TItemEditButtonsBox) => (
     <>
-      <br />
+      {/* <br /> */}
       <EditButtonsBox
         className={classes.editButtonsBox}
         switch
@@ -128,7 +129,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
         if (value.on_tap === "modal" || value.on_tap === "google") {
           return (
-            <div key={index}>
+            <div key={index} className={classes.listItem}>
               <ListItem
                 // key={index}
                 button
@@ -164,30 +165,32 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
           (value.on_tap === "appLink" && props.isSetting === true)
         ) {
           return (
-            <>
-              <a
-                href={
-                  value.on_tap === "link" ? value.link_url : value.app_link_url
-                }
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <ListItem key={index} button className={classes.listItem}>
+            <div className={classes.listItem}>
+              <ListItem key={index} button>
+                <a
+                  href={
+                    value.on_tap === "link"
+                      ? value.link_url
+                      : value.app_link_url
+                  }
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   <ListItemIcon>
                     <Icon />
                     <ShowStatus {...value} />
                     {showDataType(value.data_type, "", true)}
                   </ListItemIcon>
                   <ListItemText primary={value.icon_name} />
-                </ListItem>
-              </a>
+                </a>
+              </ListItem>
               {props.isSetting ? (
                 <ItemEditButtonsBox
                   value={value}
                   smallerValue={footerItem[index - 1]}
                 />
               ) : null}
-            </>
+            </div>
           );
         }
       })}

@@ -8,15 +8,8 @@ export type TDeleteButton = {
   onClick: any
   value: any
 }
-
-type Props = TDeleteButton & {
-  closeBox: () => void;
-};
-
-export const DeleteButton = (props: Props) => {
+export const DeleteButton = (props: TDeleteButton) => {
          const handleOnClick = (e) => {
-           e.stopPropagation();
-           props.closeBox();
            props.onClick(props.value);
          };
 

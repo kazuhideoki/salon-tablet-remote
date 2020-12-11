@@ -1,5 +1,4 @@
 import React from 'react'
-import { IconButton, makeStyles, createStyles } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
 import { StyledIconButtonEditButton } from "./EditButtonsBox";
 
@@ -9,20 +8,13 @@ export type TUpdateButton = {
   value?: any;
 }; 
 
-export type Props = TUpdateButton & {
-  closeBox: () => void;
-};
-
-export const UpdateButton = (props: Props) => {
-         // const classes = useStyles()
+export const UpdateButton = (props: TUpdateButton) => {
 
          const handleOnClick = (e) => {
            e.stopPropagation();
            if (props.value) {
-             props.closeBox()
              props.onClick(props.value);
            } else {
-             props.closeBox()
              props.onClick();
            }
          };
