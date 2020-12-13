@@ -1,9 +1,8 @@
 import React from 'react'
 import dynamic from "next/dynamic";
-import { GetServerSideProps } from 'next';
-import { Router } from 'next/router';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { getSession } from '../../lib/auth/getSession';
+import { SigninForm } from '../../pageComponent/SigninForm';
 // クライアント側でないと動かないため
 const FirebaseAuth = dynamic(() => import('../../lib/auth/FirebaseAuth'), {
   ssr: false,
@@ -32,7 +31,8 @@ const signin = () => {
   return (
     <div className={classes.root}>
       <div className={classes.authBox}>
-        <FirebaseAuth />
+        {/* <FirebaseAuth /> */}
+        <SigninForm/>
       </div>
     </div>
   )
