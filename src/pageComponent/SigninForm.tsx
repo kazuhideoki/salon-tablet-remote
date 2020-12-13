@@ -6,12 +6,12 @@ import "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from "nookies";
 
-
 initFirebase();
 
 export const SigninForm = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const passwordFieldRef = React.useRef(null);
   const router = useRouter()
 
   const handleSubmit = async () => {
@@ -52,12 +52,16 @@ export const SigninForm = () => {
         name="email"
         label="メールアドレス"
         id="email"
-        // onKeyPress={(e) => {
-        //   if (e.key == "Enter") {
-        //     e.preventDefault();
-        //     handleSubmit();
-        //   }
-        // }}
+        onKeyPress={(e) => {
+          if (e.key == "Enter") {
+            console.log('enter pressed');
+            console.log(passwordFieldRef);
+            
+            e.preventDefault();
+            passwordFieldRef.current.focus()
+
+          }
+        }}
       />
       <Typography variant="body1" component="p">
         パスワード
@@ -69,6 +73,7 @@ export const SigninForm = () => {
         label="パスワード"
         type='password'
         id="password"
+        inputRef={passwordFieldRef}
 
         onKeyPress={(e) => {
           if (e.key == "Enter") {
