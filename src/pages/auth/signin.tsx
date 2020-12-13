@@ -2,13 +2,18 @@ import React from 'react'
 import dynamic from "next/dynamic";
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { getSession } from '../../lib/auth/getSession';
-import { SigninForm } from '../../pageComponent/SigninForm';
+import { AuthForm } from "../../pageComponent/AuthFrom";
 // クライアント側でないと動かないため
 const FirebaseAuth = dynamic(() => import('../../lib/auth/FirebaseAuth'), {
   ssr: false,
 });
+import firebase from "firebase/app";
+import "firebase/auth";
+import initFirebase from "../../lib/auth/initFirebase";
 
-const useStyles = makeStyles((theme: Theme) => {
+
+
+export const useStylesAuthForm = makeStyles((theme: Theme) => {
 
     return createStyles({
       root: {
@@ -24,18 +29,21 @@ const useStyles = makeStyles((theme: Theme) => {
     });
 })
 
+initFirebase();
 
 
-const signin = () => {
-  const classes = useStyles()
+const handleSingin = (email: string, password: string) => firebase.auth().signInWithEmailAndPassword(email, password)
+
+const Signin = () => {
+  const classes = useStylesAuthForm();
   return (
     <div className={classes.root}>
       <div className={classes.authBox}>
         {/* <FirebaseAuth /> */}
-        <SigninForm/>
+        <AuthForm header="サインイン" handleAuth={handleSingin} />
       </div>
     </div>
-  )
+  );
 }
 
 export const getServerSideProps =  async (context) => {
@@ -48,4 +56,4 @@ export const getServerSideProps =  async (context) => {
   return { props: {}}
 }
 
-export default signin
+export default Signin;

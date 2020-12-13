@@ -8,7 +8,12 @@ import nookies from "nookies";
 
 initFirebase();
 
-export const SigninForm = () => {
+type TAuthForm = {
+  header: string
+  handleAuth: (email: string, password: string) => Promise<firebase.auth.UserCredential>
+}
+
+export const AuthForm:React.FC<TAuthForm> = (props) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const passwordFieldRef = React.useRef(null);
@@ -16,9 +21,7 @@ export const SigninForm = () => {
 
   const handleSubmit = async () => {
     try {
-    const user = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
+    const user = await props.handleAuth(email, password)
     
     const token = await user.user.getIdToken();
 
@@ -40,8 +43,8 @@ export const SigninForm = () => {
 
   return (
     <div>
-      <Typography variant="h3" component="h1">
-        サインイン
+      <Typography variant="h4" component="h1">
+        {props.header}
       </Typography>
       <Typography variant="body1" component="p">
         メールアドレス

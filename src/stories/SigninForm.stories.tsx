@@ -1,14 +1,12 @@
 import React from 'react';
-import { SigninForm } from '../pageComponent/SigninForm';
+import { AuthForm } from "../pageComponent/AuthFrom";
 export default {
-  title: 'SigninForm',
-  component: SigninForm,
+  title: "AuthForm",
+  component: AuthForm,
 };
 
 
 export const Normal = () => {
 
-  return (
-    <SigninForm />
-  )
+  return <AuthForm />;
 }
