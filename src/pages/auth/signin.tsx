@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from "next/dynamic";
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, Link, makeStyles, Theme, Typography } from '@material-ui/core';
 import { getSession } from '../../lib/auth/getSession';
 import { AuthForm } from "../../pageComponent/AuthFrom";
 // クライアント側でないと動かないため
@@ -40,7 +40,13 @@ const Signin = () => {
     <div className={classes.root}>
       <div className={classes.authBox}>
         {/* <FirebaseAuth /> */}
-        <AuthForm header="サインイン" handleAuth={handleSingin} />
+        <AuthForm header="サインイン" button='サインイン' handleAuth={handleSingin} />
+      <Typography variant='subtitle1' component='p'>
+        アカウントをお持ちでないですか？
+        <Link href='/auth/signup'>
+          Sing up
+        </Link>
+      </Typography>
       </div>
     </div>
   );

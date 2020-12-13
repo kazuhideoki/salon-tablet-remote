@@ -86,7 +86,7 @@ export const TopPage: React.FC<Props> = (props) => {
           <Typography variant='h5' component='h1' align='center' className={classes.h1}>
             「美容室」<br/>×<br/>「タブレット」<br/>をより良く
           </Typography>
-          <Link href="/auth/signin">
+          <Link href="/auth/signup">
             <a className={classes.startButtonA}>
             <PlainButton className={classes.startButton} variant='text'>
               無料で始める

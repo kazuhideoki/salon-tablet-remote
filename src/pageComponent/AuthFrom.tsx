@@ -10,6 +10,7 @@ initFirebase();
 
 type TAuthForm = {
   header: string
+  button: string
   handleAuth: (email: string, password: string) => Promise<firebase.auth.UserCredential>
 }
 
@@ -86,7 +87,7 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
         }}
       />
       <br/>
-      <Button onClick={() => handleSubmit()}>サインイン</Button>
+      <Button onClick={() => handleSubmit()}>{props.button}</Button>
     </div>
   );
 };

@@ -4,6 +4,8 @@ import { useStylesAuthForm } from './signin';
 import firebase from "firebase/app";
 import "firebase/auth";
 import initFirebase from "../../lib/auth/initFirebase";
+import { Typography } from '@material-ui/core';
+import Link from 'next/link';
 
 initFirebase()
 
@@ -17,7 +19,17 @@ export const Signup = () => {
     <div className={classes.root}>
       <div className={classes.authBox}>
         {/* <FirebaseAuth /> */}
-        <AuthForm header="サインアップ" handleAuth={handleSingup} />
+        <AuthForm
+          header="サインアップ"
+          button="アカウントを作成する"
+          handleAuth={handleSingup}
+        />
+        <Typography variant='subtitle1' component='p'>
+        アカウントをお持ちの方はこちら
+        <Link href='/auth/signin'>
+          Sing in
+        </Link>
+      </Typography>
       </div>
     </div>
   );

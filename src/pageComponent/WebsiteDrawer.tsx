@@ -27,7 +27,7 @@ export const pageList = [
          ["サンプル Tablet", "/sample/tablet", <Tablet />],
          ["サンプル Mobile(製作中)", "/sample/mobile", <MobileFriendly />],
          ["FAQ(製作中)", "/faq", <FormatQuote />],
-         ["サインイン", 'auth/signin', <AccountCircle/>]
+         ["サインイン", '/auth/signin', <AccountCircle/>]
        ];
 
 type Props = {
