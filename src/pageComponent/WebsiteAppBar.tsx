@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: 'none',
     },
     // トップページ以外ではAppBarはスクロールとともに隠れるように、sampleとかあるので
-    appBarNotTop: {
+    appBarStatic: {
       position: 'static',
     },
     menuButton: {
@@ -47,9 +47,20 @@ export default function WebsiteAppBar({onClick, id}) {
   // iframe内でエラーになるので、ない場合は空文字に
   const header = headerStringArray.length ? headerStringArray[0][0] : ''
 
+  const isStatic = (slug: string) => {
+    if (slug === "/" || slug === "/auth/signin" || slug === "/auth/signup") {
+      return false
+    }
+    return true
+  }
+
   return (
     <div className={classes.root} id={id}>
-      <AppBar color='transparent' className={`${classes.appBarRoot} ${slug !== '/' && classes.appBarNotTop}`}>
+      <AppBar
+        color="transparent"
+        className={`${classes.appBarRoot} ${isStatic(slug) ?
+          classes.appBarStatic : ''}`}
+      >
         <Toolbar>
           <IconButton
             edge="start"

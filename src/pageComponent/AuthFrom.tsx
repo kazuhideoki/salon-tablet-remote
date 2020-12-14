@@ -20,15 +20,19 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: 300,
+      padding: theme.spacing(3),
     },
     header: {
-      marginBottom: theme.spacing(4)
+      marginBottom: theme.spacing(4),
     },
     input: {
-      marginBottom: theme.spacing(3)
-    }
+      marginBottom: theme.spacing(3),
+    },
+    button: {
+      marginBottom: theme.spacing(3),
+    },
   })
-)
+);
 
 type TAuthForm = {
   header: string
@@ -66,47 +70,51 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
   };
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h4" component="h1" className={classes.header}>
-        {props.header}
-      </Typography>
-      <TextField
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className={classes.input}
-        fullWidth
-        name="email"
-        label="メールアドレス"
-        id="email"
-        onKeyPress={(e) => {
-          if (e.key == "Enter") {
-            e.preventDefault();
-            passwordFieldRef.current.focus();
-          }
-        }}
-      />
-      <br />
-      <TextField
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className={classes.input}
-        fullWidth
-        name="password"
-        label="パスワード"
-        type="password"
-        id="password"
-        inputRef={passwordFieldRef}
-        onKeyPress={(e) => {
-          if (e.key == "Enter") {
-            e.preventDefault();
-            handleSubmit();
-          }
-        }}
-      />
-      <br />
-      <Button variant="outlined" onClick={() => handleSubmit()}>
-        {props.button}
-      </Button>
+    <div className={classes.root} >
+        <Typography variant="h4" component="h1" className={classes.header}>
+          {props.header}
+        </Typography>
+        <TextField
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={classes.input}
+          fullWidth
+          name="email"
+          label="メールアドレス"
+          id="email"
+          onKeyPress={(e) => {
+            if (e.key == "Enter") {
+              e.preventDefault();
+              passwordFieldRef.current.focus();
+            }
+          }}
+        />
+        <br />
+        <TextField
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={classes.input}
+          fullWidth
+          name="password"
+          label="パスワード"
+          type="password"
+          id="password"
+          inputRef={passwordFieldRef}
+          onKeyPress={(e) => {
+            if (e.key == "Enter") {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }}
+        />
+        <br />
+        <Button
+          className={classes.button}
+          variant="outlined"
+          onClick={() => handleSubmit()}
+        >
+          {props.button}
+        </Button>
     </div>
   );
 };
