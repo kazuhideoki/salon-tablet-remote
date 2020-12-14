@@ -10,8 +10,7 @@ var FormData = require("form-data");
 const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.query.error) {
-    console.log();
-    ("インスタグラムアカウントの接続ができませんでした。");
+    console.log("インスタグラムアカウントの接続ができませんでした。");
     fetch(`${server}`)
   }
 
@@ -65,8 +64,6 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
           // SALON TABLETのuser_id
           user_id: user_id,
         };
-
-        console.log(JSON.stringify(params));
 
         // DBに保存する
         const data3 = await db(

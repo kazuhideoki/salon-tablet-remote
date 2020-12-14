@@ -59,9 +59,6 @@ const font = async (req: NextApiRequest, res: NextApiResponse) => {
           [theme_font, user_id]
         );
 
-
-      console.log("theme/fontの返り値は " + JSON.stringify(data));
-
       const returnData: T_user_info_theme_font_return = {
         rawData: data,
       };

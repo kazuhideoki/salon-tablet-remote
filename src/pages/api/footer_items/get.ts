@@ -32,7 +32,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // footer_itemsのorderが正しく連番になっているかチェックする
     const isCorrectOrders = checkOrders(data)
-    console.log("isCorrectOrdersは " + isCorrectOrders);
     
     // もしorderが正しくなかったら、直す処理
     if (isCorrectOrders === false) {
@@ -40,7 +39,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const isCorrectOrdersSidebar = checkOrdersSidebar(data)
-    console.log("isCorrectOrdersSidebarは " + isCorrectOrdersSidebar);
 
     if (isCorrectOrdersSidebar === false) {
       correctOrdersSidebar(data)

@@ -30,11 +30,6 @@ test("generateCorrectOrdersSidebarParamsの返り値が正しい", () => {
     correctedData,
     //@ts-ignore
   } = generateCorrectOrdersSidebarParams(footerItems);
-  console.log(
-    "generateCorrectOrdersSidebarParamsは" +
-    //@ts-ignore
-      generateCorrectOrdersSidebarParams(footerItems)
-  );
   
   expect(idParam[2]).toBe(10);
 

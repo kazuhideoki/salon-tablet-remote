@@ -23,17 +23,13 @@ const PublicPage = (props: IndexProps) => {
 
 export const getServerSideProps: GetServerSideProps = async ({req, res, query}) => {
   const slug = req.url
-  // console.log(slug);
   
   const slicedSlug = slug.replace("/public_page/", "");
-  console.log(slicedSlug);
   // サンプルページのiframeでで間違い半手せれてしまうため?以降のqueryとる
   const SlugArray = slicedSlug.split('?')
-  console.log(SlugArray);
 
   const ua = new parser.UAParser(req.headers["user-agent"]);
   const device = ua.getDevice().type;
-  console.log(device);
   
   // slugがDBにあるかどうかチェックして、「表示させているか？」「slug」を返す
   const userInfo = await getUserInfoFromSlug(SlugArray[0]);

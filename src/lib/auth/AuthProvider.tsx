@@ -22,10 +22,9 @@ export function AuthProvider({ children }: any) {
   
   const signout = (path: string) => {
     firebase.auth().signOut().then(function() {
-      // Sign-out successful.
       router.push(path)
     }).catch(function(error) {
-      // An error happened.
+      
     });
   }
 
@@ -33,16 +32,12 @@ export function AuthProvider({ children }: any) {
     // tokenが変わるのをチェックするリスナーを登録する。
     //@ts-ignore
     return firebaseClient.auth().onIdTokenChanged(async (user) => {
-      console.log(`auth changed`);
-      console.log(user);
       
       if (!user) {
         setUser(null);
         nookies.set(undefined, 'st_token', '', {});
         return;
       }
-
-      console.log('user.emailVerifiedは ' + JSON.stringify(user.emailVerified))
 
       const token = await user.getIdToken();
       setUser(user);

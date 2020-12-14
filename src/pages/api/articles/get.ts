@@ -88,7 +88,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         `SELECT user_id FROM articles WHERE user_id = ${userId} ` +
         getPublishedOnly +
         getTagedPages;
-      console.log(query2);
 
       const data2: any = await db(query2);  
 

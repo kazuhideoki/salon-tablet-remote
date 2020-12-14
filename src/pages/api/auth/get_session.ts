@@ -25,8 +25,6 @@ const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
         .auth()
         .verifyIdToken(st_token);
 
-      console.log("get_sessionのtokenは " + token);
-
       const returnData: T_auth_get_session_return = {
         email: token.email,
         emailVerified: token.email_verified,

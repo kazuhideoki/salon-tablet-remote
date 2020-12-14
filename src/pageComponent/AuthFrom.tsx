@@ -1,12 +1,34 @@
-import { Button, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  makeStyles,
+  TextField,
+  Typography,
+  Theme,
+  createStyles,
+} from "@material-ui/core";
 import React from "react";
 import initFirebase from "../lib/auth/initFirebase";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from "nookies";
+import classes from "*.module.css";
 
 initFirebase();
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: 300,
+    },
+    header: {
+      marginBottom: theme.spacing(4)
+    },
+    input: {
+      marginBottom: theme.spacing(3)
+    }
+  })
+)
 
 type TAuthForm = {
   header: string
@@ -15,6 +37,7 @@ type TAuthForm = {
 }
 
 export const AuthForm:React.FC<TAuthForm> = (props) => {
+  const classes = useStyles()
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const passwordFieldRef = React.useRef(null);
@@ -43,42 +66,36 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
   };
 
   return (
-    <div>
-      <Typography variant="h4" component="h1">
+    <div className={classes.root}>
+      <Typography variant="h4" component="h1" className={classes.header}>
         {props.header}
-      </Typography>
-      <Typography variant="body1" component="p">
-        メールアドレス
       </Typography>
       <TextField
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        className={classes.input}
+        fullWidth
         name="email"
         label="メールアドレス"
         id="email"
         onKeyPress={(e) => {
           if (e.key == "Enter") {
-            console.log('enter pressed');
-            console.log(passwordFieldRef);
-            
             e.preventDefault();
-            passwordFieldRef.current.focus()
-
+            passwordFieldRef.current.focus();
           }
         }}
       />
-      <Typography variant="body1" component="p">
-        パスワード
-      </Typography>
+      <br />
       <TextField
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className={classes.input}
+        fullWidth
         name="password"
         label="パスワード"
-        type='password'
+        type="password"
         id="password"
         inputRef={passwordFieldRef}
-
         onKeyPress={(e) => {
           if (e.key == "Enter") {
             e.preventDefault();
@@ -86,8 +103,10 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
           }
         }}
       />
-      <br/>
-      <Button onClick={() => handleSubmit()}>{props.button}</Button>
+      <br />
+      <Button variant="outlined" onClick={() => handleSubmit()}>
+        {props.button}
+      </Button>
     </div>
   );
 };
