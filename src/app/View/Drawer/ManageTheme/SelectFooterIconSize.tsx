@@ -24,9 +24,9 @@ export const SelectFooterIconSize = (props: Props) => {
         className={props.className}
       >
         {//@ts-ignore
-        sizes.map((value) => {
+        sizes.map((value, index) => {
           return (
-            <MenuItem value={value[1]}>
+            <MenuItem key={index} value={value[1]}>
                 {value[0]}
             </MenuItem>
           );

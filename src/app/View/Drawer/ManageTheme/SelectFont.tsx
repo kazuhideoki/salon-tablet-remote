@@ -31,9 +31,9 @@ export const SelectFont = (props: Props) => {
       >
         
         {//@ts-ignore
-        props.fonts.map((value) => {
+        props.fonts.map((value, index) => {
           return (
-            <MenuItem value={value[0]}>
+            <MenuItem key={index} value={value[0]}>
               <span style={{ fontFamily: value[0] }}>
                 
                 {value[1] || value[0]}

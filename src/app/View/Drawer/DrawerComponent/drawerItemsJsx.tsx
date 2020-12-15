@@ -165,8 +165,8 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
           (value.on_tap === "appLink" && props.isSetting === true)
         ) {
           return (
-            <div className={classes.listItem}>
-              <ListItem key={index} button>
+            <div key={index} className={classes.listItem}>
+              <ListItem button>
                 <a
                   href={
                     value.on_tap === "link"

@@ -18,6 +18,8 @@ export const useGetInstagramMedias = () => {
 
     if (data.err === true) {
       alert("取得できませんでした");
+       alert('Instagram')
+      console.log('data.messageは ' + data.data.message)
       dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {
       dispatchAppState({
