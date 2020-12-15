@@ -8,5 +8,5 @@ export default {
 
 export const Normal = () => {
 
-  return <AuthForm />;
+  // return <AuthForm />;
 }

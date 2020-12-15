@@ -28,7 +28,7 @@ const Signup = () => {
           <Typography variant="subtitle1" component="p">
             アカウントをお持ちの方はこちら
             <br />
-            <Link href="/auth/signin">サインイン</Link>
+            <Link href="/auth/signin"><a>サインイン</a></Link>
           </Typography>
         </div>
       </div>

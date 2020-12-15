@@ -1,24 +1,13 @@
-## Getting Started
+## SALON TABLET とは
 
-First, run the development server:
+美容室、タブレットp専用ウェブサービスです。
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+サービスに登録したら、ホーム画面に追加して利用します。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+以下の機能を有しています。
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on ZEIT Now
+- 記事の読み込み、投稿、編集、削除
+- インスタグラムの投稿の読み込み
+- メニュー表、wifiパスワード、Google検索など美容師が営業中によく使用するアイテムの登録
+- 開発者へのフィードバックの投稿
+- テーマの変更（作成中）

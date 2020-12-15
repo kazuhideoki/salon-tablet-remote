@@ -75,7 +75,7 @@ const Signin = () => {
           />
           <Typography variant="subtitle1" component="p">
             アカウントをお持ちでないですか？<br/>
-            <Link href="/auth/signup">無料でアカウントを作る</Link>
+            <Link href="/auth/signup"><a>無料でアカウントを作る</a></Link>
           </Typography>
         </div>
       </div>
