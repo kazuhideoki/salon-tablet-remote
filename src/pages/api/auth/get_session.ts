@@ -25,13 +25,14 @@ const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
         .auth()
         .verifyIdToken(st_token);
 
+        console.log('tokenは ' + token)
+
       const returnData: T_auth_get_session_return = {
         email: token.email,
         emailVerified: token.email_verified,
       };
       res.status(200).json(returnData);
     } catch (err) {
-      console.log("/auth/get_sessionのエラーは " + JSON.stringify(err));
 
       res.status(500).json({ err: true, data: { message: err.message } });
       

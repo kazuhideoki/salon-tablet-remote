@@ -1,11 +1,12 @@
 import React from 'react'
 import dynamic from "next/dynamic";
-import { createStyles, Link, makeStyles, Theme, Typography, useMediaQuery } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, Typography, useMediaQuery } from '@material-ui/core';
 import { getSession } from '../../lib/auth/getSession';
 import { AuthForm } from "../../pageComponent/AuthFrom";
 import firebase from "firebase/app";
 import "firebase/auth";
 import initFirebase from "../../lib/auth/initFirebase";
+import Link from 'next/link';
 
 export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((theme: Theme) => {
 
@@ -14,7 +15,7 @@ export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((them
         position: "absolute",
         backgroundImage: "url('/images/feature_img_signin.jpg')",
         backgroundSize: "cover",
-        backgroundPosition: isTabletPortrait ? "center" : 'right',
+        backgroundPosition: 'center',
         width: "100%",
         height: "100%",
         "&::before": {
@@ -31,7 +32,7 @@ export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((them
       authBoxContainer: {
         display: "flex",
         justifyContent: "center",
-        maxWidth: 500,
+        maxWidth: 450,
         position: "absolute",
         top: 0,
         bottom: 0,
@@ -41,12 +42,12 @@ export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((them
         marginRight: isTabletPortrait ? "auto" : 0,
       },
       authBox: {
-        backgroundColor: "rgba(255, 255, 255, 0.6)",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
         margin: "auto",
         borderRadius: theme.spacing(2),
         padding: theme.spacing(3),
-        maxWidth: 350,
-        maxHeight: 420,
+        maxWidth: 300,
+        maxHeight: 450,
         alignItems: "center",
         position: "absolute",
         top: 0,

@@ -20,7 +20,7 @@ const Signup = () => {
       <div className={classes.authBoxContainer}>
         <div className={classes.authBox}>
           <AuthForm
-            header="サインアップ"
+            header="新規登録"
             button="アカウントを作成する"
             buttonColor='primary'
             handleAuth={handleSingup}

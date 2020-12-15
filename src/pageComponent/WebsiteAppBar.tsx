@@ -9,18 +9,20 @@ import { Facebook } from "@material-ui/icons";
 import { pageList } from "./WebsiteDrawer";
 import { useRouter } from "next/router";
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
     },
     appBarRoot: {
-      boxShadow: 'none',
+      boxShadow: "none",
     },
     // トップページ以外ではAppBarはスクロールとともに隠れるように、sampleとかあるので
     appBarStatic: {
-      position: 'static',
+      position: "static",
+    },
+    appBarWhite: {
+      backgroundColor: "rgba(255,255,255,0.8)",
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     signin: {
-      textDecoration: 'none',
+      textDecoration: "none",
     },
   })
 );
@@ -47,19 +49,26 @@ export default function WebsiteAppBar({onClick, id}) {
   // iframe内でエラーになるので、ない場合は空文字に
   const header = headerStringArray.length ? headerStringArray[0][0] : ''
 
-  const isStatic = (slug: string) => {
+  const isStatic = () => {
     if (slug === "/" || slug === "/auth/signin" || slug === "/auth/signup") {
       return false
     }
     return true
+  }
+  const isBackgroundWhite = () => {
+    if (slug === '/auth/signin' || slug === '/auth/signup') {
+      return true
+    }
+    return false
   }
 
   return (
     <div className={classes.root} id={id}>
       <AppBar
         color="transparent"
-        className={`${classes.appBarRoot} ${isStatic(slug) ?
-          classes.appBarStatic : ''}`}
+        className={`${classes.appBarRoot} ${
+          isStatic() ? classes.appBarStatic : ""
+        } ${isBackgroundWhite() ? classes.appBarWhite : ""}`}
       >
         <Toolbar>
           <IconButton
@@ -72,7 +81,6 @@ export default function WebsiteAppBar({onClick, id}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            {/* ここをページ名に変えたい */}
             {header}
           </Typography>
           <IconButton>

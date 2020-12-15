@@ -18,17 +18,17 @@ initFirebase();
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: 300,
+      width: 250,
       padding: theme.spacing(3),
     },
     header: {
-      marginBottom: theme.spacing(4),
+      marginBottom: theme.spacing(3),
     },
     input: {
       marginBottom: theme.spacing(3),
     },
     button: {
-      marginBottom: theme.spacing(3),
+      margin: theme.spacing(1,0,3),
     },
   })
 );
@@ -71,7 +71,7 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
 
   return (
     <div className={classes.root} >
-        <Typography variant="h4" component="h1" className={classes.header}>
+        <Typography variant="h5" component="h1" className={classes.header}>
           {props.header}
         </Typography>
         <TextField

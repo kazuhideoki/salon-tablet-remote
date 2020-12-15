@@ -64,7 +64,6 @@ const useStyles = makeStyles((theme) =>
     root: {
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "center",
       alignItems: "center",
       height: "100%",
     },
@@ -86,10 +85,8 @@ const useStyles = makeStyles((theme) =>
       top: theme.spacing(1),
       right: 0,
       left: 0,
-      // display: "flex",
       justifyContent: "center",
       zIndex: 100,
-      // backgroundColor: "rgba(255,255,255,0.8)",
     },
     editButtonsBoxButtons: {
       left: 'auto'
@@ -98,8 +95,6 @@ const useStyles = makeStyles((theme) =>
       position: "absolute",
       top: 48,
       left: 0,
-
-      // zIndex: theme.zIndex.snackbar,
     },
     isSettingIconAndText: {
       margin: "0 20px",
