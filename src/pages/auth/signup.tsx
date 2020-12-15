@@ -9,8 +9,17 @@ import Link from 'next/link';
 
 initFirebase();
 
-const handleSingup = (email: string, password: string) =>
-  firebase.auth().createUserWithEmailAndPassword(email, password);
+const handleSingup = async (email: string, password: string) => {
+  try {
+    await firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  } catch (error) {
+    console.log("handleSingupは " + error);
+  }
+};
 
 const Signup = () => {
   const isTabletPortrait = useMediaQuery("(max-width:800px)");
@@ -22,13 +31,15 @@ const Signup = () => {
           <AuthForm
             header="新規登録"
             button="アカウントを作成する"
-            buttonColor='primary'
+            buttonColor="primary"
             handleAuth={handleSingup}
           />
           <Typography variant="subtitle1" component="p">
             アカウントをお持ちの方はこちら
             <br />
-            <Link href="/auth/signin"><a>サインイン</a></Link>
+            <Link href="/auth/signin">
+              <a>サインイン</a>
+            </Link>
           </Typography>
         </div>
       </div>

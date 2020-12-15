@@ -60,8 +60,18 @@ export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((them
 
 initFirebase();
 
-const handleSingin = (email: string, password: string) => firebase.auth().signInWithEmailAndPassword(email, password)
+const handleSignin = async (email: string, password: string) => {
+  try {
+    await firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  
+    return firebase.auth().signInWithEmailAndPassword(email, password);
 
+  } catch (error) {
+    console.log('handleSigninは ' + error)
+  }
+}
 const Signin = () => {
   const isTabletPortrait = useMediaQuery("(max-width:800px)");
   const classes = useStylesAuthForm(isTabletPortrait)();
@@ -72,11 +82,14 @@ const Signin = () => {
           <AuthForm
             header="サインイン"
             button="サインイン"
-            handleAuth={handleSingin}
+            handleAuth={handleSignin}
           />
           <Typography variant="subtitle1" component="p">
-            アカウントをお持ちでないですか？<br/>
-            <Link href="/auth/signup"><a>無料でアカウントを作る</a></Link>
+            アカウントをお持ちでないですか？
+            <br />
+            <Link href="/auth/signup">
+              <a>無料でアカウントを作る</a>
+            </Link>
           </Typography>
         </div>
       </div>
