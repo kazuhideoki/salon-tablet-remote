@@ -12,7 +12,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from "nookies";
-import classes from "*.module.css";
 
 initFirebase();
 
@@ -37,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type TAuthForm = {
   header: string
   button: string
+  buttonColor?: 'primary'
   handleAuth: (email: string, password: string) => Promise<firebase.auth.UserCredential>
 }
 
@@ -110,7 +110,8 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
         <br />
         <Button
           className={classes.button}
-          variant="outlined"
+          variant="contained"
+          color={props.buttonColor || 'default'}
           onClick={() => handleSubmit()}
         >
           {props.button}

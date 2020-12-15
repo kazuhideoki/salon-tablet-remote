@@ -68,12 +68,6 @@ type Props = { csrfToken: string, providers: any };
 export const TopPage: React.FC<Props> = (props) => {
   const classes = useStyles()
 
-  const [newEmail, setNewEmail] = React.useState('')
-
-  const isMobile = useMediaQuery("(max-width:480px)");
-
- 
-  // const imgFile = isMobile ? 'feature_img_original.jpg' : 'feature_img_lower.jpg'
   const imgFile = 'feature_img_lower.jpg'
 
   return (

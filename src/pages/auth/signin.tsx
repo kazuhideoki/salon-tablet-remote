@@ -3,33 +3,35 @@ import dynamic from "next/dynamic";
 import { createStyles, Link, makeStyles, Theme, Typography, useMediaQuery } from '@material-ui/core';
 import { getSession } from '../../lib/auth/getSession';
 import { AuthForm } from "../../pageComponent/AuthFrom";
-// クライアント側でないと動かないため
-const FirebaseAuth = dynamic(() => import('../../lib/auth/FirebaseAuth'), {
-  ssr: false,
-});
 import firebase from "firebase/app";
 import "firebase/auth";
 import initFirebase from "../../lib/auth/initFirebase";
-import { server } from '../../lib/loadUrl';
-
-
 
 export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((theme: Theme) => {
-
-    // const isTabletPortrait = useMediaQuery("(max-width:800px)");
 
     return createStyles({
       root: {
         position: "absolute",
-        backgroundImage: "url('/images/hair-stylist-combing-womans-hair.jpg')",
+        backgroundImage: "url('/images/feature_img_signin.jpg')",
         backgroundSize: "cover",
+        backgroundPosition: isTabletPortrait ? "center" : 'right',
         width: "100%",
         height: "100%",
+        "&::before": {
+          backgroundColor: 'rgba(0,0,0,0.4)',
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          content: '""',
+  
+        },
       },
       authBoxContainer: {
         display: "flex",
         justifyContent: "center",
-        maxWidth: "600px",
+        maxWidth: 500,
         position: "absolute",
         top: 0,
         bottom: 0,
@@ -40,14 +42,11 @@ export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((them
       },
       authBox: {
         backgroundColor: "rgba(255, 255, 255, 0.6)",
-        // margin: theme.spacing(3),
         margin: "auto",
         borderRadius: theme.spacing(2),
         padding: theme.spacing(3),
-        maxWidth: 380,
+        maxWidth: 350,
         maxHeight: 420,
-        // position: "absolute",
-        // right: 0,
         alignItems: "center",
         position: "absolute",
         top: 0,
@@ -59,7 +58,6 @@ export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((them
 })
 
 initFirebase();
-
 
 const handleSingin = (email: string, password: string) => firebase.auth().signInWithEmailAndPassword(email, password)
 
@@ -76,8 +74,8 @@ const Signin = () => {
             handleAuth={handleSingin}
           />
           <Typography variant="subtitle1" component="p">
-            アカウントをお持ちでないですか？
-            <Link href="/auth/signup">Sing up</Link>
+            アカウントをお持ちでないですか？<br/>
+            <Link href="/auth/signup">無料でアカウントを作る</Link>
           </Typography>
         </div>
       </div>
