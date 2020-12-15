@@ -7,35 +7,37 @@ import { Parallax } from 'react-parallax';
 import { PlainButton } from "./PlainButton";
 
 const useStyles = makeStyles((theme) =>
-createStyles({
+  createStyles({
     featureImgDiv: {
       height: 800,
-      minHeight: '80%',
-      maxHeight: '100%',
+      minHeight: "80%",
+      maxHeight: "100%",
     },
     msgBox: {
       position: "absolute",
       top: "30%",
       left: "15%",
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
     },
     h1: {
-      fontFamily: 'serif',
+      fontFamily: "serif",
       background: "rgba(255,255,255,0.6);",
       padding: theme.spacing(3),
       marginBottom: theme.spacing(3),
+      borderRadius: theme.spacing(2),
     },
     startButtonA: {
-      textDecoration: 'none',
-      display: 'contents',
+      textDecoration: "none",
+      display: "contents",
     },
     startButton: {
-      fontFamily: 'serif',
-      fontSize: '1.5em',
+      fontFamily: "serif",
+      fontSize: "1.5em",
       background: "rgba(255,255,255,0.6);",
-      textDecoration: 'none',
+      textDecoration: "none",
+      borderRadius: theme.spacing(2),
     },
     img: {
       zIndex: 0,
@@ -43,26 +45,23 @@ createStyles({
 
       maxWidth: 1000,
       marginLeft: "calc((-1000px + 100%) / 2)",
-
     },
     mainContents: {
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        maxWidth: 800,
-        objectFit: 'cover',
-        position: 'relative',
-        zIndex: 100,
-
-
-      },
+      marginRight: "auto",
+      marginLeft: "auto",
+      maxWidth: 800,
+      objectFit: "cover",
+      position: "relative",
+      zIndex: 100,
+    },
     topPageParagraph: {
-      margin: theme.spacing(8,0),
+      margin: theme.spacing(8, 0),
     },
     signInForm: {
       margin: theme.spacing(2),
     },
-  }
-))
+  })
+);
 
 type Props = { csrfToken: string, providers: any };
 

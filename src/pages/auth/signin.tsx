@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from "next/dynamic";
-import { createStyles, Link, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, Link, makeStyles, Theme, Typography, useMediaQuery } from '@material-ui/core';
 import { getSession } from '../../lib/auth/getSession';
 import { AuthForm } from "../../pageComponent/AuthFrom";
 // クライアント側でないと動かないため
@@ -14,7 +14,9 @@ import { server } from '../../lib/loadUrl';
 
 
 
-export const useStylesAuthForm = makeStyles((theme: Theme) => {
+export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((theme: Theme) => {
+
+    // const isTabletPortrait = useMediaQuery("(max-width:800px)");
 
     return createStyles({
       root: {
@@ -24,14 +26,34 @@ export const useStylesAuthForm = makeStyles((theme: Theme) => {
         width: "100%",
         height: "100%",
       },
-      img: {},
-      authBox: {
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
-        margin: theme.spacing(3),
-        borderRadius: theme.spacing(4),
-        padding: theme.spacing(3),
+      authBoxContainer: {
+        display: "flex",
+        justifyContent: "center",
+        maxWidth: "600px",
         position: "absolute",
+        top: 0,
+        bottom: 0,
         right: 0,
+        left: 0,
+        marginLeft: "auto",
+        marginRight: isTabletPortrait ? "auto" : 0,
+      },
+      authBox: {
+        backgroundColor: "rgba(255, 255, 255, 0.6)",
+        // margin: theme.spacing(3),
+        margin: "auto",
+        borderRadius: theme.spacing(2),
+        padding: theme.spacing(3),
+        maxWidth: 380,
+        maxHeight: 420,
+        // position: "absolute",
+        // right: 0,
+        alignItems: "center",
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
       },
     });
 })
@@ -42,20 +64,22 @@ initFirebase();
 const handleSingin = (email: string, password: string) => firebase.auth().signInWithEmailAndPassword(email, password)
 
 const Signin = () => {
-  const classes = useStylesAuthForm();
+  const isTabletPortrait = useMediaQuery("(max-width:800px)");
+  const classes = useStylesAuthForm(isTabletPortrait)();
   return (
     <div className={classes.root}>
-      {/* <img className={classes.img} src={`${server}/images/hair-stylist-combing-womans-hair.jpg`}/> */}
-      <div className={classes.authBox}>
-        <AuthForm
-          header="サインイン"
-          button="サインイン"
-          handleAuth={handleSingin}
-        />
-        <Typography variant="subtitle1" component="p">
-          アカウントをお持ちでないですか？
-          <Link href="/auth/signup">Sing up</Link>
-        </Typography>
+      <div className={classes.authBoxContainer}>
+        <div className={classes.authBox}>
+          <AuthForm
+            header="サインイン"
+            button="サインイン"
+            handleAuth={handleSingin}
+          />
+          <Typography variant="subtitle1" component="p">
+            アカウントをお持ちでないですか？
+            <Link href="/auth/signup">Sing up</Link>
+          </Typography>
+        </div>
       </div>
     </div>
   );
