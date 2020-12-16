@@ -5,6 +5,8 @@ type ReducerLogger = {
     action: any
 }
 export function reducerLogger({ state, newState, func, action }: ReducerLogger) {
+    if (process.env.NODE_ENV === 'production') return
+
     console.group("Action " + func.name)
     console.info("%cprev state", "color: grey; font-weight: bold", state);
     console.info("%caction", "color: blue; font-weight: bold", action);
