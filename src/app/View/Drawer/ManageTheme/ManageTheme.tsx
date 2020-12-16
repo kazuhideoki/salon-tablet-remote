@@ -176,76 +176,118 @@ export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
              <SelectTheme {...props} />
              <br />
 
-             <Divider/>
+             <Divider />
 
              {/* <Accordion expanded={props.expanded === 'panel1'} onChange={props.handleAccordion('panel1')} className={classes.accordionRoot} > */}
-             <Accordion expanded={props.expanded === true} onChange={props.handleAccordion(true)} className={classes.accordionRoot} >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography variant="body1" color="textSecondary">テーマ詳細設定</Typography>
-              </AccordionSummary>
-              <AccordionDetails className={classes.accordionDetails}>
-                
-              <Typography variant="body1" component="p" color="textSecondary">
-                メインカラー
-                <SelectPrimaryColor
-                  {...props}
-                  className={`${classes.param} ${classes.selectPrimaryColor}`}
-                />
-                セカンダリカラー
-                <FiberManualRecord
-                  style={{
-                    color: secondaryColor(props.theme_color),
-                  }}
-                />
-              </Typography>
-              <Typography variant="body1" component="p" color="textSecondary">
-                日本語フォント
-                <SelectFont
-                  {...props}
-                  whichFont="theme_font2"
-                  className={classes.param}
-                  value={props.font2}
-                  fonts={fonts2}
-                  handleOnChange={props.handleChangeThemeFont2}
-                />
-              </Typography>
-              <Typography variant="body1" component="p" color="textSecondary">
-                日本語フォント 見出し
-                <SelectFont
-                  {...props}
-                  whichFont="theme_font_heading"
-                  className={classes.param}
-                  value={props.fontHeading}
-                  fonts={fonts2}
-                  handleOnChange={props.handleChangeThemeFontHeading}
-                />
-              </Typography>
-              <Typography variant="body1" component="p" color="textSecondary">
-                英数字フォント
-                <HelpButton content="英数字を別にフォントを指定する場合は、こちらで設定できます。" />
-                <SelectFont
-                  {...props}
-                  whichFont="theme_font1"
-                  className={classes.param}
-                  value={props.font1}
-                  fonts={fonts1}
-                  handleOnChange={props.handleChangeThemeFont1}
-                />
-              </Typography>
+             <Accordion
+               expanded={props.expanded === true}
+               onChange={props.handleAccordion(true)}
+               className={classes.accordionRoot}
+             >
+               <AccordionSummary
+                 expandIcon={<ExpandMoreIcon />}
+                 aria-controls="panel1bh-content"
+                 id="panel1bh-header"
+               >
+                 <Typography variant="body1" color="textSecondary">
+                   テーマ詳細設定
+                 </Typography>
+               </AccordionSummary>
+               <AccordionDetails className={classes.accordionDetails}>
+                 <div>
 
-             </AccordionDetails>
-            </Accordion>
+                 <Typography
+                   variant="body1"
+                   component="span"
+                   color="textSecondary"
+                   >
+                   メインカラー
+                 </Typography>
+                 <SelectPrimaryColor
+                   {...props}
+                   className={`${classes.param} ${classes.selectPrimaryColor}`}
+                   />
+             
 
-            <Divider/>
+                 <Typography
+                   variant="body1"
+                   component="span"
+                   color="textSecondary"
+                   >
+                   セカンダリカラー
+                 </Typography>
+                 <FiberManualRecord
+                   style={{
+                     color: secondaryColor(props.theme_color),
+                    }}
+                    />
+                    </div>
+                    <div>
+
+                 <Typography
+                   variant="body1"
+                   component="span"
+                   color="textSecondary"
+                   >
+                   日本語フォント
+                 </Typography>
+                 <SelectFont
+                   {...props}
+                   whichFont="theme_font2"
+                   className={classes.param}
+                   value={props.font2}
+                   fonts={fonts2}
+                   handleOnChange={props.handleChangeThemeFont2}
+                   />
+                   </div>
+                   <div>
+
+                 <Typography
+                   variant="body1"
+                   component="span"
+                   color="textSecondary"
+                   >
+                   日本語フォント 見出し
+                 </Typography>
+                 <SelectFont
+                   {...props}
+                   whichFont="theme_font_heading"
+                   className={classes.param}
+                   value={props.fontHeading}
+                   fonts={fonts2}
+                   handleOnChange={props.handleChangeThemeFontHeading}
+                   />
+                   </div>
+                   <div>
+
+                 <Typography
+                   variant="body1"
+                   component="span"
+                   color="textSecondary"
+                   >
+                   英数字フォント
+                 </Typography>
+                 <HelpButton content="英数字を別にフォントを指定する場合は、こちらで設定できます。" />
+                 <SelectFont
+                   {...props}
+                   whichFont="theme_font1"
+                   className={classes.param}
+                   value={props.font1}
+                   fonts={fonts1}
+                   handleOnChange={props.handleChangeThemeFont1}
+                   />
+                   </div>
+               </AccordionDetails>
+             </Accordion>
+
+             <Divider />
+                    <div>
 
              <Typography variant="body1" component="p" color="textSecondary">
                フッターアイコンのサイズ
-               <SelectFooterIconSize {...props} className={classes.param} />
              </Typography>
+             <SelectFooterIconSize {...props} className={classes.param} />
+                    </div>
              <br />
              <SelectShowArticleType {...props} />
              <Typography
