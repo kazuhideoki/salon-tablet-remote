@@ -6,6 +6,7 @@ import "firebase/auth";
 import initFirebase from "../../lib/auth/initFirebase";
 import { Typography, useMediaQuery } from '@material-ui/core';
 import Link from 'next/link';
+import { AuthCircular } from '../../lib/AuthCircular';
 
 initFirebase();
 
@@ -22,6 +23,7 @@ const handleSingup = async (email: string, password: string) => {
 };
 
 const Signup = () => {
+  const [isClicked, setIsClicked] = React.useState(false);
   const isTabletPortrait = useMediaQuery("(max-width:800px)");
   const classes = useStylesAuthForm(isTabletPortrait)();
   return (
@@ -33,6 +35,7 @@ const Signup = () => {
             button="アカウントを作成する"
             buttonColor="primary"
             handleAuth={handleSingup}
+            setIsClicked={setIsClicked}
           />
           <Typography variant="subtitle1" component="p">
             アカウントをお持ちの方はこちら
@@ -43,6 +46,7 @@ const Signup = () => {
           </Typography>
         </div>
       </div>
+      {isClicked ? <AuthCircular message='アカウント作成中'/> : null}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import initFirebase from "../../lib/auth/initFirebase";
 import Link from 'next/link';
+import { AuthCircular } from '../../lib/AuthCircular';
 
 export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((theme: Theme) => {
 
@@ -61,6 +62,7 @@ export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((them
 initFirebase();
 
 const handleSignin = async (email: string, password: string) => {
+  
   try {
     await firebase
       .auth()
@@ -73,8 +75,10 @@ const handleSignin = async (email: string, password: string) => {
   }
 }
 const Signin = () => {
+  const [isClicked, setIsClicked] = React.useState(false);
   const isTabletPortrait = useMediaQuery("(max-width:800px)");
   const classes = useStylesAuthForm(isTabletPortrait)();
+
   return (
     <div className={classes.root}>
       <div className={classes.authBoxContainer}>
@@ -83,6 +87,7 @@ const Signin = () => {
             header="サインイン"
             button="サインイン"
             handleAuth={handleSignin}
+            setIsClicked={setIsClicked}
           />
           <Typography variant="subtitle1" component="p">
             アカウントをお持ちでないですか？
@@ -93,6 +98,7 @@ const Signin = () => {
           </Typography>
         </div>
       </div>
+      {isClicked ? <AuthCircular message='読み込み中'/> : null}
     </div>
   );
 }

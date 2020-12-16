@@ -12,6 +12,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from "nookies";
+import { AuthCircular } from "../lib/AuthCircular";
 
 initFirebase();
 
@@ -38,16 +39,19 @@ type TAuthForm = {
   button: string
   buttonColor?: 'primary'
   handleAuth: (email: string, password: string) => Promise<firebase.auth.UserCredential>
+  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const AuthForm:React.FC<TAuthForm> = (props) => {
   const classes = useStyles()
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  
   const passwordFieldRef = React.useRef(null);
   const router = useRouter()
 
   const handleSubmit = async () => {
+    props.setIsClicked(true)
     try {
     const user = await props.handleAuth(email, password)
     
@@ -70,52 +74,53 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
   };
 
   return (
-    <div className={classes.root} >
-        <Typography variant="h5" component="h1" className={classes.header}>
-          {props.header}
-        </Typography>
-        <TextField
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={classes.input}
-          fullWidth
-          name="email"
-          label="メールアドレス"
-          id="email"
-          onKeyPress={(e) => {
-            if (e.key == "Enter") {
-              e.preventDefault();
-              passwordFieldRef.current.focus();
-            }
-          }}
-        />
-        <br />
-        <TextField
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={classes.input}
-          fullWidth
-          name="password"
-          label="パスワード"
-          type="password"
-          id="password"
-          inputRef={passwordFieldRef}
-          onKeyPress={(e) => {
-            if (e.key == "Enter") {
-              e.preventDefault();
-              handleSubmit();
-            }
-          }}
-        />
-        <br />
-        <Button
-          className={classes.button}
-          variant="contained"
-          color={props.buttonColor || 'default'}
-          onClick={() => handleSubmit()}
-        >
-          {props.button}
-        </Button>
+    <div className={classes.root}>
+      <Typography variant="h5" component="h1" className={classes.header}>
+        {props.header}
+      </Typography>
+      <TextField
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className={classes.input}
+        fullWidth
+        name="email"
+        label="メールアドレス"
+        id="email"
+        onKeyPress={(e) => {
+          if (e.key == "Enter") {
+            e.preventDefault();
+            passwordFieldRef.current.focus();
+          }
+        }}
+      />
+      <br />
+      <TextField
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className={classes.input}
+        fullWidth
+        name="password"
+        label="パスワード"
+        type="password"
+        id="password"
+        inputRef={passwordFieldRef}
+        onKeyPress={(e) => {
+          if (e.key == "Enter") {
+            e.preventDefault();
+            handleSubmit();
+          }
+        }}
+      />
+      <br />
+      <Button
+        className={classes.button}
+        variant="contained"
+        color={props.buttonColor || "default"}
+        onClick={() => handleSubmit()}
+      >
+        {props.button}
+      </Button>
+      
     </div>
   );
 };

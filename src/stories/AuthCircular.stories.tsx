@@ -8,6 +8,6 @@ export default {
 export const Normal = () => {
 
   return (
-    <AuthCircular />
+    <AuthCircular message='読み込み中'/>
   )
 }

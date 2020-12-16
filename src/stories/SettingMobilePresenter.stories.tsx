@@ -26,6 +26,7 @@ const props: TUseDrawerProps = {
   closeDrawerTapMain: null,
   handleOnUpDateFooterIcon: null,
   deleteItem: null,
+  isClicked: null,
 };
 
 export const Normal = () => {

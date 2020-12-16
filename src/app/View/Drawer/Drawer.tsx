@@ -21,10 +21,10 @@ import { useFooterProps } from "../Footer/Footer";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { Settings } from "@material-ui/icons";
 import { useAuth } from "../../../lib/auth/AuthProvider";
-
-
+import { AuthCircular } from '../../../lib/AuthCircular';
 export const useDrawerProps = () => {
   const theme = useTheme();
+  const [isClicked, setIsClicked] = React.useState(false);
   const { dispatchAppState, appState } = React.useContext(Store);
   const { signout } = useAuth()
   const { isSetting, isPublicPage, isDrawerOpen, footerItems} = appState
@@ -36,6 +36,7 @@ export const useDrawerProps = () => {
 
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
+    setIsClicked(true)
     signOuting ? signout('/') : null
   }
 
@@ -78,6 +79,7 @@ export const useDrawerProps = () => {
     closeDrawerTapMain,
     handleOnUpDateFooterIcon,
     deleteItem,
+    isClicked,
   };
 }
 
@@ -175,14 +177,13 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         className={clsx(classes.menuButton, props.isDrawerOpen && classes.hide)}
       >
         {/* <MenuIcon /> */}
-        <Settings/>
+        <Settings />
       </IconButton>
       <MuiDrawer
         className={classes.drawer}
         variant="persistent"
         anchor="left"
         open={props.isDrawerOpen}
-        
         classes={{
           paper: classes.drawerPaper,
         }}
@@ -194,7 +195,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         {!props.isSetting ? (
           <>
             {drawerItems}
-            <Divider className={classes.underItem}/>
+            <Divider className={classes.underItem} />
           </>
         ) : null}
 
@@ -214,7 +215,11 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       <main
         className={`${clsx(classes.content, {
           [classes.contentShift]: props.isDrawerOpen,
-        })} ${props.isMobile === false && props.isDrawerOpen ? classes.contentShiftTablet : ''}`}
+        })} ${
+          props.isMobile === false && props.isDrawerOpen
+            ? classes.contentShiftTablet
+            : ""
+        }`}
       >
         {props.children}
       </main>
@@ -224,6 +229,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
           onClick={props.isDrawerOpen ? props.closeDrawerTapMain : null}
         ></div>
       ) : null}
+      {props.isClicked ? <AuthCircular message="サインアウト中" /> : null}
     </div>
   );
 }
