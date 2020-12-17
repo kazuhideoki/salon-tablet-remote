@@ -91,7 +91,7 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
       maxWidth: 1000, // default
       maxHeight: 1000, // default
       imageType: "image/jpeg", // default
-      debug: true, // default
+      debug: process.env.NODE_ENV !== 'production', // default
     },
     imageResize: {
       parchment: Quill.import("parchment"),
