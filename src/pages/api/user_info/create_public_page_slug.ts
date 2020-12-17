@@ -22,7 +22,6 @@ export const apiCreatePublicPageSlug = async (
            }
          );
          
-         console.log("apiCreatePublicPageSlug完了");
        };
 
 

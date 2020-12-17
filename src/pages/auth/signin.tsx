@@ -9,56 +9,59 @@ import initFirebase from "../../lib/auth/initFirebase";
 import Link from 'next/link';
 import { AuthCircular } from '../../lib/AuthCircular';
 
-export const useStylesAuthForm = (isTabletPortrait: boolean) => makeStyles((theme: Theme) => {
+export const useStyles = (isTabletPortrait: boolean) =>
+         makeStyles((theme: Theme) => {
+           return createStyles({
+             root: {
+               position: "absolute",
+               backgroundImage: "url('/images/feature_img_signin.jpg')",
+               backgroundSize: "cover",
+               backgroundPosition: "center",
+               width: "100%",
+               height: "100%",
+               "&::before": {
+                 backgroundColor: "rgba(0,0,0,0.4)",
+                 position: "absolute",
+                 top: 0,
+                 right: 0,
+                 bottom: 0,
+                 left: 0,
+                 content: '""',
+               },
+             },
+             authBoxContainer: {
+               display: "flex",
+               justifyContent: "center",
+               maxWidth: 450,
+               position: "absolute",
+               top: 0,
+               bottom: 0,
+               right: 0,
+               left: 0,
+               marginLeft: "auto",
+               marginRight: isTabletPortrait ? "auto" : 0,
+             },
+             authBox: {
+               backgroundColor: "rgba(255, 255, 255, 0.8)",
+               margin: "auto",
+               borderRadius: theme.spacing(2),
+               padding: theme.spacing(3),
+               maxWidth: 300,
+               maxHeight: 450,
+               alignItems: "center",
+               position: "absolute",
+               top: 0,
+               bottom: 0,
+               right: 0,
+               left: 0,
+             },
+           });
+         });
 
-    return createStyles({
-      root: {
-        position: "absolute",
-        backgroundImage: "url('/images/feature_img_signin.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: 'center',
-        width: "100%",
-        height: "100%",
-        "&::before": {
-          backgroundColor: 'rgba(0,0,0,0.4)',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          content: '""',
-  
-        },
-      },
-      authBoxContainer: {
-        display: "flex",
-        justifyContent: "center",
-        maxWidth: 450,
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        marginLeft: "auto",
-        marginRight: isTabletPortrait ? "auto" : 0,
-      },
-      authBox: {
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
-        margin: "auto",
-        borderRadius: theme.spacing(2),
-        padding: theme.spacing(3),
-        maxWidth: 300,
-        maxHeight: 450,
-        alignItems: "center",
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-      },
-    });
-})
-
+export const useStylesAuthForm = () => {
+  const isTabletPortrait = useMediaQuery("(max-width:800px)");
+  return useStyles(isTabletPortrait)();
+}
 initFirebase();
 
 const handleSignin = async (email: string, password: string) => {
@@ -74,13 +77,16 @@ const handleSignin = async (email: string, password: string) => {
     console.log('handleSigninは ' + error)
   }
 }
-const Signin = () => {
+
+
+const SigninForm = () => {
   const [isClicked, setIsClicked] = React.useState(false);
   const isTabletPortrait = useMediaQuery("(max-width:800px)");
-  const classes = useStylesAuthForm(isTabletPortrait)();
+  const classes = useStylesAuthForm()
 
   return (
-    <div className={classes.root}>
+    <>
+    {/* <div className={classes.root}> */}
       <div className={classes.authBoxContainer}>
         <div className={classes.authBox}>
           <AuthForm
@@ -99,7 +105,8 @@ const Signin = () => {
         </div>
       </div>
       {isClicked ? <AuthCircular message='読み込み中'/> : null}
-    </div>
+    {/* </div> */}
+    </>
   );
 }
 
@@ -112,5 +119,17 @@ export const getServerSideProps =  async (context) => {
 
   return { props: {}}
 }
+
+// 背景再レンダリング防ぐために別の関数コンポーネントに定義
+export const BackgroundDiv = ({children}) => {
+  const classes = useStylesAuthForm();
+  return <div className={classes.root}>{children}</div>;
+}
+
+const Signin = () => (
+  <BackgroundDiv>
+    <SigninForm />
+  </BackgroundDiv>
+);
 
 export default Signin;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AuthForm } from '../../pageComponent/AuthFrom';
-import { useStylesAuthForm } from './signin';
+import { BackgroundDiv, useStylesAuthForm } from './signin';
 import firebase from "firebase/app";
 import "firebase/auth";
 import initFirebase from "../../lib/auth/initFirebase";
@@ -22,10 +22,9 @@ const handleSingup = async (email: string, password: string) => {
   }
 };
 
-const Signup = () => {
+const SignupForm = () => {
   const [isClicked, setIsClicked] = React.useState(false);
-  const isTabletPortrait = useMediaQuery("(max-width:800px)");
-  const classes = useStylesAuthForm(isTabletPortrait)();
+  const classes = useStylesAuthForm()
   return (
     <div className={classes.root}>
       <div className={classes.authBoxContainer}>
@@ -46,9 +45,15 @@ const Signup = () => {
           </Typography>
         </div>
       </div>
-      {isClicked ? <AuthCircular message='アカウント作成中'/> : null}
+      {isClicked ? <AuthCircular message="アカウント作成中" /> : null}
     </div>
   );
 };
+
+const Signup = () => (
+  <BackgroundDiv>
+    <SignupForm />
+  </BackgroundDiv>
+);
 
 export default Signup;

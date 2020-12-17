@@ -36,8 +36,10 @@ export const useDrawerProps = () => {
 
   const handleOnSingOut = () => {
     const signOuting = confirm('サインアウトしますか？')
-    setIsClicked(true)
-    signOuting ? signout('/') : null
+    if(signOuting) {
+      setIsClicked(true)
+      signout("/");
+    }
   }
 
   const handleDrawerClose = () => {

@@ -37,7 +37,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       const data = await db(`INSERT INTO user_info (user_email) VALUES (?)`, [
         user_email,
       ]);
-      console.log("/user_info/create/は " + JSON.stringify(data));
 
       const returnData: T_user_info_create_return = {
         rawData: data,
