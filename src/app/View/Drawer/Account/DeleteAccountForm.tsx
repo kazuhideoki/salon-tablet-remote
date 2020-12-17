@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 export function DeleteAccountForm() {
   const classes = useStyles();
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const deleteUser = useDeleteUser()
 
   return (
@@ -77,23 +76,11 @@ export function DeleteAccountForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          {/* <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="パスワード"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          /> */}
           <Button
             fullWidth
             color="primary"
             className={classes.submit}
-            onClick={() => deleteUser({ email })}
+            onClick={() => deleteUser(email)}
           >
             アカウントを本当に削除する
           </Button>

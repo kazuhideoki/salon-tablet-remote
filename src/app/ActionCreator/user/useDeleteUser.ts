@@ -11,31 +11,26 @@ export const useDeleteUser = () => {
   const { user_email, user_id } = appState.userInfo;
   const { signout } = useAuth()
 
-  return async ({ email }) => {
-
+  return async (email: string): Promise<void> => {
     const deleting = confirm("本当に削除してよろしいですか？");
 
     if (deleting === false) {
       return null;
     }
     if (email !== user_email) {
-      alert('メールアドレスが間違っています。')
-      return null
+      alert("メールアドレスが間違っています。");
+      return null;
     }
 
-        try {
-          await apiUserInfoDelete({user_id})
-  
-          await deleteUserInFirebase();
+    try {
+      await apiUserInfoDelete({ user_id });
 
-          signout('/')        
-          alert('アカウントを削除しました。')
+      await deleteUserInFirebase();
 
-        } catch (err) {
-          alert("エラーが発生しました" + err);
-
-        }  
-
-
+      signout("/");
+      alert("アカウントを削除しました。");
+    } catch (err) {
+      alert("エラーが発生しました" + err);
+    }
   };
 };

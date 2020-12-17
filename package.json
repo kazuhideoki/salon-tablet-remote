@@ -95,6 +95,7 @@
     "@types/js-cookie": "^2.2.6",
     "@types/mysql": "^2.15.9",
     "@types/node": "^13.11.0",
+    "@types/qrcode.react": "^1.0.1",
     "@types/react": "^16.9.32",
     "@types/storybook__react": "^5.2.1",
     "jest": "^26.0.1",

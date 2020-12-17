@@ -22,7 +22,7 @@ import {
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
 import { TThemeParams } from "../Store/ThemeContext";
-import { TCreateFooterItem, TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
+import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 import { T_user_info_update } from "../../pages/api/user_info/update";
 
 export type AppStateAction =

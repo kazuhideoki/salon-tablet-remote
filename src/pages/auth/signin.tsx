@@ -8,6 +8,7 @@ import "firebase/auth";
 import initFirebase from "../../lib/auth/initFirebase";
 import Link from 'next/link';
 import { AuthCircular } from '../../lib/AuthCircular';
+import { GetServerSideProps } from 'next';
 
 export const useStyles = (isTabletPortrait: boolean) =>
          makeStyles((theme: Theme) => {
@@ -110,18 +111,18 @@ const SigninForm = () => {
   );
 }
 
-export const getServerSideProps =  async (context) => {
-  const session = await getSession({req: context.req})
-  if (session) {
-    context.res.writeHead(302, { Location: "/" });
-    context.res.end();
-  }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+         const session = await getSession({ req: context.req });
+         if (session) {
+           context.res.writeHead(302, { Location: "/" });
+           context.res.end();
+         }
 
-  return { props: {}}
-}
+         return { props: {} };
+       };
 
 // 背景再レンダリング防ぐために別の関数コンポーネントに定義
-export const BackgroundDiv = ({children}) => {
+export const BackgroundDiv:React.FC = ({children}) => {
   const classes = useStylesAuthForm();
   return <div className={classes.root}>{children}</div>;
 }

@@ -6,12 +6,12 @@ import { apiFooterItemsDelete, T_footer_items_delete } from "../../../pages/api/
 export const useDeleteFooterItem = () => {
   const { dispatchAppState } = React.useContext(Store);
 
-  return async ({footer_item_id,order}:T_footer_items_delete) => {
+  return async ({footer_item_id,order}:T_footer_items_delete):Promise<void> => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
 
     if (deleting === false) {
-      return null;
+      return
     }
 
     dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });

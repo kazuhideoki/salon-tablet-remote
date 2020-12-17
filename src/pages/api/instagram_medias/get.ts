@@ -46,7 +46,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
 
-      const data = await db(`select access_token from instagram_accounts where instagram_id = ?`, instagram_id);
+      const data = await db(`select access_token from instagram_accounts where instagram_id = ?`, instagram_id) as any[]
+      if (data !== null && data.length) {
+        
+      }
       const { access_token } = data[0];
 
       const response = await fetch(

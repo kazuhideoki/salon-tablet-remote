@@ -1,6 +1,7 @@
-import { NextPageContext } from "next";
+import { NextPage, NextPageContext } from "next";
+import { ErrorProps } from "next/error";
 
-const Error = ({ statusCode }) => {
+const Error: NextPage<ErrorProps> = ({ statusCode }) => {
   return (
     <p>
       {statusCode

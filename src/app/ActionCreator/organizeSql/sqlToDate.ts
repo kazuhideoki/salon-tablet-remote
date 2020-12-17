@@ -8,10 +8,6 @@ export const sqlToDate = (arg: string) => {
 
   return (
     date.getMonth() + 1 + "月" + date.getDate() + "日"
-    // +
-    // date.getHours() +
-    // "時" +
-    // date.getMinutes() +
-    // "分"
+
   );
 };

@@ -11,7 +11,7 @@ export const useDeleteArticle = () => {
   const { appState ,dispatchAppState } = React.useContext(Store);
   const {articles, paginationParams} = appState
   
-  return async (article_id: T_article_id) => {
+  return async (article_id: T_article_id): Promise<void> => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
 

@@ -12,7 +12,7 @@ export const useDeleteTag = () => {
   const getTags = useGetTags()
 
 
-  return async (tag_id: T_tag_id) => {
+  return async (tag_id: T_tag_id): Promise<void> => {
 
     const deleting = confirm("本当に削除してよろしいですか？");
     
