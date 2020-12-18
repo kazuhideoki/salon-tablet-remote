@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { tagIdsParse } from "./tagIdsParse";
+import { tagIdsToNumberArray } from "./tagIdsToNumberArray";
 import {
   T_tag_ids,
   T_tag_id,
@@ -10,11 +10,11 @@ import {
 export const deleteTagIdInArticle = async (tag_id: T_tag_id, user_id: T_user_id) => {
   // ★まずarticleのtag_idsの該当タグを消す
       const data0: any = await db(`SELECT article_id, tag_ids FROM articles WHERE user_id = ?`, user_id);
-      const article_ids: T_article_id[] = data0.map((value) => {
+      const article_ids: T_article_id[] = data0.map((value: {article_id: T_article_id, tag_ids: T_tag_ids}) => {
         return value.article_id;
       });
       // パースしてtag_idsをnumber[]にする
-      const parsedData: {article_id: T_article_id, tag_ids: number[] }[] = tagIdsParse(data0);      
+      const parsedData: {article_id: T_article_id, tag_ids: number[] }[] = tagIdsToNumberArray(data0);      
       // 該当tag_idを取り除いたtag_idsの入ったdataを新たに生成
       const newData = parsedData.map((value) => {
       

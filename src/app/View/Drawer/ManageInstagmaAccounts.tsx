@@ -99,7 +99,7 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
       </Typography>
 
       <a href={props.instaAuth}>
-        <Button>インスタグラムアカウントを追加する</Button>
+        <Button>インスタグラムアカウントと連携する</Button>
       </a>
       <Typography variant="subtitle1" component="p" className={classes.txt}>
         現在Instagramの連携は招待制になっています。ご希望の方はご連絡下さい。

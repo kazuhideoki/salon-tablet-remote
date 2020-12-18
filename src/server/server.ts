@@ -2,8 +2,8 @@
 // そのためにcustom serverを作って https化
 // npm run httpsで起動できる。
 
-const { createServer } = require("https");
-const { parse } = require("url");
+import { createServer } from "https";
+import { parse } from "url";
 import next from "next";
 
 const port = process.env.NEXT_PUBLIC_PORT;

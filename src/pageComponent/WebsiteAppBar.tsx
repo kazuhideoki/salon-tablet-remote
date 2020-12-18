@@ -36,7 +36,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function WebsiteAppBar({onClick, id}) {
+type Props = {
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  id: string
+}
+
+export default function WebsiteAppBar({onClick, id}: Props) {
   const classes = useStyles();
 
   const router = useRouter();

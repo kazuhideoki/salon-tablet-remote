@@ -60,7 +60,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
           username: userProfile.username,
           profile_img: "",
           access_token: longLived.access_token,
-          expires: null, // いつか実装
+          expires: null,
           // SALON TABLETのuser_id
           user_id: user_id,
         };
