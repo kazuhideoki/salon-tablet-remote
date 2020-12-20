@@ -37,6 +37,8 @@ type T_instagram_accounts_reconnect_needed_return = {
 
 const reconnect_needed = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+    console.log('reconnect_neededだよ')
+    
 
     const {
       instagram_id, user_id,

@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       margin: theme.spacing(1),
     },
+    reconnect_needed: {
+      color: theme.palette.error.main,
+    },
     skeleton: {
       width: 160,
       height: 38,
@@ -74,15 +77,22 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
     return (
       <div className={classes.account}>
         <Button
+          disabled={value.is_reconnect_needed}
           onClick={() =>
             props.getInstagramMedias(value.instagram_id, value.username, {})
           }
         >
           {value.username}
         </Button>
-        {value.is_reconnect_needed ? <Typography color='error'>
-          要塞連携
-        </Typography> : null}
+        {value.is_reconnect_needed ? (
+          <Button
+            disableRipple
+            className={classes.reconnect_needed}
+            variant="text"
+          >
+            要再連携
+          </Button>
+        ) : null}
         <DeleteButton
           onClick={props.deleteInstagramAccount}
           value={value.instagram_id}
