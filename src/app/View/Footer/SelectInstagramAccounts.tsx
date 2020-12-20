@@ -60,6 +60,7 @@ export const SelectInstagramAccountsPresenter:React.FC<Props> = (props) => {
           <div className={classes.account}>
             <Button
               onClick={() => props.getInstagramMedias(value.instagram_id, value.username, {})}
+              disabled={value.is_reconnect_needed}
             >
               {value.username}
             </Button>

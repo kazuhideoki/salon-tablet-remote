@@ -80,6 +80,9 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
         >
           {value.username}
         </Button>
+        {value.is_reconnect_needed ? <Typography color='error'>
+          要塞連携
+        </Typography> : null}
         <DeleteButton
           onClick={props.deleteInstagramAccount}
           value={value.instagram_id}
