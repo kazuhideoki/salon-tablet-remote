@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TInstagramAccounts, T_user_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
+import { changeToBooleanFromNumberInstagramAcconts } from "../../../lib/changeToBooleanFromNumber";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -24,7 +25,9 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       Number(req.query.userId)
     );
 
-    return res.status(200).json(data);
+    const returnData: TInstagramAccounts = changeToBooleanFromNumberInstagramAcconts(data)
+
+    return res.status(200).json(returnData);
   } catch (err) {
     console.log("/instagram_accounts/get/のエラーは " + JSON.stringify(err));
     return res.status(500).json({ err: true, data: { message: err.message } });

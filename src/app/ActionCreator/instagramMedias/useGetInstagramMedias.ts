@@ -2,11 +2,14 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { apiInstagramMediasGet } from "../../../pages/api/instagram_medias/get";
 import { T_instagram_id, T_instagram_username } from "../../Store/Types";
+import { apiInstagramAccountsReconnectNeeded, T_instagram_accounts_reconnect_needed } from "../../../pages/api/instagram_accounts/reconnect_needed";
 
 export const useGetInstagramMedias = () => {
   const {
     dispatchAppState,
+    appState
   } = React.useContext(Store);
+  const user_id = appState.userInfo.user_id
 
   // ページ送りでないときは空のオブジェクト
   return async (instagram_id: T_instagram_id, username: T_instagram_username, paging: {after?: string, before?: string }) => {
@@ -16,9 +19,16 @@ export const useGetInstagramMedias = () => {
 
     const data = await apiInstagramMediasGet(instagram_id, paging);
 
+    const params:T_instagram_accounts_reconnect_needed  = {instagram_id: instagram_id, user_id: user_id, is_reconnect_needed: true}
+
     if (data.err === true) {
       alert("取得できませんでした");
-      console.log('data.messageは ' + JSON.stringify(data.data.message))
+      if (data.data.message.type === "OAuthException") {
+        console.log("message.typeは OAuthException");
+        // ★ apiでフラグ建てる ＋ ※dispatchAppStateでaccountの状態管理（確認）
+        const result = await apiInstagramAccountsReconnectNeeded(params)
+        if(result.err !== true) dispatchAppState({type: "SET_INSTAGRAM_RECONNECT_NEEDED", payload: params})
+      }
       dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {
       dispatchAppState({
@@ -27,4 +37,17 @@ export const useGetInstagramMedias = () => {
       });
     }
   };
+};
+
+const d = {
+  err: true,
+  data: {
+    message: {
+      message:
+        "Error validating access token: Session has expired on Wednesday, 07-Oct-20 16:29:17 PDT. The current time is Friday, 18-Dec-20 16:45:18 PST.",
+      type: "OAuthException",
+      code: 190,
+      fbtrace_id: "ADnfXjfZ1hcR4t2r5wwReYo",
+    },
+  },
 };
