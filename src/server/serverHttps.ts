@@ -2,14 +2,16 @@
 // そのためにcustom serverを作って https化
 // npm run httpsで起動できる。
 
+// ※import使ってはだめ。デプロイ出来ない
+const { createServer } = require("https");
+const { parse } = require("url");
+const { readFileSync } = require("fs");
 
-import { createServer } from "https";
-import { parse } from "url";
-import { readFileSync } from "fs";
+
 import next from "next";
 
-// const port = process.env.NEXT_PUBLIC_PORT;
-const port = 8080;
+const port = process.env.NEXT_PUBLIC_PORT;
+// const port = 8080;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
