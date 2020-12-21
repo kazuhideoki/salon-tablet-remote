@@ -15,6 +15,7 @@ app.prepare().then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
+    // @ts-ignore
   }).listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on https://localhost:${port}`);

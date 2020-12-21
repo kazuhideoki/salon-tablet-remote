@@ -3,12 +3,13 @@
 // npm run httpsで起動できる。
 
 
-const { createServer } = require("https");
-const { parse } = require("url");
-const { readFileSync } = require("fs");
+import { createServer } from "https";
+import { parse } from "url";
+import { readFileSync } from "fs";
 import next from "next";
 
-const port = process.env.NEXT_PUBLIC_PORT;
+// const port = process.env.NEXT_PUBLIC_PORT;
+const port = 8080;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -27,6 +28,7 @@ app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
+    // @ts-ignore
   }).listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on https://localhost:${port}`);
