@@ -37,7 +37,7 @@ type TStorybookStore = {
 export const StorybookStore = React.createContext({} as TStorybookStore);
 
 
-export const Provider: React.FC = (props) => {
+export const ThemeProvider: React.FC = (props) => {
 
   const [selected_theme, setSelected_theme] = React.useState('white' as T_selected_theme)
 
@@ -59,7 +59,7 @@ export const Provider: React.FC = (props) => {
       <CssBaseline />
       <StorybookStore.Provider value={values}>
         <ThemeContext.Provider value={useThemeArgs('medium')}>
-          <SelectTheme {...selectThemeProps}  selected_theme={selected_theme} handleChange={handleChange}/>
+          <SelectTheme {...selectThemeProps}  selected_theme={selected_theme} handleChange={handleChange} user={true}/>
           <div style={border} ></div>
           {props.children}
         </ThemeContext.Provider>

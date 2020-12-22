@@ -13,6 +13,12 @@ export const SelectTheme = (props: TUseManageThemeProps) => {
                value={props.selected_theme}
                onChange={props.handleChange}
              >
+               {props.user? <FormControlLabel
+                 value="default"
+                 control={<Radio />}
+                 label="デフォルト"
+               /> : null}
+
                <FormControlLabel
                  value="white"
                  control={<Radio />}
