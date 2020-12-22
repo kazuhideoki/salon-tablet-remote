@@ -89,6 +89,7 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
         </Button>
         {value.is_reconnect_needed ? (
           <a href={props.instaAuth} className={classes.connectButton}>
+
             <Button
               className={classes.reconnect_needed}
               variant="text"
