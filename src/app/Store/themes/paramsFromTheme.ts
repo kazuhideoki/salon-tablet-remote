@@ -1,6 +1,17 @@
 import { T_selected_theme } from "../Types";
 import { TThemeParams } from "../ThemeContext";
 import { selectedIconReducer } from "../../Reducer/selectedIconReducer";
+import { themeWhite } from "./themeWhite";
+import { themeNatural } from "./themeNatural";
+import { themeDefault } from "./themeDefault";
+
+const defaultTheme: TThemeParams = {
+  selected_theme: 'default',
+  theme_color: "#311b92",
+  theme_font1: "未設定",
+  theme_font2: '"M PLUS Rounded 1c"',
+  theme_font_heading: '"M PLUS Rounded 1c"',
+};  
 
 const white: TThemeParams = {
   selected_theme: 'white',
@@ -22,13 +33,15 @@ export const generateDefaultParamsFromTheme = (
          selectedTheme: T_selected_theme
        ): TThemeParams => {
          switch (selectedTheme) {
+           case "default":
+             return defaultTheme;
            case "white":
              return white;
            case "natural":
              return natural;
 
            default:
-             break;
+             return defaultTheme;
          }
        };
 

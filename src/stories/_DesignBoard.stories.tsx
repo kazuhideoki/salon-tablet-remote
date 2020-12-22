@@ -1,6 +1,6 @@
 import { Button, createStyles, makeStyles, Typography, Theme, TextField, Paper, useTheme, Box, Chip } from '@material-ui/core';
 import React from 'react';
-import { Provider, StorybookStore } from './lib/ThemeProvider';
+import { ThemeProvider, StorybookStore } from "./lib/ThemeProvider";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -160,7 +160,7 @@ const DesignBoard:React.FC = () => {
 export default {
   title: '_DesignBoard',
   component: DesignBoard,
-  decorators: [story => <Provider >{story()}</Provider>],
+  decorators: [story => <ThemeProvider >{story()}</ThemeProvider>],
 };
 
 export const Normal = () => {

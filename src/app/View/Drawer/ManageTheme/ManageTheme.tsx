@@ -24,6 +24,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {isThemeParamsChanged} from '../../../Store/themes/paramsFromTheme'
+import { useAuth } from "../../../../lib/auth/AuthProvider";
 var colorConvert = require("color-convert");
 
 export type THsl = {
@@ -43,6 +44,7 @@ export const useManageTheme = () => {
   const [footerIconSize, setFooterIconSize] = React.useState(
     footer_icon_size
   );
+  const { user } = useAuth()
   const changeTheme = useChangeTheme()
   const changeThemeColor = useChangeThemeColor()
   const changeThemeFont = useChangeThemeFont()
@@ -130,6 +132,7 @@ export const useManageTheme = () => {
     show_article_type,
     handleChange,
     handleChangeShowArticleType,
+    user,
   };
 
 }

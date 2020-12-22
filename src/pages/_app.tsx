@@ -17,6 +17,9 @@ import WebSiteDrawer from "../pageComponent/WebsiteDrawer";
 import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { AuthProvider } from "../lib/auth/AuthProvider";
 import { AppProps } from "next/dist/next-server/lib/router/router";
+import { MuiThemeProvider } from "@material-ui/core";
+import { themeDefault } from "../app/Store/themes/themeDefault";
+import { generateDefaultParamsFromTheme } from "../app/Store/themes/paramsFromTheme";
 
 export default function MyApp({ Component, pageProps, slug }: AppProps) {
   const session = pageProps.session
@@ -37,9 +40,12 @@ export default function MyApp({ Component, pageProps, slug }: AppProps) {
           {session ? 
             <Component {...pageProps} />
             : 
-            <WebSiteDrawer id="back-to-top-anchor">
-              <Component {...pageProps} />
-            </WebSiteDrawer>
+            <MuiThemeProvider theme={themeDefault(generateDefaultParamsFromTheme('default'))}>
+              <WebSiteDrawer id="back-to-top-anchor">
+                <Component {...pageProps} />
+              </WebSiteDrawer>
+
+            </MuiThemeProvider>
           }
         </AuthProvider>
       </>
