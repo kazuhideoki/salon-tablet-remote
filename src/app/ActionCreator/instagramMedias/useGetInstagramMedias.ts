@@ -25,7 +25,7 @@ export const useGetInstagramMedias = () => {
       alert("取得できませんでした");
       if (data.data.message.type === "OAuthException") {
         console.log("message.typeは OAuthException");
-        // ★ apiでフラグ建てる ＋ ※dispatchAppStateでaccountの状態管理（確認）
+        alert("インスタグラムアカウントの再連携が必要です");
         const result = await apiInstagramAccountsReconnectNeeded(params)
         if(result.err !== true) dispatchAppState({type: "SET_INSTAGRAM_RECONNECT_NEEDED", payload: params})
       }
