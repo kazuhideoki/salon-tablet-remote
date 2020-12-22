@@ -1,9 +1,9 @@
 import React from 'react'
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core";
-import { useThemeArgs, ThemeContext, switchingTheme } from "../../app/Store/ThemeContext";
+import { useThemeArgs, ThemeContext } from "../../app/Store/ThemeContext";
 import { SelectTheme } from '../../app/View/Drawer/ManageTheme/SelectTheme';
 import { useManageTheme } from '../../app/View/Drawer/ManageTheme/ManageTheme';
-import { generateDefaultParamsFromTheme } from '../../app/Store/themes/paramsFromTheme';
+import { generateDefaultParamsFromTheme, switchingTheme } from '../../app/Store/themes/paramsFromTheme';
 import { T_selected_theme } from '../../app/Store/Types';
 import Head from 'next/head';
 import { googleFontsUrl } from '../../lib/googleFontsUrl';

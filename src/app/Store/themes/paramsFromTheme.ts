@@ -1,6 +1,5 @@
 import { T_selected_theme } from "../Types";
 import { TThemeParams } from "../ThemeContext";
-import { selectedIconReducer } from "../../Reducer/selectedIconReducer";
 import { themeWhite } from "./themeWhite";
 import { themeNatural } from "./themeNatural";
 import { themeDefault } from "./themeDefault";
@@ -27,6 +26,21 @@ const natural: TThemeParams = {
   theme_font1: "未設定",
   theme_font2: '"Noto Serif JP"',
   theme_font_heading: '"Noto Serif JP"',
+};
+
+export const switchingTheme = (params: TThemeParams) => {
+  // user_infoのselected_themeをもとにテーマを適応
+  switch (params.selected_theme) {
+    case "default":
+      return themeDefault(params);
+    case "white":
+      return themeWhite(params);
+    case "natural":
+      return themeNatural(params);
+
+    default:
+      return themeDefault(params);
+  }
 };
 
 export const generateDefaultParamsFromTheme = (
