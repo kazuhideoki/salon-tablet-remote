@@ -1,6 +1,9 @@
 import { T_selected_theme } from "../Types";
 import { TThemeParams } from "../ThemeContext";
 import { selectedIconReducer } from "../../Reducer/selectedIconReducer";
+import { themeWhite } from "./themeWhite";
+import { themeNatural } from "./themeNatural";
+import { themeDefault } from "./themeDefault";
 
 const defaultTheme: TThemeParams = {
   selected_theme: 'default',
@@ -38,7 +41,7 @@ export const generateDefaultParamsFromTheme = (
              return natural;
 
            default:
-             break;
+             return defaultTheme;
          }
        };
 

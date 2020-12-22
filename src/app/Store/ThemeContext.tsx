@@ -99,10 +99,8 @@ export const switchingTheme = (params: TThemeParams) => {
     switch (params.selected_theme) {
       case "white":
         return themeWhite(params)
-        break;
       case "natural":
         return themeNatural(params)
-        break;
 
       default:
         return themeWhite(params)
