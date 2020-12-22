@@ -27,10 +27,19 @@ const useStyles = makeStyles((theme: Theme) => {
     circularProgress: {
       marginBottom: theme.spacing(2),
     },
+    message: {
+      padding: theme.spacing(1),
+      borderRadius: theme.spacing(1),
+      backgroundColor: "rgba(0, 0, 0, 0.1)",
+    },
   });
 });
 
-export const AuthCircular = ({ message }) => {
+type Props = {
+  message: string
+}
+
+export const AuthCircular:React.FC<Props> = ({message}) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -39,7 +48,7 @@ export const AuthCircular = ({ message }) => {
         thickness={5}
         className={classes.circularProgress}
       />
-      <Typography variant="subtitle1" component="p">
+      <Typography className={classes.message} variant="subtitle1" component="p" color='textSecondary'>
         {message}
       </Typography>
     </div>

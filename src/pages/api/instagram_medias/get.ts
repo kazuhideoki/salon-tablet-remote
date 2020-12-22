@@ -59,8 +59,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       // const data2: TInstagramMedias | {error: boolean} = await response.json();
       const data2 = await response.json();
 
-      console.log("/instagram_medias/getは " + JSON.stringify(data2));
-
       if (data2.error) {
         return res
           .status(500)

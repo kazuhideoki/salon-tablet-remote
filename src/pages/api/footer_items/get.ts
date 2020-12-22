@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { checkOrders } from "../../../lib/checkOrders";
 import { FooterItems, T_user_id } from "../../../app/Store/Types";
 import { correctOrders } from "../../../lib/correctOrders";
-import { changeToBooleanFromNumber } from "../../../lib/changeToBooleanFromNumber";
+import { changeToBooleanFromNumberFooterItems } from "../../../lib/changeToBooleanFromNumber";
 import { localhost, server } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
 import { checkOrdersSidebar } from "../../../lib/checkOrdersSidebar";
@@ -47,7 +47,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
 
     // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
-    const returnData: FooterItems = changeToBooleanFromNumber(data);
+    const returnData: FooterItems = changeToBooleanFromNumberFooterItems(data);
 
     return res.status(200).json(returnData);
 

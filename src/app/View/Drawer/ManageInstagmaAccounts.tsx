@@ -44,17 +44,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     txt: {
       margin: theme.spacing(2),
-      color: 'grey',
+      color: "grey",
     },
     account: {
       display: "flex",
       margin: theme.spacing(1),
     },
+    reconnect_needed: {
+      color: theme.palette.error.main,
+    },
+    connectButton: {
+      textDecoration: "none",
+    },
     skeleton: {
       width: 160,
       height: 38,
       borderRadius: 4,
-    }
+    },
   })
 );
 
@@ -74,12 +80,24 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
     return (
       <div className={classes.account}>
         <Button
+          disabled={value.is_reconnect_needed}
           onClick={() =>
             props.getInstagramMedias(value.instagram_id, value.username, {})
           }
         >
           {value.username}
         </Button>
+        {value.is_reconnect_needed ? (
+          <a href={props.instaAuth} className={classes.connectButton}>
+
+            <Button
+              className={classes.reconnect_needed}
+              variant="text"
+            >
+              要再連携
+            </Button>
+          </a>
+        ) : null}
         <DeleteButton
           onClick={props.deleteInstagramAccount}
           value={value.instagram_id}
@@ -98,13 +116,15 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
         Instagram アカウント管理
       </Typography>
 
-      <a href={props.instaAuth}>
-        <Button>インスタグラムアカウントを追加する</Button>
+      <a href={props.instaAuth} className={classes.connectButton}>
+        <Button>インスタグラムアカウントと連携する</Button>
       </a>
       <Typography variant="subtitle1" component="p" className={classes.txt}>
         現在Instagramの連携は招待制になっています。ご希望の方はご連絡下さい。
       </Typography>
-      {props.instagramAccounts.length ? displayInstagramAccounts : noInstagramAccounts}
+      {props.instagramAccounts.length
+        ? displayInstagramAccounts
+        : noInstagramAccounts}
     </div>
   );
 };

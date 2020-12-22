@@ -1,6 +1,6 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { tagIdsParse } from "../../../lib/tagIdsParse";
+import { tagIdsToNumberArray } from "../../../lib/tagIdsToNumberArray";
 import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
@@ -103,7 +103,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const returnData: T_articles_get_return = {
         // tag_idsをnumber[]化する、なければnullのまま
-        rawData: data.length ? tagIdsParse(data) : data,
+        rawData: data.length ? tagIdsToNumberArray(data) : data,
         pagination: pagination,
         allArticles: data3 as TAllArticles
       };

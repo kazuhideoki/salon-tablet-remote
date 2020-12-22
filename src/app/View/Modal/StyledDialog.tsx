@@ -13,7 +13,7 @@ type Props = {
   className: string
   open: boolean
   TransitionComponent: any
-  // 再レンダーのときtransitonアニメーションさせたくないときは、値を0に
+  // 再レンダーのときtransitionアニメーションさせたくないときは、値を0に
   transitionDuration: any
   onClose: () => void
   maxWidth: false | "xs" | "sm" | "md" | "lg" | "xl"
@@ -37,7 +37,7 @@ export const StyledDialog: React.FC<Props> = (props) => {
       className={props.className}
       open={props.open}
       TransitionComponent={props.TransitionComponent}
-      // 再レンダーのときtransitonアニメーションさせたくないときは、値を0に
+      // 再レンダーのときtransitionアニメーションさせたくないときは、値を0に
       transitionDuration={props.transitionDuration}
       // transitionDuration={0}
       onClose={props.onClose}

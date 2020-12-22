@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, instagramRedirectHost, localhost } from "../../../lib/loadUrl";
 import { getUserInfoFromEmail } from "../../../lib/getUserInfoFromEmail";
 import { getSession } from "../../../lib/auth/getSession";
+import { apiInstagramAccountsReconnectNeeded } from "./reconnect_needed";
 
 
 var FormData = require("form-data");
@@ -14,7 +15,6 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
     fetch(`${server}`)
   }
 
-  // ドキュメントを見ると curlでformdataでやっていた。
   const form = new FormData()
   form.append("client_id", process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID);
   form.append("client_secret", process.env.INSTAGRAM_APP_SECRET);
@@ -50,27 +50,29 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const userProfile = await response3.json();
 
-        // 【要修正】
         const { email } = await getSession({ req });
         const { user_id } = await getUserInfoFromEmail(email);
 
         const params = {
           instagram_id: shortLived.user_id,
-          // instagramアカウントのusername
           username: userProfile.username,
           profile_img: "",
           access_token: longLived.access_token,
-          expires: null, // いつか実装
-          // SALON TABLETのuser_id
+          expires: null,
           user_id: user_id,
         };
 
-        // DBに保存する
         const data3 = await db(
           // すでにデータが有れば上書きする（作動している？）
           `INSERT INTO instagram_accounts SET ? ON DUPLICATE KEY UPDATE ?`,
           [params, params]
         );
+
+        await apiInstagramAccountsReconnectNeeded({
+          instagram_id: shortLived.user_id,
+          user_id: user_id,
+          is_reconnect_needed: false,
+        });
 
         res.writeHead(302, { Location: `/` });
         res.end();

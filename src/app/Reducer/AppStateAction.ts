@@ -18,12 +18,14 @@ import {
   T_theme_color,
   T_theme_font,
   T_footer_icon_size,
+  T_is_reconnect_needed,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
 import { TThemeParams } from "../Store/ThemeContext";
 import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 import { T_user_info_update } from "../../pages/api/user_info/update";
+import { T_instagram_accounts_reconnect_needed } from "../../pages/api/instagram_accounts/reconnect_needed";
 
 export type AppStateAction =
   | { type: "SELECT_DEVICE"; payload: T_selected_device }
@@ -126,6 +128,10 @@ export type AppStateAction =
   | { type: "SET_TAGS"; payload: TTags }
   | { type: "SET_INSTAGRAM_ACCOUNTS"; payload: TInstagramAccounts }
   | {
+      type: "SET_INSTAGRAM_RECONNECT_NEEDED";
+      payload: T_instagram_accounts_reconnect_needed;
+    }
+  | {
       type: "SET_INSTAGRAM_MEDIAS";
       payload: {
         data: TInstagramMedias;
@@ -135,4 +141,4 @@ export type AppStateAction =
         };
       };
     }
-  | { type: "DELETE_INSTAGRAM_MEDIAS" }
+  | { type: "DELETE_INSTAGRAM_MEDIAS" };

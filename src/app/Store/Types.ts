@@ -40,7 +40,7 @@ export type TUserInfo = {
   is_admin: T_is_admin;
   created_at: T_created_at_user;
   updated_at: T_updated_at_user | null;
-};
+} | null;
 
 const initPagination = {
   page: 0,
@@ -55,7 +55,7 @@ export type T_data_type_article = T_data_type_footer_item | 'web_article'
 
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
-// ※tag_idsはDBから取り出した直後、値がない場合はnullのこともある （tagIdsParseの前）
+// ※tag_idsはDBから取り出した直後、値がない場合はnullのこともある （tagIdsToNumberArrayの前）
 export type T_tag_ids = number[];
 export type T_is_published_articles = boolean;
 export type T_created_at = string;
@@ -173,16 +173,17 @@ export type T_profile_img = string;
 export type T_expires = string;
 export type T_created_at_instagram_account = string;
 export type T_updated_at_instagram_account = string;
+export type T_is_reconnect_needed = boolean
 
 export type TInstagramAccount = {
   instagram_id: T_instagram_id;
   username: T_instagram_username;
-
   profile_img: T_profile_img;
   expires: T_expires;
   user_id: T_user_id;
   created_at: T_created_at_instagram_account;
   updated_at: T_updated_at_instagram_account;
+  is_reconnect_needed: T_is_reconnect_needed;
 };
 export type TInstagramAccounts = TInstagramAccount[];
 
@@ -252,7 +253,7 @@ export type T_selected_device = 'responsive' | 'mobile' | 'tablet'
 export const initAppState = (data: TStoreProps) => ({
          isPublicPage: data.isPublicPage,
          uaDevice: data.device,
-        //  ※DBには selected_deviceは入ってない, pablic_pageからの値。reducerは作ってある
+        //  ※DBには selected_deviceは入ってない, public_pageからの値。reducerは作ってある
          selectedDevice: data.samplePage || 'responsive' as T_selected_device,
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,

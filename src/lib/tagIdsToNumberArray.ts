@@ -1,4 +1,4 @@
-export const tagIdsParse = (data: any) => {
+export const tagIdsToNumberArray = (data: any) => {
   // tag_idsをnumber[]化する
   const newData = data.map((value) => {
     // 値がある場合のみ(nullではないとき)変換
@@ -6,7 +6,7 @@ export const tagIdsParse = (data: any) => {
 
       // まずstringをstring[]にして,number[]に変換
       //@ts-ignore
-      const parsedTagId = JSON.parse(value.tag_ids);
+      const parsedTagId: string[] = JSON.parse(value.tag_ids);
       
       const intArray = parsedTagId.map((str) => parseInt(str, 10));
      

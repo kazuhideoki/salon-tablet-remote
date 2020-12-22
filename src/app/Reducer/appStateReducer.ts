@@ -410,6 +410,18 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
+      case "SET_INSTAGRAM_RECONNECT_NEEDED":
+        const instagramAccounts = state.instagramAccounts.map((value) => {
+          if (value.instagram_id === action.payload.instagram_id) {
+            value.is_reconnect_needed = action.payload.is_reconnect_needed
+          }
+          return value
+        })
+        newState = {
+          ...state,
+          instagramAccounts: instagramAccounts,
+        };
+        break;
       case "SET_INSTAGRAM_MEDIAS":
         newState = {
           ...state,
