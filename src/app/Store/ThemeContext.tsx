@@ -11,6 +11,8 @@ import { Store } from "./Store";
 import { useIsMobile } from "../../lib/useIsMobile";
 import { themeWhite } from "./themes/themeWhite";
 import { themeNatural } from "./themes/themeNatural";
+import { themeDefault } from "./themes/themeDefault";
+import { switchingTheme } from "./themes/paramsFromTheme";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -94,20 +96,6 @@ export type TThemeParams = {
   theme_font_heading?: T_theme_font;
 };
 
-export const switchingTheme = (params: TThemeParams) => {
-    // user_infoのselected_themeをもとにテーマを適応
-    switch (params.selected_theme) {
-      case "white":
-        return themeWhite(params)
-      case "natural":
-        return themeNatural(params)
-
-      default:
-        return themeWhite(params)
-    }
-
-}
-
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
     const { appState } = React.useContext(Store);
@@ -119,7 +107,6 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
       theme_font2,
       theme_font_heading,
     };
-    const isMobile = useIsMobile()
 
     const theme = switchingTheme(params)
 
