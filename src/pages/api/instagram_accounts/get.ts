@@ -4,6 +4,7 @@ import { TInstagramAccounts, T_user_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
 import { changeToBooleanFromNumberInstagramAcconts } from "../../../lib/changeToBooleanFromNumber";
+import { LeakRemoveTwoTone } from "@material-ui/icons";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -18,12 +19,17 @@ export const apiInstagramAccountsGet = async (user_id: T_user_id): Promise<TApiR
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   
   try {
-    //@ts-ignore
-    const data: TInstagramAccounts = await db(
-      "SELECT instagram_id, username, profile_img, expires, user_id, created_at, updated_at FROM instagram_accounts WHERE user_id = ?",
+    let data = (await db(
+      "SELECT * FROM instagram_accounts WHERE user_id = ?",
       // queryは文字列で来るため
       Number(req.query.userId)
-    );
+    )) as TInstagramAccounts;
+
+    data = data.map((value) => {
+      //@ts-ignore
+      delete value.access_token
+      return value
+    })
 
     const returnData: TInstagramAccounts = changeToBooleanFromNumberInstagramAcconts(data)
 

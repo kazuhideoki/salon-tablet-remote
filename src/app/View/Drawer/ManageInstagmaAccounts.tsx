@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme: Theme) =>
     reconnect_needed: {
       color: theme.palette.error.main,
     },
+    reconnectButton: {
+      textDecoration: 'none',
+    },
     skeleton: {
       width: 160,
       height: 38,
@@ -85,13 +88,14 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
           {value.username}
         </Button>
         {value.is_reconnect_needed ? (
-          <Button
-            disableRipple
-            className={classes.reconnect_needed}
-            variant="text"
-          >
-            要再連携
-          </Button>
+          <a href={props.instaAuth} className={classes.reconnectButton}>
+            <Button
+              className={classes.reconnect_needed}
+              variant="text"
+            >
+              要再連携
+            </Button>
+          </a>
         ) : null}
         <DeleteButton
           onClick={props.deleteInstagramAccount}
