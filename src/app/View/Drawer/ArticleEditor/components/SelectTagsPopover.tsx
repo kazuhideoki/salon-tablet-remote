@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 
-import { TagsButton } from '../../Footer/PaginationBar/TagsButton';
+import { TagsButton } from '../../../Footer/PaginationBar/TagsButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,14 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, className}) => {
   const classes = useStyles();
-  // const [selectedTags, setSelectedTags ] = React.useState([])
 
-  // const { appState } = React.useContext(Store)
-  // const {tags} = appState
-
-  const theme = useTheme()
-
-  
   const handleOnClick = (tagId: number) => {
     // 重複選択を防ぐため、すでに含まれていなかったらsetState
     if (!selectedTags.includes(tagId)) {
@@ -48,10 +41,10 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, classNa
   const handleDelete = (tagId: number) => {
     // selectedTagsからtagIdひとつひとつけす
 
-    const newselectedTags = selectedTags.filter((value) => {
+    const newSelectedTags = selectedTags.filter((value) => {
       return value !== tagId;
     });
-    setSelectedTags(newselectedTags);
+    setSelectedTags(newSelectedTags);
   }
 
   // 選択されたタグのtag_idをtag_nameと照合して表示
@@ -94,7 +87,6 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, classNa
       >
         タグ
       </Button>
-      {/* ButtonをタップするとPopoverが表示される */}
       <Popover
         id={id}
         open={open}

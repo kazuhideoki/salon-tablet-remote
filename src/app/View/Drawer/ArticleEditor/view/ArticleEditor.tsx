@@ -1,18 +1,17 @@
 import React from "react";
 import dynamic from "next/dynamic";
-const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
+const QuillEditor = dynamic(() => import("../../Editor/QuillEditor"), {
   ssr: false,
 });
 import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
-import { useCreateArticle, TCreateArticle } from "../../../ActionCreator/articles/useCreateArticle";
-import { useUpdateArticle } from "../../../ActionCreator/articles/useUpdateArticle";
-import { sqlToDate } from "../../../ActionCreator/organizeSql/sqlToDate";
-import { SelectTagsPopover } from "./SelectTagsPopover";
-import { CharCounter } from "../../../pureComponents/CharCounter";
-import { Store } from "../../../Store/Store";
+import { TCreateArticle } from "../../../../ActionCreator/articles/useCreateArticle";
+import { SelectTagsPopover } from "../components/SelectTagsPopover";
+import { CharCounter } from "../../../../pureComponents/CharCounter";
+import { Store } from "../../../../Store/Store";
 import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
-import { SwitchDataTypeBox } from "../Editor/SwitchDataTypeBox";
+import { SwitchDataTypeBox } from "../../Editor/SwitchDataTypeBox";
 import pure from "recompose/pure";
+import { useHandleSubmit } from '../context/useHandleSubmit'
 
 
 const useArticleEditorProps = () => {
@@ -45,31 +44,22 @@ const useArticleEditorProps = () => {
   const [charCountArticleContent, setCharCountArticleContent] = React.useState(
     0
   );
-  const createArticle = useCreateArticle();
-  const updateArticle = useUpdateArticle();
 
   const handleOnChangeTitleText = (e) => {
     setTitleText(e.target.value);
   };
 
-  const handleSubmit = ({ is_published }) => {
-    const params: TCreateArticle = {
-      is_published: is_published,
-      titleText,
-      editorText,
-      editorTextExcerpt,
-      editorImg,
-      selectedTags,
-      dataType
-    };
-    // 記事編集
-    if (isEditting) {
-      updateArticle(params);
-      // 記事作成
-    } else {
-      createArticle(params);
-    }
+  const params: TCreateArticle = {
+    is_published: null,
+    titleText,
+    editorText,
+    editorTextExcerpt,
+    editorImg,
+    selectedTags,
+    dataType
   };
+
+  const handleSubmit = useHandleSubmit(params, isEditting)
 
   return {
     is_admin,
@@ -99,8 +89,7 @@ const useArticleEditorProps = () => {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // display: 'flex',
-      // flexDirection: 'column',
+
     },
     header: {
       margin: theme.spacing(2),
@@ -174,13 +163,6 @@ export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = 
                />
              </div>
 
-             {/* {props.createdAt ? (
-          <Typography>作成日:{sqlToDate(props.createdAt)}</Typography>
-        ) : null}
-        {props.updatedAt ? (
-          <Typography>編集日:{sqlToDate(props.updatedAt)}</Typography>
-        ) : null} */}
-
              <QuillEditor
                editorText={props.editorText}
                setEditorText={props.setEditorText}
@@ -235,7 +217,7 @@ export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = 
            </div>
          );
        };
-// export const ArticleEditorPresenter = React.memo(ArticleEditorPresenterOriginal)
+
 export const ArticleEditorPresenter = pure(ArticleEditorPresenterOriginal)
 
 const ArticleEditor = () => {
