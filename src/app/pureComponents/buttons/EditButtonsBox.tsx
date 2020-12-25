@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
 import { SwitchOrderButton } from "./SwitchOrderButton";
-import { TUseSwitchOrders } from "../../../ActionCreator/footerItems/useSwitchOrder";
+import { TUseSwitchOrders } from "../../ActionCreator/footerItems/useSwitchOrder";
 import { UpdateButton, TUpdateButton } from "./UpdateButton";
 import { DeleteButton, TDeleteButton } from "./DeleteButton";
 

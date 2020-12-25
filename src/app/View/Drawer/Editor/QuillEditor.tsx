@@ -4,7 +4,7 @@ import ReactQuill, { Quill }from "react-quill";
 
 import { Typography } from '@material-ui/core';
 import { checkImg, removeImg } from "./()handleImg";
-import { CharCounter } from '../../viewComponents/CharCounter';
+import { CharCounter } from '../../../pureComponents/CharCounter';
 import { removeExceededImgs } from './removeExceededImgs';
 
 

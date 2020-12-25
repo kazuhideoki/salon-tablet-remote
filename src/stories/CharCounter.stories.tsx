@@ -1,6 +1,6 @@
 import React from 'react';
 //@ts-ignore
-import { CharCounter, TCharCounter } from '../app/View/viewComponents/CharCounter';
+import { CharCounter, TCharCounter } from '../app/pureComponents/CharCounter';
 export default {
   title: 'viewComponents/CharCounter',
   component: CharCounter,

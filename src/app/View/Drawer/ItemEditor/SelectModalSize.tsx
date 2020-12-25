@@ -5,13 +5,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Store } from "../../Store/Store";
-import { T_modal_size } from "../../Store/Types";
-import { HelpButton } from "../viewComponents/buttons/HelpButton";
+import { Store } from "../../../Store/Store";
+import { T_modal_size } from "../../../Store/Types";
+import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
 import { useMediaQuery } from "@material-ui/core";
-import { useIsMobile } from "../../../lib/useIsMobile";
-import { TUseFooterItemEditorProps } from "../Drawer/ItemEditor/FooterItemEditor";
-import { TFooterItemEdittingParams } from "../../ActionCreator/footerItems/useCreateFooterItem";
+import { useIsMobile } from "../../../../lib/useIsMobile";
+import { TUseFooterItemEditorProps } from "./FooterItemEditor";
+import { TFooterItemEdittingParams } from "../../../ActionCreator/footerItems/useCreateFooterItem";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 

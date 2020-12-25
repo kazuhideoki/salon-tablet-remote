@@ -7,7 +7,7 @@ import {
   FormLabel,
 } from "@material-ui/core";
 import { TUseManageThemeProps } from "./ManageTheme";
-import { HelpButton } from "../../viewComponents/buttons/HelpButton";
+import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
 
 export const SelectShowArticleType = (props: TUseManageThemeProps) => {
   return (

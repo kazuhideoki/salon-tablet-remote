@@ -15,12 +15,12 @@ import {
 } from "../../Store/Types";
 import { IconAndText } from "./IconAndText";
 import { PPagination } from "./PaginationBar/PPagination";
-import { UpdateButton } from "../viewComponents/buttons/UpdateButton";
-import { DeleteButton } from "../viewComponents/buttons/DeleteButton";
-import { SwitchOrderButton } from "../viewComponents/buttons/SwitchOrderButton";
+import { UpdateButton } from "../../pureComponents/buttons/UpdateButton";
+import { DeleteButton } from "../../pureComponents/buttons/DeleteButton";
+import { SwitchOrderButton } from "../../pureComponents/buttons/SwitchOrderButton";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
 import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
-import { EditButtonsBox } from "../viewComponents/buttons/EditButtonsBox";
+import { EditButtonsBox } from "../../pureComponents/buttons/EditButtonsBox";
 import { showDataType } from "../Main/components/showDataType";
 import { useIsMobile } from "../../../lib/useIsMobile";
 // import { useCalcFooterPadding } from "./useCalcFooterPadding";

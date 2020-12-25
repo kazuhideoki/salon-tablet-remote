@@ -14,12 +14,12 @@ import { MoodBad } from "@material-ui/icons";
 import { TUseDrawerProps } from "../Drawer";
 import { IconsSetting } from "../ItemEditor/iconSelect/icons";
 import { TThemeArgs } from "../../../Store/ThemeContext";
-import { EditButtonsBox } from "../../viewComponents/buttons/EditButtonsBox";
-import { UpdateButton } from "../../viewComponents/buttons/UpdateButton";
-import { DeleteButton } from "../../viewComponents/buttons/DeleteButton";
+import { EditButtonsBox } from "../../../pureComponents/buttons/EditButtonsBox";
+import { UpdateButton } from "../../../pureComponents/buttons/UpdateButton";
+import { DeleteButton } from "../../../pureComponents/buttons/DeleteButton";
 import { FooterItem } from "../../../Store/Types";
 import { showDataType } from "../../Main/components/showDataType";
-import { SwitchOrderButton } from "../../viewComponents/buttons/SwitchOrderButton";
+import { SwitchOrderButton } from "../../../pureComponents/buttons/SwitchOrderButton";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({

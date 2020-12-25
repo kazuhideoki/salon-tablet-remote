@@ -6,9 +6,9 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import { EditButtonsBox } from "../../viewComponents/buttons/EditButtonsBox";
-import { DeleteButton } from "../../viewComponents/buttons/DeleteButton";
-import { UpdateButton } from "../../viewComponents/buttons/UpdateButton";
+import { EditButtonsBox } from "../../../pureComponents/buttons/EditButtonsBox";
+import { DeleteButton } from "../../../pureComponents/buttons/DeleteButton";
+import { UpdateButton } from "../../../pureComponents/buttons/UpdateButton";
 import { TUseMainProps, TMainClasses } from "../PMain";
 import { showDataType } from "./showDataType";
 import { Skeleton } from "@material-ui/lab";

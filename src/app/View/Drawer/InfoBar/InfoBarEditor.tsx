@@ -5,7 +5,7 @@ const SmallQuillEditor = dynamic(() => import("./SmallQuillEditor"), {
 });
 import { Button, Typography, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
 import { Store } from "../../../Store/Store";
-import { CharCounter } from "../../viewComponents/CharCounter";
+import { CharCounter } from "../../../pureComponents/CharCounter";
 import { SwitchOnTapInfoBar } from "./SwitchOnTapInfoBar";
 import { SelectArticleInfoBar } from "./SelectArticleInfoBar";
 import { useUpdateInfoBar, TUseUpdateInfoBar } from "../../../ActionCreator/infoBar/useUpdateInfoBar";

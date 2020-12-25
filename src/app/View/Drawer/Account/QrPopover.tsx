@@ -43,7 +43,7 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
            setQrAnchorEl(event.currentTarget);
          };
 
-         const handleClose = () => {
+         const handleClose = () => { 
            setQrAnchorEl(null);
          };
 
