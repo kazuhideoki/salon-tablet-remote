@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { instagramRedirectHost } from '../../../lib/loadUrl';
 import { Store } from '../../Store/Store';
-import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
+import { DeleteButton } from '../../pureComponents/buttons/DeleteButton';
 import { useDeleteInstagramAccount } from '../../ActionCreator/instagramAccounts/useDeleteInstagramAccounts'
 import { grey } from '@material-ui/core/colors';
 import { useGetInstagramMedias } from '../../ActionCreator/instagramMedias/useGetInstagramMedias';

@@ -4,9 +4,9 @@ import { usePMainProps } from '../Main/PMain';
 import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea, Chip } from '@material-ui/core';
 import { Store } from '../../Store/Store';
 import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle';
-import { EditButtonsBox } from '../viewComponents/buttons/EditButtonsBox';
-import { UpdateButton } from '../viewComponents/buttons/UpdateButton';
-import { DeleteButton } from '../viewComponents/buttons/DeleteButton';
+import { EditButtonsBox } from '../../pureComponents/buttons/EditButtonsBox';
+import { UpdateButton } from '../../pureComponents/buttons/UpdateButton';
+import { DeleteButton } from '../../pureComponents/buttons/DeleteButton';
 import { showDataType } from '../Main/components/showDataType';
 
 export const useMainMobileProps = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, makeStyles, createStyles, Theme, CardActionArea } from '@material-ui/core'
 import { Store } from '../Store/Store'
-import { EditButtonsBox } from './viewComponents/buttons/EditButtonsBox';
+import { EditButtonsBox } from '../pureComponents/buttons/EditButtonsBox';
 
 const useInfoBarProps = () => {
 

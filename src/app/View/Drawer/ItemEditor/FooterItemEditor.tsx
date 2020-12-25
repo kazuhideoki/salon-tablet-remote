@@ -11,11 +11,11 @@ import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, S
 import { SelectAppLink } from './SelectAppLink';
 import { Store } from "../../../Store/Store";
 import { FooterItem, T_modal_size } from '../../../Store/Types';
-import { CharCounter } from "../../viewComponents/CharCounter";
-import { SelectModalSize } from '../../Setting/SelectModalSize';
+import { CharCounter } from "../../../pureComponents/CharCounter";
+import { SelectModalSize } from './SelectModalSize';
 import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
 import { IconsSetting } from './iconSelect/icons';
-import { HelpButton } from '../../viewComponents/buttons/HelpButton';
+import { HelpButton } from '../../../pureComponents/buttons/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
 import { SwitchDataTypeBox } from '../Editor/SwitchDataTypeBox';
 import { useIsMobile } from '../../../../lib/useIsMobile';

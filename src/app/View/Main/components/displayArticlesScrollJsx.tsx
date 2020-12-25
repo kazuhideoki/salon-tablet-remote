@@ -1,5 +1,5 @@
 import { Grid, CardActionArea, Card, Button, Typography } from "@material-ui/core";
-import { EditButtonsBox } from "../../viewComponents/buttons/EditButtonsBox";
+import { EditButtonsBox } from "../../../pureComponents/buttons/EditButtonsBox";
 import { TUseMainProps, TMainClasses } from "../PMain";
 import { showDataType } from "./showDataType";
 import { Skeleton } from "@material-ui/lab";

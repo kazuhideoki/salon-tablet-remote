@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { HelpButton } from "../../viewComponents/buttons/HelpButton";
+import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
 import { TThemeParams } from "../../../Store/ThemeContext";
 import { useChangeTheme } from "../../../ActionCreator/user/useChangeTheme";
 import { Store } from "../../../Store/Store";

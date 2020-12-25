@@ -2,7 +2,7 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { Slide, DialogContent, makeStyles, createStyles, useTheme, Fade } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
-import { CloseButton } from "../viewComponents/buttons/CloseButton";
+import { CloseButton } from "../../pureComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("../Main/ContentModal"), {
   ssr: false,
@@ -18,7 +18,7 @@ import { SelectTags } from "../Footer/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/ManageUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/DeleteAccountForm";
-import { useModalSize, medium } from "../viewComponents/useModalSize";
+import { useModalSize, medium } from "./useModalSize";
 import { StyledDialog } from "./StyledDialog";
 import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";

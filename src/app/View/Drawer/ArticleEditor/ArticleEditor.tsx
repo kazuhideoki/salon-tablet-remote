@@ -8,7 +8,7 @@ import { useCreateArticle, TCreateArticle } from "../../../ActionCreator/article
 import { useUpdateArticle } from "../../../ActionCreator/articles/useUpdateArticle";
 import { sqlToDate } from "../../../ActionCreator/organizeSql/sqlToDate";
 import { SelectTagsPopover } from "./SelectTagsPopover";
-import { CharCounter } from "../../viewComponents/CharCounter";
+import { CharCounter } from "../../../pureComponents/CharCounter";
 import { Store } from "../../../Store/Store";
 import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
 import { SwitchDataTypeBox } from "../Editor/SwitchDataTypeBox";

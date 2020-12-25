@@ -16,7 +16,7 @@ import {
 import { Store } from "../../../Store/Store";
 import { QrPopover } from "./QrPopover";
 import { apiUserInfoSwitchGeneratePublicPage } from "../../../../pages/api/user_info/switch_generate_public_page";
-import { HelpButton } from "../../viewComponents/buttons/HelpButton";
+import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
 import { useGoogleSearchProps } from "../../Footer/GoogleSearch";
 
 const useSettingUserInfoProps = () => {

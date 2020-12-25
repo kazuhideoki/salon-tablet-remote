@@ -3,7 +3,7 @@ import { Typography, makeStyles, Theme, createStyles, Button } from "@material-u
 import { Store } from '../../Store/Store';
 import { useGetInstagramMedias } from '../../ActionCreator/instagramMedias/useGetInstagramMedias';
 import { useIsMobile } from '../../../lib/useIsMobile';
-import { HelpButton } from '../viewComponents/buttons/HelpButton';
+import { HelpButton } from '../../pureComponents/buttons/HelpButton';
 
 export const useSelectInstagramAccountsProps = () => {
 
