@@ -1,5 +1,5 @@
 import React from 'react';
-import {InfoBarEditorPresenter} from '../app/View/Drawer/InfoBar/InfoBarEditor';
+import {InfoBarEditorPresenter} from '../app/View/Drawer/InfoBar/view/InfoBarEditor';
 import { T_info_bar_type } from '../app/Store/Types';
 import { sampleAllArticles } from './lib/sampleAllArticles';
 export default {

@@ -24,7 +24,7 @@ import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 import { TSetModal, T_selected_theme } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
-import InfoBarEditor from "../Drawer/InfoBar/InfoBarEditor";
+import InfoBarEditor from "../Drawer/InfoBar/view/InfoBarEditor";
 import { GoogleSearch } from "../Footer/GoogleSearch";
 import { PageNotEmailVerified } from "../../../pageComponent/PageNotEmailVerified";
 

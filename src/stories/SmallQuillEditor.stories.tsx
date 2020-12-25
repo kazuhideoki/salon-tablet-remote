@@ -1,10 +1,9 @@
 import React from 'react';
-import SmallQuillEditor from '../app/View/Drawer/InfoBar/SmallQuillEditor';
+import SmallQuillEditor from '../app/View/Drawer/InfoBar/components/SmallQuillEditor';
 export default {
   title: 'Drawer/InfoBar/SmallQuillEditor',
   component: SmallQuillEditor,
 };
-
 
 export const Normal = () => {
   const [editorText, setEditorText] = React.useState('')

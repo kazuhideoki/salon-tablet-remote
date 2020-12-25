@@ -8,12 +8,11 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import { TAllArticles } from "../../../Store/Types";
+import { TAllArticles } from "../../../../Store/Types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
-      // margin: theme.spacing(1),
       minWidth: 120,
     },
     selectEmpty: {
@@ -57,7 +56,6 @@ export const SelectArticleInfoBar: React.FC<Props> = ({
                }
                label="記事"
              >
-               {/* <ArticleInfoBars/> */}
                <MenuItem value="">
                  <em>None</em>
                </MenuItem>

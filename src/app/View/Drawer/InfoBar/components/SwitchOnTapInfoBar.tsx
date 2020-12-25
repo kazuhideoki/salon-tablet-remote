@@ -4,12 +4,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
-import { T_on_tap, T_info_bar_type } from "../../../Store/Types";
-import { AppStateAction } from "../../../Reducer/AppStateAction";
-
-const useStyles = makeStyles((theme: Theme) => createStyles({}));
+import { T_info_bar_type } from "../../../../Store/Types";
 
 type Props = {
   infoBarType: T_info_bar_type;
@@ -17,13 +12,11 @@ type Props = {
   className?: string;
 };
 
-// export const SwitchOnTapInfoBar = ({ onTap, setOnTap }) => {
 export const SwitchOnTapInfoBar: React.FC<Props> = ({
          infoBarType,
          setInfoBarType,
          className,
        }) => {
-         const classes = useStyles();
 
          const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           setInfoBarType(event.target.value as T_info_bar_type)

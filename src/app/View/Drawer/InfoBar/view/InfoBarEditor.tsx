@@ -1,16 +1,18 @@
 import React from "react";
 import dynamic from "next/dynamic";
-const SmallQuillEditor = dynamic(() => import("./SmallQuillEditor"), {
+const SmallQuillEditor = dynamic(() => import("../components/SmallQuillEditor"), {
   ssr: false,
 });
 import { Button, Typography, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
-import { Store } from "../../../Store/Store";
-import { CharCounter } from "../../../pureComponents/CharCounter";
-import { SwitchOnTapInfoBar } from "./SwitchOnTapInfoBar";
-import { SelectArticleInfoBar } from "./SelectArticleInfoBar";
-import { useUpdateInfoBar, TUseUpdateInfoBar } from "../../../ActionCreator/infoBar/useUpdateInfoBar";
+import { Store } from "../../../../Store/Store";
+import { CharCounter } from "../../../../pureComponents/CharCounter";
+import { SwitchOnTapInfoBar } from "../components/SwitchOnTapInfoBar";
+import { SelectArticleInfoBar } from "../components/SelectArticleInfoBar";
+import { TUseUpdateInfoBar } from "../../../../ActionCreator/infoBar/useUpdateInfoBar";
 import { PublishTwoTone } from "@material-ui/icons";
+import { useHandleSubmit } from "../context/useHandleSubmit";
 
+const scrollingAnimationDuration = (charCount: number) => (32 * charCount) / 245 + 8; // アニメーションの再生時間がが文字数に応じて増え、どの文字数でもある程度同じスピードで再生されるように調整
 
 const useInfoBarEditorProps = () => {
   const { appState } = React.useContext(Store)
@@ -23,19 +25,14 @@ const useInfoBarEditorProps = () => {
   );
   const [charCount, setCharCount] = React.useState(0);
 
-  const updateInfoBar = useUpdateInfoBar()
-
-  const handleSubmit = () => {
-    
-    const params: TUseUpdateInfoBar = {
-      infoBarType,
-      editorText,
-      articleInfoBar,
-      ScrollingAnimationDuration: (32 * charCount) / 245 + 8, // アニメーションの再生時間がが文字数に応じて増え、どの文字数でもある程度同じスピードで再生されるように調整
-    };    
-    updateInfoBar(params)  
-  };
-
+  const params: TUseUpdateInfoBar = {
+    infoBarType,
+    editorText,
+    articleInfoBar,
+    ScrollingAnimationDuration: scrollingAnimationDuration(charCount),
+  };    
+  
+  const handleSubmit = useHandleSubmit(params)
 
   return {
     infoBarType,
