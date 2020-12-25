@@ -9,8 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Info } from "@material-ui/icons";
-import { useDeleteUser } from "../../../ActionCreator/user/useDeleteUser";
-import { server } from "../../../../lib/loadUrl";
+import { useDeleteUser } from "../../../../ActionCreator/user/useDeleteUser";
+import { server } from "../../../../../lib/loadUrl";
 
 function Copyright() {
   return (

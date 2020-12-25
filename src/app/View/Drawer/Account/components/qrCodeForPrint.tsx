@@ -1,8 +1,8 @@
 import React from 'react'
 import { Typography, useTheme } from '@material-ui/core';
-import { TUseSettingUserInfoProps } from './ManageUserInfo';
+import { TUseSettingUserInfoProps } from '../view/ManageUserInfo';
 import QRCode from 'qrcode.react'
-import { server } from '../../../../lib/loadUrl';
+import { server } from '../../../../../lib/loadUrl';
 
 type Props = TUseSettingUserInfoProps &  {ref: React.MutableRefObject<undefined>}
 

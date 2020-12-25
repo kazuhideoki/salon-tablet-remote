@@ -10,23 +10,20 @@ import Container from "@material-ui/core/Container";
 import { Settings } from "@material-ui/icons";
 import { Divider, Switch, FormControlLabel, FormGroup } from "@material-ui/core";
 import {
-  useUpdateUser,
   TUpdateUser,
-} from "../../../ActionCreator/user/useUpdateUser";
-import { Store } from "../../../Store/Store";
-import { QrPopover } from "./QrPopover";
-import { apiUserInfoSwitchGeneratePublicPage } from "../../../../pages/api/user_info/switch_generate_public_page";
-import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
-import { useGoogleSearchProps } from "../../Footer/GoogleSearch";
+} from "../../../../ActionCreator/user/useUpdateUser";
+import { Store } from "../../../../Store/Store";
+import { QrPopover } from "../components/QrPopover";
+import { HelpButton } from "../../../../pureComponents/buttons/HelpButton";
+import { useGoogleSearchProps } from "../../../Footer/GoogleSearch";
+import { useOpenDeleteAccountForm } from "../context/useOpenDeleteAccountForm";
+import { useHandleOnSubmit } from "../context/useHandleOnSubmit";
+import { useHandleSwitch } from "../context/useHandleSwitch";
 
 const useSettingUserInfoProps = () => {
-
-  const { appState, dispatchAppState } = React.useContext(Store)
+  const { appState } = React.useContext(Store)
   const {userInfo} = appState
 
-  const updateUser = useUpdateUser()
-
-  // SettingUserInfoのTextField
   const [name, setName] = React.useState(userInfo.user_name || '');
   const [shopName, setShopName] = React.useState(userInfo.shop_name || '');
   const [email, setEmail] = React.useState(userInfo.user_email);
@@ -41,26 +38,11 @@ const useSettingUserInfoProps = () => {
     isShowMobile,
   };
 
-  const handleOnSubmit = () => {
-    updateUser(params)
-  }
+  const handleOnSubmit = useHandleOnSubmit(params)
 
-  const openDeleteAccountForm = () => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: "delete_account_form" });
-  }
+  const openDeleteAccountForm = useOpenDeleteAccountForm()
 
-  const handleSwitch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    const result = await apiUserInfoSwitchGeneratePublicPage({
-      is_generate_public_page: e.target.checked,
-      user_id: userInfo.user_id,
-    });
-
-    dispatchAppState({
-      type: "SET_IS_GENERATE_PUBLIC_PAGE",
-      payload: { is_generate_public_page: result.is_generate_public_page },
-    });
-  };
+  const handleSwitch = useHandleSwitch()
 
   const { clearHistory } = useGoogleSearchProps()
 
@@ -73,12 +55,10 @@ const useSettingUserInfoProps = () => {
     password,
     setPassword,
     userInfo,
-    updateUser,
     handleOnSubmit,
     openDeleteAccountForm,
     isShowMobile,
     setIsShowMobile,
-    // showMobileAndCreateSlug,
     handleSwitch,
     clearHistory,
   };
