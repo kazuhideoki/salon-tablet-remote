@@ -1,11 +1,6 @@
 import React from 'react'
 import ReactQuill, { Quill }from "react-quill";
-
-
-import { Typography } from '@material-ui/core';
-import { checkImg, removeImg } from "./()handleImg";
-import { CharCounter } from '../../../pureComponents/CharCounter';
-import { removeExceededImgs } from './removeExceededImgs';
+import { removeExceededImgs } from '../context/removeExceededImgs';
 
 
 // ※■■■ReactQuillのスタイルはquill.scssに記述■■■
@@ -28,8 +23,8 @@ Quill.register("modules/imageCompress", ImageCompress);
 
 // 画像サイズ変更のモジュールregister
 import ImageResize from "quill-image-resize";
-import { Resize } from './quillImageResizeModuleFixedForTouchEvent';
-import { Toolbar } from './toolbar';
+import { Resize } from '../context/quill/quillImageResizeModuleFixedForTouchEvent';
+import { Toolbar } from '../context/quill/toolbar';
 Quill.register("modules/imageResize", ImageResize);
 
 
@@ -37,11 +32,10 @@ type Props = {
   editorText: string,
   setEditorText: React.Dispatch<React.SetStateAction<string>>,
   setEditorTextExcerpt: React.Dispatch<React.SetStateAction<string>>,
-  charCount: number;
   setCharCount:React.Dispatch<React.SetStateAction<number>>,
   setEditorImg?: React.Dispatch<React.SetStateAction<string>>,
 }
-export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, charCount, setCharCount }) => {  
+export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEditorTextExcerpt, setEditorImg, setCharCount }) => {  
   
   const [hasMaxImgs, setHasMaxImgs] = React.useState(false)
   
@@ -65,7 +59,6 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
     ImgNode.forEach(element => {
       element.removeAttribute("height")
     });
-
 
     // サムネイルのセット
     // ↓パフォーマンスが悪いときはuseMemoか？
@@ -96,17 +89,8 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
     imageResize: {
       parchment: Quill.import("parchment"),
       // ResizeはimageのResizeをtouchイベントでも適応
-      // modules: [ "DisplaySize", "Toolbar", Resize],
-      // modules: [ "DisplaySize", Toolbar, Resize],
       modules: [ "DisplaySize", Toolbar, Resize],
     },
-    
-    // imageDrop: true,
-
-    // imageDropAndPaste: {
-    //   // add an custom image handler
-    //   handler: imageHandler,
-    // }
   };
 
   return (
@@ -121,9 +105,7 @@ export const QuillEditor:React.FC<Props> = ({ editorText, setEditorText, setEdit
         }
         theme="snow"
         modules={modules}
-        scrollingContainer='body'
-        // formats={formats}
-        
+        scrollingContainer='body'        
       />
     </>
   );

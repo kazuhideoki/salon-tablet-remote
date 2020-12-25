@@ -1,6 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
-const QuillEditor = dynamic(() => import("../../Editor/QuillEditor"), {
+const QuillEditor = dynamic(() => import("../../QuillEditor/view/QuillEditor"), {
   ssr: false,
 });
 import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
@@ -9,7 +9,7 @@ import { SelectTagsPopover } from "../components/SelectTagsPopover";
 import { CharCounter } from "../../../../pureComponents/CharCounter";
 import { Store } from "../../../../Store/Store";
 import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
-import { SwitchDataTypeBox } from "../../Editor/SwitchDataTypeBox";
+import { SwitchDataTypeBox } from "../../QuillEditor/components/SwitchDataTypeBox";
 import pure from "recompose/pure";
 import { useHandleSubmit } from '../context/useHandleSubmit'
 
@@ -168,7 +168,6 @@ export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = 
                setEditorText={props.setEditorText}
                setEditorTextExcerpt={props.setEditorTextExcerpt}
                setEditorImg={props.setEditorImg}
-               charCount={props.charCountArticleContent}
                setCharCount={props.setCharCountArticleContent}
              />
 

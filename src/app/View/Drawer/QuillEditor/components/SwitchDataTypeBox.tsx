@@ -4,12 +4,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
-import { T_on_tap, T_data_type_article, T_data_type_footer_item } from "../../../Store/Types";
-import { AppStateAction } from "../../../Reducer/AppStateAction";
-
-const useStyles = makeStyles((theme: Theme) => createStyles({}));
+import { T_data_type_article, T_data_type_footer_item } from "../../../../Store/Types";
 
 type Props = {
   dataType: T_data_type_article | T_data_type_footer_item
@@ -24,7 +19,6 @@ export const SwitchDataTypeBox: React.FC<Props> = ({
          className,
          forFooter = false,
        }) => {
-         const classes = useStyles();
 
          const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
            setDataType(event.target.value as T_data_type_article | T_data_type_footer_item)

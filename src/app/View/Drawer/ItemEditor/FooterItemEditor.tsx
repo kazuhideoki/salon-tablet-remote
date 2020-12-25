@@ -1,7 +1,7 @@
 import React from 'react'
 import { SelectIcon } from "./iconSelect/SelectIcon";
 import dynamic from "next/dynamic";
-const QuillEditor = dynamic(() => import("../Editor/QuillEditor"), {
+const QuillEditor = dynamic(() => import("../QuillEditor/view/QuillEditor"), {
   ssr: false,
 });
 import { SwitchOnTapModal } from "./SwitchOnTapModal";
@@ -17,7 +17,7 @@ import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
 import { IconsSetting } from './iconSelect/icons';
 import { HelpButton } from '../../../pureComponents/buttons/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
-import { SwitchDataTypeBox } from '../Editor/SwitchDataTypeBox';
+import { SwitchDataTypeBox } from '../QuillEditor/components/SwitchDataTypeBox';
 import { useIsMobile } from '../../../../lib/useIsMobile';
 
 const useFooterItemEditorProps = () => {
@@ -224,7 +224,6 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                    editorText={props.editorText}
                    setEditorText={props.setEditorText}
                    setEditorTextExcerpt={props.setEditorTextExcerpt}
-                   charCount={props.charCountFooterItemContent}
                    setCharCount={props.setCharCountFooterItemContent}
                  />
                  <div className={classes.charCounter}>
