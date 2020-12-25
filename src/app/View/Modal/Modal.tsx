@@ -13,7 +13,7 @@ const FooterItemModal = dynamic(() => import("../Footer/FooterItemModal"), {
 import ArticleEditor from "../Drawer/ArticleEditor/view/ArticleEditor";
 import FooterItemEditor from "../Drawer/FooterItemEditor/view/FooterItemEditor";
 import { FeedbackForm } from "../Drawer/FeedbackForm";
-import { ManageTheme } from "../Drawer/ManageTheme/ManageTheme";
+import { ManageTheme } from "../Drawer/ManageTheme/view/ManageTheme";
 import { SelectTags } from "../Footer/SelectTags";
 import { ManageTags } from "../Drawer/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/view/ManageUserInfo";

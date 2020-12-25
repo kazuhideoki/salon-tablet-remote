@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormControl, RadioGroup, FormControlLabel, Radio, FormLabel } from '@material-ui/core';
-import { TUseManageThemeProps } from './ManageTheme'
+import { TUseManageThemeProps } from '../view/ManageTheme'
 
 export const SelectTheme = (props: TUseManageThemeProps) => {
          return (

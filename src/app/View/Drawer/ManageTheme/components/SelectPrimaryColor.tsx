@@ -1,9 +1,9 @@
 import React from 'react'
 import { TextField, Popover } from '@material-ui/core'
-import { SketchPicker, SwatchesPicker } from "react-color";
+import { SwatchesPicker } from "react-color";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { FiberManualRecord } from '@material-ui/icons';
-import { TUseManageThemeProps } from './ManageTheme';
+import { TUseManageThemeProps } from '../view/ManageTheme';
 
 type Props = TUseManageThemeProps & {className?: string}
 

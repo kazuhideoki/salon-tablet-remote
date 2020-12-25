@@ -28,6 +28,7 @@ export const useDrawerProps = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
   const { signout } = useAuth()
   const { isSetting, isPublicPage, isDrawerOpen, footerItems} = appState
+  
   const getArticles = useGetArticles()
   
   const handleSwitchIsSetting = () => {

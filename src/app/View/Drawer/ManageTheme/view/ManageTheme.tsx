@@ -1,30 +1,31 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
-import { TThemeParams } from "../../../Store/ThemeContext";
-import { useChangeTheme } from "../../../ActionCreator/user/useChangeTheme";
-import { Store } from "../../../Store/Store";
+import { HelpButton } from "../../../../pureComponents/buttons/HelpButton";
+import { TThemeParams } from "../../../../Store/ThemeContext";
+import { Store } from "../../../../Store/Store";
 import { Divider, Typography } from "@material-ui/core";
-import { SelectTheme } from "./SelectTheme";
-import { SelectShowArticleType } from "./SelectShowArticleType";
-import { useChangeShowArticleType } from "../../../ActionCreator/user/useChangeShowArticleType";
-import { T_show_article_type, T_selected_theme, T_theme_color, T_footer_icon_size } from "../../../Store/Types";
-import { SelectPrimaryColor } from "./SelectPrimaryColor";
-import { useChangeThemeColor } from "../../../ActionCreator/user/useChangeThemeColor";
-import { SelectFont } from "./SelectFont";
-import { TFont1, TFont2, fonts2, fonts1 } from "../../../Store/themes/fonts";
-import { useChangeThemeFont } from "../../../ActionCreator/user/useChangeThemeFont";
+import { SelectTheme } from "../components/SelectTheme";
+import { SelectShowArticleType } from "../components/SelectShowArticleType";
+import { T_show_article_type, T_selected_theme, T_theme_color, T_footer_icon_size } from "../../../../Store/Types";
+import { SelectPrimaryColor } from "../components/SelectPrimaryColor";
+import { SelectFont } from "../components/SelectFont";
+import { TFont1, TFont2, fonts2, fonts1 } from "../../../../Store/themes/fonts";
 import { FiberManualRecord } from "@material-ui/icons";
-import { generateSecondaryColor } from "../../../../lib/color/generateSecondaryColor";
-import { secondaryColor } from "../../../../lib/color/secondaryColor";
-import { SelectFooterIconSize } from "./SelectFooterIconSize";
-import { useChangeFooterIconSize } from "../../../ActionCreator/user/useChangeFooterIconSize";
+import { generateSecondaryColor } from "../../../../../lib/color/generateSecondaryColor";
+import { secondaryColor } from "../../../../../lib/color/secondaryColor";
+import { SelectFooterIconSize } from "../components/SelectFooterIconSize";
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {isThemeParamsChanged} from '../../../Store/themes/paramsFromTheme'
-import { useAuth } from "../../../../lib/auth/AuthProvider";
+import {isThemeParamsChanged} from '../../../../Store/themes/paramsFromTheme'
+import { useAuth } from "../../../../../lib/auth/AuthProvider";
+import { useHandleChange } from "../context/useHandleChange";
+import { useHandleChangeThemeColor } from "../context/useHandleChangeThemeColor";
+import { useHandleChangeThemeFont1, useHandleChangeThemeFont2, useHandleChangeThemeFontHeading } from "../context/useHandleChangeThemeFont";
+import { useHandleChangeFooterIconSize } from "../context/useHandleChangeFooterIconSize";
+import { useHandleChangeShowArticleType } from "../context/useHandleChangeShowArticleType";
+import { useHandleAccordion } from "../context/useHandleAccordion";
 var colorConvert = require("color-convert");
 
 export type THsl = {
@@ -35,89 +36,23 @@ export type THsl = {
 export type TColor = {hex: T_theme_color, hsl: THsl}
 
 export const useManageTheme = () => {
-
   const { appState } = React.useContext(Store)
-  const { selected_theme, theme_color, theme_font1, theme_font2, theme_font_heading, footer_icon_size, show_article_type } = appState.userInfo
-  const [font1, setFont1] = React.useState(theme_font1)
-  const [font2, setFont2] = React.useState(theme_font2)
-  const [fontHeading, setFontHeading] = React.useState(theme_font_heading);
-  const [footerIconSize, setFooterIconSize] = React.useState(
-    footer_icon_size
-  );
+  const { selected_theme, theme_color, show_article_type } = appState.userInfo
+
   const { user } = useAuth()
-  const changeTheme = useChangeTheme()
-  const changeThemeColor = useChangeThemeColor()
-  const changeThemeFont = useChangeThemeFont()
-  const changeFooterIconSize = useChangeFooterIconSize()
-  const changeShowArticleType = useChangeShowArticleType()
 
-  const themeParams: TThemeParams = {
-    selected_theme: selected_theme,
-    theme_color: theme_color,
-    theme_font1: theme_font1,
-    theme_font2: theme_font2,
-    theme_font_heading: theme_font_heading,
-}
-
-  const [expanded, setExpanded] = React.useState(isThemeParamsChanged(themeParams));
-
-  const handleAccordion = (panel: boolean) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
-    setExpanded(isExpanded ? true : false);
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    changeTheme((event.target as HTMLInputElement).value as T_selected_theme);
-  };
-  const handleChangeThemeColor = async (value: TColor) => {
-    
-    const isChanged = await changeThemeColor(value)
-    if (isChanged) {
-      const params = {
-        hex: value.hex,
-        hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`
-      }
-    }
-  }
-  const handleChangeThemeFont1 = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont1[0], 'theme_font1');
-    if (isChanged) {
-      setFont1(event.target.value as TFont1[0]);
-    }
-  };
-  const handleChangeThemeFont2 = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont2[0], 'theme_font2');
-    if (isChanged) {
-      setFont2(event.target.value as TFont2[0]);
-    }
-  };
-  const handleChangeThemeFontHeading = async (event: React.ChangeEvent<{ value: unknown }>) => {
-    const isChanged = await changeThemeFont(event.target.value as TFont2[0], 'theme_font_heading');
-    if (isChanged) {
-      setFontHeading(event.target.value as TFont2[0]);
-    }
-  };
-
-  const handleChangeShowArticleType = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-         changeShowArticleType((event.target as HTMLInputElement).value as T_show_article_type);
-       };
-
-  const handleChangeFooterIconSize = async (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    const isChanged = await changeFooterIconSize(
-      event.target.value as T_footer_icon_size
-    );
-    if (isChanged) {
-      setFooterIconSize(event.target.value as T_footer_icon_size);
-    }
-  };
+  const {expanded, handleAccordion} = useHandleAccordion()
+  const handleChange = useHandleChange()
+  const handleChangeThemeColor = useHandleChangeThemeColor()
+  const {font1, handleChangeThemeFont1} = useHandleChangeThemeFont1()
+  const {font2, handleChangeThemeFont2} = useHandleChangeThemeFont2()
+  const {fontHeading, handleChangeThemeFontHeading} = useHandleChangeThemeFontHeading()
+  const handleChangeShowArticleType = useHandleChangeShowArticleType()
+  const {footerIconSize, handleChangeFooterIconSize} = useHandleChangeFooterIconSize()
 
   return {
     selected_theme,
     expanded,
-    // setExpanded,
     handleAccordion,
     theme_color,
     handleChangeThemeColor,
