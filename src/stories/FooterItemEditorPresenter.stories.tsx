@@ -1,7 +1,6 @@
 import React from 'react';
-import { FooterItemEditorPresenter, TUseFooterItemEditorProps } from '../app/View/Drawer/ItemEditor/FooterItemEditor';
-import { Provider } from './lib/ThemeProvider';
-import { WifiTwoTone } from '@material-ui/icons';
+import { FooterItemEditorPresenter, TUseFooterItemEditorProps } from '../app/View/Drawer/FooterItemEditor/view/FooterItemEditor';
+import { ThemeProvider } from './lib/ThemeProvider';
 import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 export default {
   title: 'Drawer/ItemEditor/FooterItemEditorPresenter',
@@ -11,16 +10,16 @@ export default {
 export const Normal = () => {
 
   return (
-    <Provider>
+    <ThemeProvider>
       <FooterItemEditorPresenter {...propsFooterItemEditor} />
-    </Provider>
+    </ThemeProvider>
   );
 }
 export const isMobile = () => {
 
   return (
-    <Provider>
+    <ThemeProvider>
       <FooterItemEditorPresenter {...propsFooterItemEditor} isMobile={true} />
-    </Provider>
+    </ThemeProvider>
   );
 }

@@ -4,29 +4,18 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Store } from "../../../Store/Store";
-import { T_modal_size } from "../../../Store/Types";
-import { HelpButton } from "../../../pureComponents/buttons/HelpButton";
-import { useMediaQuery } from "@material-ui/core";
-import { useIsMobile } from "../../../../lib/useIsMobile";
-import { TUseFooterItemEditorProps } from "./FooterItemEditor";
-import { TFooterItemEdittingParams } from "../../../ActionCreator/footerItems/useCreateFooterItem";
-
-const useStyles = makeStyles((theme: Theme) => createStyles({}));
+import { Store } from "../../../../Store/Store";
+import { T_modal_size } from "../../../../Store/Types";
+import { HelpButton } from "../../../../pureComponents/buttons/HelpButton";
+import { TUseFooterItemEditorProps } from "../view/FooterItemEditor";
+import { TFooterItemEdittingParams } from "../../../../ActionCreator/footerItems/useCreateFooterItem";
 
 type Props = TUseFooterItemEditorProps & {className?: string}
 
 export const SelectModalSize:React.FC<Props> = (props) => {
-  const classes = useStyles();
   const { appState, dispatchAppState} = React.useContext(Store)
-  // const isMobile = useMediaQuery("(max-width:480px)");
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // 変更後のmodalSizeも一緒にedittingParams.footerItemsに格納
-    const params:TFooterItemEdittingParams = {...props.edittingFooterItemParams, modalSizeRadio: event.target.value as T_modal_size}
-    dispatchAppState({ type: "SET_MODAL_SIZE", payload: params})
-  };
+  
 
   return (
     <div className={props.className}>
@@ -42,9 +31,9 @@ export const SelectModalSize:React.FC<Props> = (props) => {
           aria-label="modalSize"
           name="modalSize"
           value={props.modalSizeRadio}
-          onChange={handleChange}
+          onChange={props.handleChange}
         >
-          {/* ラジオボタンはstring型じゃないとうまく作動しない？ */}
+          {/* ラジオボタンはstring型じゃないとうまく作動しない */}
           <FormControlLabel
             value="fullScreen"
             control={<Radio />}

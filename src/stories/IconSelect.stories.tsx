@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   SelectIcon,
-  IconItem,
-} from "../app/View/Drawer/ItemEditor/iconSelect/SelectIcon";
+} from "../app/View/Drawer/FooterItemEditor/components/iconSelect/SelectIcon";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { EditorContext } from "../app/Store/EditorContext";
 import { WifiTwoTone } from '@material-ui/icons';
 import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 
@@ -21,11 +19,8 @@ export default {
   component: SelectIcon,
 };
 export const Normal = () => {
-  let selectedIcon = null, dispatchSelectedIcon
-
   return (
     <>
-      {/* <SelectIcon selectedIcon={selectedIcon} dispatchSelectedIcon={dispatchSelectedIcon}/> */}
       <SelectIcon {...props}/>
 
     </>
@@ -33,8 +28,6 @@ export const Normal = () => {
 };
 export const Selected = () => {
   const selectedIcon = [WifiTwoTone, "WifiTwoTone"]
-  let dispatchSelectedIcon;
-
   return (
     //@ts-ignore
       <SelectIcon {...props} selectedIcon={selectedIcon} />

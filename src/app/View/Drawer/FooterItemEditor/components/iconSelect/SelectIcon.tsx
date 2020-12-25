@@ -2,11 +2,11 @@ import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { Popover, Button, TextField, IconButton, SvgIconTypeMap, Typography } from '@material-ui/core';
+import { Popover, Button, SvgIconTypeMap } from '@material-ui/core';
 import { IconsSetting } from "./icons";
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { MoodBad, AddCircleOutlineOutlined, SentimentSatisfiedTwoTone, EmojiEmotionsTwoTone } from '@material-ui/icons';
-import { TUseFooterItemEditorProps } from '../FooterItemEditor';
+import { EmojiEmotionsTwoTone } from '@material-ui/icons';
+import { TUseFooterItemEditorProps } from '../../view/FooterItemEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -98,18 +98,6 @@ export const SelectIcon:React.FC<Props> = ({ selectedIcon, dispatchSelectedIcon,
           })}
         </GridList>
       </Popover>
-      {/* {selectedIcon ? (
-        <IconItem icon={selectedIcon[0]} />
-      ) : (
-        <>
-          <Typography variant="subtitle1" component="span">
-            未選択
-          </Typography>
-          <IconButton onClick={handleClick}>
-            <AddCircleOutlineOutlined />
-          </IconButton>
-        </>
-      )} */}
     </div>
   );
 }

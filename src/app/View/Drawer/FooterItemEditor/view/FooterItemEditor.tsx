@@ -1,29 +1,28 @@
 import React from 'react'
-import { SelectIcon } from "./iconSelect/SelectIcon";
+import { SelectIcon } from "../components/iconSelect/SelectIcon";
 import dynamic from "next/dynamic";
-const QuillEditor = dynamic(() => import("../QuillEditor/view/QuillEditor"), {
+const QuillEditor = dynamic(() => import("../../QuillEditor/view/QuillEditor"), {
   ssr: false,
 });
-import { SwitchOnTapModal } from "./SwitchOnTapModal";
-import { useCreateFooterItem, TCreateFooterItem, TFooterItemEdittingParams } from "../../../ActionCreator/footerItems/useCreateFooterItem";
-import { useUpdateFooterItem } from "../../../ActionCreator/footerItems/useUpdateFooterItem";
+import { SwitchOnTapModal } from "../components/SwitchOnTapModal";
+import { TFooterItemEdittingParams } from "../../../../ActionCreator/footerItems/useCreateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, Switch, useTheme } from '@material-ui/core';
-import { SelectAppLink } from './SelectAppLink';
-import { Store } from "../../../Store/Store";
-import { FooterItem, T_modal_size } from '../../../Store/Types';
-import { CharCounter } from "../../../pureComponents/CharCounter";
-import { SelectModalSize } from './SelectModalSize';
-import { selectedIconReducer } from '../../../Reducer/selectedIconReducer';
-import { IconsSetting } from './iconSelect/icons';
-import { HelpButton } from '../../../pureComponents/buttons/HelpButton';
+import { SelectAppLink } from '../components/SelectAppLink';
+import { Store } from "../../../../Store/Store";
+import { CharCounter } from "../../../../pureComponents/CharCounter";
+import { SelectModalSize } from '../components/SelectModalSize';
+import { selectedIconReducer } from '../../../../Reducer/selectedIconReducer';
+import { IconsSetting } from '../components/iconSelect/icons';
+import { HelpButton } from '../../../../pureComponents/buttons/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
-import { SwitchDataTypeBox } from '../QuillEditor/components/SwitchDataTypeBox';
-import { useIsMobile } from '../../../../lib/useIsMobile';
+import { SwitchDataTypeBox } from '../../QuillEditor/components/SwitchDataTypeBox';
+import { useIsMobile } from '../../../../../lib/useIsMobile';
+import { useHandleSubmit } from '../context/useHandleSubmit';
+import { T_modal_size } from '../../../../Store/Types';
+import { useHandleChange } from '../context/useHandleChange';
 
 const useFooterItemEditorProps = () => {
-
-  // const theme = useTheme()
-  const { appState, dispatchAppState } = React.useContext(Store);
+  const { appState } = React.useContext(Store);
   const { modalSize, isModalSizeChanged, onTap, isEditting, footerItem } = appState.edittingPrams;
   const [titleText, setTitleText] = React.useState(
     isEditting || isModalSizeChanged ? footerItem.icon_name : ""
@@ -65,12 +64,10 @@ const useFooterItemEditorProps = () => {
     setCharCountFooterItemContent,
   ] = React.useState(0);
 
-  const createFooterItem = useCreateFooterItem();
-  const updateFooterItem = useUpdateFooterItem();
-
   const handleOnChangeIconName = (e) => {
     setTitleText(e.target.value);
   };
+
   const initSidebar = () => {
     if (isEditting === false) {
       return false
@@ -80,9 +77,7 @@ const useFooterItemEditorProps = () => {
     }
     return true
   }
-  // const [onSidebar, setOnSidebar] = React.useState(
-  //   isEditting ? footerItem.on_sidebar : false
-  // );
+
   const [onSidebar, setOnSidebar] = React.useState(initSidebar());
   
   const handleOnSidebar = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,21 +97,13 @@ const useFooterItemEditorProps = () => {
     dataType,
   };
 
-  const handleSubmit = ({ is_published }) => {
-    const params = {...edittingFooterItemParams, is_published }
+  const handleSubmit = useHandleSubmit(edittingFooterItemParams, isEditting)
 
-    if (isEditting) {
-      updateFooterItem(params);
-    } else {
-      createFooterItem(params);
-    }
-  };
+  const handleChange = useHandleChange(edittingFooterItemParams)
 
   const isMobile = useIsMobile();
 
   return {
-    // theme,
-    dispatchAppState,
     onTapRadio,
     setOnTapRadio,
     modalSizeRadio,
@@ -143,6 +130,7 @@ const useFooterItemEditorProps = () => {
     onSidebar,
     handleOnSidebar,
     edittingFooterItemParams,
+    handleChange,
   };
 }
 
@@ -195,7 +183,6 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: 100,
     },
     charCounter: {
-      // marginLeft: "auto",
       textAlign: "right",
     },
     submitButton: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SwitchOnTapModal } from '../app/View/Drawer/ItemEditor/SwitchOnTapModal';
+import { SwitchOnTapModal } from '../app/View/Drawer/FooterItemEditor/components/SwitchOnTapModal';
 import { T_on_tap } from '../app/Store/Types';
 import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 export default {
@@ -9,7 +9,6 @@ export default {
 
 
 export const Normal = () => {
-  // const [onTap, setOnTap] = React.useState("" as T_on_tap);
 
   return (
     <>

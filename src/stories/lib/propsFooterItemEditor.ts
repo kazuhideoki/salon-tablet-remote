@@ -1,7 +1,6 @@
-import { TUseFooterItemEditorProps } from "../../app/View/Drawer/ItemEditor/FooterItemEditor";
+import { TUseFooterItemEditorProps } from "../../app/View/Drawer/FooterItemEditor/view/FooterItemEditor";
 
 export const propsFooterItemEditor: TUseFooterItemEditorProps = {
-         dispatchAppState: null,
          onTapRadio: "modal",
          setOnTapRadio: null,
          isEditting: false,
@@ -9,7 +8,6 @@ export const propsFooterItemEditor: TUseFooterItemEditorProps = {
          editorText: "",
          setEditorText: null,
          setEditorTextExcerpt: null,
-         // selectedIcon: [WifiTwoTone, "WifiTwoTone"],
          selectedIcon: null,
          dispatchSelectedIcon: null,
          linkUrl: null,

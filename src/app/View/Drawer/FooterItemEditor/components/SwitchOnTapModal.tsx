@@ -4,25 +4,16 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { HelpButton } from '../../../pureComponents/buttons/HelpButton';
-import { T_on_tap } from '../../../Store/Types';
-import { AppStateAction } from '../../../Reducer/AppStateAction';
-import { TUseFooterItemEditorProps } from './FooterItemEditor';
-import { Search } from '@material-ui/icons';
-
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-
-}));
+import { HelpButton } from '../../../../pureComponents/buttons/HelpButton';
+import { T_on_tap } from '../../../../Store/Types';
+import { TUseFooterItemEditorProps } from '../view/FooterItemEditor';
 
 type Props = TUseFooterItemEditorProps & {
   className?: string
 }
 
 export const SwitchOnTapModal:React.FC<Props> = (props) => {
-  const classes = useStyles()
-
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.setOnTapRadio(event.target.value as T_on_tap)
   };
@@ -50,7 +41,6 @@ export const SwitchOnTapModal:React.FC<Props> = (props) => {
             control={<Radio />}
             label="ウィンドウ"
           />
-          {/* <HelpButton content="ブログ記事のようにウィンドウが開きます。"/> */}
           <FormControlLabel value="link" control={<Radio />} label="リンク" />
           <FormControlLabel
             value="appLink"

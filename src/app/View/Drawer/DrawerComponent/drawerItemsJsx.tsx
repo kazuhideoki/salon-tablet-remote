@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
 import { TUseDrawerProps } from "../Drawer";
-import { IconsSetting } from "../ItemEditor/iconSelect/icons";
+import { IconsSetting } from "../FooterItemEditor/components/iconSelect/icons";
 import { TThemeArgs } from "../../../Store/ThemeContext";
 import { EditButtonsBox } from "../../../pureComponents/buttons/EditButtonsBox";
 import { UpdateButton } from "../../../pureComponents/buttons/UpdateButton";

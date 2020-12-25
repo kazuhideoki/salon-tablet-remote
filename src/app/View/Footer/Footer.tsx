@@ -3,27 +3,18 @@ import {
   Grid,
   makeStyles,
   createStyles,
-  useMediaQuery,
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
 import { Store } from "../../Store/Store";
 import {
-  T_footer_item_id,
-  T_order,
   FooterItem,
-  T_modal_size,
 } from "../../Store/Types";
 import { IconAndText } from "./IconAndText";
-import { PPagination } from "./PaginationBar/PPagination";
-import { UpdateButton } from "../../pureComponents/buttons/UpdateButton";
-import { DeleteButton } from "../../pureComponents/buttons/DeleteButton";
-import { SwitchOrderButton } from "../../pureComponents/buttons/SwitchOrderButton";
 import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
-import { IconsSetting } from "../Drawer/ItemEditor/iconSelect/icons";
+import { IconsSetting } from "../Drawer/FooterItemEditor/components/iconSelect/icons";
 import { EditButtonsBox } from "../../pureComponents/buttons/EditButtonsBox";
 import { showDataType } from "../Main/components/showDataType";
 import { useIsMobile } from "../../../lib/useIsMobile";
-// import { useCalcFooterPadding } from "./useCalcFooterPadding";
 
 export const useFooterProps = () => {
   const { appState, dispatchAppState } = useContext(Store);
@@ -42,12 +33,10 @@ export const useFooterProps = () => {
     });
   };
 
-  // const isMobile = useMediaQuery("(max-width:480px)");
   const isMobile = useIsMobile();
 
   return {
     isSetting,
-    // openModal,
     dispatchAppState,
     footerItems,
     handleOnUpDateFooterIcon,
@@ -116,7 +105,6 @@ export const FooterPresenter: React.FC<Props> = (props) => {
         return null;
       }
       // on_sidebarの場合はDrawerに表示させるため
-      // if (value.on_sidebar === true) {
       if (value.order_sidebar !== 0) {
         return null;
       }
@@ -130,7 +118,6 @@ export const FooterPresenter: React.FC<Props> = (props) => {
             ${value.is_published == true ? null : classes.itemIsDraft}
           `}
         >
-          {/* セッティング画面で順番を入れ替えるボタンなどを表示 */}
           {props.isSetting ? (
             <EditButtonsBox
               className={classes.editButtonsBox}
@@ -169,7 +156,6 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                   payload: value.footer_item_id,
                 })
               }
-              // fontSize="large"
               text={value.icon_name}
               loading={props.loading}
             />
@@ -193,7 +179,6 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                       )[0]
                     : MoodBad
                 }
-                // fontSize="large"
                 text={value.icon_name}
                 loading={props.loading}
               />
@@ -208,7 +193,6 @@ export const FooterPresenter: React.FC<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      {/* {props.children} */}
       <Grid
         container
         alignItems="center"
@@ -227,8 +211,6 @@ export const Footer = () => {
   return (
     <>
       <FooterPresenter {...props} />
-      {/* <PPagination />
-    </FooterPresenter> */}
     </>
   );
 };

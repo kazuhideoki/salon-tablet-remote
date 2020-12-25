@@ -11,7 +11,7 @@ const FooterItemModal = dynamic(() => import("../Footer/FooterItemModal"), {
   ssr: false,
 });
 import ArticleEditor from "../Drawer/ArticleEditor/view/ArticleEditor";
-import FooterItemEditor from "../Drawer/ItemEditor/FooterItemEditor";
+import FooterItemEditor from "../Drawer/FooterItemEditor/view/FooterItemEditor";
 import { FeedbackForm } from "../Drawer/FeedbackForm";
 import { ManageTheme } from "../Drawer/ManageTheme/ManageTheme";
 import { SelectTags } from "../Footer/SelectTags";
