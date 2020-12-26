@@ -7,25 +7,25 @@ import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("../Main/ContentModal"), {
   ssr: false,
 });
-const FooterItemModal = dynamic(() => import("../Footer/FooterItemModal"), {
+const FooterItemModal = dynamic(() => import("./FooterItemModal"), {
   ssr: false,
 });
 import ArticleEditor from "../Drawer/ArticleEditor/view/ArticleEditor";
 import FooterItemEditor from "../Drawer/FooterItemEditor/view/FooterItemEditor";
 import { FeedbackForm } from "../Drawer/FeedbackForm/view/FeedbackForm";
 import { ManageTheme } from "../Drawer/ManageTheme/view/ManageTheme";
-import { SelectTags } from "../Footer/SelectTags";
+import { SelectTags } from "./SelectTags";
 import { ManageTags } from "../Drawer/ManageTags/view/ManageTags";
 import { SettingUserInfo } from "../Drawer/ManageUserInfo/view/ManageUserInfo";
 import { DeleteAccountForm } from "../Drawer/DeleteAccountForm/view/DeleteAccountForm";
 import { useModalSize, medium } from "./useModalSize";
 import { StyledDialog } from "./StyledDialog";
 import { ManageInstagramAccounts } from "../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
-import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
+import { SelectInstagramAccounts } from "./SelectInstagramAccounts";
 import { TSetModal, T_selected_theme } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";
 import InfoBarEditor from "../Drawer/InfoBar/view/InfoBarEditor";
-import { GoogleSearch } from "../Footer/GoogleSearch";
+import { GoogleSearch } from "./GoogleSearch";
 import { PageNotEmailVerified } from "../../../pageComponent/PageNotEmailVerified";
 
 export const switchingTransition = (selected_theme: T_selected_theme) => {

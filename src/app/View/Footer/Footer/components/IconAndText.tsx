@@ -1,9 +1,8 @@
 import React from 'react'
 import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme, SvgIconTypeMap, createMuiTheme, useTheme } from '@material-ui/core'
-import { ThemeContext } from '../../Store/ThemeContext'
+import { ThemeContext } from '../../../../Store/ThemeContext'
 import { OverridableComponent } from '@material-ui/core/OverridableComponent'
 import { Skeleton } from '@material-ui/lab'
-import { Height } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
@@ -21,12 +20,10 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     titleText: {
       maxWidth: themes.icon * 2,
-      // whiteSpace: 'nowrap',
     },
   });
 })
 
-// 表示させるアイコンはprops.icon→Material-uiのicon、もしくはprops.img→imgのsrcで切り替えることが出来る。
 type Props = {
   icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>,
   loading: boolean,

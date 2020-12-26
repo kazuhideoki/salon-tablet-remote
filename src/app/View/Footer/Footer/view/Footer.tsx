@@ -9,7 +9,7 @@ import { Store } from "../../../../Store/Store";
 import {
   FooterItem,
 } from "../../../../Store/Types";
-import { IconAndText } from "../../IconAndText";
+import { IconAndText } from "../components/IconAndText";
 import { IconsSetting } from "../../../Drawer/FooterItemEditor/components/iconSelect/icons";
 import { EditButtonsBox } from "../../../../pureComponents/buttons/EditButtonsBox";
 import { showDataType } from "../../../Main/components/showDataType";

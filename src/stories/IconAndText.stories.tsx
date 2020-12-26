@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconAndText } from '../app/View/Footer/IconAndText';
+import { IconAndText } from '../app/View/Footer/Footer/components/IconAndText';
 import { Settings } from '@material-ui/icons';
 export default {
   title: "Footer/IconAndText",

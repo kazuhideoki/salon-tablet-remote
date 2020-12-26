@@ -14,8 +14,6 @@ const useFooterItemModalProps = () => {
 
 export type TFooterItemModalProps = ReturnType<typeof useFooterItemModalProps>;
 
-const useStyles = makeStyles((theme) => createStyles({}));
-
 export const FooterItemModalPresenter: React.FC<TFooterItemModalProps> = (props) => {
   return (
     <>
