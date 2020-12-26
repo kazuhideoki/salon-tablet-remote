@@ -26,17 +26,25 @@ import { useHandleDrawerCloseKeepIsSetting } from "../context/useHandleDrawerClo
 import { useCloseDrawerTapMain } from "../context/useCloseDrawerTapMain";
 import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
 import { useHandleDrawerOpen } from "../context/useHandleDrawerOpen";
+import { useStateDrawer } from "../context/useStateDrawer";
 
 export const useDrawerProps = () => {
+  const {
+    dispatchAppState,
+    isSetting,
+    isPublicPage,
+    isDrawerOpen,
+    footerItems,
+    pass,
+    setPass,
+    themes,
+  } = useStateDrawer()
+
   const theme = useTheme();
-  const {dispatchAppState, appState } = React.useContext(Store);
-  const { isSetting, isPublicPage, isDrawerOpen, footerItems} = appState
-  const themes = React.useContext(ThemeContext);
   const isMobile = useIsMobile()
   const { handleOnUpDateFooterIcon } = useFooterProps()
     
-  const [pass, setPass] = React.useState('')
-  
+    
   const { isClicked, handleOnSignOut } = useHandleOnSingOut();
   const handleSwitchIsSetting = useHandleSwitchIsSetting()
   const handleDrawerOpen = useHandleDrawerOpen()
