@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectTagsPresenter } from '../app/View/Modal/SelectTags';
+import { SelectTagsPresenter } from '../app/View/Modal/Modals/SelectTags';
 import { sampleTags } from './lib/sampleTags';
 import { Provider } from './lib/ThemeProvider';
 export default {

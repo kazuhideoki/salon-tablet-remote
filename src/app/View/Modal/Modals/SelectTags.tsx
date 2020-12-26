@@ -1,6 +1,6 @@
 import React from 'react'
-import { Store } from "../../Store/Store";
-import { T_tag_id } from '../../Store/Types';
+import { Store } from "../../../Store/Store";
+import { T_tag_id } from '../../../Store/Types';
 import {
   Chip,
   Typography,
@@ -9,7 +9,7 @@ import {
   createStyles,
   Button,
 } from "@material-ui/core";
-import { useGetArticles } from '../../ActionCreator/articles/useGetArticles';
+import { useGetArticles } from '../../../ActionCreator/articles/useGetArticles';
 
 const useSelectTagsProps = () => {
   const { dispatchAppState, appState } = React.useContext(Store);

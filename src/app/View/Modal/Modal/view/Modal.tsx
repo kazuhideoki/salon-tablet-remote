@@ -1,83 +1,55 @@
 import React from "react";
-import { Store } from "../../Store/Store";
+import { Store } from "../../../../Store/Store";
 import { Slide, DialogContent, makeStyles, createStyles, useTheme, Fade } from "@material-ui/core";
 import { TransitionProps } from '@material-ui/core/transitions';
-import { CloseButton } from "../../pureComponents/buttons/CloseButton";
+import { CloseButton } from "../../../../pureComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
-const ContentModal = dynamic(() => import("./ContentModal"), {
+const ContentModal = dynamic(() => import("../../Modals/ContentModal"), {
   ssr: false,
 });
-const FooterItemModal = dynamic(() => import("./FooterItemModal"), {
+const FooterItemModal = dynamic(() => import("../../Modals/FooterItemModal"), {
   ssr: false,
 });
-import ArticleEditor from "../Drawer/ArticleEditor/view/ArticleEditor";
-import FooterItemEditor from "../Drawer/FooterItemEditor/view/FooterItemEditor";
-import { FeedbackForm } from "../Drawer/FeedbackForm/view/FeedbackForm";
-import { ManageTheme } from "../Drawer/ManageTheme/view/ManageTheme";
-import { SelectTags } from "./SelectTags";
-import { ManageTags } from "../Drawer/ManageTags/view/ManageTags";
-import { SettingUserInfo } from "../Drawer/ManageUserInfo/view/ManageUserInfo";
-import { DeleteAccountForm } from "../Drawer/DeleteAccountForm/view/DeleteAccountForm";
-import { useModalSize, medium } from "./useModalSize";
-import { StyledDialog } from "./StyledDialog";
-import { ManageInstagramAccounts } from "../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
-import { SelectInstagramAccounts } from "./SelectInstagramAccounts";
-import { TSetModal, T_selected_theme } from "../../Store/Types";
-import { InstagramMediaModal } from "./InstagramMediaModal";
-import InfoBarEditor from "../Drawer/InfoBar/view/InfoBarEditor";
-import { GoogleSearch } from "./GoogleSearch";
-import { PageNotEmailVerified } from "../../../pageComponent/PageNotEmailVerified";
-
-export const switchingTransition = (selected_theme: T_selected_theme) => {
-  switch (selected_theme) {
-    case 'white':
-        return React.forwardRef<unknown, TransitionProps>(
-          function Transition(props, ref) {
-            //@ts-ignore
-            return <Fade direction="up" ref={ref} {...props} />;
-          }
-        );
-      
-      break;
-  
-    default:
-      return React.forwardRef<unknown, TransitionProps>(
-        function Transition(props, ref) {
-          //@ts-ignore
-          return <Slide direction="up" ref={ref} {...props} />;
-        }
-      );
-      break;
-  } 
-}
+import ArticleEditor from "../../../Drawer/ArticleEditor/view/ArticleEditor";
+import FooterItemEditor from "../../../Drawer/FooterItemEditor/view/FooterItemEditor";
+import { FeedbackForm } from "../../../Drawer/FeedbackForm/view/FeedbackForm";
+import { ManageTheme } from "../../../Drawer/ManageTheme/view/ManageTheme";
+import { SelectTags } from "../../Modals/SelectTags";
+import { ManageTags } from "../../../Drawer/ManageTags/view/ManageTags";
+import { SettingUserInfo } from "../../../Drawer/ManageUserInfo/view/ManageUserInfo";
+import { DeleteAccountForm } from "../../../Drawer/DeleteAccountForm/view/DeleteAccountForm";
+import { useModalSize, medium } from "../context/useModalSize";
+import { StyledDialog } from "../components/StyledDialog";
+import { ManageInstagramAccounts } from "../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
+import { SelectInstagramAccounts } from "../../Modals/SelectInstagramAccounts";
+import { TSetModal, T_selected_theme } from "../../../../Store/Types";
+import { InstagramMediaModal } from "../../Modals/InstagramMediaModal";
+import InfoBarEditor from "../../../Drawer/InfoBar/view/InfoBarEditor";
+import { GoogleSearch } from "../../Modals/GoogleSearch";
+import { PageNotEmailVerified } from "../../../../../pageComponent/PageNotEmailVerified";
+import { switchingTransition } from "../context/switchingTransition";
+import { useCloseModal } from "../context/useCloseModal";
+import { useOpenModal } from "../context/useOpenModal";
+import { useStateModal } from "../context/useStateModal";
 
 const useModalProps = () => {
-  const { appState, dispatchAppState } = React.useContext(Store);
-  const modalSize = appState.edittingPrams.modalSize
-  const { setModal, isModalOpen, currentModalContent } = appState;
-  const openModal = (name: TSetModal) => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: name });
-  };
-  const closeModal = () => {
-    let closing = true
-    if (
-      setModal === "edit_article" ||
-      setModal === "edit_footer_item" ||
-      setModal === "edit_info_bar"
-    ) {
-      closing = confirm("編集中ですが保存せずにウィンドウを閉じますか？");
-    }
+  const {
+    modalSize,
+    setModal,
+    isModalOpen,
+    currentModalContent,
+    selected_theme,
+    edittingPrams,
+  } = useStateModal()
 
-    if (closing) {
-      dispatchAppState({ type: "CLOSE_MODAL" });
-    }
-  };
+  const openModal = useOpenModal()
+
+  const closeModal = useCloseModal()
 
   const theme = useTheme()
   const duration = theme.transitions.duration
 
   return {
-    appState,
     modalSize,
     setModal,
     isModalOpen,
@@ -85,7 +57,8 @@ const useModalProps = () => {
     currentModalContent,
     closeModal,
     duration,
-    selected_theme: appState.userInfo.selected_theme
+    selected_theme,
+    edittingPrams,
   };
 };
 
@@ -142,7 +115,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             ModalContent = () => <ArticleEditor />;
             break;
           case "edit_footer_item":
-            modalStyle = useModalSize(props.appState.edittingPrams.modalSize)
+            modalStyle = useModalSize(props.modalSize)
             ModalContent = () => <FooterItemEditor />;
             break;
           case "edit_tags":
@@ -181,26 +154,26 @@ export const ModalPresenter:React.FC<Props> = (props) => {
         const [skipTransition, setSkipTransition] = React.useState(false);
         React.useEffect(function offTransition() {
           setTimeout(() => {
-            if (props.appState.isModalOpen) {
+            if (props.isModalOpen) {
               setSkipTransition(true)
             } else {
               setSkipTransition(false);
             }
           }, props.duration.enteringScreen);
-        },[props.appState.isModalOpen])        
+        },[props.isModalOpen])        
 
         return (
           // 受け取ったmodalStyle元にサイズ変更して描画
           <StyledDialog
             modalSize={props.modalSize}
             setModal={props.setModal}
-            isEditting={props.appState.edittingPrams.isEditting}
+            isEditting={props.edittingPrams.isEditting}
             modalStyle={modalStyle}
             modalStyleMobile={modalStyleMobile}
             className={classes.root}
             open={props.isModalOpen}
             TransitionComponent={Transition}
-            // 再レンダーのときtransitonアニメーションさせたくないときは、値を0に
+            // 再レンダーのときtransitionアニメーションさせたくないときは、値を0に
             transitionDuration={skipTransition ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
             onClose={props.closeModal}
             maxWidth="xl"

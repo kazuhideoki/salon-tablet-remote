@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "./Modal/Modal";
+import { Modal } from "./Modal/Modal/view/Modal";
 import { Store } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";

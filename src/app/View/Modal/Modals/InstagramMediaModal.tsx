@@ -1,7 +1,7 @@
 import React from "react";
-import { Store } from "../../Store/Store";
+import { Store } from "../../../Store/Store";
 import { makeStyles, createStyles, Typography } from "@material-ui/core";
-import { sqlToDate } from "../../ActionCreator/organizeSql/sqlToDate";
+import { sqlToDate } from "../../../ActionCreator/organizeSql/sqlToDate";
 
 const useInstagramMediaModalProps = () => {
   const { appState } = React.useContext(Store);

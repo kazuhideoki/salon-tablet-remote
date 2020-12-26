@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleSearch } from '../app/View/Modal/GoogleSearch';
+import { GoogleSearch } from '../app/View/Modal/Modals/GoogleSearch';
 export default {
   title: 'GoogleSearch',
   component: GoogleSearch,

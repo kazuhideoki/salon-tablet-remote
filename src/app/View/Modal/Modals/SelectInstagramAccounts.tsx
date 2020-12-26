@@ -1,9 +1,9 @@
 import React from 'react'
 import { Typography, makeStyles, Theme, createStyles, Button } from "@material-ui/core";
-import { Store } from '../../Store/Store';
-import { useGetInstagramMedias } from '../../ActionCreator/instagramMedias/useGetInstagramMedias';
-import { useIsMobile } from '../../../lib/useIsMobile';
-import { HelpButton } from '../../pureComponents/buttons/HelpButton';
+import { Store } from '../../../Store/Store';
+import { useGetInstagramMedias } from '../../../ActionCreator/instagramMedias/useGetInstagramMedias';
+import { useIsMobile } from '../../../../lib/useIsMobile';
+import { HelpButton } from '../../../pureComponents/buttons/HelpButton';
 
 export const useSelectInstagramAccountsProps = () => {
 

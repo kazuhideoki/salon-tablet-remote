@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContentModalPresenter, TContentModalProps } from '../app/View/Modal/ContentModal';
+import { ContentModalPresenter, TContentModalProps } from '../app/View/Modal/Modals/ContentModal';
 import { sampleData } from './lib/sampleArticles';
 export default {
   title: "Main/ContentModal",

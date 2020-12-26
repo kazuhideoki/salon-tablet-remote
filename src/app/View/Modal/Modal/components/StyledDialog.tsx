@@ -1,8 +1,8 @@
 import React from 'react'
 import { withStyles, Dialog, useMediaQuery } from '@material-ui/core';
 
-import { T_modal_size } from '../../Store/Types';
-import { useIsMobile } from '../../../lib/useIsMobile';
+import { T_modal_size } from '../../../../Store/Types';
+import { useIsMobile } from '../../../../../lib/useIsMobile';
 
 type Props = {
   modalSize: T_modal_size
