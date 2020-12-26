@@ -1,18 +1,16 @@
 import React from 'react'
 import { Typography, makeStyles, Theme, createStyles, Button } from "@material-ui/core";
-import { Store } from '../../../Store/Store';
-import { useGetInstagramMedias } from '../../../ActionCreator/instagramMedias/useGetInstagramMedias';
-import { useIsMobile } from '../../../../lib/useIsMobile';
-import { HelpButton } from '../../../pureComponents/buttons/HelpButton';
+import { useIsMobile } from '../../../../../../lib/useIsMobile';
+import { HelpButton } from '../../../../../pureComponents/buttons/HelpButton';
+import { useManageInstagramAccountsProps } from '../../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
 
 export const useSelectInstagramAccountsProps = () => {
 
-  const { appState, dispatchAppState } = React.useContext(Store);
-  const {instagramAccounts, isSetting} = appState
-  const getInstagramMedias = useGetInstagramMedias()
+  const { instagramAccounts, isSetting } = useSelectInstagramAccountsProps()
+
+  const getInstagramMedias = useManageInstagramAccountsProps()
+
   const isMobile = useIsMobile()
-
-
 
   return {
     isSetting,

@@ -19,7 +19,7 @@ import { DeleteAccountForm } from "../../../Drawer/DeleteAccountForm/view/Delete
 import { useModalSize, medium } from "../context/useModalSize";
 import { StyledDialog } from "../components/StyledDialog";
 import { ManageInstagramAccounts } from "../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
-import { SelectInstagramAccounts } from "../../Modals/SelectInstagramAccounts";
+import { SelectInstagramAccounts } from "../../Modals/SelectInstagramAccounts/view/SelectInstagramAccounts";
 import { InstagramMediaModal } from "../../Modals/InstagramMediaModal.ts/view/InstagramMediaModal";
 import InfoBarEditor from "../../../Drawer/InfoBar/view/InfoBarEditor";
 import { GoogleSearch } from "../../Modals/GoogleSearch/view/GoogleSearch";
