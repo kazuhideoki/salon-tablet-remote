@@ -1,5 +1,5 @@
 import React from 'react';
-import { FeedbackFormPresenter } from '../app/View/Drawer/FeedbackForm/FeedbackForm';
+import { FeedbackFormPresenter } from '../app/View/Drawer/FeedbackForm/view/FeedbackForm';
 export default {
   title: "Drawer/FeedbackForm",
   component: FeedbackFormPresenter,

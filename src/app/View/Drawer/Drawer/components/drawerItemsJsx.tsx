@@ -11,15 +11,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { TUseDrawerProps } from "../Drawer/view/Drawer";
-import { IconsSetting } from "../FooterItemEditor/components/iconSelect/icons";
-import { TThemeArgs } from "../../../Store/ThemeContext";
-import { EditButtonsBox } from "../../../pureComponents/buttons/EditButtonsBox";
-import { UpdateButton } from "../../../pureComponents/buttons/UpdateButton";
-import { DeleteButton } from "../../../pureComponents/buttons/DeleteButton";
-import { FooterItem } from "../../../Store/Types";
-import { showDataType } from "../../Main/components/showDataType";
-import { SwitchOrderButton } from "../../../pureComponents/buttons/SwitchOrderButton";
+import { TUseDrawerProps } from "../view/Drawer";
+import { IconsSetting } from "../../FooterItemEditor/components/iconSelect/icons";
+import { EditButtonsBox } from "../../../../pureComponents/buttons/EditButtonsBox";
+import { FooterItem } from "../../../../Store/Types";
+import { showDataType } from "../../../Main/components/showDataType";
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
