@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("../../Modals/ContentModal/view/ContentModal"), {
   ssr: false,
 });
-const FooterItemModal = dynamic(() => import("../../Modals/FooterItemModal"), {
+const FooterItemModal = dynamic(() => import("../../Modals/FooterItemModal/view/FooterItemModal"), {
   ssr: false,
 });
 import ArticleEditor from "../../../Drawer/ArticleEditor/view/ArticleEditor";
