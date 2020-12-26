@@ -4,7 +4,7 @@ import { Slide, DialogContent, makeStyles, createStyles, useTheme, Fade } from "
 import { TransitionProps } from '@material-ui/core/transitions';
 import { CloseButton } from "../../pureComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
-const ContentModal = dynamic(() => import("../Main/ContentModal"), {
+const ContentModal = dynamic(() => import("./ContentModal"), {
   ssr: false,
 });
 const FooterItemModal = dynamic(() => import("./FooterItemModal"), {
@@ -23,7 +23,7 @@ import { StyledDialog } from "./StyledDialog";
 import { ManageInstagramAccounts } from "../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "./SelectInstagramAccounts";
 import { TSetModal, T_selected_theme } from "../../Store/Types";
-import { InstagramMediaModal } from "../Main/InstagramMediaModal";
+import { InstagramMediaModal } from "./InstagramMediaModal";
 import InfoBarEditor from "../Drawer/InfoBar/view/InfoBarEditor";
 import { GoogleSearch } from "./GoogleSearch";
 import { PageNotEmailVerified } from "../../../pageComponent/PageNotEmailVerified";

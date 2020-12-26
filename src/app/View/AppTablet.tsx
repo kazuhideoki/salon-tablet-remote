@@ -6,7 +6,7 @@ import {
   createStyles,
   Theme,
 } from "@material-ui/core";
-import { PMain } from "./Main/PMain";
+import { Main } from "./Main/view/Main";
 import { Footer } from "./Footer/Footer/view/Footer";
 import { Store } from "../Store/Store";
 import { ThemeContext } from "../Store/ThemeContext";
@@ -134,7 +134,7 @@ export const AppTablet = () => {
             })} ${classes.main} ${open ? classes.mainOpened : null}`}
           >
        
-            <PMain />
+            <Main />
           </Grid>
           <Grid
             item

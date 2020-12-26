@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Grid} from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
-import { StyledCardContent } from '../PMain'
+import { StyledCardContent } from '../view/Main'
 
 
 

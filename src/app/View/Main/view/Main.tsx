@@ -6,21 +6,19 @@ import {
   createStyles,
   withStyles,
 } from "@material-ui/core";
-import { Store } from "../../Store/Store";
-import {
-  useDeleteArticle,
-} from "../../ActionCreator/articles/useDeleteArticle";
-import { TArticle } from "../../Store/Types";
-import { displayArticlesScrollJsx } from "./components/displayArticlesScrollJsx";
-import { displayArticlesGrid6Jsx } from "./components/displayArticlesGrid6Jsx";
-import { displayInstagramMediasJsx } from "./components/displayInstagramMediasJsx";
-import { noArticlesJsx } from "./components/noArticlesJsx";
+import { Store } from "../../../Store/Store";
+import { TArticle } from "../../../Store/Types";
+import { displayArticlesScrollJsx } from "../components/displayArticlesScrollJsx";
+import { displayArticlesGrid6Jsx } from "../components/displayArticlesGrid6Jsx";
+import { displayInstagramMediasJsx } from "../components/displayInstagramMediasJsx";
+import { noArticlesJsx } from "../components/noArticlesJsx";
+import { useOnClickUpdate } from "../context/useOnClickUpdate";
+import { useDeleteArticle } from "../context/useDeleteArticle";
+import { useStateMain } from "../context/useStateMain";
 
-export const usePMainProps = () => {
-  const { appState, dispatchAppState } = React.useContext(
-    Store
-  );
+export const useMainProps = () => {
   const {
+    dispatchAppState,
     articles,
     tags,
     instagramMedias,
@@ -28,15 +26,11 @@ export const usePMainProps = () => {
     isShowInstagram,
     userInfo,
     isSetting,
-  } = appState;
+  } = useStateMain()
+
   const deleteArticle = useDeleteArticle();
 
-  const onClickUpdate = (value: TArticle) => {
-    dispatchAppState({
-      type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
-      payload: value,
-    });
-  };
+  const onClickUpdate = useOnClickUpdate()
   
   return {
     isSetting,
@@ -52,7 +46,7 @@ export const usePMainProps = () => {
   };
 };
 
-export type TUseMainProps = ReturnType<typeof usePMainProps>;
+export type TUseMainProps = ReturnType<typeof useMainProps>;
 
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
@@ -167,7 +161,7 @@ export const StyledCardContent = withStyles({
   },
 })(CardContent)
 
-export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
+export const MainPresenter:React.FC<TUseMainProps> = (props) => {
   const classes = useStyles();
 
   const displayArticlesScroll = displayArticlesScrollJsx(props, classes, StyledCardContent);
@@ -224,9 +218,9 @@ export const PMainPresenter:React.FC<TUseMainProps> = (props) => {
 
 }
 
-export const PMain = () => {
-  const props = usePMainProps()
+export const Main = () => {
+  const props = useMainProps()
 
-  return <PMainPresenter {...props} />
+  return <MainPresenter {...props} />
 }
 

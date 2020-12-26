@@ -1,6 +1,6 @@
 import React from 'react'
 import { sqlToDate } from '../../ActionCreator/organizeSql/sqlToDate';
-import { usePMainProps } from '../Main/PMain';
+import { useMainProps } from '../Main/view/Main';
 import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea, Chip } from '@material-ui/core';
 import { Store } from '../../Store/Store';
 import { useDeleteArticle } from '../../ActionCreator/articles/useDeleteArticle';
@@ -14,7 +14,7 @@ export const useMainMobileProps = () => {
     articles,
     dispatchAppState,
     onClickUpdate,
-  } = usePMainProps();
+  } = useMainProps();
 
   const { appState } = React.useContext(Store)
   const {loading, isSetting} = appState
