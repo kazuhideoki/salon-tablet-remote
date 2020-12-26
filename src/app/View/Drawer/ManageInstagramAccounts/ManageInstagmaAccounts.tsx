@@ -9,16 +9,15 @@ import {
 import { instagramRedirectHost } from '../../../../lib/loadUrl';
 import { Store } from '../../../Store/Store';
 import { DeleteButton } from '../../../pureComponents/buttons/DeleteButton';
-import { useDeleteInstagramAccount } from '../../../ActionCreator/instagramAccounts/useDeleteInstagramAccounts'
-import { grey } from '@material-ui/core/colors';
-import { useGetInstagramMedias } from '../../../ActionCreator/instagramMedias/useGetInstagramMedias';
-import { loadComponents } from 'next/dist/next-server/server/load-components';
 import { Skeleton } from '@material-ui/lab';
+import { useDeleteInstagramAccount } from './context/useDeleteInstagramAccount';
+import { useGetInstagramMedias } from './context/useGetInstagramMedias';
 
 export const useManageInstagramAccountsProps = () => {
 
   const { appState } = React.useContext(Store);
   const {instagramAccounts, loading} = appState
+
   const deleteInstagramAccount = useDeleteInstagramAccount()
   const getInstagramMedias = useGetInstagramMedias()
 
