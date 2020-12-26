@@ -1,7 +1,5 @@
 import React from "react";
-import { Store } from "../../../../Store/Store";
-import { Slide, DialogContent, makeStyles, createStyles, useTheme, Fade } from "@material-ui/core";
-import { TransitionProps } from '@material-ui/core/transitions';
+import { DialogContent, makeStyles, createStyles, useTheme } from "@material-ui/core";
 import { CloseButton } from "../../../../pureComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
 const ContentModal = dynamic(() => import("../../Modals/ContentModal/view/ContentModal"), {
@@ -22,8 +20,7 @@ import { useModalSize, medium } from "../context/useModalSize";
 import { StyledDialog } from "../components/StyledDialog";
 import { ManageInstagramAccounts } from "../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../../Modals/SelectInstagramAccounts";
-import { TSetModal, T_selected_theme } from "../../../../Store/Types";
-import { InstagramMediaModal } from "../../Modals/InstagramMediaModal";
+import { InstagramMediaModal } from "../../Modals/InstagramMediaModal.ts/view/InstagramMediaModal";
 import InfoBarEditor from "../../../Drawer/InfoBar/view/InfoBarEditor";
 import { GoogleSearch } from "../../Modals/GoogleSearch/view/GoogleSearch";
 import { PageNotEmailVerified } from "../../../../../pageComponent/PageNotEmailVerified";

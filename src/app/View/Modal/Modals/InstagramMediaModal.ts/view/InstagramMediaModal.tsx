@@ -1,11 +1,10 @@
 import React from "react";
-import { Store } from "../../../Store/Store";
 import { makeStyles, createStyles, Typography } from "@material-ui/core";
-import { sqlToDate } from "../../../ActionCreator/organizeSql/sqlToDate";
+import { sqlToDate } from "../../../../../ActionCreator/organizeSql/sqlToDate";
+import { useStateInstagramMediaModal } from "../context/useStateInstagramMediaModal";
 
 const useInstagramMediaModalProps = () => {
-  const { appState } = React.useContext(Store);
-  const instagramMedia = appState.currentModalContent.instagramMedia
+  const { instagramMedia } = useStateInstagramMediaModal()
 
   return {
     instagramMedia,
