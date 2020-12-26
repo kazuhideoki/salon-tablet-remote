@@ -7,43 +7,37 @@ import { Button, TextField, Typography, CircularProgress, makeStyles, createStyl
 import { TCreateArticle } from "../../../../ActionCreator/articles/useCreateArticle";
 import { SelectTagsPopover } from "../components/SelectTagsPopover";
 import { CharCounter } from "../../../../pureComponents/CharCounter";
-import { Store } from "../../../../Store/Store";
 import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
 import { SwitchDataTypeBox } from "../../QuillEditor/components/SwitchDataTypeBox";
 import pure from "recompose/pure";
 import { useHandleSubmit } from '../context/useHandleSubmit'
+import { useStateArticleEditor } from "../context/useStateArticleEditor";
 
 
 const useArticleEditorProps = () => {
-  const { appState } = React.useContext(Store);
-  const { is_admin } = appState.userInfo
-  const { isEditting, article } = appState.edittingPrams;
-
-  const [titleText, setTitleText] = React.useState(
-    isEditting ? article.title : ""
-  );
-  const [editorText, setEditorText] = React.useState(
-    isEditting ? article.article_content : ""
-  );
-  const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(
-    isEditting ? article.article_excerpt : ""
-  );
-  const [createdAt, setCreatedAt] = React.useState("");
-  const [updatedAt, setUpdatedAt] = React.useState("");
-
-  const [dataType, setDataType] = React.useState(isEditting ? article.data_type : 'default_data');
-
-  // ArticleEditor特有のもの
-  const [editorImg, setEditorImg] = React.useState(
-    isEditting ? article.article_img : ""
-  );
-  const [selectedTags, setSelectedTags] = React.useState(
-    isEditting ? article.tag_ids : []
-  );
-
-  const [charCountArticleContent, setCharCountArticleContent] = React.useState(
-    0
-  );
+  const {
+    isEditting,
+    is_admin,
+    titleText,
+    setTitleText,
+    editorText,
+    setEditorText,
+    editorTextExcerpt,
+    setEditorTextExcerpt,
+    createdAt,
+    setCreatedAt,
+    updatedAt,
+    setUpdatedAt,
+    dataType,
+    setDataType,
+    editorImg,
+    setEditorImg,
+    selectedTags,
+    setSelectedTags,
+    charCountArticleContent,
+    setCharCountArticleContent,
+    tags,
+  } = useStateArticleEditor();
 
   const handleOnChangeTitleText = (e) => {
     setTitleText(e.target.value);
@@ -79,7 +73,7 @@ const useArticleEditorProps = () => {
     setCharCountArticleContent,
     handleOnChangeTitleText,
     handleSubmit,
-    tags: appState.tags,
+    tags,
     dataType,
     setDataType,
   };
