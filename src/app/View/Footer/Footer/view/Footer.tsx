@@ -5,39 +5,34 @@ import {
   createStyles,
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store } from "../../Store/Store";
+import { Store } from "../../../../Store/Store";
 import {
   FooterItem,
-} from "../../Store/Types";
-import { IconAndText } from "./IconAndText";
-import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
-import { IconsSetting } from "../Drawer/FooterItemEditor/components/iconSelect/icons";
-import { EditButtonsBox } from "../../pureComponents/buttons/EditButtonsBox";
-import { showDataType } from "../Main/components/showDataType";
-import { useIsMobile } from "../../../lib/useIsMobile";
+} from "../../../../Store/Types";
+import { IconAndText } from "../../IconAndText";
+import { IconsSetting } from "../../../Drawer/FooterItemEditor/components/iconSelect/icons";
+import { EditButtonsBox } from "../../../../pureComponents/buttons/EditButtonsBox";
+import { showDataType } from "../../../Main/components/showDataType";
+import { useIsMobile } from "../../../../../lib/useIsMobile";
+import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
+import { useStateFooter } from "../context/useStateFooter";
 
 export const useFooterProps = () => {
-  const { appState, dispatchAppState } = useContext(Store);
-  const { footerItems, loading, isSetting } = appState;
-
-  const deleteFooterItem = useDeleteFooterItem();
-
-  const handleOnUpDateFooterIcon = (footerItem: FooterItem) => {
-    dispatchAppState({
-      type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT",
-      payload: footerItem,
-    });
-    dispatchAppState({
-      type: "OPEN_MODAL",
-      payload: "edit_footer_item",
-    });
-  };
-
+  const {
+    footerItems,
+    loading,
+    isSetting,
+    handleOnUpDateFooterIcon,
+    openFooterItemModal,
+  } = useStateFooter();
+  
   const isMobile = useIsMobile();
 
+  const deleteFooterItem = useDeleteFooterItem();
+  
   return {
     isSetting,
-    dispatchAppState,
+    openFooterItemModal,
     footerItems,
     handleOnUpDateFooterIcon,
     deleteFooterItem,
@@ -151,10 +146,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                   : MoodBad
               }
               onClick={() =>
-                props.dispatchAppState({
-                  type: "OPEN_FOOTER_ITEM_MODAL",
-                  payload: value.footer_item_id,
-                })
+                props.openFooterItemModal(value.footer_item_id)
               }
               text={value.icon_name}
               loading={props.loading}

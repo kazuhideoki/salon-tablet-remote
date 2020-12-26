@@ -7,7 +7,7 @@ import {
   Theme,
 } from "@material-ui/core";
 import { PMain } from "./Main/PMain";
-import { Footer } from "./Footer/Footer";
+import { Footer } from "./Footer/Footer/view/Footer";
 import { Store } from "../Store/Store";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Drawer } from "./Drawer/Drawer/view/Drawer";

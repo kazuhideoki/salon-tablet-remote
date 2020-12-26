@@ -1,7 +1,7 @@
 import React from 'react';
-import { FooterPresenter } from '../app/View/Footer/Footer';
+import { FooterPresenter } from '../app/View/Footer/Footer/view/Footer';
 import { samplefooterItems } from "./lib/sampleFooterItems";
-import { Provider } from './lib/ThemeProvider';
+import { ThemeProvider } from './lib/ThemeProvider';
 
 export default {
   title: "Footer/Footer",
@@ -11,7 +11,7 @@ export default {
 const props = {
   isSetting: true,
   openModal: null,
-  dispatchAppState: null,
+  openFooterItemModal: null,
   footerItems: samplefooterItems,
   handleOnUpDateFooterIcon: null,
   handleOnDeleteFooterItem: null,
@@ -23,26 +23,26 @@ const props = {
 export const Normal = () => {
 
   return (
-    <Provider>
+    <ThemeProvider>
       <FooterPresenter {...props} />
-    </Provider>
+    </ThemeProvider>
   );
 }
 export const Loading = () => {
 
   return (
-    <Provider>
+    <ThemeProvider>
     <FooterPresenter {...props} loading={true}/>
-    </Provider>
+    </ThemeProvider>
   )
 }
 
 export const NormalIsSettingFalse = () => {
 
   return (
-    <Provider>
+    <ThemeProvider>
     <FooterPresenter {...props} isSetting={false} />
-    </Provider>
+    </ThemeProvider>
   );
 }
 
@@ -53,16 +53,16 @@ const footerItems = samplefooterItems
 
 export const ManyIcon = () => {
   return (
-    <Provider>
+    <ThemeProvider>
     <FooterPresenter {...props} footerItems={footerItems} />
-    </Provider>
+    </ThemeProvider>
   );
 };
 
 export const ManyIconIsSettingFalse = () => {
   return (
-    <Provider>
+    <ThemeProvider>
       <FooterPresenter {...props} footerItems={footerItems} isSetting={false} />
-    </Provider>
+    </ThemeProvider>
   );
 };
