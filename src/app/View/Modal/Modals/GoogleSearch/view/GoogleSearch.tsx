@@ -2,65 +2,28 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Button, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { useHandleOnClick } from "../context/useHandleOnClick";
+import { useHandleOnChange } from "../context/useHandleOnChange";
+import { useStateGoogleSearch } from "../context/useStateGoogleSearch";
+import { useClearHistory } from "../context/useClearHistory";
 
- const deleteExcessSpace = (str: string) => {
-   let newStr = str.trim()
-   return newStr.replace(/\s+/g, " ");
- }
+ 
 
 export const useGoogleSearchProps = () => {
-  const [field, setField] = React.useState('')
-  const [query, setQuery] = React.useState('')
+  const {
+    field,
+    setField,
+    query,
+    setQuery,
+    setSearchHistoryStr,
+    searchHistoryArr,
+  } = useStateGoogleSearch()
 
-  const [searchHistoryStr, setSearchHistoryStr] = React.useState(localStorage.getItem(
-    "googleSearchHistory")
-  )
+  const handleOnChange = useHandleOnChange(setField, setQuery)
 
-  const searchHistoryArr = searchHistoryStr ? searchHistoryStr.split(',') : []
+  const handleOnClick = useHandleOnClick(field, setField, setSearchHistoryStr)
 
-  const handleOnChange = value => {
-    setField(value)
-    setQuery(deleteExcessSpace(value).replace(/ /g, "+"))
-  }
-
-  const handleOnClick = () => {
-    setField('') // 効かない？
-
-    const str: TGoogleSearchHistory = localStorage.getItem(
-      "googleSearchHistory"
-    )
-
-    let newStr
-    let fieldStr = deleteExcessSpace(field)
-    
-    if (!fieldStr) {
-      return null      
-    }
-
-    if (str) {
-      let arr = []
-      arr = str.split(',')
-      const newArr = arr.includes(fieldStr) ? arr : arr.concat(fieldStr)
-      newStr = newArr.toString()
-
-    } else {
-      newStr = fieldStr
-    }
-
-    localStorage.setItem("googleSearchHistory", newStr);
-
-    
-    setSearchHistoryStr(localStorage.getItem(
-      "googleSearchHistory"))
-  }
-
-  const clearHistory = () => {
-    const deleting = confirm('Googleの検索履歴を削除してもよろしいですか？')
-    if (deleting) {
-      localStorage.setItem("googleSearchHistory", '');
-      alert('履歴を削除しました。')
-    }
-  }
+  const clearHistory = useClearHistory()
 
   return {
     field,
@@ -95,7 +58,6 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-type TGoogleSearchHistory = string
 
 export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) => {
   const classes = useStyles()

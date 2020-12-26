@@ -25,7 +25,7 @@ import { SelectInstagramAccounts } from "../../Modals/SelectInstagramAccounts";
 import { TSetModal, T_selected_theme } from "../../../../Store/Types";
 import { InstagramMediaModal } from "../../Modals/InstagramMediaModal";
 import InfoBarEditor from "../../../Drawer/InfoBar/view/InfoBarEditor";
-import { GoogleSearch } from "../../Modals/GoogleSearch";
+import { GoogleSearch } from "../../Modals/GoogleSearch/view/GoogleSearch";
 import { PageNotEmailVerified } from "../../../../../pageComponent/PageNotEmailVerified";
 import { switchingTransition } from "../context/switchingTransition";
 import { useCloseModal } from "../context/useCloseModal";
