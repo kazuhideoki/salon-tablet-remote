@@ -1,5 +1,5 @@
 import React from 'react';
-import { ManageTagsPresenter } from '../app/View/Drawer/ManageTags/ManageTags';
+import { ManageTagsPresenter } from '../app/View/Drawer/ManageTags/view/ManageTags';
 import { sampleTags } from './lib/sampleTags';
 import { Provider } from './lib/ThemeProvider';
 export default {

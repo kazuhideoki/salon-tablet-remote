@@ -8,13 +8,12 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
-import { useCreateTag } from '../../../ActionCreator/tags/useCreateTag'
-import { useUpdateTag } from '../../../ActionCreator/tags/useUpdateTag'
-import { Store } from '../../../Store/Store'
-import { useDeleteTag } from '../../../ActionCreator/tags/useDeleteTag'
-import { CharCounter } from "../../../pureComponents/CharCounter";
+import { Store } from '../../../../Store/Store'
+import { CharCounter } from "../../../../pureComponents/CharCounter";
 import { Skeleton } from '@material-ui/lab';
-import tags_delete from '../../../../pages/api/tags/delete';
+import { useHandleOnClick } from '../context/useHandleOnClick';
+import { useIsValidTagName } from '../context/useIsValidTagName';
+import { useDeleteTag } from '../context/useDeleteTag';
 
 const useManageTagsProps = () => {
   const { appState } = React.useContext(Store);
@@ -23,47 +22,23 @@ const useManageTagsProps = () => {
   const [isEditting, setIsEditting] = React.useState(false);
   const [edittingTagId, setEditingTagId] = React.useState(0);
   const [edittingTagName, setEditingTagName] = React.useState("");
-  const createTag = useCreateTag();
-  const updateTag = useUpdateTag();
-  const deleteTag = useDeleteTag();
-
+  
   const handleOnEditting = (TagId: number, tagName: string) => {
     setIsEditting(true);
     setEditingTagId(TagId);
     setTagNameField(tagName);
     setEditingTagName(tagName);
   };
-
+  
   const handleOnCreateNew = () => {
     setIsEditting(false);
     setEditingTagId(null);
     setTagNameField("");
   };
-
-  const handleOnClick = () => {
-    if (isEditting) {
-      updateTag({ edittingTagId, tagName: tagNameField });
-    } else {
-      createTag(tagNameField);
-    }
-  };
-
-  const isValidTagName = () => {
-    if (tagNameField.length === 0) {
-      return false;
-    } else if (tagNameField.length > 20) {
-      return false;
-    }
-    const tagNames = tags.map((value) => {
-      return value.tag_name;
-    });
-
-    if (tagNames.includes(tagNameField)) {
-      return false;
-    }
-
-    return true;
-  };
+  
+  const deleteTag = useDeleteTag();
+  const handleOnClick = useHandleOnClick(isEditting, edittingTagId,tagNameField)
+  const isValidTagName = useIsValidTagName(tagNameField)
 
   return {
     tags,

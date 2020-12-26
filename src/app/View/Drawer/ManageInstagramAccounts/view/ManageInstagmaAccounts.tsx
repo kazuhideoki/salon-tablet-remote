@@ -6,12 +6,12 @@ import {
   Theme,
   Button,
 } from "@material-ui/core";
-import { instagramRedirectHost } from '../../../../lib/loadUrl';
-import { Store } from '../../../Store/Store';
-import { DeleteButton } from '../../../pureComponents/buttons/DeleteButton';
+import { instagramRedirectHost } from '../../../../../lib/loadUrl';
+import { Store } from '../../../../Store/Store';
+import { DeleteButton } from '../../../../pureComponents/buttons/DeleteButton';
 import { Skeleton } from '@material-ui/lab';
-import { useDeleteInstagramAccount } from './context/useDeleteInstagramAccount';
-import { useGetInstagramMedias } from './context/useGetInstagramMedias';
+import { useDeleteInstagramAccount } from '../context/useDeleteInstagramAccount';
+import { useGetInstagramMedias } from '../context/useGetInstagramMedias';
 
 export const useManageInstagramAccountsProps = () => {
 
