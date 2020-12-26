@@ -4,7 +4,7 @@ import { Slide, DialogContent, makeStyles, createStyles, useTheme, Fade } from "
 import { TransitionProps } from '@material-ui/core/transitions';
 import { CloseButton } from "../../../../pureComponents/buttons/CloseButton";
 import dynamic from "next/dynamic";
-const ContentModal = dynamic(() => import("../../Modals/ContentModal"), {
+const ContentModal = dynamic(() => import("../../Modals/ContentModal/view/ContentModal"), {
   ssr: false,
 });
 const FooterItemModal = dynamic(() => import("../../Modals/FooterItemModal"), {
