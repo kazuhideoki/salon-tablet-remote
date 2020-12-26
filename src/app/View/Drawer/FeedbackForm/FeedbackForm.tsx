@@ -9,8 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { ContactMail } from "@material-ui/icons";
 //@ts-ignore
-import { Store } from "../../Store/Store";
-import { useSubmitFeedback } from "../../ActionCreator/useSubmitFeedback";
+import { Store } from "../../../Store/Store";
+import { useSubmitFeedback } from "../../../ActionCreator/useSubmitFeedback";
 
 const useFeedbackFormProps = () => {
   const { dispatchAppState } = React.useContext(Store)

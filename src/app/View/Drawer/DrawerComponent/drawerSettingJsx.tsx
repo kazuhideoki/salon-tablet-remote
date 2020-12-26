@@ -2,7 +2,7 @@ import React from 'react'
 import { List, ListItem, ListItemIcon, Typography, Button, TextField, ListItemText } from "@material-ui/core";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
 import { TagsButton } from "../../Footer/PaginationBar/TagsButton";
-import { TUseDrawerProps } from "../Drawer";
+import { TUseDrawerProps } from "../Drawer/view/Drawer";
 
 export const drawerSettingJsx = (props: TUseDrawerProps) => {
          if (props.isSetting) {
@@ -33,7 +33,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    {/* {props.isMobile ? null : (
                      <ListItemText primary="アイテム作成" />
                    )} */}
-                     <ListItemText primary="アイテム作成" />
+                   <ListItemText primary="アイテム作成" />
                  </ListItem>
                  <ListItem
                    button
@@ -62,10 +62,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Instagram />
                    </ListItemIcon>
-                     <ListItemText
-                       primary="Instagram 連携"
-                       secondary="製作中"
-                     />
+                   <ListItemText primary="Instagram 連携" secondary="製作中" />
                  </ListItem>
                  <ListItem
                    button
@@ -79,7 +76,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Wallpaper />
                    </ListItemIcon>
-                     <ListItemText primary="デザイン" secondary="製作中" />
+                   <ListItemText primary="デザイン" secondary="製作中" />
                  </ListItem>
                  <ListItem
                    button
@@ -93,7 +90,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Settings />
                    </ListItemIcon>
-                     <ListItemText primary="アカウント" />
+                   <ListItemText primary="アカウント" />
                  </ListItem>
                  <ListItem
                    button
@@ -107,13 +104,13 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <Feedback />
                    </ListItemIcon>
-                     <ListItemText primary="フィードバック" />
+                   <ListItemText primary="フィードバック" />
                  </ListItem>
-                 <ListItem button onClick={() => props.handleOnSingOut()}>
+                 <ListItem button onClick={() => props.handleOnSignOut()}>
                    <ListItemIcon>
                      <ExitToApp />
                    </ListItemIcon>
-                     <ListItemText primary="サインアウト" />
+                   <ListItemText primary="サインアウト" />
                  </ListItem>
                </List>
              </>

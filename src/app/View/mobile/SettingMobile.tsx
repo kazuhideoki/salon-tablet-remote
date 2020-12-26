@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles,Theme ,createStyles} from '@material-ui/core';
-import { useDrawerProps, TUseDrawerProps } from '../Drawer/Drawer';
+import { useDrawerProps, TUseDrawerProps } from '../Drawer/Drawer/view/Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -70,7 +70,7 @@ export const SettingMobilePresenter: React.FC<TUseDrawerProps> = (props) => {
       <br />
       <button
         className={classes.button}
-        onClick={() => props.handleOnSingOut()}
+        onClick={() => props.handleOnSignOut()}
       >
         サインアウト
       </button>

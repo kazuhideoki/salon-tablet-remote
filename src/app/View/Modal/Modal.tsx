@@ -12,15 +12,15 @@ const FooterItemModal = dynamic(() => import("../Footer/FooterItemModal"), {
 });
 import ArticleEditor from "../Drawer/ArticleEditor/view/ArticleEditor";
 import FooterItemEditor from "../Drawer/FooterItemEditor/view/FooterItemEditor";
-import { FeedbackForm } from "../Drawer/FeedbackForm";
+import { FeedbackForm } from "../Drawer/FeedbackForm/FeedbackForm";
 import { ManageTheme } from "../Drawer/ManageTheme/view/ManageTheme";
 import { SelectTags } from "../Footer/SelectTags";
-import { ManageTags } from "../Drawer/ManageTags";
+import { ManageTags } from "../Drawer/ManageTags/ManageTags";
 import { SettingUserInfo } from "../Drawer/Account/view/ManageUserInfo";
 import { DeleteAccountForm } from "../Drawer/Account/view/DeleteAccountForm";
 import { useModalSize, medium } from "./useModalSize";
 import { StyledDialog } from "./StyledDialog";
-import { ManageInstagramAccounts } from "../Drawer/ManageInstagmaAccounts";
+import { ManageInstagramAccounts } from "../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts";
 import { SelectInstagramAccounts } from "../Footer/SelectInstagramAccounts";
 import { TSetModal, T_selected_theme } from "../../Store/Types";
 import { InstagramMediaModal } from "../Main/InstagramMediaModal";

@@ -10,69 +10,51 @@ import { Drawer as MuiDrawer } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import { ThemeContext, TThemeArgs } from "../../Store/ThemeContext";
-import { Store } from "../../Store/Store";
-import { useGetArticles } from "../../ActionCreator/articles/useGetArticles";
-import { drawerSettingJsx } from "./DrawerComponent/drawerSettingJsx";
-import { drawerHeaderJsx } from "./DrawerComponent/drawerHeaderJsx";
-import { drawerItemsJsx } from "./DrawerComponent/drawerItemsJsx";
-import { useIsMobile } from "../../../lib/useIsMobile";
-import { useFooterProps } from "../Footer/Footer";
-import { useDeleteFooterItem } from "../../ActionCreator/footerItems/useDeleteFooterItem";
+import { ThemeContext, TThemeArgs } from "../../../../Store/ThemeContext";
+import { Store } from "../../../../Store/Store";
+import { drawerSettingJsx } from "../../DrawerComponent/drawerSettingJsx";
+import { drawerHeaderJsx } from "../../DrawerComponent/drawerHeaderJsx";
+import { drawerItemsJsx } from "../../DrawerComponent/drawerItemsJsx";
+import { useIsMobile } from "../../../../../lib/useIsMobile";
+import { useFooterProps } from "../../../Footer/Footer";
 import { Settings } from "@material-ui/icons";
-import { useAuth } from "../../../lib/auth/AuthProvider";
-import { AuthCircular } from '../../../lib/AuthCircular';
+import { AuthCircular } from '../../../../../lib/AuthCircular';
+import { useHandleSwitchIsSetting } from "../context/useHandleSwitchIsSetting";
+import { useHandleOnSingOut } from "../context/useHandleOnSingOut";
+import { useHandleDrawerClose } from "../context/useHandleDrawerClose";
+import { useHandleDrawerCloseKeepIsSetting } from "../context/useHandleDrawerCloseKeepIsSetting";
+import { useCloseDrawerTapMain } from "../context/useCloseDrawerTapMain";
+import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
+import { useHandleDrawerOpen } from "../context/useHandleDrawerOpen";
+
 export const useDrawerProps = () => {
   const theme = useTheme();
-  const [isClicked, setIsClicked] = React.useState(false);
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const { signout } = useAuth()
+  const {dispatchAppState, appState } = React.useContext(Store);
   const { isSetting, isPublicPage, isDrawerOpen, footerItems} = appState
-  
-  const getArticles = useGetArticles()
-  
-  const handleSwitchIsSetting = () => {
-    getArticles(true, 1, appState.selectedArticlesTags, false);
-  }
-
-  const handleOnSingOut = () => {
-    const signOuting = confirm('サインアウトしますか？')
-    if(signOuting) {
-      setIsClicked(true)
-      signout("/");
-    }
-  }
-
-  const handleDrawerClose = () => {
-    getArticles(false, 1, appState.selectedArticlesTags, false)
-    dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
-  };
-  const handleDrawerCloseKeepIsSetting = () => {
-    dispatchAppState({ type: "CLOSE_DRAWER" }); 
-  };
-
-  const isMobile = useIsMobile()
-  const [pass, setPass] = React.useState('')
-
   const themes = React.useContext(ThemeContext);
-
-  const closeDrawerTapMain = (e) => {
-    dispatchAppState({type: 'CLOSE_DRAWER'})
-  }
-
-
+  const isMobile = useIsMobile()
   const { handleOnUpDateFooterIcon } = useFooterProps()
+    
+  const [pass, setPass] = React.useState('')
+  
+  const { isClicked, handleOnSignOut } = useHandleOnSingOut();
+  const handleSwitchIsSetting = useHandleSwitchIsSetting()
+  const handleDrawerOpen = useHandleDrawerOpen()
+  const handleDrawerClose = useHandleDrawerClose()
+  const handleDrawerCloseKeepIsSetting = useHandleDrawerCloseKeepIsSetting()
+  const closeDrawerTapMain = useCloseDrawerTapMain()
   const deleteItem = useDeleteFooterItem()
 
   return {
     theme,
+    dispatchAppState,
     isSetting,
     isPublicPage,
     isDrawerOpen,
     footerItems,
-    dispatchAppState,
+    handleDrawerOpen,
     handleSwitchIsSetting,
-    handleOnSingOut,
+    handleOnSignOut,
     handleDrawerClose,
     handleDrawerCloseKeepIsSetting,
     isMobile,
@@ -175,7 +157,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       <IconButton
         // color="inherit"
         aria-label="open drawer"
-        onClick={() => props.dispatchAppState({ type: "OPEN_DRAWER" })}
+        onClick={() => props.handleDrawerOpen()}
         edge="start"
         className={clsx(classes.menuButton, props.isDrawerOpen && classes.hide)}
       >

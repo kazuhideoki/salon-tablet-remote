@@ -8,13 +8,13 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
-import { useCreateTag } from '../../ActionCreator/tags/useCreateTag'
-import { useUpdateTag } from '../../ActionCreator/tags/useUpdateTag'
-import { Store } from '../../Store/Store'
-import { useDeleteTag } from '../../ActionCreator/tags/useDeleteTag'
-import { CharCounter } from "../../pureComponents/CharCounter";
+import { useCreateTag } from '../../../ActionCreator/tags/useCreateTag'
+import { useUpdateTag } from '../../../ActionCreator/tags/useUpdateTag'
+import { Store } from '../../../Store/Store'
+import { useDeleteTag } from '../../../ActionCreator/tags/useDeleteTag'
+import { CharCounter } from "../../../pureComponents/CharCounter";
 import { Skeleton } from '@material-ui/lab';
-import tags_delete from '../../../pages/api/tags/delete';
+import tags_delete from '../../../../pages/api/tags/delete';
 
 const useManageTagsProps = () => {
   const { appState } = React.useContext(Store);

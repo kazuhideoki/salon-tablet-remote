@@ -1,5 +1,5 @@
 import React from 'react';
-import { ManageInstagramAccountsPresenter } from '../app/View/Drawer/ManageInstagmaAccounts';
+import { ManageInstagramAccountsPresenter } from '../app/View/Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
 import { TInstagramAccounts } from '../app/Store/Types';
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 export default {
