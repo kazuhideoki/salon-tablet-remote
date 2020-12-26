@@ -26,6 +26,7 @@ import { useHandleChangeThemeFont1, useHandleChangeThemeFont2, useHandleChangeTh
 import { useHandleChangeFooterIconSize } from "../context/useHandleChangeFooterIconSize";
 import { useHandleChangeShowArticleType } from "../context/useHandleChangeShowArticleType";
 import { useHandleAccordion } from "../context/useHandleAccordion";
+import { useStateMangeTheme } from "../context/useStateMangeTheme";
 var colorConvert = require("color-convert");
 
 export type THsl = {
@@ -36,8 +37,7 @@ export type THsl = {
 export type TColor = {hex: T_theme_color, hsl: THsl}
 
 export const useManageTheme = () => {
-  const { appState } = React.useContext(Store)
-  const { selected_theme, theme_color, show_article_type } = appState.userInfo
+  const { selected_theme, theme_color, show_article_type } = useStateMangeTheme()
 
   const { user } = useAuth()
 
