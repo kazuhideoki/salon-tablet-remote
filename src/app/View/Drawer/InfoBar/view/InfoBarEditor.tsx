@@ -4,35 +4,33 @@ const SmallQuillEditor = dynamic(() => import("../components/SmallQuillEditor"),
   ssr: false,
 });
 import { Button, Typography, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
-import { Store } from "../../../../Store/Store";
 import { CharCounter } from "../../../../pureComponents/CharCounter";
 import { SwitchOnTapInfoBar } from "../components/SwitchOnTapInfoBar";
 import { SelectArticleInfoBar } from "../components/SelectArticleInfoBar";
-import { TUseUpdateInfoBar } from "../../../../ActionCreator/infoBar/useUpdateInfoBar";
 import { PublishTwoTone } from "@material-ui/icons";
 import { useHandleSubmit } from "../context/useHandleSubmit";
+import { useStateInfoBarEditor } from "../context/useStateInfoBarEditor";
 
-const scrollingAnimationDuration = (charCount: number) => (32 * charCount) / 245 + 8; // アニメーションの再生時間がが文字数に応じて増え、どの文字数でもある程度同じスピードで再生されるように調整
 
 const useInfoBarEditorProps = () => {
-  const { appState } = React.useContext(Store)
-  const { info_bar_type, scrolling_sentence, selected_article_id } = appState.infoBarData.infoBar;
+  const {
+    allArticles,
+    infoBarType,
+    setInfoBarType,
+    editorText,
+    setEditorText,
+    articleInfoBar,
+    setArticleInfoBar,
+    charCount,
+    setCharCount,
+  } = useStateInfoBarEditor()
   
-  const [infoBarType, setInfoBarType] = React.useState(info_bar_type);
-  const [editorText, setEditorText] = React.useState(scrolling_sentence);
-  const [articleInfoBar, setArticleInfoBar] = React.useState(
-    selected_article_id as number
-  );
-  const [charCount, setCharCount] = React.useState(0);
-
-  const params: TUseUpdateInfoBar = {
+  const handleSubmit = useHandleSubmit({
     infoBarType,
     editorText,
     articleInfoBar,
-    ScrollingAnimationDuration: scrollingAnimationDuration(charCount),
-  };    
-  
-  const handleSubmit = useHandleSubmit(params)
+    charCount,
+  })
 
   return {
     infoBarType,
@@ -43,7 +41,7 @@ const useInfoBarEditorProps = () => {
     setCharCount,
     articleInfoBar,
     setArticleInfoBar,
-    allArticles: appState.allArticles,
+    allArticles,
     handleSubmit,
   };
 
