@@ -20,70 +20,40 @@ import { useIsMobile } from '../../../../../lib/useIsMobile';
 import { useHandleSubmit } from '../context/useHandleSubmit';
 import { T_modal_size } from '../../../../Store/Types';
 import { useHandleChange } from '../context/useHandleChange';
+import { useHandleOnSidebar } from '../context/useHandleOnSidebar';
+import { useStateFooterItemEditor } from '../context/useStateFooterItemEditor';
 
 const useFooterItemEditorProps = () => {
-  const { appState } = React.useContext(Store);
-  const { modalSize, isModalSizeChanged, onTap, isEditting, footerItem } = appState.edittingPrams;
-  const [titleText, setTitleText] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.icon_name : ""
-  );
-  const [editorText, setEditorText] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.item_content : ""
-  );
-  const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.item_excerpt : ""
-  );
-  const [createdAt, setCreatedAt] = React.useState("");
-  const [updatedAt, setUpdatedAt] = React.useState("");
-  const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
-    selectedIconReducer,
-    isEditting || isModalSizeChanged
-      ? IconsSetting.convertIconComponentFromName(
-          footerItem.displayed_icon_name
-        )
-      : null
-  );
-
-  const [dataType, setDataType] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.data_type : "default_data"
-  );
-
-  const [onTapRadio, setOnTapRadio] = React.useState(onTap)
-
-  const [modalSizeRadio, setModalSizeRadio] = React.useState(modalSize)
-
-  const [linkUrl, setLinkUrl] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.link_url : ""
-  );
-  const [appLinkUrl, setAppLinkUrl] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.app_link_url : ""
-  );
-
-  const [
+  const {
+    isEditting,
+    footerItem,
+    is_admin,
+    titleText,
+    editorText,
+    setEditorText,
+    editorTextExcerpt,
+    setEditorTextExcerpt,
+    selectedIcon,
+    dispatchSelectedIcon,
+    dataType,
+    setDataType,
+    onTapRadio,
+    setOnTapRadio,
+    modalSizeRadio,
+    setModalSizeRadio,
+    linkUrl,
+    setLinkUrl,
+    appLinkUrl,
+    setAppLinkUrl,
     charCountFooterItemContent,
     setCharCountFooterItemContent,
-  ] = React.useState(0);
+    handleOnChangeIconName,
+  } = useStateFooterItemEditor()
 
-  const handleOnChangeIconName = (e) => {
-    setTitleText(e.target.value);
-  };
+  const isMobile = useIsMobile();
 
-  const initSidebar = () => {
-    if (isEditting === false) {
-      return false
-    }
-    if (footerItem.order_sidebar === 0) {
-      return false
-    }
-    return true
-  }
-
-  const [onSidebar, setOnSidebar] = React.useState(initSidebar());
+  const {onSidebar, handleOnSidebar} = useHandleOnSidebar(isEditting, footerItem)
   
-  const handleOnSidebar = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOnSidebar(e.target.checked)
-  }
-
   const edittingFooterItemParams: TFooterItemEdittingParams = {
     titleText,
     selectedIcon,
@@ -99,9 +69,9 @@ const useFooterItemEditorProps = () => {
 
   const handleSubmit = useHandleSubmit(edittingFooterItemParams, isEditting)
 
+
   const handleChange = useHandleChange(edittingFooterItemParams)
 
-  const isMobile = useIsMobile();
 
   return {
     onTapRadio,
@@ -125,7 +95,7 @@ const useFooterItemEditorProps = () => {
     handleSubmit,
     dataType,
     setDataType,
-    is_admin: appState.userInfo.is_admin,
+    is_admin,
     isMobile,
     onSidebar,
     handleOnSidebar,
