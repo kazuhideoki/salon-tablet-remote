@@ -1,20 +1,22 @@
 import React from "react";
-import { Store } from "../../../Store/Store";
-import { ThemeContext } from "../../../Store/ThemeContext";
+import { Store } from "../../../../Store/Store";
+import { ThemeContext } from "../../../../Store/ThemeContext";
 import { Grid, makeStyles, createStyles, Theme, Chip, IconButton, withStyles, useTheme, Card, useMediaQuery } from "@material-ui/core";
-import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
-import { HomeButton } from "./HomeButton";
-import { PaginationArrows } from "./PaginationArrows";
-import { TagsButton } from "./TagsButton";
-import { useSelectedArticlesTagNames } from "../../../Store/useSelectedArticlesTagNames";
+import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
+import { HomeButton } from "../components/HomeButton";
+import { PaginationArrows } from "../components/PaginationArrows";
+import { TagsButton } from "../components/TagsButton";
+import { useSelectedArticlesTagNames } from "../context/useSelectedArticlesTagNames";
 import { Instagram } from "@material-ui/icons";
-import { PaginationInstagram } from "./PaginationInstagram";
-import { useGetInstagramMedias } from "../../../ActionCreator/instagramMedias/useGetInstagramMedias";
+import { PaginationInstagram } from "../components/PaginationInstagram";
+import { useHandleOnNumClick } from "../context/useHandleOnNumClick";
+import { useManageInstagramAccountsProps } from "../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
+import { useStatePaginationBar } from "../context/useStatePaginationBar";
 
-export const usePPaginationProps = () => {
-  const getArticles = useGetArticles();
-  const { dispatchAppState, appState} = React.useContext(Store);
+export const usePaginationBarProps = () => {
+  
   const {
+    dispatchAppState,
     isSetting,
     tags,
     instagramAccounts,
@@ -23,17 +25,19 @@ export const usePPaginationProps = () => {
     selectedArticlesTags,
     selectedInstagramAccount,
     isShowInstagram,
-  } = appState;
-  const {  } = appState
-  const getInstagramMedias = useGetInstagramMedias();
+  } = useStatePaginationBar()
+
+  const getArticles = useGetArticles();
+
+  const theme = useTheme()
+
+  const { getInstagramMedias } = useManageInstagramAccountsProps()
   
-  const handleOnNumClick = (num) => {
-    getArticles(isSetting, num);
-  };
+  const handleOnNumClick = useHandleOnNumClick()
 
   const selectedTagNames = useSelectedArticlesTagNames();
 
-  const theme = useTheme()
+
   const StyledIconButton = withStyles({
     root: {
       margin: theme.spacing(1),
@@ -64,11 +68,11 @@ export const usePPaginationProps = () => {
     instagramMedias,
   };
 };
-export type TUsePPaginationProps = ReturnType<typeof usePPaginationProps> & {
+export type TUsePaginationBarProps = ReturnType<typeof usePaginationBarProps> & {
   className?: string
 };
-export type TPaginationPropsAndClasses = TUsePPaginationProps & {
-  classes: TPPaginationClasses;
+export type TPaginationPropsAndClasses = TUsePaginationBarProps & {
+  classes: TPaginationBarClasses;
 };
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -139,9 +143,9 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 })
 
-export type TPPaginationClasses = ReturnType<typeof useStyles>
+export type TPaginationBarClasses = ReturnType<typeof useStyles>
 
-export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
+export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) => {
 
   const classes = useStyles();
 
@@ -196,7 +200,7 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
             props.selectedArticlesTags.length !== 0 && (
               <div className={classes.item}>
                 <div
-                  id="pagination_selectecd_tags_div"
+                  id="pagination_selected_tags_div"
                   className={`${classes.selectedTags}`}
                 >
                   {props.selectedTagNames.map((value) => (
@@ -253,8 +257,8 @@ export const PPaginationPresenter: React.FC<TUsePPaginationProps> = (props) => {
   );
 };
 
-export const PPagination = ({className = ''}) => {
-  const props = usePPaginationProps()
+export const PaginationBar = ({className = ''}) => {
+  const props = usePaginationBarProps()
   
-  return <PPaginationPresenter {...props} className={className}/>
+  return <PaginationBarPresenter {...props} className={className}/>
 }

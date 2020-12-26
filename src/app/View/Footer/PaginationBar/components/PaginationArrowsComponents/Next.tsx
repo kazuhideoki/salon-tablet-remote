@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigateNext } from "@material-ui/icons";
-import { Store } from "../../../../Store/Store";
-import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
+import { Store } from "../../../../../Store/Store";
+import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles";
 import { Typography, SvgIcon, Button } from "@material-ui/core";
-import { TPaginationPropsAndClasses } from "../PPagination";
+import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
 
 
 export const Next = (props: TPaginationPropsAndClasses) => {

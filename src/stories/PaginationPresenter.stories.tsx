@@ -1,12 +1,12 @@
 import React from 'react';
-import { PPaginationPresenter, TUsePPaginationProps } from '../app/View/Footer/PaginationBar/PPagination';
+import { PaginationBarPresenter, TUsePaginationBarProps } from '../app/View/Footer/PaginationBar/view/PaginationBar';
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 import { sampleTags } from './lib/sampleTags';
 import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';
 import { initInstagramMedias } from '../app/Store/Types';
 export default {
-  title: "Footer/Pagination/PPagination",
-  component: PPaginationPresenter,
+  title: "Footer/Pagination/PaginationBar",
+  component: PaginationBarPresenter,
 };
 
 const StyledIconButton = withStyles({
@@ -20,7 +20,7 @@ const StyledIconButton = withStyles({
   },
 })(IconButton);
 
-const props: TUsePPaginationProps = {
+const props: TUsePaginationBarProps = {
   isSetting: true,
   getArticles: null,
   paginationParams: {
@@ -48,7 +48,7 @@ export const Normal = () => {
 
   return (
     <>
-      <PPaginationPresenter {...props} />
+      <PaginationBarPresenter {...props} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
       </>
   );
@@ -57,12 +57,12 @@ export const isTabletPortrait = () => {
 
   return (
     <>
-      <PPaginationPresenter {...props} isTabletPortrait={true} />
+      <PaginationBarPresenter {...props} isTabletPortrait={true} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
       </>
   );
 }
-const props2: TUsePPaginationProps = {
+const props2: TUsePaginationBarProps = {
   isSetting: true,
   getArticles: null,
   paginationParams: {
@@ -102,7 +102,7 @@ export const Instagram表示 = () => {
 
   return (
     <>
-      <PPaginationPresenter {...props2} />
+      <PaginationBarPresenter {...props2} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
     </>
   );

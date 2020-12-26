@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@material-ui/core";
 
-import { TagsButton } from '../../../Footer/PaginationBar/TagsButton';
+import { TagsButton } from '../../../Footer/PaginationBar/components/TagsButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

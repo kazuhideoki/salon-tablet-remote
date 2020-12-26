@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid, withStyles, IconButton } from "@material-ui/core";
-import { Latest } from './PaginationArrows/Latest';
-import { Prev } from './PaginationArrows/Prev';
-import { DisplayNumbers } from './PaginationArrows/DisplayNumbers';
-import { Next } from './PaginationArrows/Next';
-import { Oldest } from "./PaginationArrows/Oldest";
-import { TPaginationPropsAndClasses } from './PPagination';
+import { Latest } from './PaginationArrowsComponents/Latest';
+import { Prev } from './PaginationArrowsComponents/Prev';
+import { DisplayNumbers } from './PaginationArrowsComponents/DisplayNumbers';
+import { Next } from './PaginationArrowsComponents/Next';
+import { Oldest } from "./PaginationArrowsComponents/Oldest";
+import { TPaginationPropsAndClasses } from '../view/PaginationBar';
 
 export const PaginationArrows:React.FC<TPaginationPropsAndClasses> = (props) => {
 

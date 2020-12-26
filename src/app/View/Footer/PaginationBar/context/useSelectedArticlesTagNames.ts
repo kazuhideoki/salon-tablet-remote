@@ -1,4 +1,4 @@
-import { Store } from "./Store";
+import { Store } from "../../../../Store/Store";
 import React from 'react'
 
 // 現在main画面で表示している記事の,タグの名前を配列で返す

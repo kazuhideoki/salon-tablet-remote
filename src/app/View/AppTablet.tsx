@@ -12,7 +12,7 @@ import { Store } from "../Store/Store";
 import { ThemeContext } from "../Store/ThemeContext";
 import { Drawer } from "./Drawer/Drawer/view/Drawer";
 import dynamic from "next/dynamic";
-import { PPagination } from "./Footer/PaginationBar/PPagination";
+import { PaginationBar } from "./Footer/PaginationBar/view/PaginationBar";
 const InfoBar = dynamic(() => import("./InfoBar"), {
   ssr: false,
 });
@@ -143,7 +143,7 @@ export const AppTablet = () => {
               [classes.contentShift]: open,
             })} ${classes.pagination} ${open ? classes.paginationOpened : null}`}
           >
-            <PPagination />
+            <PaginationBar />
           </Grid>
           <Grid
             item

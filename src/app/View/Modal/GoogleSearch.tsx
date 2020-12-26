@@ -23,7 +23,7 @@ export const useGoogleSearchProps = () => {
     setQuery(deleteExcessSpace(value).replace(/ /g, "+"))
   }
 
-  const hancleOnClick = () => {
+  const handleOnClick = () => {
     setField('') // 効かない？
 
     const str: TGoogleSearchHistory = localStorage.getItem(
@@ -68,9 +68,9 @@ export const useGoogleSearchProps = () => {
     query,
     searchHistoryArr,
     handleOnChange,
-    hancleOnClick,
+    handleOnClick,
     clearHistory,
-  }
+  };
 }
 
 export type TUseGoogleSearchProps = ReturnType<typeof useGoogleSearchProps>
@@ -101,7 +101,7 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
   const classes = useStyles()
 
   return (
-    <div className={classes.root} >
+    <div className={classes.root}>
       <Autocomplete
         freeSolo
         id="google-search"
@@ -131,7 +131,7 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
           className={classes.button}
           variant="contained"
           color="primary"
-          onClick={props.hancleOnClick}
+          onClick={props.handleOnClick}
         >
           検索
         </Button>
@@ -146,7 +146,7 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
           className={classes.button}
           variant="contained"
           color="primary"
-          onClick={props.hancleOnClick}
+          onClick={props.handleOnClick}
         >
           画像検索
         </Button>

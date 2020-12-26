@@ -1,7 +1,7 @@
 import React from 'react'
 import { List, ListItem, ListItemIcon, Typography, Button, TextField, ListItemText } from "@material-ui/core";
 import { NoteAddOutlined, VideoLabel, Settings, ExitToApp, Feedback, Wallpaper, Instagram } from "@material-ui/icons";
-import { TagsButton } from "../../../Footer/PaginationBar/TagsButton";
+import { TagsButton } from "../../../Footer/PaginationBar/components/TagsButton";
 import { TUseDrawerProps } from "../view/Drawer";
 
 export const drawerSettingJsx = (props: TUseDrawerProps) => {

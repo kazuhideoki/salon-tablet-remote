@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Typography, IconButton } from "@material-ui/core";
-import { TPaginationPropsAndClasses } from "../PPagination";
+import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
 
 type Props = {
   paginationParams: {
