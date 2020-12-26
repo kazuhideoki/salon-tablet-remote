@@ -8,33 +8,25 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
-import { Store } from '../../../../Store/Store'
 import { CharCounter } from "../../../../pureComponents/CharCounter";
 import { Skeleton } from '@material-ui/lab';
 import { useHandleOnClick } from '../context/useHandleOnClick';
 import { useIsValidTagName } from '../context/useIsValidTagName';
 import { useDeleteTag } from '../context/useDeleteTag';
+import { useStateMangeTags } from '../context/useStateMangeTags';
 
 const useManageTagsProps = () => {
-  const { appState } = React.useContext(Store);
-  const { tags, loading } = appState;
-  const [tagNameField, setTagNameField] = React.useState("");
-  const [isEditting, setIsEditting] = React.useState(false);
-  const [edittingTagId, setEditingTagId] = React.useState(0);
-  const [edittingTagName, setEditingTagName] = React.useState("");
-  
-  const handleOnEditting = (TagId: number, tagName: string) => {
-    setIsEditting(true);
-    setEditingTagId(TagId);
-    setTagNameField(tagName);
-    setEditingTagName(tagName);
-  };
-  
-  const handleOnCreateNew = () => {
-    setIsEditting(false);
-    setEditingTagId(null);
-    setTagNameField("");
-  };
+  const {
+    tags,
+    loading,
+    tagNameField,
+    setTagNameField,
+    isEditting,
+    edittingTagId,
+    edittingTagName,
+    handleOnEditting,
+    handleOnCreateNew,
+  } = useStateMangeTags()
   
   const deleteTag = useDeleteTag();
   const handleOnClick = useHandleOnClick(isEditting, edittingTagId,tagNameField)
