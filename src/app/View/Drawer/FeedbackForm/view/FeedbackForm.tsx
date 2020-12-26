@@ -12,8 +12,12 @@ import { ContactMail } from "@material-ui/icons";
 import { useHandleOnSubmit } from "../context/useHandleOnSubmit";
 
 const useFeedbackFormProps = () => {
-  const [contactFormTitle, setContactFormTitle] = React.useState('')
-  const [contactFormContent, setContactFormContent] = React.useState('');
+  const {
+    contactFormTitle,
+    setContactFormTitle,
+    contactFormContent,
+    setContactFormContent,
+  } = useStateFeedbackForm()
 
   const handleOnSubmit = useHandleOnSubmit({contactFormTitle,setContactFormTitle, contactFormContent, setContactFormContent})
 
