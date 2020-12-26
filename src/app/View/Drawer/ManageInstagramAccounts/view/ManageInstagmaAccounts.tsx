@@ -6,22 +6,18 @@ import {
   Theme,
   Button,
 } from "@material-ui/core";
-import { instagramRedirectHost } from '../../../../../lib/loadUrl';
-import { Store } from '../../../../Store/Store';
 import { DeleteButton } from '../../../../pureComponents/buttons/DeleteButton';
 import { Skeleton } from '@material-ui/lab';
 import { useDeleteInstagramAccount } from '../context/useDeleteInstagramAccount';
 import { useGetInstagramMedias } from '../context/useGetInstagramMedias';
+import { useStateManageInstagramAccount } from '../context/useStateManageInstagramAccount';
 
 export const useManageInstagramAccountsProps = () => {
 
-  const { appState } = React.useContext(Store);
-  const {instagramAccounts, loading} = appState
+  const { instagramAccounts, loading, instaAuth } = useStateManageInstagramAccount()
 
   const deleteInstagramAccount = useDeleteInstagramAccount()
   const getInstagramMedias = useGetInstagramMedias()
-
-  const instaAuth = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${instagramRedirectHost}/api/instagram_accounts/get_token&scope=user_profile,user_media&response_type=code`;
 
   return {
     instagramAccounts,
