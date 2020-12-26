@@ -19,31 +19,33 @@ import { useGoogleSearchProps } from "../../../Footer/GoogleSearch";
 import { useOpenDeleteAccountForm } from "../context/useOpenDeleteAccountForm";
 import { useHandleOnSubmit } from "../context/useHandleOnSubmit";
 import { useHandleSwitch } from "../context/useHandleSwitch";
+import { useStateAccount } from "../context/useStateAccount";
 
 const useSettingUserInfoProps = () => {
-  const { appState } = React.useContext(Store)
-  const {userInfo} = appState
 
-  const [name, setName] = React.useState(userInfo.user_name || '');
-  const [shopName, setShopName] = React.useState(userInfo.shop_name || '');
-  const [email, setEmail] = React.useState(userInfo.user_email);
-  const [password, setPassword] = React.useState('');
-  const [isShowMobile, setIsShowMobile] = React.useState(userInfo.is_generate_public_page)
+  const {
+    userInfo,
+    name,
+    setName,
+    shopName,
+    setShopName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    isShowMobile,
+    setIsShowMobile,
+  } = useStateAccount()
 
-  const params: TUpdateUser = {
+  const handleOnSubmit = useHandleOnSubmit({
     name,
     shopName,
     email,
     password,
     isShowMobile,
-  };
-
-  const handleOnSubmit = useHandleOnSubmit(params)
-
+  })
   const openDeleteAccountForm = useOpenDeleteAccountForm()
-
   const handleSwitch = useHandleSwitch()
-
   const { clearHistory } = useGoogleSearchProps()
 
   return {

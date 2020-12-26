@@ -9,8 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Info } from "@material-ui/icons";
-import { useDeleteUser } from "../../../../ActionCreator/user/useDeleteUser";
 import { server } from "../../../../../lib/loadUrl";
+import { useDeleteUser } from "../context/useDeleteUser";
+import { useStateDeleteAccountFrom } from "../context/useStateDeleteAccountForm";
 
 function Copyright() {
   return (
@@ -47,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
 
 export function DeleteAccountForm() {
   const classes = useStyles();
-  const [email, setEmail] = React.useState("");
+  
+  const { emailForConfirm, setEmailForConfirm } = useStateDeleteAccountFrom()
+
   const deleteUser = useDeleteUser()
 
   return (
@@ -73,14 +76,14 @@ export function DeleteAccountForm() {
             name="email"
             autoComplete="email"
             autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={emailForConfirm}
+            onChange={(e) => setEmailForConfirm(e.target.value)}
           />
           <Button
             fullWidth
             color="primary"
             className={classes.submit}
-            onClick={() => deleteUser(email)}
+            onClick={() => deleteUser(emailForConfirm)}
           >
             アカウントを本当に削除する
           </Button>
