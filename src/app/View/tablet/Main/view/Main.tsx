@@ -17,7 +17,7 @@ import { useDeleteArticle } from "../context/useDeleteArticle";
 import { useStateMain } from "../context/useStateMain";
 
 export const useMainProps = () => {
-  const {
+  const { 
     dispatchAppState,
     articles,
     tags,
