@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterItemEditorPresenter, TUseFooterItemEditorProps } from '../app/View/Drawer/FooterItemEditor/view/FooterItemEditor';
+import { FooterItemEditorPresenter, TUseFooterItemEditorProps } from '../app/View/tablet/Drawer/FooterItemEditor/view/FooterItemEditor';
 import { ThemeProvider } from './lib/ThemeProvider';
 import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 export default {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterPresenter } from '../app/View/Footer/Footer/view/Footer';
+import { FooterPresenter } from '../app/View/tablet/Footer/Footer/view/Footer';
 import { samplefooterItems } from "./lib/sampleFooterItems";
 import { ThemeProvider } from './lib/ThemeProvider';
 

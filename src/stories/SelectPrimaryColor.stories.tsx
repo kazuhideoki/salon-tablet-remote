@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectPrimaryColor } from '../app/View/Drawer/ManageTheme/components/SelectPrimaryColor';
+import { SelectPrimaryColor } from '../app/View/tablet/Drawer/ManageTheme/components/SelectPrimaryColor';
 export default {
   title: "Drawer/ManageTheme/SelectPrimaryColor",
   component: SelectPrimaryColor,

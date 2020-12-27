@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainPresenter, TUseMainProps } from '../app/View/Main/view/Main';
+import { MainPresenter, TUseMainProps } from '../app/View/tablet/Main/view/Main';
 import { sampleData } from './lib/sampleArticles';
 import { initInstagramMedias } from '../app/Store/Types';
 export default {

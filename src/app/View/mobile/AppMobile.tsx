@@ -1,10 +1,10 @@
 import React from 'react'
-import { MainMobile } from './MainMobile'
+import { MainMobile } from './MainMobile/view/MainMobile'
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import { Store } from '../../Store/Store';
-import { Drawer } from '../Drawer/Drawer/view/Drawer';
-import InfoBar from '../InfoBar/view/InfoBar';
-import { PaginationBar } from '../Footer/PaginationBar/view/PaginationBar';
+import { Drawer } from '../tablet/Drawer/Drawer/view/Drawer';
+import InfoBar from '../tablet/InfoBar/view/InfoBar';
+import { PaginationBar } from '../tablet/Footer/PaginationBar/view/PaginationBar';
 import { TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
 
 const useStyles = makeStyles((theme: Theme) => {

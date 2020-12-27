@@ -4,7 +4,7 @@ import {
   apiUserInfoThemeColor,
   T_user_info_theme_color,
 } from "../../../pages/api/user_info/theme/color";
-import { TColor } from "../../View/Drawer/ManageTheme/view/ManageTheme";
+import { TColor } from "../../View/tablet/Drawer/ManageTheme/view/ManageTheme";
 
 
 export const useChangeThemeColor = () => {

@@ -1,4 +1,4 @@
-import { TUseFooterItemEditorProps } from "../../app/View/Drawer/FooterItemEditor/view/FooterItemEditor";
+import { TUseFooterItemEditorProps } from "../../app/View/tablet/Drawer/FooterItemEditor/view/FooterItemEditor";
 
 export const propsFooterItemEditor: TUseFooterItemEditorProps = {
          onTapRadio: "modal",

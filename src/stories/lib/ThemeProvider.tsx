@@ -1,8 +1,8 @@
 import React from 'react'
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core";
 import { useThemeArgs, ThemeContext } from "../../app/Store/ThemeContext";
-import { SelectTheme } from '../../app/View/Drawer/ManageTheme/components/SelectTheme';
-import { useManageTheme } from '../../app/View/Drawer/ManageTheme/view/ManageTheme';
+import { SelectTheme } from '../../app/View/tablet/Drawer/ManageTheme/components/SelectTheme';
+import { useManageTheme } from '../../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
 import { generateDefaultParamsFromTheme, switchingTheme } from '../../app/Store/themes/paramsFromTheme';
 import { T_selected_theme } from '../../app/Store/Types';
 import Head from 'next/head';

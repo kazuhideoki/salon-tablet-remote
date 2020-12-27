@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles,Theme ,createStyles} from '@material-ui/core';
-import { useDrawerProps, TUseDrawerProps } from '../Drawer/Drawer/view/Drawer';
+import { useDrawerProps, TUseDrawerProps } from '../tablet/Drawer/Drawer/view/Drawer';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({

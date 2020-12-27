@@ -2,7 +2,7 @@ import React from 'react';
 import { SettingMobilePresenter } from '../app/View/mobile/SettingMobile';
 import { useThemeArgs } from '../app/Store/ThemeContext';
 import { samplefooterItems } from './lib/sampleFooterItems';
-import { TUseDrawerProps } from '../app/View/Drawer/Drawer/view/Drawer';
+import { TUseDrawerProps } from '../app/View/tablet/Drawer/Drawer/view/Drawer';
 export default {
   title: "mobile/SettingMobile",
   component: SettingMobilePresenter,

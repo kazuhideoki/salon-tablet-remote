@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerPresenter, TUseDrawerProps } from '../app/View/Drawer/Drawer/view/Drawer';
+import { DrawerPresenter, TUseDrawerProps } from '../app/View/tablet/Drawer/Drawer/view/Drawer';
 import { useTheme } from '@material-ui/core';
 import { samplefooterItems } from './lib/sampleFooterItems';
 import { useThemeArgs } from '../app/Store/ThemeContext';

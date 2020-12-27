@@ -1,5 +1,5 @@
 import React from 'react';
-import { PaginationBarPresenter, TUsePaginationBarProps } from '../app/View/Footer/PaginationBar/view/PaginationBar';
+import { PaginationBarPresenter, TUsePaginationBarProps } from '../app/View/tablet/Footer/PaginationBar/view/PaginationBar';
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 import { sampleTags } from './lib/sampleTags';
 import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';

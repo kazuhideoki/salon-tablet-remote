@@ -1,5 +1,5 @@
 import React from "react";
-import { SelectInstagramAccountsPresenter } from "../app/View/Modal/Modals/SelectInstagramAccounts/view/SelectInstagramAccounts";
+import { SelectInstagramAccountsPresenter } from "../app/View/tablet/Modal/Modals/SelectInstagramAccounts/view/SelectInstagramAccounts";
 export default {
   title: "Footer/SelectInstagramAccountsPresenter",
   component: SelectInstagramAccountsPresenter,

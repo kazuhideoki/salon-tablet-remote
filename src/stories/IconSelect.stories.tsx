@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   SelectIcon,
-} from "../app/View/Drawer/FooterItemEditor/components/iconSelect/SelectIcon";
+} from "../app/View/tablet/Drawer/FooterItemEditor/components/iconSelect/SelectIcon";
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { WifiTwoTone } from '@material-ui/icons';
 import { propsFooterItemEditor } from './lib/propsFooterItemEditor';

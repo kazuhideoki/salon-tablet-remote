@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallQuillEditor from '../app/View/Drawer/InfoBar/components/SmallQuillEditor';
+import SmallQuillEditor from '../app/View/tablet/Drawer/InfoBarEditor/components/SmallQuillEditor';
 export default {
   title: 'Drawer/InfoBar/SmallQuillEditor',
   component: SmallQuillEditor,
