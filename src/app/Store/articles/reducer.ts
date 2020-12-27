@@ -1,17 +1,31 @@
 import { reducerLogger } from "../../Reducer/reducerLogger";
-import { TArticles } from "../Types";
+import { TAllArticles, TArticles } from "../Types";
 import { TArticlesAction } from "./actions";
 import * as types from './types'
 
-export const articlesReducer = (state: TArticles, action: TArticlesAction) => {
-    let newState: TArticles;
-    const func = articlesReducer;
-    switch (action.type) {
-      case types.SET:
-        newState = action.payload
-        break;
-      }
+export type ArticleContextState = { articles: TArticles, allArticles: TAllArticles}
 
-    reducerLogger({ state, newState, func, action })
-    return newState
-}
+export const articlesReducer = (
+         state: ArticleContextState,
+         action: TArticlesAction
+       ) => {
+         let newState: ArticleContextState;
+         const func = articlesReducer;
+         switch (action.type) {
+           case types.SET:
+             newState = {
+               ...state,
+               articles: action.payload
+              };
+             break;
+           case types.SET_ALL:
+             newState = {
+               ...state,
+               allArticles: action.payload,
+             };
+             break;
+         }
+
+         reducerLogger({ state, newState, func, action });
+         return newState;
+       };

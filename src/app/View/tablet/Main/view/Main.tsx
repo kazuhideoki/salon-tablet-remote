@@ -15,6 +15,7 @@ import { noArticlesJsx } from "../components/noArticlesJsx";
 import { useOnClickUpdate } from "../context/useOnClickUpdate";
 import { useDeleteArticle } from "../context/useDeleteArticle";
 import { useStateMain } from "../context/useStateMain";
+import { useOpenArticleModal } from "../context/useOpenArticlModal";
 
 export const useMainProps = () => {
   const { 
@@ -28,6 +29,8 @@ export const useMainProps = () => {
     isSetting,
   } = useStateMain()
 
+  const openArticleModal = useOpenArticleModal()
+
   const deleteArticle = useDeleteArticle();
 
   const onClickUpdate = useOnClickUpdate()
@@ -38,7 +41,10 @@ export const useMainProps = () => {
     instagramMedias,
     tags,
     deleteArticle,
+
     dispatchAppState,
+    openArticleModal,
+
     isShowInstagram,
     show_article_type: userInfo.show_article_type,
     onClickUpdate,

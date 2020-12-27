@@ -2,14 +2,16 @@ import React from "react";
 import {
   T_article_id,
 } from "../../Store/Types";
-import { useGetArticles } from "./useGetArticles";
+import { useGetArticles } from "./useGetArticles/useGetArticles";
 import { Store } from "../../Store/Store";
 import { apiArticlesDelete } from "../../../pages/api/articles/delete";
+import { ArticleContext } from "../../Store/articles/Context";
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
   const { appState ,dispatchAppState } = React.useContext(Store);
-  const {articles, paginationParams} = appState
+  const { paginationParams} = appState
+  const { articles } = React.useContext(ArticleContext)
   
   return async (article_id: T_article_id): Promise<void> => {
 

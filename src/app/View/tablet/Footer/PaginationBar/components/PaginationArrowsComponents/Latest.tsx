@@ -1,7 +1,7 @@
 import React from "react";
 import { FirstPage } from "@material-ui/icons";
 import { Store } from "../../../../../../Store/Store";
-import { useGetArticles } from "../../../../../../ActionCreator/articles/useGetArticles";
+import { useGetArticles } from "../../../../../../ActionCreator/articles/useGetArticles/useGetArticles";
 import { Typography, SvgIcon, Button } from "@material-ui/core";
 import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
 

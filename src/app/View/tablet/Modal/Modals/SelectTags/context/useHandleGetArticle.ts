@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetArticles } from '../../../../../../ActionCreator/articles/useGetArticles';
+import { useGetArticles } from '../../../../../../ActionCreator/articles/useGetArticles/useGetArticles';
 import { Store } from '../../../../../../Store/Store';
 export const useHandleGetArticle = (selectingTags: number[]
 ) => {

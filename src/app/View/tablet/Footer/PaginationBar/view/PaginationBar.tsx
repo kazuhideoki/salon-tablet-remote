@@ -2,7 +2,7 @@ import React from "react";
 import { Store } from "../../../../../Store/Store";
 import { ThemeContext } from "../../../../../Store/ThemeContext";
 import { Grid, makeStyles, createStyles, Theme, Chip, IconButton, withStyles, useTheme, Card, useMediaQuery } from "@material-ui/core";
-import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles";
+import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles/useGetArticles";
 import { HomeButton } from "../components/HomeButton";
 import { PaginationArrows } from "../components/PaginationArrows";
 import { TagsButton } from "../components/TagsButton";

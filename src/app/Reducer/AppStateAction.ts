@@ -44,7 +44,7 @@ export type AppStateAction =
   | { type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" }
 
   // modalウィンドウを開く時
-  | { type: "OPEN_ARTICLE_MODAL"; payload: number }
+  | { type: "OPEN_ARTICLE_MODAL"; payload: {num: number, article: TArticle} }
   | { type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR"; payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL"; //on_tapの 'modal' と 'google'両方に対応
@@ -57,7 +57,6 @@ export type AppStateAction =
   | { type: "OPEN_FOOTER_ITEM_EDITOR" }
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
-  // | { type: "SET_MODAL_SIZE"; payload: TCreateFooterItem }
   | { type: "SET_MODAL_SIZE"; payload: TFooterItemEdittingParams }
   | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {

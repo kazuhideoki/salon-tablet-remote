@@ -13,6 +13,7 @@ export const useMainMobileProps = () => {
     deleteArticle,
     loading,
     isSetting,
+    openArticleModal,
   } = useMainProps();
 
   return {
@@ -22,6 +23,7 @@ export const useMainMobileProps = () => {
     isSetting,
     deleteArticle,
     onClickUpdate,
+    openArticleModal,
   };
 }
 
@@ -106,10 +108,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               // key={key}
               className={classes.item}
               onClick={() =>
-                props.dispatchAppState({
-                  type: "OPEN_ARTICLE_MODAL",
-                  payload: key,
-                })
+                props.openArticleModal(key)
               }
               component="li"
             >

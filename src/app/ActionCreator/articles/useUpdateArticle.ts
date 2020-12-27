@@ -1,6 +1,6 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import { useGetArticles } from "./useGetArticles";
+import { useGetArticles } from "./useGetArticles/useGetArticles";
 import { TCreateArticle } from "./useCreateArticle";
 import {
   T_articles_update,

@@ -1,9 +1,10 @@
 import React from 'react'
+import { ArticleContext } from '../../../../../Store/articles/Context';
 import { Store } from '../../../../../Store/Store';
 
 export const useStateInfoBarEditor = () => {
   const { appState } = React.useContext(Store);
-  const { allArticles } = appState
+  const { allArticles } = React.useContext(ArticleContext)
   const {
     info_bar_type,
     scrolling_sentence,

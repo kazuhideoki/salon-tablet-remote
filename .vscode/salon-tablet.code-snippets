@@ -75,4 +75,21 @@
     ],
     "description": "コンソールログ"
   },
+  "export file name": {
+    "prefix": "exp",
+    "body": [
+      "export const TM_FILENAME = $1"
+    ],
+    "description": "export ファイル名"
+  },
+  "import React": {
+    "prefix": "imp",
+    "body": [
+      "import React from 'react'"
+    ],
+    "description": "import React"
+  },
+
+
+
 }

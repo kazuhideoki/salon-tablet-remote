@@ -32,10 +32,7 @@ export const displayArticlesScrollJsx = (props: TUseMainProps, classes: TMainCla
                <CardActionArea
                  className={classes.cardActionArea}
                  onClick={() =>
-                   props.dispatchAppState({
-                     type: "OPEN_ARTICLE_MODAL",
-                     payload: key,
-                   })
+                   props.openArticleModal(key)
                  }
                  component="div"
                >

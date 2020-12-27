@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetArticles } from "./useGetArticles";
+import { useGetArticles } from "./useGetArticles/useGetArticles";
 import { Store } from "../../Store/Store";
 import { T_articles_create, apiArticlesCreate } from "../../../pages/api/articles/create";
 import { T_data_type_article } from "../../Store/Types";

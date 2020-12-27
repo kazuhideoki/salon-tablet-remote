@@ -1,26 +1,28 @@
 import React from "react";
-import { TArticles } from "../Types";
+import { TAllArticles, TArticles } from "../Types";
 import { TArticlesAction } from "./actions";
-import { articlesReducer } from "./reducer";
+import { articlesReducer, ArticleContextState } from "./reducer";
 
 export type ArticlesContextProps = {
   articles: TArticles;
+  allArticles: TAllArticles
   dispatchArticles: React.Dispatch<TArticlesAction>;
 };
 export const ArticleContext = React.createContext({} as ArticlesContextProps);
 
-export type ArticlesContextProvider = { articles: TArticles}
+export type Props = ArticleContextState;
 
-export const ArticlesContextProvider: React.FC<ArticlesContextProvider> = (
+export const ArticlesContextProvider: React.FC<Props> = (
          props
        ) => {
-         const [articles, dispatchArticles] = React.useReducer(
+         const [state, dispatchArticles] = React.useReducer(
            articlesReducer,
-           props.articles
+           props
          );
 
          const values: ArticlesContextProps = {
-           articles,
+           articles: state.articles,
+           allArticles: state.allArticles,
            dispatchArticles,
          };
 

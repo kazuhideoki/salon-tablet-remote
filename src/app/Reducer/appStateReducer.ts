@@ -127,7 +127,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isModalOpen: true,
           currentModalContent: {
             ...state.currentModalContent,
-            article: state.articles[action.payload],
+            article: action.payload.article,
             modalSize: "large",
           },
         };
@@ -340,8 +340,8 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           ...state,
           selectedArticlesTags: action.payload.selectedArticlesTags,
           isSetting: action.payload.isSetting,
-          articles: action.payload.data.rawData,
-          allArticles: action.payload.data.allArticles,
+          // articles: action.payload.data.rawData,
+          // allArticles: action.payload.data.allArticles,
           paginationParams: action.payload.data.pagination,
           isShowInstagram: isShowInstagram,
           loading: {
