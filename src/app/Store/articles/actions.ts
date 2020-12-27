@@ -1,13 +1,10 @@
+import { T_articles_get_return } from "../../../pages/api/articles/get";
 import { TAllArticles, TArticles } from "../Types";
 import * as types from "./types";
 
-export const set = (articles: TArticles) => ({
+export const set = (data: T_articles_get_return) => ({
   type: types.SET,
-  payload: articles,
-});
-export const setAll = (allArticles: TAllArticles) => ({
-  type: types.SET_ALL,
-  payload: allArticles,
+  payload: data,
 });
 
-export type TArticlesAction = ReturnType<typeof set> | ReturnType<typeof setAll>;
+export type TArticlesAction = ReturnType<typeof set>

@@ -1,9 +1,9 @@
 import { reducerLogger } from "../../Reducer/reducerLogger";
-import { TAllArticles, TArticles } from "../Types";
+import { TAllArticles, TArticles, TPaginationParams } from "../Types";
 import { TArticlesAction } from "./actions";
 import * as types from './types'
 
-export type ArticleContextState = { articles: TArticles, allArticles: TAllArticles}
+export type ArticleContextState = { articles: TArticles, allArticles: TAllArticles, paginationParams: TPaginationParams}
 
 export const articlesReducer = (
          state: ArticleContextState,
@@ -14,15 +14,10 @@ export const articlesReducer = (
          switch (action.type) {
            case types.SET:
              newState = {
-               ...state,
-               articles: action.payload
+               articles: action.payload.rawData,
+               allArticles: action.payload.allArticles,
+               paginationParams: action.payload.pagination
               };
-             break;
-           case types.SET_ALL:
-             newState = {
-               ...state,
-               allArticles: action.payload,
-             };
              break;
          }
 

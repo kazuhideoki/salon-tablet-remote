@@ -26,7 +26,7 @@ const StoreContextProvider: React.FC<TStoreProps> = (props) => {
 
   return (
     <Store.Provider value={values}>
-      <ArticlesContextProvider articles={props.articles} allArticles={props.allArticles}>
+      <ArticlesContextProvider articles={props.articles} allArticles={props.allArticles} paginationParams={props.pagination}>
         {props.children}
       </ArticlesContextProvider>
     </Store.Provider>

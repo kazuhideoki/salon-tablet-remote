@@ -342,7 +342,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isSetting: action.payload.isSetting,
           // articles: action.payload.data.rawData,
           // allArticles: action.payload.data.allArticles,
-          paginationParams: action.payload.data.pagination,
+          // paginationParams: action.payload.data.pagination,
           isShowInstagram: isShowInstagram,
           loading: {
             ...state.loading,

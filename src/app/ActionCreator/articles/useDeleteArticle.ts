@@ -10,7 +10,7 @@ import { ArticleContext } from "../../Store/articles/Context";
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
   const { appState ,dispatchAppState } = React.useContext(Store);
-  const { paginationParams} = appState
+  const { paginationParams} = React.useContext(ArticleContext)
   const { articles } = React.useContext(ArticleContext)
   
   return async (article_id: T_article_id): Promise<void> => {

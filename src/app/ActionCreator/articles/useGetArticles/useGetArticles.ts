@@ -40,28 +40,13 @@ export const useGetArticles = () => {
           showArticles: showArticles,
         }
       
-      useDispatches(arg)
+      dispatchAppState({
+        type: "SET_ARTICLES",
+        payload: arg,
+      });
+      dispatchArticles(set(arg.data));
 
       return true
     }
   };
 };
-
-export type Arg = {
-    data: TApiResponse<T_articles_get_return>;
-    selectedArticlesTags: number[];
-    isSetting: boolean;
-    showArticles: boolean;
-}
-
-export const useDispatches = (arg: Arg) => {
-  const { dispatchAppState } = React.useContext(Store);
-  const { dispatchArticles } = React.useContext(ArticleContext);
-
-  dispatchAppState({
-    type: "SET_ARTICLES",
-    payload: arg,
-  });
-  dispatchArticles(set(arg.data.rawData));
-
-}

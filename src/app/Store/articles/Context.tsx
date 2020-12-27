@@ -1,11 +1,9 @@
 import React from "react";
-import { TAllArticles, TArticles } from "../Types";
+import { TAllArticles, TArticles, TPaginationParams } from "../Types";
 import { TArticlesAction } from "./actions";
 import { articlesReducer, ArticleContextState } from "./reducer";
 
-export type ArticlesContextProps = {
-  articles: TArticles;
-  allArticles: TAllArticles
+export type ArticlesContextProps = ArticleContextState & {
   dispatchArticles: React.Dispatch<TArticlesAction>;
 };
 export const ArticleContext = React.createContext({} as ArticlesContextProps);
@@ -23,6 +21,7 @@ export const ArticlesContextProvider: React.FC<Props> = (
          const values: ArticlesContextProps = {
            articles: state.articles,
            allArticles: state.allArticles,
+           paginationParams: state.paginationParams,
            dispatchArticles,
          };
 
