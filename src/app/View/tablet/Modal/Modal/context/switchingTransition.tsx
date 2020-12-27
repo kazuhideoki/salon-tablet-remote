@@ -1,3 +1,4 @@
+import { Fade, Slide } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import React from 'react'
 import { T_selected_theme } from '../../../../../Store/Types';

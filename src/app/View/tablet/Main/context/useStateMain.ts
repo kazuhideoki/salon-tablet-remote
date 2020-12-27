@@ -17,7 +17,7 @@ export const useStateMain = () => {
     articles,
     tags,
     instagramMedias,
-    loading,
+    loading: loading.main,
     isShowInstagram,
     userInfo,
     isSetting,
