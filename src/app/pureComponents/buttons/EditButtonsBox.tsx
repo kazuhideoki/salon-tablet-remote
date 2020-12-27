@@ -55,13 +55,8 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
 
   return (
     <>
-      <div
-        className={`${props.className} ${props.classNameButtons}`}
-      >
-        <IconButton
-          aria-describedby={id}
-          onClick={(e) => handleClick(e)}
-        >
+      <IconButton className={`${props.className} ${props.classNameButtons}`}>
+        <IconButton aria-describedby={id} onClick={(e) => handleClick(e)}>
           <MoreVert />
         </IconButton>
         <Popover
@@ -78,11 +73,20 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
             horizontal: "right",
           }}
         >
-          {props.switch ? <SwitchOrderButton {...props.switchProps} /> : null}
-          {props.update ? <UpdateButton {...props.updateProps} /> : null}
-          {props.delete ? <DeleteButton {...props.deleteProps} /> : null}
+          {props.switch ? (
+            <SwitchOrderButton
+              {...props.switchProps}
+              handleClose={handleClose}
+            />
+          ) : null}
+          {props.update ? (
+            <UpdateButton {...props.updateProps} handleClose={handleClose} />
+          ) : null}
+          {props.delete ? (
+            <DeleteButton {...props.deleteProps} handleClose={handleClose} />
+          ) : null}
         </Popover>
-      </div>
+      </IconButton>
     </>
   );
 };

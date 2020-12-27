@@ -6,7 +6,7 @@ export type TUpdateButton = {
   // 記事とアイテムで共有するのでonClickまるごと渡す
   onClick: any;
   value?: any;
-}; 
+} & { handleClose: () => void }
 
 export const UpdateButton = (props: TUpdateButton) => {
 
@@ -17,6 +17,7 @@ export const UpdateButton = (props: TUpdateButton) => {
            } else {
              props.onClick();
            }
+           props.handleClose();
          };
 
          return (
