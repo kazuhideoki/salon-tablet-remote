@@ -12,7 +12,7 @@ import ArticleEditor from "../../../Drawer/ArticleEditor/view/ArticleEditor";
 import FooterItemEditor from "../../../Drawer/FooterItemEditor/view/FooterItemEditor";
 import { FeedbackForm } from "../../../Drawer/FeedbackForm/view/FeedbackForm";
 import { ManageTheme } from "../../../Drawer/ManageTheme/view/ManageTheme";
-import { SelectTags } from "../../Modals/SelectTags";
+import { SelectTags } from "../../Modals/SelectTags/view/SelectTags";
 import { ManageTags } from "../../../Drawer/ManageTags/view/ManageTags";
 import { SettingUserInfo } from "../../../Drawer/ManageUserInfo/view/ManageUserInfo";
 import { DeleteAccountForm } from "../../../Drawer/DeleteAccountForm/view/DeleteAccountForm";

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Store } from "../../../Store/Store";
-import { T_tag_id } from '../../../Store/Types';
+import { Store } from "../../../../../Store/Store";
+import { T_tag_id } from '../../../../../Store/Types';
 import {
   Chip,
   Typography,
@@ -9,37 +9,17 @@ import {
   createStyles,
   Button,
 } from "@material-ui/core";
-import { useGetArticles } from '../../../ActionCreator/articles/useGetArticles';
+import { useGetArticles } from '../../../../../ActionCreator/articles/useGetArticles';
+import { useHandleGetArticle } from '../context/useHandleGetArticle';
+import { useHandleSelectTag } from '../context/useHandleSelectTag';
+import { useStateSelectTags } from '../context/useStateSelectTags';
 
 const useSelectTagsProps = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const { tags } = appState;
+  const { tags, selectingTags, setSelectingTags } = useStateSelectTags()
+  
+  const handleSelectTag = useHandleSelectTag(selectingTags, setSelectingTags)
 
-  const [selectingTags, setSelectingTags] = React.useState(
-    appState.selectedArticlesTags
-  );
-
-  const getArticles = useGetArticles();
-  const handleSelectTag = (tagId: T_tag_id) => {
-    let newValue;
-
-    if (selectingTags.includes(tagId)) {
-      newValue = selectingTags.filter((value) => {
-        return value !== tagId;
-      });
-    } else {
-      newValue = selectingTags.concat(tagId);
-    }
-
-    setSelectingTags(newValue);
-  };
-
-  const handleGetArticle = () => {
-    const isLoaded = getArticles(appState.isSetting, 1, selectingTags);
-    if (isLoaded) {
-      dispatchAppState({ type: "CLOSE_MODAL" });
-    }
-  };
+  const handleGetArticle = useHandleGetArticle(selectingTags)
 
   return { tags, selectingTags, handleSelectTag, handleGetArticle };
 }
