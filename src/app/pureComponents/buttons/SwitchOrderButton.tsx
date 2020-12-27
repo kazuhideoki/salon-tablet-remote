@@ -3,7 +3,7 @@ import { useSwitchOrder, TUseSwitchOrders } from "../../ActionCreator/footerItem
 import { SwapHorizontalCircleOutlined } from "@material-ui/icons";
 import { StyledIconButtonEditButton } from "./EditButtonsBox";
 
-export type TSwitchButton = TUseSwitchOrders
+export type TSwitchButton = TUseSwitchOrders & { handleClose: () => void };
 
 export const SwitchOrderButton = (props: TSwitchButton) => {
          const switchOrder = useSwitchOrder();
@@ -19,8 +19,9 @@ export const SwitchOrderButton = (props: TSwitchButton) => {
                switchOrder({
                  smaller: props.smaller,
                  larger: props.larger,
-               });
-             }}
+                });
+                props.handleClose()
+              }}
            >
              <SwapHorizontalCircleOutlined />
            </StyledIconButtonEditButton>
