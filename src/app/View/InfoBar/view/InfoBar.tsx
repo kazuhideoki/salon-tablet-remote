@@ -1,18 +1,14 @@
 import React from 'react'
 import { Typography, makeStyles, createStyles, Theme, CardActionArea } from '@material-ui/core'
-import { Store } from '../Store/Store'
-import { EditButtonsBox } from '../pureComponents/buttons/EditButtonsBox';
+import { EditButtonsBox } from '../../../pureComponents/buttons/EditButtonsBox';
+import { useHandleOnClick } from '../context/useHandleOnClick';
+import { useStateInfoBar } from '../context/useStateInfoBar';
 
 const useInfoBarProps = () => {
 
-  const { appState, dispatchAppState } = React.useContext(Store);
-  const { infoBarData, isSetting } = appState;
-  const { infoBar, targetArticle } = infoBarData;
-  const { shop_name } = appState.userInfo
+  const { dispatchAppState, isSetting, infoBar, targetArticle, shop_name } = useStateInfoBar()
 
-  const handleOnClick = () => {
-    dispatchAppState({ type: "OPEN_MODAL", payload: "edit_info_bar" });
-  };
+  const handleOnClick = useHandleOnClick()
 
   return {
     dispatchAppState,

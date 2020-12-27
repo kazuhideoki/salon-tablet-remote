@@ -1,5 +1,5 @@
 import React from 'react';
-import { InfoBarPresenter, TUseInfoBarProps } from '../app/View/InfoBar';
+import { InfoBarPresenter, TUseInfoBarProps } from '../app/View/InfoBar/view/InfoBar';
 import { TInfoBar, TArticle, T_info_bar_type } from '../app/Store/Types';
 import { sampleData } from "./lib/sampleArticles";
 import dynamic from "next/dynamic";

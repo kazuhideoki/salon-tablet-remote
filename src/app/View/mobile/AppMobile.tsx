@@ -3,7 +3,7 @@ import { MainMobile } from './MainMobile'
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import { Store } from '../../Store/Store';
 import { Drawer } from '../Drawer/Drawer/view/Drawer';
-import InfoBar from '../InfoBar';
+import InfoBar from '../InfoBar/view/InfoBar';
 import { PaginationBar } from '../Footer/PaginationBar/view/PaginationBar';
 import { TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
 
