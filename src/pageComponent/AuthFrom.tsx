@@ -12,7 +12,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from "nookies";
-import { AuthCircular } from "../lib/AuthCircular";
 
 initFirebase();
 
@@ -66,9 +65,20 @@ export const AuthForm:React.FC<TAuthForm> = (props) => {
     router.push('/')
 
     } catch (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log("signInWithEmailAndPasswordでエラー " + error.message);
+      const errorMessage = error.message;
+      const errorCode = error.code;
+      if (errorCode === "auth/wrong-password") {
+        alert('メールアドレス、もしくはパスワードが間違っています。');
+      }
+      if (errorCode === "auth/invalid-email") {
+        alert("正しいメールアドレスではありません。");
+      }
+      if (errorCode === "auth/weak-password") {
+        alert("パスワード強度が低すぎます。より複雑な英数字の組み合わせ6文字以上にしてください。");
+      }
+      props.setIsClicked(false);
+      
+      console.log(errorMessage);
     }
 
   };
