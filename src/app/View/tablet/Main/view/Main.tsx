@@ -42,7 +42,7 @@ export const useMainProps = () => {
     isShowInstagram,
     show_article_type: userInfo.show_article_type,
     onClickUpdate,
-    loading: loading.main,
+    loading,
   };
 };
 
