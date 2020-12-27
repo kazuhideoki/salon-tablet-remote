@@ -291,7 +291,7 @@ export const initAppState = (data: TStoreProps) => ({
          },
 
          userInfo: data.userInfo,
-         articles: data.articles,
+        //  articles: data.articles,
          allArticles: data.allArticles,
          paginationParams: data.pagination,
          footerItems: data.footerItems,

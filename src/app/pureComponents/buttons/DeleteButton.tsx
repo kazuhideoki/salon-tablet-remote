@@ -7,8 +7,11 @@ export type TDeleteButton = {
   // 記事とアイテムで共有するのでonClickまるごと渡す
   onClick: any;
   value: any;
-} & { handleClose: () => void };
-export const DeleteButton = (props: TDeleteButton) => {
+}
+
+type Props = TDeleteButton & { handleClose?: () => void }
+
+export const DeleteButton = (props: Props) => {
          const handleOnClick = (e) => {
            props.onClick(props.value);
            props.handleClose();

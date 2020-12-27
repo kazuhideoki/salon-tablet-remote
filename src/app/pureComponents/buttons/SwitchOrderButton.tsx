@@ -5,7 +5,10 @@ import { StyledIconButtonEditButton } from "./EditButtonsBox";
 
 export type TSwitchButton = TUseSwitchOrders & { handleClose: () => void };
 
-export const SwitchOrderButton = (props: TSwitchButton) => {
+type Props = TSwitchButton & { handleClose?: () => void }
+
+
+export const SwitchOrderButton = (props: Props) => {
          const switchOrder = useSwitchOrder();
 
          // 一番目のアイテムには必要ないので表示させない
@@ -19,9 +22,9 @@ export const SwitchOrderButton = (props: TSwitchButton) => {
                switchOrder({
                  smaller: props.smaller,
                  larger: props.larger,
-                });
-                props.handleClose()
-              }}
+               });
+               props.handleClose();
+             }}
            >
              <SwapHorizontalCircleOutlined />
            </StyledIconButtonEditButton>

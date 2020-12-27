@@ -3,12 +3,15 @@ import {
   Store,
 } from "../../Store/Store";
 import { T_articles_get, apiArticlesGet } from "../../../pages/api/articles/get";
+import { ArticleContext } from "../../Store/articles/Context";
+import { set } from "../../Store/articles/actions";
 
 export const useGetArticles = () => {
   const {
     dispatchAppState,
     appState,
   } = React.useContext(Store);
+  const { dispatchArticles } = React.useContext(ArticleContext);
   
   return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
     
@@ -32,12 +35,12 @@ export const useGetArticles = () => {
       dispatchAppState({
         type: "SET_ARTICLES",
         payload: {
-          data,
           selectedArticlesTags: selectingTags || [],
           isSetting,
           showArticles: showArticles,
         },
       });
+      dispatchArticles(set(data.rawData))
 
       return true
     }

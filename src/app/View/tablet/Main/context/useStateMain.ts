@@ -1,9 +1,10 @@
 import React from 'react'
+import { ArticleContext } from '../../../../Store/articles/Context';
 import { Store } from '../../../../Store/Store';
 export const useStateMain = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
+  const { articles } = React.useContext(ArticleContext)
   const {
-    articles,
     tags,
     instagramMedias,
     loading,
