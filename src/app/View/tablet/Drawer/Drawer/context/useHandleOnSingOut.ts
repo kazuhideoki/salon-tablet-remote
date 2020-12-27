@@ -9,6 +9,7 @@ export const useHandleOnSingOut = () => {
     if(signOuting) {
       setIsClicked(true)
       signout("/");
+      setIsClicked(false);
     }
   }
 
