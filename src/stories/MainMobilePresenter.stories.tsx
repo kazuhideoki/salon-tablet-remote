@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainMobilePresenter } from '../app/View/mobile/MainMobile';
+import { MainMobilePresenter } from '../app/View/mobile/MainMobile/view/MainMobile';
 import { sampleData } from './lib/sampleArticles';
 export default {
   title: "mobile/MainMobile",

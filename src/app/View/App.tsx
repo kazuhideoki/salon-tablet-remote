@@ -1,10 +1,10 @@
 import React from "react";
-import { Modal } from "./Modal/Modal";
+import { Modal } from "./tablet/Modal/Modal/view/Modal";
 import { Store } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
 import { StoreContextProvider } from "../Store/Store";
 import { AppMobile } from "./mobile/AppMobile";
-import { AppTablet } from "./AppTablet";
+import { AppTablet } from "./tablet/AppTablet";
 import { useIsMobile } from "../../lib/useIsMobile";
 import { IndexProps } from "../../pages";
 import { T_auth_get_session_return } from "../../pages/api/auth/get_session";

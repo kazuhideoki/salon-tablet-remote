@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArticleEditorPresenter, TUseArticleEditorProps } from '../app/View/Drawer/ArticleEditor/ArticleEditor';
+import { ArticleEditorPresenter, TUseArticleEditorProps } from '../app/View/tablet/Drawer/ArticleEditor/view/ArticleEditor';
 import { Provider } from './lib/ThemeProvider';
 export default {
   title: "Drawer/ArticleEditorPresenter",

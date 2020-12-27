@@ -1,10 +1,10 @@
 import React from 'react'
-import { MainMobile } from './MainMobile'
+import { MainMobile } from './MainMobile/view/MainMobile'
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import { Store } from '../../Store/Store';
-import { Drawer } from '../Drawer/Drawer';
-import InfoBar from '../InfoBar';
-import { PPagination } from '../Footer/PaginationBar/PPagination';
+import { Drawer } from '../tablet/Drawer/Drawer/view/Drawer';
+import InfoBar from '../tablet/InfoBar/view/InfoBar';
+import { PaginationBar } from '../tablet/Footer/PaginationBar/view/PaginationBar';
 import { TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -82,7 +82,7 @@ export const AppMobile = () => {
             className={`${classes.main} ${open ? classes.mainOpened : null}`}
           />
         </div>
-        <PPagination
+        <PaginationBar
           className={`${classes.footer} ${open ? classes.footerOpened : null} ${
             appState.loading.main ? classes.isLoadingFooter : null
           }`}

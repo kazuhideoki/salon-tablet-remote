@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerPresenter, TUseDrawerProps } from '../app/View/Drawer/Drawer';
+import { DrawerPresenter, TUseDrawerProps } from '../app/View/tablet/Drawer/Drawer/view/Drawer';
 import { useTheme } from '@material-ui/core';
 import { samplefooterItems } from './lib/sampleFooterItems';
 import { useThemeArgs } from '../app/Store/ThemeContext';
@@ -15,7 +15,7 @@ const props: TUseDrawerProps = {
   isPublicPage: false,
   isDrawerOpen: false,
   dispatchAppState: null,
-  handleOnSingOut: null,
+  handleOnSignOut: null,
   handleDrawerClose: null,
   isMobile: false,
   footerItems: samplefooterItems,

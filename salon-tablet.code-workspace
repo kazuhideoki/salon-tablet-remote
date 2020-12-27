@@ -15,6 +15,7 @@
           "Editting",
           "MSNQ",
           "Noto",
+          "Overridable",
           "Oyib",
           "Topright",
           "appspot",
@@ -31,7 +32,8 @@
           "msapplication",
           "myproject",
           "noindex",
-          "qrcode"
+          "qrcode",
+          "samplefooter"
         ]
     }
 }

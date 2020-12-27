@@ -1,10 +1,10 @@
 import React from 'react';
-import { PMainPresenter, TUseMainProps } from '../app/View/Main/PMain';
+import { MainPresenter, TUseMainProps } from '../app/View/tablet/Main/view/Main';
 import { sampleData } from './lib/sampleArticles';
 import { initInstagramMedias } from '../app/Store/Types';
 export default {
-  title: "Main/PMain",
-  component: PMainPresenter,
+  title: "Main/Main",
+  component: MainPresenter,
 };
 
 const props: TUseMainProps = {
@@ -25,7 +25,7 @@ export const Normal = () => {
   return (
     <>
     <div style={{height: "65vh"}}>
-      <PMainPresenter {...props}/>
+      <MainPresenter {...props}/>
     </div>
     ※全画面にして表示を確認
     </>
@@ -37,7 +37,7 @@ export const Loading = () => {
   return (
     <>
       <div style={{height: "65vh"}}>
-        <PMainPresenter {...props} loading={true} />
+        <MainPresenter {...props} loading={true} />
       </div>
       ※全画面にして表示を確認
     </>
@@ -49,7 +49,7 @@ export const NoArticles = () => {
   return (
     <>
       <div style={{ height: "65vh" }}>
-        <PMainPresenter {...props} articles={[]} />
+        <MainPresenter {...props} articles={[]} />
       </div>
       ※全画面にして表示を確認
     </>

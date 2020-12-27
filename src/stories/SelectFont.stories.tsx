@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectFont } from '../app/View/Drawer/ManageTheme/SelectFont';
+import { SelectFont } from '../app/View/tablet/Drawer/ManageTheme/components/SelectFont';
 export default {
   title: 'Drawer/ManageTheme/SelectFont',
   component: SelectFont,

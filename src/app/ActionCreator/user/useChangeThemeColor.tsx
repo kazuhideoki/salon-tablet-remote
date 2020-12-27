@@ -1,11 +1,10 @@
 import React from "react";
 import { Store } from "../../Store/Store";
-import { T_selected_theme, T_theme_color } from "../../Store/Types";
 import {
   apiUserInfoThemeColor,
   T_user_info_theme_color,
 } from "../../../pages/api/user_info/theme/color";
-import { TColor } from "../../View/Drawer/ManageTheme/ManageTheme";
+import { TColor } from "../../View/tablet/Drawer/ManageTheme/view/ManageTheme";
 
 
 export const useChangeThemeColor = () => {

@@ -10,7 +10,7 @@ import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 
 import "../../public/fonts/fonts.css";
-import { switchingTransition } from '../app/View/Modal/Modal';
+import { switchingTransition } from '../app/View/tablet/Modal/Modal/view/Modal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
