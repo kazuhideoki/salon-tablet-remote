@@ -298,7 +298,7 @@ export const initAppState = (data: TStoreProps) => ({
         //  infoBarData: data.infoBarData,
         //  tags: data.tags,
         //  instagramAccounts: data.instagramAccounts,
-         instagramMedias: initInstagramMedias,
+        //  instagramMedias: initInstagramMedias,
        });
 
 export type TAppState = ReturnType<typeof initAppState> ;

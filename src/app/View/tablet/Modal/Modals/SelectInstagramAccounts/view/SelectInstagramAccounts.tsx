@@ -3,12 +3,13 @@ import { Typography, makeStyles, Theme, createStyles, Button } from "@material-u
 import { useIsMobile } from '../../../../../../../lib/useIsMobile';
 import { HelpButton } from '../../../../../../pureComponents/buttons/HelpButton';
 import { useManageInstagramAccountsProps } from '../../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
+import { useStateSelectInstagramAccounts } from '../context/useStateSelectInstagramAccounts';
 
 export const useSelectInstagramAccountsProps = () => {
 
-  const { instagramAccounts, isSetting } = useSelectInstagramAccountsProps()
+  const { instagramAccounts, isSetting } = useStateSelectInstagramAccounts()
 
-  const getInstagramMedias = useManageInstagramAccountsProps()
+  const { getInstagramMedias } = useManageInstagramAccountsProps()
 
   const isMobile = useIsMobile()
 

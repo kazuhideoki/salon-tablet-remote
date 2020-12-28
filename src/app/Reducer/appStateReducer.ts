@@ -166,7 +166,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isModalOpen: true,
           currentModalContent: {
             ...state.currentModalContent,
-            instagramMedia: state.instagramMedias.data[action.payload],
+            instagramMedia: action.payload,
             modalSize: "medium",
           },
         };
@@ -415,7 +415,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isShowInstagram: true,
           selectedInstagramAccount: action.payload.selectedInstagramAccount,
           selectedArticlesTags: [],
-          instagramMedias: action.payload.data,
+          // instagramMedias: action.payload.data,
           loading: {
             ...state.loading,
             main: false,
@@ -425,7 +425,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "DELETE_INSTAGRAM_MEDIAS":
         newState = {
           ...state,
-          instagramMedias: initInstagramMedias,
+          // instagramMedias: initInstagramMedias,
           isShowInstagram: false,
         };
         break;

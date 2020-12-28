@@ -11,19 +11,10 @@ import { PlayArrowRounded } from "@material-ui/icons";
 
 export const displayInstagramMediasJsx = (props: TUseMainProps, classes: TMainClasses, StyledCardContent: any) => props.instagramMedias.data.map((value, key) => {
   return (
-    <Grid
-      item
-      key={key}
-      className={classes.gridItem}
-    >
+    <Grid item key={key} className={classes.gridItem}>
       <CardActionArea
         className={classes.cardActionArea}
-        onClick={() =>
-          props.dispatchAppState({
-            type: "OPEN_INSTAGRAM_MEDIA_MODAL",
-            payload: key,
-          })
-        }
+        onClick={() => props.openInstagramModal(key)}
       >
         <Card className={classes.card}>
           <StyledCardContent className={classes.cardContent}>

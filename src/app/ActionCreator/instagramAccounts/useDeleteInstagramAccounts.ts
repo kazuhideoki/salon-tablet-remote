@@ -3,9 +3,13 @@ import { T_instagram_id } from "../../Store/Types";
 import { useGetInstagramAccounts } from "./useGetInstagramAccounts";
 import { Store } from "../../Store/Store";
 import { apiInstagramAccountsDelete } from "../../../pages/api/instagram_accounts/delete";
+import { InstagramContext } from "../../Store/instagram/Context";
+import { removeMedias } from "../../Store/instagram/actions";
 
 export const useDeleteInstagramAccount = () => {
   const { dispatchAppState } = React.useContext(Store)
+  const { dispatchInstagram } = React.useContext(InstagramContext);
+
   const getInstagramAccounts = useGetInstagramAccounts();
   return async (instagram_id: T_instagram_id): Promise<void> => {
     const deleting = confirm("本当に削除してよろしいですか？");
@@ -23,6 +27,8 @@ export const useDeleteInstagramAccount = () => {
       dispatchAppState({ type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" });
     } else {
       dispatchAppState({ type: "DELETE_INSTAGRAM_MEDIAS" });
+      dispatchInstagram(removeMedias())
+
       getInstagramAccounts();
     }
   };

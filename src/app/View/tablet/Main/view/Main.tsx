@@ -16,6 +16,7 @@ import { useOnClickUpdate } from "../context/useOnClickUpdate";
 import { useDeleteArticle } from "../context/useDeleteArticle";
 import { useStateMain } from "../context/useStateMain";
 import { useOpenArticleModal } from "../context/useOpenArticlModal";
+import { useOpenInstagramModal } from "../context/useOpenInstagramModal";
 
 export const useMainProps = () => {
   const { 
@@ -34,6 +35,8 @@ export const useMainProps = () => {
   const deleteArticle = useDeleteArticle();
 
   const onClickUpdate = useOnClickUpdate()
+
+  const openInstagramModal = useOpenInstagramModal();
   
   return {
     isSetting,
@@ -44,6 +47,7 @@ export const useMainProps = () => {
 
     dispatchAppState,
     openArticleModal,
+    openInstagramModal,
 
     isShowInstagram,
     show_article_type: userInfo.show_article_type,

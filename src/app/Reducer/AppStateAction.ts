@@ -1,31 +1,25 @@
 import {
   TArticle,
   FooterItem,
-  T_modal_size,
   TSetModal,
   T_instagram_username,
   T_instagram_id,
   FooterItems,
   T_footer_item_id,
   T_order,
-  TTags,
-  TInstagramAccounts,
-  TInstagramMedias,
   T_on_tap,
-  TInfoBarData,
   T_selected_device,
   T_show_article_type,
   T_theme_color,
   T_theme_font,
   T_footer_icon_size,
-  T_is_reconnect_needed,
+  TInstagramMedia,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
 import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
 import { TThemeParams } from "../Store/ThemeContext";
 import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 import { T_user_info_update } from "../../pages/api/user_info/update";
-import { T_instagram_accounts_reconnect_needed } from "../../pages/api/instagram_accounts/reconnect_needed";
 
 export type AppStateAction =
   | { type: "SELECT_DEVICE"; payload: T_selected_device }
@@ -50,7 +44,7 @@ export type AppStateAction =
       type: "OPEN_FOOTER_ITEM_MODAL"; //on_tapの 'modal' と 'google'両方に対応
       payload: { footerItemId: T_footer_item_id; footerItems: FooterItems };
     }
-  | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: number }
+  | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: TInstagramMedia }
 
   // editor modalウィンドウを開く時. 新規と編集
   | { type: "OPEN_ARTICLE_EDITOR" }
@@ -139,7 +133,6 @@ export type AppStateAction =
   | {
       type: "SET_INSTAGRAM_MEDIAS";
       payload: {
-        data: TInstagramMedias;
         selectedInstagramAccount: {
           id: T_instagram_id;
           username: T_instagram_username;

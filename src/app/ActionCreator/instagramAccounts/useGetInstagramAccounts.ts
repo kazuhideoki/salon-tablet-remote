@@ -1,14 +1,14 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import { apiInstagramAccountsGet } from "../../../pages/api/instagram_accounts/get";
-import { InstagramAccountsContext } from "../../Store/instagramAccounts/Context";
-import { set } from "../../Store/instagramAccounts/actions";
+import { InstagramContext } from "../../Store/instagram/Context";
+import { setAccounts } from "../../Store/instagram/actions";
 
 export const useGetInstagramAccounts = () => {
   const { dispatchAppState, appState } = React.useContext(
     Store
   );
-  const { dispatchInstagramAccounts } = React.useContext(InstagramAccountsContext)
+  const { dispatchInstagram } = React.useContext(InstagramContext);
 
   return async () => {
 
@@ -23,7 +23,7 @@ export const useGetInstagramAccounts = () => {
       dispatchAppState({
         type: "SET_INSTAGRAM_ACCOUNTS",
       });
-      dispatchInstagramAccounts(set(data))
+      dispatchInstagram(setAccounts(data))
     }
   };
 };
