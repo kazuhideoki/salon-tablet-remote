@@ -371,12 +371,12 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      case "SET_INFO_BAR":
-        newState = {
-          ...state,
-          infoBarData: action.payload,
-        };
-        break;
+      // case "SET_INFO_BAR":
+      //   newState = {
+      //     ...state,
+      //     infoBarData: action.payload,
+      //   };
+      //   break;
       case "SET_TAGS":
         newState = {
           ...state,

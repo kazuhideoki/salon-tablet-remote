@@ -1,15 +1,15 @@
 import React from 'react'
 import { ArticlesContext } from '../../../../../Store/articles/Context';
-import { Store } from '../../../../../Store/Store';
+import { InfoBarContext } from '../../../../../Store/infoBar/Context';
 
 export const useStateInfoBarEditor = () => {
-  const { appState } = React.useContext(Store);
   const { allArticles } = React.useContext(ArticlesContext)
+  const { infoBarData } = React.useContext(InfoBarContext)
   const {
     info_bar_type,
     scrolling_sentence,
     selected_article_id,
-  } = appState.infoBarData.infoBar;
+  } = infoBarData.infoBar;
 
   const [infoBarType, setInfoBarType] = React.useState(info_bar_type);
   const [editorText, setEditorText] = React.useState(scrolling_sentence);
