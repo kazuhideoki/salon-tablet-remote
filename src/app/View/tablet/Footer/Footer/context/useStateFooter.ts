@@ -1,10 +1,12 @@
 import React from 'react'
+import { FooterItemsContext } from '../../../../../Store/footerItems/Context';
 import { Store } from '../../../../../Store/Store';
 import { FooterItem, T_footer_item_id } from '../../../../../Store/Types';
 
 export const useStateFooter = () => {
   const { appState, dispatchAppState } = React.useContext(Store);
-  const { footerItems, loading, isSetting } = appState;
+  const { loading, isSetting } = appState;
+  const { footerItems } = React.useContext(FooterItemsContext);
 
   const handleOnUpDateFooterIcon = (footerItem: FooterItem) => {
     dispatchAppState({
@@ -20,7 +22,7 @@ export const useStateFooter = () => {
   const openFooterItemModal = (footer_item_id: T_footer_item_id) =>
     dispatchAppState({
       type: "OPEN_FOOTER_ITEM_MODAL",
-      payload: footer_item_id,
+      payload: {footerItemId: footer_item_id, footerItems},
     });
 
   return {

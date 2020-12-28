@@ -24,7 +24,6 @@ import { useHandleOnSingOut } from "../context/useHandleOnSingOut";
 import { useHandleDrawerClose } from "../context/useHandleDrawerClose";
 import { useHandleDrawerCloseKeepIsSetting } from "../context/useHandleDrawerCloseKeepIsSetting";
 import { useCloseDrawerTapMain } from "../context/useCloseDrawerTapMain";
-import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
 import { useHandleDrawerOpen } from "../context/useHandleDrawerOpen";
 import { useStateDrawer } from "../context/useStateDrawer";
 
@@ -42,7 +41,7 @@ export const useDrawerProps = () => {
 
   const theme = useTheme();
   const isMobile = useIsMobile()
-  const { handleOnUpDateFooterIcon } = useFooterProps()
+  const { handleOnUpDateFooterIcon, openFooterItemModal } = useFooterProps()
     
     
   const { isClicked, handleOnSignOut } = useHandleOnSingOut();
@@ -51,7 +50,7 @@ export const useDrawerProps = () => {
   const handleDrawerClose = useHandleDrawerClose()
   const handleDrawerCloseKeepIsSetting = useHandleDrawerCloseKeepIsSetting()
   const closeDrawerTapMain = useCloseDrawerTapMain()
-  const deleteItem = useDeleteFooterItem()
+  const { deleteFooterItem } = useFooterProps()
 
   return {
     theme,
@@ -71,7 +70,8 @@ export const useDrawerProps = () => {
     themes,
     closeDrawerTapMain,
     handleOnUpDateFooterIcon,
-    deleteItem,
+    openFooterItemModal,
+    deleteFooterItem,
     isClicked,
   };
 }

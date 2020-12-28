@@ -127,7 +127,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
               delete
               deleteProps={{
                 onClick: props.deleteFooterItem,
-                value: value.order,
+                value: {footer_item_id: value.footer_item_id , order: value.order},
               }}
             />
           ) : null}

@@ -44,11 +44,11 @@ export type AppStateAction =
   | { type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" }
 
   // modalウィンドウを開く時
-  | { type: "OPEN_ARTICLE_MODAL"; payload: {num: number, article: TArticle} }
+  | { type: "OPEN_ARTICLE_MODAL"; payload: { num: number; article: TArticle } }
   | { type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR"; payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL"; //on_tapの 'modal' と 'google'両方に対応
-      payload: T_footer_item_id;
+      payload: { footerItemId: T_footer_item_id; footerItems: FooterItems };
     }
   | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: number }
 
@@ -57,7 +57,13 @@ export type AppStateAction =
   | { type: "OPEN_FOOTER_ITEM_EDITOR" }
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
-  | { type: "SET_MODAL_SIZE"; payload: TFooterItemEdittingParams }
+  | {
+      type: "SET_MODAL_SIZE";
+      payload: {
+        footerItemEdittingParams: TFooterItemEdittingParams;
+        footerItems: FooterItems;
+      };
+    }
   | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {
       type: "SET_USER_INFO";
@@ -121,7 +127,7 @@ export type AppStateAction =
   | { type: "SET_FOOTER_ITEMS"; payload: FooterItems }
   | {
       type: "DELETE_FOOTER_ITEM";
-      payload: { footer_item_id: T_footer_item_id; order: T_order };
+      payload: { footer_item_id: T_footer_item_id; order: T_order};
     }
   | { type: "SET_INFO_BAR"; payload: TInfoBarData }
   | { type: "SET_TAGS"; payload: TTags }

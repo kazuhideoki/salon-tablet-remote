@@ -3,9 +3,13 @@ import {
   Store,
 } from "../../Store/Store";
 import { apiFooterItemsGet } from "../../../pages/api/footer_items/get";
+import { FooterItemsContext } from "../../Store/footerItems/Context";
+import { set } from "../../Store/footerItems/actions";
 
 export const useGetFooterItems = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchFooterItems } = React.useContext(FooterItemsContext);
+
 
   return async () => {
 
@@ -21,6 +25,7 @@ export const useGetFooterItems = () => {
         type: "SET_FOOTER_ITEMS",
         payload: data,
       });
+      dispatchFooterItems(set(data))
     }
   };
 };

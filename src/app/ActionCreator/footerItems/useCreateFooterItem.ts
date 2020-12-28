@@ -7,6 +7,7 @@ import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";
 import { T_footer_items_create, apiFooterItemsCreate } from "../../../pages/api/footer_items/create";
+import { FooterItemsContext } from "../../Store/footerItems/Context";
 
 export type TFooterItemEdittingParams = {
   titleText: string;
@@ -61,7 +62,7 @@ export const generateFooterItemEdittingParams = (param: TFooterItemEdittingParam
 
 export const useCreateFooterItem = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
-  const { footerItems } = appState
+  const { footerItems } = React.useContext(FooterItemsContext);
   const getFooterItems = useGetFooterItems();
 
   return async (param: TCreateFooterItem) => {

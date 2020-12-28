@@ -145,8 +145,8 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         };
         break;
       case "OPEN_FOOTER_ITEM_MODAL":
-        const target = state.footerItems.filter((value) => {
-          return action.payload === value.footer_item_id;
+        const target = action.payload.footerItems.filter((value) => {
+          return action.payload.footerItemId === value.footer_item_id;
         });
         newState = {
           ...state,
@@ -231,11 +231,11 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           ...state,
           edittingPrams: {
             ...state.edittingPrams,
-            modalSize: action.payload.modalSizeRadio,
+            modalSize: action.payload.footerItemEdittingParams.modalSizeRadio,
             isModalSizeChanged: true,
             footerItem: {
               ...state.edittingPrams.footerItem,
-              ...generateFooterItemEdittingParams(action.payload, state.footerItems),
+              ...generateFooterItemEdittingParams(action.payload.footerItemEdittingParams, action.payload.footerItems),
             },
           },
         };
@@ -353,7 +353,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "SET_FOOTER_ITEMS":
         newState = {
           ...state,
-          footerItems: action.payload,
+          // footerItems: action.payload,
           loading: {
             ...state.loading,
             footer: false,
@@ -362,22 +362,9 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         break;
 
       case "DELETE_FOOTER_ITEM":
-        const deletedState = state.footerItems.filter((value, index) => {
-          // 削除するアイテムは含めない
-          return value.footer_item_id !== action.payload.footer_item_id;
-        });
+        
         newState = {
           ...state,
-          footerItems: deletedState.map((value, index) => {
-            // 削除されたアイテムの左側のorderはそのまま出力
-            if (value.order < action.payload.order) {
-              return value;
-              // 削除されたアイテムの右側はorderの調整のためそれぞれ-1する
-            } else if (value.order > action.payload.order) {
-              value.order -= 1;
-              return value;
-            }
-          }),
           loading: {
             ...state.loading,
             footer: false,
