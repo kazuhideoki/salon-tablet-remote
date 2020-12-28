@@ -6,6 +6,7 @@ import { IndexPropsData } from "../../pages";
 import { ArticlesContextProvider } from "./articles/Context";
 import { FooterItemsContextProvider } from "./footerItems/Context";
 import { TagsContextProvider } from "./tags/Context";
+import { InfoBarContextProvider } from "./infoBar/Context";
 
 export type ContextProps = {
   appState: TAppState;
@@ -31,10 +32,10 @@ const StoreContextProvider: React.FC<TStoreProps> = (props) => {
       <ArticlesContextProvider articles={props.articles} allArticles={props.allArticles} paginationParams={props.pagination}>
         <FooterItemsContextProvider footerItems={props.footerItems}>
           <TagsContextProvider tags={props.tags}>
-            {props.children}
-
+            <InfoBarContextProvider infoBarData={props.infoBarData}>
+              {props.children}
+            </InfoBarContextProvider>
           </TagsContextProvider>
-
         </FooterItemsContextProvider>
       </ArticlesContextProvider>
     </Store.Provider>
