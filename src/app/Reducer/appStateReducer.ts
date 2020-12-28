@@ -380,7 +380,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "SET_TAGS":
         newState = {
           ...state,
-          tags: action.payload,
+          // tags: action.payload,
           loading: {
             ...state.loading,
             manageTags: false,

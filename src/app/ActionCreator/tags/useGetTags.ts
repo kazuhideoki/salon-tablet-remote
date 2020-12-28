@@ -1,9 +1,12 @@
 import React from "react";
 import { Store } from "../../Store/Store";
 import { apiTagsGet } from "../../../pages/api/tags/get";
+import { TagsContext } from "../../Store/tags/Context";
+import { set } from "../../Store/tags/actions";
 
 export const useGetTags = () => {
   const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchTags } = React.useContext(TagsContext)
 
   return async () => {
 
@@ -17,8 +20,8 @@ export const useGetTags = () => {
     } else {
       dispatchAppState({
         type: "SET_TAGS",
-        payload: data,
       });
+      dispatchTags(set(data))
     }
   };
 };

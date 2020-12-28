@@ -5,6 +5,7 @@ import { AppStateAction } from "../Reducer/AppStateAction";
 import { IndexPropsData } from "../../pages";
 import { ArticlesContextProvider } from "./articles/Context";
 import { FooterItemsContextProvider } from "./footerItems/Context";
+import { TagsContextProvider } from "./tags/Context";
 
 export type ContextProps = {
   appState: TAppState;
@@ -29,7 +30,10 @@ const StoreContextProvider: React.FC<TStoreProps> = (props) => {
     <Store.Provider value={values}>
       <ArticlesContextProvider articles={props.articles} allArticles={props.allArticles} paginationParams={props.pagination}>
         <FooterItemsContextProvider footerItems={props.footerItems}>
-          {props.children}
+          <TagsContextProvider tags={props.tags}>
+            {props.children}
+
+          </TagsContextProvider>
 
         </FooterItemsContextProvider>
       </ArticlesContextProvider>

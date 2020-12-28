@@ -130,7 +130,7 @@ export type AppStateAction =
       payload: { footer_item_id: T_footer_item_id; order: T_order};
     }
   | { type: "SET_INFO_BAR"; payload: TInfoBarData }
-  | { type: "SET_TAGS"; payload: TTags }
+  | { type: "SET_TAGS" }
   | { type: "SET_INSTAGRAM_ACCOUNTS"; payload: TInstagramAccounts }
   | {
       type: "SET_INSTAGRAM_RECONNECT_NEEDED";
