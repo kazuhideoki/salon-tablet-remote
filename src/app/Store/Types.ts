@@ -297,7 +297,7 @@ export const initAppState = (data: TStoreProps) => ({
         //  footerItems: data.footerItems,
         //  infoBarData: data.infoBarData,
         //  tags: data.tags,
-         instagramAccounts: data.instagramAccounts,
+        //  instagramAccounts: data.instagramAccounts,
          instagramMedias: initInstagramMedias,
        });
 

@@ -131,11 +131,11 @@ export type AppStateAction =
     }
   // | { type: "SET_INFO_BAR"; payload: TInfoBarData }
   | { type: "SET_TAGS" }
-  | { type: "SET_INSTAGRAM_ACCOUNTS"; payload: TInstagramAccounts }
-  | {
-      type: "SET_INSTAGRAM_RECONNECT_NEEDED";
-      payload: T_instagram_accounts_reconnect_needed;
-    }
+  | { type: "SET_INSTAGRAM_ACCOUNTS" }
+  // | {
+  //     type: "SET_INSTAGRAM_RECONNECT_NEEDED";
+  //     payload: T_instagram_accounts_reconnect_needed;
+  //   }
   | {
       type: "SET_INSTAGRAM_MEDIAS";
       payload: {

@@ -3,6 +3,8 @@ import { Store } from "../../Store/Store";
 import { apiInstagramMediasGet } from "../../../pages/api/instagram_medias/get";
 import { T_instagram_id, T_instagram_username } from "../../Store/Types";
 import { apiInstagramAccountsReconnectNeeded, T_instagram_accounts_reconnect_needed } from "../../../pages/api/instagram_accounts/reconnect_needed";
+import { InstagramAccountsContext } from "../../Store/instagramAccounts/Context";
+import { setReconnect } from "../../Store/instagramAccounts/actions";
 
 export const useGetInstagramMedias = () => {
   const {
@@ -10,6 +12,8 @@ export const useGetInstagramMedias = () => {
     appState
   } = React.useContext(Store);
   const user_id = appState.userInfo.user_id
+  const { dispatchInstagramAccounts } = React.useContext(InstagramAccountsContext);
+
 
   // ページ送りでないときは空のオブジェクト
   return async (instagram_id: T_instagram_id, username: T_instagram_username, paging: {after?: string, before?: string }) => {
@@ -27,7 +31,7 @@ export const useGetInstagramMedias = () => {
         console.log("message.typeは OAuthException");
         alert("インスタグラムアカウントの再連携が必要です");
         const result = await apiInstagramAccountsReconnectNeeded(params)
-        if(result.err !== true) dispatchAppState({type: "SET_INSTAGRAM_RECONNECT_NEEDED", payload: params})
+        if(result.err !== true) dispatchInstagramAccounts(setReconnect(instagram_id))
       }
       dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {

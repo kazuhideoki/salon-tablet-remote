@@ -12,8 +12,19 @@ export const instagramAccountsReducer = (
   let newState: InstagramAccountsContextState;
   const func = instagramAccountsReducer;
   switch (action.type) {
+
     case types.SET:
-      newState = action.payload
+      newState = action.payload;
+      break;
+
+    case types.SET_RECONNECT:
+      const instagramAccounts = state.map((value) => {
+        if (value.instagram_id === action.payload) {
+          value.is_reconnect_needed = true
+        }
+        return value;
+      });
+      newState = instagramAccounts
       break;
   }
 
