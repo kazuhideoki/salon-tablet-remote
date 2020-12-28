@@ -3,7 +3,7 @@ import {
   Store,
 } from "../../../Store/Store";
 import { T_articles_get, apiArticlesGet, T_articles_get_return } from "../../../../pages/api/articles/get";
-import { ArticleContext } from "../../../Store/articles/Context";
+import { ArticlesContext } from "../../../Store/articles/Context";
 import { set } from "../../../Store/articles/actions";
 import { TApiResponse } from "../../../../lib/apiTypes";
 
@@ -12,7 +12,7 @@ export const useGetArticles = () => {
     dispatchAppState,
     appState,
   } = React.useContext(Store);
-  const { dispatchArticles } = React.useContext(ArticleContext);
+  const { dispatchArticles } = React.useContext(ArticlesContext);
   
   return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
     

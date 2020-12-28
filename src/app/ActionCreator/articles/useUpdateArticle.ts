@@ -6,7 +6,7 @@ import {
   T_articles_update,
   apiArticlesUpdate,
 } from "../../../pages/api/articles/update";
-import { ArticleContext } from "../../Store/articles/Context";
+import { ArticlesContext } from "../../Store/articles/Context";
 
 export type TUpdateArticle = TCreateArticle;
 
@@ -15,7 +15,7 @@ export const useUpdateArticle = () => {
     dispatchAppState,
     appState
   } = React.useContext(Store);
-  const { paginationParams } = React.useContext(ArticleContext)
+  const { paginationParams } = React.useContext(ArticlesContext)
 
   const getArticles = useGetArticles();
   

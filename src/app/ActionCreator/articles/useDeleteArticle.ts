@@ -5,13 +5,13 @@ import {
 import { useGetArticles } from "./useGetArticles/useGetArticles";
 import { Store } from "../../Store/Store";
 import { apiArticlesDelete } from "../../../pages/api/articles/delete";
-import { ArticleContext } from "../../Store/articles/Context";
+import { ArticlesContext } from "../../Store/articles/Context";
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
   const { appState ,dispatchAppState } = React.useContext(Store);
-  const { paginationParams} = React.useContext(ArticleContext)
-  const { articles } = React.useContext(ArticleContext)
+  const { paginationParams} = React.useContext(ArticlesContext)
+  const { articles } = React.useContext(ArticlesContext)
   
   return async (article_id: T_article_id): Promise<void> => {
 

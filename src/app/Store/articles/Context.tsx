@@ -1,14 +1,14 @@
 import React from "react";
 import { TAllArticles, TArticles, TPaginationParams } from "../Types";
 import { TArticlesAction } from "./actions";
-import { articlesReducer, ArticleContextState } from "./reducer";
+import { articlesReducer, ArticlesContextState } from "./reducer";
 
-export type ArticlesContextProps = ArticleContextState & {
+export type ArticlesContextProps = ArticlesContextState & {
   dispatchArticles: React.Dispatch<TArticlesAction>;
 };
-export const ArticleContext = React.createContext({} as ArticlesContextProps);
+export const ArticlesContext = React.createContext({} as ArticlesContextProps);
 
-export type Props = ArticleContextState;
+export type Props = ArticlesContextState;
 
 export const ArticlesContextProvider: React.FC<Props> = (
          props
@@ -26,7 +26,7 @@ export const ArticlesContextProvider: React.FC<Props> = (
          };
 
          return (
-           <ArticleContext.Provider value={values}>{props.children}</ArticleContext.Provider>
+           <ArticlesContext.Provider value={values}>{props.children}</ArticlesContext.Provider>
          );
        };
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import { ArticleContext } from '../../../../Store/articles/Context'
+import { ArticlesContext } from '../../../../Store/articles/Context'
 import { Store } from '../../../../Store/Store'
 export const useOpenArticleModal = () => {
   const { dispatchAppState } = React.useContext(Store)
-  const { articles } = React.useContext(ArticleContext)
+  const { articles } = React.useContext(ArticlesContext)
 
   return (num: number) => {
     dispatchAppState({

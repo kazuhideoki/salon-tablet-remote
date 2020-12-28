@@ -3,21 +3,25 @@ import { TAllArticles, TArticles, TPaginationParams } from "../Types";
 import { TArticlesAction } from "./actions";
 import * as types from './types'
 
-export type ArticleContextState = { articles: TArticles, allArticles: TAllArticles, paginationParams: TPaginationParams}
+export type ArticlesContextState = {
+  articles: TArticles;
+  allArticles: TAllArticles;
+  paginationParams: TPaginationParams;
+};
 
 export const articlesReducer = (
-         state: ArticleContextState,
+         state: ArticlesContextState,
          action: TArticlesAction
        ) => {
-         let newState: ArticleContextState;
+         let newState: ArticlesContextState;
          const func = articlesReducer;
          switch (action.type) {
            case types.SET:
              newState = {
                articles: action.payload.rawData,
                allArticles: action.payload.allArticles,
-               paginationParams: action.payload.pagination
-              };
+               paginationParams: action.payload.pagination,
+             };
              break;
          }
 
