@@ -8,6 +8,7 @@ import { FooterItemsContextProvider } from "./footerItems/Context";
 import { TagsContextProvider } from "./tags/Context";
 import { InfoBarContextProvider } from "./infoBar/Context";
 import { InstagramContextProvider } from "./instagram/Context";
+import { UserInfoContextProvider } from "./userInfo/Context";
 
 export type ContextProps = {
   appState: TAppState;
@@ -30,17 +31,19 @@ const StoreContextProvider: React.FC<TStoreProps> = (props) => {
 
   return (
     <Store.Provider value={values}>
-      <ArticlesContextProvider articles={props.articles} allArticles={props.allArticles} paginationParams={props.pagination}>
-        <FooterItemsContextProvider footerItems={props.footerItems}>
-          <TagsContextProvider tags={props.tags}>
-            <InfoBarContextProvider infoBarData={props.infoBarData}>
-              <InstagramContextProvider instagramAccounts={props.instagramAccounts}>
-                {props.children}
-              </InstagramContextProvider>
-            </InfoBarContextProvider>
-          </TagsContextProvider>
-        </FooterItemsContextProvider>
-      </ArticlesContextProvider>
+      <UserInfoContextProvider userInfo={props.userInfo}>
+        <ArticlesContextProvider articles={props.articles} allArticles={props.allArticles} paginationParams={props.pagination}>
+          <FooterItemsContextProvider footerItems={props.footerItems}>
+            <TagsContextProvider tags={props.tags}>
+              <InfoBarContextProvider infoBarData={props.infoBarData}>
+                <InstagramContextProvider instagramAccounts={props.instagramAccounts}>
+                  {props.children}
+                </InstagramContextProvider>
+              </InfoBarContextProvider>
+            </TagsContextProvider>
+          </FooterItemsContextProvider>
+        </ArticlesContextProvider>
+      </UserInfoContextProvider>
     </Store.Provider>
   );
 };
