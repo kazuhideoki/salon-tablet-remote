@@ -3,12 +3,12 @@ import { TAllArticles, TArticles, TPaginationParams } from "../Types";
 import { TArticlesAction } from "./actions";
 import { articlesReducer, ArticlesContextState } from "./reducer";
 
+export type Props = ArticlesContextState;
+
 export type ArticlesContextProps = ArticlesContextState & {
   dispatchArticles: React.Dispatch<TArticlesAction>;
 };
 export const ArticlesContext = React.createContext({} as ArticlesContextProps);
-
-export type Props = ArticlesContextState;
 
 export const ArticlesContextProvider: React.FC<Props> = (
          props

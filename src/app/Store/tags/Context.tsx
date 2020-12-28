@@ -2,13 +2,14 @@ import React from "react";
 import { TTagsAction } from "./actions";
 import { tagsReducer, TagsContextState } from "./reducer";
 
+export type Props = {tags: TagsContextState};
+
 export type TagsContextProps = {
   tags: TagsContextState;
   dispatchTags: React.Dispatch<TTagsAction>;
 };
-export const TagsContext = React.createContext({} as TagsContextProps);
 
-export type Props = {tags: TagsContextState};
+export const TagsContext = React.createContext({} as TagsContextProps);
 
 export const TagsContextProvider: React.FC<Props> = (props) => {
   const [state, dispatchTags] = React.useReducer(tagsReducer, props.tags);
