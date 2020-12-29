@@ -8,8 +8,12 @@ export const closeModal = () => ({
 export const openDrawer = () => ({
          type: types.OPEN_DRAWER,
        });
+export const closeDrawer = () => ({
+         type: types.CLOSE_DRAWER,
+       });
 
-export type TAppStateAction = 
-  ReturnType<typeof setModal>
+export type TAppStateAction =
+  | ReturnType<typeof setModal>
   | ReturnType<typeof closeModal>
   | ReturnType<typeof openDrawer>
+  | ReturnType<typeof closeDrawer>;

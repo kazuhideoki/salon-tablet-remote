@@ -10,7 +10,7 @@ import { Drawer as MuiDrawer } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import { ThemeContext, TThemeArgs } from "../../../../../Store/ThemeContext";
+import { TThemeArgs } from "../../../../../Store/ThemeContext";
 import { drawerSettingJsx } from "../components/drawerSettingJsx";
 import { drawerHeaderJsx } from "../components/drawerHeaderJsx";
 import { drawerItemsJsx } from "../components/drawerItemsJsx";
@@ -21,8 +21,7 @@ import { AuthCircular } from '../../../../../../lib/AuthCircular';
 import { useHandleSwitchIsSetting } from "../context/useHandleSwitchIsSetting";
 import { useHandleOnSingOut } from "../context/useHandleOnSingOut";
 import { useHandleDrawerClose } from "../context/useHandleDrawerClose";
-import { useHandleDrawerCloseKeepIsSetting } from "../context/useHandleDrawerCloseKeepIsSetting";
-import { useCloseDrawerTapMain } from "../context/useCloseDrawerTapMain";
+import { useCloseDrawer } from "../context/useCloseDrawer";
 import { useHandleDrawerOpen } from "../context/useHandleDrawerOpen";
 import { useStateDrawer } from "../context/useStateDrawer";
 import { useOpenModal } from "../context/useOpenModal";
@@ -48,8 +47,7 @@ export const useDrawerProps = () => {
   const handleSwitchIsSetting = useHandleSwitchIsSetting()
   const handleDrawerOpen = useHandleDrawerOpen()
   const handleDrawerClose = useHandleDrawerClose()
-  const handleDrawerCloseKeepIsSetting = useHandleDrawerCloseKeepIsSetting()
-  const closeDrawerTapMain = useCloseDrawerTapMain()
+  const closeDrawer = useCloseDrawer()
   const { deleteFooterItem } = useFooterProps()
   const openModal = useOpenModal()
   
@@ -64,12 +62,11 @@ export const useDrawerProps = () => {
     handleSwitchIsSetting,
     handleOnSignOut,
     handleDrawerClose,
-    handleDrawerCloseKeepIsSetting,
     isMobile,
     pass,
     setPass,
     themes,
-    closeDrawerTapMain,
+    closeDrawer,
     handleOnUpDateFooterIcon,
     openFooterItemModal,
     deleteFooterItem,
@@ -221,7 +218,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       {props.isMobile && props.isDrawerOpen ? (
         <div
           className={classes.greyScreen}
-          onClick={props.isDrawerOpen ? props.closeDrawerTapMain : null}
+          onClick={props.isDrawerOpen ? props.closeDrawer : null}
         ></div>
       ) : null}
       {props.isClicked ? <AuthCircular message="サインアウト中" /> : null}
