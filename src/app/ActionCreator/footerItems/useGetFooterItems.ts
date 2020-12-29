@@ -4,22 +4,24 @@ import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { set } from "../../Store/footerItems/actions";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useFooterProps } from "../../View/tablet/Footer/Footer/view/Footer";
 
 export const useGetFooterItems = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchFooterItems } = React.useContext(FooterItemsContext);
+  const { handleLoadingFooter } = useFooterProps()
 
 
   return async () => {
 
-    dispatchAppState({type: "ON_IS_LOADING_FOOTER"})
+    handleLoadingFooter(true)
 
     const data = await apiFooterItemsGet(userInfo.user_id);
 
     if (data.err === true) {
       alert("取得できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
+      handleLoadingFooter(true)
     } else {
       dispatchAppState({
         type: "SET_FOOTER_ITEMS",

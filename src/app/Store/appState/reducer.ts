@@ -51,6 +51,15 @@ export const appStateReducer = (
           }
         }
       break;
+    case types.IS_LOADING_FOOTER:
+      newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            footer: action.payload,
+          }
+        }
+      break;
   }
 
   reducerLogger({ state, newState, func, action });

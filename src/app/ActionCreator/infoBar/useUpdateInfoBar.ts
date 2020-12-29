@@ -18,7 +18,6 @@ export type TUseUpdateInfoBar = {
 };
 
 export const useUpdateInfoBar = () => {
-  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { closeModal } = useModalProps();
   const getInfoBar = useGetInfoBar();
@@ -39,7 +38,6 @@ export const useUpdateInfoBar = () => {
 
     if (data.err === true) {
       alert("更新できませんでした");
-      // dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
       closeModal()
 

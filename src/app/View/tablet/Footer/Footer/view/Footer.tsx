@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Grid,
   makeStyles,
   createStyles,
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import {
-  FooterItem,
-} from "../../../../../Store/Types";
 import { IconAndText } from "../components/IconAndText";
 import { IconsSetting } from "../../../Drawer/FooterItemEditor/components/iconSelect/icons";
 import { EditButtonsBox } from "../../../../../pureComponents/buttons/EditButtonsBox";
@@ -16,6 +13,7 @@ import { useIsMobile } from "../../../../../../lib/useIsMobile";
 import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
 import { useStateFooter } from "../context/useStateFooter";
 import { useHandleOnUpDateFooterIcon } from "../context/useHandleOnUpDateFooterIcon";
+import { useHandleLoadingFooter } from "../context/useHandleLoadingFooter";
 
 export const useFooterProps = () => {
   const {
@@ -29,6 +27,8 @@ export const useFooterProps = () => {
 
   const handleOnUpDateFooterIcon = useHandleOnUpDateFooterIcon();
 
+  const handleLoadingFooter = useHandleLoadingFooter();
+
   const deleteFooterItem = useDeleteFooterItem();
   
   return {
@@ -39,6 +39,7 @@ export const useFooterProps = () => {
     deleteFooterItem,
     isMobile,
     loading: loading.footer,
+    handleLoadingFooter,
   };
 };
 

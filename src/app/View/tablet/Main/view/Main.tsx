@@ -39,6 +39,7 @@ export const useMainProps = () => {
 
   const handleLoadingMain = useHandleLoadingMain()
   
+  
   return {
     isSetting,
     articles,

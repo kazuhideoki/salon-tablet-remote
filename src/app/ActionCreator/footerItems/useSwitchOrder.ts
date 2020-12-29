@@ -4,8 +4,9 @@ import {
   T_footer_items_switch_order,
   apiFooterItemsSwitchOrder,
 } from "../../../pages/api/footer_items/switch_order";
-import { Store } from "../../Store/Store";
 import { FooterItem } from "../../Store/Types";
+import { AppStateContext } from "../../Store/appState/Context";
+import { useFooterProps } from "../../View/tablet/Footer/Footer/view/Footer";
 
 export type TUseSwitchOrders = {
   smaller: FooterItem
@@ -14,10 +15,11 @@ export type TUseSwitchOrders = {
 
 export const useSwitchOrder = () => {
   const getFooterItems = useGetFooterItems();
-  const { dispatchAppState }= React.useContext(Store)
+  const { dispatchAppState }= React.useContext(AppStateContext)
+  const { handleLoadingFooter } = useFooterProps()
 
   return async ({smaller, larger}:TUseSwitchOrders) => {
-    dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
+    handleLoadingFooter(true)
 
     const params: T_footer_items_switch_order = {
       smaller: {
@@ -36,7 +38,7 @@ export const useSwitchOrder = () => {
 
     if (data.err === true) {
       alert("アイテムを入れ替えることができませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
+      handleLoadingFooter(false)
     } else {
       getFooterItems();
     }

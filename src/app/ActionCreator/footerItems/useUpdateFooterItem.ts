@@ -6,19 +6,21 @@ import { T_footer_items_update, apiFooterItemsUpdate } from "../../../pages/api/
 import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { AppStateContext } from "../../Store/appState/Context";
 import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
+import { useFooterProps } from "../../View/tablet/Footer/Footer/view/Footer";
 
 export type TUpdateFooterItem = TCreateFooterItem;
 
 export const useUpdateFooterItem = () => {
-  const { dispatchAppState, appState } = React.useContext(AppStateContext);
+  const { appState } = React.useContext(AppStateContext);
   const { footerItems } = React.useContext(FooterItemsContext);
   const { closeModal } = useModalProps();
+  const { handleLoadingFooter } = useFooterProps()
   const getFooterItems = useGetFooterItems();
 
   return async (param: TUpdateFooterItem) => {
 
     closeModal()
-    dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
+    handleLoadingFooter(true)
 
     const params: T_footer_items_update = {
       id: appState.edittingPrams.footerItem.footer_item_id,
@@ -32,7 +34,7 @@ export const useUpdateFooterItem = () => {
 
     if (data.err === true) {
       alert("更新できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
+      handleLoadingFooter(false)
     } else {
       closeModal()
 

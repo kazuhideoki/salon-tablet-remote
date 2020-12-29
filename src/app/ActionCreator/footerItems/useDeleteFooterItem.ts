@@ -4,10 +4,12 @@ import { apiFooterItemsDelete, T_footer_items_delete } from "../../../pages/api/
 import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { set } from "../../Store/footerItems/actions";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useFooterProps } from "../../View/tablet/Footer/Footer/view/Footer";
 
 export const useDeleteFooterItem = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { footerItems, dispatchFooterItems } = React.useContext(FooterItemsContext);
+  const { handleLoadingFooter } = useFooterProps()
 
   return async ({footer_item_id, order}:T_footer_items_delete):Promise<void> => {
 
@@ -17,13 +19,13 @@ export const useDeleteFooterItem = () => {
       return
     }
 
-    dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
+    handleLoadingFooter(true)
     
     const data = await apiFooterItemsDelete({footer_item_id, order})
 
     if (data.err === true) {
       alert("削除できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
+      handleLoadingFooter(false)
     } else {
       dispatchAppState({
         type: "DELETE_FOOTER_ITEM",
