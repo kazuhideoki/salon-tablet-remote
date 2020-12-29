@@ -9,16 +9,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Settings } from "@material-ui/icons";
 import { Divider, Switch, FormControlLabel, FormGroup } from "@material-ui/core";
-import {
-  TUpdateUser,
-} from "../../../../../ActionCreator/user/useUpdateUser";
 import { QrPopover } from "../components/QrPopover";
 import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
 import { useGoogleSearchProps } from "../../../Modal/Modals/GoogleSearch/view/GoogleSearch";
-import { useOpenDeleteAccountForm } from "../context/useOpenDeleteAccountForm";
 import { useHandleOnSubmit } from "../context/useHandleOnSubmit";
 import { useHandleSwitch } from "../context/useHandleSwitch";
 import { useStateAccount } from "../context/useStateAccount";
+import { useDrawerProps } from "../../Drawer/view/Drawer";
 
 const useSettingUserInfoProps = () => {
 
@@ -43,7 +40,7 @@ const useSettingUserInfoProps = () => {
     password,
     isShowMobile,
   })
-  const openDeleteAccountForm = useOpenDeleteAccountForm()
+  const { openModal } = useDrawerProps()
   const handleSwitch = useHandleSwitch()
   const { clearHistory } = useGoogleSearchProps()
 
@@ -57,11 +54,11 @@ const useSettingUserInfoProps = () => {
     setPassword,
     userInfo,
     handleOnSubmit,
-    openDeleteAccountForm,
     isShowMobile,
     setIsShowMobile,
     handleSwitch,
     clearHistory,
+    openModal,
   };
 }
 
@@ -177,10 +174,9 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                      <b>有効なパスワードです。</b>
                    </Typography>
                  ) : null}
-                   <Typography component="h3" variant="body1" color={"error"}>
-                     ※パスワードは変更時のみご入力下さい。
-                   </Typography>
-                 
+                 <Typography component="h3" variant="body1" color={"error"}>
+                   ※パスワードは変更時のみご入力下さい。
+                 </Typography>
 
                  <Button
                    fullWidth
@@ -209,19 +205,24 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                    }
                    label="パブリックページの出力"
                  />
-                 <HelpButton content='パブリックページを出力すると①URLがあればパスワードなしで誰でもアクセスできるようになります。②観覧用のページのみです。'/>
+                 <HelpButton content="パブリックページを出力すると①URLがあればパスワードなしで誰でもアクセスできるようになります。②観覧用のページのみです。" />
                  <QrPopover {...props}>QRコードを表示する</QrPopover>
                </FormGroup>
-                <Button fullWidth onClick={props.clearHistory} variant='outlined' className={classes.button}>
-                  Google検索履歴クリア
-                </Button>
+               <Button
+                 fullWidth
+                 onClick={props.clearHistory}
+                 variant="outlined"
+                 className={classes.button}
+               >
+                 Google検索履歴クリア
+               </Button>
                <Divider variant="middle" />
                <Button
                  fullWidth
                  color="secondary"
                  className={classes.submit}
-                 onClick={() => props.openDeleteAccountForm()}
-                //  disabled
+                 onClick={() => props.openModal('delete_account_form')}
+                 //  disabled
                >
                  アカウントを削除する
                </Button>

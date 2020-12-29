@@ -11,6 +11,7 @@ import { PaginationInstagram } from "../components/PaginationInstagram";
 import { useHandleOnNumClick } from "../context/useHandleOnNumClick";
 import { useManageInstagramAccountsProps } from "../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
 import { useStatePaginationBar } from "../context/useStatePaginationBar";
+import { useDrawerProps } from "../../../Drawer/Drawer/view/Drawer";
 
 export const usePaginationBarProps = () => {
   
@@ -35,6 +36,8 @@ export const usePaginationBarProps = () => {
   const handleOnNumClick = useHandleOnNumClick()
 
   const selectedTagNames = useSelectedArticlesTagNames();
+
+  const { openModal } = useDrawerProps()
 
 
   const StyledIconButton = withStyles({
@@ -65,6 +68,7 @@ export const usePaginationBarProps = () => {
     isTabletPortrait,
     getInstagramMedias,
     instagramMedias,
+    openModal,
   };
 };
 export type TUsePaginationBarProps = ReturnType<typeof usePaginationBarProps> & {
@@ -183,12 +187,7 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
                     ? `${classes.button} ${classes.selectedButton}`
                     : classes.button
                 }
-                onClick={() =>
-                  props.dispatchAppState({
-                    type: "OPEN_MODAL",
-                    payload: "select_tags",
-                  })
-                }
+                onClick={() => props.openModal("select_tags")}
               >
                 <TagsButton />
               </props.StyledIconButton>
@@ -217,12 +216,7 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
                     ? `${classes.button} ${classes.selectedButton}`
                     : classes.button
                 }
-                onClick={() =>
-                  props.dispatchAppState({
-                    type: "OPEN_MODAL",
-                    payload: "select_instagram",
-                  })
-                }
+                onClick={() => props.openModal("select_instagram")}
               >
                 <Instagram />
               </props.StyledIconButton>

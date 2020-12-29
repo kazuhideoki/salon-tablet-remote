@@ -25,6 +25,7 @@ import { useHandleDrawerCloseKeepIsSetting } from "../context/useHandleDrawerClo
 import { useCloseDrawerTapMain } from "../context/useCloseDrawerTapMain";
 import { useHandleDrawerOpen } from "../context/useHandleDrawerOpen";
 import { useStateDrawer } from "../context/useStateDrawer";
+import { useOpenModal } from "../context/useOpenModal";
 
 export const useDrawerProps = () => {
   const {
@@ -50,7 +51,8 @@ export const useDrawerProps = () => {
   const handleDrawerCloseKeepIsSetting = useHandleDrawerCloseKeepIsSetting()
   const closeDrawerTapMain = useCloseDrawerTapMain()
   const { deleteFooterItem } = useFooterProps()
-
+  const openModal = useOpenModal()
+  
   return {
     theme,
     dispatchAppState,
@@ -72,6 +74,7 @@ export const useDrawerProps = () => {
     openFooterItemModal,
     deleteFooterItem,
     isClicked,
+    openModal,
   };
 }
 

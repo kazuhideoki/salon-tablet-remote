@@ -8,6 +8,7 @@ import {
 import { T_info_bar_type } from "../../Store/Types";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
 
 export type TUseUpdateInfoBar = {
   infoBarType: T_info_bar_type;
@@ -19,12 +20,12 @@ export type TUseUpdateInfoBar = {
 export const useUpdateInfoBar = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
+  const { closeModal } = useModalProps();
   const getInfoBar = useGetInfoBar();
 
   return async (param: TUseUpdateInfoBar) => {
 
-    dispatchAppState({ type: "CLOSE_MODAL" });
-    // dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
+    closeModal()
 
     const params: T_info_bar_update = {
         user_id: userInfo.user_id,
@@ -40,7 +41,7 @@ export const useUpdateInfoBar = () => {
       alert("更新できませんでした");
       // dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
-      dispatchAppState({ type: "CLOSE_MODAL" });
+      closeModal()
 
       getInfoBar();
     }

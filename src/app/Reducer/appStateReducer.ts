@@ -9,24 +9,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-      case "OPEN_MODAL":
-        newState = {
-          ...state,
-          setModal: action.payload,
-          isModalOpen: true,
-        };
-        break;
-      case "CLOSE_MODAL":
-        newState = {
-          ...state,
-          isModalOpen: false,
-          edittingPrams: {
-            ...state.edittingPrams,
-            isModalSizeChanged: false,
-          },
-        };
-        break;
-
       case "OPEN_DRAWER":
         newState = {
           ...state,
@@ -144,7 +126,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         });
         newState = {
           ...state,
-          setModal: target[0].on_tap === 'modal' ? "footer_item_modal" : 'google_search',
+          setModal:
+            target[0].on_tap === "modal"
+              ? "footer_item_modal"
+              : "google_search",
           isModalOpen: true,
           currentModalContent: {
             ...state.currentModalContent,
@@ -219,7 +204,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      // modalSizeの変更をViewに反映させつつ、入力中の値も保持しておくためのロジック
+      // modalSizeの変更をViewに反映させつつ、入力中の値も保持しておくためのロジック。isModalSizeChangedで判定する
       case "SET_MODAL_SIZE":
         newState = {
           ...state,
@@ -229,7 +214,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
             isModalSizeChanged: true,
             footerItem: {
               ...state.edittingPrams.footerItem,
-              ...generateFooterItemEdittingParams(action.payload.footerItemEdittingParams, action.payload.footerItems),
+              ...generateFooterItemEdittingParams(
+                action.payload.footerItemEdittingParams,
+                action.payload.footerItems
+              ),
             },
           },
         };
@@ -250,7 +238,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isModalOpen: false,
         };
         break;
-    
 
       case "SET_ARTICLES":
         const isShowInstagram =
@@ -277,7 +264,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         break;
 
       case "DELETE_FOOTER_ITEM":
-        
         newState = {
           ...state,
           loading: {

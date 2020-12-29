@@ -14,8 +14,6 @@ import { T_articles_get_return } from "../../pages/api/articles/get";
 import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 
 export type AppStateAction =
-  | { type: "OPEN_MODAL"; payload: TSetModal }
-  | { type: "CLOSE_MODAL" }
   | { type: "OPEN_DRAWER" }
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
   | { type: "CLOSE_DRAWER" }

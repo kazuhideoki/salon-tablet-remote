@@ -7,6 +7,7 @@ import {
 } from "../../../pages/api/articles/update";
 import { ArticlesContext } from "../../Store/articles/Context";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
 
 export type TUpdateArticle = TCreateArticle;
 
@@ -16,12 +17,13 @@ export const useUpdateArticle = () => {
     appState
   } = React.useContext(AppStateContext);
   const { paginationParams } = React.useContext(ArticlesContext)
+  const { closeModal } = useModalProps();
 
   const getArticles = useGetArticles();
   
   return async (param: TUpdateArticle) => {
 
-    dispatchAppState({ type: "CLOSE_MODAL" });
+    closeModal()
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
    
     const params: T_articles_update = {
@@ -46,7 +48,7 @@ export const useUpdateArticle = () => {
       alert("更新できませんでした");
       dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
     } else {
-      dispatchAppState({ type: "CLOSE_MODAL" });
+      closeModal()
 
       getArticles(appState.isSetting, paginationParams.page);
     }

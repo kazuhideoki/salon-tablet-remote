@@ -6,6 +6,7 @@ import { InstagramContext } from "../../Store/instagram/Context";
 import { setMedias, setReconnect } from "../../Store/instagram/actions";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
 
 export const useGetInstagramMedias = () => {
   const {
@@ -14,13 +15,14 @@ export const useGetInstagramMedias = () => {
   const { userInfo } = React.useContext(UserInfoContext);
   const user_id = userInfo.user_id
   const { dispatchInstagram } = React.useContext(InstagramContext);
+  const { closeModal } = useModalProps();
 
 
   // ページ送りでないときは空のオブジェクト
   return async (instagram_id: T_instagram_id, username: T_instagram_username, paging: {after?: string, before?: string }) => {
     
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
-    dispatchAppState({type: "CLOSE_MODAL"})
+    closeModal()
 
     const data = await apiInstagramMediasGet(instagram_id, paging);
 

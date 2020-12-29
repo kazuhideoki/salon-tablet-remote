@@ -12,8 +12,22 @@ export const appStateReducer = (
   let newState: AppStateContextState;
   const func = appStateReducer;
   switch (action.type) {
-    case types.SET:
-      newState = action.payload
+    case types.OPEN_MODAL:
+      newState = {
+        ...state,
+        setModal: action.payload,
+        isModalOpen: true,
+      };
+      break;
+    case types.CLOSE_MODAL:
+      newState = {
+        ...state,
+        isModalOpen: false,
+        edittingPrams: {
+          ...state.edittingPrams,
+          isModalSizeChanged: false,
+        },
+      };
       break;
   }
 

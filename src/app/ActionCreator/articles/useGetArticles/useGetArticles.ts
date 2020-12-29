@@ -4,6 +4,7 @@ import { ArticlesContext } from "../../../Store/articles/Context";
 import { set } from "../../../Store/articles/actions";
 import { UserInfoContext } from "../../../Store/userInfo/Context";
 import { AppStateContext } from "../../../Store/appState/Context";
+import { useModalProps } from "../../../View/tablet/Modal/Modal/view/Modal";
 
 export const useGetArticles = () => {
   const {
@@ -11,10 +12,11 @@ export const useGetArticles = () => {
   } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchArticles } = React.useContext(ArticlesContext);
+  const { closeModal } = useModalProps();
   
   return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
     
-    dispatchAppState({ type: "CLOSE_MODAL" });
+    closeModal()
     dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
     
     const params: T_articles_get = {

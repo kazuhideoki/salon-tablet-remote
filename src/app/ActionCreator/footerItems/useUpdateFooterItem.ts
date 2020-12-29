@@ -5,17 +5,19 @@ import { TCreateFooterItem, generateFooterItemEdittingParams } from "./useCreate
 import { T_footer_items_update, apiFooterItemsUpdate } from "../../../pages/api/footer_items/update";
 import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
 
 export type TUpdateFooterItem = TCreateFooterItem;
 
 export const useUpdateFooterItem = () => {
   const { dispatchAppState, appState } = React.useContext(AppStateContext);
   const { footerItems } = React.useContext(FooterItemsContext);
+  const { closeModal } = useModalProps();
   const getFooterItems = useGetFooterItems();
 
   return async (param: TUpdateFooterItem) => {
 
-    dispatchAppState({ type: "CLOSE_MODAL" });
+    closeModal()
     dispatchAppState({ type: "ON_IS_LOADING_FOOTER" });
 
     const params: T_footer_items_update = {
@@ -32,7 +34,7 @@ export const useUpdateFooterItem = () => {
       alert("更新できませんでした");
       dispatchAppState({ type: "OFF_IS_LOADING_FOOTER" });
     } else {
-      dispatchAppState({ type: "CLOSE_MODAL" });
+      closeModal()
 
       getFooterItems();
     }

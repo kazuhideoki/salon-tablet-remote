@@ -1,21 +1,21 @@
 import React from 'react'
 import { Typography, makeStyles, createStyles, Theme, CardActionArea } from '@material-ui/core'
 import { EditButtonsBox } from '../../../../pureComponents/buttons/EditButtonsBox';
-import { useHandleOnClick } from '../context/useHandleOnClick';
 import { useStateInfoBar } from '../context/useStateInfoBar';
+import { useDrawerProps } from '../../Drawer/Drawer/view/Drawer';
 
 const useInfoBarProps = () => {
 
   const { dispatchAppState, isSetting, infoBar, targetArticle, shop_name } = useStateInfoBar()
 
-  const handleOnClick = useHandleOnClick()
+  const { openModal } = useDrawerProps()
 
   return {
     dispatchAppState,
     isSetting,
     infoBar,
     targetArticle,
-    handleOnClick,
+    openModal,
     shop_name,
   };
 }
@@ -140,7 +140,12 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
          return (
            <div className={`${classes.root} ${props.className}`}>
              {props.isSetting ? (
-               <EditButtonsBox className={classes.editButtonsBox} show={true} update updateProps={{onClick: props.handleOnClick}}/>
+               <EditButtonsBox
+                 className={classes.editButtonsBox}
+                 show={true}
+                 update
+                 updateProps={{ onClick: props.openModal("edit_info_bar") }}
+               />
              ) : null}
              {displayInfoBar}
            </div>

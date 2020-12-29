@@ -26,10 +26,9 @@ import { GoogleSearch } from "../../Modals/GoogleSearch/view/GoogleSearch";
 import { PageNotEmailVerified } from "../../../../../../pageComponent/PageNotEmailVerified";
 import { switchingTransition } from "../context/switchingTransition";
 import { useCloseModal } from "../context/useCloseModal";
-import { useOpenModal } from "../context/useOpenModal";
 import { useStateModal } from "../context/useStateModal";
 
-const useModalProps = () => {
+export const useModalProps = () => {
   const {
     modalSize,
     setModal,
@@ -38,8 +37,6 @@ const useModalProps = () => {
     selected_theme,
     edittingPrams,
   } = useStateModal()
-
-  const openModal = useOpenModal()
 
   const closeModal = useCloseModal()
 
@@ -50,7 +47,6 @@ const useModalProps = () => {
     modalSize,
     setModal,
     isModalOpen,
-    openModal,
     currentModalContent,
     closeModal,
     duration,

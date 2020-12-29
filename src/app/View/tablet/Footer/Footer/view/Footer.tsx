@@ -15,17 +15,19 @@ import { showDataType } from "../../../Main/components/showDataType";
 import { useIsMobile } from "../../../../../../lib/useIsMobile";
 import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
 import { useStateFooter } from "../context/useStateFooter";
+import { useHandleOnUpDateFooterIcon } from "../context/useHandleOnUpDateFooterIcon";
 
 export const useFooterProps = () => {
   const {
     footerItems,
     loading,
     isSetting,
-    handleOnUpDateFooterIcon,
     openFooterItemModal,
   } = useStateFooter();
   
   const isMobile = useIsMobile();
+
+  const handleOnUpDateFooterIcon = useHandleOnUpDateFooterIcon();
 
   const deleteFooterItem = useDeleteFooterItem();
   

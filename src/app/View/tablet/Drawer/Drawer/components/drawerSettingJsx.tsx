@@ -35,15 +35,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    )} */}
                    <ListItemText primary="アイテム作成" />
                  </ListItem>
-                 <ListItem
-                   button
-                   onClick={() =>
-                     props.dispatchAppState({
-                       type: "OPEN_MODAL",
-                       payload: "edit_tags",
-                     })
-                   }
-                 >
+                 <ListItem button onClick={() => props.openModal("edit_tags")}>
                    <ListItemIcon>
                      <TagsButton />
                    </ListItemIcon>
@@ -52,12 +44,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                  </ListItem>
                  <ListItem
                    button
-                   onClick={() =>
-                     props.dispatchAppState({
-                       type: "OPEN_MODAL",
-                       payload: "manage_instagram",
-                     })
-                   }
+                   onClick={() => props.openModal("manage_instagram")}
                  >
                    <ListItemIcon>
                      <Instagram />
@@ -66,12 +53,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                  </ListItem>
                  <ListItem
                    button
-                   onClick={() =>
-                     props.dispatchAppState({
-                       type: "OPEN_MODAL",
-                       payload: "setting_theme",
-                     })
-                   }
+                   onClick={() => props.openModal("setting_theme")}
                  >
                    <ListItemIcon>
                      <Wallpaper />
@@ -80,12 +62,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                  </ListItem>
                  <ListItem
                    button
-                   onClick={() =>
-                     props.dispatchAppState({
-                       type: "OPEN_MODAL",
-                       payload: "setting_user_info",
-                     })
-                   }
+                   onClick={() => props.openModal("setting_user_info")}
                  >
                    <ListItemIcon>
                      <Settings />
@@ -94,12 +71,7 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                  </ListItem>
                  <ListItem
                    button
-                   onClick={() =>
-                     props.dispatchAppState({
-                       type: "OPEN_MODAL",
-                       payload: "feedback_form",
-                     })
-                   }
+                   onClick={() => props.openModal("feedback_form")}
                  >
                    <ListItemIcon>
                      <Feedback />

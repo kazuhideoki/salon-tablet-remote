@@ -9,6 +9,7 @@ import { T_auth_get_session_return } from "../../pages/api/auth/get_session";
 import { UserInfoContext } from "../Store/userInfo/Context";
 import { AppStateContext } from "../Store/appState/Context";
 import { StoreContextProvider } from "../Store/Store";
+import { useDrawerProps } from "./tablet/Drawer/Drawer/view/Drawer";
 
 type TAppViewProps = {
   device: any,
@@ -18,11 +19,12 @@ type TAppViewProps = {
 const AppView = ({device, session}: TAppViewProps) => {
   const isMobile = useIsMobile();
   const { dispatchAppState, appState } = React.useContext(AppStateContext);
+  const { openModal } = useDrawerProps()
   const { userInfo } = React.useContext(UserInfoContext);
 
   React.useEffect(function settingPassword() {
     if (session.emailVerified === false) {
-      dispatchAppState({ type: "OPEN_MODAL", payload: "popup_not_email_verified" });
+      openModal("popup_not_email_verified");
     }
   }, []);
   React.useEffect(
