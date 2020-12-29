@@ -8,6 +8,7 @@ import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";
 import { T_footer_items_create, apiFooterItemsCreate } from "../../../pages/api/footer_items/create";
 import { FooterItemsContext } from "../../Store/footerItems/Context";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export type TFooterItemEdittingParams = {
   titleText: string;
@@ -61,7 +62,8 @@ export const generateFooterItemEdittingParams = (param: TFooterItemEdittingParam
 }
 
 export const useCreateFooterItem = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
   const { footerItems } = React.useContext(FooterItemsContext);
   const getFooterItems = useGetFooterItems();
 
@@ -73,7 +75,7 @@ export const useCreateFooterItem = () => {
     const params: T_footer_items_create = {
       ...generateFooterItemEdittingParams(param, footerItems),
       is_published: param.is_published,
-      user_id: appState.userInfo.user_id,
+      user_id: userInfo.user_id,
     };
 
     const data = await apiFooterItemsCreate(params)

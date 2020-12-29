@@ -1,13 +1,11 @@
 import React from "react";
-import { TWhichFont } from "../../../../../../pages/api/user_info/theme/font";
 import { useChangeThemeFont } from "../../../../../ActionCreator/user/useChangeThemeFont";
-import { Store } from "../../../../../Store/Store";
 import { TFont1, TFont2 } from "../../../../../Store/themes/fonts";
-import { T_theme_font } from "../../../../../Store/Types";
+import { UserInfoContext } from "../../../../../Store/userInfo/Context";
 
 export const useHandleChangeThemeFont1 = () => {
-  const { appState } = React.useContext(Store);
-  const [font1, setFont1] = React.useState(appState.userInfo.theme_font1);
+  const { userInfo } = React.useContext(UserInfoContext);
+  const [font1, setFont1] = React.useState(userInfo.theme_font1);
   const changeThemeFont = useChangeThemeFont();
 
   const handleChangeThemeFont1 = async (
@@ -26,8 +24,8 @@ export const useHandleChangeThemeFont1 = () => {
 };
 
 export const useHandleChangeThemeFont2 = () => {
-  const { appState } = React.useContext(Store);
-  const [font2, setFont2] = React.useState(appState.userInfo.theme_font2);
+  const { userInfo } = React.useContext(UserInfoContext);
+  const [font2, setFont2] = React.useState(userInfo.theme_font2);
   const changeThemeFont = useChangeThemeFont();
 
   const handleChangeThemeFont2 = async (
@@ -45,9 +43,9 @@ export const useHandleChangeThemeFont2 = () => {
   return { font2, handleChangeThemeFont2 };
 };
 export const useHandleChangeThemeFontHeading = () => {
-  const { appState } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
   const [fontHeading, setFontHeading] = React.useState(
-    appState.userInfo.theme_font_heading
+    userInfo.theme_font_heading
   );
   const changeThemeFont = useChangeThemeFont();
 

@@ -1,14 +1,12 @@
 import React from "react";
-import {
-  Store,
-} from "../../Store/Store";
 import { apiUserInfoDelete } from "../../../pages/api/user_info/delete";
 import { useAuth } from "../../../lib/auth/AuthProvider";
 import { deleteUserInFirebase } from "../../../lib/auth/deleteUserInFirebase";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export const useDeleteUser = () => {
-  const { appState } = React.useContext(Store);
-  const { user_email, user_id } = appState.userInfo;
+  const { userInfo } = React.useContext(UserInfoContext);
+  const { user_email, user_id } = userInfo;
   const { signout } = useAuth()
 
   return async (email: string): Promise<void> => {

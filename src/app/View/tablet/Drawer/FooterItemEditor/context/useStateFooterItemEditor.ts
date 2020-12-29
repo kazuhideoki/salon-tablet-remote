@@ -1,11 +1,13 @@
 import React from 'react'
 import { selectedIconReducer } from '../../../../../Reducer/selectedIconReducer';
 import { Store } from '../../../../../Store/Store';
+import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 import { IconsSetting } from '../components/iconSelect/icons';
 
 export const useStateFooterItemEditor = () => {
+  const { userInfo } = React.useContext(UserInfoContext);
+  const { is_admin } = userInfo
   const { appState } = React.useContext(Store);
-  const { is_admin } = appState.userInfo
   const {
     modalSize,
     isModalSizeChanged,
@@ -13,6 +15,7 @@ export const useStateFooterItemEditor = () => {
     isEditting,
     footerItem,
   } = appState.edittingPrams;
+  
   const [titleText, setTitleText] = React.useState(
     isEditting || isModalSizeChanged ? footerItem.icon_name : ""
   );

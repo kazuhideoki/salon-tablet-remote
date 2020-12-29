@@ -5,10 +5,12 @@ import {
 } from "../../Store/Types";
 import { apiUserInfoChangeTheme, T_user_info_change_theme } from "../../../pages/api/user_info/theme/change_theme";
 import { generateDefaultParamsFromTheme } from "../../Store/themes/paramsFromTheme";
+import { UserInfoContext } from "../../Store/userInfo/Context";
+import { setTheme } from "../../Store/userInfo/actions";
 
 export const useChangeTheme = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const { user_id } = appState.userInfo;
+  const { dispatchUserInfo, userInfo } = React.useContext(UserInfoContext);
+  const { user_id } = userInfo;
   
   return async (selectedTheme: T_selected_theme) => {
 
@@ -24,11 +26,7 @@ export const useChangeTheme = () => {
     if (data.err === true) {
       alert("変更できませんでした");
     } else {
-      dispatchAppState({
-        // SET_THEMEではparamが増える度に更新の必要あり
-        type: "SET_THEME",
-        payload: { themeParams: themeParams },
-      });
+      dispatchUserInfo(setTheme(themeParams));
      
     }
   };

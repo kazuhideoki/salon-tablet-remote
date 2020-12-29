@@ -6,12 +6,13 @@ import { T_articles_get, apiArticlesGet, T_articles_get_return } from "../../../
 import { ArticlesContext } from "../../../Store/articles/Context";
 import { set } from "../../../Store/articles/actions";
 import { TApiResponse } from "../../../../lib/apiTypes";
+import { UserInfoContext } from "../../../Store/userInfo/Context";
 
 export const useGetArticles = () => {
   const {
     dispatchAppState,
-    appState,
   } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchArticles } = React.useContext(ArticlesContext);
   
   return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
@@ -23,7 +24,7 @@ export const useGetArticles = () => {
       page,
       selectingTags: selectingTags || [],
       isSetting: isSetting,
-      userId: appState.userInfo.user_id,
+      userId: userInfo.user_id,
     };
 
     const data = await apiArticlesGet(params)

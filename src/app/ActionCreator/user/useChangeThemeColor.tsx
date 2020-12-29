@@ -5,11 +5,13 @@ import {
   T_user_info_theme_color,
 } from "../../../pages/api/user_info/theme/color";
 import { TColor } from "../../View/tablet/Drawer/ManageTheme/view/ManageTheme";
+import { UserInfoContext } from "../../Store/userInfo/Context";
+import { setThemeColor } from "../../Store/userInfo/actions";
 
 
-export const useChangeThemeColor = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const { user_id } = appState.userInfo;
+export const useChangeThemeColor = () => {  
+  const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
+  const { user_id } = userInfo;
 
   return async (color: TColor) => {
 
@@ -23,12 +25,8 @@ export const useChangeThemeColor = () => {
     if (data.err === true) {
       alert("変更できませんでした");
       return false
-    } else {
-      dispatchAppState({
-        // SET_THEMEではparamが増える度に更新の必要あり
-        type: "SET_THEME_COLOR",
-        payload: { themeColor: color.hex },
-      });
+    } else {      
+      dispatchUserInfo(setThemeColor(color.hex));
 
       return true
     }

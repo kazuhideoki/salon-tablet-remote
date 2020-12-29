@@ -6,13 +6,8 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme, T_footer_icon_size } from "./Types";
-import { Store } from "./Store";
-
-import { useIsMobile } from "../../lib/useIsMobile";
-import { themeWhite } from "./themes/themeWhite";
-import { themeNatural } from "./themes/themeNatural";
-import { themeDefault } from "./themes/themeDefault";
 import { switchingTheme } from "./themes/paramsFromTheme";
+import { UserInfoContext } from "./userInfo/Context";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -98,8 +93,9 @@ export type TThemeParams = {
 
 export const ThemeProvider:React.FC<TUserInfo> = (props) => {
 
-    const { appState } = React.useContext(Store);
-    const { selected_theme, theme_color, theme_font1, theme_font2, theme_font_heading, footer_icon_size } = appState.userInfo;
+    const { userInfo } = React.useContext(UserInfoContext);
+    
+    const { selected_theme, theme_color, theme_font1, theme_font2, theme_font_heading, footer_icon_size } = userInfo;
     const params: TThemeParams = {
       selected_theme,
       theme_color,

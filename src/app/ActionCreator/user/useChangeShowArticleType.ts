@@ -5,10 +5,12 @@ import {
   apiUserInfoChangeShowArticleType,
   T_user_info_change_show_article_type,
 } from "../../../pages/api/user_info/change_show_article_type";
+import { UserInfoContext } from "../../Store/userInfo/Context";
+import { setShowArticleType } from "../../Store/userInfo/actions";
 
 export const useChangeShowArticleType = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const { user_id } = appState.userInfo;
+  const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
+  const { user_id } = userInfo;
 
   return async (showArticleType: T_show_article_type) => {
     const params: T_user_info_change_show_article_type = {
@@ -21,10 +23,7 @@ export const useChangeShowArticleType = () => {
     if (data.err === true) {
       alert("変更できませんでした");
     } else {
-      dispatchAppState({
-        type: "SET_SHOW_ARTICLE_TYPE",
-        payload: { showArticleType },
-      });
+      dispatchUserInfo(setShowArticleType(showArticleType));
     }
   };
 };

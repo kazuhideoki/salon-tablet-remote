@@ -5,13 +5,14 @@ import { T_instagram_id, T_instagram_username } from "../../Store/Types";
 import { apiInstagramAccountsReconnectNeeded, T_instagram_accounts_reconnect_needed } from "../../../pages/api/instagram_accounts/reconnect_needed";
 import { InstagramContext } from "../../Store/instagram/Context";
 import { setMedias, setReconnect } from "../../Store/instagram/actions";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export const useGetInstagramMedias = () => {
   const {
     dispatchAppState,
-    appState
   } = React.useContext(Store);
-  const user_id = appState.userInfo.user_id
+  const { userInfo } = React.useContext(UserInfoContext);
+  const user_id = userInfo.user_id
   const { dispatchInstagram } = React.useContext(InstagramContext);
 
 

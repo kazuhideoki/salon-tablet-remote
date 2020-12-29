@@ -7,10 +7,12 @@ import {
   TWhichFont,
 } from "../../../pages/api/user_info/theme/font";
 import { TFont1,TFont2 } from "../../Store/themes/fonts";
+import { UserInfoContext } from "../../Store/userInfo/Context";
+import { setThemeFont1, setThemeFont2, setThemeFontHeading } from "../../Store/userInfo/actions";
 
 export const useChangeThemeFont = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const { user_id } = appState.userInfo;
+  const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
+  const { user_id } = userInfo;
 
   return async (font: TFont1[0] | TFont2[0], whichFont: TWhichFont) => {
     const params: T_user_info_theme_font = {
@@ -26,23 +28,11 @@ export const useChangeThemeFont = () => {
       return false;
     } else {
       if (whichFont === 'theme_font2') {
-        dispatchAppState({
-          // SET_THEMEではparamが増える度に更新の必要あり
-          type: "SET_THEME_FONT2",
-          payload: { themeFont: font },
-        });
+        dispatchUserInfo(setThemeFont2(font));
       } else if (whichFont === 'theme_font1'){
-        dispatchAppState({
-          // SET_THEMEではparamが増える度に更新の必要あり
-          type: "SET_THEME_FONT1",
-          payload: { themeFont: font },
-        });
+        dispatchUserInfo(setThemeFont1(font));
       } else if (whichFont === 'theme_font_heading') {
-        dispatchAppState({
-          // SET_THEMEではparamが増える度に更新の必要あり
-          type: "SET_THEME_FONT_HEADING",
-          payload: { themeFont: font },
-        });
+        dispatchUserInfo(setThemeFontHeading(font));
       }
 
       return true;

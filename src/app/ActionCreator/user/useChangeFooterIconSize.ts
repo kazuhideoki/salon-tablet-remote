@@ -5,10 +5,12 @@ import {
   apiUserInfoChangeFooterIconSize,
   T_user_info_change_footer_icon_size,
 } from "../../../pages/api/user_info/change_footer_icon_size";
+import { UserInfoContext } from "../../Store/userInfo/Context";
+import { setFooterIconSize } from "../../Store/userInfo/actions";
 
 export const useChangeFooterIconSize = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
-  const { user_id } = appState.userInfo;
+  const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
+  const { user_id } = userInfo;
 
   return async (footerIconSize: T_footer_icon_size) => {
     const params: T_user_info_change_footer_icon_size = {
@@ -22,10 +24,7 @@ export const useChangeFooterIconSize = () => {
       alert("変更できませんでした");
       return false
     } else {
-      dispatchAppState({
-        type: "SET_FOOTER_ICON_SIZE",
-        payload: { footerIconSize },
-      });
+      dispatchUserInfo(setFooterIconSize(footerIconSize));
       return true
     }
   };

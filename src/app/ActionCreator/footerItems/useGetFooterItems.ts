@@ -5,9 +5,11 @@ import {
 import { apiFooterItemsGet } from "../../../pages/api/footer_items/get";
 import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { set } from "../../Store/footerItems/actions";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export const useGetFooterItems = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchFooterItems } = React.useContext(FooterItemsContext);
 
 
@@ -15,7 +17,7 @@ export const useGetFooterItems = () => {
 
     dispatchAppState({type: "ON_IS_LOADING_FOOTER"})
 
-    const data = await apiFooterItemsGet(appState.userInfo.user_id);
+    const data = await apiFooterItemsGet(userInfo.user_id);
 
     if (data.err === true) {
       alert("取得できませんでした");

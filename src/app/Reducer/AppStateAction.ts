@@ -60,55 +60,10 @@ export type AppStateAction =
     }
   | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {
-      type: "SET_USER_INFO";
-      payload: T_user_info_update;
+      type: "SET_USER_INFO"
+      // payload: T_user_info_update;
     }
-  | {
-      type: "SET_THEME";
-      payload: {
-        themeParams: TThemeParams;
-      };
-    }
-  | {
-      type: "SET_THEME_COLOR";
-      payload: {
-        themeColor: T_theme_color;
-      };
-    }
-  | {
-      type: "SET_THEME_FONT1";
-      payload: {
-        themeFont: T_theme_font;
-      };
-    }
-  | {
-      type: "SET_THEME_FONT2";
-      payload: {
-        themeFont: T_theme_font;
-      };
-    }
-  | {
-      type: "SET_THEME_FONT_HEADING";
-      payload: {
-        themeFont: T_theme_font;
-      };
-    }
-  | {
-      type: "SET_FOOTER_ICON_SIZE";
-      payload: {
-        footerIconSize: T_footer_icon_size;
-      };
-    }
-  | {
-      type: "SET_SHOW_ARTICLE_TYPE";
-      payload: {
-        showArticleType: T_show_article_type;
-      };
-    }
-  | {
-      type: "SET_IS_GENERATE_PUBLIC_PAGE";
-      payload: T_user_info_switch_generate_public_page_return;
-    }
+
   | {
       type: "SET_ARTICLES";
       payload: {

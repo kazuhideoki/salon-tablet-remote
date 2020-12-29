@@ -3,6 +3,7 @@ import { useGetArticles } from "./useGetArticles/useGetArticles";
 import { Store } from "../../Store/Store";
 import { T_articles_create, apiArticlesCreate } from "../../../pages/api/articles/create";
 import { T_data_type_article } from "../../Store/Types";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export type TCreateArticle = {
   is_published: boolean
@@ -18,6 +19,7 @@ export const useCreateArticle =  () => {
   const { dispatchAppState, appState } = React.useContext(
     Store
   );
+  const { userInfo } = React.useContext(UserInfoContext);
   
   return async ( param: TCreateArticle) => {
 
@@ -34,7 +36,7 @@ export const useCreateArticle =  () => {
       ? JSON.stringify(param.selectedTags)
       : null,
       data_type: param.dataType,
-      user_id: appState.userInfo.user_id,
+      user_id: userInfo.user_id,
     };
 
     const data = await apiArticlesCreate(params)

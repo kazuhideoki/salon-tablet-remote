@@ -254,85 +254,11 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           isModalOpen: false,
-          userInfo: { ...state.userInfo, ...action.payload },
+          // userInfo: { ...state.userInfo, ...action.payload },
         };
         break;
-      case "SET_THEME":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            selected_theme: action.payload.themeParams.selected_theme,
-            theme_color: action.payload.themeParams.theme_color,
-            theme_font1: action.payload.themeParams.theme_font1,
-            theme_font2: action.payload.themeParams.theme_font2,
-            theme_font_heading: action.payload.themeParams.theme_font_heading,
-          },
-        };
-        break;
-      case "SET_THEME_COLOR":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            theme_color: action.payload.themeColor,
-          },
-        };
-        break;
-      case "SET_THEME_FONT1":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            theme_font1: action.payload.themeFont,
-          },
-        };
-        break;
-      case "SET_THEME_FONT2":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            theme_font2: action.payload.themeFont,
-          },
-        };
-        break;
-      case "SET_THEME_FONT_HEADING":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            theme_font_heading: action.payload.themeFont,
-          },
-        };
-        break;
-      case "SET_FOOTER_ICON_SIZE":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            footer_icon_size: action.payload.footerIconSize,
-          },
-        };
-        break;
-      case "SET_SHOW_ARTICLE_TYPE":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            show_article_type: action.payload.showArticleType,
-          },
-        };
-        break;
-      case "SET_IS_GENERATE_PUBLIC_PAGE":
-        newState = {
-          ...state,
-          userInfo: {
-            ...state.userInfo,
-            is_generate_public_page: action.payload.is_generate_public_page,
-          },
-        };
-        break;
+    
+
       case "SET_ARTICLES":
         const isShowInstagram =
           action.payload.showArticles === true ? false : state.isShowInstagram;

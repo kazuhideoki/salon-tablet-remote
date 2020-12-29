@@ -4,14 +4,16 @@ import { apiInfoBarGet } from "../../../pages/api/info_bar/get";
 import { TInfoBarData } from "../../Store/Types";
 import { InfoBarContext } from "../../Store/infoBar/Context";
 import { set } from "../../Store/infoBar/actions";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export const useGetInfoBar = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchInfoBar } = React.useContext(InfoBarContext)
 
   return async () => {
 
-    const data = await apiInfoBarGet(appState.userInfo.user_id);
+    const data = await apiInfoBarGet(userInfo.user_id);
 
     if (data.err === true) {
       alert("取得できませんでした");

@@ -290,7 +290,7 @@ export const initAppState = (data: TStoreProps) => ({
            manageInstagramAccounts: false,
          },
 
-         userInfo: data.userInfo,
+        //  userInfo: data.userInfo,
         //  articles: data.articles,
         //  allArticles: data.allArticles,
         //  paginationParams: data.pagination,

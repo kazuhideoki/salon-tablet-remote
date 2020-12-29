@@ -5,10 +5,12 @@ import {
 } from "../../Store/Types";
 import { useGetTags } from "./useGetTags";
 import { T_tags_delete, apiTagsDelete } from "../../../pages/api/tags/delete";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export const useDeleteTag = () => {
-  const { appState, dispatchAppState } = React.useContext(Store);
-  const { user_id } = appState.userInfo;
+  const { dispatchAppState } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
+  const { user_id } = userInfo;
   const getTags = useGetTags()
 
 

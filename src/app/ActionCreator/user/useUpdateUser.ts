@@ -3,6 +3,8 @@ import { Store } from "../../Store/Store";
 import { apiUserInfoUpdate, T_user_info_update } from "../../../pages/api/user_info/update";
 import { updatePassword } from "../../../lib/auth/updatePassword";
 import { useAuth } from "../../../lib/auth/AuthProvider";
+import { UserInfoContext } from "../../Store/userInfo/Context";
+import { update } from "../../Store/userInfo/actions";
 
 export type TUpdateUser = {
   name: string
@@ -17,7 +19,8 @@ export const useUpdateUser = () => {
     dispatchAppState,
     appState,
   } = React.useContext(Store);
-  const { user_id } = appState.userInfo
+  const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
+  const { user_id } = userInfo
   const {user} = useAuth()
 
   return async (param: TUpdateUser) => {
@@ -34,12 +37,13 @@ export const useUpdateUser = () => {
       const data = await apiUserInfoUpdate(params);
       
       // パスワード変更 firebaseで ここ
-      await updatePassword({password: param.password, user})
+      if (param.password.length) await updatePassword({password: param.password, user})
       
       dispatchAppState({
         type: "SET_USER_INFO",
-        payload: params,
       });
+      dispatchUserInfo(update(params))
+
       alert("ユーザーデータを更新しました。");
   
     } catch (err) {

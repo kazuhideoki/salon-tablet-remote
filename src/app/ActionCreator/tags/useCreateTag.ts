@@ -3,9 +3,11 @@ import React from "react";
 import { Store } from "../../Store/Store";
 import { T_tags_create, apiTagsCreate } from "../../../pages/api/tags/create";
 import { useGetTags } from "./useGetTags";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 export const useCreateTag = () => {
-  const { appState, dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
   const getTags = useGetTags()
 
   return async (tagName: string) => {
@@ -13,7 +15,7 @@ export const useCreateTag = () => {
     dispatchAppState({ type: "ON_IS_LOADING_TAGS" });
 
     const params: T_tags_create = {
-      user_id: appState.userInfo.user_id,
+      user_id: userInfo.user_id,
       tag_name: tagName,
     };
     
