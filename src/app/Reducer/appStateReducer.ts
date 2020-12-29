@@ -9,14 +9,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-      case "OPEN_DRAWER":
-        newState = {
-          ...state,
-          isDrawerOpen: true,
-          isModalOpen: false,
-        };
-        break;
-
       case "CLOSE_DRAWER":
         newState = {
           ...state,

@@ -29,6 +29,13 @@ export const appStateReducer = (
         },
       };
       break;
+    case types.OPEN_DRAWER:
+      newState = {
+        ...state,
+        isDrawerOpen: true,
+        isModalOpen: false,
+      };
+      break;
   }
 
   reducerLogger({ state, newState, func, action });
