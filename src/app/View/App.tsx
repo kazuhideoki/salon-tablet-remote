@@ -1,14 +1,14 @@
 import React from "react";
 import { Modal } from "./tablet/Modal/Modal/view/Modal";
-import { Store } from "../Store/Store";
 import { ThemeProvider } from "../Store/ThemeContext";
-import { StoreContextProvider } from "../Store/Store";
 import { AppMobile } from "./mobile/AppMobile";
 import { AppTablet } from "./tablet/AppTablet";
 import { useIsMobile } from "../../lib/useIsMobile";
 import { IndexProps } from "../../pages";
 import { T_auth_get_session_return } from "../../pages/api/auth/get_session";
 import { UserInfoContext } from "../Store/userInfo/Context";
+import { AppStateContext } from "../Store/appState/Context";
+import { StoreContextProvider } from "../Store/Store";
 
 type TAppViewProps = {
   device: any,
@@ -17,7 +17,7 @@ type TAppViewProps = {
 
 const AppView = ({device, session}: TAppViewProps) => {
   const isMobile = useIsMobile();
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState, appState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
 
   React.useEffect(function settingPassword() {

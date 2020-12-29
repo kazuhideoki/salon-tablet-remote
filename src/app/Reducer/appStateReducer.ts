@@ -9,12 +9,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-      case "SELECT_DEVICE":
-        newState = {
-          ...state,
-          selectedDevice: action.payload,
-        };
-        break;
       case "OPEN_MODAL":
         newState = {
           ...state,
@@ -254,7 +248,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         newState = {
           ...state,
           isModalOpen: false,
-          // userInfo: { ...state.userInfo, ...action.payload },
         };
         break;
     
@@ -266,9 +259,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           ...state,
           selectedArticlesTags: action.payload.selectedArticlesTags,
           isSetting: action.payload.isSetting,
-          // articles: action.payload.data.rawData,
-          // allArticles: action.payload.data.allArticles,
-          // paginationParams: action.payload.data.pagination,
           isShowInstagram: isShowInstagram,
           loading: {
             ...state.loading,
@@ -279,7 +269,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "SET_FOOTER_ITEMS":
         newState = {
           ...state,
-          // footerItems: action.payload,
           loading: {
             ...state.loading,
             footer: false,
@@ -297,16 +286,9 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      // case "SET_INFO_BAR":
-      //   newState = {
-      //     ...state,
-      //     infoBarData: action.payload,
-      //   };
-      //   break;
       case "SET_TAGS":
         newState = {
           ...state,
-          // tags: action.payload,
           loading: {
             ...state.loading,
             manageTags: false,
@@ -316,32 +298,18 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "SET_INSTAGRAM_ACCOUNTS":
         newState = {
           ...state,
-          // instagramAccounts: action.payload,
           loading: {
             ...state.loading,
             manageInstagramAccounts: false,
           },
         };
         break;
-      // case "SET_INSTAGRAM_RECONNECT_NEEDED":
-      //   const instagramAccounts = state.instagramAccounts.map((value) => {
-      //     if (value.instagram_id === action.payload.instagram_id) {
-      //       value.is_reconnect_needed = action.payload.is_reconnect_needed
-      //     }
-      //     return value
-      //   })
-      //   newState = {
-      //     ...state,
-      //     instagramAccounts: instagramAccounts,
-      //   };
-      //   break;
       case "SET_INSTAGRAM_MEDIAS":
         newState = {
           ...state,
           isShowInstagram: true,
           selectedInstagramAccount: action.payload.selectedInstagramAccount,
           selectedArticlesTags: [],
-          // instagramMedias: action.payload.data,
           loading: {
             ...state.loading,
             main: false,
@@ -351,7 +319,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
       case "DELETE_INSTAGRAM_MEDIAS":
         newState = {
           ...state,
-          // instagramMedias: initInstagramMedias,
           isShowInstagram: false,
         };
         break;

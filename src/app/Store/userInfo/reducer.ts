@@ -1,5 +1,5 @@
 import { reducerLogger } from "../../Reducer/reducerLogger";
-import { TUserInfo, T_theme_font } from "../Types";
+import { TUserInfo } from "../Types";
 import { TUserInfoAction } from "./actions";
 import * as types from "./types";
 

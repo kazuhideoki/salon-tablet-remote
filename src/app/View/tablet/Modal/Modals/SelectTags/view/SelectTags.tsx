@@ -1,6 +1,4 @@
 import React from 'react'
-import { Store } from "../../../../../../Store/Store";
-import { T_tag_id } from '../../../../../../Store/Types';
 import {
   Chip,
   Typography,
@@ -9,7 +7,6 @@ import {
   createStyles,
   Button,
 } from "@material-ui/core";
-import { useGetArticles } from '../../../../../../ActionCreator/articles/useGetArticles/useGetArticles';
 import { useHandleGetArticle } from '../context/useHandleGetArticle';
 import { useHandleSelectTag } from '../context/useHandleSelectTag';
 import { useStateSelectTags } from '../context/useStateSelectTags';

@@ -12,7 +12,6 @@ import { Divider, Switch, FormControlLabel, FormGroup } from "@material-ui/core"
 import {
   TUpdateUser,
 } from "../../../../../ActionCreator/user/useUpdateUser";
-import { Store } from "../../../../../Store/Store";
 import { QrPopover } from "../components/QrPopover";
 import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
 import { useGoogleSearchProps } from "../../../Modal/Modals/GoogleSearch/view/GoogleSearch";

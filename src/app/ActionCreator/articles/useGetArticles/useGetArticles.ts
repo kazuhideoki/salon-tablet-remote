@@ -1,17 +1,14 @@
 import React from "react";
-import {
-  Store,
-} from "../../../Store/Store";
 import { T_articles_get, apiArticlesGet, T_articles_get_return } from "../../../../pages/api/articles/get";
 import { ArticlesContext } from "../../../Store/articles/Context";
 import { set } from "../../../Store/articles/actions";
-import { TApiResponse } from "../../../../lib/apiTypes";
 import { UserInfoContext } from "../../../Store/userInfo/Context";
+import { AppStateContext } from "../../../Store/appState/Context";
 
 export const useGetArticles = () => {
   const {
     dispatchAppState,
-  } = React.useContext(Store);
+  } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchArticles } = React.useContext(ArticlesContext);
   

@@ -2,11 +2,11 @@ import React from "react";
 
 import { useGetTags } from "./useGetTags";
 import { T_tags_update, apiTagsUpdata } from "../../../pages/api/tags/update";
-import { Store } from "../../Store/Store";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useUpdateTag = () => {
 
-  const { dispatchAppState } = React.useContext(Store)
+  const { dispatchAppState } = React.useContext(AppStateContext)
   const getTags = useGetTags();
 
   return async ({edittingTagId, tagName}) => {

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
+import { AppStateContext } from '../../../../../Store/appState/Context';
 export const useHandleDrawerCloseKeepIsSetting = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(AppStateContext);
   return () => {
     dispatchAppState({ type: "CLOSE_DRAWER" }); 
   };

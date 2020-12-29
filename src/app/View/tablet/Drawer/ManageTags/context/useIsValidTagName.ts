@@ -1,8 +1,6 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
 import { TagsContext } from '../../../../../Store/tags/Context';
 export const useIsValidTagName = (tagNameField: string) => {
-  const { appState } = React.useContext(Store);
   const { tags } = React.useContext(TagsContext);
 
   return () => {

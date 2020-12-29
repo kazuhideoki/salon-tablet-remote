@@ -3,13 +3,13 @@ import {
   T_article_id,
 } from "../../Store/Types";
 import { useGetArticles } from "./useGetArticles/useGetArticles";
-import { Store } from "../../Store/Store";
 import { apiArticlesDelete } from "../../../pages/api/articles/delete";
 import { ArticlesContext } from "../../Store/articles/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();
-  const { appState ,dispatchAppState } = React.useContext(Store);
+  const { appState ,dispatchAppState } = React.useContext(AppStateContext);
   const { paginationParams} = React.useContext(ArticlesContext)
   const { articles } = React.useContext(ArticlesContext)
   

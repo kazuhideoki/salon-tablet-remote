@@ -1,9 +1,9 @@
 import React from 'react'
+import { AppStateContext } from '../../../../Store/appState/Context';
 import { InstagramContext } from '../../../../Store/instagram/Context';
-import { Store } from '../../../../Store/Store';
 
 export const useOpenInstagramModal = () => {
-  const { dispatchAppState} = React.useContext(Store)
+  const { dispatchAppState } = React.useContext(AppStateContext)
   const { instagramMedias } = React.useContext(InstagramContext);
 
   

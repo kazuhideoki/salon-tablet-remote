@@ -1,9 +1,9 @@
 import React from "react";
 import { useGetArticles } from "./useGetArticles/useGetArticles";
-import { Store } from "../../Store/Store";
 import { T_articles_create, apiArticlesCreate } from "../../../pages/api/articles/create";
 import { T_data_type_article } from "../../Store/Types";
 import { UserInfoContext } from "../../Store/userInfo/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export type TCreateArticle = {
   is_published: boolean
@@ -17,7 +17,7 @@ export type TCreateArticle = {
 export const useCreateArticle =  () => {
   const getArticles = useGetArticles();
   const { dispatchAppState, appState } = React.useContext(
-    Store
+    AppStateContext
   );
   const { userInfo } = React.useContext(UserInfoContext);
   

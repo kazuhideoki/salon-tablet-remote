@@ -8,11 +8,11 @@ import {
 } from "@material-ui/core";
 import { Main } from "./Main/view/Main";
 import { Footer } from "./Footer/Footer/view/Footer";
-import { Store } from "../../Store/Store";
 import { ThemeContext } from "../../Store/ThemeContext";
 import { Drawer } from "./Drawer/Drawer/view/Drawer";
 import dynamic from "next/dynamic";
 import { PaginationBar } from "./Footer/PaginationBar/view/PaginationBar";
+import { AppStateContext, AppStateContextProvider } from "../../Store/appState/Context";
 const InfoBar = dynamic(() => import("./InfoBar/view/InfoBar"), {
   ssr: false,
 });
@@ -22,8 +22,6 @@ const InfoBar = dynamic(() => import("./InfoBar/view/InfoBar"), {
 
 const useStyles = makeStyles((theme: Theme) => {
   const themes = React.useContext(ThemeContext);
-
-  // const margin = theme.spacing(1);
 
   return createStyles({
     root: {
@@ -104,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const AppTablet = () => {
   // スタイルを反映させたclassNameを出力
   const classes = useStyles();
-  const { appState } = React.useContext(Store);
+  const { appState } = React.useContext(AppStateContext);
   const open = appState.isDrawerOpen;
 
   return (

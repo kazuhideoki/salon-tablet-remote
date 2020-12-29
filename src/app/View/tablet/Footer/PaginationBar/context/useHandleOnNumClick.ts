@@ -1,9 +1,9 @@
 import React from 'react'
 import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles/useGetArticles";
-import { Store } from '../../../../../Store/Store';
+import { AppStateContext } from '../../../../../Store/appState/Context';
 
 export const useHandleOnNumClick = () => {
-  const { appState } = React.useContext(Store);
+  const { appState } = React.useContext(AppStateContext);
   const { isSetting } = appState
 
   const getArticles = useGetArticles();

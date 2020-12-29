@@ -1,7 +1,4 @@
-import React, { useReducer } from "react";
-import { appStateReducer } from "../Reducer/appStateReducer";
-import { TAppState, initAppState } from "./Types";
-import { AppStateAction } from "../Reducer/AppStateAction";
+import React from "react";
 import { IndexPropsData } from "../../pages";
 import { ArticlesContextProvider } from "./articles/Context";
 import { FooterItemsContextProvider } from "./footerItems/Context";
@@ -9,28 +6,14 @@ import { TagsContextProvider } from "./tags/Context";
 import { InfoBarContextProvider } from "./infoBar/Context";
 import { InstagramContextProvider } from "./instagram/Context";
 import { UserInfoContextProvider } from "./userInfo/Context";
-
-export type ContextProps = {
-  appState: TAppState;
-  dispatchAppState: React.Dispatch<AppStateAction>;
-};
-const Store = React.createContext({} as ContextProps);
+import { AppStateContextProvider } from "./appState/Context";
 
 export type TStoreProps = IndexPropsData & {isPublicPage: boolean, device: string, samplePage: string, }
 
-const StoreContextProvider: React.FC<TStoreProps> = (props) => {
-  const [appState, dispatchAppState] = useReducer(
-    appStateReducer,
-    initAppState(props)
-  );
-
-  const values = {
-    appState,
-    dispatchAppState,
-  };
-
+export const StoreContextProvider: React.FC<TStoreProps> = (props) => {
+ 
   return (
-    <Store.Provider value={values}>
+    <AppStateContextProvider {...props}>
       <UserInfoContextProvider userInfo={props.userInfo}>
         <ArticlesContextProvider articles={props.articles} allArticles={props.allArticles} paginationParams={props.pagination}>
           <FooterItemsContextProvider footerItems={props.footerItems}>
@@ -44,10 +27,6 @@ const StoreContextProvider: React.FC<TStoreProps> = (props) => {
           </FooterItemsContextProvider>
         </ArticlesContextProvider>
       </UserInfoContextProvider>
-    </Store.Provider>
+    </AppStateContextProvider>
   );
 };
-
-export { Store, StoreContextProvider };
-
-export default StoreContextProvider;

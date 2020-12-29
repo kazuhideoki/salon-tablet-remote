@@ -1,12 +1,12 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import { apiTagsGet } from "../../../pages/api/tags/get";
 import { TagsContext } from "../../Store/tags/Context";
 import { set } from "../../Store/tags/actions";
 import { UserInfoContext } from "../../Store/userInfo/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useGetTags = () => {
-  const { dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchTags } = React.useContext(TagsContext)
 

@@ -6,8 +6,6 @@ import {
   createStyles,
   withStyles,
 } from "@material-ui/core";
-import { Store } from "../../../../Store/Store";
-import { TArticle } from "../../../../Store/Types";
 import { displayArticlesScrollJsx } from "../components/displayArticlesScrollJsx";
 import { displayArticlesGrid6Jsx } from "../components/displayArticlesGrid6Jsx";
 import { displayInstagramMediasJsx } from "../components/displayInstagramMediasJsx";

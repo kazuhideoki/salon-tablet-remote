@@ -1,5 +1,4 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
 import { TThemeParams } from '../../../../../Store/ThemeContext';
 import { isThemeParamsChanged } from "../../../../../Store/themes/paramsFromTheme";
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';

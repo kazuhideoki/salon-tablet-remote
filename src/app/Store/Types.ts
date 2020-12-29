@@ -250,11 +250,15 @@ export type TSetModal =
   | 'popup_not_email_verified'
 
 export type T_selected_device = 'responsive' | 'mobile' | 'tablet'
-export const initAppState = (data: TStoreProps) => ({
+export const initAppState = (data: {
+         isPublicPage: boolean;
+         device: string;
+         samplePage: string;
+       }) => ({
          isPublicPage: data.isPublicPage,
          uaDevice: data.device,
-        //  ※DBには selected_deviceは入ってない, public_pageからの値。reducerは作ってある
-         selectedDevice: data.samplePage || 'responsive' as T_selected_device,
+         //  ※DBには selected_deviceは入ってない, public_pageからの値。reducerは作ってある
+         selectedDevice: data.samplePage || ("responsive" as T_selected_device),
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,
          setModal: "edit_article" as TSetModal,
@@ -289,16 +293,6 @@ export const initAppState = (data: TStoreProps) => ({
            manageTags: false,
            manageInstagramAccounts: false,
          },
-
-        //  userInfo: data.userInfo,
-        //  articles: data.articles,
-        //  allArticles: data.allArticles,
-        //  paginationParams: data.pagination,
-        //  footerItems: data.footerItems,
-        //  infoBarData: data.infoBarData,
-        //  tags: data.tags,
-        //  instagramAccounts: data.instagramAccounts,
-        //  instagramMedias: initInstagramMedias,
        });
 
 export type TAppState = ReturnType<typeof initAppState> ;

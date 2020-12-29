@@ -1,12 +1,12 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import { T_order, T_footer_item_id } from "../../Store/Types";
 import { apiFooterItemsDelete, T_footer_items_delete } from "../../../pages/api/footer_items/delete";
 import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { set } from "../../Store/footerItems/actions";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useDeleteFooterItem = () => {
-  const { dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { footerItems, dispatchFooterItems } = React.useContext(FooterItemsContext);
 
   return async ({footer_item_id, order}:T_footer_items_delete):Promise<void> => {

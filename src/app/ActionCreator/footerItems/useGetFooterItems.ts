@@ -1,14 +1,12 @@
 import React from "react";
-import {
-  Store,
-} from "../../Store/Store";
 import { apiFooterItemsGet } from "../../../pages/api/footer_items/get";
 import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { set } from "../../Store/footerItems/actions";
 import { UserInfoContext } from "../../Store/userInfo/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useGetFooterItems = () => {
-  const { dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchFooterItems } = React.useContext(FooterItemsContext);
 

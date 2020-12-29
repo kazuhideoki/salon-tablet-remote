@@ -1,6 +1,5 @@
 import React from 'react'
 import { apiUserInfoSwitchGeneratePublicPage } from "../../../../../../pages/api/user_info/switch_generate_public_page";
-import { Store } from "../../../../../Store/Store";
 import { setIsGeneratePublicPage } from '../../../../../Store/userInfo/actions';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 

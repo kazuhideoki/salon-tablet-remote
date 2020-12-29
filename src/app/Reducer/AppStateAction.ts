@@ -8,21 +8,12 @@ import {
   T_footer_item_id,
   T_order,
   T_on_tap,
-  T_selected_device,
-  T_show_article_type,
-  T_theme_color,
-  T_theme_font,
-  T_footer_icon_size,
   TInstagramMedia,
 } from "../Store/Types";
 import { T_articles_get_return } from "../../pages/api/articles/get";
-import { T_user_info_switch_generate_public_page_return } from "../../pages/api/user_info/switch_generate_public_page";
-import { TThemeParams } from "../Store/ThemeContext";
 import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
-import { T_user_info_update } from "../../pages/api/user_info/update";
 
 export type AppStateAction =
-  | { type: "SELECT_DEVICE"; payload: T_selected_device }
   | { type: "OPEN_MODAL"; payload: TSetModal }
   | { type: "CLOSE_MODAL" }
   | { type: "OPEN_DRAWER" }

@@ -1,15 +1,15 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 
 import { useGetFooterItems } from "./useGetFooterItems";
-import { TCreateFooterItem, calcOrder, generateFooterItemEdittingParams } from "./useCreateFooterItem";
+import { TCreateFooterItem, generateFooterItemEdittingParams } from "./useCreateFooterItem";
 import { T_footer_items_update, apiFooterItemsUpdate } from "../../../pages/api/footer_items/update";
 import { FooterItemsContext } from "../../Store/footerItems/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export type TUpdateFooterItem = TCreateFooterItem;
 
 export const useUpdateFooterItem = () => {
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState, appState } = React.useContext(AppStateContext);
   const { footerItems } = React.useContext(FooterItemsContext);
   const getFooterItems = useGetFooterItems();
 

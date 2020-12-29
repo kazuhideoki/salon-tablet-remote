@@ -1,16 +1,16 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import { apiInstagramMediasGet } from "../../../pages/api/instagram_medias/get";
 import { T_instagram_id, T_instagram_username } from "../../Store/Types";
 import { apiInstagramAccountsReconnectNeeded, T_instagram_accounts_reconnect_needed } from "../../../pages/api/instagram_accounts/reconnect_needed";
 import { InstagramContext } from "../../Store/instagram/Context";
 import { setMedias, setReconnect } from "../../Store/instagram/actions";
 import { UserInfoContext } from "../../Store/userInfo/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useGetInstagramMedias = () => {
   const {
     dispatchAppState,
-  } = React.useContext(Store);
+  } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const user_id = userInfo.user_id
   const { dispatchInstagram } = React.useContext(InstagramContext);

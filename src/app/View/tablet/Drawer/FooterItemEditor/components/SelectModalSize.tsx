@@ -4,16 +4,16 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { Store } from "../../../../../Store/Store";
 import { T_modal_size } from "../../../../../Store/Types";
 import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
 import { TUseFooterItemEditorProps } from "../view/FooterItemEditor";
 import { TFooterItemEdittingParams } from "../../../../../ActionCreator/footerItems/useCreateFooterItem";
+import { AppStateContextProvider } from "../../../../../Store/appState/Context";
 
 type Props = TUseFooterItemEditorProps & {className?: string}
 
 export const SelectModalSize:React.FC<Props> = (props) => {
-  const { appState, dispatchAppState} = React.useContext(Store)
+  const { appState, dispatchAppState} = React.useContext(AppStateContextProvider)
 
   
 

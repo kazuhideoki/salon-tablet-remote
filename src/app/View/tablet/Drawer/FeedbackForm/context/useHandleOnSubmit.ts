@@ -1,6 +1,6 @@
 import React from "react";
 import { useSubmitFeedback } from "../../../../../ActionCreator/useSubmitFeedback";
-import { Store } from "../../../../../Store/Store";
+import { AppStateContext } from "../../../../../Store/appState/Context";
 
 type Type = {
   contactFormTitle: string;
@@ -15,7 +15,7 @@ export const useHandleOnSubmit = ({
   contactFormContent,
   setContactFormContent,
 }: Type) => {
-  const { dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(AppStateContext);
 
   const submitFeedback = useSubmitFeedback();
 

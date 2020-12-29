@@ -1,7 +1,7 @@
 import React from 'react'
-import { Store } from '../../../../../../Store/Store';
+import { AppStateContext } from '../../../../../../Store/appState/Context';
 export const useStateInstagramMediaModal = () => {
-  const { appState } = React.useContext(Store);
+  const { appState } = React.useContext(AppStateContext);
   const instagramMedia = appState.currentModalContent.instagramMedia;
 
   return { instagramMedia }

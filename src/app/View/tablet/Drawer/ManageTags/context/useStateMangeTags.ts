@@ -1,9 +1,9 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
+import { AppStateContext } from '../../../../../Store/appState/Context';
 import { TagsContext } from '../../../../../Store/tags/Context';
 
 export const useStateMangeTags = () => {
-  const { appState } = React.useContext(Store);
+  const { appState } = React.useContext(AppStateContext);
   const { loading } = appState;
   const { tags } = React.useContext(TagsContext);
   const [tagNameField, setTagNameField] = React.useState("");

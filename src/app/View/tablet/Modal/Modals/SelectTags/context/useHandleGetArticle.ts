@@ -1,9 +1,9 @@
 import React from 'react'
 import { useGetArticles } from '../../../../../../ActionCreator/articles/useGetArticles/useGetArticles';
-import { Store } from '../../../../../../Store/Store';
+import { AppStateContext } from '../../../../../../Store/appState/Context';
 export const useHandleGetArticle = (selectingTags: number[]
 ) => {
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { dispatchAppState, appState } = React.useContext(AppStateContext);
   const getArticles = useGetArticles()
 
 

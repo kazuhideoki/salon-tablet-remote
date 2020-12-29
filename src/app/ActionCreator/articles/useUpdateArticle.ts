@@ -1,5 +1,4 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import { useGetArticles } from "./useGetArticles/useGetArticles";
 import { TCreateArticle } from "./useCreateArticle";
 import {
@@ -7,6 +6,7 @@ import {
   apiArticlesUpdate,
 } from "../../../pages/api/articles/update";
 import { ArticlesContext } from "../../Store/articles/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export type TUpdateArticle = TCreateArticle;
 
@@ -14,7 +14,7 @@ export const useUpdateArticle = () => {
   const {
     dispatchAppState,
     appState
-  } = React.useContext(Store);
+  } = React.useContext(AppStateContext);
   const { paginationParams } = React.useContext(ArticlesContext)
 
   const getArticles = useGetArticles();

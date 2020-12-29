@@ -1,24 +1,26 @@
+import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { reducerLogger } from "./reducerLogger";
-import { TSelectedIcon } from "../Store/EditorContext";
+
+type Type = [OverridableComponent<SvgIconTypeMap<{}, "svg">>, string]
 
 export const selectedIconReducer = (
-  state: TSelectedIcon,
-  action: {
-    type: "SET_ICON";
-    payload: TSelectedIcon
-  }
-) => {
-  let newState: TSelectedIcon;
-  const func = selectedIconReducer;
-  switch (action.type) {
-    case "SET_ICON":
-      newState = action.payload;
-    break;
+         state: Type,
+         action: {
+           type: "SET_ICON";
+           payload: Type;
+         }
+       ) => {
+         let newState: Type;
+         const func = selectedIconReducer;
+         switch (action.type) {
+           case "SET_ICON":
+             newState = action.payload;
+             break;
 
-    default:
-      console.log("エラー, selectedIconReducer");
-        newState = { ...state };
-  }
-  reducerLogger({ state, newState, func, action });
-  return newState;
-};
+           default:
+             console.log("エラー, selectedIconReducer");
+             newState = { ...state };
+         }
+         reducerLogger({ state, newState, func, action });
+         return newState;
+       };

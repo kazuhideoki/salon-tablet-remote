@@ -1,5 +1,4 @@
 import React from 'react'
-import { Store } from '../../../../../../Store/Store'
 import { makeStyles, createStyles, Typography } from '@material-ui/core'
 import ReactQuill, { Quill }from "react-quill";
 import { useStateContentModal } from '../context/useStateContentModal';

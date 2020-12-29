@@ -1,13 +1,13 @@
 import React from 'react'
 import { selectedIconReducer } from '../../../../../Reducer/selectedIconReducer';
-import { Store } from '../../../../../Store/Store';
+import { AppStateContext } from '../../../../../Store/appState/Context';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 import { IconsSetting } from '../components/iconSelect/icons';
 
 export const useStateFooterItemEditor = () => {
   const { userInfo } = React.useContext(UserInfoContext);
   const { is_admin } = userInfo
-  const { appState } = React.useContext(Store);
+  const { appState } = React.useContext(AppStateContext);
   const {
     modalSize,
     isModalSizeChanged,

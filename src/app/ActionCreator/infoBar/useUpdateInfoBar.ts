@@ -1,5 +1,4 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 
 import { useGetInfoBar } from "./useGetInfoBar";
 import {
@@ -8,6 +7,7 @@ import {
 } from "../../../pages/api/info_bar/update";
 import { T_info_bar_type } from "../../Store/Types";
 import { UserInfoContext } from "../../Store/userInfo/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export type TUseUpdateInfoBar = {
   infoBarType: T_info_bar_type;
@@ -17,7 +17,7 @@ export type TUseUpdateInfoBar = {
 };
 
 export const useUpdateInfoBar = () => {
-  const { dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const getInfoBar = useGetInfoBar();
 

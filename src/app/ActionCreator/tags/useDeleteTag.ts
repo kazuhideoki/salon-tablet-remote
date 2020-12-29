@@ -1,14 +1,14 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import {
   T_tag_id,
 } from "../../Store/Types";
 import { useGetTags } from "./useGetTags";
 import { T_tags_delete, apiTagsDelete } from "../../../pages/api/tags/delete";
 import { UserInfoContext } from "../../Store/userInfo/Context";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useDeleteTag = () => {
-  const { dispatchAppState } = React.useContext(Store);
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
   const getTags = useGetTags()

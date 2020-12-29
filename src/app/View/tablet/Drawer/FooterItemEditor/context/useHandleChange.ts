@@ -1,12 +1,12 @@
 import React from 'react'
 import { TFooterItemEdittingParams } from '../../../../../ActionCreator/footerItems/useCreateFooterItem';
+import { AppStateContext } from '../../../../../Store/appState/Context';
 import { FooterItemsContext } from '../../../../../Store/footerItems/Context';
-import { Store } from '../../../../../Store/Store';
 import { T_modal_size } from '../../../../../Store/Types';
 export const useHandleChange = (
          edittingFooterItemParams: TFooterItemEdittingParams
        ) => {
-         const { dispatchAppState } = React.useContext(Store);
+         const { dispatchAppState } = React.useContext(AppStateContext);
          const { footerItems } = React.useContext(FooterItemsContext)
 
          return (event: React.ChangeEvent<HTMLInputElement>) => {

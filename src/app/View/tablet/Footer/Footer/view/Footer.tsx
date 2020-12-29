@@ -5,7 +5,6 @@ import {
   createStyles,
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store } from "../../../../../Store/Store";
 import {
   FooterItem,
 } from "../../../../../Store/Types";

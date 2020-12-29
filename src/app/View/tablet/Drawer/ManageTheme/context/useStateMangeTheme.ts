@@ -1,5 +1,4 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 
 export const useStateMangeTheme = () => {

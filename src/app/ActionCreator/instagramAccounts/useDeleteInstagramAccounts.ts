@@ -1,13 +1,13 @@
 import React from "react";
 import { T_instagram_id } from "../../Store/Types";
 import { useGetInstagramAccounts } from "./useGetInstagramAccounts";
-import { Store } from "../../Store/Store";
 import { apiInstagramAccountsDelete } from "../../../pages/api/instagram_accounts/delete";
 import { InstagramContext } from "../../Store/instagram/Context";
 import { removeMedias } from "../../Store/instagram/actions";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export const useDeleteInstagramAccount = () => {
-  const { dispatchAppState } = React.useContext(Store)
+  const { dispatchAppState } = React.useContext(AppStateContext)
   const { dispatchInstagram } = React.useContext(InstagramContext);
 
   const getInstagramAccounts = useGetInstagramAccounts();

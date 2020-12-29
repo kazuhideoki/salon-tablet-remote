@@ -1,7 +1,7 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
+import { AppStateContext } from '../../../../../Store/appState/Context';
 export const useCloseModal = () => {
-    const { appState, dispatchAppState } = React.useContext(Store);
+    const { appState, dispatchAppState } = React.useContext(AppStateContext);
     const { setModal } = appState
 
   return () => {

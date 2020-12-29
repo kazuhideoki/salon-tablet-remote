@@ -1,5 +1,4 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import {
   T_modal_size, T_is_published_footer_items, T_on_tap, T_data_type_footer_item, FooterItems,
 } from "../../Store/Types";

@@ -1,10 +1,10 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import { apiUserInfoUpdate, T_user_info_update } from "../../../pages/api/user_info/update";
 import { updatePassword } from "../../../lib/auth/updatePassword";
 import { useAuth } from "../../../lib/auth/AuthProvider";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { update } from "../../Store/userInfo/actions";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export type TUpdateUser = {
   name: string
@@ -18,7 +18,7 @@ export const useUpdateUser = () => {
   const {
     dispatchAppState,
     appState,
-  } = React.useContext(Store);
+  } = React.useContext(AppStateContext);
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo
   const {user} = useAuth()
