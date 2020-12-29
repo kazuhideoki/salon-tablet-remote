@@ -5,10 +5,12 @@ import { apiInstagramAccountsDelete } from "../../../pages/api/instagram_account
 import { InstagramContext } from "../../Store/instagram/Context";
 import { removeMedias } from "../../Store/instagram/actions";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useManageInstagramAccountsProps } from "../../View/tablet/Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
 
 export const useDeleteInstagramAccount = () => {
   const { dispatchAppState } = React.useContext(AppStateContext)
   const { dispatchInstagram } = React.useContext(InstagramContext);
+  const { handleLoadingInstagramAccounts } = useManageInstagramAccountsProps()
 
   const getInstagramAccounts = useGetInstagramAccounts();
   return async (instagram_id: T_instagram_id): Promise<void> => {
@@ -18,13 +20,13 @@ export const useDeleteInstagramAccount = () => {
       return null;
     }
 
-    dispatchAppState({ type: "ON_IS_LOADING_INSTAGRAM_ACCOUNTS" });
+    handleLoadingInstagramAccounts(true)
 
     const data = await apiInstagramAccountsDelete({ instagram_id });
 
     if (data.err === true) {
       alert("削除できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" });
+      handleLoadingInstagramAccounts(false)
     } else {
       dispatchAppState({ type: "DELETE_INSTAGRAM_MEDIAS" });
       dispatchInstagram(removeMedias())

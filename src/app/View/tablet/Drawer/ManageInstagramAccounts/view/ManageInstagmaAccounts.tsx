@@ -11,10 +11,12 @@ import { Skeleton } from '@material-ui/lab';
 import { useDeleteInstagramAccount } from '../context/useDeleteInstagramAccount';
 import { useGetInstagramMedias } from '../context/useGetInstagramMedias';
 import { useStateManageInstagramAccount } from '../context/useStateManageInstagramAccount';
+import { useHandleLoadingInstagramAccounts } from '../context/useHandleLoadingInastagramAccounts';
 
 export const useManageInstagramAccountsProps = () => {
 
   const { instagramAccounts, loading, instaAuth } = useStateManageInstagramAccount()
+  const handleLoadingInstagramAccounts = useHandleLoadingInstagramAccounts()
 
   const deleteInstagramAccount = useDeleteInstagramAccount()
   const getInstagramMedias = useGetInstagramMedias()
@@ -25,6 +27,7 @@ export const useManageInstagramAccountsProps = () => {
     instaAuth,
     deleteInstagramAccount,
     loading: loading.manageInstagramAccounts,
+    handleLoadingInstagramAccounts,
   };
 }
 type Props = ReturnType<typeof useManageInstagramAccountsProps>

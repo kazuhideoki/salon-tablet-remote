@@ -14,9 +14,7 @@ import { T_articles_get_return } from "../../pages/api/articles/get";
 import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 
 export type AppStateAction =
-  // セットで利用するが、時間差で作動させる必要があるので別に分けてある
-  | { type: "ON_IS_LOADING_INSTAGRAM_ACCOUNTS" }
-  | { type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" }
+
 
   // modalウィンドウを開く時
   | { type: "OPEN_ARTICLE_MODAL"; payload: { num: number; article: TArticle } }

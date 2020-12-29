@@ -44,30 +44,39 @@ export const appStateReducer = (
       break;
     case types.IS_LOADING_MAIN:
       newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            main: action.payload,
-          }
-        }
+        ...state,
+        loading: {
+          ...state.loading,
+          main: action.payload,
+        },
+      };
       break;
     case types.IS_LOADING_FOOTER:
       newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            footer: action.payload,
-          }
-        }
+        ...state,
+        loading: {
+          ...state.loading,
+          footer: action.payload,
+        },
+      };
       break;
     case types.IS_LOADING_TAGS:
       newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            manageTags: action.payload,
-          }
-        }
+        ...state,
+        loading: {
+          ...state.loading,
+          manageTags: action.payload,
+        },
+      };
+      break;
+    case types.IS_LOADING_INSTAGRAM_ACCOUNTS:
+      newState = {
+        ...state,
+        loading: {
+          ...state.loading,
+          manageInstagramAccounts: action.payload,
+        },
+      };
       break;
   }
 

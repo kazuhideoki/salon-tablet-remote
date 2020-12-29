@@ -23,6 +23,10 @@ export const isLoadingTags = (value: boolean) => ({
          type: types.IS_LOADING_TAGS,
          payload: value,
        });
+export const isLoadingInstagramAccounts = (value: boolean) => ({
+         type: types.IS_LOADING_INSTAGRAM_ACCOUNTS,
+         payload: value,
+       });
 
 export type TAppStateAction =
   | ReturnType<typeof setModal>
@@ -32,3 +36,4 @@ export type TAppStateAction =
   | ReturnType<typeof isLoadingMain>
   | ReturnType<typeof isLoadingFooter>
   | ReturnType<typeof isLoadingTags>
+  | ReturnType<typeof isLoadingInstagramAccounts>
