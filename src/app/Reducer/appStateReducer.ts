@@ -9,24 +9,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-      case "ON_IS_LOADING_MAIN":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            main: true,
-          },
-        };
-        break;
-      case "OFF_IS_LOADING_MAIN":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            main: false,
-          },
-        };
-        break;
+  
       case "ON_IS_LOADING_FOOTER":
         newState = {
           ...state,

@@ -15,6 +15,7 @@ import { useDeleteArticle } from "../context/useDeleteArticle";
 import { useStateMain } from "../context/useStateMain";
 import { useOpenArticleModal } from "../context/useOpenArticlModal";
 import { useOpenInstagramModal } from "../context/useOpenInstagramModal";
+import { useHandleLoadingMain } from "../context/useHandleLoadingMain";
 
 export const useMainProps = () => {
   const { 
@@ -35,6 +36,8 @@ export const useMainProps = () => {
   const onClickUpdate = useOnClickUpdate()
 
   const openInstagramModal = useOpenInstagramModal();
+
+  const handleLoadingMain = useHandleLoadingMain()
   
   return {
     isSetting,
@@ -51,6 +54,7 @@ export const useMainProps = () => {
     show_article_type: userInfo.show_article_type,
     onClickUpdate,
     loading,
+    handleLoadingMain,
   };
 };
 

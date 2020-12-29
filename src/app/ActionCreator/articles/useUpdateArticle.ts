@@ -8,23 +8,24 @@ import {
 import { ArticlesContext } from "../../Store/articles/Context";
 import { AppStateContext } from "../../Store/appState/Context";
 import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
+import { useMainProps } from "../../View/tablet/Main/view/Main";
 
 export type TUpdateArticle = TCreateArticle;
 
 export const useUpdateArticle = () => {
   const {
-    dispatchAppState,
     appState
   } = React.useContext(AppStateContext);
   const { paginationParams } = React.useContext(ArticlesContext)
   const { closeModal } = useModalProps();
+  const { handleLoadingMain } = useMainProps();
 
   const getArticles = useGetArticles();
   
   return async (param: TUpdateArticle) => {
 
     closeModal()
-    dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
+    handleLoadingMain(true)
    
     const params: T_articles_update = {
       // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
@@ -46,7 +47,7 @@ export const useUpdateArticle = () => {
 
     if (data.err === true) {
       alert("更新できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
+      handleLoadingMain(false)
     } else {
       closeModal()
 

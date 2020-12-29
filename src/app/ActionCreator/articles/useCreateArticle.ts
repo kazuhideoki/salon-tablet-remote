@@ -5,6 +5,7 @@ import { T_data_type_article } from "../../Store/Types";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { AppStateContext } from "../../Store/appState/Context";
 import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
+import { useMainProps } from "../../View/tablet/Main/view/Main";
 
 export type TCreateArticle = {
   is_published: boolean
@@ -17,16 +18,17 @@ export type TCreateArticle = {
 };
 export const useCreateArticle =  () => {
   const getArticles = useGetArticles();
-  const { dispatchAppState, appState } = React.useContext(
+  const { appState } = React.useContext(
     AppStateContext
   );
   const { userInfo } = React.useContext(UserInfoContext);
   const { closeModal } = useModalProps()
+  const { handleLoadingMain } = useMainProps()
   
   return async ( param: TCreateArticle) => {
 
     closeModal()
-    dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
+    handleLoadingMain(true)
     
     const params: T_articles_create = {
       is_published: param.is_published,
@@ -46,7 +48,7 @@ export const useCreateArticle =  () => {
     if (data.err === true) {
 
       alert("投稿できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
+      handleLoadingMain(false)
     } else {
       closeModal()
 

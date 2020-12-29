@@ -5,6 +5,7 @@ import { set } from "../../../Store/articles/actions";
 import { UserInfoContext } from "../../../Store/userInfo/Context";
 import { AppStateContext } from "../../../Store/appState/Context";
 import { useModalProps } from "../../../View/tablet/Modal/Modal/view/Modal";
+import { useMainProps } from "../../../View/tablet/Main/view/Main";
 
 export const useGetArticles = () => {
   const {
@@ -13,11 +14,12 @@ export const useGetArticles = () => {
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchArticles } = React.useContext(ArticlesContext);
   const { closeModal } = useModalProps();
+  const { handleLoadingMain } = useMainProps();
   
   return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
     
     closeModal()
-    dispatchAppState({ type: "ON_IS_LOADING_MAIN" });
+    handleLoadingMain(true)
     
     const params: T_articles_get = {
       page,
@@ -30,7 +32,7 @@ export const useGetArticles = () => {
 
     if (data.err === true) {
       alert("記事を取得できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_MAIN" });
+      handleLoadingMain(false)
       return false
     } else {
       const arg = {

@@ -42,6 +42,15 @@ export const appStateReducer = (
         isDrawerOpen: false,
       };
       break;
+    case types.IS_LOADING_MAIN:
+      newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            main: action.payload,
+          }
+        }
+      break;
   }
 
   reducerLogger({ state, newState, func, action });

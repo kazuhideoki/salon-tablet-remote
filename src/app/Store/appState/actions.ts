@@ -11,9 +11,14 @@ export const openDrawer = () => ({
 export const closeDrawer = () => ({
          type: types.CLOSE_DRAWER,
        });
+export const isLoadingMain = (value: boolean) => ({
+         type: types.IS_LOADING_MAIN,
+          payload: value
+       });
 
 export type TAppStateAction =
   | ReturnType<typeof setModal>
   | ReturnType<typeof closeModal>
   | ReturnType<typeof openDrawer>
-  | ReturnType<typeof closeDrawer>;
+  | ReturnType<typeof closeDrawer>
+  | ReturnType<typeof isLoadingMain>
