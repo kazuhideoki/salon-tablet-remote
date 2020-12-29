@@ -1,17 +1,16 @@
 import React from "react";
-
 import { useGetTags } from "./useGetTags";
 import { T_tags_update, apiTagsUpdata } from "../../../pages/api/tags/update";
-import { AppStateContext } from "../../Store/appState/Context";
+import { useManageTagsProps } from "../../View/tablet/Drawer/ManageTags/view/ManageTags";
 
 export const useUpdateTag = () => {
 
-  const { dispatchAppState } = React.useContext(AppStateContext)
+  const { handleLoadingTags  } = useManageTagsProps();
   const getTags = useGetTags();
 
   return async ({edittingTagId, tagName}) => {
 
-    dispatchAppState({ type: "ON_IS_LOADING_TAGS" });
+    handleLoadingTags(true)
 
     const params: T_tags_update = {
       tag_id: edittingTagId,
@@ -22,7 +21,7 @@ export const useUpdateTag = () => {
 
     if (data.err === true) {
       alert("更新できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_TAGS" });
+      handleLoadingTags(false)
     } else {
       getTags();
     }

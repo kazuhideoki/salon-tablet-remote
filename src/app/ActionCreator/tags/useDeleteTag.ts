@@ -6,11 +6,13 @@ import { useGetTags } from "./useGetTags";
 import { T_tags_delete, apiTagsDelete } from "../../../pages/api/tags/delete";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { AppStateContext } from "../../Store/appState/Context";
+import { useManageTagsProps } from "../../View/tablet/Drawer/ManageTags/view/ManageTags";
 
 export const useDeleteTag = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
+  const { handleLoadingTags } = useManageTagsProps()
   const getTags = useGetTags()
 
 
@@ -22,7 +24,7 @@ export const useDeleteTag = () => {
       return null;
     }
 
-    dispatchAppState({ type: "ON_IS_LOADING_TAGS" });
+    handleLoadingTags(true)
 
     const params: T_tags_delete = { tag_id: tag_id, user_id: user_id };
 
@@ -30,7 +32,7 @@ export const useDeleteTag = () => {
 
     if (data.err === true) {
       alert("削除できませんでした");
-      dispatchAppState({ type: "OFF_IS_LOADING_TAGS" });
+      handleLoadingTags(false)
     } else {
       getTags()
     }

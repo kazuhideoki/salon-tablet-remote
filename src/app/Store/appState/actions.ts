@@ -19,6 +19,10 @@ export const isLoadingFooter = (value: boolean) => ({
          type: types.IS_LOADING_FOOTER,
          payload: value,
        });
+export const isLoadingTags = (value: boolean) => ({
+         type: types.IS_LOADING_TAGS,
+         payload: value,
+       });
 
 export type TAppStateAction =
   | ReturnType<typeof setModal>
@@ -27,3 +31,4 @@ export type TAppStateAction =
   | ReturnType<typeof closeDrawer>
   | ReturnType<typeof isLoadingMain>
   | ReturnType<typeof isLoadingFooter>
+  | ReturnType<typeof isLoadingTags>

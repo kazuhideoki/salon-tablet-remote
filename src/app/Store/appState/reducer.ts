@@ -60,6 +60,15 @@ export const appStateReducer = (
           }
         }
       break;
+    case types.IS_LOADING_TAGS:
+      newState = {
+          ...state,
+          loading: {
+            ...state.loading,
+            manageTags: action.payload,
+          }
+        }
+      break;
   }
 
   reducerLogger({ state, newState, func, action });

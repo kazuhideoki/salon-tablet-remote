@@ -14,8 +14,9 @@ import { useHandleOnClick } from '../context/useHandleOnClick';
 import { useIsValidTagName } from '../context/useIsValidTagName';
 import { useDeleteTag } from '../context/useDeleteTag';
 import { useStateMangeTags } from '../context/useStateMangeTags';
+import { useHandleLoadingTags } from '../context/useHandleLoadingTags';
 
-const useManageTagsProps = () => {
+export const useManageTagsProps = () => {
   const {
     tags,
     loading,
@@ -31,6 +32,7 @@ const useManageTagsProps = () => {
   const deleteTag = useDeleteTag();
   const handleOnClick = useHandleOnClick(isEditting, edittingTagId,tagNameField)
   const isValidTagName = useIsValidTagName(tagNameField)
+  const handleLoadingTags = useHandleLoadingTags()
 
   return {
     tags,
@@ -45,6 +47,7 @@ const useManageTagsProps = () => {
     handleOnEditting,
     deleteTag,
     isValidTagName,
+    handleLoadingTags,
   };
 }
 

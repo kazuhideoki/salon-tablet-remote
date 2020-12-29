@@ -4,3 +4,4 @@ export const OPEN_DRAWER = "OPEN_DRAWER" as const;
 export const CLOSE_DRAWER = "CLOSE_DRAWER" as const;
 export const IS_LOADING_MAIN = "IS_LOADING_MAIN" as const;
 export const IS_LOADING_FOOTER = "IS_LOADING_FOOTER" as const;
+export const IS_LOADING_TAGS = "IS_LOADING_TAGS" as const;

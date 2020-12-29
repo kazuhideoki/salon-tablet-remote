@@ -9,24 +9,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-      case "ON_IS_LOADING_TAGS":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            manageTags: true,
-          },
-        };
-        break;
-      case "OFF_IS_LOADING_TAGS":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            manageTags: false,
-          },
-        };
-        break;
       case "ON_IS_LOADING_INSTAGRAM_ACCOUNTS":
         newState = {
           ...state,

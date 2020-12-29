@@ -15,8 +15,6 @@ import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreat
 
 export type AppStateAction =
   // セットで利用するが、時間差で作動させる必要があるので別に分けてある
-  | { type: "ON_IS_LOADING_TAGS" }
-  | { type: "OFF_IS_LOADING_TAGS" }
   | { type: "ON_IS_LOADING_INSTAGRAM_ACCOUNTS" }
   | { type: "OFF_IS_LOADING_INSTAGRAM_ACCOUNTS" }
 
