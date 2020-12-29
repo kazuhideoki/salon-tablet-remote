@@ -37,7 +37,6 @@ export type AppStateAction =
         footerItems: FooterItems;
       };
     }
-  | { type: "SET_ON_TAP"; payload: T_on_tap }
   | {
       type: "SET_USER_INFO"
       // payload: T_user_info_update;
@@ -52,18 +51,7 @@ export type AppStateAction =
         showArticles: boolean;
       };
     }
-  | { type: "SET_FOOTER_ITEMS"; payload: FooterItems }
-  | {
-      type: "DELETE_FOOTER_ITEM";
-      payload: { footer_item_id: T_footer_item_id; order: T_order};
-    }
-  // | { type: "SET_INFO_BAR"; payload: TInfoBarData }
-  | { type: "SET_TAGS" }
-  | { type: "SET_INSTAGRAM_ACCOUNTS" }
-  // | {
-  //     type: "SET_INSTAGRAM_RECONNECT_NEEDED";
-  //     payload: T_instagram_accounts_reconnect_needed;
-  //   }
+ 
   | {
       type: "SET_INSTAGRAM_MEDIAS";
       payload: {

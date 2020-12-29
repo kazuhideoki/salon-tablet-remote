@@ -21,12 +21,9 @@ export const useGetFooterItems = () => {
 
     if (data.err === true) {
       alert("取得できませんでした");
-      handleLoadingFooter(true)
+      handleLoadingFooter(false)
     } else {
-      dispatchAppState({
-        type: "SET_FOOTER_ITEMS",
-        payload: data,
-      });
+      handleLoadingFooter(false)
       dispatchFooterItems(set(data))
     }
   };

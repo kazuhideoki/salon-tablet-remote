@@ -22,9 +22,7 @@ export const useGetTags = () => {
       alert("取得できませんでした");
       handleLoadingTags(false)
     } else {
-      dispatchAppState({
-        type: "SET_TAGS",
-      });
+      handleLoadingTags(false);
       dispatchTags(set(data))
     }
   };

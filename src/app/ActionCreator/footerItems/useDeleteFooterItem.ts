@@ -27,10 +27,7 @@ export const useDeleteFooterItem = () => {
       alert("削除できませんでした");
       handleLoadingFooter(false)
     } else {
-      dispatchAppState({
-        type: "DELETE_FOOTER_ITEM",
-        payload: { footer_item_id, order },
-      });
+      handleLoadingFooter(false);
 
       const deletedState = footerItems.filter((value, index) => {
         // 削除するアイテムは含めない

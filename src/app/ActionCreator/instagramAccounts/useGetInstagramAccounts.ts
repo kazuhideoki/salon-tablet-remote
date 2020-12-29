@@ -24,9 +24,7 @@ export const useGetInstagramAccounts = () => {
       alert("取得できませんでした");
       handleLoadingInstagramAccounts(false)
     } else {
-      dispatchAppState({
-        type: "SET_INSTAGRAM_ACCOUNTS",
-      });
+      handleLoadingInstagramAccounts(false);
       dispatchInstagram(setAccounts(data))
     }
   };

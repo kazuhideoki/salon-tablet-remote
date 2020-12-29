@@ -65,6 +65,9 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         };
         break;
 
+
+
+
       case "OPEN_ARTICLE_EDITOR":
         newState = {
           ...state,
@@ -136,15 +139,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      case "SET_ON_TAP":
-        newState = {
-          ...state,
-          edittingPrams: {
-            ...state.edittingPrams,
-            onTap: action.payload,
-          },
-        };
-        break;
+  
 
       case "SET_USER_INFO":
         newState = {
@@ -167,43 +162,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      case "SET_FOOTER_ITEMS":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            footer: false,
-          },
-        };
-        break;
 
-      case "DELETE_FOOTER_ITEM":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            footer: false,
-          },
-        };
-        break;
-      case "SET_TAGS":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            manageTags: false,
-          },
-        };
-        break;
-      case "SET_INSTAGRAM_ACCOUNTS":
-        newState = {
-          ...state,
-          loading: {
-            ...state.loading,
-            manageInstagramAccounts: false,
-          },
-        };
-        break;
       case "SET_INSTAGRAM_MEDIAS":
         newState = {
           ...state,
