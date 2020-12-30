@@ -11,9 +11,6 @@ import { TFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreat
 export type AppStateAction =
 
 
-  // editor modalウィンドウを開く時. 新規と編集
-  | { type: "OPEN_FOOTER_ITEM_EDITOR" }
-  | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
 
 
   | {

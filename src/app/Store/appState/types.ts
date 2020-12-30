@@ -11,5 +11,7 @@ export const SET_FOOTER_ITEM_CONTENT = "SET_FOOTER_ITEM_CONTENT" as const;
 export const SET_INSTAGRAM_MEDIA_CONTENT = "SET_INSTAGRAM_MEDIA_CONTENT" as const;
 export const CREATE_ARTICLE = "CREATE_ARTICLE" as const;
 export const UPDATE_ARTICLE = "UPDATE_ARTICLE" as const;
+export const CREATE_FOOTER_ITEM = "CREATE_FOOTER_ITEM" as const;
+export const UPDATE_FOOTER_ITEM = "UPDATE_FOOTER_ITEM" as const;
 
 export const SET_MODAL_SIZE = "SET_MODAL_SIZE" as const;

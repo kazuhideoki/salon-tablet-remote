@@ -129,6 +129,31 @@ export const appStateReducer = (
         },
       };
       break;
+    case types.CREATE_FOOTER_ITEM:
+      newState = {
+        ...state,
+        edittingPrams: {
+          ...state.edittingPrams,
+          isEditting: false,
+          modalSize: "large",
+          isModalSizeChanged: false,
+          onTap: "modal",
+        },
+      };
+      break;
+    case types.UPDATE_FOOTER_ITEM:
+      newState = {
+        ...state,
+        edittingPrams: {
+          ...state.edittingPrams,
+          isEditting: true,
+          footerItem: { ...action.payload },
+          modalSize: action.payload.modal_size,
+          isModalSizeChanged: false,
+          onTap: action.payload.on_tap,
+        },
+      };
+      break;
 
     // modalSizeの変更をViewに反映させつつ、入力中の値も保持しておくためのロジック。isModalSizeChangedで判定する
     case types.SET_MODAL_SIZE:

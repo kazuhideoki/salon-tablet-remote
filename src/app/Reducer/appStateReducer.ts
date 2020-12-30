@@ -3,44 +3,11 @@ import {
 } from "../Store/Types";
 import { reducerLogger } from "./reducerLogger";
 import { AppStateAction } from "./AppStateAction";
-import { generateFooterItemEdittingParams } from "../ActionCreator/footerItems/useCreateFooterItem";
 
 export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-    
-
-
-
-
-      case "OPEN_FOOTER_ITEM_EDITOR":
-        newState = {
-          ...state,
-          edittingPrams: {
-            ...state.edittingPrams,
-            isEditting: false,
-            modalSize: "large",
-            isModalSizeChanged: false,
-            onTap: "modal",
-          },
-        };
-        break;
-
-      case "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT":
-        newState = {
-          ...state,
-          edittingPrams: {
-            ...state.edittingPrams,
-            isEditting: true,
-            footerItem: { ...action.payload },
-            modalSize: action.payload.modal_size,
-            isModalSizeChanged: false,
-            onTap: action.payload.on_tap,
-          },
-        };
-        break;
-      
 
       case "SET_ARTICLES":
         const isShowInstagram =
