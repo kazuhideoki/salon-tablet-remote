@@ -1,5 +1,6 @@
 import * as types from "./types";
-import { FooterItem, TAppState, TArticle, TInstagramMedia, TSetModal } from "../Types";
+import { FooterItem, FooterItems, TAppState, TArticle, TInstagramMedia, TSetModal } from "../Types";
+import { TFooterItemEdittingParams } from "../../ActionCreator/footerItems/useCreateFooterItem";
 
 export const setModal = (value: TSetModal) => ({ type: types.OPEN_MODAL, payload: value });
 export const closeModal = () => ({
@@ -40,6 +41,14 @@ export const setInstagramMediaContent = (value: TInstagramMedia) => ({
          payload: value,
        });
 
+export const setModalSize = (value: {
+         footerItemEdittingParams: TFooterItemEdittingParams;
+         footerItems: FooterItems;
+       }) => ({
+         type: types.SET_MODAL_SIZE,
+         payload: value,
+       });
+
 export type TAppStateAction =
   | ReturnType<typeof setModal>
   | ReturnType<typeof closeModal>
@@ -52,3 +61,5 @@ export type TAppStateAction =
   | ReturnType<typeof setArticleContent>
   | ReturnType<typeof setFooterItemContent>
   | ReturnType<typeof setInstagramMediaContent>
+  
+  | ReturnType<typeof setModalSize>

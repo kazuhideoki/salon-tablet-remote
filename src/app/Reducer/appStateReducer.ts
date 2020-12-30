@@ -66,25 +66,8 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      // modalSizeの変更をViewに反映させつつ、入力中の値も保持しておくためのロジック。isModalSizeChangedで判定する
-      case "SET_MODAL_SIZE":
-        newState = {
-          ...state,
-          edittingPrams: {
-            ...state.edittingPrams,
-            modalSize: action.payload.footerItemEdittingParams.modalSizeRadio,
-            isModalSizeChanged: true,
-            footerItem: {
-              ...state.edittingPrams.footerItem,
-              ...generateFooterItemEdittingParams(
-                action.payload.footerItemEdittingParams,
-                action.payload.footerItems
-              ),
-            },
-          },
-        };
-        break;
-  
+      
+
 
       case "SET_USER_INFO":
         newState = {

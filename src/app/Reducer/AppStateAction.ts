@@ -16,13 +16,7 @@ export type AppStateAction =
   | { type: "OPEN_FOOTER_ITEM_EDITOR" }
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
-  | {
-      type: "SET_MODAL_SIZE";
-      payload: {
-        footerItemEdittingParams: TFooterItemEdittingParams;
-        footerItems: FooterItems;
-      };
-    }
+
   | {
       type: "SET_USER_INFO"
       // payload: T_user_info_update;

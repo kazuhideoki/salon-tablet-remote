@@ -1,5 +1,6 @@
 import React from 'react'
 import { TFooterItemEdittingParams } from '../../../../../ActionCreator/footerItems/useCreateFooterItem';
+import { setModalSize } from '../../../../../Store/appState/actions';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 import { FooterItemsContext } from '../../../../../Store/footerItems/Context';
 import { T_modal_size } from '../../../../../Store/Types';
@@ -15,6 +16,6 @@ export const useHandleChange = (
              ...edittingFooterItemParams,
              modalSizeRadio: event.target.value as T_modal_size,
            };
-           dispatchAppState({ type: "SET_MODAL_SIZE", payload: {footerItemEdittingParams: params, footerItems: footerItems} });
+           dispatchAppState(setModalSize({footerItemEdittingParams: params, footerItems}));
          };
        };

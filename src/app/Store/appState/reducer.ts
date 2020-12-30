@@ -1,3 +1,4 @@
+import { generateFooterItemEdittingParams } from "../../ActionCreator/footerItems/useCreateFooterItem";
 import { reducerLogger } from "../../Reducer/reducerLogger";
 import { TAppState } from "../Types";
 import { TAppStateAction } from "./actions";
@@ -105,6 +106,25 @@ export const appStateReducer = (
           ...state.currentModalContent,
           instagramMedia: action.payload,
           modalSize: "medium",
+        },
+      };
+      break;
+
+    // modalSizeの変更をViewに反映させつつ、入力中の値も保持しておくためのロジック。isModalSizeChangedで判定する
+    case types.SET_MODAL_SIZE:
+      newState = {
+        ...state,
+        edittingPrams: {
+          ...state.edittingPrams,
+          modalSize: action.payload.footerItemEdittingParams.modalSizeRadio,
+          isModalSizeChanged: true,
+          footerItem: {
+            ...state.edittingPrams.footerItem,
+            ...generateFooterItemEdittingParams(
+              action.payload.footerItemEdittingParams,
+              action.payload.footerItems
+            ),
+          },
         },
       };
       break;
