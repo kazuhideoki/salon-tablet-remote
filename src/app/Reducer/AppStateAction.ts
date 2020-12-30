@@ -17,10 +17,6 @@ export type AppStateAction =
   | { type: "OPEN_ARTICLE_EDITOR_FOR_EDIT"; payload: TArticle }
   | { type: "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT"; payload: FooterItem }
 
-  | {
-      type: "SET_USER_INFO"
-      // payload: T_user_info_update;
-    }
 
   | {
       type: "SET_ARTICLES";

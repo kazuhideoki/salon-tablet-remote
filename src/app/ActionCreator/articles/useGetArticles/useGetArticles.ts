@@ -47,6 +47,7 @@ export const useGetArticles = () => {
         payload: arg,
       });
       dispatchArticles(set(arg.data));
+      handleLoadingMain(false)
 
       return true
     }

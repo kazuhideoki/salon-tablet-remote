@@ -68,14 +68,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
         break;
       
 
-
-      case "SET_USER_INFO":
-        newState = {
-          ...state,
-          isModalOpen: false,
-        };
-        break;
-
       case "SET_ARTICLES":
         const isShowInstagram =
           action.payload.showArticles === true ? false : state.isShowInstagram;
@@ -84,10 +76,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           selectedArticlesTags: action.payload.selectedArticlesTags,
           isSetting: action.payload.isSetting,
           isShowInstagram: isShowInstagram,
-          loading: {
-            ...state.loading,
-            main: false,
-          },
         };
         break;
 
@@ -97,10 +85,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           isShowInstagram: true,
           selectedInstagramAccount: action.payload.selectedInstagramAccount,
           selectedArticlesTags: [],
-          loading: {
-            ...state.loading,
-            main: false,
-          },
         };
         break;
       case "DELETE_INSTAGRAM_MEDIAS":

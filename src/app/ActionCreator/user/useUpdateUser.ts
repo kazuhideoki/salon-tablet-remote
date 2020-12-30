@@ -5,6 +5,7 @@ import { useAuth } from "../../../lib/auth/AuthProvider";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { update } from "../../Store/userInfo/actions";
 import { AppStateContext } from "../../Store/appState/Context";
+import { closeModal } from "../../Store/appState/actions";
 
 export type TUpdateUser = {
   name: string
@@ -39,10 +40,8 @@ export const useUpdateUser = () => {
       // パスワード変更 firebaseで ここ
       if (param.password.length) await updatePassword({password: param.password, user})
       
-      dispatchAppState({
-        type: "SET_USER_INFO",
-      });
       dispatchUserInfo(update(params))
+      dispatchAppState(closeModal())
 
       alert("ユーザーデータを更新しました。");
   

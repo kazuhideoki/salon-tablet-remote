@@ -45,6 +45,7 @@ export const useGetInstagramMedias = () => {
         payload: { selectedInstagramAccount: {id: instagram_id, username}}
       });
       dispatchInstagram(setMedias(data))
+      handleLoadingMain(false)
 
     }
   };
