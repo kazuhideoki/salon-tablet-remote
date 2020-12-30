@@ -6,3 +6,4 @@ export const IS_LOADING_MAIN = "IS_LOADING_MAIN" as const;
 export const IS_LOADING_FOOTER = "IS_LOADING_FOOTER" as const;
 export const IS_LOADING_TAGS = "IS_LOADING_TAGS" as const;
 export const IS_LOADING_INSTAGRAM_ACCOUNTS = "IS_LOADING_INSTAGRAM_ACCOUNTS" as const;
+export const SET_ARTICLE_CONTENT = "SET_ARTICLE_CONTENT" as const;

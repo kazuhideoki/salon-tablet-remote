@@ -17,8 +17,6 @@ export type AppStateAction =
 
 
   // modalウィンドウを開く時
-  | { type: "OPEN_ARTICLE_MODAL"; payload: { num: number; article: TArticle } }
-  | { type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR"; payload: TArticle }
   | {
       type: "OPEN_FOOTER_ITEM_MODAL"; //on_tapの 'modal' と 'google'両方に対応
       payload: { footerItemId: T_footer_item_id; footerItems: FooterItems };

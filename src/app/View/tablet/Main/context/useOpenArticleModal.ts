@@ -1,15 +1,16 @@
 import React from 'react'
+import { setArticleContent, setModal } from '../../../../Store/appState/actions'
 import { AppStateContext } from '../../../../Store/appState/Context'
 import { ArticlesContext } from '../../../../Store/articles/Context'
+import { useMainProps } from '../view/Main'
 export const useOpenArticleModal = () => {
   const { dispatchAppState } = React.useContext(AppStateContext)
   const { articles } = React.useContext(ArticlesContext)
 
   return (num: number) => {
-    dispatchAppState({
-      type: "OPEN_ARTICLE_MODAL",
-      payload: { num, article: articles[num] },
-    });
+    dispatchAppState(setArticleContent(articles[num]));
+    dispatchAppState(setModal('content_modal'))
+
   };
 
 

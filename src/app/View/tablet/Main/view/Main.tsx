@@ -13,7 +13,7 @@ import { noArticlesJsx } from "../components/noArticlesJsx";
 import { useOnClickUpdate } from "../context/useOnClickUpdate";
 import { useDeleteArticle } from "../context/useDeleteArticle";
 import { useStateMain } from "../context/useStateMain";
-import { useOpenArticleModal } from "../context/useOpenArticlModal";
+import { useOpenArticleModal } from "../context/useOpenArticleModal";
 import { useOpenInstagramModal } from "../context/useOpenInstagramModal";
 import { useHandleLoadingMain } from "../context/useHandleLoadingMain";
 

@@ -3,10 +3,12 @@ import { Typography, makeStyles, createStyles, Theme, CardActionArea } from '@ma
 import { EditButtonsBox } from '../../../../pureComponents/buttons/EditButtonsBox';
 import { useStateInfoBar } from '../context/useStateInfoBar';
 import { useDrawerProps } from '../../Drawer/Drawer/view/Drawer';
+import { useOpenArticleModalInfoBar } from '../context/useOpenArticleModalInfoBar';
 
 const useInfoBarProps = () => {
 
   const { dispatchAppState, isSetting, infoBar, targetArticle, shop_name } = useStateInfoBar()
+  const openArticleModalInfoBar = useOpenArticleModalInfoBar();
 
   const { openModal } = useDrawerProps()
 
@@ -17,6 +19,7 @@ const useInfoBarProps = () => {
     targetArticle,
     openModal,
     shop_name,
+    openArticleModalInfoBar,
   };
 }
 
@@ -115,10 +118,7 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
              displayInfoBar = (
                <CardActionArea
                  onClick={() =>
-                   props.dispatchAppState({
-                     type: "OPEN_ARTICLE_MODAL_FROM_INFO_BAR",
-                     payload: props.targetArticle,
-                   })
+                   props.openArticleModalInfoBar(props.targetArticle)
                  }
                  className={classes.article}
                >

@@ -9,31 +9,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-
-      case "OPEN_ARTICLE_MODAL":
-        newState = {
-          ...state,
-          setModal: "content_modal",
-          isModalOpen: true,
-          currentModalContent: {
-            ...state.currentModalContent,
-            article: action.payload.article,
-            modalSize: "large",
-          },
-        };
-        break;
-      case "OPEN_ARTICLE_MODAL_FROM_INFO_BAR":
-        newState = {
-          ...state,
-          setModal: "content_modal",
-          isModalOpen: true,
-          currentModalContent: {
-            ...state.currentModalContent,
-            article: action.payload,
-            modalSize: "large",
-          },
-        };
-        break;
+     
       case "OPEN_FOOTER_ITEM_MODAL":
         const target = action.payload.footerItems.filter((value) => {
           return action.payload.footerItemId === value.footer_item_id;

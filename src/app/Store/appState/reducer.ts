@@ -78,6 +78,16 @@ export const appStateReducer = (
         },
       };
       break;
+    case types.SET_ARTICLE_CONTENT:
+      newState = {
+        ...state,
+        currentModalContent: {
+          ...state.currentModalContent,
+          article: action.payload,
+          modalSize: "large",
+        },
+      };
+      break;
   }
 
   reducerLogger({ state, newState, func, action });
