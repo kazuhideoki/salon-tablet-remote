@@ -109,6 +109,26 @@ export const appStateReducer = (
         },
       };
       break;
+    case types.CREATE_ARTICLE:
+      newState = {
+        ...state,
+        edittingPrams: {
+          ...state.edittingPrams,
+          isEditting: false,
+        },
+      };
+      break;
+    case types.UPDATE_ARTICLE:
+      newState = {
+        ...state,
+        edittingPrams: {
+          ...state.edittingPrams,
+          isEditting: true,
+          article: { ...action.payload },
+          modalSize: "large",
+        },
+      };
+      break;
 
     // modalSizeの変更をViewに反映させつつ、入力中の値も保持しておくためのロジック。isModalSizeChangedで判定する
     case types.SET_MODAL_SIZE:

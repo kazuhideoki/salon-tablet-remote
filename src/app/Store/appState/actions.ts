@@ -40,6 +40,13 @@ export const setInstagramMediaContent = (value: TInstagramMedia) => ({
          type: types.SET_INSTAGRAM_MEDIA_CONTENT,
          payload: value,
        });
+export const createArticle = () => ({
+         type: types.CREATE_ARTICLE,
+       });
+export const updateArticle = (article: TArticle) => ({
+         type: types.UPDATE_ARTICLE,
+         payload: article
+       });
 
 export const setModalSize = (value: {
          footerItemEdittingParams: TFooterItemEdittingParams;
@@ -61,5 +68,7 @@ export type TAppStateAction =
   | ReturnType<typeof setArticleContent>
   | ReturnType<typeof setFooterItemContent>
   | ReturnType<typeof setInstagramMediaContent>
+  | ReturnType<typeof createArticle>
+  | ReturnType<typeof updateArticle>
   
   | ReturnType<typeof setModalSize>

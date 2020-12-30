@@ -13,22 +13,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
 
 
 
-      case "OPEN_ARTICLE_EDITOR":
-        newState = {
-          ...state,
-          setModal: "edit_article",
-          isModalOpen: true,
-          edittingPrams: {
-            ...state.edittingPrams,
-            isEditting: false,
-          },
-        };
-        break;
+
       case "OPEN_FOOTER_ITEM_EDITOR":
         newState = {
           ...state,
-          setModal: "edit_footer_item",
-          isModalOpen: true,
           edittingPrams: {
             ...state.edittingPrams,
             isEditting: false,
@@ -38,24 +26,10 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      case "OPEN_ARTICLE_EDITOR_FOR_EDIT":
-        newState = {
-          ...state,
-          setModal: "edit_article",
-          isModalOpen: true,
-          edittingPrams: {
-            ...state.edittingPrams,
-            isEditting: true,
-            article: { ...action.payload },
-            modalSize: "large",
-          },
-        };
-        break;
+
       case "OPEN_FOOTER_ITEM_EDITOR_FOR_EDIT":
         newState = {
           ...state,
-          setModal: "edit_footer_item",
-          isModalOpen: true,
           edittingPrams: {
             ...state.edittingPrams,
             isEditting: true,

@@ -9,24 +9,14 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
            return (
              <>
                <List>
-                 <ListItem
-                   button
-                   onClick={() =>
-                     props.dispatchAppState({ type: "OPEN_ARTICLE_EDITOR" })
-                   }
-                 >
+                 <ListItem button onClick={() => props.openArticleEditor()}>
                    <ListItemIcon>
                      <NoteAddOutlined />
                    </ListItemIcon>
                    {/* {props.isMobile ? null : <ListItemText primary="記事作成" />} */}
                    <ListItemText primary="記事作成" />
                  </ListItem>
-                 <ListItem
-                   button
-                   onClick={() =>
-                     props.dispatchAppState({ type: "OPEN_FOOTER_ITEM_EDITOR" })
-                   }
-                 >
+                 <ListItem button onClick={() => props.openFooterItemEditor()}>
                    <ListItemIcon>
                      <VideoLabel />
                    </ListItemIcon>

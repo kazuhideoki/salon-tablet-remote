@@ -25,6 +25,8 @@ import { useCloseDrawer } from "../context/useCloseDrawer";
 import { useHandleDrawerOpen } from "../context/useHandleDrawerOpen";
 import { useStateDrawer } from "../context/useStateDrawer";
 import { useOpenModal } from "../context/useOpenModal";
+import { useOpenArticleEditor } from "../context/useOpenArticleEditor";
+import { useOpenFooterItemEditor } from "../context/useOpenFooterItemEditor";
 
 export const useDrawerProps = () => {
   const {
@@ -50,6 +52,8 @@ export const useDrawerProps = () => {
   const closeDrawer = useCloseDrawer()
   const { deleteFooterItem } = useFooterProps()
   const openModal = useOpenModal()
+  const openArticleEditor = useOpenArticleEditor();
+  const openFooterItemEditor = useOpenFooterItemEditor()
   
   return {
     theme,
@@ -72,6 +76,8 @@ export const useDrawerProps = () => {
     deleteFooterItem,
     isClicked,
     openModal,
+    openArticleEditor,
+    openFooterItemEditor,
   };
 }
 

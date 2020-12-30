@@ -12,7 +12,7 @@ import { showDataType } from "../../../Main/components/showDataType";
 import { useIsMobile } from "../../../../../../lib/useIsMobile";
 import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
 import { useStateFooter } from "../context/useStateFooter";
-import { useHandleOnUpDateFooterIcon } from "../context/useHandleOnUpDateFooterIcon";
+import { useHandleOnUpdateFooterItem } from "../context/useHandleOnUpdateFooterItem";
 import { useHandleLoadingFooter } from "../context/useHandleLoadingFooter";
 import { useOpenFooterItemModal } from "../context/useOpenFooterItemModal";
 
@@ -25,7 +25,7 @@ export const useFooterProps = () => {
   
   const isMobile = useIsMobile();
 
-  const handleOnUpDateFooterIcon = useHandleOnUpDateFooterIcon();
+  const handleOnUpDateFooterIcon = useHandleOnUpdateFooterItem();
 
   const handleLoadingFooter = useHandleLoadingFooter();
 
