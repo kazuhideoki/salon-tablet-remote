@@ -14,13 +14,13 @@ import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
 import { useStateFooter } from "../context/useStateFooter";
 import { useHandleOnUpDateFooterIcon } from "../context/useHandleOnUpDateFooterIcon";
 import { useHandleLoadingFooter } from "../context/useHandleLoadingFooter";
+import { useOpenFooterItemModal } from "../context/useOpenFooterItemModal";
 
 export const useFooterProps = () => {
   const {
     footerItems,
     loading,
     isSetting,
-    openFooterItemModal,
   } = useStateFooter();
   
   const isMobile = useIsMobile();
@@ -29,7 +29,10 @@ export const useFooterProps = () => {
 
   const handleLoadingFooter = useHandleLoadingFooter();
 
+  const openFooterItemModal = useOpenFooterItemModal()
+
   const deleteFooterItem = useDeleteFooterItem();
+
   
   return {
     isSetting,
@@ -148,7 +151,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                   : MoodBad
               }
               onClick={() =>
-                props.openFooterItemModal(value.footer_item_id)
+                props.openFooterItemModal(value)
               }
               text={value.icon_name}
               loading={props.loading}

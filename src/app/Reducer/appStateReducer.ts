@@ -9,26 +9,7 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
     let newState: TAppState;
     const func = appStateReducer
     switch (action.type) {
-     
-      case "OPEN_FOOTER_ITEM_MODAL":
-        const target = action.payload.footerItems.filter((value) => {
-          return action.payload.footerItemId === value.footer_item_id;
-        });
-        newState = {
-          ...state,
-          setModal:
-            target[0].on_tap === "modal"
-              ? "footer_item_modal"
-              : "google_search",
-          isModalOpen: true,
-          currentModalContent: {
-            ...state.currentModalContent,
-            footerItem: target[0],
-            modalSize: target[0].modal_size,
-          },
-        };
-        break;
-
+    
 
 
 

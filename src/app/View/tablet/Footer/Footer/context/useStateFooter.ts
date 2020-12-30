@@ -8,16 +8,9 @@ export const useStateFooter = () => {
   const { loading, isSetting } = appState;
   const { footerItems } = React.useContext(FooterItemsContext);
 
-  const openFooterItemModal = (footer_item_id: T_footer_item_id) =>
-    dispatchAppState({
-      type: "OPEN_FOOTER_ITEM_MODAL",
-      payload: {footerItemId: footer_item_id, footerItems},
-    });
-
   return {
     footerItems,
     loading,
     isSetting,
-    openFooterItemModal,
   };
 }

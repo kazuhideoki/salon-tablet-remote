@@ -88,6 +88,16 @@ export const appStateReducer = (
         },
       };
       break;
+    case types.SET_FOOTER_ITEM_CONTENT:
+      newState = {
+        ...state,
+        currentModalContent: {
+          ...state.currentModalContent,
+          footerItem: action.payload,
+          modalSize: action.payload.modal_size,
+        },
+      };
+      break;
     case types.SET_INSTAGRAM_MEDIA_CONTENT:
       newState = {
         ...state,
