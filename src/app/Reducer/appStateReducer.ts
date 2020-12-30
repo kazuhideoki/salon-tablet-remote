@@ -28,18 +28,6 @@ export function appStateReducer(state: TAppState, action: AppStateAction) {
           },
         };
         break;
-      case "OPEN_INSTAGRAM_MEDIA_MODAL":
-        newState = {
-          ...state,
-          setModal: "instagram_media_modal",
-          isModalOpen: true,
-          currentModalContent: {
-            ...state.currentModalContent,
-            instagramMedia: action.payload,
-            modalSize: "medium",
-          },
-        };
-        break;
 
 
 

@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { TAppState, TArticle, TSetModal } from "../Types";
+import { TAppState, TArticle, TInstagramMedia, TSetModal } from "../Types";
 
 export const setModal = (value: TSetModal) => ({ type: types.OPEN_MODAL, payload: value });
 export const closeModal = () => ({
@@ -31,6 +31,10 @@ export const setArticleContent = (value: TArticle) => ({
          type: types.SET_ARTICLE_CONTENT,
          payload: value,
        });
+export const setInstagramMediaContent = (value: TInstagramMedia) => ({
+         type: types.SET_INSTAGRAM_MEDIA_CONTENT,
+         payload: value,
+       });
 
 export type TAppStateAction =
   | ReturnType<typeof setModal>
@@ -42,3 +46,4 @@ export type TAppStateAction =
   | ReturnType<typeof isLoadingTags>
   | ReturnType<typeof isLoadingInstagramAccounts>
   | ReturnType<typeof setArticleContent>
+  | ReturnType<typeof setInstagramMediaContent>

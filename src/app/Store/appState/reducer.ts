@@ -88,6 +88,16 @@ export const appStateReducer = (
         },
       };
       break;
+    case types.SET_INSTAGRAM_MEDIA_CONTENT:
+      newState = {
+        ...state,
+        currentModalContent: {
+          ...state.currentModalContent,
+          instagramMedia: action.payload,
+          modalSize: "medium",
+        },
+      };
+      break;
   }
 
   reducerLogger({ state, newState, func, action });

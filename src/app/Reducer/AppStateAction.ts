@@ -21,7 +21,6 @@ export type AppStateAction =
       type: "OPEN_FOOTER_ITEM_MODAL"; //on_tapの 'modal' と 'google'両方に対応
       payload: { footerItemId: T_footer_item_id; footerItems: FooterItems };
     }
-  | { type: "OPEN_INSTAGRAM_MEDIA_MODAL"; payload: TInstagramMedia }
 
   // editor modalウィンドウを開く時. 新規と編集
   | { type: "OPEN_ARTICLE_EDITOR" }
