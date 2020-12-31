@@ -77,12 +77,12 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
         res.writeHead(302, { Location: `/` });
         res.end();
       } catch (err) {
-    console.log(
-      "/instagram_accounts/get_token/のエラーは " + JSON.stringify(err)
-    );
-    res.writeHead(302, { Location: `/` });
-    res.end();
-  }
+        console.log(
+          "/instagram_accounts/get_token/のエラーは " + JSON.stringify(err)
+        );
+        res.writeHead(302, { Location: `/` });
+        res.end();
+      }
 };
 
 // socketうんぬんの エラーメッセージを表示させないようにする

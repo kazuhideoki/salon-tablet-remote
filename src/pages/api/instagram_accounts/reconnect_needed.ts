@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TInstagramAccounts, T_instagram_id, T_user_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsReconnectNeeded = async (
@@ -10,19 +11,7 @@ export const apiInstagramAccountsReconnectNeeded = async (
        ): Promise<TApiResponse<
          T_instagram_accounts_reconnect_needed_return
        >> => {
-         let str = process.browser ? server : localhost;
-
-         const res = await fetch(
-           `${str}/api/instagram_accounts/reconnect_needed`,
-           {
-             headers: { "Content-Type": "application/json" },
-             method: "POST",
-             mode: "cors",
-             body: JSON.stringify(params),
-           }
-         );
-
-         return await res.json();
+         return apiWrapPost(params, "instagram_accounts/reconnect_needed");
        };
 
 export type T_instagram_accounts_reconnect_needed = {
@@ -55,7 +44,7 @@ const reconnect_needed = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json({result: true});
     } catch (err) {
       console.log("/instagram_accounts/reconnect_needed/のエラーは " + JSON.stringify(err));
-      return res.status(500).json({ err: true, result: false, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

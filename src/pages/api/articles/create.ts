@@ -12,20 +12,11 @@ import {
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesCreate = async (params: T_articles_create):Promise<TApiResponse<T_articles_create_return>> => {
-  const str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/articles/create`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost(params,"articles/create");
 } 
 
 export type T_articles_create = {
@@ -68,7 +59,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/articles/create/のエラーは " + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
 
     }
 

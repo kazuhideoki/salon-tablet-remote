@@ -3,21 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { T_user_id } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeFooterIconSize = async (
   params: T_user_info_change_footer_icon_size
 ): Promise<TApiResponse<T_user_info_change_footer_icon_size_return>> => {
-  let str = process.browser ? server : localhost;
-
-  const res = await fetch(`${str}/api/user_info/change_footer_icon_size`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost(params, "user_info/change_footer_icon_size");
 };
 
 export type T_user_info_change_footer_icon_size = {
@@ -55,9 +47,7 @@ const change_footer_icon_size = async (
       console.log(
         "/user_info/change_footer_icon_size/のエラーは " + JSON.stringify(err)
       );
-      return res
-        .status(500)
-        .json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

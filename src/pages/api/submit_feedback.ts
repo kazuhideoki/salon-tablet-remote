@@ -70,12 +70,10 @@ const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
       const retrunData: T_submit_feedback_return_no_error = { sent: true };
       return res.status(200).json(retrunData);
     } catch (err) {
-      const returnData: T_submit_feedback_return = {
-        sent: false,
-        err: true,
-        data: { message: err.message },
-      };
-      return returnData;
+      console.log("/submit_feedbackのエラーは " + JSON.stringify(err));
+
+    
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

@@ -12,19 +12,11 @@ import {
   T_data_type_article,
 } from "../../../app/Store/Types";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiResponse<T_articles_update_return>> => {
-  const str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/articles/update`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost(params,"articles/update");
 } 
 
 export type T_articles_update_params = {
@@ -71,7 +63,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/articles/update/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

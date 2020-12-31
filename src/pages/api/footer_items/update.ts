@@ -7,21 +7,12 @@ import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 import { T_footer_items_params } from "./create";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsUpdate = async (params: T_footer_items_update):Promise<TApiResponse<T_footer_items_update_return>> => {
-  let str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/footer_items/update`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-  console.log('strは ' + str)
-
-  return await res.json();
+  return apiWrapPost(params,"footer_items/update");
 }
 
 export type T_footer_items_update_params = T_footer_items_params
@@ -61,7 +52,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/footer_items/update/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

@@ -3,20 +3,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { T_user_id, T_tag_name } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsCreate = async (params: T_tags_create):Promise<TApiResponse<T_tags_create>> => {
-  let str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/tags/create`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost(params,"tags/create");
 } 
 
 export type T_tags_create = {
@@ -44,7 +36,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/tags/create/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id, T_user_email } from "../../../app/Store/Types";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 
 
@@ -10,17 +11,7 @@ import { T_user_id, T_user_email } from "../../../app/Store/Types";
 export const apiCreatePublicPageSlug = async (
          params: T_user_info_create_public_page_slug
        ): Promise<TApiResponse<void>> => {
-         let str = process.browser ? server : localhost;
-
-         const res = await fetch(
-           `${str}/api/user_info/create_public_page_slug`,
-           {
-             headers: { "Content-Type": "application/json"},
-             method: "POST",
-             mode: "cors",
-             body: JSON.stringify(params),
-           }
-         );
+         return apiWrapPost(params, "user_info/create_public_page_slug");
          
        };
 
@@ -52,7 +43,7 @@ const create_public_page_slug = async (req: NextApiRequest, res: NextApiResponse
         "/user_info/create_public_page_slug/のエラーは " + JSON.stringify(err)
       );
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

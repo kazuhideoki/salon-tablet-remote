@@ -31,9 +31,7 @@ const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
       };
       res.status(200).json(returnData);
     } catch (err) {
-
-      res.status(500).json({ err: true, data: { message: err.message } });
-      
+      return res.status(500).json({ err: true, data: err });
     }
 };
 

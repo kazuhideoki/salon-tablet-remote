@@ -25,25 +25,26 @@ export const useGetInstagramMedias = () => {
     dispatchAppState(isLoadingMain(true))
     dispatchAppState(closeModal())
 
-    const data = await apiInstagramMediasGet(instagram_id, paging);
-
-    const params:T_instagram_accounts_reconnect_needed  = {instagram_id: instagram_id, user_id: user_id, is_reconnect_needed: true}
-
-    if (data.err === true) {
-      alert("取得できませんでした");
-      if (data.data.message.type === "OAuthException") {
-        console.log("message.typeは OAuthException");
-        alert("インスタグラムアカウントの再連携が必要です");
-        const result = await apiInstagramAccountsReconnectNeeded(params)
-        if(result.err !== true) dispatchInstagram(setReconnect(instagram_id));
-      }
-      dispatchAppState(isLoadingMain(false));
-    } else {
+    try {
+      const data = await apiInstagramMediasGet({instagram_id, paging});
       dispatchInstagram(setMedias(data))
       dispatchAppState(
         setSelectedInstagramAccounts({ id: instagram_id, username })
       );
       dispatchAppState(isShowInstagram(true))
+      dispatchAppState(isLoadingMain(false));
+    } catch (err) {
+      alert("取得できませんでした");
+      console.log('errは ' + JSON.stringify(err))
+      
+      if (err.data.error.message.type === "OAuthException") {
+        console.log("message.typeは OAuthException");
+        alert("インスタグラムアカウントの再連携が必要です");
+        const params:T_instagram_accounts_reconnect_needed  = {instagram_id: instagram_id, user_id: user_id, is_reconnect_needed: true}
+        const result = await apiInstagramAccountsReconnectNeeded(params)
+        if(result.err !== true) dispatchInstagram(setReconnect(instagram_id));
+      }
+
       dispatchAppState(isLoadingMain(false));
 
     }

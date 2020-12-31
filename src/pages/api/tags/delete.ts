@@ -9,20 +9,12 @@ import {
 import { deleteTagIdInArticle } from "../../../lib/deleteTagIdInArticle";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (params: T_tags_delete):Promise<TApiResponse<T_tags_delete_return>> => {
-  let str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/tags/delete`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost(params,"tags/delete");
 } 
 
 export type T_tags_delete = {tag_id: T_tag_id, user_id: T_user_id}
@@ -55,7 +47,7 @@ const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/tags/delete/のエラーは " + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

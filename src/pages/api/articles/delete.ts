@@ -3,20 +3,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { T_article_id } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesDelete = async (params: T_articles_delete):Promise<TApiResponse<T_articles_delete_return>> => {
-  const str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/articles/delete`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost(params,"articles/delete");
 } 
 
 export type T_articles_delete = {
@@ -47,7 +39,7 @@ const articles_delete = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/articles/delete/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };
