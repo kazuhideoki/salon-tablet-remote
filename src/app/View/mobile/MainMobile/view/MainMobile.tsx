@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     items: {
       overflowY: "scroll",
+      position: 'relative',
     },
     item: {
       display: "flex",
@@ -75,7 +76,6 @@ const useStyles = makeStyles((theme: Theme) => {
       position: "absolute",
       top: 0,
       right: 0,
-      // zIndex: 10,
     },
   });
 })
@@ -99,18 +99,15 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
     <div className={`${classes.root} ${props.className}`}>
       
       {/* ↓スクロール可のためにrootと分けてある */}
-      <List className={classes.items}>
+      {/* <List className={classes.items}> */}
 
       {props.articles.map((value, key) => {
         return (
-          <div key={key}>
+          <div key={key} className={classes.items}>
             <CardActionArea
-              // key={key}
               className={classes.item}
-              onClick={() =>
-                props.openArticleModal(key)
-              }
-              component="li"
+              onClick={() => props.openArticleModal(key)}
+              component="div"
             >
               <div className={classes.thumbnailDiv}>
                 {value.article_img.length ? (
@@ -128,7 +125,6 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                 <Typography variant="h6" component="h2">
                   {value.title}
                   {value.is_published ? null : (
-                    // <span className={classes.itemIsDraft}>下書き</span>
                     <Chip
                       size="small"
                       label="下書き"
@@ -137,22 +133,27 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                   )}
                   {showDataType(value.data_type)}
                 </Typography>
-                {/* <Typography gutterBottom variant="body1">
-                  {value.article_excerpt}
-                  {value.article_excerpt.length > 100 ? "..." : ""}
-                </Typography> */}
                 <Typography gutterBottom variant="subtitle1" align="right">
                   {sqlToDate(value.created_at)}
                 </Typography>
               </div>
-              {props.isSetting ? (
-                <EditButtonsBox className={classes.editButtonsBox}/>
-              ) : null}
             </CardActionArea>
+            {props.isSetting ? (
+              <EditButtonsBox
+                className={classes.editButtonsBox}
+                update
+                updateProps={{ onClick: props.onClickUpdate, value: value }}
+                delete
+                deleteProps={{
+                  onClick: props.deleteArticle,
+                  value: value.article_id,
+                }}
+              />
+            ) : null}
           </div>
         );
       })}
-      </List>
+      {/* </List> */}
        
     </div>
   );
