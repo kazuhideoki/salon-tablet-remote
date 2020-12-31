@@ -51,8 +51,8 @@ export const SelectArticleInfoBar: React.FC<Props> = ({
                labelId="select-app-label"
                id="select-app"
                value={articleInfoBar}
-               onChange={(e: React.ChangeEvent<{ value: string }>) =>
-                 setArticleInfoBar(Number(e.target.value))
+               onChange={(e: React.ChangeEvent<{value: unknown }>) =>
+                 setArticleInfoBar(Number(e.target.value as string))
                }
                label="記事"
              >

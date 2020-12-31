@@ -22,7 +22,10 @@ export const getSession = async (
       body: JSON.stringify({ st_token }),
     });
   
-    return await res.json();
+    const result = await res.json();
+    if (result.err) return null
+
+    return result
 
   } catch (err) {
     return null

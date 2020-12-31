@@ -5,7 +5,6 @@ const QuillEditor = dynamic(() => import("../../QuillEditor/view/QuillEditor"), 
   ssr: false,
 });
 import { SwitchOnTapModal } from "../components/SwitchOnTapModal";
-import { TFooterItemEdittingParams } from "../context/useCreateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, Switch, useTheme } from '@material-ui/core';
 import { SelectAppLink } from '../components/SelectAppLink';
 import { CharCounter } from "../../../../../pureComponents/CharCounter";
@@ -18,6 +17,9 @@ import { useHandleSubmit } from '../context/useHandleSubmit';
 import { useHandleChange } from '../context/useHandleChange';
 import { useHandleOnSidebar } from '../context/useHandleOnSidebar';
 import { useStateFooterItemEditor } from '../context/useStateFooterItemEditor';
+import { TFooterItemEdittingParams } from '../context/useCreateFooterItem';
+import { T_data_type_article, T_data_type_footer_item } from '../../../../../Store/Interface';
+import { TDataTypeAndSet } from '../../../Drawer/QuillEditor/components/SwitchDataTypeBox'
 
 const useFooterItemEditorProps = () => {
   const {
@@ -68,6 +70,10 @@ const useFooterItemEditorProps = () => {
 
   const handleChange = useHandleChange(edittingFooterItemParams)
 
+  const dataTypeAndSet: TDataTypeAndSet<T_data_type_footer_item> = {
+    dataType,
+    setDataType,
+  }
 
   return {
     onTapRadio,
@@ -89,8 +95,7 @@ const useFooterItemEditorProps = () => {
     setCharCountFooterItemContent,
     handleOnChangeIconName,
     handleSubmit,
-    dataType,
-    setDataType,
+    dataTypeAndSet,
     is_admin,
     isMobile,
     onSidebar,
@@ -235,11 +240,7 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                {props.isEditting ? "アイテム編集" : "アイテム作成"}
              </Typography>
              {props.is_admin ? (
-               <SwitchDataTypeBox
-                 dataType={props.dataType}
-                 setDataType={props.setDataType}
-                 forFooter
-               />
+               <SwitchDataTypeBox dataTypeAndSet={props.dataTypeAndSet} forFooter />
              ) : null}
 
              <div className={classes.topDiv}>
@@ -258,34 +259,31 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
                />
                <br />
 
-               <SelectIcon
-                 className={classes.selectIcon}
-                 {...props}
-               />
+               <SelectIcon className={classes.selectIcon} {...props} />
              </div>
 
              <SwitchOnTapModal
                className={classes.switchOnTapModal}
                {...props}
              />
-             <div style={{display: 'inline-block'}} className={classes.switchSidebar}>
-\              <Typography
-                variant="body1"
-                component="p"
-                color="textSecondary"
-              >
-                サイドバーに表示
-                <HelpButton
-                  content="タブレットビューでのみ適応。モバイルビューでは全てサイドバーに表示されます。"
-                  size="small"
-                />
-              </Typography>
-              <Switch
-                checked={props.onSidebar}
-                onChange={props.handleOnSidebar}
-                name="onSidebar"
-                color="primary"
-              />
+             <div
+               style={{ display: "inline-block" }}
+               className={classes.switchSidebar}
+             >
+               \{" "}
+               <Typography variant="body1" component="p" color="textSecondary">
+                 サイドバーに表示
+                 <HelpButton
+                   content="タブレットビューでのみ適応。モバイルビューでは全てサイドバーに表示されます。"
+                   size="small"
+                 />
+               </Typography>
+               <Switch
+                 checked={props.onSidebar}
+                 onChange={props.handleOnSidebar}
+                 name="onSidebar"
+                 color="primary"
+               />
              </div>
 
              {mainField}

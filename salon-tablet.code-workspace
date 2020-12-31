@@ -14,6 +14,7 @@
           "Bottomright",
           "Editting",
           "MSNQ",
+          "Magzter",
           "Noto",
           "Overridable",
           "Oyib",
@@ -27,12 +28,14 @@
           "esnext",
           "formdata",
           "gcloud",
+          "ibooks",
           "infosalontablet",
           "mixins",
           "msapplication",
           "myproject",
           "noindex",
           "qrcode",
+          "rmagazine",
           "samplefooter"
         ]
     }
