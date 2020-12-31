@@ -33,13 +33,14 @@ export const useSwitchOrder = () => {
       }
     };
 
-    const data = await apiFooterItemsSwitchOrder(params);
-
-    if (data.err === true) {
+    try {
+      await apiFooterItemsSwitchOrder(params);
+      getFooterItems();
+    } catch (err) {
       alert("アイテムを入れ替えることができませんでした");
       dispatchAppState(isLoadingFooter(false));
-    } else {
-      getFooterItems();
+
     }
+
   };
 };

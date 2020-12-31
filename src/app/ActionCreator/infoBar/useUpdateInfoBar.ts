@@ -35,14 +35,15 @@ export const useUpdateInfoBar = () => {
         selected_article_id: param.articleInfoBar,
     }
 
-    const data = await apiInfoBarUpdate(params);
-
-    if (data.err === true) {
-      alert("更新できませんでした");
-    } else {
+    try {
+      await apiInfoBarUpdate(params);
       dispatchAppState(closeModal())
-
+  
       getInfoBar();
+    } catch (err) {
+      alert("更新できませんでした");
+
     }
+
   };
 };

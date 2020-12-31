@@ -21,16 +21,16 @@ export const useDeleteInstagramAccount = () => {
 
     dispatchAppState(isLoadingInstagramAccounts(true))
 
-    const data = await apiInstagramAccountsDelete({ instagram_id });
-
-    if (data.err === true) {
-      alert("削除できませんでした");
-      dispatchAppState(isLoadingInstagramAccounts(false))
-    } else {
+    try {
+      await apiInstagramAccountsDelete({ instagram_id });
       dispatchAppState(isShowInstagram(false));
       dispatchInstagram(removeMedias())
-
+  
       getInstagramAccounts();
+    } catch (err) {
+      alert("削除できませんでした");
+      dispatchAppState(isLoadingInstagramAccounts(false))
+
     }
-  };
-};
+  }
+}

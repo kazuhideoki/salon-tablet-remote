@@ -78,15 +78,16 @@ export const useCreateFooterItem = () => {
       user_id: userInfo.user_id,
     };
 
-    const data = await apiFooterItemsCreate(params)
-
-    if (data.err === true) {
+    try {
+      await apiFooterItemsCreate(params)
+      dispatchAppState(closeModal())
+  
+      getFooterItems();
+    } catch (err) {
       alert("投稿できませんでした");
       dispatchAppState(isLoadingFooter(false))
-    } else {
-      dispatchAppState(closeModal())
 
-      getFooterItems();
     }
+
   };
 };

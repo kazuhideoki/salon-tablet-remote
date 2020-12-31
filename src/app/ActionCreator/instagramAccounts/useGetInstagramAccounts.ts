@@ -18,14 +18,14 @@ export const useGetInstagramAccounts = () => {
 
     dispatchAppState(isLoadingInstagramAccounts(true))
 
-    const data = await apiInstagramAccountsGet(userInfo.user_id);
-
-    if (data.err === true) {
-      alert("取得できませんでした");
-      dispatchAppState(isLoadingInstagramAccounts(false));
-    } else {
+    try {
+      const data = await apiInstagramAccountsGet(userInfo.user_id);
       dispatchAppState(isLoadingInstagramAccounts(false));
       dispatchInstagram(setAccounts(data))
+    } catch (err) {
+      alert("取得できませんでした");
+      dispatchAppState(isLoadingInstagramAccounts(false));
+
     }
-  };
+  }
 };

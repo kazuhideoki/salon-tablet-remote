@@ -13,13 +13,13 @@ export const useGetInfoBar = () => {
 
   return async () => {
 
-    const data = await apiInfoBarGet(userInfo.user_id);
-
-    if (data.err === true) {
+    try {
+      const data = await apiInfoBarGet(userInfo.user_id);
+      dispatchInfoBar(set(data))
+    } catch (err) {
       alert("取得できませんでした");
       dispatchAppState(isLoadingFooter(false))
-    } else {
-      dispatchInfoBar(set(data))
+
     }
   };
 };

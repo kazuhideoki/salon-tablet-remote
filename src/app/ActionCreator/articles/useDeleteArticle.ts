@@ -23,20 +23,21 @@ export const useDeleteArticle = () => {
     }
     
     dispatchAppState(isLoadingMain(true));
+    try {
+      await apiArticlesDelete({ article_id });
 
-    const data = await apiArticlesDelete({ article_id });
-
-    if (data.err === true) {
-      alert("削除できませんでした");
-      dispatchAppState(isLoadingMain(false));
-    } else {
-      //   ページに表示されている記事が1で、かつ、最後の1記事ではない
       if (articles.length === 1 && paginationParams.rowCount > 1) {
         const targetPage = paginationParams.page - 1;
         getArticles(appState.isSetting,targetPage);
       } else {
         getArticles(appState.isSetting, paginationParams.page);
       }
+
+    } catch (err) {
+      alert("削除できませんでした");
+      dispatchAppState(isLoadingMain(false));
+
     }
+
   };
 };

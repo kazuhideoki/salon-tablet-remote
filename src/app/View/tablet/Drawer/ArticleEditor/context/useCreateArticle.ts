@@ -40,16 +40,16 @@ export const useCreateArticle =  () => {
       user_id: userInfo.user_id,
     };
 
-    const data = await apiArticlesCreate(params)
+    try {
+      const data = await apiArticlesCreate(params)
+      
+      dispatchAppState(closeModal())
+      getArticles(appState.isSetting, 1, []);
 
-    if (data.err === true) {
-
+    } catch (e) {
       alert("投稿できませんでした");
       dispatchAppState(isLoadingMain(false));
-    } else {
-      dispatchAppState(closeModal())
-
-      getArticles(appState.isSetting, 1, []);
     }
+
   };
 };

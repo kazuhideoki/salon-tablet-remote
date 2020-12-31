@@ -16,14 +16,15 @@ export const useGetFooterItems = () => {
 
     dispatchAppState(isLoadingFooter(true))
 
-    const data = await apiFooterItemsGet(userInfo.user_id);
-
-    if (data.err === true) {
-      alert("取得できませんでした");
-      dispatchAppState(isLoadingFooter(false));
-    } else {
+    try {
+      const data = await apiFooterItemsGet(userInfo.user_id);
       dispatchAppState(isLoadingFooter(false));
       dispatchFooterItems(set(data))
+    } catch (err) {
+      alert("取得できませんでした");
+      dispatchAppState(isLoadingFooter(false));
+
     }
+
   };
 };

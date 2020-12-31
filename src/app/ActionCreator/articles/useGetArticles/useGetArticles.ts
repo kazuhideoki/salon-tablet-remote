@@ -26,14 +26,8 @@ export const useGetArticles = () => {
       userId: userInfo.user_id,
     };
 
-    const data = await apiArticlesGet(params)
-    
-
-    if (data.err === true) {
-      alert("記事を取得できませんでした");
-      dispatchAppState(isLoadingMain(false));
-      return false
-    } else {
+    try {
+      const data = await apiArticlesGet(params)
       const arg = {
           data,
           selectedArticlesTags: selectingTags || [],
@@ -47,8 +41,14 @@ export const useGetArticles = () => {
       dispatchAppState(isShowInstagram(bool))
       dispatchArticles(set(arg.data));
       dispatchAppState(isLoadingMain(false));
-
+  
       return true
+    } catch (err) {
+      alert("記事を取得できませんでした");
+      dispatchAppState(isLoadingMain(false));
+      return false
+
     }
+
   };
 };

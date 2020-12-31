@@ -27,15 +27,15 @@ export const useUpdateFooterItem = () => {
       },
     };
 
-    const data = await apiFooterItemsUpdate(params);
-
-    if (data.err === true) {
+    try {
+      await apiFooterItemsUpdate(params);
+      dispatchAppState(closeModal())
+      getFooterItems();
+    } catch (err) {
       alert("更新できませんでした");
       dispatchAppState(isLoadingFooter(false))
-    } else {
-      dispatchAppState(closeModal())
 
-      getFooterItems();
     }
+
   };
 };
