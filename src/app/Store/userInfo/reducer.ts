@@ -1,5 +1,5 @@
-import { reducerLogger } from "../../Reducer/reducerLogger";
-import { TUserInfo } from "../Types";
+import { reducerLogger } from "../../../lib/dev/reducerLogger";
+import { TUserInfo } from "../Interface";
 import { TUserInfoAction } from "./actions";
 import * as types from "./types";
 

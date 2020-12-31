@@ -1,5 +1,5 @@
 import React from "react";
-import { T_footer_icon_size } from "../../../../../../Store/Types";
+import { T_footer_icon_size } from "../../../../../../Store/Interface";
 import {
   apiUserInfoChangeFooterIconSize,
   T_user_info_change_footer_icon_size,

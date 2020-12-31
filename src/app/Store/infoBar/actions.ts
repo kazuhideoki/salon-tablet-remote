@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { TInfoBar, TInfoBarData } from "../Types";
+import { TInfoBar, TInfoBarData } from "../Interface";
 
 export const set = (infoBar: TInfoBarData) => ({
          type: types.SET,

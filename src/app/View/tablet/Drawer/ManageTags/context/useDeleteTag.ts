@@ -1,7 +1,7 @@
 import React from "react";
 import {
   T_tag_id,
-} from "../../../../../Store/Types";
+} from "../../../../../Store/Interface";
 import { useGetTags } from "./lib/useGetTags";
 import { T_tags_delete, apiTagsDelete } from "../../../../../../pages/api/tags/delete";
 import { UserInfoContext } from "../../../../../Store/userInfo/Context";

@@ -1,8 +1,8 @@
-import { T_selected_theme } from "../Types";
-import { TThemeParams } from "../ThemeContext";
-import { themeWhite } from "./themeWhite";
-import { themeNatural } from "./themeNatural";
-import { themeDefault } from "./themeDefault";
+import { T_selected_theme } from "../../Interface";
+import { TThemeParams } from "../ThemeProvider";
+import { themeWhite } from "./themes/themeWhite";
+import { themeNatural } from "./themes/themeNatural";
+import { themeDefault } from "./themes/themeDefault";
 
 const defaultTheme: TThemeParams = {
   selected_theme: 'default',

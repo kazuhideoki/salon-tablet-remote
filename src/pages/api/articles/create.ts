@@ -8,7 +8,7 @@ import {
   T_article_img,
   T_user_id,
   T_data_type_article,
-} from "../../../app/Store/Types";
+} from "../../../app/Store/Interface";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";

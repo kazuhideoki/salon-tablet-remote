@@ -5,7 +5,7 @@ import {
   T_info_bar_update,
   apiInfoBarUpdate,
 } from "../../../../../../pages/api/info_bar/update";
-import { T_info_bar_type } from "../../../../../Store/Types";
+import { T_info_bar_type } from "../../../../../Store/Interface";
 import { UserInfoContext } from "../../../../../Store/userInfo/Context";
 import { AppStateContext } from "../../../../../Store/appState/Context";
 import { closeModal } from "../../../../../Store/appState/actions";

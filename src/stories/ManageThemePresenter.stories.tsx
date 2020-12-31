@@ -3,7 +3,7 @@ import React from 'react';
 import "../../public/fonts/fonts.css";
 
 import { ManageThemePresenter, TUseManageThemeProps, TColor } from '../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
-import { TFont1, TFont2 } from '../app/Store/themes/fonts';
+import { TFont1, TFont2 } from '../app/Store/theme/lib/fonts';
 import { googleFontsUrl } from '../lib/googleFontsUrl';
 import { generateSecondaryColor } from '../lib/color/generateSecondaryColor';
 export default {

@@ -1,7 +1,7 @@
 import React from "react";
 import {
   T_article_id,
-} from "../../../../Store/Types";
+} from "../../../../Store/Interface";
 import { useGetArticles } from "./lib/useGetArticles";
 import { apiArticlesDelete } from "../../../../../pages/api/articles/delete";
 import { ArticlesContext } from "../../../../Store/articles/Context";

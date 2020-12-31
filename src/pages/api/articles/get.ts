@@ -1,7 +1,7 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { tagIdsToNumberArray } from "../../../lib/tagIdsToNumberArray";
-import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Types";
+import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Interface";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
 import { apiWrapPost } from "../../../lib/apiWrap";

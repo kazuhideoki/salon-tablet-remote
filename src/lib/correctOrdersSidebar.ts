@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { FooterItems } from "../app/Store/Types";
+import { FooterItems } from "../app/Store/Interface";
 
 export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
   const onSidebar = data.filter((value, index) => {

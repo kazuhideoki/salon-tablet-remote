@@ -3,7 +3,7 @@ import { PaginationBarPresenter, TUsePaginationBarProps } from '../app/View/tabl
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 import { sampleTags } from './lib/sampleTags';
 import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';
-import { initInstagramMedias } from '../app/Store/Types';
+import { initInstagramMedias } from '../app/Store/Interface';
 export default {
   title: "Footer/Pagination/PaginationBar",
   component: PaginationBarPresenter,

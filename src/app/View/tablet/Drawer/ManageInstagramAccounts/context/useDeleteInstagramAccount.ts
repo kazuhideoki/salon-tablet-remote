@@ -1,5 +1,5 @@
 import React from "react";
-import { T_instagram_id } from "../../../../../Store/Types";
+import { T_instagram_id } from "../../../../../Store/Interface";
 import { useGetInstagramAccounts } from "./lib/useGetInstagramAccounts";
 import { apiInstagramAccountsDelete } from "../../../../../../pages/api/instagram_accounts/delete";
 import { InstagramContext } from "../../../../../Store/instagram/Context";

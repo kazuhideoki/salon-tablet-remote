@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { HelpButton } from '../../../../../pureComponents/buttons/HelpButton';
-import { T_on_tap } from '../../../../../Store/Types';
+import { T_on_tap } from '../../../../../Store/Interface';
 import { TUseFooterItemEditorProps } from '../view/FooterItemEditor';
 
 type Props = TUseFooterItemEditorProps & {

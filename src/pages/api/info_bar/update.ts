@@ -6,7 +6,7 @@ import {
   T_selected_article_id,
   T_user_id,
   T_scrolling_animation_duration,
-} from "../../../app/Store/Types";
+} from "../../../app/Store/Interface";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { apiWrapPost } from "../../../lib/apiWrap";

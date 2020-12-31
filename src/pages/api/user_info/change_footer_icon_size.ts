@@ -1,6 +1,6 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_user_id } from "../../../app/Store/Types";
+import { T_user_id } from "../../../app/Store/Interface";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { apiWrapPost } from "../../../lib/apiWrap";

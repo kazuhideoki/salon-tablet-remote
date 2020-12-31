@@ -8,7 +8,7 @@ import {
   TInstagramAccounts,
   TAllArticles,
   TInfoBarData,
-} from "../app/Store/Types";
+} from "../app/Store/Interface";
 import { App } from "../app/View/App";
 import { GetServerSideProps } from "next";
 import { TopPage } from "../pageComponent/TopPage";

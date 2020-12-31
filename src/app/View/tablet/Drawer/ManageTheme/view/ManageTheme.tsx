@@ -1,14 +1,14 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
-import { TThemeParams } from "../../../../../Store/ThemeContext";
+import { TThemeParams } from "../../../../../Store/theme/ThemeProvider";
 import { Divider, Typography } from "@material-ui/core";
 import { SelectTheme } from "../components/SelectTheme";
 import { SelectShowArticleType } from "../components/SelectShowArticleType";
-import { T_show_article_type, T_selected_theme, T_theme_color, T_footer_icon_size } from "../../../../../Store/Types";
+import { T_show_article_type, T_selected_theme, T_theme_color, T_footer_icon_size } from "../../../../../Store/Interface";
 import { SelectPrimaryColor } from "../components/SelectPrimaryColor";
 import { SelectFont } from "../components/SelectFont";
-import { TFont1, TFont2, fonts2, fonts1 } from "../../../../../Store/themes/fonts";
+import { TFont1, TFont2, fonts2, fonts1 } from "../../../../../Store/theme/lib/fonts";
 import { FiberManualRecord } from "@material-ui/icons";
 import { generateSecondaryColor } from "../../../../../../lib/color/generateSecondaryColor";
 import { secondaryColor } from "../../../../../../lib/color/secondaryColor";
@@ -17,7 +17,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {isThemeParamsChanged} from '../../../../../Store/themes/paramsFromTheme'
+import {isThemeParamsChanged} from '../../../../../Store/theme/lib/paramsFromTheme'
 import { useAuth } from "../../../../../../lib/auth/AuthProvider";
 import { useHandleChange } from "../context/useHandleChange";
 import { useHandleChangeThemeColor } from "../context/useHandleChangeThemeColor";

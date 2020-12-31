@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppStateContext } from '../../../../../Store/appState/Context';
 import { FooterItemsContext } from '../../../../../Store/footerItems/Context';
-import { ThemeContext } from "../../../../../Store/ThemeContext";
+import { ThemeContext } from "../../../../../Store/theme/ThemeProvider";
 
 
 export const useStateDrawer = () => {

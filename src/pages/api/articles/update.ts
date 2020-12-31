@@ -10,7 +10,7 @@ import {
   T_article_excerpt,
   T_article_img,
   T_data_type_article,
-} from "../../../app/Store/Types";
+} from "../../../app/Store/Interface";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";
 import { apiWrapPost } from "../../../lib/apiWrap";
 

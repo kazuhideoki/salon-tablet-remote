@@ -2,7 +2,7 @@ import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
-import { T_order_sidebar, T_footer_item_id, T_order } from "../../../app/Store/Types";
+import { T_order_sidebar, T_footer_item_id, T_order } from "../../../app/Store/Interface";
 import { apiWrapPost } from "../../../lib/apiWrap";
 
 

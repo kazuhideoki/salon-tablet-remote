@@ -1,10 +1,10 @@
 import React from 'react'
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core";
-import { useThemeArgs, ThemeContext } from "../../app/Store/ThemeContext";
+import { useThemeArgs, ThemeContext } from "../../app/Store/theme/ThemeProvider";
 import { SelectTheme } from '../../app/View/tablet/Drawer/ManageTheme/components/SelectTheme';
 import { useManageTheme } from '../../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
-import { generateDefaultParamsFromTheme, switchingTheme } from '../../app/Store/themes/paramsFromTheme';
-import { T_selected_theme } from '../../app/Store/Types';
+import { generateDefaultParamsFromTheme, switchingTheme } from '../../app/Store/theme/lib/paramsFromTheme';
+import { T_selected_theme } from '../../app/Store/Interface';
 import Head from 'next/head';
 import { googleFontsUrl } from '../../lib/googleFontsUrl';
 

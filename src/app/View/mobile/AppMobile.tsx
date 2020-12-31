@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core";
 import { Drawer } from '../tablet/Drawer/Drawer/view/Drawer';
 import InfoBar from '../tablet/InfoBar/view/InfoBar';
 import { PaginationBar } from '../tablet/Footer/PaginationBar/view/PaginationBar';
-import { TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
+import { TThemeArgs, ThemeContext } from '../../Store/theme/ThemeProvider';
 import { AppStateContext } from '../../Store/appState/Context';
 
 const useStyles = makeStyles((theme: Theme) => {

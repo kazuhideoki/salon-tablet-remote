@@ -1,7 +1,7 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
-import { T_article_id } from "../../../app/Store/Types";
+import { T_article_id } from "../../../app/Store/Interface";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { apiWrapPost } from "../../../lib/apiWrap";
 

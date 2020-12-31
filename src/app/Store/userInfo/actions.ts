@@ -1,7 +1,7 @@
 import * as types from "./types";
-import { T_footer_icon_size, T_is_generate_public_page, T_show_article_type, T_theme_color, T_theme_font } from "../Types";
+import { T_footer_icon_size, T_is_generate_public_page, T_show_article_type, T_theme_color, T_theme_font } from "../Interface";
 import { T_user_info_update } from "../../../pages/api/user_info/update";
-import { TThemeParams } from "../ThemeContext";
+import { TThemeParams } from "../theme/ThemeProvider";
 
 export const update = (userInfo: T_user_info_update) => ({
          type: types.UPDATE,

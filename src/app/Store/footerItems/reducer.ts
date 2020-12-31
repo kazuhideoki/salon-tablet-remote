@@ -1,5 +1,5 @@
-import { reducerLogger } from "../../Reducer/reducerLogger";
-import { FooterItems } from "../Types";
+import { reducerLogger } from "../../../lib/dev/reducerLogger";
+import { FooterItems } from "../Interface";
 import { TFooterItemsAction } from "./actions";
 import * as types from "./types";
 

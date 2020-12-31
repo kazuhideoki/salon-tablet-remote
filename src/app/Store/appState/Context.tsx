@@ -1,5 +1,5 @@
 import React from "react";
-import { initAppState } from "../Types";
+import { initAppState } from "./initialValue";
 import { TAppStateAction } from "./actions";
 import { appStateReducer, AppStateContextState } from "./reducer";
 

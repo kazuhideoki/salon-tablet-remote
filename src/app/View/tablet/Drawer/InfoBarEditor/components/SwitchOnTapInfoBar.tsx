@@ -4,7 +4,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { T_info_bar_type } from "../../../../../Store/Types";
+import { T_info_bar_type } from "../../../../../Store/Interface";
 
 type Props = {
   infoBarType: T_info_bar_type;

@@ -7,6 +7,7 @@ import { InfoBarContextProvider } from "./infoBar/Context";
 import { InstagramContextProvider } from "./instagram/Context";
 import { UserInfoContextProvider } from "./userInfo/Context";
 import { AppStateContextProvider } from "./appState/Context";
+import { ThemeProvider } from "./theme/ThemeProvider";
 
 export type TStoreProps = IndexPropsData & {isPublicPage: boolean, device: string, samplePage: string, }
 
@@ -20,7 +21,9 @@ export const StoreContextProvider: React.FC<TStoreProps> = (props) => {
             <TagsContextProvider tags={props.tags}>
               <InfoBarContextProvider infoBarData={props.infoBarData}>
                 <InstagramContextProvider instagramAccounts={props.instagramAccounts}>
-                  {props.children}
+                  <ThemeProvider {...props.userInfo}>
+                    {props.children}
+                  </ThemeProvider>
                 </InstagramContextProvider>
               </InfoBarContextProvider>
             </TagsContextProvider>

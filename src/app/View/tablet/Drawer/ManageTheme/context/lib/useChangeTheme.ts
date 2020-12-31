@@ -1,9 +1,9 @@
 import React from "react";
 import {
   T_selected_theme,
-} from "../../../../../../Store/Types";
+} from "../../../../../../Store/Interface";
 import { apiUserInfoChangeTheme, T_user_info_change_theme } from "../../../../../../../pages/api/user_info/theme/change_theme";
-import { generateDefaultParamsFromTheme } from "../../../../../../Store/themes/paramsFromTheme";
+import { generateDefaultParamsFromTheme } from "../../../../../../Store/theme/lib/paramsFromTheme";
 import { UserInfoContext } from "../../../../../../Store/userInfo/Context";
 import { setTheme } from "../../../../../../Store/userInfo/actions";
 

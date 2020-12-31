@@ -1,5 +1,5 @@
-import { reducerLogger } from "../../Reducer/reducerLogger";
-import { initInstagramMedias, TInstagramAccounts, TInstagramMedias } from "../Types";
+import { reducerLogger } from "../../../lib/dev/reducerLogger";
+import { initInstagramMedias, TInstagramAccounts, TInstagramMedias } from "../Interface";
 import { TInstagramAction } from "./actions";
 import * as types from "./types";
 

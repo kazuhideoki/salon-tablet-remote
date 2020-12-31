@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { Main } from "./Main/view/Main";
 import { Footer } from "./Footer/Footer/view/Footer";
-import { ThemeContext } from "../../Store/ThemeContext";
+import { ThemeContext } from "../../Store/theme/ThemeProvider";
 import { Drawer } from "./Drawer/Drawer/view/Drawer";
 import dynamic from "next/dynamic";
 import { PaginationBar } from "./Footer/PaginationBar/view/PaginationBar";

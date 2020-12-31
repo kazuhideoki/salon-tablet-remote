@@ -2,7 +2,7 @@ import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   T_footer_item_id,
-} from "../../../app/Store/Types";
+} from "../../../app/Store/Interface";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { checkIsAdmin } from "../../../lib/checkIsAdmin";

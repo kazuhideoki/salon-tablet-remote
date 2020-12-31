@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { initInstagramMedias, TInstagramAccounts, TInstagramMedias, T_instagram_id, T_is_reconnect_needed } from "../Types";
+import { initInstagramMedias, TInstagramAccounts, TInstagramMedias, T_instagram_id, T_is_reconnect_needed } from "../Interface";
 
 export const setAccounts = (instagramAccounts: TInstagramAccounts) => ({
          type: types.SET_ACCOUNTS,

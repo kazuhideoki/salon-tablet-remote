@@ -1,5 +1,5 @@
 import React from "react";
-import { T_show_article_type } from "../../../../../../Store/Types";
+import { T_show_article_type } from "../../../../../../Store/Interface";
 import {
   apiUserInfoChangeShowArticleType,
   T_user_info_change_show_article_type,

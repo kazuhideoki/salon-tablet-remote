@@ -1,4 +1,4 @@
-import { TUserInfo } from "../app/Store/Types";
+import { TUserInfo } from "../app/Store/Interface";
 
 export const userInfoParamsFromSql = (userInfo: TUserInfo) => {
   //@ts-ignore

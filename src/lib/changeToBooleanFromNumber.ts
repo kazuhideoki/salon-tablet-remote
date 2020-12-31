@@ -1,4 +1,4 @@
-import { FooterItems, TInstagramAccounts } from "../app/Store/Types";
+import { FooterItems, TInstagramAccounts } from "../app/Store/Interface";
 
 // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
 export const changeToBooleanFromNumberFooterItems = (data: FooterItems) => {

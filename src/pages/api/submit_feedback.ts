@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { TUserInfo } from "../../app/Store/Types";
+import { TUserInfo } from "../../app/Store/Interface";
 import { server, localhost } from "../../lib/loadUrl";
 
 const receiverEmailAddress = "infosalontablet@gmail.com";

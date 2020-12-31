@@ -1,7 +1,7 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { checkOrders } from "../../../lib/checkOrders";
-import { FooterItems, T_user_id } from "../../../app/Store/Types";
+import { FooterItems, T_user_id } from "../../../app/Store/Interface";
 import { correctOrders } from "../../../lib/correctOrders";
 import { changeToBooleanFromNumberFooterItems } from "../../../lib/changeToBooleanFromNumber";
 import { localhost, server } from "../../../lib/loadUrl";

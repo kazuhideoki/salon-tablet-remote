@@ -5,7 +5,7 @@ import {
   T_tag_id,
   T_user_id,
   T_article_id,
-} from "../../../app/Store/Types";
+} from "../../../app/Store/Interface";
 import { deleteTagIdInArticle } from "../../../lib/deleteTagIdInArticle";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";

@@ -1,6 +1,6 @@
 import { db } from "../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TArticle, FooterItems, FooterItem, T_user_id, TArticles } from "../../app/Store/Types";
+import { TArticle, FooterItems, FooterItem, T_user_id, TArticles } from "../../app/Store/Interface";
 import { TApiResponse } from "../../lib/apiTypes";
 import { server, localhost } from "../../lib/loadUrl";
 import { apiWrapPost } from "../../lib/apiWrap";

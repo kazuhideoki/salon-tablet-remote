@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeContext } from "../../../../../Store/ThemeContext";
+import { ThemeContext } from "../../../../../Store/theme/ThemeProvider";
 import { Grid, makeStyles, createStyles, Theme, Chip, IconButton, withStyles, useTheme, Card, useMediaQuery } from "@material-ui/core";
 import { useGetArticles } from "../../../Main/context/lib/useGetArticles";
 import { HomeButton } from "../components/HomeButton";
