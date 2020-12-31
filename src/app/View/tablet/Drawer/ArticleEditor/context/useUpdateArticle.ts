@@ -1,13 +1,13 @@
 import React from "react";
-import { useGetArticles } from "./useGetArticles/useGetArticles";
+import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles/useGetArticles";
 import { TCreateArticle } from "./useCreateArticle";
 import {
   T_articles_update,
   apiArticlesUpdate,
-} from "../../../pages/api/articles/update";
-import { ArticlesContext } from "../../Store/articles/Context";
-import { AppStateContext } from "../../Store/appState/Context";
-import { closeModal, isLoadingMain } from "../../Store/appState/actions";
+} from "../../../../../../pages/api/articles/update";
+import { ArticlesContext } from "../../../../../Store/articles/Context";
+import { AppStateContext } from "../../../../../Store/appState/Context";
+import { closeModal, isLoadingMain } from "../../../../../Store/appState/actions";
 
 export type TUpdateArticle = TCreateArticle;
 

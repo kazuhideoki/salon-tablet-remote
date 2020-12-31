@@ -2,8 +2,8 @@ import React from 'react'
 import {
   useCreateArticle,
   TCreateArticle,
-} from "../../../../../ActionCreator/articles/useCreateArticle";
-import { useUpdateArticle } from "../../../../../ActionCreator/articles/useUpdateArticle";
+} from "./useCreateArticle";
+import { useUpdateArticle } from "./useUpdateArticle";
 
 type Type = { is_published: boolean }
 

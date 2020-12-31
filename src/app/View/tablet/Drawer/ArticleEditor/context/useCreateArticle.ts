@@ -1,10 +1,10 @@
 import React from "react";
-import { useGetArticles } from "./useGetArticles/useGetArticles";
-import { T_articles_create, apiArticlesCreate } from "../../../pages/api/articles/create";
-import { T_data_type_article } from "../../Store/Types";
-import { UserInfoContext } from "../../Store/userInfo/Context";
-import { AppStateContext } from "../../Store/appState/Context";
-import { closeModal, isLoadingMain } from "../../Store/appState/actions";
+import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles/useGetArticles";
+import { T_articles_create, apiArticlesCreate } from "../../../../../../pages/api/articles/create";
+import { T_data_type_article } from "../../../../../Store/Types";
+import { UserInfoContext } from "../../../../../Store/userInfo/Context";
+import { AppStateContext } from "../../../../../Store/appState/Context";
+import { closeModal, isLoadingMain } from "../../../../../Store/appState/actions";
 
 export type TCreateArticle = {
   is_published: boolean
