@@ -6,35 +6,36 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { T_data_type_article, T_data_type_footer_item } from "../../../../../Store/Interface";
 
+export type TDataTypeAndSet<T> = {
+  dataType: T
+  setDataType: React.Dispatch<T>
+}
 type Props = {
-  dataType: T_data_type_article | T_data_type_footer_item
-  setDataType: React.Dispatch<React.SetStateAction<T_data_type_article | T_data_type_footer_item>>
+  dataTypeAndSet: TDataTypeAndSet<T_data_type_article> | TDataTypeAndSet<T_data_type_footer_item>
   className?: string;
   forFooter?: boolean
 };
 
 export const SwitchDataTypeBox: React.FC<Props> = ({
-         dataType,
-         setDataType,
+         dataTypeAndSet,
          className,
          forFooter = false,
        }) => {
-
          const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-           setDataType(event.target.value as T_data_type_article | T_data_type_footer_item)
+           dataTypeAndSet.setDataType(
+             event.target.value as T_data_type_footer_item
+           );
          };
 
          return (
            <div className={className}>
              <FormControl component="fieldset">
-               <FormLabel component="legend">
-                 記事タイプ
-               </FormLabel>
+               <FormLabel component="legend">記事タイプ</FormLabel>
                <RadioGroup
                  row
                  aria-label="switch-data-type-box"
                  name="switch-data-type-box"
-                 value={dataType}
+                 value={dataTypeAndSet.dataType}
                  onChange={handleChange}
                >
                  <FormControlLabel

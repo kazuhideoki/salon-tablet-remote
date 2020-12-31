@@ -36,8 +36,8 @@ export const SelectAppLink:React.FC<Props> = ({appLinkUrl, setAppLinkUrl, classN
         labelId="select-app-label"
         id="select-app"
         value={appLinkUrl}
-        onChange={(e: React.ChangeEvent<{ value: string }>) =>
-          setAppLinkUrl(e.target.value)
+        onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
+          setAppLinkUrl(e.target.value as string)
         }
         label="アプリ"
       >

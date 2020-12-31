@@ -8,10 +8,11 @@ import { TCreateArticle } from "../context/useCreateArticle";
 import { SelectTagsPopover } from "../components/SelectTagsPopover";
 import { CharCounter } from "../../../../../pureComponents/CharCounter";
 import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
-import { SwitchDataTypeBox } from "../../QuillEditor/components/SwitchDataTypeBox";
+import { SwitchDataTypeBox, TDataTypeAndSet } from "../../QuillEditor/components/SwitchDataTypeBox";
 import pure from "recompose/pure";
 import { useHandleSubmit } from '../context/useHandleSubmit'
 import { useStateArticleEditor } from "../context/useStateArticleEditor";
+import { T_data_type_article } from "../../../../../Store/Interface";
 
 
 const useArticleEditorProps = () => {
@@ -55,6 +56,11 @@ const useArticleEditorProps = () => {
 
   const handleSubmit = useHandleSubmit(params, isEditting)
 
+  const dataTypeAndSet: TDataTypeAndSet<T_data_type_article> ={
+    dataType,
+    setDataType,
+  }
+
   return {
     is_admin,
     isEditting,
@@ -74,8 +80,7 @@ const useArticleEditorProps = () => {
     handleOnChangeTitleText,
     handleSubmit,
     tags,
-    dataType,
-    setDataType,
+    dataTypeAndSet,
   };
 
 }
@@ -132,8 +137,7 @@ export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = 
              </Typography>
              {props.is_admin ? (
                <SwitchDataTypeBox
-                 dataType={props.dataType}
-                 setDataType={props.setDataType}
+                 dataTypeAndSet={props.dataTypeAndSet}
                />
              ) : null}
              <div className={classes.topDiv}>
