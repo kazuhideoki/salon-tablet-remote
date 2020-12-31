@@ -4,23 +4,11 @@ import { tagIdsToNumberArray } from "../../../lib/tagIdsToNumberArray";
 import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Types";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
-  
-  const str = process.browser ? server : localhost
-
-  const res = await fetch(
-    `${str}/api/articles/get`,
-    {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(articlesParam),
-    }
-  );
-
-  return await res.json();
+export const apiArticlesGet = async (params: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
+  return apiWrapPost("articles/get", params);
 } 
 
 export type T_articles_get = {
@@ -113,7 +101,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/articles/get/のエラーは " + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

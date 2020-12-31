@@ -1,10 +1,10 @@
 import React from 'react'
 import { useMediaQuery } from "@material-ui/core";
-import { Store } from '../app/Store/Store';
+import { AppStateContext } from '../app/Store/appState/Context';
 
 export const useIsMobile = () => {
-  const { appState } = React.useContext(Store)
-  const { uaDevice, selectedDevice } = appState
+  const { appState } = React.useContext(AppStateContext);
+  const { uaDevice } = appState
 
   // 描画直後の判定に（直後はmobileでもfalseになるため）
   const defaultMatches = () => {
@@ -21,13 +21,6 @@ export const useIsMobile = () => {
   const smallHeight = useMediaQuery("(max-height:480px)", {
     defaultMatches: defaultMatches(),
   });
-
-  if (selectedDevice === "mobile") {
-    return true;
-  }
-  if (selectedDevice === "tablet") {
-    return false;
-  }
 
   if (smallWidth || smallHeight) {
     return true

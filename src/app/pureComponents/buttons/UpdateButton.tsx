@@ -6,10 +6,11 @@ export type TUpdateButton = {
   // 記事とアイテムで共有するのでonClickまるごと渡す
   onClick: any;
   value?: any;
-} & { handleClose: () => void }
+}
 
-export const UpdateButton = (props: TUpdateButton) => {
+type Props = TUpdateButton & { handleClose?: () => void }
 
+export const UpdateButton = (props: Props) => {
          const handleOnClick = (e) => {
            e.stopPropagation();
            if (props.value) {

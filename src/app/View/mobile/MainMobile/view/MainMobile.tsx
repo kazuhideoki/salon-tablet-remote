@@ -1,5 +1,5 @@
 import React from 'react'
-import { sqlToDate } from '../../../../ActionCreator/organizeSql/sqlToDate';
+import { sqlToDate } from '../../../../../lib/sqlToDate';
 import { useMainProps } from '../../../tablet/Main/view/Main';
 import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea, Chip } from '@material-ui/core';
 import { EditButtonsBox } from '../../../../pureComponents/buttons/EditButtonsBox';
@@ -13,6 +13,7 @@ export const useMainMobileProps = () => {
     deleteArticle,
     loading,
     isSetting,
+    openArticleModal,
   } = useMainProps();
 
   return {
@@ -22,6 +23,7 @@ export const useMainMobileProps = () => {
     isSetting,
     deleteArticle,
     onClickUpdate,
+    openArticleModal,
   };
 }
 
@@ -106,10 +108,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
               // key={key}
               className={classes.item}
               onClick={() =>
-                props.dispatchAppState({
-                  type: "OPEN_ARTICLE_MODAL",
-                  payload: key,
-                })
+                props.openArticleModal(key)
               }
               component="li"
             >

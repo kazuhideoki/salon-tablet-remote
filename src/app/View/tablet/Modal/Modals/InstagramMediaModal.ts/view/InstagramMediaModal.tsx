@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, createStyles, Typography } from "@material-ui/core";
-import { sqlToDate } from "../../../../../../ActionCreator/organizeSql/sqlToDate";
+import { sqlToDate } from "../../../../../../../lib/sqlToDate";
 import { useStateInstagramMediaModal } from "../context/useStateInstagramMediaModal";
 
 const useInstagramMediaModalProps = () => {

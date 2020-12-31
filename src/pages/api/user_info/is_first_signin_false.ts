@@ -3,19 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { T_user_id } from "../../../app/Store/Types";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiIsFirsSigninFalse = async (
-         param: user_info_is_first_signin_false
+         params: user_info_is_first_signin_false
        ) => {
-         let str = process.browser ? server : localhost;
-
-         const res = await fetch(`${str}/api/user_info/is_first_signin_false`, {
-           headers: { "Content-Type": "application/json" },
-           method: "POST",
-           mode: "cors",
-           body: JSON.stringify(param),
-         });
+         return apiWrapPost("user_info/is_first_signin_false", params);
        };
 
 type user_info_is_first_signin_false = {
@@ -36,7 +30,7 @@ const is_first_signin_false = async (req: NextApiRequest, res: NextApiResponse) 
     } catch (err) {
       console.log("/user_info/is_first_signin_false/のエラーは " + JSON.stringify(err));
 
-      throw "is_first_signin_falseでエラー。";
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

@@ -1,17 +1,17 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
 import { TThemeParams } from '../../../../../Store/ThemeContext';
 import { isThemeParamsChanged } from "../../../../../Store/themes/paramsFromTheme";
+import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 
 export const useHandleAccordion = () => {
-  const { appState } = React.useContext(Store);
+  const { userInfo } = React.useContext(UserInfoContext);
   const {
     selected_theme,
     theme_color,
     theme_font1,
     theme_font2,
     theme_font_heading,
-  } = appState.userInfo;
+  } = userInfo;
   const themeParams: TThemeParams = {
     selected_theme: selected_theme,
     theme_color: theme_color,

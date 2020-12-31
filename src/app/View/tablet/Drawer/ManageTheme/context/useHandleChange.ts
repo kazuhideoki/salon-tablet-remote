@@ -1,4 +1,4 @@
-import { useChangeTheme } from "../../../../../ActionCreator/user/useChangeTheme";
+import { useChangeTheme } from "./lib/useChangeTheme";
 import { T_selected_theme } from "../../../../../Store/Types";
 
 export const useHandleChange = () => {

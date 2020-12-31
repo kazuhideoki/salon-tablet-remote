@@ -8,8 +8,8 @@ import { CharCounter } from "../../../../../pureComponents/CharCounter";
 import { SwitchOnTapInfoBar } from "../components/SwitchOnTapInfoBar";
 import { SelectArticleInfoBar } from "../components/SelectArticleInfoBar";
 import { PublishTwoTone } from "@material-ui/icons";
-import { useHandleSubmit } from "../context/useHandleSubmit";
 import { useStateInfoBarEditor } from "../context/useStateInfoBarEditor";
+import { useUpdateInfoBar } from "../context/useUpdateInfoBar";
 
 
 const useInfoBarEditorProps = () => {
@@ -25,7 +25,7 @@ const useInfoBarEditorProps = () => {
     setCharCount,
   } = useStateInfoBarEditor()
   
-  const handleSubmit = useHandleSubmit({
+  const updateInfoBar = useUpdateInfoBar({
     infoBarType,
     editorText,
     articleInfoBar,
@@ -42,7 +42,7 @@ const useInfoBarEditorProps = () => {
     articleInfoBar,
     setArticleInfoBar,
     allArticles,
-    handleSubmit,
+    updateInfoBar,
   };
 
 }
@@ -141,7 +141,7 @@ export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
                    <Button
                      variant="contained"
                      color="primary"
-                     onClick={() => props.handleSubmit()}
+                     onClick={() => props.updateInfoBar()}
                      startIcon={<PublishTwoTone />}
                      disabled={
                        props.charCount < 501

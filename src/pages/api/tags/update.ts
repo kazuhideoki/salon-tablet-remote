@@ -5,22 +5,14 @@ import {
 } from "../../../app/Store/Types";
 import { server, localhost } from "../../../lib/loadUrl";
 import { TApiResponse } from "../../../lib/apiTypes";
+import { apiWrapPost } from "../../../lib/apiWrap";
 
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsUpdata = async (
   params: T_tags_update
 ): Promise<TApiResponse<T_tags_update_return>> => {
-  let str = process.browser ? server : localhost;
-
-  const res = await fetch(`${str}/api/tags/update`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost("tags/update", params);
 }; 
 
 export type T_tags_update = {
@@ -53,7 +45,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       console.log("/tags/update/のエラーは " + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

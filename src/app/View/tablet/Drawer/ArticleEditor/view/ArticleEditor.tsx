@@ -4,7 +4,7 @@ const QuillEditor = dynamic(() => import("../../QuillEditor/view/QuillEditor"), 
   ssr: false,
 });
 import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
-import { TCreateArticle } from "../../../../../ActionCreator/articles/useCreateArticle";
+import { TCreateArticle } from "../context/useCreateArticle";
 import { SelectTagsPopover } from "../components/SelectTagsPopover";
 import { CharCounter } from "../../../../../pureComponents/CharCounter";
 import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";

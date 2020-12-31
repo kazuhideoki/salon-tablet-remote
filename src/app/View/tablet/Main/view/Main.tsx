@@ -6,15 +6,16 @@ import {
   createStyles,
   withStyles,
 } from "@material-ui/core";
-import { Store } from "../../../../Store/Store";
-import { TArticle } from "../../../../Store/Types";
 import { displayArticlesScrollJsx } from "../components/displayArticlesScrollJsx";
 import { displayArticlesGrid6Jsx } from "../components/displayArticlesGrid6Jsx";
 import { displayInstagramMediasJsx } from "../components/displayInstagramMediasJsx";
 import { noArticlesJsx } from "../components/noArticlesJsx";
 import { useOnClickUpdate } from "../context/useOnClickUpdate";
-import { useDeleteArticle } from "../context/useDeleteArticle";
 import { useStateMain } from "../context/useStateMain";
+import { useOpenArticleModal } from "../context/useOpenArticleModal";
+import { useOpenInstagramModal } from "../context/useOpenInstagramModal";
+import { useHandleLoadingMain } from "../context/useHandleLoadingMain";
+import { useDeleteArticle } from "../context/useDeleteArticle";
 
 export const useMainProps = () => {
   const { 
@@ -28,9 +29,16 @@ export const useMainProps = () => {
     isSetting,
   } = useStateMain()
 
+  const openArticleModal = useOpenArticleModal()
+
   const deleteArticle = useDeleteArticle();
 
   const onClickUpdate = useOnClickUpdate()
+
+  const openInstagramModal = useOpenInstagramModal();
+
+  const handleLoadingMain = useHandleLoadingMain()
+  
   
   return {
     isSetting,
@@ -38,11 +46,16 @@ export const useMainProps = () => {
     instagramMedias,
     tags,
     deleteArticle,
+
     dispatchAppState,
+    openArticleModal,
+    openInstagramModal,
+
     isShowInstagram,
     show_article_type: userInfo.show_article_type,
     onClickUpdate,
     loading,
+    handleLoadingMain,
   };
 };
 
@@ -178,11 +191,13 @@ export const MainPresenter:React.FC<TUseMainProps> = (props) => {
   let displayContent
 
   if (props.isShowInstagram) {
-    if (props.articles.length) {
+
+    if (props.instagramMedias.data.length) {
       displayContent = displayInstagramMedias;
     } else {
       displayContent = noArticles
     }
+
   } else {
     if (props.articles.length) {
       switch (props.show_article_type) {

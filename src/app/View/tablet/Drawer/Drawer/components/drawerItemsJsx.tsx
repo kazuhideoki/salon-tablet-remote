@@ -82,12 +82,12 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
       <EditButtonsBox
         className={classes.editButtonsBox}
         switch
-        switchProps={{ smaller: smallerValue, larger: value }}
+        switchProps={{ smaller: smallerValue, larger: value, switchOrder: props.switchOrder }}
         update
         updateProps={{ onClick: props.handleOnUpDateFooterIcon, value: value }}
         delete
         deleteProps={{
-          onClick: props.deleteItem,
+          onClick: props.deleteFooterItem,
           value: { footer_item_id: value.footer_item_id, order: value.order },
         }}
       />
@@ -130,10 +130,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 // key={index}
                 button
                 onClick={() =>
-                  props.dispatchAppState({
-                    type: "OPEN_FOOTER_ITEM_MODAL",
-                    payload: value.footer_item_id,
-                  })
+                  props.openFooterItemModal(value)
                 }
               >
                 <ListItemIcon>

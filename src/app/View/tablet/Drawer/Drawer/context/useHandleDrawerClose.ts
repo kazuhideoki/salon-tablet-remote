@@ -1,12 +1,14 @@
 import React from 'react'
-import { useGetArticles } from '../../../../../ActionCreator/articles/useGetArticles';
-import { Store } from '../../../../../Store/Store';
+import { useGetArticles } from '../../../Main/context/lib/useGetArticles';
+import { closeDrawer } from '../../../../../Store/appState/actions';
+import { AppStateContext } from '../../../../../Store/appState/Context';
+
 export const useHandleDrawerClose = () => {
   const getArticles = useGetArticles();
-  const { dispatchAppState, appState } = React.useContext(Store);
+  const { appState, dispatchAppState } = React.useContext(AppStateContext);
 
   return () => {
     getArticles(false, 1, appState.selectedArticlesTags, false);
-    dispatchAppState({ type: "CLOSE_DRAWER" }); // getArticlesまえにdispatchされた値は,apiに送信されるときに反映されない。→get終わってから反映
+    dispatchAppState(closeDrawer())
   };
 }

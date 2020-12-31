@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
 import { TThemeParams } from "../../../../../Store/ThemeContext";
-import { Store } from "../../../../../Store/Store";
 import { Divider, Typography } from "@material-ui/core";
 import { SelectTheme } from "../components/SelectTheme";
 import { SelectShowArticleType } from "../components/SelectShowArticleType";

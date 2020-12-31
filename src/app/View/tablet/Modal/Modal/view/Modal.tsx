@@ -26,10 +26,10 @@ import { GoogleSearch } from "../../Modals/GoogleSearch/view/GoogleSearch";
 import { PageNotEmailVerified } from "../../../../../../pageComponent/PageNotEmailVerified";
 import { switchingTransition } from "../context/switchingTransition";
 import { useCloseModal } from "../context/useCloseModal";
-import { useOpenModal } from "../context/useOpenModal";
 import { useStateModal } from "../context/useStateModal";
+import { useIsMobile } from "../../../../../../lib/useIsMobile";
 
-const useModalProps = () => {
+export const useModalProps = () => {
   const {
     modalSize,
     setModal,
@@ -39,9 +39,9 @@ const useModalProps = () => {
     edittingPrams,
   } = useStateModal()
 
-  const openModal = useOpenModal()
-
   const closeModal = useCloseModal()
+
+  const isMobile = useIsMobile()
 
   const theme = useTheme()
   const duration = theme.transitions.duration
@@ -50,12 +50,12 @@ const useModalProps = () => {
     modalSize,
     setModal,
     isModalOpen,
-    openModal,
     currentModalContent,
     closeModal,
     duration,
     selected_theme,
     edittingPrams,
+    isMobile,
   };
 };
 
@@ -174,6 +174,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             transitionDuration={skipTransition ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
             onClose={props.closeModal}
             maxWidth="xl"
+            isMobile={props.isMobile}
           >
             {props.setModal === 'google_search' ? null : <CloseButton onClick={props.closeModal} /> }
             <DialogContent className={classes.dialogContent}>

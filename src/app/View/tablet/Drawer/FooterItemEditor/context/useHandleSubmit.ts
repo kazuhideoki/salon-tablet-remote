@@ -1,9 +1,16 @@
-import { TFooterItemEdittingParams, useCreateFooterItem } from "../../../../../ActionCreator/footerItems/useCreateFooterItem";
-import { useUpdateFooterItem } from "../../../../../ActionCreator/footerItems/useUpdateFooterItem";
+import { TFooterItemEdittingParams, useCreateFooterItem } from "./useCreateFooterItem";
+import { useUpdateFooterItem } from "./useUpdateFooterItem";
 
 export const useHandleSubmit = (
          edittingFooterItemParams: TFooterItemEdittingParams, isEditting: boolean
        ) => {
+
+        
+
+
+
+
+
          const createFooterItem = useCreateFooterItem();
          const updateFooterItem = useUpdateFooterItem();
 

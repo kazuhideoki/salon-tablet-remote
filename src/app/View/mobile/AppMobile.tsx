@@ -1,11 +1,11 @@
 import React from 'react'
 import { MainMobile } from './MainMobile/view/MainMobile'
 import { makeStyles, createStyles, Theme } from "@material-ui/core";
-import { Store } from '../../Store/Store';
 import { Drawer } from '../tablet/Drawer/Drawer/view/Drawer';
 import InfoBar from '../tablet/InfoBar/view/InfoBar';
 import { PaginationBar } from '../tablet/Footer/PaginationBar/view/PaginationBar';
 import { TThemeArgs, ThemeContext } from '../../Store/ThemeContext';
+import { AppStateContext } from '../../Store/appState/Context';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const AppMobile = () => {
   const themes = React.useContext(ThemeContext)
   const classes = useStyles(themes);
-  const { appState } = React.useContext(Store)
+  const { appState } = React.useContext(AppStateContext)
   const open = appState.isDrawerOpen
 
   return (

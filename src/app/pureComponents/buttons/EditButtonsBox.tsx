@@ -8,8 +8,8 @@ import {
   Popover,
 } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
-import { SwitchOrderButton } from "./SwitchOrderButton";
-import { TUseSwitchOrders } from "../../ActionCreator/footerItems/useSwitchOrder";
+import { SwitchOrderButton, TSwitchOrderButton } from "./SwitchOrderButton";
+import { TUseSwitchOrders } from "../../View/tablet/Footer/Footer/context/useSwitchOrder";
 import { UpdateButton, TUpdateButton } from "./UpdateButton";
 import { DeleteButton, TDeleteButton } from "./DeleteButton";
 
@@ -22,7 +22,8 @@ type Props = {
   delete?: boolean;
   deleteProps?: TDeleteButton
   switch?: boolean
-  switchProps?: TUseSwitchOrders
+  switchProps?: TSwitchOrderButton
+
 };
 
 const useStyles = makeStyles((theme) =>

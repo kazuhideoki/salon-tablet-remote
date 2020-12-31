@@ -10,8 +10,7 @@ import { Drawer as MuiDrawer } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import { ThemeContext, TThemeArgs } from "../../../../../Store/ThemeContext";
-import { Store } from "../../../../../Store/Store";
+import { TThemeArgs } from "../../../../../Store/ThemeContext";
 import { drawerSettingJsx } from "../components/drawerSettingJsx";
 import { drawerHeaderJsx } from "../components/drawerHeaderJsx";
 import { drawerItemsJsx } from "../components/drawerItemsJsx";
@@ -22,11 +21,13 @@ import { AuthCircular } from '../../../../../../lib/AuthCircular';
 import { useHandleSwitchIsSetting } from "../context/useHandleSwitchIsSetting";
 import { useHandleOnSingOut } from "../context/useHandleOnSingOut";
 import { useHandleDrawerClose } from "../context/useHandleDrawerClose";
-import { useHandleDrawerCloseKeepIsSetting } from "../context/useHandleDrawerCloseKeepIsSetting";
-import { useCloseDrawerTapMain } from "../context/useCloseDrawerTapMain";
-import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
+import { useCloseDrawer } from "../context/useCloseDrawer";
 import { useHandleDrawerOpen } from "../context/useHandleDrawerOpen";
 import { useStateDrawer } from "../context/useStateDrawer";
+import { useOpenModal } from "../context/useOpenModal";
+import { useOpenArticleEditor } from "../context/useOpenArticleEditor";
+import { useOpenFooterItemEditor } from "../context/useOpenFooterItemEditor";
+import { useSwitchOrder } from "../../../Footer/Footer/context/useSwitchOrder";
 
 export const useDrawerProps = () => {
   const {
@@ -40,19 +41,25 @@ export const useDrawerProps = () => {
     themes,
   } = useStateDrawer()
 
-  const theme = useTheme();
-  const isMobile = useIsMobile()
-  const { handleOnUpDateFooterIcon } = useFooterProps()
-    
-    
+  
   const { isClicked, handleOnSignOut } = useHandleOnSingOut();
   const handleSwitchIsSetting = useHandleSwitchIsSetting()
   const handleDrawerOpen = useHandleDrawerOpen()
   const handleDrawerClose = useHandleDrawerClose()
-  const handleDrawerCloseKeepIsSetting = useHandleDrawerCloseKeepIsSetting()
-  const closeDrawerTapMain = useCloseDrawerTapMain()
-  const deleteItem = useDeleteFooterItem()
-
+  const closeDrawer = useCloseDrawer()
+  const openModal = useOpenModal()
+  const openArticleEditor = useOpenArticleEditor();
+  const openFooterItemEditor = useOpenFooterItemEditor()
+  const switchOrder = useSwitchOrder()
+  
+  const theme = useTheme();
+  const isMobile = useIsMobile()
+  const {
+    handleOnUpDateFooterIcon,
+    openFooterItemModal,
+    deleteFooterItem,
+  } = useFooterProps();    
+  
   return {
     theme,
     dispatchAppState,
@@ -64,15 +71,19 @@ export const useDrawerProps = () => {
     handleSwitchIsSetting,
     handleOnSignOut,
     handleDrawerClose,
-    handleDrawerCloseKeepIsSetting,
     isMobile,
     pass,
     setPass,
     themes,
-    closeDrawerTapMain,
+    closeDrawer,
     handleOnUpDateFooterIcon,
-    deleteItem,
+    openFooterItemModal,
+    deleteFooterItem,
     isClicked,
+    openModal,
+    openArticleEditor,
+    openFooterItemEditor,
+    switchOrder,
   };
 }
 
@@ -184,7 +195,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <div className={classes.drawerHeader}>{drawerHeader}</div>
         <Divider />
 
-        {/* {props.isMobile && !props.isSetting ? ( */}
         {!props.isSetting ? (
           <>
             {drawerItems}
@@ -197,7 +207,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <Divider />
 
         {/* 編集モードではアイテムは下にずらす */}
-        {/* {props.isMobile && props.isSetting ? ( */}
         {props.isSetting ? (
           <>
             {drawerItems}
@@ -219,7 +228,7 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
       {props.isMobile && props.isDrawerOpen ? (
         <div
           className={classes.greyScreen}
-          onClick={props.isDrawerOpen ? props.closeDrawerTapMain : null}
+          onClick={props.isDrawerOpen ? props.closeDrawer : null}
         ></div>
       ) : null}
       {props.isClicked ? <AuthCircular message="サインアウト中" /> : null}

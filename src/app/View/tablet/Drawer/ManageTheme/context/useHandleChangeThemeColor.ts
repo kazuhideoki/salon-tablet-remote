@@ -1,5 +1,5 @@
 import { generateSecondaryColor } from "../../../../../../lib/color/generateSecondaryColor";
-import { useChangeThemeColor } from "../../../../../ActionCreator/user/useChangeThemeColor";
+import { useChangeThemeColor } from "./lib/useChangeThemeColor";
 import { TColor } from "../view/ManageTheme";
 var colorConvert = require("color-convert");
 

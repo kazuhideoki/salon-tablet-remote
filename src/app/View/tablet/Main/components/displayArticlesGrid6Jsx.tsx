@@ -14,7 +14,7 @@ import { UpdateButton } from "../../../../pureComponents/buttons/UpdateButton";
 import { TUseMainProps, TMainClasses } from "../view/Main";
 import { showDataType } from "./showDataType";
 import { Skeleton } from "@material-ui/lab";
-import { sqlToDate } from "../../../../ActionCreator/organizeSql/sqlToDate";
+import { sqlToDate } from "../../../../../lib/sqlToDate";
 import { SelectedTags } from "./SelectedTags";
 import { TArticles } from "../../../../Store/Types";
 import { ThemeContext } from "../../../../Store/ThemeContext";
@@ -100,12 +100,7 @@ export const displayArticlesGrid6Jsx = (
           ) : null}
           <CardActionArea
             className={classesGrid6.cardActionArea}
-            onClick={() =>
-              props.dispatchAppState({
-                type: "OPEN_ARTICLE_MODAL",
-                payload: row2 ? key + 3 : key,
-              })
-            }
+            onClick={() => props.openArticleModal(row2 ? key + 3 : key)}
             component="div"
           >
             <Card className={classes.card}>

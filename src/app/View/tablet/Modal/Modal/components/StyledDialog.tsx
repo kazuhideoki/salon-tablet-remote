@@ -1,8 +1,7 @@
 import React from 'react'
-import { withStyles, Dialog, useMediaQuery } from '@material-ui/core';
+import { withStyles, Dialog } from '@material-ui/core';
 
 import { T_modal_size } from '../../../../../Store/Types';
-import { useIsMobile } from '../../../../../../lib/useIsMobile';
 
 type Props = {
   modalSize: T_modal_size
@@ -17,14 +16,13 @@ type Props = {
   transitionDuration: any
   onClose: () => void
   maxWidth: false | "xs" | "sm" | "md" | "lg" | "xl"
+  isMobile: boolean
 }
 
 // 受け取ったmodalStyle元にサイズ変更して描画
 export const StyledDialog: React.FC<Props> = (props) => {
 
-  // const isMobile = useMediaQuery("(max-width:480px)");
-  const isMobile = useIsMobile()
-  const modalStyle = isMobile ? props.modalStyleMobile : props.modalStyle
+  const modalStyle = props.isMobile ? props.modalStyleMobile : props.modalStyle
   
   // 中のcssを変えないといけなかったのでwithStylesで
   const StyledDialog = withStyles({

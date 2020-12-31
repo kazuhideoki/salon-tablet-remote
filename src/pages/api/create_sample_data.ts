@@ -3,19 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { TArticle, FooterItems, FooterItem, T_user_id, TArticles } from "../../app/Store/Types";
 import { TApiResponse } from "../../lib/apiTypes";
 import { server, localhost } from "../../lib/loadUrl";
+import { apiWrapPost } from "../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
   params: T_create_sample_data
 ): Promise<TApiResponse<void>> => {
-  const str = process.browser ? server : localhost;
-
-  await fetch(`${str}/api/create_sample_data`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
+  apiWrapPost("create_sample_data", params);
 };
 
 export type T_create_sample_data = {
@@ -93,10 +87,9 @@ const create_sample_data = async (req: NextApiRequest, res: NextApiResponse) => 
 
           res.end();
         } catch (err) {
-      console.log("/create_sample_dataのエラーは " + JSON.stringify(err));
-      // res.status(500).json({ err: true, data: { message: err.message } });
-      throw 'create_sample_dataでエラー。'
-    }
+          console.log("/create_sample_dataのエラーは " + JSON.stringify(err));
+          return res.status(500).json({ err: true, data: err });
+        }
 
   }
 };

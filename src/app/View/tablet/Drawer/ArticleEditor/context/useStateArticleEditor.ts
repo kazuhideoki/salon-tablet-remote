@@ -1,10 +1,13 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
+import { AppStateContext } from '../../../../../Store/appState/Context';
+import { TagsContext } from '../../../../../Store/tags/Context';
+import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 
 export const useStateArticleEditor = () => {
-    const { appState } = React.useContext(Store);
-    const { tags } = appState
-    const { is_admin } = appState.userInfo;
+    const { appState } = React.useContext(AppStateContext);
+    const { tags } = React.useContext(TagsContext);
+    const { userInfo } = React.useContext(UserInfoContext);
+    const { is_admin } = userInfo;
     const { isEditting, article } = appState.edittingPrams;
 
     const [titleText, setTitleText] = React.useState(

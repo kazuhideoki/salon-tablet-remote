@@ -1,9 +1,11 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
+import { AppStateContext } from '../../../../../Store/appState/Context';
+import { TagsContext } from '../../../../../Store/tags/Context';
 
 export const useStateMangeTags = () => {
-  const { appState } = React.useContext(Store);
-  const { tags, loading } = appState;
+  const { appState } = React.useContext(AppStateContext);
+  const { loading } = appState;
+  const { tags } = React.useContext(TagsContext);
   const [tagNameField, setTagNameField] = React.useState("");
   const [isEditting, setIsEditting] = React.useState(false);
   const [edittingTagId, setEditingTagId] = React.useState(0);

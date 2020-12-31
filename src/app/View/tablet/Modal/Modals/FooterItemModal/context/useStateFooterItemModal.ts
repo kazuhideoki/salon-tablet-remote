@@ -1,8 +1,8 @@
 import React from 'react'
-import { Store } from '../../../../../../Store/Store';
+import { AppStateContext } from '../../../../../../Store/appState/Context';
 
 export const useStateFooterItemModal = () => {
-  const { appState } = React.useContext(Store);
+  const { appState } = React.useContext(AppStateContext);
   const footerItem = appState.currentModalContent.footerItem;
   return { footerItem };
 }

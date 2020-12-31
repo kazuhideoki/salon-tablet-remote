@@ -23,7 +23,7 @@ export function AuthProvider({ children }: any) {
   const signout = (path: string) => {
     firebase.auth().signOut().then(function() {
       router.push(path)
-    }).catch(function(error) {
+    }).catch(function(err) {
       
     });
   }

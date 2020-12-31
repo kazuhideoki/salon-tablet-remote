@@ -1,8 +1,7 @@
 import React from 'react'
-import { Store } from '../../../../../Store/Store';
+import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 export const useStateAccount = () => {
-  const { appState } = React.useContext(Store);
-  const { userInfo } = appState;
+  const { userInfo } = React.useContext(UserInfoContext);
 
   const [name, setName] = React.useState(userInfo.user_name || "");
   const [shopName, setShopName] = React.useState(userInfo.shop_name || "");

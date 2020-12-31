@@ -16,7 +16,7 @@ export const updatePassword = ({
            .then(function() {
              return;
            })
-           .catch(function(error) {
-             throw new Error("updatePasswordに失敗" + error);
+           .catch(function(err) {
+             throw new Error("updatePasswordに失敗" + err);
            });
        };

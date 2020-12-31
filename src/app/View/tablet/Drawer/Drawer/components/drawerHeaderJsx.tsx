@@ -37,11 +37,7 @@ export const drawerHeaderJsx = (props: TUseDrawerProps) => {
             <Close />
             <Typography variant="body1">終了</Typography>
           </Button>
-          <Button variant="text" onClick={props.handleDrawerCloseKeepIsSetting}>
-            {/* {props.isMobile ? null : (
-              <Typography variant="body1">終了</Typography>
-            )} */}
-
+          <Button variant="text" onClick={props.closeDrawer}>
             {props.theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (

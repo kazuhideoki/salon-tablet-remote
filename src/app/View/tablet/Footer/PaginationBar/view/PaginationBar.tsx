@@ -1,8 +1,7 @@
 import React from "react";
-import { Store } from "../../../../../Store/Store";
 import { ThemeContext } from "../../../../../Store/ThemeContext";
 import { Grid, makeStyles, createStyles, Theme, Chip, IconButton, withStyles, useTheme, Card, useMediaQuery } from "@material-ui/core";
-import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles";
+import { useGetArticles } from "../../../Main/context/lib/useGetArticles";
 import { HomeButton } from "../components/HomeButton";
 import { PaginationArrows } from "../components/PaginationArrows";
 import { TagsButton } from "../components/TagsButton";
@@ -12,6 +11,7 @@ import { PaginationInstagram } from "../components/PaginationInstagram";
 import { useHandleOnNumClick } from "../context/useHandleOnNumClick";
 import { useManageInstagramAccountsProps } from "../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
 import { useStatePaginationBar } from "../context/useStatePaginationBar";
+import { useDrawerProps } from "../../../Drawer/Drawer/view/Drawer";
 
 export const usePaginationBarProps = () => {
   
@@ -36,6 +36,8 @@ export const usePaginationBarProps = () => {
   const handleOnNumClick = useHandleOnNumClick()
 
   const selectedTagNames = useSelectedArticlesTagNames();
+
+  const { openModal } = useDrawerProps()
 
 
   const StyledIconButton = withStyles({
@@ -66,6 +68,7 @@ export const usePaginationBarProps = () => {
     isTabletPortrait,
     getInstagramMedias,
     instagramMedias,
+    openModal,
   };
 };
 export type TUsePaginationBarProps = ReturnType<typeof usePaginationBarProps> & {
@@ -184,12 +187,7 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
                     ? `${classes.button} ${classes.selectedButton}`
                     : classes.button
                 }
-                onClick={() =>
-                  props.dispatchAppState({
-                    type: "OPEN_MODAL",
-                    payload: "select_tags",
-                  })
-                }
+                onClick={() => props.openModal("select_tags")}
               >
                 <TagsButton />
               </props.StyledIconButton>
@@ -218,12 +216,7 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
                     ? `${classes.button} ${classes.selectedButton}`
                     : classes.button
                 }
-                onClick={() =>
-                  props.dispatchAppState({
-                    type: "OPEN_MODAL",
-                    payload: "select_instagram",
-                  })
-                }
+                onClick={() => props.openModal("select_instagram")}
               >
                 <Instagram />
               </props.StyledIconButton>

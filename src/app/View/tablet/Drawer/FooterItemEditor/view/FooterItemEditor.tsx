@@ -5,20 +5,16 @@ const QuillEditor = dynamic(() => import("../../QuillEditor/view/QuillEditor"), 
   ssr: false,
 });
 import { SwitchOnTapModal } from "../components/SwitchOnTapModal";
-import { TFooterItemEdittingParams } from "../../../../../ActionCreator/footerItems/useCreateFooterItem";
+import { TFooterItemEdittingParams } from "../context/useCreateFooterItem";
 import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, Switch, useTheme } from '@material-ui/core';
 import { SelectAppLink } from '../components/SelectAppLink';
-import { Store } from "../../../../../Store/Store";
 import { CharCounter } from "../../../../../pureComponents/CharCounter";
 import { SelectModalSize } from '../components/SelectModalSize';
-import { selectedIconReducer } from '../../../../../Reducer/selectedIconReducer';
-import { IconsSetting } from '../components/iconSelect/icons';
 import { HelpButton } from '../../../../../pureComponents/buttons/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
 import { SwitchDataTypeBox } from '../../QuillEditor/components/SwitchDataTypeBox';
 import { useIsMobile } from '../../../../../../lib/useIsMobile';
 import { useHandleSubmit } from '../context/useHandleSubmit';
-import { T_modal_size } from '../../../../../Store/Types';
 import { useHandleChange } from '../context/useHandleChange';
 import { useHandleOnSidebar } from '../context/useHandleOnSidebar';
 import { useStateFooterItemEditor } from '../context/useStateFooterItemEditor';

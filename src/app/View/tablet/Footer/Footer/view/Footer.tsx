@@ -1,14 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Grid,
   makeStyles,
   createStyles,
 } from "@material-ui/core";
 import { MoodBad } from "@material-ui/icons";
-import { Store } from "../../../../../Store/Store";
-import {
-  FooterItem,
-} from "../../../../../Store/Types";
 import { IconAndText } from "../components/IconAndText";
 import { IconsSetting } from "../../../Drawer/FooterItemEditor/components/iconSelect/icons";
 import { EditButtonsBox } from "../../../../../pureComponents/buttons/EditButtonsBox";
@@ -16,19 +12,30 @@ import { showDataType } from "../../../Main/components/showDataType";
 import { useIsMobile } from "../../../../../../lib/useIsMobile";
 import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
 import { useStateFooter } from "../context/useStateFooter";
+import { useHandleOnUpdateFooterItem } from "../context/useHandleOnUpdateFooterItem";
+import { useHandleLoadingFooter } from "../context/useHandleLoadingFooter";
+import { useOpenFooterItemModal } from "../context/useOpenFooterItemModal";
+import { useSwitchOrder } from "../context/useSwitchOrder";
 
 export const useFooterProps = () => {
   const {
     footerItems,
     loading,
     isSetting,
-    handleOnUpDateFooterIcon,
-    openFooterItemModal,
   } = useStateFooter();
   
   const isMobile = useIsMobile();
 
+  const handleOnUpDateFooterIcon = useHandleOnUpdateFooterItem();
+
+  const handleLoadingFooter = useHandleLoadingFooter();
+
+  const openFooterItemModal = useOpenFooterItemModal()
+
   const deleteFooterItem = useDeleteFooterItem();
+
+  const switchOrder = useSwitchOrder()
+
   
   return {
     isSetting,
@@ -38,6 +45,8 @@ export const useFooterProps = () => {
     deleteFooterItem,
     isMobile,
     loading: loading.footer,
+    handleLoadingFooter,
+    switchOrder,
   };
 };
 
@@ -118,7 +127,12 @@ export const FooterPresenter: React.FC<Props> = (props) => {
               className={classes.editButtonsBox}
               classNameButtons={classes.editButtonsBoxButtons}
               switch
-              switchProps={{ smaller: footerItem[index - 1], larger: value }}
+              switchProps={{
+                smaller: footerItem[index - 1],
+                larger: value,
+                switchOrder: props.switchOrder,
+                
+              }}
               update
               updateProps={{
                 onClick: props.handleOnUpDateFooterIcon,
@@ -127,7 +141,10 @@ export const FooterPresenter: React.FC<Props> = (props) => {
               delete
               deleteProps={{
                 onClick: props.deleteFooterItem,
-                value: value.order,
+                value: {
+                  footer_item_id: value.footer_item_id,
+                  order: value.order,
+                },
               }}
             />
           ) : null}
@@ -145,9 +162,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                     )[0]
                   : MoodBad
               }
-              onClick={() =>
-                props.openFooterItemModal(value.footer_item_id)
-              }
+              onClick={() => props.openFooterItemModal(value)}
               text={value.icon_name}
               loading={props.loading}
             />

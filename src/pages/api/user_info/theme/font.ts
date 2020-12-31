@@ -3,21 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { T_user_id, T_theme_font } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
+import { apiWrapPost } from "../../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeFont = async (
   params: T_user_info_theme_font
 ): Promise<TApiResponse<T_user_info_theme_font_return>> => {
-  let str = process.browser ? server : localhost;
-
-  const res = await fetch(`${str}/api/user_info/theme/font`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  return apiWrapPost("user_info/theme/font", params);
 };
 
 export type TWhichFont = "theme_font1" | "theme_font2" | "theme_font_heading";
@@ -65,9 +57,7 @@ const font = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json(returnData);
     } catch (err) {
       console.log("/user_info/theme/font/のエラーは " + JSON.stringify(err));
-      return res
-        .status(500)
-        .json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

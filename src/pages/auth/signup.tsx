@@ -17,8 +17,9 @@ const handleSingup = async (email: string, password: string) => {
       .setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
     return firebase.auth().createUserWithEmailAndPassword(email, password);
-  } catch (error) {
-    console.log("handleSingupは " + error);
+  } catch (err) {
+    console.log("handleSingupは " + err);
+    alert('エラーによりアカウントを作成出来ませんでした')
   }
 };
 

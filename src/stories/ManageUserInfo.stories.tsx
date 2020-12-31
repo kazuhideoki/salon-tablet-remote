@@ -18,7 +18,6 @@ const props = {
   },
   updateUser: null,
   handleOnSubmit: null,
-  openDeleteAccountForm: null,
 }
 
 //@ts-ignore

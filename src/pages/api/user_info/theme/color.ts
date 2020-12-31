@@ -3,21 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { T_user_id, T_theme_color } from "../../../../app/Store/Types";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
+import { apiWrapPost } from "../../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeColor = async (
          params: T_user_info_theme_color
        ): Promise<TApiResponse<T_user_info_theme_color_return>> => {
-         let str = process.browser ? server : localhost;
-
-         const res = await fetch(`${str}/api/user_info/theme/color`, {
-           headers: { "Content-Type": "application/json"},
-           method: "POST",
-           mode: "cors",
-           body: JSON.stringify(params),
-         });
-
-         return await res.json();
+         return apiWrapPost("user_info/theme/color", params);
        };
 
 export type T_user_info_theme_color = {
@@ -52,9 +44,7 @@ const color = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json(returnData);
     } catch (err) {
       console.log("/user_info/theme/color/のエラーは " + JSON.stringify(err));
-      return res
-        .status(500)
-        .json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, data: err });
     }
   }
 };

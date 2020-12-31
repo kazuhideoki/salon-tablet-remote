@@ -1,4 +1,4 @@
-import { useChangeShowArticleType } from "../../../../../ActionCreator/user/useChangeShowArticleType";
+import { useChangeShowArticleType } from "./lib/useChangeShowArticleType";
 import { T_show_article_type } from "../../../../../Store/Types";
 
 export const useHandleChangeShowArticleType = () => {

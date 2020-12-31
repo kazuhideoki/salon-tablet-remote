@@ -1,8 +1,5 @@
 import React from "react";
 import { NavigateBefore } from "@material-ui/icons";
-import { Store } from "../../../../../../Store/Store";
-import { useGetArticles } from "../../../../../../ActionCreator/articles/useGetArticles";
-import { Typography, SvgIcon, IconButton, Button } from "@material-ui/core";
 import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
 
 export const Prev = (props: TPaginationPropsAndClasses) => {

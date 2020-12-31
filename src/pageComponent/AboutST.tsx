@@ -1,9 +1,6 @@
 import { makeStyles, Theme, Typography,createStyles, Grid, useMediaQuery } from '@material-ui/core'
 import React from 'react'
 import { server } from '../lib/loadUrl';
-import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
-import { useIsMobile } from '../lib/useIsMobile';
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export const AboutST = () => {
   const classes = useStyles()
 
-  // const isMobile = useIsMobile()
   const isLargeDisplay = useMediaQuery("(min-width:600px)");
 
   return (

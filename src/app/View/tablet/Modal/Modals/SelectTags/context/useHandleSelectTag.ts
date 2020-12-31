@@ -3,7 +3,7 @@ import { T_tag_id } from "../../../../../../Store/Types";
 export const useHandleSelectTag = (selectingTags: number[], setSelectingTags: React.Dispatch<React.SetStateAction<number[]>>
 ) => {
   return (tagId: T_tag_id) => {
-    let newValue;
+    let newValue: number[];
 
     if (selectingTags.includes(tagId)) {
       newValue = selectingTags.filter((value) => {

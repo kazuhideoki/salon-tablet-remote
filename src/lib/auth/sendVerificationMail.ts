@@ -10,7 +10,7 @@ export const sendVerificationMail = async (user: firebase.User) => {
 
       return true
     })
-    .catch(function(error) {
+    .catch(function(err) {
       // An error happened.
       return false
     });

@@ -1,13 +1,13 @@
 import React from 'react'
-import { Store } from '../../../../Store/Store';
+import { setModal, updateArticle } from '../../../../Store/appState/actions';
+import { AppStateContext } from '../../../../Store/appState/Context';
 import { TArticle } from "../../../../Store/Types";
 
 export const useOnClickUpdate = () => {
-  const { dispatchAppState } = React.useContext(Store)
-  return (value: TArticle) => {
-    dispatchAppState({
-      type: "OPEN_ARTICLE_EDITOR_FOR_EDIT",
-      payload: value,
-    });
+  const { dispatchAppState } = React.useContext(AppStateContext)
+  return (article: TArticle) => {
+
+    dispatchAppState(updateArticle(article));
+    dispatchAppState(setModal('edit_article'))
   }
 }
