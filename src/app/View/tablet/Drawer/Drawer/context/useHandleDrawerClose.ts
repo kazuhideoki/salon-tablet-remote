@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetArticles } from '../../../../../ActionCreator/articles/useGetArticles/useGetArticles';
+import { useGetArticles } from '../../../../ActionCreator/articles/useGetArticles';
 import { closeDrawer } from '../../../../../Store/appState/actions';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 

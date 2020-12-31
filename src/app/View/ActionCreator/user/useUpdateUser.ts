@@ -1,11 +1,11 @@
 import React from "react";
-import { apiUserInfoUpdate, T_user_info_update } from "../../../pages/api/user_info/update";
-import { updatePassword } from "../../../lib/auth/updatePassword";
-import { useAuth } from "../../../lib/auth/AuthProvider";
-import { UserInfoContext } from "../../Store/userInfo/Context";
-import { update } from "../../Store/userInfo/actions";
-import { AppStateContext } from "../../Store/appState/Context";
-import { closeModal } from "../../Store/appState/actions";
+import { apiUserInfoUpdate, T_user_info_update } from "../../../../pages/api/user_info/update";
+import { updatePassword } from "../../../../lib/auth/updatePassword";
+import { useAuth } from "../../../../lib/auth/AuthProvider";
+import { UserInfoContext } from "../../../Store/userInfo/Context";
+import { update } from "../../../Store/userInfo/actions";
+import { AppStateContext } from "../../../Store/appState/Context";
+import { closeModal } from "../../../Store/appState/actions";
 
 export type TUpdateUser = {
   name: string

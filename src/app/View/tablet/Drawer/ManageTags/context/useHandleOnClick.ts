@@ -1,5 +1,5 @@
-import { useCreateTag } from "../../../../../ActionCreator/tags/useCreateTag";
-import { useUpdateTag } from "../../../../../ActionCreator/tags/useUpdateTag";
+import { useCreateTag } from "../../../../ActionCreator/tags/useCreateTag";
+import { useUpdateTag } from "../../../../ActionCreator/tags/useUpdateTag";
 
 export const useHandleOnClick = (isEditting: boolean, edittingTagId: number, tagNameField: string) => {
   const createTag = useCreateTag();

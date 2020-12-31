@@ -1,7 +1,7 @@
 import React from "react";
-import { server, localhost } from "../../lib/loadUrl";
-import { T_submit_feedback, apiSubmitFeedback } from "../../pages/api/submit_feedback";
-import { UserInfoContext } from "../Store/userInfo/Context";
+import { server, localhost } from "../../../lib/loadUrl";
+import { T_submit_feedback, apiSubmitFeedback } from "../../../pages/api/submit_feedback";
+import { UserInfoContext } from "../../Store/userInfo/Context";
 
 type TUseSubmitFeedback = { contactFormTitle: string, contactFormContent: string }
 

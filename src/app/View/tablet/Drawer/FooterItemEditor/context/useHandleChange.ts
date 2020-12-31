@@ -1,5 +1,5 @@
 import React from 'react'
-import { TFooterItemEdittingParams } from '../../../../../ActionCreator/footerItems/useCreateFooterItem';
+import { TFooterItemEdittingParams } from './useCreateFooterItem';
 import { setModalSize } from '../../../../../Store/appState/actions';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 import { FooterItemsContext } from '../../../../../Store/footerItems/Context';

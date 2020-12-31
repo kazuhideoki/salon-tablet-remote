@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles/useGetArticles";
+import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
 import { AppStateContext } from '../../../../../Store/appState/Context';
 
 export const useHandleSwitchIsSetting = () => {

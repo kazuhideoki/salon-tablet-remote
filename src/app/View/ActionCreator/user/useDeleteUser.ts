@@ -1,8 +1,8 @@
 import React from "react";
-import { apiUserInfoDelete } from "../../../pages/api/user_info/delete";
-import { useAuth } from "../../../lib/auth/AuthProvider";
-import { deleteUserInFirebase } from "../../../lib/auth/deleteUserInFirebase";
-import { UserInfoContext } from "../../Store/userInfo/Context";
+import { apiUserInfoDelete } from "../../../../pages/api/user_info/delete";
+import { useAuth } from "../../../../lib/auth/AuthProvider";
+import { deleteUserInFirebase } from "../../../../lib/auth/deleteUserInFirebase";
+import { UserInfoContext } from "../../../Store/userInfo/Context";
 
 export const useDeleteUser = () => {
   const { userInfo } = React.useContext(UserInfoContext);

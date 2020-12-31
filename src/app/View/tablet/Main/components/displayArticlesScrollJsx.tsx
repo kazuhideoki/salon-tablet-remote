@@ -3,7 +3,7 @@ import { EditButtonsBox } from "../../../../pureComponents/buttons/EditButtonsBo
 import { TUseMainProps, TMainClasses } from "../view/Main";
 import { showDataType } from "./showDataType";
 import { Skeleton } from "@material-ui/lab";
-import { sqlToDate } from "../../../../ActionCreator/organizeSql/sqlToDate";
+import { sqlToDate } from "../../../../../lib/sqlToDate";
 import { SelectedTags } from "./SelectedTags";
 
 export const displayArticlesScrollJsx = (props: TUseMainProps, classes: TMainClasses, StyledCardContent: any) =>

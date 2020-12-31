@@ -1,5 +1,5 @@
 import React from "react";
-import { useSubmitFeedback } from "../../../../../ActionCreator/useSubmitFeedback";
+import { useSubmitFeedback } from "../../../../ActionCreator/useSubmitFeedback";
 import { closeModal } from "../../../../../Store/appState/actions";
 import { AppStateContext } from "../../../../../Store/appState/Context";
 

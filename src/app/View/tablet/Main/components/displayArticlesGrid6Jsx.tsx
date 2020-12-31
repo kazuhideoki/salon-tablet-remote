@@ -14,7 +14,7 @@ import { UpdateButton } from "../../../../pureComponents/buttons/UpdateButton";
 import { TUseMainProps, TMainClasses } from "../view/Main";
 import { showDataType } from "./showDataType";
 import { Skeleton } from "@material-ui/lab";
-import { sqlToDate } from "../../../../ActionCreator/organizeSql/sqlToDate";
+import { sqlToDate } from "../../../../../lib/sqlToDate";
 import { SelectedTags } from "./SelectedTags";
 import { TArticles } from "../../../../Store/Types";
 import { ThemeContext } from "../../../../Store/ThemeContext";

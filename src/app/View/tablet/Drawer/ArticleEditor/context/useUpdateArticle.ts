@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles/useGetArticles";
+import { useGetArticles } from "../../../../ActionCreator/articles/useGetArticles";
 import { TCreateArticle } from "./useCreateArticle";
 import {
   T_articles_update,

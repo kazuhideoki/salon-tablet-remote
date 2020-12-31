@@ -1,6 +1,6 @@
 import * as types from "./types";
 import { FooterItem, FooterItems, TAppState, TArticle, TInstagramMedia, TSetModal, T_instagram_id, T_instagram_username } from "../Types";
-import { TFooterItemEdittingParams } from "../../ActionCreator/footerItems/useCreateFooterItem";
+import { TFooterItemEdittingParams } from "../../View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem";
 import { T_articles_get_return } from "../../../pages/api/articles/get";
 
 export const setModal = (value: TSetModal) => ({ type: types.OPEN_MODAL, payload: value });

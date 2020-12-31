@@ -2,10 +2,10 @@ import React from "react";
 
 import { useGetFooterItems } from "./useGetFooterItems";
 import { TCreateFooterItem, generateFooterItemEdittingParams } from "./useCreateFooterItem";
-import { T_footer_items_update, apiFooterItemsUpdate } from "../../../pages/api/footer_items/update";
-import { FooterItemsContext } from "../../Store/footerItems/Context";
-import { AppStateContext } from "../../Store/appState/Context";
-import { closeModal, isLoadingFooter } from "../../Store/appState/actions";
+import { T_footer_items_update, apiFooterItemsUpdate } from "../../../../../../pages/api/footer_items/update";
+import { FooterItemsContext } from "../../../../../Store/footerItems/Context";
+import { AppStateContext } from "../../../../../Store/appState/Context";
+import { closeModal, isLoadingFooter } from "../../../../../Store/appState/actions";
 
 export type TUpdateFooterItem = TCreateFooterItem;
 

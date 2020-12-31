@@ -1,13 +1,13 @@
 import React from "react";
 import {
   T_tag_id,
-} from "../../Store/Types";
+} from "../../../Store/Types";
 import { useGetTags } from "./useGetTags";
-import { T_tags_delete, apiTagsDelete } from "../../../pages/api/tags/delete";
-import { UserInfoContext } from "../../Store/userInfo/Context";
-import { AppStateContext } from "../../Store/appState/Context";
-import { useManageTagsProps } from "../../View/tablet/Drawer/ManageTags/view/ManageTags";
-import { isLoadingTags } from "../../Store/appState/actions";
+import { T_tags_delete, apiTagsDelete } from "../../../../pages/api/tags/delete";
+import { UserInfoContext } from "../../../Store/userInfo/Context";
+import { AppStateContext } from "../../../Store/appState/Context";
+import { useManageTagsProps } from "../../tablet/Drawer/ManageTags/view/ManageTags";
+import { isLoadingTags } from "../../../Store/appState/actions";
 
 export const useDeleteTag = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);

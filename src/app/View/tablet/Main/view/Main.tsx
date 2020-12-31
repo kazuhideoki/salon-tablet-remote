@@ -11,11 +11,11 @@ import { displayArticlesGrid6Jsx } from "../components/displayArticlesGrid6Jsx";
 import { displayInstagramMediasJsx } from "../components/displayInstagramMediasJsx";
 import { noArticlesJsx } from "../components/noArticlesJsx";
 import { useOnClickUpdate } from "../context/useOnClickUpdate";
-import { useDeleteArticle } from "../context/useDeleteArticle";
 import { useStateMain } from "../context/useStateMain";
 import { useOpenArticleModal } from "../context/useOpenArticleModal";
 import { useOpenInstagramModal } from "../context/useOpenInstagramModal";
 import { useHandleLoadingMain } from "../context/useHandleLoadingMain";
+import { useDeleteArticle } from "../context/useDeleteArticle";
 
 export const useMainProps = () => {
   const { 

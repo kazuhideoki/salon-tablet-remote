@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSwitchOrder, TUseSwitchOrders } from "../../ActionCreator/footerItems/useSwitchOrder";
+import { useSwitchOrder, TUseSwitchOrders } from "../../View/ActionCreator/footerItems/useSwitchOrder";
 import { SwapHorizontalCircleOutlined } from "@material-ui/icons";
 import { StyledIconButtonEditButton } from "./EditButtonsBox";
 

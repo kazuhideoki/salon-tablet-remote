@@ -1,10 +1,10 @@
 import React from "react";
-import { apiInfoBarGet } from "../../../pages/api/info_bar/get";
-import { InfoBarContext } from "../../Store/infoBar/Context";
-import { set } from "../../Store/infoBar/actions";
-import { UserInfoContext } from "../../Store/userInfo/Context";
-import { AppStateContext } from "../../Store/appState/Context";
-import { isLoadingFooter } from "../../Store/appState/actions";
+import { apiInfoBarGet } from "../../../../../../../pages/api/info_bar/get";
+import { InfoBarContext } from "../../../../../../Store/infoBar/Context";
+import { set } from "../../../../../../Store/infoBar/actions";
+import { UserInfoContext } from "../../../../../../Store/userInfo/Context";
+import { AppStateContext } from "../../../../../../Store/appState/Context";
+import { isLoadingFooter } from "../../../../../../Store/appState/actions";
 
 export const useGetInfoBar = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
