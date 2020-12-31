@@ -8,7 +8,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsSwitchOrder = async (params:T_footer_items_switch_order):Promise<TApiResponse<T_footer_items_switch_order_return>> => {
-  return apiWrapPost(params, "footer_items/switch_order");
+  return apiWrapPost("footer_items/switch_order", params);
 }
 
 export type T_footer_items_switch_order = {

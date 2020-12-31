@@ -12,7 +12,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiTagsUpdata = async (
   params: T_tags_update
 ): Promise<TApiResponse<T_tags_update_return>> => {
-  return apiWrapPost(params, "tags/update");
+  return apiWrapPost("tags/update", params);
 }; 
 
 export type T_tags_update = {

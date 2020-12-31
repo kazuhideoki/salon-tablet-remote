@@ -16,7 +16,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiResponse<T_articles_update_return>> => {
-  return apiWrapPost(params,"articles/update");
+  return apiWrapPost("articles/update", params);
 } 
 
 export type T_articles_update_params = {

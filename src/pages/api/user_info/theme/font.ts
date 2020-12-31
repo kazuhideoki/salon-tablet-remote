@@ -9,7 +9,7 @@ import { apiWrapPost } from "../../../../lib/apiWrap";
 export const apiUserInfoThemeFont = async (
   params: T_user_info_theme_font
 ): Promise<TApiResponse<T_user_info_theme_font_return>> => {
-  return apiWrapPost(params,"user_info/theme/font");
+  return apiWrapPost("user_info/theme/font", params);
 };
 
 export type TWhichFont = "theme_font1" | "theme_font2" | "theme_font_heading";

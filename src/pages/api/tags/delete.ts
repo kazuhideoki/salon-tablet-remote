@@ -14,7 +14,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (params: T_tags_delete):Promise<TApiResponse<T_tags_delete_return>> => {
-  return apiWrapPost(params,"tags/delete");
+  return apiWrapPost("tags/delete", params);
 } 
 
 export type T_tags_delete = {tag_id: T_tag_id, user_id: T_user_id}

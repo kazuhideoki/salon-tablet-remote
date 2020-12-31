@@ -10,7 +10,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiUserInfoDelete = async (
   params: T_user_info_delete
 ): Promise<TApiResponse<T_user_info_delete_return>> => {
-  return apiWrapPost(params, "user_info/delete");
+  return apiWrapPost("user_info/delete", params);
 };
 
 export type T_user_info_delete = {

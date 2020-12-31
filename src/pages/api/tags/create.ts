@@ -8,7 +8,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsCreate = async (params: T_tags_create):Promise<TApiResponse<T_tags_create>> => {
-  return apiWrapPost(params,"tags/create");
+  return apiWrapPost("tags/create", params);
 } 
 
 export type T_tags_create = {

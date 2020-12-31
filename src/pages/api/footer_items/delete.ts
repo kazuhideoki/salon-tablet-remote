@@ -8,7 +8,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsDelete = async (params:T_footer_items_delete):Promise<TApiResponse<T_footer_items_delete_return>> => {
-  return apiWrapPost(params, "footer_items/delete");
+  return apiWrapPost("footer_items/delete", params);
 }
 
 export type T_footer_items_delete = {

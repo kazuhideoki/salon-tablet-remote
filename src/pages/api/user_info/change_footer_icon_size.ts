@@ -9,7 +9,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiUserInfoChangeFooterIconSize = async (
   params: T_user_info_change_footer_icon_size
 ): Promise<TApiResponse<T_user_info_change_footer_icon_size_return>> => {
-  return apiWrapPost(params, "user_info/change_footer_icon_size");
+  return apiWrapPost("user_info/change_footer_icon_size", params);
 };
 
 export type T_user_info_change_footer_icon_size = {

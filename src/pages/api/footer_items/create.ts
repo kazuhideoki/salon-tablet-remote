@@ -22,7 +22,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (params:T_footer_items_create):Promise<TApiResponse<T_footer_items_create_return>> => {
-  return apiWrapPost(params, "footer_items/create");
+  return apiWrapPost("footer_items/create", params);
 }
 
 export type T_footer_items_params = {

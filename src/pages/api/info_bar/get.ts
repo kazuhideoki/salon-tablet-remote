@@ -4,16 +4,13 @@ import { TInfoBar, T_user_id, TInfoBarData } from "../../../app/Store/Types";
 import { localhost, server } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
 import { createInitInfoBar } from "../../../lib/createInitInfoBar";
+import { apiWrapGet } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
          user_id: T_user_id
        ): Promise<TApiResponse<TInfoBarData>> => {
-         let str = process.browser ? server : localhost;
-
-         const res = await fetch(`${str}/api/info_bar/get?userId=${user_id}`);
-
-         return await res.json();
+         return apiWrapGet(`info_bar/get?userId=${user_id}`);
        };
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -54,8 +51,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
   } catch (err) {
     console.log("/info_bar/get/のエラーは " + JSON.stringify(err));
-    const errOnj: TApiError = { err: true, data: { message: err.message } };
-    return res.status(500).json(errOnj);
+    return res.status(500).json({ err: true, data: err });
   }
 };
 

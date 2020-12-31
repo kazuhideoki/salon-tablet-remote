@@ -9,7 +9,7 @@ import { apiWrapPost } from "../../lib/apiWrap";
 export const apiCreateSampleData = async (
   params: T_create_sample_data
 ): Promise<TApiResponse<void>> => {
-  apiWrapPost(params, "create_sample_data");
+  apiWrapPost("create_sample_data", params);
 };
 
 export type T_create_sample_data = {

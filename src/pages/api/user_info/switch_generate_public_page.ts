@@ -10,7 +10,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiUserInfoSwitchGeneratePublicPage = async (
   params: T_user_info_switch_generate_public_page
 ): Promise<TApiResponse<T_user_info_switch_generate_public_page_return>> => {
-  return apiWrapPost(params, "user_info/switch_generate_public_page");
+  return apiWrapPost("user_info/switch_generate_public_page", params);
 };
 
 export type T_user_info_switch_generate_public_page = {

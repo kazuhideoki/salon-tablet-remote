@@ -11,7 +11,7 @@ export const apiInstagramAccountsReconnectNeeded = async (
        ): Promise<TApiResponse<
          T_instagram_accounts_reconnect_needed_return
        >> => {
-         return apiWrapPost(params, "instagram_accounts/reconnect_needed");
+         return apiWrapPost("instagram_accounts/reconnect_needed", params);
        };
 
 export type T_instagram_accounts_reconnect_needed = {

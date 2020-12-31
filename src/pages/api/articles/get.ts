@@ -8,7 +8,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (params: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
-  return apiWrapPost(params,"articles/get");
+  return apiWrapPost("articles/get", params);
 } 
 
 export type T_articles_get = {

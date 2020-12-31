@@ -16,7 +16,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 
 
 export const apiArticlesCreate = async (params: T_articles_create):Promise<TApiResponse<T_articles_create_return>> => {
-  return apiWrapPost(params,"articles/create");
+  return apiWrapPost("articles/create", params);
 } 
 
 export type T_articles_create = {

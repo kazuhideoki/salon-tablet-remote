@@ -11,7 +11,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiCreatePublicPageSlug = async (
          params: T_user_info_create_public_page_slug
        ): Promise<TApiResponse<void>> => {
-         return apiWrapPost(params, "user_info/create_public_page_slug");
+         return apiWrapPost("user_info/create_public_page_slug", params);
          
        };
 

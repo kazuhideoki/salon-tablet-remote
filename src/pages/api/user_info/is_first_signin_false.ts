@@ -9,7 +9,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiIsFirsSigninFalse = async (
          params: user_info_is_first_signin_false
        ) => {
-         return apiWrapPost(params, "user_info/is_first_signin_false");
+         return apiWrapPost("user_info/is_first_signin_false", params);
        };
 
 type user_info_is_first_signin_false = {

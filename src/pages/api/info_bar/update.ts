@@ -15,7 +15,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiInfoBarUpdate = async (
   params: T_info_bar_update
 ): Promise<TApiResponse<T_info_bar_update_return>> => {
-  return apiWrapPost(params,"info_bar/update");
+  return apiWrapPost("info_bar/update", params);
 };
 
 export type T_info_bar_update = {

@@ -10,7 +10,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiInstagramMediasGet = async (
          params: T_instagram_medias_get
        ): Promise<TApiResponse<TInstagramMedias>> => {
-         return apiWrapPost(params,"instagram_medias/get");
+         return apiWrapPost("instagram_medias/get", params);
        }; 
 
 export type T_instagram_medias_get = {

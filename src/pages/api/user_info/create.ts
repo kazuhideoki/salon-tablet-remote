@@ -8,7 +8,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiUserInfoCreate = async (
   params: T_user_info_create
 ): Promise<TApiResponse<T_user_info_create_return>> => {
-  return apiWrapPost(params, "user_info/create");
+  return apiWrapPost("user_info/create", params);
 };
 
 export type T_user_info_create = {

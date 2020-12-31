@@ -10,7 +10,7 @@ import { apiWrapPost } from "../../../lib/apiWrap";
 export const apiUserInfoUpdate = async (
   params: T_user_info_update
 ): Promise<TApiResponse<T_user_info_update_return>> => {
-  return apiWrapPost(params, "user_info/update");
+  return apiWrapPost("user_info/update", params);
 };
 
 export type T_user_info_update = {

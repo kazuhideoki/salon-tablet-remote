@@ -8,7 +8,7 @@ import { apiWrapPost } from "../../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (params: T_user_info_change_theme):Promise<TApiResponse<T_user_info_change_theme_return>> => {
-  return apiWrapPost(params, "user_info/theme/change_theme");
+  return apiWrapPost("user_info/theme/change_theme", params);
 } 
 
 export type T_user_info_change_theme = {
