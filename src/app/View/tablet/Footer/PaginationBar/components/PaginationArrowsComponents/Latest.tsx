@@ -1,7 +1,5 @@
 import React from "react";
 import { FirstPage } from "@material-ui/icons";
-import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles";
-import { Typography, SvgIcon, Button } from "@material-ui/core";
 import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
 
 //  ページ数が3より大きい場合latestとoldestを表示

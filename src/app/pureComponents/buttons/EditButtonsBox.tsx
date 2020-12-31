@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
 import { SwitchOrderButton } from "./SwitchOrderButton";
-import { TUseSwitchOrders } from "../../View/ActionCreator/footerItems/useSwitchOrder";
+import { TUseSwitchOrders } from "../../View/tablet/Footer/Footer/context/useSwitchOrder";
 import { UpdateButton, TUpdateButton } from "./UpdateButton";
 import { DeleteButton, TDeleteButton } from "./DeleteButton";
 
@@ -23,6 +23,7 @@ type Props = {
   deleteProps?: TDeleteButton
   switch?: boolean
   switchProps?: TUseSwitchOrders
+
 };
 
 const useStyles = makeStyles((theme) =>

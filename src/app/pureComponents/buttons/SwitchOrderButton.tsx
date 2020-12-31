@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSwitchOrder, TUseSwitchOrders } from "../../View/ActionCreator/footerItems/useSwitchOrder";
+import { useSwitchOrder, TUseSwitchOrders } from "../../View/tablet/Footer/Footer/context/useSwitchOrder";
 import { SwapHorizontalCircleOutlined } from "@material-ui/icons";
 import { StyledIconButtonEditButton } from "./EditButtonsBox";
 
@@ -22,6 +22,7 @@ export const SwitchOrderButton = (props: Props) => {
                switchOrder({
                  smaller: props.smaller,
                  larger: props.larger,
+                 switchOrder: props.switchOrder,
                });
                props.handleClose();
              }}

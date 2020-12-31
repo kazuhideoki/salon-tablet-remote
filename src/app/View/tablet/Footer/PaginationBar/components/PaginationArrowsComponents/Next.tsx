@@ -1,7 +1,5 @@
 import React from "react";
 import { NavigateNext } from "@material-ui/icons";
-import { useGetArticles } from "../../../../../ActionCreator/articles/useGetArticles";
-import { Typography, SvgIcon, Button } from "@material-ui/core";
 import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
 
 

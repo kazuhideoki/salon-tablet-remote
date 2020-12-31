@@ -1,5 +1,5 @@
 import React from "react";
-import { T_articles_get, apiArticlesGet, T_articles_get_return } from "../../../../pages/api/articles/get";
+import { T_articles_get, apiArticlesGet } from "../../../../pages/api/articles/get";
 import { ArticlesContext } from "../../../Store/articles/Context";
 import { set } from "../../../Store/articles/actions";
 import { UserInfoContext } from "../../../Store/userInfo/Context";

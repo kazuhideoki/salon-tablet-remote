@@ -15,6 +15,7 @@ import { useStateFooter } from "../context/useStateFooter";
 import { useHandleOnUpdateFooterItem } from "../context/useHandleOnUpdateFooterItem";
 import { useHandleLoadingFooter } from "../context/useHandleLoadingFooter";
 import { useOpenFooterItemModal } from "../context/useOpenFooterItemModal";
+import { useSwitchOrder } from "../context/useSwitchOrder";
 
 export const useFooterProps = () => {
   const {
@@ -33,6 +34,8 @@ export const useFooterProps = () => {
 
   const deleteFooterItem = useDeleteFooterItem();
 
+  const switchOrder = useSwitchOrder()
+
   
   return {
     isSetting,
@@ -43,6 +46,7 @@ export const useFooterProps = () => {
     isMobile,
     loading: loading.footer,
     handleLoadingFooter,
+    switchOrder,
   };
 };
 
@@ -123,7 +127,11 @@ export const FooterPresenter: React.FC<Props> = (props) => {
               className={classes.editButtonsBox}
               classNameButtons={classes.editButtonsBoxButtons}
               switch
-              switchProps={{ smaller: footerItem[index - 1], larger: value }}
+              switchProps={{
+                smaller: footerItem[index - 1],
+                larger: value,
+                switchOrder: props.switchOrder,
+              }}
               update
               updateProps={{
                 onClick: props.handleOnUpDateFooterIcon,
@@ -132,7 +140,10 @@ export const FooterPresenter: React.FC<Props> = (props) => {
               delete
               deleteProps={{
                 onClick: props.deleteFooterItem,
-                value: {footer_item_id: value.footer_item_id , order: value.order},
+                value: {
+                  footer_item_id: value.footer_item_id,
+                  order: value.order,
+                },
               }}
             />
           ) : null}
@@ -150,9 +161,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                     )[0]
                   : MoodBad
               }
-              onClick={() =>
-                props.openFooterItemModal(value)
-              }
+              onClick={() => props.openFooterItemModal(value)}
               text={value.icon_name}
               loading={props.loading}
             />
