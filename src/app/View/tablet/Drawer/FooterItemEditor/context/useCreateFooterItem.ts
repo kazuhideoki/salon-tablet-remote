@@ -1,7 +1,7 @@
 import React from "react";
 import {
   T_modal_size, T_is_published_footer_items, T_on_tap, T_data_type_footer_item, FooterItems,
-} from "../../../../../Store/Types";
+} from "../../../../../Store/Interface";
 import { useGetFooterItems } from "./useGetFooterItems";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";

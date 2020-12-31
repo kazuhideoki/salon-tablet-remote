@@ -1,11 +1,11 @@
 import React from "react";
-import { T_selected_theme, T_theme_font } from "../../../../../Store/Types";
+import { T_selected_theme, T_theme_font } from "../../../../../Store/Interface";
 import {
   apiUserInfoThemeFont,
   T_user_info_theme_font,
   TWhichFont,
 } from "../../../../../../pages/api/user_info/theme/font";
-import { TFont1,TFont2 } from "../../../../../Store/themes/fonts";
+import { TFont1,TFont2 } from "../../../../../Store/theme/lib/fonts";
 import { UserInfoContext } from "../../../../../Store/userInfo/Context";
 import { setThemeFont1, setThemeFont2, setThemeFontHeading } from "../../../../../Store/userInfo/actions";
 

@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { FooterItem, FooterItems, TAppState, TArticle, TInstagramMedia, TSetModal, T_instagram_id, T_instagram_username } from "../Types";
+import { FooterItem, FooterItems, TArticle, TInstagramMedia, TSetModal, T_instagram_id, T_instagram_username } from "../Interface";
 import { TFooterItemEdittingParams } from "../../View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem";
 import { T_articles_get_return } from "../../../pages/api/articles/get";
 

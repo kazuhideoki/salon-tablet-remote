@@ -1,7 +1,7 @@
 import React from 'react';
 import { TopPage } from '../pageComponent/TopPage';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
-import { WebsiteThemeProvider } from '../app/Store/themes/websiteTheme';
+import { WebsiteThemeProvider } from '../app/Store/theme/lib/themes/websiteTheme';
 
 export default {
   title: 'pageComponent/TopPage',

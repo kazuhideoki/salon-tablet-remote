@@ -1,6 +1,6 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TInfoBar, T_user_id, TInfoBarData } from "../../../app/Store/Types";
+import { TInfoBar, T_user_id, TInfoBarData } from "../../../app/Store/Interface";
 import { localhost, server } from "../../../lib/loadUrl";
 import { TApiResponse, TApiError } from "../../../lib/apiTypes";
 import { createInitInfoBar } from "../../../lib/createInitInfoBar";

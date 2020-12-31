@@ -1,7 +1,7 @@
 import React from 'react'
 import { setArticleContent, setModal } from '../../../../Store/appState/actions'
 import { AppStateContext } from '../../../../Store/appState/Context'
-import { TArticle } from '../../../../Store/Types'
+import { TArticle } from '../../../../Store/Interface'
 
 export const useOpenArticleModalInfoBar = () => {
   const { dispatchAppState } = React.useContext(AppStateContext)

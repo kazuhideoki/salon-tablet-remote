@@ -18,8 +18,8 @@ import { googleFontsUrl } from "../lib/googleFontsUrl";
 import { AuthProvider } from "../lib/auth/AuthProvider";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 import { MuiThemeProvider } from "@material-ui/core";
-import { themeDefault } from "../app/Store/themes/themeDefault";
-import { generateDefaultParamsFromTheme } from "../app/Store/themes/paramsFromTheme";
+import { themeDefault } from "../app/Store/theme/lib/themes/themeDefault";
+import { generateDefaultParamsFromTheme } from "../app/Store/theme/lib/paramsFromTheme";
 
 export default function MyApp({ Component, pageProps, slug }: AppProps) {
   const session = pageProps.session

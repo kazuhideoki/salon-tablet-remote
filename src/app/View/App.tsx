@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "./tablet/Modal/Modal/view/Modal";
-import { ThemeProvider } from "../Store/ThemeContext";
+import { ThemeProvider } from "../Store/theme/ThemeProvider";
 import { AppMobile } from "./mobile/AppMobile";
 import { AppTablet } from "./tablet/AppTablet";
 import { useIsMobile } from "../../lib/useIsMobile";
@@ -53,10 +53,8 @@ export const App = (props: IndexProps) => {
       device={props.device}
       samplePage={props.samplePage}
     >
-      <ThemeProvider {...props.data.userInfo}>
         <AppView device={props.device} session={props.session} />
         <Modal />
-      </ThemeProvider>
     </StoreContextProvider>
   );
 }

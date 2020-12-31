@@ -1,6 +1,6 @@
 import { db } from "../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TInstagramAccounts, T_user_id } from "../../../app/Store/Types";
+import { TInstagramAccounts, T_user_id } from "../../../app/Store/Interface";
 import { TApiResponse } from "../../../lib/apiTypes";
 import { server, localhost } from "../../../lib/loadUrl";
 import { changeToBooleanFromNumberInstagramAcconts } from "../../../lib/changeToBooleanFromNumber";

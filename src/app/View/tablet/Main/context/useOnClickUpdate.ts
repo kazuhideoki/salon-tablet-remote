@@ -1,7 +1,7 @@
 import React from 'react'
 import { setModal, updateArticle } from '../../../../Store/appState/actions';
 import { AppStateContext } from '../../../../Store/appState/Context';
-import { TArticle } from "../../../../Store/Types";
+import { TArticle } from "../../../../Store/Interface";
 
 export const useOnClickUpdate = () => {
   const { dispatchAppState } = React.useContext(AppStateContext)

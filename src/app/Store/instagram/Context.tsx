@@ -1,5 +1,5 @@
 import React from "react";
-import { initInstagramMedias, TInstagramAccounts, TInstagramMedias } from "../Types";
+import { initInstagramMedias, TInstagramAccounts, TInstagramMedias } from "../Interface";
 import { TInstagramAction } from "./actions";
 import { instagramReducer, InstagramContextState } from "./reducer";
 

@@ -1,9 +1,9 @@
 import { db } from "../../../../lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { T_user_id } from "../../../../app/Store/Types";
+import { T_user_id } from "../../../../app/Store/Interface";
 import { server, localhost } from "../../../../lib/loadUrl";
 import { TApiResponse } from "../../../../lib/apiTypes";
-import { TThemeParams } from "../../../../app/Store/ThemeContext";
+import { TThemeParams } from "../../../../app/Store/theme/ThemeProvider";
 import { apiWrapPost } from "../../../../lib/apiWrap";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -29,11 +29,6 @@ const change_theme = async (req: NextApiRequest, res: NextApiResponse) => {
         themeParams,
         user_id,
       ]);
-
-      console.log(
-        "change_themeの返り値は " +
-          JSON.stringify(data)
-      );
 
       const returnData: T_user_info_change_theme_return = {
         rawData: data,

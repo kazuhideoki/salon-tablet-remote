@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, IconButton, withStyles, makeStyles, createStyles, Theme, SvgIconTypeMap, createMuiTheme, useTheme } from '@material-ui/core'
-import { ThemeContext } from '../../../../../Store/ThemeContext'
+import { ThemeContext } from '../../../../../Store/theme/ThemeProvider'
 import { OverridableComponent } from '@material-ui/core/OverridableComponent'
 import { Skeleton } from '@material-ui/lab'
 

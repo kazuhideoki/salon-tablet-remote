@@ -1,10 +1,10 @@
 import { generateFooterItemEdittingParams } from "../../View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem";
-import { reducerLogger } from "../../Reducer/reducerLogger";
-import { TAppState } from "../Types";
+import { reducerLogger } from "../../../lib/dev/reducerLogger";
 import { TAppStateAction } from "./actions";
 import * as types from "./types";
+import { initAppState } from "./initialValue";
 
-export type AppStateContextState = TAppState;
+export type AppStateContextState = ReturnType<typeof initAppState>;
 
 export const appStateReducer = (
   state: AppStateContextState,

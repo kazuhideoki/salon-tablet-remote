@@ -1,4 +1,4 @@
-import { T_user_id, TInfoBarWithoutId, T_selected_article_id, TInfoBar } from "../app/Store/Types";
+import { T_user_id, TInfoBarWithoutId, T_selected_article_id, TInfoBar } from "../app/Store/Interface";
 import { db } from "./db";
 
 export const createInitInfoBar = async (user_id: T_user_id) => {  

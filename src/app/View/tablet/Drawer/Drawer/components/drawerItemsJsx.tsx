@@ -14,7 +14,7 @@ import { MoodBad } from "@material-ui/icons";
 import { TUseDrawerProps } from "../view/Drawer";
 import { IconsSetting } from "../../FooterItemEditor/components/iconSelect/icons";
 import { EditButtonsBox } from "../../../../../pureComponents/buttons/EditButtonsBox";
-import { FooterItem } from "../../../../../Store/Types";
+import { FooterItem } from "../../../../../Store/Interface";
 import { showDataType } from "../../../Main/components/showDataType";
 
 const useStyles = makeStyles((theme: Theme) => {

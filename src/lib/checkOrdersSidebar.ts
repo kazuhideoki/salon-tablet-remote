@@ -1,4 +1,4 @@
-import { FooterItems } from "../app/Store/Types";
+import { FooterItems } from "../app/Store/Interface";
 
 export const checkOrdersSidebar = (footerItems: FooterItems) => {
 

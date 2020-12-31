@@ -1,6 +1,6 @@
 import React from 'react';
 import {InfoBarEditorPresenter} from '../app/View/tablet/Drawer/InfoBarEditor/view/InfoBarEditor';
-import { T_info_bar_type } from '../app/Store/Types';
+import { T_info_bar_type } from '../app/Store/Interface';
 import { sampleAllArticles } from './lib/sampleAllArticles';
 export default {
   title: 'Drawer/InfoBar/InfoBarEditorPresenter',

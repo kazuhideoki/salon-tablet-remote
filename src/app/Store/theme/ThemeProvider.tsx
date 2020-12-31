@@ -5,9 +5,9 @@ import {
   useTheme,
   useMediaQuery,
 } from "@material-ui/core";
-import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme, T_footer_icon_size } from "./Types";
-import { switchingTheme } from "./themes/paramsFromTheme";
-import { UserInfoContext } from "./userInfo/Context";
+import { TUserInfo, T_theme_font, T_theme_color, T_selected_theme, T_footer_icon_size } from "../Interface";
+import { switchingTheme } from "./lib/paramsFromTheme";
+import { UserInfoContext } from "../userInfo/Context";
 
 const screenWidth = 100
 const screenHeight = 100
@@ -118,8 +118,5 @@ export const ThemeProvider:React.FC<TUserInfo> = (props) => {
       </MuiThemeProvider>
     );
 };
-
-export default ThemeProvider;
-
 
 

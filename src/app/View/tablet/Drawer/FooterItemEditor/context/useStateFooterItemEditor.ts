@@ -1,5 +1,5 @@
 import React from 'react'
-import { selectedIconReducer } from '../../../../../Reducer/selectedIconReducer';
+import { selectedIconReducer } from './lib/selectedIconReducer';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 import { IconsSetting } from '../components/iconSelect/icons';

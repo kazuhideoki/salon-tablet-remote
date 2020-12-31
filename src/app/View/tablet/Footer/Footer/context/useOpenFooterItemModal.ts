@@ -1,7 +1,7 @@
 import React from 'react'
 import { setFooterItemContent, setModal } from '../../../../../Store/appState/actions';
 import { AppStateContext } from '../../../../../Store/appState/Context';
-import { FooterItem } from "../../../../../Store/Types";
+import { FooterItem } from "../../../../../Store/Interface";
 
 export const useOpenFooterItemModal = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);

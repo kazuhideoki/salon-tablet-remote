@@ -1,6 +1,6 @@
 import React from 'react'
-import { TThemeParams } from '../../../../../Store/ThemeContext';
-import { isThemeParamsChanged } from "../../../../../Store/themes/paramsFromTheme";
+import { TThemeParams } from '../../../../../Store/theme/ThemeProvider';
+import { isThemeParamsChanged } from "../../../../../Store/theme/lib/paramsFromTheme";
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 
 export const useHandleAccordion = () => {

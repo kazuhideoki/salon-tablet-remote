@@ -1,4 +1,4 @@
-import { T_theme_color } from "../../app/Store/Types"
+import { T_theme_color } from "../../app/Store/Interface"
 import { generateSecondaryColor } from "./generateSecondaryColor";
 var colorConvert = require("color-convert");
 

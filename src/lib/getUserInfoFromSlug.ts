@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { TUserInfo } from "../app/Store/Types";
+import { TUserInfo } from "../app/Store/Interface";
 import { userInfoParamsFromSql } from "./userInfoParamsFromSql";
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

@@ -1,5 +1,5 @@
 import { useChangeTheme } from "./lib/useChangeTheme";
-import { T_selected_theme } from "../../../../../Store/Types";
+import { T_selected_theme } from "../../../../../Store/Interface";
 
 export const useHandleChange = () => {
   const changeTheme = useChangeTheme();

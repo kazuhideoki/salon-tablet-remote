@@ -1,4 +1,4 @@
-import { T_tag_id } from "../../../../../../Store/Types";
+import { T_tag_id } from "../../../../../../Store/Interface";
 
 export const useHandleSelectTag = (selectingTags: number[], setSelectingTags: React.Dispatch<React.SetStateAction<number[]>>
 ) => {

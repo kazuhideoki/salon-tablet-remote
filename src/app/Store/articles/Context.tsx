@@ -1,5 +1,5 @@
 import React from "react";
-import { TAllArticles, TArticles, TPaginationParams } from "../Types";
+import { TAllArticles, TArticles, TPaginationParams } from "../Interface";
 import { TArticlesAction } from "./actions";
 import { articlesReducer, ArticlesContextState } from "./reducer";
 
