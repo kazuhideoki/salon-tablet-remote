@@ -12,18 +12,20 @@ export const getSession = async (
 
   const st_token = parseCookies({ req: params.req })["st_token"];
 
-  const res = await fetch(`${str}/api/auth/get_session`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify({ st_token }),
-  });
+  if (!st_token) return null
 
-  const result = await res.json();
+  try {
+    const res = await fetch(`${str}/api/auth/get_session`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify({ st_token }),
+    });
+  
+    return await res.json();
 
-  if (result.err) {
-    return null;
+  } catch (err) {
+    return null
   }
 
-  return result;
 };
