@@ -1,5 +1,4 @@
 import React from "react";
-import { Store } from "../../Store/Store";
 import {
   apiUserInfoThemeColor,
   T_user_info_theme_color,

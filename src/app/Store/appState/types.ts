@@ -15,3 +15,7 @@ export const CREATE_FOOTER_ITEM = "CREATE_FOOTER_ITEM" as const;
 export const UPDATE_FOOTER_ITEM = "UPDATE_FOOTER_ITEM" as const;
 
 export const SET_MODAL_SIZE = "SET_MODAL_SIZE" as const;
+export const SET_SELECTED_INSTAGRAM_ACCOUNTS = "SET_SELECTED_INSTAGRAM_ACCOUNTS" as const;
+export const IS_SHOW_INSTAGRAM = "IS_SHOW_INSTAGRAM" as const;
+
+export const SET_ARTICLES_APP_STATE = "SET_ARTICLES_APP_STATE" as const;

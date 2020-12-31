@@ -1,9 +1,9 @@
 import React from 'react'
+import { AppStateContext } from '../../../../../../Store/appState/Context';
 import { InstagramContext } from '../../../../../../Store/instagram/Context';
-import { Store } from '../../../../../../Store/Store';
 
 export const useStateSelectInstagramAccounts = () => {
-  const { appState } = React.useContext(Store);
+  const { appState } = React.useContext(AppStateContext);
   const { isSetting } = appState;
   const { instagramAccounts } = React.useContext(InstagramContext);
 

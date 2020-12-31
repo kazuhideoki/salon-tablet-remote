@@ -5,6 +5,7 @@ import { setAccounts } from "../../Store/instagram/actions";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { AppStateContext } from "../../Store/appState/Context";
 import { useManageInstagramAccountsProps } from "../../View/tablet/Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
+import { isLoadingInstagramAccounts } from "../../Store/appState/actions";
 
 export const useGetInstagramAccounts = () => {
   const { dispatchAppState } = React.useContext(
@@ -12,19 +13,18 @@ export const useGetInstagramAccounts = () => {
   );
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchInstagram } = React.useContext(InstagramContext);
-  const { handleLoadingInstagramAccounts } = useManageInstagramAccountsProps()
 
   return async () => {
 
-    handleLoadingInstagramAccounts(true)
+    dispatchAppState(isLoadingInstagramAccounts(true))
 
     const data = await apiInstagramAccountsGet(userInfo.user_id);
 
     if (data.err === true) {
       alert("取得できませんでした");
-      handleLoadingInstagramAccounts(false)
+      dispatchAppState(isLoadingInstagramAccounts(false));
     } else {
-      handleLoadingInstagramAccounts(false);
+      dispatchAppState(isLoadingInstagramAccounts(false));
       dispatchInstagram(setAccounts(data))
     }
   };

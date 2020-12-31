@@ -1,10 +1,10 @@
-import { Store } from "../../../../../Store/Store";
 import React from 'react'
+import { AppStateContext } from '../../../../../Store/appState/Context';
 import { TagsContext } from "../../../../../Store/tags/Context";
 
 // 現在main画面で表示している記事の,タグの名前を配列で返す
 export const useSelectedArticlesTagNames = () => {
-  const {appState} = React.useContext(Store)
+  const {appState} = React.useContext(AppStateContext)
   const { tags } = React.useContext(TagsContext);
   const selectedArticlesTags = appState.selectedArticlesTags
 

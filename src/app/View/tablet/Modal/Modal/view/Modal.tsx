@@ -27,6 +27,7 @@ import { PageNotEmailVerified } from "../../../../../../pageComponent/PageNotEma
 import { switchingTransition } from "../context/switchingTransition";
 import { useCloseModal } from "../context/useCloseModal";
 import { useStateModal } from "../context/useStateModal";
+import { useIsMobile } from "../../../../../../lib/useIsMobile";
 
 export const useModalProps = () => {
   const {
@@ -40,6 +41,8 @@ export const useModalProps = () => {
 
   const closeModal = useCloseModal()
 
+  const isMobile = useIsMobile()
+
   const theme = useTheme()
   const duration = theme.transitions.duration
 
@@ -52,6 +55,7 @@ export const useModalProps = () => {
     duration,
     selected_theme,
     edittingPrams,
+    isMobile,
   };
 };
 
@@ -170,6 +174,7 @@ export const ModalPresenter:React.FC<Props> = (props) => {
             transitionDuration={skipTransition ? 0 : { enter: props.duration.enteringScreen, exit: props.duration.leavingScreen }}
             onClose={props.closeModal}
             maxWidth="xl"
+            isMobile={props.isMobile}
           >
             {props.setModal === 'google_search' ? null : <CloseButton onClick={props.closeModal} /> }
             <DialogContent className={classes.dialogContent}>

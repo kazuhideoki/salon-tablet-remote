@@ -144,7 +144,7 @@ export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
                  className={classes.editButtonsBox}
                  show={true}
                  update
-                 updateProps={{ onClick: props.openModal("edit_info_bar") }}
+                 updateProps={{ onClick: () => props.openModal("edit_info_bar") }}
                />
              ) : null}
              {displayInfoBar}

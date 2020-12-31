@@ -1,6 +1,7 @@
 import * as types from "./types";
-import { FooterItem, FooterItems, TAppState, TArticle, TInstagramMedia, TSetModal } from "../Types";
+import { FooterItem, FooterItems, TAppState, TArticle, TInstagramMedia, TSetModal, T_instagram_id, T_instagram_username } from "../Types";
 import { TFooterItemEdittingParams } from "../../ActionCreator/footerItems/useCreateFooterItem";
+import { T_articles_get_return } from "../../../pages/api/articles/get";
 
 export const setModal = (value: TSetModal) => ({ type: types.OPEN_MODAL, payload: value });
 export const closeModal = () => ({
@@ -62,6 +63,27 @@ export const setModalSize = (value: {
          type: types.SET_MODAL_SIZE,
          payload: value,
        });
+export const setSelectedInstagramAccounts = (value: {
+        id: T_instagram_id;
+        username: T_instagram_username;
+}) => ({
+         type: types.SET_SELECTED_INSTAGRAM_ACCOUNTS,
+         payload: value,
+       });
+export const isShowInstagram = (value: boolean) => ({
+         type: types.IS_SHOW_INSTAGRAM,
+         payload: value,
+       });
+
+export const setArticlesAppState = (value: {
+        data: T_articles_get_return;
+        selectedArticlesTags: number[];
+        isSetting: boolean;
+        showArticles: boolean;
+      }) => ({
+         type: types.SET_ARTICLES_APP_STATE,
+         payload: value,
+       });
 
 export type TAppStateAction =
   | ReturnType<typeof setModal>
@@ -81,3 +103,7 @@ export type TAppStateAction =
   | ReturnType<typeof updateFooterItem>
   
   | ReturnType<typeof setModalSize>
+  | ReturnType<typeof setSelectedInstagramAccounts>
+  | ReturnType<typeof isShowInstagram>
+
+  | ReturnType<typeof setArticlesAppState>

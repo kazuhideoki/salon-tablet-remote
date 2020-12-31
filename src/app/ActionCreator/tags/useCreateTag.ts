@@ -4,15 +4,17 @@ import { T_tags_create, apiTagsCreate } from "../../../pages/api/tags/create";
 import { useGetTags } from "./useGetTags";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { useManageTagsProps } from "../../View/tablet/Drawer/ManageTags/view/ManageTags"
+import { AppStateContext } from "../../Store/appState/Context";
+import { isLoadingTags } from "../../Store/appState/actions";
 
 export const useCreateTag = () => {
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
-  const { handleLoadingTags } = useManageTagsProps();
   const getTags = useGetTags()
 
   return async (tagName: string) => {
 
-    handleLoadingTags(true)
+    dispatchAppState(isLoadingTags(true))
 
     const params: T_tags_create = {
       user_id: userInfo.user_id,
@@ -23,7 +25,7 @@ export const useCreateTag = () => {
 
     if (data.err === true) {
       alert("タグを作成できませんでした");
-      handleLoadingTags(false)
+      dispatchAppState(isLoadingTags(false))
     } else {
       getTags();
     }

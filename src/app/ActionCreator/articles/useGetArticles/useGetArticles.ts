@@ -6,6 +6,7 @@ import { UserInfoContext } from "../../../Store/userInfo/Context";
 import { AppStateContext } from "../../../Store/appState/Context";
 import { useModalProps } from "../../../View/tablet/Modal/Modal/view/Modal";
 import { useMainProps } from "../../../View/tablet/Main/view/Main";
+import { closeModal, isLoadingMain, isShowInstagram, setArticlesAppState } from "../../../Store/appState/actions";
 
 export const useGetArticles = () => {
   const {
@@ -13,13 +14,11 @@ export const useGetArticles = () => {
   } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchArticles } = React.useContext(ArticlesContext);
-  const { closeModal } = useModalProps();
-  const { handleLoadingMain } = useMainProps();
   
   return async (isSetting: boolean, page: number, selectingTags?: number[], showArticles = true) => {
     
-    closeModal()
-    handleLoadingMain(true)
+    dispatchAppState(closeModal())
+    dispatchAppState(isLoadingMain(true))
     
     const params: T_articles_get = {
       page,
@@ -29,10 +28,11 @@ export const useGetArticles = () => {
     };
 
     const data = await apiArticlesGet(params)
+    
 
     if (data.err === true) {
       alert("記事を取得できませんでした");
-      handleLoadingMain(false)
+      dispatchAppState(isLoadingMain(false));
       return false
     } else {
       const arg = {
@@ -42,12 +42,9 @@ export const useGetArticles = () => {
           showArticles: showArticles,
         }
       
-      dispatchAppState({
-        type: "SET_ARTICLES",
-        payload: arg,
-      });
+      dispatchAppState(setArticlesAppState(arg));
       dispatchArticles(set(arg.data));
-      handleLoadingMain(false)
+      dispatchAppState(isLoadingMain(false));
 
       return true
     }

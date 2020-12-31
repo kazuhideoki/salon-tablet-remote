@@ -130,7 +130,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
                 // key={index}
                 button
                 onClick={() =>
-                  props.openFooterItemModal(value.footer_item_id)
+                  props.openFooterItemModal(value)
                 }
               >
                 <ListItemIcon>

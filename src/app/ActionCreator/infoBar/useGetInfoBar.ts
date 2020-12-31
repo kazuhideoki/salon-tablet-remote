@@ -4,12 +4,12 @@ import { InfoBarContext } from "../../Store/infoBar/Context";
 import { set } from "../../Store/infoBar/actions";
 import { UserInfoContext } from "../../Store/userInfo/Context";
 import { AppStateContext } from "../../Store/appState/Context";
-import { useFooterProps } from "../../View/tablet/Footer/Footer/view/Footer";
+import { isLoadingFooter } from "../../Store/appState/actions";
 
 export const useGetInfoBar = () => {
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { dispatchInfoBar } = React.useContext(InfoBarContext)
-  const { handleLoadingFooter } = useFooterProps()
 
   return async () => {
 
@@ -17,7 +17,7 @@ export const useGetInfoBar = () => {
 
     if (data.err === true) {
       alert("取得できませんでした");
-      handleLoadingFooter(false)
+      dispatchAppState(isLoadingFooter(false))
     } else {
       dispatchInfoBar(set(data))
     }

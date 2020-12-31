@@ -1,3 +1,4 @@
+import { SvgIconTypeMap } from "@material-ui/core";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { reducerLogger } from "./reducerLogger";
 

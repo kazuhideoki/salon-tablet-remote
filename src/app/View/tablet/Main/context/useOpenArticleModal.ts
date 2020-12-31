@@ -2,7 +2,7 @@ import React from 'react'
 import { setArticleContent, setModal } from '../../../../Store/appState/actions'
 import { AppStateContext } from '../../../../Store/appState/Context'
 import { ArticlesContext } from '../../../../Store/articles/Context'
-import { useMainProps } from '../view/Main'
+
 export const useOpenArticleModal = () => {
   const { dispatchAppState } = React.useContext(AppStateContext)
   const { articles } = React.useContext(ArticlesContext)

@@ -8,8 +8,8 @@ import { SvgIconTypeMap } from "@material-ui/core";
 import { T_footer_items_create, apiFooterItemsCreate } from "../../../pages/api/footer_items/create";
 import { FooterItemsContext } from "../../Store/footerItems/Context";
 import { UserInfoContext } from "../../Store/userInfo/Context";
-import { useModalProps } from "../../View/tablet/Modal/Modal/view/Modal";
-import { useFooterProps } from "../../View/tablet/Footer/Footer/view/Footer";
+import { closeModal, isLoadingFooter } from "../../Store/appState/actions";
+import { AppStateContext } from "../../Store/appState/Context";
 
 export type TFooterItemEdittingParams = {
   titleText: string;
@@ -62,16 +62,15 @@ export const generateFooterItemEdittingParams = (param: TFooterItemEdittingParam
 }
 
 export const useCreateFooterItem = () => {
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { footerItems } = React.useContext(FooterItemsContext);
-  const { closeModal } = useModalProps();
-  const { handleLoadingFooter } = useFooterProps()
   const getFooterItems = useGetFooterItems();
 
   return async (param: TCreateFooterItem) => {
 
-    closeModal()
-    handleLoadingFooter(true)
+    dispatchAppState(closeModal());
+    dispatchAppState(isLoadingFooter(true));
 
     const params: T_footer_items_create = {
       ...generateFooterItemEdittingParams(param, footerItems),
@@ -83,9 +82,9 @@ export const useCreateFooterItem = () => {
 
     if (data.err === true) {
       alert("投稿できませんでした");
-      handleLoadingFooter(false)
+      dispatchAppState(isLoadingFooter(false))
     } else {
-      closeModal()
+      dispatchAppState(closeModal())
 
       getFooterItems();
     }

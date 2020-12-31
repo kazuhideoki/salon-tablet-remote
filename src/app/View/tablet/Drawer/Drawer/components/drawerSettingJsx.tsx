@@ -13,23 +13,18 @@ export const drawerSettingJsx = (props: TUseDrawerProps) => {
                    <ListItemIcon>
                      <NoteAddOutlined />
                    </ListItemIcon>
-                   {/* {props.isMobile ? null : <ListItemText primary="記事作成" />} */}
                    <ListItemText primary="記事作成" />
                  </ListItem>
                  <ListItem button onClick={() => props.openFooterItemEditor()}>
                    <ListItemIcon>
                      <VideoLabel />
                    </ListItemIcon>
-                   {/* {props.isMobile ? null : (
-                     <ListItemText primary="アイテム作成" />
-                   )} */}
                    <ListItemText primary="アイテム作成" />
                  </ListItem>
                  <ListItem button onClick={() => props.openModal("edit_tags")}>
                    <ListItemIcon>
                      <TagsButton />
                    </ListItemIcon>
-                   {/* {props.isMobile ? null : <ListItemText primary="タグ管理" />} */}
                    <ListItemText primary="タグ管理" />
                  </ListItem>
                  <ListItem

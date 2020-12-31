@@ -1,14 +1,14 @@
 import React from 'react'
 import { useGetArticles } from '../../../../../ActionCreator/articles/useGetArticles/useGetArticles';
+import { closeDrawer } from '../../../../../Store/appState/actions';
 import { AppStateContext } from '../../../../../Store/appState/Context';
-import { useDrawerProps } from '../view/Drawer';
+
 export const useHandleDrawerClose = () => {
   const getArticles = useGetArticles();
-  const { appState } = React.useContext(AppStateContext);
-  const { closeDrawer } = useDrawerProps()
+  const { appState, dispatchAppState } = React.useContext(AppStateContext);
 
   return () => {
     getArticles(false, 1, appState.selectedArticlesTags, false);
-    closeDrawer()
+    dispatchAppState(closeDrawer())
   };
 }

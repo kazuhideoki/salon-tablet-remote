@@ -7,7 +7,6 @@ import { useIsMobile } from "../../lib/useIsMobile";
 import { IndexProps } from "../../pages";
 import { T_auth_get_session_return } from "../../pages/api/auth/get_session";
 import { UserInfoContext } from "../Store/userInfo/Context";
-import { AppStateContext } from "../Store/appState/Context";
 import { StoreContextProvider } from "../Store/Store";
 import { useDrawerProps } from "./tablet/Drawer/Drawer/view/Drawer";
 
@@ -18,7 +17,6 @@ type TAppViewProps = {
 
 const AppView = ({device, session}: TAppViewProps) => {
   const isMobile = useIsMobile();
-  const { dispatchAppState, appState } = React.useContext(AppStateContext);
   const { openModal } = useDrawerProps()
   const { userInfo } = React.useContext(UserInfoContext);
 

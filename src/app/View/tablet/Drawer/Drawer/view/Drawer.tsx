@@ -40,20 +40,23 @@ export const useDrawerProps = () => {
     themes,
   } = useStateDrawer()
 
-  const theme = useTheme();
-  const isMobile = useIsMobile()
-  const { handleOnUpDateFooterIcon, openFooterItemModal } = useFooterProps()
-    
-    
+  
   const { isClicked, handleOnSignOut } = useHandleOnSingOut();
   const handleSwitchIsSetting = useHandleSwitchIsSetting()
   const handleDrawerOpen = useHandleDrawerOpen()
   const handleDrawerClose = useHandleDrawerClose()
   const closeDrawer = useCloseDrawer()
-  const { deleteFooterItem } = useFooterProps()
   const openModal = useOpenModal()
   const openArticleEditor = useOpenArticleEditor();
   const openFooterItemEditor = useOpenFooterItemEditor()
+  
+  const theme = useTheme();
+  const isMobile = useIsMobile()
+  const {
+    handleOnUpDateFooterIcon,
+    openFooterItemModal,
+    deleteFooterItem,
+  } = useFooterProps();    
   
   return {
     theme,
@@ -189,7 +192,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <div className={classes.drawerHeader}>{drawerHeader}</div>
         <Divider />
 
-        {/* {props.isMobile && !props.isSetting ? ( */}
         {!props.isSetting ? (
           <>
             {drawerItems}
@@ -202,7 +204,6 @@ export const DrawerPresenter:React.FC<TUseDrawerProps> = (props) => {
         <Divider />
 
         {/* 編集モードではアイテムは下にずらす */}
-        {/* {props.isMobile && props.isSetting ? ( */}
         {props.isSetting ? (
           <>
             {drawerItems}

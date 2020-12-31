@@ -257,8 +257,6 @@ export const initAppState = (data: {
        }) => ({
          isPublicPage: data.isPublicPage,
          uaDevice: data.device,
-         //  ※DBには selected_deviceは入ってない, public_pageからの値。reducerは作ってある
-         selectedDevice: data.samplePage || ("responsive" as T_selected_device),
          isSetting: !data.isPublicPage,
          isDrawerOpen: !data.isPublicPage,
          setModal: "edit_article" as TSetModal,
