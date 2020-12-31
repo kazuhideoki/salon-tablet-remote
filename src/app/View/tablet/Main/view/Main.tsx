@@ -191,11 +191,13 @@ export const MainPresenter:React.FC<TUseMainProps> = (props) => {
   let displayContent
 
   if (props.isShowInstagram) {
-    if (props.articles.length) {
+
+    if (props.instagramMedias.data.length) {
       displayContent = displayInstagramMedias;
     } else {
       displayContent = noArticles
     }
+
   } else {
     if (props.articles.length) {
       switch (props.show_article_type) {

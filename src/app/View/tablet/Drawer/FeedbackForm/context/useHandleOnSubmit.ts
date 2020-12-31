@@ -1,6 +1,7 @@
 import React from "react";
 import { useSubmitFeedback } from "../../../../../ActionCreator/useSubmitFeedback";
-import { useModalProps } from "../../../Modal/Modal/view/Modal";
+import { closeModal } from "../../../../../Store/appState/actions";
+import { AppStateContext } from "../../../../../Store/appState/Context";
 
 type Type = {
   contactFormTitle: string;
@@ -15,7 +16,7 @@ export const useHandleOnSubmit = ({
   contactFormContent,
   setContactFormContent,
 }: Type) => {
-  const { closeModal } = useModalProps();
+  const { dispatchAppState} = React.useContext(AppStateContext)
 
   const submitFeedback = useSubmitFeedback();
 
@@ -29,7 +30,7 @@ export const useHandleOnSubmit = ({
       alert("送信されました。");
       setContactFormTitle("");
       setContactFormContent("");
-      closeModal()
+      dispatchAppState(closeModal())
     } else {
       alert("送信に失敗しました。");
     }

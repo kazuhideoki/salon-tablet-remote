@@ -19,6 +19,8 @@ export const useGetInstagramMedias = () => {
 
   // ページ送りでないときは空のオブジェクト
   return async (instagram_id: T_instagram_id, username: T_instagram_username, paging: {after?: string, before?: string }) => {
+    console.log("useGetInstagramMediasだよ");
+    
     
     dispatchAppState(isLoadingMain(true))
     dispatchAppState(closeModal())
@@ -37,11 +39,11 @@ export const useGetInstagramMedias = () => {
       }
       dispatchAppState(isLoadingMain(false));
     } else {
+      dispatchInstagram(setMedias(data))
       dispatchAppState(
         setSelectedInstagramAccounts({ id: instagram_id, username })
       );
       dispatchAppState(isShowInstagram(true))
-      dispatchInstagram(setMedias(data))
       dispatchAppState(isLoadingMain(false));
 
     }

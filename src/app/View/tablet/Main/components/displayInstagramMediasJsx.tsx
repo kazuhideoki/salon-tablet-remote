@@ -1,12 +1,7 @@
 import { Grid, CardActionArea, Card, Button, Typography } from "@material-ui/core";
-import { EditButtonsBox } from "../../../../pureComponents/buttons/EditButtonsBox";
-import { DeleteButton } from "../../../../pureComponents/buttons/DeleteButton";
-import { UpdateButton } from "../../../../pureComponents/buttons/UpdateButton";
 import { TUseMainProps, TMainClasses } from "../view/Main";
-import { showDataType } from "./showDataType";
 import { Skeleton } from "@material-ui/lab";
 import { sqlToDate } from "../../../../ActionCreator/organizeSql/sqlToDate";
-import { SelectedTags } from "./SelectedTags";
 import { PlayArrowRounded } from "@material-ui/icons";
 
 export const displayInstagramMediasJsx = (props: TUseMainProps, classes: TMainClasses, StyledCardContent: any) => props.instagramMedias.data.map((value, key) => {

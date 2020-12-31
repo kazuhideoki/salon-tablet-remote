@@ -9,9 +9,9 @@ import {
 import { DeleteButton } from '../../../../../pureComponents/buttons/DeleteButton';
 import { Skeleton } from '@material-ui/lab';
 import { useDeleteInstagramAccount } from '../context/useDeleteInstagramAccount';
-import { useGetInstagramMedias } from '../context/useGetInstagramMedias';
 import { useStateManageInstagramAccount } from '../context/useStateManageInstagramAccount';
 import { useHandleLoadingInstagramAccounts } from '../context/useHandleLoadingInastagramAccounts';
+import { useGetInstagramMedias } from '../../../../../ActionCreator/instagramMedias/useGetInstagramMedias';
 
 export const useManageInstagramAccountsProps = () => {
 

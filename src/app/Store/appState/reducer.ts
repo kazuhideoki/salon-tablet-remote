@@ -188,13 +188,10 @@ export const appStateReducer = (
       break;
       
     case types.SET_ARTICLES_APP_STATE:
-      const isShowInstagram =
-        action.payload.showArticles === true ? false : state.isShowInstagram;
       newState = {
         ...state,
         selectedArticlesTags: action.payload.selectedArticlesTags,
         isSetting: action.payload.isSetting,
-        isShowInstagram: isShowInstagram,
       };
       break;
   }

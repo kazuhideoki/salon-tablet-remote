@@ -4,12 +4,11 @@ import { ArticlesContext } from "../../../Store/articles/Context";
 import { set } from "../../../Store/articles/actions";
 import { UserInfoContext } from "../../../Store/userInfo/Context";
 import { AppStateContext } from "../../../Store/appState/Context";
-import { useModalProps } from "../../../View/tablet/Modal/Modal/view/Modal";
-import { useMainProps } from "../../../View/tablet/Main/view/Main";
 import { closeModal, isLoadingMain, isShowInstagram, setArticlesAppState } from "../../../Store/appState/actions";
 
 export const useGetArticles = () => {
   const {
+    appState,
     dispatchAppState,
   } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
@@ -43,6 +42,9 @@ export const useGetArticles = () => {
         }
       
       dispatchAppState(setArticlesAppState(arg));
+      const bool =
+        showArticles === true ? false : appState.isShowInstagram;
+      dispatchAppState(isShowInstagram(bool))
       dispatchArticles(set(arg.data));
       dispatchAppState(isLoadingMain(false));
 
