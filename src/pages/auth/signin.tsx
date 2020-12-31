@@ -74,8 +74,9 @@ const handleSignin = async (email: string, password: string) => {
   
     return firebase.auth().signInWithEmailAndPassword(email, password);
 
-  } catch (error) {
-    console.log('handleSigninは ' + error)
+  } catch (err) {
+    console.log('handleSigninは ' + err)
+    alert('エラーによりサインイン出来ませんでした')
   }
 }
 
