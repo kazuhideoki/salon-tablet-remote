@@ -12,10 +12,10 @@ import { Divider, Switch, FormControlLabel, FormGroup } from "@material-ui/core"
 import { QrPopover } from "../components/QrPopover";
 import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
 import { useGoogleSearchProps } from "../../../Modal/Modals/GoogleSearch/view/GoogleSearch";
-import { useHandleOnSubmit } from "../context/useHandleOnSubmit";
 import { useHandleSwitch } from "../context/useHandleSwitch";
 import { useStateAccount } from "../context/useStateAccount";
 import { useDrawerProps } from "../../Drawer/view/Drawer";
+import { useUpdateUser } from "../context/useUpdateUser";
 
 const useSettingUserInfoProps = () => {
 
@@ -33,7 +33,7 @@ const useSettingUserInfoProps = () => {
     setIsShowMobile,
   } = useStateAccount()
 
-  const handleOnSubmit = useHandleOnSubmit({
+  const updateUser = useUpdateUser({
     name,
     shopName,
     email,
@@ -53,7 +53,7 @@ const useSettingUserInfoProps = () => {
     password,
     setPassword,
     userInfo,
-    handleOnSubmit,
+    updateUser,
     isShowMobile,
     setIsShowMobile,
     handleSwitch,
@@ -182,7 +182,7 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                    fullWidth
                    color="primary"
                    className={classes.submit}
-                   onClick={() => props.handleOnSubmit()}
+                   onClick={() => props.updateUser()}
                    disabled={
                      isValidPassword(props.password) ||
                      props.password.length === 0
@@ -221,7 +221,7 @@ export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
                  fullWidth
                  color="secondary"
                  className={classes.submit}
-                 onClick={() => props.openModal('delete_account_form')}
+                 onClick={() => props.openModal("delete_account_form")}
                  //  disabled
                >
                  アカウントを削除する

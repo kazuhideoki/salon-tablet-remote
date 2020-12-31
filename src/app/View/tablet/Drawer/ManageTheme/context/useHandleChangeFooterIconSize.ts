@@ -1,5 +1,5 @@
 import React from 'react'
-import { useChangeFooterIconSize } from "../../../../ActionCreator/user/useChangeFooterIconSize";
+import { useChangeFooterIconSize } from "./lib/useChangeFooterIconSize";
 import { T_footer_icon_size } from "../../../../../Store/Types";
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 

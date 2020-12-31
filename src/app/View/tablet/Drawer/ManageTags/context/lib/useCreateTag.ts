@@ -1,11 +1,11 @@
 import React from "react";
 
-import { T_tags_create, apiTagsCreate } from "../../../../pages/api/tags/create";
+import { T_tags_create, apiTagsCreate } from "../../../../../../../pages/api/tags/create";
 import { useGetTags } from "./useGetTags";
-import { UserInfoContext } from "../../../Store/userInfo/Context";
-import { useManageTagsProps } from "../../tablet/Drawer/ManageTags/view/ManageTags"
-import { AppStateContext } from "../../../Store/appState/Context";
-import { isLoadingTags } from "../../../Store/appState/actions";
+import { UserInfoContext } from "../../../../../../Store/userInfo/Context";
+import { useManageTagsProps } from "../../view/ManageTags"
+import { AppStateContext } from "../../../../../../Store/appState/Context";
+import { isLoadingTags } from "../../../../../../Store/appState/actions";
 
 export const useCreateTag = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);

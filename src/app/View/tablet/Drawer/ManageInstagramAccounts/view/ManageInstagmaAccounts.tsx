@@ -11,7 +11,7 @@ import { Skeleton } from '@material-ui/lab';
 import { useDeleteInstagramAccount } from '../context/useDeleteInstagramAccount';
 import { useStateManageInstagramAccount } from '../context/useStateManageInstagramAccount';
 import { useHandleLoadingInstagramAccounts } from '../context/useHandleLoadingInastagramAccounts';
-import { useGetInstagramMedias } from '../../../../ActionCreator/instagramMedias/useGetInstagramMedias';
+import { useGetInstagramMedias } from '../context/useGetInstagramMedias';
 
 export const useManageInstagramAccountsProps = () => {
 
