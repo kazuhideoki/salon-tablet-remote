@@ -27,6 +27,7 @@ import { useStateDrawer } from "../context/useStateDrawer";
 import { useOpenModal } from "../context/useOpenModal";
 import { useOpenArticleEditor } from "../context/useOpenArticleEditor";
 import { useOpenFooterItemEditor } from "../context/useOpenFooterItemEditor";
+import { useSwitchOrder } from "../../../Footer/Footer/context/useSwitchOrder";
 
 export const useDrawerProps = () => {
   const {
@@ -49,6 +50,7 @@ export const useDrawerProps = () => {
   const openModal = useOpenModal()
   const openArticleEditor = useOpenArticleEditor();
   const openFooterItemEditor = useOpenFooterItemEditor()
+  const switchOrder = useSwitchOrder()
   
   const theme = useTheme();
   const isMobile = useIsMobile()
@@ -81,6 +83,7 @@ export const useDrawerProps = () => {
     openModal,
     openArticleEditor,
     openFooterItemEditor,
+    switchOrder,
   };
 }
 

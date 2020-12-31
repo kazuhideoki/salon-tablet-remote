@@ -131,6 +131,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                 smaller: footerItem[index - 1],
                 larger: value,
                 switchOrder: props.switchOrder,
+                
               }}
               update
               updateProps={{

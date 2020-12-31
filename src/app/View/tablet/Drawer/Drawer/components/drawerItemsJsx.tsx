@@ -82,7 +82,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
       <EditButtonsBox
         className={classes.editButtonsBox}
         switch
-        switchProps={{ smaller: smallerValue, larger: value }}
+        switchProps={{ smaller: smallerValue, larger: value, switchOrder: props.switchOrder }}
         update
         updateProps={{ onClick: props.handleOnUpDateFooterIcon, value: value }}
         delete

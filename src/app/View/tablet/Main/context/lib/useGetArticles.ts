@@ -1,10 +1,10 @@
 import React from "react";
-import { T_articles_get, apiArticlesGet } from "../../../../pages/api/articles/get";
-import { ArticlesContext } from "../../../Store/articles/Context";
-import { set } from "../../../Store/articles/actions";
-import { UserInfoContext } from "../../../Store/userInfo/Context";
-import { AppStateContext } from "../../../Store/appState/Context";
-import { closeModal, isLoadingMain, isShowInstagram, setArticlesAppState } from "../../../Store/appState/actions";
+import { T_articles_get, apiArticlesGet } from "../../../../../../pages/api/articles/get";
+import { ArticlesContext } from "../../../../../Store/articles/Context";
+import { set } from "../../../../../Store/articles/actions";
+import { UserInfoContext } from "../../../../../Store/userInfo/Context";
+import { AppStateContext } from "../../../../../Store/appState/Context";
+import { closeModal, isLoadingMain, isShowInstagram, setArticlesAppState } from "../../../../../Store/appState/actions";
 
 export const useGetArticles = () => {
   const {

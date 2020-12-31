@@ -11,7 +11,6 @@ import { isLoadingFooter } from "../../../../../Store/appState/actions";
 export type TUseSwitchOrders = {
   smaller: FooterItem
   larger: FooterItem
-  switchOrder: ({ smaller, larger }: TUseSwitchOrders) => Promise<void>
 };
 
 export const useSwitchOrder = () => {

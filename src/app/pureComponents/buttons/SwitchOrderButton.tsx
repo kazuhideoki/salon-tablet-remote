@@ -3,10 +3,12 @@ import { useSwitchOrder, TUseSwitchOrders } from "../../View/tablet/Footer/Foote
 import { SwapHorizontalCircleOutlined } from "@material-ui/icons";
 import { StyledIconButtonEditButton } from "./EditButtonsBox";
 
-export type TSwitchButton = TUseSwitchOrders & { handleClose: () => void };
+export type TSwitchOrderButton = TUseSwitchOrders & {
+  
+  switchOrder: ({ smaller, larger }: TUseSwitchOrders) => Promise<void>;
+};
 
-type Props = TSwitchButton & { handleClose?: () => void }
-
+type Props = TSwitchOrderButton & {handleClose: () => void;}
 
 export const SwitchOrderButton = (props: Props) => {
          const switchOrder = useSwitchOrder();
@@ -22,7 +24,6 @@ export const SwitchOrderButton = (props: Props) => {
                switchOrder({
                  smaller: props.smaller,
                  larger: props.larger,
-                 switchOrder: props.switchOrder,
                });
                props.handleClose();
              }}

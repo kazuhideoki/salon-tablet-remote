@@ -2,7 +2,7 @@ import React from "react";
 import {
   T_article_id,
 } from "../../../../Store/Types";
-import { useGetArticles } from "../../../ActionCreator/articles/useGetArticles";
+import { useGetArticles } from "./lib/useGetArticles";
 import { apiArticlesDelete } from "../../../../../pages/api/articles/delete";
 import { ArticlesContext } from "../../../../Store/articles/Context";
 import { AppStateContext } from "../../../../Store/appState/Context";
