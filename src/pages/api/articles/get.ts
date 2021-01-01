@@ -66,11 +66,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       ` ${pageSize}`;
       
     try {
-      // await isSession(req)
          
-      let data: any = await db(
+      let data = await db(
         query
-      );
+      ) as TArticles;
 
       const query2 =
         `SELECT user_id FROM articles WHERE user_id = ${userId} ` +

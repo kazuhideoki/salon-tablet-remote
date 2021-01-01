@@ -8,7 +8,7 @@ export const useHandleOnNumClick = () => {
 
   const getArticles = useGetArticles();
 
-  return (num) => {
+  return (num: number) => {
     getArticles(isSetting, num);
   };
 }

@@ -1,13 +1,26 @@
-import React from 'react'
-import { SelectIcon } from "../components/iconSelect/SelectIcon";
-import dynamic from "next/dynamic";
-const QuillEditor = dynamic(() => import("../../QuillEditor/view/QuillEditor"), {
-  ssr: false,
-});
-import { SwitchOnTapModal } from "../components/SwitchOnTapModal";
-import { TextField, Button, Typography, makeStyles, Theme, createStyles, Grid, Switch, useTheme } from '@material-ui/core';
+import React from 'react';
+import { SelectIcon } from '../components/iconSelect/SelectIcon';
+import dynamic from 'next/dynamic';
+const QuillEditor = dynamic(
+  () => import('../../QuillEditor/view/QuillEditor'),
+  {
+    ssr: false,
+  }
+);
+import { SwitchOnTapModal } from '../components/SwitchOnTapModal';
+import {
+  TextField,
+  Button,
+  Typography,
+  makeStyles,
+  Theme,
+  createStyles,
+  Grid,
+  Switch,
+  useTheme,
+} from '@material-ui/core';
 import { SelectAppLink } from '../components/SelectAppLink';
-import { CharCounter } from "../../../../../pureComponents/CharCounter";
+import { CharCounter } from '../../../../../pureComponents/CharCounter';
 import { SelectModalSize } from '../components/SelectModalSize';
 import { HelpButton } from '../../../../../pureComponents/buttons/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
@@ -18,8 +31,11 @@ import { useHandleChange } from '../context/useHandleChange';
 import { useHandleOnSidebar } from '../context/useHandleOnSidebar';
 import { useStateFooterItemEditor } from '../context/useStateFooterItemEditor';
 import { TFooterItemEdittingParams } from '../context/useCreateFooterItem';
-import { T_data_type_article, T_data_type_footer_item } from '../../../../../Store/Interface';
-import { TDataTypeAndSet } from '../../../Drawer/QuillEditor/components/SwitchDataTypeBox'
+import {
+  T_data_type_article,
+  T_data_type_footer_item,
+} from '../../../../../Store/Interface';
+import { TDataTypeAndSet } from '../../../Drawer/QuillEditor/components/SwitchDataTypeBox';
 
 const useFooterItemEditorProps = () => {
   const {
@@ -45,13 +61,16 @@ const useFooterItemEditorProps = () => {
     setAppLinkUrl,
     charCountFooterItemContent,
     setCharCountFooterItemContent,
-    handleOnChangeIconName,
-  } = useStateFooterItemEditor()
+    setTitleText,
+  } = useStateFooterItemEditor();
 
   const isMobile = useIsMobile();
 
-  const {onSidebar, handleOnSidebar} = useHandleOnSidebar(isEditting, footerItem)
-  
+  const { onSidebar, handleOnSidebar } = useHandleOnSidebar(
+    isEditting,
+    footerItem
+  );
+
   const edittingFooterItemParams: TFooterItemEdittingParams = {
     titleText,
     selectedIcon,
@@ -65,15 +84,14 @@ const useFooterItemEditorProps = () => {
     dataType,
   };
 
-  const handleSubmit = useHandleSubmit(edittingFooterItemParams, isEditting)
+  const handleSubmit = useHandleSubmit(edittingFooterItemParams, isEditting);
 
-
-  const handleChange = useHandleChange(edittingFooterItemParams)
+  const handleChange = useHandleChange(edittingFooterItemParams);
 
   const dataTypeAndSet: TDataTypeAndSet<T_data_type_footer_item> = {
     dataType,
     setDataType,
-  }
+  };
 
   return {
     onTapRadio,
@@ -93,7 +111,7 @@ const useFooterItemEditorProps = () => {
     setAppLinkUrl,
     charCountFooterItemContent,
     setCharCountFooterItemContent,
-    handleOnChangeIconName,
+    setTitleText,
     handleSubmit,
     dataTypeAndSet,
     is_admin,
@@ -103,9 +121,11 @@ const useFooterItemEditorProps = () => {
     edittingFooterItemParams,
     handleChange,
   };
-}
+};
 
-export type TUseFooterItemEditorProps = ReturnType<typeof useFooterItemEditorProps>
+export type TUseFooterItemEditorProps = ReturnType<
+  typeof useFooterItemEditorProps
+>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -113,13 +133,13 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     topDiv: {
-      display: "flex",
+      display: 'flex',
       marginBottom: theme.spacing(2),
     },
     title: {
-      width: "50%",
+      width: '50%',
       margin: `0 ${theme.spacing(2)}px`,
-      maxWidth: "100%",
+      maxWidth: '100%',
     },
     selectIcon: {
       margin: `0 ${theme.spacing(2)}px`,
@@ -129,15 +149,15 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
     switchSidebar: {
-      margin: theme.spacing(0,2),
+      margin: theme.spacing(0, 2),
     },
     selectModalSize: {
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
 
     linkTextField: {
-      minWidth: "80%",
-      maxWidth: "100%",
+      minWidth: '80%',
+      maxWidth: '100%',
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
     appLink: {
@@ -148,188 +168,175 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     bottomDiv: {
-      position: "sticky",
+      position: 'sticky',
       bottom: 0,
       marginRight: theme.spacing(2),
       zIndex: 100,
     },
     charCounter: {
-      textAlign: "right",
+      textAlign: 'right',
     },
     submitButton: {
-      marginLeft: "auto",
+      marginLeft: 'auto',
       marginRight: theme.spacing(1),
     },
   })
 );
 
 export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
-         props
-       ) => {
-         const classes = useStyles();
+  props
+) => {
+  const classes = useStyles();
 
-         let mainField: JSX.Element;
-         switch (props.onTapRadio) {
-           case 'modal':
-             mainField = (
-               <div>
-                 <SelectModalSize
-                   {...props}
-                   className={classes.selectModalSize}
-                 />
+  let mainField: JSX.Element;
+  switch (props.onTapRadio) {
+    case 'modal':
+      mainField = (
+        <div>
+          <SelectModalSize {...props} className={classes.selectModalSize} />
 
-                 <QuillEditor
-                   editorText={props.editorText}
-                   setEditorText={props.setEditorText}
-                   setEditorTextExcerpt={props.setEditorTextExcerpt}
-                   setCharCount={props.setCharCountFooterItemContent}
-                 />
-                 <div className={classes.charCounter}>
-                   <CharCounter
-                     charCount={props.charCountFooterItemContent}
-                     limitCount={1000}
-                     align="right"
-                     isShowCount
-                   />
-                 </div>
-               </div>
-             );
-             break;
-           case 'link':
-             mainField = (
-               <div>
-                 <TextField
-                   id="linkUrl"
-                   label="リンクURL"
-                   value={props.linkUrl}
-                   onChange={(e) => props.setLinkUrl(e.target.value)}
-                   className={classes.linkTextField}
-                 />
-               </div>
-             );
-             break;
-           case 'appLink':
-             mainField = (
-               <div>
-                 <SelectAppLink
-                   appLinkUrl={props.appLinkUrl}
-                   setAppLinkUrl={props.setAppLinkUrl}
-                   className={classes.appLink}
-                 />
-               </div>
-             );
-             break;
-           case 'google':
-             mainField = (
-               <div className={classes.googleSearch}>
-                 <Typography variant='h4' color='textSecondary' align='center'>
-                  Google検索機能（実験機能）
-                 </Typography>
-               </div>
-             )
-             break;
+          <QuillEditor
+            editorText={props.editorText}
+            setEditorText={props.setEditorText}
+            setEditorTextExcerpt={props.setEditorTextExcerpt}
+            setCharCount={props.setCharCountFooterItemContent}
+          />
+          <div className={classes.charCounter}>
+            <CharCounter
+              charCount={props.charCountFooterItemContent}
+              limitCount={1000}
+              align="right"
+              isShowCount
+            />
+          </div>
+        </div>
+      );
+      break;
+    case 'link':
+      mainField = (
+        <div>
+          <TextField
+            id="linkUrl"
+            label="リンクURL"
+            value={props.linkUrl}
+            onChange={(e) => props.setLinkUrl(e.target.value)}
+            className={classes.linkTextField}
+          />
+        </div>
+      );
+      break;
+    case 'appLink':
+      mainField = (
+        <div>
+          <SelectAppLink
+            appLinkUrl={props.appLinkUrl}
+            setAppLinkUrl={props.setAppLinkUrl}
+            className={classes.appLink}
+          />
+        </div>
+      );
+      break;
+    case 'google':
+      mainField = (
+        <div className={classes.googleSearch}>
+          <Typography variant="h4" color="textSecondary" align="center">
+            Google検索機能（実験機能）
+          </Typography>
+        </div>
+      );
+      break;
 
-           default:
-             break;
-         }
-     
+    default:
+      break;
+  }
 
-         return (
-           <>
-             <Typography variant="h4" component="h2" className={classes.header}>
-               {props.isEditting ? "アイテム編集" : "アイテム作成"}
-             </Typography>
-             {props.is_admin ? (
-               <SwitchDataTypeBox dataTypeAndSet={props.dataTypeAndSet} forFooter />
-             ) : null}
+  return (
+    <>
+      <Typography variant="h4" component="h2" className={classes.header}>
+        {props.isEditting ? 'アイテム編集' : 'アイテム作成'}
+      </Typography>
+      {props.is_admin ? (
+        <SwitchDataTypeBox dataTypeAndSet={props.dataTypeAndSet} forFooter />
+      ) : null}
 
-             <div className={classes.topDiv}>
-               <TextField
-                 id="icon-name-text-field"
-                 label="アイテム名"
-                 multiline
-                 value={props.titleText}
-                 onChange={(e) => props.handleOnChangeIconName(e)}
-                 className={classes.title}
-               />
-               <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。" />
-               <CharCounter
-                 charCount={props.titleText.length}
-                 limitCount={100}
-               />
-               <br />
+      <div className={classes.topDiv}>
+        <TextField
+          id="icon-name-text-field"
+          label="アイテム名"
+          multiline
+          value={props.titleText}
+          onChange={(e) => props.setTitleText(e.target.value)}
+          className={classes.title}
+        />
+        <HelpButton content="名前がきれいに表示されないときは、改行するか短くしてみて下さい。" />
+        <CharCounter charCount={props.titleText.length} limitCount={100} />
+        <br />
 
-               <SelectIcon className={classes.selectIcon} {...props} />
-             </div>
+        <SelectIcon className={classes.selectIcon} {...props} />
+      </div>
 
-             <SwitchOnTapModal
-               className={classes.switchOnTapModal}
-               {...props}
-             />
-             <div
-               style={{ display: "inline-block" }}
-               className={classes.switchSidebar}
-             >
-               \{" "}
-               <Typography variant="body1" component="p" color="textSecondary">
-                 サイドバーに表示
-                 <HelpButton
-                   content="タブレットビューでのみ適応。モバイルビューでは全てサイドバーに表示されます。"
-                   size="small"
-                 />
-               </Typography>
-               <Switch
-                 checked={props.onSidebar}
-                 onChange={props.handleOnSidebar}
-                 name="onSidebar"
-                 color="primary"
-               />
-             </div>
+      <SwitchOnTapModal className={classes.switchOnTapModal} {...props} />
+      <div
+        style={{ display: 'inline-block' }}
+        className={classes.switchSidebar}>
+        \{' '}
+        <Typography variant="body1" component="p" color="textSecondary">
+          サイドバーに表示
+          <HelpButton
+            content="タブレットビューでのみ適応。モバイルビューでは全てサイドバーに表示されます。"
+            size="small"
+          />
+        </Typography>
+        <Switch
+          checked={props.onSidebar}
+          onChange={props.handleOnSidebar}
+          name="onSidebar"
+          color="primary"
+        />
+      </div>
 
-             {mainField}
+      {mainField}
 
-             <div className={classes.bottomDiv}>
-               <Grid container>
-                 <Grid item className={classes.submitButton}>
-                   <Button
-                     variant="contained"
-                     color="primary"
-                     onClick={() => props.handleSubmit({ is_published: true })}
-                     startIcon={<PublishTwoTone />}
-                     disabled={
-                       props.titleText.length < 101 &&
-                       props.charCountFooterItemContent < 1001
-                         ? false
-                         : true
-                     }
-                   >
-                     {props.isEditting ? "更新" : "投稿"}
-                   </Button>
-                 </Grid>
-                 <Grid item>
-                   <Button
-                     onClick={() => props.handleSubmit({ is_published: false })}
-                     startIcon={<SaveTwoTone />}
-                     disabled={
-                       props.titleText.length < 101 &&
-                       props.charCountFooterItemContent < 1001
-                         ? false
-                         : true
-                     }
-                   >
-                     下書き保存
-                   </Button>
-                 </Grid>
-               </Grid>
-             </div>
-           </>
-         );
-       };
+      <div className={classes.bottomDiv}>
+        <Grid container>
+          <Grid item className={classes.submitButton}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => props.handleSubmit(true)}
+              startIcon={<PublishTwoTone />}
+              disabled={
+                props.titleText.length < 101 &&
+                props.charCountFooterItemContent < 1001
+                  ? false
+                  : true
+              }>
+              {props.isEditting ? '更新' : '投稿'}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() => props.handleSubmit(false)}
+              startIcon={<SaveTwoTone />}
+              disabled={
+                props.titleText.length < 101 &&
+                props.charCountFooterItemContent < 1001
+                  ? false
+                  : true
+              }>
+              下書き保存
+            </Button>
+          </Grid>
+        </Grid>
+      </div>
+    </>
+  );
+};
 
 const FooterItemEditor = () => {
-  const props = useFooterItemEditorProps()
+  const props = useFooterItemEditorProps();
 
-  return <FooterItemEditorPresenter {...props}/>
-}
+  return <FooterItemEditorPresenter {...props} />;
+};
 
-export default FooterItemEditor
+export default FooterItemEditor;

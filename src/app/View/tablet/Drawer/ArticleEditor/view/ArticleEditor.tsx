@@ -1,19 +1,33 @@
-import React from "react";
-import dynamic from "next/dynamic";
-const QuillEditor = dynamic(() => import("../../QuillEditor/view/QuillEditor"), {
-  ssr: false,
-});
-import { Button, TextField, Typography, CircularProgress, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
-import { TCreateArticle } from "../context/useCreateArticle";
-import { SelectTagsPopover } from "../components/SelectTagsPopover";
-import { CharCounter } from "../../../../../pureComponents/CharCounter";
-import { SaveTwoTone, PublishTwoTone } from "@material-ui/icons";
-import { SwitchDataTypeBox, TDataTypeAndSet } from "../../QuillEditor/components/SwitchDataTypeBox";
-import pure from "recompose/pure";
-import { useHandleSubmit } from '../context/useHandleSubmit'
-import { useStateArticleEditor } from "../context/useStateArticleEditor";
-import { T_data_type_article } from "../../../../../Store/Interface";
+import React from 'react';
+import dynamic from 'next/dynamic';
+const QuillEditor = dynamic(
+  () => import('../../QuillEditor/view/QuillEditor'),
+  {
+    ssr: false,
+  }
+);
+import {
+  Button,
+  TextField,
+  Typography,
+  makeStyles,
+  createStyles,
+  Theme,
+  Grid,
+} from '@material-ui/core';
+import { TCreateArticle } from '../context/useCreateArticle';
+import { SelectTagsPopover } from '../components/SelectTagsPopover';
+import { CharCounter } from '../../../../../pureComponents/CharCounter';
+import { SaveTwoTone, PublishTwoTone } from '@material-ui/icons';
+import {
+  SwitchDataTypeBox,
+  TDataTypeAndSet,
+} from '../../QuillEditor/components/SwitchDataTypeBox';
+import pure from 'recompose/pure';
 
+import { useHandleSubmit } from '../context/useHandleSubmit';
+import { useStateArticleEditor } from '../context/useStateArticleEditor';
+import { T_data_type_article } from '../../../../../Store/Interface';
 
 const useArticleEditorProps = () => {
   const {
@@ -40,10 +54,6 @@ const useArticleEditorProps = () => {
     tags,
   } = useStateArticleEditor();
 
-  const handleOnChangeTitleText = (e) => {
-    setTitleText(e.target.value);
-  };
-
   const params: TCreateArticle = {
     is_published: null,
     titleText,
@@ -51,15 +61,15 @@ const useArticleEditorProps = () => {
     editorTextExcerpt,
     editorImg,
     selectedTags,
-    dataType
+    dataType,
   };
 
-  const handleSubmit = useHandleSubmit(params, isEditting)
+  const handleSubmit = useHandleSubmit(params, isEditting);
 
-  const dataTypeAndSet: TDataTypeAndSet<T_data_type_article> ={
+  const dataTypeAndSet: TDataTypeAndSet<T_data_type_article> = {
     dataType,
     setDataType,
-  }
+  };
 
   return {
     is_admin,
@@ -77,150 +87,133 @@ const useArticleEditorProps = () => {
     setSelectedTags,
     charCountArticleContent,
     setCharCountArticleContent,
-    handleOnChangeTitleText,
+    setTitleText,
     handleSubmit,
     tags,
     dataTypeAndSet,
   };
-
-}
+};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-
-    },
+    root: {},
     header: {
       margin: theme.spacing(2),
     },
     topDiv: {
-      display: "flex",
+      display: 'flex',
       marginBottom: theme.spacing(2),
     },
     title: {
-      width: "50%",
+      width: '50%',
       marginLeft: theme.spacing(2),
-      maxWidth: "100%",
+      maxWidth: '100%',
     },
     selectTagsPopover: {
       margin: `0 ${theme.spacing(2)}px`,
     },
 
     bottomDiv: {
-      position: "sticky",
+      position: 'sticky',
       bottom: 0,
       // right: theme.spacing(2),
       marginRight: theme.spacing(2),
       zIndex: 100,
     },
     charCounter: {
-      textAlign: "right",
+      textAlign: 'right',
     },
     submitButton: {
-      marginLeft: "auto",
+      marginLeft: 'auto',
       marginRight: theme.spacing(1),
     },
   })
 );
 
-export type TUseArticleEditorProps = ReturnType<typeof useArticleEditorProps>
+export type TUseArticleEditorProps = ReturnType<typeof useArticleEditorProps>;
 
 export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = (
-         props
-       ) => {
-         const classes = useStyles();
+  props
+) => {
+  const classes = useStyles();
 
-         return (
-           <div className={classes.root}>
-             <Typography variant="h4" component="h2" className={classes.header}>
-               {props.isEditting ? "記事編集" : "記事作成"}
-             </Typography>
-             {props.is_admin ? (
-               <SwitchDataTypeBox
-                 dataTypeAndSet={props.dataTypeAndSet}
-               />
-             ) : null}
-             <div className={classes.topDiv}>
-               <TextField
-                 id="article-title-text-field"
-                 label="タイトル"
-                 value={props.titleText}
-                 onChange={(e) => props.handleOnChangeTitleText(e)}
-                 className={classes.title}
-                 // onKeyPress title エンターで 本文へ quillとの連携がやろうとしたが難しい。
-               />
-               <CharCounter
-                 charCount={props.titleText.length}
-                 limitCount={100}
-               />
-               <SelectTagsPopover
-                 className={classes.selectTagsPopover}
-                 selectedTags={props.selectedTags}
-                 setSelectedTags={props.setSelectedTags}
-                 tags={props.tags}
-               />
-             </div>
+  return (
+    <div className={classes.root}>
+      <Typography variant="h4" component="h2" className={classes.header}>
+        {props.isEditting ? '記事編集' : '記事作成'}
+      </Typography>
+      {props.is_admin ? (
+        <SwitchDataTypeBox dataTypeAndSet={props.dataTypeAndSet} />
+      ) : null}
+      <div className={classes.topDiv}>
+        <TextField
+          id="article-title-text-field"
+          label="タイトル"
+          value={props.titleText}
+          onChange={(e) => props.setTitleText(e.target.value)}
+          className={classes.title}
+        />
+        <CharCounter charCount={props.titleText.length} limitCount={100} />
+        <SelectTagsPopover className={classes.selectTagsPopover} {...props} />
+      </div>
 
-             <QuillEditor
-               editorText={props.editorText}
-               setEditorText={props.setEditorText}
-               setEditorTextExcerpt={props.setEditorTextExcerpt}
-               setEditorImg={props.setEditorImg}
-               setCharCount={props.setCharCountArticleContent}
-             />
+      <QuillEditor
+        editorText={props.editorText}
+        setEditorText={props.setEditorText}
+        setEditorTextExcerpt={props.setEditorTextExcerpt}
+        setEditorImg={props.setEditorImg}
+        setCharCount={props.setCharCountArticleContent}
+      />
 
-             <div className={classes.bottomDiv}>
-               <div className={classes.charCounter}>
-                 <CharCounter
-                   charCount={props.charCountArticleContent}
-                   limitCount={1000}
-                   align="right"
-                   isShowCount
-                 />
-               </div>
-               <Grid container>
-                 <Grid item className={classes.submitButton}>
-                   <Button
-                     variant="contained"
-                     color="primary"
-                     onClick={() => props.handleSubmit({ is_published: true })}
-                     startIcon={<PublishTwoTone />}
-                     disabled={
-                       props.titleText.length < 101 &&
-                       props.charCountArticleContent < 1001
-                         ? false
-                         : true
-                     }
-                   >
-                     {props.isEditting ? "更新" : "投稿"}
-                   </Button>
-                 </Grid>
-                 <Grid item>
-                   <Button
-                     onClick={() => props.handleSubmit({ is_published: false })}
-                     startIcon={<SaveTwoTone />}
-                     disabled={
-                       props.titleText.length < 101 &&
-                       props.charCountArticleContent < 1001
-                         ? false
-                         : true
-                     }
-                   >
-                     下書き保存
-                   </Button>
-                 </Grid>
-               </Grid>
-             </div>
-           </div>
-         );
-       };
+      <div className={classes.bottomDiv}>
+        <div className={classes.charCounter}>
+          <CharCounter
+            charCount={props.charCountArticleContent}
+            limitCount={1000}
+            align="right"
+            isShowCount
+          />
+        </div>
+        <Grid container>
+          <Grid item className={classes.submitButton}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => props.handleSubmit(true)}
+              startIcon={<PublishTwoTone />}
+              disabled={
+                props.titleText.length < 101 &&
+                props.charCountArticleContent < 1001
+                  ? false
+                  : true
+              }>
+              {props.isEditting ? '更新' : '投稿'}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() => props.handleSubmit(false)}
+              startIcon={<SaveTwoTone />}
+              disabled={
+                props.titleText.length < 101 &&
+                props.charCountArticleContent < 1001
+                  ? false
+                  : true
+              }>
+              下書き保存
+            </Button>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
+};
 
-export const ArticleEditorPresenter = pure(ArticleEditorPresenterOriginal)
+export const ArticleEditorPresenter = pure(ArticleEditorPresenterOriginal);
 
-const ArticleEditor = () => {
-  const props = useArticleEditorProps()
+const ArticleEditor: React.FC = () => {
+  const props = useArticleEditorProps();
 
-  return <ArticleEditorPresenter {...props}/>
-}
-export default ArticleEditor
-
+  return <ArticleEditorPresenter {...props} />;
+};
+export default ArticleEditor;

@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { generateDefaultParamsFromTheme } from '../../../../../Store/theme/lib/paramsFromTheme';
 import { TThemeParams } from '../../../../../Store/theme/ThemeProvider';
-import { isThemeParamsChanged } from "../../../../../Store/theme/lib/paramsFromTheme";
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import Lodash from 'lodash';
 
 export const useHandleAccordion = () => {
   const { userInfo } = React.useContext(UserInfoContext);
@@ -24,11 +25,21 @@ export const useHandleAccordion = () => {
   );
 
   const handleAccordion = (panel: boolean) => (
-    event: React.ChangeEvent<{}>,
+    event: React.ChangeEvent<Record<string, unknown>>,
     isExpanded: boolean
   ) => {
     setExpanded(isExpanded ? true : false);
   };
 
-  return {expanded, handleAccordion}
-}
+  return { expanded, handleAccordion };
+};
+
+export const isThemeParamsChanged = (themeParams: TThemeParams): boolean => {
+  const originalThemeParams = generateDefaultParamsFromTheme(
+    themeParams.selected_theme
+  );
+
+  const isSame = Lodash.isEqual(themeParams, originalThemeParams);
+
+  return isSame ? false : true;
+};

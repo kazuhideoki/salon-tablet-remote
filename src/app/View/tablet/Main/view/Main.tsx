@@ -173,6 +173,7 @@ export const StyledCardContent = withStyles({
     },
   },
 })(CardContent)
+export type TStyledCardContent = typeof StyledCardContent
 
 export const MainPresenter:React.FC<TUseMainProps> = (props) => {
   const classes = useStyles();
