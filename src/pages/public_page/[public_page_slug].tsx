@@ -1,15 +1,43 @@
 import React from 'react'
 import { GetServerSideProps } from "next";
-import { getUserInfoFromSlug } from "../../lib/getUserInfoFromSlug";
 import { generateProps } from '../../lib/generateProps';
 import App from '../../app/View/App';
 import Head from 'next/head';
 import parser from "ua-parser-js";
 import { IndexProps } from '..';
+import { checkIsGeneratePubulicPage } from '../../lib/checkIsGeneratePubulicPage';
+import { makeStyles, Typography, Theme, createStyles } from "@material-ui/core";
 
-
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    typography: {
+      margin: theme.spacing(3),
+    },
+  })
+);
 
 const PublicPage = (props: IndexProps) => {
+  const classes = useStyles()
+
+  if (props.isPublicPage === false) {
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex" />
+        </Head>
+        <Typography
+          className={classes.typography}
+          align="center"
+          variant="h4"
+          component="h2"
+          gutterBottom
+          color="textSecondary"
+        >
+          パブリックページが有効化されていません
+        </Typography>
+      </>
+    );
+  }
 
   return (
     <>
@@ -32,16 +60,16 @@ export const getServerSideProps: GetServerSideProps = async ({req, res, query}) 
   const device = ua.getDevice().type;
   
   // slugがDBにあるかどうかチェックして、「表示させているか？」「slug」を返す
-  const userInfo = await getUserInfoFromSlug(SlugArray[0]);
+  const userInfo = await checkIsGeneratePubulicPage(SlugArray[0]);
 
   if (userInfo === null) {
-    res.statusCode = 302;
-    res.setHeader(
-      "Location",
-      `/public_page/wrong_url?wrong_slug=${slicedSlug}`
-    ); 
-    res.end()
-    return { props: null };
+    // res.statusCode = 302;
+    // res.setHeader(
+    //   "Location",
+    //   `/public_page/wrong_url?wrong_slug=${slicedSlug}`
+    // ); 
+    // res.end()
+    return { props: {isPublicPage: false} };
   }
 
   const returnData: IndexProps = {

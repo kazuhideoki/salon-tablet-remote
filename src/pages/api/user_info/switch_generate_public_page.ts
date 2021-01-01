@@ -23,8 +23,6 @@ export type T_user_info_switch_generate_public_page_return = {
 
 const switch_generate_public_page = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-
-    console.log('switch_generate_public_pageのreq.bodyは ' + JSON.stringify(req.body));
     
     const {
       is_generate_public_page,
@@ -37,8 +35,6 @@ const switch_generate_public_page = async (req: NextApiRequest, res: NextApiResp
         `UPDATE user_info SET is_generate_public_page = ? WHERE user_id = ?`,
         [is_generate_public_page, user_id]
       );
-
-        console.log("/user_info/switch_generate_public_page/は " + JSON.stringify(data));
 
         const returnData: T_user_info_switch_generate_public_page_return = {
           is_generate_public_page: is_generate_public_page
