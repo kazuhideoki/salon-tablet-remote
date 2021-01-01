@@ -19,7 +19,7 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "alwaysStrict": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "strictNullChecks": false,
     "strictPropertyInitialization": false,
 
@@ -36,7 +36,13 @@
   "exclude": [
     "node_modules",
     "./src/stories"
-    
-    
-  ]
+  ],
+
+ 
+  "baseUrl": ".",
+  "paths": {
+    "*": [
+      "@types/*"
+    ]
+  }
 }
