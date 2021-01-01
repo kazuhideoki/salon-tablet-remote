@@ -1,10 +1,11 @@
-export const tagIdsToNumberArray = (data: any) => {
+import { TArticles } from "../app/Store/Interface";
+
+export const tagIdsToNumberArray = (data: TArticles) => {
   // tag_idsをnumber[]化する
   const newData = data.map((value) => {
     // 値がある場合のみ(nullではないとき)変換
     if (value.tag_ids) {
 
-      // まずstringをstring[]にして,number[]に変換
       //@ts-ignore
       const parsedTagId: string[] = JSON.parse(value.tag_ids);
       

@@ -1,5 +1,5 @@
-import React from "react";
-import ReactQuill, { Quill } from "react-quill";
+import React from 'react';
+import ReactQuill from 'react-quill';
 
 type Props = {
   editorText: string;
@@ -11,26 +11,34 @@ export const SmallQuillEditor: React.FC<Props> = ({
   setEditorText,
   setCharCount,
 }) => {
-
-  const handleOnChange = (content, delta, source, editor) => {
+  const handleOnChange = (
+    content: string,
+    delta: any,
+    source: any,
+    editor: any
+  ) => {
     setEditorText(content);
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
     const plainText = editor.getText();
     setCharCount(plainText.length);
-
   };
 
   const modules = {
     toolbar: [
-      ["bold", "italic", "underline", "strike"],
-      [{ color: [] }, { background: [] }],
-      ["clean"],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ color: [] as [] }, { background: [] as [] }],
+      ['clean'],
     ],
-
   };
-  const formats = 
-    ["bold", "italic", "underline", "strike", 'color', 'background', 'clean']
-  
+  const formats = [
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'color',
+    'background',
+    'clean',
+  ];
 
   return (
     // ※ReactQuillのスタイルはquill.scssに記述
@@ -47,7 +55,6 @@ export const SmallQuillEditor: React.FC<Props> = ({
         // コピペなどで他のformatのせいで一行表示ができなくなるのを防ぐ
         formats={formats}
         scrollingContainer="body"
-        // formats={formats}
       />
     </>
   );

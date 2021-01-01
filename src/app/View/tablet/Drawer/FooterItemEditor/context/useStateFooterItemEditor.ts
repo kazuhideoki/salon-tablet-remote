@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { selectedIconReducer } from './lib/selectedIconReducer';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
@@ -6,7 +6,7 @@ import { IconsSetting } from '../components/iconSelect/icons';
 
 export const useStateFooterItemEditor = () => {
   const { userInfo } = React.useContext(UserInfoContext);
-  const { is_admin } = userInfo
+  const { is_admin } = userInfo;
   const { appState } = React.useContext(AppStateContext);
   const {
     modalSize,
@@ -15,15 +15,15 @@ export const useStateFooterItemEditor = () => {
     isEditting,
     footerItem,
   } = appState.edittingPrams;
-  
+
   const [titleText, setTitleText] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.icon_name : ""
+    isEditting || isModalSizeChanged ? footerItem.icon_name : ''
   );
   const [editorText, setEditorText] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.item_content : ""
+    isEditting || isModalSizeChanged ? footerItem.item_content : ''
   );
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.item_excerpt : ""
+    isEditting || isModalSizeChanged ? footerItem.item_excerpt : ''
   );
   const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
     selectedIconReducer,
@@ -35,7 +35,7 @@ export const useStateFooterItemEditor = () => {
   );
 
   const [dataType, setDataType] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.data_type : "default_data"
+    isEditting || isModalSizeChanged ? footerItem.data_type : 'default_data'
   );
 
   const [onTapRadio, setOnTapRadio] = React.useState(onTap);
@@ -43,21 +43,16 @@ export const useStateFooterItemEditor = () => {
   const [modalSizeRadio, setModalSizeRadio] = React.useState(modalSize);
 
   const [linkUrl, setLinkUrl] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.link_url : ""
+    isEditting || isModalSizeChanged ? footerItem.link_url : ''
   );
   const [appLinkUrl, setAppLinkUrl] = React.useState(
-    isEditting || isModalSizeChanged ? footerItem.app_link_url : ""
+    isEditting || isModalSizeChanged ? footerItem.app_link_url : ''
   );
 
   const [
     charCountFooterItemContent,
     setCharCountFooterItemContent,
   ] = React.useState(0);
-
-  const handleOnChangeIconName = (e) => {
-    setTitleText(e.target.value);
-  }
-
 
   return {
     isEditting,
@@ -82,6 +77,6 @@ export const useStateFooterItemEditor = () => {
     setAppLinkUrl,
     charCountFooterItemContent,
     setCharCountFooterItemContent,
-    handleOnChangeIconName,
+    setTitleText,
   };
-}
+};

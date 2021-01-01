@@ -8,7 +8,7 @@ import nookies from 'nookies'
 initFirebase()
 
 const firebaseAuthConfig = {
-  signInFlow: 'popup',
+  signInFlow: "popup",
   signInOptions: [
     {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -16,21 +16,23 @@ const firebaseAuthConfig = {
     },
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
   ],
-  signInSuccessUrl: '/',
-  credentialHelper: 'none',
+  signInSuccessUrl: "/",
+  credentialHelper: "none",
   callbacks: {
-    signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
-      
+    signInSuccessWithAuthResult: async (
+      { user }: firebase.auth.UserCredential,
+      redirectUrl: string
+    ) => {
       const token = await user.getIdToken();
 
-      nookies.set(undefined, 'st_token', token, {
+      nookies.set(undefined, "st_token", token, {
         maxAge: 30 * 24 * 60 * 60,
         // pathを指定したらcookieがgSSRで取得できた
-        path: '/',
+        path: "/",
       });
     },
   },
-}
+};
 
 const FirebaseAuth = () => {
   return (

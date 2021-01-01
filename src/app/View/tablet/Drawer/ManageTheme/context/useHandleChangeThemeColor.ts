@@ -1,8 +1,7 @@
-import { generateSecondaryColor } from "../../../../../../lib/color/generateSecondaryColor";
-import { useChangeThemeColor } from "./lib/useChangeThemeColor";
-import { TColor } from "../view/ManageTheme";
-var colorConvert = require("color-convert");
-
+import { generateSecondaryColor } from '../../../../../../lib/color/generateSecondaryColor';
+import { useChangeThemeColor } from './lib/useChangeThemeColor';
+import { TColor } from '../view/ManageTheme';
+const colorConvert = require('color-convert');
 
 export const useHandleChangeThemeColor = () => {
   const changeThemeColor = useChangeThemeColor();
@@ -16,4 +15,4 @@ export const useHandleChangeThemeColor = () => {
       };
     }
   };
-}
+};

@@ -1,7 +1,11 @@
-import { useCreateTag } from "./lib/useCreateTag";
-import { useUpdateTag } from "./lib/useUpdateTag";
+import { useCreateTag } from './lib/useCreateTag';
+import { useUpdateTag } from './lib/useUpdateTag';
 
-export const useHandleOnClick = (isEditting: boolean, edittingTagId: number, tagNameField: string) => {
+export const useHandleOnClick = (
+  isEditting: boolean,
+  edittingTagId: number,
+  tagNameField: string
+) => {
   const createTag = useCreateTag();
   const updateTag = useUpdateTag();
 
@@ -11,5 +15,5 @@ export const useHandleOnClick = (isEditting: boolean, edittingTagId: number, tag
     } else {
       createTag(tagNameField);
     }
-  }
-}
+  };
+};

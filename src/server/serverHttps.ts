@@ -3,16 +3,15 @@
 // npm run httpsで起動できる。
 
 // ※import使ってはだめ。デプロイ出来ない
-const { createServer } = require("https");
-const { parse } = require("url");
-const { readFileSync } = require("fs");
+import { createServer } from 'https';
+import { parse } from 'url';
+import { readFileSync } from 'fs';
 
-
-import next from "next";
+import next from 'next';
 
 const port = process.env.NEXT_PUBLIC_PORT;
 // const port = 8080;
-const dev = process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -21,18 +20,15 @@ const handle = app.getRequestHandler();
 
 // https接続にするためmkcertを使って鍵を作る (参考) https://kifarunix.com/how-to-create-self-signed-ssl-certificate-with-mkcert-on-ubuntu-18-04/
 const httpsOptions = {
-  key: readFileSync("./src/server/local.dev+4-key.pem"),
-  cert: readFileSync("./src/server/local.dev+4.pem"),
-  ca: [readFileSync("./src/server/rootCA.pem")],
+  key: readFileSync('./src/server/local.dev+4-key.pem'),
+  cert: readFileSync('./src/server/local.dev+4.pem'),
+  ca: [readFileSync('./src/server/rootCA.pem')],
 };
 
 app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
-    // @ts-ignore
-  }).listen(port, (err) => {
-    if (err) throw err;
-    console.log(`> Ready on https://localhost:${port}`);
-  });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  }).listen(port);
 });

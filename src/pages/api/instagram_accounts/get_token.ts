@@ -58,7 +58,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
           username: userProfile.username,
           profile_img: "",
           access_token: longLived.access_token,
-          expires: null,
+          expires: '',
           user_id: user_id,
         };
 

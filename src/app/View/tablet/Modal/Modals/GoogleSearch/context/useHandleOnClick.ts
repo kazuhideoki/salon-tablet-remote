@@ -6,7 +6,7 @@ export const deleteExcessSpace = (str: string) => {
 export const useHandleOnClick = (field: string, setField: React.Dispatch<React.SetStateAction<string>>, setSearchHistoryStr: React.Dispatch<React.SetStateAction<string>>
 
 ) => {
-  return () => {
+  return (): void => {
     setField(""); // 効かない？
 
     const str: string = localStorage.getItem(

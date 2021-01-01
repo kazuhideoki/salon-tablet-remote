@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Button,
   Popover,
@@ -6,10 +6,10 @@ import {
   createStyles,
   Theme,
   Chip,
-  useTheme,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 import { TagsButton } from '../../../Footer/PaginationBar/components/TagsButton';
+import { TUseArticleEditorProps } from '../view/ArticleEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,47 +24,53 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 70,
     },
     noTag: {
-      color: theme.palette.text.disabled
-    }
+      color: theme.palette.text.disabled,
+    },
   })
 );
 
-export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, className}) => {
+type Props = TUseArticleEditorProps & { className: string };
+
+export const SelectTagsPopover: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const handleOnClick = (tagId: number) => {
     // 重複選択を防ぐため、すでに含まれていなかったらsetState
-    if (!selectedTags.includes(tagId)) {
-      setSelectedTags(selectedTags.concat(tagId))
+    if (!props.selectedTags.includes(tagId)) {
+      props.setSelectedTags(props.selectedTags.concat(tagId));
     }
-  }
+  };
   const handleDelete = (tagId: number) => {
     // selectedTagsからtagIdひとつひとつけす
 
-    const newSelectedTags = selectedTags.filter((value) => {
+    const newSelectedTags = props.selectedTags.filter((value) => {
       return value !== tagId;
     });
-    setSelectedTags(newSelectedTags);
-  }
+    props.setSelectedTags(newSelectedTags);
+  };
 
   // 選択されたタグのtag_idをtag_nameと照合して表示
   const ShowSelectedTagsChip = () => {
-    const showSelectedTags = tags.filter((value) => {
-      return selectedTags.includes(value.tag_id)
+    const showSelectedTags = props.tags.filter((value) => {
+      return props.selectedTags.includes(value.tag_id);
     });
 
     return (
       <>
-        {showSelectedTags.map((value) => (
-          <Chip label={value.tag_name} onDelete={() => handleDelete(value.tag_id)}></Chip>
+        {showSelectedTags.map((value, index) => (
+          <Chip
+            key={index}
+            label={value.tag_name}
+            onDelete={() => handleDelete(value.tag_id)}></Chip>
         ))}
       </>
     );
-
-  }
+  };
 
   // 以下アイコン選択のPopoverのための設定
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -74,17 +80,16 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, classNa
   const open = Boolean(anchorEl);
   const id = open ? 'tag-popover' : undefined;
   // 以上アイコン選択のPopoverのための設定
-  
+
   return (
-    <div className={className}>
+    <div className={props.className}>
       <Button
         className={classes.button}
         aria-describedby={id}
         color="primary"
         onClick={handleClick}
         size="large"
-        startIcon={<TagsButton/>}
-      >
+        startIcon={<TagsButton />}>
         タグ
       </Button>
       <Popover
@@ -93,19 +98,18 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, classNa
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-      >
-        {tags.length ? (
-          tags.map((value, key) => {
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}>
+        {props.tags.length ? (
+          props.tags.map((value, key) => {
             return (
               <>
-                {selectedTags.includes(value.tag_id) ? (
+                {props.selectedTags.includes(value.tag_id) ? (
                   // セレクトされてる
                   <Chip
                     key={key}
@@ -128,11 +132,11 @@ export const SelectTagsPopover = ({ selectedTags, setSelectedTags, tags, classNa
           <Chip label="タグがありません" className={classes.noTag} />
         )}
       </Popover>
-      {selectedTags.length ? (
+      {props.selectedTags.length ? (
         <ShowSelectedTagsChip />
       ) : (
         <Chip label="未選択" disabled />
       )}
     </div>
   );
-}
+};

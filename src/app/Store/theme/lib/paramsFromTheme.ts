@@ -1,29 +1,29 @@
-import { T_selected_theme } from "../../Interface";
-import { TThemeParams } from "../ThemeProvider";
-import { themeWhite } from "./themes/themeWhite";
-import { themeNatural } from "./themes/themeNatural";
-import { themeDefault } from "./themes/themeDefault";
+import { T_selected_theme } from '../../Interface';
+import { TThemeParams } from '../ThemeProvider';
+import { themeWhite } from './themes/themeWhite';
+import { themeNatural } from './themes/themeNatural';
+import { themeDefault } from './themes/themeDefault';
 
-const defaultTheme: TThemeParams = {
+const defaultThemeUnChanged: TThemeParams = {
   selected_theme: 'default',
-  theme_color: "#311b92",
-  theme_font1: "未設定",
+  theme_color: '#311b92',
+  theme_font1: '未設定',
   theme_font2: '"M PLUS Rounded 1c"',
   theme_font_heading: '"M PLUS Rounded 1c"',
-};  
+};
 
-const white: TThemeParams = {
+export const whiteUnChanged: TThemeParams = {
   selected_theme: 'white',
-  theme_color: "#263238",
-  theme_font1: "未設定",
+  theme_color: '#263238',
+  theme_font1: '未設定',
   theme_font2: '"M PLUS Rounded 1c"',
   theme_font_heading: '"M PLUS Rounded 1c"',
-};             
+};
 
-const natural: TThemeParams = {
-  selected_theme: "natural",
-  theme_color: "#5d4037",
-  theme_font1: "未設定",
+const naturalUnChanged: TThemeParams = {
+  selected_theme: 'natural',
+  theme_color: '#5d4037',
+  theme_font1: '未設定',
   theme_font2: '"Noto Serif JP"',
   theme_font_heading: '"Noto Serif JP"',
 };
@@ -31,11 +31,11 @@ const natural: TThemeParams = {
 export const switchingTheme = (params: TThemeParams) => {
   // user_infoのselected_themeをもとにテーマを適応
   switch (params.selected_theme) {
-    case "default":
+    case 'default':
       return themeDefault(params);
-    case "white":
+    case 'white':
       return themeWhite(params);
-    case "natural":
+    case 'natural':
       return themeNatural(params);
 
     default:
@@ -44,30 +44,17 @@ export const switchingTheme = (params: TThemeParams) => {
 };
 
 export const generateDefaultParamsFromTheme = (
-         selectedTheme: T_selected_theme
-       ): TThemeParams => {
-         switch (selectedTheme) {
-           case "default":
-             return defaultTheme;
-           case "white":
-             return white;
-           case "natural":
-             return natural;
+  selectedTheme: T_selected_theme
+): TThemeParams => {
+  switch (selectedTheme) {
+    case 'default':
+      return defaultThemeUnChanged;
+    case 'white':
+      return whiteUnChanged;
+    case 'natural':
+      return naturalUnChanged;
 
-           default:
-             return defaultTheme;
-         }
-       };
-
-export const isThemeParamsChanged = (themeParams: TThemeParams) => {
-  const originalThemeParams = generateDefaultParamsFromTheme(themeParams.selected_theme)
-
-  let resultArr: boolean[] = []
-  for (const [key, value] of Object.entries(themeParams)) {
-    resultArr.push(themeParams[key] !== originalThemeParams[key]);
-  } 
-
-  const result = resultArr.includes(true);
-
-  return result;
-}
+    default:
+      return defaultThemeUnChanged;
+  }
+};

@@ -3,21 +3,12 @@ import {
   Grid,
   CardActionArea,
   Card,
-  Button,
   Typography,
 } from "@material-ui/core";
-import { EditButtonsBox } from "../../../../pureComponents/buttons/EditButtonsBox";
-import { DeleteButton } from "../../../../pureComponents/buttons/DeleteButton";
-import { UpdateButton } from "../../../../pureComponents/buttons/UpdateButton";
-import { TUseMainProps, TMainClasses } from "../view/Main";
-import { showDataType } from "./showDataType";
-import { Skeleton } from "@material-ui/lab";
-import { sqlToDate } from "../../../../../lib/sqlToDate";
-import { SelectedTags } from "./SelectedTags";
-import { PlayArrowRounded } from "@material-ui/icons";
+import { TMainClasses, TStyledCardContent } from "../view/Main";
 
 // 記事がなかった場合の表示
-export const noArticlesJsx = (classes: TMainClasses, StyledCardContent) => (
+export const noArticlesJsx = (classes: TMainClasses, StyledCardContent: TStyledCardContent) => (
          <Grid item>
            <CardActionArea className={classes.cardActionArea} component="div">
              <Card className={classes.card}>
