@@ -9,7 +9,7 @@ import { TIndexPropsData } from '../pages';
 export const generateProps = async (
   userInfo: TUserInfo,
   getPublishedOnly: boolean
-) => {
+): Promise<TIndexPropsData> => {
   // 記事一覧取得
   const articlesParam: T_articles_get = {
     page: 1,

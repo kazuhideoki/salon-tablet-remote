@@ -43,17 +43,22 @@ export type TIndexProps = {
 };
 
 const Index: React.FC<TIndexProps> = (props) => {
-  if (props.session === null) {
+  if (props.data && props.session) {
     return (
       <>
-        <SEO />
-        <TopPage />
+        <App
+          data={props.data}
+          isPublicPage={props.isPublicPage}
+          device={props.device}
+          session={props.session}
+        />
       </>
     );
   } else {
     return (
       <>
-        <App {...props} />
+        <SEO />
+        <TopPage />
       </>
     );
   }

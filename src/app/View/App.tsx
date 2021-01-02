@@ -1,14 +1,14 @@
 import React from 'react';
 import { Modal } from './tablet/Modal/Modal/view/Modal';
-import { ThemeProvider } from '../Store/theme/ThemeProvider';
 import { AppMobile } from './mobile/AppMobile';
 import { AppTablet } from './tablet/AppTablet';
 import { useIsMobile } from '../../lib/useIsMobile';
-import { TIndexProps } from '../../pages';
+import { TIndexProps, TIndexPropsData } from '../../pages';
 import { T_auth_get_session_return } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../Store/userInfo/Context';
 import { StoreContextProvider } from '../Store/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/view/Drawer';
+import { TUaDeviceType } from '../Store/Interface';
 
 type TAppViewProps = {
   session: T_auth_get_session_return;
@@ -42,7 +42,14 @@ const AppView = ({ session }: TAppViewProps) => {
   }
 };
 
-export const App = (props: TIndexProps) => {
+type TApp = {
+  data: TIndexPropsData;
+  isPublicPage: boolean;
+  device: TUaDeviceType;
+  session: T_auth_get_session_return;
+};
+
+export const App = (props: TApp) => {
   return (
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider

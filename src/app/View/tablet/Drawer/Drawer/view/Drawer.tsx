@@ -223,9 +223,7 @@ export const DrawerPresenter: React.FC<TUseDrawerProps> = (props) => {
         {props.children}
       </main>
       {props.isMobile && props.isDrawerOpen ? (
-        <div
-          className={classes.greyScreen}
-          onClick={props.isDrawerOpen ? props.closeDrawer : null}></div>
+        <div className={classes.greyScreen} onClick={props.closeDrawer}></div>
       ) : null}
       {props.isClicked ? <AuthCircular message="サインアウト中" /> : null}
     </div>
