@@ -1,42 +1,33 @@
-import React from "react";
-import {
-  Grid,
-  makeStyles,
-  createStyles,
-} from "@material-ui/core";
-import { MoodBad } from "@material-ui/icons";
-import { IconAndText } from "../components/IconAndText";
-import { IconsSetting } from "../../../Drawer/FooterItemEditor/components/iconSelect/icons";
-import { EditButtonsBox } from "../../../../../pureComponents/buttons/EditButtonsBox";
-import { showDataType } from "../../../Main/components/showDataType";
-import { useIsMobile } from "../../../../../../lib/useIsMobile";
-import { useDeleteFooterItem } from "../context/useDeleteFooterItem";
-import { useStateFooter } from "../context/useStateFooter";
-import { useHandleOnUpdateFooterItem } from "../context/useHandleOnUpdateFooterItem";
-import { useHandleLoadingFooter } from "../context/useHandleLoadingFooter";
-import { useOpenFooterItemModal } from "../context/useOpenFooterItemModal";
-import { useSwitchOrder } from "../context/useSwitchOrder";
+import React from 'react';
+import { Grid, makeStyles, createStyles } from '@material-ui/core';
+import { MoodBad } from '@material-ui/icons';
+import { IconAndText } from '../components/IconAndText';
+import { IconsSetting } from '../../../Drawer/FooterItemEditor/components/iconSelect/icons';
+import { EditButtonsBox } from '../../../../../pureComponents/buttons/EditButtonsBox';
+import { showDataType } from '../../../Main/components/showDataType';
+import { useIsMobile } from '../../../../../../lib/useIsMobile';
+import { useDeleteFooterItem } from '../context/useDeleteFooterItem';
+import { useStateFooter } from '../context/useStateFooter';
+import { useHandleOnUpdateFooterItem } from '../context/useHandleOnUpdateFooterItem';
+import { useHandleLoadingFooter } from '../context/useHandleLoadingFooter';
+import { useOpenFooterItemModal } from '../context/useOpenFooterItemModal';
+import { useSwitchOrder } from '../context/useSwitchOrder';
 
 export const useFooterProps = () => {
-  const {
-    footerItems,
-    loading,
-    isSetting,
-  } = useStateFooter();
-  
+  const { footerItems, loading, isSetting } = useStateFooter();
+
   const isMobile = useIsMobile();
 
   const handleOnUpDateFooterIcon = useHandleOnUpdateFooterItem();
 
   const handleLoadingFooter = useHandleLoadingFooter();
 
-  const openFooterItemModal = useOpenFooterItemModal()
+  const openFooterItemModal = useOpenFooterItemModal();
 
   const deleteFooterItem = useDeleteFooterItem();
 
-  const switchOrder = useSwitchOrder()
+  const switchOrder = useSwitchOrder();
 
-  
   return {
     isSetting,
     openFooterItemModal,
@@ -55,42 +46,42 @@ type Props = ReturnType<typeof useFooterProps>;
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      height: "100%",
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      height: '100%',
     },
     GridContainer: {
-      overflowY: "hidden",
-      overflowX: "scroll",
+      overflowY: 'hidden',
+      overflowX: 'scroll',
     },
     itemIsDraft: {
-      height: "100%",
-      border: "3px solid red",
+      height: '100%',
+      border: '3px solid red',
     },
     gridItem: {
-      margin: "auto",
-      height: "100%",
-      position: "relative",
+      margin: 'auto',
+      height: '100%',
+      position: 'relative',
     },
     editButtonsBox: {
-      position: "absolute",
+      position: 'absolute',
       top: theme.spacing(1),
       right: 0,
       left: 0,
-      justifyContent: "center",
+      justifyContent: 'center',
       zIndex: 100,
     },
     editButtonsBoxButtons: {
-      left: 'auto'
+      left: 'auto',
     },
     showDataType: {
-      position: "absolute",
+      position: 'absolute',
       top: 48,
       left: 0,
     },
     isSettingIconAndText: {
-      margin: "0 20px",
+      margin: '0 20px',
     },
   })
 );
@@ -120,8 +111,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
           // 投稿済みか下書きかで見た目を変える
           className={`${classes.gridItem}
             ${value.is_published == true ? null : classes.itemIsDraft}
-          `}
-        >
+          `}>
           {props.isSetting ? (
             <EditButtonsBox
               className={classes.editButtonsBox}
@@ -131,7 +121,6 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                 smaller: footerItem[index - 1],
                 larger: value,
                 switchOrder: props.switchOrder,
-                
               }}
               update
               updateProps={{
@@ -152,9 +141,11 @@ export const FooterPresenter: React.FC<Props> = (props) => {
           {showDataType(value.data_type, classes.showDataType)}
 
           {/* on_tapが'modal'でモーダルウィンドウオープン。'link'でリンク埋め込み */}
-          {value.on_tap === "modal" || value.on_tap === "google" ? (
+          {value.on_tap === 'modal' || value.on_tap === 'google' ? (
             <IconAndText
-              className={props.isSetting ? classes.isSettingIconAndText : null}
+              className={
+                props.isSetting ? classes.isSettingIconAndText : undefined
+              }
               icon={
                 value.displayed_icon_name
                   ? IconsSetting.convertIconComponentFromName(
@@ -170,11 +161,10 @@ export const FooterPresenter: React.FC<Props> = (props) => {
             // "modal", 'google'以外→"link"か"appLink"の時
             <a
               href={
-                value.on_tap === "link" ? value.link_url : value.app_link_url
+                value.on_tap === 'link' ? value.link_url : value.app_link_url
               }
               rel="noopener noreferrer"
-              target="_blank"
-            >
+              target="_blank">
               <IconAndText
                 className={
                   props.isSetting ? classes.isSettingIconAndText : null
@@ -205,8 +195,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
         alignItems="center"
         wrap="nowrap"
         spacing={2}
-        className={classes.GridContainer}
-      >
+        className={classes.GridContainer}>
         {props.footerItems.length ? displayFooterItems : noItems}
       </Grid>
     </div>

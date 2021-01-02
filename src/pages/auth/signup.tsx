@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { AuthForm } from '../../pageComponent/AuthFrom';
 import { BackgroundDiv, useStylesAuthForm } from './signin';
-import firebase from "firebase/app";
-import "firebase/auth";
-import initFirebase from "../../lib/auth/initFirebase";
-import { Typography, useMediaQuery } from '@material-ui/core';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import initFirebase from '../../lib/auth/initFirebase';
+import { Typography } from '@material-ui/core';
 import Link from 'next/link';
 import { AuthCircular } from '../../lib/AuthCircular';
 
@@ -18,14 +18,15 @@ const handleSingup = async (email: string, password: string) => {
 
     return firebase.auth().createUserWithEmailAndPassword(email, password);
   } catch (err) {
-    console.log("handleSingupは " + err);
-    alert('エラーによりアカウントを作成出来ませんでした')
+    console.log('handleSingupは ' + err);
+    alert('エラーによりアカウントを作成出来ませんでした');
+    return null;
   }
 };
 
 const SignupForm = () => {
   const [isClicked, setIsClicked] = React.useState(false);
-  const classes = useStylesAuthForm()
+  const classes = useStylesAuthForm();
   return (
     <div className={classes.root}>
       <div className={classes.authBoxContainer}>
