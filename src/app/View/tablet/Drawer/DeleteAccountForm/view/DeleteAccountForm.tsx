@@ -1,27 +1,27 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { Info } from "@material-ui/icons";
-import { server } from "../../../../../../lib/loadUrl";
-import { useDeleteUser } from "../context/useDeleteUser";
-import { useStateDeleteAccountFrom } from "../context/useStateDeleteAccountForm";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { Info } from '@material-ui/icons';
+import { server } from '../../../../../../lib/loadUrl';
+import { useDeleteUser } from '../context/useDeleteUser';
+import { useStateDeleteAccountFrom } from '../context/useStateDeleteAccountForm';
 
 function Copyright() {
   return (
     <Typography variant="body1" color="textSecondary" align="center">
-      {"Copyright © "}
+      {'Copyright © '}
       <Link color="inherit" href={server}>
         SALON TABLET
-      </Link>{" "}
+      </Link>{' '}
       {new Date().getFullYear()}
-      {"."}
+      {'.'}
     </Typography>
   );
 }
@@ -29,16 +29,16 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -48,10 +48,15 @@ const useStyles = makeStyles((theme) => ({
 
 export function DeleteAccountForm() {
   const classes = useStyles();
-  
-  const { emailForConfirm, setEmailForConfirm } = useStateDeleteAccountFrom()
 
-  const deleteUser = useDeleteUser()
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+  } = useStateDeleteAccountFrom();
+
+  const deleteUser = useDeleteUser();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -71,20 +76,30 @@ export function DeleteAccountForm() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="メールアドレス"
             name="email"
-            autoComplete="email"
+            label="メールアドレス"
+            type="email"
+            id="email"
             autoFocus
-            value={emailForConfirm}
-            onChange={(e) => setEmailForConfirm(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="パスワード"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             fullWidth
             color="primary"
             className={classes.submit}
-            onClick={() => deleteUser(emailForConfirm)}
-          >
+            onClick={() => deleteUser(email, password)}>
             アカウントを本当に削除する
           </Button>
         </form>

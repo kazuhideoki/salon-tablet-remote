@@ -10,21 +10,22 @@ export const generateProps = async (
   userInfo: TUserInfo,
   getPublishedOnly: boolean
 ): Promise<TIndexPropsData> => {
+  const { user_id } = userInfo;
   // 記事一覧取得
   const articlesParam: T_articles_get = {
     page: 1,
     selectingTags: [],
     isSetting: getPublishedOnly ? false : true,
-    userId: userInfo.user_id,
+    userId: user_id,
   };
 
   // 並列処理でデータを取ってくる
   const [data, data2, data3, data4, data5] = await Promise.all([
     apiArticlesGet(articlesParam),
-    apiFooterItemsGet(userInfo.user_id),
-    apiInfoBarGet(userInfo.user_id),
-    apiTagsGet(userInfo.user_id),
-    apiInstagramAccountsGet(userInfo.user_id),
+    apiFooterItemsGet(user_id),
+    apiInfoBarGet(user_id),
+    apiTagsGet(user_id),
+    apiInstagramAccountsGet(user_id),
   ]);
 
   // as any で何故かエラー消える

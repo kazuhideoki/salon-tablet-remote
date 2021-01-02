@@ -7,6 +7,7 @@ import initFirebase from '../../lib/auth/initFirebase';
 import { Typography } from '@material-ui/core';
 import Link from 'next/link';
 import { AuthCircular } from '../../lib/AuthCircular';
+import { createUserData } from '../../lib/db/createUserData';
 
 initFirebase();
 
@@ -16,7 +17,13 @@ const handleSingup = async (email: string, password: string) => {
       .auth()
       .setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+    const user = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
+
+    await createUserData(email);
+
+    return user;
   } catch (err) {
     console.log('handleSingupは ' + err);
     alert('エラーによりアカウントを作成出来ませんでした');
