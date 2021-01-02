@@ -10,11 +10,12 @@ import {
   T_on_tap,
 } from '../Interface';
 
-export const initAppState = (data: {
+export type TInitAppState = {
   isPublicPage: boolean;
   device: TUaDeviceType;
-  samplePage: string;
-}) => ({
+};
+
+export const initAppState = (data: TInitAppState) => ({
   isPublicPage: data.isPublicPage,
   uaDevice: data.device,
   isSetting: !data.isPublicPage,

@@ -1,38 +1,34 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { IncomingMessage } from "http";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { IncomingMessage } from 'http';
 
-import { firebaseAdmin } from "../../../lib/auth/firebaseAdmin";
-
+import { firebaseAdmin } from '../../../lib/auth/firebaseAdmin';
 
 export type T_auth_get_session = {
-  req: NextApiRequest | IncomingMessage
+  req: NextApiRequest | IncomingMessage;
 };
 export type T_auth_get_session_body = {
-  st_token: string
+  st_token: string;
 };
 
 export type T_auth_get_session_return = {
-  email: string;
-  emailVerified: boolean
-};;
+  email: string | null;
+  emailVerified: boolean | null;
+};
 
 const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { st_token }: T_auth_get_session_body = req.body;
+  const { st_token }: T_auth_get_session_body = req.body;
 
-    try {
-      
-      const token = await firebaseAdmin
-        .auth()
-        .verifyIdToken(st_token);
+  try {
+    const token = await firebaseAdmin.auth().verifyIdToken(st_token);
 
-      const returnData: T_auth_get_session_return = {
-        email: token.email,
-        emailVerified: token.email_verified,
-      };
-      res.status(200).json(returnData);
-    } catch (err) {
-      return res.status(500).json({ err: true, data: err });
-    }
+    const returnData: T_auth_get_session_return = {
+      email: token.email || null,
+      emailVerified: token.email_verified || null,
+    };
+    res.status(200).json(returnData);
+  } catch (err) {
+    return res.status(500).json({ err: true, data: err });
+  }
 };
 
 // socketうんぬんの エラーメッセージを表示させないようにする
@@ -41,7 +37,7 @@ export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };

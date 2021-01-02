@@ -1,12 +1,15 @@
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-export const deleteUserInFirebase = async () => {
+export const deleteUserInFirebase = async (): Promise<void> => {
   const user = firebase.auth().currentUser;
-  await user.delete().then(function() {
-    return
-  }).catch(function(err) {
-    console.log("deleteUserInFirebaseでエラー" + err);
-    
-  });
-}
+  if (user)
+    await user
+      .delete()
+      .then(function () {
+        return;
+      })
+      .catch(function (err) {
+        console.log('deleteUserInFirebaseでエラー' + err);
+      });
+};

@@ -4,7 +4,7 @@ import { generateProps } from '../../lib/generateProps';
 import App from '../../app/View/App';
 import Head from 'next/head';
 import parser from 'ua-parser-js';
-import { IndexProps } from '..';
+import { TIndexProps } from '..';
 import { checkIsGeneratePubulicPage } from '../../lib/checkIsGeneratePubulicPage';
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
 import { TUserInfo } from '../../app/Store/Interface';
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PublicPage = (props: IndexProps) => {
+const PublicPage = (props: TIndexProps) => {
   const classes = useStyles();
 
   if (props.isPublicPage === false) {
@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return { props: { isPublicPage: false } };
   }
 
-  const returnData: IndexProps = {
+  const returnData: TIndexProps = {
     data: await generateProps(userInfo, true),
     isPublicPage: true,
     samplePage: (query.sample as string) || undefined,

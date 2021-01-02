@@ -8,6 +8,7 @@ import {
   TInstagramAccounts,
   TAllArticles,
   TInfoBarData,
+  TUaDeviceType,
 } from '../app/Store/Interface';
 import { App } from '../app/View/App';
 import { GetServerSideProps } from 'next';
@@ -16,7 +17,6 @@ import { getUserInfoFromEmail } from '../lib/getUserInfoFromEmail';
 import { apiCreateSampleData } from './api/create_sample_data';
 import { generateProps } from '../lib/generateProps';
 import { apiCreatePublicPageSlug } from './api/user_info/create_public_page_slug';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
 import { SEO } from '../pageComponent/SEO';
 import { getDeviceType } from '../lib/getDeviceType';
 import { apiUserInfoCreate } from './api/user_info/create';
@@ -24,7 +24,7 @@ import { apiIsFirsSigninFalse } from './api/user_info/is_first_signin_false';
 import { T_auth_get_session_return } from './api/auth/get_session';
 import { getSession } from '../lib/auth/getSession';
 
-export type IndexPropsData = {
+export type TIndexPropsData = {
   articles: TArticles;
   pagination: TPaginationParams;
   allArticles: TAllArticles;
@@ -35,23 +35,19 @@ export type IndexPropsData = {
   userInfo: TUserInfo;
 };
 
-export type IndexProps = {
-  data?: IndexPropsData;
+export type TIndexProps = {
+  data: TIndexPropsData | null;
   isPublicPage: boolean;
-  device: string;
-  samplePage?: string;
-  csrfToken?: any;
-  providers?: any;
-  message?: string;
-  session?: T_auth_get_session_return;
+  device: TUaDeviceType;
+  session: T_auth_get_session_return | null;
 };
 
-const Index = (props: IndexProps) => {
+const Index: React.FC<TIndexProps> = (props) => {
   if (props.session === null) {
     return (
       <>
         <SEO />
-        <TopPage csrfToken={props.csrfToken} providers={props.providers} />
+        <TopPage />
       </>
     );
   } else {
@@ -61,15 +57,6 @@ const Index = (props: IndexProps) => {
       </>
     );
   }
-};
-
-export type TSessionOnj = {
-  user: {
-    name: string | null;
-    email: string | null;
-    image: string | null;
-  };
-  expires: string | null;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -83,10 +70,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (session === null) {
     return {
       props: {
-        session: undefined,
+        data: null,
+        session: null,
         isPublicPage: false,
-        device: device || null,
-      } as IndexProps,
+        device: device,
+      } as TIndexProps,
     };
   }
 
@@ -120,10 +108,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
-  // アカウント作成直後,確認メールでurlクリックしたが、session情報が更新されてない場合に対応
-  // session.emailVerified = true
-
-  const returnData: IndexProps = {
+  const returnData: TIndexProps = {
     data: await generateProps(userInfo, false),
     isPublicPage: false,
     device: device,

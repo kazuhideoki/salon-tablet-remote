@@ -1,13 +1,7 @@
-import React from "react";
-import { initAppState } from "./initialValue";
-import { TAppStateAction } from "./actions";
-import { appStateReducer, AppStateContextState } from "./reducer";
-
-export type Props = {
-  isPublicPage: boolean;
-  device: string;
-  samplePage: string;
-};
+import React from 'react';
+import { initAppState, TInitAppState } from './initialValue';
+import { TAppStateAction } from './actions';
+import { appStateReducer, AppStateContextState } from './reducer';
 
 export type AppStateContextProps = {
   appState: AppStateContextState;
@@ -16,8 +10,11 @@ export type AppStateContextProps = {
 
 export const AppStateContext = React.createContext({} as AppStateContextProps);
 
-export const AppStateContextProvider: React.FC<Props> = (props) => {
-  const [state, dispatchAppState] = React.useReducer(appStateReducer, initAppState(props));
+export const AppStateContextProvider: React.FC<TInitAppState> = (props) => {
+  const [state, dispatchAppState] = React.useReducer(
+    appStateReducer,
+    initAppState(props)
+  );
 
   const values: AppStateContextProps = {
     appState: state,
