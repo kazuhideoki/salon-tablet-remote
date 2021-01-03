@@ -7,7 +7,6 @@ import { userInfoParamsFromSql } from '../../../lib/userInfoParamsFromSql';
 export const apiGetUserInfoFromEmail = async (
   email: string
 ): Promise<TUserInfo> => {
-  console.log(`getUserInfoFromEmail で email: ${email}`);
   return apiWrapGet(`user_info/get?email=${email}`);
 };
 
@@ -19,8 +18,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       'select * from `user_info` where `user_email` = ?',
       email
     )) as TUserInfo[];
-
-    console.log(`getUserInfoFromEmailのdata: ${JSON.stringify(data)}`);
 
     if (data.length) {
       const returnData = userInfoParamsFromSql(data[0]);

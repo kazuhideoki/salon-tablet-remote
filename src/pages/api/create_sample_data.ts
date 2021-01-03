@@ -8,7 +8,6 @@ import {
   TArticles,
 } from '../../app/Store/Interface';
 import { TApiResponse } from '../../lib/apiTypes';
-import { server, localhost } from '../../lib/loadUrl';
 import { apiWrapPost } from '../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
