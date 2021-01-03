@@ -4,23 +4,19 @@ import {
   T_user_id,
   T_is_generate_public_page,
 } from '../../../app/Store/Interface';
-import { server, localhost } from '../../../lib/loadUrl';
-import { TApiResponse } from '../../../lib/apiTypes';
+import { TApiResponse } from '../../../lib/apiWrap';
 import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoSwitchGeneratePublicPage = async (
   params: T_user_info_switch_generate_public_page
-): Promise<TApiResponse<T_user_info_switch_generate_public_page_return>> => {
+): Promise<TApiResponse> => {
   return apiWrapPost('user_info/switch_generate_public_page', params);
 };
 
 export type T_user_info_switch_generate_public_page = {
   user_id: T_user_id;
   is_generate_public_page: T_is_generate_public_page;
-};
-export type T_user_info_switch_generate_public_page_return = {
-  is_generate_public_page: boolean;
 };
 
 const switch_generate_public_page = async (
@@ -34,22 +30,18 @@ const switch_generate_public_page = async (
     }: T_user_info_switch_generate_public_page = req.body;
 
     try {
-      const data = await db(
+      await db(
         `UPDATE user_info SET is_generate_public_page = ? WHERE user_id = ?`,
         [is_generate_public_page, user_id]
       );
 
-      const returnData: T_user_info_switch_generate_public_page_return = {
-        is_generate_public_page: is_generate_public_page,
-      };
-
-      return res.status(200).json(returnData);
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log(
         '/user_info/switch_generate_public_page/のエラーは ' +
           JSON.stringify(err)
       );
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };

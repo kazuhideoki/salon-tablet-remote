@@ -16,8 +16,10 @@ import { TopPage } from '../pageComponent/TopPage';
 import { generateProps } from '../lib/generateProps';
 import { SEO } from '../pageComponent/SEO';
 import { getDeviceType } from '../lib/getDeviceType';
-import { T_auth_get_session_return } from './api/auth/get_session';
-import { getSession } from '../lib/auth/getSession';
+import {
+  apiGetSession,
+  T_auth_get_session_return,
+} from './api/auth/get_session';
 import { apiGetUserInfoFromEmail } from './api/user_info/get';
 
 export type TIndexPropsData = {
@@ -65,28 +67,32 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const device = getDeviceType(context);
 
-  const session = await getSession({ req });
+  try {
+    const session = await apiGetSession({ req });
 
-  if (session?.email) {
-    const userInfo = await apiGetUserInfoFromEmail(session.email);
+    if (session?.email) {
+      const data = await apiGetUserInfoFromEmail(session.email);
 
-    return {
-      props: {
-        data: await generateProps(userInfo, false),
-        isPublicPage: false,
-        device: device,
-        session,
-      } as TIndexProps,
-    };
-  } else {
-    return {
-      props: {
-        data: null,
-        session: null,
-        isPublicPage: false,
-        device: device,
-      } as TIndexProps,
-    };
+      return {
+        props: {
+          data: await generateProps(data.rawData, false),
+          isPublicPage: false,
+          device: device,
+          session,
+        } as TIndexProps,
+      };
+    } else {
+      return {
+        props: {
+          data: null,
+          session: null,
+          isPublicPage: false,
+          device: device,
+        } as TIndexProps,
+      };
+    }
+  } catch (err) {
+    console.log(`index.tsx gSSP: ${err}`);
   }
 };
 

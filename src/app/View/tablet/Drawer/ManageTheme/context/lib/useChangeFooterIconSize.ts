@@ -1,11 +1,11 @@
-import React from "react";
-import { T_footer_icon_size } from "../../../../../../Store/Interface";
+import React from 'react';
+import { T_footer_icon_size } from '../../../../../../Store/Interface';
 import {
   apiUserInfoChangeFooterIconSize,
   T_user_info_change_footer_icon_size,
-} from "../../../../../../../pages/api/user_info/change_footer_icon_size";
-import { UserInfoContext } from "../../../../../../Store/userInfo/Context";
-import { setFooterIconSize } from "../../../../../../Store/userInfo/actions";
+} from '../../../../../../../pages/api/user_info/change_footer_icon_size';
+import { UserInfoContext } from '../../../../../../Store/userInfo/Context';
+import { setFooterIconSize } from '../../../../../../Store/userInfo/actions';
 
 export const useChangeFooterIconSize = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
@@ -17,14 +17,12 @@ export const useChangeFooterIconSize = () => {
       footer_icon_size: footerIconSize,
     };
 
-    const data = await apiUserInfoChangeFooterIconSize(params);
-
-    if (data.err === true) {
-      alert("変更できませんでした");
-      return false
-    } else {
+    try {
+      await apiUserInfoChangeFooterIconSize(params);
       dispatchUserInfo(setFooterIconSize(footerIconSize));
-      return true
+    } catch (err) {
+      alert('変更できませんでした');
+      throw `useChangeFooterIconSize: ${err}`;
     }
   };
 };

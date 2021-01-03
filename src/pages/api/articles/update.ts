@@ -1,7 +1,6 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
+import { db } from '../../../lib/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { TApiResponse } from '../../../lib/apiWrap';
 import {
   T_is_published_articles,
   T_title,
@@ -10,14 +9,16 @@ import {
   T_article_excerpt,
   T_article_img,
   T_data_type_article,
-} from "../../../app/Store/Interface";
-import { checkIsAdmin } from "../../../lib/checkIsAdmin";
-import { apiWrapPost } from "../../../lib/apiWrap";
+} from '../../../app/Store/Interface';
+import { checkIsAdmin } from '../../../lib/checkIsAdmin';
+import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesUpdate = async (params: T_articles_update):Promise<TApiResponse<T_articles_update_return>> => {
-  return apiWrapPost("articles/update", params);
-} 
+export const apiArticlesUpdate = async (
+  params: T_articles_update
+): Promise<TApiResponse> => {
+  return apiWrapPost('articles/update', params);
+};
 
 export type T_articles_update_params = {
   is_published: T_is_published_articles;
@@ -33,37 +34,26 @@ export type T_articles_update = {
   params: T_articles_update_params;
   article_id: T_article_id;
 };
-export type T_articles_update_return = {
-  rawData: unknown;
-};
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     const { params }: T_articles_update = req.body;
     const id: T_article_id = req.body.article_id;
 
     try {
-      const isAdmin = await checkIsAdmin({req});
+      const isAdmin = await checkIsAdmin({ req });
 
       if (isAdmin === false) {
-        params.data_type = "default_data";
+        params.data_type = 'default_data';
       }
 
-      const data = await db(`UPDATE articles SET ? WHERE article_id = ?`, [
-        params,
-        id,
-      ]);
-      console.log("/articles/update/は " + JSON.stringify(data));
+      await db(`UPDATE articles SET ? WHERE article_id = ?`, [params, id]);
 
-      const returnData: T_articles_update_return = {
-        rawData: data,
-      };
-      res.status(200).json(returnData);
-      
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
-      console.log("/articles/update/のエラーは " + JSON.stringify(err));
+      console.log('/articles/update/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: err });
+      res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };
@@ -74,9 +64,9 @@ export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };
 
-export default update
+export default update;

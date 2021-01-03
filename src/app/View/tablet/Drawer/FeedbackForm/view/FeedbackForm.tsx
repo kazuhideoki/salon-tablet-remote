@@ -1,16 +1,15 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { ContactMail } from "@material-ui/icons";
-//@ts-ignore
-import { useHandleOnSubmit } from "../context/useHandleOnSubmit";
-import { useStateFeedbackForm } from "../context/useStateFeedbackForm";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { ContactMail } from '@material-ui/icons';
+import { useSubmitFeedback } from '../context/useSubmitFeedback';
+import { useStateFeedbackForm } from '../context/useStateFeedbackForm';
 
 const useFeedbackFormProps = () => {
   const {
@@ -18,35 +17,40 @@ const useFeedbackFormProps = () => {
     setContactFormTitle,
     contactFormContent,
     setContactFormContent,
-  } = useStateFeedbackForm()
+  } = useStateFeedbackForm();
 
-  const handleOnSubmit = useHandleOnSubmit({contactFormTitle,setContactFormTitle, contactFormContent, setContactFormContent})
+  const submitFeedback = useSubmitFeedback({
+    contactFormTitle,
+    setContactFormTitle,
+    contactFormContent,
+    setContactFormContent,
+  });
 
   return {
     contactFormTitle,
     setContactFormTitle,
     contactFormContent,
     setContactFormContent,
-    handleOnSubmit,
+    submitFeedback,
   };
-}
+};
 
-type Props = ReturnType<typeof useFeedbackFormProps>
+type Props = ReturnType<typeof useFeedbackFormProps>;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    overflowY: "scroll",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    overflowY: 'scroll',
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   content: {
@@ -57,8 +61,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const FeedbackFormPresenter:React.FC<Props> = (props) => {
-  const classes = useStyles()
+export const FeedbackFormPresenter: React.FC<Props> = (props) => {
+  const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -103,7 +107,7 @@ export const FeedbackFormPresenter:React.FC<Props> = (props) => {
             fullWidth
             color="primary"
             className={classes.submit}
-            onClick={() => props.handleOnSubmit()}
+            onClick={() => props.submitFeedback()}
             // disabled={}
           >
             送信
@@ -112,7 +116,7 @@ export const FeedbackFormPresenter:React.FC<Props> = (props) => {
       </div>
     </Container>
   );
-}
+};
 
 export const FeedbackForm = () => {
   const props = useFeedbackFormProps();

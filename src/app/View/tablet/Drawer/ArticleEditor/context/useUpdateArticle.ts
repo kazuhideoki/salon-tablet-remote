@@ -1,31 +1,29 @@
-import React from "react";
-import { useGetArticles } from "../../../Main/context/lib/useGetArticles";
-import { TCreateArticle } from "./useCreateArticle";
+import React from 'react';
+import { useGetArticles } from '../../../Main/context/lib/useGetArticles';
+import { TCreateArticle } from './useCreateArticle';
 import {
   T_articles_update,
   apiArticlesUpdate,
-} from "../../../../../../pages/api/articles/update";
-import { ArticlesContext } from "../../../../../Store/articles/Context";
-import { AppStateContext } from "../../../../../Store/appState/Context";
-import { closeModal, isLoadingMain } from "../../../../../Store/appState/actions";
+} from '../../../../../../pages/api/articles/update';
+import { ArticlesContext } from '../../../../../Store/articles/Context';
+import { AppStateContext } from '../../../../../Store/appState/Context';
+import {
+  closeModal,
+  isLoadingMain,
+} from '../../../../../Store/appState/actions';
 
 export type TUpdateArticle = TCreateArticle;
 
 export const useUpdateArticle = () => {
-  const {
-    appState,
-    dispatchAppState
-  } = React.useContext(AppStateContext);
-  const { paginationParams } = React.useContext(ArticlesContext)
+  const { appState, dispatchAppState } = React.useContext(AppStateContext);
+  const { paginationParams } = React.useContext(ArticlesContext);
 
   const getArticles = useGetArticles();
-  
-  return async (param: TUpdateArticle) => {
 
-    dispatchAppState(closeModal())
+  return async (param: TUpdateArticle) => {
+    dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
-   
     const params: T_articles_update = {
       // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
       params: {
@@ -42,15 +40,17 @@ export const useUpdateArticle = () => {
       article_id: appState.edittingPrams.article.article_id,
     };
 
-    const data = await apiArticlesUpdate(params);
+    try {
+      await apiArticlesUpdate(params);
 
-    if (data.err === true) {
-      alert("更新できませんでした");
-      dispatchAppState(isLoadingMain(false))
-    } else {
-      dispatchAppState(closeModal())
+      dispatchAppState(closeModal());
 
       getArticles(appState.isSetting, paginationParams.page);
+    } catch (err) {
+      console.log(`useUpdateArticle: ${err}`);
+
+      alert('更新できませんでした');
+      dispatchAppState(isLoadingMain(false));
     }
   };
 };

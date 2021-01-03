@@ -1,6 +1,6 @@
 import { NextApiRequest } from 'next';
+import { apiGetSession } from '../pages/api/auth/get_session';
 import { apiGetUserInfoFromEmail } from '../pages/api/user_info/get';
-import { getSession } from './auth/getSession';
 
 type TCheckIsAdmin = {
   req: NextApiRequest;
@@ -9,11 +9,15 @@ type TCheckIsAdmin = {
 export const checkIsAdmin = async ({
   req,
 }: TCheckIsAdmin): Promise<boolean> => {
-  const session = await getSession({ req });
-  if (session && session.email) {
-    const userInfo = await apiGetUserInfoFromEmail(session.email);
-    if (userInfo) return userInfo.is_admin;
-  }
+  try {
+    const session = await apiGetSession({ req });
+    if (session && session.email) {
+      const data = await apiGetUserInfoFromEmail(session.email);
+      return data.rawData.is_admin;
+    }
 
-  return false;
+    return false;
+  } catch (err) {
+    throw `checkIsAdmin: ${err}`;
+  }
 };

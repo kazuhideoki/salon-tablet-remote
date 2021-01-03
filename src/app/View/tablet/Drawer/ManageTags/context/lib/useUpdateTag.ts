@@ -20,14 +20,14 @@ export const useUpdateTag = () => {
       tag_id: edittingTagId,
       tag_name: tagName,
     };
+    try {
+      await apiTagsUpdata(params);
+      getTags();
+    } catch (err) {
+      console.log(`useUpdateTag: ${err}`);
 
-    const data = await apiTagsUpdata(params);
-
-    if (data.err === true) {
       alert('更新できませんでした');
       dispatchAppState(isLoadingTags(false));
-    } else {
-      getTags();
     }
   };
 };

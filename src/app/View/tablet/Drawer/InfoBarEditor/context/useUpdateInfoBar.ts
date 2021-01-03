@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { useGetInfoBar } from "./lib/useGetInfoBar";
+import { useGetInfoBar } from './lib/useGetInfoBar';
 import {
   T_info_bar_update,
   apiInfoBarUpdate,
-} from "../../../../../../pages/api/info_bar/update";
-import { T_info_bar_type } from "../../../../../Store/Interface";
-import { UserInfoContext } from "../../../../../Store/userInfo/Context";
-import { AppStateContext } from "../../../../../Store/appState/Context";
-import { closeModal } from "../../../../../Store/appState/actions";
+} from '../../../../../../pages/api/info_bar/update';
+import { T_info_bar_type } from '../../../../../Store/Interface';
+import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import { AppStateContext } from '../../../../../Store/appState/Context';
+import { closeModal } from '../../../../../Store/appState/actions';
 
 const scrollingAnimationDuration = (charCount: number) =>
   (32 * charCount) / 245 + 8; // アニメーションの再生時間がが文字数に応じて増え、どの文字数でもある程度同じスピードで再生されるように調整
@@ -21,30 +21,32 @@ type Type = {
 };
 
 export const useUpdateInfoBar = (params: Type) => {
-         const { dispatchAppState } = React.useContext(AppStateContext);
-         const { userInfo } = React.useContext(UserInfoContext);
-         const getInfoBar = useGetInfoBar();
+  const { dispatchAppState } = React.useContext(AppStateContext);
+  const { userInfo } = React.useContext(UserInfoContext);
+  const getInfoBar = useGetInfoBar();
 
-         return async () => {
-           dispatchAppState(closeModal());
+  return async () => {
+    dispatchAppState(closeModal());
 
-           const updateInfoBarParams: T_info_bar_update = {
-             user_id: userInfo.user_id,
-             info_bar_type: params.infoBarType,
-             scrolling_sentence: params.editorText,
-             scrolling_animation_duration: scrollingAnimationDuration(
-             params.charCount
-           ),
-             selected_article_id: params.articleInfoBar,
-           };
+    const updateInfoBarParams: T_info_bar_update = {
+      user_id: userInfo.user_id,
+      info_bar_type: params.infoBarType,
+      scrolling_sentence: params.editorText,
+      scrolling_animation_duration: scrollingAnimationDuration(
+        params.charCount
+      ),
+      selected_article_id: params.articleInfoBar,
+    };
 
-           try {
-             await apiInfoBarUpdate(updateInfoBarParams);
-             dispatchAppState(closeModal());
+    try {
+      await apiInfoBarUpdate(updateInfoBarParams);
+      dispatchAppState(closeModal());
 
-             getInfoBar();
-           } catch (err) {
-             alert("更新できませんでした");
-           }
-         };
-       };
+      getInfoBar();
+    } catch (err) {
+      console.log(`useUpdateInfoBar: ${err}`);
+
+      alert('更新できませんでした');
+    }
+  };
+};
