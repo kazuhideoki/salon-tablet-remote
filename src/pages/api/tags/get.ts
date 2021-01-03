@@ -1,8 +1,7 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TTags, T_user_id } from '../../../app/Store/Interface';
-import { server, localhost } from '../../../lib/loadUrl';
-import { TApiResponse, TApiError } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/apiWrap';
 import { apiWrapGet } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -21,10 +20,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       Number(req.query.userId)
     );
 
-    return res.status(200).json(data);
+    res.status(200).json({ err: false, rawData: data } as TApiResponse<TTags>);
   } catch (err) {
     console.log('/tags/get/のエラーは ' + JSON.stringify(err));
-    return res.status(500).json({ err: true, data: err });
+    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
   }
 };
 
