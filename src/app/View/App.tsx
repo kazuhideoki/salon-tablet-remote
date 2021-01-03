@@ -20,7 +20,7 @@ const AppView = ({ session }: TAppViewProps) => {
   const { userInfo } = React.useContext(UserInfoContext);
 
   React.useEffect(function settingPassword() {
-    if (session.emailVerified === false) {
+    if (session.emailVerified !== true) {
       openModal('popup_not_email_verified');
     }
   }, []);

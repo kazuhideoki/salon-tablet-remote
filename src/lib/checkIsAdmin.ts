@@ -1,6 +1,6 @@
 import { NextApiRequest } from 'next';
+import { apiGetUserInfoFromEmail } from '../pages/api/user_info/get';
 import { getSession } from './auth/getSession';
-import { getUserInfoFromEmail } from './getUserInfoFromEmail';
 
 type TCheckIsAdmin = {
   req: NextApiRequest;
@@ -11,7 +11,7 @@ export const checkIsAdmin = async ({
 }: TCheckIsAdmin): Promise<boolean> => {
   const session = await getSession({ req });
   if (session && session.email) {
-    const userInfo = await getUserInfoFromEmail(session.email);
+    const userInfo = await apiGetUserInfoFromEmail(session.email);
     if (userInfo) return userInfo.is_admin;
   }
 

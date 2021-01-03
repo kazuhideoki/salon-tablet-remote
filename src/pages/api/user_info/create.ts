@@ -1,14 +1,13 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { apiWrapPost } from "../../../lib/apiWrap";
+import { db } from '../../../lib/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { TApiResponse } from '../../../lib/apiTypes';
+import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoCreate = async (
   params: T_user_info_create
-): Promise<TApiResponse<T_user_info_create_return>> => {
-  return apiWrapPost("user_info/create", params);
+): Promise<TApiResponse<void>> => {
+  apiWrapPost('user_info/create', params);
 };
 
 export type T_user_info_create = {
@@ -20,10 +19,8 @@ export type T_user_info_create_return = {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-
+  if (req.method === 'POST') {
     const { user_email }: T_user_info_create = req.body;
-    const params = { user_email };
 
     try {
       const data = await db(`INSERT INTO user_info (user_email) VALUES (?)`, [
@@ -35,8 +32,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       };
 
       res.status(200).json(returnData);
+      res.end();
     } catch (err) {
-      console.log("/user_info/create/のエラーは " + JSON.stringify(err));
+      console.log('/user_info/create/のエラーは ' + JSON.stringify(err));
 
       return res.status(500).json({ err: true, data: err });
     }
@@ -49,7 +47,7 @@ export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };

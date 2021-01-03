@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
 export const useStateDeleteAccountFrom = () => {
-    const [emailForConfirm, setEmailForConfirm] = React.useState("");
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   return {
-    emailForConfirm,
-    setEmailForConfirm,
+    email,
+    setEmail,
+    password,
+    setPassword,
   };
-}
+};
