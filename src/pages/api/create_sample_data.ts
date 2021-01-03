@@ -14,7 +14,7 @@ import { apiWrapPost } from '../../lib/apiWrap';
 export const apiCreateSampleData = async (
   params: T_create_sample_data
 ): Promise<TApiResponse<void>> => {
-  apiWrapPost('create_sample_data', params, false);
+  return apiWrapPost('create_sample_data', params, false);
 };
 
 export type T_create_sample_data = {
@@ -87,10 +87,10 @@ const create_sample_data = async (
         insertSampleFooterItems(itemParams),
       ]);
 
-      res.end();
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log('/create_sample_dataのエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };
