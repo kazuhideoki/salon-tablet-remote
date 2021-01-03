@@ -5,8 +5,7 @@ import {
   T_user_id,
   TInfoBarData,
 } from '../../../app/Store/Interface';
-import { localhost, server } from '../../../lib/loadUrl';
-import { TApiResponse, TApiError } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/apiWrap';
 import { createInitInfoBar } from '../../../lib/createInitInfoBar';
 import { apiWrapGet } from '../../../lib/apiWrap';
 
@@ -27,7 +26,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       'SELECT * FROM info_bar WHERE user_id = ?',
       userId
     );
-    // console.log('info_bar/getのdataは ' + JSON.stringify(data));
 
     // 初回サインインのときなどでinfo_barがない場合、新しく作る。作ったデータが返ってくる
     if (data.length === 0) {
@@ -45,16 +43,15 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       );
     }
 
-    const returnData: TInfoBarData = {
+    const rawData: TInfoBarData = {
       infoBar: data[0] as TInfoBar,
-      // scrolling_animation_duration: null,
       targetArticle: data2.length ? data2[0] : [],
     };
 
-    return res.status(200).json(returnData);
+    res.status(200).json({ err: false, rawData } as TApiResponse<TInfoBarData>);
   } catch (err) {
     console.log('/info_bar/get/のエラーは ' + JSON.stringify(err));
-    return res.status(500).json({ err: true, data: err });
+    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
   }
 };
 
