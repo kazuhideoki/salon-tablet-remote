@@ -1,6 +1,6 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../lib/apiTypes';
+import { TApiResponse } from '../../../lib/apiWrap';
 import { T_user_id } from '../../../app/Store/Interface';
 import { apiWrapPost } from '../../../lib/apiWrap';
 
@@ -8,7 +8,7 @@ import { apiWrapPost } from '../../../lib/apiWrap';
 export const apiCreatePublicPageSlug = async (
   params: T_user_info_create_public_page_slug
 ): Promise<TApiResponse<void>> => {
-  apiWrapPost('user_info/create_public_page_slug', params, false);
+  return apiWrapPost('user_info/create_public_page_slug', params, false);
 };
 
 export type T_user_info_create_public_page_slug = {

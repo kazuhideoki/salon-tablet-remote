@@ -1,16 +1,15 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { T_user_id } from "../../../app/Store/Interface";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { apiWrapPost } from "../../../lib/apiWrap";
-
+import { db } from '../../../lib/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { T_user_id } from '../../../app/Store/Interface';
+import { server, localhost } from '../../../lib/loadUrl';
+import { TApiResponse } from '../../../lib/apiWrap';
+import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeShowArticleType = async (
   params: T_user_info_change_show_article_type
 ): Promise<TApiResponse<T_user_info_change_show_article_type_return>> => {
-  return apiWrapPost("user_info/change_show_article_type", params);
+  return apiWrapPost('user_info/change_show_article_type', params);
 };
 
 export type T_user_info_change_show_article_type = {
@@ -21,9 +20,11 @@ export type T_user_info_change_show_article_type_return = {
   rawData: unknown;
 };
 
-const change_show_article_type = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-
+const change_show_article_type = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
+  if (req.method === 'POST') {
     // await runMiddleware(req, res);
 
     const {
@@ -38,14 +39,16 @@ const change_show_article_type = async (req: NextApiRequest, res: NextApiRespons
         [showArticleType, user_id]
       );
 
-      console.log("change_show_article_typeの返り値は " + JSON.stringify(data));
+      console.log('change_show_article_typeの返り値は ' + JSON.stringify(data));
 
       const returnData: T_user_info_change_show_article_type_return = {
         rawData: data,
       };
       return res.status(200).json(returnData);
     } catch (err) {
-      console.log("/user_info/change_show_article_type/のエラーは " + JSON.stringify(err));
+      console.log(
+        '/user_info/change_show_article_type/のエラーは ' + JSON.stringify(err)
+      );
       return res.status(500).json({ err: true, data: err });
     }
   }
@@ -57,7 +60,7 @@ export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };

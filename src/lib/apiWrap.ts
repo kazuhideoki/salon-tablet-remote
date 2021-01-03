@@ -1,5 +1,7 @@
 import { server, localhost } from './loadUrl';
 
+export type TApiResponse<T = void> = { err: boolean; data: T };
+
 const fetchPost = async (str: string, url: string, params: any) => {
   return await fetch(`${str}/api/${url}`, {
     headers: { 'Content-Type': 'application/json' },
@@ -13,12 +15,12 @@ const fetchGet = async (str: string, url: string) => {
   return await fetch(`${str}/api/${url}`);
 };
 
-const apiWrap = async (
+const apiWrap = async <T>(
   fetch: any,
   url: string,
   params?: any,
   returning = true
-) => {
+): Promise<TApiResponse<T>> => {
   const str = process.browser ? server : localhost;
 
   try {
@@ -33,8 +35,12 @@ const apiWrap = async (
   }
 };
 
-export const apiWrapPost = (url: string, params: any, returning = true) =>
-  apiWrap(fetchPost, url, params, returning);
+export const apiWrapPost = async <T = void>(
+  url: string,
+  params: any,
+  returning = true
+): Promise<TApiResponse<T>> =>
+  await apiWrap<T>(fetchPost, url, params, returning);
 
 export const apiWrapGet = (url: string, returning = true) =>
   apiWrap(fetchGet, url, null, returning);

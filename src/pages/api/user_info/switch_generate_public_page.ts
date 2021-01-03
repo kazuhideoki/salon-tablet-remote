@@ -5,7 +5,7 @@ import {
   T_is_generate_public_page,
 } from '../../../app/Store/Interface';
 import { server, localhost } from '../../../lib/loadUrl';
-import { TApiResponse } from '../../../lib/apiTypes';
+import { TApiResponse } from '../../../lib/apiWrap';
 import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

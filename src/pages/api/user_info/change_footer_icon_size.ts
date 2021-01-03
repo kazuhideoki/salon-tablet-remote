@@ -1,15 +1,15 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { T_user_id } from "../../../app/Store/Interface";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { apiWrapPost } from "../../../lib/apiWrap";
+import { db } from '../../../lib/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { T_user_id } from '../../../app/Store/Interface';
+import { server, localhost } from '../../../lib/loadUrl';
+import { TApiResponse } from '../../../lib/apiWrap';
+import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeFooterIconSize = async (
   params: T_user_info_change_footer_icon_size
 ): Promise<TApiResponse<T_user_info_change_footer_icon_size_return>> => {
-  return apiWrapPost("user_info/change_footer_icon_size", params);
+  return apiWrapPost('user_info/change_footer_icon_size', params);
 };
 
 export type T_user_info_change_footer_icon_size = {
@@ -24,7 +24,7 @@ const change_footer_icon_size = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     const {
       user_id,
       footer_icon_size,
@@ -37,7 +37,7 @@ const change_footer_icon_size = async (
         [footer_icon_size, user_id]
       );
 
-      console.log("change_footer_icon_sizeの返り値は " + JSON.stringify(data));
+      console.log('change_footer_icon_sizeの返り値は ' + JSON.stringify(data));
 
       const returnData: T_user_info_change_footer_icon_size_return = {
         rawData: data,
@@ -45,7 +45,7 @@ const change_footer_icon_size = async (
       return res.status(200).json(returnData);
     } catch (err) {
       console.log(
-        "/user_info/change_footer_icon_size/のエラーは " + JSON.stringify(err)
+        '/user_info/change_footer_icon_size/のエラーは ' + JSON.stringify(err)
       );
       return res.status(500).json({ err: true, data: err });
     }
@@ -58,7 +58,7 @@ export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };

@@ -7,7 +7,7 @@ import {
   T_user_id,
   TArticles,
 } from '../../app/Store/Interface';
-import { TApiResponse } from '../../lib/apiTypes';
+import { TApiResponse } from '../../lib/apiWrap';
 import { apiWrapPost } from '../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

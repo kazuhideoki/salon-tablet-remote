@@ -1,5 +1,5 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
+import { db } from '../../../lib/db';
+import { NextApiRequest, NextApiResponse } from 'next';
 import {
   T_is_published_footer_items,
   T_icon_name,
@@ -14,16 +14,18 @@ import {
   T_modal_size,
   T_data_type_footer_item,
   T_order_sidebar,
-} from "../../../app/Store/Interface";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { checkIsAdmin } from "../../../lib/checkIsAdmin";
-import { apiWrapPost } from "../../../lib/apiWrap";
+} from '../../../app/Store/Interface';
+import { server, localhost } from '../../../lib/loadUrl';
+import { TApiResponse } from '../../../lib/apiWrap';
+import { checkIsAdmin } from '../../../lib/checkIsAdmin';
+import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiFooterItemsCreate = async (params:T_footer_items_create):Promise<TApiResponse<T_footer_items_create_return>> => {
-  return apiWrapPost("footer_items/create", params);
-}
+export const apiFooterItemsCreate = async (
+  params: T_footer_items_create
+): Promise<TApiResponse<T_footer_items_create_return>> => {
+  return apiWrapPost('footer_items/create', params);
+};
 
 export type T_footer_items_params = {
   is_published: T_is_published_footer_items;
@@ -37,8 +39,8 @@ export type T_footer_items_params = {
   modal_size: T_modal_size;
   // on_sidebar: T_on_sidebar
   order: T_order;
-  order_sidebar: T_order_sidebar
-  data_type: T_data_type_footer_item
+  order_sidebar: T_order_sidebar;
+  data_type: T_data_type_footer_item;
 };
 
 export type T_footer_items_create = T_footer_items_params & {
@@ -50,37 +52,30 @@ export type T_footer_items_create_return = {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  
-  if (req.method === "POST") {
-
+  if (req.method === 'POST') {
     const params: T_footer_items_create = req.body;
 
     try {
-      const isAdmin = await checkIsAdmin({req});
+      const isAdmin = await checkIsAdmin({ req });
 
       if (isAdmin === false) {
-        params.data_type = "default_data";
+        params.data_type = 'default_data';
       }
 
       const data = await db(`INSERT INTO footer_items SET ?`, params);
-  
-      console.log("/footer_items/create/は " + JSON.stringify(data));
-  
+
+      console.log('/footer_items/create/は ' + JSON.stringify(data));
+
       const returnData: T_footer_items_create_return = {
         rawData: data,
       };
       res.status(200).json(returnData);
-
     } catch (err) {
-
-      console.log("/footer_items/create/のエラーは " + JSON.stringify(err));
+      console.log('/footer_items/create/のエラーは ' + JSON.stringify(err));
 
       return res.status(500).json({ err: true, data: err });
-
     }
-
-  } else if (req.method === "GET") {
-    
+  } else if (req.method === 'GET') {
   }
 };
 
