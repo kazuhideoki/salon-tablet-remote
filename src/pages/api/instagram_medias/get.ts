@@ -1,7 +1,6 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TApiResponse } from '../../../lib/apiWrap';
-import { server, localhost } from '../../../lib/loadUrl';
 import { T_instagram_id, TInstagramMedias } from '../../../app/Store/Interface';
 import { apiWrapPost } from '../../../lib/apiWrap';
 
@@ -35,8 +34,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         `select access_token from instagram_accounts where instagram_id = ?`,
         instagram_id
       )) as any[];
-      if (data !== null && data.length) {
-      }
+
       const { access_token } = data[0];
 
       const response = await fetch(
@@ -47,15 +45,18 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (data2.error) {
         console.log('data2.errorは ' + data2.error);
-        return res.status(500).json({ err: true, data: data2 });
+        return res
+          .status(500)
+          .json({ err: true, rawData: data2 } as TApiResponse);
       }
 
-      const returnData: TInstagramMedias = data2;
-      // {data: []}の形で取得
-      return res.status(200).json(returnData);
+      const rawData: TInstagramMedias = data2;
+      res
+        .status(200)
+        .json({ err: false, rawData } as TApiResponse<TInstagramMedias>);
     } catch (err) {
       console.log('/instagram_medias/get/のエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };
