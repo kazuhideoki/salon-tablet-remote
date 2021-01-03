@@ -30,9 +30,9 @@ export const generateProps = async (
 
   // as any で何故かエラー消える
   const propsData: TIndexPropsData = {
-    articles: data.err ? [] : data.rawData,
-    pagination: data.err ? ([] as any) : data.pagination,
-    allArticles: data.err ? [] : data.allArticles,
+    articles: data.err ? [] : data.rawData.rawData,
+    pagination: data.err ? ([] as any) : data.rawData.pagination,
+    allArticles: data.err ? [] : data.rawData.allArticles,
     footerItems: data2.err ? [] : data2,
     infoBarData: data3.err ? ([] as any) : data3,
     tags: data4.err ? [] : data4,

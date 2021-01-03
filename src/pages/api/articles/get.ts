@@ -8,7 +8,6 @@ import {
   TPaginationParams,
 } from '../../../app/Store/Interface';
 import { TApiResponse } from '../../../lib/apiWrap';
-import { server, localhost } from '../../../lib/loadUrl';
 import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -92,18 +91,21 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         rowCount: data2.length,
       };
 
-      const returnData: T_articles_get_return = {
-        // tag_idsをnumber[]化する、なければnullのまま
-        rawData: data.length ? tagIdsToNumberArray(data) : data,
-        pagination: pagination,
-        allArticles: data3 as TAllArticles,
+      const returnData: TApiResponse<T_articles_get_return> = {
+        err: false,
+        rawData: {
+          // tag_idsをnumber[]化する、なければnullのまま
+          rawData: data.length ? tagIdsToNumberArray(data) : data,
+          pagination: pagination,
+          allArticles: data3 as TAllArticles,
+        },
       };
 
       return res.status(200).json(returnData);
     } catch (err) {
       console.log('/articles/get/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };

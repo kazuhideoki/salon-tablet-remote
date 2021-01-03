@@ -1,6 +1,7 @@
 import { server, localhost } from './loadUrl';
 
-export type TApiResponse<T = void> = { err: boolean; data: T };
+export type TApiResponse<T = void> = { err: boolean; rawData: T };
+// | { err: true; data: string };
 
 const fetchPost = async (str: string, url: string, params: any) => {
   return await fetch(`${str}/api/${url}`, {

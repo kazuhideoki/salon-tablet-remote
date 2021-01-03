@@ -49,11 +49,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await db(`SELECT * FROM articles WHERE user_id = ?`, params.user_id);
 
-      res.end();
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log('/articles/create/のエラーは ' + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: err });
+      res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };
