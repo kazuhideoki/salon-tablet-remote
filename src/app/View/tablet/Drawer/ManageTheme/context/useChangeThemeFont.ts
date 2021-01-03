@@ -1,13 +1,16 @@
-import React from "react";
-import { T_selected_theme, T_theme_font } from "../../../../../Store/Interface";
+import React from 'react';
 import {
   apiUserInfoThemeFont,
   T_user_info_theme_font,
   TWhichFont,
-} from "../../../../../../pages/api/user_info/theme/font";
-import { TFont1,TFont2 } from "../../../../../Store/theme/lib/fonts";
-import { UserInfoContext } from "../../../../../Store/userInfo/Context";
-import { setThemeFont1, setThemeFont2, setThemeFontHeading } from "../../../../../Store/userInfo/actions";
+} from '../../../../../../pages/api/user_info/theme/font';
+import { TFont1, TFont2 } from '../../../../../Store/theme/lib/fonts';
+import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import {
+  setThemeFont1,
+  setThemeFont2,
+  setThemeFontHeading,
+} from '../../../../../Store/userInfo/actions';
 
 export const useChangeThemeFont = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
@@ -20,21 +23,19 @@ export const useChangeThemeFont = () => {
       whichFont,
     };
 
-    const data = await apiUserInfoThemeFont(params);
+    try {
+      await apiUserInfoThemeFont(params);
 
-    if (data.err === true) {
-      alert("変更できませんでした");
-      return false;
-    } else {
       if (whichFont === 'theme_font2') {
         dispatchUserInfo(setThemeFont2(font));
-      } else if (whichFont === 'theme_font1'){
+      } else if (whichFont === 'theme_font1') {
         dispatchUserInfo(setThemeFont1(font));
       } else if (whichFont === 'theme_font_heading') {
         dispatchUserInfo(setThemeFontHeading(font));
       }
-
-      return true;
+    } catch (err) {
+      alert('変更できませんでした');
+      throw `useChangeThemeFont: ${err}`;
     }
   };
 };

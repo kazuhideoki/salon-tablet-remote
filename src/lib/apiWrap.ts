@@ -27,8 +27,8 @@ const apiWrap = async <T>(
   try {
     const res = await fetch(str, url, params);
     if (returning) {
-      const result = await res.json();
-      if (result.err) throw result;
+      const result = (await res.json()) as TApiResponse;
+      if (result.err) throw result.rawData;
       return result;
     }
   } catch (err) {

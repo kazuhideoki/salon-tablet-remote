@@ -32,13 +32,13 @@ const create_public_page_slug = async (
         user_id,
       ]);
 
-      res.end();
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log(
         '/user_info/create_public_page_slug/のエラーは ' + JSON.stringify(err)
       );
 
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };

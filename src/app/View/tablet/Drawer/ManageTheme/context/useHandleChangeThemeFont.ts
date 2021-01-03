@@ -1,7 +1,7 @@
-import React from "react";
-import { useChangeThemeFont } from "./useChangeThemeFont";
-import { TFont1, TFont2 } from "../../../../../Store/theme/lib/fonts";
-import { UserInfoContext } from "../../../../../Store/userInfo/Context";
+import React from 'react';
+import { useChangeThemeFont } from './useChangeThemeFont';
+import { TFont1, TFont2 } from '../../../../../Store/theme/lib/fonts';
+import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 
 export const useHandleChangeThemeFont1 = () => {
   const { userInfo } = React.useContext(UserInfoContext);
@@ -11,12 +11,11 @@ export const useHandleChangeThemeFont1 = () => {
   const handleChangeThemeFont1 = async (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
-    const isChanged = await changeThemeFont(
-      event.target.value as TFont1[0],
-      "theme_font1"
-    );
-    if (isChanged) {
+    try {
+      await changeThemeFont(event.target.value as TFont1[0], 'theme_font1');
       setFont1(event.target.value as TFont1[0]);
+    } catch (err) {
+      console.log(`handleChangeThemeFont1: ${err}`);
     }
   };
 
@@ -31,12 +30,11 @@ export const useHandleChangeThemeFont2 = () => {
   const handleChangeThemeFont2 = async (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
-    const isChanged = await changeThemeFont(
-      event.target.value as TFont2[0],
-      "theme_font2"
-    );
-    if (isChanged) {
+    try {
+      await changeThemeFont(event.target.value as TFont2[0], 'theme_font2');
       setFont2(event.target.value as TFont2[0]);
+    } catch (err) {
+      console.log(`handleChangeThemeFont2: ${err}`);
     }
   };
 
@@ -52,12 +50,14 @@ export const useHandleChangeThemeFontHeading = () => {
   const handleChangeThemeFontHeading = async (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
-    const isChanged = await changeThemeFont(
-      event.target.value as TFont2[0],
-      "theme_font_heading"
-    );
-    if (isChanged) {
+    try {
+      await changeThemeFont(
+        event.target.value as TFont2[0],
+        'theme_font_heading'
+      );
       setFontHeading(event.target.value as TFont2[0]);
+    } catch (err) {
+      console.log(`handleChangeThemeFontHeading: ${err}`);
     }
   };
 

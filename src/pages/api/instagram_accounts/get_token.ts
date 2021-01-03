@@ -51,7 +51,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
     const userProfile = await response3.json();
 
     const { email } = await apiGetSession({ req });
-    const { user_id } = await apiGetUserInfoFromEmail(email);
+    const { rawData } = await apiGetUserInfoFromEmail(email);
 
     const params = {
       instagram_id: shortLived.user_id,
@@ -59,7 +59,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
       profile_img: '',
       access_token: longLived.access_token,
       expires: '',
-      user_id: user_id,
+      user_id: rawData.user_id,
     };
 
     await db(
@@ -71,7 +71,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
     // DBの要再連携フラブをオフにする
     await apiInstagramAccountsReconnectNeeded({
       instagram_id: shortLived.user_id,
-      user_id: user_id,
+      user_id: rawData.user_id,
       is_reconnect_needed: false,
     });
 

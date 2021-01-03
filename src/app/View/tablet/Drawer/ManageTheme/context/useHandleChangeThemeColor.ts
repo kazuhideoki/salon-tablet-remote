@@ -7,12 +7,12 @@ export const useHandleChangeThemeColor = () => {
   const changeThemeColor = useChangeThemeColor();
 
   return async (value: TColor) => {
-    const isChanged = await changeThemeColor(value);
-    if (isChanged) {
-      const params = {
-        hex: value.hex,
-        hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`,
-      };
-    }
+    try {
+      await changeThemeColor(value);
+      // const params = {
+      //   hex: value.hex,
+      //   hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`,
+      // };
+    } catch (err) {}
   };
 };

@@ -1,6 +1,5 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { server, localhost } from '../../../lib/loadUrl';
 import { TApiResponse } from '../../../lib/apiWrap';
 import {
   T_user_id,
@@ -14,7 +13,7 @@ import { apiWrapPost } from '../../../lib/apiWrap';
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoUpdate = async (
   params: T_user_info_update
-): Promise<TApiResponse<T_user_info_update_return>> => {
+): Promise<TApiResponse> => {
   return apiWrapPost('user_info/update', params);
 };
 
@@ -24,10 +23,6 @@ export type T_user_info_update = {
   shop_name: T_shop_name;
   user_email: T_user_email;
   is_generate_public_page: T_is_generate_public_page;
-};
-
-export type T_user_info_update_return = {
-  rawData: unknown;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -41,15 +36,11 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
       ]);
       console.log('/user_info/update/は ' + JSON.stringify(data));
 
-      const returnData: T_user_info_update_return = {
-        rawData: data,
-      };
-
-      res.status(200).json(returnData);
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log('/user_info/update/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };

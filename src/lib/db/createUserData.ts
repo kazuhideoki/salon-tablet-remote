@@ -10,8 +10,8 @@ export const createUserData = async (email: string): Promise<void> => {
       user_email: email,
     });
 
-    const userInfo = await apiGetUserInfoFromEmail(email);
-    const { user_id } = userInfo;
+    const data = await apiGetUserInfoFromEmail(email);
+    const { user_id } = data.rawData;
 
     await apiCreateSampleData({ user_id });
 

@@ -71,11 +71,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await apiGetSession({ req });
 
     if (session?.email) {
-      const userInfo = await apiGetUserInfoFromEmail(session.email);
+      const data = await apiGetUserInfoFromEmail(session.email);
 
       return {
         props: {
-          data: await generateProps(userInfo, false),
+          data: await generateProps(data.rawData, false),
           isPublicPage: false,
           device: device,
           session,

@@ -12,8 +12,8 @@ export const checkIsAdmin = async ({
   try {
     const session = await apiGetSession({ req });
     if (session && session.email) {
-      const userInfo = await apiGetUserInfoFromEmail(session.email);
-      if (userInfo) return userInfo.is_admin;
+      const data = await apiGetUserInfoFromEmail(session.email);
+      return data.rawData.is_admin;
     }
 
     return false;

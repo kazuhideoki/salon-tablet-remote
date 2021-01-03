@@ -30,7 +30,7 @@ export const useDeleteUser = () => {
       signout('/');
       alert('アカウントを削除しました。');
     } catch (err) {
-      alert('エラーが発生しました' + err);
+      alert(`useDeleteUser: ${err}`);
     }
   };
 };
