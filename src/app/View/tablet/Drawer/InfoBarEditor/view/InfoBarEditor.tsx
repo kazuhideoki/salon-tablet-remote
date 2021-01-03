@@ -1,16 +1,25 @@
-import React from "react";
-import dynamic from "next/dynamic";
-const SmallQuillEditor = dynamic(() => import("../components/SmallQuillEditor"), {
-  ssr: false,
-});
-import { Button, Typography, makeStyles, createStyles, Theme, Grid } from "@material-ui/core";
-import { CharCounter } from "../../../../../pureComponents/CharCounter";
-import { SwitchOnTapInfoBar } from "../components/SwitchOnTapInfoBar";
-import { SelectArticleInfoBar } from "../components/SelectArticleInfoBar";
-import { PublishTwoTone } from "@material-ui/icons";
-import { useStateInfoBarEditor } from "../context/useStateInfoBarEditor";
-import { useUpdateInfoBar } from "../context/useUpdateInfoBar";
-
+import React from 'react';
+import dynamic from 'next/dynamic';
+const SmallQuillEditor = dynamic(
+  () => import('../components/SmallQuillEditor'),
+  {
+    ssr: false,
+  }
+);
+import {
+  Button,
+  Typography,
+  makeStyles,
+  createStyles,
+  Theme,
+  Grid,
+} from '@material-ui/core';
+import { CharCounter } from '../../../../../pureComponents/CharCounter';
+import { SwitchOnTapInfoBar } from '../components/SwitchOnTapInfoBar';
+import { SelectArticleInfoBar } from '../components/SelectArticleInfoBar';
+import { PublishTwoTone } from '@material-ui/icons';
+import { useStateInfoBarEditor } from '../context/useStateInfoBarEditor';
+import { useUpdateInfoBar } from '../context/useUpdateInfoBar';
 
 const useInfoBarEditorProps = () => {
   const {
@@ -23,14 +32,14 @@ const useInfoBarEditorProps = () => {
     setArticleInfoBar,
     charCount,
     setCharCount,
-  } = useStateInfoBarEditor()
-  
+  } = useStateInfoBarEditor();
+
   const updateInfoBar = useUpdateInfoBar({
     infoBarType,
     editorText,
     articleInfoBar,
     charCount,
-  })
+  });
 
   return {
     infoBarType,
@@ -44,8 +53,7 @@ const useInfoBarEditorProps = () => {
     allArticles,
     updateInfoBar,
   };
-
-}
+};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,115 +64,103 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
     charCounter: {
-      textAlign: "right",
+      textAlign: 'right',
     },
     selectArticleInfoBar: {
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(1)}px`,
     },
     bottomDiv: {
-      position: "sticky",
+      position: 'sticky',
       bottom: 0,
       marginRight: theme.spacing(2),
       zIndex: 100,
     },
     submitButton: {
-      marginLeft: "auto",
+      marginLeft: 'auto',
       marginRight: theme.spacing(1),
     },
   })
 );
 
-export type TUseInfoBarEditorProps = ReturnType<typeof useInfoBarEditorProps>
+export type TUseInfoBarEditorProps = ReturnType<typeof useInfoBarEditorProps>;
 
 export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
-         props
-       ) => {
-         const classes = useStyles();
+  props
+) => {
+  const classes = useStyles();
 
-         let mainField: JSX.Element = null
-         switch (props.infoBarType) {
-           case 'shop_name':
-             break;
-           case 'scrolling_sentence':
-             mainField = (
-               <>
-                 <SmallQuillEditor
-                   editorText={props.editorText}
-                   setEditorText={props.setEditorText}
-                   setCharCount={props.setCharCount}
-                 />
-                 <div className={classes.charCounter}>
-                   <CharCounter
-                     charCount={props.charCount}
-                     limitCount={500}
-                     isShowCount
-                   />
-                 </div>
-               </>
-             );
-             break;
-           case 'article':
-             mainField = (
-               <>
-                 <SelectArticleInfoBar
-                   articleInfoBar={props.articleInfoBar}
-                   setArticleInfoBar={props.setArticleInfoBar}
-                   AllArticles={props.allArticles}
-                   className={classes.selectArticleInfoBar}
-                 />
-               </>
-             );
-             break;
-         
-           default:
-             break;
-         }
+  const mainField: JSX.Element = (() => {
+    switch (props.infoBarType) {
+      case 'scrolling_sentence':
+        return (
+          <>
+            <SmallQuillEditor
+              editorText={props.editorText}
+              setEditorText={props.setEditorText}
+              setCharCount={props.setCharCount}
+            />
+            <div className={classes.charCounter}>
+              <CharCounter
+                charCount={props.charCount}
+                limitCount={500}
+                isShowCount
+              />
+            </div>
+          </>
+        );
+      case 'article':
+        return (
+          <>
+            <SelectArticleInfoBar
+              articleInfoBar={props.articleInfoBar}
+              setArticleInfoBar={props.setArticleInfoBar}
+              AllArticles={props.allArticles}
+              className={classes.selectArticleInfoBar}
+            />
+          </>
+        );
 
+      default:
+        return <></>;
+    }
+  })();
 
-         return (
-           <div>
-             <Typography variant="h4" component="h2" className={classes.header}>
-               インフォの設定
-             </Typography>
+  return (
+    <div>
+      <Typography variant="h4" component="h2" className={classes.header}>
+        インフォの設定
+      </Typography>
 
-             <SwitchOnTapInfoBar
-               infoBarType={props.infoBarType}
-               setInfoBarType={props.setInfoBarType}
-               className={classes.switchOnTapInfoBar}
-             />
+      <SwitchOnTapInfoBar
+        infoBarType={props.infoBarType}
+        setInfoBarType={props.setInfoBarType}
+        className={classes.switchOnTapInfoBar}
+      />
 
-             {mainField}
+      {mainField}
 
-             <div className={classes.bottomDiv}>
-               <Grid container>
-                 <Grid item className={classes.submitButton}>
-                   <Button
-                     variant="contained"
-                     color="primary"
-                     onClick={() => props.updateInfoBar()}
-                     startIcon={<PublishTwoTone />}
-                     disabled={
-                       props.charCount < 501
-                         ? false
-                         : true
-                     }
-                   >
-                     更新
-                   </Button>
-                 </Grid>
-                 <Grid item>
-
-                 </Grid>
-               </Grid>
-             </div>
-           </div>
-         );
-       };
+      <div className={classes.bottomDiv}>
+        <Grid container>
+          <Grid item className={classes.submitButton}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => props.updateInfoBar()}
+              startIcon={<PublishTwoTone />}
+              disabled={props.charCount < 501 ? false : true}>
+              更新
+            </Button>
+          </Grid>
+          <Grid item></Grid>
+        </Grid>
+      </div>
+    </div>
+  );
+};
 
 const InfoBarEditor = () => {
-  const props = useInfoBarEditorProps()
+  const props = useInfoBarEditorProps();
 
-  return <InfoBarEditorPresenter {...props}/>
-}
-export default InfoBarEditor
-
+  return <InfoBarEditorPresenter {...props} />;
+};
+export default InfoBarEditor;

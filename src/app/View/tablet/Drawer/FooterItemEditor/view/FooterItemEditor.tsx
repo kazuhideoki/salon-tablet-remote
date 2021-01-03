@@ -188,67 +188,64 @@ export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
 ) => {
   const classes = useStyles();
 
-  let mainField: JSX.Element;
-  switch (props.onTapRadio) {
-    case 'modal':
-      mainField = (
-        <div>
-          <SelectModalSize {...props} className={classes.selectModalSize} />
+  const mainField: JSX.Element = (() => {
+    switch (props.onTapRadio) {
+      case 'modal':
+        return (
+          <div>
+            <SelectModalSize {...props} className={classes.selectModalSize} />
 
-          <QuillEditor
-            editorText={props.editorText}
-            setEditorText={props.setEditorText}
-            setEditorTextExcerpt={props.setEditorTextExcerpt}
-            setCharCount={props.setCharCountFooterItemContent}
-          />
-          <div className={classes.charCounter}>
-            <CharCounter
-              charCount={props.charCountFooterItemContent}
-              limitCount={1000}
-              align="right"
-              isShowCount
+            <QuillEditor
+              editorText={props.editorText}
+              setEditorText={props.setEditorText}
+              setEditorTextExcerpt={props.setEditorTextExcerpt}
+              setCharCount={props.setCharCountFooterItemContent}
+            />
+            <div className={classes.charCounter}>
+              <CharCounter
+                charCount={props.charCountFooterItemContent}
+                limitCount={1000}
+                align="right"
+                isShowCount
+              />
+            </div>
+          </div>
+        );
+      case 'link':
+        return (
+          <div>
+            <TextField
+              id="linkUrl"
+              label="リンクURL"
+              value={props.linkUrl}
+              onChange={(e) => props.setLinkUrl(e.target.value)}
+              className={classes.linkTextField}
             />
           </div>
-        </div>
-      );
-      break;
-    case 'link':
-      mainField = (
-        <div>
-          <TextField
-            id="linkUrl"
-            label="リンクURL"
-            value={props.linkUrl}
-            onChange={(e) => props.setLinkUrl(e.target.value)}
-            className={classes.linkTextField}
-          />
-        </div>
-      );
-      break;
-    case 'appLink':
-      mainField = (
-        <div>
-          <SelectAppLink
-            appLinkUrl={props.appLinkUrl}
-            setAppLinkUrl={props.setAppLinkUrl}
-            className={classes.appLink}
-          />
-        </div>
-      );
-      break;
-    case 'google':
-      mainField = (
-        <div className={classes.googleSearch}>
-          <Typography variant="h4" color="textSecondary" align="center">
-            Google検索機能（実験機能）
-          </Typography>
-        </div>
-      );
-      break;
+        );
+      case 'appLink':
+        return (
+          <div>
+            <SelectAppLink
+              appLinkUrl={props.appLinkUrl}
+              setAppLinkUrl={props.setAppLinkUrl}
+              className={classes.appLink}
+            />
+          </div>
+        );
+      case 'google':
+        return (
+          <div className={classes.googleSearch}>
+            <Typography variant="h4" color="textSecondary" align="center">
+              Google検索機能（実験機能）
+            </Typography>
+          </div>
+        );
 
-    default:
-      break;
-  }
+      default:
+        return <></>;
+    }
+  })();
 
   return (
     <>

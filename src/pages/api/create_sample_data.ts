@@ -1,7 +1,6 @@
 import { db } from '../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  TArticle,
   FooterItems,
   FooterItem,
   T_user_id,
@@ -14,7 +13,7 @@ import { apiWrapPost } from '../../lib/apiWrap';
 export const apiCreateSampleData = async (
   params: T_create_sample_data
 ): Promise<TApiResponse<void>> => {
-  return apiWrapPost('create_sample_data', params, false);
+  return apiWrapPost('create_sample_data', params);
 };
 
 export type T_create_sample_data = {
@@ -22,11 +21,10 @@ export type T_create_sample_data = {
 };
 
 const getSampleArticles = async (user_id: T_user_id) => {
-  //@ts-ignore
-  const data: any[] = await db(
+  const data = (await db(
     `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`
-  );
-  const params = data.map((article: TArticle) => {
+  )) as TArticles;
+  const params = data.map((article) => {
     delete article.article_id;
     delete article.created_at;
     delete article.updated_at;

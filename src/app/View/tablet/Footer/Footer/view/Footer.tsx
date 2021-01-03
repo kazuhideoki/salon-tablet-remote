@@ -150,7 +150,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                 value.displayed_icon_name
                   ? IconsSetting.convertIconComponentFromName(
                       value.displayed_icon_name
-                    )[0]
+                    )[0] || MoodBad
                   : MoodBad
               }
               onClick={() => props.openFooterItemModal(value)}
@@ -167,7 +167,7 @@ export const FooterPresenter: React.FC<Props> = (props) => {
               target="_blank">
               <IconAndText
                 className={
-                  props.isSetting ? classes.isSettingIconAndText : null
+                  props.isSetting ? classes.isSettingIconAndText : undefined
                 }
                 icon={
                   value.displayed_icon_name

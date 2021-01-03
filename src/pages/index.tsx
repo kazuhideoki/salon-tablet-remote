@@ -62,10 +62,17 @@ const Index: React.FC<TIndexProps> = (props) => {
   }
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req } = context;
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const device = getDeviceType(req);
 
-  const device = getDeviceType(context);
+  const topPageProps = {
+    props: {
+      data: null,
+      session: null,
+      isPublicPage: false,
+      device: device,
+    } as TIndexProps,
+  };
 
   try {
     const session = await apiGetSession({ req });
@@ -82,17 +89,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         } as TIndexProps,
       };
     } else {
-      return {
-        props: {
-          data: null,
-          session: null,
-          isPublicPage: false,
-          device: device,
-        } as TIndexProps,
-      };
+      return topPageProps;
     }
   } catch (err) {
     console.log(`index.tsx gSSP: ${err}`);
+    return topPageProps;
   }
 };
 

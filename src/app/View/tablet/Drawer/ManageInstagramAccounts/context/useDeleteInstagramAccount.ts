@@ -19,7 +19,7 @@ export const useDeleteInstagramAccount = () => {
     const deleting = confirm('本当に削除してよろしいですか？');
 
     if (deleting === false) {
-      return null;
+      return;
     }
 
     dispatchAppState(isLoadingInstagramAccounts(true));

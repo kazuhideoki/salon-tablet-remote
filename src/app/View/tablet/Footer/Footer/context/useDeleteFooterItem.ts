@@ -43,6 +43,7 @@ export const useDeleteFooterItem = () => {
           value.order -= 1;
           return value;
         }
+        return value;
       });
       dispatchFooterItems(set(newState));
     } catch (err) {

@@ -50,33 +50,37 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const userProfile = await response3.json();
 
-    const { email } = await apiGetSession({ req });
-    const { rawData } = await apiGetUserInfoFromEmail(email);
+    const session = await apiGetSession({ req });
+    if (session?.email) {
+      const { rawData } = await apiGetUserInfoFromEmail(session.email);
 
-    const params = {
-      instagram_id: shortLived.user_id,
-      username: userProfile.username,
-      profile_img: '',
-      access_token: longLived.access_token,
-      expires: '',
-      user_id: rawData.user_id,
-    };
+      const params = {
+        instagram_id: shortLived.user_id,
+        username: userProfile.username,
+        profile_img: '',
+        access_token: longLived.access_token,
+        expires: '',
+        user_id: rawData.user_id,
+      };
 
-    await db(
-      // すでにデータが有れば上書きする（作動している？）
-      `INSERT INTO instagram_accounts SET ? ON DUPLICATE KEY UPDATE ?`,
-      [params, params]
-    );
+      await db(
+        // すでにデータが有れば上書きする（作動している？）
+        `INSERT INTO instagram_accounts SET ? ON DUPLICATE KEY UPDATE ?`,
+        [params, params]
+      );
 
-    // DBの要再連携フラブをオフにする
-    await apiInstagramAccountsReconnectNeeded({
-      instagram_id: shortLived.user_id,
-      user_id: rawData.user_id,
-      is_reconnect_needed: false,
-    });
+      // DBの要再連携フラブをオフにする
+      await apiInstagramAccountsReconnectNeeded({
+        instagram_id: shortLived.user_id,
+        user_id: rawData.user_id,
+        is_reconnect_needed: false,
+      });
 
-    res.writeHead(302, { Location: `/` });
-    res.end();
+      res.writeHead(302, { Location: `/` });
+      res.end();
+    } else {
+      throw `instagram_accounts/get_token: セッションがありません`;
+    }
   } catch (err) {
     console.log(
       '/instagram_accounts/get_token/のエラーは ' + JSON.stringify(err)

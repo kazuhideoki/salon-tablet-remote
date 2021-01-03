@@ -27,6 +27,8 @@ const httpsOptions = {
 
 app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
