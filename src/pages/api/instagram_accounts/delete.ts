@@ -1,22 +1,18 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { T_instagram_id } from '../../../app/Store/Interface';
-import { server, localhost } from '../../../lib/loadUrl';
 import { TApiResponse } from '../../../lib/apiWrap';
 import { apiWrapPost } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsDelete = async (
   params: T_instagram_accounts_delete
-): Promise<TApiResponse<T_instagram_accounts_delete_return>> => {
+): Promise<TApiResponse> => {
   return apiWrapPost('instagram_accounts/delete', params);
 };
 
 export type T_instagram_accounts_delete = {
   instagram_id: T_instagram_id;
-};
-export type T_instagram_accounts_delete_return = {
-  rawData: unknown;
 };
 
 const instagram_accounts_delete = async (
@@ -24,27 +20,21 @@ const instagram_accounts_delete = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    // await runMiddleware(req, res);
-
     const { instagram_id }: T_instagram_accounts_delete = req.body;
 
     try {
-      const data = await db(
+      await db(
         `DELETE FROM instagram_accounts WHERE instagram_id = ?`,
         instagram_id
       );
-      console.log('/instagram_accounts/delete/は ' + JSON.stringify(data));
 
-      const returnData: T_instagram_accounts_delete_return = {
-        rawData: data,
-      };
-      res.status(200).json(returnData);
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log(
         '/instagram_accounts/delete/のエラーは ' + JSON.stringify(err)
       );
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };

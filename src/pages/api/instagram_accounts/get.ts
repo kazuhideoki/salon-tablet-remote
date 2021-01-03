@@ -2,9 +2,7 @@ import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TInstagramAccounts, T_user_id } from '../../../app/Store/Interface';
 import { TApiResponse } from '../../../lib/apiWrap';
-import { server, localhost } from '../../../lib/loadUrl';
 import { changeToBooleanFromNumberInstagramAcconts } from '../../../lib/changeToBooleanFromNumber';
-import { LeakRemoveTwoTone } from '@material-ui/icons';
 import { apiWrapGet } from '../../../lib/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -28,14 +26,15 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       return value;
     });
 
-    const returnData: TInstagramAccounts = changeToBooleanFromNumberInstagramAcconts(
+    const rawData: TInstagramAccounts = changeToBooleanFromNumberInstagramAcconts(
       data
     );
-
-    return res.status(200).json(returnData);
+    res
+      .status(200)
+      .json({ err: false, rawData } as TApiResponse<TInstagramAccounts>);
   } catch (err) {
     console.log('/instagram_accounts/get/のエラーは ' + JSON.stringify(err));
-    return res.status(500).json({ err: true, data: err });
+    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
   }
 };
 

@@ -1,9 +1,11 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { server, instagramRedirectHost, localhost } from '../../../lib/loadUrl';
+import { server, instagramRedirectHost } from '../../../lib/loadUrl';
 import { apiInstagramAccountsReconnectNeeded } from './reconnect_needed';
 import { apiGetUserInfoFromEmail } from '../user_info/get';
 import { apiGetSession } from '../auth/get_session';
+
+// ※instagramアカウントを認証するときのリダイレクト先
 
 const FormData = require('form-data');
 
@@ -60,12 +62,13 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
       user_id: user_id,
     };
 
-    const data3 = await db(
+    await db(
       // すでにデータが有れば上書きする（作動している？）
       `INSERT INTO instagram_accounts SET ? ON DUPLICATE KEY UPDATE ?`,
       [params, params]
     );
 
+    // DBの要再連携フラブをオフにする
     await apiInstagramAccountsReconnectNeeded({
       instagram_id: shortLived.user_id,
       user_id: user_id,
