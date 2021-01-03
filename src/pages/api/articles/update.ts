@@ -47,11 +47,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
         params.data_type = 'default_data';
       }
 
-      const data = await db(`UPDATE articles SET ? WHERE article_id = ?`, [
-        params,
-        id,
-      ]);
-      console.log('/articles/update/は ' + JSON.stringify(data));
+      await db(`UPDATE articles SET ? WHERE article_id = ?`, [params, id]);
 
       res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {

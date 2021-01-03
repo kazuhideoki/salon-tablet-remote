@@ -35,8 +35,6 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
         [params, id]
       );
 
-      console.log('/footer_items/update/は ' + JSON.stringify(data));
-
       res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log('/footer_items/update/のエラーは ' + JSON.stringify(err));

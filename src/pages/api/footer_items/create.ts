@@ -59,15 +59,12 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const data = await db(`INSERT INTO footer_items SET ?`, params);
 
-      console.log('/footer_items/create/は ' + JSON.stringify(data));
-
       res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log('/footer_items/create/のエラーは ' + JSON.stringify(err));
 
       return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
-  } else if (req.method === 'GET') {
   }
 };
 

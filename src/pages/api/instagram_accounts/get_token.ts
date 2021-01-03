@@ -1,9 +1,9 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { server, instagramRedirectHost, localhost } from '../../../lib/loadUrl';
-import { getSession } from '../../../lib/auth/getSession';
 import { apiInstagramAccountsReconnectNeeded } from './reconnect_needed';
 import { apiGetUserInfoFromEmail } from '../user_info/get';
+import { apiGetSession } from '../auth/get_session';
 
 const FormData = require('form-data');
 
@@ -48,7 +48,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const userProfile = await response3.json();
 
-    const { email } = await getSession({ req });
+    const { email } = await apiGetSession({ req });
     const { user_id } = await apiGetUserInfoFromEmail(email);
 
     const params = {
