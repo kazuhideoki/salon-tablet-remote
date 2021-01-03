@@ -1,6 +1,5 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { server, localhost } from '../../../lib/loadUrl';
 import { T_footer_item_id, T_order } from '../../../app/Store/Interface';
 import { TApiResponse } from '../../../lib/apiWrap';
 import { apiWrapPost } from '../../../lib/apiWrap';
@@ -8,17 +7,13 @@ import { apiWrapPost } from '../../../lib/apiWrap';
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsDelete = async (
   params: T_footer_items_delete
-): Promise<TApiResponse<T_footer_items_delete_return>> => {
+): Promise<TApiResponse> => {
   return apiWrapPost('footer_items/delete', params);
 };
 
 export type T_footer_items_delete = {
   footer_item_id: T_footer_item_id;
   order: T_order;
-};
-
-export type T_footer_items_delete_return = {
-  rawData: unknown;
 };
 
 const footer_items_delete = async (
@@ -34,22 +29,18 @@ const footer_items_delete = async (
         footer_item_id
       );
       // 残ったアイテムのorderを調整するため
-      const data2 = await db(
+      await db(
         ' UPDATE `footer_items` SET `order` = `order` -1 WHERE `order` > ? ',
         order
       );
-      // UPDATE `footer_items` SET `order` = `order` -1 WHERE `order` > ?
 
       console.log('/footer_items/delete/は ' + JSON.stringify(data));
 
-      const returnData: T_footer_items_delete_return = {
-        rawData: data2,
-      };
-      res.status(200).json(returnData);
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log('/footer_items/delete/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   }
 };

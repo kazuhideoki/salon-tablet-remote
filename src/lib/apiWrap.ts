@@ -43,5 +43,5 @@ export const apiWrapPost = async <T = void>(
 ): Promise<TApiResponse<T>> =>
   await apiWrap<T>(fetchPost, url, params, returning);
 
-export const apiWrapGet = (url: string, returning = true) =>
-  apiWrap(fetchGet, url, null, returning);
+export const apiWrapGet = async <T = void>(url: string, returning = true) =>
+  apiWrap<T>(fetchGet, url, null, returning);

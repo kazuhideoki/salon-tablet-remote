@@ -33,7 +33,7 @@ export const generateProps = async (
     articles: data.err ? [] : data.rawData.rawData,
     pagination: data.err ? ([] as any) : data.rawData.pagination,
     allArticles: data.err ? [] : data.rawData.allArticles,
-    footerItems: data2.err ? [] : data2,
+    footerItems: data2.err ? [] : data2.rawData,
     infoBarData: data3.err ? ([] as any) : data3,
     tags: data4.err ? [] : data4,
     instagramAccounts: data5.err ? [] : data5,

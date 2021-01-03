@@ -1,11 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import { useGetFooterItems } from "./useGetFooterItems";
-import { TCreateFooterItem, generateFooterItemEdittingParams } from "./useCreateFooterItem";
-import { T_footer_items_update, apiFooterItemsUpdate } from "../../../../../../pages/api/footer_items/update";
-import { FooterItemsContext } from "../../../../../Store/footerItems/Context";
-import { AppStateContext } from "../../../../../Store/appState/Context";
-import { closeModal, isLoadingFooter } from "../../../../../Store/appState/actions";
+import { useGetFooterItems } from './useGetFooterItems';
+import {
+  TCreateFooterItem,
+  generateFooterItemEdittingParams,
+} from './useCreateFooterItem';
+import {
+  T_footer_items_update,
+  apiFooterItemsUpdate,
+} from '../../../../../../pages/api/footer_items/update';
+import { FooterItemsContext } from '../../../../../Store/footerItems/Context';
+import { AppStateContext } from '../../../../../Store/appState/Context';
+import {
+  closeModal,
+  isLoadingFooter,
+} from '../../../../../Store/appState/actions';
 
 export type TUpdateFooterItem = TCreateFooterItem;
 
@@ -15,7 +24,6 @@ export const useUpdateFooterItem = () => {
   const getFooterItems = useGetFooterItems();
 
   return async (param: TUpdateFooterItem) => {
-
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingFooter(true));
 
@@ -29,13 +37,13 @@ export const useUpdateFooterItem = () => {
 
     try {
       await apiFooterItemsUpdate(params);
-      dispatchAppState(closeModal())
+      dispatchAppState(closeModal());
       getFooterItems();
     } catch (err) {
-      alert("更新できませんでした");
-      dispatchAppState(isLoadingFooter(false))
+      console.log(`useUpdateFooterItem: ${err}`);
 
+      alert('更新できませんでした');
+      dispatchAppState(isLoadingFooter(false));
     }
-
   };
 };

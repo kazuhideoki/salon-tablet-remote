@@ -4,8 +4,7 @@ import { checkOrders } from '../../../lib/checkOrders';
 import { FooterItems, T_user_id } from '../../../app/Store/Interface';
 import { correctOrders } from '../../../lib/correctOrders';
 import { changeToBooleanFromNumberFooterItems } from '../../../lib/changeToBooleanFromNumber';
-import { localhost, server } from '../../../lib/loadUrl';
-import { TApiResponse, TApiError } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/apiWrap';
 import { checkOrdersSidebar } from '../../../lib/checkOrdersSidebar';
 import { correctOrdersSidebar } from '../../../lib/correctOrdersSidebar';
 import { apiWrapGet } from '../../../lib/apiWrap';
@@ -42,13 +41,13 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
-    const returnData: FooterItems = changeToBooleanFromNumberFooterItems(data);
+    const rawData: FooterItems = changeToBooleanFromNumberFooterItems(data);
 
-    return res.status(200).json(returnData);
+    res.status(200).json({ err: false, rawData } as TApiResponse<FooterItems>);
   } catch (err) {
     console.log('/footer_items/get/のエラーは ' + JSON.stringify(err));
 
-    return res.status(500).json({ err: true, data: err });
+    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
   }
 };
 

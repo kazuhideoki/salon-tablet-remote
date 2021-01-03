@@ -1,23 +1,23 @@
-import React from "react";
-import { useGetFooterItems } from "../../../Drawer/FooterItemEditor/context/useGetFooterItems";
+import React from 'react';
+import { useGetFooterItems } from '../../../Drawer/FooterItemEditor/context/useGetFooterItems';
 import {
   T_footer_items_switch_order,
   apiFooterItemsSwitchOrder,
-} from "../../../../../../pages/api/footer_items/switch_order";
-import { FooterItem } from "../../../../../Store/Interface";
-import { AppStateContext } from "../../../../../Store/appState/Context";
-import { isLoadingFooter } from "../../../../../Store/appState/actions";
+} from '../../../../../../pages/api/footer_items/switch_order';
+import { FooterItem } from '../../../../../Store/Interface';
+import { AppStateContext } from '../../../../../Store/appState/Context';
+import { isLoadingFooter } from '../../../../../Store/appState/actions';
 
 export type TUseSwitchOrders = {
-  smaller: FooterItem
-  larger: FooterItem
+  smaller: FooterItem;
+  larger: FooterItem;
 };
 
 export const useSwitchOrder = () => {
   const getFooterItems = useGetFooterItems();
-  const { dispatchAppState }= React.useContext(AppStateContext)
+  const { dispatchAppState } = React.useContext(AppStateContext);
 
-  return async ({smaller, larger}:TUseSwitchOrders) => {
+  return async ({ smaller, larger }: TUseSwitchOrders) => {
     dispatchAppState(isLoadingFooter(true));
 
     const params: T_footer_items_switch_order = {
@@ -30,17 +30,17 @@ export const useSwitchOrder = () => {
         footer_item_id: larger.footer_item_id,
         order: larger.order,
         order_sidebar: larger.order_sidebar,
-      }
+      },
     };
 
     try {
       await apiFooterItemsSwitchOrder(params);
       getFooterItems();
     } catch (err) {
-      alert("アイテムを入れ替えることができませんでした");
+      console.log(`useSwitchOrder: ${err}`);
+
+      alert('アイテムを入れ替えることができませんでした');
       dispatchAppState(isLoadingFooter(false));
-
     }
-
   };
 };

@@ -15,7 +15,6 @@ import {
   T_data_type_footer_item,
   T_order_sidebar,
 } from '../../../app/Store/Interface';
-import { server, localhost } from '../../../lib/loadUrl';
 import { TApiResponse } from '../../../lib/apiWrap';
 import { checkIsAdmin } from '../../../lib/checkIsAdmin';
 import { apiWrapPost } from '../../../lib/apiWrap';
@@ -23,7 +22,7 @@ import { apiWrapPost } from '../../../lib/apiWrap';
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (
   params: T_footer_items_create
-): Promise<TApiResponse<T_footer_items_create_return>> => {
+): Promise<TApiResponse> => {
   return apiWrapPost('footer_items/create', params);
 };
 
@@ -47,10 +46,6 @@ export type T_footer_items_create = T_footer_items_params & {
   user_id: T_user_id;
 };
 
-export type T_footer_items_create_return = {
-  rawData: unknown;
-};
-
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const params: T_footer_items_create = req.body;
@@ -66,14 +61,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
       console.log('/footer_items/create/は ' + JSON.stringify(data));
 
-      const returnData: T_footer_items_create_return = {
-        rawData: data,
-      };
-      res.status(200).json(returnData);
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log('/footer_items/create/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, data: err });
+      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
     }
   } else if (req.method === 'GET') {
   }

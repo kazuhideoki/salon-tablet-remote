@@ -1,6 +1,5 @@
 import { db } from '../../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { server, localhost } from '../../../lib/loadUrl';
 import { TApiResponse } from '../../../lib/apiWrap';
 import {
   T_order_sidebar,
@@ -12,7 +11,7 @@ import { apiWrapPost } from '../../../lib/apiWrap';
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsSwitchOrder = async (
   params: T_footer_items_switch_order
-): Promise<TApiResponse<T_footer_items_switch_order_return>> => {
+): Promise<TApiResponse> => {
   return apiWrapPost('footer_items/switch_order', params);
 };
 
@@ -28,8 +27,6 @@ export type T_footer_items_switch_order = {
     order_sidebar: T_order_sidebar;
   };
 };
-
-export type T_footer_items_switch_order_return = { err: boolean };
 
 const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
@@ -60,9 +57,7 @@ const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
         [smallerToLarger, smaller.footer_item_id]
       );
 
-      const returnData: T_footer_items_switch_order_return = { err: false };
-
-      res.status(200).json(returnData);
+      res.status(200).json({ err: false, rawData: null } as TApiResponse);
     } catch (err) {
       console.log(
         '/footer_items/switch_order/のエラーは ' + JSON.stringify(err)
