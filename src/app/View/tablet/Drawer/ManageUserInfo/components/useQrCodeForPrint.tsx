@@ -9,7 +9,7 @@ const width = 450;
 // FCにするとuseReactToPrintでエラーがでてしまうのでhooksにした。
 export const useQrCodeForPrint = (
   props: TUseSettingUserInfoProps,
-  ref: React.MutableRefObject<null>
+  ref: React.MutableRefObject<undefined>
 ) => {
   const theme = useTheme();
 

@@ -9,7 +9,7 @@ import { SelectPrimaryColor } from '../components/SelectPrimaryColor';
 import { SelectFont } from '../components/SelectFont';
 import { fonts2, fonts1 } from '../../../../../Store/theme/lib/fonts';
 import { FiberManualRecord } from '@material-ui/icons';
-import { secondaryColor } from '../../../../../../lib/color/secondaryColor';
+import { secondaryColor } from '../../../../../../lib/secondaryColor';
 import { SelectFooterIconSize } from '../components/SelectFooterIconSize';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';

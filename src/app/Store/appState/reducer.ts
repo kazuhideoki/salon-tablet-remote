@@ -1,8 +1,8 @@
-import { generateFooterItemEdittingParams } from "../../View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem";
-import { reducerLogger } from "../../../lib/dev/reducerLogger";
-import { TAppStateAction } from "./actions";
-import * as types from "./types";
-import { initAppState } from "./initialValue";
+import { generateFooterItemEdittingParams } from '../../View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem';
+import { reducerLogger } from '../../../lib/dev/reducerLogger';
+import { TAppStateAction } from './actions';
+import * as types from './types';
+import { initAppState } from './initialValue';
 
 export type AppStateContextState = ReturnType<typeof initAppState>;
 
@@ -85,7 +85,7 @@ export const appStateReducer = (
         currentModalContent: {
           ...state.currentModalContent,
           article: action.payload,
-          modalSize: "large",
+          modalSize: 'large',
         },
       };
       break;
@@ -105,7 +105,7 @@ export const appStateReducer = (
         currentModalContent: {
           ...state.currentModalContent,
           instagramMedia: action.payload,
-          modalSize: "medium",
+          modalSize: 'medium',
         },
       };
       break;
@@ -125,7 +125,7 @@ export const appStateReducer = (
           ...state.edittingPrams,
           isEditting: true,
           article: { ...action.payload },
-          modalSize: "large",
+          modalSize: 'large',
         },
       };
       break;
@@ -135,9 +135,9 @@ export const appStateReducer = (
         edittingPrams: {
           ...state.edittingPrams,
           isEditting: false,
-          modalSize: "large",
+          modalSize: 'large',
           isModalSizeChanged: false,
-          onTap: "modal",
+          onTap: 'modal',
         },
       };
       break;
@@ -186,7 +186,7 @@ export const appStateReducer = (
         isShowInstagram: action.payload,
       };
       break;
-      
+
     case types.SET_ARTICLES_APP_STATE:
       newState = {
         ...state,

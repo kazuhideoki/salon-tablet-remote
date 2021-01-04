@@ -41,13 +41,13 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // もしorderが正しくなかったら、直す処理
     if (isCorrectOrders === false) {
-      correctOrders(data);
+      await correctOrders(data);
     }
 
     const isCorrectOrdersSidebar = checkOrdersSidebar(data);
 
     if (isCorrectOrdersSidebar === false) {
-      correctOrdersSidebar(data);
+      await correctOrdersSidebar(data);
     }
 
     // mysqlではbooleanが 0, 1 なのでbooleanに変換する。

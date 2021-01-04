@@ -1,23 +1,23 @@
-import { createMuiTheme } from "@material-ui/core";
-import { TThemeParams } from "../../ThemeProvider";
-import { Deprecated_FontNameToFontFamily } from "../fonts";
-import { secondaryColor } from "../../../../../lib/color/secondaryColor";
+import { createMuiTheme } from '@material-ui/core';
+import { TThemeParams } from '../../ThemeProvider';
+import { Deprecated_FontNameToFontFamily } from '../fonts';
+import { secondaryColor } from '../../../../../lib/secondaryColor';
 
 const theme = createMuiTheme();
 
-export const themeDefault= (params: TThemeParams) =>
+export const themeDefault = (params: TThemeParams) =>
   createMuiTheme({
     overrides: {
       MuiCssBaseline: {
-        "@global": {
+        '@global': {
           a: {
-            color: "#607d8b",
+            color: '#607d8b',
           },
           h1: {
-            fontWeight: "500",
+            fontWeight: '500',
           },
           h2: {
-            fontWeight: "500",
+            fontWeight: '500',
           },
         },
       },
@@ -41,8 +41,8 @@ export const themeDefault= (params: TThemeParams) =>
 
         params.theme_font2,
         '"游ゴシック体"',
-        "sans-serif",
-      ].join(","),
+        'sans-serif',
+      ].join(','),
       fontWeightLight: 200,
       fontWeightRegular: 300,
       fontWeightMedium: 400,
@@ -77,26 +77,26 @@ export const themeDefault= (params: TThemeParams) =>
         main: secondaryColor(params.theme_color),
       },
       text: {
-        primary: "rgba(0, 0, 0, 0.95)",
-        secondary: "rgba(0, 0, 0, 0.77)",
-        disabled: "rgba(0, 0, 0, 0.54)",
-        hint: "rgba(0, 0, 0, 0.54)",
+        primary: 'rgba(0, 0, 0, 0.95)',
+        secondary: 'rgba(0, 0, 0, 0.77)',
+        disabled: 'rgba(0, 0, 0, 0.54)',
+        hint: 'rgba(0, 0, 0, 0.54)',
       },
     },
 
     props: {
       MuiPaper: {
-        variant: "elevation",
+        variant: 'elevation',
         elevation: 2,
       },
       MuiTextField: {
-        variant: "standard",
+        variant: 'standard',
       },
       MuiButton: {
-        variant: "outlined",
+        variant: 'outlined',
       },
       MuiFormControl: {
-        variant: "standard",
+        variant: 'standard',
       },
     },
   });

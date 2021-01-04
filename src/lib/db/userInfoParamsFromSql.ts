@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { TUserInfo } from '../../app/Store/Interface';
 
 export const userInfoParamsFromSql = (userInfo: TUserInfo) => {
@@ -7,6 +8,7 @@ export const userInfoParamsFromSql = (userInfo: TUserInfo) => {
   userInfo.is_admin = userInfo.is_admin === 1 ? true : false;
   //@ts-ignore
   userInfo.is_generate_public_page =
+    //@ts-ignore
     userInfo.is_generate_public_page === 1 ? true : false;
 
   return userInfo;

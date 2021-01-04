@@ -20,12 +20,16 @@ export const generateCorrectOrdersParams = (data: FooterItems) => {
 export const correctOrders = async (data: FooterItems) => {
   const { updateParamInCase, idParam } = generateCorrectOrdersParams(data);
 
-  await db(
-    'UPDATE `footer_items` SET `order` = CASE `footer_item_id` ' +
-      updateParamInCase +
-      ' END WHERE `footer_item_id` IN (?)',
-    [idParam]
-  );
+  try {
+    await db(
+      'UPDATE `footer_items` SET `order` = CASE `footer_item_id` ' +
+        updateParamInCase +
+        ' END WHERE `footer_item_id` IN (?)',
+      [idParam]
+    );
+  } catch (err) {
+    throw `correctOrders: ${err}`;
+  }
 };
 
 export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
@@ -56,10 +60,14 @@ export const correctOrdersSidebar = async (data: FooterItems) => {
     data
   );
 
-  await db(
-    'UPDATE `footer_items` SET `order_sidebar` = CASE `footer_item_id` ' +
-      updateParamInCase +
-      ' END WHERE `footer_item_id` IN (?)',
-    [idParam]
-  );
+  try {
+    await db(
+      'UPDATE `footer_items` SET `order_sidebar` = CASE `footer_item_id` ' +
+        updateParamInCase +
+        ' END WHERE `footer_item_id` IN (?)',
+      [idParam]
+    );
+  } catch (err) {
+    throw `correctOrdersSidebar: ${err}`;
+  }
 };

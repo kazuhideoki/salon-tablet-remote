@@ -3,6 +3,7 @@ import { selectedIconReducer } from './lib/selectedIconReducer';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 import { IconsSetting } from '../components/iconSelect/icons';
+import { MoodBad } from '@material-ui/icons';
 
 export const useStateFooterItemEditor = () => {
   const { userInfo } = React.useContext(UserInfoContext);
@@ -31,7 +32,7 @@ export const useStateFooterItemEditor = () => {
       ? IconsSetting.convertIconComponentFromName(
           footerItem.displayed_icon_name
         )
-      : null
+      : [MoodBad, 'MoodBad']
   );
 
   const [dataType, setDataType] = React.useState(
