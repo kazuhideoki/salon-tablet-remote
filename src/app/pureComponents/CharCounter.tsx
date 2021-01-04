@@ -1,24 +1,22 @@
-import React from 'react'
+import React from 'react';
 import { Typography, PropTypes } from '@material-ui/core';
 
 export type TCharCounter = {
-  charCount: number
-  limitCount: number
-  align?: PropTypes.Alignment
-  isShowCount?: boolean
-}
+  charCount: number;
+  limitCount: number;
+  align?: PropTypes.Alignment;
+  isShowCount?: boolean;
+};
 
-export const CharCounter:React.FC<TCharCounter> = (props) => {
+export const CharCounter: React.FC<TCharCounter> = (props) => {
   return (
-    //@ts-ignore
     <>
       {props.charCount <= props.limitCount || (
         <Typography
           variant="subtitle1"
           component="span"
           align={props.align}
-          color={props.charCount <= props.limitCount ? "textPrimary" : "error"}
-        >
+          color={props.charCount <= props.limitCount ? 'textPrimary' : 'error'}>
           {`文字数をオーバーしています、${props.limitCount}文字以下にして下さい`}
         </Typography>
       )}
@@ -28,9 +26,8 @@ export const CharCounter:React.FC<TCharCounter> = (props) => {
             variant="subtitle1"
             component="span"
             color={
-              props.charCount <= props.limitCount ? "textPrimary" : "error"
-            }
-          >
+              props.charCount <= props.limitCount ? 'textPrimary' : 'error'
+            }>
             {props.charCount}
           </Typography>
           <Typography variant="subtitle1" component="span" color="textPrimary">
@@ -40,4 +37,4 @@ export const CharCounter:React.FC<TCharCounter> = (props) => {
       )}
     </>
   );
-}
+};

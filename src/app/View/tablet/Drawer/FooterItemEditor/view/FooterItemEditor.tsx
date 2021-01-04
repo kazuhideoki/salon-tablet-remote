@@ -22,7 +22,7 @@ import {
 import { SelectAppLink } from '../components/SelectAppLink';
 import { CharCounter } from '../../../../../pureComponents/CharCounter';
 import { SelectModalSize } from '../components/SelectModalSize';
-import { HelpButton } from '../../../../../pureComponents/buttons/HelpButton';
+import { HelpButton } from '../../../../../pureComponents/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
 import { SwitchDataTypeBox } from '../../QuillEditor/components/SwitchDataTypeBox';
 import { useIsMobile } from '../../../../../../lib/useIsMobile';

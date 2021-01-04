@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   List,
   ListItem,
@@ -9,34 +9,34 @@ import {
   makeStyles,
   Theme,
   Typography,
-} from "@material-ui/core";
-import { MoodBad } from "@material-ui/icons";
-import { TUseDrawerProps } from "../view/Drawer";
-import { IconsSetting } from "../../FooterItemEditor/components/iconSelect/icons";
-import { EditButtonsBox } from "../../../../../pureComponents/buttons/EditButtonsBox";
-import { FooterItem } from "../../../../../Store/Interface";
-import { showDataType } from "../../../Main/components/showDataType";
+} from '@material-ui/core';
+import { MoodBad } from '@material-ui/icons';
+import { TUseDrawerProps } from '../view/Drawer';
+import { IconsSetting } from '../../FooterItemEditor/components/iconSelect/icons';
+import { EditButtonsBox } from '../../../../../pureComponents/editButtonBox/EditButtonsBox';
+import { FooterItem } from '../../../../../Store/Interface';
+import { showDataType } from '../../../Main/components/showDataType';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     listItem: {
-      display: "flex",
+      display: 'flex',
     },
     listItemText: {
-      textOverflow: "ellipsis",
+      textOverflow: 'ellipsis',
     },
     itemIsDraft: {
-      border: "2px solid red",
+      border: '2px solid red',
       borderRadius: 2,
-      fontStyle: "italic",
+      fontStyle: 'italic',
     },
     itemIsAppLink: {
-      border: "2px solid green",
+      border: '2px solid green',
       borderRadius: 2,
-      fontStyle: "italic",
+      fontStyle: 'italic',
     },
     editButtonsBox: {
-      position: "absolute",
+      position: 'absolute',
       right: theme.spacing(1),
       zIndex: 10,
     },
@@ -63,7 +63,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
             // <span className={classes.itemIsDraft}>下書き</span>
             <Chip size="small" label="下書き" className={classes.itemIsDraft} />
           ) : null}
-          {value.on_tap === "appLink" ? (
+          {value.on_tap === 'appLink' ? (
             // <span className={classes.itemIsAppLink}>アプリ</span>
             <Chip
               size="small"
@@ -76,19 +76,25 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
     );
   };
   type TItemEditButtonsBox = { value: FooterItem; smallerValue: FooterItem };
+
   const ItemEditButtonsBox = ({ value, smallerValue }: TItemEditButtonsBox) => (
     <>
-      {/* <br /> */}
       <EditButtonsBox
         className={classes.editButtonsBox}
-        switch
-        switchProps={{ smaller: smallerValue, larger: value, switchOrder: props.switchOrder }}
-        update
-        updateProps={{ onClick: props.handleOnUpDateFooterIcon, value: value }}
-        delete
-        deleteProps={{
-          onClick: props.deleteFooterItem,
-          value: { footer_item_id: value.footer_item_id, order: value.order },
+        handleSwitchButton={{
+          smaller: smallerValue,
+          switchOrder: () =>
+            props.switchOrder({ smaller: smallerValue, larger: value }),
+        }}
+        handleUpdateButton={{
+          onClick: () => props.handleOnUpDateFooterIcon(value),
+        }}
+        handleDeleteButton={{
+          onClick: () =>
+            props.deleteFooterItem({
+              footer_item_id: value.footer_item_id,
+              order: value.order,
+            }),
         }}
       />
     </>
@@ -111,7 +117,7 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
           return null;
         }
 
-        if (props.isSetting === false && value.on_tap === "appLink") {
+        if (props.isSetting === false && value.on_tap === 'appLink') {
           return null;
         }
 
@@ -123,20 +129,17 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
 
         const Icon = () => <ItemIcon />;
 
-        if (value.on_tap === "modal" || value.on_tap === "google") {
+        if (value.on_tap === 'modal' || value.on_tap === 'google') {
           return (
             <div key={index} className={classes.listItem}>
               <ListItem
                 // key={index}
                 button
-                onClick={() =>
-                  props.openFooterItemModal(value)
-                }
-              >
+                onClick={() => props.openFooterItemModal(value)}>
                 <ListItemIcon>
                   <Icon />
                   <ShowStatus {...value} />
-                  {showDataType(value.data_type, "", true)}
+                  {showDataType(value.data_type, '', true)}
                 </ListItemIcon>
                 <ListItemText
                   primary={value.icon_name}
@@ -154,25 +157,24 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
         }
 
         if (
-          value.on_tap === "link" ||
-          (value.on_tap === "appLink" && props.isSetting === true)
+          value.on_tap === 'link' ||
+          (value.on_tap === 'appLink' && props.isSetting === true)
         ) {
           return (
             <div key={index} className={classes.listItem}>
               <ListItem button>
                 <a
                   href={
-                    value.on_tap === "link"
+                    value.on_tap === 'link'
                       ? value.link_url
                       : value.app_link_url
                   }
                   rel="noopener noreferrer"
-                  target="_blank"
-                >
+                  target="_blank">
                   <ListItemIcon>
                     <Icon />
                     <ShowStatus {...value} />
-                    {showDataType(value.data_type, "", true)}
+                    {showDataType(value.data_type, '', true)}
                   </ListItemIcon>
                   <ListItemText primary={value.icon_name} />
                 </a>

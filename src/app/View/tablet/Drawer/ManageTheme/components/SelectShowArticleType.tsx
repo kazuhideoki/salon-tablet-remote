@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   FormControl,
   RadioGroup,
   FormControlLabel,
   Radio,
   FormLabel,
-} from "@material-ui/core";
-import { TUseManageThemeProps } from "../view/ManageTheme";
-import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
+} from '@material-ui/core';
+import { TUseManageThemeProps } from '../view/ManageTheme';
+import { HelpButton } from '../../../../../pureComponents/HelpButton';
 
 export const SelectShowArticleType = (props: TUseManageThemeProps) => {
   return (
@@ -22,8 +22,7 @@ export const SelectShowArticleType = (props: TUseManageThemeProps) => {
         aria-label="select-show-article-type"
         name="select-show-article-type"
         value={props.show_article_type}
-        onChange={props.handleChangeShowArticleType}
-      >
+        onChange={props.handleChangeShowArticleType}>
         <FormControlLabel
           value="scroll"
           control={<Radio />}
@@ -37,4 +36,4 @@ export const SelectShowArticleType = (props: TUseManageThemeProps) => {
       </RadioGroup>
     </FormControl>
   );
-}
+};

@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import {
   Typography,
   makeStyles,
   createStyles,
   Theme,
   Button,
-} from "@material-ui/core";
-import { DeleteButton } from '../../../../../pureComponents/buttons/DeleteButton';
+} from '@material-ui/core';
+import { DeleteButton } from '../../../../../pureComponents/editButtonBox/DeleteButton';
 import { Skeleton } from '@material-ui/lab';
 import { useDeleteInstagramAccount } from '../context/useDeleteInstagramAccount';
 import { useStateManageInstagramAccount } from '../context/useStateManageInstagramAccount';
@@ -14,12 +14,15 @@ import { useHandleLoadingInstagramAccounts } from '../context/useHandleLoadingIn
 import { useGetInstagramMedias } from '../context/useGetInstagramMedias';
 
 export const useManageInstagramAccountsProps = () => {
+  const {
+    instagramAccounts,
+    loading,
+    instaAuth,
+  } = useStateManageInstagramAccount();
+  const handleLoadingInstagramAccounts = useHandleLoadingInstagramAccounts();
 
-  const { instagramAccounts, loading, instaAuth } = useStateManageInstagramAccount()
-  const handleLoadingInstagramAccounts = useHandleLoadingInstagramAccounts()
-
-  const deleteInstagramAccount = useDeleteInstagramAccount()
-  const getInstagramMedias = useGetInstagramMedias()
+  const deleteInstagramAccount = useDeleteInstagramAccount();
+  const getInstagramMedias = useGetInstagramMedias();
 
   return {
     instagramAccounts,
@@ -29,8 +32,8 @@ export const useManageInstagramAccountsProps = () => {
     loading: loading.manageInstagramAccounts,
     handleLoadingInstagramAccounts,
   };
-}
-type Props = ReturnType<typeof useManageInstagramAccountsProps>
+};
+type Props = ReturnType<typeof useManageInstagramAccountsProps>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,17 +45,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     txt: {
       margin: theme.spacing(2),
-      color: "grey",
+      color: 'grey',
     },
     account: {
-      display: "flex",
+      display: 'flex',
       margin: theme.spacing(1),
     },
     reconnect_needed: {
       color: theme.palette.error.main,
     },
     connectButton: {
-      textDecoration: "none",
+      textDecoration: 'none',
     },
     skeleton: {
       width: 160,
@@ -62,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
+export const ManageInstagramAccountsPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const displayInstagramAccounts = props.instagramAccounts.map((value) => {
@@ -81,17 +84,12 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
           disabled={value.is_reconnect_needed}
           onClick={() =>
             props.getInstagramMedias(value.instagram_id, value.username, {})
-          }
-        >
+          }>
           {value.username}
         </Button>
         {value.is_reconnect_needed ? (
           <a href={props.instaAuth} className={classes.connectButton}>
-
-            <Button
-              className={classes.reconnect_needed}
-              variant="text"
-            >
+            <Button className={classes.reconnect_needed} variant="text">
               要再連携
             </Button>
           </a>
@@ -128,7 +126,7 @@ export const ManageInstagramAccountsPresenter:React.FC<Props> = (props) => {
 };
 
 export const ManageInstagramAccounts = () => {
-  const props = useManageInstagramAccountsProps()
+  const props = useManageInstagramAccountsProps();
 
-  return <ManageInstagramAccountsPresenter {...props}/>
-}
+  return <ManageInstagramAccountsPresenter {...props} />;
+};
