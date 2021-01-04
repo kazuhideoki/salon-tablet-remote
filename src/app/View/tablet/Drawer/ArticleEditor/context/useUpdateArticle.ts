@@ -20,14 +20,14 @@ export const useUpdateArticle = () => {
 
   const getArticles = useGetArticles();
 
-  return async (param: TUpdateArticle) => {
+  return async (param: TUpdateArticle, isPublished: boolean) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
     const params: T_articles_update = {
       // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
       params: {
-        is_published: param.is_published,
+        is_published: isPublished,
         title: param.titleText,
         article_content: param.editorText,
         article_excerpt: param.editorTextExcerpt,

@@ -20,7 +20,8 @@ export const UpdateButton = (props: Props) => {
     } else {
       props.onClick();
     }
-    props.handleClose();
+
+    if (props.handleClose) props.handleClose();
   };
 
   return (

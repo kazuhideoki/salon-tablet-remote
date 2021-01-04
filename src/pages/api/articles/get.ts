@@ -35,12 +35,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { page, selectingTags, isSetting, userId }: T_articles_get = req.body;
     // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
-    let getPublishedOnly: string;
-    if (isSetting === false) {
-      getPublishedOnly = `AND is_published = true `;
-    } else if (isSetting === true) {
-      getPublishedOnly = ' ';
-    }
+    const getPublishedOnly = isSetting ? ' ' : `AND is_published = true `;
 
     // 正規表現でタグを検索
 

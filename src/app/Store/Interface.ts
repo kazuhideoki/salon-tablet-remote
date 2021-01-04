@@ -20,8 +20,8 @@ export type T_updated_at_user = string;
 
 export type TUserInfo = {
   user_id: T_user_id;
-  user_name: T_user_name | null;
-  shop_name: T_shop_name | null;
+  user_name: T_user_name;
+  shop_name: T_shop_name;
   user_email: T_user_email;
   show_article_type: T_show_article_type;
   is_first_sign_in: boolean;
@@ -91,7 +91,7 @@ export type T_is_published_footer_items = boolean;
 export type T_created_at_footer_items = string;
 export type T_updated_at_footer_items = string;
 export type T_icon_name = string;
-export type T_displayed_icon_name = string | null;
+export type T_displayed_icon_name = string;
 export type T_on_tap = 'modal' | 'link' | 'appLink' | 'google';
 // export type T_on_sidebar = boolean
 export type T_item_content = string;

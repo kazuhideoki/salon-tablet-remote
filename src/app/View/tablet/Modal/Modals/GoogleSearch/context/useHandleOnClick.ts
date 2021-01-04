@@ -1,36 +1,36 @@
 export const deleteExcessSpace = (str: string) => {
-  let newStr = str.trim();
-  return newStr.replace(/\s+/g, " ");
+  const newStr = str.trim();
+  return newStr.replace(/\s+/g, ' ');
 };
 
-export const useHandleOnClick = (field: string, setField: React.Dispatch<React.SetStateAction<string>>, setSearchHistoryStr: React.Dispatch<React.SetStateAction<string>>
-
+export const useHandleOnClick = (
+  field: string,
+  setField: React.Dispatch<React.SetStateAction<string>>,
+  setSearchHistoryStr: React.Dispatch<React.SetStateAction<string>>
 ) => {
   return (): void => {
-    setField(""); // 効かない？
+    setField(''); // 効かない？
 
-    const str: string = localStorage.getItem(
-      "googleSearchHistory"
-    );
+    const str = localStorage.getItem('googleSearchHistory');
 
     let newStr;
-    let fieldStr = deleteExcessSpace(field);
+    const fieldStr = deleteExcessSpace(field);
 
     if (!fieldStr) {
-      return null;
+      return;
     }
 
     if (str) {
       let arr = [];
-      arr = str.split(",");
+      arr = str.split(',');
       const newArr = arr.includes(fieldStr) ? arr : arr.concat(fieldStr);
       newStr = newArr.toString();
     } else {
       newStr = fieldStr;
     }
 
-    localStorage.setItem("googleSearchHistory", newStr);
+    localStorage.setItem('googleSearchHistory', newStr);
 
-    setSearchHistoryStr(localStorage.getItem("googleSearchHistory"));
+    setSearchHistoryStr(localStorage.getItem('googleSearchHistory') || '');
   };
-}
+};

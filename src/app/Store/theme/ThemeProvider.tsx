@@ -92,7 +92,7 @@ export type TThemeParams = {
   theme_color: T_theme_color;
   theme_font1: T_theme_font;
   theme_font2: T_theme_font;
-  theme_font_heading?: T_theme_font;
+  theme_font_heading: T_theme_font;
 };
 
 export const ThemeProvider: React.FC<TUserInfo> = (props) => {

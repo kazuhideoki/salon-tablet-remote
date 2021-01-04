@@ -13,7 +13,6 @@ import {
 } from '../../../../../Store/appState/actions';
 
 export type TCreateArticle = {
-  is_published: boolean;
   titleText: string;
   editorText: string;
   editorTextExcerpt: string;
@@ -26,12 +25,12 @@ export const useCreateArticle = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
 
-  return async (param: TCreateArticle) => {
+  return async (param: TCreateArticle, isPublished: boolean) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
     const params: T_articles_create = {
-      is_published: param.is_published,
+      is_published: isPublished,
       title: param.titleText,
       article_content: param.editorText,
       article_excerpt: param.editorTextExcerpt,
@@ -44,7 +43,7 @@ export const useCreateArticle = () => {
     };
 
     try {
-      apiArticlesCreate(params);
+      await apiArticlesCreate(params);
 
       dispatchAppState(closeModal());
       getArticles(appState.isSetting, 1, []);

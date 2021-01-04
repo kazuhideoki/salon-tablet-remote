@@ -13,11 +13,11 @@ export const useDeleteUser = () => {
     const deleting = confirm('本当に削除してよろしいですか？');
 
     if (deleting === false) {
-      return null;
+      return;
     }
     if (email !== user_email) {
       alert('メールアドレスが間違っています。');
-      return null;
+      return;
     }
 
     try {

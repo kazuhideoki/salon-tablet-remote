@@ -17,6 +17,7 @@ import {
   PlaceTwoTone,
   HomeTwoTone,
   Search,
+  MoodBad,
 } from '@material-ui/icons';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
@@ -50,12 +51,10 @@ export const IconsSetting = class {
   // アイコン名からもとの[IconComponent, IconName]の形に戻す。
   static convertIconComponentFromName(
     titleText: string
-  ):
-    | [
-        OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>,
-        string
-      ]
-    | null {
+  ): [
+    OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>,
+    string
+  ] {
     const targetIcon = this.icons.find((value) => {
       return value[1] == titleText;
     });
@@ -63,7 +62,7 @@ export const IconsSetting = class {
     if (targetIcon) {
       return targetIcon;
     } else {
-      return null;
+      return [MoodBad, 'MoodBad'];
     }
   }
 };
