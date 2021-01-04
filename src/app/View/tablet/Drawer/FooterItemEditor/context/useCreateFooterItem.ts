@@ -25,7 +25,10 @@ import { AppStateContext } from '../../../../../Store/appState/Context';
 
 export type TFooterItemEdittingParams = {
   titleText: string;
-  selectedIcon: [OverridableComponent<SvgIconTypeMap<{}, 'svg'>>, string];
+  selectedIcon: [
+    OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>,
+    string
+  ];
   onTapRadio: T_on_tap;
   editorText: string;
   editorTextExcerpt: string;

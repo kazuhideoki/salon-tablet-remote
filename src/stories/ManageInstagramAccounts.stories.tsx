@@ -1,35 +1,35 @@
 import React from 'react';
-import { ManageInstagramAccountsPresenter } from '../app/View/tablet/Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
-import { TInstagramAccounts } from '../app/Store/Interface';
+import {
+  ManageInstagramAccountsPresenter,
+  TManageInstagramAccountsPresenter,
+} from '../app/View/tablet/Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 export default {
-  title: "Drawer/ManageInstagramAccountsPresenter",
+  title: 'Drawer/ManageInstagramAccountsPresenter',
   component: ManageInstagramAccountsPresenter,
 };
 
-const props = {
+const props: TManageInstagramAccountsPresenter = {
   instagramAccounts: sampleInstagramAccounts,
-  instaAuth: "",
-  deleteInstagramAccount: null,
-  getInstagramMedias: null,
-  loading: false
+  instaAuth: '',
+  deleteInstagramAccount: async () => {
+    return;
+  },
+  getInstagramMedias: async () => {
+    return;
+  },
+  loading: false,
+  handleLoadingInstagramAccounts: () => {
+    return;
+  },
 };
 
 export const Normal = () => {
-
-  return (
-    <ManageInstagramAccountsPresenter {...props}/>
-  )
-}
+  return <ManageInstagramAccountsPresenter {...props} />;
+};
 export const Loading = () => {
-
-  return (
-    <ManageInstagramAccountsPresenter {...props} loading={true}/>
-  )
-}
+  return <ManageInstagramAccountsPresenter {...props} loading={true} />;
+};
 export const noInstagramAccounts = () => {
-
-  return (
-    <ManageInstagramAccountsPresenter {...props} instagramAccounts={[]}/>
-  )
-}
+  return <ManageInstagramAccountsPresenter {...props} instagramAccounts={[]} />;
+};

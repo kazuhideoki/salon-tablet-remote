@@ -1,29 +1,75 @@
+import { MoodBad } from '@material-ui/icons';
+import { TFooterItemEdittingParams } from '../../app/View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem';
 import { TUseFooterItemEditorProps } from '../../app/View/tablet/Drawer/FooterItemEditor/view/FooterItemEditor';
+
+export const edittingFooterItemParams: TFooterItemEdittingParams = {
+  titleText: 'string',
+  selectedIcon: [MoodBad, 'MoodBad'],
+  onTapRadio: 'modal',
+  editorText: 'string',
+  editorTextExcerpt: 'string',
+  linkUrl: 'string',
+  modalSizeRadio: 'medium',
+  appLinkUrl: 'string',
+  onSidebar: false,
+  dataType: 'default_data',
+};
 
 export const propsFooterItemEditor: TUseFooterItemEditorProps = {
   onTapRadio: 'modal',
-  setOnTapRadio: null,
+  setOnTapRadio: () => {
+    return;
+  },
   isEditting: false,
   titleText: '',
   editorText: '',
-  setEditorText: null,
-  setEditorTextExcerpt: null,
-  selectedIcon: null,
-  dispatchSelectedIcon: null,
-  linkUrl: null,
-  setLinkUrl: null,
-  appLinkUrl: null,
-  setAppLinkUrl: null,
+  setEditorText: () => {
+    return;
+  },
+  setEditorTextExcerpt: () => {
+    return;
+  },
+  selectedIcon: [MoodBad, 'MoodBad'],
+  dispatchSelectedIcon: () => {
+    return;
+  },
+  linkUrl: '',
+  setLinkUrl: () => {
+    return;
+  },
+  appLinkUrl: '',
+  setAppLinkUrl: () => {
+    return;
+  },
   charCountFooterItemContent: 0,
-  setCharCountFooterItemContent: null,
-  handleSubmit: null,
+  setCharCountFooterItemContent: () => {
+    return;
+  },
+  handleSubmit: () => {
+    return;
+  },
   modalSizeRadio: 'large',
-  setModalSizeRadio: null,
-  dataType: 'default_data',
-  setDataType: null,
+  setModalSizeRadio: () => {
+    return;
+  },
+  dataTypeAndSet: {
+    dataType: 'default_data',
+    setDataType: () => {
+      return;
+    },
+  },
   is_admin: false,
   isMobile: false,
   onSidebar: false,
-  handleOnSidebar: null,
-  edittingFooterItemParams: null,
+  handleOnSidebar: () => {
+    return;
+  },
+  edittingFooterItemParams: edittingFooterItemParams,
+
+  setTitleText: () => {
+    return;
+  },
+  handleChange: () => {
+    return;
+  },
 };

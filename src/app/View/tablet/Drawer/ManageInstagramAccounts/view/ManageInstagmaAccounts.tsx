@@ -33,7 +33,9 @@ export const useManageInstagramAccountsProps = () => {
     handleLoadingInstagramAccounts,
   };
 };
-type Props = ReturnType<typeof useManageInstagramAccountsProps>;
+export type TManageInstagramAccountsPresenter = ReturnType<
+  typeof useManageInstagramAccountsProps
+>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,42 +67,45 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ManageInstagramAccountsPresenter: React.FC<Props> = (props) => {
+export const ManageInstagramAccountsPresenter: React.FC<TManageInstagramAccountsPresenter> = (
+  props
+) => {
   const classes = useStyles();
 
-  const displayInstagramAccounts = props.instagramAccounts.map((value) => {
-    if (props.loading) {
+  const displayInstagramAccounts = props.instagramAccounts.map(
+    (value, index) => {
+      if (props.loading) {
+        return (
+          <Skeleton
+            variant="rect"
+            className={`${classes.account} ${classes.skeleton}`}
+          />
+        );
+      }
+
       return (
-        <Skeleton
-          variant="rect"
-          className={`${classes.account} ${classes.skeleton}`}
-        />
+        <div className={classes.account} key={index}>
+          <Button
+            disabled={value.is_reconnect_needed}
+            onClick={() =>
+              props.getInstagramMedias(value.instagram_id, value.username, {})
+            }>
+            {value.username}
+          </Button>
+          {value.is_reconnect_needed ? (
+            <a href={props.instaAuth} className={classes.connectButton}>
+              <Button className={classes.reconnect_needed} variant="text">
+                要再連携
+              </Button>
+            </a>
+          ) : null}
+          <DeleteButton
+            onClick={() => props.deleteInstagramAccount(value.instagram_id)}
+          />
+        </div>
       );
     }
-
-    return (
-      <div className={classes.account}>
-        <Button
-          disabled={value.is_reconnect_needed}
-          onClick={() =>
-            props.getInstagramMedias(value.instagram_id, value.username, {})
-          }>
-          {value.username}
-        </Button>
-        {value.is_reconnect_needed ? (
-          <a href={props.instaAuth} className={classes.connectButton}>
-            <Button className={classes.reconnect_needed} variant="text">
-              要再連携
-            </Button>
-          </a>
-        ) : null}
-        <DeleteButton
-          onClick={props.deleteInstagramAccount}
-          value={value.instagram_id}
-        />
-      </div>
-    );
-  });
+  );
 
   const noInstagramAccounts = (
     <Typography variant="subtitle1">Instagramと連携されていません</Typography>

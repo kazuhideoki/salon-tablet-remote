@@ -1,6 +1,6 @@
 import React from 'react';
 import { TopPage } from '../pageComponent/TopPage';
-import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import { ParallaxProvider } from 'react-scroll-parallax';
 import { WebsiteThemeProvider } from '../app/Store/theme/lib/themes/websiteTheme';
 
 export default {
@@ -9,21 +9,13 @@ export default {
 };
 
 export const Normal = () => {
-  const props = {
-    csrfToken: null,
-    providers: {facebook:  {signinUrl: 'abc'}},
-  }
-
-
   return (
     <>
-    <WebsiteThemeProvider>
-
-    <ParallaxProvider>
-      <TopPage {...props}/>
-
-    </ParallaxProvider>
-    </WebsiteThemeProvider>
+      <WebsiteThemeProvider>
+        <ParallaxProvider>
+          <TopPage />
+        </ParallaxProvider>
+      </WebsiteThemeProvider>
     </>
-  )
-}
+  );
+};

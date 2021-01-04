@@ -15,10 +15,20 @@ export const Normal = () => {
       handleSwitchButton={{
         smaller: samplefooterItems[0],
 
-        switchOrder: null,
+        switchOrder: async () => {
+          return;
+        },
       }}
-      handleUpdateButton={{ onClick: null }}
-      handleDeleteButton={{ onClick: null }}
+      handleUpdateButton={{
+        onClick: () => {
+          return;
+        },
+      }}
+      handleDeleteButton={{
+        onClick: () => {
+          return;
+        },
+      }}
     />
   );
 };

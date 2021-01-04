@@ -149,7 +149,6 @@ export type TInfoBarWithoutId = {
 export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id };
 export type TInfoBarData = {
   infoBar: TInfoBar;
-  // scrolling_animation_duration: number;
   targetArticle: TArticle;
 };
 

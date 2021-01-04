@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Chip,
   Typography,
@@ -6,22 +6,22 @@ import {
   Theme,
   createStyles,
   Button,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import { useHandleGetArticle } from '../context/useHandleGetArticle';
 import { useHandleSelectTag } from '../context/useHandleSelectTag';
 import { useStateSelectTags } from '../context/useStateSelectTags';
 
 const useSelectTagsProps = () => {
-  const { tags, selectingTags, setSelectingTags } = useStateSelectTags()
-  
-  const handleSelectTag = useHandleSelectTag(selectingTags, setSelectingTags)
+  const { tags, selectingTags, setSelectingTags } = useStateSelectTags();
 
-  const handleGetArticle = useHandleGetArticle(selectingTags)
+  const handleSelectTag = useHandleSelectTag(selectingTags, setSelectingTags);
+
+  const handleGetArticle = useHandleGetArticle(selectingTags);
 
   return { tags, selectingTags, handleSelectTag, handleGetArticle };
-}
+};
 
-type Props = ReturnType<typeof useSelectTagsProps>
+export type TSelectTagsPresenter = ReturnType<typeof useSelectTagsProps>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
     },
     tagsWrap: {
-      display: "flex",
-      flexWrap: "wrap",
+      display: 'flex',
+      flexWrap: 'wrap',
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(2)}px`,
       // padding: theme.spacing(2),
     },
@@ -46,9 +46,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectTagsPresenter:React.FC<Props> = (props) => {
-  const classes = useStyles()
-  
+export const SelectTagsPresenter: React.FC<TSelectTagsPresenter> = (props) => {
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -64,7 +63,7 @@ export const SelectTagsPresenter:React.FC<Props> = (props) => {
               label={value.tag_name}
               color={
                 props.selectingTags.includes(value.tag_id)
-                  ? "primary"
+                  ? 'primary'
                   : undefined
               }
               onClick={() => props.handleSelectTag(value.tag_id)}
@@ -72,13 +71,17 @@ export const SelectTagsPresenter:React.FC<Props> = (props) => {
           );
         })}
       </div>
-      <Button onClick={() => props.handleGetArticle()} className={classes.button}>記事を読み込む</Button>
+      <Button
+        onClick={() => props.handleGetArticle()}
+        className={classes.button}>
+        記事を読み込む
+      </Button>
     </div>
   );
-}
+};
 
 export const SelectTags = () => {
-  const props = useSelectTagsProps()
+  const props = useSelectTagsProps();
 
-  return <SelectTagsPresenter {...props}/>
-}
+  return <SelectTagsPresenter {...props} />;
+};

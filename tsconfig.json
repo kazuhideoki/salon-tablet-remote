@@ -10,14 +10,7 @@
     "allowJs": true,
     "skipLibCheck": true,
 
-    "strict": false,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": false,
+    "strict": true,
 
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -26,8 +19,8 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "./src/stories"],
+  "include": [".src/**/*", "./src/stories/**/*"],
+  "exclude": ["node_modules"],
 
   "baseUrl": ".",
   "paths": {

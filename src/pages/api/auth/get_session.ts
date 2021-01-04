@@ -8,7 +8,7 @@ import { parseCookies } from 'nookies';
 export const apiGetSession = async (
   params: T_auth_get_session
 ): Promise<T_auth_get_session_return | null> => {
-  const str = process.browser ? server : localhost;
+  const str = typeof window !== 'undefined' ? server : localhost;
 
   const st_token = parseCookies({ req: params.req })['st_token'];
 

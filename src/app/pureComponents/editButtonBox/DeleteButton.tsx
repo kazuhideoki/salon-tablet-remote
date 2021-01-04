@@ -6,12 +6,12 @@ export type THandleDeleteButton = {
   onClick: () => void;
 };
 
-type Props = THandleDeleteButton & { handleClose: () => void };
+type Props = THandleDeleteButton & { handleClose?: () => void };
 
 export const DeleteButton = (props: Props) => {
   const handleOnClick = () => {
     props.onClick();
-    props.handleClose();
+    props.handleClose && props.handleClose();
   };
 
   return (

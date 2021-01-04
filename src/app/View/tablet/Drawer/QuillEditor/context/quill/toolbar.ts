@@ -26,7 +26,7 @@ export class Toolbar {
   toolbar: any;
   options: any;
   overlay: any;
-  alignments: any[];
+  alignments: any;
   img: any;
   requestUpdate: any;
   onCreate = (): void => {
@@ -87,7 +87,7 @@ export class Toolbar {
 
   _addToolbarButtons = (): void => {
     const buttons: any[] = [];
-    this.alignments.forEach((alignment, idx) => {
+    this.alignments.forEach((alignment: any, idx: any) => {
       const button = document.createElement('span');
       buttons.push(button);
       button.innerHTML = alignment.icon;

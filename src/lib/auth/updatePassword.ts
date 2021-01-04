@@ -1,22 +1,21 @@
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 type TUpdatePassword = {
-  password: string
-  user: firebase.User
-}
+  password: string;
+  user: firebase.User;
+};
 
-export const updatePassword = ({
-         password,
-         user
-        }: TUpdatePassword) => {
-
-         user
-           .updatePassword(password)
-           .then(function() {
-             return;
-           })
-           .catch(function(err) {
-             throw new Error("updatePasswordに失敗" + err);
-           });
-       };
+export const updatePasswordInFirebase = ({
+  password,
+  user,
+}: TUpdatePassword) => {
+  user
+    .updatePassword(password)
+    .then(function () {
+      return;
+    })
+    .catch(function (err) {
+      throw new Error('updatePasswordに失敗' + err);
+    });
+};

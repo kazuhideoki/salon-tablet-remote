@@ -4,9 +4,9 @@ import { StyledIconButtonEditButton } from './EditButtonsBox';
 
 export type THandleUpdateButton = { onClick: () => void };
 
-type Props = THandleUpdateButton & { handleClose: () => void };
+export type TUpdateButton = THandleUpdateButton & { handleClose: () => void };
 
-export const UpdateButton = (props: Props) => {
+export const UpdateButton = (props: TUpdateButton) => {
   const handleOnClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {

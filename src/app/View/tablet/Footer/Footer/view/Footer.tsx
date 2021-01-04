@@ -40,7 +40,7 @@ export const useFooterProps = () => {
   };
 };
 
-type Props = ReturnType<typeof useFooterProps>;
+export type TFooterPresenter = ReturnType<typeof useFooterProps>;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const FooterPresenter: React.FC<Props> = (props) => {
+export const FooterPresenter: React.FC<TFooterPresenter> = (props) => {
   const classes = useStyles();
 
   const selectedDisplayFooterItems = props.footerItems.filter((value) => {

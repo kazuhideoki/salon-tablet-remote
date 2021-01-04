@@ -1,20 +1,20 @@
-import React from 'react'
-import { T_modal_size } from "../../../../../Store/Interface";
+import React from 'react';
+import { T_modal_size } from '../../../../../Store/Interface';
 
 export const fullScreen = {
-  width: "100vw",
-  height: "100vh",
-  maxHeight: "100%",
+  width: '100vw',
+  height: '100vh',
+  maxHeight: '100%',
   margin: 0,
 };
 export const large = {
-  width: "90vw",
-  height: "90vh",
+  width: '90vw',
+  height: '90vh',
   margin: 0,
 };
 export const medium = {
-  width: "75vw",
-  height: "75vh",
+  width: '75vw',
+  height: '75vh',
   margin: 0,
 };
 
@@ -24,14 +24,17 @@ const shortSide = () => {
   } else {
     return window.innerHeight;
   }
-}
-export const small = process.browser ? {
-  width: `${shortSide() * 0.6}px`,
-  height: `${shortSide() * 0.6}px`,
-  // maxWidth: "100%",
-  // maxHeight: "100%",
-  margin: 0,
-} : null
+};
+export const small =
+  typeof window !== 'undefined'
+    ? {
+        width: `${shortSide() * 0.6}px`,
+        height: `${shortSide() * 0.6}px`,
+        // maxWidth: "100%",
+        // maxHeight: "100%",
+        margin: 0,
+      }
+    : null;
 
 const upperSide = {
   width: '90vw',
@@ -39,20 +42,19 @@ const upperSide = {
   margin: 0,
   marginBottom: 'auto',
   marginTop: 50,
-}
+};
 
-export const useModalSize  = (modalSize: T_modal_size) => {
-
+export const useModalSize = (modalSize: T_modal_size) => {
   switch (modalSize) {
-    case "fullScreen":
+    case 'fullScreen':
       return fullScreen;
-    case "large":
+    case 'large':
       return large;
-    case "medium":
+    case 'medium':
       return medium;
-    case "small":
-      return small
+    case 'small':
+      return small;
     case 'upperSide':
-      return upperSide
+      return upperSide;
   }
-}
+};

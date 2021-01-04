@@ -26,7 +26,7 @@ const AppView = ({ session }: TAppViewProps) => {
   }, []);
   React.useEffect(
     function setTitle() {
-      if (process.browser) {
+      if (typeof window !== 'undefined') {
         document.title = userInfo.shop_name
           ? `${userInfo.shop_name} | SALON TABLET`
           : 'SALON TABLET';
