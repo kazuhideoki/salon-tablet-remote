@@ -1,26 +1,15 @@
 import React from 'react';
-import {
-  makeStyles,
-  createStyles,
-  withStyles,
-  IconButton,
-  Popover,
-} from '@material-ui/core';
+import { withStyles, IconButton, Popover } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
 import { SwitchOrderButton, TSwitchOrderButton } from './SwitchOrderButton';
-import { UpdateButton, TUpdateButton } from './UpdateButton';
-import { DeleteButton, TDeleteButton } from './DeleteButton';
+import { THandleUpdateButton, UpdateButton } from './UpdateButton';
+import { DeleteButton, THandleDeleteButton } from './DeleteButton';
 
 type Props = {
   className?: string;
-  classNameButtons?: string;
-  show?: boolean;
-  update?: boolean;
-  updateProps?: TUpdateButton;
-  delete?: boolean;
-  deleteProps?: TDeleteButton;
-  switch?: boolean;
-  switchProps?: TSwitchOrderButton;
+  handleUpdateButton?: THandleUpdateButton;
+  handleDeleteButton?: THandleDeleteButton;
+  handleSwitchButton?: TSwitchOrderButton;
 };
 
 export const StyledIconButtonEditButton = withStyles({
@@ -31,9 +20,11 @@ export const StyledIconButtonEditButton = withStyles({
 })(IconButton);
 
 export const EditButtonsBox: React.FC<Props> = (props) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
   const open = Boolean(anchorEl);
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setAnchorEl(e.currentTarget);
   };
@@ -44,7 +35,7 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
 
   return (
     <>
-      <IconButton className={`${props.className} ${props.classNameButtons}`}>
+      <IconButton className={props.className}>
         <IconButton aria-describedby={id} onClick={(e) => handleClick(e)}>
           <MoreVert />
         </IconButton>
@@ -61,17 +52,23 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
             vertical: 'top',
             horizontal: 'right',
           }}>
-          {props.switch ? (
+          {props.handleSwitchButton ? (
             <SwitchOrderButton
-              {...props.switchProps}
+              {...props.handleSwitchButton}
               handleClose={handleClose}
             />
           ) : null}
-          {props.update ? (
-            <UpdateButton {...props.updateProps} handleClose={handleClose} />
+          {props.handleUpdateButton ? (
+            <UpdateButton
+              {...props.handleUpdateButton}
+              handleClose={handleClose}
+            />
           ) : null}
-          {props.delete ? (
-            <DeleteButton {...props.deleteProps} handleClose={handleClose} />
+          {props.handleDeleteButton ? (
+            <DeleteButton
+              {...props.handleDeleteButton}
+              handleClose={handleClose}
+            />
           ) : null}
         </Popover>
       </IconButton>

@@ -1,31 +1,24 @@
 import React from 'react';
-import { EditButtonsBox } from "../app/pureComponents/buttons/EditButtonsBox";
-import { SwitchOrderButton } from '../app/pureComponents/buttons/SwitchOrderButton';
-import { UpdateButton } from '../app/pureComponents/buttons/UpdateButton';
-import { DeleteButton } from "../app/pureComponents/buttons/DeleteButton";
+import { EditButtonsBox } from '../app/pureComponents/editButtonBox/EditButtonsBox';
 import { samplefooterItems } from './lib/sampleFooterItems';
 export default {
-  title: "viewComponents/buttons/EditButtonsBox",
+  title: 'viewComponents/buttons/EditButtonsBox',
   component: EditButtonsBox,
 };
 
-const onClick = null
-const className = ""
+const className = '';
 
 export const Normal = () => {
-
   return (
     <EditButtonsBox
       className={className}
-      switch
-      switchProps={{
+      handleSwitchButton={{
         smaller: samplefooterItems[0],
-        larger: samplefooterItems[1],
+
+        switchOrder: null,
       }}
-      update
-      updateProps={{ onClick: null, value: null }}
-      delete
-      deleteProps={{ onClick: null, value: null }}
+      handleUpdateButton={{ onClick: null }}
+      handleDeleteButton={{ onClick: null }}
     />
   );
-}
+};

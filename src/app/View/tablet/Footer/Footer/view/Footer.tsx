@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, makeStyles, createStyles } from '@material-ui/core';
 import { IconAndText } from '../components/IconAndText';
 import { IconsSetting } from '../../../Drawer/FooterItemEditor/components/iconSelect/icons';
-import { EditButtonsBox } from '../../../../../pureComponents/buttons/EditButtonsBox';
+import { EditButtonsBox } from '../../../../../pureComponents/editButtonBox/EditButtonsBox';
 import { showDataType } from '../../../Main/components/showDataType';
 import { useIsMobile } from '../../../../../../lib/useIsMobile';
 import { useDeleteFooterItem } from '../context/useDeleteFooterItem';
@@ -67,11 +67,9 @@ const useStyles = makeStyles((theme) =>
       position: 'absolute',
       top: theme.spacing(1),
       right: 0,
-      left: 0,
+      // left: 0,
       justifyContent: 'center',
       zIndex: 100,
-    },
-    editButtonsBoxButtons: {
       left: 'auto',
     },
     showDataType: {
@@ -114,25 +112,23 @@ export const FooterPresenter: React.FC<Props> = (props) => {
           {props.isSetting ? (
             <EditButtonsBox
               className={classes.editButtonsBox}
-              classNameButtons={classes.editButtonsBoxButtons}
-              switch
-              switchProps={{
+              handleSwitchButton={{
                 smaller: footerItem[index - 1],
-                larger: value,
-                switchOrder: props.switchOrder,
+                switchOrder: () =>
+                  props.switchOrder({
+                    smaller: footerItem[index - 1],
+                    larger: value,
+                  }),
               }}
-              update
-              updateProps={{
-                onClick: props.handleOnUpDateFooterIcon,
-                value: value,
+              handleUpdateButton={{
+                onClick: () => props.handleOnUpDateFooterIcon(value),
               }}
-              delete
-              deleteProps={{
-                onClick: props.deleteFooterItem,
-                value: {
-                  footer_item_id: value.footer_item_id,
-                  order: value.order,
-                },
+              handleDeleteButton={{
+                onClick: () =>
+                  props.deleteFooterItem({
+                    footer_item_id: value.footer_item_id,
+                    order: value.order,
+                  }),
               }}
             />
           ) : null}

@@ -1,8 +1,17 @@
-import React from 'react'
+import React from 'react';
 import { sqlToDate } from '../../../../../lib/sqlToDate';
 import { useMainProps } from '../../../tablet/Main/view/Main';
-import { makeStyles,createStyles, Theme, CircularProgress, List, Typography, CardActionArea, Chip } from '@material-ui/core';
-import { EditButtonsBox } from '../../../../pureComponents/buttons/EditButtonsBox';
+import {
+  makeStyles,
+  createStyles,
+  Theme,
+  CircularProgress,
+  List,
+  Typography,
+  CardActionArea,
+  Chip,
+} from '@material-ui/core';
+import { EditButtonsBox } from '../../../../pureComponents/editButtonBox/EditButtonsBox';
 import { showDataType } from '../../../tablet/Main/components/showDataType';
 
 export const useMainMobileProps = () => {
@@ -25,26 +34,26 @@ export const useMainMobileProps = () => {
     onClickUpdate,
     openArticleModal,
   };
-}
+};
 
-type Props = ReturnType<typeof useMainMobileProps> & {className?: string}
+type Props = ReturnType<typeof useMainMobileProps> & { className?: string };
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
-      overflowY: "scroll",
+      overflowY: 'scroll',
       flexGrow: 1,
-      width: "100%",
+      width: '100%',
     },
     items: {
-      overflowY: "scroll",
+      overflowY: 'scroll',
       position: 'relative',
     },
     item: {
-      display: "flex",
-      flexWrap: "nowrap",
+      display: 'flex',
+      flexWrap: 'nowrap',
       justifyContent: 'flex-start',
-      borderBottom: "1px solid grey",
+      borderBottom: '1px solid grey',
       padding: theme.spacing(1),
 
       position: 'relative',
@@ -53,51 +62,52 @@ const useStyles = makeStyles((theme: Theme) => {
       margin: theme.spacing(1),
     },
     thumbnail: {
-      objectFit: "cover",
-      width: "130px",
-      height: "130px",
+      objectFit: 'cover',
+      width: '130px',
+      height: '130px',
     },
     contents: {
       margin: theme.spacing(1),
     },
     itemIsDraft: {
-      border: "2px solid red",
+      border: '2px solid red',
       borderRadius: 2,
-      fontStyle: "italic",
+      fontStyle: 'italic',
     },
     circularProgress: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
     },
     editButtonsBox: {
-      position: "absolute",
+      position: 'absolute',
       top: 0,
       right: 0,
     },
   });
-})
+});
 
-export const MainMobilePresenter:React.FC<Props> = (props) => {
-  const classes = useStyles()
+export const MainMobilePresenter: React.FC<Props> = (props) => {
+  const classes = useStyles();
 
   if (props.loading) {
-    return <CircularProgress
-      className={classes.circularProgress}
-      size={50}
-      thickness={4}
-    />
+    return (
+      <CircularProgress
+        className={classes.circularProgress}
+        size={50}
+        thickness={4}
+      />
+    );
   }
 
   if (props.articles.length === 0) {
     return <div className={classes.item}>記事がありません</div>;
   }
-      
+
   return (
     <div className={`${classes.root} ${props.className}`}>
-      
       {/* ↓スクロール可のためにrootと分けてある */}
       {/* <List className={classes.items}> */}
 
@@ -107,8 +117,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
             <CardActionArea
               className={classes.item}
               onClick={() => props.openArticleModal(key)}
-              component="div"
-            >
+              component="div">
               <div className={classes.thumbnailDiv}>
                 {value.article_img.length ? (
                   <img
@@ -117,8 +126,7 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
                   />
                 ) : (
                   <div
-                    className={`p-main-thumbnail ${classes.thumbnail}`}
-                  ></div>
+                    className={`p-main-thumbnail ${classes.thumbnail}`}></div>
                 )}
               </div>
               <div className={classes.contents}>
@@ -141,12 +149,12 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
             {props.isSetting ? (
               <EditButtonsBox
                 className={classes.editButtonsBox}
-                update
-                updateProps={{ onClick: props.onClickUpdate, value: value }}
-                delete
-                deleteProps={{
-                  onClick: props.deleteArticle,
-                  value: value.article_id,
+                // update
+                handleUpdateButton={{
+                  onClick: () => props.onClickUpdate(value),
+                }}
+                handleDeleteButton={{
+                  onClick: () => props.deleteArticle(value.article_id),
                 }}
               />
             ) : null}
@@ -154,13 +162,12 @@ export const MainMobilePresenter:React.FC<Props> = (props) => {
         );
       })}
       {/* </List> */}
-       
     </div>
   );
-}
+};
 
-export const MainMobile = ({className = ''}) => {
-  const props = useMainMobileProps()
+export const MainMobile = ({ className = '' }) => {
+  const props = useMainMobileProps();
 
-  return <MainMobilePresenter {...props} className={className}/>
-}
+  return <MainMobilePresenter {...props} className={className} />;
+};

@@ -1,17 +1,22 @@
-import React from 'react'
-import { Typography, makeStyles, Theme, createStyles, Button } from "@material-ui/core";
+import React from 'react';
+import {
+  Typography,
+  makeStyles,
+  Theme,
+  createStyles,
+  Button,
+} from '@material-ui/core';
 import { useIsMobile } from '../../../../../../../lib/useIsMobile';
-import { HelpButton } from '../../../../../../pureComponents/buttons/HelpButton';
+import { HelpButton } from '../../../../../../pureComponents/HelpButton';
 import { useManageInstagramAccountsProps } from '../../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
 import { useStateSelectInstagramAccounts } from '../context/useStateSelectInstagramAccounts';
 
 export const useSelectInstagramAccountsProps = () => {
+  const { instagramAccounts, isSetting } = useStateSelectInstagramAccounts();
 
-  const { instagramAccounts, isSetting } = useStateSelectInstagramAccounts()
+  const { getInstagramMedias } = useManageInstagramAccountsProps();
 
-  const { getInstagramMedias } = useManageInstagramAccountsProps()
-
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   return {
     isSetting,
@@ -19,8 +24,8 @@ export const useSelectInstagramAccountsProps = () => {
     getInstagramMedias,
     isMobile,
   };
-}
-type Props = ReturnType<typeof useSelectInstagramAccountsProps>
+};
+type Props = ReturnType<typeof useSelectInstagramAccountsProps>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,31 +41,37 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectInstagramAccountsPresenter:React.FC<Props> = (props) => {
-  const classes = useStyles()
-  
+export const SelectInstagramAccountsPresenter: React.FC<Props> = (props) => {
+  const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <Typography variant="h4" component="h2" className={classes.header}>
         インスタグラムアカウント選択
       </Typography>
-      {props.isMobile && props.isSetting ? <><br/><HelpButton content='「スマートフォン表示」ではInstagram公式サイト（アプリ）へ遷移します。(※タブレットモード同様に専用画面を実装予定)' /></> : null}
+      {props.isMobile && props.isSetting ? (
+        <>
+          <br />
+          <HelpButton content="「スマートフォン表示」ではInstagram公式サイト（アプリ）へ遷移します。(※タブレットモード同様に専用画面を実装予定)" />
+        </>
+      ) : null}
       {props.instagramAccounts.map((value) => {
         if (props.isMobile) {
           return (
-            <a className={classes.account} href={`https://www.instagram.com/${value.username}/`}>
-              <Button>
-                {value.username}
-              </Button>
+            <a
+              className={classes.account}
+              href={`https://www.instagram.com/${value.username}/`}>
+              <Button>{value.username}</Button>
             </a>
           );
         }
         return (
           <div className={classes.account}>
             <Button
-              onClick={() => props.getInstagramMedias(value.instagram_id, value.username, {})}
-              disabled={value.is_reconnect_needed}
-            >
+              onClick={() =>
+                props.getInstagramMedias(value.instagram_id, value.username, {})
+              }
+              disabled={value.is_reconnect_needed}>
               {value.username}
             </Button>
           </div>
@@ -68,11 +79,10 @@ export const SelectInstagramAccountsPresenter:React.FC<Props> = (props) => {
       })}
     </div>
   );
-}
+};
 
 export const SelectInstagramAccounts = () => {
   const props = useSelectInstagramAccountsProps();
 
   return <SelectInstagramAccountsPresenter {...props} />;
 };
-

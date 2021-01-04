@@ -1,19 +1,17 @@
-import React from "react";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import { HelpButton } from "../../../../../pureComponents/buttons/HelpButton";
-import { TUseFooterItemEditorProps } from "../view/FooterItemEditor";
-import { AppStateContext } from "../../../../../Store/appState/Context";
+import React from 'react';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import { HelpButton } from '../../../../../pureComponents/HelpButton';
+import { TUseFooterItemEditorProps } from '../view/FooterItemEditor';
+import { AppStateContext } from '../../../../../Store/appState/Context';
 
-type Props = TUseFooterItemEditorProps & {className?: string}
+type Props = TUseFooterItemEditorProps & { className?: string };
 
-export const SelectModalSize:React.FC<Props> = (props) => {
-  const { appState, dispatchAppState} = React.useContext(AppStateContext)
-
-  
+export const SelectModalSize: React.FC<Props> = (props) => {
+  const { appState, dispatchAppState } = React.useContext(AppStateContext);
 
   return (
     <div className={props.className}>
@@ -21,7 +19,10 @@ export const SelectModalSize:React.FC<Props> = (props) => {
         <FormLabel component="legend">
           ウィンドウサイズ
           {props.isMobile ? (
-            <HelpButton content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい" size='small'/>
+            <HelpButton
+              content="スマートフォンではウィンドウサイズは反映されません。タブレットで表示をご確認下さい"
+              size="small"
+            />
           ) : null}
         </FormLabel>
         <RadioGroup
@@ -29,8 +30,7 @@ export const SelectModalSize:React.FC<Props> = (props) => {
           aria-label="modalSize"
           name="modalSize"
           value={props.modalSizeRadio}
-          onChange={props.handleChange}
-        >
+          onChange={props.handleChange}>
           {/* ラジオボタンはstring型じゃないとうまく作動しない */}
           <FormControlLabel
             value="fullScreen"
@@ -44,4 +44,4 @@ export const SelectModalSize:React.FC<Props> = (props) => {
       </FormControl>
     </div>
   );
-}
+};
