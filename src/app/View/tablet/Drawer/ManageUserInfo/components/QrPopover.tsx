@@ -45,7 +45,7 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
   const open = Boolean(qrAnchorEl);
   const id = open ? 'qr-popover' : undefined;
 
-  const ref = React.useRef();
+  const ref = React.useRef(null);
   // const ref = React.createRef();
   const handlePrint = useReactToPrint({
     content: () => ref.current || null,

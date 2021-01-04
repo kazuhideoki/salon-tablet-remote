@@ -3,7 +3,7 @@ import {
   apiUserInfoUpdate,
   T_user_info_update,
 } from '../../../../../../pages/api/user_info/update';
-import { updatePassword } from '../../../../../../lib/auth/updatePassword';
+import { updatePasswordInFirebase } from '../../../../../../lib/auth/updatePassword';
 import { useAuth } from '../../../../../../lib/auth/AuthProvider';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 import { update } from '../../../../../Store/userInfo/actions';
@@ -34,11 +34,12 @@ export const useUpdateUser = (param: TUpdateUser) => {
     };
 
     try {
-      await apiUserInfoUpdate(params);
-
       // パスワード変更 firebaseで ここ
-      if (param.password.length)
-        await updatePassword({ password: param.password, user });
+      if (param.password.length && user) {
+        await updatePasswordInFirebase({ password: param.password, user });
+      }
+
+      await apiUserInfoUpdate(params);
 
       dispatchUserInfo(update(params));
       dispatchAppState(closeModal());

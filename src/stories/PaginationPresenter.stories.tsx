@@ -1,11 +1,13 @@
 import React from 'react';
-import { PaginationBarPresenter, TUsePaginationBarProps } from '../app/View/tablet/Footer/PaginationBar/view/PaginationBar';
+import {
+  PaginationBarPresenter,
+  TUsePaginationBarProps,
+} from '../app/View/tablet/Footer/PaginationBar/view/PaginationBar';
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 import { sampleTags } from './lib/sampleTags';
-import { withStyles, IconButton, MuiThemeProvider } from '@material-ui/core';
-import { initInstagramMedias } from '../app/Store/Interface';
+import { withStyles, IconButton } from '@material-ui/core';
 export default {
-  title: "Footer/Pagination/PaginationBar",
+  title: 'Footer/Pagination/PaginationBar',
   component: PaginationBarPresenter,
 };
 
@@ -15,8 +17,8 @@ const StyledIconButton = withStyles({
     // border: "1px solid",
   },
   label: {
-    width: "1rem",
-    height: "1rem",
+    width: '1rem',
+    height: '1rem',
   },
 })(IconButton);
 
@@ -32,7 +34,7 @@ const props: TUsePaginationBarProps = {
 
   dispatchAppState: null,
   handleOnNumClick: null,
-  selectedTagNames: ["カラー", "パーマ", "英語"],
+  selectedTagNames: ['カラー', 'パーマ', '英語'],
   selectedInstagramAccount: null,
   isShowInstagram: false,
   tags: sampleTags,
@@ -42,26 +44,25 @@ const props: TUsePaginationBarProps = {
   getInstagramMedias: null,
   instagramMedias: null,
   isTabletPortrait: false,
+  openModal: null,
 };
 
 export const Normal = () => {
-
   return (
     <>
       <PaginationBarPresenter {...props} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
-      </>
+    </>
   );
-}
+};
 export const isTabletPortrait = () => {
-
   return (
     <>
       <PaginationBarPresenter {...props} isTabletPortrait={true} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
-      </>
+    </>
   );
-}
+};
 const props2: TUsePaginationBarProps = {
   isSetting: true,
   getArticles: null,
@@ -74,10 +75,10 @@ const props2: TUsePaginationBarProps = {
 
   dispatchAppState: null,
   handleOnNumClick: null,
-  selectedTagNames: ["カラー", "パーマ", "英語"],
+  selectedTagNames: ['カラー', 'パーマ', '英語'],
   selectedInstagramAccount: {
     id: 0,
-    username: "instagramさん",
+    username: 'instagramさん',
   },
   isShowInstagram: true,
   tags: sampleTags,
@@ -88,22 +89,22 @@ const props2: TUsePaginationBarProps = {
   instagramMedias: {
     data: [],
     paging: {
-        cursors: {
-            before: 'string',
-            after: 'string',
-        },
-        next: "string",
+      cursors: {
+        before: 'string',
+        after: 'string',
+      },
+      next: 'string',
     },
   },
   isTabletPortrait: false,
+  openModal: null,
 };
 
 export const Instagram表示 = () => {
-
   return (
     <>
       <PaginationBarPresenter {...props2} />
       ※StyledIconButtonはpropsなので変更を反映させるためにはstoriesも変える必要あり
     </>
   );
-}
+};

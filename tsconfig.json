@@ -26,8 +26,8 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "./src/stories"],
+  "include": [".src/**/*", "./src/stories/**/*"],
+  "exclude": ["node_modules"],
 
   "baseUrl": ".",
   "paths": {

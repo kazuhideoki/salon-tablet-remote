@@ -1,7 +1,7 @@
 import React from 'react';
 import { SelectTagsPresenter } from '../app/View/tablet/Modal/Modals/SelectTags/view/SelectTags';
 import { sampleTags } from './lib/sampleTags';
-import { Provider } from './lib/ThemeProvider';
+import { ThemeProvider } from './lib/ThemeProvider';
 export default {
   title: 'Footer/SelectTagsPresenter',
   component: SelectTagsPresenter,
@@ -15,11 +15,9 @@ const props = {
 };
 
 export const Normal = () => {
-
   return (
-    <Provider>
-
-      <SelectTagsPresenter {...props}/>
-    </Provider>
-  )
-}
+    <ThemeProvider>
+      <SelectTagsPresenter {...props} />
+    </ThemeProvider>
+  );
+};
