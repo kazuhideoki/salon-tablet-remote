@@ -1,10 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-export const deleteUserInFirebase = async (
-  email: string,
-  password: string
-): Promise<void> => {
+export const deleteUserInFirebase = async (password: string): Promise<void> => {
   try {
     const user = firebase.auth().currentUser;
 

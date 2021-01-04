@@ -6,7 +6,6 @@ import { firebaseClient } from './firebaseClient';
 import { useRouter } from 'next/router';
 
 type TAuthContext = {
-  //@ts-ignore
   user: firebase.User | null;
   signout: (path: string) => void;
 };
@@ -16,8 +15,7 @@ const AuthContext = createContext<TAuthContext>({
 } as TAuthContext);
 
 export function AuthProvider({ children }: any) {
-  //@ts-ignore
-  const [user, setUser] = useState<firebaseClient.User | null>(null);
+  const [user, setUser] = useState<firebase.User | null>(null);
   const router = useRouter();
 
   const signout = (path: string) => {
@@ -27,12 +25,13 @@ export function AuthProvider({ children }: any) {
       .then(function () {
         router.push(path);
       })
-      .catch(function (err) {});
+      .catch(function (err) {
+        throw new Error(`signout: ${err}`);
+      });
   };
 
   useEffect(() => {
     // tokenが変わるのをチェックするリスナーを登録する。
-    //@ts-ignore
     return firebaseClient.auth().onIdTokenChanged(async (user) => {
       if (!user) {
         setUser(null);
