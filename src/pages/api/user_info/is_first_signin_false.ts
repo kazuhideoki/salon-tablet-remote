@@ -1,9 +1,9 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { server, localhost } from '../../../lib/loadUrl';
-import { TApiResponse } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
 import { T_user_id } from '../../../app/Store/Interface';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiIsFirsSigninFalse = async (
@@ -38,8 +38,8 @@ const is_first_signin_false = async (
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

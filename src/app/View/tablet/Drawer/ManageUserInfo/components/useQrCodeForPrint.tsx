@@ -6,9 +6,10 @@ import { server } from '../../../../../../lib/loadUrl';
 
 const width = 450;
 
-export const QrCodeForPrint = (
+// FCにするとuseReactToPrintでエラーがでてしまうのでhooksにした。
+export const useQrCodeForPrint = (
   props: TUseSettingUserInfoProps,
-  ref: React.MutableRefObject<null>
+  ref: React.MutableRefObject<undefined>
 ) => {
   const theme = useTheme();
 

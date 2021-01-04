@@ -1,19 +1,39 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   TInfoBar,
   T_user_id,
   TInfoBarData,
+  TInfoBarWithoutId,
 } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { createInitInfoBar } from '../../../lib/createInitInfoBar';
-import { apiWrapGet } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { apiWrapGet } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
   user_id: T_user_id
 ): Promise<TApiResponse<TInfoBarData>> => {
   return apiWrapGet(`info_bar/get?userId=${user_id}`);
+};
+
+const createInitInfoBar = async (user_id: T_user_id) => {
+  const params: TInfoBarWithoutId = {
+    user_id: user_id,
+    info_bar_type: 'shop_name',
+    scrolling_sentence: '',
+    scrolling_animation_duration: 8,
+    selected_article_id: null,
+  };
+
+  await db(`INSERT INTO info_bar SET ?`, params);
+
+  const data = (await db(
+    // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
+    'SELECT * FROM info_bar WHERE user_id = ?',
+    user_id
+  )) as TInfoBar[];
+
+  return data;
 };
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -55,7 +75,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

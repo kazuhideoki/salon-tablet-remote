@@ -1,15 +1,25 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TInstagramAccounts, T_user_id } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { changeToBooleanFromNumberInstagramAcconts } from '../../../lib/changeToBooleanFromNumber';
-import { apiWrapGet } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { apiWrapGet } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsGet = async (
   user_id: T_user_id
 ): Promise<TApiResponse<TInstagramAccounts>> => {
   return apiWrapGet(`instagram_accounts/get?userId=${user_id}`);
+};
+
+const changeToBooleanFromNumberInstagramAcconts = (
+  data: TInstagramAccounts
+) => {
+  return data.map((value) => {
+    //@ts-ignore
+    value.is_reconnect_needed = value.is_reconnect_needed === 1 ? true : false;
+
+    return value;
+  });
 };
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -38,7 +48,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

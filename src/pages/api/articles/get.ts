@@ -1,14 +1,14 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { tagIdsToNumberArray } from '../../../lib/tagIdsToNumberArray';
+import { tagIdsFromString } from '../../../lib/db/tagIdsFromString';
 import {
   T_user_id,
   TArticles,
   TAllArticles,
   TPaginationParams,
 } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (
@@ -90,7 +90,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         err: false,
         rawData: {
           // tag_idsをnumber[]化する、なければnullのまま
-          rawData: data.length ? tagIdsToNumberArray(data) : data,
+          rawData: data.length ? tagIdsFromString(data) : data,
           pagination: pagination,
           allArticles: data3 as TAllArticles,
         },
@@ -105,8 +105,8 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

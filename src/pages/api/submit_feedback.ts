@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TUserInfo } from '../../app/Store/Interface';
-import { apiWrapPost, TApiResponse } from '../../lib/apiWrap';
+import { apiWrapPost, TApiResponse } from '../../lib/db/apiWrap';
 
 const receiverEmailAddress = 'infosalontablet@gmail.com';
 const senderEmailAddress = 'infosalontablet@gmail.com';
@@ -63,8 +63,8 @@ const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

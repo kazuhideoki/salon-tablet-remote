@@ -1,10 +1,10 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { T_footer_item_id } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { checkIsAdmin } from '../../../lib/checkIsAdmin';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { checkIsAdmin } from '../../../lib/db/checkIsAdmin';
 import { T_footer_items_params } from './create';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsUpdate = async (
@@ -44,8 +44,8 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

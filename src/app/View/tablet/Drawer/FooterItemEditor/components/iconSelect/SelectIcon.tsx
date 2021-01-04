@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 type TIconItem = {
-  icon?: OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>;
+  icon: OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>;
 };
 export const IconItem = (props: TIconItem) => {
   return <props.icon style={{ fontSize: 50 }} />;

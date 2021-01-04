@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingMessage } from 'http';
 import { firebaseAdmin } from '../../../lib/auth/firebaseAdmin';
-import { TApiResponse } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
 import { server, localhost } from '../../../lib/loadUrl';
 import { parseCookies } from 'nookies';
 
@@ -62,8 +62,8 @@ const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

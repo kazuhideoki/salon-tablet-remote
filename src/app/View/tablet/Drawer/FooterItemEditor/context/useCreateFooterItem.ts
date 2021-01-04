@@ -5,6 +5,8 @@ import {
   T_on_tap,
   T_data_type_footer_item,
   FooterItems,
+  FooterItem,
+  FooterItemWithoutId,
 } from '../../../../../Store/Interface';
 import { useGetFooterItems } from './useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
@@ -64,7 +66,7 @@ export const generateFooterItemEdittingParams = (
   return {
     icon_name: param.titleText,
     // 選択されていたらアイコンの名前を返す.
-    displayed_icon_name: param.selectedIcon ? param.selectedIcon[1] : null,
+    displayed_icon_name: param.selectedIcon[1],
     on_tap: param.onTapRadio,
     item_content: param.editorText,
     item_excerpt: param.editorTextExcerpt,

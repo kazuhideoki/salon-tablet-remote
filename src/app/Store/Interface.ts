@@ -54,7 +54,6 @@ export type T_data_type_article = T_data_type_footer_item | 'web_article';
 
 // ●●●●●● テーブル `articles`
 export type T_article_id = number;
-// ※tag_idsはDBから取り出した直後、値がない場合はnullのこともある （tagIdsToNumberArrayの前）
 export type T_tag_ids = number[];
 export type T_is_published_articles = boolean;
 export type T_created_at = string;

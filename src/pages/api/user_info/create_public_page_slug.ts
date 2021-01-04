@@ -1,8 +1,8 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
 import { T_user_id } from '../../../app/Store/Interface';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreatePublicPageSlug = async (
@@ -43,8 +43,8 @@ const create_public_page_slug = async (
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

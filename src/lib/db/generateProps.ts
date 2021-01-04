@@ -1,10 +1,10 @@
-import { TInfoBarData, TUserInfo } from '../app/Store/Interface';
-import { T_articles_get, apiArticlesGet } from '../pages/api/articles/get';
-import { apiFooterItemsGet } from '../pages/api/footer_items/get';
-import { apiTagsGet } from '../pages/api/tags/get';
-import { apiInstagramAccountsGet } from '../pages/api/instagram_accounts/get';
-import { apiInfoBarGet } from '../pages/api/info_bar/get';
-import { TIndexPropsData } from '../pages';
+import { TInfoBarData, TUserInfo } from '../../app/Store/Interface';
+import { T_articles_get, apiArticlesGet } from '../../pages/api/articles/get';
+import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
+import { apiTagsGet } from '../../pages/api/tags/get';
+import { apiInstagramAccountsGet } from '../../pages/api/instagram_accounts/get';
+import { apiInfoBarGet } from '../../pages/api/info_bar/get';
+import { TIndexPropsData } from '../../pages';
 
 export const generateProps = async (
   userInfo: TUserInfo,

@@ -1,8 +1,8 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
 import { T_instagram_id, TInstagramMedias } from '../../../app/Store/Interface';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (
@@ -61,7 +61,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

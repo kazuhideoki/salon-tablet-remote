@@ -21,7 +21,7 @@ export const useDeleteUser = () => {
     }
 
     try {
-      await deleteUserInFirebase(email, password);
+      await deleteUserInFirebase(password);
       console.log('deleteUserInFirebase完了');
 
       await apiUserInfoDelete({ user_id });

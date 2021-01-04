@@ -1,9 +1,9 @@
-import { db } from '../../../../lib/db';
+import { db } from '../../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { T_user_id } from '../../../../app/Store/Interface';
-import { TApiResponse } from '../../../../lib/apiWrap';
+import { TApiResponse } from '../../../../lib/db/apiWrap';
 import { TThemeParams } from '../../../../app/Store/theme/ThemeProvider';
-import { apiWrapPost } from '../../../../lib/apiWrap';
+import { apiWrapPost } from '../../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (
@@ -35,8 +35,8 @@ const change_theme = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

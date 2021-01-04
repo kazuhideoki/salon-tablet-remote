@@ -7,7 +7,7 @@ import nookies from 'nookies';
 
 initFirebase();
 
-const firebaseAuthConfig = {
+const firebaseAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInOptions: [
     {
@@ -19,6 +19,8 @@ const firebaseAuthConfig = {
   signInSuccessUrl: '/',
   credentialHelper: 'none',
   callbacks: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
     signInSuccessWithAuthResult: async ({
       user,
     }: firebase.auth.UserCredential) => {
@@ -39,7 +41,6 @@ const FirebaseAuth = () => {
   return (
     <div>
       <StyledFirebaseAuth
-        //@ts-ignore
         uiConfig={firebaseAuthConfig}
         firebaseAuth={firebase.auth()}
       />
