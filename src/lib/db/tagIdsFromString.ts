@@ -1,0 +1,24 @@
+import { TArticles, T_article_id } from '../../app/Store/Interface';
+
+export const tagIdsFromString = (data: any) => {
+  // tag_idsをnumber[]化する
+  const newData = data.map(
+    (value: { article_id: T_article_id; tag_ids: number[] }) => {
+      // 値がある場合のみ(nullではないとき)変換
+      if (value.tag_ids) {
+        //@ts-ignore
+        const parsedTagId: string[] = JSON.parse(value.tag_ids);
+
+        const intArray = parsedTagId.map((str) => parseInt(str, 10));
+
+        value.tag_ids = intArray;
+      } else {
+        value.tag_ids = [];
+      }
+
+      return value;
+    }
+  );
+
+  return newData;
+};

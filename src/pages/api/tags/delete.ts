@@ -1,9 +1,9 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { T_tag_id, T_user_id } from '../../../app/Store/Interface';
-import { deleteTagIdInArticle } from '../../../lib/deleteTagIdInArticle';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { deleteTagIdInArticle } from '../../../lib/db/deleteTagIdInArticle';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (
@@ -16,13 +16,11 @@ export type T_tags_delete = { tag_id: T_tag_id; user_id: T_user_id };
 
 const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    // await runMiddleware(req, res);
-
     const { tag_id, user_id }: T_tags_delete = req.body;
 
     try {
       // articleのtag_idsの該当タグを消す。DBのtab_idsは文字列だが、うまいこと該当タグのtag_id:numberだけをを削除する
-      deleteTagIdInArticle(tag_id, user_id);
+      await deleteTagIdInArticle(tag_id, user_id);
 
       // ★タグそのものを消す
       await db(`DELETE FROM tags WHERE tag_id = ?`, tag_id);
@@ -36,8 +34,8 @@ const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

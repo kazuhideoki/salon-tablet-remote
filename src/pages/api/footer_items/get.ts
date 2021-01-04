@@ -1,19 +1,29 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { checkOrders } from '../../../lib/checkOrders';
+import { checkOrders } from '../../../lib/db/checkOrders';
 import { FooterItems, T_user_id } from '../../../app/Store/Interface';
-import { correctOrders } from '../../../lib/correctOrders';
-import { changeToBooleanFromNumberFooterItems } from '../../../lib/changeToBooleanFromNumber';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { checkOrdersSidebar } from '../../../lib/checkOrdersSidebar';
-import { correctOrdersSidebar } from '../../../lib/correctOrdersSidebar';
-import { apiWrapGet } from '../../../lib/apiWrap';
+import { correctOrders } from '../../../lib/db/correctOrders';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { checkOrdersSidebar } from '../../../lib/db/checkOrders';
+import { correctOrdersSidebar } from '../../../lib/db/correctOrders';
+import { apiWrapGet } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsGet = async (
   user_id: T_user_id
 ): Promise<TApiResponse<FooterItems>> => {
   return apiWrapGet(`footer_items/get?userId=${user_id}`);
+};
+
+const changeToBooleanFromNumberFooterItems = (data: FooterItems) => {
+  return data.map((value) => {
+    //@ts-ignore
+    value.is_published = value.is_published === 1 ? true : false;
+    //@ts-ignore
+    value.on_sidebar = value.on_sidebar === 1 ? true : false;
+
+    return value;
+  });
 };
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -51,7 +61,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

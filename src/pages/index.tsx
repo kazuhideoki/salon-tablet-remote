@@ -13,7 +13,7 @@ import {
 import { App } from '../app/View/App';
 import { GetServerSideProps } from 'next';
 import { TopPage } from '../pageComponent/TopPage';
-import { generateProps } from '../lib/generateProps';
+import { generateProps } from '../lib/db/generateProps';
 import { SEO } from '../pageComponent/SEO';
 import { getDeviceType } from '../lib/getDeviceType';
 import {

@@ -1,4 +1,4 @@
-import { server, localhost } from './loadUrl';
+import { server, localhost } from '../loadUrl';
 
 export type TApiResponse<T = null> = { err: boolean; rawData: T };
 // | { err: true; data: string };

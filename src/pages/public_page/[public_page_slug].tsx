@@ -1,10 +1,10 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { generateProps } from '../../lib/generateProps';
+import { generateProps } from '../../lib/db/generateProps';
 import App from '../../app/View/App';
 import Head from 'next/head';
 import { TIndexProps } from '..';
-import { checkIsGeneratePubulicPage } from '../../lib/checkIsGeneratePubulicPage';
+import { checkIsGeneratePubulicPage } from '../../lib/db/checkIsGeneratePubulicPage';
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
 import { TUserInfo } from '../../app/Store/Interface';
 import { getDeviceType } from '../../lib/getDeviceType';

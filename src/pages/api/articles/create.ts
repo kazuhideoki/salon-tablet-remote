@@ -1,4 +1,4 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   T_is_published_articles,
@@ -9,9 +9,9 @@ import {
   T_user_id,
   T_data_type_article,
 } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { checkIsAdmin } from '../../../lib/checkIsAdmin';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { checkIsAdmin } from '../../../lib/db/checkIsAdmin';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 export const apiArticlesCreate = async (
   params: T_articles_create
@@ -58,8 +58,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

@@ -1,8 +1,8 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { T_user_id, T_tag_name } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsCreate = async (
@@ -33,8 +33,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,

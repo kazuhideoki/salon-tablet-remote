@@ -1,4 +1,4 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { server, instagramRedirectHost } from '../../../lib/loadUrl';
 import { apiInstagramAccountsReconnectNeeded } from './reconnect_needed';
@@ -90,7 +90,7 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

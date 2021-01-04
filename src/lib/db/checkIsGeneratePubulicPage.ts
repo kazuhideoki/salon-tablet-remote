@@ -1,4 +1,4 @@
-import { TUserInfo } from '../app/Store/Interface';
+import { TUserInfo } from '../../app/Store/Interface';
 import { db } from './db';
 import { userInfoParamsFromSql } from './userInfoParamsFromSql';
 

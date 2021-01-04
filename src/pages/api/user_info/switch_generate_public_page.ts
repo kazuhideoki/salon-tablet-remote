@@ -1,11 +1,11 @@
-import { db } from '../../../lib/db';
+import { db } from '../../../lib/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   T_user_id,
   T_is_generate_public_page,
 } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/apiWrap';
-import { apiWrapPost } from '../../../lib/apiWrap';
+import { TApiResponse } from '../../../lib/db/apiWrap';
+import { apiWrapPost } from '../../../lib/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoSwitchGeneratePublicPage = async (
@@ -46,8 +46,8 @@ const switch_generate_public_page = async (
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,
