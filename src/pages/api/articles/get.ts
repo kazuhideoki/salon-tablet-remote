@@ -8,7 +8,6 @@ import {
   TPaginationParams,
 } from '../../../app/Store/Interface';
 import { apiWrapGet, TApiResponse } from '../../../lib/db/apiWrap';
-import { split } from 'lodash';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (
@@ -49,46 +48,38 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const isSetting: boolean = req.query.isSetting === 'true' ? true : false;
   const userId = Number(req.query.userId) as number;
 
-  console.log(JSON.stringify({ page, selectingTags, isSetting, userId }));
+  const TArticleGet: T_articles_get = {
+    page,
+    selectingTags,
+    isSetting,
+    userId,
+  }; // 型checkのため;
 
   // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
-  const getPublishedOnly = isSetting ? ' ' : `AND is_published = true `;
+  const getPublishedOnly = isSetting ? '' : `AND is_published = true`;
 
-  // 正規表現でタグを検索
+  // mapで正規表現配列化
+  const regExpTagsArray = selectingTags.map((value) => {
+    return `'[[:<:]]${value}[[:>:]]'`;
+  });
 
-  let getTagedPages;
-  if (selectingTags.length === 0) {
-    getTagedPages = '';
-  } else {
-    // mapで正規表現配列化
-    const regExpTagsArray = selectingTags.map((value) => {
-      return `'[[:<:]]${value}[[:>:]]'`;
-    });
-    // 正規表現連結、sql文化
-    getTagedPages = `AND tag_ids REGEXP ${regExpTagsArray.join(
-      ' AND tag_ids REGEXP '
-    )} `;
-  }
+  // 正規表現連結、sql文化
+  const getTagedPages =
+    selectingTags.length === 0
+      ? ''
+      : `AND tag_ids REGEXP ${regExpTagsArray.join(' AND tag_ids REGEXP ')}`;
 
   const skipRows = pageSize * (page - 1); // オフセット, 何ページ飛ばすか
   const offSet = skipRows === 0 ? '' : skipRows + ',';
 
-  const query =
-    `SELECT * FROM articles WHERE user_id = ${userId} ` +
-    getPublishedOnly +
-    getTagedPages +
-    `ORDER BY created_at DESC LIMIT ` +
-    offSet +
-    ` ${pageSize}`;
-
   try {
-    const data = (await db(query)) as TArticles;
+    const data = (await db(
+      `SELECT * FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages} ORDER BY created_at DESC LIMIT ${offSet} ${pageSize}`
+    )) as TArticles;
 
-    const data2: any = await db(
-      `SELECT user_id FROM articles WHERE user_id = ${userId} ` +
-        getPublishedOnly +
-        getTagedPages
-    );
+    const data2 = (await db(
+      `SELECT user_id FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages}`
+    )) as any[];
 
     const data3 = await db(
       `SELECT article_id, title FROM articles WHERE user_id = ${userId}`
