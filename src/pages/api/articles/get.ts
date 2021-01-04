@@ -7,14 +7,19 @@ import {
   TAllArticles,
   TPaginationParams,
 } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { apiWrapPost } from '../../../lib/db/apiWrap';
+import { apiWrapGet, TApiResponse } from '../../../lib/db/apiWrap';
+import { split } from 'lodash';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (
   params: T_articles_get
 ): Promise<TApiResponse<T_articles_get_return>> => {
-  return apiWrapPost('articles/get', params);
+  const { page, selectingTags, isSetting, userId } = params;
+  console.log('apiArticlesGetだよ');
+
+  return apiWrapGet(
+    `articles/get?page=${page}&selectingTags=${selectingTags}&isSetting=${isSetting}&userId=${userId}`
+  );
 };
 
 export type T_articles_get = {
@@ -25,83 +30,91 @@ export type T_articles_get = {
 };
 
 export type T_articles_get_return = {
-  rawData: TArticles;
+  articles: TArticles;
   pagination: TPaginationParams;
   allArticles: TAllArticles;
 };
 
+const pageSize = 6;
+
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  const pageSize = 6;
-  if (req.method === 'POST') {
-    const { page, selectingTags, isSetting, userId }: T_articles_get = req.body;
-    // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
-    const getPublishedOnly = isSetting ? ' ' : `AND is_published = true `;
+  console.log('req.queryは ' + JSON.stringify(req.query));
 
-    // 正規表現でタグを検索
+  const page = Number(req.query.page) as number;
+  const selectingTags = req.query.selectingTags
+    ? ((req.query.selectingTags as string)
+        .split(',')
+        .map((value) => Number(value)) as number[])
+    : [];
+  const isSetting: boolean = req.query.isSetting === 'true' ? true : false;
+  const userId = Number(req.query.userId) as number;
 
-    let getTagedPages;
-    if (selectingTags.length === 0) {
-      getTagedPages = '';
-    } else {
-      // mapで正規表現配列化
-      const regExpTagsArray = selectingTags.map((value) => {
-        return `'[[:<:]]${value}[[:>:]]'`;
-      });
-      // 正規表現連結、sql文化
-      getTagedPages = `AND tag_ids REGEXP ${regExpTagsArray.join(
-        ' AND tag_ids REGEXP '
-      )} `;
-    }
+  console.log(JSON.stringify({ page, selectingTags, isSetting, userId }));
 
-    // const skipRows = 5 * (page - 1); // オフセット, 何ページ飛ばすか
-    const skipRows = pageSize * (page - 1); // オフセット, 何ページ飛ばすか
-    const offSet = skipRows === 0 ? '' : skipRows + ',';
+  // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
+  const getPublishedOnly = isSetting ? ' ' : `AND is_published = true `;
 
-    const query =
-      `SELECT * FROM articles WHERE user_id = ${userId} ` +
-      getPublishedOnly +
-      getTagedPages +
-      `ORDER BY created_at DESC LIMIT ` +
-      offSet +
-      // ` 5`;
-      ` ${pageSize}`;
+  // 正規表現でタグを検索
 
-    try {
-      const data = (await db(query)) as TArticles;
+  let getTagedPages;
+  if (selectingTags.length === 0) {
+    getTagedPages = '';
+  } else {
+    // mapで正規表現配列化
+    const regExpTagsArray = selectingTags.map((value) => {
+      return `'[[:<:]]${value}[[:>:]]'`;
+    });
+    // 正規表現連結、sql文化
+    getTagedPages = `AND tag_ids REGEXP ${regExpTagsArray.join(
+      ' AND tag_ids REGEXP '
+    )} `;
+  }
 
-      const query2 =
-        `SELECT user_id FROM articles WHERE user_id = ${userId} ` +
+  const skipRows = pageSize * (page - 1); // オフセット, 何ページ飛ばすか
+  const offSet = skipRows === 0 ? '' : skipRows + ',';
+
+  const query =
+    `SELECT * FROM articles WHERE user_id = ${userId} ` +
+    getPublishedOnly +
+    getTagedPages +
+    `ORDER BY created_at DESC LIMIT ` +
+    offSet +
+    ` ${pageSize}`;
+
+  try {
+    const data = (await db(query)) as TArticles;
+
+    const data2: any = await db(
+      `SELECT user_id FROM articles WHERE user_id = ${userId} ` +
         getPublishedOnly +
-        getTagedPages;
+        getTagedPages
+    );
 
-      const data2: any = await db(query2);
+    const data3 = await db(
+      `SELECT article_id, title FROM articles WHERE user_id = ${userId}`
+    );
 
-      const query3 = `SELECT article_id, title FROM articles WHERE user_id = ${userId}`;
-      const data3 = await db(query3);
+    const pagination: TPaginationParams = {
+      page: page,
+      pageCount: data2.length ? Math.ceil(data2.length / pageSize) : 0, // 全row数をpageSizeで割って切り上げ
+      pageSize: pageSize,
+      rowCount: data2.length,
+    };
 
-      const pagination: TPaginationParams = {
-        page: page,
-        pageCount: data2.length ? Math.ceil(data2.length / pageSize) : 0, // 全row数をpageSizeで割って切り上げ
-        pageSize: pageSize,
-        rowCount: data2.length,
-      };
+    const rawData: T_articles_get_return = {
+      // tag_idsをnumber[]化する、なければnullのまま
+      articles: data.length ? tagIdsFromString(data) : data,
+      pagination: pagination,
+      allArticles: data3 as TAllArticles,
+    };
 
-      const returnData: TApiResponse<T_articles_get_return> = {
-        err: false,
-        rawData: {
-          // tag_idsをnumber[]化する、なければnullのまま
-          rawData: data.length ? tagIdsFromString(data) : data,
-          pagination: pagination,
-          allArticles: data3 as TAllArticles,
-        },
-      };
+    res
+      .status(200)
+      .json({ err: false, rawData } as TApiResponse<T_articles_get_return>);
+  } catch (err) {
+    console.log('/articles/get/のエラーは ' + JSON.stringify(err));
 
-      return res.status(200).json(returnData);
-    } catch (err) {
-      console.log('/articles/get/のエラーは ' + JSON.stringify(err));
-
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
-    }
+    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
   }
 };
 
@@ -110,9 +123,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 export const config = {
   api: {
     externalResolver: true,
-    bodyParser: {
-      sizeLimit: '50mb',
-    },
   },
 };
 
