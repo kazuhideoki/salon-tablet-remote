@@ -1,5 +1,8 @@
 import React from 'react';
-import { SelectTagsPresenter } from '../app/View/tablet/Modal/Modals/SelectTags/view/SelectTags';
+import {
+  SelectTagsPresenter,
+  TSelectTagsPresenter,
+} from '../app/View/tablet/Modal/Modals/SelectTags/view/SelectTags';
 import { sampleTags } from './lib/sampleTags';
 import { ThemeProvider } from './lib/ThemeProvider';
 export default {
@@ -7,11 +10,15 @@ export default {
   component: SelectTagsPresenter,
 };
 
-const props = {
+const props: TSelectTagsPresenter = {
   tags: sampleTags,
   selectingTags: [],
-  handleSelectTag: null,
-  handleGetArticle: null,
+  handleSelectTag: () => {
+    return;
+  },
+  handleGetArticle: () => {
+    return;
+  },
 };
 
 export const Normal = () => {

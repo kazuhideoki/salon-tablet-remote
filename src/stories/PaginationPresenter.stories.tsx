@@ -6,6 +6,7 @@ import {
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 import { sampleTags } from './lib/sampleTags';
 import { withStyles, IconButton } from '@material-ui/core';
+import { TInstagramMedias } from '../app/Store/Interface';
 export default {
   title: 'Footer/Pagination/PaginationBar',
   component: PaginationBarPresenter,
@@ -14,7 +15,6 @@ export default {
 const StyledIconButton = withStyles({
   root: {
     margin: 8,
-    // border: "1px solid",
   },
   label: {
     width: '1rem',
@@ -24,7 +24,9 @@ const StyledIconButton = withStyles({
 
 const props: TUsePaginationBarProps = {
   isSetting: true,
-  getArticles: null,
+  getArticles: async () => {
+    return true;
+  },
   paginationParams: {
     page: 3,
     pageCount: 4,
@@ -32,19 +34,27 @@ const props: TUsePaginationBarProps = {
     rowCount: 18,
   },
 
-  dispatchAppState: null,
-  handleOnNumClick: null,
+  dispatchAppState: () => {
+    return;
+  },
+  handleOnNumClick: () => {
+    return;
+  },
   selectedTagNames: ['カラー', 'パーマ', '英語'],
-  selectedInstagramAccount: null,
+  selectedInstagramAccount: { id: 0, username: 'example' },
   isShowInstagram: false,
   tags: sampleTags,
   instagramAccounts: sampleInstagramAccounts,
   selectedArticlesTags: [1],
   StyledIconButton,
-  getInstagramMedias: null,
-  instagramMedias: null,
+  getInstagramMedias: async () => {
+    return;
+  },
+  instagramMedias: {} as TInstagramMedias,
   isTabletPortrait: false,
-  openModal: null,
+  openModal: () => {
+    return;
+  },
 };
 
 export const Normal = () => {
@@ -65,7 +75,9 @@ export const isTabletPortrait = () => {
 };
 const props2: TUsePaginationBarProps = {
   isSetting: true,
-  getArticles: null,
+  getArticles: async () => {
+    return true;
+  },
   paginationParams: {
     page: 3,
     pageCount: 4,
@@ -73,8 +85,12 @@ const props2: TUsePaginationBarProps = {
     rowCount: 18,
   },
 
-  dispatchAppState: null,
-  handleOnNumClick: null,
+  dispatchAppState: () => {
+    return;
+  },
+  handleOnNumClick: () => {
+    return;
+  },
   selectedTagNames: ['カラー', 'パーマ', '英語'],
   selectedInstagramAccount: {
     id: 0,
@@ -85,7 +101,9 @@ const props2: TUsePaginationBarProps = {
   instagramAccounts: sampleInstagramAccounts,
   selectedArticlesTags: [1],
   StyledIconButton,
-  getInstagramMedias: null,
+  getInstagramMedias: async () => {
+    return;
+  },
   instagramMedias: {
     data: [],
     paging: {
@@ -97,7 +115,9 @@ const props2: TUsePaginationBarProps = {
     },
   },
   isTabletPortrait: false,
-  openModal: null,
+  openModal: () => {
+    return;
+  },
 };
 
 export const Instagram表示 = () => {

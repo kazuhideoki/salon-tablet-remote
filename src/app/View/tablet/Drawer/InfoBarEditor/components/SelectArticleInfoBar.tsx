@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   makeStyles,
   Theme,
@@ -7,8 +7,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
-} from "@material-ui/core";
-import { TAllArticles } from "../../../../../Store/Interface";
+} from '@material-ui/core';
+import { TAllArticles } from '../../../../../Store/Interface';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,46 +21,45 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = {
-  AllArticles: TAllArticles
+export type TSelectArticleInfoBar = {
+  AllArticles: TAllArticles;
   articleInfoBar: number;
   setArticleInfoBar: React.Dispatch<React.SetStateAction<number>>;
   className?: string;
 };
 
-export const SelectArticleInfoBar: React.FC<Props> = ({
-         AllArticles,
-         articleInfoBar,
-         setArticleInfoBar,
-         className,
-       }) => {
-         const classes = useStyles();
+export const SelectArticleInfoBar: React.FC<TSelectArticleInfoBar> = ({
+  AllArticles,
+  articleInfoBar,
+  setArticleInfoBar,
+  className,
+}) => {
+  const classes = useStyles();
 
-         const menuItems = AllArticles.map((value) => {
-           return (
-             <MenuItem value={String(value.article_id)}>
-               {value.title}
-             </MenuItem>
-           );
-         });
+  const menuItems = AllArticles.map((value, index) => {
+    return (
+      <MenuItem key={index} value={String(value.article_id)}>
+        {value.title}
+      </MenuItem>
+    );
+  });
 
-         return (
-           <FormControl className={`${classes.formControl} ${className}`}>
-             <InputLabel id="select-app-label">記事</InputLabel>
-             <Select
-               labelId="select-app-label"
-               id="select-app"
-               value={articleInfoBar}
-               onChange={(e: React.ChangeEvent<{value: unknown }>) =>
-                 setArticleInfoBar(Number(e.target.value as string))
-               }
-               label="記事"
-             >
-               <MenuItem value="">
-                 <em>None</em>
-               </MenuItem>
-               {menuItems}
-             </Select>
-           </FormControl>
-         );
-       };
+  return (
+    <FormControl className={`${classes.formControl} ${className}`}>
+      <InputLabel id="select-app-label">記事</InputLabel>
+      <Select
+        labelId="select-app-label"
+        id="select-app"
+        value={articleInfoBar}
+        onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
+          setArticleInfoBar(Number(e.target.value as string))
+        }
+        label="記事">
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        {menuItems}
+      </Select>
+    </FormControl>
+  );
+};

@@ -21,7 +21,7 @@ const apiWrap = async <T>(
   url: string,
   params?: any
 ): Promise<TApiResponse<T>> => {
-  const str = process.browser ? server : localhost;
+  const str = typeof window !== 'undefined' ? server : localhost;
 
   try {
     const res = await fetch(str, url, params);

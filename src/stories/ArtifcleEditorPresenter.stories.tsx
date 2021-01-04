@@ -1,47 +1,82 @@
-import React from 'react';
-import { ArticleEditorPresenter, TUseArticleEditorProps } from '../app/View/tablet/Drawer/ArticleEditor/view/ArticleEditor';
-import { Provider } from './lib/ThemeProvider';
+import React, { ReactNode } from 'react';
+import {
+  ArticleEditorPresenter,
+  TUseArticleEditorProps,
+} from '../app/View/tablet/Drawer/ArticleEditor/view/ArticleEditor';
+import { CSFStory } from './lib/interface';
+import { ThemeProvider } from './lib/ThemeProvider';
+
 export default {
-  title: "Drawer/ArticleEditorPresenter",
+  title: 'Drawer/ArticleEditorPresenter',
   component: ArticleEditorPresenter,
-  decorators: [story => <Provider >{story()}</Provider>],
-};
+  decorators: [(story) => <ThemeProvider>{story()}</ThemeProvider>],
+} as CSFStory;
 
 const props: TUseArticleEditorProps = {
   isEditting: false,
-  titleText: "",
-  editorText: "",
-  setEditorText: null,
-  setEditorTextExcerpt: null,
-  createdAt: "",
-  setCreatedAt: null,
-  updatedAt: "",
-  setUpdatedAt: null,
-  setEditorImg: null,
+  titleText: '',
+  editorText: '',
+  setEditorText: () => {
+    return;
+  },
+  setEditorTextExcerpt: () => {
+    return;
+  },
+  createdAt: '',
+  setCreatedAt: () => {
+    return;
+  },
+  updatedAt: '',
+  setUpdatedAt: () => {
+    return;
+  },
+  setEditorImg: () => {
+    return;
+  },
   selectedTags: [],
-  setSelectedTags: null,
+  setSelectedTags: () => {
+    return;
+  },
   charCountArticleContent: 0,
-  setCharCountArticleContent: null,
-  handleOnChangeTitleText: null,
-  handleSubmit: null,
+  setCharCountArticleContent: () => {
+    return;
+  },
+  handleSubmit: () => {
+    return;
+  },
   tags: [],
   is_admin: false,
-  dataType: 'default_data',
-  setDataType: null,
+  setTitleText: () => {
+    return;
+  },
+  dataTypeAndSet: {
+    dataType: 'default_data',
+    setDataType: () => {
+      return;
+    },
+  },
 };
 
 export const Normal = () => {
-  const [editorText,setEditorText] = React.useState('')
+  const [editorText, setEditorText] = React.useState('');
 
   return (
-      <ArticleEditorPresenter {...props} editorText={editorText} setEditorText={setEditorText}/>
-  )
-}
+    <ArticleEditorPresenter
+      {...props}
+      editorText={editorText}
+      setEditorText={setEditorText}
+    />
+  );
+};
 export const is_Admin = () => {
-  const [editorText,setEditorText] = React.useState('')
+  const [editorText, setEditorText] = React.useState('');
 
   return (
-      <ArticleEditorPresenter {...props} editorText={editorText} setEditorText={setEditorText} is_admin={true}/>
-  )
-}
-
+    <ArticleEditorPresenter
+      {...props}
+      editorText={editorText}
+      setEditorText={setEditorText}
+      is_admin={true}
+    />
+  );
+};

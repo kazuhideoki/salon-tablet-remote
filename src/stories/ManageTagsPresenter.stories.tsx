@@ -1,50 +1,61 @@
 import React from 'react';
-import { ManageTagsPresenter } from '../app/View/tablet/Drawer/ManageTags/view/ManageTags';
+import {
+  ManageTagsPresenter,
+  TManageTagsPresenter,
+} from '../app/View/tablet/Drawer/ManageTags/view/ManageTags';
 import { sampleTags } from './lib/sampleTags';
-import { Provider } from './lib/ThemeProvider';
+import { ThemeProvider } from './lib/ThemeProvider';
 export default {
   title: 'Drawer/ManageTagsPresenter',
   component: ManageTagsPresenter,
 };
 
-const props = {
+const props: TManageTagsPresenter = {
   tags: sampleTags,
   loading: false,
   edittingTagName: '',
   isEditting: false,
   tagNameField: '',
-  setTagNameField: null,
-  edittingTagId: null,
-  handleOnClick: null,
-  handleOnCreateNew: null,
-  handleOnEditting: null,
-  deleteTag: null,
+  setTagNameField: () => {
+    return;
+  },
+  edittingTagId: 0,
+  handleOnClick: () => {
+    return;
+  },
+  handleOnCreateNew: () => {
+    return;
+  },
+  handleOnEditting: () => {
+    return;
+  },
+  deleteTag: async () => {
+    return;
+  },
   isValidTagName: () => true,
+  handleLoadingTags: () => {
+    return;
+  },
 };
 
 export const Normal = () => {
-
   return (
-    <Provider>
-    <ManageTagsPresenter {...props}/>
-    </Provider>
-  )
-}
+    <ThemeProvider>
+      <ManageTagsPresenter {...props} />
+    </ThemeProvider>
+  );
+};
 export const Loading = () => {
-
   return (
-    <Provider>
-
-      <ManageTagsPresenter {...props} loading={true}/>
-    </Provider>
-  )
-}
+    <ThemeProvider>
+      <ManageTagsPresenter {...props} loading={true} />
+    </ThemeProvider>
+  );
+};
 export const noTags = () => {
-
   return (
-    <Provider>
-      <ManageTagsPresenter {...props} tags={[]}/>
-
-    </Provider>
-  )
-}
+    <ThemeProvider>
+      <ManageTagsPresenter {...props} tags={[]} />
+    </ThemeProvider>
+  );
+};

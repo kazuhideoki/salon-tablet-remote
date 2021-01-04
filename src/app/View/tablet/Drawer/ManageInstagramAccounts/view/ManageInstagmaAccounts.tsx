@@ -33,7 +33,9 @@ export const useManageInstagramAccountsProps = () => {
     handleLoadingInstagramAccounts,
   };
 };
-type Props = ReturnType<typeof useManageInstagramAccountsProps>;
+export type TManageInstagramAccountsPresenter = ReturnType<
+  typeof useManageInstagramAccountsProps
+>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,7 +67,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ManageInstagramAccountsPresenter: React.FC<Props> = (props) => {
+export const ManageInstagramAccountsPresenter: React.FC<TManageInstagramAccountsPresenter> = (
+  props
+) => {
   const classes = useStyles();
 
   const displayInstagramAccounts = props.instagramAccounts.map(

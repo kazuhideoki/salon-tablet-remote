@@ -27,6 +27,7 @@ import { useHandleChangeFooterIconSize } from '../context/useHandleChangeFooterI
 import { useHandleChangeShowArticleType } from '../context/useHandleChangeShowArticleType';
 import { useHandleAccordion } from '../context/useHandleAccordion';
 import { useStateMangeTheme } from '../context/useStateMangeTheme';
+import firebase from 'firebase/app';
 
 export type THsl = {
   h: number;
@@ -81,6 +82,9 @@ export const useManageTheme = () => {
 };
 
 export type TUseManageThemeProps = ReturnType<typeof useManageTheme>;
+export type TUseManageThemePropsPartial = Partial<
+  ReturnType<typeof useManageTheme>
+>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

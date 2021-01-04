@@ -9,7 +9,7 @@ import {
 } from '../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
 import { TFont1, TFont2 } from '../app/Store/theme/lib/fonts';
 import { googleFontsUrl } from '../lib/googleFontsUrl';
-import { generateSecondaryColor } from '../lib/color/secondaryColor';
+import { generateSecondaryColor } from '../lib/secondaryColor';
 export default {
   title: 'Drawer/ManageTheme',
   component: ManageThemePresenter,
@@ -20,7 +20,7 @@ export const Normal = () => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleAccordion = (panel: boolean) => (
-    event: React.ChangeEvent<{}>,
+    event: React.ChangeEvent<Record<string, unknown>>,
     isExpanded: boolean
   ) => {
     setExpanded(isExpanded ? true : false);
@@ -41,7 +41,7 @@ export const Normal = () => {
   const [fontHeading, setFontHeading] = React.useState('' as TFont2[0]);
 
   const props: TUseManageThemeProps = {
-    selected_theme: null,
+    selected_theme: 'default',
     expanded,
     handleAccordion,
     theme_color: color,
@@ -78,11 +78,18 @@ export const Normal = () => {
     ) => {
       setFontHeading(event.target.value as TFont2[0]);
     },
-    show_article_type: null,
-    handleChange: null,
-    handleChangeShowArticleType: null,
+    show_article_type: 'scroll',
+    handleChange: () => {
+      return;
+    },
+    handleChangeShowArticleType: () => {
+      return;
+    },
     footerIconSize: 'medium',
-    handleChangeFooterIconSize: null,
+    handleChangeFooterIconSize: async () => {
+      return;
+    },
+    user: null,
   };
 
   return (
@@ -138,8 +145,8 @@ export const Normal = () => {
           <p>Why don’t you try it for one month?</p>
         </div>
         <div
-          //@ts-ignore
           style={{
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
             fontFamily: [font1, font2],
             lineHeight: 1.5,

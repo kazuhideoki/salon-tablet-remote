@@ -1,50 +1,60 @@
 import React from 'react';
-import { FooterPresenter } from '../app/View/tablet/Footer/Footer/view/Footer';
-import { samplefooterItems } from "./lib/sampleFooterItems";
+import {
+  FooterPresenter,
+  TFooterPresenter,
+} from '../app/View/tablet/Footer/Footer/view/Footer';
+import { samplefooterItems } from './lib/sampleFooterItems';
 import { ThemeProvider } from './lib/ThemeProvider';
 
 export default {
-  title: "Footer/Footer",
+  title: 'Footer/Footer',
   component: FooterPresenter,
 };
 
-const props = {
+const props: TFooterPresenter = {
   isSetting: true,
-  openModal: null,
-  openFooterItemModal: null,
+  openFooterItemModal: () => {
+    return;
+  },
   footerItems: samplefooterItems,
-  handleOnUpDateFooterIcon: null,
-  handleOnDeleteFooterItem: null,
-  isMobile: null,
-  deleteFooterItem: null,
+  handleOnUpDateFooterIcon: () => {
+    return;
+  },
+  isMobile: false,
+  deleteFooterItem: async () => {
+    return;
+  },
   loading: false,
+  handleLoadingFooter: () => {
+    return;
+  },
+  switchOrder: async () => {
+    return;
+  },
 };
 
 export const Normal = () => {
-
   return (
     <ThemeProvider>
       <FooterPresenter {...props} />
     </ThemeProvider>
   );
-}
+};
 export const Loading = () => {
-
   return (
     <ThemeProvider>
-    <FooterPresenter {...props} loading={true}/>
-    </ThemeProvider>
-  )
-}
-
-export const NormalIsSettingFalse = () => {
-
-  return (
-    <ThemeProvider>
-    <FooterPresenter {...props} isSetting={false} />
+      <FooterPresenter {...props} loading={true} />
     </ThemeProvider>
   );
-}
+};
+
+export const NormalIsSettingFalse = () => {
+  return (
+    <ThemeProvider>
+      <FooterPresenter {...props} isSetting={false} />
+    </ThemeProvider>
+  );
+};
 
 const footerItems = samplefooterItems
   .concat(samplefooterItems)
@@ -54,7 +64,7 @@ const footerItems = samplefooterItems
 export const ManyIcon = () => {
   return (
     <ThemeProvider>
-    <FooterPresenter {...props} footerItems={footerItems} />
+      <FooterPresenter {...props} footerItems={footerItems} />
     </ThemeProvider>
   );
 };

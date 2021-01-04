@@ -1,23 +1,22 @@
 import React from 'react';
-import { SelectArticleInfoBar } from '../app/View/tablet/Drawer/InfoBarEditor/components/SelectArticleInfoBar';
+import {
+  SelectArticleInfoBar,
+  TSelectArticleInfoBar,
+} from '../app/View/tablet/Drawer/InfoBarEditor/components/SelectArticleInfoBar';
 import { sampleAllArticles } from './lib/sampleAllArticles';
 export default {
-  title: "Drawer/InfoBar/SelectArticleOnInfoBar",
+  title: 'Drawer/InfoBar/SelectArticleOnInfoBar',
   component: SelectArticleInfoBar,
 };
 
-
 export const Normal = () => {
-    const [articleInfoBar, setArticleInfoBar] = React.useState(null as number);
+  const [articleInfoBar, setArticleInfoBar] = React.useState(2);
 
+  const props: TSelectArticleInfoBar = {
+    AllArticles: sampleAllArticles,
+    articleInfoBar,
+    setArticleInfoBar,
+  };
 
-  const props ={
-  AllArticles: sampleAllArticles,
-  articleInfoBar,
-  setArticleInfoBar,
+  return <SelectArticleInfoBar {...props} />;
 };
-
-  return (
-    <SelectArticleInfoBar {...props}/>
-  )
-}

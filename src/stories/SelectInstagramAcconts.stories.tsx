@@ -1,13 +1,19 @@
-import React from "react";
-import { SelectInstagramAccountsPresenter } from "../app/View/tablet/Modal/Modals/SelectInstagramAccounts/view/SelectInstagramAccounts";
+import React from 'react';
+import {
+  SelectInstagramAccountsPresenter,
+  TSelectInstagramAccountsPresenter,
+} from '../app/View/tablet/Modal/Modals/SelectInstagramAccounts/view/SelectInstagramAccounts';
+import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 export default {
-  title: "Footer/SelectInstagramAccountsPresenter",
+  title: 'Footer/SelectInstagramAccountsPresenter',
   component: SelectInstagramAccountsPresenter,
 };
 
-const props = {
-  instagramAccounts: null,
-  getInstagramMedias: null,
+const props: TSelectInstagramAccountsPresenter = {
+  instagramAccounts: sampleInstagramAccounts,
+  getInstagramMedias: async () => {
+    return;
+  },
   isSetting: false,
   isMobile: false,
 };

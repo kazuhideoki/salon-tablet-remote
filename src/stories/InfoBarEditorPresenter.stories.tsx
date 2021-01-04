@@ -1,5 +1,8 @@
 import React from 'react';
-import {InfoBarEditorPresenter} from '../app/View/tablet/Drawer/InfoBarEditor/view/InfoBarEditor';
+import {
+  InfoBarEditorPresenter,
+  TUseInfoBarEditorProps,
+} from '../app/View/tablet/Drawer/InfoBarEditor/view/InfoBarEditor';
 import { T_info_bar_type } from '../app/Store/Interface';
 import { sampleAllArticles } from './lib/sampleAllArticles';
 export default {
@@ -7,16 +10,15 @@ export default {
   component: InfoBarEditorPresenter,
 };
 
-
 export const Normal = () => {
   const [editorText, setEditorText] = React.useState('');
   const [charCount, setCharCount] = React.useState(0);
-  const [infoBarType, setInfoBarType] = React.useState('shop_name' as T_info_bar_type);
-  const [articleInfoBar, setArticleInfoBar] = React.useState(null as number);
+  const [infoBarType, setInfoBarType] = React.useState(
+    'shop_name' as T_info_bar_type
+  );
+  const [articleInfoBar, setArticleInfoBar] = React.useState(2);
 
-
-  
-  const props = {
+  const props: TUseInfoBarEditorProps = {
     editorText,
     setEditorText,
     charCount,
@@ -26,11 +28,10 @@ export const Normal = () => {
     articleInfoBar,
     setArticleInfoBar,
     allArticles: sampleAllArticles,
-    handleSubmit: null,
+    updateInfoBar: async () => {
+      return;
+    },
   };
 
-
-  return (
-    <InfoBarEditorPresenter {...props}/>
-  )
-}
+  return <InfoBarEditorPresenter {...props} />;
+};

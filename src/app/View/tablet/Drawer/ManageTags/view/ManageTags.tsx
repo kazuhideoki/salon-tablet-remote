@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   TextField,
   Button,
@@ -7,8 +7,8 @@ import {
   Theme,
   createStyles,
   Typography,
-} from "@material-ui/core";
-import { CharCounter } from "../../../../../pureComponents/CharCounter";
+} from '@material-ui/core';
+import { CharCounter } from '../../../../../pureComponents/CharCounter';
 import { Skeleton } from '@material-ui/lab';
 import { useHandleOnClick } from '../context/useHandleOnClick';
 import { useIsValidTagName } from '../context/useIsValidTagName';
@@ -27,12 +27,16 @@ export const useManageTagsProps = () => {
     edittingTagName,
     handleOnEditting,
     handleOnCreateNew,
-  } = useStateMangeTags()
-  
+  } = useStateMangeTags();
+
   const deleteTag = useDeleteTag();
-  const handleOnClick = useHandleOnClick(isEditting, edittingTagId,tagNameField)
-  const isValidTagName = useIsValidTagName(tagNameField)
-  const handleLoadingTags = useHandleLoadingTags()
+  const handleOnClick = useHandleOnClick(
+    isEditting,
+    edittingTagId,
+    tagNameField
+  );
+  const isValidTagName = useIsValidTagName(tagNameField);
+  const handleLoadingTags = useHandleLoadingTags();
 
   return {
     tags,
@@ -49,9 +53,9 @@ export const useManageTagsProps = () => {
     isValidTagName,
     handleLoadingTags,
   };
-}
+};
 
-type Props = ReturnType<typeof useManageTagsProps>
+export type TManageTagsPresenter = ReturnType<typeof useManageTagsProps>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: `0 ${theme.spacing(2)}px ${theme.spacing(2)}px`,
     },
     textFieldAndButton: {
-      display: "flex",
+      display: 'flex',
       marginBottom: theme.spacing(2),
     },
     textField: {
@@ -75,8 +79,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: `0 ${theme.spacing(2)}px`,
     },
     tagsWrap: {
-      display: "flex",
-      flexWrap: "wrap",
+      display: 'flex',
+      flexWrap: 'wrap',
       margin: `0 ${theme.spacing(2)}px`,
     },
     tag: {
@@ -90,32 +94,37 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ManageTagsPresenter:React.FC<Props> = (props) => {
+export const ManageTagsPresenter: React.FC<TManageTagsPresenter> = (props) => {
   const classes = useStyles();
 
   const displayTags = props.tags.map((value, key) => {
-          if (props.loading) {
-            return <Skeleton variant="rect" className={`${classes.tag} ${classes.skeleton}`} />;
-          }
+    if (props.loading) {
+      return (
+        <Skeleton
+          variant="rect"
+          className={`${classes.tag} ${classes.skeleton}`}
+        />
+      );
+    }
 
-          return (
-            <Chip
-              key={key}
-              className={classes.tag}
-              label={value.tag_name}
-              color={
-                value.tag_id === props.edittingTagId ? "primary" : undefined
-              }
-              onClick={
-                props.isEditting && value.tag_id === props.edittingTagId // 編集中にもう一度タップすると新規作成に戻る
-                  ? () => props.handleOnCreateNew()
-                  : () => props.handleOnEditting(value.tag_id, value.tag_name)
-              }
-              onDelete={() => props.deleteTag(value.tag_id)}
-            />
-          );
-        })
-  const noTags = <Typography variant="subtitle1">タグが作成されていません</Typography>
+    return (
+      <Chip
+        key={key}
+        className={classes.tag}
+        label={value.tag_name}
+        color={value.tag_id === props.edittingTagId ? 'primary' : undefined}
+        onClick={
+          props.isEditting && value.tag_id === props.edittingTagId // 編集中にもう一度タップすると新規作成に戻る
+            ? () => props.handleOnCreateNew()
+            : () => props.handleOnEditting(value.tag_id, value.tag_name)
+        }
+        onDelete={() => props.deleteTag(value.tag_id)}
+      />
+    );
+  });
+  const noTags = (
+    <Typography variant="subtitle1">タグが作成されていません</Typography>
+  );
 
   return (
     <div className={classes.root}>
@@ -125,7 +134,7 @@ export const ManageTagsPresenter:React.FC<Props> = (props) => {
       <Typography variant="h5" component="p" className={classes.edittingInfo}>
         {props.isEditting
           ? `タグ"${props.edittingTagName}"を編集中`
-          : "新規作成"}
+          : '新規作成'}
       </Typography>
       <div className={classes.textFieldAndButton}>
         <TextField
@@ -135,7 +144,7 @@ export const ManageTagsPresenter:React.FC<Props> = (props) => {
           value={props.tagNameField}
           onChange={(e) => props.setTagNameField(e.target.value)}
           onKeyPress={(e) => {
-            if (e.key == "Enter") {
+            if (e.key == 'Enter') {
               e.preventDefault();
               props.handleOnClick();
             }
@@ -148,9 +157,8 @@ export const ManageTagsPresenter:React.FC<Props> = (props) => {
         <Button
           onClick={() => props.handleOnClick()}
           disabled={!props.isValidTagName()}
-          className={classes.button}
-        >
-          {props.isEditting ? "更新" : "作成"}
+          className={classes.button}>
+          {props.isEditting ? '更新' : '作成'}
         </Button>
       </div>
 
@@ -159,10 +167,10 @@ export const ManageTagsPresenter:React.FC<Props> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export const ManageTags = () => {
-  const props = useManageTagsProps()
+  const props = useManageTagsProps();
 
-  return <ManageTagsPresenter {...props}/>
-}
+  return <ManageTagsPresenter {...props} />;
+};

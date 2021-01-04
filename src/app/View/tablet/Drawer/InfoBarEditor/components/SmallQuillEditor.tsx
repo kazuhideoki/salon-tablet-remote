@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 
-type Props = {
+export type TSmallQuillEditor = {
   editorText: string;
   setEditorText: React.Dispatch<React.SetStateAction<string>>;
   setCharCount: React.Dispatch<React.SetStateAction<number>>;
 };
-export const SmallQuillEditor: React.FC<Props> = ({
+export const SmallQuillEditor: React.FC<TSmallQuillEditor> = ({
   editorText,
   setEditorText,
   setCharCount,
