@@ -1,5 +1,4 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import {
   createStyles,
   makeStyles,
@@ -81,12 +80,12 @@ const handleSignin = async (email: string, password: string) => {
   } catch (err) {
     console.log('handleSigninは ' + err);
     alert('エラーによりサインイン出来ませんでした');
+    return null;
   }
 };
 
 const SigninForm = () => {
   const [isClicked, setIsClicked] = React.useState(false);
-  const isTabletPortrait = useMediaQuery('(max-width:800px)');
   const classes = useStylesAuthForm();
 
   return (
@@ -126,6 +125,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: {} };
   } catch (err) {
     console.log(`signin.tsx gSSP: ${err}`);
+    return { props: {} };
   }
 };
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, makeStyles, createStyles } from '@material-ui/core';
-import { MoodBad } from '@material-ui/icons';
 import { IconAndText } from '../components/IconAndText';
 import { IconsSetting } from '../../../Drawer/FooterItemEditor/components/iconSelect/icons';
 import { EditButtonsBox } from '../../../../../pureComponents/buttons/EditButtonsBox';
@@ -147,11 +146,9 @@ export const FooterPresenter: React.FC<Props> = (props) => {
                 props.isSetting ? classes.isSettingIconAndText : undefined
               }
               icon={
-                value.displayed_icon_name
-                  ? IconsSetting.convertIconComponentFromName(
-                      value.displayed_icon_name
-                    )[0]
-                  : MoodBad
+                IconsSetting.convertIconComponentFromName(
+                  value.displayed_icon_name
+                )[0]
               }
               onClick={() => props.openFooterItemModal(value)}
               text={value.icon_name}
@@ -167,14 +164,12 @@ export const FooterPresenter: React.FC<Props> = (props) => {
               target="_blank">
               <IconAndText
                 className={
-                  props.isSetting ? classes.isSettingIconAndText : null
+                  props.isSetting ? classes.isSettingIconAndText : undefined
                 }
                 icon={
-                  value.displayed_icon_name
-                    ? IconsSetting.convertIconComponentFromName(
-                        value.displayed_icon_name
-                      )[0]
-                    : MoodBad
+                  IconsSetting.convertIconComponentFromName(
+                    value.displayed_icon_name
+                  )[0]
                 }
                 text={value.icon_name}
                 loading={props.loading}

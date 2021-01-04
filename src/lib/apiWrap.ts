@@ -1,6 +1,6 @@
 import { server, localhost } from './loadUrl';
 
-export type TApiResponse<T = void> = { err: boolean; rawData: T };
+export type TApiResponse<T = null> = { err: boolean; rawData: T };
 // | { err: true; data: string };
 
 const fetchPost = async (str: string, url: string, params: any) => {
@@ -19,29 +19,24 @@ const fetchGet = async (str: string, url: string) => {
 const apiWrap = async <T>(
   fetch: any,
   url: string,
-  params?: any,
-  returning = true
+  params?: any
 ): Promise<TApiResponse<T>> => {
   const str = process.browser ? server : localhost;
 
   try {
     const res = await fetch(str, url, params);
-    if (returning) {
-      const result = (await res.json()) as TApiResponse;
-      if (result.err) throw result.rawData;
-      return result;
-    }
+    const result = (await res.json()) as TApiResponse<T>;
+    if (result.err) throw result.rawData; // エラー内容をthrowする
+    return result;
   } catch (err) {
     throw `${url}: ${err}`;
   }
 };
 
-export const apiWrapPost = async <T = void>(
+export const apiWrapPost = async <T = null>(
   url: string,
-  params: any,
-  returning = true
-): Promise<TApiResponse<T>> =>
-  await apiWrap<T>(fetchPost, url, params, returning);
+  params: any
+): Promise<TApiResponse<T>> => await apiWrap<T>(fetchPost, url, params);
 
-export const apiWrapGet = async <T = void>(url: string, returning = true) =>
-  apiWrap<T>(fetchGet, url, null, returning);
+export const apiWrapGet = async <T = null>(url: string) =>
+  apiWrap<T>(fetchGet, url, null);

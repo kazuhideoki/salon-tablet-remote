@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 import { TagsContext } from '../../../../../Store/tags/Context';
 
@@ -6,10 +6,10 @@ export const useStateMangeTags = () => {
   const { appState } = React.useContext(AppStateContext);
   const { loading } = appState;
   const { tags } = React.useContext(TagsContext);
-  const [tagNameField, setTagNameField] = React.useState("");
+  const [tagNameField, setTagNameField] = React.useState('');
   const [isEditting, setIsEditting] = React.useState(false);
   const [edittingTagId, setEditingTagId] = React.useState(0);
-  const [edittingTagName, setEditingTagName] = React.useState("");
+  const [edittingTagName, setEditingTagName] = React.useState('');
 
   const handleOnEditting = (TagId: number, tagName: string) => {
     setIsEditting(true);
@@ -20,8 +20,8 @@ export const useStateMangeTags = () => {
 
   const handleOnCreateNew = () => {
     setIsEditting(false);
-    setEditingTagId(null);
-    setTagNameField("");
+    setEditingTagId(0);
+    setTagNameField('');
   };
 
   return {
@@ -35,4 +35,4 @@ export const useStateMangeTags = () => {
     handleOnEditting,
     handleOnCreateNew,
   };
-}
+};

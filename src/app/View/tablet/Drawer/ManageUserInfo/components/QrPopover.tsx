@@ -7,7 +7,7 @@ import { TUseSettingUserInfoProps } from '../view/ManageUserInfo';
 import QRCode from 'qrcode.react';
 import { server } from '../../../../../../lib/loadUrl';
 import { useReactToPrint } from 'react-to-print';
-import { qrCodeForPrint } from './qrCodeForPrint';
+import { QrCodeForPrint } from './QrCodeForPrint';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IconButton } from '@material-ui/core';
 import { FileCopyOutlined, PrintOutlined } from '@material-ui/icons';
@@ -45,7 +45,7 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
   const open = Boolean(qrAnchorEl);
   const id = open ? 'qr-popover' : undefined;
 
-  const ref = React.useRef();
+  const ref = React.useRef(null);
   const handlePrint = useReactToPrint({
     content: () => ref.current,
     documentTitle: props.userInfo.shop_name,
@@ -99,7 +99,9 @@ export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
           </IconButton>
 
           {/* 印刷用。 */}
-          <div style={{ display: 'none' }}>{qrCodeForPrint(props, ref)}</div>
+          <div style={{ display: 'none' }}>
+            <QrCodeForPrint {...props} ref />
+          </div>
         </div>
       </Popover>
     </>

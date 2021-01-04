@@ -20,8 +20,8 @@ export type T_updated_at_user = string;
 
 export type TUserInfo = {
   user_id: T_user_id;
-  user_name: T_user_name | null;
-  shop_name: T_shop_name | null;
+  user_name: T_user_name;
+  shop_name: T_shop_name;
   user_email: T_user_email;
   show_article_type: T_show_article_type;
   is_first_sign_in: boolean;
@@ -89,15 +89,15 @@ export type TAllArticles = {
 export type T_footer_item_id = number;
 export type T_is_published_footer_items = boolean;
 export type T_created_at_footer_items = string;
-export type T_updated_at_footer_items = string | null;
-export type T_icon_name = string | null;
-export type T_displayed_icon_name = string | null;
+export type T_updated_at_footer_items = string;
+export type T_icon_name = string;
+export type T_displayed_icon_name = string;
 export type T_on_tap = 'modal' | 'link' | 'appLink' | 'google';
 // export type T_on_sidebar = boolean
-export type T_item_content = string | null;
-export type T_item_excerpt = string | null;
-export type T_link_url = string | null;
-export type T_app_link_url = string | null;
+export type T_item_content = string;
+export type T_item_excerpt = string;
+export type T_link_url = string;
+export type T_app_link_url = string;
 export type T_modal_size =
   | 'fullScreen'
   | 'large'
@@ -112,14 +112,14 @@ export type FooterItemWithoutId = {
   is_published: T_is_published_footer_items;
   created_at: T_created_at_footer_items;
   updated_at: T_updated_at_footer_items | null;
-  icon_name: T_icon_name | null;
-  displayed_icon_name: T_displayed_icon_name | null;
+  icon_name: T_icon_name;
+  displayed_icon_name: T_displayed_icon_name;
   on_tap: T_on_tap;
   // on_sidebar: T_on_sidebar
-  item_content: T_item_content | null;
-  item_excerpt: T_item_excerpt | null;
-  link_url: T_link_url | null;
-  app_link_url: T_app_link_url | null;
+  item_content: T_item_content;
+  item_excerpt: T_item_excerpt;
+  link_url: T_link_url;
+  app_link_url: T_app_link_url;
   modal_size: T_modal_size;
   order: T_order;
   order_sidebar: T_order_sidebar;
@@ -144,7 +144,7 @@ export type TInfoBarWithoutId = {
   info_bar_type: T_info_bar_type;
   scrolling_sentence: T_scrolling_sentence;
   scrolling_animation_duration: T_scrolling_animation_duration;
-  selected_article_id: T_selected_article_id;
+  selected_article_id: T_selected_article_id | null;
 };
 
 export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id };

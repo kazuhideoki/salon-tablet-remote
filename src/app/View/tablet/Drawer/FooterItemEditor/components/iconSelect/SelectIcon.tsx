@@ -32,7 +32,6 @@ export const SelectIcon: React.FC<Props> = ({
   selectedIcon,
   dispatchSelectedIcon,
   className,
-  onTapRadio,
 }) => {
   const classes = useStyles();
 

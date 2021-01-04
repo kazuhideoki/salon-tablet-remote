@@ -42,12 +42,12 @@ export class Toolbar {
 
   // The toolbar and its children will be destroyed when the overlay is removed
   onDestroy = (): void => {
-    return null;
+    return;
   };
 
   // Nothing to update on drag because we are are positioned relative to the overlay
   onUpdate = (): void => {
-    return null;
+    return;
   };
 
   _defineAlignments = (): void => {
@@ -59,7 +59,7 @@ export class Toolbar {
         },
         //  isApplied: () => FloatStyle.value(this.img) == "left",
         isApplied: (): void => {
-          return null;
+          return;
         },
       },
       {
@@ -69,7 +69,7 @@ export class Toolbar {
         },
         //  isApplied: () => MarginStyle.value(this.img) == "auto",
         isApplied: (): void => {
-          return null;
+          return;
         },
       },
       {
@@ -79,7 +79,7 @@ export class Toolbar {
         },
         //  isApplied: () => FloatStyle.value(this.img) == "right",
         isApplied: (): void => {
-          return null;
+          return;
         },
       },
     ];

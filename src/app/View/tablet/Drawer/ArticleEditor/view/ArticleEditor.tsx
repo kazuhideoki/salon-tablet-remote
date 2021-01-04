@@ -55,7 +55,6 @@ const useArticleEditorProps = () => {
   } = useStateArticleEditor();
 
   const params: TCreateArticle = {
-    is_published: null,
     titleText,
     editorText,
     editorTextExcerpt,
@@ -64,7 +63,7 @@ const useArticleEditorProps = () => {
     dataType,
   };
 
-  const handleSubmit = useHandleSubmit(params, isEditting);
+  const handleSubmit = useHandleSubmit({ params, isEditting });
 
   const dataTypeAndSet: TDataTypeAndSet<T_data_type_article> = {
     dataType,

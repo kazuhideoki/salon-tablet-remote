@@ -3,11 +3,11 @@ import { GetServerSideProps } from 'next';
 import { generateProps } from '../../lib/generateProps';
 import App from '../../app/View/App';
 import Head from 'next/head';
-import parser from 'ua-parser-js';
 import { TIndexProps } from '..';
 import { checkIsGeneratePubulicPage } from '../../lib/checkIsGeneratePubulicPage';
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
 import { TUserInfo } from '../../app/Store/Interface';
+import { getDeviceType } from '../../lib/getDeviceType';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +20,21 @@ const useStyles = makeStyles((theme: Theme) =>
 const PublicPage = (props: TIndexProps) => {
   const classes = useStyles();
 
-  if (props.isPublicPage === false) {
+  if (props.data && props.session) {
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex" />
+        </Head>
+        <App
+          data={props.data}
+          isPublicPage={props.isPublicPage}
+          device={props.device}
+          session={props.session}
+        />
+      </>
+    );
+  } else {
     return (
       <>
         <Head>
@@ -38,24 +52,13 @@ const PublicPage = (props: TIndexProps) => {
       </>
     );
   }
-
-  return (
-    <>
-      <Head>
-        <meta name="robots" content="noindex" />
-      </Head>
-      <App {...props} />
-    </>
-  );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
-  res,
   query,
 }) => {
-  const ua = new parser.UAParser(req.headers['user-agent']);
-  const device = ua.getDevice().type;
+  const device = getDeviceType(req);
 
   const slug = req.url;
   let userInfo: TUserInfo | null = null;
@@ -74,7 +77,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   const returnData: TIndexProps = {
     data: await generateProps(userInfo, true),
     isPublicPage: true,
-    samplePage: (query.sample as string) || undefined,
     device: device,
     // sessionを入れてAppBarを表示させなくする
     session: { email: 'sample@sample.com', emailVerified: true },
