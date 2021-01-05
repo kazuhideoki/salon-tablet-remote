@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  T_articles_get,
+  ApiArticlesGet,
   apiArticlesGet,
 } from '../../../pages/api/articles/get';
 import { ArticlesContext } from '../../store/articles/Context';
@@ -28,7 +28,7 @@ export const useGetArticles = () => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
-    const params: T_articles_get = {
+    const params: ApiArticlesGet = {
       page,
       selectingTags: selectingTags || [],
       isSetting: isSetting,

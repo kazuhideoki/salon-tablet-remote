@@ -16,10 +16,7 @@ import { TopPage } from '../app/components/pages/TopPage';
 import { generateProps } from '../util/db/generateProps';
 import { SEO } from '../app/components/pages/SEO';
 import { getDeviceType } from '../util/getDeviceType';
-import {
-  apiGetSession,
-  T_auth_get_session_return,
-} from './api/auth/get_session';
+import { apiGetSession, ApiGetSessionReturn } from './api/auth/get_session';
 import { apiGetUserInfoFromEmail } from './api/user_info/get';
 
 export type TIndexPropsData = {
@@ -37,7 +34,7 @@ export type TIndexProps = {
   data: TIndexPropsData | null;
   isPublicPage: boolean;
   device: UaDeviceType;
-  session: T_auth_get_session_return | null;
+  session: ApiGetSessionReturn | null;
 };
 
 const Index: React.FC<TIndexProps> = (props) => {

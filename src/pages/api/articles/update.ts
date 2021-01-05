@@ -7,12 +7,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesUpdate = async (
-  params: T_articles_update
+  params: ApiArticlesUpdate
 ): Promise<TApiResponse> => {
   return apiWrapPost('articles/update', params);
 };
 
-export type T_articles_update_params = {
+export type ApiArticlesUpdateParams = {
   is_published: boolean;
   title: string;
   article_content: string;
@@ -22,14 +22,14 @@ export type T_articles_update_params = {
   data_type: DataTypeArticle;
 };
 // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
-export type T_articles_update = {
-  params: T_articles_update_params;
+export type ApiArticlesUpdate = {
+  params: ApiArticlesUpdateParams;
   article_id: number;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { params }: T_articles_update = req.body;
+    const { params }: ApiArticlesUpdate = req.body;
     const id: number = req.body.article_id;
 
     try {

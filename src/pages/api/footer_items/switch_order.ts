@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsSwitchOrder = async (
-  params: T_footer_items_switch_order
+  params: ApiFooterItemsSwitchOrder
 ): Promise<TApiResponse> => {
   return apiWrapPost('footer_items/switch_order', params);
 };
 
-export type T_footer_items_switch_order = {
+export type ApiFooterItemsSwitchOrder = {
   smaller: {
     footer_item_id: number;
     order: number;
@@ -25,7 +25,7 @@ export type T_footer_items_switch_order = {
 
 const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { smaller, larger }: T_footer_items_switch_order = req.body;
+    const { smaller, larger }: ApiFooterItemsSwitchOrder = req.body;
 
     //  ※db操作まとめる
 

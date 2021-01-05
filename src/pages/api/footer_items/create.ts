@@ -11,12 +11,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (
-  params: T_footer_items_create
+  params: ApiFooterItemsCreate
 ): Promise<TApiResponse> => {
   return apiWrapPost('footer_items/create', params);
 };
 
-export type T_footer_items_params = {
+export type ApiFooterItemsParams = {
   is_published: boolean;
   icon_name: string;
   displayed_icon_name: string | null;
@@ -32,13 +32,13 @@ export type T_footer_items_params = {
   data_type: DataTypeFooterItem;
 };
 
-export type T_footer_items_create = T_footer_items_params & {
+export type ApiFooterItemsCreate = ApiFooterItemsParams & {
   user_id: number;
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const params: T_footer_items_create = req.body;
+    const params: ApiFooterItemsCreate = req.body;
 
     try {
       const isAdmin = await checkIsAdmin({ req });

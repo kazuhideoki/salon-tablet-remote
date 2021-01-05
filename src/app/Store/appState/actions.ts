@@ -7,7 +7,7 @@ import {
   SetModal,
 } from '../../../util/interface/Interface';
 import { TFooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
-import { T_articles_get_return } from '../../../pages/api/articles/get';
+import { ApiArticlesGetReturn } from '../../../pages/api/articles/get';
 
 export const setModal = (value: SetModal) => ({
   type: types.OPEN_MODAL,
@@ -85,7 +85,7 @@ export const isShowInstagram = (value: boolean) => ({
 });
 
 export const setArticlesAppState = (value: {
-  data: T_articles_get_return;
+  data: ApiArticlesGetReturn;
   selectedArticlesTags: number[];
   isSetting: boolean;
   showArticles: boolean;

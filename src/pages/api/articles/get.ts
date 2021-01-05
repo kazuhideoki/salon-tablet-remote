@@ -10,8 +10,8 @@ import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (
-  params: T_articles_get
-): Promise<TApiResponse<T_articles_get_return>> => {
+  params: ApiArticlesGet
+): Promise<TApiResponse<ApiArticlesGetReturn>> => {
   const { page, selectingTags, isSetting, userId } = params;
   console.log('apiArticlesGetだよ');
 
@@ -20,14 +20,14 @@ export const apiArticlesGet = async (
   );
 };
 
-export type T_articles_get = {
+export type ApiArticlesGet = {
   page: number;
   selectingTags: number[];
   isSetting: boolean;
   userId: number;
 };
 
-export type T_articles_get_return = {
+export type ApiArticlesGetReturn = {
   articles: Articles;
   pagination: PaginationParams;
   allArticles: TAllArticles;
@@ -47,7 +47,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const isSetting: boolean = req.query.isSetting === 'true' ? true : false;
   const userId = Number(req.query.userId) as number;
 
-  const ArticleGet: T_articles_get = {
+  const ArticleGet: ApiArticlesGet = {
     page,
     selectingTags,
     isSetting,
@@ -91,7 +91,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       rowCount: data2.length,
     };
 
-    const rawData: T_articles_get_return = {
+    const rawData: ApiArticlesGetReturn = {
       // tag_idsをnumber[]化する、なければnullのまま
       articles: data.length ? tagIdsFromString(data) : data,
       pagination: pagination,
@@ -100,7 +100,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res
       .status(200)
-      .json({ err: false, rawData } as TApiResponse<T_articles_get_return>);
+      .json({ err: false, rawData } as TApiResponse<ApiArticlesGetReturn>);
   } catch (err) {
     console.log('/articles/get/のエラーは ' + JSON.stringify(err));
 

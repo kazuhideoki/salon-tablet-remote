@@ -6,8 +6,8 @@ import { server, localhost } from '../../../util/loadUrl';
 import { parseCookies } from 'nookies';
 
 export const apiGetSession = async (
-  params: T_auth_get_session
-): Promise<T_auth_get_session_return | null> => {
+  params: ApiGetSession
+): Promise<ApiGetSessionReturn | null> => {
   const str = typeof window !== 'undefined' ? server : localhost;
 
   const st_token = parseCookies({ req: params.req })['st_token'];
@@ -22,7 +22,7 @@ export const apiGetSession = async (
       body: JSON.stringify({ st_token }),
     });
 
-    const result = (await res.json()) as TApiResponse<T_auth_get_session_return>;
+    const result = (await res.json()) as TApiResponse<ApiGetSessionReturn>;
     if (result.err) return null;
     if (result.rawData.email === null) return null;
 
@@ -32,31 +32,31 @@ export const apiGetSession = async (
   }
 };
 
-export type T_auth_get_session = {
+export type ApiGetSession = {
   req: NextApiRequest | IncomingMessage;
 };
-export type T_auth_get_session_body = {
+export type ApiGetSession_body = {
   st_token: string;
 };
 
-export type T_auth_get_session_return = {
+export type ApiGetSessionReturn = {
   email: string | null;
   emailVerified: boolean | null;
 };
 
 const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { st_token }: T_auth_get_session_body = req.body;
+  const { st_token }: ApiGetSession_body = req.body;
 
   try {
     const token = await firebaseAdmin.auth().verifyIdToken(st_token);
 
-    const rawData: T_auth_get_session_return = {
+    const rawData: ApiGetSessionReturn = {
       email: token.email || null,
       emailVerified: token.email_verified || null,
     };
     res
       .status(200)
-      .json({ err: false, rawData } as TApiResponse<T_auth_get_session_return>);
+      .json({ err: false, rawData } as TApiResponse<ApiGetSessionReturn>);
   } catch (err) {
     return res.status(500).json({ err: true, rawData: err } as TApiResponse);
   }

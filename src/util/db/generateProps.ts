@@ -1,5 +1,5 @@
 import { InfoBarData, UserInfo } from '../interface/Interface';
-import { T_articles_get, apiArticlesGet } from '../../pages/api/articles/get';
+import { ApiArticlesGet, apiArticlesGet } from '../../pages/api/articles/get';
 import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';
 import { apiInstagramAccountsGet } from '../../pages/api/instagram_accounts/get';
@@ -12,7 +12,7 @@ export const generateProps = async (
 ): Promise<TIndexPropsData> => {
   const { user_id } = userInfo;
   // 記事一覧取得
-  const articlesParam: T_articles_get = {
+  const articlesParam: ApiArticlesGet = {
     page: 1,
     selectingTags: [],
     isSetting: getPublishedOnly ? false : true,

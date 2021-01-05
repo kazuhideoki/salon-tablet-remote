@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsDelete = async (
-  params: T_footer_items_delete
+  params: ApiFooterItemsDelete
 ): Promise<TApiResponse> => {
   return apiWrapPost('footer_items/delete', params);
 };
 
-export type T_footer_items_delete = {
+export type ApiFooterItemsDelete = {
   footer_item_id: number;
   order: number;
 };
@@ -20,7 +20,7 @@ const footer_items_delete = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    const { footer_item_id, order }: T_footer_items_delete = req.body;
+    const { footer_item_id, order }: ApiFooterItemsDelete = req.body;
 
     try {
       const data = await db(

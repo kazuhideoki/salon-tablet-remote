@@ -11,7 +11,7 @@ import { useGetFooterItems } from './useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
 import {
-  T_footer_items_create,
+  ApiFooterItemsCreate,
   apiFooterItemsCreate,
 } from '../../../pages/api/footer_items/create';
 import { FooterItemsContext } from '../../store/footerItems/Context';
@@ -88,7 +88,7 @@ export const useCreateFooterItem = () => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingFooter(true));
 
-    const params: T_footer_items_create = {
+    const params: ApiFooterItemsCreate = {
       ...generateFooterItemEdittingParams(param, footerItems),
       is_published: param.is_published,
       user_id: userInfo.user_id,

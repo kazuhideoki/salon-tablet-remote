@@ -4,14 +4,14 @@ import { AppMobile } from './mobile/AppMobile';
 import { AppTablet } from './tablet/AppTablet';
 import { useIsMobile } from '../../util/useIsMobile';
 import { TIndexProps, TIndexPropsData } from '../../pages';
-import { T_auth_get_session_return } from '../../pages/api/auth/get_session';
+import { ApiGetSessionReturn } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../store/userInfo/Context';
 import { StoreContextProvider } from '../store/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
 import { UaDeviceType } from '../../util/interface/Interface';
 
 type TAppViewProps = {
-  session: T_auth_get_session_return;
+  session: ApiGetSessionReturn;
 };
 
 const AppView = ({ session }: TAppViewProps) => {
@@ -46,7 +46,7 @@ type TApp = {
   data: TIndexPropsData;
   isPublicPage: boolean;
   device: UaDeviceType;
-  session: T_auth_get_session_return;
+  session: ApiGetSessionReturn;
 };
 
 export const App = (props: TApp) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useGetArticles } from './useGetArticles';
 import { TCreateArticle } from './useCreateArticle';
 import {
-  T_articles_update,
+  ApiArticlesUpdate,
   apiArticlesUpdate,
 } from '../../../pages/api/articles/update';
 import { ArticlesContext } from '../../store/articles/Context';
@@ -21,7 +21,7 @@ export const useUpdateArticle = () => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
-    const params: T_articles_update = {
+    const params: ApiArticlesUpdate = {
       // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
       params: {
         is_published: isPublished,

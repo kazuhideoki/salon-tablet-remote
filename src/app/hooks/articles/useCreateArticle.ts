@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetArticles } from './useGetArticles';
 import {
-  T_articles_create,
+  ApiArticlesCreate,
   apiArticlesCreate,
 } from '../../../pages/api/articles/create';
 import { DataTypeArticle } from '../../../util/interface/Interface';
@@ -26,7 +26,7 @@ export const useCreateArticle = () => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
-    const params: T_articles_create = {
+    const params: ApiArticlesCreate = {
       is_published: isPublished,
       title: param.titleText,
       article_content: param.editorText,

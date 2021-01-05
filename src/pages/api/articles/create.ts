@@ -6,12 +6,12 @@ import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 export const apiArticlesCreate = async (
-  params: T_articles_create
+  params: ApiArticlesCreate
 ): Promise<TApiResponse> => {
   return apiWrapPost('articles/create', params);
 };
 
-export type T_articles_create = {
+export type ApiArticlesCreate = {
   is_published: boolean;
   title: string;
   article_content: string;
@@ -22,13 +22,9 @@ export type T_articles_create = {
   user_id: number;
 };
 
-export type T_articles_create_return = {
-  rawData: unknown;
-};
-
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const params: T_articles_create = req.body;
+    const params: ApiArticlesCreate = req.body;
 
     try {
       const isAdmin = await checkIsAdmin({ req });

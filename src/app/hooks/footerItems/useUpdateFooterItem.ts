@@ -6,7 +6,7 @@ import {
   generateFooterItemEdittingParams,
 } from './useCreateFooterItem';
 import {
-  T_footer_items_update,
+  ApiFooterItemsUpdate,
   apiFooterItemsUpdate,
 } from '../../../pages/api/footer_items/update';
 import { FooterItemsContext } from '../../store/footerItems/Context';
@@ -24,7 +24,7 @@ export const useUpdateFooterItem = () => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingFooter(true));
 
-    const params: T_footer_items_update = {
+    const params: ApiFooterItemsUpdate = {
       id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
         ...generateFooterItemEdittingParams(param, footerItems),
