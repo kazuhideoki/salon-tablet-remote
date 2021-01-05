@@ -19,7 +19,7 @@ const FooterItemModal = dynamic(
     ssr: false,
   }
 );
-import ArticleEditor from '../../../Drawer/ArticleEditor/view/ArticleEditor';
+import ArticleEditor from '../../../Drawer/ArticleEditor/ArticleEditor';
 import FooterItemEditor from '../../../Drawer/FooterItemEditor/view/FooterItemEditor';
 import { FeedbackForm } from '../../../Drawer/FeedbackForm/view/FeedbackForm';
 import { ManageTheme } from '../../../Drawer/ManageTheme/view/ManageTheme';

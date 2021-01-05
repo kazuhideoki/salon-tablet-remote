@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 const QuillEditor = dynamic(
-  () => import('../../QuillEditor/view/QuillEditor'),
+  () => import('../QuillEditor/view/QuillEditor'),
   {
     ssr: false,
   }
@@ -15,19 +15,19 @@ import {
   Theme,
   Grid,
 } from '@material-ui/core';
-import { TCreateArticle } from '../context/useCreateArticle';
-import { SelectTagsPopover } from '../components/SelectTagsPopover';
-import { CharCounter } from '../../../../../components/CharCounter';
+import { TCreateArticle } from './context/useCreateArticle';
+import { SelectTagsPopover } from './components/SelectTagsPopover';
+import { CharCounter } from '../../../../components/CharCounter';
 import { SaveTwoTone, PublishTwoTone } from '@material-ui/icons';
 import {
   SwitchDataTypeBox,
   TDataTypeAndSet,
-} from '../../QuillEditor/components/SwitchDataTypeBox';
+} from '../QuillEditor/components/SwitchDataTypeBox';
 import pure from 'recompose/pure';
 
-import { useHandleSubmit } from '../context/useHandleSubmit';
-import { useStateArticleEditor } from '../context/useStateArticleEditor';
-import { T_data_type_article } from '../../../../../Store/Interface';
+import { useHandleSubmit } from './context/useHandleSubmit';
+import { useStateArticleEditor } from './context/useStateArticleEditor';
+import { T_data_type_article } from '../../../../Store/Interface';
 
 const useArticleEditorProps = () => {
   const {

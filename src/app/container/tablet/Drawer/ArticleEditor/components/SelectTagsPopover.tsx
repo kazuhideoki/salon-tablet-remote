@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 
 import { TagsButton } from '../../../Footer/PaginationBar/components/TagsButton';
-import { TUseArticleEditorProps } from '../view/ArticleEditor';
+import { TUseArticleEditorProps } from '../ArticleEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
