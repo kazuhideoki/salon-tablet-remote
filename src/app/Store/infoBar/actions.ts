@@ -1,9 +1,9 @@
 import * as types from './types';
-import { TInfoBar, TInfoBarData } from '../../../util/interface/Interface';
+import { InfoBar, InfoBarData } from '../../../util/interface/Interface';
 
-export const set = (infoBar: TInfoBarData) => ({
+export const set = (infoBar: InfoBarData) => ({
   type: types.SET,
   payload: infoBar,
 });
 
-export type TInfoBarAction = ReturnType<typeof set>;
+export type InfoBarAction = ReturnType<typeof set>;

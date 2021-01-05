@@ -1,15 +1,15 @@
 import React from 'react';
 import { useGetArticles } from './useGetArticles';
-import { TCreateArticle } from './useCreateArticle';
+import { CreateArticleParams } from './useCreateArticle';
 import {
-  T_articles_update,
+  ApiArticlesUpdate,
   apiArticlesUpdate,
 } from '../../../pages/api/articles/update';
 import { ArticlesContext } from '../../store/articles/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { closeModal, isLoadingMain } from '../../store/appState/actions';
 
-export type TUpdateArticle = TCreateArticle;
+type Props = CreateArticleParams;
 
 export const useUpdateArticle = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
@@ -17,11 +17,11 @@ export const useUpdateArticle = () => {
 
   const getArticles = useGetArticles();
 
-  return async (param: TUpdateArticle, isPublished: boolean) => {
+  return async (param: Props, isPublished: boolean) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
-    const params: T_articles_update = {
+    const params: ApiArticlesUpdate = {
       // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
       params: {
         is_published: isPublished,

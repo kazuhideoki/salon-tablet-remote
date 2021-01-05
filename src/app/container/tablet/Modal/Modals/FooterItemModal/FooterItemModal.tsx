@@ -11,11 +11,9 @@ const useFooterItemModalProps = () => {
   };
 };
 
-export type TFooterItemModalProps = ReturnType<typeof useFooterItemModalProps>;
+type Props = ReturnType<typeof useFooterItemModalProps>;
 
-export const FooterItemModalPresenter: React.FC<TFooterItemModalProps> = (
-  props
-) => {
+export const FooterItemModalPresenter: React.FC<Props> = (props) => {
   return (
     <>
       <Typography variant="body1">

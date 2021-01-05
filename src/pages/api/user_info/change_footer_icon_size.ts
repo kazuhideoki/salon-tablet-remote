@@ -1,18 +1,17 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id } from '../../../util/interface/Interface';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeFooterIconSize = async (
-  params: T_user_info_change_footer_icon_size
-): Promise<TApiResponse> => {
+  params: ApiUserInfoChangeFooterIconSize
+): Promise<ApiResponse> => {
   return apiWrapPost('user_info/change_footer_icon_size', params);
 };
 
-export type T_user_info_change_footer_icon_size = {
-  user_id: T_user_id;
+export type ApiUserInfoChangeFooterIconSize = {
+  user_id: number;
   footer_icon_size: string;
 };
 
@@ -24,7 +23,7 @@ const change_footer_icon_size = async (
     const {
       user_id,
       footer_icon_size,
-    }: T_user_info_change_footer_icon_size = req.body;
+    }: ApiUserInfoChangeFooterIconSize = req.body;
 
     try {
       await db(`UPDATE user_info SET footer_icon_size = ? where user_id = ?`, [
@@ -32,12 +31,12 @@ const change_footer_icon_size = async (
         user_id,
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log(
         '/user_info/change_footer_icon_size/のエラーは ' + JSON.stringify(err)
       );
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

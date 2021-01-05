@@ -1,15 +1,15 @@
 import React from 'react';
 import { Select, MenuItem } from '@material-ui/core';
-import { TUseManageThemeProps } from '../ManageTheme';
-import { TFont1, TFont2 } from '../../../../../store/theme/lib/fonts';
-import { TWhichFont } from '../../../../../../pages/api/user_info/theme/font';
-import { T_theme_font } from '../../../../../../util/interface/Interface';
+import { ManageThemePresenterProps } from '../ManageTheme';
+import { Font1, Font2 } from '../../../../../store/theme/lib/fonts';
+import { WhichFont } from '../../../../../../pages/api/user_info/theme/font';
+import { ThemeFont } from '../../../../../../util/interface/Interface';
 
-type Props = TUseManageThemeProps & {
-  whichFont: TWhichFont;
+type Props = ManageThemePresenterProps & {
+  whichFont: WhichFont;
   className?: string;
-  value: T_theme_font;
-  fonts: TFont1[] | TFont2[];
+  value: ThemeFont;
+  fonts: Font1[] | Font2[];
   handleOnChange: (
     event: React.ChangeEvent<{
       value: unknown;

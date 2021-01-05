@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  TUserInfo,
-  TArticles,
-  TPaginationParams,
+  UserInfo,
+  Articles,
+  PaginationParams,
   FooterItems,
-  TTags,
-  TInstagramAccounts,
-  TAllArticles,
-  TInfoBarData,
-  TUaDeviceType,
+  Tags,
+  InstagramAccounts,
+  AllArticles,
+  InfoBarData,
+  UaDeviceType,
 } from '../util/interface/Interface';
 import { App } from '../app/container/App';
 import { GetServerSideProps } from 'next';
@@ -16,31 +16,28 @@ import { TopPage } from '../app/components/pages/TopPage';
 import { generateProps } from '../util/db/generateProps';
 import { SEO } from '../app/components/pages/SEO';
 import { getDeviceType } from '../util/getDeviceType';
-import {
-  apiGetSession,
-  T_auth_get_session_return,
-} from './api/auth/get_session';
+import { apiGetSession, ApiGetSessionReturn } from './api/auth/get_session';
 import { apiGetUserInfoFromEmail } from './api/user_info/get';
 
-export type TIndexPropsData = {
-  articles: TArticles;
-  pagination: TPaginationParams;
-  allArticles: TAllArticles;
+export type IndexPropsData = {
+  articles: Articles;
+  pagination: PaginationParams;
+  allArticles: AllArticles;
   footerItems: FooterItems;
-  infoBarData: TInfoBarData;
-  tags: TTags;
-  instagramAccounts: TInstagramAccounts;
-  userInfo: TUserInfo;
+  infoBarData: InfoBarData;
+  tags: Tags;
+  instagramAccounts: InstagramAccounts;
+  userInfo: UserInfo;
 };
 
-export type TIndexProps = {
-  data: TIndexPropsData | null;
+export type IndexProps = {
+  data: IndexPropsData | null;
   isPublicPage: boolean;
-  device: TUaDeviceType;
-  session: T_auth_get_session_return | null;
+  device: UaDeviceType;
+  session: ApiGetSessionReturn | null;
 };
 
-const Index: React.FC<TIndexProps> = (props) => {
+const Index: React.FC<IndexProps> = (props) => {
   if (props.data && props.session) {
     return (
       <>
@@ -71,7 +68,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       session: null,
       isPublicPage: false,
       device: device,
-    } as TIndexProps,
+    } as IndexProps,
   };
 
   try {
@@ -86,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
           isPublicPage: false,
           device: device,
           session,
-        } as TIndexProps,
+        } as IndexProps,
       };
     } else {
       return topPageProps;

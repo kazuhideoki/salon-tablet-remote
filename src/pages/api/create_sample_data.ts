@@ -3,27 +3,26 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {
   FooterItems,
   FooterItem,
-  T_user_id,
-  TArticles,
+  Articles,
 } from '../../util/interface/Interface';
-import { TApiResponse } from '../../util/db/apiWrap';
+import { ApiResponse } from '../../util/db/apiWrap';
 import { apiWrapPost } from '../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
-  params: T_create_sample_data
-): Promise<TApiResponse<void>> => {
+  params: ApiCreateSampleData
+): Promise<ApiResponse<void>> => {
   return apiWrapPost('create_sample_data', params);
 };
 
-export type T_create_sample_data = {
-  user_id: T_user_id;
+export type ApiCreateSampleData = {
+  user_id: number;
 };
 
-const getSampleArticles = async (user_id: T_user_id) => {
+const getSampleArticles = async (user_id: number) => {
   const data = (await db(
     `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`
-  )) as TArticles;
+  )) as Articles;
   const params = data.map((article) => {
     delete article.article_id;
     delete article.created_at;
@@ -37,13 +36,13 @@ const getSampleArticles = async (user_id: T_user_id) => {
   return params;
 };
 
-const insertSampleArticles = async (params: TArticles) => {
+const insertSampleArticles = async (params: Articles) => {
   params.forEach(async (article) => {
     await db(`INSERT INTO articles SET ?`, article);
   });
 };
 
-const getSampleFooterItems = async (user_id: T_user_id) => {
+const getSampleFooterItems = async (user_id: number) => {
   const data: any = await db(
     `SELECT * FROM footer_items WHERE data_type = 'sample_data' ORDER BY created_at DESC`
   );
@@ -72,7 +71,7 @@ const create_sample_data = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    const { user_id }: T_create_sample_data = req.body;
+    const { user_id }: ApiCreateSampleData = req.body;
 
     try {
       const [params, itemParams] = await Promise.all([
@@ -85,10 +84,10 @@ const create_sample_data = async (
         insertSampleFooterItems(itemParams),
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/create_sample_dataのエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

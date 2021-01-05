@@ -34,7 +34,7 @@ export const useGoogleSearchProps = () => {
   };
 };
 
-export type TUseGoogleSearchProps = ReturnType<typeof useGoogleSearchProps>;
+type Props = ReturnType<typeof useGoogleSearchProps>;
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -56,9 +56,7 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (
-  props
-) => {
+export const GoogleSearchPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (

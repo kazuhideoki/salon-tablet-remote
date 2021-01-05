@@ -1,6 +1,6 @@
-import { TInstagramAccounts } from '../interface/Interface';
+import { InstagramAccounts } from '../interface/Interface';
 
-export const sampleInstagramAccounts: TInstagramAccounts = [
+export const sampleInstagramAccounts: InstagramAccounts = [
   {
     instagram_id: 17841401135200276,
     username: 'oki_stylist',

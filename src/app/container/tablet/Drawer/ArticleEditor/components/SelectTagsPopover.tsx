@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 
 import { TagsButton } from '../../../Footer/PaginationBar/components/TagsButton';
-import { TUseArticleEditorProps } from '../ArticleEditor';
+import { ArticleEditorPresenterProps } from '../ArticleEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = TUseArticleEditorProps & { className: string };
+type Props = ArticleEditorPresenterProps & { className: string };
 
 export const SelectTagsPopover: React.FC<Props> = (props) => {
   const classes = useStyles();

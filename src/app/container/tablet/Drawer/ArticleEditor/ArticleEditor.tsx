@@ -12,19 +12,19 @@ import {
   Theme,
   Grid,
 } from '@material-ui/core';
-import { TCreateArticle } from '../../../../hooks/articles/useCreateArticle';
+import { CreateArticleParams } from '../../../../hooks/articles/useCreateArticle';
 import { SelectTagsPopover } from './components/SelectTagsPopover';
 import { CharCounter } from '../../../../components/CharCounter';
 import { SaveTwoTone, PublishTwoTone } from '@material-ui/icons';
 import {
   SwitchDataTypeBox,
-  TDataTypeAndSet,
+  DataTypeAndSet,
 } from '../QuillEditor/components/SwitchDataTypeBox';
 import pure from 'recompose/pure';
 
 import { useHandleSubmit } from './context/useHandleSubmit';
 import { useStateArticleEditor } from './context/useStateArticleEditor';
-import { T_data_type_article } from '../../../../../util/interface/Interface';
+import { DataTypeArticle } from '../../../../../util/interface/Interface';
 
 const useArticleEditorProps = () => {
   const {
@@ -51,7 +51,7 @@ const useArticleEditorProps = () => {
     tags,
   } = useStateArticleEditor();
 
-  const params: TCreateArticle = {
+  const params: CreateArticleParams = {
     titleText,
     editorText,
     editorTextExcerpt,
@@ -62,7 +62,7 @@ const useArticleEditorProps = () => {
 
   const handleSubmit = useHandleSubmit({ params, isEditting });
 
-  const dataTypeAndSet: TDataTypeAndSet<T_data_type_article> = {
+  const dataTypeAndSet: DataTypeAndSet<DataTypeArticle> = {
     dataType,
     setDataType,
   };
@@ -126,9 +126,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type TUseArticleEditorProps = ReturnType<typeof useArticleEditorProps>;
+export type ArticleEditorPresenterProps = ReturnType<
+  typeof useArticleEditorProps
+>;
 
-export const ArticleEditorPresenterOriginal: React.FC<TUseArticleEditorProps> = (
+export const ArticleEditorPresenterOriginal: React.FC<ArticleEditorPresenterProps> = (
   props
 ) => {
   const classes = useStyles();

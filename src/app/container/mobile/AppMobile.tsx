@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core';
 import { Drawer } from '../tablet/Drawer/Drawer/Drawer';
 import InfoBar from '../tablet/InfoBar/InfoBar';
 import { PaginationBar } from '../tablet/Footer/PaginationBar/PaginationBar';
-import { TThemeArgs, ThemeContext } from '../../store/theme/ThemeProvider';
+import { ThemeArgs, ThemeContext } from '../../store/theme/ThemeProvider';
 import { AppStateContext } from '../../store/appState/Context';
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -20,29 +20,23 @@ const useStyles = makeStyles((theme: Theme) => {
       position: 'relative',
     },
     gridRootOpen: {
-      width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
+      width: (themes: ThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
     },
     infoBar: {
       width: '100vw',
       height: 60,
     },
-    infoBarOpened: {
-      // width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
-    },
+    infoBarOpened: {},
     main: {
       width: '100vw',
     },
-    mainOpened: {
-      // width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
-    },
+    mainOpened: {},
     footer: {
       position: 'sticky',
       bottom: 0,
       width: '100vw',
     },
-    footerOpened: {
-      // width: (themes: TThemeArgs) => `calc(100vw - ${themes.drawerWidth}px)`,
-    },
+    footerOpened: {},
     isLoadingFooter: {
       position: 'fixed',
     },

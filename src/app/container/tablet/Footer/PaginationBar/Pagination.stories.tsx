@@ -1,12 +1,15 @@
 import React from 'react';
 import {
   PaginationBarPresenter,
-  TUsePaginationBarProps,
+  PaginationBarPresenterProps,
 } from './PaginationBar';
 import { sampleInstagramAccounts } from '../../../../../util/dev/sampleInstagramAccounts';
 import { sampleTags } from '../../../../../util/dev/sampleTags';
 import { withStyles, IconButton } from '@material-ui/core';
-import { TInstagramMedias } from '../../../../../util/interface/Interface';
+import {
+  InstagramMediaObject,
+  InstagramMedias,
+} from '../../../../../util/interface/Interface';
 export default {
   title: 'Footer/Pagination/PaginationBar',
   component: PaginationBarPresenter,
@@ -22,7 +25,7 @@ const StyledIconButton = withStyles({
   },
 })(IconButton);
 
-const props: TUsePaginationBarProps = {
+const props: PaginationBarPresenterProps = {
   isSetting: true,
   getArticles: async () => {
     return true;
@@ -50,7 +53,7 @@ const props: TUsePaginationBarProps = {
   getInstagramMedias: async () => {
     return;
   },
-  instagramMedias: {} as TInstagramMedias,
+  instagramMediaObject: {} as InstagramMediaObject,
   isTabletPortrait: false,
   openModal: () => {
     return;
@@ -73,7 +76,7 @@ export const isTabletPortrait = () => {
     </>
   );
 };
-const props2: TUsePaginationBarProps = {
+const props2: PaginationBarPresenterProps = {
   isSetting: true,
   getArticles: async () => {
     return true;
@@ -104,7 +107,7 @@ const props2: TUsePaginationBarProps = {
   getInstagramMedias: async () => {
     return;
   },
-  instagramMedias: {
+  instagramMediaObject: {
     data: [],
     paging: {
       cursors: {

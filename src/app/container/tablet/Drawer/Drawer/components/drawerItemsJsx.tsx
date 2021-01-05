@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { MoodBad } from '@material-ui/icons';
-import { TUseDrawerProps } from '../Drawer';
+import { DrawerPresenterProps } from '../Drawer';
 import { IconsSetting } from '../../FooterItemEditor/components/iconSelect/icons';
 import { EditButtonsBox } from '../../../../../components/editButtonBox/EditButtonsBox';
 import { FooterItem } from '../../../../../../util/interface/Interface';
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const drawerItemsJsx = (props: TUseDrawerProps) => {
+export const drawerItemsJsx = (props: DrawerPresenterProps) => {
   const classes = useStyles(props.themes);
 
   let displayItem = props.footerItems;
@@ -75,9 +75,9 @@ export const drawerItemsJsx = (props: TUseDrawerProps) => {
       </>
     );
   };
-  type TItemEditButtonsBox = { value: FooterItem; smallerValue: FooterItem };
+  type Props = { value: FooterItem; smallerValue: FooterItem };
 
-  const ItemEditButtonsBox = ({ value, smallerValue }: TItemEditButtonsBox) => (
+  const ItemEditButtonsBox = ({ value, smallerValue }: Props) => (
     <>
       <EditButtonsBox
         className={classes.editButtonsBox}

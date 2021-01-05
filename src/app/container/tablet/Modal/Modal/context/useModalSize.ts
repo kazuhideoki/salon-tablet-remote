@@ -1,5 +1,5 @@
 import React from 'react';
-import { T_modal_size } from '../../../../../../util/interface/Interface';
+import { ModalSize } from '../../../../../../util/interface/Interface';
 
 export const fullScreen = {
   width: '100vw',
@@ -44,7 +44,7 @@ const upperSide = {
   marginTop: 50,
 };
 
-export const useModalSize = (modalSize: T_modal_size) => {
+export const useModalSize = (modalSize: ModalSize) => {
   switch (modalSize) {
     case 'fullScreen':
       return fullScreen;

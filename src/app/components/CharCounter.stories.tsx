@@ -1,6 +1,6 @@
 import React from 'react';
 //@ts-ignore
-import { CharCounter, TCharCounter } from './CharCounter';
+import { CharCounter, CharCounterProps } from './CharCounter';
 export default {
   title: 'viewComponents/CharCounter',
   component: CharCounter,
@@ -26,7 +26,7 @@ export const OverLimit = () => {
   return <CharCounter {...props} />;
 };
 export const OverLimitAlignRight = () => {
-  const props: TCharCounter = {
+  const props: CharCounterProps = {
     charCount: 200,
     limitCount: 100,
     align: 'right',

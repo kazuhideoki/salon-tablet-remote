@@ -3,10 +3,10 @@ import { GetServerSideProps } from 'next';
 import { generateProps } from '../../util/db/generateProps';
 import App from '../../app/container/App';
 import Head from 'next/head';
-import { TIndexProps } from '..';
+import { IndexProps } from '..';
 import { checkIsGeneratePubulicPage } from '../../util/db/checkIsGeneratePubulicPage';
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
-import { TUserInfo } from '../../util/interface/Interface';
+import { UserInfo } from '../../util/interface/Interface';
 import { getDeviceType } from '../../util/getDeviceType';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PublicPage = (props: TIndexProps) => {
+const PublicPage = (props: IndexProps) => {
   const classes = useStyles();
 
   if (props.data && props.session) {
@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const slug = req.url;
   if (slug === undefined) throw `slug is undefined`;
 
-  let userInfo: TUserInfo | null = null;
+  let userInfo: UserInfo | null = null;
   const slicedSlug = slug.replace('/public_page/', '');
   // サンプルページのiframeでで間違い半手せれてしまうため?以降のqueryとる
   const SlugArray = slicedSlug.split('?');
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     userInfo = await checkIsGeneratePubulicPage(SlugArray[0]);
 
     if (userInfo === null) throw `userInfo is null`;
-    const returnData: TIndexProps = {
+    const returnData: IndexProps = {
       data: await generateProps(userInfo, true),
       isPublicPage: true,
       device: device,

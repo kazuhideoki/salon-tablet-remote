@@ -1,31 +1,31 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoCreate = async (
-  params: T_user_info_create
-): Promise<TApiResponse<void>> => {
+  params: ApiUserInfoCreate
+): Promise<ApiResponse<void>> => {
   return apiWrapPost('user_info/create', params);
 };
 
-export type T_user_info_create = {
+export type ApiUserInfoCreate = {
   user_email: string;
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { user_email }: T_user_info_create = req.body;
+    const { user_email }: ApiUserInfoCreate = req.body;
 
     try {
       await db(`INSERT INTO user_info (user_email) VALUES (?)`, [user_email]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/user_info/create/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

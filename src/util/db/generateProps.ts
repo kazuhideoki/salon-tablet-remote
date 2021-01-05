@@ -1,18 +1,18 @@
-import { TInfoBarData, TUserInfo } from '../interface/Interface';
-import { T_articles_get, apiArticlesGet } from '../../pages/api/articles/get';
+import { InfoBarData, UserInfo } from '../interface/Interface';
+import { ApiArticlesGet, apiArticlesGet } from '../../pages/api/articles/get';
 import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';
 import { apiInstagramAccountsGet } from '../../pages/api/instagram_accounts/get';
 import { apiInfoBarGet } from '../../pages/api/info_bar/get';
-import { TIndexPropsData } from '../../pages';
+import { IndexPropsData } from '../../pages';
 
 export const generateProps = async (
-  userInfo: TUserInfo,
+  userInfo: UserInfo,
   getPublishedOnly: boolean
-): Promise<TIndexPropsData> => {
+): Promise<IndexPropsData> => {
   const { user_id } = userInfo;
   // 記事一覧取得
-  const articlesParam: T_articles_get = {
+  const articlesParam: ApiArticlesGet = {
     page: 1,
     selectingTags: [],
     isSetting: getPublishedOnly ? false : true,
@@ -29,12 +29,12 @@ export const generateProps = async (
     ]);
 
     // as any で何故かエラー消える
-    const propsData: TIndexPropsData = {
+    const propsData: IndexPropsData = {
       articles: data.err ? [] : data.rawData.articles,
       pagination: data.err ? ([] as any) : data.rawData.pagination,
       allArticles: data.err ? [] : data.rawData.allArticles,
       footerItems: data2.err ? [] : data2.rawData,
-      infoBarData: data3.err ? ({} as TInfoBarData) : data3.rawData,
+      infoBarData: data3.err ? ({} as InfoBarData) : data3.rawData,
       tags: data4.err ? [] : data4.rawData,
       instagramAccounts: data5.err ? [] : data5.rawData,
       // JSONのエラーになったので、このような書き方↓

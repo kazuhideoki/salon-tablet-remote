@@ -2,17 +2,16 @@ import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
 import {
-  T_user_id,
-  TArticles,
-  TAllArticles,
-  TPaginationParams,
+  Articles,
+  AllArticles,
+  PaginationParams,
 } from '../../../util/interface/Interface';
-import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapGet, ApiResponse } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (
-  params: T_articles_get
-): Promise<TApiResponse<T_articles_get_return>> => {
+  params: ApiArticlesGet
+): Promise<ApiResponse<ApiArticlesGetReturn>> => {
   const { page, selectingTags, isSetting, userId } = params;
   console.log('apiArticlesGetだよ');
 
@@ -21,17 +20,17 @@ export const apiArticlesGet = async (
   );
 };
 
-export type T_articles_get = {
+export type ApiArticlesGet = {
   page: number;
   selectingTags: number[];
   isSetting: boolean;
-  userId: T_user_id;
+  userId: number;
 };
 
-export type T_articles_get_return = {
-  articles: TArticles;
-  pagination: TPaginationParams;
-  allArticles: TAllArticles;
+export type ApiArticlesGetReturn = {
+  articles: Articles;
+  pagination: PaginationParams;
+  allArticles: AllArticles;
 };
 
 const pageSize = 6;
@@ -48,7 +47,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const isSetting: boolean = req.query.isSetting === 'true' ? true : false;
   const userId = Number(req.query.userId) as number;
 
-  const TArticleGet: T_articles_get = {
+  const ArticleGet: ApiArticlesGet = {
     page,
     selectingTags,
     isSetting,
@@ -75,7 +74,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = (await db(
       `SELECT * FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages} ORDER BY created_at DESC LIMIT ${offSet} ${pageSize}`
-    )) as TArticles;
+    )) as Articles;
 
     const data2 = (await db(
       `SELECT user_id FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages}`
@@ -85,27 +84,27 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       `SELECT article_id, title FROM articles WHERE user_id = ${userId}`
     );
 
-    const pagination: TPaginationParams = {
+    const pagination: PaginationParams = {
       page: page,
       pageCount: data2.length ? Math.ceil(data2.length / pageSize) : 0, // 全row数をpageSizeで割って切り上げ
       pageSize: pageSize,
       rowCount: data2.length,
     };
 
-    const rawData: T_articles_get_return = {
+    const rawData: ApiArticlesGetReturn = {
       // tag_idsをnumber[]化する、なければnullのまま
       articles: data.length ? tagIdsFromString(data) : data,
       pagination: pagination,
-      allArticles: data3 as TAllArticles,
+      allArticles: data3 as AllArticles,
     };
 
     res
       .status(200)
-      .json({ err: false, rawData } as TApiResponse<T_articles_get_return>);
+      .json({ err: false, rawData } as ApiResponse<ApiArticlesGetReturn>);
   } catch (err) {
     console.log('/articles/get/のエラーは ' + JSON.stringify(err));
 
-    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 

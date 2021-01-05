@@ -3,18 +3,18 @@ import { Modal } from './tablet/Modal/Modal/Modal';
 import { AppMobile } from './mobile/AppMobile';
 import { AppTablet } from './tablet/AppTablet';
 import { useIsMobile } from '../../util/useIsMobile';
-import { TIndexProps, TIndexPropsData } from '../../pages';
-import { T_auth_get_session_return } from '../../pages/api/auth/get_session';
+import { IndexProps, IndexPropsData } from '../../pages';
+import { ApiGetSessionReturn } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../store/userInfo/Context';
 import { StoreContextProvider } from '../store/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
-import { TUaDeviceType } from '../../util/interface/Interface';
+import { UaDeviceType } from '../../util/interface/Interface';
 
-type TAppViewProps = {
-  session: T_auth_get_session_return;
+type AppViewProps = {
+  session: ApiGetSessionReturn;
 };
 
-const AppView = ({ session }: TAppViewProps) => {
+const AppView = ({ session }: AppViewProps) => {
   const isMobile = useIsMobile();
   const { openModal } = useDrawerProps();
   const { userInfo } = React.useContext(UserInfoContext);
@@ -42,14 +42,14 @@ const AppView = ({ session }: TAppViewProps) => {
   }
 };
 
-type TApp = {
-  data: TIndexPropsData;
+type Props = {
+  data: IndexPropsData;
   isPublicPage: boolean;
-  device: TUaDeviceType;
-  session: T_auth_get_session_return;
+  device: UaDeviceType;
+  session: ApiGetSessionReturn;
 };
 
-export const App = (props: TApp) => {
+export const App = (props: Props) => {
   return (
     // Storeの情報をContextから読み込んで出力
     <StoreContextProvider

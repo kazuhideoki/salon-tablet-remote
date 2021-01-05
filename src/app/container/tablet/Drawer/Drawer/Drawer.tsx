@@ -10,7 +10,7 @@ import { Drawer as MuiDrawer } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import { TThemeArgs } from '../../../../store/theme/ThemeProvider';
+import { ThemeArgs } from '../../../../store/theme/ThemeProvider';
 import { drawerSettingJsx } from './components/drawerSettingJsx';
 import { drawerHeaderJsx } from './components/drawerHeaderJsx';
 import { drawerItemsJsx } from './components/drawerItemsJsx';
@@ -86,7 +86,7 @@ export const useDrawerProps = () => {
   };
 };
 
-export type TUseDrawerProps = ReturnType<typeof useDrawerProps> & {
+export type DrawerPresenterProps = ReturnType<typeof useDrawerProps> & {
   className?: string;
 };
 
@@ -109,11 +109,11 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     drawer: {
       // zIndex: theme.zIndex.drawer,
-      width: (themes: TThemeArgs) => themes.drawerWidth,
+      width: (themes: ThemeArgs) => themes.drawerWidth,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: (themes: TThemeArgs) => themes.drawerWidth,
+      width: (themes: ThemeArgs) => themes.drawerWidth,
       overflowX: 'visible',
       overflowY: 'scroll',
     },
@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme: Theme) => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      marginLeft: (themes: TThemeArgs) => -themes.drawerWidth,
+      marginLeft: (themes: ThemeArgs) => -themes.drawerWidth,
       overflow: 'visible',
     },
     contentShift: {
@@ -146,7 +146,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     // 関数は優先度が高くなってしまうので別に切り分け。tabletようのmargin調整
     contentShiftTablet: {
-      marginLeft: (themes: TThemeArgs) => 0,
+      marginLeft: (themes: ThemeArgs) => 0,
     },
     greyScreen: {
       position: 'absolute',
@@ -160,7 +160,7 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const DrawerPresenter: React.FC<TUseDrawerProps> = (props) => {
+export const DrawerPresenter: React.FC<DrawerPresenterProps> = (props) => {
   const classes = useStyles(props.themes);
 
   const drawerHeader = drawerHeaderJsx(props);

@@ -1,36 +1,31 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
-import {
-  T_order_sidebar,
-  T_footer_item_id,
-  T_order,
-} from '../../../util/interface/Interface';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsSwitchOrder = async (
-  params: T_footer_items_switch_order
-): Promise<TApiResponse> => {
+  params: ApiFooterItemsSwitchOrder
+): Promise<ApiResponse> => {
   return apiWrapPost('footer_items/switch_order', params);
 };
 
-export type T_footer_items_switch_order = {
+export type ApiFooterItemsSwitchOrder = {
   smaller: {
-    footer_item_id: T_footer_item_id;
-    order: T_order;
-    order_sidebar: T_order_sidebar;
+    footer_item_id: number;
+    order: number;
+    order_sidebar: number;
   };
   larger: {
-    footer_item_id: T_footer_item_id;
-    order: T_order;
-    order_sidebar: T_order_sidebar;
+    footer_item_id: number;
+    order: number;
+    order_sidebar: number;
   };
 };
 
 const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { smaller, larger }: T_footer_items_switch_order = req.body;
+    const { smaller, larger }: ApiFooterItemsSwitchOrder = req.body;
 
     //  ※db操作まとめる
 
@@ -57,7 +52,7 @@ const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
         [smallerToLarger, smaller.footer_item_id]
       );
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log(
         '/footer_items/switch_order/のエラーは ' + JSON.stringify(err)

@@ -6,11 +6,10 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import {
-  TUserInfo,
-  T_theme_font,
-  T_theme_color,
-  T_selected_theme,
-  T_footer_icon_size,
+  UserInfo,
+  ThemeFont,
+  SelectedTheme,
+  FooterIconSize,
 } from '../../../util/interface/Interface';
 import { switchingTheme } from './lib/paramsFromTheme';
 import { UserInfoContext } from '../userInfo/Context';
@@ -37,7 +36,7 @@ const pMainWidth = screenWidth - pMainMargin * 2;
 // const pMainHeight = screenHeight - pInfoBarHeight - pInfoBarMarginBottom - pFooterHeight - pFooterMarginTop - portalPadding * 2
 
 // ThemeContext.Providerを通して渡される値
-export const useThemeArgs = (footer_icon_size: T_footer_icon_size) => {
+export const useThemeArgs = (footer_icon_size: FooterIconSize) => {
   const isTabletPortrait = useMediaQuery('(max-width:800px)');
 
   const theme = useTheme();
@@ -83,19 +82,19 @@ export const useThemeArgs = (footer_icon_size: T_footer_icon_size) => {
   return args;
 };
 
-export type TThemeArgs = ReturnType<typeof useThemeArgs>;
+export type ThemeArgs = ReturnType<typeof useThemeArgs>;
 
-export const ThemeContext = React.createContext({} as TThemeArgs);
+export const ThemeContext = React.createContext({} as ThemeArgs);
 
-export type TThemeParams = {
-  selected_theme: T_selected_theme;
-  theme_color: T_theme_color;
-  theme_font1: T_theme_font;
-  theme_font2: T_theme_font;
-  theme_font_heading: T_theme_font;
+export type ThemeParams = {
+  selected_theme: SelectedTheme;
+  theme_color: string;
+  theme_font1: ThemeFont;
+  theme_font2: ThemeFont;
+  theme_font_heading: ThemeFont;
 };
 
-export const ThemeProvider: React.FC<TUserInfo> = (props) => {
+export const ThemeProvider: React.FC<UserInfo> = (props) => {
   const { userInfo } = React.useContext(UserInfoContext);
 
   const {
@@ -106,7 +105,7 @@ export const ThemeProvider: React.FC<TUserInfo> = (props) => {
     theme_font_heading,
     footer_icon_size,
   } = userInfo;
-  const params: TThemeParams = {
+  const params: ThemeParams = {
     selected_theme,
     theme_color,
     theme_font1,

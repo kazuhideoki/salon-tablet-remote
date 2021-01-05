@@ -11,7 +11,9 @@ const useContentModalProps = () => {
   };
 };
 
-export type TContentModalProps = ReturnType<typeof useContentModalProps>;
+export type ContentModalPresenterProps = ReturnType<
+  typeof useContentModalProps
+>;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -21,7 +23,9 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const ContentModalPresenter: React.FC<TContentModalProps> = (props) => {
+export const ContentModalPresenter: React.FC<ContentModalPresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   return (

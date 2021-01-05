@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-  T_modal_size,
-  T_is_published_footer_items,
-  T_on_tap,
-  T_data_type_footer_item,
+  ModalSize,
+  Ontap,
+  DataTypeFooterItem,
   FooterItems,
   FooterItem,
   FooterItemWithoutId,
@@ -12,7 +11,7 @@ import { useGetFooterItems } from './useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
 import {
-  T_footer_items_create,
+  ApiFooterItemsCreate,
   apiFooterItemsCreate,
 } from '../../../pages/api/footer_items/create';
 import { FooterItemsContext } from '../../store/footerItems/Context';
@@ -20,24 +19,24 @@ import { UserInfoContext } from '../../store/userInfo/Context';
 import { closeModal, isLoadingFooter } from '../../store/appState/actions';
 import { AppStateContext } from '../../store/appState/Context';
 
-export type TFooterItemEdittingParams = {
+export type FooterItemEdittingParams = {
   titleText: string;
   selectedIcon: [
     OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>,
     string
   ];
-  onTapRadio: T_on_tap;
+  onTapRadio: Ontap;
   editorText: string;
   editorTextExcerpt: string;
   linkUrl: string;
-  modalSizeRadio: T_modal_size;
+  modalSizeRadio: ModalSize;
   appLinkUrl: string;
   onSidebar: boolean;
-  dataType: T_data_type_footer_item;
+  dataType: DataTypeFooterItem;
 };
 
-export type TCreateFooterItem = TFooterItemEdittingParams & {
-  is_published: T_is_published_footer_items;
+export type CreateFooterItem = FooterItemEdittingParams & {
+  is_published: boolean;
 };
 
 export const calcOrder = (
@@ -60,7 +59,7 @@ export const calcOrder = (
 };
 
 export const generateFooterItemEdittingParams = (
-  param: TFooterItemEdittingParams,
+  param: FooterItemEdittingParams,
   footerItems: FooterItems
 ) => {
   return {
@@ -85,11 +84,11 @@ export const useCreateFooterItem = () => {
   const { footerItems } = React.useContext(FooterItemsContext);
   const getFooterItems = useGetFooterItems();
 
-  return async (param: TCreateFooterItem) => {
+  return async (param: CreateFooterItem) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingFooter(true));
 
-    const params: T_footer_items_create = {
+    const params: ApiFooterItemsCreate = {
       ...generateFooterItemEdittingParams(param, footerItems),
       is_published: param.is_published,
       user_id: userInfo.user_id,

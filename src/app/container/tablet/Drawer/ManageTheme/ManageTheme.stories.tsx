@@ -4,10 +4,10 @@ import '../../../../../../public/fonts/fonts.css';
 
 import {
   ManageThemePresenter,
-  TUseManageThemeProps,
-  TColor,
+  ManageThemePresenterProps,
+  Color,
 } from './ManageTheme';
-import { TFont1, TFont2 } from '../../../../store/theme/lib/fonts';
+import { Font1, Font2 } from '../../../../store/theme/lib/fonts';
 import { googleFontsUrl } from '../../../../../util/googleFontsUrl';
 import { generateSecondaryColor } from '../../../../../util/secondaryColor';
 export default {
@@ -36,16 +36,16 @@ export const Normal = () => {
   const [color, dispatchColor] = React.useState('#0000FF');
   console.log('colorは ' + JSON.stringify(color));
 
-  const [font1, setFont1] = React.useState('未設定' as TFont1[0]);
-  const [font2, setFont2] = React.useState('ヒラギノ角ゴシック' as TFont2[0]);
-  const [fontHeading, setFontHeading] = React.useState('' as TFont2[0]);
+  const [font1, setFont1] = React.useState('未設定' as Font1[0]);
+  const [font2, setFont2] = React.useState('ヒラギノ角ゴシック' as Font2[0]);
+  const [fontHeading, setFontHeading] = React.useState('' as Font2[0]);
 
-  const props: TUseManageThemeProps = {
+  const props: ManageThemePresenterProps = {
     selected_theme: 'default',
     expanded,
     handleAccordion,
     theme_color: color,
-    handleChangeThemeColor: async (value: TColor) => {
+    handleChangeThemeColor: async (value: Color) => {
       const params = {
         hex: value.hex,
         hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`,
@@ -64,19 +64,19 @@ export const Normal = () => {
     handleChangeThemeFont1: async (
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
-      setFont1(event.target.value as TFont1[0]);
+      setFont1(event.target.value as Font1[0]);
     },
     font2: font2,
     handleChangeThemeFont2: async (
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
-      setFont2(event.target.value as TFont2[0]);
+      setFont2(event.target.value as Font2[0]);
     },
     fontHeading,
     handleChangeThemeFontHeading: async (
       event: React.ChangeEvent<{ value: unknown }>
     ) => {
-      setFontHeading(event.target.value as TFont2[0]);
+      setFontHeading(event.target.value as Font2[0]);
     },
     show_article_type: 'scroll',
     handleChange: () => {

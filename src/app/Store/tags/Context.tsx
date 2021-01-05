@@ -1,12 +1,12 @@
-import React from "react";
-import { TTagsAction } from "./actions";
-import { tagsReducer, TagsContextState } from "./reducer";
+import React from 'react';
+import { TagsAction } from './actions';
+import { tagsReducer, TagsContextState } from './reducer';
 
-export type Props = {tags: TagsContextState};
+export type Props = { tags: TagsContextState };
 
 export type TagsContextProps = {
   tags: TagsContextState;
-  dispatchTags: React.Dispatch<TTagsAction>;
+  dispatchTags: React.Dispatch<TagsAction>;
 };
 
 export const TagsContext = React.createContext({} as TagsContextProps);
@@ -20,8 +20,6 @@ export const TagsContextProvider: React.FC<Props> = (props) => {
   };
 
   return (
-    <TagsContext.Provider value={values}>
-      {props.children}
-    </TagsContext.Provider>
+    <TagsContext.Provider value={values}>{props.children}</TagsContext.Provider>
   );
 };

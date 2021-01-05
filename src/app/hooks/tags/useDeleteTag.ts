@@ -1,7 +1,6 @@
 import React from 'react';
-import { T_tag_id } from '../../../util/interface/Interface';
 import { useGetTags } from './useGetTags';
-import { T_tags_delete, apiTagsDelete } from '../../../pages/api/tags/delete';
+import { ApiTagsCreate, apiTagsDelete } from '../../../pages/api/tags/delete';
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { isLoadingTags } from '../../store/appState/actions';
@@ -12,7 +11,7 @@ export const useDeleteTag = () => {
   const { user_id } = userInfo;
   const getTags = useGetTags();
 
-  return async (tag_id: T_tag_id): Promise<void> => {
+  return async (tag_id: number): Promise<void> => {
     const deleting = confirm('本当に削除してよろしいですか？');
 
     if (deleting === false) {
@@ -21,7 +20,7 @@ export const useDeleteTag = () => {
 
     dispatchAppState(isLoadingTags(true));
 
-    const params: T_tags_delete = { tag_id: tag_id, user_id: user_id };
+    const params: ApiTagsCreate = { tag_id: tag_id, user_id: user_id };
 
     try {
       await apiTagsDelete(params);

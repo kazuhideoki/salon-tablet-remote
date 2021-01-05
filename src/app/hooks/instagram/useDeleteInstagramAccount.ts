@@ -1,5 +1,4 @@
 import React from 'react';
-import { T_instagram_id } from '../../../util/interface/Interface';
 import { useGetInstagramAccounts } from './useGetInstagramAccounts';
 import { apiInstagramAccountsDelete } from '../../../pages/api/instagram_accounts/delete';
 import { InstagramContext } from '../../store/instagram/Context';
@@ -15,7 +14,7 @@ export const useDeleteInstagramAccount = () => {
   const { dispatchInstagram } = React.useContext(InstagramContext);
 
   const getInstagramAccounts = useGetInstagramAccounts();
-  return async (instagram_id: T_instagram_id): Promise<void> => {
+  return async (instagram_id: number): Promise<void> => {
     const deleting = confirm('本当に削除してよろしいですか？');
 
     if (deleting === false) {

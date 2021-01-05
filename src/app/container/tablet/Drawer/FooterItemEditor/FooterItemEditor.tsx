@@ -27,12 +27,12 @@ import { useHandleSubmit } from './context/useHandleSubmit';
 import { useHandleChange } from './context/useHandleChange';
 import { useHandleOnSidebar } from './context/useHandleOnSidebar';
 import { useStateFooterItemEditor } from './context/useStateFooterItemEditor';
-import { TFooterItemEdittingParams } from '../../../../hooks/footerItems/useCreateFooterItem';
+import { FooterItemEdittingParams } from '../../../../hooks/footerItems/useCreateFooterItem';
 import {
-  T_data_type_article,
-  T_data_type_footer_item,
+  DataTypeArticle,
+  DataTypeFooterItem,
 } from '../../../../../util/interface/Interface';
-import { TDataTypeAndSet } from '../QuillEditor/components/SwitchDataTypeBox';
+import { DataTypeAndSet } from '../QuillEditor/components/SwitchDataTypeBox';
 
 const useFooterItemEditorProps = () => {
   const {
@@ -68,7 +68,7 @@ const useFooterItemEditorProps = () => {
     footerItem
   );
 
-  const edittingFooterItemParams: TFooterItemEdittingParams = {
+  const edittingFooterItemParams: FooterItemEdittingParams = {
     titleText,
     selectedIcon,
     onTapRadio,
@@ -85,7 +85,7 @@ const useFooterItemEditorProps = () => {
 
   const handleChange = useHandleChange(edittingFooterItemParams);
 
-  const dataTypeAndSet: TDataTypeAndSet<T_data_type_footer_item> = {
+  const dataTypeAndSet: DataTypeAndSet<DataTypeFooterItem> = {
     dataType,
     setDataType,
   };
@@ -120,7 +120,7 @@ const useFooterItemEditorProps = () => {
   };
 };
 
-export type TUseFooterItemEditorProps = ReturnType<
+export type FooterItemEditorPresenterProps = ReturnType<
   typeof useFooterItemEditorProps
 >;
 
@@ -180,7 +180,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const FooterItemEditorPresenter: React.FC<TUseFooterItemEditorProps> = (
+export const FooterItemEditorPresenter: React.FC<FooterItemEditorPresenterProps> = (
   props
 ) => {
   const classes = useStyles();

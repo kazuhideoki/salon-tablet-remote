@@ -6,9 +6,9 @@ import {
   Radio,
   FormLabel,
 } from '@material-ui/core';
-import { TUseManageThemeProps } from '../ManageTheme';
+import { ManageThemePresenterProps } from '../ManageTheme';
 
-export const SelectTheme = (props: TUseManageThemeProps) => {
+export const SelectTheme = (props: ManageThemePresenterProps) => {
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">テーマ</FormLabel>

@@ -1,32 +1,32 @@
 import React from 'react';
 import { useGetArticles } from './useGetArticles';
 import {
-  T_articles_create,
+  ApiArticlesCreate,
   apiArticlesCreate,
 } from '../../../pages/api/articles/create';
-import { T_data_type_article } from '../../../util/interface/Interface';
+import { DataTypeArticle } from '../../../util/interface/Interface';
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { closeModal, isLoadingMain } from '../../store/appState/actions';
 
-export type TCreateArticle = {
+export type CreateArticleParams = {
   titleText: string;
   editorText: string;
   editorTextExcerpt: string;
   editorImg: string;
   selectedTags: number[];
-  dataType: T_data_type_article;
+  dataType: DataTypeArticle;
 };
 export const useCreateArticle = () => {
   const getArticles = useGetArticles();
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
 
-  return async (param: TCreateArticle, isPublished: boolean) => {
+  return async (param: CreateArticleParams, isPublished: boolean) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 
-    const params: T_articles_create = {
+    const params: ApiArticlesCreate = {
       is_published: isPublished,
       title: param.titleText,
       article_content: param.editorText,

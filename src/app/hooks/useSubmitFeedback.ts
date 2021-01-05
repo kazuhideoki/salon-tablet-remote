@@ -4,11 +4,11 @@ import { AppStateContext } from '../store/appState/Context';
 import { UserInfoContext } from '../store/userInfo/Context';
 import {
   // apiSubmitFeedback,
-  T_submit_feedback,
+  ApiSubmitFeedback,
 } from '../../pages/api/submit_feedback';
-import { apiWrapPost, TApiResponse } from '../../util/db/apiWrap';
+import { apiWrapPost, ApiResponse } from '../../util/db/apiWrap';
 
-type Type = {
+type Props = {
   contactFormTitle: string;
   setContactFormTitle: React.Dispatch<React.SetStateAction<string>>;
   contactFormContent: string;
@@ -17,8 +17,8 @@ type Type = {
 
 // nodemailerをフロントエンドでインポートするとエラー「module not found can't resolve 'dns' nodemailer」になるので、フロント側で実装
 const apiSubmitFeedback = async (
-  params: T_submit_feedback
-): Promise<TApiResponse<void>> => {
+  params: ApiSubmitFeedback
+): Promise<ApiResponse<void>> => {
   return apiWrapPost('submit_feedback', params);
 };
 
@@ -27,12 +27,12 @@ export const useSubmitFeedback = ({
   setContactFormTitle,
   contactFormContent,
   setContactFormContent,
-}: Type) => {
+}: Props) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
 
   return async () => {
-    const params: T_submit_feedback = {
+    const params: ApiSubmitFeedback = {
       contactFormTitle,
       contactFormContent,
       userInfo,

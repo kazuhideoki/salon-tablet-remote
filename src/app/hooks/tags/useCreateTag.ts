@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { T_tags_create, apiTagsCreate } from '../../../pages/api/tags/create';
+import { ApiTagsCreate, apiTagsCreate } from '../../../pages/api/tags/create';
 import { useGetTags } from './useGetTags';
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { AppStateContext } from '../../store/appState/Context';
@@ -14,7 +14,7 @@ export const useCreateTag = () => {
   return async (tagName: string) => {
     dispatchAppState(isLoadingTags(true));
 
-    const params: T_tags_create = {
+    const params: ApiTagsCreate = {
       user_id: userInfo.user_id,
       tag_name: tagName,
     };

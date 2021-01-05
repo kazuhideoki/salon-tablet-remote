@@ -30,7 +30,7 @@ export const usePaginationBarProps = () => {
     isSetting,
     tags,
     instagramAccounts,
-    instagramMedias,
+    instagramMediaObject,
     paginationParams,
     selectedArticlesTags,
     selectedInstagramAccount,
@@ -76,17 +76,17 @@ export const usePaginationBarProps = () => {
     selectedArticlesTags,
     isTabletPortrait,
     getInstagramMedias,
-    instagramMedias,
+    instagramMediaObject,
     openModal,
   };
 };
-export type TUsePaginationBarProps = ReturnType<
+export type PaginationBarPresenterProps = ReturnType<
   typeof usePaginationBarProps
 > & {
   className?: string;
 };
-export type TPaginationPropsAndClasses = TUsePaginationBarProps & {
-  classes: TPaginationBarClasses;
+export type PaginationPresenterPropsAndClasses = PaginationBarPresenterProps & {
+  classes: PaginationBarClasses;
 };
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -157,9 +157,9 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export type TPaginationBarClasses = ReturnType<typeof useStyles>;
+export type PaginationBarClasses = ReturnType<typeof useStyles>;
 
-export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (
+export const PaginationBarPresenter: React.FC<PaginationBarPresenterProps> = (
   props
 ) => {
   const classes = useStyles();

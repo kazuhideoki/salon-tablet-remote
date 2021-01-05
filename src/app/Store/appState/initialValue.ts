@@ -1,50 +1,48 @@
 import {
   FooterItem,
-  TArticle,
-  TInstagramMedia,
-  TSetModal,
-  TUaDeviceType,
-  T_instagram_id,
-  T_instagram_username,
-  T_modal_size,
-  T_on_tap,
+  Article,
+  InstagramMedia,
+  SetModal,
+  UaDeviceType,
+  ModalSize,
+  Ontap,
 } from '../../../util/interface/Interface';
 
-export type TInitAppState = {
+export type InitAppState = {
   isPublicPage: boolean;
-  device: TUaDeviceType;
+  device: UaDeviceType;
 };
 
-export const initAppState = (data: TInitAppState) => ({
+export const initAppState = (data: InitAppState) => ({
   isPublicPage: data.isPublicPage,
   uaDevice: data.device,
   isSetting: !data.isPublicPage,
   isDrawerOpen: !data.isPublicPage,
-  setModal: 'edit_article' as TSetModal,
+  setModal: 'edit_article' as SetModal,
   isModalOpen: false,
   isShowInstagram: false,
   // modal表示するコンテン情報を格納
   currentModalContent: {
-    modalSize: 'large' as T_modal_size,
-    article: {} as TArticle,
+    modalSize: 'large' as ModalSize,
+    article: {} as Article,
     footerItem: {} as FooterItem,
-    instagramMedia: {} as TInstagramMedia,
+    instagramMedia: {} as InstagramMedia,
   },
 
   edittingPrams: {
     isEditting: false,
     isModalSizeChanged: false,
-    article: {} as TArticle,
+    article: {} as Article,
     footerItem: {} as FooterItem,
     // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
-    modalSize: 'large' as T_modal_size,
-    onTap: 'modal' as T_on_tap,
+    modalSize: 'large' as ModalSize,
+    onTap: 'modal' as Ontap,
   },
   // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
   selectedArticlesTags: [] as number[],
   selectedInstagramAccount: {
-    id: 0 as T_instagram_id,
-    username: '' as T_instagram_username,
+    id: 0 as number,
+    username: '' as string,
   },
   loading: {
     main: false,

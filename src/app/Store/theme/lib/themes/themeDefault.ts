@@ -1,10 +1,10 @@
 import { createMuiTheme } from '@material-ui/core';
-import { TThemeParams } from '../../ThemeProvider';
+import { ThemeParams } from '../../ThemeProvider';
 import { secondaryColor } from '../../../../../util/secondaryColor';
 
 const theme = createMuiTheme();
 
-export const themeDefault = (params: TThemeParams) =>
+export const themeDefault = (params: ThemeParams) =>
   createMuiTheme({
     overrides: {
       MuiCssBaseline: {

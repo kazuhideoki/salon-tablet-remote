@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   SelectArticleInfoBar,
-  TSelectArticleInfoBar,
+  SelectArticleInfoBarProps,
 } from './SelectArticleInfoBar';
 import { sampleAllArticles } from '../../../../../../util/dev/sampleAllArticles';
 export default {
@@ -12,7 +12,7 @@ export default {
 export const Normal = () => {
   const [articleInfoBar, setArticleInfoBar] = React.useState(2);
 
-  const props: TSelectArticleInfoBar = {
+  const props: SelectArticleInfoBarProps = {
     AllArticles: sampleAllArticles,
     articleInfoBar,
     setArticleInfoBar,

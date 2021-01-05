@@ -1,18 +1,17 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
-import { T_user_id } from '../../../util/interface/Interface';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreatePublicPageSlug = async (
-  params: T_user_info_create_public_page_slug
-): Promise<TApiResponse<void>> => {
+  params: ApiCreatePublicPageSlug
+): Promise<ApiResponse<void>> => {
   return apiWrapPost('user_info/create_public_page_slug', params);
 };
 
-export type T_user_info_create_public_page_slug = {
-  user_id: T_user_id;
+export type ApiCreatePublicPageSlug = {
+  user_id: number;
 };
 
 const create_public_page_slug = async (
@@ -20,7 +19,7 @@ const create_public_page_slug = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    const { user_id } = req.body as T_user_info_create_public_page_slug;
+    const { user_id } = req.body as ApiCreatePublicPageSlug;
 
     try {
       // slug生成
@@ -32,13 +31,13 @@ const create_public_page_slug = async (
         user_id,
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log(
         '/user_info/create_public_page_slug/のエラーは ' + JSON.stringify(err)
       );
 
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

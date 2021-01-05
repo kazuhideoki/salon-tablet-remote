@@ -1,20 +1,19 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id } from '../../../../util/interface/Interface';
-import { TApiResponse } from '../../../../util/db/apiWrap';
-import { TThemeParams } from '../../../../app/store/theme/ThemeProvider';
+import { ApiResponse } from '../../../../util/db/apiWrap';
+import { ThemeParams } from '../../../../app/store/theme/ThemeProvider';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (
-  params: T_user_info_change_theme
-): Promise<TApiResponse> => {
+  params: ApiUserInfoChangeTheme
+): Promise<ApiResponse> => {
   return apiWrapPost('user_info/theme/change_theme', params);
 };
 
-export type T_user_info_change_theme = {
-  user_id: T_user_id;
-  themeParams: TThemeParams;
+export type ApiUserInfoChangeTheme = {
+  user_id: number;
+  themeParams: ThemeParams;
 };
 
 const change_theme = async (
@@ -22,7 +21,7 @@ const change_theme = async (
   res: NextApiResponse
 ): Promise<void> => {
   if (req.method === 'POST') {
-    const { user_id, themeParams }: T_user_info_change_theme = req.body;
+    const { user_id, themeParams }: ApiUserInfoChangeTheme = req.body;
 
     try {
       await db(`UPDATE user_info SET ? where user_id = ?`, [
@@ -30,10 +29,10 @@ const change_theme = async (
         user_id,
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/user_info/change_theme/のエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

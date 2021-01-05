@@ -1,18 +1,18 @@
 import React from 'react';
 import {
-  initInstagramMedias,
-  TInstagramAccounts,
-  TInstagramMedias,
+  initInstagramMediaObject,
+  InstagramAccounts,
+  InstagramMediaObject,
 } from '../../../util/interface/Interface';
-import { TInstagramAction } from './actions';
-import { instagramReducer, InstagramContextState } from './reducer';
+import { InstagramAction } from './actions';
+import { instagramReducer } from './reducer';
 
-export type Props = { instagramAccounts: TInstagramAccounts };
+export type Props = { instagramAccounts: InstagramAccounts };
 
 export type InstagramContextProps = {
-  instagramAccounts: TInstagramAccounts;
-  instagramMedias: TInstagramMedias;
-  dispatchInstagram: React.Dispatch<TInstagramAction>;
+  instagramAccounts: InstagramAccounts;
+  instagramMediaObject: InstagramMediaObject;
+  dispatchInstagram: React.Dispatch<InstagramAction>;
 };
 export const InstagramContext = React.createContext(
   {} as InstagramContextProps
@@ -21,12 +21,12 @@ export const InstagramContext = React.createContext(
 export const InstagramContextProvider: React.FC<Props> = (props) => {
   const [state, dispatchInstagram] = React.useReducer(instagramReducer, {
     instagramAccounts: props.instagramAccounts,
-    instagramMedias: initInstagramMedias,
+    instagramMediaObject: initInstagramMediaObject,
   });
 
   const values: InstagramContextProps = {
     instagramAccounts: state.instagramAccounts,
-    instagramMedias: state.instagramMedias,
+    instagramMediaObject: state.instagramMediaObject,
     dispatchInstagram,
   };
 

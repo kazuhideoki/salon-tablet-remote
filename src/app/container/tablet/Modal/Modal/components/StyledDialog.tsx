@@ -1,10 +1,10 @@
 import React from 'react';
 import { withStyles, Dialog } from '@material-ui/core';
 
-import { T_modal_size } from '../../../../../../util/interface/Interface';
+import { ModalSize } from '../../../../../../util/interface/Interface';
 
 type Props = {
-  modalSize: T_modal_size;
+  modalSize: ModalSize;
   setModal: string;
   isEditting: boolean;
   modalStyle: any;

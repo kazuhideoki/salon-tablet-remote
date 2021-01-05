@@ -34,7 +34,7 @@ const useInfoBarProps = () => {
   };
 };
 
-export type TUseInfoBarProps = ReturnType<typeof useInfoBarProps> & {
+export type InfoBarPresenterProps = ReturnType<typeof useInfoBarProps> & {
   className?: string;
 };
 
@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const InfoBarPresenter: React.FC<TUseInfoBarProps> = (props) => {
+export const InfoBarPresenter: React.FC<InfoBarPresenterProps> = (props) => {
   const classes = useStyles({
     scrolling_animation_duration: props.infoBar.scrolling_animation_duration,
   });

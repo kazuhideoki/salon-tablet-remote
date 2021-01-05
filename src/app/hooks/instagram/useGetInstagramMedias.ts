@@ -1,12 +1,8 @@
 import React from 'react';
 import { apiInstagramMediasGet } from '../../../pages/api/instagram_medias/get';
 import {
-  T_instagram_id,
-  T_instagram_username,
-} from '../../../util/interface/Interface';
-import {
   apiInstagramAccountsReconnectNeeded,
-  T_instagram_accounts_reconnect_needed,
+  ApiInstagramAccountsReconnectNeeded,
 } from '../../../pages/api/instagram_accounts/reconnect_needed';
 import { InstagramContext } from '../../store/instagram/Context';
 import { setMedias, setReconnect } from '../../store/instagram/actions';
@@ -27,8 +23,8 @@ export const useGetInstagramMedias = () => {
 
   // ページ送りでないときは空のオブジェクト
   return async (
-    instagram_id: T_instagram_id,
-    username: T_instagram_username,
+    instagram_id: number,
+    username: string,
     paging: { after?: string; before?: string }
   ) => {
     dispatchAppState(isLoadingMain(true));
@@ -49,7 +45,7 @@ export const useGetInstagramMedias = () => {
       if (err.data.error.message.type === 'OAuthException') {
         console.log('message.typeは OAuthException');
         alert('インスタグラムアカウントの再連携が必要です');
-        const params: T_instagram_accounts_reconnect_needed = {
+        const params: ApiInstagramAccountsReconnectNeeded = {
           instagram_id: instagram_id,
           user_id: user_id,
           is_reconnect_needed: true,

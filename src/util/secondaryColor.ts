@@ -1,12 +1,11 @@
-import { T_theme_color } from './interface/Interface';
 import colorConvert from 'color-convert';
 
-import { THsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';
+import { Hsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';
 
-type props = THsl | number[]; //両方のパターンに対応させる？★
+type props = Hsl | number[]; //両方のパターンに対応させる？★
 
 export const generateSecondaryColor = (props: props) => {
-  let params: THsl;
+  let params: Hsl;
   let h: number, s: number, l: number;
   if (Array.isArray(props)) {
     params = {
@@ -34,7 +33,7 @@ export const generateSecondaryColor = (props: props) => {
   return newParams;
 };
 
-export const secondaryColor = (theme_color: T_theme_color) => {
+export const secondaryColor = (theme_color: string) => {
   return `#${colorConvert.hsl.hex(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore

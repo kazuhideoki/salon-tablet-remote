@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   SelectInstagramAccountsPresenter,
-  TSelectInstagramAccountsPresenter,
+  SelectInstagramAccountsPresenterProps,
 } from './SelectInstagramAccounts';
 import { sampleInstagramAccounts } from '../../../../../../util/dev/sampleInstagramAccounts';
 export default {
@@ -9,7 +9,7 @@ export default {
   component: SelectInstagramAccountsPresenter,
 };
 
-const props: TSelectInstagramAccountsPresenter = {
+const props: SelectInstagramAccountsPresenterProps = {
   instagramAccounts: sampleInstagramAccounts,
   getInstagramMedias: async () => {
     return;

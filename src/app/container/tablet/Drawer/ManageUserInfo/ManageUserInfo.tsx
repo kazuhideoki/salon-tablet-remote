@@ -66,7 +66,7 @@ const useSettingUserInfoProps = () => {
   };
 };
 
-export type TUseSettingUserInfoProps = ReturnType<
+export type SettingUserInfoPresenterProps = ReturnType<
   typeof useSettingUserInfoProps
 >;
 
@@ -99,7 +99,7 @@ const isValidPassword = (password: string) => {
   return regrex.test(password);
 };
 
-export const SettingUserInfoPresenter: React.FC<TUseSettingUserInfoProps> = (
+export const SettingUserInfoPresenter: React.FC<SettingUserInfoPresenterProps> = (
   props
 ) => {
   const classes = useStyles();

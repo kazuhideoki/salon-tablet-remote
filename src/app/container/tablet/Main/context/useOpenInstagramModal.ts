@@ -8,10 +8,10 @@ import { InstagramContext } from '../../../../store/instagram/Context';
 
 export const useOpenInstagramModal = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
-  const { instagramMedias } = React.useContext(InstagramContext);
+  const { instagramMediaObject } = React.useContext(InstagramContext);
 
   return (key: number) => {
-    const instagramMedia = instagramMedias.data[key];
+    const instagramMedia = instagramMediaObject.data[key];
     dispatchAppState(setInstagramMediaContent(instagramMedia));
     dispatchAppState(setModal('instagram_media_modal'));
   };

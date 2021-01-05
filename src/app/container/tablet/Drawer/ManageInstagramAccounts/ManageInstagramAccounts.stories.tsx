@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ManageInstagramAccountsPresenter,
-  TManageInstagramAccountsPresenter,
+  ManageInstagramAccountsPresenterProps,
 } from './ManageInstagmaAccounts';
 import { sampleInstagramAccounts } from '../../../../../util/dev/sampleInstagramAccounts';
 export default {
@@ -9,7 +9,7 @@ export default {
   component: ManageInstagramAccountsPresenter,
 };
 
-const props: TManageInstagramAccountsPresenter = {
+const props: ManageInstagramAccountsPresenterProps = {
   instagramAccounts: sampleInstagramAccounts,
   instaAuth: '',
   deleteInstagramAccount: async () => {

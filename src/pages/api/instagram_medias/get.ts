@@ -1,27 +1,24 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
-import {
-  T_instagram_id,
-  TInstagramMedias,
-} from '../../../util/interface/Interface';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { InstagramMediaObject } from '../../../util/interface/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (
-  params: T_instagram_medias_get
-): Promise<TApiResponse<TInstagramMedias>> => {
+  params: ApiInstagramMediasGet
+): Promise<ApiResponse<InstagramMediaObject>> => {
   return apiWrapPost('instagram_medias/get', params);
 };
 
-export type T_instagram_medias_get = {
-  instagram_id: T_instagram_id;
+export type ApiInstagramMediasGet = {
+  instagram_id: number;
   paging: { after?: string; before?: string };
 };
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { instagram_id, paging }: T_instagram_medias_get = req.body;
+    const { instagram_id, paging }: ApiInstagramMediasGet = req.body;
 
     let pagingParam;
     if (paging.hasOwnProperty('after')) {
@@ -50,16 +47,16 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         console.log('data2.errorは ' + data2.error);
         return res
           .status(500)
-          .json({ err: true, rawData: data2 } as TApiResponse);
+          .json({ err: true, rawData: data2 } as ApiResponse);
       }
 
-      const rawData: TInstagramMedias = data2;
+      const rawData: InstagramMediaObject = data2;
       res
         .status(200)
-        .json({ err: false, rawData } as TApiResponse<TInstagramMedias>);
+        .json({ err: false, rawData } as ApiResponse<InstagramMediaObject>);
     } catch (err) {
       console.log('/instagram_medias/get/のエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

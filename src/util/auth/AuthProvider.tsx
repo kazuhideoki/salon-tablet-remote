@@ -5,14 +5,14 @@ import 'firebase/auth';
 import { firebaseClient } from './firebaseClient';
 import { useRouter } from 'next/router';
 
-type TAuthContext = {
+type AuthContext = {
   user: firebase.User | null;
   signout: (path: string) => void;
 };
 
-const AuthContext = createContext<TAuthContext>({
+const AuthContext = createContext<AuthContext>({
   user: null,
-} as TAuthContext);
+} as AuthContext);
 
 export function AuthProvider({ children }: any) {
   const [user, setUser] = useState<firebase.User | null>(null);

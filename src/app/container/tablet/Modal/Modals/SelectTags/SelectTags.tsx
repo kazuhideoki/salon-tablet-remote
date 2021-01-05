@@ -21,7 +21,7 @@ const useSelectTagsProps = () => {
   return { tags, selectingTags, handleSelectTag, handleGetArticle };
 };
 
-export type TSelectTagsPresenter = ReturnType<typeof useSelectTagsProps>;
+export type SelectTagsPresenterProps = ReturnType<typeof useSelectTagsProps>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +46,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectTagsPresenter: React.FC<TSelectTagsPresenter> = (props) => {
+export const SelectTagsPresenter: React.FC<SelectTagsPresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   return (

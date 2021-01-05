@@ -1,24 +1,23 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id, T_theme_color } from '../../../../util/interface/Interface';
-import { TApiResponse } from '../../../../util/db/apiWrap';
+import { ApiResponse } from '../../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeColor = async (
-  params: T_user_info_theme_color
-): Promise<TApiResponse> => {
+  params: ApiUserInfoThemeColor
+): Promise<ApiResponse> => {
   return apiWrapPost('user_info/theme/color', params);
 };
 
-export type T_user_info_theme_color = {
-  user_id: T_user_id;
-  theme_color: T_theme_color;
+export type ApiUserInfoThemeColor = {
+  user_id: number;
+  theme_color: string;
 };
 
 const color = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { user_id, theme_color }: T_user_info_theme_color = req.body;
+    const { user_id, theme_color }: ApiUserInfoThemeColor = req.body;
 
     try {
       await db(`UPDATE user_info SET theme_color = ? where user_id = ?`, [
@@ -26,10 +25,10 @@ const color = async (req: NextApiRequest, res: NextApiResponse) => {
         user_id,
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/user_info/theme/color/のエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

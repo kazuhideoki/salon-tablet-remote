@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TUserInfo } from '../../util/interface/Interface';
-import { apiWrapPost, TApiResponse } from '../../util/db/apiWrap';
+import { UserInfo } from '../../util/interface/Interface';
+import { ApiResponse } from '../../util/db/apiWrap';
 
 const receiverEmailAddress = 'infosalontablet@gmail.com';
 const senderEmailAddress = 'infosalontablet@gmail.com';
@@ -17,20 +17,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// // サーバーサイドとフロントサイド考えずに使えるようにラップする
-// export const apiSubmitFeedback = async (
-//   params: T_submit_feedback
-// ): Promise<TApiResponse<void>> => {
-//   return apiWrapPost('submit_feedback', params);
-// };
-
-export type T_submit_feedback = {
+export type ApiSubmitFeedback = {
   contactFormTitle: string;
   contactFormContent: string;
-  userInfo: TUserInfo;
+  userInfo: UserInfo;
 };
 
-export type T_submit_feedback_return_no_error = { sent: true };
+export type ApiSubmitFeedback_return_no_error = { sent: true };
 
 const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
@@ -38,7 +31,7 @@ const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
       contactFormTitle,
       contactFormContent,
       userInfo,
-    }: T_submit_feedback = req.body;
+    }: ApiSubmitFeedback = req.body;
 
     const mailOptions1 = {
       from: senderEmailAddress,
@@ -54,11 +47,11 @@ const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
 
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/submit_feedbackのエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

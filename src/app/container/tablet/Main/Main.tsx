@@ -22,7 +22,7 @@ export const useMainProps = () => {
     dispatchAppState,
     articles,
     tags,
-    instagramMedias,
+    instagramMediaObject,
     loading,
     isShowInstagram,
     userInfo,
@@ -42,7 +42,7 @@ export const useMainProps = () => {
   return {
     isSetting,
     articles,
-    instagramMedias,
+    instagramMediaObject,
     tags,
     deleteArticle,
 
@@ -58,7 +58,7 @@ export const useMainProps = () => {
   };
 };
 
-export type TUseMainProps = ReturnType<typeof useMainProps>;
+export type MainPresenterProps = ReturnType<typeof useMainProps>;
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const useStyles = makeStyles((theme) => {
@@ -161,7 +161,7 @@ const useStyles = makeStyles((theme) => {
   });
 });
 
-export type TMainClasses = ReturnType<typeof useStyles>;
+export type MainClasses = ReturnType<typeof useStyles>;
 
 export const StyledCardContent = withStyles({
   root: {
@@ -170,9 +170,9 @@ export const StyledCardContent = withStyles({
     },
   },
 })(CardContent);
-export type TStyledCardContent = typeof StyledCardContent;
+export type StyledCardContentType = typeof StyledCardContent;
 
-export const MainPresenter: React.FC<TUseMainProps> = (props) => {
+export const MainPresenter: React.FC<MainPresenterProps> = (props) => {
   const classes = useStyles();
 
   const displayArticlesScroll = displayArticlesScrollJsx(
@@ -197,7 +197,7 @@ export const MainPresenter: React.FC<TUseMainProps> = (props) => {
   let displayContent;
 
   if (props.isShowInstagram) {
-    if (props.instagramMedias.data.length) {
+    if (props.instagramMediaObject.data.length) {
       displayContent = displayInstagramMedias;
     } else {
       displayContent = noArticles;

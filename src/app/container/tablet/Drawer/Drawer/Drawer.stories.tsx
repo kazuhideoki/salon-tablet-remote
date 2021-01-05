@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerPresenter, TUseDrawerProps } from './Drawer';
+import { DrawerPresenter, DrawerPresenterProps } from './Drawer';
 import { useTheme } from '@material-ui/core';
 import { samplefooterItems } from '../../../../../util/dev/sampleFooterItems';
 import { useThemeArgs } from '../../../../store/theme/ThemeProvider';
@@ -8,7 +8,7 @@ export default {
   component: DrawerPresenter,
 };
 
-const props: TUseDrawerProps = {
+const props: DrawerPresenterProps = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   theme: null,

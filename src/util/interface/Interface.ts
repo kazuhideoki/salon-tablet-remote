@@ -1,44 +1,29 @@
-import { TFont1, TFont2 } from '../../app/store/theme/lib/fonts';
+import { Font1, Font2 } from '../../app/store/theme/lib/fonts';
 
-export type T_user_id = number;
-export type T_user_name = string;
-export type T_shop_name = string;
-export type T_user_email = string;
-export type T_show_article_type = 'scroll' | 'grid6';
+export type ShowArticleType = 'scroll' | 'grid6';
+export type SelectedTheme = 'default' | 'white' | 'natural';
+export type ThemeFont = Font1[0] | Font2[0];
+export type FooterIconSize = 'medium' | 'small';
 
-export type T_selected_theme = 'default' | 'white' | 'natural';
-export type T_theme_color = string;
-export type T_theme_font = TFont1[0] | TFont2[0];
-export type T_footer_icon_size = 'medium' | 'small';
-
-export type T_is_generate_public_page = boolean;
-export type T_public_page_slug = string;
-// export type T_public_page_url = string;
-export type T_is_admin = boolean;
-export type T_created_at_user = string;
-export type T_updated_at_user = string;
-
-export type TUserInfo = {
-  user_id: T_user_id;
-  user_name: T_user_name;
-  shop_name: T_shop_name;
-  user_email: T_user_email;
-  show_article_type: T_show_article_type;
+export type UserInfo = {
+  user_id: number;
+  user_name: string;
+  shop_name: string;
+  user_email: string;
+  show_article_type: ShowArticleType;
   is_first_sign_in: boolean;
 
-  selected_theme: T_selected_theme;
-  theme_color: T_theme_color;
-  theme_font1: T_theme_font;
-  theme_font2: T_theme_font;
-  theme_font_heading: T_theme_font;
-  footer_icon_size: T_footer_icon_size;
-
-  is_generate_public_page: T_is_generate_public_page;
-  public_page_slug: T_public_page_slug;
-
-  is_admin: T_is_admin;
-  created_at: T_created_at_user;
-  updated_at: T_updated_at_user | null;
+  selected_theme: SelectedTheme;
+  theme_color: string;
+  theme_font1: ThemeFont;
+  theme_font2: ThemeFont;
+  theme_font_heading: ThemeFont;
+  footer_icon_size: FooterIconSize;
+  is_generate_public_page: boolean;
+  public_page_slug: string;
+  is_admin: boolean;
+  created_at: string;
+  updated_at: string | null;
 };
 
 const initPagination = {
@@ -47,169 +32,126 @@ const initPagination = {
   pageSize: 0,
   rowCount: 0,
 };
-export type TPaginationParams = typeof initPagination;
+export type PaginationParams = typeof initPagination;
 
-export type T_data_type_footer_item = 'default_data' | 'sample_data';
-export type T_data_type_article = T_data_type_footer_item | 'web_article';
+export type DataTypeFooterItem = 'default_data' | 'sample_data';
+export type DataTypeArticle = DataTypeFooterItem | 'web_article';
 
 // ●●●●●● テーブル `articles`
-export type T_article_id = number;
-export type T_tag_ids = number[];
-export type T_is_published_articles = boolean;
-export type T_created_at = string;
-export type T_updated_at = string;
-export type T_title = string;
-export type T_article_content = string;
-export type T_article_excerpt = string;
-export type T_article_img = string;
-
 export type ArticleWithoutArticleId = {
-  user_id: T_user_id;
-  tag_ids: T_tag_ids;
-  is_published: T_is_published_articles;
-  created_at: T_created_at;
-  updated_at: T_updated_at;
-  title: T_title;
-  article_content: T_article_content;
-  article_excerpt: T_article_excerpt;
-  article_img: T_article_img;
+  user_id: number;
+  tag_ids: number[];
+  is_published: boolean;
+  created_at: string;
+  updated_at: string;
+  title: string;
+  article_content: string;
+  article_excerpt: string;
+  article_img: string;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  data_type: T_data_type_article;
+  data_type: DataTypeArticle;
 };
-export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
-export type TArticles = TArticle[];
+export type Article = { article_id: number } & ArticleWithoutArticleId;
+export type Articles = Article[];
 
-export type TAllArticles = {
-  article_id: T_article_id;
-  title: T_title;
+export type AllArticles = {
+  article_id: number;
+  title: string;
 }[];
 
 // ●●●●●● テーブル `footer_items`
-export type T_footer_item_id = number;
-export type T_is_published_footer_items = boolean;
-export type T_created_at_footer_items = string;
-export type T_updated_at_footer_items = string;
-export type T_icon_name = string;
-export type T_displayed_icon_name = string;
-export type T_on_tap = 'modal' | 'link' | 'appLink' | 'google';
-// export type T_on_sidebar = boolean
-export type T_item_content = string;
-export type T_item_excerpt = string;
-export type T_link_url = string;
-export type T_app_link_url = string;
-export type T_modal_size =
+export type Ontap = 'modal' | 'link' | 'appLink' | 'google';
+export type ModalSize =
   | 'fullScreen'
   | 'large'
   | 'medium'
   | 'small'
   | 'upperSide';
-export type T_order = number;
-export type T_order_sidebar = number;
 
 export type FooterItemWithoutId = {
-  user_id: T_user_id;
-  is_published: T_is_published_footer_items;
-  created_at: T_created_at_footer_items;
-  updated_at: T_updated_at_footer_items | null;
-  icon_name: T_icon_name;
-  displayed_icon_name: T_displayed_icon_name;
-  on_tap: T_on_tap;
+  user_id: number;
+  is_published: boolean;
+  created_at: string;
+  updated_at: string | null;
+  icon_name: string;
+  displayed_icon_name: string;
+  on_tap: Ontap;
   // on_sidebar: T_on_sidebar
-  item_content: T_item_content;
-  item_excerpt: T_item_excerpt;
-  link_url: T_link_url;
-  app_link_url: T_app_link_url;
-  modal_size: T_modal_size;
-  order: T_order;
-  order_sidebar: T_order_sidebar;
+  item_content: string;
+  item_excerpt: string;
+  link_url: string;
+  app_link_url: string;
+  modal_size: ModalSize;
+  order: number;
+  order_sidebar: number;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  data_type: T_data_type_footer_item;
+  data_type: DataTypeFooterItem;
 };
 export type FooterItem = {
-  footer_item_id: T_footer_item_id;
+  footer_item_id: number;
 } & FooterItemWithoutId;
 export type FooterItems = FooterItem[];
 
 // ●●●●●● テーブル `info_bar`
 
-export type T_info_bar_id = number;
-export type T_info_bar_type = 'shop_name' | 'scrolling_sentence' | 'article';
-export type T_scrolling_sentence = string;
-export type T_scrolling_animation_duration = number;
-export type T_selected_article_id = T_article_id;
+export type InfoBarType = 'shop_name' | 'scrolling_sentence' | 'article';
 
-export type TInfoBarWithoutId = {
-  user_id: T_user_id;
-  info_bar_type: T_info_bar_type;
-  scrolling_sentence: T_scrolling_sentence;
-  scrolling_animation_duration: T_scrolling_animation_duration;
-  selected_article_id: T_selected_article_id | null;
+export type InfoBarWithoutId = {
+  user_id: number;
+  info_bar_type: InfoBarType;
+  scrolling_sentence: string;
+  scrolling_animation_duration: number;
+  selected_article_id: number | null;
 };
 
-export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id };
-export type TInfoBarData = {
-  infoBar: TInfoBar;
-  targetArticle: TArticle;
+export type InfoBar = InfoBarWithoutId & { info_bar_id: number };
+export type InfoBarData = {
+  infoBar: InfoBar;
+  targetArticle: Article;
 };
 
 // ●●●●●● テーブル `tags`
 
-export type T_tag_id = number;
-export type T_tag_name = string;
-export type T_created_at_tag = string;
-export type T_updated_at_tag = string | null;
-
-export type TTag = {
-  tag_id: T_tag_id;
-  user_id: T_user_id;
-  tag_name: T_tag_name;
-  created_at: T_created_at_tag;
-  updated_at: T_updated_at_tag;
+export type Tag = {
+  tag_id: number;
+  user_id: number;
+  tag_name: string;
+  created_at: string;
+  updated_at: string | null;
 };
 
-export type TTags = TTag[];
+export type Tags = Tag[];
 
-export type T_instagram_id = number;
-export type T_instagram_username = string;
-export type T_profile_img = string;
-export type T_expires = string;
-export type T_created_at_instagram_account = string;
-export type T_updated_at_instagram_account = string;
-export type T_is_reconnect_needed = boolean;
+// ●●●●●● テーブル `instagram_accounts`
 
-export type TInstagramAccount = {
-  instagram_id: T_instagram_id;
-  username: T_instagram_username;
-  profile_img: T_profile_img;
-  expires: T_expires;
-  user_id: T_user_id;
-  created_at: T_created_at_instagram_account;
-  updated_at: T_updated_at_instagram_account;
-  is_reconnect_needed: T_is_reconnect_needed;
+export type InstagramAccount = {
+  instagram_id: number;
+  username: string;
+  profile_img: string;
+  expires: string;
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+  is_reconnect_needed: boolean;
 };
-export type TInstagramAccounts = TInstagramAccount[];
+export type InstagramAccounts = InstagramAccount[];
 
-export type T_instagram_media_id = number;
-export type T_media_caption = string;
-export type T_media_type = 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
-export type T_media_url = string;
-export type T_media_permalink = string;
-export type T_media_thumbnail_url = string;
-export type T_media_timestamp = string;
+export type MediaType = 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
 
-export type TInstagramMedia = {
-  id: T_instagram_media_id;
-  caption: T_media_caption;
-  media_type: T_media_type;
-  media_url: T_media_url;
-  permalink: T_media_permalink;
-  thumbnail_url: T_media_thumbnail_url;
-  timestamp: T_media_timestamp;
-  username: T_instagram_username;
+export type InstagramMedia = {
+  id: number;
+  caption: string;
+  media_type: MediaType;
+  media_url: string;
+  permalink: string;
+  thumbnail_url: string;
+  timestamp: string;
+  username: string;
 };
+export type InstagramMedias = InstagramMedia[];
 
-export const initInstagramMedias = {
-  data: [] as TInstagramMedia[],
+export const initInstagramMediaObject = {
+  data: [] as InstagramMedia[],
   paging: {
     cursors: {
       before: '',
@@ -218,10 +160,10 @@ export const initInstagramMedias = {
     next: '',
     previous: '',
   },
-} as TInstagramMedias;
+} as InstagramMediaObject;
 
-export type TInstagramMedias = {
-  data: TInstagramMedia[];
+export type InstagramMediaObject = {
+  data: InstagramMedia[];
   paging: {
     cursors: {
       before: string;
@@ -232,7 +174,7 @@ export type TInstagramMedias = {
   };
 };
 
-export type TSetModal =
+export type SetModal =
   | 'content_modal'
   | 'footer_item_modal'
   | 'google_search'
@@ -250,9 +192,9 @@ export type TSetModal =
   | 'delete_account_form'
   | 'popup_not_email_verified';
 
-export type T_selected_device = 'responsive' | 'mobile' | 'tablet';
+export type SelectedDevice = 'responsive' | 'mobile' | 'tablet';
 
-export type TUaDeviceType =
+export type UaDeviceType =
   | 'console'
   | 'mobile'
   | 'tablet'

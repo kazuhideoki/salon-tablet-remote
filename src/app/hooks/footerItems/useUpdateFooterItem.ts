@@ -2,29 +2,29 @@ import React from 'react';
 
 import { useGetFooterItems } from './useGetFooterItems';
 import {
-  TCreateFooterItem,
+  CreateFooterItem,
   generateFooterItemEdittingParams,
 } from './useCreateFooterItem';
 import {
-  T_footer_items_update,
+  ApiFooterItemsUpdate,
   apiFooterItemsUpdate,
 } from '../../../pages/api/footer_items/update';
 import { FooterItemsContext } from '../../store/footerItems/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { closeModal, isLoadingFooter } from '../../store/appState/actions';
 
-export type TUpdateFooterItem = TCreateFooterItem;
+export type Props = CreateFooterItem;
 
 export const useUpdateFooterItem = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
   const { footerItems } = React.useContext(FooterItemsContext);
   const getFooterItems = useGetFooterItems();
 
-  return async (param: TUpdateFooterItem) => {
+  return async (param: Props) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingFooter(true));
 
-    const params: T_footer_items_update = {
+    const params: ApiFooterItemsUpdate = {
       id: appState.edittingPrams.footerItem.footer_item_id,
       params: {
         ...generateFooterItemEdittingParams(param, footerItems),

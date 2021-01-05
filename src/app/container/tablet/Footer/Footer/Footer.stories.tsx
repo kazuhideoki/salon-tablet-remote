@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterPresenter, TFooterPresenter } from './Footer';
+import { FooterPresenter, FooterPresenterProps } from './Footer';
 import { samplefooterItems } from '../../../../../util/dev/sampleFooterItems';
 import { ThemeProvider } from '../../../../components/ThemeProviderInStorybook';
 
@@ -8,7 +8,7 @@ export default {
   component: FooterPresenter,
 };
 
-const props: TFooterPresenter = {
+const props: FooterPresenterProps = {
   isSetting: true,
   openFooterItemModal: () => {
     return;

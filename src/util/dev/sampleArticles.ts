@@ -1,7 +1,7 @@
-import { TArticles } from '../interface/Interface';
+import { Articles } from '../interface/Interface';
 
 // export const sampleData = JSON.parse({
-export const sampleData: TArticles = [
+export const sampleData: Articles = [
   {
     article_id: 3,
     user_id: 1,

@@ -18,9 +18,9 @@ import {
   Instagram,
 } from '@material-ui/icons';
 import { TagsButton } from '../../../Footer/PaginationBar/components/TagsButton';
-import { TUseDrawerProps } from '../Drawer';
+import { DrawerPresenterProps } from '../Drawer';
 
-export const drawerSettingJsx = (props: TUseDrawerProps) => {
+export const drawerSettingJsx = (props: DrawerPresenterProps) => {
   if (props.isSetting) {
     return (
       <>

@@ -5,16 +5,16 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { HelpButton } from '../../../../../components/HelpButton';
-import { T_on_tap } from '../../../../../../util/interface/Interface';
-import { TUseFooterItemEditorProps } from '../FooterItemEditor';
+import { Ontap } from '../../../../../../util/interface/Interface';
+import { FooterItemEditorPresenterProps } from '../FooterItemEditor';
 
-type Props = TUseFooterItemEditorProps & {
+type Props = FooterItemEditorPresenterProps & {
   className?: string;
 };
 
 export const SwitchOnTapModal: React.FC<Props> = (props) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.setOnTapRadio(event.target.value as T_on_tap);
+    props.setOnTapRadio(event.target.value as Ontap);
   };
 
   return (

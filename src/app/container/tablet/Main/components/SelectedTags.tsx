@@ -1,11 +1,11 @@
 import React from 'react';
-import { TArticle, TTags } from '../../../../../util/interface/Interface';
+import { Article, Tags } from '../../../../../util/interface/Interface';
 import { Chip } from '@material-ui/core';
 
 type Props = {
   className: string;
-  article: TArticle;
-  tags: TTags;
+  article: Article;
+  tags: Tags;
 };
 
 // 各記事で選択されているタグを表示

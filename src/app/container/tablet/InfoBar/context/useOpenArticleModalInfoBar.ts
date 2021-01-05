@@ -4,12 +4,12 @@ import {
   setModal,
 } from '../../../../store/appState/actions';
 import { AppStateContext } from '../../../../store/appState/Context';
-import { TArticle } from '../../../../../util/interface/Interface';
+import { Article } from '../../../../../util/interface/Interface';
 
 export const useOpenArticleModalInfoBar = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
 
-  return (article: TArticle) => {
+  return (article: Article) => {
     dispatchAppState(setArticleContent(article));
     dispatchAppState(setModal('content_modal'));
   };

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Grid,
   CardActionArea,
@@ -5,17 +6,17 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
-import { TUseMainProps, TMainClasses } from '../Main';
+import { MainPresenterProps, MainClasses } from '../Main';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
 import { PlayArrowRounded } from '@material-ui/icons';
 
 export const displayInstagramMediasJsx = (
-  props: TUseMainProps,
-  classes: TMainClasses,
+  props: MainPresenterProps,
+  classes: MainClasses,
   StyledCardContent: any
 ) =>
-  props.instagramMedias.data.map((value, key) => {
+  props.instagramMediaObject.data.map((value, key) => {
     return (
       <Grid item key={key} className={classes.gridItem}>
         <CardActionArea

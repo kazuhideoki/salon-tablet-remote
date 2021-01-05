@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectTagsPresenter, TSelectTagsPresenter } from './SelectTags';
+import { SelectTagsPresenter, SelectTagsPresenterProps } from './SelectTags';
 import { sampleTags } from '../../../../../../util/dev/sampleTags';
 import { ThemeProvider } from '../../../../../components/ThemeProviderInStorybook';
 export default {
@@ -7,7 +7,7 @@ export default {
   component: SelectTagsPresenter,
 };
 
-const props: TSelectTagsPresenter = {
+const props: SelectTagsPresenterProps = {
   tags: sampleTags,
   selectingTags: [],
   handleSelectTag: () => {

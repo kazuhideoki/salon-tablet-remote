@@ -2,13 +2,11 @@ import { NextApiRequest } from 'next';
 import { apiGetSession } from '../../pages/api/auth/get_session';
 import { apiGetUserInfoFromEmail } from '../../pages/api/user_info/get';
 
-type TCheckIsAdmin = {
+type Props = {
   req: NextApiRequest;
 };
 
-export const checkIsAdmin = async ({
-  req,
-}: TCheckIsAdmin): Promise<boolean> => {
+export const checkIsAdmin = async ({ req }: Props): Promise<boolean> => {
   try {
     const session = await apiGetSession({ req });
     if (session && session.email) {

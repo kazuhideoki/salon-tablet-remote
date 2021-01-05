@@ -6,4 +6,4 @@ export const set = (footerItems: FooterItems) => ({
   payload: footerItems,
 });
 
-export type TFooterItemsAction = ReturnType<typeof set>;
+export type FooterItemsAction = ReturnType<typeof set>;

@@ -1,23 +1,22 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
-import { T_user_id } from '../../../util/interface/Interface';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoDelete = async (
-  params: T_user_info_delete
-): Promise<TApiResponse> => {
+  params: ApiUserInfoDelete
+): Promise<ApiResponse> => {
   return apiWrapPost('user_info/delete', params);
 };
 
-export type T_user_info_delete = {
-  user_id: T_user_id;
+export type ApiUserInfoDelete = {
+  user_id: number;
 };
 
 const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { user_id }: T_user_info_delete = req.body;
+    const { user_id }: ApiUserInfoDelete = req.body;
 
     try {
       const data = await db(
@@ -35,10 +34,10 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await db('DELETE FROM `info_bar` WHERE `user_id`=?', user_id);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/user_info/delete/のエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

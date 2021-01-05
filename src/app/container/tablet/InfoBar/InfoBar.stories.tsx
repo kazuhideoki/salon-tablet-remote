@@ -1,5 +1,5 @@
 import React from 'react';
-import { InfoBarPresenter, TUseInfoBarProps } from './InfoBar';
+import { InfoBarPresenter, InfoBarPresenterProps } from './InfoBar';
 import { sampleData } from '../../../../util/dev/sampleArticles';
 import { scrollingAnimationDuration } from '../../../hooks/infoBar/useUpdateInfoBar';
 
@@ -8,7 +8,7 @@ export default {
   component: InfoBarPresenter,
 };
 
-const props: TUseInfoBarProps = {
+const props: InfoBarPresenterProps = {
   dispatchAppState: () => {
     return;
   },
@@ -33,18 +33,18 @@ const props: TUseInfoBarProps = {
 };
 
 export const isSetting = () => {
-  const props1: TUseInfoBarProps = { ...props, isSetting: true };
+  const props1: InfoBarPresenterProps = { ...props, isSetting: true };
   return <InfoBarPresenter {...props1} />;
 };
 export const shop_name = () => {
-  const props2: TUseInfoBarProps = {
+  const props2: InfoBarPresenterProps = {
     ...props,
     infoBar: { ...props.infoBar, info_bar_type: 'shop_name' },
   };
   return <InfoBarPresenter {...props2} />;
 };
 export const scrolling_sentence = () => {
-  const props3: TUseInfoBarProps = {
+  const props3: InfoBarPresenterProps = {
     ...props,
     infoBar: { ...props.infoBar, info_bar_type: 'scrolling_sentence' },
   };

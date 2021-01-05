@@ -2,16 +2,14 @@ import * as types from './types';
 import {
   FooterItem,
   FooterItems,
-  TArticle,
-  TInstagramMedia,
-  TSetModal,
-  T_instagram_id,
-  T_instagram_username,
+  Article,
+  InstagramMedia,
+  SetModal,
 } from '../../../util/interface/Interface';
-import { TFooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
-import { T_articles_get_return } from '../../../pages/api/articles/get';
+import { FooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
+import { ApiArticlesGetReturn } from '../../../pages/api/articles/get';
 
-export const setModal = (value: TSetModal) => ({
+export const setModal = (value: SetModal) => ({
   type: types.OPEN_MODAL,
   payload: value,
 });
@@ -40,7 +38,7 @@ export const isLoadingInstagramAccounts = (value: boolean) => ({
   type: types.IS_LOADING_INSTAGRAM_ACCOUNTS,
   payload: value,
 });
-export const setArticleContent = (value: TArticle) => ({
+export const setArticleContent = (value: Article) => ({
   type: types.SET_ARTICLE_CONTENT,
   payload: value,
 });
@@ -48,14 +46,14 @@ export const setFooterItemContent = (value: FooterItem) => ({
   type: types.SET_FOOTER_ITEM_CONTENT,
   payload: value,
 });
-export const setInstagramMediaContent = (value: TInstagramMedia) => ({
+export const setInstagramMediaContent = (value: InstagramMedia) => ({
   type: types.SET_INSTAGRAM_MEDIA_CONTENT,
   payload: value,
 });
 export const createArticle = () => ({
   type: types.CREATE_ARTICLE,
 });
-export const updateArticle = (value: TArticle) => ({
+export const updateArticle = (value: Article) => ({
   type: types.UPDATE_ARTICLE,
   payload: value,
 });
@@ -68,15 +66,15 @@ export const updateFooterItem = (value: FooterItem) => ({
 });
 
 export const setModalSize = (value: {
-  footerItemEdittingParams: TFooterItemEdittingParams;
+  footerItemEdittingParams: FooterItemEdittingParams;
   footerItems: FooterItems;
 }) => ({
   type: types.SET_MODAL_SIZE,
   payload: value,
 });
 export const setSelectedInstagramAccounts = (value: {
-  id: T_instagram_id;
-  username: T_instagram_username;
+  id: number;
+  username: string;
 }) => ({
   type: types.SET_SELECTED_INSTAGRAM_ACCOUNTS,
   payload: value,
@@ -87,7 +85,7 @@ export const isShowInstagram = (value: boolean) => ({
 });
 
 export const setArticlesAppState = (value: {
-  data: T_articles_get_return;
+  data: ApiArticlesGetReturn;
   selectedArticlesTags: number[];
   isSetting: boolean;
   showArticles: boolean;
@@ -96,7 +94,7 @@ export const setArticlesAppState = (value: {
   payload: value,
 });
 
-export type TAppStateAction =
+export type AppStateAction =
   | ReturnType<typeof setModal>
   | ReturnType<typeof closeModal>
   | ReturnType<typeof openDrawer>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ManageTagsPresenter, TManageTagsPresenter } from './ManageTags';
+import { ManageTagsPresenter, ManageTagsPresenterProps } from './ManageTags';
 import { sampleTags } from '../../../../../util/dev/sampleTags';
 import { ThemeProvider } from '../../../../components/ThemeProviderInStorybook';
 export default {
@@ -7,7 +7,7 @@ export default {
   component: ManageTagsPresenter,
 };
 
-const props: TManageTagsPresenter = {
+const props: ManageTagsPresenterProps = {
   tags: sampleTags,
   loading: false,
   edittingTagName: '',

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   apiFooterItemsDelete,
-  T_footer_items_delete,
+  ApiFooterItemsDelete,
 } from '../../../pages/api/footer_items/delete';
 import { FooterItemsContext } from '../../store/footerItems/Context';
 import { set } from '../../store/footerItems/actions';
@@ -17,7 +17,7 @@ export const useDeleteFooterItem = () => {
   return async ({
     footer_item_id,
     order,
-  }: T_footer_items_delete): Promise<void> => {
+  }: ApiFooterItemsDelete): Promise<void> => {
     const deleting = confirm('本当に削除してよろしいですか？');
 
     if (deleting === false) {

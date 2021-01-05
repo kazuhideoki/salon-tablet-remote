@@ -55,7 +55,7 @@ export const useManageTagsProps = () => {
   };
 };
 
-export type TManageTagsPresenter = ReturnType<typeof useManageTagsProps>;
+export type ManageTagsPresenterProps = ReturnType<typeof useManageTagsProps>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -94,7 +94,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ManageTagsPresenter: React.FC<TManageTagsPresenter> = (props) => {
+export const ManageTagsPresenter: React.FC<ManageTagsPresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   const displayTags = props.tags.map((value, key) => {

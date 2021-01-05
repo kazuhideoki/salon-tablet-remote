@@ -1,15 +1,18 @@
 import React from 'react';
 import { withStyles, IconButton, Popover } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
-import { SwitchOrderButton, TSwitchOrderButton } from './SwitchOrderButton';
-import { THandleUpdateButton, UpdateButton } from './UpdateButton';
-import { DeleteButton, THandleDeleteButton } from './DeleteButton';
+import {
+  SwitchOrderButton,
+  HandleSwitchOrderButton,
+} from './SwitchOrderButton';
+import { HandleUpdateButton, UpdateButton } from './UpdateButton';
+import { DeleteButton, HandleDeleteButton } from './DeleteButton';
 
 type Props = {
   className?: string;
-  handleUpdateButton?: THandleUpdateButton;
-  handleDeleteButton?: THandleDeleteButton;
-  handleSwitchButton?: TSwitchOrderButton;
+  handleUpdateButton?: HandleUpdateButton;
+  handleDeleteButton?: HandleDeleteButton;
+  handleSwitchButton?: HandleSwitchOrderButton;
 };
 
 export const StyledIconButtonEditButton = withStyles({

@@ -1,21 +1,21 @@
 import { reducerLogger } from '../../../util/dev/reducerLogger';
 import {
-  TAllArticles,
-  TArticles,
-  TPaginationParams,
+  AllArticles,
+  Articles,
+  PaginationParams,
 } from '../../../util/interface/Interface';
-import { TArticlesAction } from './actions';
+import { ArticlesAction } from './actions';
 import * as types from './types';
 
 export type ArticlesContextState = {
-  articles: TArticles;
-  allArticles: TAllArticles;
-  paginationParams: TPaginationParams;
+  articles: Articles;
+  allArticles: AllArticles;
+  paginationParams: PaginationParams;
 };
 
 export const articlesReducer = (
   state: ArticlesContextState,
-  action: TArticlesAction
+  action: ArticlesAction
 ) => {
   let newState: ArticlesContextState;
   const func = articlesReducer;
