@@ -19,7 +19,7 @@ import { HelpButton } from '../../../../../components/HelpButton';
 import { useGoogleSearchProps } from '../../../Modal/Modals/GoogleSearch/view/GoogleSearch';
 import { useHandleSwitch } from '../context/useHandleSwitch';
 import { useStateAccount } from '../context/useStateAccount';
-import { useDrawerProps } from '../../Drawer/view/Drawer';
+import { useDrawerProps } from '../../Drawer/Drawer';
 import { useUpdateUser } from '../context/useUpdateUser';
 
 const useSettingUserInfoProps = () => {

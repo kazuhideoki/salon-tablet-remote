@@ -1,29 +1,23 @@
-import React from "react";
-import {
-  Typography,
-  Button,
-  IconButton,
-} from "@material-ui/core";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { TUseDrawerProps } from "../view/Drawer";
-import { Close } from "@material-ui/icons";
+import React from 'react';
+import { Typography, Button, IconButton } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { TUseDrawerProps } from '../Drawer';
+import { Close } from '@material-ui/icons';
 
 export const drawerHeaderJsx = (props: TUseDrawerProps) => {
- 
-
   // Open 開いてパスワード入力画面
   if (!props.isSetting) {
     return (
       <IconButton onClick={props.handleDrawerClose}>
-        {props.theme.direction === "ltr" ? (
+        {props.theme.direction === 'ltr' ? (
           <ChevronLeftIcon />
         ) : (
           <ChevronRightIcon />
         )}
       </IconButton>
     );
-  } 
+  }
   // Open isSetting 開いて編集モード
   else if (props.isSetting) {
     if (props.isMobile && props.isDrawerOpen) {
@@ -32,13 +26,12 @@ export const drawerHeaderJsx = (props: TUseDrawerProps) => {
           <Button
             variant="text"
             onClick={props.handleDrawerClose}
-            color="primary"
-          >
+            color="primary">
             <Close />
             <Typography variant="body1">終了</Typography>
           </Button>
           <Button variant="text" onClick={props.closeDrawer}>
-            {props.theme.direction === "ltr" ? (
+            {props.theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
@@ -52,12 +45,12 @@ export const drawerHeaderJsx = (props: TUseDrawerProps) => {
       <Button variant="text" onClick={props.handleDrawerClose}>
         {/* <Typography variant="body1">終了</Typography> */}
 
-        {props.theme.direction === "ltr" ? (
+        {props.theme.direction === 'ltr' ? (
           <ChevronLeftIcon />
         ) : (
           <ChevronRightIcon />
         )}
       </Button>
     );
-  } 
-}
+  }
+};

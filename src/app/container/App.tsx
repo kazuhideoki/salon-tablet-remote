@@ -7,7 +7,7 @@ import { TIndexProps, TIndexPropsData } from '../../pages';
 import { T_auth_get_session_return } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../Store/userInfo/Context';
 import { StoreContextProvider } from '../Store/Store';
-import { useDrawerProps } from './tablet/Drawer/Drawer/view/Drawer';
+import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
 import { TUaDeviceType } from '../Store/Interface';
 
 type TAppViewProps = {

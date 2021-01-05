@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { MoodBad } from '@material-ui/icons';
-import { TUseDrawerProps } from '../view/Drawer';
+import { TUseDrawerProps } from '../Drawer';
 import { IconsSetting } from '../../FooterItemEditor/components/iconSelect/icons';
 import { EditButtonsBox } from '../../../../../components/editButtonBox/EditButtonsBox';
 import { FooterItem } from '../../../../../Store/Interface';

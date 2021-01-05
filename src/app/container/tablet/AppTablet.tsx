@@ -1,19 +1,17 @@
-import React from "react";
-import clsx from "clsx";
+import React from 'react';
+import clsx from 'clsx';
+import { Grid, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { Main } from './Main/view/Main';
+import { Footer } from './Footer/Footer/view/Footer';
+import { ThemeContext } from '../../Store/theme/ThemeProvider';
+import { Drawer } from './Drawer/Drawer/Drawer';
+import dynamic from 'next/dynamic';
+import { PaginationBar } from './Footer/PaginationBar/view/PaginationBar';
 import {
-  Grid,
-  makeStyles,
-  createStyles,
-  Theme,
-} from "@material-ui/core";
-import { Main } from "./Main/view/Main";
-import { Footer } from "./Footer/Footer/view/Footer";
-import { ThemeContext } from "../../Store/theme/ThemeProvider";
-import { Drawer } from "./Drawer/Drawer/view/Drawer";
-import dynamic from "next/dynamic";
-import { PaginationBar } from "./Footer/PaginationBar/view/PaginationBar";
-import { AppStateContext, AppStateContextProvider } from "../../Store/appState/Context";
-const InfoBar = dynamic(() => import("./InfoBar/view/InfoBar"), {
+  AppStateContext,
+  AppStateContextProvider,
+} from '../../Store/appState/Context';
+const InfoBar = dynamic(() => import('./InfoBar/view/InfoBar'), {
   ssr: false,
 });
 
@@ -25,20 +23,20 @@ const useStyles = makeStyles((theme: Theme) => {
 
   return createStyles({
     root: {
-      overflow: "hidden",
-      position: "fixed",
+      overflow: 'hidden',
+      position: 'fixed',
       left: 0,
       top: 0,
-      width: "100vw",
-      height: "100vh",
+      width: '100vw',
+      height: '100vh',
       padding: `${themes.app.padding}vh ${themes.app.padding}vw`,
     },
     gridRoot: {
-      height: "100%",
-      position: "relative",
+      height: '100%',
+      position: 'relative',
     },
     header: {
-      width: themes.pInfoBar.width + "vw",
+      width: themes.pInfoBar.width + 'vw',
       height: themes.pInfoBar.height,
       // marginBottom: themes.pInfoBar.marginBottom + "vh",
       marginBottom: themes.margin,
@@ -47,10 +45,10 @@ const useStyles = makeStyles((theme: Theme) => {
       width: `calc(${themes.pInfoBar.width}vw - ${themes.drawerWidth}px)`,
     },
     main: {
-      width: themes.pMain.width + "vw",
+      width: themes.pMain.width + 'vw',
       height: `calc(${themes.pMain.height(themes.margin)})`,
       // height: `calc(100% - ${themes.pFooter.height} - ${themes.pInfoBar.height} - ${theme.spacing(1) * 2}px)` ,
-      position: "relative",
+      position: 'relative',
     },
     mainOpened: {
       width: `calc(${themes.pMain.width}vw - ${themes.drawerWidth}px)`,
@@ -58,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => {
     pagination: {
       // marginTop: themes.pFooter.marginTop + "vh",
       marginTop: themes.margin,
-      width: themes.pagination.width + "vw",
+      width: themes.pagination.width + 'vw',
       height: themes.pagination.height,
     },
     paginationOpened: {
@@ -67,31 +65,31 @@ const useStyles = makeStyles((theme: Theme) => {
     footer: {
       // marginTop: themes.pFooter.marginTop + "vh",
       // marginTop: themes.margin,
-      width: themes.pFooter.width + "vw",
+      width: themes.pFooter.width + 'vw',
       height: themes.pFooter.height,
     },
     footerOpened: {
       width: `calc(${themes.pFooter.width}vw - ${themes.drawerWidth}px)`,
     },
     circularProgress: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
     },
     //  drawerの開閉のアニメーション
     content: {
       // height: 'auto', これを指定すると scrollの方でfooter_icon_sizeの変更に対応できなくなる
       flexGrow: 1,
-      transition: theme.transitions.create("margin", {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
     },
     //  drawerの開閉のアニメーション
     contentShift: {
-      transition: theme.transitions.create("margin", {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
@@ -114,14 +112,12 @@ export const AppTablet = () => {
           direction="column"
           justify="center"
           alignItems="center"
-          className={classes.gridRoot}
-        >
+          className={classes.gridRoot}>
           <Grid
             item
             className={`${clsx(classes.content, {
               [classes.contentShift]: open,
-            })} ${classes.header} ${open ? classes.headerOpened : null}`}
-          >
+            })} ${classes.header} ${open ? classes.headerOpened : null}`}>
             <InfoBar />
           </Grid>
           <Grid
@@ -129,9 +125,7 @@ export const AppTablet = () => {
             // mainOpenedでDrawerの開閉時のCSSを適応
             className={`${clsx(classes.content, {
               [classes.contentShift]: open,
-            })} ${classes.main} ${open ? classes.mainOpened : null}`}
-          >
-       
+            })} ${classes.main} ${open ? classes.mainOpened : null}`}>
             <Main />
           </Grid>
           <Grid
@@ -139,8 +133,9 @@ export const AppTablet = () => {
             // footerOpenedでDrawerの開閉時のCSSを適応
             className={`${clsx(classes.content, {
               [classes.contentShift]: open,
-            })} ${classes.pagination} ${open ? classes.paginationOpened : null}`}
-          >
+            })} ${classes.pagination} ${
+              open ? classes.paginationOpened : null
+            }`}>
             <PaginationBar />
           </Grid>
           <Grid
@@ -148,8 +143,7 @@ export const AppTablet = () => {
             // footerOpenedでDrawerの開閉時のCSSを適応
             className={`${clsx(classes.content, {
               [classes.contentShift]: open,
-            })} ${classes.footer} ${open ? classes.footerOpened : null}`}
-          >
+            })} ${classes.footer} ${open ? classes.footerOpened : null}`}>
             <Footer />
           </Grid>
         </Grid>

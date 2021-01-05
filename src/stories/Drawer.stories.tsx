@@ -2,7 +2,7 @@ import React from 'react';
 import {
   DrawerPresenter,
   TUseDrawerProps,
-} from '../app/container/tablet/Drawer/Drawer/view/Drawer';
+} from '../app/container/tablet/Drawer/Drawer/Drawer';
 import { useTheme } from '@material-ui/core';
 import { samplefooterItems } from './lib/sampleFooterItems';
 import { useThemeArgs } from '../app/Store/theme/ThemeProvider';

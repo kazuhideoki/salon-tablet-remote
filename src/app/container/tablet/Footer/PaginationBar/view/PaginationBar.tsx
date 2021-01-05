@@ -1,20 +1,30 @@
-import React from "react";
-import { ThemeContext } from "../../../../../Store/theme/ThemeProvider";
-import { Grid, makeStyles, createStyles, Theme, Chip, IconButton, withStyles, useTheme, Card, useMediaQuery } from "@material-ui/core";
-import { useGetArticles } from "../../../Main/context/lib/useGetArticles";
-import { HomeButton } from "../components/HomeButton";
-import { PaginationArrows } from "../components/PaginationArrows";
-import { TagsButton } from "../components/TagsButton";
-import { useSelectedArticlesTagNames } from "../context/useSelectedArticlesTagNames";
-import { Instagram } from "@material-ui/icons";
-import { PaginationInstagram } from "../components/PaginationInstagram";
-import { useHandleOnNumClick } from "../context/useHandleOnNumClick";
-import { useManageInstagramAccountsProps } from "../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts";
-import { useStatePaginationBar } from "../context/useStatePaginationBar";
-import { useDrawerProps } from "../../../Drawer/Drawer/view/Drawer";
+import React from 'react';
+import { ThemeContext } from '../../../../../Store/theme/ThemeProvider';
+import {
+  Grid,
+  makeStyles,
+  createStyles,
+  Theme,
+  Chip,
+  IconButton,
+  withStyles,
+  useTheme,
+  Card,
+  useMediaQuery,
+} from '@material-ui/core';
+import { useGetArticles } from '../../../Main/context/lib/useGetArticles';
+import { HomeButton } from '../components/HomeButton';
+import { PaginationArrows } from '../components/PaginationArrows';
+import { TagsButton } from '../components/TagsButton';
+import { useSelectedArticlesTagNames } from '../context/useSelectedArticlesTagNames';
+import { Instagram } from '@material-ui/icons';
+import { PaginationInstagram } from '../components/PaginationInstagram';
+import { useHandleOnNumClick } from '../context/useHandleOnNumClick';
+import { useManageInstagramAccountsProps } from '../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
+import { useStatePaginationBar } from '../context/useStatePaginationBar';
+import { useDrawerProps } from '../../../Drawer/Drawer/Drawer';
 
 export const usePaginationBarProps = () => {
-  
   const {
     dispatchAppState,
     isSetting,
@@ -25,32 +35,31 @@ export const usePaginationBarProps = () => {
     selectedArticlesTags,
     selectedInstagramAccount,
     isShowInstagram,
-  } = useStatePaginationBar()
+  } = useStatePaginationBar();
 
   const getArticles = useGetArticles();
 
-  const theme = useTheme()
+  const theme = useTheme();
 
-  const { getInstagramMedias } = useManageInstagramAccountsProps()
-  
-  const handleOnNumClick = useHandleOnNumClick()
+  const { getInstagramMedias } = useManageInstagramAccountsProps();
+
+  const handleOnNumClick = useHandleOnNumClick();
 
   const selectedTagNames = useSelectedArticlesTagNames();
 
-  const { openModal } = useDrawerProps()
-
+  const { openModal } = useDrawerProps();
 
   const StyledIconButton = withStyles({
     root: {
       margin: theme.spacing(1),
     },
     label: {
-      width: "1rem",
-      height: "1rem",
+      width: '1rem',
+      height: '1rem',
     },
   })(IconButton);
 
-  const isTabletPortrait = useMediaQuery("(max-width:800px)");
+  const isTabletPortrait = useMediaQuery('(max-width:800px)');
 
   return {
     StyledIconButton,
@@ -71,8 +80,10 @@ export const usePaginationBarProps = () => {
     openModal,
   };
 };
-export type TUsePaginationBarProps = ReturnType<typeof usePaginationBarProps> & {
-  className?: string
+export type TUsePaginationBarProps = ReturnType<
+  typeof usePaginationBarProps
+> & {
+  className?: string;
 };
 export type TPaginationPropsAndClasses = TUsePaginationBarProps & {
   classes: TPaginationBarClasses;
@@ -83,75 +94,75 @@ const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     root: {
       borderRadius: 0,
-      width: "100%",
+      width: '100%',
     },
     gridContainer: {
-      overflowX: "scroll",
-      width: "100%",
+      overflowX: 'scroll',
+      width: '100%',
     },
     gridIcons: {
-      marginLeft: "auto",
-      display: "flex",
-      wrap: "nowrap",
+      marginLeft: 'auto',
+      display: 'flex',
+      wrap: 'nowrap',
     },
     isTabletPortrait: {
-      marginLeft: "auto",
-      marginRight: "auto",
+      marginLeft: 'auto',
+      marginRight: 'auto',
     },
     item: {
       padding: 4,
     },
     gridPagination: {
-      marginRight: "auto",
+      marginRight: 'auto',
     },
     pagination: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
 
     icons: {
-      fontSize: "inherit",
+      fontSize: 'inherit',
     },
 
     button: {
-      border: "1px solid",
+      border: '1px solid',
     },
     selectedButton: {
-      fontWeight: "bold",
+      fontWeight: 'bold',
       color: theme.palette.secondary.main,
     },
     disabled: {
       color: theme.palette.text.disabled,
-      border: "none",
+      border: 'none',
     },
     girdSelectedTags: {
-      overflowX: "scroll",
-      overflowY: "hidden",
+      overflowX: 'scroll',
+      overflowY: 'hidden',
       flexShrink: 1,
     },
     selectedTags: {
-      display: "flex",
-      flexWrap: "nowrap",
-      alignItems: "center",
-      width: "fit-content",
-      height: "100%",
+      display: 'flex',
+      flexWrap: 'nowrap',
+      alignItems: 'center',
+      width: 'fit-content',
+      height: '100%',
     },
 
     instagramAccount: {
-      display: "flex",
-      flexWrap: "nowrap",
-      alignItems: "center",
+      display: 'flex',
+      flexWrap: 'nowrap',
+      alignItems: 'center',
     },
   });
-})
+});
 
-export type TPaginationBarClasses = ReturnType<typeof useStyles>
+export type TPaginationBarClasses = ReturnType<typeof useStyles>;
 
-export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) => {
-
+export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (
+  props
+) => {
   const classes = useStyles();
-
 
   return (
     <Card className={`${classes.root} ${props.className}`}>
@@ -159,21 +170,20 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
         container
         spacing={1}
         wrap="nowrap"
-        direction={props.isTabletPortrait ? "column" : undefined}
-        className={`${classes.gridContainer}`}
-      >
+        direction={props.isTabletPortrait ? 'column' : undefined}
+        className={`${classes.gridContainer}`}>
         <Grid
           item
           className={`${classes.gridIcons} ${
-            props.isTabletPortrait ? classes.isTabletPortrait : ""
-          }`}
-        >
+            props.isTabletPortrait ? classes.isTabletPortrait : ''
+          }`}>
           <div className={classes.item}>
             <props.StyledIconButton
-              className={` ${classes.button} ${props.isShowInstagram ===
-                false && props.selectedTagNames.length === 0}`}
-              onClick={() => props.getArticles(props.isSetting, 1, [])}
-            >
+              className={` ${classes.button} ${
+                props.isShowInstagram === false &&
+                props.selectedTagNames.length === 0
+              }`}
+              onClick={() => props.getArticles(props.isSetting, 1, [])}>
               <HomeButton />
             </props.StyledIconButton>
           </div>
@@ -187,8 +197,7 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
                     ? `${classes.button} ${classes.selectedButton}`
                     : classes.button
                 }
-                onClick={() => props.openModal("select_tags")}
-              >
+                onClick={() => props.openModal('select_tags')}>
                 <TagsButton />
               </props.StyledIconButton>
             </div>
@@ -199,8 +208,7 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
               <div className={classes.item}>
                 <div
                   id="pagination_selected_tags_div"
-                  className={`${classes.selectedTags}`}
-                >
+                  className={`${classes.selectedTags}`}>
                   {props.selectedTagNames.map((value) => (
                     <Chip label={value} size="small" />
                   ))}
@@ -216,8 +224,7 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
                     ? `${classes.button} ${classes.selectedButton}`
                     : classes.button
                 }
-                onClick={() => props.openModal("select_instagram")}
-              >
+                onClick={() => props.openModal('select_instagram')}>
                 <Instagram />
               </props.StyledIconButton>
             </div>
@@ -236,9 +243,8 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
         <Grid
           item
           className={`${classes.gridPagination} ${
-            props.isTabletPortrait ? classes.isTabletPortrait : ""
-          }`}
-        >
+            props.isTabletPortrait ? classes.isTabletPortrait : ''
+          }`}>
           {props.isShowInstagram ? (
             <PaginationInstagram {...props} classes={classes} />
           ) : (
@@ -250,8 +256,8 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (props) 
   );
 };
 
-export const PaginationBar = ({className = ''}) => {
-  const props = usePaginationBarProps()
-  
-  return <PaginationBarPresenter {...props} className={className}/>
-}
+export const PaginationBar = ({ className = '' }) => {
+  const props = usePaginationBarProps();
+
+  return <PaginationBarPresenter {...props} className={className} />;
+};
