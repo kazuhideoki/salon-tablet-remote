@@ -6,7 +6,10 @@ import {
 import { sampleInstagramAccounts } from '../../../../../util/dev/sampleInstagramAccounts';
 import { sampleTags } from '../../../../../util/dev/sampleTags';
 import { withStyles, IconButton } from '@material-ui/core';
-import { TInstagramMedias } from '../../../../../util/interface/Interface';
+import {
+  InstagramMediaObject,
+  InstagramMedias,
+} from '../../../../../util/interface/Interface';
 export default {
   title: 'Footer/Pagination/PaginationBar',
   component: PaginationBarPresenter,
@@ -50,7 +53,7 @@ const props: TUsePaginationBarProps = {
   getInstagramMedias: async () => {
     return;
   },
-  instagramMedias: {} as TInstagramMedias,
+  instagramMediaObject: {} as InstagramMediaObject,
   isTabletPortrait: false,
   openModal: () => {
     return;
@@ -104,7 +107,7 @@ const props2: TUsePaginationBarProps = {
   getInstagramMedias: async () => {
     return;
   },
-  instagramMedias: {
+  instagramMediaObject: {
     data: [],
     paging: {
       cursors: {

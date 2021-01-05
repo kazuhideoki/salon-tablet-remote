@@ -3,10 +3,8 @@ import {
   FooterItem,
   FooterItems,
   Article,
-  TInstagramMedia,
+  InstagramMedia,
   TSetModal,
-  T_instagram_id,
-  T_instagram_username,
 } from '../../../util/interface/Interface';
 import { TFooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
 import { T_articles_get_return } from '../../../pages/api/articles/get';
@@ -48,7 +46,7 @@ export const setFooterItemContent = (value: FooterItem) => ({
   type: types.SET_FOOTER_ITEM_CONTENT,
   payload: value,
 });
-export const setInstagramMediaContent = (value: TInstagramMedia) => ({
+export const setInstagramMediaContent = (value: InstagramMedia) => ({
   type: types.SET_INSTAGRAM_MEDIA_CONTENT,
   payload: value,
 });
@@ -75,8 +73,8 @@ export const setModalSize = (value: {
   payload: value,
 });
 export const setSelectedInstagramAccounts = (value: {
-  id: T_instagram_id;
-  username: T_instagram_username;
+  id: number;
+  username: string;
 }) => ({
   type: types.SET_SELECTED_INSTAGRAM_ACCOUNTS,
   payload: value,

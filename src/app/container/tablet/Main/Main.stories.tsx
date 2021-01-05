@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainPresenter, TUseMainProps } from './Main';
 import { sampleData } from '../../../../util/dev/sampleArticles';
-import { initInstagramMedias } from '../../../../util/interface/Interface';
+import { initInstagramMediaObject } from '../../../../util/interface/Interface';
 export default {
   title: 'Main/Main',
   component: MainPresenter,
@@ -10,7 +10,7 @@ export default {
 const props: TUseMainProps = {
   articles: sampleData,
   isSetting: false,
-  instagramMedias: initInstagramMedias,
+  instagramMediaObject: initInstagramMediaObject,
   tags: [],
   deleteArticle: async () => {
     return;

@@ -1,19 +1,17 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TInstagramAccounts } from '../../../util/interface/Interface';
+import { InstagramAccounts } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsGet = async (
   user_id: number
-): Promise<TApiResponse<TInstagramAccounts>> => {
+): Promise<TApiResponse<InstagramAccounts>> => {
   return apiWrapGet(`instagram_accounts/get?userId=${user_id}`);
 };
 
-const changeToBooleanFromNumberInstagramAcconts = (
-  data: TInstagramAccounts
-) => {
+const changeToBooleanFromNumberInstagramAcconts = (data: InstagramAccounts) => {
   return data.map((value) => {
     //@ts-ignore
     value.is_reconnect_needed = value.is_reconnect_needed === 1 ? true : false;
@@ -28,20 +26,20 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       'SELECT * FROM instagram_accounts WHERE user_id = ?',
       // queryは文字列で来るため
       Number(req.query.userId)
-    )) as TInstagramAccounts;
+    )) as any[];
 
     data = data.map((value) => {
       //@ts-ignore
       delete value.access_token;
       return value;
-    });
+    }) as InstagramAccounts;
 
-    const rawData: TInstagramAccounts = changeToBooleanFromNumberInstagramAcconts(
+    const rawData: InstagramAccounts = changeToBooleanFromNumberInstagramAcconts(
       data
     );
     res
       .status(200)
-      .json({ err: false, rawData } as TApiResponse<TInstagramAccounts>);
+      .json({ err: false, rawData } as TApiResponse<InstagramAccounts>);
   } catch (err) {
     console.log('/instagram_accounts/get/のエラーは ' + JSON.stringify(err));
     return res.status(500).json({ err: true, rawData: err } as TApiResponse);

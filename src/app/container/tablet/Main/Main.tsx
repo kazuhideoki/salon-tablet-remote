@@ -22,7 +22,7 @@ export const useMainProps = () => {
     dispatchAppState,
     articles,
     tags,
-    instagramMedias,
+    instagramMediaObject,
     loading,
     isShowInstagram,
     userInfo,
@@ -42,7 +42,7 @@ export const useMainProps = () => {
   return {
     isSetting,
     articles,
-    instagramMedias,
+    instagramMediaObject,
     tags,
     deleteArticle,
 
@@ -197,7 +197,7 @@ export const MainPresenter: React.FC<TUseMainProps> = (props) => {
   let displayContent;
 
   if (props.isShowInstagram) {
-    if (props.instagramMedias.data.length) {
+    if (props.instagramMediaObject.data.length) {
       displayContent = displayInstagramMedias;
     } else {
       displayContent = noArticles;

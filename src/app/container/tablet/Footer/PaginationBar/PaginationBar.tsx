@@ -30,7 +30,7 @@ export const usePaginationBarProps = () => {
     isSetting,
     tags,
     instagramAccounts,
-    instagramMedias,
+    instagramMediaObject,
     paginationParams,
     selectedArticlesTags,
     selectedInstagramAccount,
@@ -76,7 +76,7 @@ export const usePaginationBarProps = () => {
     selectedArticlesTags,
     isTabletPortrait,
     getInstagramMedias,
-    instagramMedias,
+    instagramMediaObject,
     openModal,
   };
 };

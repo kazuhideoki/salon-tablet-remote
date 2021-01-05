@@ -1,27 +1,24 @@
 import * as types from './types';
 import {
-  initInstagramMedias,
-  TInstagramAccounts,
-  TInstagramMedias,
-  T_instagram_id,
-  T_is_reconnect_needed,
+  InstagramAccounts,
+  InstagramMediaObject,
 } from '../../../util/interface/Interface';
 
-export const setAccounts = (instagramAccounts: TInstagramAccounts) => ({
+export const setAccounts = (instagramAccounts: InstagramAccounts) => ({
   type: types.SET_ACCOUNTS,
   payload: instagramAccounts,
 });
 
 export type TSetReconnect = {
-  is_reconnect_needed: T_is_reconnect_needed;
+  is_reconnect_needed: boolean;
 };
-export const setReconnect = (instagram_id: T_instagram_id) => ({
+export const setReconnect = (instagram_id: number) => ({
   type: types.SET_RECONNECT,
   payload: instagram_id,
 });
-export const setMedias = (instagramMedias: TInstagramMedias) => ({
+export const setMedias = (instagramMediaObject: InstagramMediaObject) => ({
   type: types.SET_MEDIAS,
-  payload: instagramMedias,
+  payload: instagramMediaObject,
 });
 export const removeMedias = () => ({
   type: types.REMOVE_MEDIAS,

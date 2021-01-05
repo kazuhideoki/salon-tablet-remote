@@ -7,7 +7,7 @@ import { TagsContext } from '../../../../../store/tags/Context';
 export const useStatePaginationBar = () => {
   const { dispatchAppState, appState } = React.useContext(AppStateContext);
   const { paginationParams } = React.useContext(ArticlesContext);
-  const { instagramAccounts, instagramMedias } = React.useContext(
+  const { instagramAccounts, instagramMediaObject } = React.useContext(
     InstagramContext
   );
   const { tags } = React.useContext(TagsContext);
@@ -23,7 +23,7 @@ export const useStatePaginationBar = () => {
     isSetting,
     tags,
     instagramAccounts,
-    instagramMedias,
+    instagramMediaObject,
     paginationParams,
     selectedArticlesTags,
     selectedInstagramAccount,

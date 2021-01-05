@@ -5,7 +5,7 @@ import { TPaginationPropsAndClasses } from '../PaginationBar';
 export const PaginationInstagram: React.FC<TPaginationPropsAndClasses> = (
   props
 ) => {
-  const { cursors, next, previous } = props.instagramMedias.paging;
+  const { cursors, next, previous } = props.instagramMediaObject.paging;
 
   return (
     <div>

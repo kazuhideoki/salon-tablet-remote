@@ -30,7 +30,7 @@ export const usePaginationBarProps = () => {
     isSetting,
     tags,
     instagramAccounts,
-    instagramMedias,
+    instagramMediaObject,
     paginationParams,
     selectedArticlesTags,
     selectedInstagramAccount,
@@ -76,7 +76,7 @@ export const usePaginationBarProps = () => {
     selectedArticlesTags,
     isTabletPortrait,
     getInstagramMedias,
-    instagramMedias,
+    instagramMediaObject,
     openModal,
   };
 };
@@ -209,8 +209,8 @@ export const PaginationBarPresenter: React.FC<TUsePaginationBarProps> = (
                 <div
                   id="pagination_selected_tags_div"
                   className={`${classes.selectedTags}`}>
-                  {props.selectedTagNames.map((value) => (
-                    <Chip label={value} size="small" />
+                  {props.selectedTagNames.map((value, index) => (
+                    <Chip key={index} label={value} size="small" />
                   ))}
                 </div>
               </div>

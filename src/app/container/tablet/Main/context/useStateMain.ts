@@ -9,7 +9,7 @@ export const useStateMain = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
   const { articles } = React.useContext(ArticlesContext);
   const { tags } = React.useContext(TagsContext);
-  const { instagramMedias } = React.useContext(InstagramContext);
+  const { instagramMediaObject } = React.useContext(InstagramContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { loading, isShowInstagram, isSetting } = appState;
 
@@ -17,7 +17,7 @@ export const useStateMain = () => {
     dispatchAppState,
     articles,
     tags,
-    instagramMedias,
+    instagramMediaObject,
     loading: loading.main,
     isShowInstagram,
     userInfo,

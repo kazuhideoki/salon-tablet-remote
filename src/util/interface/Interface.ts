@@ -125,47 +125,34 @@ export type Tags = Tag[];
 
 // ●●●●●● テーブル `instagram_accounts`
 
-export type T_instagram_id = number;
-export type T_instagram_username = string;
-export type T_profile_img = string;
-export type T_expires = string;
-export type T_created_at_instagram_account = string;
-export type T_updated_at_instagram_account = string;
-export type T_is_reconnect_needed = boolean;
-
-export type TInstagramAccount = {
-  instagram_id: T_instagram_id;
-  username: T_instagram_username;
-  profile_img: T_profile_img;
-  expires: T_expires;
+export type InstagramAccount = {
+  instagram_id: number;
+  username: string;
+  profile_img: string;
+  expires: string;
   user_id: number;
-  created_at: T_created_at_instagram_account;
-  updated_at: T_updated_at_instagram_account;
-  is_reconnect_needed: T_is_reconnect_needed;
+  created_at: string;
+  updated_at: string;
+  is_reconnect_needed: boolean;
 };
-export type TInstagramAccounts = TInstagramAccount[];
+export type InstagramAccounts = InstagramAccount[];
 
-export type T_instagram_media_id = number;
-export type T_media_caption = string;
-export type T_media_type = 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
-export type T_media_url = string;
-export type T_media_permalink = string;
-export type T_media_thumbnail_url = string;
-export type T_media_timestamp = string;
+export type MediaType = 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
 
-export type TInstagramMedia = {
-  id: T_instagram_media_id;
-  caption: T_media_caption;
-  media_type: T_media_type;
-  media_url: T_media_url;
-  permalink: T_media_permalink;
-  thumbnail_url: T_media_thumbnail_url;
-  timestamp: T_media_timestamp;
-  username: T_instagram_username;
+export type InstagramMedia = {
+  id: number;
+  caption: string;
+  media_type: MediaType;
+  media_url: string;
+  permalink: string;
+  thumbnail_url: string;
+  timestamp: string;
+  username: string;
 };
+export type InstagramMedias = InstagramMedia[];
 
-export const initInstagramMedias = {
-  data: [] as TInstagramMedia[],
+export const initInstagramMediaObject = {
+  data: [] as InstagramMedia[],
   paging: {
     cursors: {
       before: '',
@@ -174,10 +161,10 @@ export const initInstagramMedias = {
     next: '',
     previous: '',
   },
-} as TInstagramMedias;
+} as InstagramMediaObject;
 
-export type TInstagramMedias = {
-  data: TInstagramMedia[];
+export type InstagramMediaObject = {
+  data: InstagramMedia[];
   paging: {
     cursors: {
       before: string;

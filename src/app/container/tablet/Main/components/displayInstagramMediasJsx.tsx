@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Grid,
   CardActionArea,
@@ -15,7 +16,7 @@ export const displayInstagramMediasJsx = (
   classes: TMainClasses,
   StyledCardContent: any
 ) =>
-  props.instagramMedias.data.map((value, key) => {
+  props.instagramMediaObject.data.map((value, key) => {
     return (
       <Grid item key={key} className={classes.gridItem}>
         <CardActionArea

@@ -1,15 +1,15 @@
 import { reducerLogger } from '../../../util/dev/reducerLogger';
 import {
-  initInstagramMedias,
-  TInstagramAccounts,
-  TInstagramMedias,
+  initInstagramMediaObject,
+  InstagramAccounts,
+  InstagramMediaObject,
 } from '../../../util/interface/Interface';
 import { TInstagramAction } from './actions';
 import * as types from './types';
 
 export type InstagramContextState = {
-  instagramAccounts: TInstagramAccounts;
-  instagramMedias: TInstagramMedias;
+  instagramAccounts: InstagramAccounts;
+  instagramMediaObject: InstagramMediaObject;
 };
 
 export const instagramReducer = (
@@ -41,13 +41,13 @@ export const instagramReducer = (
     case types.SET_MEDIAS:
       newState = {
         ...state,
-        instagramMedias: action.payload,
+        instagramMediaObject: action.payload,
       };
       break;
     case types.REMOVE_MEDIAS:
       newState = {
         ...state,
-        instagramMedias: initInstagramMedias,
+        instagramMediaObject: initInstagramMediaObject,
       };
       break;
   }

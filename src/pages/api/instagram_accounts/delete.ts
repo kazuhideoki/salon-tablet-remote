@@ -1,6 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_instagram_id } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -12,7 +11,7 @@ export const apiInstagramAccountsDelete = async (
 };
 
 export type T_instagram_accounts_delete = {
-  instagram_id: T_instagram_id;
+  instagram_id: number;
 };
 
 const instagram_accounts_delete = async (

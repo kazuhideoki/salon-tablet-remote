@@ -1,10 +1,6 @@
 import React from 'react';
 import { apiInstagramMediasGet } from '../../../pages/api/instagram_medias/get';
 import {
-  T_instagram_id,
-  T_instagram_username,
-} from '../../../util/interface/Interface';
-import {
   apiInstagramAccountsReconnectNeeded,
   T_instagram_accounts_reconnect_needed,
 } from '../../../pages/api/instagram_accounts/reconnect_needed';
@@ -27,8 +23,8 @@ export const useGetInstagramMedias = () => {
 
   // ページ送りでないときは空のオブジェクト
   return async (
-    instagram_id: T_instagram_id,
-    username: T_instagram_username,
+    instagram_id: number,
+    username: string,
     paging: { after?: string; before?: string }
   ) => {
     dispatchAppState(isLoadingMain(true));
