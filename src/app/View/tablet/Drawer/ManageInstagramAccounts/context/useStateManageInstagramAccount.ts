@@ -1,7 +1,7 @@
-import React from 'react'
-import { instagramRedirectHost } from '../../../../../../lib/loadUrl';
+import React from 'react';
+import { instagramRedirectHost } from '../../../../../../util/loadUrl';
 import { AppStateContext } from '../../../../../Store/appState/Context';
-import { InstagramContext } from "../../../../../Store/instagram/Context";
+import { InstagramContext } from '../../../../../Store/instagram/Context';
 export const useStateManageInstagramAccount = () => {
   const { appState } = React.useContext(AppStateContext);
   const { instagramAccounts } = React.useContext(InstagramContext);
@@ -14,4 +14,4 @@ export const useStateManageInstagramAccount = () => {
     loading,
     instaAuth,
   };
-}
+};

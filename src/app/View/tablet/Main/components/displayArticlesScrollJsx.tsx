@@ -10,7 +10,7 @@ import { EditButtonsBox } from '../../../../pureComponents/editButtonBox/EditBut
 import { TUseMainProps, TMainClasses } from '../view/Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
-import { sqlToDate } from '../../../../../lib/sqlToDate';
+import { sqlToDate } from '../../../../../util/sqlToDate';
 import { SelectedTags } from './SelectedTags';
 
 export const displayArticlesScrollJsx = (

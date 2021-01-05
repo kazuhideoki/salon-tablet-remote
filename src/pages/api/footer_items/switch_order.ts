@@ -1,12 +1,12 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../lib/db/apiWrap';
+import { TApiResponse } from '../../../util/db/apiWrap';
 import {
   T_order_sidebar,
   T_footer_item_id,
   T_order,
 } from '../../../app/Store/Interface';
-import { apiWrapPost } from '../../../lib/db/apiWrap';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsSwitchOrder = async (

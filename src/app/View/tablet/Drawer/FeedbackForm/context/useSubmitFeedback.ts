@@ -6,7 +6,7 @@ import {
   // apiSubmitFeedback,
   T_submit_feedback,
 } from '../../../../../../pages/api/submit_feedback';
-import { apiWrapPost, TApiResponse } from '../../../../../../lib/db/apiWrap';
+import { apiWrapPost, TApiResponse } from '../../../../../../util/db/apiWrap';
 
 type Type = {
   contactFormTitle: string;

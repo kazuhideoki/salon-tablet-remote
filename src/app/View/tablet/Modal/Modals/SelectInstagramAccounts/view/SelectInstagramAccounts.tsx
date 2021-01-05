@@ -6,7 +6,7 @@ import {
   createStyles,
   Button,
 } from '@material-ui/core';
-import { useIsMobile } from '../../../../../../../lib/useIsMobile';
+import { useIsMobile } from '../../../../../../../util/useIsMobile';
 import { HelpButton } from '../../../../../../pureComponents/HelpButton';
 import { useManageInstagramAccountsProps } from '../../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
 import { useStateSelectInstagramAccounts } from '../context/useStateSelectInstagramAccounts';

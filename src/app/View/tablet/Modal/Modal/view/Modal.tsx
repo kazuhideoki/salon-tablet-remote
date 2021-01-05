@@ -38,7 +38,7 @@ import { PageNotEmailVerified } from '../../../../../../pageComponent/PageNotEma
 import { switchingTransition } from '../context/switchingTransition';
 import { useCloseModal } from '../context/useCloseModal';
 import { useStateModal } from '../context/useStateModal';
-import { useIsMobile } from '../../../../../../lib/useIsMobile';
+import { useIsMobile } from '../../../../../../util/useIsMobile';
 
 export const useModalProps = () => {
   const {

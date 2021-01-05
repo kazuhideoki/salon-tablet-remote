@@ -1,7 +1,6 @@
 import { createMuiTheme } from '@material-ui/core';
 import { TThemeParams } from '../../ThemeProvider';
-import { Deprecated_FontNameToFontFamily } from '../fonts';
-import { secondaryColor } from '../../../../../lib/secondaryColor';
+import { secondaryColor } from '../../../../../util/secondaryColor';
 
 const theme = createMuiTheme();
 

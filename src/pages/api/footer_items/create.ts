@@ -1,4 +1,4 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   T_is_published_footer_items,
@@ -15,9 +15,9 @@ import {
   T_data_type_footer_item,
   T_order_sidebar,
 } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { checkIsAdmin } from '../../../lib/db/checkIsAdmin';
-import { apiWrapPost } from '../../../lib/db/apiWrap';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (

@@ -1,7 +1,7 @@
-import { reducerLogger } from "../../../lib/dev/reducerLogger";
-import { TUserInfo } from "../Interface";
-import { TUserInfoAction } from "./actions";
-import * as types from "./types";
+import { reducerLogger } from '../../../util/dev/reducerLogger';
+import { TUserInfo } from '../Interface';
+import { TUserInfoAction } from './actions';
+import * as types from './types';
 
 export type UserInfoContextState = TUserInfo;
 
@@ -13,29 +13,29 @@ export const userInfoReducer = (
   const func = userInfoReducer;
   switch (action.type) {
     case types.UPDATE:
-      newState = { ...state, ...action.payload }
+      newState = { ...state, ...action.payload };
       break;
     case types.SET_THEME:
       newState = {
-            ...state,
-            selected_theme: action.payload.selected_theme,
-            theme_color: action.payload.theme_color,
-            theme_font1: action.payload.theme_font1,
-            theme_font2: action.payload.theme_font2,
-            theme_font_heading: action.payload.theme_font_heading,
-          }
+        ...state,
+        selected_theme: action.payload.selected_theme,
+        theme_color: action.payload.theme_color,
+        theme_font1: action.payload.theme_font1,
+        theme_font2: action.payload.theme_font2,
+        theme_font_heading: action.payload.theme_font_heading,
+      };
       break;
     case types.SET_THEME_COLOR:
       newState = {
         ...state,
-        theme_color: action.payload
-      }
+        theme_color: action.payload,
+      };
       break;
     case types.SET_THEME_FONT1:
       newState = {
         ...state,
         theme_font1: action.payload,
-      }
+      };
       break;
     case types.SET_THEME_FONT2:
       newState = {

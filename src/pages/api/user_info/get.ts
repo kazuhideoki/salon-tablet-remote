@@ -1,8 +1,8 @@
-import { apiWrapGet, TApiResponse } from '../../../lib/db/apiWrap';
+import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { TUserInfo } from '../../../app/Store/Interface';
-import { userInfoParamsFromSql } from '../../../lib/db/userInfoParamsFromSql';
+import { userInfoParamsFromSql } from '../../../util/db/userInfoParamsFromSql';
 
 export const apiGetUserInfoFromEmail = async (
   email: string

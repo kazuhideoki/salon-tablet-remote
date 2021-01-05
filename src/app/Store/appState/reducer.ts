@@ -1,5 +1,5 @@
 import { generateFooterItemEdittingParams } from '../../View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem';
-import { reducerLogger } from '../../../lib/dev/reducerLogger';
+import { reducerLogger } from '../../../util/dev/reducerLogger';
 import { TAppStateAction } from './actions';
 import * as types from './types';
 import { initAppState } from './initialValue';

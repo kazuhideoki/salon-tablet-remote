@@ -11,7 +11,7 @@ import {
   switchingTheme,
 } from '../../app/Store/theme/lib/paramsFromTheme';
 import { T_selected_theme } from '../../app/Store/Interface';
-import { googleFontsUrl } from '../../lib/googleFontsUrl';
+import { googleFontsUrl } from '../../util/googleFontsUrl';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore

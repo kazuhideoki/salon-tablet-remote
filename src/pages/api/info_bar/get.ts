@@ -1,4 +1,4 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   TInfoBar,
@@ -6,8 +6,8 @@ import {
   TInfoBarData,
   TInfoBarWithoutId,
 } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { apiWrapGet } from '../../../lib/db/apiWrap';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from './tablet/Modal/Modal/view/Modal';
 import { AppMobile } from './mobile/AppMobile';
 import { AppTablet } from './tablet/AppTablet';
-import { useIsMobile } from '../../lib/useIsMobile';
+import { useIsMobile } from '../../util/useIsMobile';
 import { TIndexProps, TIndexPropsData } from '../../pages';
 import { T_auth_get_session_return } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../Store/userInfo/Context';

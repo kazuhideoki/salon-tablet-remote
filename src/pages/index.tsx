@@ -13,9 +13,9 @@ import {
 import { App } from '../app/View/App';
 import { GetServerSideProps } from 'next';
 import { TopPage } from '../pageComponent/TopPage';
-import { generateProps } from '../lib/db/generateProps';
+import { generateProps } from '../util/db/generateProps';
 import { SEO } from '../pageComponent/SEO';
-import { getDeviceType } from '../lib/getDeviceType';
+import { getDeviceType } from '../util/getDeviceType';
 import {
   apiGetSession,
   T_auth_get_session_return,

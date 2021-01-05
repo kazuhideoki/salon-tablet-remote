@@ -8,8 +8,8 @@ import {
   TColor,
 } from '../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
 import { TFont1, TFont2 } from '../app/Store/theme/lib/fonts';
-import { googleFontsUrl } from '../lib/googleFontsUrl';
-import { generateSecondaryColor } from '../lib/secondaryColor';
+import { googleFontsUrl } from '../util/googleFontsUrl';
+import { generateSecondaryColor } from '../util/secondaryColor';
 export default {
   title: 'Drawer/ManageTheme',
   component: ManageThemePresenter,

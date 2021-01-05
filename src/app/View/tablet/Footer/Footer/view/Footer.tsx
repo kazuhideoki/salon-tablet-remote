@@ -4,7 +4,7 @@ import { IconAndText } from '../components/IconAndText';
 import { IconsSetting } from '../../../Drawer/FooterItemEditor/components/iconSelect/icons';
 import { EditButtonsBox } from '../../../../../pureComponents/editButtonBox/EditButtonsBox';
 import { showDataType } from '../../../Main/components/showDataType';
-import { useIsMobile } from '../../../../../../lib/useIsMobile';
+import { useIsMobile } from '../../../../../../util/useIsMobile';
 import { useDeleteFooterItem } from '../context/useDeleteFooterItem';
 import { useStateFooter } from '../context/useStateFooter';
 import { useHandleOnUpdateFooterItem } from '../context/useHandleOnUpdateFooterItem';

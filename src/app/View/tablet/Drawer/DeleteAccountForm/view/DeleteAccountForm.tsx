@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Info } from '@material-ui/icons';
-import { server } from '../../../../../../lib/loadUrl';
+import { server } from '../../../../../../util/loadUrl';
 import { useDeleteUser } from '../context/useDeleteUser';
 import { useStateDeleteAccountFrom } from '../context/useStateDeleteAccountForm';
 

@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingMessage } from 'http';
-import { firebaseAdmin } from '../../../lib/auth/firebaseAdmin';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { server, localhost } from '../../../lib/loadUrl';
+import { firebaseAdmin } from '../../../util/auth/firebaseAdmin';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import { server, localhost } from '../../../util/loadUrl';
 import { parseCookies } from 'nookies';
 
 export const apiGetSession = async (

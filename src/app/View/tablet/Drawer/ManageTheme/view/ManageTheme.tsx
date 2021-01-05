@@ -9,13 +9,13 @@ import { SelectPrimaryColor } from '../components/SelectPrimaryColor';
 import { SelectFont } from '../components/SelectFont';
 import { fonts2, fonts1 } from '../../../../../Store/theme/lib/fonts';
 import { FiberManualRecord } from '@material-ui/icons';
-import { secondaryColor } from '../../../../../../lib/secondaryColor';
+import { secondaryColor } from '../../../../../../util/secondaryColor';
 import { SelectFooterIconSize } from '../components/SelectFooterIconSize';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useAuth } from '../../../../../../lib/auth/AuthProvider';
+import { useAuth } from '../../../../../../util/auth/AuthProvider';
 import { useHandleChange } from '../context/useHandleChange';
 import { useHandleChangeThemeColor } from '../context/useHandleChangeThemeColor';
 import {

@@ -1,7 +1,7 @@
-import { reducerLogger } from "../../../lib/dev/reducerLogger";
-import { FooterItems } from "../Interface";
-import { TFooterItemsAction } from "./actions";
-import * as types from "./types";
+import { reducerLogger } from '../../../util/dev/reducerLogger';
+import { FooterItems } from '../Interface';
+import { TFooterItemsAction } from './actions';
+import * as types from './types';
 
 export type FooterItemsContextState = FooterItems;
 
@@ -13,7 +13,7 @@ export const footerItemsReducer = (
   const func = footerItemsReducer;
   switch (action.type) {
     case types.SET:
-      newState = action.payload
+      newState = action.payload;
       break;
   }
 

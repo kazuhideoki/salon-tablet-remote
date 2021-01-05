@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import Link from 'next/link';
 import { AboutST } from './AboutST';
-import { server } from '../lib/loadUrl';
+import { server } from '../util/loadUrl';
 import { Parallax } from 'react-parallax';
 import { PlainButton } from './PlainButton';
 

@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { TUseSettingUserInfoProps } from '../view/ManageUserInfo';
 import QRCode from 'qrcode.react';
-import { server } from '../../../../../../lib/loadUrl';
+import { server } from '../../../../../../util/loadUrl';
 import { useReactToPrint } from 'react-to-print';
 import { useQrCodeForPrint } from './useQrCodeForPrint';
 import { CopyToClipboard } from 'react-copy-to-clipboard';

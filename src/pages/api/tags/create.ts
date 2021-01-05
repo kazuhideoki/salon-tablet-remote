@@ -1,8 +1,8 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { T_user_id, T_tag_name } from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { apiWrapPost } from '../../../lib/db/apiWrap';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsCreate = async (

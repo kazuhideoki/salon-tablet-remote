@@ -1,7 +1,11 @@
-import { reducerLogger } from "../../../lib/dev/reducerLogger";
-import { initInstagramMedias, TInstagramAccounts, TInstagramMedias } from "../Interface";
-import { TInstagramAction } from "./actions";
-import * as types from "./types";
+import { reducerLogger } from '../../../util/dev/reducerLogger';
+import {
+  initInstagramMedias,
+  TInstagramAccounts,
+  TInstagramMedias,
+} from '../Interface';
+import { TInstagramAction } from './actions';
+import * as types from './types';
 
 export type InstagramContextState = {
   instagramAccounts: TInstagramAccounts;
@@ -15,37 +19,36 @@ export const instagramReducer = (
   let newState: InstagramContextState;
   const func = instagramReducer;
   switch (action.type) {
-
     case types.SET_ACCOUNTS:
       newState = {
         ...state,
-        instagramAccounts: action.payload
+        instagramAccounts: action.payload,
       };
       break;
 
     case types.SET_RECONNECT:
       const instagramAccounts = state.instagramAccounts.map((value) => {
         if (value.instagram_id === action.payload) {
-          value.is_reconnect_needed = true
+          value.is_reconnect_needed = true;
         }
         return value;
       });
       newState = {
         ...state,
-        instagramAccounts: instagramAccounts
-      }
+        instagramAccounts: instagramAccounts,
+      };
       break;
     case types.SET_MEDIAS:
       newState = {
         ...state,
         instagramMedias: action.payload,
-      }
+      };
       break;
     case types.REMOVE_MEDIAS:
       newState = {
         ...state,
         instagramMedias: initInstagramMedias,
-      }
+      };
       break;
   }
 
