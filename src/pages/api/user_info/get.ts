@@ -1,4 +1,4 @@
-import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapGet, ApiResponse } from '../../../util/db/apiWrap';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '../../../util/db/db';
 import { UserInfo } from '../../../util/interface/Interface';
@@ -6,7 +6,7 @@ import { userInfoParamsFromSql } from '../../../util/db/userInfoParamsFromSql';
 
 export const apiGetUserInfoFromEmail = async (
   email: string
-): Promise<TApiResponse<UserInfo>> => {
+): Promise<ApiResponse<UserInfo>> => {
   return apiWrapGet(`user_info/get?email=${email}`);
 };
 
@@ -21,10 +21,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const rawData = userInfoParamsFromSql(data[0]);
     if (data.length === 0) throw new Error('userInfoがありません');
-    res.status(200).json({ err: false, rawData } as TApiResponse<UserInfo>);
+    res.status(200).json({ err: false, rawData } as ApiResponse<UserInfo>);
   } catch (err) {
     console.log('/user_info/get/のエラーは ' + JSON.stringify(err));
-    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 export const config = {

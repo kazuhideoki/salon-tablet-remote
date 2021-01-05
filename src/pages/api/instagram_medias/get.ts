@@ -1,13 +1,13 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { InstagramMediaObject } from '../../../util/interface/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (
   params: ApiInstagramMediasGet
-): Promise<TApiResponse<InstagramMediaObject>> => {
+): Promise<ApiResponse<InstagramMediaObject>> => {
   return apiWrapPost('instagram_medias/get', params);
 };
 
@@ -47,16 +47,16 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         console.log('data2.errorは ' + data2.error);
         return res
           .status(500)
-          .json({ err: true, rawData: data2 } as TApiResponse);
+          .json({ err: true, rawData: data2 } as ApiResponse);
       }
 
       const rawData: InstagramMediaObject = data2;
       res
         .status(200)
-        .json({ err: false, rawData } as TApiResponse<InstagramMediaObject>);
+        .json({ err: false, rawData } as ApiResponse<InstagramMediaObject>);
     } catch (err) {
       console.log('/instagram_medias/get/のエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

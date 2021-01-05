@@ -1,12 +1,12 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsDelete = async (
   params: ApiFooterItemsDelete
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('footer_items/delete', params);
 };
 
@@ -35,11 +35,11 @@ const footer_items_delete = async (
 
       console.log('/footer_items/delete/は ' + JSON.stringify(data));
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/footer_items/delete/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

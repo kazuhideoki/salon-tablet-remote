@@ -1,11 +1,11 @@
 import colorConvert from 'color-convert';
 
-import { THsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';
+import { Hsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';
 
-type props = THsl | number[]; //両方のパターンに対応させる？★
+type props = Hsl | number[]; //両方のパターンに対応させる？★
 
 export const generateSecondaryColor = (props: props) => {
-  let params: THsl;
+  let params: Hsl;
   let h: number, s: number, l: number;
   if (Array.isArray(props)) {
     params = {

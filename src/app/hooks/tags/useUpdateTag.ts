@@ -4,13 +4,13 @@ import { ApiTagsUpdata, apiTagsUpdata } from '../../../pages/api/tags/update';
 import { AppStateContext } from '../../store/appState/Context';
 import { isLoadingTags } from '../../store/appState/actions';
 
-type TUpdateTag = { edittingTagId: number; tagName: string };
+type Props = { edittingTagId: number; tagName: string };
 
 export const useUpdateTag = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const getTags = useGetTags();
 
-  return async ({ edittingTagId, tagName }: TUpdateTag) => {
+  return async ({ edittingTagId, tagName }: Props) => {
     dispatchAppState(isLoadingTags(true));
 
     const params: ApiTagsUpdata = {

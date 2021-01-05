@@ -3,15 +3,15 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
 import {
   Articles,
-  TAllArticles,
+  AllArticles,
   PaginationParams,
 } from '../../../util/interface/Interface';
-import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapGet, ApiResponse } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (
   params: ApiArticlesGet
-): Promise<TApiResponse<ApiArticlesGetReturn>> => {
+): Promise<ApiResponse<ApiArticlesGetReturn>> => {
   const { page, selectingTags, isSetting, userId } = params;
   console.log('apiArticlesGetだよ');
 
@@ -30,7 +30,7 @@ export type ApiArticlesGet = {
 export type ApiArticlesGetReturn = {
   articles: Articles;
   pagination: PaginationParams;
-  allArticles: TAllArticles;
+  allArticles: AllArticles;
 };
 
 const pageSize = 6;
@@ -95,16 +95,16 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       // tag_idsをnumber[]化する、なければnullのまま
       articles: data.length ? tagIdsFromString(data) : data,
       pagination: pagination,
-      allArticles: data3 as TAllArticles,
+      allArticles: data3 as AllArticles,
     };
 
     res
       .status(200)
-      .json({ err: false, rawData } as TApiResponse<ApiArticlesGetReturn>);
+      .json({ err: false, rawData } as ApiResponse<ApiArticlesGetReturn>);
   } catch (err) {
     console.log('/articles/get/のエラーは ' + JSON.stringify(err));
 
-    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 

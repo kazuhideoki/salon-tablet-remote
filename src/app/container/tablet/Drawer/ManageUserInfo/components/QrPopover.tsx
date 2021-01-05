@@ -3,7 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { TUseSettingUserInfoProps } from '../ManageUserInfo';
+import { SettingUserInfoPresenterProps } from '../ManageUserInfo';
 import QRCode from 'qrcode.react';
 import { server } from '../../../../../../util/loadUrl';
 import { useReactToPrint } from 'react-to-print';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const QrPopover: React.FC<TUseSettingUserInfoProps> = (props) => {
+export const QrPopover: React.FC<SettingUserInfoPresenterProps> = (props) => {
   const classes = useStyles();
   const [qrAnchorEl, setQrAnchorEl] = React.useState<HTMLButtonElement | null>(
     null

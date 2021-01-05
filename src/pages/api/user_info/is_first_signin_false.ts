@@ -1,12 +1,12 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiIsFirsSigninFalse = async (
   params: ApiIsFirsSigninFalse
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('user_info/is_first_signin_false', params);
 };
 
@@ -25,13 +25,13 @@ const is_first_signin_false = async (
         `UPDATE user_info SET is_first_sign_in = 0 WHERE user_id = ?`,
         user_id
       );
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log(
         '/user_info/is_first_signin_false/のエラーは ' + JSON.stringify(err)
       );
 
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

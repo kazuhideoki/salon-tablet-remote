@@ -1,9 +1,9 @@
 import React from 'react';
 import { FirstPage } from '@material-ui/icons';
-import { TPaginationPropsAndClasses } from '../../PaginationBar';
+import { PaginationPresenterPropsAndClasses } from '../../PaginationBar';
 
 //  ページ数が3より大きい場合latestとoldestを表示
-export const Latest: React.FC<TPaginationPropsAndClasses> = (props) => {
+export const Latest: React.FC<PaginationPresenterPropsAndClasses> = (props) => {
   const { page, pageCount } = props.paginationParams;
 
   const hundleOnClick = () => {

@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   useCreateArticle,
-  TCreateArticle,
+  CreateArticleParams,
 } from '../../../../../hooks/articles/useCreateArticle';
 import { useUpdateArticle } from '../../../../../hooks/articles/useUpdateArticle';
 
-export type THandleSubmit = { params: TCreateArticle; isEditting: boolean };
+type Props = { params: CreateArticleParams; isEditting: boolean };
 
-export const useHandleSubmit = (props: THandleSubmit) => {
+export const useHandleSubmit = (props: Props) => {
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
 

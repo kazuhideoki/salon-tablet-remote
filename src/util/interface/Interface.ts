@@ -1,8 +1,8 @@
-import { TFont1, TFont2 } from '../../app/store/theme/lib/fonts';
+import { Font1, Font2 } from '../../app/store/theme/lib/fonts';
 
 export type ShowArticleType = 'scroll' | 'grid6';
 export type SelectedTheme = 'default' | 'white' | 'natural';
-export type ThemeFont = TFont1[0] | TFont2[0];
+export type ThemeFont = Font1[0] | Font2[0];
 export type FooterIconSize = 'medium' | 'small';
 
 export type UserInfo = {
@@ -54,7 +54,7 @@ export type ArticleWithoutArticleId = {
 export type Article = { article_id: number } & ArticleWithoutArticleId;
 export type Articles = Article[];
 
-export type TAllArticles = {
+export type AllArticles = {
   article_id: number;
   title: string;
 }[];
@@ -95,14 +95,13 @@ export type FooterItems = FooterItem[];
 // ●●●●●● テーブル `info_bar`
 
 export type InfoBarType = 'shop_name' | 'scrolling_sentence' | 'article';
-export type T_selected_article_id = number;
 
 export type InfoBarWithoutId = {
   user_id: number;
   info_bar_type: InfoBarType;
   scrolling_sentence: string;
   scrolling_animation_duration: number;
-  selected_article_id: T_selected_article_id | null;
+  selected_article_id: number | null;
 };
 
 export type InfoBar = InfoBarWithoutId & { info_bar_id: number };

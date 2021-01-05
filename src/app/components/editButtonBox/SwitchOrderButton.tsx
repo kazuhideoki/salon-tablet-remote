@@ -4,12 +4,12 @@ import { StyledIconButtonEditButton } from './EditButtonsBox';
 import { FooterItem } from '../../../util/interface/Interface';
 
 // 一番目のアイテムかどうか判定させるためにsmalllerがいる
-export type TSwitchOrderButton = {
+export type HandleSwitchOrderButton = {
   smaller: FooterItem;
   switchOrder: () => Promise<void>;
 };
 
-type Props = TSwitchOrderButton & { handleClose: () => void };
+type Props = HandleSwitchOrderButton & { handleClose: () => void };
 
 export const SwitchOrderButton = (props: Props) => {
   // 一番目のアイテムには必要ないので表示させない

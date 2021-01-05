@@ -1,12 +1,12 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeShowArticleType = async (
   params: ApiUserInfoChangeShowArticleType
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('user_info/change_show_article_type', params);
 };
 
@@ -31,12 +31,12 @@ const change_show_article_type = async (
         user_id,
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log(
         '/user_info/change_show_article_type/のエラーは ' + JSON.stringify(err)
       );
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

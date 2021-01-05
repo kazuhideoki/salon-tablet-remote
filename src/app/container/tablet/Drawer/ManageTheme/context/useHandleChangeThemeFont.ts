@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChangeThemeFont } from '../../../../../hooks/userInfo/theme/useChangeThemeFont';
-import { TFont1, TFont2 } from '../../../../../store/theme/lib/fonts';
+import { Font1, Font2 } from '../../../../../store/theme/lib/fonts';
 import { UserInfoContext } from '../../../../../store/userInfo/Context';
 
 export const useHandleChangeThemeFont1 = () => {
@@ -12,8 +12,8 @@ export const useHandleChangeThemeFont1 = () => {
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     try {
-      await changeThemeFont(event.target.value as TFont1[0], 'theme_font1');
-      setFont1(event.target.value as TFont1[0]);
+      await changeThemeFont(event.target.value as Font1[0], 'theme_font1');
+      setFont1(event.target.value as Font1[0]);
     } catch (err) {
       console.log(`handleChangeThemeFont1: ${err}`);
     }
@@ -31,8 +31,8 @@ export const useHandleChangeThemeFont2 = () => {
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     try {
-      await changeThemeFont(event.target.value as TFont2[0], 'theme_font2');
-      setFont2(event.target.value as TFont2[0]);
+      await changeThemeFont(event.target.value as Font2[0], 'theme_font2');
+      setFont2(event.target.value as Font2[0]);
     } catch (err) {
       console.log(`handleChangeThemeFont2: ${err}`);
     }
@@ -52,10 +52,10 @@ export const useHandleChangeThemeFontHeading = () => {
   ) => {
     try {
       await changeThemeFont(
-        event.target.value as TFont2[0],
+        event.target.value as Font2[0],
         'theme_font_heading'
       );
-      setFontHeading(event.target.value as TFont2[0]);
+      setFontHeading(event.target.value as Font2[0]);
     } catch (err) {
       console.log(`handleChangeThemeFontHeading: ${err}`);
     }

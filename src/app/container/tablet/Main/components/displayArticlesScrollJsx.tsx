@@ -7,15 +7,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
-import { TUseMainProps, TMainClasses } from '../Main';
+import { MainPresenterProps, MainClasses } from '../Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
 import { SelectedTags } from './SelectedTags';
 
 export const displayArticlesScrollJsx = (
-  props: TUseMainProps,
-  classes: TMainClasses,
+  props: MainPresenterProps,
+  classes: MainClasses,
   StyledCardContent: any
 ) =>
   props.articles.map((value, key: number) => {

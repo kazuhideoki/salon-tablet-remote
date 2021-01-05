@@ -8,7 +8,7 @@ import {
   MenuItem,
   Select,
 } from '@material-ui/core';
-import { TAllArticles } from '../../../../../../util/interface/Interface';
+import { AllArticles } from '../../../../../../util/interface/Interface';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,14 +21,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type TSelectArticleInfoBar = {
-  AllArticles: TAllArticles;
+export type SelectArticleInfoBarProps = {
+  AllArticles: AllArticles;
   articleInfoBar: number;
   setArticleInfoBar: React.Dispatch<React.SetStateAction<number>>;
   className?: string;
 };
 
-export const SelectArticleInfoBar: React.FC<TSelectArticleInfoBar> = ({
+export const SelectArticleInfoBar: React.FC<SelectArticleInfoBarProps> = ({
   AllArticles,
   articleInfoBar,
   setArticleInfoBar,

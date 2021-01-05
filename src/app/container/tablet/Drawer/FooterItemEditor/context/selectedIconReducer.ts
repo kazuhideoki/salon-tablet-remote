@@ -2,16 +2,19 @@ import { SvgIconTypeMap } from '@material-ui/core';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { reducerLogger } from '../../../../../../util/dev/reducerLogger';
 
-type Type = [OverridableComponent<SvgIconTypeMap<{}, 'svg'>>, string];
+type State = [
+  OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>,
+  string
+];
 
 export const selectedIconReducer = (
-  state: Type,
+  state: State,
   action: {
     type: 'SET_ICON';
-    payload: Type;
+    payload: State;
   }
 ) => {
-  let newState: Type;
+  let newState: State;
   const func = selectedIconReducer;
   switch (action.type) {
     case 'SET_ICON':

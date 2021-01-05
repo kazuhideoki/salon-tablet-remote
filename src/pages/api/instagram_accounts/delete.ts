@@ -1,12 +1,12 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsDelete = async (
   params: ApiInstagramAccountsDelete
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('instagram_accounts/delete', params);
 };
 
@@ -27,13 +27,13 @@ const instagram_accounts_delete = async (
         instagram_id
       );
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log(
         '/instagram_accounts/delete/のエラーは ' + JSON.stringify(err)
       );
 
-      res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { LastPage } from '@material-ui/icons';
 import { SvgIcon, Button, IconButton } from '@material-ui/core';
-import { TPaginationPropsAndClasses } from '../../PaginationBar';
+import { PaginationPresenterPropsAndClasses } from '../../PaginationBar';
 
 //  ページ数が3より大きい場合latestとoldestを表示
-export const Oldest = (props: TPaginationPropsAndClasses) => {
+export const Oldest = (props: PaginationPresenterPropsAndClasses) => {
   const { page, pageCount } = props.paginationParams;
 
   const hundleOnClick = () => {

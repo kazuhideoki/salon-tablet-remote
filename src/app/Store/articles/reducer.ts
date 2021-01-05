@@ -1,6 +1,6 @@
 import { reducerLogger } from '../../../util/dev/reducerLogger';
 import {
-  TAllArticles,
+  AllArticles,
   Articles,
   PaginationParams,
 } from '../../../util/interface/Interface';
@@ -9,7 +9,7 @@ import * as types from './types';
 
 export type ArticlesContextState = {
   articles: Articles;
-  allArticles: TAllArticles;
+  allArticles: AllArticles;
   paginationParams: PaginationParams;
 };
 

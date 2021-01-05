@@ -1,11 +1,11 @@
 import { createMuiTheme } from '@material-ui/core';
-import { TThemeParams } from '../../ThemeProvider';
+import { ThemeParams } from '../../ThemeProvider';
 import { Deprecated_FontNameToFontFamily } from '../fonts';
 import { secondaryColor } from '../../../../../util/secondaryColor';
 
 const theme = createMuiTheme();
 
-export const themeWhite = (params: TThemeParams) =>
+export const themeWhite = (params: ThemeParams) =>
   createMuiTheme({
     overrides: {
       MuiCssBaseline: {

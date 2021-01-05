@@ -2,9 +2,9 @@ import React from 'react';
 import {
   apiUserInfoThemeFont,
   ApiUserInfoThemeFont,
-  TWhichFont,
+  WhichFont,
 } from '../../../../pages/api/user_info/theme/font';
-import { TFont1, TFont2 } from '../../../store/theme/lib/fonts';
+import { Font1, Font2 } from '../../../store/theme/lib/fonts';
 import { UserInfoContext } from '../../../store/userInfo/Context';
 import {
   setThemeFont1,
@@ -16,7 +16,7 @@ export const useChangeThemeFont = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 
-  return async (font: TFont1[0] | TFont2[0], whichFont: TWhichFont) => {
+  return async (font: Font1[0] | Font2[0], whichFont: WhichFont) => {
     const params: ApiUserInfoThemeFont = {
       user_id,
       theme_font: font,

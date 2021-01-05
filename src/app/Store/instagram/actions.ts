@@ -9,9 +9,6 @@ export const setAccounts = (instagramAccounts: InstagramAccounts) => ({
   payload: instagramAccounts,
 });
 
-export type TSetReconnect = {
-  is_reconnect_needed: boolean;
-};
 export const setReconnect = (instagram_id: number) => ({
   type: types.SET_RECONNECT,
   payload: instagram_id,
@@ -24,7 +21,7 @@ export const removeMedias = () => ({
   type: types.REMOVE_MEDIAS,
 });
 
-export type TInstagramAction =
+export type InstagramAction =
   | ReturnType<typeof setAccounts>
   | ReturnType<typeof setReconnect>
   | ReturnType<typeof setMedias>

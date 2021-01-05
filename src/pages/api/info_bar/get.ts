@@ -5,13 +5,13 @@ import {
   InfoBarData,
   InfoBarWithoutId,
 } from '../../../util/interface/Interface';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
   user_id: number
-): Promise<TApiResponse<InfoBarData>> => {
+): Promise<ApiResponse<InfoBarData>> => {
   return apiWrapGet(`info_bar/get?userId=${user_id}`);
 };
 
@@ -67,10 +67,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       targetArticle: data2.length ? data2[0] : [],
     };
 
-    res.status(200).json({ err: false, rawData } as TApiResponse<InfoBarData>);
+    res.status(200).json({ err: false, rawData } as ApiResponse<InfoBarData>);
   } catch (err) {
     console.log('/info_bar/get/のエラーは ' + JSON.stringify(err));
-    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 

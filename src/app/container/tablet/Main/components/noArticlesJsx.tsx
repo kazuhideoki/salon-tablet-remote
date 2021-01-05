@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grid, CardActionArea, Card, Typography } from '@material-ui/core';
-import { TMainClasses, TStyledCardContent } from '../Main';
+import { MainClasses, StyledCardContentType } from '../Main';
 
 // 記事がなかった場合の表示
 export const noArticlesJsx = (
-  classes: TMainClasses,
-  StyledCardContent: TStyledCardContent
+  classes: MainClasses,
+  StyledCardContent: StyledCardContentType
 ) => (
   <Grid item>
     <CardActionArea className={classes.cardActionArea} component="div">

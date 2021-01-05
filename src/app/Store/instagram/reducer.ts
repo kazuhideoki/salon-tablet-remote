@@ -4,7 +4,7 @@ import {
   InstagramAccounts,
   InstagramMediaObject,
 } from '../../../util/interface/Interface';
-import { TInstagramAction } from './actions';
+import { InstagramAction } from './actions';
 import * as types from './types';
 
 export type InstagramContextState = {
@@ -14,7 +14,7 @@ export type InstagramContextState = {
 
 export const instagramReducer = (
   state: InstagramContextState,
-  action: TInstagramAction
+  action: InstagramAction
 ) => {
   let newState: InstagramContextState;
   const func = instagramReducer;

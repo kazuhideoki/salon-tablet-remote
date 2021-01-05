@@ -28,12 +28,12 @@ import { useHandleAccordion } from './context/useHandleAccordion';
 import { useStateMangeTheme } from './context/useStateMangeTheme';
 import firebase from 'firebase/app';
 
-export type THsl = {
+export type Hsl = {
   h: number;
   s: number;
   l: number;
 };
-export type TColor = { hex: string; hsl: THsl };
+export type Color = { hex: string; hsl: Hsl };
 
 export const useManageTheme = () => {
   const {
@@ -80,10 +80,7 @@ export const useManageTheme = () => {
   };
 };
 
-export type TUseManageThemeProps = ReturnType<typeof useManageTheme>;
-export type TUseManageThemePropsPartial = Partial<
-  ReturnType<typeof useManageTheme>
->;
+export type ManageThemePresenterProps = ReturnType<typeof useManageTheme>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -114,7 +111,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ManageThemePresenter: React.FC<TUseManageThemeProps> = (props) => {
+export const ManageThemePresenter: React.FC<ManageThemePresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   return (

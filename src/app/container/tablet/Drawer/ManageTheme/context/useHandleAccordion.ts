@@ -1,6 +1,6 @@
 import React from 'react';
 import { generateDefaultParamsFromTheme } from '../../../../../store/theme/lib/paramsFromTheme';
-import { TThemeParams } from '../../../../../store/theme/ThemeProvider';
+import { ThemeParams } from '../../../../../store/theme/ThemeProvider';
 import { UserInfoContext } from '../../../../../store/userInfo/Context';
 import Lodash from 'lodash';
 
@@ -13,7 +13,7 @@ export const useHandleAccordion = () => {
     theme_font2,
     theme_font_heading,
   } = userInfo;
-  const themeParams: TThemeParams = {
+  const themeParams: ThemeParams = {
     selected_theme: selected_theme,
     theme_color: theme_color,
     theme_font1: theme_font1,
@@ -34,7 +34,7 @@ export const useHandleAccordion = () => {
   return { expanded, handleAccordion };
 };
 
-export const isThemeParamsChanged = (themeParams: TThemeParams): boolean => {
+export const isThemeParamsChanged = (themeParams: ThemeParams): boolean => {
   const originalThemeParams = generateDefaultParamsFromTheme(
     themeParams.selected_theme
   );

@@ -1,12 +1,12 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsSwitchOrder = async (
   params: ApiFooterItemsSwitchOrder
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('footer_items/switch_order', params);
 };
 
@@ -52,7 +52,7 @@ const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
         [smallerToLarger, smaller.footer_item_id]
       );
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log(
         '/footer_items/switch_order/のエラーは ' + JSON.stringify(err)

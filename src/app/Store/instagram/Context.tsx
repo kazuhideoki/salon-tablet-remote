@@ -4,7 +4,7 @@ import {
   InstagramAccounts,
   InstagramMediaObject,
 } from '../../../util/interface/Interface';
-import { TInstagramAction } from './actions';
+import { InstagramAction } from './actions';
 import { instagramReducer } from './reducer';
 
 export type Props = { instagramAccounts: InstagramAccounts };
@@ -12,7 +12,7 @@ export type Props = { instagramAccounts: InstagramAccounts };
 export type InstagramContextProps = {
   instagramAccounts: InstagramAccounts;
   instagramMediaObject: InstagramMediaObject;
-  dispatchInstagram: React.Dispatch<TInstagramAction>;
+  dispatchInstagram: React.Dispatch<InstagramAction>;
 };
 export const InstagramContext = React.createContext(
   {} as InstagramContextProps

@@ -25,7 +25,7 @@ export const useSelectInstagramAccountsProps = () => {
     isMobile,
   };
 };
-export type TSelectInstagramAccountsPresenter = ReturnType<
+export type SelectInstagramAccountsPresenterProps = ReturnType<
   typeof useSelectInstagramAccountsProps
 >;
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const SelectInstagramAccountsPresenter: React.FC<TSelectInstagramAccountsPresenter> = (
+export const SelectInstagramAccountsPresenter: React.FC<SelectInstagramAccountsPresenterProps> = (
   props
 ) => {
   const classes = useStyles();

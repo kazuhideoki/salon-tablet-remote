@@ -2,11 +2,11 @@ import React from 'react';
 import { EditTwoTone } from '@material-ui/icons';
 import { StyledIconButtonEditButton } from './EditButtonsBox';
 
-export type THandleUpdateButton = { onClick: () => void };
+export type HandleUpdateButton = { onClick: () => void };
 
-export type TUpdateButton = THandleUpdateButton & { handleClose: () => void };
+export type Props = HandleUpdateButton & { handleClose: () => void };
 
-export const UpdateButton = (props: TUpdateButton) => {
+export const UpdateButton = (props: Props) => {
   const handleOnClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {

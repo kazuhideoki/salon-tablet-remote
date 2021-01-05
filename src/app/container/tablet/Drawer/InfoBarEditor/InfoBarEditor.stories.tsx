@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   InfoBarEditorPresenter,
-  TUseInfoBarEditorProps,
+  InfoBarEditorPresenterProps,
 } from './InfoBarEditor';
 import { InfoBarType } from '../../../../../util/interface/Interface';
 import { sampleAllArticles } from '../../../../../util/dev/sampleAllArticles';
@@ -18,7 +18,7 @@ export const Normal = () => {
   );
   const [articleInfoBar, setArticleInfoBar] = React.useState(2);
 
-  const props: TUseInfoBarEditorProps = {
+  const props: InfoBarEditorPresenterProps = {
     editorText,
     setEditorText,
     charCount,

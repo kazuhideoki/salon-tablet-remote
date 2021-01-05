@@ -1,5 +1,5 @@
 import React from 'react';
-import { TIndexPropsData } from '../../pages';
+import { IndexPropsData } from '../../pages';
 import { ArticlesContextProvider } from './articles/Context';
 import { FooterItemsContextProvider } from './footerItems/Context';
 import { TagsContextProvider } from './tags/Context';
@@ -8,11 +8,11 @@ import { InstagramContextProvider } from './instagram/Context';
 import { UserInfoContextProvider } from './userInfo/Context';
 import { AppStateContextProvider } from './appState/Context';
 import { ThemeProvider } from './theme/ThemeProvider';
-import { TInitAppState } from './appState/initialValue';
+import { InitAppState } from './appState/initialValue';
 
-export type TStoreProps = TIndexPropsData & TInitAppState;
+type Props = IndexPropsData & InitAppState;
 
-export const StoreContextProvider: React.FC<TStoreProps> = (props) => {
+export const StoreContextProvider: React.FC<Props> = (props) => {
   return (
     <AppStateContextProvider
       isPublicPage={props.isPublicPage}

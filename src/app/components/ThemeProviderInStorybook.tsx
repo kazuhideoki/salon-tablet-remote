@@ -2,7 +2,7 @@ import React from 'react';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { useThemeArgs, ThemeContext } from '../store/theme/ThemeProvider';
 import { SelectTheme } from '../container/tablet/Drawer/ManageTheme/components/SelectTheme';
-import { TUseManageThemeProps } from '../container/tablet/Drawer/ManageTheme/ManageTheme';
+import { ManageThemePresenterProps } from '../container/tablet/Drawer/ManageTheme/ManageTheme';
 import {
   generateDefaultParamsFromTheme,
   switchingTheme,
@@ -12,7 +12,7 @@ import { SelectedTheme } from '../../util/interface/Interface';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
-const selectThemeProps: TUseManageThemeProps = {
+const selectThemeProps: ManageThemePresenterProps = {
   selected_theme: 'default',
   expanded: true,
   handleAccordion: () => {
@@ -58,10 +58,8 @@ const border = {
   marginBottom: 40,
 };
 
-type TStorybookStore = SelectedTheme;
-
 export const StorybookStore = React.createContext(
-  {} as { selected_theme: TStorybookStore }
+  {} as { selected_theme: SelectedTheme }
 );
 
 export const ThemeProvider: React.FC = (props) => {

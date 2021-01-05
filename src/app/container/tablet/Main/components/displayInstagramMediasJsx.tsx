@@ -6,14 +6,14 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
-import { TUseMainProps, TMainClasses } from '../Main';
+import { MainPresenterProps, MainClasses } from '../Main';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
 import { PlayArrowRounded } from '@material-ui/icons';
 
 export const displayInstagramMediasJsx = (
-  props: TUseMainProps,
-  classes: TMainClasses,
+  props: MainPresenterProps,
+  classes: MainClasses,
   StyledCardContent: any
 ) =>
   props.instagramMediaObject.data.map((value, key) => {

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingMessage } from 'http';
 import { firebaseAdmin } from '../../../util/auth/firebaseAdmin';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { server, localhost } from '../../../util/loadUrl';
 import { parseCookies } from 'nookies';
 
@@ -22,7 +22,7 @@ export const apiGetSession = async (
       body: JSON.stringify({ st_token }),
     });
 
-    const result = (await res.json()) as TApiResponse<ApiGetSessionReturn>;
+    const result = (await res.json()) as ApiResponse<ApiGetSessionReturn>;
     if (result.err) return null;
     if (result.rawData.email === null) return null;
 
@@ -56,9 +56,9 @@ const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
     };
     res
       .status(200)
-      .json({ err: false, rawData } as TApiResponse<ApiGetSessionReturn>);
+      .json({ err: false, rawData } as ApiResponse<ApiGetSessionReturn>);
   } catch (err) {
-    return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 

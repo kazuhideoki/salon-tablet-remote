@@ -5,13 +5,13 @@ import {
   FooterItem,
   Articles,
 } from '../../util/interface/Interface';
-import { TApiResponse } from '../../util/db/apiWrap';
+import { ApiResponse } from '../../util/db/apiWrap';
 import { apiWrapPost } from '../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
   params: ApiCreateSampleData
-): Promise<TApiResponse<void>> => {
+): Promise<ApiResponse<void>> => {
   return apiWrapPost('create_sample_data', params);
 };
 
@@ -84,10 +84,10 @@ const create_sample_data = async (
         insertSampleFooterItems(itemParams),
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/create_sample_dataのエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

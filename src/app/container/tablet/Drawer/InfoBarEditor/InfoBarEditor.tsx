@@ -82,9 +82,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type TUseInfoBarEditorProps = ReturnType<typeof useInfoBarEditorProps>;
+export type InfoBarEditorPresenterProps = ReturnType<
+  typeof useInfoBarEditorProps
+>;
 
-export const InfoBarEditorPresenter: React.FC<TUseInfoBarEditorProps> = (
+export const InfoBarEditorPresenter: React.FC<InfoBarEditorPresenterProps> = (
   props
 ) => {
   const classes = useStyles();

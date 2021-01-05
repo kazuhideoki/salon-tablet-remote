@@ -5,9 +5,9 @@ import { Prev } from './PaginationArrowsComponents/Prev';
 import { DisplayNumbers } from './PaginationArrowsComponents/DisplayNumbers';
 import { Next } from './PaginationArrowsComponents/Next';
 import { Oldest } from './PaginationArrowsComponents/Oldest';
-import { TPaginationPropsAndClasses } from '../PaginationBar';
+import { PaginationPresenterPropsAndClasses } from '../PaginationBar';
 
-export const PaginationArrows: React.FC<TPaginationPropsAndClasses> = (
+export const PaginationArrows: React.FC<PaginationPresenterPropsAndClasses> = (
   props
 ) => {
   return (

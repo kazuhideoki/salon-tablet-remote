@@ -1,8 +1,8 @@
 import { MoodBad } from '@material-ui/icons';
-import { TFooterItemEdittingParams } from '../../app/hooks/footerItems/useCreateFooterItem';
-import { TUseFooterItemEditorProps } from '../../app/container/tablet/Drawer/FooterItemEditor/FooterItemEditor';
+import { FooterItemEdittingParams } from '../../app/hooks/footerItems/useCreateFooterItem';
+import { FooterItemEditorPresenterProps } from '../../app/container/tablet/Drawer/FooterItemEditor/FooterItemEditor';
 
-export const edittingFooterItemParams: TFooterItemEdittingParams = {
+export const edittingFooterItemParams: FooterItemEdittingParams = {
   titleText: 'string',
   selectedIcon: [MoodBad, 'MoodBad'],
   onTapRadio: 'modal',
@@ -15,7 +15,7 @@ export const edittingFooterItemParams: TFooterItemEdittingParams = {
   dataType: 'default_data',
 };
 
-export const propsFooterItemEditor: TUseFooterItemEditorProps = {
+export const propsFooterItemEditor: FooterItemEditorPresenterProps = {
   onTapRadio: 'modal',
   setOnTapRadio: () => {
     return;

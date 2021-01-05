@@ -9,14 +9,14 @@ import {
   DataTypeFooterItem,
 } from '../../../../../../util/interface/Interface';
 
-export type TDataTypeAndSet<T> = {
+export type DataTypeAndSet<T> = {
   dataType: T;
   setDataType: React.Dispatch<T>;
 };
 type Props = {
   dataTypeAndSet:
-    | TDataTypeAndSet<DataTypeArticle>
-    | TDataTypeAndSet<DataTypeFooterItem>;
+    | DataTypeAndSet<DataTypeArticle>
+    | DataTypeAndSet<DataTypeFooterItem>;
   className?: string;
   forFooter?: boolean;
 };

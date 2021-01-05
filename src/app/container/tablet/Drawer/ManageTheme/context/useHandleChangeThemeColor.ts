@@ -1,10 +1,10 @@
 import { useChangeThemeColor } from '../../../../../hooks/userInfo/theme/useChangeThemeColor';
-import { TColor } from '../ManageTheme';
+import { Color } from '../ManageTheme';
 
 export const useHandleChangeThemeColor = () => {
   const changeThemeColor = useChangeThemeColor();
 
-  return async (value: TColor) => {
+  return async (value: Color) => {
     try {
       await changeThemeColor(value);
     } catch (err) {}

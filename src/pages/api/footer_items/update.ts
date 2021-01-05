@@ -1,6 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { ApiFooterItemsParams } from './create';
 import { apiWrapPost } from '../../../util/db/apiWrap';
@@ -8,7 +8,7 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsUpdate = async (
   params: ApiFooterItemsUpdate
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('footer_items/update', params);
 };
 
@@ -33,11 +33,11 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
         [params, id]
       );
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/footer_items/update/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

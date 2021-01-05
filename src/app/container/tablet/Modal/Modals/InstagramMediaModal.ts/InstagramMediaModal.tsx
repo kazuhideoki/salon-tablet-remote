@@ -11,7 +11,9 @@ const useInstagramMediaModalProps = () => {
   };
 };
 
-export type TContentModalProps = ReturnType<typeof useInstagramMediaModalProps>;
+export type ContentModalPresenterProps = ReturnType<
+  typeof useInstagramMediaModalProps
+>;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const InstagramMediaModalPresenter: React.FC<TContentModalProps> = (
+export const InstagramMediaModalPresenter: React.FC<ContentModalPresenterProps> = (
   props
 ) => {
   const classes = useStyles();

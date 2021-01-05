@@ -82,11 +82,11 @@ export const useThemeArgs = (footer_icon_size: FooterIconSize) => {
   return args;
 };
 
-export type TThemeArgs = ReturnType<typeof useThemeArgs>;
+export type ThemeArgs = ReturnType<typeof useThemeArgs>;
 
-export const ThemeContext = React.createContext({} as TThemeArgs);
+export const ThemeContext = React.createContext({} as ThemeArgs);
 
-export type TThemeParams = {
+export type ThemeParams = {
   selected_theme: SelectedTheme;
   theme_color: string;
   theme_font1: ThemeFont;
@@ -105,7 +105,7 @@ export const ThemeProvider: React.FC<UserInfo> = (props) => {
     theme_font_heading,
     footer_icon_size,
   } = userInfo;
-  const params: TThemeParams = {
+  const params: ThemeParams = {
     selected_theme,
     theme_color,
     theme_font1,

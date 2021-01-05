@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons';
-import { TPaginationPropsAndClasses } from '../PaginationBar';
+import { PaginationPresenterPropsAndClasses } from '../PaginationBar';
 
-export const PaginationInstagram: React.FC<TPaginationPropsAndClasses> = (
+export const PaginationInstagram: React.FC<PaginationPresenterPropsAndClasses> = (
   props
 ) => {
   const { cursors, next, previous } = props.instagramMediaObject.paging;

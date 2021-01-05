@@ -1,14 +1,14 @@
 import React from 'react';
 import { Typography, PropTypes } from '@material-ui/core';
 
-export type TCharCounter = {
+export type CharCounterProps = {
   charCount: number;
   limitCount: number;
   align?: PropTypes.Alignment;
   isShowCount?: boolean;
 };
 
-export const CharCounter: React.FC<TCharCounter> = (props) => {
+export const CharCounter: React.FC<CharCounterProps> = (props) => {
   return (
     <>
       {props.charCount <= props.limitCount || (

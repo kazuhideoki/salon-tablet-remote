@@ -6,10 +6,10 @@ import {
   Radio,
   FormLabel,
 } from '@material-ui/core';
-import { TUseManageThemeProps } from '../ManageTheme';
+import { ManageThemePresenterProps } from '../ManageTheme';
 import { HelpButton } from '../../../../../components/HelpButton';
 
-export const SelectShowArticleType = (props: TUseManageThemeProps) => {
+export const SelectShowArticleType = (props: ManageThemePresenterProps) => {
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">

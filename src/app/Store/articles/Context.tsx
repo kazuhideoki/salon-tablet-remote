@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  TAllArticles,
+  AllArticles,
   Articles,
   PaginationParams,
 } from '../../../util/interface/Interface';

@@ -5,10 +5,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { HelpButton } from '../../../../../components/HelpButton';
-import { TUseFooterItemEditorProps } from '../FooterItemEditor';
+import { FooterItemEditorPresenterProps } from '../FooterItemEditor';
 import { AppStateContext } from '../../../../../store/appState/Context';
 
-type Props = TUseFooterItemEditorProps & { className?: string };
+type Props = FooterItemEditorPresenterProps & { className?: string };
 
 export const SelectModalSize: React.FC<Props> = (props) => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);

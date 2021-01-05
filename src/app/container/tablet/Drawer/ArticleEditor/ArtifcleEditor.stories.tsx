@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import {
   ArticleEditorPresenter,
-  TUseArticleEditorProps,
+  ArticleEditorPresenterProps,
 } from './ArticleEditor';
 import { CSFStory } from '../../../../../util/interface/CSFStory';
 import { ThemeProvider } from '../../../../components/ThemeProviderInStorybook';
@@ -12,7 +12,7 @@ export default {
   decorators: [(story) => <ThemeProvider>{story()}</ThemeProvider>],
 } as CSFStory;
 
-const props: TUseArticleEditorProps = {
+const props: ArticleEditorPresenterProps = {
   isEditting: false,
   titleText: '',
   editorText: '',

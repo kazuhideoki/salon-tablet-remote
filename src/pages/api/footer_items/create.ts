@@ -5,14 +5,14 @@ import {
   ModalSize,
   DataTypeFooterItem,
 } from '../../../util/interface/Interface';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (
   params: ApiFooterItemsCreate
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('footer_items/create', params);
 };
 
@@ -49,11 +49,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const data = await db(`INSERT INTO footer_items SET ?`, params);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/footer_items/create/のエラーは ' + JSON.stringify(err));
 
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

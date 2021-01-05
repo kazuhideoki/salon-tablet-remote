@@ -13,14 +13,14 @@ import { closeModal } from '../../store/appState/actions';
 export const scrollingAnimationDuration = (charCount: number) =>
   (32 * charCount) / 245 + 8; // アニメーションの再生時間がが文字数に応じて増え、どの文字数でもある程度同じスピードで再生されるように調整
 
-type Type = {
+type Props = {
   infoBarType: InfoBarType;
   editorText: string;
   articleInfoBar: number;
   charCount: number;
 };
 
-export const useUpdateInfoBar = (params: Type) => {
+export const useUpdateInfoBar = (params: Props) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const getInfoBar = useGetInfoBar();

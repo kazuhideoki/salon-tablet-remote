@@ -9,7 +9,7 @@ import { UserInfoContext } from '../../store/userInfo/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { closeModal, isLoadingMain } from '../../store/appState/actions';
 
-export type TCreateArticle = {
+export type CreateArticleParams = {
   titleText: string;
   editorText: string;
   editorTextExcerpt: string;
@@ -22,7 +22,7 @@ export const useCreateArticle = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
 
-  return async (param: TCreateArticle, isPublished: boolean) => {
+  return async (param: CreateArticleParams, isPublished: boolean) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingMain(true));
 

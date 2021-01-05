@@ -1,17 +1,22 @@
-import React from "react";
-import { TFooterItemsAction } from "./actions";
-import { footerItemsReducer, FooterItemsContextState } from "./reducer";
+import React from 'react';
+import { FooterItemsAction } from './actions';
+import { footerItemsReducer, FooterItemsContextState } from './reducer';
 
-export type Props = {footerItems: FooterItemsContextState};
+export type Props = { footerItems: FooterItemsContextState };
 
 export type FooterItemsContextProps = {
   footerItems: FooterItemsContextState;
-  dispatchFooterItems: React.Dispatch<TFooterItemsAction>;
+  dispatchFooterItems: React.Dispatch<FooterItemsAction>;
 };
-export const FooterItemsContext = React.createContext({} as FooterItemsContextProps);
+export const FooterItemsContext = React.createContext(
+  {} as FooterItemsContextProps
+);
 
 export const FooterItemsContextProvider: React.FC<Props> = (props) => {
-  const [state, dispatchFooterItems] = React.useReducer(footerItemsReducer, props.footerItems);
+  const [state, dispatchFooterItems] = React.useReducer(
+    footerItemsReducer,
+    props.footerItems
+  );
 
   const values: FooterItemsContextProps = {
     footerItems: state,

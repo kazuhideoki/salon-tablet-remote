@@ -11,7 +11,7 @@ import {
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { DeleteButton } from '../../../../components/editButtonBox/DeleteButton';
 import { UpdateButton } from '../../../../components/editButtonBox/UpdateButton';
-import { TUseMainProps, TMainClasses } from '../Main';
+import { MainPresenterProps, MainClasses } from '../Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
@@ -69,8 +69,8 @@ const useStyles = makeStyles((theme) => {
 });
 
 export const displayArticlesGrid6Jsx = (
-  props: TUseMainProps,
-  classes: TMainClasses,
+  props: MainPresenterProps,
+  classes: MainClasses,
   StyledCardContent: any
 ) => {
   const classesGrid6 = useStyles();

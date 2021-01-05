@@ -5,13 +5,13 @@ import {
   FooterIconSize,
 } from '../../../util/interface/Interface';
 import { ApiUserInfoUpdate } from '../../../pages/api/user_info/update';
-import { TThemeParams } from '../theme/ThemeProvider';
+import { ThemeParams } from '../theme/ThemeProvider';
 
 export const update = (userInfo: ApiUserInfoUpdate) => ({
   type: types.UPDATE,
   payload: userInfo,
 });
-export const setTheme = (themeParams: TThemeParams) => ({
+export const setTheme = (themeParams: ThemeParams) => ({
   type: types.SET_THEME,
   payload: themeParams,
 });

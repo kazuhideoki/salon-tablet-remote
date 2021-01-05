@@ -1,11 +1,11 @@
 import {
-  TFooterItemEdittingParams,
+  FooterItemEdittingParams,
   useCreateFooterItem,
 } from '../../../../../hooks/footerItems/useCreateFooterItem';
 import { useUpdateFooterItem } from '../../../../../hooks/footerItems/useUpdateFooterItem';
 
 export const useHandleSubmit = (
-  edittingFooterItemParams: TFooterItemEdittingParams,
+  edittingFooterItemParams: FooterItemEdittingParams,
   isEditting: boolean
 ) => {
   const createFooterItem = useCreateFooterItem();

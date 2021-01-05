@@ -1,10 +1,10 @@
 import { test, expect } from '@jest/globals';
 import { whiteUnChanged } from '../../../../../store/theme/lib/paramsFromTheme';
-import { TThemeParams } from '../../../../../store/theme/ThemeProvider';
+import { ThemeParams } from '../../../../../store/theme/ThemeProvider';
 import { isThemeParamsChanged } from './useHandleAccordion';
 
 test('isThemeParamsChanged 変更されている', () => {
-  const ChangedWhiteThemeParams: TThemeParams = {
+  const ChangedWhiteThemeParams: ThemeParams = {
     selected_theme: 'white',
     theme_color: '#263200',
     theme_font1: '未設定',

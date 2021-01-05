@@ -1,16 +1,16 @@
 import React from 'react';
-import { initAppState, TInitAppState } from './initialValue';
-import { TAppStateAction } from './actions';
+import { initAppState, InitAppState } from './initialValue';
+import { AppStateAction } from './actions';
 import { appStateReducer, AppStateContextState } from './reducer';
 
 export type AppStateContextProps = {
   appState: AppStateContextState;
-  dispatchAppState: React.Dispatch<TAppStateAction>;
+  dispatchAppState: React.Dispatch<AppStateAction>;
 };
 
 export const AppStateContext = React.createContext({} as AppStateContextProps);
 
-export const AppStateContextProvider: React.FC<TInitAppState> = (props) => {
+export const AppStateContextProvider: React.FC<InitAppState> = (props) => {
   const [state, dispatchAppState] = React.useReducer(
     appStateReducer,
     initAppState(props)

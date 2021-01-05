@@ -6,7 +6,7 @@ import { Popover, Button, SvgIconTypeMap } from '@material-ui/core';
 import { IconsSetting } from './icons';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { EmojiEmotionsTwoTone } from '@material-ui/icons';
-import { TUseFooterItemEditorProps } from '../../FooterItemEditor';
+import { FooterItemEditorPresenterProps } from '../../FooterItemEditor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,16 +19,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-type TIconItem = {
+type IconItemProps = {
   icon: OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>;
 };
-export const IconItem = (props: TIconItem) => {
+export const IconItem = (props: IconItemProps) => {
   return <props.icon style={{ fontSize: 50 }} />;
 };
 
-type Props = TUseFooterItemEditorProps & { className?: string };
+type SelectIconProps = FooterItemEditorPresenterProps & { className?: string };
 
-export const SelectIcon: React.FC<Props> = ({
+export const SelectIcon: React.FC<SelectIconProps> = ({
   selectedIcon,
   dispatchSelectedIcon,
   className,

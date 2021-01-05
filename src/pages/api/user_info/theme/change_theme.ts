@@ -1,19 +1,19 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../../util/db/apiWrap';
-import { TThemeParams } from '../../../../app/store/theme/ThemeProvider';
+import { ApiResponse } from '../../../../util/db/apiWrap';
+import { ThemeParams } from '../../../../app/store/theme/ThemeProvider';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (
   params: ApiUserInfoChangeTheme
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('user_info/theme/change_theme', params);
 };
 
 export type ApiUserInfoChangeTheme = {
   user_id: number;
-  themeParams: TThemeParams;
+  themeParams: ThemeParams;
 };
 
 const change_theme = async (
@@ -29,10 +29,10 @@ const change_theme = async (
         user_id,
       ]);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/user_info/change_theme/のエラーは ' + JSON.stringify(err));
-      return res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

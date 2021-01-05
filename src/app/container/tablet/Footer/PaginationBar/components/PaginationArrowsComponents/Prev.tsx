@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavigateBefore } from '@material-ui/icons';
-import { TPaginationPropsAndClasses } from '../../PaginationBar';
+import { PaginationPresenterPropsAndClasses } from '../../PaginationBar';
 
-export const Prev = (props: TPaginationPropsAndClasses) => {
+export const Prev = (props: PaginationPresenterPropsAndClasses) => {
   const { page } = props.paginationParams;
 
   const hundleOnClick = () => {

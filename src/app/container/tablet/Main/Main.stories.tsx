@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainPresenter, TUseMainProps } from './Main';
+import { MainPresenter, MainPresenterProps } from './Main';
 import { sampleData } from '../../../../util/dev/sampleArticles';
 import { initInstagramMediaObject } from '../../../../util/interface/Interface';
 export default {
@@ -7,7 +7,7 @@ export default {
   component: MainPresenter,
 };
 
-const props: TUseMainProps = {
+const props: MainPresenterProps = {
   articles: sampleData,
   isSetting: false,
   instagramMediaObject: initInstagramMediaObject,

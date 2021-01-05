@@ -4,12 +4,12 @@ import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';
 import { apiInstagramAccountsGet } from '../../pages/api/instagram_accounts/get';
 import { apiInfoBarGet } from '../../pages/api/info_bar/get';
-import { TIndexPropsData } from '../../pages';
+import { IndexPropsData } from '../../pages';
 
 export const generateProps = async (
   userInfo: UserInfo,
   getPublishedOnly: boolean
-): Promise<TIndexPropsData> => {
+): Promise<IndexPropsData> => {
   const { user_id } = userInfo;
   // 記事一覧取得
   const articlesParam: ApiArticlesGet = {
@@ -29,7 +29,7 @@ export const generateProps = async (
     ]);
 
     // as any で何故かエラー消える
-    const propsData: TIndexPropsData = {
+    const propsData: IndexPropsData = {
       articles: data.err ? [] : data.rawData.articles,
       pagination: data.err ? ([] as any) : data.rawData.pagination,
       allArticles: data.err ? [] : data.rawData.allArticles,

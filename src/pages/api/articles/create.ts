@@ -1,13 +1,13 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { DataTypeArticle } from '../../../util/interface/Interface';
-import { TApiResponse } from '../../../util/db/apiWrap';
+import { ApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 export const apiArticlesCreate = async (
   params: ApiArticlesCreate
-): Promise<TApiResponse> => {
+): Promise<ApiResponse> => {
   return apiWrapPost('articles/create', params);
 };
 
@@ -37,11 +37,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await db(`SELECT * FROM articles WHERE user_id = ?`, params.user_id);
 
-      res.status(200).json({ err: false, rawData: null } as TApiResponse);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/articles/create/のエラーは ' + JSON.stringify(err));
 
-      res.status(500).json({ err: true, rawData: err } as TApiResponse);
+      res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };

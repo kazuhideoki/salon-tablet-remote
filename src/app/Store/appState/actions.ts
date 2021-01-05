@@ -6,7 +6,7 @@ import {
   InstagramMedia,
   SetModal,
 } from '../../../util/interface/Interface';
-import { TFooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
+import { FooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
 import { ApiArticlesGetReturn } from '../../../pages/api/articles/get';
 
 export const setModal = (value: SetModal) => ({
@@ -66,7 +66,7 @@ export const updateFooterItem = (value: FooterItem) => ({
 });
 
 export const setModalSize = (value: {
-  footerItemEdittingParams: TFooterItemEdittingParams;
+  footerItemEdittingParams: FooterItemEdittingParams;
   footerItems: FooterItems;
 }) => ({
   type: types.SET_MODAL_SIZE,
@@ -94,7 +94,7 @@ export const setArticlesAppState = (value: {
   payload: value,
 });
 
-export type TAppStateAction =
+export type AppStateAction =
   | ReturnType<typeof setModal>
   | ReturnType<typeof closeModal>
   | ReturnType<typeof openDrawer>

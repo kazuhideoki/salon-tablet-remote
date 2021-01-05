@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   PaginationBarPresenter,
-  TUsePaginationBarProps,
+  PaginationBarPresenterProps,
 } from './PaginationBar';
 import { sampleInstagramAccounts } from '../../../../../util/dev/sampleInstagramAccounts';
 import { sampleTags } from '../../../../../util/dev/sampleTags';
@@ -25,7 +25,7 @@ const StyledIconButton = withStyles({
   },
 })(IconButton);
 
-const props: TUsePaginationBarProps = {
+const props: PaginationBarPresenterProps = {
   isSetting: true,
   getArticles: async () => {
     return true;
@@ -76,7 +76,7 @@ export const isTabletPortrait = () => {
     </>
   );
 };
-const props2: TUsePaginationBarProps = {
+const props2: PaginationBarPresenterProps = {
   isSetting: true,
   getArticles: async () => {
     return true;

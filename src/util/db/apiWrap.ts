@@ -1,6 +1,6 @@
 import { server, localhost } from '../loadUrl';
 
-export type TApiResponse<T = null> = { err: boolean; rawData: T };
+export type ApiResponse<T = null> = { err: boolean; rawData: T };
 // | { err: true; data: string };
 
 const fetchPost = async (str: string, url: string, params: any) => {
@@ -20,12 +20,12 @@ const apiWrap = async <T>(
   fetch: any,
   url: string,
   params?: any
-): Promise<TApiResponse<T>> => {
+): Promise<ApiResponse<T>> => {
   const str = typeof window !== 'undefined' ? server : localhost;
 
   try {
     const res = await fetch(str, url, params);
-    const result = (await res.json()) as TApiResponse<T>;
+    const result = (await res.json()) as ApiResponse<T>;
     if (result.err) throw result.rawData; // エラー内容をthrowする
     return result;
   } catch (err) {
@@ -36,7 +36,7 @@ const apiWrap = async <T>(
 export const apiWrapPost = async <T = null>(
   url: string,
   params: any
-): Promise<TApiResponse<T>> => await apiWrap<T>(fetchPost, url, params);
+): Promise<ApiResponse<T>> => await apiWrap<T>(fetchPost, url, params);
 
 export const apiWrapGet = async <T = null>(url: string) =>
   apiWrap<T>(fetchGet, url, null);

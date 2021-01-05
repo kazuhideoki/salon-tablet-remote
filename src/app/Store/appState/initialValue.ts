@@ -8,12 +8,12 @@ import {
   Ontap,
 } from '../../../util/interface/Interface';
 
-export type TInitAppState = {
+export type InitAppState = {
   isPublicPage: boolean;
   device: UaDeviceType;
 };
 
-export const initAppState = (data: TInitAppState) => ({
+export const initAppState = (data: InitAppState) => ({
   isPublicPage: data.isPublicPage,
   uaDevice: data.device,
   isSetting: !data.isPublicPage,

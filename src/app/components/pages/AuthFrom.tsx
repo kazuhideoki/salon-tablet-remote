@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type TAuthForm = {
+type Props = {
   header: string;
   button: string;
   buttonColor?: 'primary';
@@ -44,7 +44,7 @@ type TAuthForm = {
   setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const AuthForm: React.FC<TAuthForm> = (props) => {
+export const AuthForm: React.FC<Props> = (props) => {
   const classes = useStyles();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');

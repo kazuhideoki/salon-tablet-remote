@@ -10,7 +10,7 @@ import { update } from '../../store/userInfo/actions';
 import { AppStateContext } from '../../store/appState/Context';
 import { closeModal } from '../../store/appState/actions';
 
-export type TUpdateUser = {
+export type Props = {
   name: string;
   shopName: string;
   email: string;
@@ -18,7 +18,7 @@ export type TUpdateUser = {
   isShowMobile: boolean;
 };
 
-export const useUpdateUser = (param: TUpdateUser) => {
+export const useUpdateUser = (param: Props) => {
   const { dispatchAppState, appState } = React.useContext(AppStateContext);
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;

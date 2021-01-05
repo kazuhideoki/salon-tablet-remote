@@ -8,7 +8,7 @@ import { FooterItem } from '../../../util/interface/Interface';
 import { AppStateContext } from '../../store/appState/Context';
 import { isLoadingFooter } from '../../store/appState/actions';
 
-export type TUseSwitchOrders = {
+type Props = {
   smaller: FooterItem;
   larger: FooterItem;
 };
@@ -17,7 +17,7 @@ export const useSwitchOrder = () => {
   const getFooterItems = useGetFooterItems();
   const { dispatchAppState } = React.useContext(AppStateContext);
 
-  return async ({ smaller, larger }: TUseSwitchOrders) => {
+  return async ({ smaller, larger }: Props) => {
     dispatchAppState(isLoadingFooter(true));
 
     const params: ApiFooterItemsSwitchOrder = {

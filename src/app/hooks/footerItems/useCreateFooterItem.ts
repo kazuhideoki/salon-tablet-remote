@@ -19,7 +19,7 @@ import { UserInfoContext } from '../../store/userInfo/Context';
 import { closeModal, isLoadingFooter } from '../../store/appState/actions';
 import { AppStateContext } from '../../store/appState/Context';
 
-export type TFooterItemEdittingParams = {
+export type FooterItemEdittingParams = {
   titleText: string;
   selectedIcon: [
     OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>,
@@ -35,7 +35,7 @@ export type TFooterItemEdittingParams = {
   dataType: DataTypeFooterItem;
 };
 
-export type TCreateFooterItem = TFooterItemEdittingParams & {
+export type CreateFooterItem = FooterItemEdittingParams & {
   is_published: boolean;
 };
 
@@ -59,7 +59,7 @@ export const calcOrder = (
 };
 
 export const generateFooterItemEdittingParams = (
-  param: TFooterItemEdittingParams,
+  param: FooterItemEdittingParams,
   footerItems: FooterItems
 ) => {
   return {
@@ -84,7 +84,7 @@ export const useCreateFooterItem = () => {
   const { footerItems } = React.useContext(FooterItemsContext);
   const getFooterItems = useGetFooterItems();
 
-  return async (param: TCreateFooterItem) => {
+  return async (param: CreateFooterItem) => {
     dispatchAppState(closeModal());
     dispatchAppState(isLoadingFooter(true));
 
