@@ -2,7 +2,7 @@ import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import initFirebase from '../../lib/auth/initFirebase';
+import initFirebase from '../../util/auth/initFirebase';
 import nookies from 'nookies';
 
 initFirebase();

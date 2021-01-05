@@ -17,7 +17,7 @@ import { drawerItemsJsx } from './components/drawerItemsJsx';
 import { useIsMobile } from '../../../../../util/useIsMobile';
 import { useFooterProps } from '../../Footer/Footer/Footer';
 import { Settings } from '@material-ui/icons';
-import { AuthCircular } from '../../../../../util/AuthCircular';
+import { AuthCircular } from '../../../../components/AuthCircular';
 import { useHandleSwitchIsSetting } from './context/useHandleSwitchIsSetting';
 import { useHandleOnSingOut } from './context/useHandleOnSingOut';
 import { useHandleDrawerClose } from './context/useHandleDrawerClose';

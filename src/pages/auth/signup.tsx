@@ -6,8 +6,8 @@ import 'firebase/auth';
 import initFirebase from '../../util/auth/initFirebase';
 import { Typography } from '@material-ui/core';
 import Link from 'next/link';
-import { AuthCircular } from '../../util/AuthCircular';
 import { createUserData } from '../../util/db/createUserData';
+import { AuthCircular } from '../../app/components/AuthCircular';
 
 initFirebase();
 

@@ -1,44 +1,41 @@
 {
-	"folders": [
-        {
-            "path": "."
-        },
-        {
-            "path": "../.."
-        }
-    ],
-    "settings": {
-      "workbench.tree.indent": 12,
-        "editor.tabSize": 2,
-        "cSpell.words": [
-          "Bottomright",
-          "Editting",
-          "MSNQ",
-          "Magzter",
-          "Noto",
-          "Overridable",
-          "Oyib",
-          "Taged",
-          "Topright",
-          "appspot",
-          "bfup",
-          "browserconfig",
-          "cloudsql",
-          "csrf",
-          "entrypoint",
-          "esnext",
-          "formdata",
-          "gcloud",
-          "ibooks",
-          "infosalontablet",
-          "mixins",
-          "msapplication",
-          "myproject",
-          "noindex",
-          "qrcode",
-          "resizer",
-          "rmagazine",
-          "samplefooter"
-        ]
+  "folders": [
+    {
+      "path": "."
     }
+  ],
+  "settings": {
+    "workbench.tree.indent": 12,
+    "editor.tabSize": 2,
+    "cSpell.words": [
+      "Bottomright",
+      "Editting",
+      "MSNQ",
+      "Magzter",
+      "Noto",
+      "Overridable",
+      "Oyib",
+      "Taged",
+      "Topright",
+      "appspot",
+      "bfup",
+      "browserconfig",
+      "cloudsql",
+      "csrf",
+      "entrypoint",
+      "esnext",
+      "formdata",
+      "gcloud",
+      "ibooks",
+      "infosalontablet",
+      "mixins",
+      "msapplication",
+      "myproject",
+      "noindex",
+      "qrcode",
+      "resizer",
+      "rmagazine",
+      "samplefooter"
+    ]
+  }
 }

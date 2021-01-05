@@ -1,6 +1,6 @@
 import React from "react";
 import { TUserInfoAction } from "./actions";
-import { userInfoReducer, UserInfoContextState } from "./reducer";
+import { UserInfoContextState, userInfoReducer } from "./reducer";
 
 export type Props = {userInfo: UserInfoContextState};
 
