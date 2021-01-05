@@ -1,18 +1,20 @@
 import React from 'react';
 // import { QuillEditor } from "../app/Setting/QuillEditor";
-import dynamic from "next/dynamic";
-const QuillEditor = dynamic(() => import("../app/View/tablet/Drawer/QuillEditor/view/QuillEditor"), {
-  ssr: false,
-});
-import "react-quill/dist/quill.snow.css";
-
+import dynamic from 'next/dynamic';
+const QuillEditor = dynamic(
+  () => import('../app/container/tablet/Drawer/QuillEditor/view/QuillEditor'),
+  {
+    ssr: false,
+  }
+);
+import 'react-quill/dist/quill.snow.css';
 
 export default {
-  title: "Drawer/Editor/QuillEditor",
+  title: 'Drawer/Editor/QuillEditor',
   component: QuillEditor,
 };
 export const Normal = () => {
-  const [editorText, setEditorText] = React.useState("");
+  const [editorText, setEditorText] = React.useState('');
   const [charCounts, setCharCount] = React.useState(0);
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState('');
   const [editorImg, setEditorImg] = React.useState('');
@@ -26,4 +28,4 @@ export const Normal = () => {
       setEditorImg={setEditorImg}
     />
   );
-}
+};

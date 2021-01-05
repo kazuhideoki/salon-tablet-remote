@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { generateProps } from '../../lib/db/generateProps';
-import App from '../../app/View/App';
+import App from '../../app/container/App';
 import Head from 'next/head';
 import { TIndexProps } from '..';
 import { checkIsGeneratePubulicPage } from '../../lib/db/checkIsGeneratePubulicPage';

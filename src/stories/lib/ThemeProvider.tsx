@@ -4,8 +4,8 @@ import {
   useThemeArgs,
   ThemeContext,
 } from '../../app/Store/theme/ThemeProvider';
-import { SelectTheme } from '../../app/View/tablet/Drawer/ManageTheme/components/SelectTheme';
-import { TUseManageThemeProps } from '../../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
+import { SelectTheme } from '../../app/container/tablet/Drawer/ManageTheme/components/SelectTheme';
+import { TUseManageThemeProps } from '../../app/container/tablet/Drawer/ManageTheme/view/ManageTheme';
 import {
   generateDefaultParamsFromTheme,
   switchingTheme,

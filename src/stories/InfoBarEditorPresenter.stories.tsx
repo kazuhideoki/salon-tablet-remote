@@ -2,7 +2,7 @@ import React from 'react';
 import {
   InfoBarEditorPresenter,
   TUseInfoBarEditorProps,
-} from '../app/View/tablet/Drawer/InfoBarEditor/view/InfoBarEditor';
+} from '../app/container/tablet/Drawer/InfoBarEditor/view/InfoBarEditor';
 import { T_info_bar_type } from '../app/Store/Interface';
 import { sampleAllArticles } from './lib/sampleAllArticles';
 export default {

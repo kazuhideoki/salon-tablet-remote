@@ -6,7 +6,7 @@ import {
   ManageThemePresenter,
   TUseManageThemeProps,
   TColor,
-} from '../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
+} from '../app/container/tablet/Drawer/ManageTheme/view/ManageTheme';
 import { TFont1, TFont2 } from '../app/Store/theme/lib/fonts';
 import { googleFontsUrl } from '../util/googleFontsUrl';
 import { generateSecondaryColor } from '../util/secondaryColor';

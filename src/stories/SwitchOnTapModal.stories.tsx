@@ -1,15 +1,13 @@
 import React from 'react';
-import { SwitchOnTapModal } from '../app/View/tablet/Drawer/FooterItemEditor/components/SwitchOnTapModal';
+import { SwitchOnTapModal } from '../app/container/tablet/Drawer/FooterItemEditor/components/SwitchOnTapModal';
 import { T_on_tap } from '../app/Store/Interface';
 import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 export default {
-  title: "Drawer/ItemEditor/SwitchOnTapModal",
+  title: 'Drawer/ItemEditor/SwitchOnTapModal',
   component: SwitchOnTapModal,
 };
 
-
 export const Normal = () => {
-
   return (
     <>
       <p>d</p>
@@ -20,9 +18,9 @@ export const Normal = () => {
       <SwitchOnTapModal {...propsFooterItemEditor} onTapRadio={'modal'} />;
     </>
   );
-}
+};
 export const isMobile = () => {
-  const [onTap, setOnTap] = React.useState("" as T_on_tap);
+  const [onTap, setOnTap] = React.useState('' as T_on_tap);
 
   return (
     <>
@@ -33,10 +31,10 @@ export const isMobile = () => {
       <p>d</p>
       <SwitchOnTapModal
         {...propsFooterItemEditor}
-        onTapRadio={"modal"}
+        onTapRadio={'modal'}
         isMobile={true}
       />
       ;
     </>
   );
-}
+};

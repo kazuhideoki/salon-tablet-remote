@@ -1,14 +1,14 @@
 import React from 'react';
-import { MainMobilePresenter } from '../app/View/mobile/MainMobile/view/MainMobile';
+import { MainMobilePresenter } from '../app/container/mobile/MainMobile/view/MainMobile';
 import { sampleData } from './lib/sampleArticles';
 export default {
-  title: "mobile/MainMobile",
+  title: 'mobile/MainMobile',
   component: MainMobilePresenter,
 };
 
 const props = {
   appState: {
-    isSetting: true
+    isSetting: true,
   },
   isSetting: false,
   loading: {
@@ -22,16 +22,14 @@ const props = {
 };
 
 export const Normal = () => {
-
   return (
     //@ts-ignore
-    <MainMobilePresenter {...props}/>
-  )
-}
+    <MainMobilePresenter {...props} />
+  );
+};
 export const isSetting = () => {
-
   return (
     //@ts-ignore
     <MainMobilePresenter {...props} isSetting={true} />
-  )
-}
+  );
+};

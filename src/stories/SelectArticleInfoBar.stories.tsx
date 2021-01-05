@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SelectArticleInfoBar,
   TSelectArticleInfoBar,
-} from '../app/View/tablet/Drawer/InfoBarEditor/components/SelectArticleInfoBar';
+} from '../app/container/tablet/Drawer/InfoBarEditor/components/SelectArticleInfoBar';
 import { sampleAllArticles } from './lib/sampleAllArticles';
 export default {
   title: 'Drawer/InfoBar/SelectArticleOnInfoBar',

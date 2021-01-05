@@ -18,7 +18,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import '../../public/fonts/fonts.css';
-import { switchingTransition } from '../app/View/tablet/Modal/Modal/context/switchingTransition';
+import { switchingTransition } from '../app/container/tablet/Modal/Modal/context/switchingTransition';
 import { CSFStory } from './lib/interface';
 
 const useStyles = makeStyles((theme: Theme) =>

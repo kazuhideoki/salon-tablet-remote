@@ -1,4 +1,4 @@
-import { generateFooterItemEdittingParams } from '../../View/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem';
+import { generateFooterItemEdittingParams } from '../../container/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem';
 import { reducerLogger } from '../../../util/dev/reducerLogger';
 import { TAppStateAction } from './actions';
 import * as types from './types';

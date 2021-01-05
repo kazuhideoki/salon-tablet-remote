@@ -2,11 +2,11 @@ import React from 'react';
 import {
   InfoBarPresenter,
   TUseInfoBarProps,
-} from '../app/View/tablet/InfoBar/view/InfoBar';
+} from '../app/container/tablet/InfoBar/view/InfoBar';
 import { TInfoBar, TArticle, T_info_bar_type } from '../app/Store/Interface';
 import { sampleData } from './lib/sampleArticles';
 import dynamic from 'next/dynamic';
-import { scrollingAnimationDuration } from '../app/View/tablet/Drawer/InfoBarEditor/context/useUpdateInfoBar';
+import { scrollingAnimationDuration } from '../app/container/tablet/Drawer/InfoBarEditor/context/useUpdateInfoBar';
 
 export default {
   title: 'InfoBarPresenter',

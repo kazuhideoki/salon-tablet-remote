@@ -1,7 +1,7 @@
 import { T_theme_color } from '../app/Store/Interface';
 import colorConvert from 'color-convert';
 
-import { THsl } from '../app/View/tablet/Drawer/ManageTheme/view/ManageTheme';
+import { THsl } from '../app/container/tablet/Drawer/ManageTheme/view/ManageTheme';
 
 type props = THsl | number[]; //両方のパターンに対応させる？★
 

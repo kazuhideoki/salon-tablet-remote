@@ -1,6 +1,6 @@
 import { whiteUnChanged } from '../app/Store/theme/lib/paramsFromTheme';
 import { TThemeParams } from '../app/Store/theme/ThemeProvider';
-import { isThemeParamsChanged } from '../app/View/tablet/Drawer/ManageTheme/context/useHandleAccordion';
+import { isThemeParamsChanged } from '../app/container/tablet/Drawer/ManageTheme/context/useHandleAccordion';
 
 test('isThemeParamsChanged 変更されている', () => {
   const ChangedWhiteThemeParams: TThemeParams = {

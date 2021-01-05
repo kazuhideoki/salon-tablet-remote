@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import {
   ArticleEditorPresenter,
   TUseArticleEditorProps,
-} from '../app/View/tablet/Drawer/ArticleEditor/view/ArticleEditor';
+} from '../app/container/tablet/Drawer/ArticleEditor/view/ArticleEditor';
 import { CSFStory } from './lib/interface';
 import { ThemeProvider } from './lib/ThemeProvider';
 
