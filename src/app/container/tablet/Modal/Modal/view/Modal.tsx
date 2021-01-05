@@ -26,7 +26,7 @@ import { ManageTheme } from '../../../Drawer/ManageTheme/view/ManageTheme';
 import { SelectTags } from '../../Modals/SelectTags/view/SelectTags';
 import { ManageTags } from '../../../Drawer/ManageTags/view/ManageTags';
 import { SettingUserInfo } from '../../../Drawer/ManageUserInfo/view/ManageUserInfo';
-import { DeleteAccountForm } from '../../../Drawer/DeleteAccountForm/view/DeleteAccountForm';
+import { DeleteAccountForm } from '../../../Drawer/DeleteAccountForm/DeleteAccountForm';
 import { useModalSize, medium } from '../context/useModalSize';
 import { StyledDialog } from '../components/StyledDialog';
 import { ManageInstagramAccounts } from '../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
