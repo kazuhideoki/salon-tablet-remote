@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsDelete = async (
-  params: T_instagram_accounts_delete
+  params: ApiInstagramAccountsDelete
 ): Promise<TApiResponse> => {
   return apiWrapPost('instagram_accounts/delete', params);
 };
 
-export type T_instagram_accounts_delete = {
+export type ApiInstagramAccountsDelete = {
   instagram_id: number;
 };
 
@@ -19,7 +19,7 @@ const instagram_accounts_delete = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    const { instagram_id }: T_instagram_accounts_delete = req.body;
+    const { instagram_id }: ApiInstagramAccountsDelete = req.body;
 
     try {
       await db(

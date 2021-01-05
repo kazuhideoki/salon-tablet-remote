@@ -6,16 +6,16 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (
-  params: T_tags_delete
+  params: ApiTagsCreate
 ): Promise<TApiResponse> => {
   return apiWrapPost('tags/delete', params);
 };
 
-export type T_tags_delete = { tag_id: number; user_id: number };
+export type ApiTagsCreate = { tag_id: number; user_id: number };
 
 const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { tag_id, user_id }: T_tags_delete = req.body;
+    const { tag_id, user_id }: ApiTagsCreate = req.body;
 
     try {
       // articleのtag_idsの該当タグを消す。DBのtab_idsは文字列だが、うまいこと該当タグのtag_id:numberだけをを削除する

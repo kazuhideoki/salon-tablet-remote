@@ -5,18 +5,18 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoCreate = async (
-  params: T_user_info_create
+  params: ApiUserInfoCreate
 ): Promise<TApiResponse<void>> => {
   return apiWrapPost('user_info/create', params);
 };
 
-export type T_user_info_create = {
+export type ApiUserInfoCreate = {
   user_email: string;
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { user_email }: T_user_info_create = req.body;
+    const { user_email }: ApiUserInfoCreate = req.body;
 
     try {
       await db(`INSERT INTO user_info (user_email) VALUES (?)`, [user_email]);

@@ -1,17 +1,16 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { server, localhost } from '../../../util/loadUrl';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiIsFirsSigninFalse = async (
-  params: user_info_is_first_signin_false
+  params: ApiIsFirsSigninFalse
 ): Promise<TApiResponse> => {
   return apiWrapPost('user_info/is_first_signin_false', params);
 };
 
-type user_info_is_first_signin_false = {
+type ApiIsFirsSigninFalse = {
   user_id: number;
 };
 
@@ -20,7 +19,7 @@ const is_first_signin_false = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    const { user_id } = req.body as user_info_is_first_signin_false;
+    const { user_id } = req.body as ApiIsFirsSigninFalse;
     try {
       await db(
         `UPDATE user_info SET is_first_sign_in = 0 WHERE user_id = ?`,

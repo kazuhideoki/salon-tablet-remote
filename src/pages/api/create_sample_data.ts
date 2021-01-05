@@ -10,12 +10,12 @@ import { apiWrapPost } from '../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
-  params: T_create_sample_data
+  params: ApiCreateSampleData
 ): Promise<TApiResponse<void>> => {
   return apiWrapPost('create_sample_data', params);
 };
 
-export type T_create_sample_data = {
+export type ApiCreateSampleData = {
   user_id: number;
 };
 
@@ -71,7 +71,7 @@ const create_sample_data = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    const { user_id }: T_create_sample_data = req.body;
+    const { user_id }: ApiCreateSampleData = req.body;
 
     try {
       const [params, itemParams] = await Promise.all([

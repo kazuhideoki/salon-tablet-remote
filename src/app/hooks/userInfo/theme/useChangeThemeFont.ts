@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   apiUserInfoThemeFont,
-  T_user_info_theme_font,
+  ApiUserInfoThemeFont,
   TWhichFont,
 } from '../../../../pages/api/user_info/theme/font';
 import { TFont1, TFont2 } from '../../../store/theme/lib/fonts';
@@ -17,7 +17,7 @@ export const useChangeThemeFont = () => {
   const { user_id } = userInfo;
 
   return async (font: TFont1[0] | TFont2[0], whichFont: TWhichFont) => {
-    const params: T_user_info_theme_font = {
+    const params: ApiUserInfoThemeFont = {
       user_id,
       theme_font: font,
       whichFont,

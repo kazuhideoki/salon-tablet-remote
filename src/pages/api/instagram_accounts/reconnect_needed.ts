@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsReconnectNeeded = async (
-  params: T_instagram_accounts_reconnect_needed
+  params: ApiInstagramAccountsReconnectNeeded
 ): Promise<TApiResponse<void>> => {
   return apiWrapPost('instagram_accounts/reconnect_needed', params);
 };
 
-export type T_instagram_accounts_reconnect_needed = {
+export type ApiInstagramAccountsReconnectNeeded = {
   instagram_id: number;
   user_id: number;
   is_reconnect_needed: boolean;
@@ -22,7 +22,7 @@ const reconnect_needed = async (req: NextApiRequest, res: NextApiResponse) => {
       instagram_id,
       user_id,
       is_reconnect_needed,
-    } = req.body as T_instagram_accounts_reconnect_needed;
+    } = req.body as ApiInstagramAccountsReconnectNeeded;
     const isReconnectNeeded = is_reconnect_needed ? 1 : 0;
 
     try {

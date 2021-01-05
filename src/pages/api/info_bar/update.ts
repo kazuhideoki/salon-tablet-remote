@@ -6,12 +6,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarUpdate = async (
-  params: T_info_bar_update
+  params: ApiInfoBarUpdate
 ): Promise<TApiResponse> => {
   return apiWrapPost('info_bar/update', params);
 };
 
-export type T_info_bar_update = {
+export type ApiInfoBarUpdate = {
   user_id: number;
   info_bar_type: InfoBarType;
   scrolling_sentence: string;
@@ -21,7 +21,7 @@ export type T_info_bar_update = {
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const params: T_info_bar_update = req.body;
+    const params: ApiInfoBarUpdate = req.body;
 
     try {
       await db(`UPDATE info_bar SET ? WHERE user_id = ?`, [

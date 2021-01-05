@@ -5,19 +5,19 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsUpdata = async (
-  params: T_tags_update
+  params: ApiTagsUpdata
 ): Promise<TApiResponse> => {
   return apiWrapPost('tags/update', params);
 };
 
-export type T_tags_update = {
+export type ApiTagsUpdata = {
   tag_id: number;
   tag_name: string;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const params: T_tags_update = req.body;
+    const params: ApiTagsUpdata = req.body;
 
     try {
       const data = await db(`UPDATE tags SET ? WHERE tag_id = ?`, [

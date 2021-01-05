@@ -2,7 +2,7 @@ import React from 'react';
 import { ShowArticleType } from '../../../util/interface/Interface';
 import {
   apiUserInfoChangeShowArticleType,
-  T_user_info_change_show_article_type,
+  ApiUserInfoChangeShowArticleType,
 } from '../../../pages/api/user_info/change_show_article_type';
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { setShowArticleType } from '../../store/userInfo/actions';
@@ -12,7 +12,7 @@ export const useChangeShowArticleType = () => {
   const { user_id } = userInfo;
 
   return async (showArticleType: ShowArticleType) => {
-    const params: T_user_info_change_show_article_type = {
+    const params: ApiUserInfoChangeShowArticleType = {
       user_id,
       showArticleType,
     };

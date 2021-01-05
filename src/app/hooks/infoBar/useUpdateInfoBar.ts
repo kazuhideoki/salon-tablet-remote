@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useGetInfoBar } from './useGetInfoBar';
 import {
-  T_info_bar_update,
+  ApiInfoBarUpdate,
   apiInfoBarUpdate,
 } from '../../../pages/api/info_bar/update';
 import { InfoBarType } from '../../../util/interface/Interface';
@@ -28,7 +28,7 @@ export const useUpdateInfoBar = (params: Type) => {
   return async () => {
     dispatchAppState(closeModal());
 
-    const updateInfoBarParams: T_info_bar_update = {
+    const updateInfoBarParams: ApiInfoBarUpdate = {
       user_id: userInfo.user_id,
       info_bar_type: params.infoBarType,
       scrolling_sentence: params.editorText,

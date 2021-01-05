@@ -5,19 +5,19 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsCreate = async (
-  params: T_tags_create
+  params: ApiTagsCreate
 ): Promise<TApiResponse> => {
   return apiWrapPost('tags/create', params);
 };
 
-export type T_tags_create = {
+export type ApiTagsCreate = {
   user_id: number;
   tag_name: string;
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const params: T_tags_create = req.body;
+    const params: ApiTagsCreate = req.body;
 
     try {
       const data = await db(`INSERT INTO tags SET ?`, params);

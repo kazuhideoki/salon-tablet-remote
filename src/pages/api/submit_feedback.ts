@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { UserInfo } from '../../util/interface/Interface';
-import { apiWrapPost, TApiResponse } from '../../util/db/apiWrap';
+import { TApiResponse } from '../../util/db/apiWrap';
 
 const receiverEmailAddress = 'infosalontablet@gmail.com';
 const senderEmailAddress = 'infosalontablet@gmail.com';
@@ -16,13 +16,6 @@ const transporter = nodemailer.createTransport({
     pass: senderEmailPassword,
   },
 });
-
-// // サーバーサイドとフロントサイド考えずに使えるようにラップする
-// export const apiSubmitFeedback = async (
-//   params: T_submit_feedback
-// ): Promise<TApiResponse<void>> => {
-//   return apiWrapPost('submit_feedback', params);
-// };
 
 export type T_submit_feedback = {
   contactFormTitle: string;

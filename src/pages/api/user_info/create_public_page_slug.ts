@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreatePublicPageSlug = async (
-  params: T_user_info_create_public_page_slug
+  params: ApiCreatePublicPageSlug
 ): Promise<TApiResponse<void>> => {
   return apiWrapPost('user_info/create_public_page_slug', params);
 };
 
-export type T_user_info_create_public_page_slug = {
+export type ApiCreatePublicPageSlug = {
   user_id: number;
 };
 
@@ -19,7 +19,7 @@ const create_public_page_slug = async (
   res: NextApiResponse
 ) => {
   if (req.method === 'POST') {
-    const { user_id } = req.body as T_user_info_create_public_page_slug;
+    const { user_id } = req.body as ApiCreatePublicPageSlug;
 
     try {
       // slug生成

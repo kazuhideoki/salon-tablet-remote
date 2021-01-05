@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeShowArticleType = async (
-  params: T_user_info_change_show_article_type
+  params: ApiUserInfoChangeShowArticleType
 ): Promise<TApiResponse> => {
   return apiWrapPost('user_info/change_show_article_type', params);
 };
 
-export type T_user_info_change_show_article_type = {
+export type ApiUserInfoChangeShowArticleType = {
   user_id: number;
   showArticleType: string;
 };
@@ -23,7 +23,7 @@ const change_show_article_type = async (
     const {
       user_id,
       showArticleType,
-    }: T_user_info_change_show_article_type = req.body;
+    }: ApiUserInfoChangeShowArticleType = req.body;
 
     try {
       await db(`UPDATE user_info SET show_article_type = ? where user_id = ?`, [

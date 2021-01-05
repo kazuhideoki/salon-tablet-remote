@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   apiUserInfoUpdate,
-  T_user_info_update,
+  ApiUserInfoUpdate,
 } from '../../../pages/api/user_info/update';
 import { updatePasswordInFirebase } from '../../../util/auth/updatePassword';
 import { useAuth } from '../../../util/auth/AuthProvider';
@@ -25,7 +25,7 @@ export const useUpdateUser = (param: TUpdateUser) => {
   const { user } = useAuth();
 
   return async () => {
-    const params: T_user_info_update = {
+    const params: ApiUserInfoUpdate = {
       user_id: user_id,
       user_name: param.name,
       shop_name: param.shopName,

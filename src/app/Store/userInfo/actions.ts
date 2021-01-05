@@ -4,10 +4,10 @@ import {
   ShowArticleType,
   FooterIconSize,
 } from '../../../util/interface/Interface';
-import { T_user_info_update } from '../../../pages/api/user_info/update';
+import { ApiUserInfoUpdate } from '../../../pages/api/user_info/update';
 import { TThemeParams } from '../theme/ThemeProvider';
 
-export const update = (userInfo: T_user_info_update) => ({
+export const update = (userInfo: ApiUserInfoUpdate) => ({
   type: types.UPDATE,
   payload: userInfo,
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGetTags } from './useGetTags';
-import { T_tags_delete, apiTagsDelete } from '../../../pages/api/tags/delete';
+import { ApiTagsCreate, apiTagsDelete } from '../../../pages/api/tags/delete';
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { isLoadingTags } from '../../store/appState/actions';
@@ -20,7 +20,7 @@ export const useDeleteTag = () => {
 
     dispatchAppState(isLoadingTags(true));
 
-    const params: T_tags_delete = { tag_id: tag_id, user_id: user_id };
+    const params: ApiTagsCreate = { tag_id: tag_id, user_id: user_id };
 
     try {
       await apiTagsDelete(params);

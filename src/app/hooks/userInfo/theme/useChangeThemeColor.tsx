@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   apiUserInfoThemeColor,
-  T_user_info_theme_color,
+  ApiUserInfoThemeColor,
 } from '../../../../pages/api/user_info/theme/color';
 import { TColor } from '../../../container/tablet/Drawer/ManageTheme/ManageTheme';
 import { UserInfoContext } from '../../../store/userInfo/Context';
@@ -12,7 +12,7 @@ export const useChangeThemeColor = () => {
   const { user_id } = userInfo;
 
   return async (color: TColor) => {
-    const params: T_user_info_theme_color = {
+    const params: ApiUserInfoThemeColor = {
       user_id,
       theme_color: color.hex,
     };

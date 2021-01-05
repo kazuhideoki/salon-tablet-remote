@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeFooterIconSize = async (
-  params: T_user_info_change_footer_icon_size
+  params: ApiUserInfoChangeFooterIconSize
 ): Promise<TApiResponse> => {
   return apiWrapPost('user_info/change_footer_icon_size', params);
 };
 
-export type T_user_info_change_footer_icon_size = {
+export type ApiUserInfoChangeFooterIconSize = {
   user_id: number;
   footer_icon_size: string;
 };
@@ -23,7 +23,7 @@ const change_footer_icon_size = async (
     const {
       user_id,
       footer_icon_size,
-    }: T_user_info_change_footer_icon_size = req.body;
+    }: ApiUserInfoChangeFooterIconSize = req.body;
 
     try {
       await db(`UPDATE user_info SET footer_icon_size = ? where user_id = ?`, [

@@ -5,18 +5,18 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoDelete = async (
-  params: T_user_info_delete
+  params: ApiUserInfoDelete
 ): Promise<TApiResponse> => {
   return apiWrapPost('user_info/delete', params);
 };
 
-export type T_user_info_delete = {
+export type ApiUserInfoDelete = {
   user_id: number;
 };
 
 const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { user_id }: T_user_info_delete = req.body;
+    const { user_id }: ApiUserInfoDelete = req.body;
 
     try {
       const data = await db(

@@ -5,12 +5,12 @@ import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoSwitchGeneratePublicPage = async (
-  params: T_user_info_switch_generate_public_page
+  params: ApiUserInfoSwitchGeneratePublicPage
 ): Promise<TApiResponse> => {
   return apiWrapPost('user_info/switch_generate_public_page', params);
 };
 
-export type T_user_info_switch_generate_public_page = {
+export type ApiUserInfoSwitchGeneratePublicPage = {
   user_id: number;
   is_generate_public_page: boolean;
 };
@@ -23,7 +23,7 @@ const switch_generate_public_page = async (
     const {
       is_generate_public_page,
       user_id,
-    }: T_user_info_switch_generate_public_page = req.body;
+    }: ApiUserInfoSwitchGeneratePublicPage = req.body;
 
     try {
       await db(

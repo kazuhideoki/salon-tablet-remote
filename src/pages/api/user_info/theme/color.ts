@@ -5,19 +5,19 @@ import { apiWrapPost } from '../../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeColor = async (
-  params: T_user_info_theme_color
+  params: ApiUserInfoThemeColor
 ): Promise<TApiResponse> => {
   return apiWrapPost('user_info/theme/color', params);
 };
 
-export type T_user_info_theme_color = {
+export type ApiUserInfoThemeColor = {
   user_id: number;
   theme_color: string;
 };
 
 const color = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { user_id, theme_color }: T_user_info_theme_color = req.body;
+    const { user_id, theme_color }: ApiUserInfoThemeColor = req.body;
 
     try {
       await db(`UPDATE user_info SET theme_color = ? where user_id = ?`, [
