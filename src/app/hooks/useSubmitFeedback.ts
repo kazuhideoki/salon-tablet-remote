@@ -1,12 +1,12 @@
 import React from 'react';
-import { closeModal } from '../../../../../Store/appState/actions';
-import { AppStateContext } from '../../../../../Store/appState/Context';
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import { closeModal } from '../Store/appState/actions';
+import { AppStateContext } from '../Store/appState/Context';
+import { UserInfoContext } from '../Store/userInfo/Context';
 import {
   // apiSubmitFeedback,
   T_submit_feedback,
-} from '../../../../../../pages/api/submit_feedback';
-import { apiWrapPost, TApiResponse } from '../../../../../../util/db/apiWrap';
+} from '../../pages/api/submit_feedback';
+import { apiWrapPost, TApiResponse } from '../../util/db/apiWrap';
 
 type Type = {
   contactFormTitle: string;

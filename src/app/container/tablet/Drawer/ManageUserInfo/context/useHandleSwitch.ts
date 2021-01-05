@@ -1,20 +1,14 @@
 import React from 'react';
-import { apiUserInfoSwitchGeneratePublicPage } from '../../../../../../pages/api/user_info/switch_generate_public_page';
-import { setIsGeneratePublicPage } from '../../../../../Store/userInfo/actions';
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import { useSwitchGeneratePublicPage } from '../../../../../hooks/userInfo/useSwitchGeneratePublicPage';
 
 export const useHandleSwitch = () => {
-  const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
+  const switchGeneratePublicPage = useSwitchGeneratePublicPage();
 
   return async (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
 
     try {
-      await apiUserInfoSwitchGeneratePublicPage({
-        is_generate_public_page: checked,
-        user_id: userInfo.user_id,
-      });
-      dispatchUserInfo(setIsGeneratePublicPage(checked));
+      await switchGeneratePublicPage(checked);
     } catch (err) {
       console.log(`useHandleSwitch: ${err}`);
     }
