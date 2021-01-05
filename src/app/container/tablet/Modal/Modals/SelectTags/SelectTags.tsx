@@ -7,9 +7,9 @@ import {
   createStyles,
   Button,
 } from '@material-ui/core';
-import { useHandleGetArticle } from '../context/useHandleGetArticle';
-import { useHandleSelectTag } from '../context/useHandleSelectTag';
-import { useStateSelectTags } from '../context/useStateSelectTags';
+import { useHandleGetArticle } from './context/useHandleGetArticle';
+import { useHandleSelectTag } from './context/useHandleSelectTag';
+import { useStateSelectTags } from './context/useStateSelectTags';
 
 const useSelectTagsProps = () => {
   const { tags, selectingTags, setSelectingTags } = useStateSelectTags();

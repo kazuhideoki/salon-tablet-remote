@@ -1,18 +1,19 @@
 // nextjsでmaterial-uiをうまく対応させるため
 // https://developerhandbook.com/react/how-to-set-up-nextjs-material-ui/
 
-import React from 'react'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheets } from '@material-ui/styles'
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import { server } from '../lib/loadUrl'
+import React from 'react';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheets } from '@material-ui/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { server } from '../util/loadUrl';
 
-const theme = responsiveFontSizes(createMuiTheme())
+const theme = responsiveFontSizes(createMuiTheme());
 
 class MyDocument extends Document {
-  domain = "https://salon-tablet.com";
-  appName = "SALON TABLET";
-  content = "美容室のためのタブレット専用ウェブサービスです。美容師と顧客のコミュニケーションプラットフォームを提供し、単価アップ、タブレット内の整理、美容室の雰囲気作りに貢献します。"
+  domain = 'https://salon-tablet.com';
+  appName = 'SALON TABLET';
+  content =
+    '美容室のためのタブレット専用ウェブサービスです。美容師と顧客のコミュニケーションプラットフォームを提供し、単価アップ、タブレット内の整理、美容室の雰囲気作りに貢献します。';
 
   render() {
     return (
@@ -66,7 +67,7 @@ class MyDocument extends Document {
           <meta name="twitter:description" content={this.content} />
           <meta
             name="twitter:image"
-            content={this.domain + "/images/icons/icon-192x192.png"}
+            content={this.domain + '/images/icons/icon-192x192.png'}
           />
           {/* <meta name="twitter:creator" content="@DavidWShadow" /> */}
           <meta property="og:type" content="website" />
@@ -76,7 +77,7 @@ class MyDocument extends Document {
           <meta property="og:url" content={this.domain} />
           <meta
             property="og:image"
-            content={this.domain + "/images/icons/icon-192x192.png"}
+            content={this.domain + '/images/icons/icon-192x192.png'}
           />
 
           {/* 【PWA対応】next-pwaのdocumentより ここまで */}
@@ -99,7 +100,7 @@ class MyDocument extends Document {
                 box-sizing: border-box;
               }
               body {
-                font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+                font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
                 font-size: 1rem;
                 margin: 0;
               }
@@ -115,17 +116,17 @@ class MyDocument extends Document {
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
+MyDocument.getInitialProps = async (ctx) => {
   // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets()
-  const originalRenderPage = ctx.renderPage
+  const sheets = new ServerStyleSheets();
+  const originalRenderPage = ctx.renderPage;
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />)
-    })
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+    });
 
-  const initialProps = await Document.getInitialProps(ctx)
+  const initialProps = await Document.getInitialProps(ctx);
 
   return {
     ...initialProps,
@@ -134,9 +135,9 @@ MyDocument.getInitialProps = async ctx => {
       <React.Fragment key="styles">
         {initialProps.styles}
         {sheets.getStyleElement()}
-      </React.Fragment>
-    ]
-  }
-}
+      </React.Fragment>,
+    ],
+  };
+};
 
-export default MyDocument
+export default MyDocument;

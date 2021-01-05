@@ -1,4 +1,4 @@
-import WebSiteDrawer from '../app/components/pageComponent/WebsiteDrawer';
+import WebSiteDrawer from '../app/components/pages/WebsiteDrawer';
 import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>

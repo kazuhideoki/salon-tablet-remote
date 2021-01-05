@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SelectTagsPresenter,
   TSelectTagsPresenter,
-} from '../app/container/tablet/Modal/Modals/SelectTags/view/SelectTags';
+} from '../app/container/tablet/Modal/Modals/SelectTags/SelectTags';
 import { sampleTags } from './lib/sampleTags';
 import { ThemeProvider } from './lib/ThemeProvider';
 export default {

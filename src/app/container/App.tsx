@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from './tablet/Modal/Modal/view/Modal';
+import { Modal } from './tablet/Modal/Modal/Modal';
 import { AppMobile } from './mobile/AppMobile';
 import { AppTablet } from './tablet/AppTablet';
 import { useIsMobile } from '../../util/useIsMobile';

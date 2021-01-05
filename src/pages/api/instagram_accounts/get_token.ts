@@ -1,6 +1,6 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { server, instagramRedirectHost } from '../../../lib/loadUrl';
+import { server, instagramRedirectHost } from '../../../util/loadUrl';
 import { apiInstagramAccountsReconnectNeeded } from './reconnect_needed';
 import { apiGetUserInfoFromEmail } from '../user_info/get';
 import { apiGetSession } from '../auth/get_session';

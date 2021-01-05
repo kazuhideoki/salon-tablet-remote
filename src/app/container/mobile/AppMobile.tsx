@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainMobile } from './MainMobile/view/MainMobile';
+import { MainMobile } from './MainMobile/MainMobile';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
 import { Drawer } from '../tablet/Drawer/Drawer/Drawer';
 import InfoBar from '../tablet/InfoBar/InfoBar';

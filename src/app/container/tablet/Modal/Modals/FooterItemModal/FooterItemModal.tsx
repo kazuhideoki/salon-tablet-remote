@@ -1,10 +1,10 @@
-import React from "react";
-import { Typography } from "@material-ui/core";
-import ReactQuill, { Quill } from "react-quill";
-import { useStateFooterItemModal } from "../context/useStateFooterItemModal";
+import React from 'react';
+import { Typography } from '@material-ui/core';
+import ReactQuill, { Quill } from 'react-quill';
+import { useStateFooterItemModal } from './context/useStateFooterItemModal';
 
 const useFooterItemModalProps = () => {
-  const { footerItem } = useStateFooterItemModal()
+  const { footerItem } = useStateFooterItemModal();
 
   return {
     footerItem,
@@ -13,7 +13,9 @@ const useFooterItemModalProps = () => {
 
 export type TFooterItemModalProps = ReturnType<typeof useFooterItemModalProps>;
 
-export const FooterItemModalPresenter: React.FC<TFooterItemModalProps> = (props) => {
+export const FooterItemModalPresenter: React.FC<TFooterItemModalProps> = (
+  props
+) => {
   return (
     <>
       <Typography variant="body1">

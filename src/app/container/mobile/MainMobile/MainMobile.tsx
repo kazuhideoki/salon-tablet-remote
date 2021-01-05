@@ -1,6 +1,6 @@
 import React from 'react';
-import { sqlToDate } from '../../../../../util/sqlToDate';
-import { useMainProps } from '../../../tablet/Main/Main';
+import { sqlToDate } from '../../../../util/sqlToDate';
+import { useMainProps } from '../../tablet/Main/Main';
 import {
   makeStyles,
   createStyles,
@@ -11,8 +11,8 @@ import {
   CardActionArea,
   Chip,
 } from '@material-ui/core';
-import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
-import { showDataType } from '../../../tablet/Main/components/showDataType';
+import { EditButtonsBox } from '../../../components/editButtonBox/EditButtonsBox';
+import { showDataType } from '../../tablet/Main/components/showDataType';
 
 export const useMainMobileProps = () => {
   const {

@@ -5,40 +5,40 @@ import {
   createStyles,
   useTheme,
 } from '@material-ui/core';
-import { CloseButton } from '../../../../../components/editButtonBox/CloseButton';
+import { CloseButton } from '../../../../components/editButtonBox/CloseButton';
 import dynamic from 'next/dynamic';
 const ContentModal = dynamic(
-  () => import('../../Modals/ContentModal/view/ContentModal'),
+  () => import('../Modals/ContentModal/ContentModal'),
   {
     ssr: false,
   }
 );
 const FooterItemModal = dynamic(
-  () => import('../../Modals/FooterItemModal/view/FooterItemModal'),
+  () => import('../Modals/FooterItemModal/FooterItemModal'),
   {
     ssr: false,
   }
 );
-import ArticleEditor from '../../../Drawer/ArticleEditor/ArticleEditor';
-import FooterItemEditor from '../../../Drawer/FooterItemEditor/FooterItemEditor';
-import { FeedbackForm } from '../../../Drawer/FeedbackForm/FeedbackForm';
-import { ManageTheme } from '../../../Drawer/ManageTheme/ManageTheme';
-import { SelectTags } from '../../Modals/SelectTags/view/SelectTags';
-import { ManageTags } from '../../../Drawer/ManageTags/ManageTags';
-import { SettingUserInfo } from '../../../Drawer/ManageUserInfo/ManageUserInfo';
-import { DeleteAccountForm } from '../../../Drawer/DeleteAccountForm/DeleteAccountForm';
-import { useModalSize, medium } from '../context/useModalSize';
-import { StyledDialog } from '../components/StyledDialog';
-import { ManageInstagramAccounts } from '../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
-import { SelectInstagramAccounts } from '../../Modals/SelectInstagramAccounts/view/SelectInstagramAccounts';
-import { InstagramMediaModal } from '../../Modals/InstagramMediaModal.ts/view/InstagramMediaModal';
-import InfoBarEditor from '../../../Drawer/InfoBarEditor/InfoBarEditor';
-import { GoogleSearch } from '../../Modals/GoogleSearch/view/GoogleSearch';
-import { PageNotEmailVerified } from '../../../../../components/pages/PageNotEmailVerified';
-import { switchingTransition } from '../context/switchingTransition';
-import { useCloseModal } from '../context/useCloseModal';
-import { useStateModal } from '../context/useStateModal';
-import { useIsMobile } from '../../../../../../util/useIsMobile';
+import ArticleEditor from '../../Drawer/ArticleEditor/ArticleEditor';
+import FooterItemEditor from '../../Drawer/FooterItemEditor/FooterItemEditor';
+import { FeedbackForm } from '../../Drawer/FeedbackForm/FeedbackForm';
+import { ManageTheme } from '../../Drawer/ManageTheme/ManageTheme';
+import { SelectTags } from '../Modals/SelectTags/SelectTags';
+import { ManageTags } from '../../Drawer/ManageTags/ManageTags';
+import { SettingUserInfo } from '../../Drawer/ManageUserInfo/ManageUserInfo';
+import { DeleteAccountForm } from '../../Drawer/DeleteAccountForm/DeleteAccountForm';
+import { useModalSize, medium } from './context/useModalSize';
+import { StyledDialog } from './components/StyledDialog';
+import { ManageInstagramAccounts } from '../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
+import { SelectInstagramAccounts } from '../Modals/SelectInstagramAccounts/SelectInstagramAccounts';
+import { InstagramMediaModal } from '../Modals/InstagramMediaModal.ts/InstagramMediaModal';
+import InfoBarEditor from '../../Drawer/InfoBarEditor/InfoBarEditor';
+import { GoogleSearch } from '../Modals/GoogleSearch/GoogleSearch';
+import { PageNotEmailVerified } from '../../../../components/pages/PageNotEmailVerified';
+import { switchingTransition } from './context/switchingTransition';
+import { useCloseModal } from './context/useCloseModal';
+import { useStateModal } from './context/useStateModal';
+import { useIsMobile } from '../../../../../util/useIsMobile';
 
 export const useModalProps = () => {
   const {

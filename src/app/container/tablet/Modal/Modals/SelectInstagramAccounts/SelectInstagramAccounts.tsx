@@ -6,10 +6,10 @@ import {
   createStyles,
   Button,
 } from '@material-ui/core';
-import { useIsMobile } from '../../../../../../../util/useIsMobile';
-import { HelpButton } from '../../../../../../components/HelpButton';
-import { useManageInstagramAccountsProps } from '../../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
-import { useStateSelectInstagramAccounts } from '../context/useStateSelectInstagramAccounts';
+import { useIsMobile } from '../../../../../../util/useIsMobile';
+import { HelpButton } from '../../../../../components/HelpButton';
+import { useManageInstagramAccountsProps } from '../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
+import { useStateSelectInstagramAccounts } from './context/useStateSelectInstagramAccounts';
 
 export const useSelectInstagramAccountsProps = () => {
   const { instagramAccounts, isSetting } = useStateSelectInstagramAccounts();

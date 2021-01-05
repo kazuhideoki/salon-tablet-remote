@@ -1,13 +1,11 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { Button, makeStyles, Theme, createStyles } from "@material-ui/core";
-import { useHandleOnClick } from "../context/useHandleOnClick";
-import { useHandleOnChange } from "../context/useHandleOnChange";
-import { useStateGoogleSearch } from "../context/useStateGoogleSearch";
-import { useClearHistory } from "../context/useClearHistory";
-
- 
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { Button, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { useHandleOnClick } from './context/useHandleOnClick';
+import { useHandleOnChange } from './context/useHandleOnChange';
+import { useStateGoogleSearch } from './context/useStateGoogleSearch';
+import { useClearHistory } from './context/useClearHistory';
 
 export const useGoogleSearchProps = () => {
   const {
@@ -17,13 +15,13 @@ export const useGoogleSearchProps = () => {
     setQuery,
     setSearchHistoryStr,
     searchHistoryArr,
-  } = useStateGoogleSearch()
+  } = useStateGoogleSearch();
 
-  const handleOnChange = useHandleOnChange(setField, setQuery)
+  const handleOnChange = useHandleOnChange(setField, setQuery);
 
-  const handleOnClick = useHandleOnClick(field, setField, setSearchHistoryStr)
+  const handleOnClick = useHandleOnClick(field, setField, setSearchHistoryStr);
 
-  const clearHistory = useClearHistory()
+  const clearHistory = useClearHistory();
 
   return {
     field,
@@ -34,9 +32,9 @@ export const useGoogleSearchProps = () => {
     handleOnClick,
     clearHistory,
   };
-}
+};
 
-export type TUseGoogleSearchProps = ReturnType<typeof useGoogleSearchProps>
+export type TUseGoogleSearchProps = ReturnType<typeof useGoogleSearchProps>;
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -54,13 +52,14 @@ const useStyles = makeStyles((theme: Theme) => {
     a: {
       textDecoration: 'none',
       color: theme.palette.text.primary,
-    }
+    },
   });
 });
 
-
-export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) => {
-  const classes = useStyles()
+export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (
+  props
+) => {
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -79,7 +78,7 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
             autoFocus
             label="Google 検索"
             margin="normal"
-            InputProps={{ ...params.InputProps, type: "search" }}
+            InputProps={{ ...params.InputProps, type: 'search' }}
           />
         )}
       />
@@ -87,14 +86,12 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
         href={`https://www.google.com/search?newwindow=1&q=${props.query}`}
         rel="noopener noreferrer"
         target="_blank"
-        className={classes.a}
-      >
+        className={classes.a}>
         <Button
           className={classes.button}
           variant="contained"
           color="primary"
-          onClick={props.handleOnClick}
-        >
+          onClick={props.handleOnClick}>
           検索
         </Button>
       </a>
@@ -102,23 +99,21 @@ export const GoogleSearchPresenter: React.FC<TUseGoogleSearchProps> = (props) =>
         href={`https://www.google.com/search?newwindow=1&tbm=isch&q=${props.query}`}
         rel="noopener noreferrer"
         target="_blank"
-        className={classes.a}
-      >
+        className={classes.a}>
         <Button
           className={classes.button}
           variant="contained"
           color="primary"
-          onClick={props.handleOnClick}
-        >
+          onClick={props.handleOnClick}>
           画像検索
         </Button>
       </a>
     </div>
   );
-}
+};
 
 export const GoogleSearch = () => {
-  const props = useGoogleSearchProps()
+  const props = useGoogleSearchProps();
 
-  return <GoogleSearchPresenter {...props}/>
-}
+  return <GoogleSearchPresenter {...props} />;
+};

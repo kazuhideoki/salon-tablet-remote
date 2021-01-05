@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ContentModalPresenter,
   TContentModalProps,
-} from '../app/container/tablet/Modal/Modals/ContentModal/view/ContentModal';
+} from '../app/container/tablet/Modal/Modals/ContentModal/ContentModal';
 import { sampleData } from './lib/sampleArticles';
 export default {
   title: 'Main/ContentModal',

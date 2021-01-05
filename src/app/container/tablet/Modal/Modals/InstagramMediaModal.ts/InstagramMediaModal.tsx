@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles, Typography } from '@material-ui/core';
-import { sqlToDate } from '../../../../../../../util/sqlToDate';
-import { useStateInstagramMediaModal } from '../context/useStateInstagramMediaModal';
+import { sqlToDate } from '../../../../../../util/sqlToDate';
+import { useStateInstagramMediaModal } from './context/useStateInstagramMediaModal';
 
 const useInstagramMediaModalProps = () => {
   const { instagramMedia } = useStateInstagramMediaModal();

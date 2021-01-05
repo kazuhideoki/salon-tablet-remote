@@ -12,10 +12,11 @@ import '../../public/fonts/fonts.css';
 // ReactQuillの整形
 import '../../public/quill.scss';
 
+import React from 'react';
 import Head from 'next/head';
-import WebSiteDrawer from '../app/components/pageComponent/WebsiteDrawer';
-import { googleFontsUrl } from '../lib/googleFontsUrl';
-import { AuthProvider } from '../lib/auth/AuthProvider';
+import WebSiteDrawer from '../app/components/pages/WebsiteDrawer';
+import { googleFontsUrl } from '../util/googleFontsUrl';
+import { AuthProvider } from '../util/auth/AuthProvider';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { MuiThemeProvider } from '@material-ui/core';
 import { themeDefault } from '../app/Store/theme/lib/themes/themeDefault';
