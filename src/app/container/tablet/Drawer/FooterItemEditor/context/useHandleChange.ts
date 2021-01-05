@@ -3,7 +3,7 @@ import { TFooterItemEdittingParams } from '../../../../../hooks/footerItems/useC
 import { setModalSize } from '../../../../../store/appState/actions';
 import { AppStateContext } from '../../../../../store/appState/Context';
 import { FooterItemsContext } from '../../../../../store/footerItems/Context';
-import { T_modal_size } from '../../../../../../util/interface/Interface';
+import { ModalSize } from '../../../../../../util/interface/Interface';
 export const useHandleChange = (
   edittingFooterItemParams: TFooterItemEdittingParams
 ) => {
@@ -14,7 +14,7 @@ export const useHandleChange = (
     // 変更後のmodalSizeも一緒にedittingParams.footerItemsに格納
     const params: TFooterItemEdittingParams = {
       ...edittingFooterItemParams,
-      modalSizeRadio: event.target.value as T_modal_size,
+      modalSizeRadio: event.target.value as ModalSize,
     };
     dispatchAppState(
       setModalSize({ footerItemEdittingParams: params, footerItems })

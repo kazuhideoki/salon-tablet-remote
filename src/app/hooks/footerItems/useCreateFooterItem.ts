@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-  T_modal_size,
-  T_is_published_footer_items,
-  T_on_tap,
+  ModalSize,
+  Ontap,
   DataTypeFooterItem,
   FooterItems,
   FooterItem,
@@ -26,18 +25,18 @@ export type TFooterItemEdittingParams = {
     OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>,
     string
   ];
-  onTapRadio: T_on_tap;
+  onTapRadio: Ontap;
   editorText: string;
   editorTextExcerpt: string;
   linkUrl: string;
-  modalSizeRadio: T_modal_size;
+  modalSizeRadio: ModalSize;
   appLinkUrl: string;
   onSidebar: boolean;
   dataType: DataTypeFooterItem;
 };
 
 export type TCreateFooterItem = TFooterItemEdittingParams & {
-  is_published: T_is_published_footer_items;
+  is_published: boolean;
 };
 
 export const calcOrder = (

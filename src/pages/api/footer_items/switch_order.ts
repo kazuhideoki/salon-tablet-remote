@@ -1,11 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TApiResponse } from '../../../util/db/apiWrap';
-import {
-  T_order_sidebar,
-  T_footer_item_id,
-  T_order,
-} from '../../../util/interface/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -17,14 +12,14 @@ export const apiFooterItemsSwitchOrder = async (
 
 export type T_footer_items_switch_order = {
   smaller: {
-    footer_item_id: T_footer_item_id;
-    order: T_order;
-    order_sidebar: T_order_sidebar;
+    footer_item_id: number;
+    order: number;
+    order_sidebar: number;
   };
   larger: {
-    footer_item_id: T_footer_item_id;
-    order: T_order;
-    order_sidebar: T_order_sidebar;
+    footer_item_id: number;
+    order: number;
+    order_sidebar: number;
   };
 };
 

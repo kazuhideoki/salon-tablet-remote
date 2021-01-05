@@ -1,6 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_footer_item_id, T_order } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -12,8 +11,8 @@ export const apiFooterItemsDelete = async (
 };
 
 export type T_footer_items_delete = {
-  footer_item_id: T_footer_item_id;
-  order: T_order;
+  footer_item_id: number;
+  order: number;
 };
 
 const footer_items_delete = async (

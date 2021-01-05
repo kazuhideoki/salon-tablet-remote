@@ -6,8 +6,8 @@ import {
   TUaDeviceType,
   T_instagram_id,
   T_instagram_username,
-  T_modal_size,
-  T_on_tap,
+  ModalSize,
+  Ontap,
 } from '../../../util/interface/Interface';
 
 export type TInitAppState = {
@@ -25,7 +25,7 @@ export const initAppState = (data: TInitAppState) => ({
   isShowInstagram: false,
   // modal表示するコンテン情報を格納
   currentModalContent: {
-    modalSize: 'large' as T_modal_size,
+    modalSize: 'large' as ModalSize,
     article: {} as Article,
     footerItem: {} as FooterItem,
     instagramMedia: {} as TInstagramMedia,
@@ -37,8 +37,8 @@ export const initAppState = (data: TInitAppState) => ({
     article: {} as Article,
     footerItem: {} as FooterItem,
     // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
-    modalSize: 'large' as T_modal_size,
-    onTap: 'modal' as T_on_tap,
+    modalSize: 'large' as ModalSize,
+    onTap: 'modal' as Ontap,
   },
   // タグ選択のSelectTagsで選択されたタグデータを格納、これをもとにmainに記事を表示
   selectedArticlesTags: [] as number[],

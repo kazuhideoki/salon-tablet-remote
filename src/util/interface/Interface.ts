@@ -60,48 +60,35 @@ export type TAllArticles = {
 }[];
 
 // ●●●●●● テーブル `footer_items`
-export type T_footer_item_id = number;
-export type T_is_published_footer_items = boolean;
-export type T_created_at_footer_items = string;
-export type T_updated_at_footer_items = string;
-export type T_icon_name = string;
-export type T_displayed_icon_name = string;
-export type T_on_tap = 'modal' | 'link' | 'appLink' | 'google';
-// export type T_on_sidebar = boolean
-export type T_item_content = string;
-export type T_item_excerpt = string;
-export type T_link_url = string;
-export type T_app_link_url = string;
-export type T_modal_size =
+export type Ontap = 'modal' | 'link' | 'appLink' | 'google';
+export type ModalSize =
   | 'fullScreen'
   | 'large'
   | 'medium'
   | 'small'
   | 'upperSide';
-export type T_order = number;
-export type T_order_sidebar = number;
 
 export type FooterItemWithoutId = {
   user_id: number;
-  is_published: T_is_published_footer_items;
-  created_at: T_created_at_footer_items;
-  updated_at: T_updated_at_footer_items | null;
-  icon_name: T_icon_name;
-  displayed_icon_name: T_displayed_icon_name;
-  on_tap: T_on_tap;
+  is_published: boolean;
+  created_at: string;
+  updated_at: string | null;
+  icon_name: string;
+  displayed_icon_name: string;
+  on_tap: Ontap;
   // on_sidebar: T_on_sidebar
-  item_content: T_item_content;
-  item_excerpt: T_item_excerpt;
-  link_url: T_link_url;
-  app_link_url: T_app_link_url;
-  modal_size: T_modal_size;
-  order: T_order;
-  order_sidebar: T_order_sidebar;
+  item_content: string;
+  item_excerpt: string;
+  link_url: string;
+  app_link_url: string;
+  modal_size: ModalSize;
+  order: number;
+  order_sidebar: number;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
   data_type: DataTypeFooterItem;
 };
 export type FooterItem = {
-  footer_item_id: T_footer_item_id;
+  footer_item_id: number;
 } & FooterItemWithoutId;
 export type FooterItems = FooterItem[];
 

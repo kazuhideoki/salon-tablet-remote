@@ -1,6 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_footer_item_id } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { T_footer_items_params } from './create';
@@ -16,7 +15,7 @@ export const apiFooterItemsUpdate = async (
 export type T_footer_items_update_params = T_footer_items_params;
 export type T_footer_items_update = {
   params: T_footer_items_update_params;
-  id: T_footer_item_id;
+  id: number;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
