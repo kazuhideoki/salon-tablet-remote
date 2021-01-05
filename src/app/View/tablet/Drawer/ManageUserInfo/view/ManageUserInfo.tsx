@@ -15,7 +15,7 @@ import {
   FormGroup,
 } from '@material-ui/core';
 import { QrPopover } from '../components/QrPopover';
-import { HelpButton } from '../../../../../pureComponents/HelpButton';
+import { HelpButton } from '../../../../../components/HelpButton';
 import { useGoogleSearchProps } from '../../../Modal/Modals/GoogleSearch/view/GoogleSearch';
 import { useHandleSwitch } from '../context/useHandleSwitch';
 import { useStateAccount } from '../context/useStateAccount';

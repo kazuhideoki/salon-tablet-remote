@@ -1,5 +1,5 @@
 import React from 'react';
-import { HelpButton } from '../app/pureComponents/HelpButton';
+import { HelpButton } from '../app/components/HelpButton';
 import { makeStyles, createStyles } from '@material-ui/core';
 export default {
   title: 'viewComponents/buttons/HelpButton',

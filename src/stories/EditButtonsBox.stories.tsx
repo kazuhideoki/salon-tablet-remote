@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditButtonsBox } from '../app/pureComponents/editButtonBox/EditButtonsBox';
+import { EditButtonsBox } from '../app/components/editButtonBox/EditButtonsBox';
 import { samplefooterItems } from './lib/sampleFooterItems';
 export default {
   title: 'viewComponents/buttons/EditButtonsBox',

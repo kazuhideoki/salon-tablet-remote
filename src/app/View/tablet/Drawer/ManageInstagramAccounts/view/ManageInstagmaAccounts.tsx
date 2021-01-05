@@ -6,7 +6,7 @@ import {
   Theme,
   Button,
 } from '@material-ui/core';
-import { DeleteButton } from '../../../../../pureComponents/editButtonBox/DeleteButton';
+import { DeleteButton } from '../../../../../components/editButtonBox/DeleteButton';
 import { Skeleton } from '@material-ui/lab';
 import { useDeleteInstagramAccount } from '../context/useDeleteInstagramAccount';
 import { useStateManageInstagramAccount } from '../context/useStateManageInstagramAccount';

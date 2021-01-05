@@ -6,7 +6,7 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
-import { EditButtonsBox } from '../../../../pureComponents/editButtonBox/EditButtonsBox';
+import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { TUseMainProps, TMainClasses } from '../view/Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';

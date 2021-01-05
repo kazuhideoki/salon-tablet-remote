@@ -7,7 +7,7 @@ import {
   createStyles,
 } from '@material-ui/core';
 import React from 'react';
-import initFirebase from '../util/auth/initFirebase';
+import initFirebase from '../../../util/auth/initFirebase';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { useRouter } from 'next/router';

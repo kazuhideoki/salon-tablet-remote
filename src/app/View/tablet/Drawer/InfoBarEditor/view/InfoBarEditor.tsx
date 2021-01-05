@@ -14,7 +14,7 @@ import {
   Theme,
   Grid,
 } from '@material-ui/core';
-import { CharCounter } from '../../../../../pureComponents/CharCounter';
+import { CharCounter } from '../../../../../components/CharCounter';
 import { SwitchOnTapInfoBar } from '../components/SwitchOnTapInfoBar';
 import { SelectArticleInfoBar } from '../components/SelectArticleInfoBar';
 import { PublishTwoTone } from '@material-ui/icons';

@@ -20,9 +20,9 @@ import {
   useTheme,
 } from '@material-ui/core';
 import { SelectAppLink } from '../components/SelectAppLink';
-import { CharCounter } from '../../../../../pureComponents/CharCounter';
+import { CharCounter } from '../../../../../components/CharCounter';
 import { SelectModalSize } from '../components/SelectModalSize';
-import { HelpButton } from '../../../../../pureComponents/HelpButton';
+import { HelpButton } from '../../../../../components/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
 import { SwitchDataTypeBox } from '../../QuillEditor/components/SwitchDataTypeBox';
 import { useIsMobile } from '../../../../../../util/useIsMobile';

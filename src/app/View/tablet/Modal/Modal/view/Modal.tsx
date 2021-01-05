@@ -5,7 +5,7 @@ import {
   createStyles,
   useTheme,
 } from '@material-ui/core';
-import { CloseButton } from '../../../../../pureComponents/editButtonBox/CloseButton';
+import { CloseButton } from '../../../../../components/editButtonBox/CloseButton';
 import dynamic from 'next/dynamic';
 const ContentModal = dynamic(
   () => import('../../Modals/ContentModal/view/ContentModal'),
@@ -34,7 +34,7 @@ import { SelectInstagramAccounts } from '../../Modals/SelectInstagramAccounts/vi
 import { InstagramMediaModal } from '../../Modals/InstagramMediaModal.ts/view/InstagramMediaModal';
 import InfoBarEditor from '../../../Drawer/InfoBarEditor/view/InfoBarEditor';
 import { GoogleSearch } from '../../Modals/GoogleSearch/view/GoogleSearch';
-import { PageNotEmailVerified } from '../../../../../../pageComponent/PageNotEmailVerified';
+import { PageNotEmailVerified } from '../../../../../components/pageComponent/PageNotEmailVerified';
 import { switchingTransition } from '../context/switchingTransition';
 import { useCloseModal } from '../context/useCloseModal';
 import { useStateModal } from '../context/useStateModal';

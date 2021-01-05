@@ -4,7 +4,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { HelpButton } from '../../../../../pureComponents/HelpButton';
+import { HelpButton } from '../../../../../components/HelpButton';
 import { TUseFooterItemEditorProps } from '../view/FooterItemEditor';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 

@@ -8,9 +8,9 @@ import {
 } from '@material-ui/core';
 import Link from 'next/link';
 import { AboutST } from './AboutST';
-import { server } from '../util/loadUrl';
 import { Parallax } from 'react-parallax';
 import { PlainButton } from './PlainButton';
+import { server } from '../../../util/loadUrl';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

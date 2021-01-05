@@ -11,7 +11,7 @@ import {
   CardActionArea,
   Chip,
 } from '@material-ui/core';
-import { EditButtonsBox } from '../../../../pureComponents/editButtonBox/EditButtonsBox';
+import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { showDataType } from '../../../tablet/Main/components/showDataType';
 
 export const useMainMobileProps = () => {

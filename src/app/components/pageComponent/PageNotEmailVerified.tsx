@@ -7,8 +7,8 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import React from 'react';
-import { useAuth } from '../util/auth/AuthProvider';
-import { sendVerificationMail } from '../util/auth/sendVerificationMail';
+import { useAuth } from '../../../util/auth/AuthProvider';
+import { sendVerificationMail } from '../../../util/auth/sendVerificationMail';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({

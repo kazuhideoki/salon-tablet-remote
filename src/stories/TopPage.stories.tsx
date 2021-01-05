@@ -1,5 +1,5 @@
 import React from 'react';
-import { TopPage } from '../pageComponent/TopPage';
+import { TopPage } from '../app/components/pageComponent/TopPage';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import { WebsiteThemeProvider } from '../app/Store/theme/lib/themes/websiteTheme';
 

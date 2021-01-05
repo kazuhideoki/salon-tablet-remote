@@ -6,7 +6,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
-import { AuthForm } from '../../pageComponent/AuthFrom';
+import { AuthForm } from '../../app/components/pageComponent/AuthFrom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import initFirebase from '../../lib/auth/initFirebase';

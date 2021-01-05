@@ -8,9 +8,9 @@ import {
   createStyles,
   makeStyles,
 } from '@material-ui/core';
-import { EditButtonsBox } from '../../../../pureComponents/editButtonBox/EditButtonsBox';
-import { DeleteButton } from '../../../../pureComponents/editButtonBox/DeleteButton';
-import { UpdateButton } from '../../../../pureComponents/editButtonBox/UpdateButton';
+import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
+import { DeleteButton } from '../../../../components/editButtonBox/DeleteButton';
+import { UpdateButton } from '../../../../components/editButtonBox/UpdateButton';
 import { TUseMainProps, TMainClasses } from '../view/Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';

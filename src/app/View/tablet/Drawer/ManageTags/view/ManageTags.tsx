@@ -8,7 +8,7 @@ import {
   createStyles,
   Typography,
 } from '@material-ui/core';
-import { CharCounter } from '../../../../../pureComponents/CharCounter';
+import { CharCounter } from '../../../../../components/CharCounter';
 import { Skeleton } from '@material-ui/lab';
 import { useHandleOnClick } from '../context/useHandleOnClick';
 import { useIsValidTagName } from '../context/useIsValidTagName';

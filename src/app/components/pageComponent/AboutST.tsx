@@ -7,7 +7,7 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import React from 'react';
-import { server } from '../util/loadUrl';
+import { server } from '../../../util/loadUrl';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

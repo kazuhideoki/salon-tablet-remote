@@ -13,7 +13,7 @@ import {
 import { MoodBad } from '@material-ui/icons';
 import { TUseDrawerProps } from '../view/Drawer';
 import { IconsSetting } from '../../FooterItemEditor/components/iconSelect/icons';
-import { EditButtonsBox } from '../../../../../pureComponents/editButtonBox/EditButtonsBox';
+import { EditButtonsBox } from '../../../../../components/editButtonBox/EditButtonsBox';
 import { FooterItem } from '../../../../../Store/Interface';
 import { showDataType } from '../../../Main/components/showDataType';
 

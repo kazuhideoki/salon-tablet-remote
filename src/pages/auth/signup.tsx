@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthForm } from '../../pageComponent/AuthFrom';
+import { AuthForm } from '../../app/components/pageComponent/AuthFrom';
 import { BackgroundDiv, useStylesAuthForm } from './signin';
 import firebase from 'firebase/app';
 import 'firebase/auth';

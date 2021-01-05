@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import { TCreateArticle } from '../context/useCreateArticle';
 import { SelectTagsPopover } from '../components/SelectTagsPopover';
-import { CharCounter } from '../../../../../pureComponents/CharCounter';
+import { CharCounter } from '../../../../../components/CharCounter';
 import { SaveTwoTone, PublishTwoTone } from '@material-ui/icons';
 import {
   SwitchDataTypeBox,

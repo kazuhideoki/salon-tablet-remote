@@ -12,9 +12,9 @@ import {
 } from '../app/Store/Interface';
 import { App } from '../app/View/App';
 import { GetServerSideProps } from 'next';
-import { TopPage } from '../pageComponent/TopPage';
+import { TopPage } from '../app/components/pageComponent/TopPage';
 import { generateProps } from '../util/db/generateProps';
-import { SEO } from '../pageComponent/SEO';
+import { SEO } from '../app/components/pageComponent/SEO';
 import { getDeviceType } from '../util/getDeviceType';
 import {
   apiGetSession,

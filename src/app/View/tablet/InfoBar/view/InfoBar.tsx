@@ -6,7 +6,7 @@ import {
   Theme,
   CardActionArea,
 } from '@material-ui/core';
-import { EditButtonsBox } from '../../../../pureComponents/editButtonBox/EditButtonsBox';
+import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { useStateInfoBar } from '../context/useStateInfoBar';
 import { useDrawerProps } from '../../Drawer/Drawer/view/Drawer';
 import { useOpenArticleModalInfoBar } from '../context/useOpenArticleModalInfoBar';
