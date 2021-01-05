@@ -1,14 +1,14 @@
 import React from 'react';
-import { T_instagram_id } from '../../Store/Interface';
+import { T_instagram_id } from '../../store/Interface';
 import { useGetInstagramAccounts } from './useGetInstagramAccounts';
 import { apiInstagramAccountsDelete } from '../../../pages/api/instagram_accounts/delete';
-import { InstagramContext } from '../../Store/instagram/Context';
-import { removeMedias } from '../../Store/instagram/actions';
-import { AppStateContext } from '../../Store/appState/Context';
+import { InstagramContext } from '../../store/instagram/Context';
+import { removeMedias } from '../../store/instagram/actions';
+import { AppStateContext } from '../../store/appState/Context';
 import {
   isLoadingInstagramAccounts,
   isShowInstagram,
-} from '../../Store/appState/actions';
+} from '../../store/appState/actions';
 
 export const useDeleteInstagramAccount = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);

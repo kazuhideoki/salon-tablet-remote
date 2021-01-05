@@ -1,10 +1,10 @@
 import React from 'react';
-import { T_article_id } from '../../Store/Interface';
+import { T_article_id } from '../../store/Interface';
 import { useGetArticles } from './useGetArticles';
 import { apiArticlesDelete } from '../../../pages/api/articles/delete';
-import { ArticlesContext } from '../../Store/articles/Context';
-import { AppStateContext } from '../../Store/appState/Context';
-import { isLoadingMain } from '../../Store/appState/actions';
+import { ArticlesContext } from '../../store/articles/Context';
+import { AppStateContext } from '../../store/appState/Context';
+import { isLoadingMain } from '../../store/appState/actions';
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();

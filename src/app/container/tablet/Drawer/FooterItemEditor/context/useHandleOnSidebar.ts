@@ -1,6 +1,9 @@
-import React from 'react'
-import { FooterItem } from '../../../../../Store/Interface';
-export const useHandleOnSidebar = (isEditting: boolean, footerItem: FooterItem) => {
+import React from 'react';
+import { FooterItem } from '../../../../../store/Interface';
+export const useHandleOnSidebar = (
+  isEditting: boolean,
+  footerItem: FooterItem
+) => {
   const initSidebar = () => {
     if (isEditting === false) {
       return false;
@@ -21,4 +24,4 @@ export const useHandleOnSidebar = (isEditting: boolean, footerItem: FooterItem) 
     onSidebar,
     handleOnSidebar,
   };
-}
+};

@@ -1,4 +1,4 @@
-import { FooterItems } from '../../app/Store/Interface';
+import { FooterItems } from '../../app/store/Interface';
 
 export const checkOrders = (footerItems: FooterItems) => {
   let result = true;

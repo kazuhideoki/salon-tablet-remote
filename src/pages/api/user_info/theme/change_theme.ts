@@ -1,8 +1,8 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id } from '../../../../app/Store/Interface';
+import { T_user_id } from '../../../../app/store/Interface';
 import { TApiResponse } from '../../../../util/db/apiWrap';
-import { TThemeParams } from '../../../../app/Store/theme/ThemeProvider';
+import { TThemeParams } from '../../../../app/store/theme/ThemeProvider';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

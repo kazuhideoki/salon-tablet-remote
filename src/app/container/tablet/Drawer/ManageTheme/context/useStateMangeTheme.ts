@@ -1,5 +1,5 @@
-import React from 'react'
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import React from 'react';
+import { UserInfoContext } from '../../../../../store/userInfo/Context';
 
 export const useStateMangeTheme = () => {
   const { userInfo } = React.useContext(UserInfoContext);
@@ -10,4 +10,4 @@ export const useStateMangeTheme = () => {
     theme_color,
     show_article_type,
   };
-}
+};

@@ -5,7 +5,7 @@ import {
   T_order_sidebar,
   T_footer_item_id,
   T_order,
-} from '../../../app/Store/Interface';
+} from '../../../app/store/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

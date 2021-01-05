@@ -1,7 +1,10 @@
-import React from 'react'
-import { setFooterItemContent, setModal } from '../../../../../Store/appState/actions';
-import { AppStateContext } from '../../../../../Store/appState/Context';
-import { FooterItem } from "../../../../../Store/Interface";
+import React from 'react';
+import {
+  setFooterItemContent,
+  setModal,
+} from '../../../../../store/appState/actions';
+import { AppStateContext } from '../../../../../store/appState/Context';
+import { FooterItem } from '../../../../../store/Interface';
 
 export const useOpenFooterItemModal = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
@@ -9,9 +12,9 @@ export const useOpenFooterItemModal = () => {
   return (footerItem: FooterItem) => {
     dispatchAppState(setFooterItemContent(footerItem));
     if (footerItem.on_tap === 'modal') {
-      dispatchAppState(setModal("footer_item_modal"));
+      dispatchAppState(setModal('footer_item_modal'));
     } else if (footerItem.on_tap === 'google') {
-      dispatchAppState(setModal("google_search"));
+      dispatchAppState(setModal('google_search'));
     }
-  }
-}
+  };
+};

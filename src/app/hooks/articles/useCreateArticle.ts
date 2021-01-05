@@ -4,10 +4,10 @@ import {
   T_articles_create,
   apiArticlesCreate,
 } from '../../../pages/api/articles/create';
-import { T_data_type_article } from '../../Store/Interface';
-import { UserInfoContext } from '../../Store/userInfo/Context';
-import { AppStateContext } from '../../Store/appState/Context';
-import { closeModal, isLoadingMain } from '../../Store/appState/actions';
+import { T_data_type_article } from '../../store/Interface';
+import { UserInfoContext } from '../../store/userInfo/Context';
+import { AppStateContext } from '../../store/appState/Context';
+import { closeModal, isLoadingMain } from '../../store/appState/actions';
 
 export type TCreateArticle = {
   titleText: string;

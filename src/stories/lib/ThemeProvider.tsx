@@ -3,14 +3,14 @@ import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import {
   useThemeArgs,
   ThemeContext,
-} from '../../app/Store/theme/ThemeProvider';
+} from '../../app/store/theme/ThemeProvider';
 import { SelectTheme } from '../../app/container/tablet/Drawer/ManageTheme/components/SelectTheme';
 import { TUseManageThemeProps } from '../../app/container/tablet/Drawer/ManageTheme/ManageTheme';
 import {
   generateDefaultParamsFromTheme,
   switchingTheme,
-} from '../../app/Store/theme/lib/paramsFromTheme';
-import { T_selected_theme } from '../../app/Store/Interface';
+} from '../../app/store/theme/lib/paramsFromTheme';
+import { T_selected_theme } from '../../app/store/Interface';
 import { googleFontsUrl } from '../../util/googleFontsUrl';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

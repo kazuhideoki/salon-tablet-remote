@@ -1,5 +1,5 @@
 import React from 'react';
-import { T_modal_size } from '../../../../../Store/Interface';
+import { T_modal_size } from '../../../../../store/Interface';
 
 export const fullScreen = {
   width: '100vw',

@@ -1,6 +1,6 @@
-import React from 'react'
-import { AppStateContext } from '../../../../../Store/appState/Context';
-import { FooterItemsContext } from '../../../../../Store/footerItems/Context';
+import React from 'react';
+import { AppStateContext } from '../../../../../store/appState/Context';
+import { FooterItemsContext } from '../../../../../store/footerItems/Context';
 
 export const useStateFooter = () => {
   const { appState } = React.useContext(AppStateContext);
@@ -12,4 +12,4 @@ export const useStateFooter = () => {
     loading,
     isSetting,
   };
-}
+};

@@ -1,7 +1,7 @@
 import React from 'react';
 import { apiUserInfoSwitchGeneratePublicPage } from '../../../pages/api/user_info/switch_generate_public_page';
-import { setIsGeneratePublicPage } from '../../Store/userInfo/actions';
-import { UserInfoContext } from '../../Store/userInfo/Context';
+import { setIsGeneratePublicPage } from '../../store/userInfo/actions';
+import { UserInfoContext } from '../../store/userInfo/Context';
 
 export const useSwitchGeneratePublicPage = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);

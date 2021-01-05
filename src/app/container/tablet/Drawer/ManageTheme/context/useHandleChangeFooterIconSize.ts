@@ -1,7 +1,7 @@
 import React from 'react';
 import { useChangeFooterIconSize } from '../../../../../hooks/userInfo/useChangeFooterIconSize';
-import { T_footer_icon_size } from '../../../../../Store/Interface';
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import { T_footer_icon_size } from '../../../../../store/Interface';
+import { UserInfoContext } from '../../../../../store/userInfo/Context';
 
 export const useHandleChangeFooterIconSize = () => {
   const { userInfo } = React.useContext(UserInfoContext);

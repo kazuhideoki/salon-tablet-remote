@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals';
-import { whiteUnChanged } from '../../../../../Store/theme/lib/paramsFromTheme';
-import { TThemeParams } from '../../../../../Store/theme/ThemeProvider';
+import { whiteUnChanged } from '../../../../../store/theme/lib/paramsFromTheme';
+import { TThemeParams } from '../../../../../store/theme/ThemeProvider';
 import { isThemeParamsChanged } from './useHandleAccordion';
 
 test('isThemeParamsChanged 変更されている', () => {

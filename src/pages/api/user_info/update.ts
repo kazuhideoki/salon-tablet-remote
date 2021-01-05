@@ -7,7 +7,7 @@ import {
   T_shop_name,
   T_user_email,
   T_is_generate_public_page,
-} from '../../../app/Store/Interface';
+} from '../../../app/store/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

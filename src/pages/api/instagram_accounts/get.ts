@@ -1,6 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TInstagramAccounts, T_user_id } from '../../../app/Store/Interface';
+import { TInstagramAccounts, T_user_id } from '../../../app/store/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 

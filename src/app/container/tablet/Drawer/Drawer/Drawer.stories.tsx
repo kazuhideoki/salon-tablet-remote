@@ -2,7 +2,7 @@ import React from 'react';
 import { DrawerPresenter, TUseDrawerProps } from './Drawer';
 import { useTheme } from '@material-ui/core';
 import { samplefooterItems } from '../../../../../stories/lib/sampleFooterItems';
-import { useThemeArgs } from '../../../../Store/theme/ThemeProvider';
+import { useThemeArgs } from '../../../../store/theme/ThemeProvider';
 export default {
   title: 'Drawer/Drawer',
   component: DrawerPresenter,

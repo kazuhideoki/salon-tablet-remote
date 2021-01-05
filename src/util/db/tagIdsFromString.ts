@@ -1,4 +1,4 @@
-import { T_article_id } from '../../app/Store/Interface';
+import { T_article_id } from '../../app/store/Interface';
 
 export const tagIdsFromString = (data: any) => {
   // tag_idsをnumber[]化する

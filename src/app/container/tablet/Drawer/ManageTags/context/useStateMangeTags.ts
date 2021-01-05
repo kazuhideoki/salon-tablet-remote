@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppStateContext } from '../../../../../Store/appState/Context';
-import { TagsContext } from '../../../../../Store/tags/Context';
+import { AppStateContext } from '../../../../../store/appState/Context';
+import { TagsContext } from '../../../../../store/tags/Context';
 
 export const useStateMangeTags = () => {
   const { appState } = React.useContext(AppStateContext);

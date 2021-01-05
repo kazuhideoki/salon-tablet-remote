@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { TUserInfo } from '../../app/Store/Interface';
+import { TUserInfo } from '../../app/store/Interface';
 
 export const userInfoParamsFromSql = (userInfo: TUserInfo) => {
   //@ts-ignore

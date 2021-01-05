@@ -2,7 +2,7 @@ import React from 'react';
 import { apiUserInfoDelete } from '../../../pages/api/user_info/delete';
 import { useAuth } from '../../../util/auth/AuthProvider';
 import { deleteUserInFirebase } from '../../../util/auth/deleteUserInFirebase';
-import { UserInfoContext } from '../../Store/userInfo/Context';
+import { UserInfoContext } from '../../store/userInfo/Context';
 
 export const useDeleteUser = () => {
   const { userInfo } = React.useContext(UserInfoContext);

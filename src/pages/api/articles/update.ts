@@ -9,7 +9,7 @@ import {
   T_article_excerpt,
   T_article_img,
   T_data_type_article,
-} from '../../../app/Store/Interface';
+} from '../../../app/store/Interface';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 

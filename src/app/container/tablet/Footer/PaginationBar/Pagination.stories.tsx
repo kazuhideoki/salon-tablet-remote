@@ -6,7 +6,7 @@ import {
 import { sampleInstagramAccounts } from '../../../../../stories/lib/sampleInstagramAccounts';
 import { sampleTags } from '../../../../../stories/lib/sampleTags';
 import { withStyles, IconButton } from '@material-ui/core';
-import { TInstagramMedias } from '../../../../Store/Interface';
+import { TInstagramMedias } from '../../../../store/Interface';
 export default {
   title: 'Footer/Pagination/PaginationBar',
   component: PaginationBarPresenter,

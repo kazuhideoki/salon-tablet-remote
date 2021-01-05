@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetArticles } from '../../../../../hooks/articles/useGetArticles';
-import { closeDrawer } from '../../../../../Store/appState/actions';
-import { AppStateContext } from '../../../../../Store/appState/Context';
+import { closeDrawer } from '../../../../../store/appState/actions';
+import { AppStateContext } from '../../../../../store/appState/Context';
 
 export const useHandleDrawerClose = () => {
   const getArticles = useGetArticles();

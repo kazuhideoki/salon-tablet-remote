@@ -1,6 +1,8 @@
-import { T_tag_id } from "../../../../../../Store/Interface";
+import { T_tag_id } from '../../../../../../store/Interface';
 
-export const useHandleSelectTag = (selectingTags: number[], setSelectingTags: React.Dispatch<React.SetStateAction<number[]>>
+export const useHandleSelectTag = (
+  selectingTags: number[],
+  setSelectingTags: React.Dispatch<React.SetStateAction<number[]>>
 ) => {
   return (tagId: T_tag_id) => {
     let newValue: number[];
@@ -15,4 +17,4 @@ export const useHandleSelectTag = (selectingTags: number[], setSelectingTags: Re
 
     setSelectingTags(newValue);
   };
-}
+};

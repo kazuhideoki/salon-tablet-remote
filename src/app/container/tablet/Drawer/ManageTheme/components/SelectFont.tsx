@@ -1,9 +1,9 @@
 import React from 'react';
 import { Select, MenuItem } from '@material-ui/core';
 import { TUseManageThemeProps } from '../ManageTheme';
-import { TFont1, TFont2 } from '../../../../../Store/theme/lib/fonts';
+import { TFont1, TFont2 } from '../../../../../store/theme/lib/fonts';
 import { TWhichFont } from '../../../../../../pages/api/user_info/theme/font';
-import { T_theme_font } from '../../../../../Store/Interface';
+import { T_theme_font } from '../../../../../store/Interface';
 
 type Props = TUseManageThemeProps & {
   whichFont: TWhichFont;

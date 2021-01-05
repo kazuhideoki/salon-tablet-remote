@@ -5,7 +5,7 @@ import {
   FooterItem,
   T_user_id,
   TArticles,
-} from '../../app/Store/Interface';
+} from '../../app/store/Interface';
 import { TApiResponse } from '../../util/db/apiWrap';
 import { apiWrapPost } from '../../util/db/apiWrap';
 

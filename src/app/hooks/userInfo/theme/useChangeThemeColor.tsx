@@ -4,8 +4,8 @@ import {
   T_user_info_theme_color,
 } from '../../../../pages/api/user_info/theme/color';
 import { TColor } from '../../../container/tablet/Drawer/ManageTheme/ManageTheme';
-import { UserInfoContext } from '../../../Store/userInfo/Context';
-import { setThemeColor } from '../../../Store/userInfo/actions';
+import { UserInfoContext } from '../../../store/userInfo/Context';
+import { setThemeColor } from '../../../store/userInfo/actions';
 
 export const useChangeThemeColor = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);

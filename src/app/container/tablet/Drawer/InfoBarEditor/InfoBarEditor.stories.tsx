@@ -3,7 +3,7 @@ import {
   InfoBarEditorPresenter,
   TUseInfoBarEditorProps,
 } from './InfoBarEditor';
-import { T_info_bar_type } from '../../../../Store/Interface';
+import { T_info_bar_type } from '../../../../store/Interface';
 import { sampleAllArticles } from '../../../../../stories/lib/sampleAllArticles';
 export default {
   title: 'Drawer/InfoBar/InfoBarEditorPresenter',

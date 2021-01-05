@@ -1,5 +1,5 @@
-import React from 'react'
-import { TagsContext } from '../../../../../Store/tags/Context';
+import React from 'react';
+import { TagsContext } from '../../../../../store/tags/Context';
 export const useIsValidTagName = (tagNameField: string) => {
   const { tags } = React.useContext(TagsContext);
 
@@ -19,4 +19,4 @@ export const useIsValidTagName = (tagNameField: string) => {
 
     return true;
   };
-}
+};

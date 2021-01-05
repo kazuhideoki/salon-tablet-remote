@@ -6,7 +6,7 @@ import {
   T_selected_article_id,
   T_user_id,
   T_scrolling_animation_duration,
-} from '../../../app/Store/Interface';
+} from '../../../app/store/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 

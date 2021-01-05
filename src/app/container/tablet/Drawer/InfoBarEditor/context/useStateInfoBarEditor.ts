@@ -1,10 +1,10 @@
-import React from 'react'
-import { ArticlesContext } from '../../../../../Store/articles/Context';
-import { InfoBarContext } from '../../../../../Store/infoBar/Context';
+import React from 'react';
+import { ArticlesContext } from '../../../../../store/articles/Context';
+import { InfoBarContext } from '../../../../../store/infoBar/Context';
 
 export const useStateInfoBarEditor = () => {
-  const { allArticles } = React.useContext(ArticlesContext)
-  const { infoBarData } = React.useContext(InfoBarContext)
+  const { allArticles } = React.useContext(ArticlesContext);
+  const { infoBarData } = React.useContext(InfoBarContext);
   const {
     info_bar_type,
     scrolling_sentence,
@@ -29,4 +29,4 @@ export const useStateInfoBarEditor = () => {
     charCount,
     setCharCount,
   };
-}
+};

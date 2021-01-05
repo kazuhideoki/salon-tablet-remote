@@ -16,8 +16,8 @@ import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
 import { SelectedTags } from './SelectedTags';
-import { TArticles } from '../../../../Store/Interface';
-import { ThemeContext } from '../../../../Store/theme/ThemeProvider';
+import { TArticles } from '../../../../store/Interface';
+import { ThemeContext } from '../../../../store/theme/ThemeProvider';
 
 const useStyles = makeStyles((theme) => {
   const themes = React.useContext(ThemeContext);

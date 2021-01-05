@@ -1,7 +1,7 @@
 import React from 'react';
-import { generateDefaultParamsFromTheme } from '../../../../../Store/theme/lib/paramsFromTheme';
-import { TThemeParams } from '../../../../../Store/theme/ThemeProvider';
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
+import { generateDefaultParamsFromTheme } from '../../../../../store/theme/lib/paramsFromTheme';
+import { TThemeParams } from '../../../../../store/theme/ThemeProvider';
+import { UserInfoContext } from '../../../../../store/userInfo/Context';
 import Lodash from 'lodash';
 
 export const useHandleAccordion = () => {

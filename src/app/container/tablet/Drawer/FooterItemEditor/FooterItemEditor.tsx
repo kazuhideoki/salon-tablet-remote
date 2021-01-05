@@ -31,7 +31,7 @@ import { TFooterItemEdittingParams } from '../../../../hooks/footerItems/useCrea
 import {
   T_data_type_article,
   T_data_type_footer_item,
-} from '../../../../Store/Interface';
+} from '../../../../store/Interface';
 import { TDataTypeAndSet } from '../QuillEditor/components/SwitchDataTypeBox';
 
 const useFooterItemEditorProps = () => {

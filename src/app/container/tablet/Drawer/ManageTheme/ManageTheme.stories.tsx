@@ -7,7 +7,7 @@ import {
   TUseManageThemeProps,
   TColor,
 } from './ManageTheme';
-import { TFont1, TFont2 } from '../../../../Store/theme/lib/fonts';
+import { TFont1, TFont2 } from '../../../../store/theme/lib/fonts';
 import { googleFontsUrl } from '../../../../../util/googleFontsUrl';
 import { generateSecondaryColor } from '../../../../../util/secondaryColor';
 export default {

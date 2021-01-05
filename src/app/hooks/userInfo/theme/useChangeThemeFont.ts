@@ -4,13 +4,13 @@ import {
   T_user_info_theme_font,
   TWhichFont,
 } from '../../../../pages/api/user_info/theme/font';
-import { TFont1, TFont2 } from '../../../Store/theme/lib/fonts';
-import { UserInfoContext } from '../../../Store/userInfo/Context';
+import { TFont1, TFont2 } from '../../../store/theme/lib/fonts';
+import { UserInfoContext } from '../../../store/userInfo/Context';
 import {
   setThemeFont1,
   setThemeFont2,
   setThemeFontHeading,
-} from '../../../Store/userInfo/actions';
+} from '../../../store/userInfo/actions';
 
 export const useChangeThemeFont = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);

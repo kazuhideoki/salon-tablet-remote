@@ -1,6 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_footer_item_id, T_order } from '../../../app/Store/Interface';
+import { T_footer_item_id, T_order } from '../../../app/store/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 

@@ -1,6 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_footer_item_id } from '../../../app/Store/Interface';
+import { T_footer_item_id } from '../../../app/store/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { T_footer_items_params } from './create';

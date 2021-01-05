@@ -1,4 +1,4 @@
-import { TInfoBarData, TUserInfo } from '../../app/Store/Interface';
+import { TInfoBarData, TUserInfo } from '../../app/store/Interface';
 import { T_articles_get, apiArticlesGet } from '../../pages/api/articles/get';
 import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';

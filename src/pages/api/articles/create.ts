@@ -8,7 +8,7 @@ import {
   T_article_img,
   T_user_id,
   T_data_type_article,
-} from '../../../app/Store/Interface';
+} from '../../../app/store/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';

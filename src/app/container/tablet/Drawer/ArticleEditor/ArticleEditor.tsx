@@ -24,7 +24,7 @@ import pure from 'recompose/pure';
 
 import { useHandleSubmit } from './context/useHandleSubmit';
 import { useStateArticleEditor } from './context/useStateArticleEditor';
-import { T_data_type_article } from '../../../../Store/Interface';
+import { T_data_type_article } from '../../../../store/Interface';
 
 const useArticleEditorProps = () => {
   const {

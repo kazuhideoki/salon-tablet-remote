@@ -9,7 +9,7 @@ import {
   TAllArticles,
   TInfoBarData,
   TUaDeviceType,
-} from '../app/Store/Interface';
+} from '../app/store/Interface';
 import { App } from '../app/container/App';
 import { GetServerSideProps } from 'next';
 import { TopPage } from '../app/components/pages/TopPage';

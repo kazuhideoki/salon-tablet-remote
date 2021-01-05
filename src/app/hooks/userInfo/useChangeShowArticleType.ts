@@ -1,11 +1,11 @@
 import React from 'react';
-import { T_show_article_type } from '../../Store/Interface';
+import { T_show_article_type } from '../../store/Interface';
 import {
   apiUserInfoChangeShowArticleType,
   T_user_info_change_show_article_type,
 } from '../../../pages/api/user_info/change_show_article_type';
-import { UserInfoContext } from '../../Store/userInfo/Context';
-import { setShowArticleType } from '../../Store/userInfo/actions';
+import { UserInfoContext } from '../../store/userInfo/Context';
+import { setShowArticleType } from '../../store/userInfo/actions';
 
 export const useChangeShowArticleType = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);

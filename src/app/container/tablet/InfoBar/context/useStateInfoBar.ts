@@ -1,12 +1,12 @@
-import React from "react";
-import { AppStateContext } from "../../../../Store/appState/Context";
-import { InfoBarContext } from "../../../../Store/infoBar/Context";
-import { UserInfoContext } from "../../../../Store/userInfo/Context";
+import React from 'react';
+import { AppStateContext } from '../../../../store/appState/Context';
+import { InfoBarContext } from '../../../../store/infoBar/Context';
+import { UserInfoContext } from '../../../../store/userInfo/Context';
 
 export const useStateInfoBar = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
   const { isSetting } = appState;
-  const { infoBarData } = React.useContext(InfoBarContext)
+  const { infoBarData } = React.useContext(InfoBarContext);
   const { infoBar, targetArticle } = infoBarData;
   const { userInfo } = React.useContext(UserInfoContext);
   const { shop_name } = userInfo;
@@ -18,4 +18,4 @@ export const useStateInfoBar = () => {
     targetArticle,
     shop_name,
   };
-}
+};

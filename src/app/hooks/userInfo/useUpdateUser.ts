@@ -5,10 +5,10 @@ import {
 } from '../../../pages/api/user_info/update';
 import { updatePasswordInFirebase } from '../../../util/auth/updatePassword';
 import { useAuth } from '../../../util/auth/AuthProvider';
-import { UserInfoContext } from '../../Store/userInfo/Context';
-import { update } from '../../Store/userInfo/actions';
-import { AppStateContext } from '../../Store/appState/Context';
-import { closeModal } from '../../Store/appState/actions';
+import { UserInfoContext } from '../../store/userInfo/Context';
+import { update } from '../../store/userInfo/actions';
+import { AppStateContext } from '../../store/appState/Context';
+import { closeModal } from '../../store/appState/actions';
 
 export type TUpdateUser = {
   name: string;

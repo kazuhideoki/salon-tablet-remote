@@ -7,7 +7,7 @@ import {
   FooterItems,
   FooterItem,
   FooterItemWithoutId,
-} from '../../Store/Interface';
+} from '../../store/Interface';
 import { useGetFooterItems } from './useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
@@ -15,10 +15,10 @@ import {
   T_footer_items_create,
   apiFooterItemsCreate,
 } from '../../../pages/api/footer_items/create';
-import { FooterItemsContext } from '../../Store/footerItems/Context';
-import { UserInfoContext } from '../../Store/userInfo/Context';
-import { closeModal, isLoadingFooter } from '../../Store/appState/actions';
-import { AppStateContext } from '../../Store/appState/Context';
+import { FooterItemsContext } from '../../store/footerItems/Context';
+import { UserInfoContext } from '../../store/userInfo/Context';
+import { closeModal, isLoadingFooter } from '../../store/appState/actions';
+import { AppStateContext } from '../../store/appState/Context';
 
 export type TFooterItemEdittingParams = {
   titleText: string;

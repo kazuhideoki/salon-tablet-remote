@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { HelpButton } from '../../../../../components/HelpButton';
 import { TUseFooterItemEditorProps } from '../FooterItemEditor';
-import { AppStateContext } from '../../../../../Store/appState/Context';
+import { AppStateContext } from '../../../../../store/appState/Context';
 
 type Props = TUseFooterItemEditorProps & { className?: string };
 

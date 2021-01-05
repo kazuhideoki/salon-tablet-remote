@@ -1,11 +1,11 @@
 import { Fade, Slide } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
-import React from 'react'
-import { T_selected_theme } from '../../../../../Store/Interface';
+import React from 'react';
+import { T_selected_theme } from '../../../../../store/Interface';
 
 export const switchingTransition = (selected_theme: T_selected_theme) => {
   switch (selected_theme) {
-    case "white":
+    case 'white':
       return React.forwardRef<unknown, TransitionProps>(function Transition(
         props,
         ref

@@ -1,11 +1,11 @@
 import React from 'react';
-import { T_footer_icon_size } from '../../Store/Interface';
+import { T_footer_icon_size } from '../../store/Interface';
 import {
   apiUserInfoChangeFooterIconSize,
   T_user_info_change_footer_icon_size,
 } from '../../../pages/api/user_info/change_footer_icon_size';
-import { UserInfoContext } from '../../Store/userInfo/Context';
-import { setFooterIconSize } from '../../Store/userInfo/actions';
+import { UserInfoContext } from '../../store/userInfo/Context';
+import { setFooterIconSize } from '../../store/userInfo/actions';
 
 export const useChangeFooterIconSize = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);

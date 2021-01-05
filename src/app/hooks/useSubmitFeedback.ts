@@ -1,7 +1,7 @@
 import React from 'react';
-import { closeModal } from '../Store/appState/actions';
-import { AppStateContext } from '../Store/appState/Context';
-import { UserInfoContext } from '../Store/userInfo/Context';
+import { closeModal } from '../store/appState/actions';
+import { AppStateContext } from '../store/appState/Context';
+import { UserInfoContext } from '../store/userInfo/Context';
 import {
   // apiSubmitFeedback,
   T_submit_feedback,

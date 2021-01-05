@@ -1,7 +1,7 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { checkOrders } from '../../../util/db/checkOrders';
-import { FooterItems, T_user_id } from '../../../app/Store/Interface';
+import { FooterItems, T_user_id } from '../../../app/store/Interface';
 import { correctOrders } from '../../../util/db/correctOrders';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { checkOrdersSidebar } from '../../../util/db/checkOrders';

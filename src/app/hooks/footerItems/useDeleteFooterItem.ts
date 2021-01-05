@@ -3,10 +3,10 @@ import {
   apiFooterItemsDelete,
   T_footer_items_delete,
 } from '../../../pages/api/footer_items/delete';
-import { FooterItemsContext } from '../../Store/footerItems/Context';
-import { set } from '../../Store/footerItems/actions';
-import { AppStateContext } from '../../Store/appState/Context';
-import { isLoadingFooter } from '../../Store/appState/actions';
+import { FooterItemsContext } from '../../store/footerItems/Context';
+import { set } from '../../store/footerItems/actions';
+import { AppStateContext } from '../../store/appState/Context';
+import { isLoadingFooter } from '../../store/appState/actions';
 
 export const useDeleteFooterItem = () => {
   const { footerItems, dispatchFooterItems } = React.useContext(
