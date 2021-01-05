@@ -1,6 +1,7 @@
-import { whiteUnChanged } from '../app/Store/theme/lib/paramsFromTheme';
-import { TThemeParams } from '../app/Store/theme/ThemeProvider';
-import { isThemeParamsChanged } from '../app/container/tablet/Drawer/ManageTheme/context/useHandleAccordion';
+import { test, expect } from '@jest/globals';
+import { whiteUnChanged } from '../../../../../Store/theme/lib/paramsFromTheme';
+import { TThemeParams } from '../../../../../Store/theme/ThemeProvider';
+import { isThemeParamsChanged } from './useHandleAccordion';
 
 test('isThemeParamsChanged 変更されている', () => {
   const ChangedWhiteThemeParams: TThemeParams = {
