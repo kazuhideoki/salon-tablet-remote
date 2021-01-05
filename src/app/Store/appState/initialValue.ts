@@ -2,15 +2,15 @@ import {
   FooterItem,
   Article,
   InstagramMedia,
-  TSetModal,
-  TUaDeviceType,
+  SetModal,
+  UaDeviceType,
   ModalSize,
   Ontap,
 } from '../../../util/interface/Interface';
 
 export type TInitAppState = {
   isPublicPage: boolean;
-  device: TUaDeviceType;
+  device: UaDeviceType;
 };
 
 export const initAppState = (data: TInitAppState) => ({
@@ -18,7 +18,7 @@ export const initAppState = (data: TInitAppState) => ({
   uaDevice: data.device,
   isSetting: !data.isPublicPage,
   isDrawerOpen: !data.isPublicPage,
-  setModal: 'edit_article' as TSetModal,
+  setModal: 'edit_article' as SetModal,
   isModalOpen: false,
   isShowInstagram: false,
   // modal表示するコンテン情報を格納

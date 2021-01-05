@@ -8,7 +8,7 @@ import { T_auth_get_session_return } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../store/userInfo/Context';
 import { StoreContextProvider } from '../store/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
-import { TUaDeviceType } from '../../util/interface/Interface';
+import { UaDeviceType } from '../../util/interface/Interface';
 
 type TAppViewProps = {
   session: T_auth_get_session_return;
@@ -45,7 +45,7 @@ const AppView = ({ session }: TAppViewProps) => {
 type TApp = {
   data: TIndexPropsData;
   isPublicPage: boolean;
-  device: TUaDeviceType;
+  device: UaDeviceType;
   session: T_auth_get_session_return;
 };
 

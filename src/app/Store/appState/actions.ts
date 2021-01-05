@@ -4,12 +4,12 @@ import {
   FooterItems,
   Article,
   InstagramMedia,
-  TSetModal,
+  SetModal,
 } from '../../../util/interface/Interface';
 import { TFooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
 import { T_articles_get_return } from '../../../pages/api/articles/get';
 
-export const setModal = (value: TSetModal) => ({
+export const setModal = (value: SetModal) => ({
   type: types.OPEN_MODAL,
   payload: value,
 });

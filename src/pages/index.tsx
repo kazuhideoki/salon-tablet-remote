@@ -8,7 +8,7 @@ import {
   InstagramAccounts,
   TAllArticles,
   InfoBarData,
-  TUaDeviceType,
+  UaDeviceType,
 } from '../util/interface/Interface';
 import { App } from '../app/container/App';
 import { GetServerSideProps } from 'next';
@@ -36,7 +36,7 @@ export type TIndexPropsData = {
 export type TIndexProps = {
   data: TIndexPropsData | null;
   isPublicPage: boolean;
-  device: TUaDeviceType;
+  device: UaDeviceType;
   session: T_auth_get_session_return | null;
 };
 
