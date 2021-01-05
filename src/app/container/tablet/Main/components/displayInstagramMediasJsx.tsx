@@ -16,12 +16,12 @@ export const displayInstagramMediasJsx = (
   classes: MainClasses,
   StyledCardContent: any
 ) =>
-  props.instagramMediaObject.data.map((value, key) => {
+  props.instagramMediaObject.data.map((value, index) => {
     return (
-      <Grid item key={key} className={classes.gridItem}>
+      <Grid item key={index} className={classes.gridItem}>
         <CardActionArea
           className={classes.cardActionArea}
-          onClick={() => props.openInstagramModal(key)}>
+          onClick={() => props.openInstagramModal(index)}>
           <Card className={classes.card}>
             <StyledCardContent className={classes.cardContent}>
               <div className={classes.thumbnailDiv}>

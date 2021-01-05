@@ -33,7 +33,7 @@ export const correctOrders = async (data: FooterItems) => {
 };
 
 export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
-  const onSidebar = data.filter((value, index) => {
+  const onSidebar = data.filter((value) => {
     // return value.on_sidebar === true
     return value.order_sidebar !== 0;
   });

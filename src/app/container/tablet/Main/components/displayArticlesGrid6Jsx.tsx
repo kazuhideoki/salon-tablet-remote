@@ -76,11 +76,11 @@ export const displayArticlesGrid6Jsx = (
   const classesGrid6 = useStyles();
 
   const row = (articles: Articles, row2: boolean) =>
-    articles.map((value, key: number) => {
+    articles.map((value, index) => {
       return (
         <Grid
           item
-          key={key}
+          key={index}
           // 投稿済みか下書きかで見た目を変える
           className={`${classesGrid6.gridItem}
             ${!value.is_published ? classes.itemIsDraft : ''}
@@ -96,7 +96,7 @@ export const displayArticlesGrid6Jsx = (
           ) : null}
           <CardActionArea
             className={classesGrid6.cardActionArea}
-            onClick={() => props.openArticleModal(row2 ? key + 3 : key)}
+            onClick={() => props.openArticleModal(row2 ? index + 3 : index)}
             component="div">
             <Card className={classes.card}>
               <StyledCardContent

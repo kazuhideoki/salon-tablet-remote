@@ -99,7 +99,7 @@ export const ManageTagsPresenter: React.FC<ManageTagsPresenterProps> = (
 ) => {
   const classes = useStyles();
 
-  const displayTags = props.tags.map((value, key) => {
+  const displayTags = props.tags.map((value, index) => {
     if (props.loading) {
       return (
         <Skeleton
@@ -111,7 +111,7 @@ export const ManageTagsPresenter: React.FC<ManageTagsPresenterProps> = (
 
     return (
       <Chip
-        key={key}
+        key={index}
         className={classes.tag}
         label={value.tag_name}
         color={value.tag_id === props.edittingTagId ? 'primary' : undefined}

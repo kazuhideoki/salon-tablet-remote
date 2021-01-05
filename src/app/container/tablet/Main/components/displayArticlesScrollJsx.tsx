@@ -18,11 +18,11 @@ export const displayArticlesScrollJsx = (
   classes: MainClasses,
   StyledCardContent: any
 ) =>
-  props.articles.map((value, key: number) => {
+  props.articles.map((value, index) => {
     return (
       <Grid
         item
-        key={key}
+        key={index}
         // 投稿済みか下書きかで見た目を変える
         className={`${classes.gridItem}
             ${!value.is_published ? classes.itemIsDraft : ''}
@@ -40,7 +40,7 @@ export const displayArticlesScrollJsx = (
         ) : null}
         <CardActionArea
           className={classes.cardActionArea}
-          onClick={() => props.openArticleModal(key)}
+          onClick={() => props.openArticleModal(index)}
           component="div">
           <Card className={classes.card}>
             <StyledCardContent className={classes.cardContent}>

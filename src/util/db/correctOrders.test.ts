@@ -23,7 +23,6 @@ const footerItems = [
 
 test('generateCorrectOrdersParamsの返り値が正しい', () => {
   const {
-    updateParamInCase,
     idParam,
     correctedData,
     //@ts-ignore

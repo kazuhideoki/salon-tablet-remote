@@ -6,7 +6,6 @@ import {
   createStyles,
   Theme,
   CircularProgress,
-  List,
   Typography,
   CardActionArea,
   Chip,
@@ -108,15 +107,12 @@ export const MainMobilePresenter: React.FC<Props> = (props) => {
 
   return (
     <div className={`${classes.root} ${props.className}`}>
-      {/* ↓スクロール可のためにrootと分けてある */}
-      {/* <List className={classes.items}> */}
-
-      {props.articles.map((value, key) => {
+      {props.articles.map((value, index) => {
         return (
-          <div key={key} className={classes.items}>
+          <div key={index} className={classes.items}>
             <CardActionArea
               className={classes.item}
-              onClick={() => props.openArticleModal(key)}
+              onClick={() => props.openArticleModal(index)}
               component="div">
               <div className={classes.thumbnailDiv}>
                 {value.article_img.length ? (
