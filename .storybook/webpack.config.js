@@ -5,7 +5,7 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    worker_threads: 'empty',
-    'fast-crc32c': 'empty',
+    // worker_threads: 'empty',
+    // 'fast-crc32c': 'empty',
   },
 };
