@@ -1,11 +1,7 @@
 import { db } from './db';
 import { tagIdsFromString } from './tagIdsFromString';
-import { T_tag_id } from '../interface/Interface';
 
-export const deleteTagIdInArticle = async (
-  tag_id: T_tag_id,
-  user_id: number
-) => {
+export const deleteTagIdInArticle = async (tag_id: number, user_id: number) => {
   try {
     // ★まずarticleのtag_idsの該当タグを消す
     const data0 = (await db(

@@ -1,9 +1,9 @@
 import * as types from './types';
-import { TTags } from '../../../util/interface/Interface';
+import { Tags } from '../../../util/interface/Interface';
 
-export const set = (tags: TTags) => ({
+export const set = (tags: Tags) => ({
   type: types.SET,
   payload: tags,
 });
 
-export type TTagsAction = ReturnType<typeof set>;
+export type TagsAction = ReturnType<typeof set>;

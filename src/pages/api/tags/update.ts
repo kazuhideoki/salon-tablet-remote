@@ -1,6 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_tag_id, T_tag_name } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -12,8 +11,8 @@ export const apiTagsUpdata = async (
 };
 
 export type T_tags_update = {
-  tag_id: T_tag_id;
-  tag_name: T_tag_name;
+  tag_id: number;
+  tag_name: string;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {

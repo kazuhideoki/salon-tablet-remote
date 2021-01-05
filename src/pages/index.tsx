@@ -4,7 +4,7 @@ import {
   Articles,
   PaginationParams,
   FooterItems,
-  TTags,
+  Tags,
   TInstagramAccounts,
   TAllArticles,
   InfoBarData,
@@ -28,7 +28,7 @@ export type TIndexPropsData = {
   allArticles: TAllArticles;
   footerItems: FooterItems;
   infoBarData: InfoBarData;
-  tags: TTags;
+  tags: Tags;
   instagramAccounts: TInstagramAccounts;
   userInfo: UserInfo;
 };

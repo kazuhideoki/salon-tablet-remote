@@ -1,6 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_tag_name } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -13,7 +12,7 @@ export const apiTagsCreate = async (
 
 export type T_tags_create = {
   user_id: number;
-  tag_name: T_tag_name;
+  tag_name: string;
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {

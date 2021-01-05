@@ -113,20 +113,17 @@ export type InfoBarData = {
 
 // ●●●●●● テーブル `tags`
 
-export type T_tag_id = number;
-export type T_tag_name = string;
-export type T_created_at_tag = string;
-export type T_updated_at_tag = string | null;
-
-export type TTag = {
-  tag_id: T_tag_id;
+export type Tag = {
+  tag_id: number;
   user_id: number;
-  tag_name: T_tag_name;
-  created_at: T_created_at_tag;
-  updated_at: T_updated_at_tag;
+  tag_name: string;
+  created_at: string;
+  updated_at: string | null;
 };
 
-export type TTags = TTag[];
+export type Tags = Tag[];
+
+// ●●●●●● テーブル `instagram_accounts`
 
 export type T_instagram_id = number;
 export type T_instagram_username = string;
