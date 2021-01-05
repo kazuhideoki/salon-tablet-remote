@@ -1,11 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  T_info_bar_type,
-  T_scrolling_sentence,
-  T_selected_article_id,
-  T_scrolling_animation_duration,
-} from '../../../util/interface/Interface';
+import { InfoBarType } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -18,10 +13,10 @@ export const apiInfoBarUpdate = async (
 
 export type T_info_bar_update = {
   user_id: number;
-  info_bar_type: T_info_bar_type;
-  scrolling_sentence: T_scrolling_sentence;
-  scrolling_animation_duration: T_scrolling_animation_duration;
-  selected_article_id: T_selected_article_id;
+  info_bar_type: InfoBarType;
+  scrolling_sentence: string;
+  scrolling_animation_duration: number;
+  selected_article_id: number;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {

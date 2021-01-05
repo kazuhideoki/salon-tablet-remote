@@ -1,4 +1,4 @@
-import { TInfoBarData, UserInfo } from '../interface/Interface';
+import { InfoBarData, UserInfo } from '../interface/Interface';
 import { T_articles_get, apiArticlesGet } from '../../pages/api/articles/get';
 import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';
@@ -34,7 +34,7 @@ export const generateProps = async (
       pagination: data.err ? ([] as any) : data.rawData.pagination,
       allArticles: data.err ? [] : data.rawData.allArticles,
       footerItems: data2.err ? [] : data2.rawData,
-      infoBarData: data3.err ? ({} as TInfoBarData) : data3.rawData,
+      infoBarData: data3.err ? ({} as InfoBarData) : data3.rawData,
       tags: data4.err ? [] : data4.rawData,
       instagramAccounts: data5.err ? [] : data5.rawData,
       // JSONのエラーになったので、このような書き方↓

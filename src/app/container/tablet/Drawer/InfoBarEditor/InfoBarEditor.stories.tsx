@@ -3,7 +3,7 @@ import {
   InfoBarEditorPresenter,
   TUseInfoBarEditorProps,
 } from './InfoBarEditor';
-import { T_info_bar_type } from '../../../../../util/interface/Interface';
+import { InfoBarType } from '../../../../../util/interface/Interface';
 import { sampleAllArticles } from '../../../../../util/dev/sampleAllArticles';
 export default {
   title: 'Drawer/InfoBar/InfoBarEditorPresenter',
@@ -14,7 +14,7 @@ export const Normal = () => {
   const [editorText, setEditorText] = React.useState('');
   const [charCount, setCharCount] = React.useState(0);
   const [infoBarType, setInfoBarType] = React.useState(
-    'shop_name' as T_info_bar_type
+    'shop_name' as InfoBarType
   );
   const [articleInfoBar, setArticleInfoBar] = React.useState(2);
 

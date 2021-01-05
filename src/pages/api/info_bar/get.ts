@@ -1,9 +1,9 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  TInfoBar,
-  TInfoBarData,
-  TInfoBarWithoutId,
+  InfoBar,
+  InfoBarData,
+  InfoBarWithoutId,
 } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
@@ -11,12 +11,12 @@ import { apiWrapGet } from '../../../util/db/apiWrap';
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
   user_id: number
-): Promise<TApiResponse<TInfoBarData>> => {
+): Promise<TApiResponse<InfoBarData>> => {
   return apiWrapGet(`info_bar/get?userId=${user_id}`);
 };
 
 const createInitInfoBar = async (user_id: number) => {
-  const params: TInfoBarWithoutId = {
+  const params: InfoBarWithoutId = {
     user_id: user_id,
     info_bar_type: 'shop_name',
     scrolling_sentence: '',
@@ -30,7 +30,7 @@ const createInitInfoBar = async (user_id: number) => {
     // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
     'SELECT * FROM info_bar WHERE user_id = ?',
     user_id
-  )) as TInfoBar[];
+  )) as InfoBar[];
 
   return data;
 };
@@ -40,7 +40,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     //@ts-ignore
-    let data: TInfoBar[] = await db(
+    let data: InfoBar[] = await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
       'SELECT * FROM info_bar WHERE user_id = ?',
       userId
@@ -62,12 +62,12 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       );
     }
 
-    const rawData: TInfoBarData = {
-      infoBar: data[0] as TInfoBar,
+    const rawData: InfoBarData = {
+      infoBar: data[0] as InfoBar,
       targetArticle: data2.length ? data2[0] : [],
     };
 
-    res.status(200).json({ err: false, rawData } as TApiResponse<TInfoBarData>);
+    res.status(200).json({ err: false, rawData } as TApiResponse<InfoBarData>);
   } catch (err) {
     console.log('/info_bar/get/のエラーは ' + JSON.stringify(err));
     return res.status(500).json({ err: true, rawData: err } as TApiResponse);

@@ -4,11 +4,11 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { T_info_bar_type } from '../../../../../../util/interface/Interface';
+import { InfoBarType } from '../../../../../../util/interface/Interface';
 
 type Props = {
-  infoBarType: T_info_bar_type;
-  setInfoBarType: React.Dispatch<React.SetStateAction<T_info_bar_type>>;
+  infoBarType: InfoBarType;
+  setInfoBarType: React.Dispatch<React.SetStateAction<InfoBarType>>;
   className?: string;
 };
 
@@ -18,7 +18,7 @@ export const SwitchOnTapInfoBar: React.FC<Props> = ({
   className,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInfoBarType(event.target.value as T_info_bar_type);
+    setInfoBarType(event.target.value as InfoBarType);
   };
 
   return (

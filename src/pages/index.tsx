@@ -7,7 +7,7 @@ import {
   TTags,
   TInstagramAccounts,
   TAllArticles,
-  TInfoBarData,
+  InfoBarData,
   TUaDeviceType,
 } from '../util/interface/Interface';
 import { App } from '../app/container/App';
@@ -27,7 +27,7 @@ export type TIndexPropsData = {
   pagination: PaginationParams;
   allArticles: TAllArticles;
   footerItems: FooterItems;
-  infoBarData: TInfoBarData;
+  infoBarData: InfoBarData;
   tags: TTags;
   instagramAccounts: TInstagramAccounts;
   userInfo: UserInfo;

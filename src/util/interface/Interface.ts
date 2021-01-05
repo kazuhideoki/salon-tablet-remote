@@ -94,23 +94,20 @@ export type FooterItems = FooterItem[];
 
 // ●●●●●● テーブル `info_bar`
 
-export type T_info_bar_id = number;
-export type T_info_bar_type = 'shop_name' | 'scrolling_sentence' | 'article';
-export type T_scrolling_sentence = string;
-export type T_scrolling_animation_duration = number;
+export type InfoBarType = 'shop_name' | 'scrolling_sentence' | 'article';
 export type T_selected_article_id = number;
 
-export type TInfoBarWithoutId = {
+export type InfoBarWithoutId = {
   user_id: number;
-  info_bar_type: T_info_bar_type;
-  scrolling_sentence: T_scrolling_sentence;
-  scrolling_animation_duration: T_scrolling_animation_duration;
+  info_bar_type: InfoBarType;
+  scrolling_sentence: string;
+  scrolling_animation_duration: number;
   selected_article_id: T_selected_article_id | null;
 };
 
-export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id };
-export type TInfoBarData = {
-  infoBar: TInfoBar;
+export type InfoBar = InfoBarWithoutId & { info_bar_id: number };
+export type InfoBarData = {
+  infoBar: InfoBar;
   targetArticle: Article;
 };
 

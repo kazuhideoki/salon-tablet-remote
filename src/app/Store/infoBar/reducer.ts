@@ -1,13 +1,13 @@
 import { reducerLogger } from '../../../util/dev/reducerLogger';
-import { TInfoBar, TInfoBarData } from '../../../util/interface/Interface';
-import { TInfoBarAction } from './actions';
+import { InfoBar, InfoBarData } from '../../../util/interface/Interface';
+import { InfoBarAction } from './actions';
 import * as types from './types';
 
-export type InfoBarContextState = TInfoBarData;
+export type InfoBarContextState = InfoBarData;
 
 export const infoBarReducer = (
   state: InfoBarContextState,
-  action: TInfoBarAction
+  action: InfoBarAction
 ) => {
   let newState: InfoBarContextState;
   const func = infoBarReducer;
