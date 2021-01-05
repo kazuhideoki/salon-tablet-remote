@@ -1,11 +1,8 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-const QuillEditor = dynamic(
-  () => import('../QuillEditor/view/QuillEditor'),
-  {
-    ssr: false,
-  }
-);
+const QuillEditor = dynamic(() => import('../QuillEditor/QuillEditor'), {
+  ssr: false,
+});
 import {
   Button,
   TextField,

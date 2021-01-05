@@ -1,5 +1,5 @@
 import React from 'react';
-import { SettingUserInfoPresenter } from '../app/container/tablet/Drawer/ManageUserInfo/view/ManageUserInfo';
+import { SettingUserInfoPresenter } from '../app/container/tablet/Drawer/ManageUserInfo/ManageUserInfo';
 export default {
   title: 'Drawer/Account/SettingUserInfo',
   component: SettingUserInfoPresenter,

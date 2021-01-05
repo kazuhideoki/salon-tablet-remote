@@ -20,19 +20,19 @@ const FooterItemModal = dynamic(
   }
 );
 import ArticleEditor from '../../../Drawer/ArticleEditor/ArticleEditor';
-import FooterItemEditor from '../../../Drawer/FooterItemEditor/view/FooterItemEditor';
-import { FeedbackForm } from '../../../Drawer/FeedbackForm/view/FeedbackForm';
-import { ManageTheme } from '../../../Drawer/ManageTheme/view/ManageTheme';
+import FooterItemEditor from '../../../Drawer/FooterItemEditor/FooterItemEditor';
+import { FeedbackForm } from '../../../Drawer/FeedbackForm/FeedbackForm';
+import { ManageTheme } from '../../../Drawer/ManageTheme/ManageTheme';
 import { SelectTags } from '../../Modals/SelectTags/view/SelectTags';
-import { ManageTags } from '../../../Drawer/ManageTags/view/ManageTags';
-import { SettingUserInfo } from '../../../Drawer/ManageUserInfo/view/ManageUserInfo';
+import { ManageTags } from '../../../Drawer/ManageTags/ManageTags';
+import { SettingUserInfo } from '../../../Drawer/ManageUserInfo/ManageUserInfo';
 import { DeleteAccountForm } from '../../../Drawer/DeleteAccountForm/DeleteAccountForm';
 import { useModalSize, medium } from '../context/useModalSize';
 import { StyledDialog } from '../components/StyledDialog';
-import { ManageInstagramAccounts } from '../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
+import { ManageInstagramAccounts } from '../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
 import { SelectInstagramAccounts } from '../../Modals/SelectInstagramAccounts/view/SelectInstagramAccounts';
 import { InstagramMediaModal } from '../../Modals/InstagramMediaModal.ts/view/InstagramMediaModal';
-import InfoBarEditor from '../../../Drawer/InfoBarEditor/view/InfoBarEditor';
+import InfoBarEditor from '../../../Drawer/InfoBarEditor/InfoBarEditor';
 import { GoogleSearch } from '../../Modals/GoogleSearch/view/GoogleSearch';
 import { PageNotEmailVerified } from '../../../../../components/pages/PageNotEmailVerified';
 import { switchingTransition } from '../context/switchingTransition';

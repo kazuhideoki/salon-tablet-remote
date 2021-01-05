@@ -2,7 +2,7 @@ import React from 'react';
 // import { QuillEditor } from "../app/Setting/QuillEditor";
 import dynamic from 'next/dynamic';
 const QuillEditor = dynamic(
-  () => import('../app/container/tablet/Drawer/QuillEditor/view/QuillEditor'),
+  () => import('../app/container/tablet/Drawer/QuillEditor/QuillEditor'),
   {
     ssr: false,
   }

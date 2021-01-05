@@ -1,6 +1,6 @@
 import { MoodBad } from '@material-ui/icons';
 import { TFooterItemEdittingParams } from '../../app/container/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem';
-import { TUseFooterItemEditorProps } from '../../app/container/tablet/Drawer/FooterItemEditor/view/FooterItemEditor';
+import { TUseFooterItemEditorProps } from '../../app/container/tablet/Drawer/FooterItemEditor/FooterItemEditor';
 
 export const edittingFooterItemParams: TFooterItemEdittingParams = {
   titleText: 'string',

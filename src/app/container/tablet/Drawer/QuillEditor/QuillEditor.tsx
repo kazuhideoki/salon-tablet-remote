@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactQuill, { Quill } from 'react-quill';
-import { removeExceededImgs } from '../context/removeExceededImgs';
+import { removeExceededImgs } from './context/removeExceededImgs';
 
 // ※■■■ReactQuillのスタイルはquill.scssに記述■■■
 
@@ -37,8 +37,8 @@ Quill.register('modules/imageCompress', ImageCompress);
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import ImageResize from 'quill-image-resize';
-import { Resize } from '../context/quill/quillImageResizeModuleFixedForTouchEvent';
-import { Toolbar } from '../context/quill/toolbar';
+import { Resize } from './context/quill/quillImageResizeModuleFixedForTouchEvent';
+import { Toolbar } from './context/quill/toolbar';
 Quill.register('modules/imageResize', ImageResize);
 
 type Props = {

@@ -1,13 +1,10 @@
 import React from 'react';
-import { SelectIcon } from '../components/iconSelect/SelectIcon';
+import { SelectIcon } from './components/iconSelect/SelectIcon';
 import dynamic from 'next/dynamic';
-const QuillEditor = dynamic(
-  () => import('../../QuillEditor/view/QuillEditor'),
-  {
-    ssr: false,
-  }
-);
-import { SwitchOnTapModal } from '../components/SwitchOnTapModal';
+const QuillEditor = dynamic(() => import('../QuillEditor/QuillEditor'), {
+  ssr: false,
+});
+import { SwitchOnTapModal } from './components/SwitchOnTapModal';
 import {
   TextField,
   Button,
@@ -19,23 +16,23 @@ import {
   Switch,
   useTheme,
 } from '@material-ui/core';
-import { SelectAppLink } from '../components/SelectAppLink';
-import { CharCounter } from '../../../../../components/CharCounter';
-import { SelectModalSize } from '../components/SelectModalSize';
-import { HelpButton } from '../../../../../components/HelpButton';
+import { SelectAppLink } from './components/SelectAppLink';
+import { CharCounter } from '../../../../components/CharCounter';
+import { SelectModalSize } from './components/SelectModalSize';
+import { HelpButton } from '../../../../components/HelpButton';
 import { PublishTwoTone, SaveTwoTone } from '@material-ui/icons';
-import { SwitchDataTypeBox } from '../../QuillEditor/components/SwitchDataTypeBox';
-import { useIsMobile } from '../../../../../../util/useIsMobile';
-import { useHandleSubmit } from '../context/useHandleSubmit';
-import { useHandleChange } from '../context/useHandleChange';
-import { useHandleOnSidebar } from '../context/useHandleOnSidebar';
-import { useStateFooterItemEditor } from '../context/useStateFooterItemEditor';
-import { TFooterItemEdittingParams } from '../context/useCreateFooterItem';
+import { SwitchDataTypeBox } from '../QuillEditor/components/SwitchDataTypeBox';
+import { useIsMobile } from '../../../../../util/useIsMobile';
+import { useHandleSubmit } from './context/useHandleSubmit';
+import { useHandleChange } from './context/useHandleChange';
+import { useHandleOnSidebar } from './context/useHandleOnSidebar';
+import { useStateFooterItemEditor } from './context/useStateFooterItemEditor';
+import { TFooterItemEdittingParams } from './context/useCreateFooterItem';
 import {
   T_data_type_article,
   T_data_type_footer_item,
-} from '../../../../../Store/Interface';
-import { TDataTypeAndSet } from '../../../Drawer/QuillEditor/components/SwitchDataTypeBox';
+} from '../../../../Store/Interface';
+import { TDataTypeAndSet } from '../QuillEditor/components/SwitchDataTypeBox';
 
 const useFooterItemEditorProps = () => {
   const {

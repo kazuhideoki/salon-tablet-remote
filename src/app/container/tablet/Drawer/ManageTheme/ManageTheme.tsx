@@ -1,32 +1,32 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { HelpButton } from '../../../../../components/HelpButton';
+import { HelpButton } from '../../../../components/HelpButton';
 import { Divider, Typography } from '@material-ui/core';
-import { SelectTheme } from '../components/SelectTheme';
-import { SelectShowArticleType } from '../components/SelectShowArticleType';
-import { T_theme_color } from '../../../../../Store/Interface';
-import { SelectPrimaryColor } from '../components/SelectPrimaryColor';
-import { SelectFont } from '../components/SelectFont';
-import { fonts2, fonts1 } from '../../../../../Store/theme/lib/fonts';
+import { SelectTheme } from './components/SelectTheme';
+import { SelectShowArticleType } from './components/SelectShowArticleType';
+import { T_theme_color } from '../../../../Store/Interface';
+import { SelectPrimaryColor } from './components/SelectPrimaryColor';
+import { SelectFont } from './components/SelectFont';
+import { fonts2, fonts1 } from '../../../../Store/theme/lib/fonts';
 import { FiberManualRecord } from '@material-ui/icons';
-import { secondaryColor } from '../../../../../../util/secondaryColor';
-import { SelectFooterIconSize } from '../components/SelectFooterIconSize';
+import { secondaryColor } from '../../../../../util/secondaryColor';
+import { SelectFooterIconSize } from './components/SelectFooterIconSize';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useAuth } from '../../../../../../util/auth/AuthProvider';
-import { useHandleChange } from '../context/useHandleChange';
-import { useHandleChangeThemeColor } from '../context/useHandleChangeThemeColor';
+import { useAuth } from '../../../../../util/auth/AuthProvider';
+import { useHandleChange } from './context/useHandleChange';
+import { useHandleChangeThemeColor } from './context/useHandleChangeThemeColor';
 import {
   useHandleChangeThemeFont1,
   useHandleChangeThemeFont2,
   useHandleChangeThemeFontHeading,
-} from '../context/useHandleChangeThemeFont';
-import { useHandleChangeFooterIconSize } from '../context/useHandleChangeFooterIconSize';
-import { useHandleChangeShowArticleType } from '../context/useHandleChangeShowArticleType';
-import { useHandleAccordion } from '../context/useHandleAccordion';
-import { useStateMangeTheme } from '../context/useStateMangeTheme';
+} from './context/useHandleChangeThemeFont';
+import { useHandleChangeFooterIconSize } from './context/useHandleChangeFooterIconSize';
+import { useHandleChangeShowArticleType } from './context/useHandleChangeShowArticleType';
+import { useHandleAccordion } from './context/useHandleAccordion';
+import { useStateMangeTheme } from './context/useStateMangeTheme';
 import firebase from 'firebase/app';
 
 export type THsl = {

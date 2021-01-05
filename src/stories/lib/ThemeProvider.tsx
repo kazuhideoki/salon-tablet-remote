@@ -5,7 +5,7 @@ import {
   ThemeContext,
 } from '../../app/Store/theme/ThemeProvider';
 import { SelectTheme } from '../../app/container/tablet/Drawer/ManageTheme/components/SelectTheme';
-import { TUseManageThemeProps } from '../../app/container/tablet/Drawer/ManageTheme/view/ManageTheme';
+import { TUseManageThemeProps } from '../../app/container/tablet/Drawer/ManageTheme/ManageTheme';
 import {
   generateDefaultParamsFromTheme,
   switchingTheme,

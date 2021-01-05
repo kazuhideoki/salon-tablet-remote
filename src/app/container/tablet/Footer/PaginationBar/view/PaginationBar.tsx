@@ -20,7 +20,7 @@ import { useSelectedArticlesTagNames } from '../context/useSelectedArticlesTagNa
 import { Instagram } from '@material-ui/icons';
 import { PaginationInstagram } from '../components/PaginationInstagram';
 import { useHandleOnNumClick } from '../context/useHandleOnNumClick';
-import { useManageInstagramAccountsProps } from '../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
+import { useManageInstagramAccountsProps } from '../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
 import { useStatePaginationBar } from '../context/useStatePaginationBar';
 import { useDrawerProps } from '../../../Drawer/Drawer/Drawer';
 

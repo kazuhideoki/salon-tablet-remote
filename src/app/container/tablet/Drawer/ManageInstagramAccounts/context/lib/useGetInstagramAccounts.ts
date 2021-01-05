@@ -4,7 +4,7 @@ import { InstagramContext } from '../../../../../../Store/instagram/Context';
 import { setAccounts } from '../../../../../../Store/instagram/actions';
 import { UserInfoContext } from '../../../../../../Store/userInfo/Context';
 import { AppStateContext } from '../../../../../../Store/appState/Context';
-import { useManageInstagramAccountsProps } from '../../view/ManageInstagmaAccounts';
+import { useManageInstagramAccountsProps } from '../../ManageInstagmaAccounts';
 import { isLoadingInstagramAccounts } from '../../../../../../Store/appState/actions';
 
 export const useGetInstagramAccounts = () => {

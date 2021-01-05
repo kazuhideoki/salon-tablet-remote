@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { useIsMobile } from '../../../../../../../util/useIsMobile';
 import { HelpButton } from '../../../../../../components/HelpButton';
-import { useManageInstagramAccountsProps } from '../../../../Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
+import { useManageInstagramAccountsProps } from '../../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
 import { useStateSelectInstagramAccounts } from '../context/useStateSelectInstagramAccounts';
 
 export const useSelectInstagramAccountsProps = () => {

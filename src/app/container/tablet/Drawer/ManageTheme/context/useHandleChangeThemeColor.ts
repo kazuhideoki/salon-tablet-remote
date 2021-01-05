@@ -1,5 +1,5 @@
 import { useChangeThemeColor } from './lib/useChangeThemeColor';
-import { TColor } from '../view/ManageTheme';
+import { TColor } from '../ManageTheme';
 
 export const useHandleChangeThemeColor = () => {
   const changeThemeColor = useChangeThemeColor();

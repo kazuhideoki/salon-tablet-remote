@@ -3,7 +3,7 @@ import {
   apiUserInfoThemeColor,
   T_user_info_theme_color,
 } from '../../../../../../../pages/api/user_info/theme/color';
-import { TColor } from '../../view/ManageTheme';
+import { TColor } from '../../ManageTheme';
 import { UserInfoContext } from '../../../../../../Store/userInfo/Context';
 import { setThemeColor } from '../../../../../../Store/userInfo/actions';
 

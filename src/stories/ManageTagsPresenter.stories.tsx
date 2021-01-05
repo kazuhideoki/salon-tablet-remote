@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ManageTagsPresenter,
   TManageTagsPresenter,
-} from '../app/container/tablet/Drawer/ManageTags/view/ManageTags';
+} from '../app/container/tablet/Drawer/ManageTags/ManageTags';
 import { sampleTags } from './lib/sampleTags';
 import { ThemeProvider } from './lib/ThemeProvider';
 export default {

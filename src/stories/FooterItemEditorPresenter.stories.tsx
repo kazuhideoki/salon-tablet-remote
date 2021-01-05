@@ -2,7 +2,7 @@ import React from 'react';
 import {
   FooterItemEditorPresenter,
   TUseFooterItemEditorProps,
-} from '../app/container/tablet/Drawer/FooterItemEditor/view/FooterItemEditor';
+} from '../app/container/tablet/Drawer/FooterItemEditor/FooterItemEditor';
 import { ThemeProvider } from './lib/ThemeProvider';
 import { propsFooterItemEditor } from './lib/propsFooterItemEditor';
 export default {

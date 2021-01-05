@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ManageInstagramAccountsPresenter,
   TManageInstagramAccountsPresenter,
-} from '../app/container/tablet/Drawer/ManageInstagramAccounts/view/ManageInstagmaAccounts';
+} from '../app/container/tablet/Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 export default {
   title: 'Drawer/ManageInstagramAccountsPresenter',
