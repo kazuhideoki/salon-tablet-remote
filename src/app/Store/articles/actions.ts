@@ -1,5 +1,5 @@
 import { T_articles_get_return } from '../../../pages/api/articles/get';
-import { TAllArticles, TArticles } from '../../../util/interface/Interface';
+import { TAllArticles, Articles } from '../../../util/interface/Interface';
 import * as types from './types';
 
 export const set = (data: T_articles_get_return) => ({
@@ -7,4 +7,4 @@ export const set = (data: T_articles_get_return) => ({
   payload: data,
 });
 
-export type TArticlesAction = ReturnType<typeof set>;
+export type ArticlesAction = ReturnType<typeof set>;

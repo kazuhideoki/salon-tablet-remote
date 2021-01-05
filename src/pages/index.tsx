@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   UserInfo,
-  TArticles,
-  TPaginationParams,
+  Articles,
+  PaginationParams,
   FooterItems,
   TTags,
   TInstagramAccounts,
@@ -23,8 +23,8 @@ import {
 import { apiGetUserInfoFromEmail } from './api/user_info/get';
 
 export type TIndexPropsData = {
-  articles: TArticles;
-  pagination: TPaginationParams;
+  articles: Articles;
+  pagination: PaginationParams;
   allArticles: TAllArticles;
   footerItems: FooterItems;
   infoBarData: TInfoBarData;

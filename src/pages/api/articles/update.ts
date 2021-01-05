@@ -1,15 +1,7 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TApiResponse } from '../../../util/db/apiWrap';
-import {
-  T_is_published_articles,
-  T_title,
-  T_article_content,
-  T_article_id,
-  T_article_excerpt,
-  T_article_img,
-  T_data_type_article,
-} from '../../../util/interface/Interface';
+import { DataTypeArticle } from '../../../util/interface/Interface';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -21,24 +13,24 @@ export const apiArticlesUpdate = async (
 };
 
 export type T_articles_update_params = {
-  is_published: T_is_published_articles;
-  title: T_title;
-  article_content: T_article_content;
-  article_excerpt: T_article_excerpt;
-  article_img: T_article_img;
+  is_published: boolean;
+  title: string;
+  article_content: string;
+  article_excerpt: string;
+  article_img: string;
   tag_ids: string | null;
-  data_type: T_data_type_article;
+  data_type: DataTypeArticle;
 };
 // dbに そのまま入れられるように paramsとwhereに使うidは分けておく
 export type T_articles_update = {
   params: T_articles_update_params;
-  article_id: T_article_id;
+  article_id: number;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { params }: T_articles_update = req.body;
-    const id: T_article_id = req.body.article_id;
+    const id: number = req.body.article_id;
 
     try {
       const isAdmin = await checkIsAdmin({ req });

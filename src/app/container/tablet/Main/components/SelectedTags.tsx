@@ -1,10 +1,10 @@
 import React from 'react';
-import { TArticle, TTags } from '../../../../../util/interface/Interface';
+import { Article, TTags } from '../../../../../util/interface/Interface';
 import { Chip } from '@material-ui/core';
 
 type Props = {
   className: string;
-  article: TArticle;
+  article: Article;
   tags: TTags;
 };
 

@@ -1,6 +1,6 @@
 import {
   FooterItem,
-  TArticle,
+  Article,
   TInstagramMedia,
   TSetModal,
   TUaDeviceType,
@@ -26,7 +26,7 @@ export const initAppState = (data: TInitAppState) => ({
   // modal表示するコンテン情報を格納
   currentModalContent: {
     modalSize: 'large' as T_modal_size,
-    article: {} as TArticle,
+    article: {} as Article,
     footerItem: {} as FooterItem,
     instagramMedia: {} as TInstagramMedia,
   },
@@ -34,7 +34,7 @@ export const initAppState = (data: TInitAppState) => ({
   edittingPrams: {
     isEditting: false,
     isModalSizeChanged: false,
-    article: {} as TArticle,
+    article: {} as Article,
     footerItem: {} as FooterItem,
     // 編集中のmodalSizeとonTapはこちらを参照↓、初期値はfooterItemから参照↑
     modalSize: 'large' as T_modal_size,

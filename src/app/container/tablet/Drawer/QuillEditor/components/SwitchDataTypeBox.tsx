@@ -5,8 +5,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import {
-  T_data_type_article,
-  T_data_type_footer_item,
+  DataTypeArticle,
+  DataTypeFooterItem,
 } from '../../../../../../util/interface/Interface';
 
 export type TDataTypeAndSet<T> = {
@@ -15,8 +15,8 @@ export type TDataTypeAndSet<T> = {
 };
 type Props = {
   dataTypeAndSet:
-    | TDataTypeAndSet<T_data_type_article>
-    | TDataTypeAndSet<T_data_type_footer_item>;
+    | TDataTypeAndSet<DataTypeArticle>
+    | TDataTypeAndSet<DataTypeFooterItem>;
   className?: string;
   forFooter?: boolean;
 };
@@ -27,7 +27,7 @@ export const SwitchDataTypeBox: React.FC<Props> = ({
   forFooter = false,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dataTypeAndSet.setDataType(event.target.value as T_data_type_footer_item);
+    dataTypeAndSet.setDataType(event.target.value as DataTypeFooterItem);
   };
 
   return (

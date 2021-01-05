@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  T_data_type_article,
-  T_data_type_footer_item,
+  DataTypeArticle,
+  DataTypeFooterItem,
 } from '../../../../../util/interface/Interface';
 import { Chip } from '@material-ui/core';
 
 export const showDataType = (
-  dataType: T_data_type_article | T_data_type_footer_item,
+  dataType: DataTypeArticle | DataTypeFooterItem,
   className?: string,
   isSizeSmall?: boolean
 ) => {

@@ -1,6 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_article_id } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -12,7 +11,7 @@ export const apiArticlesDelete = async (
 };
 
 export type T_articles_delete = {
-  article_id: T_article_id;
+  article_id: number;
 };
 
 const articles_delete = async (req: NextApiRequest, res: NextApiResponse) => {

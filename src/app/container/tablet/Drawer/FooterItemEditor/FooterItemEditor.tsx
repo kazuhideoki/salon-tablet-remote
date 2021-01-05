@@ -29,8 +29,8 @@ import { useHandleOnSidebar } from './context/useHandleOnSidebar';
 import { useStateFooterItemEditor } from './context/useStateFooterItemEditor';
 import { TFooterItemEdittingParams } from '../../../../hooks/footerItems/useCreateFooterItem';
 import {
-  T_data_type_article,
-  T_data_type_footer_item,
+  DataTypeArticle,
+  DataTypeFooterItem,
 } from '../../../../../util/interface/Interface';
 import { TDataTypeAndSet } from '../QuillEditor/components/SwitchDataTypeBox';
 
@@ -85,7 +85,7 @@ const useFooterItemEditorProps = () => {
 
   const handleChange = useHandleChange(edittingFooterItemParams);
 
-  const dataTypeAndSet: TDataTypeAndSet<T_data_type_footer_item> = {
+  const dataTypeAndSet: TDataTypeAndSet<DataTypeFooterItem> = {
     dataType,
     setDataType,
   };

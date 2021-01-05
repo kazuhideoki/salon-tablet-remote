@@ -1,16 +1,16 @@
 import React from 'react';
 import {
   TAllArticles,
-  TArticles,
-  TPaginationParams,
+  Articles,
+  PaginationParams,
 } from '../../../util/interface/Interface';
-import { TArticlesAction } from './actions';
+import { ArticlesAction } from './actions';
 import { articlesReducer, ArticlesContextState } from './reducer';
 
 export type Props = ArticlesContextState;
 
 export type ArticlesContextProps = ArticlesContextState & {
-  dispatchArticles: React.Dispatch<TArticlesAction>;
+  dispatchArticles: React.Dispatch<ArticlesAction>;
 };
 export const ArticlesContext = React.createContext({} as ArticlesContextProps);
 

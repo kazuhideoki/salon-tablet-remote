@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {
   FooterItems,
   FooterItem,
-  TArticles,
+  Articles,
 } from '../../util/interface/Interface';
 import { TApiResponse } from '../../util/db/apiWrap';
 import { apiWrapPost } from '../../util/db/apiWrap';
@@ -22,7 +22,7 @@ export type T_create_sample_data = {
 const getSampleArticles = async (user_id: number) => {
   const data = (await db(
     `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`
-  )) as TArticles;
+  )) as Articles;
   const params = data.map((article) => {
     delete article.article_id;
     delete article.created_at;
@@ -36,7 +36,7 @@ const getSampleArticles = async (user_id: number) => {
   return params;
 };
 
-const insertSampleArticles = async (params: TArticles) => {
+const insertSampleArticles = async (params: Articles) => {
   params.forEach(async (article) => {
     await db(`INSERT INTO articles SET ?`, article);
   });

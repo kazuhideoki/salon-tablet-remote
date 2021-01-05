@@ -2,9 +2,9 @@ import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
 import {
-  TArticles,
+  Articles,
   TAllArticles,
-  TPaginationParams,
+  PaginationParams,
 } from '../../../util/interface/Interface';
 import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
 
@@ -28,8 +28,8 @@ export type T_articles_get = {
 };
 
 export type T_articles_get_return = {
-  articles: TArticles;
-  pagination: TPaginationParams;
+  articles: Articles;
+  pagination: PaginationParams;
   allArticles: TAllArticles;
 };
 
@@ -47,7 +47,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const isSetting: boolean = req.query.isSetting === 'true' ? true : false;
   const userId = Number(req.query.userId) as number;
 
-  const TArticleGet: T_articles_get = {
+  const ArticleGet: T_articles_get = {
     page,
     selectingTags,
     isSetting,
@@ -74,7 +74,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = (await db(
       `SELECT * FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages} ORDER BY created_at DESC LIMIT ${offSet} ${pageSize}`
-    )) as TArticles;
+    )) as Articles;
 
     const data2 = (await db(
       `SELECT user_id FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages}`
@@ -84,7 +84,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       `SELECT article_id, title FROM articles WHERE user_id = ${userId}`
     );
 
-    const pagination: TPaginationParams = {
+    const pagination: PaginationParams = {
       page: page,
       pageCount: data2.length ? Math.ceil(data2.length / pageSize) : 0, // 全row数をpageSizeで割って切り上げ
       pageSize: pageSize,

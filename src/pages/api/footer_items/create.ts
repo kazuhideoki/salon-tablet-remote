@@ -11,7 +11,7 @@ import {
   T_item_excerpt,
   T_app_link_url,
   T_modal_size,
-  T_data_type_footer_item,
+  DataTypeFooterItem,
   T_order_sidebar,
 } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
@@ -38,7 +38,7 @@ export type T_footer_items_params = {
   // on_sidebar: T_on_sidebar
   order: T_order;
   order_sidebar: T_order_sidebar;
-  data_type: T_data_type_footer_item;
+  data_type: DataTypeFooterItem;
 };
 
 export type T_footer_items_create = T_footer_items_params & {

@@ -32,41 +32,31 @@ const initPagination = {
   pageSize: 0,
   rowCount: 0,
 };
-export type TPaginationParams = typeof initPagination;
+export type PaginationParams = typeof initPagination;
 
-export type T_data_type_footer_item = 'default_data' | 'sample_data';
-export type T_data_type_article = T_data_type_footer_item | 'web_article';
+export type DataTypeFooterItem = 'default_data' | 'sample_data';
+export type DataTypeArticle = DataTypeFooterItem | 'web_article';
 
 // ●●●●●● テーブル `articles`
-export type T_article_id = number;
-export type T_tag_ids = number[];
-export type T_is_published_articles = boolean;
-export type T_created_at = string;
-export type T_updated_at = string;
-export type T_title = string;
-export type T_article_content = string;
-export type T_article_excerpt = string;
-export type T_article_img = string;
-
 export type ArticleWithoutArticleId = {
   user_id: number;
-  tag_ids: T_tag_ids;
-  is_published: T_is_published_articles;
-  created_at: T_created_at;
-  updated_at: T_updated_at;
-  title: T_title;
-  article_content: T_article_content;
-  article_excerpt: T_article_excerpt;
-  article_img: T_article_img;
+  tag_ids: number[];
+  is_published: boolean;
+  created_at: string;
+  updated_at: string;
+  title: string;
+  article_content: string;
+  article_excerpt: string;
+  article_img: string;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  data_type: T_data_type_article;
+  data_type: DataTypeArticle;
 };
-export type TArticle = { article_id: T_article_id } & ArticleWithoutArticleId;
-export type TArticles = TArticle[];
+export type Article = { article_id: number } & ArticleWithoutArticleId;
+export type Articles = Article[];
 
 export type TAllArticles = {
-  article_id: T_article_id;
-  title: T_title;
+  article_id: number;
+  title: string;
 }[];
 
 // ●●●●●● テーブル `footer_items`
@@ -108,7 +98,7 @@ export type FooterItemWithoutId = {
   order: T_order;
   order_sidebar: T_order_sidebar;
   // 初回サインイン時のサンプルデータのコピー元をtrueに
-  data_type: T_data_type_footer_item;
+  data_type: DataTypeFooterItem;
 };
 export type FooterItem = {
   footer_item_id: T_footer_item_id;
@@ -121,7 +111,7 @@ export type T_info_bar_id = number;
 export type T_info_bar_type = 'shop_name' | 'scrolling_sentence' | 'article';
 export type T_scrolling_sentence = string;
 export type T_scrolling_animation_duration = number;
-export type T_selected_article_id = T_article_id;
+export type T_selected_article_id = number;
 
 export type TInfoBarWithoutId = {
   user_id: number;
@@ -134,7 +124,7 @@ export type TInfoBarWithoutId = {
 export type TInfoBar = TInfoBarWithoutId & { info_bar_id: T_info_bar_id };
 export type TInfoBarData = {
   infoBar: TInfoBar;
-  targetArticle: TArticle;
+  targetArticle: Article;
 };
 
 // ●●●●●● テーブル `tags`

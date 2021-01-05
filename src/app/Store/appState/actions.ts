@@ -2,7 +2,7 @@ import * as types from './types';
 import {
   FooterItem,
   FooterItems,
-  TArticle,
+  Article,
   TInstagramMedia,
   TSetModal,
   T_instagram_id,
@@ -40,7 +40,7 @@ export const isLoadingInstagramAccounts = (value: boolean) => ({
   type: types.IS_LOADING_INSTAGRAM_ACCOUNTS,
   payload: value,
 });
-export const setArticleContent = (value: TArticle) => ({
+export const setArticleContent = (value: Article) => ({
   type: types.SET_ARTICLE_CONTENT,
   payload: value,
 });
@@ -55,7 +55,7 @@ export const setInstagramMediaContent = (value: TInstagramMedia) => ({
 export const createArticle = () => ({
   type: types.CREATE_ARTICLE,
 });
-export const updateArticle = (value: TArticle) => ({
+export const updateArticle = (value: Article) => ({
   type: types.UPDATE_ARTICLE,
   payload: value,
 });

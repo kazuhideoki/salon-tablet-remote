@@ -16,7 +16,7 @@ import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
 import { SelectedTags } from './SelectedTags';
-import { TArticles } from '../../../../../util/interface/Interface';
+import { Articles } from '../../../../../util/interface/Interface';
 import { ThemeContext } from '../../../../store/theme/ThemeProvider';
 
 const useStyles = makeStyles((theme) => {
@@ -75,7 +75,7 @@ export const displayArticlesGrid6Jsx = (
 ) => {
   const classesGrid6 = useStyles();
 
-  const row = (articles: TArticles, row2: boolean) =>
+  const row = (articles: Articles, row2: boolean) =>
     articles.map((value, key: number) => {
       return (
         <Grid

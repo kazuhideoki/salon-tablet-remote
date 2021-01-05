@@ -1,5 +1,4 @@
 import React from 'react';
-import { T_article_id } from '../../../util/interface/Interface';
 import { useGetArticles } from './useGetArticles';
 import { apiArticlesDelete } from '../../../pages/api/articles/delete';
 import { ArticlesContext } from '../../store/articles/Context';
@@ -12,7 +11,7 @@ export const useDeleteArticle = () => {
   const { paginationParams } = React.useContext(ArticlesContext);
   const { articles } = React.useContext(ArticlesContext);
 
-  return async (article_id: T_article_id): Promise<void> => {
+  return async (article_id: number): Promise<void> => {
     const deleting = confirm('本当に削除してよろしいですか？');
 
     if (deleting === false) {

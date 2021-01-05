@@ -3,7 +3,7 @@ import {
   T_modal_size,
   T_is_published_footer_items,
   T_on_tap,
-  T_data_type_footer_item,
+  DataTypeFooterItem,
   FooterItems,
   FooterItem,
   FooterItemWithoutId,
@@ -33,7 +33,7 @@ export type TFooterItemEdittingParams = {
   modalSizeRadio: T_modal_size;
   appLinkUrl: string;
   onSidebar: boolean;
-  dataType: T_data_type_footer_item;
+  dataType: DataTypeFooterItem;
 };
 
 export type TCreateFooterItem = TFooterItemEdittingParams & {
