@@ -14,7 +14,7 @@ import {
   T_modal_size,
   T_data_type_footer_item,
   T_order_sidebar,
-} from '../../../app/store/Interface';
+} from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';

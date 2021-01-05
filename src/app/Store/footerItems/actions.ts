@@ -1,5 +1,5 @@
 import * as types from './types';
-import { FooterItems } from '../Interface';
+import { FooterItems } from '../../../util/interface/Interface';
 
 export const set = (footerItems: FooterItems) => ({
   type: types.SET,

@@ -3,7 +3,7 @@ import {
   SelectArticleInfoBar,
   TSelectArticleInfoBar,
 } from './SelectArticleInfoBar';
-import { sampleAllArticles } from '../../../../../../stories/lib/sampleAllArticles';
+import { sampleAllArticles } from '../../../../../../util/dev/sampleAllArticles';
 export default {
   title: 'Drawer/InfoBar/SelectArticleOnInfoBar',
   component: SelectArticleInfoBar,

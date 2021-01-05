@@ -1,4 +1,4 @@
-import { T_selected_theme } from '../../../../../store/Interface';
+import { T_selected_theme } from '../../../../../../util/interface/Interface';
 import { useChangeTheme } from '../../../../../hooks/userInfo/theme/useChangeTheme';
 
 export const useHandleChange = () => {

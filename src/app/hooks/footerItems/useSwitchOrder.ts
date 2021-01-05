@@ -4,7 +4,7 @@ import {
   T_footer_items_switch_order,
   apiFooterItemsSwitchOrder,
 } from '../../../pages/api/footer_items/switch_order';
-import { FooterItem } from '../../store/Interface';
+import { FooterItem } from '../../../util/interface/Interface';
 import { AppStateContext } from '../../store/appState/Context';
 import { isLoadingFooter } from '../../store/appState/actions';
 

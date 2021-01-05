@@ -4,7 +4,7 @@ import {
   T_articles_create,
   apiArticlesCreate,
 } from '../../../pages/api/articles/create';
-import { T_data_type_article } from '../../store/Interface';
+import { T_data_type_article } from '../../../util/interface/Interface';
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { closeModal, isLoadingMain } from '../../store/appState/actions';

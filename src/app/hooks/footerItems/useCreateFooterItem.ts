@@ -7,7 +7,7 @@ import {
   FooterItems,
   FooterItem,
   FooterItemWithoutId,
-} from '../../store/Interface';
+} from '../../../util/interface/Interface';
 import { useGetFooterItems } from './useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';

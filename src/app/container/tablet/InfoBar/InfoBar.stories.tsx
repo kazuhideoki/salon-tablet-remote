@@ -1,6 +1,6 @@
 import React from 'react';
 import { InfoBarPresenter, TUseInfoBarProps } from './InfoBar';
-import { sampleData } from '../../../../stories/lib/sampleArticles';
+import { sampleData } from '../../../../util/dev/sampleArticles';
 import { scrollingAnimationDuration } from '../../../hooks/infoBar/useUpdateInfoBar';
 
 export default {

@@ -3,7 +3,7 @@ import {
   ManageInstagramAccountsPresenter,
   TManageInstagramAccountsPresenter,
 } from './ManageInstagmaAccounts';
-import { sampleInstagramAccounts } from '../../../../../stories/lib/sampleInstagramAccounts';
+import { sampleInstagramAccounts } from '../../../../../util/dev/sampleInstagramAccounts';
 export default {
   title: 'Drawer/ManageInstagramAccountsPresenter',
   component: ManageInstagramAccountsPresenter,

@@ -3,8 +3,8 @@ import {
   ArticleEditorPresenter,
   TUseArticleEditorProps,
 } from './ArticleEditor';
-import { CSFStory } from '../../../../../stories/lib/interface';
-import { ThemeProvider } from '../../../../../stories/lib/ThemeProvider';
+import { CSFStory } from '../../../../../util/interface/CSFStory';
+import { ThemeProvider } from '../../../../components/ThemeProviderInStorybook';
 
 export default {
   title: 'Drawer/ArticleEditorPresenter',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SelectTagsPresenter, TSelectTagsPresenter } from './SelectTags';
-import { sampleTags } from '../../../../../../stories/lib/sampleTags';
-import { ThemeProvider } from '../../../../../../stories/lib/ThemeProvider';
+import { sampleTags } from '../../../../../../util/dev/sampleTags';
+import { ThemeProvider } from '../../../../../components/ThemeProviderInStorybook';
 export default {
   title: 'Footer/SelectTagsPresenter',
   component: SelectTagsPresenter,

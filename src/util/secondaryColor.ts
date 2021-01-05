@@ -1,4 +1,4 @@
-import { T_theme_color } from '../app/store/Interface';
+import { T_theme_color } from './interface/Interface';
 import colorConvert from 'color-convert';
 
 import { THsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';

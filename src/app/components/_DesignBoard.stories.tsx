@@ -11,15 +11,15 @@ import {
   Chip,
 } from '@material-ui/core';
 import React from 'react';
-import { ThemeProvider, StorybookStore } from './lib/ThemeProvider';
+import { ThemeProvider, StorybookStore } from './ThemeProviderInStorybook';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import '../../public/fonts/fonts.css';
-import { switchingTransition } from '../app/container/tablet/Modal/Modal/context/switchingTransition';
-import { CSFStory } from './lib/interface';
+import '../../../public/fonts/fonts.css';
+import { switchingTransition } from '../container/tablet/Modal/Modal/context/switchingTransition';
+import { CSFStory } from '../../util/interface/CSFStory';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

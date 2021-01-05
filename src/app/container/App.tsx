@@ -8,7 +8,7 @@ import { T_auth_get_session_return } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../store/userInfo/Context';
 import { StoreContextProvider } from '../store/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
-import { TUaDeviceType } from '../store/Interface';
+import { TUaDeviceType } from '../../util/interface/Interface';
 
 type TAppViewProps = {
   session: T_auth_get_session_return;

@@ -1,4 +1,4 @@
-import { TFont1, TFont2 } from './theme/lib/fonts';
+import { TFont1, TFont2 } from '../../app/store/theme/lib/fonts';
 
 export type T_user_id = number;
 export type T_user_name = string;

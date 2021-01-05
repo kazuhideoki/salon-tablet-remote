@@ -6,7 +6,7 @@ import {
   TArticles,
   TAllArticles,
   TPaginationParams,
-} from '../../../app/store/Interface';
+} from '../../../util/interface/Interface';
 import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

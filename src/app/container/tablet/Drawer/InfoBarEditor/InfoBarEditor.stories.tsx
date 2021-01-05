@@ -3,8 +3,8 @@ import {
   InfoBarEditorPresenter,
   TUseInfoBarEditorProps,
 } from './InfoBarEditor';
-import { T_info_bar_type } from '../../../../store/Interface';
-import { sampleAllArticles } from '../../../../../stories/lib/sampleAllArticles';
+import { T_info_bar_type } from '../../../../../util/interface/Interface';
+import { sampleAllArticles } from '../../../../../util/dev/sampleAllArticles';
 export default {
   title: 'Drawer/InfoBar/InfoBarEditorPresenter',
   component: InfoBarEditorPresenter,

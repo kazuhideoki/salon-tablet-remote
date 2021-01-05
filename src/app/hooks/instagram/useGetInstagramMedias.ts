@@ -1,6 +1,9 @@
 import React from 'react';
 import { apiInstagramMediasGet } from '../../../pages/api/instagram_medias/get';
-import { T_instagram_id, T_instagram_username } from '../../store/Interface';
+import {
+  T_instagram_id,
+  T_instagram_username,
+} from '../../../util/interface/Interface';
 import {
   apiInstagramAccountsReconnectNeeded,
   T_instagram_accounts_reconnect_needed,

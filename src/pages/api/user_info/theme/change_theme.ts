@@ -1,6 +1,6 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id } from '../../../../app/store/Interface';
+import { T_user_id } from '../../../../util/interface/Interface';
 import { TApiResponse } from '../../../../util/db/apiWrap';
 import { TThemeParams } from '../../../../app/store/theme/ThemeProvider';
 import { apiWrapPost } from '../../../../util/db/apiWrap';

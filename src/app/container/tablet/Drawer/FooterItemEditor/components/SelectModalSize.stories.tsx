@@ -1,7 +1,7 @@
 import React from 'react';
 import { SelectModalSize } from './SelectModalSize';
-import { T_modal_size } from '../../../../../store/Interface';
-import { propsFooterItemEditor } from '../../../../../../stories/lib/propsFooterItemEditor';
+import { T_modal_size } from '../../../../../../util/interface/Interface';
+import { propsFooterItemEditor } from '../../../../../../util/dev/propsFooterItemEditor';
 export default {
   title: 'Setting/SelectModalSize',
   component: SelectModalSize,

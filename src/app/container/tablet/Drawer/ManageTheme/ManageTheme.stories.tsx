@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../public/fonts/fonts.css';
+import '../../../../../../public/fonts/fonts.css';
 
 import {
   ManageThemePresenter,

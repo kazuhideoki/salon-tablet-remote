@@ -1,6 +1,6 @@
 import React from 'react';
 import { EditButtonsBox } from './EditButtonsBox';
-import { samplefooterItems } from '../../../stories/lib/sampleFooterItems';
+import { samplefooterItems } from '../../../util/dev/sampleFooterItems';
 export default {
   title: 'viewComponents/buttons/EditButtonsBox',
   component: EditButtonsBox,

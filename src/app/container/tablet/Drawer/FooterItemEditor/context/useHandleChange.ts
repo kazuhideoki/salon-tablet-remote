@@ -3,7 +3,7 @@ import { TFooterItemEdittingParams } from '../../../../../hooks/footerItems/useC
 import { setModalSize } from '../../../../../store/appState/actions';
 import { AppStateContext } from '../../../../../store/appState/Context';
 import { FooterItemsContext } from '../../../../../store/footerItems/Context';
-import { T_modal_size } from '../../../../../store/Interface';
+import { T_modal_size } from '../../../../../../util/interface/Interface';
 export const useHandleChange = (
   edittingFooterItemParams: TFooterItemEdittingParams
 ) => {

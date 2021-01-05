@@ -1,10 +1,10 @@
-import * as firebaseAdmin from "firebase-admin";
+import * as firebaseAdmin from 'firebase-admin';
 
 // get this JSON from the Firebase board
 // you can also store the values in environment variables
-import serviceAccount from  "../../../firebase_secret.json";
+import serviceAccount from '../../../firebase_secret.json';
 
-if (!firebaseAdmin.apps.length) {
+if (typeof window === undefined && !firebaseAdmin.apps.length) {
   firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert({
       privateKey: serviceAccount.private_key,

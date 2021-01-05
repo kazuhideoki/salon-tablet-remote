@@ -1,5 +1,5 @@
 import { reducerLogger } from '../../../util/dev/reducerLogger';
-import { TTags } from '../Interface';
+import { TTags } from '../../../util/interface/Interface';
 import { TTagsAction } from './actions';
 import * as types from './types';
 

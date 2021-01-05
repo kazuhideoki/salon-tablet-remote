@@ -3,7 +3,7 @@ import {
   initInstagramMedias,
   TInstagramAccounts,
   TInstagramMedias,
-} from '../Interface';
+} from '../../../util/interface/Interface';
 import { TInstagramAction } from './actions';
 import * as types from './types';
 

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TUserInfo } from '../../app/store/Interface';
+import { TUserInfo } from '../../util/interface/Interface';
 import { apiWrapPost, TApiResponse } from '../../util/db/apiWrap';
 
 const receiverEmailAddress = 'infosalontablet@gmail.com';

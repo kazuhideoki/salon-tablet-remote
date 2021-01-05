@@ -1,5 +1,5 @@
 import React from 'react';
-import { TArticle, TTags } from '../../../../store/Interface';
+import { TArticle, TTags } from '../../../../../util/interface/Interface';
 import { Chip } from '@material-ui/core';
 
 type Props = {

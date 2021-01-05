@@ -5,7 +5,7 @@ import {
   T_tag_id,
   T_user_id,
   T_article_id,
-} from '../../app/store/Interface';
+} from '../interface/Interface';
 
 export const deleteTagIdInArticle = async (
   tag_id: T_tag_id,

@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {
   T_user_id,
   T_is_generate_public_page,
-} from '../../../app/store/Interface';
+} from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 

@@ -1,4 +1,4 @@
-import { T_tag_id } from '../../../../../../store/Interface';
+import { T_tag_id } from '../../../../../../../util/interface/Interface';
 
 export const useHandleSelectTag = (
   selectingTags: number[],

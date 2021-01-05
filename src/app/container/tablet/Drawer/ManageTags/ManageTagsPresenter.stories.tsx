@@ -1,7 +1,7 @@
 import React from 'react';
 import { ManageTagsPresenter, TManageTagsPresenter } from './ManageTags';
-import { sampleTags } from '../../../../../stories/lib/sampleTags';
-import { ThemeProvider } from '../../../../../stories/lib/ThemeProvider';
+import { sampleTags } from '../../../../../util/dev/sampleTags';
+import { ThemeProvider } from '../../../../components/ThemeProviderInStorybook';
 export default {
   title: 'Drawer/ManageTagsPresenter',
   component: ManageTagsPresenter,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainPresenter, TUseMainProps } from './Main';
-import { sampleData } from '../../../../stories/lib/sampleArticles';
-import { initInstagramMedias } from '../../../store/Interface';
+import { sampleData } from '../../../../util/dev/sampleArticles';
+import { initInstagramMedias } from '../../../../util/interface/Interface';
 export default {
   title: 'Main/Main',
   component: MainPresenter,

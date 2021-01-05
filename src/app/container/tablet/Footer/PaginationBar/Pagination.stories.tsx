@@ -3,10 +3,10 @@ import {
   PaginationBarPresenter,
   TUsePaginationBarProps,
 } from './PaginationBar';
-import { sampleInstagramAccounts } from '../../../../../stories/lib/sampleInstagramAccounts';
-import { sampleTags } from '../../../../../stories/lib/sampleTags';
+import { sampleInstagramAccounts } from '../../../../../util/dev/sampleInstagramAccounts';
+import { sampleTags } from '../../../../../util/dev/sampleTags';
 import { withStyles, IconButton } from '@material-ui/core';
-import { TInstagramMedias } from '../../../../store/Interface';
+import { TInstagramMedias } from '../../../../../util/interface/Interface';
 export default {
   title: 'Footer/Pagination/PaginationBar',
   component: PaginationBarPresenter,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterItem } from '../../../../../store/Interface';
+import { FooterItem } from '../../../../../../util/interface/Interface';
 export const useHandleOnSidebar = (
   isEditting: boolean,
   footerItem: FooterItem

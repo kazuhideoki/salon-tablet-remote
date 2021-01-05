@@ -3,7 +3,7 @@ import { Select, MenuItem } from '@material-ui/core';
 import { TUseManageThemeProps } from '../ManageTheme';
 import { TFont1, TFont2 } from '../../../../../store/theme/lib/fonts';
 import { TWhichFont } from '../../../../../../pages/api/user_info/theme/font';
-import { T_theme_font } from '../../../../../store/Interface';
+import { T_theme_font } from '../../../../../../util/interface/Interface';
 
 type Props = TUseManageThemeProps & {
   whichFont: TWhichFont;

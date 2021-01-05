@@ -1,4 +1,4 @@
-import { TInstagramAccounts } from '../../app/store/Interface';
+import { TInstagramAccounts } from '../interface/Interface';
 
 export const sampleInstagramAccounts: TInstagramAccounts = [
   {

@@ -1,5 +1,5 @@
 import { useChangeShowArticleType } from '../../../../../hooks/userInfo/useChangeShowArticleType';
-import { T_show_article_type } from '../../../../../store/Interface';
+import { T_show_article_type } from '../../../../../../util/interface/Interface';
 
 export const useHandleChangeShowArticleType = () => {
   const changeShowArticleType = useChangeShowArticleType();

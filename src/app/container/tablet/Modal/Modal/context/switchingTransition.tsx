@@ -1,7 +1,7 @@
 import { Fade, Slide } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import React from 'react';
-import { T_selected_theme } from '../../../../../store/Interface';
+import { T_selected_theme } from '../../../../../../util/interface/Interface';
 
 export const switchingTransition = (selected_theme: T_selected_theme) => {
   switch (selected_theme) {

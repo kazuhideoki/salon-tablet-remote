@@ -5,7 +5,7 @@ import {
   T_user_id,
   TInfoBarData,
   TInfoBarWithoutId,
-} from '../../../app/store/Interface';
+} from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 

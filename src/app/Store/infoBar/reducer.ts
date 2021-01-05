@@ -1,5 +1,5 @@
 import { reducerLogger } from '../../../util/dev/reducerLogger';
-import { TInfoBar, TInfoBarData } from '../Interface';
+import { TInfoBar, TInfoBarData } from '../../../util/interface/Interface';
 import { TInfoBarAction } from './actions';
 import * as types from './types';
 

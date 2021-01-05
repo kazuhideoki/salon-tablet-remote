@@ -7,7 +7,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import {
   T_data_type_article,
   T_data_type_footer_item,
-} from '../../../../../store/Interface';
+} from '../../../../../../util/interface/Interface';
 
 export type TDataTypeAndSet<T> = {
   dataType: T;

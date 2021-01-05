@@ -1,5 +1,5 @@
 import { db } from './db';
-import { FooterItems } from '../../app/store/Interface';
+import { FooterItems } from '../interface/Interface';
 
 export const generateCorrectOrdersParams = (data: FooterItems) => {
   const correctedData = data.map((value, index) => {

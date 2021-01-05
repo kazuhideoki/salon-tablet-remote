@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { TIndexProps } from '..';
 import { checkIsGeneratePubulicPage } from '../../util/db/checkIsGeneratePubulicPage';
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
-import { TUserInfo } from '../../app/store/Interface';
+import { TUserInfo } from '../../util/interface/Interface';
 import { getDeviceType } from '../../util/getDeviceType';
 
 const useStyles = makeStyles((theme: Theme) =>

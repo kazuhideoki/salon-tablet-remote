@@ -1,5 +1,5 @@
 import React from 'react';
-import { T_selected_theme } from '../../../store/Interface';
+import { T_selected_theme } from '../../../../util/interface/Interface';
 import { apiUserInfoChangeTheme } from '../../../../pages/api/user_info/theme/change_theme';
 import { generateDefaultParamsFromTheme } from '../../../store/theme/lib/paramsFromTheme';
 import { UserInfoContext } from '../../../store/userInfo/Context';

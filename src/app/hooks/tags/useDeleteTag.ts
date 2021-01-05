@@ -1,5 +1,5 @@
 import React from 'react';
-import { T_tag_id } from '../../store/Interface';
+import { T_tag_id } from '../../../util/interface/Interface';
 import { useGetTags } from './useGetTags';
 import { T_tags_delete, apiTagsDelete } from '../../../pages/api/tags/delete';
 import { UserInfoContext } from '../../store/userInfo/Context';

@@ -1,16 +1,13 @@
 import React from 'react';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
-import {
-  useThemeArgs,
-  ThemeContext,
-} from '../../app/store/theme/ThemeProvider';
-import { SelectTheme } from '../../app/container/tablet/Drawer/ManageTheme/components/SelectTheme';
-import { TUseManageThemeProps } from '../../app/container/tablet/Drawer/ManageTheme/ManageTheme';
+import { useThemeArgs, ThemeContext } from '../store/theme/ThemeProvider';
+import { SelectTheme } from '../container/tablet/Drawer/ManageTheme/components/SelectTheme';
+import { TUseManageThemeProps } from '../container/tablet/Drawer/ManageTheme/ManageTheme';
 import {
   generateDefaultParamsFromTheme,
   switchingTheme,
-} from '../../app/store/theme/lib/paramsFromTheme';
-import { T_selected_theme } from '../../app/store/Interface';
+} from '../store/theme/lib/paramsFromTheme';
+import { T_selected_theme } from '../../util/interface/Interface';
 import { googleFontsUrl } from '../../util/googleFontsUrl';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
