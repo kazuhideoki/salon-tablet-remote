@@ -1,5 +1,5 @@
 import React from 'react';
-import { AboutST } from '../app/components/pageComponent/AboutST';
+import { AboutST } from '../app/components/pages/AboutST';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 
 export default {

@@ -8,8 +8,8 @@ import {
 import Link from 'next/link';
 import React from 'react';
 import { server } from '../../util/loadUrl';
-import { PlainButton } from '../../app/components/pageComponent/PlainButton';
-import { SEO } from '../../app/components/pageComponent/SEO';
+import { PlainButton } from '../../app/components/pages/PlainButton';
+import { SEO } from '../../app/components/pages/SEO';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

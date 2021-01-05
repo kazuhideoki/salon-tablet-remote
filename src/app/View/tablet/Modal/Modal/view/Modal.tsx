@@ -34,7 +34,7 @@ import { SelectInstagramAccounts } from '../../Modals/SelectInstagramAccounts/vi
 import { InstagramMediaModal } from '../../Modals/InstagramMediaModal.ts/view/InstagramMediaModal';
 import InfoBarEditor from '../../../Drawer/InfoBarEditor/view/InfoBarEditor';
 import { GoogleSearch } from '../../Modals/GoogleSearch/view/GoogleSearch';
-import { PageNotEmailVerified } from '../../../../../components/pageComponent/PageNotEmailVerified';
+import { PageNotEmailVerified } from '../../../../../components/pages/PageNotEmailVerified';
 import { switchingTransition } from '../context/switchingTransition';
 import { useCloseModal } from '../context/useCloseModal';
 import { useStateModal } from '../context/useStateModal';
