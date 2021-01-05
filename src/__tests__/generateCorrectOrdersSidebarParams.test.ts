@@ -1,4 +1,4 @@
-import { generateCorrectOrdersSidebarParams } from '../lib/db/correctOrders';
+import { generateCorrectOrdersSidebarParams } from '../util/db/correctOrders';
 
 const footerItems = [
   {
@@ -33,12 +33,12 @@ test('generateCorrectOrdersSidebarParamsの返り値が正しい', () => {
 
   expect(idParam[2]).toBe(10);
 
-  const order_sidebars = correctedData.map((value) => {
+  const order_sidebars = correctedData.map((value: any) => {
     return value.order_sidebar;
   });
 
   expect(
-    order_sidebars.reduce(function (a, x) {
+    order_sidebars.reduce(function (a: any, x: any) {
       return a + x;
     }, 0)
   ).toBe(6);

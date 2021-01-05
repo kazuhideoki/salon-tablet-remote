@@ -1,4 +1,4 @@
-import { generateCorrectOrdersParams } from '../lib/db/correctOrders';
+import { generateCorrectOrdersParams } from '../util/db/correctOrders';
 
 const footerItems = [
   {
@@ -28,12 +28,12 @@ test('generateCorrectOrdersParamsの返り値が正しい', () => {
   } = generateCorrectOrdersParams(footerItems);
   expect(idParam[1]).toBe(200);
 
-  const orders = correctedData.map((value) => {
+  const orders = correctedData.map((value: any) => {
     return value.order;
   });
 
   expect(
-    orders.reduce(function (a, x) {
+    orders.reduce(function (a: any, x: any) {
       return a + x;
     }, 0)
   ).toBe(10);

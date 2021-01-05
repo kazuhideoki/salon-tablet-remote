@@ -1,4 +1,4 @@
-import { checkOrders } from '../lib/db/checkOrders';
+import { checkOrders } from '../util/db/checkOrders';
 import { samplefooterItems } from '../stories/lib/sampleFooterItems';
 
 const footerItems1 = [

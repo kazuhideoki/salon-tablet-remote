@@ -1,5 +1,5 @@
 import { samplefooterItems } from '../stories/lib/sampleFooterItems';
-import { checkOrdersSidebar } from '../lib/db/checkOrders';
+import { checkOrdersSidebar } from '../util/db/checkOrders';
 
 const footerItems1 = [
   {
@@ -9,13 +9,13 @@ const footerItems1 = [
     order_sidebar: 2,
   },
   {
+    order_sidebar: 3,
+  },
+  {
     order_sidebar: 4,
   },
   {
     order_sidebar: 5,
-  },
-  {
-    order_sidebar: 3,
   },
 ];
 
