@@ -1,4 +1,4 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   T_is_published_articles,
@@ -8,10 +8,10 @@ import {
   T_article_img,
   T_user_id,
   T_data_type_article,
-} from '../../../app/Store/Interface';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { checkIsAdmin } from '../../../lib/db/checkIsAdmin';
-import { apiWrapPost } from '../../../lib/db/apiWrap';
+} from '../../../util/interface/Interface';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 export const apiArticlesCreate = async (
   params: T_articles_create

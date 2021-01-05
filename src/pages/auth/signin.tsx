@@ -6,14 +6,14 @@ import {
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
-import { AuthForm } from '../../pageComponent/AuthFrom';
+import { AuthForm } from '../../app/components/pages/AuthFrom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import initFirebase from '../../lib/auth/initFirebase';
+import initFirebase from '../../util/auth/initFirebase';
 import Link from 'next/link';
-import { AuthCircular } from '../../lib/AuthCircular';
 import { GetServerSideProps } from 'next';
 import { apiGetSession } from '../api/auth/get_session';
+import { AuthCircular } from '../../app/components/AuthCircular';
 
 export const useStyles = (isTabletPortrait: boolean) =>
   makeStyles((theme: Theme) => {

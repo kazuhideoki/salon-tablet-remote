@@ -1,13 +1,13 @@
 import React from 'react';
-import { AuthForm } from '../../pageComponent/AuthFrom';
+import { AuthForm } from '../../app/components/pages/AuthFrom';
 import { BackgroundDiv, useStylesAuthForm } from './signin';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import initFirebase from '../../lib/auth/initFirebase';
+import initFirebase from '../../util/auth/initFirebase';
 import { Typography } from '@material-ui/core';
 import Link from 'next/link';
-import { AuthCircular } from '../../lib/AuthCircular';
-import { createUserData } from '../../lib/db/createUserData';
+import { createUserData } from '../../util/db/createUserData';
+import { AuthCircular } from '../../app/components/AuthCircular';
 
 initFirebase();
 

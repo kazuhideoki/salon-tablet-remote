@@ -1,5 +1,9 @@
-import { reducerLogger } from '../../../lib/dev/reducerLogger';
-import { TAllArticles, TArticles, TPaginationParams } from '../Interface';
+import { reducerLogger } from '../../../util/dev/reducerLogger';
+import {
+  TAllArticles,
+  TArticles,
+  TPaginationParams,
+} from '../../../util/interface/Interface';
 import { TArticlesAction } from './actions';
 import * as types from './types';
 

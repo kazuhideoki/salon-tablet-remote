@@ -11,7 +11,7 @@ import {
   T_theme_color,
   T_selected_theme,
   T_footer_icon_size,
-} from '../Interface';
+} from '../../../util/interface/Interface';
 import { switchingTheme } from './lib/paramsFromTheme';
 import { UserInfoContext } from '../userInfo/Context';
 

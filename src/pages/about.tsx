@@ -1,5 +1,5 @@
-import WebSiteDrawer from '../pageComponent/WebsiteDrawer'
-import { Typography, makeStyles, createStyles, Theme } from "@material-ui/core";
+import WebSiteDrawer from '../app/components/pages/WebsiteDrawer';
+import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function About() {
-  const classes = useStyles()
-  
+  const classes = useStyles();
+
   return (
     <div>
       <Typography
@@ -20,13 +20,11 @@ function About() {
         variant="h4"
         component="h2"
         gutterBottom
-        color="textSecondary"
-      >
+        color="textSecondary">
         製作中
       </Typography>
     </div>
   );
 }
 
-export default About
-
+export default About;

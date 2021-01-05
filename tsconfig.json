@@ -19,9 +19,8 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [".src/**/*", "./src/stories/**/*"],
+  "include": ["src"],
   "exclude": ["node_modules"],
-
   "baseUrl": ".",
   "paths": {
     "*": ["@types/*"]

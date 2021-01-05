@@ -1,4 +1,4 @@
-import { T_selected_theme } from '../../Interface';
+import { T_selected_theme } from '../../../../util/interface/Interface';
 import { TThemeParams } from '../ThemeProvider';
 import { themeWhite } from './themes/themeWhite';
 import { themeNatural } from './themes/themeNatural';

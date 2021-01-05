@@ -9,13 +9,13 @@ import {
   TAllArticles,
   TInfoBarData,
   TUaDeviceType,
-} from '../app/Store/Interface';
-import { App } from '../app/View/App';
+} from '../util/interface/Interface';
+import { App } from '../app/container/App';
 import { GetServerSideProps } from 'next';
-import { TopPage } from '../pageComponent/TopPage';
-import { generateProps } from '../lib/db/generateProps';
-import { SEO } from '../pageComponent/SEO';
-import { getDeviceType } from '../lib/getDeviceType';
+import { TopPage } from '../app/components/pages/TopPage';
+import { generateProps } from '../util/db/generateProps';
+import { SEO } from '../app/components/pages/SEO';
+import { getDeviceType } from '../util/getDeviceType';
 import {
   apiGetSession,
   T_auth_get_session_return,

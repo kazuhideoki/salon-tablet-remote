@@ -1,7 +1,7 @@
-import { reducerLogger } from "../../../lib/dev/reducerLogger";
-import { TInfoBar, TInfoBarData } from "../Interface";
-import { TInfoBarAction } from "./actions";
-import * as types from "./types";
+import { reducerLogger } from '../../../util/dev/reducerLogger';
+import { TInfoBar, TInfoBarData } from '../../../util/interface/Interface';
+import { TInfoBarAction } from './actions';
+import * as types from './types';
 
 export type InfoBarContextState = TInfoBarData;
 
@@ -13,7 +13,7 @@ export const infoBarReducer = (
   const func = infoBarReducer;
   switch (action.type) {
     case types.SET:
-      newState = action.payload
+      newState = action.payload;
       break;
   }
 

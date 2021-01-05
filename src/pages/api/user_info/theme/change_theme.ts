@@ -1,9 +1,9 @@
-import { db } from '../../../../lib/db/db';
+import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id } from '../../../../app/Store/Interface';
-import { TApiResponse } from '../../../../lib/db/apiWrap';
-import { TThemeParams } from '../../../../app/Store/theme/ThemeProvider';
-import { apiWrapPost } from '../../../../lib/db/apiWrap';
+import { T_user_id } from '../../../../util/interface/Interface';
+import { TApiResponse } from '../../../../util/db/apiWrap';
+import { TThemeParams } from '../../../../app/store/theme/ThemeProvider';
+import { apiWrapPost } from '../../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (
@@ -17,7 +17,10 @@ export type T_user_info_change_theme = {
   themeParams: TThemeParams;
 };
 
-const change_theme = async (req: NextApiRequest, res: NextApiResponse) => {
+const change_theme = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { user_id, themeParams }: T_user_info_change_theme = req.body;
 

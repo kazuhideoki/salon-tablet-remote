@@ -1,13 +1,13 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { tagIdsFromString } from '../../../lib/db/tagIdsFromString';
+import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
 import {
   T_user_id,
   TArticles,
   TAllArticles,
   TPaginationParams,
-} from '../../../app/Store/Interface';
-import { apiWrapGet, TApiResponse } from '../../../lib/db/apiWrap';
+} from '../../../util/interface/Interface';
+import { apiWrapGet, TApiResponse } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (

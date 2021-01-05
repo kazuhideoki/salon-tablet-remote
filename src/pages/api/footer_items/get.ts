@@ -1,12 +1,12 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { checkOrders } from '../../../lib/db/checkOrders';
-import { FooterItems, T_user_id } from '../../../app/Store/Interface';
-import { correctOrders } from '../../../lib/db/correctOrders';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { checkOrdersSidebar } from '../../../lib/db/checkOrders';
-import { correctOrdersSidebar } from '../../../lib/db/correctOrders';
-import { apiWrapGet } from '../../../lib/db/apiWrap';
+import { checkOrders } from '../../../util/db/checkOrders';
+import { FooterItems, T_user_id } from '../../../util/interface/Interface';
+import { correctOrders } from '../../../util/db/correctOrders';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import { checkOrdersSidebar } from '../../../util/db/checkOrders';
+import { correctOrdersSidebar } from '../../../util/db/correctOrders';
+import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsGet = async (

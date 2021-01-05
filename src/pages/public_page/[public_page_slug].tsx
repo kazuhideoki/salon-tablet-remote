@@ -1,13 +1,13 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { generateProps } from '../../lib/db/generateProps';
-import App from '../../app/View/App';
+import { generateProps } from '../../util/db/generateProps';
+import App from '../../app/container/App';
 import Head from 'next/head';
 import { TIndexProps } from '..';
-import { checkIsGeneratePubulicPage } from '../../lib/db/checkIsGeneratePubulicPage';
+import { checkIsGeneratePubulicPage } from '../../util/db/checkIsGeneratePubulicPage';
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
-import { TUserInfo } from '../../app/Store/Interface';
-import { getDeviceType } from '../../lib/getDeviceType';
+import { TUserInfo } from '../../util/interface/Interface';
+import { getDeviceType } from '../../util/getDeviceType';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

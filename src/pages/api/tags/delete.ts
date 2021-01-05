@@ -1,9 +1,9 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_tag_id, T_user_id } from '../../../app/Store/Interface';
-import { deleteTagIdInArticle } from '../../../lib/db/deleteTagIdInArticle';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { apiWrapPost } from '../../../lib/db/apiWrap';
+import { T_tag_id, T_user_id } from '../../../util/interface/Interface';
+import { deleteTagIdInArticle } from '../../../util/db/deleteTagIdInArticle';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (

@@ -1,8 +1,11 @@
-import { db } from '../../../lib/db/db';
+import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TApiResponse } from '../../../lib/db/apiWrap';
-import { T_instagram_id, TInstagramMedias } from '../../../app/Store/Interface';
-import { apiWrapPost } from '../../../lib/db/apiWrap';
+import { TApiResponse } from '../../../util/db/apiWrap';
+import {
+  T_instagram_id,
+  TInstagramMedias,
+} from '../../../util/interface/Interface';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (

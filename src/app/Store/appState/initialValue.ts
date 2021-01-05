@@ -8,7 +8,7 @@ import {
   T_instagram_username,
   T_modal_size,
   T_on_tap,
-} from '../Interface';
+} from '../../../util/interface/Interface';
 
 export type TInitAppState = {
   isPublicPage: boolean;
