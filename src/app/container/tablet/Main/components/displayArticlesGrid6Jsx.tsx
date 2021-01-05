@@ -11,7 +11,7 @@ import {
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { DeleteButton } from '../../../../components/editButtonBox/DeleteButton';
 import { UpdateButton } from '../../../../components/editButtonBox/UpdateButton';
-import { TUseMainProps, TMainClasses } from '../view/Main';
+import { TUseMainProps, TMainClasses } from '../Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';

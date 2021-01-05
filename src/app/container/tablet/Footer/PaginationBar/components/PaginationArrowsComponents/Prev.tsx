@@ -1,6 +1,6 @@
-import React from "react";
-import { NavigateBefore } from "@material-ui/icons";
-import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
+import React from 'react';
+import { NavigateBefore } from '@material-ui/icons';
+import { TPaginationPropsAndClasses } from '../../PaginationBar';
 
 export const Prev = (props: TPaginationPropsAndClasses) => {
   const { page } = props.paginationParams;
@@ -9,7 +9,7 @@ export const Prev = (props: TPaginationPropsAndClasses) => {
     props.getArticles(props.isSetting, props.paginationParams.page - 1);
   };
 
-  let className
+  let className;
   let onClick;
   let disabled;
   if (!(page === 1)) {
@@ -26,10 +26,8 @@ export const Prev = (props: TPaginationPropsAndClasses) => {
     <props.StyledIconButton
       className={className}
       onClick={onClick}
-      disabled={disabled}
-    >
+      disabled={disabled}>
       <NavigateBefore />
     </props.StyledIconButton>
   );
 };
-

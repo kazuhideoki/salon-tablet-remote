@@ -1,7 +1,6 @@
-import React from "react";
-import { NavigateNext } from "@material-ui/icons";
-import { TPaginationPropsAndClasses } from "../../view/PaginationBar";
-
+import React from 'react';
+import { NavigateNext } from '@material-ui/icons';
+import { TPaginationPropsAndClasses } from '../../PaginationBar';
 
 export const Next = (props: TPaginationPropsAndClasses) => {
   const { page, pageCount, rowCount } = props.paginationParams;
@@ -10,7 +9,7 @@ export const Next = (props: TPaginationPropsAndClasses) => {
     props.getArticles(props.isSetting, props.paginationParams.page + 1);
   };
 
-  let className
+  let className;
   let onClick;
   let disabled;
   if (!(page === pageCount) && rowCount !== 0) {
@@ -27,11 +26,8 @@ export const Next = (props: TPaginationPropsAndClasses) => {
     <props.StyledIconButton
       className={className}
       onClick={onClick}
-      disabled={disabled}
-    >
+      disabled={disabled}>
       <NavigateNext />
     </props.StyledIconButton>
   );
 };
-
-

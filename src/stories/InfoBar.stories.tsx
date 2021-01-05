@@ -2,7 +2,7 @@ import React from 'react';
 import {
   InfoBarPresenter,
   TUseInfoBarProps,
-} from '../app/container/tablet/InfoBar/view/InfoBar';
+} from '../app/container/tablet/InfoBar/InfoBar';
 import { TInfoBar, TArticle, T_info_bar_type } from '../app/Store/Interface';
 import { sampleData } from './lib/sampleArticles';
 import dynamic from 'next/dynamic';

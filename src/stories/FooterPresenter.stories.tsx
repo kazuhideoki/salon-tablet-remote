@@ -2,7 +2,7 @@ import React from 'react';
 import {
   FooterPresenter,
   TFooterPresenter,
-} from '../app/container/tablet/Footer/Footer/view/Footer';
+} from '../app/container/tablet/Footer/Footer/Footer';
 import { samplefooterItems } from './lib/sampleFooterItems';
 import { ThemeProvider } from './lib/ThemeProvider';
 

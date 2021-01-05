@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeContext } from '../../../../../Store/theme/ThemeProvider';
+import { ThemeContext } from '../../../../Store/theme/ThemeProvider';
 import {
   Grid,
   makeStyles,
@@ -12,17 +12,17 @@ import {
   Card,
   useMediaQuery,
 } from '@material-ui/core';
-import { useGetArticles } from '../../../Main/context/lib/useGetArticles';
-import { HomeButton } from '../components/HomeButton';
-import { PaginationArrows } from '../components/PaginationArrows';
-import { TagsButton } from '../components/TagsButton';
-import { useSelectedArticlesTagNames } from '../context/useSelectedArticlesTagNames';
+import { useGetArticles } from '../../Main/context/lib/useGetArticles';
+import { HomeButton } from './components/HomeButton';
+import { PaginationArrows } from './components/PaginationArrows';
+import { TagsButton } from './components/TagsButton';
+import { useSelectedArticlesTagNames } from './context/useSelectedArticlesTagNames';
 import { Instagram } from '@material-ui/icons';
-import { PaginationInstagram } from '../components/PaginationInstagram';
-import { useHandleOnNumClick } from '../context/useHandleOnNumClick';
-import { useManageInstagramAccountsProps } from '../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
-import { useStatePaginationBar } from '../context/useStatePaginationBar';
-import { useDrawerProps } from '../../../Drawer/Drawer/Drawer';
+import { PaginationInstagram } from './components/PaginationInstagram';
+import { useHandleOnNumClick } from './context/useHandleOnNumClick';
+import { useManageInstagramAccountsProps } from '../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
+import { useStatePaginationBar } from './context/useStatePaginationBar';
+import { useDrawerProps } from '../../Drawer/Drawer/Drawer';
 
 export const usePaginationBarProps = () => {
   const {

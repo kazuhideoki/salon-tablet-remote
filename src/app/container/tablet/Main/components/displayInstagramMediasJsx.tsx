@@ -5,7 +5,7 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
-import { TUseMainProps, TMainClasses } from '../view/Main';
+import { TUseMainProps, TMainClasses } from '../Main';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
 import { PlayArrowRounded } from '@material-ui/icons';

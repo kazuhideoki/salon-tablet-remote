@@ -1,17 +1,17 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Grid, makeStyles, createStyles, Theme } from '@material-ui/core';
-import { Main } from './Main/view/Main';
-import { Footer } from './Footer/Footer/view/Footer';
+import { Main } from './Main/Main';
+import { Footer } from './Footer/Footer/Footer';
 import { ThemeContext } from '../../Store/theme/ThemeProvider';
 import { Drawer } from './Drawer/Drawer/Drawer';
 import dynamic from 'next/dynamic';
-import { PaginationBar } from './Footer/PaginationBar/view/PaginationBar';
+import { PaginationBar } from './Footer/PaginationBar/PaginationBar';
 import {
   AppStateContext,
   AppStateContextProvider,
 } from '../../Store/appState/Context';
-const InfoBar = dynamic(() => import('./InfoBar/view/InfoBar'), {
+const InfoBar = dynamic(() => import('./InfoBar/InfoBar'), {
   ssr: false,
 });
 

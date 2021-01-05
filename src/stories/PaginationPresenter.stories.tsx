@@ -2,7 +2,7 @@ import React from 'react';
 import {
   PaginationBarPresenter,
   TUsePaginationBarProps,
-} from '../app/container/tablet/Footer/PaginationBar/view/PaginationBar';
+} from '../app/container/tablet/Footer/PaginationBar/PaginationBar';
 import { sampleInstagramAccounts } from './lib/sampleInstagramAccounts';
 import { sampleTags } from './lib/sampleTags';
 import { withStyles, IconButton } from '@material-ui/core';

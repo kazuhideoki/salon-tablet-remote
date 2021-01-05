@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons';
-import { TPaginationPropsAndClasses } from '../view/PaginationBar';
+import { TPaginationPropsAndClasses } from '../PaginationBar';
 
 export const PaginationInstagram: React.FC<TPaginationPropsAndClasses> = (
   props
