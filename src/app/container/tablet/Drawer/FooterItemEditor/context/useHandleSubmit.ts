@@ -1,8 +1,8 @@
 import {
   TFooterItemEdittingParams,
   useCreateFooterItem,
-} from './useCreateFooterItem';
-import { useUpdateFooterItem } from './useUpdateFooterItem';
+} from '../../../../../hooks/footerItems/useCreateFooterItem';
+import { useUpdateFooterItem } from '../../../../../hooks/footerItems/useUpdateFooterItem';
 
 export const useHandleSubmit = (
   edittingFooterItemParams: TFooterItemEdittingParams,

@@ -7,21 +7,18 @@ import {
   FooterItems,
   FooterItem,
   FooterItemWithoutId,
-} from '../../../../../Store/Interface';
-import { useGetFooterItems } from './useGetFooterItems';
+} from '../../Store/Interface';
+import { useGetFooterItems } from '../../container/tablet/Drawer/FooterItemEditor/context/useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
 import {
   T_footer_items_create,
   apiFooterItemsCreate,
-} from '../../../../../../pages/api/footer_items/create';
-import { FooterItemsContext } from '../../../../../Store/footerItems/Context';
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
-import {
-  closeModal,
-  isLoadingFooter,
-} from '../../../../../Store/appState/actions';
-import { AppStateContext } from '../../../../../Store/appState/Context';
+} from '../../../pages/api/footer_items/create';
+import { FooterItemsContext } from '../../Store/footerItems/Context';
+import { UserInfoContext } from '../../Store/userInfo/Context';
+import { closeModal, isLoadingFooter } from '../../Store/appState/actions';
+import { AppStateContext } from '../../Store/appState/Context';
 
 export type TFooterItemEdittingParams = {
   titleText: string;

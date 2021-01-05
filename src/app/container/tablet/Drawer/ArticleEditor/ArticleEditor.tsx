@@ -12,7 +12,7 @@ import {
   Theme,
   Grid,
 } from '@material-ui/core';
-import { TCreateArticle } from './context/useCreateArticle';
+import { TCreateArticle } from '../../../../hooks/articles/useCreateArticle';
 import { SelectTagsPopover } from './components/SelectTagsPopover';
 import { CharCounter } from '../../../../components/CharCounter';
 import { SaveTwoTone, PublishTwoTone } from '@material-ui/icons';

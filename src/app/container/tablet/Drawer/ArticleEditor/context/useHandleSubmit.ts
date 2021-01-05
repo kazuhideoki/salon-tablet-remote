@@ -1,6 +1,9 @@
 import React from 'react';
-import { useCreateArticle, TCreateArticle } from './useCreateArticle';
-import { useUpdateArticle } from './useUpdateArticle';
+import {
+  useCreateArticle,
+  TCreateArticle,
+} from '../../../../../hooks/articles/useCreateArticle';
+import { useUpdateArticle } from '../../../../../hooks/articles/useUpdateArticle';
 
 export type THandleSubmit = { params: TCreateArticle; isEditting: boolean };
 

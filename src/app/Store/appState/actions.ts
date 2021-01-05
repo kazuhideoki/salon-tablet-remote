@@ -8,7 +8,7 @@ import {
   T_instagram_id,
   T_instagram_username,
 } from '../Interface';
-import { TFooterItemEdittingParams } from '../../container/tablet/Drawer/FooterItemEditor/context/useCreateFooterItem';
+import { TFooterItemEdittingParams } from '../../hooks/footerItems/useCreateFooterItem';
 import { T_articles_get_return } from '../../../pages/api/articles/get';
 
 export const setModal = (value: TSetModal) => ({

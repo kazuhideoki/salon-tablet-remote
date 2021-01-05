@@ -27,7 +27,7 @@ import { useHandleSubmit } from './context/useHandleSubmit';
 import { useHandleChange } from './context/useHandleChange';
 import { useHandleOnSidebar } from './context/useHandleOnSidebar';
 import { useStateFooterItemEditor } from './context/useStateFooterItemEditor';
-import { TFooterItemEdittingParams } from './context/useCreateFooterItem';
+import { TFooterItemEdittingParams } from '../../../../hooks/footerItems/useCreateFooterItem';
 import {
   T_data_type_article,
   T_data_type_footer_item,

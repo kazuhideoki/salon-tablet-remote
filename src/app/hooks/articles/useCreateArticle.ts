@@ -1,16 +1,13 @@
 import React from 'react';
-import { useGetArticles } from '../../../Main/context/lib/useGetArticles';
+import { useGetArticles } from '../../container/tablet/Main/context/lib/useGetArticles';
 import {
   T_articles_create,
   apiArticlesCreate,
-} from '../../../../../../pages/api/articles/create';
-import { T_data_type_article } from '../../../../../Store/Interface';
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
-import { AppStateContext } from '../../../../../Store/appState/Context';
-import {
-  closeModal,
-  isLoadingMain,
-} from '../../../../../Store/appState/actions';
+} from '../../../pages/api/articles/create';
+import { T_data_type_article } from '../../Store/Interface';
+import { UserInfoContext } from '../../Store/userInfo/Context';
+import { AppStateContext } from '../../Store/appState/Context';
+import { closeModal, isLoadingMain } from '../../Store/appState/actions';
 
 export type TCreateArticle = {
   titleText: string;
