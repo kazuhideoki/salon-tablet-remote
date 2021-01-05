@@ -1,11 +1,8 @@
 import React from 'react';
 import { useGetTags } from './useGetTags';
-import {
-  T_tags_update,
-  apiTagsUpdata,
-} from '../../../../../../../pages/api/tags/update';
-import { AppStateContext } from '../../../../../../Store/appState/Context';
-import { isLoadingTags } from '../../../../../../Store/appState/actions';
+import { T_tags_update, apiTagsUpdata } from '../../../pages/api/tags/update';
+import { AppStateContext } from '../../Store/appState/Context';
+import { isLoadingTags } from '../../Store/appState/actions';
 
 type TUpdateTag = { edittingTagId: number; tagName: string };
 

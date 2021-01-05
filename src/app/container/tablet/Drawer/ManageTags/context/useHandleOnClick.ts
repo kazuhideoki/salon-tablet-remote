@@ -1,5 +1,5 @@
-import { useCreateTag } from './lib/useCreateTag';
-import { useUpdateTag } from './lib/useUpdateTag';
+import { useCreateTag } from '../../../../../hooks/tags/useCreateTag';
+import { useUpdateTag } from '../../../../../hooks/tags/useUpdateTag';
 
 export const useHandleOnClick = (
   isEditting: boolean,

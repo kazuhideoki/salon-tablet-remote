@@ -5,12 +5,12 @@ import { IconsSetting } from '../../Drawer/FooterItemEditor/components/iconSelec
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { showDataType } from '../../Main/components/showDataType';
 import { useIsMobile } from '../../../../../util/useIsMobile';
-import { useDeleteFooterItem } from './context/useDeleteFooterItem';
+import { useDeleteFooterItem } from '../../../../hooks/footerItems/useDeleteFooterItem';
 import { useStateFooter } from './context/useStateFooter';
 import { useHandleOnUpdateFooterItem } from './context/useHandleOnUpdateFooterItem';
 import { useHandleLoadingFooter } from './context/useHandleLoadingFooter';
 import { useOpenFooterItemModal } from './context/useOpenFooterItemModal';
-import { useSwitchOrder } from './context/useSwitchOrder';
+import { useSwitchOrder } from '../../../../hooks/footerItems/useSwitchOrder';
 
 export const useFooterProps = () => {
   const { footerItems, loading, isSetting } = useStateFooter();

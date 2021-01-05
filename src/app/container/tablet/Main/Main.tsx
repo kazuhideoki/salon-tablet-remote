@@ -15,7 +15,7 @@ import { useStateMain } from './context/useStateMain';
 import { useOpenArticleModal } from './context/useOpenArticleModal';
 import { useOpenInstagramModal } from './context/useOpenInstagramModal';
 import { useHandleLoadingMain } from './context/useHandleLoadingMain';
-import { useDeleteArticle } from './context/useDeleteArticle';
+import { useDeleteArticle } from '../../../hooks/articles/useDeleteArticle';
 
 export const useMainProps = () => {
   const {

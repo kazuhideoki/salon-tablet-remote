@@ -1,12 +1,12 @@
 import React from 'react';
-import { useGetFooterItems } from '../../../Drawer/FooterItemEditor/context/useGetFooterItems';
+import { useGetFooterItems } from './useGetFooterItems';
 import {
   T_footer_items_switch_order,
   apiFooterItemsSwitchOrder,
-} from '../../../../../../pages/api/footer_items/switch_order';
-import { FooterItem } from '../../../../../Store/Interface';
-import { AppStateContext } from '../../../../../Store/appState/Context';
-import { isLoadingFooter } from '../../../../../Store/appState/actions';
+} from '../../../pages/api/footer_items/switch_order';
+import { FooterItem } from '../../Store/Interface';
+import { AppStateContext } from '../../Store/appState/Context';
+import { isLoadingFooter } from '../../Store/appState/actions';
 
 export type TUseSwitchOrders = {
   smaller: FooterItem;

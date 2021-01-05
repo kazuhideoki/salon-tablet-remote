@@ -8,7 +8,7 @@ import {
   FooterItem,
   FooterItemWithoutId,
 } from '../../Store/Interface';
-import { useGetFooterItems } from '../../container/tablet/Drawer/FooterItemEditor/context/useGetFooterItems';
+import { useGetFooterItems } from './useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
 import {

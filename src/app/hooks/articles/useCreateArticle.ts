@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetArticles } from '../../container/tablet/Main/context/lib/useGetArticles';
+import { useGetArticles } from './useGetArticles';
 import {
   T_articles_create,
   apiArticlesCreate,

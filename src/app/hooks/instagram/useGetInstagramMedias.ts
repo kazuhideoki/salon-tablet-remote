@@ -1,26 +1,20 @@
 import React from 'react';
-import { apiInstagramMediasGet } from '../../../../../../pages/api/instagram_medias/get';
-import {
-  T_instagram_id,
-  T_instagram_username,
-} from '../../../../../Store/Interface';
+import { apiInstagramMediasGet } from '../../../pages/api/instagram_medias/get';
+import { T_instagram_id, T_instagram_username } from '../../Store/Interface';
 import {
   apiInstagramAccountsReconnectNeeded,
   T_instagram_accounts_reconnect_needed,
-} from '../../../../../../pages/api/instagram_accounts/reconnect_needed';
-import { InstagramContext } from '../../../../../Store/instagram/Context';
-import {
-  setMedias,
-  setReconnect,
-} from '../../../../../Store/instagram/actions';
-import { UserInfoContext } from '../../../../../Store/userInfo/Context';
-import { AppStateContext } from '../../../../../Store/appState/Context';
+} from '../../../pages/api/instagram_accounts/reconnect_needed';
+import { InstagramContext } from '../../Store/instagram/Context';
+import { setMedias, setReconnect } from '../../Store/instagram/actions';
+import { UserInfoContext } from '../../Store/userInfo/Context';
+import { AppStateContext } from '../../Store/appState/Context';
 import {
   closeModal,
   isLoadingMain,
   isShowInstagram,
   setSelectedInstagramAccounts,
-} from '../../../../../Store/appState/actions';
+} from '../../Store/appState/actions';
 
 export const useGetInstagramMedias = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);

@@ -2,10 +2,10 @@ import React from 'react';
 import {
   apiUserInfoThemeColor,
   T_user_info_theme_color,
-} from '../../../../../../../pages/api/user_info/theme/color';
-import { TColor } from '../../ManageTheme';
-import { UserInfoContext } from '../../../../../../Store/userInfo/Context';
-import { setThemeColor } from '../../../../../../Store/userInfo/actions';
+} from '../../../../pages/api/user_info/theme/color';
+import { TColor } from '../../../container/tablet/Drawer/ManageTheme/ManageTheme';
+import { UserInfoContext } from '../../../Store/userInfo/Context';
+import { setThemeColor } from '../../../Store/userInfo/actions';
 
 export const useChangeThemeColor = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useChangeThemeFont } from './useChangeThemeFont';
+import { useChangeThemeFont } from '../../../../../hooks/userInfo/theme/useChangeThemeFont';
 import { TFont1, TFont2 } from '../../../../../Store/theme/lib/fonts';
 import { UserInfoContext } from '../../../../../Store/userInfo/Context';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useGetFooterItems } from '../../container/tablet/Drawer/FooterItemEditor/context/useGetFooterItems';
+import { useGetFooterItems } from './useGetFooterItems';
 import {
   TCreateFooterItem,
   generateFooterItemEdittingParams,

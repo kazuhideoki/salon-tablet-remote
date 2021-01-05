@@ -19,7 +19,7 @@ import { SwitchOnTapInfoBar } from './components/SwitchOnTapInfoBar';
 import { SelectArticleInfoBar } from './components/SelectArticleInfoBar';
 import { PublishTwoTone } from '@material-ui/icons';
 import { useStateInfoBarEditor } from './context/useStateInfoBarEditor';
-import { useUpdateInfoBar } from './context/useUpdateInfoBar';
+import { useUpdateInfoBar } from '../../../../hooks/infoBar/useUpdateInfoBar';
 
 const useInfoBarEditorProps = () => {
   const {

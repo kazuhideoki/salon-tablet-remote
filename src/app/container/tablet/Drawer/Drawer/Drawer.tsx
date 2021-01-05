@@ -27,7 +27,7 @@ import { useStateDrawer } from './context/useStateDrawer';
 import { useOpenModal } from './context/useOpenModal';
 import { useOpenArticleEditor } from './context/useOpenArticleEditor';
 import { useOpenFooterItemEditor } from './context/useOpenFooterItemEditor';
-import { useSwitchOrder } from '../../Footer/Footer/context/useSwitchOrder';
+import { useSwitchOrder } from '../../../../hooks/footerItems/useSwitchOrder';
 
 export const useDrawerProps = () => {
   const {

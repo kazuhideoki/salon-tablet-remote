@@ -1,5 +1,5 @@
-import React from 'react'
-import { useGetArticles } from "../../../Main/context/lib/useGetArticles";
+import React from 'react';
+import { useGetArticles } from '../../../../../hooks/articles/useGetArticles';
 import { AppStateContext } from '../../../../../Store/appState/Context';
 
 export const useHandleSwitchIsSetting = () => {
@@ -9,4 +9,4 @@ export const useHandleSwitchIsSetting = () => {
   return () => {
     getArticles(true, 1, appState.selectedArticlesTags, false);
   };
-}
+};
