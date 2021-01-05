@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {
   FooterItems,
   FooterItem,
-  T_user_id,
   TArticles,
 } from '../../util/interface/Interface';
 import { TApiResponse } from '../../util/db/apiWrap';
@@ -17,10 +16,10 @@ export const apiCreateSampleData = async (
 };
 
 export type T_create_sample_data = {
-  user_id: T_user_id;
+  user_id: number;
 };
 
-const getSampleArticles = async (user_id: T_user_id) => {
+const getSampleArticles = async (user_id: number) => {
   const data = (await db(
     `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`
   )) as TArticles;
@@ -43,7 +42,7 @@ const insertSampleArticles = async (params: TArticles) => {
   });
 };
 
-const getSampleFooterItems = async (user_id: T_user_id) => {
+const getSampleFooterItems = async (user_id: number) => {
   const data: any = await db(
     `SELECT * FROM footer_items WHERE data_type = 'sample_data' ORDER BY created_at DESC`
   );

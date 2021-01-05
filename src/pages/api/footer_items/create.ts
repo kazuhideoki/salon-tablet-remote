@@ -10,7 +10,6 @@ import {
   T_order,
   T_item_excerpt,
   T_app_link_url,
-  T_user_id,
   T_modal_size,
   T_data_type_footer_item,
   T_order_sidebar,
@@ -43,7 +42,7 @@ export type T_footer_items_params = {
 };
 
 export type T_footer_items_create = T_footer_items_params & {
-  user_id: T_user_id;
+  user_id: number;
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {

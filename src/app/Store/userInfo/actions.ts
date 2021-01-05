@@ -1,10 +1,8 @@
 import * as types from './types';
 import {
-  T_footer_icon_size,
-  T_is_generate_public_page,
-  T_show_article_type,
-  T_theme_color,
-  T_theme_font,
+  ThemeFont,
+  ShowArticleType,
+  FooterIconSize,
 } from '../../../util/interface/Interface';
 import { T_user_info_update } from '../../../pages/api/user_info/update';
 import { TThemeParams } from '../theme/ThemeProvider';
@@ -17,39 +15,37 @@ export const setTheme = (themeParams: TThemeParams) => ({
   type: types.SET_THEME,
   payload: themeParams,
 });
-export const setThemeColor = (themeColor: T_theme_color) => ({
+export const setThemeColor = (themeColor: string) => ({
   type: types.SET_THEME_COLOR,
   payload: themeColor,
 });
-export const setThemeFont1 = (themeFont: T_theme_font) =>
+export const setThemeFont1 = (themeFont: ThemeFont) =>
   ({
     type: types.SET_THEME_FONT1,
     payload: themeFont,
   } as const);
-export const setThemeFont2 = (themeFont: T_theme_font) => ({
+export const setThemeFont2 = (themeFont: ThemeFont) => ({
   type: types.SET_THEME_FONT2,
   payload: themeFont,
 });
-export const setThemeFontHeading = (themeFont: T_theme_font) => ({
+export const setThemeFontHeading = (themeFont: ThemeFont) => ({
   type: types.SET_THEME_FONT_HEADING,
   payload: themeFont,
 });
-export const setFooterIconSize = (footerIconSize: T_footer_icon_size) => ({
+export const setFooterIconSize = (footerIconSize: FooterIconSize) => ({
   type: types.SET_FOOTER_ICON_SIZE,
   payload: footerIconSize,
 });
-export const setShowArticleType = (showArticleType: T_show_article_type) => ({
+export const setShowArticleType = (showArticleType: ShowArticleType) => ({
   type: types.SET_SHOW_ARTICLE_TYPE,
   payload: showArticleType,
 });
-export const setIsGeneratePublicPage = (
-  is_generate_public_page: T_is_generate_public_page
-) => ({
+export const setIsGeneratePublicPage = (is_generate_public_page: boolean) => ({
   type: types.SET_IS_GENERATE_PUBLIC_PAGE,
   payload: is_generate_public_page,
 });
 
-export type TUserInfoAction =
+export type UserInfoAction =
   | ReturnType<typeof update>
   | ReturnType<typeof setTheme>
   | ReturnType<typeof setThemeColor>

@@ -1,6 +1,5 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id, T_theme_color } from '../../../../util/interface/Interface';
 import { TApiResponse } from '../../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
@@ -12,8 +11,8 @@ export const apiUserInfoThemeColor = async (
 };
 
 export type T_user_info_theme_color = {
-  user_id: T_user_id;
-  theme_color: T_theme_color;
+  user_id: number;
+  theme_color: string;
 };
 
 const color = async (req: NextApiRequest, res: NextApiResponse) => {

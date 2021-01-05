@@ -1,7 +1,7 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { checkOrders } from '../../../util/db/checkOrders';
-import { FooterItems, T_user_id } from '../../../util/interface/Interface';
+import { FooterItems } from '../../../util/interface/Interface';
 import { correctOrders } from '../../../util/db/correctOrders';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { checkOrdersSidebar } from '../../../util/db/checkOrders';
@@ -10,7 +10,7 @@ import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsGet = async (
-  user_id: T_user_id
+  user_id: number
 ): Promise<TApiResponse<FooterItems>> => {
   return apiWrapGet(`footer_items/get?userId=${user_id}`);
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  TUserInfo,
+  UserInfo,
   TArticles,
   TPaginationParams,
   FooterItems,
@@ -30,7 +30,7 @@ export type TIndexPropsData = {
   infoBarData: TInfoBarData;
   tags: TTags;
   instagramAccounts: TInstagramAccounts;
-  userInfo: TUserInfo;
+  userInfo: UserInfo;
 };
 
 export type TIndexProps = {

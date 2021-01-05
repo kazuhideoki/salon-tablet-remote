@@ -1,12 +1,12 @@
 import React from 'react';
-import { TUserInfoAction } from './actions';
+import { UserInfoAction } from './actions';
 import { UserInfoContextState, userInfoReducer } from './reducer';
 
 export type Props = { userInfo: UserInfoContextState };
 
 export type UserInfoContextProps = {
   userInfo: UserInfoContextState;
-  dispatchUserInfo: React.Dispatch<TUserInfoAction>;
+  dispatchUserInfo: React.Dispatch<UserInfoAction>;
 };
 
 export const UserInfoContext = React.createContext({} as UserInfoContextProps);

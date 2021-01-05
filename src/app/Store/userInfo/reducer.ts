@@ -1,13 +1,13 @@
 import { reducerLogger } from '../../../util/dev/reducerLogger';
-import { TUserInfo } from '../../../util/interface/Interface';
-import { TUserInfoAction } from './actions';
+import { UserInfo } from '../../../util/interface/Interface';
+import { UserInfoAction } from './actions';
 import * as types from './types';
 
-export type UserInfoContextState = TUserInfo;
+export type UserInfoContextState = UserInfo;
 
 export const userInfoReducer = (
   state: UserInfoContextState,
-  action: TUserInfoAction
+  action: UserInfoAction
 ) => {
   let newState: UserInfoContextState;
   const func = userInfoReducer;

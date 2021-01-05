@@ -2,7 +2,6 @@ import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   TInfoBar,
-  T_user_id,
   TInfoBarData,
   TInfoBarWithoutId,
 } from '../../../util/interface/Interface';
@@ -11,12 +10,12 @@ import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
-  user_id: T_user_id
+  user_id: number
 ): Promise<TApiResponse<TInfoBarData>> => {
   return apiWrapGet(`info_bar/get?userId=${user_id}`);
 };
 
-const createInitInfoBar = async (user_id: T_user_id) => {
+const createInitInfoBar = async (user_id: number) => {
   const params: TInfoBarWithoutId = {
     user_id: user_id,
     info_bar_type: 'shop_name',
@@ -37,7 +36,7 @@ const createInitInfoBar = async (user_id: T_user_id) => {
 };
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  const userId: T_user_id = Number(req.query.userId);
+  const userId = Number(req.query.userId);
 
   try {
     //@ts-ignore

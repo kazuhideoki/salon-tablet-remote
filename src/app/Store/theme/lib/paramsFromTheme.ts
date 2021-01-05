@@ -1,4 +1,4 @@
-import { T_selected_theme } from '../../../../util/interface/Interface';
+import { SelectedTheme } from '../../../../util/interface/Interface';
 import { TThemeParams } from '../ThemeProvider';
 import { themeWhite } from './themes/themeWhite';
 import { themeNatural } from './themes/themeNatural';
@@ -44,7 +44,7 @@ export const switchingTheme = (params: TThemeParams) => {
 };
 
 export const generateDefaultParamsFromTheme = (
-  selectedTheme: T_selected_theme
+  selectedTheme: SelectedTheme
 ): TThemeParams => {
   switch (selectedTheme) {
     case 'default':

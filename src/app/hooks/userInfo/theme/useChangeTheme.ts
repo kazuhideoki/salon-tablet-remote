@@ -1,5 +1,5 @@
 import React from 'react';
-import { T_selected_theme } from '../../../../util/interface/Interface';
+import { SelectedTheme } from '../../../../util/interface/Interface';
 import { apiUserInfoChangeTheme } from '../../../../pages/api/user_info/theme/change_theme';
 import { generateDefaultParamsFromTheme } from '../../../store/theme/lib/paramsFromTheme';
 import { UserInfoContext } from '../../../store/userInfo/Context';
@@ -9,7 +9,7 @@ export const useChangeTheme = () => {
   const { dispatchUserInfo, userInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 
-  return async (selectedTheme: T_selected_theme) => {
+  return async (selectedTheme: SelectedTheme) => {
     const themeParams = generateDefaultParamsFromTheme(selectedTheme);
 
     const params = {

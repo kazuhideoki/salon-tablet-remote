@@ -1,44 +1,29 @@
 import { TFont1, TFont2 } from '../../app/store/theme/lib/fonts';
 
-export type T_user_id = number;
-export type T_user_name = string;
-export type T_shop_name = string;
-export type T_user_email = string;
-export type T_show_article_type = 'scroll' | 'grid6';
+export type ShowArticleType = 'scroll' | 'grid6';
+export type SelectedTheme = 'default' | 'white' | 'natural';
+export type ThemeFont = TFont1[0] | TFont2[0];
+export type FooterIconSize = 'medium' | 'small';
 
-export type T_selected_theme = 'default' | 'white' | 'natural';
-export type T_theme_color = string;
-export type T_theme_font = TFont1[0] | TFont2[0];
-export type T_footer_icon_size = 'medium' | 'small';
-
-export type T_is_generate_public_page = boolean;
-export type T_public_page_slug = string;
-// export type T_public_page_url = string;
-export type T_is_admin = boolean;
-export type T_created_at_user = string;
-export type T_updated_at_user = string;
-
-export type TUserInfo = {
-  user_id: T_user_id;
-  user_name: T_user_name;
-  shop_name: T_shop_name;
-  user_email: T_user_email;
-  show_article_type: T_show_article_type;
+export type UserInfo = {
+  user_id: number;
+  user_name: string;
+  shop_name: string;
+  user_email: string;
+  show_article_type: ShowArticleType;
   is_first_sign_in: boolean;
 
-  selected_theme: T_selected_theme;
-  theme_color: T_theme_color;
-  theme_font1: T_theme_font;
-  theme_font2: T_theme_font;
-  theme_font_heading: T_theme_font;
-  footer_icon_size: T_footer_icon_size;
-
-  is_generate_public_page: T_is_generate_public_page;
-  public_page_slug: T_public_page_slug;
-
-  is_admin: T_is_admin;
-  created_at: T_created_at_user;
-  updated_at: T_updated_at_user | null;
+  selected_theme: SelectedTheme;
+  theme_color: string;
+  theme_font1: ThemeFont;
+  theme_font2: ThemeFont;
+  theme_font_heading: ThemeFont;
+  footer_icon_size: FooterIconSize;
+  is_generate_public_page: boolean;
+  public_page_slug: string;
+  is_admin: boolean;
+  created_at: string;
+  updated_at: string | null;
 };
 
 const initPagination = {
@@ -64,7 +49,7 @@ export type T_article_excerpt = string;
 export type T_article_img = string;
 
 export type ArticleWithoutArticleId = {
-  user_id: T_user_id;
+  user_id: number;
   tag_ids: T_tag_ids;
   is_published: T_is_published_articles;
   created_at: T_created_at;
@@ -107,7 +92,7 @@ export type T_order = number;
 export type T_order_sidebar = number;
 
 export type FooterItemWithoutId = {
-  user_id: T_user_id;
+  user_id: number;
   is_published: T_is_published_footer_items;
   created_at: T_created_at_footer_items;
   updated_at: T_updated_at_footer_items | null;
@@ -139,7 +124,7 @@ export type T_scrolling_animation_duration = number;
 export type T_selected_article_id = T_article_id;
 
 export type TInfoBarWithoutId = {
-  user_id: T_user_id;
+  user_id: number;
   info_bar_type: T_info_bar_type;
   scrolling_sentence: T_scrolling_sentence;
   scrolling_animation_duration: T_scrolling_animation_duration;
@@ -161,7 +146,7 @@ export type T_updated_at_tag = string | null;
 
 export type TTag = {
   tag_id: T_tag_id;
-  user_id: T_user_id;
+  user_id: number;
   tag_name: T_tag_name;
   created_at: T_created_at_tag;
   updated_at: T_updated_at_tag;
@@ -182,7 +167,7 @@ export type TInstagramAccount = {
   username: T_instagram_username;
   profile_img: T_profile_img;
   expires: T_expires;
-  user_id: T_user_id;
+  user_id: number;
   created_at: T_created_at_instagram_account;
   updated_at: T_updated_at_instagram_account;
   is_reconnect_needed: T_is_reconnect_needed;

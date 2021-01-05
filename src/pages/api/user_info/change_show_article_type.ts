@@ -1,6 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -12,7 +11,7 @@ export const apiUserInfoChangeShowArticleType = async (
 };
 
 export type T_user_info_change_show_article_type = {
-  user_id: T_user_id;
+  user_id: number;
   showArticleType: string;
 };
 

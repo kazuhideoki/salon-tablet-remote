@@ -2,7 +2,6 @@ import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { server, localhost } from '../../../util/loadUrl';
 import { TApiResponse } from '../../../util/db/apiWrap';
-import { T_user_id } from '../../../util/interface/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -13,7 +12,7 @@ export const apiIsFirsSigninFalse = async (
 };
 
 type user_info_is_first_signin_false = {
-  user_id: T_user_id;
+  user_id: number;
 };
 
 const is_first_signin_false = async (

@@ -1,15 +1,10 @@
 import { db } from './db';
 import { tagIdsFromString } from './tagIdsFromString';
-import {
-  T_tag_ids,
-  T_tag_id,
-  T_user_id,
-  T_article_id,
-} from '../interface/Interface';
+import { T_tag_ids, T_tag_id, T_article_id } from '../interface/Interface';
 
 export const deleteTagIdInArticle = async (
   tag_id: T_tag_id,
-  user_id: T_user_id
+  user_id: number
 ) => {
   try {
     // ★まずarticleのtag_idsの該当タグを消す

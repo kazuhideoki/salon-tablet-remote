@@ -4,7 +4,6 @@ import {
   T_info_bar_type,
   T_scrolling_sentence,
   T_selected_article_id,
-  T_user_id,
   T_scrolling_animation_duration,
 } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
@@ -18,7 +17,7 @@ export const apiInfoBarUpdate = async (
 };
 
 export type T_info_bar_update = {
-  user_id: T_user_id;
+  user_id: number;
   info_bar_type: T_info_bar_type;
   scrolling_sentence: T_scrolling_sentence;
   scrolling_animation_duration: T_scrolling_animation_duration;

@@ -1,9 +1,5 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  T_user_id,
-  T_is_generate_public_page,
-} from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
@@ -15,8 +11,8 @@ export const apiUserInfoSwitchGeneratePublicPage = async (
 };
 
 export type T_user_info_switch_generate_public_page = {
-  user_id: T_user_id;
-  is_generate_public_page: T_is_generate_public_page;
+  user_id: number;
+  is_generate_public_page: boolean;
 };
 
 const switch_generate_public_page = async (

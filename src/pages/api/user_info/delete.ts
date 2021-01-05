@@ -1,7 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { TApiResponse } from '../../../util/db/apiWrap';
-import { T_user_id } from '../../../util/interface/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
@@ -12,7 +11,7 @@ export const apiUserInfoDelete = async (
 };
 
 export type T_user_info_delete = {
-  user_id: T_user_id;
+  user_id: number;
 };
 
 const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {

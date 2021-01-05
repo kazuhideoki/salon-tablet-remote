@@ -1,14 +1,14 @@
 import React from 'react';
 import { Select, MenuItem } from '@material-ui/core';
 import { TUseManageThemeProps } from '../ManageTheme';
-import { T_footer_icon_size } from '../../../../../../util/interface/Interface';
+import { FooterIconSize } from '../../../../../../util/interface/Interface';
 
 type Props = TUseManageThemeProps & { className?: string };
 
 export const SelectFooterIconSize = (props: Props) => {
   const id = 'select_footer_icon_size';
 
-  const sizes: [string, T_footer_icon_size][] = [
+  const sizes: [string, FooterIconSize][] = [
     ['中', 'medium'],
     ['小', 'small'],
   ];

@@ -1,6 +1,6 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id, T_theme_font } from '../../../../util/interface/Interface';
+import { ThemeFont } from '../../../../util/interface/Interface';
 import { TApiResponse } from '../../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
@@ -14,8 +14,8 @@ export const apiUserInfoThemeFont = async (
 export type TWhichFont = 'theme_font1' | 'theme_font2' | 'theme_font_heading';
 
 export type T_user_info_theme_font = {
-  user_id: T_user_id;
-  theme_font: T_theme_font;
+  user_id: number;
+  theme_font: ThemeFont;
   whichFont: TWhichFont;
 };
 

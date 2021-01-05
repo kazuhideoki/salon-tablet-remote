@@ -4,7 +4,6 @@ import { HelpButton } from '../../../../components/HelpButton';
 import { Divider, Typography } from '@material-ui/core';
 import { SelectTheme } from './components/SelectTheme';
 import { SelectShowArticleType } from './components/SelectShowArticleType';
-import { T_theme_color } from '../../../../../util/interface/Interface';
 import { SelectPrimaryColor } from './components/SelectPrimaryColor';
 import { SelectFont } from './components/SelectFont';
 import { fonts2, fonts1 } from '../../../../store/theme/lib/fonts';
@@ -34,7 +33,7 @@ export type THsl = {
   s: number;
   l: number;
 };
-export type TColor = { hex: T_theme_color; hsl: THsl };
+export type TColor = { hex: string; hsl: THsl };
 
 export const useManageTheme = () => {
   const {

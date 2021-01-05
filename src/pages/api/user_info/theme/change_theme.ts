@@ -1,6 +1,5 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_user_id } from '../../../../util/interface/Interface';
 import { TApiResponse } from '../../../../util/db/apiWrap';
 import { TThemeParams } from '../../../../app/store/theme/ThemeProvider';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
@@ -13,7 +12,7 @@ export const apiUserInfoChangeTheme = async (
 };
 
 export type T_user_info_change_theme = {
-  user_id: T_user_id;
+  user_id: number;
   themeParams: TThemeParams;
 };
 

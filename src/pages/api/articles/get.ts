@@ -2,7 +2,6 @@ import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
 import {
-  T_user_id,
   TArticles,
   TAllArticles,
   TPaginationParams,
@@ -25,7 +24,7 @@ export type T_articles_get = {
   page: number;
   selectingTags: number[];
   isSetting: boolean;
-  userId: T_user_id;
+  userId: number;
 };
 
 export type T_articles_get_return = {

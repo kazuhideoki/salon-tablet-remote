@@ -1,15 +1,12 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  TInstagramAccounts,
-  T_user_id,
-} from '../../../util/interface/Interface';
+import { TInstagramAccounts } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramAccountsGet = async (
-  user_id: T_user_id
+  user_id: number
 ): Promise<TApiResponse<TInstagramAccounts>> => {
   return apiWrapGet(`instagram_accounts/get?userId=${user_id}`);
 };

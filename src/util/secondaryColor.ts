@@ -1,4 +1,3 @@
-import { T_theme_color } from './interface/Interface';
 import colorConvert from 'color-convert';
 
 import { THsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';
@@ -34,7 +33,7 @@ export const generateSecondaryColor = (props: props) => {
   return newParams;
 };
 
-export const secondaryColor = (theme_color: T_theme_color) => {
+export const secondaryColor = (theme_color: string) => {
   return `#${colorConvert.hsl.hex(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore

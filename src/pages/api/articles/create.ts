@@ -6,7 +6,6 @@ import {
   T_article_content,
   T_article_excerpt,
   T_article_img,
-  T_user_id,
   T_data_type_article,
 } from '../../../util/interface/Interface';
 import { TApiResponse } from '../../../util/db/apiWrap';
@@ -27,7 +26,7 @@ export type T_articles_create = {
   article_img: T_article_img;
   tag_ids: string | null;
   data_type: T_data_type_article;
-  user_id: T_user_id;
+  user_id: number;
 };
 
 export type T_articles_create_return = {

@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { TIndexProps } from '..';
 import { checkIsGeneratePubulicPage } from '../../util/db/checkIsGeneratePubulicPage';
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
-import { TUserInfo } from '../../util/interface/Interface';
+import { UserInfo } from '../../util/interface/Interface';
 import { getDeviceType } from '../../util/getDeviceType';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const slug = req.url;
   if (slug === undefined) throw `slug is undefined`;
 
-  let userInfo: TUserInfo | null = null;
+  let userInfo: UserInfo | null = null;
   const slicedSlug = slug.replace('/public_page/', '');
   // サンプルページのiframeでで間違い半手せれてしまうため?以降のqueryとる
   const SlugArray = slicedSlug.split('?');

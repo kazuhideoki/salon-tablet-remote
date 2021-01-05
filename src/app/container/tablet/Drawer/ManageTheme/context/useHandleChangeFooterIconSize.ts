@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChangeFooterIconSize } from '../../../../../hooks/userInfo/useChangeFooterIconSize';
-import { T_footer_icon_size } from '../../../../../../util/interface/Interface';
+import { FooterIconSize } from '../../../../../../util/interface/Interface';
 import { UserInfoContext } from '../../../../../store/userInfo/Context';
 
 export const useHandleChangeFooterIconSize = () => {
@@ -14,8 +14,8 @@ export const useHandleChangeFooterIconSize = () => {
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     try {
-      await changeFooterIconSize(event.target.value as T_footer_icon_size);
-      setFooterIconSize(event.target.value as T_footer_icon_size);
+      await changeFooterIconSize(event.target.value as FooterIconSize);
+      setFooterIconSize(event.target.value as FooterIconSize);
     } catch (err) {
       console.log(`handleChangeFooterIconSize: ${err}`);
     }

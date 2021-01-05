@@ -1,4 +1,4 @@
-import { TInfoBarData, TUserInfo } from '../interface/Interface';
+import { TInfoBarData, UserInfo } from '../interface/Interface';
 import { T_articles_get, apiArticlesGet } from '../../pages/api/articles/get';
 import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';
@@ -7,7 +7,7 @@ import { apiInfoBarGet } from '../../pages/api/info_bar/get';
 import { TIndexPropsData } from '../../pages';
 
 export const generateProps = async (
-  userInfo: TUserInfo,
+  userInfo: UserInfo,
   getPublishedOnly: boolean
 ): Promise<TIndexPropsData> => {
   const { user_id } = userInfo;

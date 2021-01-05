@@ -1,6 +1,6 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { T_tag_id, T_user_id } from '../../../util/interface/Interface';
+import { T_tag_id } from '../../../util/interface/Interface';
 import { deleteTagIdInArticle } from '../../../util/db/deleteTagIdInArticle';
 import { TApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
@@ -12,7 +12,7 @@ export const apiTagsDelete = async (
   return apiWrapPost('tags/delete', params);
 };
 
-export type T_tags_delete = { tag_id: T_tag_id; user_id: T_user_id };
+export type T_tags_delete = { tag_id: T_tag_id; user_id: number };
 
 const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {

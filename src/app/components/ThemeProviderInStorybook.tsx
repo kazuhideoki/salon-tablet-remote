@@ -7,8 +7,8 @@ import {
   generateDefaultParamsFromTheme,
   switchingTheme,
 } from '../store/theme/lib/paramsFromTheme';
-import { T_selected_theme } from '../../util/interface/Interface';
 import { googleFontsUrl } from '../../util/googleFontsUrl';
+import { SelectedTheme } from '../../util/interface/Interface';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
@@ -58,20 +58,20 @@ const border = {
   marginBottom: 40,
 };
 
-type TStorybookStore = {
-  selected_theme: T_selected_theme;
-};
+type TStorybookStore = SelectedTheme;
 
-export const StorybookStore = React.createContext({} as TStorybookStore);
+export const StorybookStore = React.createContext(
+  {} as { selected_theme: TStorybookStore }
+);
 
 export const ThemeProvider: React.FC = (props) => {
   const [selected_theme, setSelected_theme] = React.useState(
-    'white' as T_selected_theme
+    'white' as SelectedTheme
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected_theme(
-      (event.target as HTMLInputElement).value as T_selected_theme
+      (event.target as HTMLInputElement).value as SelectedTheme
     );
   };
 

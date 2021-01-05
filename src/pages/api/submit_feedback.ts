@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { TUserInfo } from '../../util/interface/Interface';
+import { UserInfo } from '../../util/interface/Interface';
 import { apiWrapPost, TApiResponse } from '../../util/db/apiWrap';
 
 const receiverEmailAddress = 'infosalontablet@gmail.com';
@@ -27,7 +27,7 @@ const transporter = nodemailer.createTransport({
 export type T_submit_feedback = {
   contactFormTitle: string;
   contactFormContent: string;
-  userInfo: TUserInfo;
+  userInfo: UserInfo;
 };
 
 export type T_submit_feedback_return_no_error = { sent: true };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { T_show_article_type } from '../../../util/interface/Interface';
+import { ShowArticleType } from '../../../util/interface/Interface';
 import {
   apiUserInfoChangeShowArticleType,
   T_user_info_change_show_article_type,
@@ -11,7 +11,7 @@ export const useChangeShowArticleType = () => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 
-  return async (showArticleType: T_show_article_type) => {
+  return async (showArticleType: ShowArticleType) => {
     const params: T_user_info_change_show_article_type = {
       user_id,
       showArticleType,
