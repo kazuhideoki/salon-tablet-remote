@@ -15,7 +15,10 @@ export type ApiTagsCreate = {
   tag_name: string;
 };
 
-const create = async (req: NextApiRequest, res: NextApiResponse) => {
+const create = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const params: ApiTagsCreate = req.body;
 

@@ -15,7 +15,7 @@ export type InstagramContextState = {
 export const instagramReducer = (
   state: InstagramContextState,
   action: InstagramAction
-) => {
+): InstagramContextState => {
   let newState: InstagramContextState;
   const func = instagramReducer;
   switch (action.type) {

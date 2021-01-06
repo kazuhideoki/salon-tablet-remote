@@ -8,7 +8,7 @@ export type FooterItemsContextState = FooterItems;
 export const footerItemsReducer = (
   state: FooterItemsContextState,
   action: FooterItemsAction
-) => {
+): FooterItemsContextState => {
   let newState: FooterItemsContextState;
   const func = footerItemsReducer;
   switch (action.type) {

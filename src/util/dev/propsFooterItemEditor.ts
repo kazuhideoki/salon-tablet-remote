@@ -54,7 +54,7 @@ export const propsFooterItemEditor: FooterItemEditorPresenterProps = {
   },
   dataTypeAndSet: {
     dataType: 'default_data',
-    setDataType: () => {
+    setDataType: (): void => {
       return;
     },
   },

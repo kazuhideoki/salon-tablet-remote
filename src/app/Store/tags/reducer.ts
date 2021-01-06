@@ -5,7 +5,10 @@ import * as types from './types';
 
 export type TagsContextState = Tags;
 
-export const tagsReducer = (state: TagsContextState, action: TagsAction) => {
+export const tagsReducer = (
+  state: TagsContextState,
+  action: TagsAction
+): TagsContextState => {
   let newState: TagsContextState;
   const func = tagsReducer;
   switch (action.type) {
@@ -14,6 +17,6 @@ export const tagsReducer = (state: TagsContextState, action: TagsAction) => {
       break;
   }
 
-  reducerLogger({ state, newState, func, action });
+  reducerLogger<TagsContextState>({ state, newState, func, action });
   return newState;
 };

@@ -4,7 +4,7 @@ import { Hsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';
 
 type props = Hsl | number[]; //両方のパターンに対応させる？★
 
-export const generateSecondaryColor = (props: props) => {
+export const generateSecondaryColor = (props: props): number[] => {
   let params: Hsl;
   let h: number, s: number, l: number;
   if (Array.isArray(props)) {

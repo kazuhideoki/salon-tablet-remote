@@ -19,7 +19,10 @@ export type ApiInfoBarUpdate = {
   selected_article_id: number;
 };
 
-const update = async (req: NextApiRequest, res: NextApiResponse) => {
+const update = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const params: ApiInfoBarUpdate = req.body;
 

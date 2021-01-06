@@ -15,7 +15,14 @@ import {
   setSelectedInstagramAccounts,
 } from '../../store/appState/actions';
 
-export const useGetInstagramMedias = () => {
+export const useGetInstagramMedias = (): ((
+  instagram_id: number,
+  username: string,
+  paging: {
+    after?: string;
+    before?: string;
+  }
+) => Promise<void>) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const user_id = userInfo.user_id;

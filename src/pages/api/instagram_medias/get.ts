@@ -16,7 +16,10 @@ export type ApiInstagramMediasGet = {
   paging: { after?: string; before?: string };
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { instagram_id, paging }: ApiInstagramMediasGet = req.body;
 

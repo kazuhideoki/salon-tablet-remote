@@ -11,14 +11,16 @@ export const apiTagsGet = async (
   return apiWrapGet(`tags/get?userId=${user_id}`);
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
-    //@ts-ignore
-    const data: Tags = await db(
+    const data = (await db(
       'SELECT * FROM tags WHERE user_id = ?',
       // queryは文字列で来るため
       Number(req.query.userId)
-    );
+    )) as Tags;
 
     res.status(200).json({ err: false, rawData: data } as ApiResponse<Tags>);
   } catch (err) {

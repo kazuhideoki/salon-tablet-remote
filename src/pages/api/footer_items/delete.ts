@@ -18,7 +18,7 @@ export type ApiFooterItemsDelete = {
 const footer_items_delete = async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   if (req.method === 'POST') {
     const { footer_item_id, order }: ApiFooterItemsDelete = req.body;
 

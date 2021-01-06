@@ -1,12 +1,9 @@
 import { db } from '../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  FooterItems,
-  FooterItem,
-  Articles,
-} from '../../util/interface/Interface';
+import { FooterItem, Article } from '../../util/interface/Interface';
 import { ApiResponse } from '../../util/db/apiWrap';
 import { apiWrapPost } from '../../util/db/apiWrap';
+import { PartiallyPartial } from '../../util/interface/typescript';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
@@ -19,10 +16,15 @@ export type ApiCreateSampleData = {
   user_id: number;
 };
 
+type ArticlesForSample = PartiallyPartial<
+  Article,
+  'article_id' | 'created_at' | 'updated_at'
+>;
+
 const getSampleArticles = async (user_id: number) => {
   const data = (await db(
     `SELECT * FROM articles WHERE data_type = 'sample_data' ORDER BY created_at DESC`
-  )) as Articles;
+  )) as ArticlesForSample[];
   const params = data.map((article) => {
     delete article.article_id;
     delete article.created_at;
@@ -36,18 +38,23 @@ const getSampleArticles = async (user_id: number) => {
   return params;
 };
 
-const insertSampleArticles = async (params: Articles) => {
+const insertSampleArticles = async (params: ArticlesForSample[]) => {
   params.forEach(async (article) => {
     await db(`INSERT INTO articles SET ?`, article);
   });
 };
 
-const getSampleFooterItems = async (user_id: number) => {
-  const data: any = await db(
-    `SELECT * FROM footer_items WHERE data_type = 'sample_data' ORDER BY created_at DESC`
-  );
+type FooterItemForSample = PartiallyPartial<
+  FooterItem,
+  'footer_item_id' | 'created_at' | 'updated_at'
+>;
 
-  const params = data.map((item: FooterItem) => {
+const getSampleFooterItems = async (user_id: number) => {
+  const data = (await db(
+    `SELECT * FROM footer_items WHERE data_type = 'sample_data' ORDER BY created_at DESC`
+  )) as FooterItemForSample[];
+
+  const params = data.map((item) => {
     delete item.footer_item_id;
     delete item.created_at;
     delete item.updated_at;
@@ -60,7 +67,7 @@ const getSampleFooterItems = async (user_id: number) => {
   return params;
 };
 
-const insertSampleFooterItems = async (params: FooterItems) => {
+const insertSampleFooterItems = async (params: FooterItemForSample[]) => {
   params.forEach(async (footerItem) => {
     await db(`INSERT INTO footer_items SET ?`, footerItem);
   });
@@ -69,7 +76,7 @@ const insertSampleFooterItems = async (params: FooterItems) => {
 const create_sample_data = async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   if (req.method === 'POST') {
     const { user_id }: ApiCreateSampleData = req.body;
 

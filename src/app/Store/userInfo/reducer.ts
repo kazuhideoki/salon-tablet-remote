@@ -8,7 +8,7 @@ export type UserInfoContextState = UserInfo;
 export const userInfoReducer = (
   state: UserInfoContextState,
   action: UserInfoAction
-) => {
+): UserInfoContextState => {
   let newState: UserInfoContextState;
   const func = userInfoReducer;
   switch (action.type) {

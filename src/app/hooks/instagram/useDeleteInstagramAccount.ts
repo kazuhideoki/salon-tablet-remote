@@ -9,7 +9,9 @@ import {
   isShowInstagram,
 } from '../../store/appState/actions';
 
-export const useDeleteInstagramAccount = () => {
+export const useDeleteInstagramAccount = (): ((
+  instagram_id: number
+) => Promise<void>) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { dispatchInstagram } = React.useContext(InstagramContext);
 

@@ -4,7 +4,10 @@ import { useAuth } from '../../../util/auth/AuthProvider';
 import { deleteUserInFirebase } from '../../../util/auth/deleteUserInFirebase';
 import { UserInfoContext } from '../../store/userInfo/Context';
 
-export const useDeleteUser = () => {
+export const useDeleteUser = (): ((
+  email: string,
+  password: string
+) => Promise<void>) => {
   const { userInfo } = React.useContext(UserInfoContext);
   const { user_email, user_id } = userInfo;
   const { signout } = useAuth();

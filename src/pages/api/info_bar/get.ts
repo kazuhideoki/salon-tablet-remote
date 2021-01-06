@@ -35,16 +35,18 @@ const createInitInfoBar = async (user_id: number) => {
   return data;
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   const userId = Number(req.query.userId);
 
   try {
-    //@ts-ignore
-    let data: InfoBar[] = await db(
+    let data = (await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
       'SELECT * FROM info_bar WHERE user_id = ?',
       userId
-    );
+    )) as InfoBar[];
 
     // 初回サインインのときなどでinfo_barがない場合、新しく作る。作ったデータが返ってくる
     if (data.length === 0) {

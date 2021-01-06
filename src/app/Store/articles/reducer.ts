@@ -16,7 +16,7 @@ export type ArticlesContextState = {
 export const articlesReducer = (
   state: ArticlesContextState,
   action: ArticlesAction
-) => {
+): ArticlesContextState => {
   let newState: ArticlesContextState;
   const func = articlesReducer;
   switch (action.type) {

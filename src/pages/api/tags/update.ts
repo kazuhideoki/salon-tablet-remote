@@ -15,7 +15,10 @@ export type ApiTagsUpdata = {
   tag_name: string;
 };
 
-const update = async (req: NextApiRequest, res: NextApiResponse) => {
+const update = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const params: ApiTagsUpdata = req.body;
 

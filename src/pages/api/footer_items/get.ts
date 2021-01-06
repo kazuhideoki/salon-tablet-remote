@@ -26,15 +26,17 @@ const changeToBooleanFromNumberFooterItems = (data: FooterItems) => {
   });
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
-    //@ts-ignore
-    const data: FooterItems = await db(
+    const data = (await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
       'SELECT * FROM footer_items WHERE user_id = ? ORDER BY `order` ASC',
       // queryは文字列で来るため
       Number(req.query.userId)
-    );
+    )) as FooterItems;
 
     // footer_itemsのorderが正しく連番になっているかチェックする
     const isCorrectOrders = checkOrders(data);

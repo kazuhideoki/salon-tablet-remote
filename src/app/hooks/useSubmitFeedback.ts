@@ -2,10 +2,7 @@ import React from 'react';
 import { closeModal } from '../store/appState/actions';
 import { AppStateContext } from '../store/appState/Context';
 import { UserInfoContext } from '../store/userInfo/Context';
-import {
-  // apiSubmitFeedback,
-  ApiSubmitFeedback,
-} from '../../pages/api/submit_feedback';
+import { ApiSubmitFeedback } from '../../pages/api/submit_feedback';
 import { apiWrapPost, ApiResponse } from '../../util/db/apiWrap';
 
 type Props = {
@@ -22,19 +19,14 @@ const apiSubmitFeedback = async (
   return apiWrapPost('submit_feedback', params);
 };
 
-export const useSubmitFeedback = ({
-  contactFormTitle,
-  setContactFormTitle,
-  contactFormContent,
-  setContactFormContent,
-}: Props) => {
+export const useSubmitFeedback = (props: Props): (() => Promise<void>) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
 
   return async () => {
     const params: ApiSubmitFeedback = {
-      contactFormTitle,
-      contactFormContent,
+      contactFormTitle: props.contactFormTitle,
+      contactFormContent: props.contactFormContent,
       userInfo,
     };
 
@@ -42,8 +34,8 @@ export const useSubmitFeedback = ({
       await apiSubmitFeedback(params);
 
       alert('送信されました。');
-      setContactFormTitle('');
-      setContactFormContent('');
+      props.setContactFormTitle('');
+      props.setContactFormContent('');
       dispatchAppState(closeModal());
     } catch (err) {
       console.log(`useSubmitFeedback ${JSON.stringify(err)}`);

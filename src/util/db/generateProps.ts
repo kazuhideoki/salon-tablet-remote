@@ -1,4 +1,8 @@
-import { InfoBarData, UserInfo } from '../interface/Interface';
+import {
+  InfoBarData,
+  PaginationParams,
+  UserInfo,
+} from '../interface/Interface';
 import { ApiArticlesGet, apiArticlesGet } from '../../pages/api/articles/get';
 import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';
@@ -31,7 +35,7 @@ export const generateProps = async (
     // as any で何故かエラー消える
     const propsData: IndexPropsData = {
       articles: data.err ? [] : data.rawData.articles,
-      pagination: data.err ? ([] as any) : data.rawData.pagination,
+      pagination: data.err ? ({} as PaginationParams) : data.rawData.pagination,
       allArticles: data.err ? [] : data.rawData.allArticles,
       footerItems: data2.err ? [] : data2.rawData,
       infoBarData: data3.err ? ({} as InfoBarData) : data3.rawData,

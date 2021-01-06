@@ -1,14 +1,11 @@
-import { Button } from "@material-ui/core";
+import { Button } from '@material-ui/core';
 
 function ConnectInstagramAccount() {
-
-  const handleOnClick = () => {
-    
-  }
-
   return (
     <div>
-      <Button onClick={() => handleOnClick()}>インスタグラムアカウントにつなげる</Button>
+      <Button onClick={() => handleOnClick()}>
+        インスタグラムアカウントにつなげる
+      </Button>
     </div>
   );
 }

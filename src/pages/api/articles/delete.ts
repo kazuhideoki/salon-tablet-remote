@@ -14,7 +14,10 @@ export type ApiArticlesDelete = {
   article_id: number;
 };
 
-const articles_delete = async (req: NextApiRequest, res: NextApiResponse) => {
+const articles_delete = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { article_id }: ApiArticlesDelete = req.body;
 

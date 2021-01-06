@@ -17,7 +17,7 @@ export type ApiCreatePublicPageSlug = {
 const create_public_page_slug = async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   if (req.method === 'POST') {
     const { user_id } = req.body as ApiCreatePublicPageSlug;
 

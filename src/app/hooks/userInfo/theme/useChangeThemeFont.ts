@@ -12,7 +12,10 @@ import {
   setThemeFontHeading,
 } from '../../../store/userInfo/actions';
 
-export const useChangeThemeFont = () => {
+export const useChangeThemeFont = (): ((
+  font: Font1[0] | Font2[0],
+  whichFont: WhichFont
+) => Promise<void>) => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 

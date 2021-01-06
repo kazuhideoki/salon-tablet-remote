@@ -18,7 +18,7 @@ export type ApiUserInfoChangeShowArticleType = {
 const change_show_article_type = async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   if (req.method === 'POST') {
     const {
       user_id,

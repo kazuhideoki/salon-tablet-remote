@@ -9,7 +9,7 @@ export type AppStateContextState = ReturnType<typeof initAppState>;
 export const appStateReducer = (
   state: AppStateContextState,
   action: AppStateAction
-) => {
+): AppStateContextState => {
   let newState: AppStateContextState;
   const func = appStateReducer;
   switch (action.type) {

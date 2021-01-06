@@ -23,30 +23,3 @@ export const fonts2: Font2[] = [
   ['"ヒラギノ角ゴ ProN"', 'ヒラギノ角ゴシック'],
   ['"Noto Serif JP"', '源ノ明朝'],
 ];
-
-export const Deprecated_FontNameToFontFamily = (
-  fontName: Font1[0] | Font2[0]
-) => {
-  const target1 = fonts1.filter((value) => {
-    return value[0] === fontName;
-  });
-  // [1]がある場合、そちらをreturn
-  if (target1.length) {
-    const value = target1[0];
-    if (typeof value === 'object') {
-      return value[0];
-    }
-    return value;
-  }
-
-  const target2 = fonts2.filter((value) => {
-    return value[0] === fontName;
-  });
-  if (target2.length) {
-    const value = target2[0];
-    if (typeof value === 'object') {
-      return value[0];
-    }
-    return value;
-  }
-};

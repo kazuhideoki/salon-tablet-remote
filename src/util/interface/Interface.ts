@@ -76,7 +76,6 @@ export type FooterItemWithoutId = {
   icon_name: string;
   displayed_icon_name: string;
   on_tap: Ontap;
-  // on_sidebar: T_on_sidebar
   item_content: string;
   item_excerpt: string;
   link_url: string;
