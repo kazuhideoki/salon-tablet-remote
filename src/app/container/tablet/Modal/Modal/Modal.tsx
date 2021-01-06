@@ -98,61 +98,61 @@ export const ModalPresenter: React.FC<Props> = (props) => {
 
   switch (props.setModal) {
     case 'content_modal':
-      ModalContent = () => <ContentModal />;
+      ModalContent = ContentModal;
       break;
     case 'footer_item_modal':
       modalStyle = useModalSize(props.currentModalContent.modalSize);
-      ModalContent = () => <FooterItemModal />;
+      ModalContent = FooterItemModal;
       break;
     case 'google_search':
       modalStyle = useModalSize('upperSide');
-      ModalContent = () => <GoogleSearch />;
+      ModalContent = GoogleSearch;
       break;
     case 'instagram_media_modal':
       modalStyle = useModalSize(props.currentModalContent.modalSize);
-      ModalContent = () => <InstagramMediaModal />;
+      ModalContent = InstagramMediaModal;
       break;
     case 'select_tags':
       modalStyle = medium;
-      ModalContent = () => <SelectTags />;
+      ModalContent = SelectTags;
       break;
     case 'select_instagram':
       modalStyle = medium;
-      ModalContent = () => <SelectInstagramAccounts />;
+      ModalContent = SelectInstagramAccounts;
       break;
     case 'edit_info_bar':
-      ModalContent = () => <InfoBarEditor />;
+      ModalContent = InfoBarEditor;
       break;
     case 'edit_article':
-      ModalContent = () => <ArticleEditor />;
+      ModalContent = ArticleEditor;
       break;
     case 'edit_footer_item':
       modalStyle = useModalSize(props.modalSize);
-      ModalContent = () => <FooterItemEditor />;
+      ModalContent = FooterItemEditor;
       break;
     case 'edit_tags':
       modalStyle = useModalSize('medium');
-      ModalContent = () => <ManageTags />;
+      ModalContent = ManageTags;
       break;
     case 'manage_instagram':
-      ModalContent = () => <ManageInstagramAccounts />;
+      ModalContent = ManageInstagramAccounts;
       break;
     case 'setting_theme':
       modalStyle = useModalSize('medium');
-      ModalContent = () => <ManageTheme />;
+      ModalContent = ManageTheme;
       break;
     case 'setting_user_info':
-      ModalContent = () => <SettingUserInfo />;
+      ModalContent = SettingUserInfo;
       break;
     case 'feedback_form':
-      ModalContent = () => <FeedbackForm />;
+      ModalContent = FeedbackForm;
       break;
     case 'delete_account_form':
-      ModalContent = () => <DeleteAccountForm />;
+      ModalContent = DeleteAccountForm;
       break;
     case 'popup_not_email_verified':
       modalStyle = useModalSize('medium');
-      ModalContent = () => <PageNotEmailVerified />;
+      ModalContent = PageNotEmailVerified;
       break;
 
     default:
