@@ -19,9 +19,7 @@ export const Normal = () => {
     </>
   );
 };
-export const isMobile = () => {
-  const [onTap, setOnTap] = React.useState('' as Ontap);
-
+export const isMobile: React.FC = () => {
   return (
     <>
       <p>d</p>

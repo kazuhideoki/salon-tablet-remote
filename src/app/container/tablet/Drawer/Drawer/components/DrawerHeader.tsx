@@ -5,7 +5,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { DrawerPresenterProps } from '../Drawer';
 import { Close } from '@material-ui/icons';
 
-export const drawerHeaderJsx = (props: DrawerPresenterProps) => {
+export const DrawerHeader: React.FC<DrawerPresenterProps> = (props) => {
   // Open 開いてパスワード入力画面
   if (!props.isSetting) {
     return (
@@ -43,8 +43,6 @@ export const drawerHeaderJsx = (props: DrawerPresenterProps) => {
     }
     return (
       <Button variant="text" onClick={props.handleDrawerClose}>
-        {/* <Typography variant="body1">終了</Typography> */}
-
         {props.theme.direction === 'ltr' ? (
           <ChevronLeftIcon />
         ) : (
@@ -52,5 +50,7 @@ export const drawerHeaderJsx = (props: DrawerPresenterProps) => {
         )}
       </Button>
     );
+  } else {
+    return <></>;
   }
 };

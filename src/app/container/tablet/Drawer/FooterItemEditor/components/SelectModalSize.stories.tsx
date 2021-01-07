@@ -13,7 +13,7 @@ export const Normal = () => {
     <SelectModalSize {...propsFooterItemEditor} modalSizeRadio={modalSize} />
   );
 };
-export const isMobile = () => {
+export const IsMobile = () => {
   const [modalSize, setModalSize] = React.useState('large' as ModalSize);
 
   return (
