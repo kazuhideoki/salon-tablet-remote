@@ -16,7 +16,7 @@ config.config.socketPath =
 
 const mysql = serverlessMysql(config);
 
-export const db = async (query: string, params?: any): Promise<unknown> => {
+export const db = async (query: string, params?: unknown): Promise<unknown> => {
   const results = await mysql.query(query, params);
   await mysql.end();
   return results;

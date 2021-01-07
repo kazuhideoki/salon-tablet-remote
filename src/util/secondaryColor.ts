@@ -33,7 +33,7 @@ export const generateSecondaryColor = (props: props): number[] => {
   return newParams;
 };
 
-export const secondaryColor = (theme_color: string) => {
+export const secondaryColor = (theme_color: string): string => {
   return `#${colorConvert.hsl.hex(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore

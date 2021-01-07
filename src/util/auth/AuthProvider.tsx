@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContext>({
   user: null,
 } as AuthContext);
 
-export function AuthProvider({ children }: any) {
+export function AuthProvider({ children }: any): JSX.Element {
   const [user, setUser] = useState<firebase.User | null>(null);
   const router = useRouter();
 
@@ -50,6 +50,6 @@ export function AuthProvider({ children }: any) {
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }
 
-export const useAuth = () => {
+export const useAuth = (): AuthContext => {
   return useContext(AuthContext);
 };

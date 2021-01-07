@@ -1,7 +1,7 @@
 import React from 'react';
 import { SelectIcon } from './SelectIcon';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { WifiTwoTone } from '@material-ui/icons';
+import { MoodBad, WifiTwoTone } from '@material-ui/icons';
 import { propsFooterItemEditor } from '../../../../../../../util/dev/sampleProps/propsFooterItemEditor';
 
 const props = propsFooterItemEditor;
@@ -26,7 +26,12 @@ export const Normal = () => {
 export const Selected = () => {
   const selectedIcon = [WifiTwoTone, 'WifiTwoTone'];
   return (
-    //@ts-ignore
-    <SelectIcon {...props} selectedIcon={selectedIcon} />
+    <SelectIcon
+      {...props}
+      selectedIcon={selectedIcon}
+      dispatchSelectedIcon={() => {
+        return;
+      }}
+    />
   );
 };

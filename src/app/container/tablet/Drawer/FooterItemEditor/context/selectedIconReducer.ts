@@ -13,7 +13,7 @@ export const selectedIconReducer = (
     type: 'SET_ICON';
     payload: State;
   }
-) => {
+): State => {
   let newState: State;
   const func = selectedIconReducer;
   switch (action.type) {

@@ -1,12 +1,11 @@
 import React from 'react';
-//@ts-ignore
 import { CharCounter, CharCounterProps } from './CharCounter';
 export default {
   title: 'viewComponents/CharCounter',
   component: CharCounter,
 };
 
-export const OK = () => {
+export const OK = (): JSX.Element => {
   const props = {
     charCount: 50,
     limitCount: 100,
@@ -16,7 +15,7 @@ export const OK = () => {
   return <CharCounter {...props} />;
 };
 
-export const OverLimit = () => {
+export const OverLimit = (): JSX.Element => {
   const props = {
     charCount: 200,
     limitCount: 100,
@@ -25,7 +24,7 @@ export const OverLimit = () => {
 
   return <CharCounter {...props} />;
 };
-export const OverLimitAlignRight = () => {
+export const OverLimitAlignRight = (): JSX.Element => {
   const props: CharCounterProps = {
     charCount: 200,
     limitCount: 100,
@@ -33,13 +32,9 @@ export const OverLimitAlignRight = () => {
     isShowCount: true,
   };
 
-  return (
-    // <div style={{margin: "0 0 0 auto" }}>
-    <CharCounter {...props} />
-    // </div>
-  );
+  return <CharCounter {...props} />;
 };
-export const OverLimitNoShowCount = () => {
+export const OverLimitNoShowCount = (): JSX.Element => {
   const props = {
     charCount: 200,
     limitCount: 100,

@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, Fab } from '@material-ui/core';
+import { makeStyles, createStyles, Fab } from '@material-ui/core';
 import { server } from '../../util/loadUrl';
 import { ScrollTop } from '../../app/components/pages/ScrollTop';
 import { KeyboardArrowUp } from '@material-ui/icons';
 import { SEO } from '../../app/components/pages/SEO';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     iframe: {
       width: '100vw',
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function Tablet() {
+function Tablet(): JSX.Element {
   const classes = useStyles();
 
   return (
