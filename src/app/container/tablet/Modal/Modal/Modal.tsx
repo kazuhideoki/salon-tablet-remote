@@ -83,16 +83,11 @@ const useStyles = makeStyles((theme) => {
   });
 });
 
-// type ModalContentType =
-//   | (() => JSX.Element)
-//   | React.FC<Record<string, unknown>>
-//   | React.ComponentType<Record<string, unknown>>;
-
 export const ModalPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   // ModalContentは内容モーダルウィンドウの中身の設定
-  let ModalContent: React.ReactNode = () => <></>;
+  let modalContent: React.ReactNode = () => <></>;
 
   // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。デフォルトはlarge
   let modalStyle = useModalSize('large');
@@ -103,61 +98,61 @@ export const ModalPresenter: React.FC<Props> = (props) => {
 
   switch (props.setModal) {
     case 'content_modal':
-      ModalContent = ContentModal;
+      modalContent = <ContentModal />;
       break;
     case 'footer_item_modal':
       modalStyle = useModalSize(props.currentModalContent.modalSize);
-      ModalContent = FooterItemModal;
+      modalContent = <FooterItemModal />;
       break;
     case 'google_search':
       modalStyle = useModalSize('upperSide');
-      ModalContent = GoogleSearch;
+      modalContent = <GoogleSearch />;
       break;
     case 'instagram_media_modal':
       modalStyle = useModalSize(props.currentModalContent.modalSize);
-      ModalContent = InstagramMediaModal;
+      modalContent = <InstagramMediaModal />;
       break;
     case 'select_tags':
       modalStyle = medium;
-      ModalContent = SelectTags;
+      modalContent = <SelectTags />;
       break;
     case 'select_instagram':
       modalStyle = medium;
-      ModalContent = SelectInstagramAccounts;
+      modalContent = <SelectInstagramAccounts />;
       break;
     case 'edit_info_bar':
-      ModalContent = InfoBarEditor;
+      modalContent = <InfoBarEditor />;
       break;
     case 'edit_article':
-      ModalContent = ArticleEditor;
+      modalContent = <ArticleEditor />;
       break;
     case 'edit_footer_item':
       modalStyle = useModalSize(props.modalSize);
-      ModalContent = FooterItemEditor;
+      modalContent = <FooterItemEditor />;
       break;
     case 'edit_tags':
       modalStyle = useModalSize('medium');
-      ModalContent = ManageTags;
+      modalContent = <ManageTags />;
       break;
     case 'manage_instagram':
-      ModalContent = ManageInstagramAccounts;
+      modalContent = <ManageInstagramAccounts />;
       break;
     case 'setting_theme':
       modalStyle = useModalSize('medium');
-      ModalContent = ManageTheme;
+      modalContent = <ManageTheme />;
       break;
     case 'setting_user_info':
-      ModalContent = SettingUserInfo;
+      modalContent = <SettingUserInfo />;
       break;
     case 'feedback_form':
-      ModalContent = FeedbackForm;
+      modalContent = <FeedbackForm />;
       break;
     case 'delete_account_form':
-      ModalContent = DeleteAccountForm;
+      modalContent = <DeleteAccountForm />;
       break;
     case 'popup_not_email_verified':
       modalStyle = useModalSize('medium');
-      ModalContent = PageNotEmailVerified;
+      modalContent = <PageNotEmailVerified />;
       break;
 
     default:
@@ -209,7 +204,7 @@ export const ModalPresenter: React.FC<Props> = (props) => {
         <CloseButton onClick={props.closeModal} />
       )}
       <DialogContent className={classes.dialogContent}>
-        <ModalContent />
+        {modalContent}
       </DialogContent>
     </StyledDialog>
   );
