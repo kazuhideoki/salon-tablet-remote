@@ -42,7 +42,7 @@ const upperSide = {
   marginTop: 50,
 };
 
-export const useModalSize = (modalSize: ModalSize) => {
+export const useModalStyle = (modalSize: ModalSize) => {
   switch (modalSize) {
     case 'fullScreen':
       return fullScreen;
@@ -57,4 +57,4 @@ export const useModalSize = (modalSize: ModalSize) => {
   }
   return large;
 };
-export type UseModalSize = ReturnType<typeof useModalSize>;
+export type UseModalSize = ReturnType<typeof useModalStyle>;

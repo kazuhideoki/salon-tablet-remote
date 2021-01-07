@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, Dialog } from '@material-ui/core';
 
 import { ModalSize } from '../../../../../../util/interface/Interface';
-import { UseModalSize } from '../context/useModalSize';
+import { UseModalSize } from '../context/useModalStyle';
 import { TransitionHandlerProps } from '@material-ui/core/transitions';
 
 type Props = {
