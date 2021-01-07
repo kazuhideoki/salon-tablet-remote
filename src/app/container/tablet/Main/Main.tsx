@@ -6,9 +6,9 @@ import {
   createStyles,
   withStyles,
 } from '@material-ui/core';
-import { displayArticlesScrollJsx } from './components/displayArticlesScrollJsx';
-import { displayArticlesGrid6Jsx } from './components/displayArticlesGrid6Jsx';
-import { displayInstagramMediasJsx } from './components/displayInstagramMediasJsx';
+import { DisplayArticlesScroll } from './components/DisplayArticlesScroll';
+import { DisplayArticlesGrid6 } from './components/DisplayArticlesGrid6';
+import { DisplayInstagramMedias } from './components/DisplayInstagramMedias';
 import { noArticlesJsx } from './components/noArticlesJsx';
 import { useOnClickUpdate } from './context/useOnClickUpdate';
 import { useStateMain } from './context/useStateMain';
@@ -175,21 +175,27 @@ export type StyledCardContentType = typeof StyledCardContent;
 export const MainPresenter: React.FC<MainPresenterProps> = (props) => {
   const classes = useStyles();
 
-  const displayArticlesScroll = displayArticlesScrollJsx(
-    props,
-    classes,
-    StyledCardContent
+  const displayArticlesScroll = (
+    <DisplayArticlesScroll
+      props={props}
+      classes={classes}
+      StyledCardContent={StyledCardContent}
+    />
   );
-  const displayArticlesGrid6 = displayArticlesGrid6Jsx(
-    props,
-    classes,
-    StyledCardContent
+  const displayArticlesGrid6 = (
+    <DisplayArticlesGrid6
+      props={props}
+      classes={classes}
+      StyledCardContent={StyledCardContent}
+    />
   );
 
-  const displayInstagramMedias = displayInstagramMediasJsx(
-    props,
-    classes,
-    StyledCardContent
+  const displayInstagramMedias = (
+    <DisplayInstagramMedias
+      props={props}
+      classes={classes}
+      StyledCardContent={StyledCardContent}
+    />
   );
 
   const noArticles = noArticlesJsx(classes, StyledCardContent);

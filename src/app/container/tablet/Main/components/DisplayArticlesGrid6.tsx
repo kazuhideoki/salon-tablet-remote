@@ -3,21 +3,16 @@ import {
   Grid,
   CardActionArea,
   Card,
-  Button,
   Typography,
   createStyles,
   makeStyles,
 } from '@material-ui/core';
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
-import { DeleteButton } from '../../../../components/editButtonBox/DeleteButton';
-import { UpdateButton } from '../../../../components/editButtonBox/UpdateButton';
-import { MainPresenterProps, MainClasses } from '../Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
-import { sqlToDate } from '../../../../../util/sqlToDate';
-import { SelectedTags } from './SelectedTags';
 import { Articles } from '../../../../../util/interface/Interface';
 import { ThemeContext } from '../../../../store/theme/ThemeProvider';
+import { DisplayProps } from './DisplayArticlesScroll';
 
 const useStyles = makeStyles((theme) => {
   const themes = React.useContext(ThemeContext);
@@ -68,11 +63,11 @@ const useStyles = makeStyles((theme) => {
   });
 });
 
-export const displayArticlesGrid6Jsx = (
-  props: MainPresenterProps,
-  classes: MainClasses,
-  StyledCardContent: any
-) => {
+export const DisplayArticlesGrid6: React.FC<DisplayProps> = ({
+  props,
+  classes,
+  StyledCardContent,
+}) => {
   const classesGrid6 = useStyles();
 
   const row = (articles: Articles, row2: boolean) =>
@@ -88,7 +83,9 @@ export const displayArticlesGrid6Jsx = (
           {props.isSetting ? (
             <EditButtonsBox
               className={classes.editButtonsBox}
-              handleUpdateButton={{ onClick: () => props.onClickUpdate(value) }}
+              handleUpdateButton={{
+                onClick: () => props.onClickUpdate(value),
+              }}
               handleDeleteButton={{
                 onClick: () => props.deleteArticle(value.article_id),
               }}
