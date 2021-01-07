@@ -16,7 +16,10 @@ export type ApiInstagramAccountsReconnectNeeded = {
   is_reconnect_needed: boolean;
 };
 
-const reconnect_needed = async (req: NextApiRequest, res: NextApiResponse) => {
+const reconnect_needed = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const {
       instagram_id,

@@ -1,6 +1,9 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { InstagramAccounts } from '../../../util/interface/Interface';
+import {
+  InstagramAccountFromDB,
+  InstagramAccounts,
+} from '../../../util/interface/Interface';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 
@@ -11,32 +14,36 @@ export const apiInstagramAccountsGet = async (
   return apiWrapGet(`instagram_accounts/get?userId=${user_id}`);
 };
 
-const changeToBooleanFromNumberInstagramAcconts = (data: InstagramAccounts) => {
+const changeToBooleanFromNumberInstagramAcconts = (
+  data: InstagramAccountFromDB[]
+) => {
   return data.map((value) => {
-    //@ts-ignore
     value.is_reconnect_needed = value.is_reconnect_needed === 1 ? true : false;
 
     return value;
   });
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
     let data = (await db(
       'SELECT * FROM instagram_accounts WHERE user_id = ?',
       // queryは文字列で来るため
       Number(req.query.userId)
-    )) as any[];
+    )) as InstagramAccountFromDB[];
 
     data = data.map((value) => {
-      //@ts-ignore
       delete value.access_token;
       return value;
     }) as InstagramAccounts;
 
-    const rawData: InstagramAccounts = changeToBooleanFromNumberInstagramAcconts(
+    const rawData = changeToBooleanFromNumberInstagramAcconts(
       data
-    );
+    ) as InstagramAccounts;
+
     res
       .status(200)
       .json({ err: false, rawData } as ApiResponse<InstagramAccounts>);

@@ -7,7 +7,9 @@ import {
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { setFooterIconSize } from '../../store/userInfo/actions';
 
-export const useChangeFooterIconSize = () => {
+export const useChangeFooterIconSize = (): ((
+  footerIconSize: FooterIconSize
+) => Promise<void>) => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 

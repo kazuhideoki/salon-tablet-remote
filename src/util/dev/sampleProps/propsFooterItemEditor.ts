@@ -1,6 +1,6 @@
 import { MoodBad } from '@material-ui/icons';
-import { FooterItemEdittingParams } from '../../app/hooks/footerItems/useCreateFooterItem';
-import { FooterItemEditorPresenterProps } from '../../app/container/tablet/Drawer/FooterItemEditor/FooterItemEditor';
+import { FooterItemEdittingParams } from '../../../app/hooks/footerItems/useCreateFooterItem';
+import { FooterItemEditorPresenterProps } from '../../../app/container/tablet/Drawer/FooterItemEditor/FooterItemEditor';
 
 export const edittingFooterItemParams: FooterItemEdittingParams = {
   titleText: 'string',
@@ -54,7 +54,7 @@ export const propsFooterItemEditor: FooterItemEditorPresenterProps = {
   },
   dataTypeAndSet: {
     dataType: 'default_data',
-    setDataType: () => {
+    setDataType: (): void => {
       return;
     },
   },

@@ -1,5 +1,5 @@
 // データベースからフロントに渡ってきたデータを整形する
-export const sqlToDate = (arg: string) => {
+export const sqlToDate = (arg: string): string => {
   // safariでのNaNになってしまうバグを防ぐため+を.に変換
   // (参考) https://qiita.com/pearmaster8293/items/b5b0df28147eb049f1ea
   const date = new Date(arg.replace('+', '.'));

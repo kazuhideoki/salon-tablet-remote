@@ -19,22 +19,20 @@ export const medium = {
 };
 
 const shortSide = () => {
+  if (typeof window === 'undefined') return 1000;
   if (window.innerHeight > window.innerWidth) {
     return window.innerWidth;
   } else {
     return window.innerHeight;
   }
 };
-export const small =
-  typeof window !== 'undefined'
-    ? {
-        width: `${shortSide() * 0.6}px`,
-        height: `${shortSide() * 0.6}px`,
-        // maxWidth: "100%",
-        // maxHeight: "100%",
-        margin: 0,
-      }
-    : null;
+export const small = {
+  width: `${shortSide() * 0.6}px`,
+  height: `${shortSide() * 0.6}px`,
+  // maxWidth: "100%",
+  // maxHeight: "100%",
+  margin: 0,
+};
 
 const upperSide = {
   width: '90vw',
@@ -44,7 +42,7 @@ const upperSide = {
   marginTop: 50,
 };
 
-export const useModalSize = (modalSize: ModalSize) => {
+export const useModalStyle = (modalSize: ModalSize) => {
   switch (modalSize) {
     case 'fullScreen':
       return fullScreen;
@@ -57,4 +55,6 @@ export const useModalSize = (modalSize: ModalSize) => {
     case 'upperSide':
       return upperSide;
   }
+  return large;
 };
+export type UseModalSize = ReturnType<typeof useModalStyle>;

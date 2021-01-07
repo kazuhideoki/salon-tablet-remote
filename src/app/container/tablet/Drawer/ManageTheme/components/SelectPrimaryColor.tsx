@@ -5,9 +5,11 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import { FiberManualRecord } from '@material-ui/icons';
 import { ManageThemePresenterProps } from '../ManageTheme';
 
-type Props = ManageThemePresenterProps & { className?: string };
+export type SelectPrimaryColorProps = ManageThemePresenterProps & {
+  className?: string;
+};
 
-export const SelectPrimaryColor = (props: Props) => {
+export const SelectPrimaryColor = (props: SelectPrimaryColorProps) => {
   return (
     <PopupState variant="popover" popupId="theme-color-popup-popover">
       {(popupState) => (

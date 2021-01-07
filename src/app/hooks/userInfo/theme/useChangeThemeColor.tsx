@@ -7,7 +7,7 @@ import { Color } from '../../../container/tablet/Drawer/ManageTheme/ManageTheme'
 import { UserInfoContext } from '../../../store/userInfo/Context';
 import { setThemeColor } from '../../../store/userInfo/actions';
 
-export const useChangeThemeColor = () => {
+export const useChangeThemeColor = (): ((color: Color) => Promise<void>) => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 

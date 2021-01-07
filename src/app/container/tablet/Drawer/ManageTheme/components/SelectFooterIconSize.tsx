@@ -21,16 +21,13 @@ export const SelectFooterIconSize = (props: Props) => {
         value={props.footerIconSize}
         onChange={props.handleChangeFooterIconSize}
         className={props.className}>
-        {
-          //@ts-ignore
-          sizes.map((value, index) => {
-            return (
-              <MenuItem key={index} value={value[1]}>
-                {value[0]}
-              </MenuItem>
-            );
-          })
-        }
+        {sizes.map((value, index) => {
+          return (
+            <MenuItem key={index} value={value[1]}>
+              {value[0]}
+            </MenuItem>
+          );
+        })}
       </Select>
     </>
   );

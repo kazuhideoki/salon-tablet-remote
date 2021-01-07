@@ -4,7 +4,8 @@ import * as firebaseAdmin from 'firebase-admin';
 // you can also store the values in environment variables
 import serviceAccount from '../../../firebase_secret.json';
 
-if (typeof window === undefined && !firebaseAdmin.apps.length) {
+// if (typeof window === undefined && !firebaseAdmin.apps.length) {
+if (!firebaseAdmin.apps.length) {
   firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert({
       privateKey: serviceAccount.private_key,

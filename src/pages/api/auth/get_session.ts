@@ -44,7 +44,10 @@ export type ApiGetSessionReturn = {
   emailVerified: boolean | null;
 };
 
-const get_session = async (req: NextApiRequest, res: NextApiResponse) => {
+const get_session = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   const { st_token }: ApiGetSession_body = req.body;
 
   try {

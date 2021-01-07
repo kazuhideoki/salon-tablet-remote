@@ -13,7 +13,10 @@ export const apiTagsDelete = async (
 
 export type ApiTagsCreate = { tag_id: number; user_id: number };
 
-const tags_delete = async (req: NextApiRequest, res: NextApiResponse) => {
+const tags_delete = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { tag_id, user_id }: ApiTagsCreate = req.body;
 

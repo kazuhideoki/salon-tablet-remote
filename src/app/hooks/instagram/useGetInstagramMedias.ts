@@ -15,26 +15,37 @@ import {
   setSelectedInstagramAccounts,
 } from '../../store/appState/actions';
 
-export const useGetInstagramMedias = () => {
+type Props = {
+  instagram_id: number;
+  username: string;
+  paging: {
+    after: string;
+    before: string;
+  };
+};
+
+export const useGetInstagramMedias = (): ((params: Props) => Promise<void>) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const user_id = userInfo.user_id;
   const { dispatchInstagram } = React.useContext(InstagramContext);
 
   // ページ送りでないときは空のオブジェクト
-  return async (
-    instagram_id: number,
-    username: string,
-    paging: { after?: string; before?: string }
-  ) => {
+  return async (params: Props) => {
     dispatchAppState(isLoadingMain(true));
     dispatchAppState(closeModal());
 
     try {
-      const data = await apiInstagramMediasGet({ instagram_id, paging });
+      const data = await apiInstagramMediasGet({
+        instagram_id: params.instagram_id,
+        paging: params.paging,
+      });
       dispatchInstagram(setMedias(data.rawData));
       dispatchAppState(
-        setSelectedInstagramAccounts({ id: instagram_id, username })
+        setSelectedInstagramAccounts({
+          id: params.instagram_id,
+          username: params.username,
+        })
       );
       dispatchAppState(isShowInstagram(true));
       dispatchAppState(isLoadingMain(false));
@@ -45,14 +56,14 @@ export const useGetInstagramMedias = () => {
       if (err.data.error.message.type === 'OAuthException') {
         console.log('message.typeは OAuthException');
         alert('インスタグラムアカウントの再連携が必要です');
-        const params: ApiInstagramAccountsReconnectNeeded = {
-          instagram_id: instagram_id,
+        const params2: ApiInstagramAccountsReconnectNeeded = {
+          instagram_id: params.instagram_id,
           user_id: user_id,
           is_reconnect_needed: true,
         };
         try {
-          await apiInstagramAccountsReconnectNeeded(params);
-          dispatchInstagram(setReconnect(instagram_id));
+          await apiInstagramAccountsReconnectNeeded(params2);
+          dispatchInstagram(setReconnect(params.instagram_id));
         } catch (err) {
           console.log(`useGetInstagramMedias catch: ${err}`);
         }

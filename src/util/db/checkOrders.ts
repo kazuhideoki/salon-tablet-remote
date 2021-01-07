@@ -1,6 +1,6 @@
 import { FooterItems } from '../interface/Interface';
 
-export const checkOrders = (footerItems: FooterItems) => {
+export const checkOrders = (footerItems: FooterItems): boolean => {
   let result = true;
   footerItems.forEach((footerItem, index) => {
     // 昇順でDBから取得しているので、orderがindex+1でないと間違い
@@ -12,7 +12,7 @@ export const checkOrders = (footerItems: FooterItems) => {
   return result;
 };
 
-export const checkOrdersSidebar = (footerItems: FooterItems) => {
+export const checkOrdersSidebar = (footerItems: FooterItems): boolean => {
   let result = true;
   const footerItemsOnSidebar = footerItems.filter((value) => {
     return value.order_sidebar !== 0;

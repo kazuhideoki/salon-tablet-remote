@@ -1,17 +1,15 @@
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-export const sendVerificationMail = async (user: firebase.User) => {
-
+export const sendVerificationMail = async (
+  user: firebase.User
+): Promise<boolean> => {
   return user
     .sendEmailVerification()
-    .then(function() {
-    
-
-      return true
+    .then(function () {
+      return true;
     })
-    .catch(function(err) {
-      // An error happened.
-      return false
+    .catch(function () {
+      return false;
     });
-}
+};

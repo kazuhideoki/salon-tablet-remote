@@ -1,24 +1,47 @@
 import React from 'react';
-import { SettingUserInfoPresenter } from './ManageUserInfo';
+import { sampleUserInfo } from '../../../../../util/dev/sampleUserInfo';
+import {
+  SettingUserInfoPresenter,
+  SettingUserInfoPresenterProps,
+} from './ManageUserInfo';
 export default {
   title: 'Drawer/Account/SettingUserInfo',
   component: SettingUserInfoPresenter,
 };
 
-const props = {
-  name: null,
-  setName: null,
-  shopName: null,
-  setShopName: null,
-  email: null,
-  password: '123456aA',
-  setPassword: null,
-  userInfo: {
-    shop_name: '美容室ABC',
+const props: SettingUserInfoPresenterProps = {
+  name: '',
+  setName: () => {
+    return;
   },
-  updateUser: null,
-  handleOnSubmit: null,
+  shopName: '',
+  setShopName: () => {
+    return;
+  },
+  email: '',
+  password: '123456aA',
+  setPassword: () => {
+    return;
+  },
+  userInfo: sampleUserInfo,
+  updateUser: async () => {
+    return;
+  },
+  openModal: () => {
+    return;
+  },
+  isShowMobile: false,
+  setIsShowMobile: () => {
+    return;
+  },
+  handleSwitch: async () => {
+    return;
+  },
+  clearHistory: () => {
+    return;
+  },
 };
 
-//@ts-ignore
-export const Normal = () => <SettingUserInfoPresenter {...props} />;
+export const Normal = (): JSX.Element => (
+  <SettingUserInfoPresenter {...props} />
+);

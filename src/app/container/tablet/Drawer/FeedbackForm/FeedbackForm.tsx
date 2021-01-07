@@ -35,7 +35,9 @@ const useFeedbackFormProps = () => {
   };
 };
 
-type Props = ReturnType<typeof useFeedbackFormProps>;
+export type FeedbackFormPresenterProps = ReturnType<
+  typeof useFeedbackFormProps
+>;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,7 +63,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const FeedbackFormPresenter: React.FC<Props> = (props) => {
+export const FeedbackFormPresenter: React.FC<FeedbackFormPresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   return (

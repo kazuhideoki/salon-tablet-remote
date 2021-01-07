@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { UserInfo } from '../interface/Interface';
 
-export const userInfoParamsFromSql = (userInfo: UserInfo) => {
+export const userInfoParamsFromSql = (userInfo: UserInfo): UserInfo => {
   //@ts-ignore
   userInfo.is_first_sign_in = userInfo.is_first_sign_in === 1 ? true : false;
   //@ts-ignore

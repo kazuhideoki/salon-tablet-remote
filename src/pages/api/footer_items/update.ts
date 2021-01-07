@@ -17,7 +17,10 @@ export type ApiFooterItemsUpdate = {
   id: number;
 };
 
-const update = async (req: NextApiRequest, res: NextApiResponse) => {
+const update = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { params, id }: ApiFooterItemsUpdate = req.body;
 

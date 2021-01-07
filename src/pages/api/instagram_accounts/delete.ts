@@ -17,7 +17,7 @@ export type ApiInstagramAccountsDelete = {
 const instagram_accounts_delete = async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   if (req.method === 'POST') {
     const { instagram_id }: ApiInstagramAccountsDelete = req.body;
 

@@ -14,7 +14,10 @@ export type ApiUserInfoCreate = {
   user_email: string;
 };
 
-const create = async (req: NextApiRequest, res: NextApiResponse) => {
+const create = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { user_email }: ApiUserInfoCreate = req.body;
 

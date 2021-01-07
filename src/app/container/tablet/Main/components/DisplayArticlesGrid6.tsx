@@ -3,21 +3,16 @@ import {
   Grid,
   CardActionArea,
   Card,
-  Button,
   Typography,
   createStyles,
   makeStyles,
 } from '@material-ui/core';
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
-import { DeleteButton } from '../../../../components/editButtonBox/DeleteButton';
-import { UpdateButton } from '../../../../components/editButtonBox/UpdateButton';
-import { MainPresenterProps, MainClasses } from '../Main';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
-import { sqlToDate } from '../../../../../util/sqlToDate';
-import { SelectedTags } from './SelectedTags';
 import { Articles } from '../../../../../util/interface/Interface';
 import { ThemeContext } from '../../../../store/theme/ThemeProvider';
+import { DisplayProps } from './DisplayArticlesScroll';
 
 const useStyles = makeStyles((theme) => {
   const themes = React.useContext(ThemeContext);
@@ -68,19 +63,19 @@ const useStyles = makeStyles((theme) => {
   });
 });
 
-export const displayArticlesGrid6Jsx = (
-  props: MainPresenterProps,
-  classes: MainClasses,
-  StyledCardContent: any
-) => {
+export const DisplayArticlesGrid6: React.FC<DisplayProps> = ({
+  props,
+  classes,
+  StyledCardContent,
+}) => {
   const classesGrid6 = useStyles();
 
   const row = (articles: Articles, row2: boolean) =>
-    articles.map((value, key: number) => {
+    articles.map((value, index) => {
       return (
         <Grid
           item
-          key={key}
+          key={index}
           // 投稿済みか下書きかで見た目を変える
           className={`${classesGrid6.gridItem}
             ${!value.is_published ? classes.itemIsDraft : ''}
@@ -88,7 +83,9 @@ export const displayArticlesGrid6Jsx = (
           {props.isSetting ? (
             <EditButtonsBox
               className={classes.editButtonsBox}
-              handleUpdateButton={{ onClick: () => props.onClickUpdate(value) }}
+              handleUpdateButton={{
+                onClick: () => props.onClickUpdate(value),
+              }}
               handleDeleteButton={{
                 onClick: () => props.deleteArticle(value.article_id),
               }}
@@ -96,7 +93,7 @@ export const displayArticlesGrid6Jsx = (
           ) : null}
           <CardActionArea
             className={classesGrid6.cardActionArea}
-            onClick={() => props.openArticleModal(row2 ? key + 3 : key)}
+            onClick={() => props.openArticleModal(row2 ? index + 3 : index)}
             component="div">
             <Card className={classes.card}>
               <StyledCardContent

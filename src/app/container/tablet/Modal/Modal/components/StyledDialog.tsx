@@ -2,18 +2,27 @@ import React from 'react';
 import { withStyles, Dialog } from '@material-ui/core';
 
 import { ModalSize } from '../../../../../../util/interface/Interface';
+import { UseModalSize } from '../context/useModalStyle';
+import { TransitionHandlerProps } from '@material-ui/core/transitions';
 
 type Props = {
   modalSize: ModalSize;
   setModal: string;
   isEditting: boolean;
-  modalStyle: any;
-  modalStyleMobile: any;
+  modalStyle: UseModalSize;
+  modalStyleMobile: UseModalSize;
   className: string;
   open: boolean;
-  TransitionComponent: any;
+  TransitionComponent: React.ForwardRefExoticComponent<
+    TransitionHandlerProps & React.RefAttributes<unknown>
+  >;
   // 再レンダーのときtransitionアニメーションさせたくないときは、値を0に
-  transitionDuration: any;
+  transitionDuration:
+    | number
+    | {
+        enter: number;
+        exit: number;
+      };
   onClose: () => void;
   maxWidth: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   isMobile: boolean;

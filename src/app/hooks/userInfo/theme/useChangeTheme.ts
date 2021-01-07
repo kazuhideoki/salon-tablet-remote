@@ -5,7 +5,9 @@ import { generateDefaultParamsFromTheme } from '../../../store/theme/lib/paramsF
 import { UserInfoContext } from '../../../store/userInfo/Context';
 import { setTheme } from '../../../store/userInfo/actions';
 
-export const useChangeTheme = () => {
+export const useChangeTheme = (): ((
+  selectedTheme: SelectedTheme
+) => Promise<void>) => {
   const { dispatchUserInfo, userInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 

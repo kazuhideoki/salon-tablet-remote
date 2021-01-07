@@ -209,8 +209,8 @@ export const PaginationBarPresenter: React.FC<PaginationBarPresenterProps> = (
                 <div
                   id="pagination_selected_tags_div"
                   className={`${classes.selectedTags}`}>
-                  {props.selectedTagNames.map((value) => (
-                    <Chip label={value} size="small" />
+                  {props.selectedTagNames.map((value, index) => (
+                    <Chip key={index} label={value} size="small" />
                   ))}
                 </div>
               </div>

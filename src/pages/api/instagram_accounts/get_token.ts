@@ -7,9 +7,12 @@ import { apiGetSession } from '../auth/get_session';
 
 // ※instagramアカウントを認証するときのリダイレクト先
 
-const FormData = require('form-data');
+import FormData from 'form-data';
 
-const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
+const get_token = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.query.error) {
     console.log('インスタグラムアカウントの接続ができませんでした。');
     fetch(`${server}`);
@@ -18,7 +21,6 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
   const form = new FormData();
   form.append('client_id', process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID);
   form.append('client_secret', process.env.INSTAGRAM_APP_SECRET);
-  //@ts-ignore
   form.append('code', req.query.code);
   form.append('grant_type', 'authorization_code');
   form.append(
@@ -31,6 +33,8 @@ const get_token = async (req: NextApiRequest, res: NextApiResponse) => {
       `https://api.instagram.com/oauth/access_token`,
       {
         method: 'POST',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
         body: form,
       }
     );

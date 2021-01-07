@@ -68,7 +68,7 @@ export const Normal = () => {
     />
   );
 };
-export const is_Admin = () => {
+export const IsAdmin = () => {
   const [editorText, setEditorText] = React.useState('');
 
   return (

@@ -18,7 +18,7 @@ export type ApiUserInfoChangeFooterIconSize = {
 const change_footer_icon_size = async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   if (req.method === 'POST') {
     const {
       user_id,

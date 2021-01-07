@@ -6,7 +6,7 @@ import { isLoadingTags } from '../../store/appState/actions';
 
 type Props = { edittingTagId: number; tagName: string };
 
-export const useUpdateTag = () => {
+export const useUpdateTag = (): ((props: Props) => Promise<void>) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const getTags = useGetTags();
 

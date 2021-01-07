@@ -10,17 +10,18 @@ export const PaginationInstagram: React.FC<PaginationPresenterPropsAndClasses> =
   return (
     <div>
       <props.StyledIconButton
+        disableRipple={previous ? false : true}
         className={`${props.classes.button} ${
           previous || props.classes.disabled
         }`}
         onClick={
           previous
             ? () =>
-                props.getInstagramMedias(
-                  props.selectedInstagramAccount.id,
-                  props.selectedInstagramAccount.username,
-                  { before: cursors.before }
-                )
+                props.getInstagramMedias({
+                  instagram_id: props.selectedInstagramAccount.id,
+                  username: props.selectedInstagramAccount.username,
+                  paging: { after: '', before: cursors.before },
+                })
             : undefined
         }>
         <NavigateBefore
@@ -28,15 +29,16 @@ export const PaginationInstagram: React.FC<PaginationPresenterPropsAndClasses> =
         />
       </props.StyledIconButton>
       <props.StyledIconButton
+        disableRipple={next ? false : true}
         className={`${props.classes.button} ${next || props.classes.disabled}`}
         onClick={
           next
             ? () =>
-                props.getInstagramMedias(
-                  props.selectedInstagramAccount.id,
-                  props.selectedInstagramAccount.username,
-                  { after: cursors.after }
-                )
+                props.getInstagramMedias({
+                  instagram_id: props.selectedInstagramAccount.id,
+                  username: props.selectedInstagramAccount.username,
+                  paging: { after: cursors.after, before: '' },
+                })
             : undefined
         }>
         <NavigateNext className={next ? undefined : props.classes.disabled} />

@@ -64,7 +64,10 @@ export const useStyles = (isTabletPortrait: boolean) =>
     });
   });
 
-export const useStylesAuthForm = () => {
+export const useStylesAuthForm = (): Record<
+  'root' | 'authBoxContainer' | 'authBox',
+  string
+> => {
   const isTabletPortrait = useMediaQuery('(max-width:800px)');
   return useStyles(isTabletPortrait)();
 };
@@ -135,7 +138,7 @@ export const BackgroundDiv: React.FC = ({ children }) => {
   return <div className={classes.root}>{children}</div>;
 };
 
-const Signin = () => (
+const Signin = (): JSX.Element => (
   <BackgroundDiv>
     <SigninForm />
   </BackgroundDiv>

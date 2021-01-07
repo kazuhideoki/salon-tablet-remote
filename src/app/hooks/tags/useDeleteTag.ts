@@ -5,7 +5,7 @@ import { UserInfoContext } from '../../store/userInfo/Context';
 import { AppStateContext } from '../../store/appState/Context';
 import { isLoadingTags } from '../../store/appState/actions';
 
-export const useDeleteTag = () => {
+export const useDeleteTag = (): ((tag_id: number) => Promise<void>) => {
   const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;

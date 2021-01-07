@@ -20,7 +20,7 @@ import {
 import { TagsButton } from '../../../Footer/PaginationBar/components/TagsButton';
 import { DrawerPresenterProps } from '../Drawer';
 
-export const drawerSettingJsx = (props: DrawerPresenterProps) => {
+export const DrawerSetting: React.FC<DrawerPresenterProps> = (props) => {
   if (props.isSetting) {
     return (
       <>

@@ -88,7 +88,11 @@ export const ManageInstagramAccountsPresenter: React.FC<ManageInstagramAccountsP
           <Button
             disabled={value.is_reconnect_needed}
             onClick={() =>
-              props.getInstagramMedias(value.instagram_id, value.username, {})
+              props.getInstagramMedias({
+                instagram_id: value.instagram_id,
+                username: value.username,
+                paging: { after: '', before: '' },
+              })
             }>
             {value.username}
           </Button>
@@ -130,7 +134,7 @@ export const ManageInstagramAccountsPresenter: React.FC<ManageInstagramAccountsP
   );
 };
 
-export const ManageInstagramAccounts = () => {
+export const ManageInstagramAccounts = (): JSX.Element => {
   const props = useManageInstagramAccountsProps();
 
   return <ManageInstagramAccountsPresenter {...props} />;

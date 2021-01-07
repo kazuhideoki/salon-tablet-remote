@@ -8,7 +8,7 @@ export type InfoBarContextState = InfoBarData;
 export const infoBarReducer = (
   state: InfoBarContextState,
   action: InfoBarAction
-) => {
+): InfoBarContextState => {
   let newState: InfoBarContextState;
   const func = infoBarReducer;
   switch (action.type) {

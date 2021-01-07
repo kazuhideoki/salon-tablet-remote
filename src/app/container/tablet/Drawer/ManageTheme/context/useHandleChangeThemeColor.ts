@@ -7,6 +7,8 @@ export const useHandleChangeThemeColor = () => {
   return async (value: Color) => {
     try {
       await changeThemeColor(value);
-    } catch (err) {}
+    } catch (err) {
+      console.log(`useHandleChangeThemeColor: ${err}`);
+    }
   };
 };

@@ -1,7 +1,6 @@
 import { server, localhost } from '../loadUrl';
 
 export type ApiResponse<T = null> = { err: boolean; rawData: T };
-// | { err: true; data: string };
 
 const fetchPost = async (str: string, url: string, params: any) => {
   return await fetch(`${str}/api/${url}`, {
@@ -38,5 +37,6 @@ export const apiWrapPost = async <T = null>(
   params: any
 ): Promise<ApiResponse<T>> => await apiWrap<T>(fetchPost, url, params);
 
-export const apiWrapGet = async <T = null>(url: string) =>
-  apiWrap<T>(fetchGet, url, null);
+export const apiWrapGet = async <T = null>(
+  url: string
+): Promise<ApiResponse<T>> => apiWrap<T>(fetchGet, url, null);

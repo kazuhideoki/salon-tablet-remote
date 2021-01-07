@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const drawerItemsJsx = (props: DrawerPresenterProps) => {
+export const DrawerItems: React.FC<DrawerPresenterProps> = (props) => {
   const classes = useStyles(props.themes);
 
   let displayItem = props.footerItems;

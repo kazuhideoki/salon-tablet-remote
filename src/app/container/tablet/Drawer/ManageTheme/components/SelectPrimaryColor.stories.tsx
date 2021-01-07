@@ -1,5 +1,9 @@
 import React from 'react';
-import { SelectPrimaryColor } from './SelectPrimaryColor';
+import { sampleManageThemePresenterProps } from '../../../../../../util/dev/sampleProps/sampleManageThemePresenterProps';
+import {
+  SelectPrimaryColor,
+  SelectPrimaryColorProps,
+} from './SelectPrimaryColor';
 export default {
   title: 'Drawer/ManageTheme/SelectPrimaryColor',
   component: SelectPrimaryColor,
@@ -7,16 +11,7 @@ export default {
 
 export const Normal = () => {
   const [color, setColor] = React.useState({ hex: '#FFFFFF' });
-  const handleChangeThemeColor = setColor;
 
-  const props = {
-    color,
-    setColor,
-    handleChangeThemeColor,
-  };
-
-  return (
-    //@ts-ignore
-    <SelectPrimaryColor {...props} />
-  );
+  const props: SelectPrimaryColorProps = sampleManageThemePresenterProps;
+  return <SelectPrimaryColor {...props} />;
 };

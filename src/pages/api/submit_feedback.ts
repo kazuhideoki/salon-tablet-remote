@@ -25,7 +25,10 @@ export type ApiSubmitFeedback = {
 
 export type ApiSubmitFeedback_return_no_error = { sent: true };
 
-const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
+const submit_feedback = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const {
       contactFormTitle,

@@ -59,7 +59,7 @@ export const SelectInstagramAccountsPresenter: React.FC<SelectInstagramAccountsP
           <HelpButton content="「スマートフォン表示」ではInstagram公式サイト（アプリ）へ遷移します。(※タブレットモード同様に専用画面を実装予定)" />
         </>
       ) : null}
-      {props.instagramAccounts.map((value) => {
+      {props.instagramAccounts.map((value, index) => {
         if (props.isMobile) {
           return (
             <a
@@ -70,10 +70,14 @@ export const SelectInstagramAccountsPresenter: React.FC<SelectInstagramAccountsP
           );
         }
         return (
-          <div className={classes.account}>
+          <div key={index} className={classes.account}>
             <Button
               onClick={() =>
-                props.getInstagramMedias(value.instagram_id, value.username, {})
+                props.getInstagramMedias({
+                  instagram_id: value.instagram_id,
+                  username: value.username,
+                  paging: { after: '', before: '' },
+                })
               }
               disabled={value.is_reconnect_needed}>
               {value.username}

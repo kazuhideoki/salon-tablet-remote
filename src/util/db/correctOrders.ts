@@ -1,7 +1,21 @@
 import { db } from './db';
 import { FooterItems } from '../interface/Interface';
 
-export const generateCorrectOrdersParams = (data: FooterItems) => {
+type CorrectedData = {
+  order: number;
+  order_sidebar: number;
+  footer_item_id: number;
+};
+
+type Return<T> = {
+  updateParamInCase: string;
+  idParam: number[];
+  correctedData: T[];
+};
+
+export const generateCorrectOrdersParams = (
+  data: FooterItems
+): Return<Pick<CorrectedData, 'footer_item_id' | 'order'>> => {
   const correctedData = data.map((value, index) => {
     value.order = index + 1;
     return { order: value.order, footer_item_id: value.footer_item_id };
@@ -17,7 +31,7 @@ export const generateCorrectOrdersParams = (data: FooterItems) => {
   return { updateParamInCase, idParam, correctedData };
 };
 
-export const correctOrders = async (data: FooterItems) => {
+export const correctOrders = async (data: FooterItems): Promise<void> => {
   const { updateParamInCase, idParam } = generateCorrectOrdersParams(data);
 
   try {
@@ -32,8 +46,10 @@ export const correctOrders = async (data: FooterItems) => {
   }
 };
 
-export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
-  const onSidebar = data.filter((value, index) => {
+export const generateCorrectOrdersSidebarParams = (
+  data: FooterItems
+): Return<Pick<CorrectedData, 'footer_item_id' | 'order_sidebar'>> => {
+  const onSidebar = data.filter((value) => {
     // return value.on_sidebar === true
     return value.order_sidebar !== 0;
   });
@@ -55,7 +71,9 @@ export const generateCorrectOrdersSidebarParams = (data: FooterItems) => {
   return { updateParamInCase, idParam, correctedData };
 };
 
-export const correctOrdersSidebar = async (data: FooterItems) => {
+export const correctOrdersSidebar = async (
+  data: FooterItems
+): Promise<void> => {
   const { updateParamInCase, idParam } = generateCorrectOrdersSidebarParams(
     data
   );

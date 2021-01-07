@@ -68,15 +68,16 @@ export type ModalSize =
   | 'small'
   | 'upperSide';
 
-export type FooterItemWithoutId = {
+type is_published = boolean | number;
+export type FooterItemFromDB = {
+  footer_item_id: number;
   user_id: number;
-  is_published: boolean;
+  is_published: is_published;
   created_at: string;
   updated_at: string | null;
   icon_name: string;
   displayed_icon_name: string;
   on_tap: Ontap;
-  // on_sidebar: T_on_sidebar
   item_content: string;
   item_excerpt: string;
   link_url: string;
@@ -87,9 +88,12 @@ export type FooterItemWithoutId = {
   // 初回サインイン時のサンプルデータのコピー元をtrueに
   data_type: DataTypeFooterItem;
 };
-export type FooterItem = {
-  footer_item_id: number;
-} & FooterItemWithoutId;
+
+export type FooterItem = Omit<FooterItemFromDB, 'is_published'> & {
+  is_published: Exclude<is_published, number>;
+};
+
+export type FooterItemWithoutId = Omit<FooterItem, 'footer_item_id'>;
 export type FooterItems = FooterItem[];
 
 // ●●●●●● テーブル `info_bar`
@@ -124,16 +128,23 @@ export type Tags = Tag[];
 
 // ●●●●●● テーブル `instagram_accounts`
 
-export type InstagramAccount = {
+type is_reconnect_needed = boolean | number;
+export type InstagramAccountFromDB = {
   instagram_id: number;
   username: string;
   profile_img: string;
   expires: string;
+  access_token?: string;
   user_id: number;
   created_at: string;
   updated_at: string;
-  is_reconnect_needed: boolean;
+  is_reconnect_needed: is_reconnect_needed;
 };
+export type InstagramAccount = Omit<
+  InstagramAccountFromDB,
+  'access_token' | 'is_reconnect_needed'
+> & { is_reconnect_needed: Exclude<is_reconnect_needed, number> };
+
 export type InstagramAccounts = InstagramAccount[];
 
 export type MediaType = 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';

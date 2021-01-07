@@ -13,17 +13,20 @@ export const apiInstagramMediasGet = async (
 
 export type ApiInstagramMediasGet = {
   instagram_id: number;
-  paging: { after?: string; before?: string };
+  paging: { after: string; before: string };
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { instagram_id, paging }: ApiInstagramMediasGet = req.body;
 
     let pagingParam;
-    if (paging.hasOwnProperty('after')) {
+    if (paging.after) {
       pagingParam = `after=${paging.after}`;
-    } else if (paging.hasOwnProperty('before')) {
+    } else if (paging.before) {
       pagingParam = `before=${paging.before}`;
     } else {
       pagingParam = ``;

@@ -22,7 +22,10 @@ export type ApiArticlesCreate = {
   user_id: number;
 };
 
-const create = async (req: NextApiRequest, res: NextApiResponse) => {
+const create = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const params: ApiArticlesCreate = req.body;
 

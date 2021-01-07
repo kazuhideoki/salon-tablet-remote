@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Popover, Button, SvgIconTypeMap } from '@material-ui/core';
@@ -8,7 +8,7 @@ import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { EmojiEmotionsTwoTone } from '@material-ui/icons';
 import { FooterItemEditorPresenterProps } from '../../FooterItemEditor';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     gridList: {
       width: 300,

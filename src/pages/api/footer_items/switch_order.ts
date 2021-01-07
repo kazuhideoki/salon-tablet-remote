@@ -23,7 +23,10 @@ export type ApiFooterItemsSwitchOrder = {
   };
 };
 
-const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
+const switch_order = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const { smaller, larger }: ApiFooterItemsSwitchOrder = req.body;
 
@@ -42,15 +45,15 @@ const switch_order = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       // largerをsmallerに
-      const date1 = await db(
-        'UPDATE `footer_items` SET ? WHERE `footer_item_id`=?',
-        [largerToSmaller, larger.footer_item_id]
-      );
+      await db('UPDATE `footer_items` SET ? WHERE `footer_item_id`=?', [
+        largerToSmaller,
+        larger.footer_item_id,
+      ]);
       // smallerをlargerに
-      const date2 = await db(
-        'UPDATE `footer_items` SET ? WHERE `footer_item_id`=?',
-        [smallerToLarger, smaller.footer_item_id]
-      );
+      await db('UPDATE `footer_items` SET ? WHERE `footer_item_id`=?', [
+        smallerToLarger,
+        smaller.footer_item_id,
+      ]);
 
       res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {

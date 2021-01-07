@@ -7,7 +7,9 @@ import {
 import { UserInfoContext } from '../../store/userInfo/Context';
 import { setShowArticleType } from '../../store/userInfo/actions';
 
-export const useChangeShowArticleType = () => {
+export const useChangeShowArticleType = (): ((
+  showArticleType: ShowArticleType
+) => Promise<void>) => {
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
 

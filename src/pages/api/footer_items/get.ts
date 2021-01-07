@@ -1,7 +1,10 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { checkOrders } from '../../../util/db/checkOrders';
-import { FooterItems } from '../../../util/interface/Interface';
+import {
+  FooterItemFromDB,
+  FooterItems,
+} from '../../../util/interface/Interface';
 import { correctOrders } from '../../../util/db/correctOrders';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { checkOrdersSidebar } from '../../../util/db/checkOrders';
@@ -15,26 +18,24 @@ export const apiFooterItemsGet = async (
   return apiWrapGet(`footer_items/get?userId=${user_id}`);
 };
 
-const changeToBooleanFromNumberFooterItems = (data: FooterItems) => {
+const changeToBooleanFromNumberFooterItems = (data: FooterItemFromDB[]) => {
   return data.map((value) => {
-    //@ts-ignore
     value.is_published = value.is_published === 1 ? true : false;
-    //@ts-ignore
-    value.on_sidebar = value.on_sidebar === 1 ? true : false;
-
     return value;
   });
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
-    //@ts-ignore
-    const data: FooterItems = await db(
+    const data = (await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
       'SELECT * FROM footer_items WHERE user_id = ? ORDER BY `order` ASC',
       // queryは文字列で来るため
       Number(req.query.userId)
-    );
+    )) as FooterItems;
 
     // footer_itemsのorderが正しく連番になっているかチェックする
     const isCorrectOrders = checkOrders(data);
@@ -51,7 +52,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
-    const rawData: FooterItems = changeToBooleanFromNumberFooterItems(data);
+    const rawData = changeToBooleanFromNumberFooterItems(data) as FooterItems;
 
     res.status(200).json({ err: false, rawData } as ApiResponse<FooterItems>);
   } catch (err) {

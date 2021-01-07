@@ -18,8 +18,8 @@ export type Props = {
   isShowMobile: boolean;
 };
 
-export const useUpdateUser = (param: Props) => {
-  const { dispatchAppState, appState } = React.useContext(AppStateContext);
+export const useUpdateUser = (param: Props): (() => Promise<void>) => {
+  const { dispatchAppState } = React.useContext(AppStateContext);
   const { userInfo, dispatchUserInfo } = React.useContext(UserInfoContext);
   const { user_id } = userInfo;
   const { user } = useAuth();

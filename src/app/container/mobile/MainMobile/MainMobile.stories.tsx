@@ -1,35 +1,47 @@
 import React from 'react';
 import { MainMobilePresenter } from './MainMobile';
-import { sampleData } from '../../../../util/dev/sampleArticles';
+import { sampleArticles } from '../../../../util/dev/sampleArticles';
+import { MainPresenterProps } from '../../tablet/Main/Main';
+import { sampleTags } from '../../../../util/dev/sampleTags';
+import { sampleInstagramMediaObject } from '../../../../util/dev/sampleData/sampleInstagramMediaObject';
 export default {
   title: 'mobile/MainMobile',
   component: MainMobilePresenter,
 };
 
-const props = {
-  appState: {
-    isSetting: false,
-  },
+export const props: MainPresenterProps = {
   isSetting: false,
-  loading: {
-    mainArticles: false,
+  articles: sampleArticles,
+  instagramMediaObject: sampleInstagramMediaObject,
+  tags: sampleTags,
+  deleteArticle: async () => {
+    return;
   },
-  articles: sampleData,
-  handleOnUpDate: null,
-  handleOnDelete: null,
-  classes: null,
-  handleOpenArticleEditor: null,
+
+  dispatchAppState: () => {
+    return;
+  },
+  openArticleModal: () => {
+    return;
+  },
+  openInstagramModal: () => {
+    return;
+  },
+
+  isShowInstagram: false,
+  show_article_type: 'scroll',
+  onClickUpdate: () => {
+    return;
+  },
+  loading: false,
+  handleLoadingMain: () => {
+    return;
+  },
 };
 
-export const Normal = () => {
-  return (
-    //@ts-ignore
-    <MainMobilePresenter {...props} />
-  );
+export const Normal = (): JSX.Element => {
+  return <MainMobilePresenter {...props} />;
 };
-export const isSetting = () => {
-  return (
-    //@ts-ignore
-    <MainMobilePresenter {...props} isSetting={true} />
-  );
+export const isSetting = (): JSX.Element => {
+  return <MainMobilePresenter {...props} isSetting={true} />;
 };

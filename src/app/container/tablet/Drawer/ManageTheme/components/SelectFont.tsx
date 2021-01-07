@@ -9,7 +9,7 @@ type Props = ManageThemePresenterProps & {
   whichFont: WhichFont;
   className?: string;
   value: ThemeFont;
-  fonts: Font1[] | Font2[];
+  fonts: (Font1 | Font2)[];
   handleOnChange: (
     event: React.ChangeEvent<{
       value: unknown;
@@ -17,7 +17,7 @@ type Props = ManageThemePresenterProps & {
   ) => Promise<void>;
 };
 
-export const SelectFont = (props: Props) => {
+export const SelectFont = (props: Props): JSX.Element => {
   return (
     <>
       <Select
@@ -26,18 +26,15 @@ export const SelectFont = (props: Props) => {
         value={props.value}
         onChange={props.handleOnChange}
         className={props.className}>
-        {
-          //@ts-ignore
-          props.fonts.map((value, index) => {
-            return (
-              <MenuItem key={index} value={value[0]}>
-                <span style={{ fontFamily: value[0] }}>
-                  {value[1] || value[0]}
-                </span>
-              </MenuItem>
-            );
-          })
-        }
+        {props.fonts.map((value, index) => {
+          return (
+            <MenuItem key={index} value={value[0]}>
+              <span style={{ fontFamily: value[0] }}>
+                {value[1] || value[0]}
+              </span>
+            </MenuItem>
+          );
+        })}
       </Select>
     </>
   );

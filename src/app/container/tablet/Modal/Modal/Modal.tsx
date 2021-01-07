@@ -27,7 +27,7 @@ import { SelectTags } from '../Modals/SelectTags/SelectTags';
 import { ManageTags } from '../../Drawer/ManageTags/ManageTags';
 import { SettingUserInfo } from '../../Drawer/ManageUserInfo/ManageUserInfo';
 import { DeleteAccountForm } from '../../Drawer/DeleteAccountForm/DeleteAccountForm';
-import { useModalSize, medium } from './context/useModalSize';
+import { useModalStyle, medium } from './context/useModalStyle';
 import { StyledDialog } from './components/StyledDialog';
 import { ManageInstagramAccounts } from '../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
 import { SelectInstagramAccounts } from '../Modals/SelectInstagramAccounts/SelectInstagramAccounts';
@@ -72,7 +72,7 @@ export const useModalProps = () => {
 
 type Props = ReturnType<typeof useModalProps>;
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(() => {
   return createStyles({
     root: {
       padding: 0,
@@ -87,72 +87,74 @@ export const ModalPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   // ModalContentは内容モーダルウィンドウの中身の設定
-  let ModalContent = () => <></>;
+  let modalContent: React.ReactNode = () => <></>;
 
   // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。デフォルトはlarge
-  let modalStyle = useModalSize('large');
-  const modalStyleMobile =
-    props.setModal === 'google_search'
-      ? useModalSize('upperSide')
-      : useModalSize('fullScreen');
+  let modalStyle = useModalStyle('large');
+
+  const fullScreenModalStyle = useModalStyle('fullScreen');
+  const upperSideModalStyle = useModalStyle('upperSide');
+  const propsModalStyle = useModalStyle(props.modalSize);
+  const mediumModalStyle = useModalStyle('medium');
+  const currentModalStyle = useModalStyle(props.currentModalContent.modalSize);
 
   switch (props.setModal) {
     case 'content_modal':
-      ModalContent = () => <ContentModal />;
+      modalContent = <ContentModal />;
       break;
     case 'footer_item_modal':
-      modalStyle = useModalSize(props.currentModalContent.modalSize);
-      ModalContent = () => <FooterItemModal />;
+      modalStyle = currentModalStyle;
+      modalContent = <FooterItemModal />;
       break;
     case 'google_search':
-      modalStyle = useModalSize('upperSide');
-      ModalContent = () => <GoogleSearch />;
+      modalStyle = upperSideModalStyle;
+      modalContent = <GoogleSearch />;
       break;
     case 'instagram_media_modal':
-      modalStyle = useModalSize(props.currentModalContent.modalSize);
-      ModalContent = () => <InstagramMediaModal />;
+      modalStyle = currentModalStyle;
+      modalContent = <InstagramMediaModal />;
       break;
     case 'select_tags':
       modalStyle = medium;
-      ModalContent = () => <SelectTags />;
+      modalContent = <SelectTags />;
       break;
     case 'select_instagram':
       modalStyle = medium;
-      ModalContent = () => <SelectInstagramAccounts />;
+      modalContent = <SelectInstagramAccounts />;
       break;
     case 'edit_info_bar':
-      ModalContent = () => <InfoBarEditor />;
+      modalContent = <InfoBarEditor />;
       break;
     case 'edit_article':
-      ModalContent = () => <ArticleEditor />;
+      modalContent = <ArticleEditor />;
       break;
     case 'edit_footer_item':
-      modalStyle = useModalSize(props.modalSize);
-      ModalContent = () => <FooterItemEditor />;
+      modalStyle = propsModalStyle;
+      modalContent = <FooterItemEditor />;
       break;
     case 'edit_tags':
-      modalStyle = useModalSize('medium');
-      ModalContent = () => <ManageTags />;
+      modalStyle = mediumModalStyle;
+      modalContent = <ManageTags />;
       break;
     case 'manage_instagram':
-      ModalContent = () => <ManageInstagramAccounts />;
+      modalContent = <ManageInstagramAccounts />;
       break;
     case 'setting_theme':
-      modalStyle = useModalSize('medium');
-      ModalContent = () => <ManageTheme />;
+      modalStyle = mediumModalStyle;
+      modalContent = <ManageTheme />;
       break;
     case 'setting_user_info':
-      ModalContent = () => <SettingUserInfo />;
+      modalContent = <SettingUserInfo />;
       break;
     case 'feedback_form':
-      ModalContent = () => <FeedbackForm />;
+      modalContent = <FeedbackForm />;
       break;
     case 'delete_account_form':
-      ModalContent = () => <DeleteAccountForm />;
+      modalContent = <DeleteAccountForm />;
       break;
     case 'popup_not_email_verified':
-      modalStyle = useModalSize('medium');
-      ModalContent = () => <PageNotEmailVerified />;
+      modalStyle = mediumModalStyle;
+      modalContent = <PageNotEmailVerified />;
       break;
 
     default:
@@ -184,7 +186,11 @@ export const ModalPresenter: React.FC<Props> = (props) => {
       setModal={props.setModal}
       isEditting={props.edittingPrams.isEditting}
       modalStyle={modalStyle}
-      modalStyleMobile={modalStyleMobile}
+      modalStyleMobile={
+        props.setModal === 'google_search'
+          ? upperSideModalStyle
+          : fullScreenModalStyle
+      }
       className={classes.root}
       open={props.isModalOpen}
       TransitionComponent={Transition}
@@ -204,13 +210,13 @@ export const ModalPresenter: React.FC<Props> = (props) => {
         <CloseButton onClick={props.closeModal} />
       )}
       <DialogContent className={classes.dialogContent}>
-        <ModalContent />
+        {modalContent}
       </DialogContent>
     </StyledDialog>
   );
 };
 
-export const Modal = () => {
+export const Modal = (): JSX.Element => {
   const props = useModalProps();
 
   return <ModalPresenter {...props} />;

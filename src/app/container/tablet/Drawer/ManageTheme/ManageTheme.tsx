@@ -26,7 +26,6 @@ import { useHandleChangeFooterIconSize } from './context/useHandleChangeFooterIc
 import { useHandleChangeShowArticleType } from './context/useHandleChangeShowArticleType';
 import { useHandleAccordion } from './context/useHandleAccordion';
 import { useStateMangeTheme } from './context/useStateMangeTheme';
-import firebase from 'firebase/app';
 
 export type Hsl = {
   h: number;
@@ -126,7 +125,6 @@ export const ManageThemePresenter: React.FC<ManageThemePresenterProps> = (
 
       <Divider />
 
-      {/* <Accordion expanded={props.expanded === 'panel1'} onChange={props.handleAccordion('panel1')} className={classes.accordionRoot} > */}
       <Accordion
         expanded={props.expanded === true}
         onChange={props.handleAccordion(true)}

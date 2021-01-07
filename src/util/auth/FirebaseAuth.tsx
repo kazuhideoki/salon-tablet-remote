@@ -37,7 +37,7 @@ const firebaseAuthConfig: firebaseui.auth.Config = {
   },
 };
 
-const FirebaseAuth = () => {
+const FirebaseAuth = (): JSX.Element => {
   return (
     <div>
       <StyledFirebaseAuth

@@ -1,7 +1,6 @@
 import { Articles } from '../interface/Interface';
 
-// export const sampleData = JSON.parse({
-export const sampleData: Articles = [
+export const sampleArticles: Articles = [
   {
     article_id: 3,
     user_id: 1,

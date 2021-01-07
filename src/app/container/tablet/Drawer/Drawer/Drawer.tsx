@@ -11,9 +11,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import { ThemeArgs } from '../../../../store/theme/ThemeProvider';
-import { drawerSettingJsx } from './components/drawerSettingJsx';
-import { drawerHeaderJsx } from './components/drawerHeaderJsx';
-import { drawerItemsJsx } from './components/drawerItemsJsx';
+import { DrawerSetting } from './components/DrawerSetting';
+import { DrawerHeader } from './components/DrawerHeader';
+import { DrawerItems } from './components/DrawerItems';
 import { useIsMobile } from '../../../../../util/useIsMobile';
 import { useFooterProps } from '../../Footer/Footer/Footer';
 import { Settings } from '@material-ui/icons';
@@ -163,9 +163,9 @@ const useStyles = makeStyles((theme: Theme) => {
 export const DrawerPresenter: React.FC<DrawerPresenterProps> = (props) => {
   const classes = useStyles(props.themes);
 
-  const drawerHeader = drawerHeaderJsx(props);
-  const drawerItems = drawerItemsJsx(props);
-  const drawerSetting = drawerSettingJsx(props);
+  const drawerHeader = <DrawerHeader {...props} />;
+  const drawerItems = <DrawerItems {...props} />;
+  const drawerSetting = <DrawerSetting {...props} />;
 
   return (
     <div className={`${classes.root} ${props.className}`}>

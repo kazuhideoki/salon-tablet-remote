@@ -3,23 +3,25 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import React from 'react';
 import { SelectedTheme } from '../../../../../../util/interface/Interface';
 
-export const switchingTransition = (selected_theme: SelectedTheme) => {
+export const switchingTransition = (
+  selected_theme: SelectedTheme
+): React.ForwardRefExoticComponent<
+  TransitionProps & React.RefAttributes<unknown>
+> => {
   switch (selected_theme) {
     case 'white':
-      return React.forwardRef<unknown, TransitionProps>(function Transition(
-        props,
-        ref
+      return React.forwardRef(function Transition(
+        props: TransitionProps & { children?: React.ReactElement<any, any> },
+        ref: React.Ref<unknown>
       ) {
-        //@ts-ignore
-        return <Fade direction="up" ref={ref} {...props} />;
+        return <Fade ref={ref} {...props} />;
       });
 
     default:
-      return React.forwardRef<unknown, TransitionProps>(function Transition(
-        props,
-        ref
+      return React.forwardRef(function Transition(
+        props: TransitionProps & { children?: React.ReactElement<any, any> },
+        ref: React.Ref<unknown>
       ) {
-        //@ts-ignore
         return <Slide direction="up" ref={ref} {...props} />;
       });
   }
