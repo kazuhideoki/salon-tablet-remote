@@ -63,7 +63,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const FeedbackFormPresenter: React.FC<Props> = (props) => {
+export const FeedbackFormPresenter: React.FC<FeedbackFormPresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   return (

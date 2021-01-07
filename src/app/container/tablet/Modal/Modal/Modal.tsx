@@ -83,16 +83,16 @@ const useStyles = makeStyles((theme) => {
   });
 });
 
-type ModalContentType =
-  | (() => JSX.Element)
-  | React.FC<Record<string, unknown>>
-  | React.ComponentType<Record<string, unknown>>;
+// type ModalContentType =
+//   | (() => JSX.Element)
+//   | React.FC<Record<string, unknown>>
+//   | React.ComponentType<Record<string, unknown>>;
 
 export const ModalPresenter: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   // ModalContentは内容モーダルウィンドウの中身の設定
-  let ModalContent: ModalContentType = () => <></>;
+  let ModalContent: React.ReactNode = () => <></>;
 
   // modalStyleにモーダルの表示形式の設定。サイズやoverflowなどのプロパティを設定する。デフォルトはlarge
   let modalStyle = useModalSize('large');

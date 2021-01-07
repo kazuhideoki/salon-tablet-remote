@@ -1,17 +1,33 @@
-//@ts-nocheck
-import { BaseModule } from 'quill-image-resize-module-react/src/modules/BaseModule';
+import { BaseModule } from 'quill-image-resize-module-react';
 
 // imageのResizeをtouchイベントでも適応するためのquill-image-resize-module-react用のモジュール
-export class Resize {
-  constructor(resizer) {
-    this.overlay = resizer.overlay;
+// export class Resize {
+//   constructor(resizer) {
+//     this.overlay = resizer.overlay;
 
-    this.img = resizer.img;
+//     this.img = resizer.img;
 
-    this.options = resizer.options;
+//     this.options = resizer.options;
 
-    this.requestUpdate = resizer.onUpdate;
+//     this.requestUpdate = resizer.onUpdate;
+//   }
+export class Resize extends BaseModule {
+  constructor(resizer: any) {
+    super();
+    this.boxes = resizer.boxes;
+    this.preDragWidth = resizer.preDragWidth;
+    this.dragStartX = resizer.dragStartX;
+    this.dragBox = resizer.dragBox;
   }
+
+  overlay: any;
+  img: any;
+  options: any;
+  requestUpdate: any;
+  boxes: any[];
+  preDragWidth: any;
+  dragStartX: any;
+  dragBox: any;
 
   onCreate = () => {
     // track resize handles
@@ -27,12 +43,12 @@ export class Resize {
     this.positionBoxes();
   };
 
-  onDestroy = () => {
+  onDestroy = (): void => {
     // reset drag handle cursors
     this.setCursor('');
   };
 
-  positionBoxes = () => {
+  positionBoxes = (): void => {
     const handleXOffset = `${
       -parseFloat(this.options.handleStyles.width) / 2
     }px`;
@@ -52,7 +68,7 @@ export class Resize {
     });
   };
 
-  addBox = (cursor) => {
+  addBox = (cursor: any): void => {
     // create div element for resize handle
     const box = document.createElement('div');
 
@@ -78,7 +94,7 @@ export class Resize {
     this.boxes.push(box);
   };
 
-  handleMousedown = (evt) => {
+  handleMousedown = (evt: any): void => {
     this.dragBox = evt.target;
     // note starting mousedown position
 
@@ -95,7 +111,7 @@ export class Resize {
     document.addEventListener('mousemove', this.handleDrag, false);
     document.addEventListener('mouseup', this.handleMouseup, false);
   };
-  handleTouchStart = (evt) => {
+  handleTouchStart = (evt: any): void => {
     evt.preventDefault();
 
     // note which box
@@ -117,14 +133,14 @@ export class Resize {
     document.addEventListener('touchend', this.handleTouchend, false);
   };
 
-  handleMouseup = () => {
+  handleMouseup = (): void => {
     // reset cursor everywhere
     this.setCursor('');
     // stop listening for movement and mouseup
     document.removeEventListener('mousemove', this.handleDrag);
     document.removeEventListener('mouseup', this.handleMouseup);
   };
-  handleTouchend = (evt) => {
+  handleTouchend = (evt: any): void => {
     evt.preventDefault();
 
     // reset cursor everywhere
@@ -134,7 +150,7 @@ export class Resize {
     document.removeEventListener('touchend', this.handleTouchend);
   };
 
-  handleDrag = (evt) => {
+  handleDrag = (evt: any): void => {
     if (!this.img) {
       // image not set yet
       return;
@@ -155,7 +171,7 @@ export class Resize {
 
     this.requestUpdate();
   };
-  handleTouchmove = (evt) => {
+  handleTouchmove = (evt: any): void => {
     evt.preventDefault();
 
     if (!this.img) {
@@ -180,7 +196,7 @@ export class Resize {
     this.requestUpdate();
   };
 
-  setCursor = (value) => {
+  setCursor = (value: any): void => {
     [document.body, this.img].forEach((el) => {
       el.style.cursor = value; // eslint-disable-line no-param-reassign
     });
