@@ -27,15 +27,14 @@ export const instagramReducer = (
       break;
 
     case types.SET_RECONNECT:
-      const instagramAccounts = state.instagramAccounts.map((value) => {
-        if (value.instagram_id === action.payload) {
-          value.is_reconnect_needed = true;
-        }
-        return value;
-      });
       newState = {
         ...state,
-        instagramAccounts: instagramAccounts,
+        instagramAccounts: state.instagramAccounts.map((value) => {
+          if (value.instagram_id === action.payload) {
+            value.is_reconnect_needed = true;
+          }
+          return value;
+        }),
       };
       break;
     case types.SET_MEDIAS:
