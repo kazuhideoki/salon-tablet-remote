@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainPresenter, MainPresenterProps } from './Main';
-import { sampleData } from '../../../../util/dev/sampleArticles';
+import { sampleArticles } from '../../../../util/dev/sampleArticles';
 import { initInstagramMediaObject } from '../../../../util/interface/Interface';
 export default {
   title: 'Main/Main',
@@ -8,7 +8,7 @@ export default {
 };
 
 const props: MainPresenterProps = {
-  articles: sampleData,
+  articles: sampleArticles,
   isSetting: false,
   instagramMediaObject: initInstagramMediaObject,
   tags: [],

@@ -17,7 +17,7 @@ type Props = ManageThemePresenterProps & {
   ) => Promise<void>;
 };
 
-export const SelectFont = (props: Props) => {
+export const SelectFont = (props: Props): JSX.Element => {
   return (
     <>
       <Select

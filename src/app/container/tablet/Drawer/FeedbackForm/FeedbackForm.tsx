@@ -35,7 +35,9 @@ const useFeedbackFormProps = () => {
   };
 };
 
-type Props = ReturnType<typeof useFeedbackFormProps>;
+export type FeedbackFormPresenterProps = ReturnType<
+  typeof useFeedbackFormProps
+>;
 
 const useStyles = makeStyles((theme) => ({
   paper: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FooterItemEditorPresenter } from './FooterItemEditor';
 import { ThemeProvider } from '../../../../components/ThemeProviderInStorybook';
-import { propsFooterItemEditor } from '../../../../../util/dev/propsFooterItemEditor';
+import { propsFooterItemEditor } from '../../../../../util/dev/sampleProps/propsFooterItemEditor';
 export default {
   title: 'Drawer/ItemEditor/FooterItemEditorPresenter',
   component: FooterItemEditorPresenter,

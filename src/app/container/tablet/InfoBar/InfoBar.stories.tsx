@@ -1,6 +1,6 @@
 import React from 'react';
 import { InfoBarPresenter, InfoBarPresenterProps } from './InfoBar';
-import { sampleData } from '../../../../util/dev/sampleArticles';
+import { sampleArticles } from '../../../../util/dev/sampleArticles';
 import { scrollingAnimationDuration } from '../../../hooks/infoBar/useUpdateInfoBar';
 
 export default {
@@ -22,7 +22,7 @@ const props: InfoBarPresenterProps = {
     selected_article_id: null,
     scrolling_animation_duration: (32 * 35) / 245 + 8,
   },
-  targetArticle: sampleData[0],
+  targetArticle: sampleArticles[0],
   shop_name: 'salon de なんちゃら',
   openArticleModalInfoBar: () => {
     return;

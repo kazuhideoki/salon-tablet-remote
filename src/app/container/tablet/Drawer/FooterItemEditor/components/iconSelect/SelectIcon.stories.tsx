@@ -2,7 +2,7 @@ import React from 'react';
 import { SelectIcon } from './SelectIcon';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { WifiTwoTone } from '@material-ui/icons';
-import { propsFooterItemEditor } from '../../../../../../../util/dev/propsFooterItemEditor';
+import { propsFooterItemEditor } from '../../../../../../../util/dev/sampleProps/propsFooterItemEditor';
 
 const props = propsFooterItemEditor;
 
