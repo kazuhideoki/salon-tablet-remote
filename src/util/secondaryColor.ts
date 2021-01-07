@@ -2,9 +2,11 @@ import colorConvert from 'color-convert';
 
 import { Hsl } from '../app/container/tablet/Drawer/ManageTheme/ManageTheme';
 
-type props = Hsl | number[]; //両方のパターンに対応させる？★
+type props = Hsl | [number, number, number]; //両方のパターンに対応させる？★
 
-export const generateSecondaryColor = (props: props): number[] => {
+export const generateSecondaryColor = (
+  props: props
+): [number, number, number] => {
   let params: Hsl;
   let h: number, s: number, l: number;
   if (Array.isArray(props)) {
@@ -28,7 +30,7 @@ export const generateSecondaryColor = (props: props): number[] => {
     h = h - 360;
   }
 
-  const newParams = [h, s, l];
+  const newParams = [h, s, l] as [number, number, number];
 
   return newParams;
 };

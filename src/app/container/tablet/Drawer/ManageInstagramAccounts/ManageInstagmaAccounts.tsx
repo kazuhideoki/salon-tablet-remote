@@ -134,7 +134,7 @@ export const ManageInstagramAccountsPresenter: React.FC<ManageInstagramAccountsP
   );
 };
 
-export const ManageInstagramAccounts = () => {
+export const ManageInstagramAccounts = (): JSX.Element => {
   const props = useManageInstagramAccountsProps();
 
   return <ManageInstagramAccountsPresenter {...props} />;

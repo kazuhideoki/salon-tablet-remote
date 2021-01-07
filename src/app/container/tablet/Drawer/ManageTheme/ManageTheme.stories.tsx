@@ -14,7 +14,7 @@ export default {
   title: 'Drawer/ManageTheme',
   component: ManageThemePresenter,
 };
-const colorConvert = require('color-convert');
+import colorConvert from 'color-convert';
 
 export const Normal = () => {
   const [expanded, setExpanded] = React.useState(false);
@@ -46,10 +46,6 @@ export const Normal = () => {
     handleAccordion,
     theme_color: color,
     handleChangeThemeColor: async (value: Color) => {
-      const params = {
-        hex: value.hex,
-        hex2: `#${colorConvert.hsl.hex(generateSecondaryColor(value.hsl))}`,
-      };
       console.log('【】value.hslは ' + JSON.stringify(value.hsl));
       console.log(
         '【】generateSecondaryColorは ' + generateSecondaryColor(value.hsl)
