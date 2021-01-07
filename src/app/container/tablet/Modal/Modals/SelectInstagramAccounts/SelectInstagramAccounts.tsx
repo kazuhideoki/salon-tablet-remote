@@ -73,7 +73,11 @@ export const SelectInstagramAccountsPresenter: React.FC<SelectInstagramAccountsP
           <div key={index} className={classes.account}>
             <Button
               onClick={() =>
-                props.getInstagramMedias(value.instagram_id, value.username, {})
+                props.getInstagramMedias({
+                  instagram_id: value.instagram_id,
+                  username: value.username,
+                  paging: { after: '', before: '' },
+                })
               }
               disabled={value.is_reconnect_needed}>
               {value.username}
