@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@2.0.0
+        uses: actions/checkout@v2.0.0
       - name: Set Node.js 12.x
-        uses: actions/setup-node@v1.3.0
+        uses: actions/setup-node@v2
         with:
           node-version: 12.x
       - name: Install dependencies
-        run: npm ci
+        run: npm i
       - name: Test
         run: npm run test
   lint:
@@ -28,10 +28,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Set Node.js 12.x
-        uses: actions/setup-node@v1.3.0
+        uses: actions/setup-node@v2
         with:
           node-version: 12.x
       - name: Install dependencies
-        run: npm ci
+        run: npm i
       - name: Lint
         run: npm run lint
