@@ -1,66 +1,47 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { server, localhost } from "../../../lib/loadUrl";
-import { T_article_id } from "../../../app/Store/Types";
-import { TApiResponse } from "../../../lib/apiTypes";
-
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesDelete = async (params: T_articles_delete):Promise<TApiResponse<T_articles_delete_return>> => {
-  const str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/articles/delete`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
-} 
-
-export type T_articles_delete = {
-  article_id: T_article_id
-}
-export type T_articles_delete_return = {
-  rawData: unknown;
+export const apiArticlesDelete = async (
+  params: ApiArticlesDelete
+): Promise<ApiResponse> => {
+  return apiWrapPost('articles/delete', params);
 };
 
+export type ApiArticlesDelete = {
+  article_id: number;
+};
 
-
-const articles_delete = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-    const { article_id }: T_articles_delete = req.body;
+const articles_delete = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (req.method === 'POST') {
+    const { article_id }: ApiArticlesDelete = req.body;
 
     try {
-      const data = await db(
-        `DELETE FROM articles WHERE article_id = ?`,
-        article_id
-      );
-      console.log("/articles/delete/は " + JSON.stringify(data));
+      await db(`DELETE FROM articles WHERE article_id = ?`, article_id);
 
-      const returnData: T_articles_delete_return = {
-        rawData: data,
-      };
-      res.status(200).json(returnData);
-      
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
-      console.log("/articles/delete/のエラーは " + JSON.stringify(err));
+      console.log('/articles/delete/のエラーは ' + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      res.status(500).json({ err: true, data: err });
     }
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };
 
-export default articles_delete
+export default articles_delete;

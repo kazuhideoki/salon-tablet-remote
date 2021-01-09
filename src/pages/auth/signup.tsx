@@ -1,12 +1,13 @@
-import React from 'react'
-import { AuthForm } from '../../pageComponent/AuthFrom';
+import React from 'react';
+import { AuthForm } from '../../app/components/pages/AuthFrom';
 import { BackgroundDiv, useStylesAuthForm } from './signin';
-import firebase from "firebase/app";
-import "firebase/auth";
-import initFirebase from "../../lib/auth/initFirebase";
-import { Typography, useMediaQuery } from '@material-ui/core';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import initFirebase from '../../util/auth/initFirebase';
+import { Typography } from '@material-ui/core';
 import Link from 'next/link';
-import { AuthCircular } from '../../lib/AuthCircular';
+import { createUserData } from '../../util/db/createUserData';
+import { AuthCircular } from '../../app/components/AuthCircular';
 
 initFirebase();
 
@@ -16,15 +17,23 @@ const handleSingup = async (email: string, password: string) => {
       .auth()
       .setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
-  } catch (error) {
-    console.log("handleSingupは " + error);
+    const user = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
+
+    await createUserData(email);
+
+    return user;
+  } catch (err) {
+    console.log('handleSingupは ' + err);
+    alert('エラーによりアカウントを作成出来ませんでした');
+    return null;
   }
 };
 
 const SignupForm = () => {
   const [isClicked, setIsClicked] = React.useState(false);
-  const classes = useStylesAuthForm()
+  const classes = useStylesAuthForm();
   return (
     <div className={classes.root}>
       <div className={classes.authBoxContainer}>

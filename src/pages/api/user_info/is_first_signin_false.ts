@@ -1,53 +1,48 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { T_user_id } from "../../../app/Store/Types";
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiIsFirsSigninFalse = async (
-         param: user_info_is_first_signin_false
-       ) => {
-         let str = process.browser ? server : localhost;
+  params: ApiIsFirsSigninFalse
+): Promise<ApiResponse> => {
+  return apiWrapPost('user_info/is_first_signin_false', params);
+};
 
-         const res = await fetch(`${str}/api/user_info/is_first_signin_false`, {
-           headers: { "Content-Type": "application/json" },
-           method: "POST",
-           mode: "cors",
-           body: JSON.stringify(param),
-         });
-       };
+type ApiIsFirsSigninFalse = {
+  user_id: number;
+};
 
-type user_info_is_first_signin_false = {
-  user_id: T_user_id
-}
-
-const is_first_signin_false = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-    const { user_id } = req.body as user_info_is_first_signin_false
-    try{
-      
-      const data = await db(
+const is_first_signin_false = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
+  if (req.method === 'POST') {
+    const { user_id } = req.body as ApiIsFirsSigninFalse;
+    try {
+      await db(
         `UPDATE user_info SET is_first_sign_in = 0 WHERE user_id = ?`,
         user_id
       );
-      res.end()
-
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
-      console.log("/user_info/is_first_signin_false/のエラーは " + JSON.stringify(err));
+      console.log(
+        '/user_info/is_first_signin_false/のエラーは ' + JSON.stringify(err)
+      );
 
-      throw "is_first_signin_falseでエラー。";
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };

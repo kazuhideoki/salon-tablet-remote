@@ -1,72 +1,51 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { T_user_id, T_user_name, T_shop_name, T_user_email, T_is_generate_public_page } from "../../../app/Store/Types";
-
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoUpdate = async (
-  params: T_user_info_update
-): Promise<TApiResponse<T_user_info_update_return>> => {
-  let str = process.browser ? server : localhost;
-
-  const res = await fetch(`${str}/api/user_info/update`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
+  params: ApiUserInfoUpdate
+): Promise<ApiResponse> => {
+  return apiWrapPost('user_info/update', params);
 };
 
-export type T_user_info_update = {
-  user_id: T_user_id;
-  user_name: T_user_name;
-  shop_name: T_shop_name;
-  user_email: T_user_email;
-  is_generate_public_page: T_is_generate_public_page
-}
-
-export type T_user_info_update_return = {
-  rawData: unknown;
+export type ApiUserInfoUpdate = {
+  user_id: number;
+  user_name: string;
+  shop_name: string;
+  user_email: string;
+  is_generate_public_page: boolean;
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-
-    const params: T_user_info_update = req.body;
+  if (req.method === 'POST') {
+    const params: ApiUserInfoUpdate = req.body;
 
     try {
       const data = await db(`UPDATE user_info SET ? WHERE user_id = ?`, [
         params,
         params.user_id,
       ]);
-      console.log("/user_info/update/は " + JSON.stringify(data));
+      console.log('/user_info/update/は ' + JSON.stringify(data));
 
-      const returnData: T_user_info_update_return = {
-        rawData: data,
-      };
-      
-      res.status(200).json(returnData);
-
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
-      console.log("/user_info/update/のエラーは " + JSON.stringify(err));
+      console.log('/user_info/update/のエラーは ' + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };
-export default update
+export default update;

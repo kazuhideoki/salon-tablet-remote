@@ -1,42 +1,62 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { TInfoBar, T_user_id, TInfoBarData } from "../../../app/Store/Types";
-import { localhost, server } from "../../../lib/loadUrl";
-import { TApiResponse, TApiError } from "../../../lib/apiTypes";
-import { createInitInfoBar } from "../../../lib/createInitInfoBar";
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import {
+  InfoBar,
+  InfoBarData,
+  InfoBarWithoutId,
+} from '../../../util/interface/Interface';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
-         user_id: T_user_id
-       ): Promise<TApiResponse<TInfoBarData>> => {
-         let str = process.browser ? server : localhost;
+  user_id: number
+): Promise<ApiResponse<InfoBarData>> => {
+  return apiWrapGet(`info_bar/get?userId=${user_id}`);
+};
 
-         const res = await fetch(`${str}/api/info_bar/get?userId=${user_id}`);
+const createInitInfoBar = async (user_id: number) => {
+  const params: InfoBarWithoutId = {
+    user_id: user_id,
+    info_bar_type: 'shop_name',
+    scrolling_sentence: '',
+    scrolling_animation_duration: 8,
+    selected_article_id: null,
+  };
 
-         return await res.json();
-       };
+  await db(`INSERT INTO info_bar SET ?`, params);
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  const userId: T_user_id = Number(req.query.userId);
+  const data = (await db(
+    // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
+    'SELECT * FROM info_bar WHERE user_id = ?',
+    user_id
+  )) as InfoBar[];
+
+  return data;
+};
+
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  const userId = Number(req.query.userId);
 
   try {
-    //@ts-ignore
-    let data: TInfoBar[] = await db(
+    let data = (await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
-      "SELECT * FROM info_bar WHERE user_id = ?",
+      'SELECT * FROM info_bar WHERE user_id = ?',
       userId
-    );
-    // console.log('info_bar/getのdataは ' + JSON.stringify(data));
+    )) as InfoBar[];
 
     // 初回サインインのときなどでinfo_barがない場合、新しく作る。作ったデータが返ってくる
     if (data.length === 0) {
-      data = await createInitInfoBar(userId)
+      data = await createInitInfoBar(userId);
     }
 
     const article_id = data[0].selected_article_id;
 
     // selected_article_idがセットされていれば該当記事取得
-    let data2 = [] as any
+    let data2 = [] as any;
     if (article_id) {
       data2 = await db(
         `SELECT * FROM articles WHERE article_id = ?`,
@@ -44,22 +64,19 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       );
     }
 
-    const returnData: TInfoBarData = {
-      infoBar: data[0] as TInfoBar,
-      // scrolling_animation_duration: null,
+    const rawData: InfoBarData = {
+      infoBar: data[0] as InfoBar,
       targetArticle: data2.length ? data2[0] : [],
     };
 
-    return res.status(200).json(returnData);
-
+    res.status(200).json({ err: false, rawData } as ApiResponse<InfoBarData>);
   } catch (err) {
-    console.log("/info_bar/get/のエラーは " + JSON.stringify(err));
-    const errOnj: TApiError = { err: true, data: { message: err.message } };
-    return res.status(500).json(errOnj);
+    console.log('/info_bar/get/のエラーは ' + JSON.stringify(err));
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

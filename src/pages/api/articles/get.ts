@@ -1,132 +1,119 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { tagIdsToNumberArray } from "../../../lib/tagIdsToNumberArray";
-import { T_user_id, TArticles, TAllArticles, TPaginationParams } from "../../../app/Store/Types";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { server, localhost } from "../../../lib/loadUrl";
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
+import {
+  Articles,
+  AllArticles,
+  PaginationParams,
+} from '../../../util/interface/Interface';
+import { apiWrapGet, ApiResponse } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiArticlesGet = async (articlesParam: T_articles_get): Promise<TApiResponse<T_articles_get_return>> => {
-  
-  const str = process.browser ? server : localhost
+export const apiArticlesGet = async (
+  params: ApiArticlesGet
+): Promise<ApiResponse<ApiArticlesGetReturn>> => {
+  const { page, selectingTags, isSetting, userId } = params;
+  console.log('apiArticlesGetだよ');
 
-  const res = await fetch(
-    `${str}/api/articles/get`,
-    {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(articlesParam),
-    }
+  return apiWrapGet(
+    `articles/get?page=${page}&selectingTags=${selectingTags}&isSetting=${isSetting}&userId=${userId}`
   );
-
-  return await res.json();
-} 
-
-export type T_articles_get = {
-  page: number
-  selectingTags: number[]
-  isSetting: boolean;
-  userId: T_user_id;
 };
 
+export type ApiArticlesGet = {
+  page: number;
+  selectingTags: number[];
+  isSetting: boolean;
+  userId: number;
+};
 
-export type T_articles_get_return = {
-  rawData: TArticles,
-  pagination: TPaginationParams
-  allArticles: TAllArticles
-}
+export type ApiArticlesGetReturn = {
+  articles: Articles;
+  pagination: PaginationParams;
+  allArticles: AllArticles;
+};
+
+const pageSize = 6;
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  const pageSize = 6
-  if (req.method === "POST") {
-        
-    const { page, selectingTags, isSetting, userId }: T_articles_get = req.body;
-    // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
-    let getPublishedOnly: string;
-    if (isSetting === false) {
-      getPublishedOnly = `AND is_published = true `;
-    } else if (isSetting === true) {
-      getPublishedOnly = " ";
-    }
+  console.log('req.queryは ' + JSON.stringify(req.query));
 
-    // 正規表現でタグを検索
+  const page = Number(req.query.page) as number;
+  const selectingTags = req.query.selectingTags
+    ? ((req.query.selectingTags as string)
+        .split(',')
+        .map((value) => Number(value)) as number[])
+    : [];
+  const isSetting: boolean = req.query.isSetting === 'true' ? true : false;
+  const userId = Number(req.query.userId) as number;
 
-    let getTagedPages;
-    if (selectingTags.length === 0) {
-      getTagedPages = ''
-    } else {
-      // mapで正規表現配列化
-      const regExpTagsArray = selectingTags.map((value) => {
-        return `'[[:<:]]${value}[[:>:]]'`;
-      })
-      // 正規表現連結、sql文化
-      getTagedPages = `AND tag_ids REGEXP ${regExpTagsArray.join(" AND tag_ids REGEXP ")} `;
-    }
+  const ArticleGet: ApiArticlesGet = {
+    page,
+    selectingTags,
+    isSetting,
+    userId,
+  }; // 型checkのため;
 
-    // const skipRows = 5 * (page - 1); // オフセット, 何ページ飛ばすか
-    const skipRows = pageSize * (page - 1); // オフセット, 何ページ飛ばすか
-    const offSet = skipRows === 0 ? '' : skipRows + ","; 
+  // 通常はis_published(投稿済み)がtrueのみ,セッティング中はすべての記事
+  const getPublishedOnly = isSetting ? '' : `AND is_published = true`;
 
-    const query =
-      `SELECT * FROM articles WHERE user_id = ${userId} ` +
-      getPublishedOnly +
-      getTagedPages +
-      `ORDER BY created_at DESC LIMIT ` +
-      offSet +
-      // ` 5`;
-      ` ${pageSize}`;
-      
-    try {
-      // await isSession(req)
-         
-      let data: any = await db(
-        query
-      );
+  // mapで正規表現配列化
+  const regExpTagsArray = selectingTags.map((value) => {
+    return `'[[:<:]]${value}[[:>:]]'`;
+  });
 
-      const query2 =
-        `SELECT user_id FROM articles WHERE user_id = ${userId} ` +
-        getPublishedOnly +
-        getTagedPages;
+  // 正規表現連結、sql文化
+  const getTagedPages =
+    selectingTags.length === 0
+      ? ''
+      : `AND tag_ids REGEXP ${regExpTagsArray.join(' AND tag_ids REGEXP ')}`;
 
-      const data2: any = await db(query2);  
+  const skipRows = pageSize * (page - 1); // オフセット, 何ページ飛ばすか
+  const offSet = skipRows === 0 ? '' : skipRows + ',';
 
-      const query3 = `SELECT article_id, title FROM articles WHERE user_id = ${userId}`;
-      const data3 = await db(query3);
-      
-      const pagination: TPaginationParams = {
-        page: page,
-        pageCount: data2.length ? Math.ceil(data2.length / pageSize) : 0, // 全row数をpageSizeで割って切り上げ
-        pageSize: pageSize,
-        rowCount: data2.length,
-      };
+  try {
+    const data = (await db(
+      `SELECT * FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages} ORDER BY created_at DESC LIMIT ${offSet} ${pageSize}`
+    )) as Articles;
 
-      const returnData: T_articles_get_return = {
-        // tag_idsをnumber[]化する、なければnullのまま
-        rawData: data.length ? tagIdsToNumberArray(data) : data,
-        pagination: pagination,
-        allArticles: data3 as TAllArticles
-      };
+    const data2 = (await db(
+      `SELECT user_id FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages}`
+    )) as any[];
 
-      return res.status(200).json(returnData);
+    const data3 = await db(
+      `SELECT article_id, title FROM articles WHERE user_id = ${userId}`
+    );
 
-    } catch (err) {
-      console.log("/articles/get/のエラーは " + JSON.stringify(err));
+    const pagination: PaginationParams = {
+      page: page,
+      pageCount: data2.length ? Math.ceil(data2.length / pageSize) : 0, // 全row数をpageSizeで割って切り上げ
+      pageSize: pageSize,
+      rowCount: data2.length,
+    };
 
-      return res.status(500).json({ err: true, data: { message: err.message } });
-    }
+    const rawData: ApiArticlesGetReturn = {
+      // tag_idsをnumber[]化する、なければnullのまま
+      articles: data.length ? tagIdsFromString(data) : data,
+      pagination: pagination,
+      allArticles: data3 as AllArticles,
+    };
+
+    res
+      .status(200)
+      .json({ err: false, rawData } as ApiResponse<ApiArticlesGetReturn>);
+  } catch (err) {
+    console.log('/articles/get/のエラーは ' + JSON.stringify(err));
+
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,
-    bodyParser: {
-      sizeLimit: "50mb",
-    },
   },
 };
 
-export default get
+export default get;

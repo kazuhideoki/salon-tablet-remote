@@ -1,44 +1,39 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { TTags, T_user_id } from "../../../app/Store/Types";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse, TApiError } from "../../../lib/apiTypes";
-
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { Tags } from '../../../util/interface/Interface';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiTagsGet = async (user_id: T_user_id): Promise<TApiResponse<TTags>> => {
-  let str = process.browser ? server : localhost
+export const apiTagsGet = async (
+  user_id: number
+): Promise<ApiResponse<Tags>> => {
+  return apiWrapGet(`tags/get?userId=${user_id}`);
+};
 
-  const res = await fetch(
-      `${str}/api/tags/get?userId=${user_id}`
-  )
-
-  return await res.json();
-}
-
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
-    //@ts-ignore
-    const data: TTags = await db(
-      "SELECT * FROM tags WHERE user_id = ?",
+    const data = (await db(
+      'SELECT * FROM tags WHERE user_id = ?',
       // queryは文字列で来るため
       Number(req.query.userId)
-    );
+    )) as Tags;
 
-    return res.status(200).json(data);
+    res.status(200).json({ err: false, rawData: data } as ApiResponse<Tags>);
   } catch (err) {
-    console.log("/tags/get/のエラーは " + JSON.stringify(err));
-    const errOnj: TApiError = { err: true, data: { message: err.message } };
-    return res.status(500).json(errOnj);
+    console.log('/tags/get/のエラーは ' + JSON.stringify(err));
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,
   },
 };
 
-export default get
+export default get;

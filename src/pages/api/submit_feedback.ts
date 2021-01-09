@@ -1,14 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { TUserInfo } from "../../app/Store/Types";
-import { server, localhost } from "../../lib/loadUrl";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { UserInfo } from '../../util/interface/Interface';
+import { ApiResponse } from '../../util/db/apiWrap';
 
-const receiverEmailAddress = "infosalontablet@gmail.com";
-const senderEmailAddress = "infosalontablet@gmail.com";
-const senderEmailPassword = "2356Sp!p";
+const receiverEmailAddress = 'infosalontablet@gmail.com';
+const senderEmailAddress = 'infosalontablet@gmail.com';
+const senderEmailPassword = '2356Sp!p';
 
-const nodemailer = require("nodemailer");
+import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: 'smtp.gmail.com',
   port: 587,
   secure: false,
   auth: {
@@ -17,41 +17,24 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiSubmitFeedback = async (
-  params: T_submit_feedback
-): Promise<T_submit_feedback_return> => {
-  const str = process.browser ? server : localhost;
-
-  const res = await fetch(`${str}/api/submit_feedback`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-
-  return await res.json();
-};
-
-export type T_submit_feedback = {
+export type ApiSubmitFeedback = {
   contactFormTitle: string;
   contactFormContent: string;
-  userInfo: TUserInfo;
+  userInfo: UserInfo;
 };
 
-export type T_submit_feedback_return_no_error = { sent: true };
-// T_submit_feedback_returnは成功も失敗も一緒くたにしてしまった、無理やり方を合わせるため
-export type T_submit_feedback_return = {sent: boolean, err: true, data: { message: string } }
+export type ApiSubmitFeedback_return_no_error = { sent: true };
 
-
-const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
+const submit_feedback = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (req.method === 'POST') {
     const {
       contactFormTitle,
       contactFormContent,
       userInfo,
-    }: T_submit_feedback = req.body;
+    }: ApiSubmitFeedback = req.body;
 
     const mailOptions1 = {
       from: senderEmailAddress,
@@ -65,28 +48,24 @@ const submit_feedback = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const info = await transporter.sendMail(mailOptions1);
 
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-      const retrunData: T_submit_feedback_return_no_error = { sent: true };
-      return res.status(200).json(retrunData);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
-      const returnData: T_submit_feedback_return = {
-        sent: false,
-        err: true,
-        data: { message: err.message },
-      };
-      return returnData;
+      console.log('/submit_feedbackのエラーは ' + JSON.stringify(err));
+
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: '50mb',
     },
   },
 };

@@ -1,68 +1,72 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { checkOrders } from "../../../lib/checkOrders";
-import { FooterItems, T_user_id } from "../../../app/Store/Types";
-import { correctOrders } from "../../../lib/correctOrders";
-import { changeToBooleanFromNumberFooterItems } from "../../../lib/changeToBooleanFromNumber";
-import { localhost, server } from "../../../lib/loadUrl";
-import { TApiResponse, TApiError } from "../../../lib/apiTypes";
-import { checkOrdersSidebar } from "../../../lib/checkOrdersSidebar";
-import { correctOrdersSidebar } from "../../../lib/correctOrdersSidebar";
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { checkOrders } from '../../../util/db/checkOrders';
+import {
+  FooterItemFromDB,
+  FooterItems,
+} from '../../../util/interface/Interface';
+import { correctOrders } from '../../../util/db/correctOrders';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { checkOrdersSidebar } from '../../../util/db/checkOrders';
+import { correctOrdersSidebar } from '../../../util/db/correctOrders';
+import { apiWrapGet } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiFooterItemsGet = async (user_id: T_user_id): Promise<TApiResponse<FooterItems>> => {
-  let str = process.browser ? server : localhost
+export const apiFooterItemsGet = async (
+  user_id: number
+): Promise<ApiResponse<FooterItems>> => {
+  return apiWrapGet(`footer_items/get?userId=${user_id}`);
+};
 
-  const res = await fetch(
-      `${str}/api/footer_items/get?userId=${user_id}`
-  )
+const changeToBooleanFromNumberFooterItems = (data: FooterItemFromDB[]) => {
+  return data.map((value) => {
+    value.is_published = value.is_published === 1 ? true : false;
+    return value;
+  });
+};
 
-  return await res.json();
-}
-
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
-    //@ts-ignore
-    const data: FooterItems = await db(
+    const data = (await db(
       // column名を囲むときは``がよいか？''ではエラーにならないが、ORDER BY が作動しなかった。
-      "SELECT * FROM footer_items WHERE user_id = ? ORDER BY `order` ASC",
+      'SELECT * FROM footer_items WHERE user_id = ? ORDER BY `order` ASC',
       // queryは文字列で来るため
       Number(req.query.userId)
-    );
+    )) as FooterItems;
 
     // footer_itemsのorderが正しく連番になっているかチェックする
-    const isCorrectOrders = checkOrders(data)
-    
+    const isCorrectOrders = checkOrders(data);
+
     // もしorderが正しくなかったら、直す処理
     if (isCorrectOrders === false) {
-      correctOrders(data)
+      await correctOrders(data);
     }
 
-    const isCorrectOrdersSidebar = checkOrdersSidebar(data)
+    const isCorrectOrdersSidebar = checkOrdersSidebar(data);
 
     if (isCorrectOrdersSidebar === false) {
-      correctOrdersSidebar(data)
+      await correctOrdersSidebar(data);
     }
 
-
-
     // mysqlではbooleanが 0, 1 なのでbooleanに変換する。
-    const returnData: FooterItems = changeToBooleanFromNumberFooterItems(data);
+    const rawData = changeToBooleanFromNumberFooterItems(data) as FooterItems;
 
-    return res.status(200).json(returnData);
-
+    res.status(200).json({ err: false, rawData } as ApiResponse<FooterItems>);
   } catch (err) {
-    console.log("/footer_items/get/のエラーは " + JSON.stringify(err));
-    const errOnj:TApiError = { err: true, data: { message: err.message } }
-    return res.status(500).json(errOnj);
+    console.log('/footer_items/get/のエラーは ' + JSON.stringify(err));
+
+    return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,
   },
 };
 
-export default get
+export default get;

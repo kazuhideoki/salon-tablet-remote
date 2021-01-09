@@ -12,7 +12,7 @@
 # below:
 
 node_modules
-
+source-context.json
 /src/
 
 

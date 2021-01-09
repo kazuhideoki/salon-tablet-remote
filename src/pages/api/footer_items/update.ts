@@ -1,50 +1,34 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import {
-  T_footer_item_id,
-} from "../../../app/Store/Types";
-import { server, localhost } from "../../../lib/loadUrl";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { checkIsAdmin } from "../../../lib/checkIsAdmin";
-import { T_footer_items_params } from "./create";
-
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
+import { ApiFooterItemsParams } from './create';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiFooterItemsUpdate = async (params: T_footer_items_update):Promise<TApiResponse<T_footer_items_update_return>> => {
-  let str = process.browser ? server : localhost
-
-  const res = await fetch(`${str}/api/footer_items/update`, {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
-  console.log('strは ' + str)
-
-  return await res.json();
-}
-
-export type T_footer_items_update_params = T_footer_items_params
-export type T_footer_items_update = {
-  params: T_footer_items_update_params;
-  id: T_footer_item_id;
+export const apiFooterItemsUpdate = async (
+  params: ApiFooterItemsUpdate
+): Promise<ApiResponse> => {
+  return apiWrapPost('footer_items/update', params);
 };
 
-export type T_footer_items_update_return = {
-  rawData: unknown;
+export type ApiFooterItemsUpdate = {
+  params: ApiFooterItemsParams;
+  id: number;
 };
 
-
-const update = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-
-    const { params, id }: T_footer_items_update = req.body;
+const update = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (req.method === 'POST') {
+    const { params, id }: ApiFooterItemsUpdate = req.body;
 
     try {
       const isAdmin = await checkIsAdmin({ req });
 
       if (isAdmin === false) {
-        params.data_type = "default_data";
+        params.data_type = 'default_data';
       }
 
       const data = await db(
@@ -52,22 +36,17 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
         [params, id]
       );
 
-      console.log("/footer_items/update/は " + JSON.stringify(data));
-
-      const returnData = {
-        rawData: data,
-      };
-      res.status(200).json(returnData);
+      res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
-      console.log("/footer_items/update/のエラーは " + JSON.stringify(err));
+      console.log('/footer_items/update/のエラーは ' + JSON.stringify(err));
 
-      res.status(500).json({ err: true, data: { message: err.message } });
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
-// jsonのパーサー
+// エラーメッセージ非表示
+
 export const config = {
   api: {
     externalResolver: true,
@@ -77,4 +56,4 @@ export const config = {
   },
 };
 
-export default update
+export default update;

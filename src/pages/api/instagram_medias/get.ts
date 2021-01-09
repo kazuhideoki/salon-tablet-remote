@@ -1,86 +1,74 @@
-import { db } from "../../../lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
-import { TApiResponse } from "../../../lib/apiTypes";
-import { server, localhost } from "../../../lib/loadUrl";
-import { T_instagram_id, TInstagramMedias } from "../../../app/Store/Types";
-
+import { db } from '../../../util/db/db';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { ApiResponse } from '../../../util/db/apiWrap';
+import { InstagramMediaObject } from '../../../util/interface/Interface';
+import { apiWrapPost } from '../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする
-export const apiInstagramMediasGet = async (instagram_id: T_instagram_id, paging: { after?: string; before?: string } | null):Promise<TApiResponse<TInstagramMedias>> => {
-  
-  let str = process.browser ? server : localhost
-
-  const params: T_instagram_medias_get = {
-    instagram_id,
-    paging,
-  };
-  // pagingCursorがあるときはページ送り用のfetch
-  const res = await fetch(`${str}/api/instagram_medias/get`, {
-    headers: { "Content-Type": "application/json"},
-    method: "POST",
-    mode: "cors",
-    body: JSON.stringify(params),
-  });
- 
-  return await res.json();
-} 
-
-export type T_instagram_medias_get = {
-  instagram_id: T_instagram_id;
-  paging: { after?: string; before?: string };
+export const apiInstagramMediasGet = async (
+  params: ApiInstagramMediasGet
+): Promise<ApiResponse<InstagramMediaObject>> => {
+  return apiWrapPost('instagram_medias/get', params);
 };
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-    
-    const { instagram_id, paging }: T_instagram_medias_get = req.body;
+export type ApiInstagramMediasGet = {
+  instagram_id: number;
+  paging: { after: string; before: string };
+};
+
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (req.method === 'POST') {
+    const { instagram_id, paging }: ApiInstagramMediasGet = req.body;
 
     let pagingParam;
-    if (paging.hasOwnProperty("after")) {
+    if (paging.after) {
       pagingParam = `after=${paging.after}`;
-    } else if (paging.hasOwnProperty("before")) {
+    } else if (paging.before) {
       pagingParam = `before=${paging.before}`;
     } else {
       pagingParam = ``;
     }
 
     try {
+      const data = (await db(
+        `select access_token from instagram_accounts where instagram_id = ?`,
+        instagram_id
+      )) as any[];
 
-      const data = await db(`select access_token from instagram_accounts where instagram_id = ?`, instagram_id) as any[]
-      if (data !== null && data.length) {
-        
-      }
       const { access_token } = data[0];
 
       const response = await fetch(
         `https://graph.instagram.com/v1.0/me/media?fields=caption,id,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=${access_token}&${pagingParam}`
       );
-      
-      // const data2: TInstagramMedias | {error: boolean} = await response.json();
+
       const data2 = await response.json();
 
       if (data2.error) {
+        console.log('data2.errorは ' + data2.error);
         return res
           .status(500)
-          .json({ err: true, data: { message: data2.error } });
+          .json({ err: true, rawData: data2 } as ApiResponse);
       }
 
-      const returnData:TInstagramMedias = data2
-      // {data: []}の形で取得
-      return res.status(200).json(returnData);
-
+      const rawData: InstagramMediaObject = data2;
+      res
+        .status(200)
+        .json({ err: false, rawData } as ApiResponse<InstagramMediaObject>);
     } catch (err) {
-      console.log("/instagram_medias/get/のエラーは " + JSON.stringify(err));
-      return res.status(500).json({ err: true, data: { message: err.message } });
+      console.log('/instagram_medias/get/のエラーは ' + JSON.stringify(err));
+      return res.status(500).json({ err: true, rawData: err } as ApiResponse);
     }
   }
 };
 
-// socketうんぬんの エラーメッセージを表示させないようにする
+// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,
   },
 };
 
-export default get
+export default get;
