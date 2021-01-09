@@ -5,8 +5,8 @@ import {
   apiFooterItemsSwitchOrder,
 } from '../../../pages/api/footer_items/switch_order';
 import { FooterItem } from '../../../util/interface/Interface';
-import { AppStateContext } from '../../store/appState/Context';
-import { isLoadingFooter } from '../../store/appState/actions';
+import { AppStateContext } from '../../stores/appState/Context';
+import { isLoadingFooter } from '../../stores/appState/actions';
 
 type Props = {
   smaller: FooterItem;

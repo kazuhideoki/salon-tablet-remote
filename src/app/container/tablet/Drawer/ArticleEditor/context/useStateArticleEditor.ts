@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppStateContext } from '../../../../../store/appState/Context';
-import { TagsContext } from '../../../../../store/tags/Context';
-import { UserInfoContext } from '../../../../../store/userInfo/Context';
+import { AppStateContext } from '../../../../../stores/appState/Context';
+import { TagsContext } from '../../../../../stores/tags/Context';
+import { UserInfoContext } from '../../../../../stores/userInfo/Context';
 
 export const useStateArticleEditor = () => {
   const { appState } = React.useContext(AppStateContext);

@@ -4,8 +4,8 @@ import {
   apiUserInfoChangeShowArticleType,
   ApiUserInfoChangeShowArticleType,
 } from '../../../pages/api/user_info/change_show_article_type';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { setShowArticleType } from '../../store/userInfo/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { setShowArticleType } from '../../stores/userInfo/actions';
 
 export const useChangeShowArticleType = (): ((
   showArticleType: ShowArticleType

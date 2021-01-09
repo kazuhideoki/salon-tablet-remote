@@ -4,8 +4,8 @@ import {
   apiUserInfoChangeFooterIconSize,
   ApiUserInfoChangeFooterIconSize,
 } from '../../../pages/api/user_info/change_footer_icon_size';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { setFooterIconSize } from '../../store/userInfo/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { setFooterIconSize } from '../../stores/userInfo/actions';
 
 export const useChangeFooterIconSize = (): ((
   footerIconSize: FooterIconSize

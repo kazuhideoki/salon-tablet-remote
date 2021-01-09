@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppStateContext } from '../../../../store/appState/Context';
-import { InfoBarContext } from '../../../../store/infoBar/Context';
-import { UserInfoContext } from '../../../../store/userInfo/Context';
+import { AppStateContext } from '../../../../stores/appState/Context';
+import { InfoBarContext } from '../../../../stores/infoBar/Context';
+import { UserInfoContext } from '../../../../stores/userInfo/Context';
 
 export const useStateInfoBar = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArticlesContext } from '../../../../../store/articles/Context';
-import { InfoBarContext } from '../../../../../store/infoBar/Context';
+import { ArticlesContext } from '../../../../../stores/articles/Context';
+import { InfoBarContext } from '../../../../../stores/infoBar/Context';
 
 export const useStateInfoBarEditor = () => {
   const { allArticles } = React.useContext(ArticlesContext);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGetArticles } from '../../../../../hooks/articles/useGetArticles';
-import { AppStateContext } from '../../../../../store/appState/Context';
+import { AppStateContext } from '../../../../../stores/appState/Context';
 
 export const useHandleSwitchIsSetting = () => {
   const { appState } = React.useContext(AppStateContext);

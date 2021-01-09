@@ -2,8 +2,8 @@ import React from 'react';
 import {
   setArticleContent,
   setModal,
-} from '../../../../store/appState/actions';
-import { AppStateContext } from '../../../../store/appState/Context';
+} from '../../../../stores/appState/actions';
+import { AppStateContext } from '../../../../stores/appState/Context';
 import { Article } from '../../../../../util/interface/Interface';
 
 export const useOpenArticleModalInfoBar = () => {

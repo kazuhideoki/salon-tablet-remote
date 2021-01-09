@@ -7,7 +7,7 @@ import {
   ManageThemePresenterProps,
   Color,
 } from './ManageTheme';
-import { Font1, Font2 } from '../../../../store/theme/lib/fonts';
+import { Font1, Font2 } from '../../../../stores/theme/lib/fonts';
 import { googleFontsUrl } from '../../../../../util/googleFontsUrl';
 import { generateSecondaryColor } from '../../../../../util/secondaryColor';
 export default {

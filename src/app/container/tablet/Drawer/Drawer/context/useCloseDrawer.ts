@@ -1,6 +1,6 @@
 import React from 'react';
-import { closeDrawer } from '../../../../../store/appState/actions';
-import { AppStateContext } from '../../../../../store/appState/Context';
+import { closeDrawer } from '../../../../../stores/appState/actions';
+import { AppStateContext } from '../../../../../stores/appState/Context';
 
 export const useCloseDrawer = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);

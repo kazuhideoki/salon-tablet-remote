@@ -3,14 +3,14 @@ import clsx from 'clsx';
 import { Grid, makeStyles, createStyles, Theme } from '@material-ui/core';
 import { Main } from './Main/Main';
 import { Footer } from './Footer/Footer/Footer';
-import { ThemeContext } from '../../store/theme/ThemeProvider';
+import { ThemeContext } from '../../stores/theme/ThemeProvider';
 import { Drawer } from './Drawer/Drawer/Drawer';
 import dynamic from 'next/dynamic';
 import { PaginationBar } from './Footer/PaginationBar/PaginationBar';
 import {
   AppStateContext,
   AppStateContextProvider,
-} from '../../store/appState/Context';
+} from '../../stores/appState/Context';
 const InfoBar = dynamic(() => import('./InfoBar/InfoBar'), {
   ssr: false,
 });

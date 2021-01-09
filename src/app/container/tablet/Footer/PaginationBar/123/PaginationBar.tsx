@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeContext } from '../../../../../store/theme/ThemeProvider';
+import { ThemeContext } from '../../../../../stores/theme/ThemeProvider';
 import {
   Grid,
   makeStyles,
