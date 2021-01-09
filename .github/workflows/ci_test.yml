@@ -1,10 +1,6 @@
 name: Continuous Integration
 
-# 新しいコミットがリポジトリにプッシュされるたびにこのワークフローを実行する
-on:
-  push:
-    branches:
-      - test
+on: push
 
 jobs:
   unit-test:
@@ -35,3 +31,31 @@ jobs:
         run: npm i
       - name: Lint
         run: npm run lint
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm i
+      - name: Format
+        run: npm run format
+  tsc:
+    name: tsc
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm i
+      - name: tsc
+        run: npm run tsc

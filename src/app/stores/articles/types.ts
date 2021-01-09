@@ -1,1 +1,1 @@
-export const SET = "SET" as const
+export const SET = 'SET' as const;

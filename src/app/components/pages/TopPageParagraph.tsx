@@ -1,5 +1,5 @@
-import React from 'react'
-import { Typography, makeStyles, createStyles, Theme } from "@material-ui/core";
+import React from 'react';
+import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  className?: string
-}
+  className?: string;
+};
 
-export const TopPageParagraph:React.FC<Props> = ({className}) => {
-  const classes = useStyles()
+export const TopPageParagraph: React.FC<Props> = ({ className }) => {
+  const classes = useStyles();
   return (
     <div className={className}>
       {/* <Typography align="center" variant="h1" component="h1" gutterBottom>
@@ -26,17 +26,15 @@ export const TopPageParagraph:React.FC<Props> = ({className}) => {
         align="center"
         variant="h3"
         component="h1"
-        gutterBottom
-      >
+        gutterBottom>
         「美容室」×「タブレット」をよりよく
       </Typography>
       <Typography
         className={classes.typography}
         variant="body1"
         component="h2"
-        align='center'
-        gutterBottom
-      >
+        align="center"
+        gutterBottom>
         美容室のためのタブレット専用ウェブアプリ
         {/* 美容室でタブレットをどのように活用していますか？雑誌のアプリでしょうか？スタイル写真を見せたり？
         SALON
@@ -45,4 +43,4 @@ export const TopPageParagraph:React.FC<Props> = ({className}) => {
       </Typography>
     </div>
   );
-}
+};

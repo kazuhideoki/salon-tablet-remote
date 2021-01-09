@@ -1,10 +1,10 @@
-import * as firebase from "firebase/app";
-import "firebase/app";
+import * as firebase from 'firebase/app';
+import 'firebase/app';
 import 'firebase/auth';
 
-const firebaseClient = firebase.default
+const firebaseClient = firebase.default;
 
-if (typeof window !== "undefined" && !firebaseClient.apps.length) {
+if (typeof window !== 'undefined' && !firebaseClient.apps.length) {
   const CLIENT_CONFIG = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -14,7 +14,7 @@ if (typeof window !== "undefined" && !firebaseClient.apps.length) {
     messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   };
-  
+
   firebaseClient.initializeApp(CLIENT_CONFIG);
   firebaseClient
     .auth()
