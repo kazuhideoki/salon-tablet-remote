@@ -14,19 +14,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.0.0
-      - name: Decrypt large secret
-        run: ./.github/scripts/decrypt_secret.sh
+      # - name: Decrypt GCP secret
+      #   run: ./.github/scripts/decrypt_secret.sh
+      #   env:
+      #     GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Decrypt .env file
+        run: ./.github/scripts/decrypt_env.sh
         env:
-          LARGE_SECRET_PASSPHRASE: ${{ secrets.GCP_CREDENTIALS }}
-      - name: Set GAE
-        uses: google-github-actions/deploy-appengine@main
-        with:
-          credentials: ${{ $HOME/secrets/gcp_credentials.json }}
+          ENV_CREDENTIALS: ${{ secrets.ENV_CREDENTIALS }}
+
       - name: Set Node.js 12.x
         uses: actions/setup-node@v2
         with:
           node-version: 12.x
       - name: Install dependencies
         run: npm i
-      - name: build & deploy
-        run: npm run deploy:test
+      - name: build test
+        run: npm run build:test
+      - name: Deploy GAE
+        uses: google-github-actions/deploy-appengine@main
+        with:
+          credentials: ${{ secrets.GCP_CREDENTIALS_JSON }} # 成功
+          deliverables: appTest.yaml
