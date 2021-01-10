@@ -1,9 +1,9 @@
 import React from 'react';
 import { useGetTags } from './useGetTags';
 import { ApiTagsCreate, apiTagsDelete } from '../../../pages/api/tags/delete';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { AppStateContext } from '../../store/appState/Context';
-import { isLoadingTags } from '../../store/appState/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { AppStateContext } from '../../stores/appState/Context';
+import { isLoadingTags } from '../../stores/appState/actions';
 
 export const useDeleteTag = (): ((tag_id: number) => Promise<void>) => {
   const { dispatchAppState } = React.useContext(AppStateContext);

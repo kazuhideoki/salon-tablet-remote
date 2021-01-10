@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 export const useStateFeedbackForm = () => {
-  const [contactFormTitle, setContactFormTitle] = React.useState("");
-  const [contactFormContent, setContactFormContent] = React.useState("");
+  const [contactFormTitle, setContactFormTitle] = React.useState('');
+  const [contactFormContent, setContactFormContent] = React.useState('');
 
   return {
     contactFormTitle,
@@ -10,5 +10,4 @@ export const useStateFeedbackForm = () => {
     contactFormContent,
     setContactFormContent,
   };
-}
-
+};

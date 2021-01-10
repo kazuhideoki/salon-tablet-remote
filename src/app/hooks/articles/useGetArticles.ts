@@ -3,16 +3,16 @@ import {
   ApiArticlesGet,
   apiArticlesGet,
 } from '../../../pages/api/articles/get';
-import { ArticlesContext } from '../../store/articles/Context';
-import { set } from '../../store/articles/actions';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { AppStateContext } from '../../store/appState/Context';
+import { ArticlesContext } from '../../stores/articles/Context';
+import { set } from '../../stores/articles/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { AppStateContext } from '../../stores/appState/Context';
 import {
   closeModal,
   isLoadingMain,
   isShowInstagram,
   setArticlesAppState,
-} from '../../store/appState/actions';
+} from '../../stores/appState/actions';
 
 export const useGetArticles = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);

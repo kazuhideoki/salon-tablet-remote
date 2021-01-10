@@ -1,13 +1,13 @@
 import React from 'react';
 import { useGetInstagramAccounts } from './useGetInstagramAccounts';
 import { apiInstagramAccountsDelete } from '../../../pages/api/instagram_accounts/delete';
-import { InstagramContext } from '../../store/instagram/Context';
-import { removeMedias } from '../../store/instagram/actions';
-import { AppStateContext } from '../../store/appState/Context';
+import { InstagramContext } from '../../stores/instagram/Context';
+import { removeMedias } from '../../stores/instagram/actions';
+import { AppStateContext } from '../../stores/appState/Context';
 import {
   isLoadingInstagramAccounts,
   isShowInstagram,
-} from '../../store/appState/actions';
+} from '../../stores/appState/actions';
 
 export const useDeleteInstagramAccount = (): ((
   instagram_id: number

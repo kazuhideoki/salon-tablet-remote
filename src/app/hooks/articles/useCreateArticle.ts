@@ -5,9 +5,9 @@ import {
   apiArticlesCreate,
 } from '../../../pages/api/articles/create';
 import { DataTypeArticle } from '../../../util/interface/Interface';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { AppStateContext } from '../../store/appState/Context';
-import { closeModal, isLoadingMain } from '../../store/appState/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { AppStateContext } from '../../stores/appState/Context';
+import { closeModal, isLoadingMain } from '../../stores/appState/actions';
 
 export type CreateArticleParams = {
   titleText: string;

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Typography, makeStyles, createStyles, Theme } from "@material-ui/core";
+import React from 'react';
+import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,12 +20,11 @@ const Faq = () => {
         variant="h4"
         component="h2"
         gutterBottom
-        color="textSecondary"
-      >
+        color="textSecondary">
         製作中
       </Typography>
     </div>
   );
-}
+};
 
-export default Faq
+export default Faq;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   makeStyles,
   Theme,
@@ -7,7 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,13 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  appLinkUrl: string
-  setAppLinkUrl: React.Dispatch<React.SetStateAction<string>>
-  className?: string
-}
+  appLinkUrl: string;
+  setAppLinkUrl: React.Dispatch<React.SetStateAction<string>>;
+  className?: string;
+};
 
-export const SelectAppLink:React.FC<Props> = ({appLinkUrl, setAppLinkUrl, className}) => {
-  const classes = useStyles()
+export const SelectAppLink: React.FC<Props> = ({
+  appLinkUrl,
+  setAppLinkUrl,
+  className,
+}) => {
+  const classes = useStyles();
 
   return (
     <FormControl className={`${classes.formControl} ${className}`}>
@@ -39,8 +43,7 @@ export const SelectAppLink:React.FC<Props> = ({appLinkUrl, setAppLinkUrl, classN
         onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
           setAppLinkUrl(e.target.value as string)
         }
-        label="アプリ"
-      >
+        label="アプリ">
         {/* <AppLinks/> */}
         <MenuItem value="">
           <em>None</em>
@@ -54,4 +57,4 @@ export const SelectAppLink:React.FC<Props> = ({appLinkUrl, setAppLinkUrl, classN
       </Select>
     </FormControl>
   );
-}
+};

@@ -1,6 +1,6 @@
 import React from 'react';
-import { setModal, updateArticle } from '../../../../store/appState/actions';
-import { AppStateContext } from '../../../../store/appState/Context';
+import { setModal, updateArticle } from '../../../../stores/appState/actions';
+import { AppStateContext } from '../../../../stores/appState/Context';
 import { Article } from '../../../../../util/interface/Interface';
 
 export const useOnClickUpdate = () => {

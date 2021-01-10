@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppStateContext } from '../../../../../store/appState/Context';
-import { ArticlesContext } from '../../../../../store/articles/Context';
-import { InstagramContext } from '../../../../../store/instagram/Context';
-import { TagsContext } from '../../../../../store/tags/Context';
+import { AppStateContext } from '../../../../../stores/appState/Context';
+import { ArticlesContext } from '../../../../../stores/articles/Context';
+import { InstagramContext } from '../../../../../stores/instagram/Context';
+import { TagsContext } from '../../../../../stores/tags/Context';
 
 export const useStatePaginationBar = () => {
   const { dispatchAppState, appState } = React.useContext(AppStateContext);

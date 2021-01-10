@@ -1,4 +1,4 @@
-import { Font1, Font2 } from '../../app/store/theme/lib/fonts';
+import { Font1, Font2 } from '../../app/stores/theme/lib/fonts';
 
 export type ShowArticleType = 'scroll' | 'grid6';
 export type SelectedTheme = 'default' | 'white' | 'natural';

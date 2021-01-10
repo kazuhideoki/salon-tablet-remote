@@ -27,7 +27,6 @@ export const websiteTheme = createMuiTheme({
     MuiButton: {
       variant: 'contained',
       style: {
-        //  backgroundImage: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)"
         backgroundImage:
           'linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%)',
       },

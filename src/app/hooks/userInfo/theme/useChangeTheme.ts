@@ -1,9 +1,9 @@
 import React from 'react';
 import { SelectedTheme } from '../../../../util/interface/Interface';
 import { apiUserInfoChangeTheme } from '../../../../pages/api/user_info/theme/change_theme';
-import { generateDefaultParamsFromTheme } from '../../../store/theme/lib/paramsFromTheme';
-import { UserInfoContext } from '../../../store/userInfo/Context';
-import { setTheme } from '../../../store/userInfo/actions';
+import { generateDefaultParamsFromTheme } from '../../../stores/theme/lib/paramsFromTheme';
+import { UserInfoContext } from '../../../stores/userInfo/Context';
+import { setTheme } from '../../../stores/userInfo/actions';
 
 export const useChangeTheme = (): ((
   selectedTheme: SelectedTheme

@@ -5,9 +5,9 @@ import {
   ApiArticlesUpdate,
   apiArticlesUpdate,
 } from '../../../pages/api/articles/update';
-import { ArticlesContext } from '../../store/articles/Context';
-import { AppStateContext } from '../../store/appState/Context';
-import { closeModal, isLoadingMain } from '../../store/appState/actions';
+import { ArticlesContext } from '../../stores/articles/Context';
+import { AppStateContext } from '../../stores/appState/Context';
+import { closeModal, isLoadingMain } from '../../stores/appState/actions';
 
 type Props = CreateArticleParams;
 

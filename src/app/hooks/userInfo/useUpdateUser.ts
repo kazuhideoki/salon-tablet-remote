@@ -5,10 +5,10 @@ import {
 } from '../../../pages/api/user_info/update';
 import { updatePasswordInFirebase } from '../../../util/auth/updatePassword';
 import { useAuth } from '../../../util/auth/AuthProvider';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { update } from '../../store/userInfo/actions';
-import { AppStateContext } from '../../store/appState/Context';
-import { closeModal } from '../../store/appState/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { update } from '../../stores/userInfo/actions';
+import { AppStateContext } from '../../stores/appState/Context';
+import { closeModal } from '../../stores/appState/actions';
 
 export type Props = {
   name: string;

@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme } from '@material-ui/core';
 
 export const commonTheme = createMuiTheme({
   overrides: {
@@ -12,5 +12,4 @@ export const commonTheme = createMuiTheme({
       },
     },
   },
-
 });

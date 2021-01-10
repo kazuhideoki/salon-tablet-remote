@@ -1,9 +1,9 @@
 import React from 'react';
 import { useGetArticles } from './useGetArticles';
 import { apiArticlesDelete } from '../../../pages/api/articles/delete';
-import { ArticlesContext } from '../../store/articles/Context';
-import { AppStateContext } from '../../store/appState/Context';
-import { isLoadingMain } from '../../store/appState/actions';
+import { ArticlesContext } from '../../stores/articles/Context';
+import { AppStateContext } from '../../stores/appState/Context';
+import { isLoadingMain } from '../../stores/appState/actions';
 
 export const useDeleteArticle = () => {
   const getArticles = useGetArticles();

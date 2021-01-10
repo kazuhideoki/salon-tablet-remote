@@ -1,7 +1,7 @@
 import React from 'react';
 import { apiUserInfoSwitchGeneratePublicPage } from '../../../pages/api/user_info/switch_generate_public_page';
-import { setIsGeneratePublicPage } from '../../store/userInfo/actions';
-import { UserInfoContext } from '../../store/userInfo/Context';
+import { setIsGeneratePublicPage } from '../../stores/userInfo/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
 
 export const useSwitchGeneratePublicPage = (): ((
   is_generate_public_page: boolean

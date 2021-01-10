@@ -1,12 +1,12 @@
 import React from 'react';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
-import { useThemeArgs, ThemeContext } from '../store/theme/ThemeProvider';
+import { useThemeArgs, ThemeContext } from '../stores/theme/ThemeProvider';
 import { SelectTheme } from '../container/tablet/Drawer/ManageTheme/components/SelectTheme';
 import { ManageThemePresenterProps } from '../container/tablet/Drawer/ManageTheme/ManageTheme';
 import {
   generateDefaultParamsFromTheme,
   switchingTheme,
-} from '../store/theme/lib/paramsFromTheme';
+} from '../stores/theme/lib/paramsFromTheme';
 import { googleFontsUrl } from '../../util/googleFontsUrl';
 import { SelectedTheme } from '../../util/interface/Interface';
 
