@@ -14,14 +14,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.0.0
-      - name: Decrypt large secret
-        run: ./.github/scripts/decrypt_secret.sh
+      - name: Decrypt GCP secret
+        run: ../scripts/decrypt_secret.sh
         env:
           LARGE_SECRET_PASSPHRASE: ${{ secrets.GCP_CREDENTIALS }}
       - name: Set GAE
         uses: google-github-actions/deploy-appengine@main
         with:
-          credentials: ${{ $HOME/secrets/gcp_credentials.json }}
+          path: ../secrets/gcp_credentials.json
       - name: Set Node.js 12.x
         uses: actions/setup-node@v2
         with:
