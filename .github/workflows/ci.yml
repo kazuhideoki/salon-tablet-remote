@@ -1,6 +1,10 @@
 name: Continuous Integration
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - master
+      - test
 
 jobs:
   unit-test:

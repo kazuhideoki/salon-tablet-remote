@@ -1,11 +1,9 @@
 name: Continuous Delivery
 
 on:
-  workflow_run:
-    workflows: ['Continuous Integration']
-    branches: [master, test]
-    types:
-      - completed
+  push:
+    branches:
+      - test
 
 jobs:
   deploy:
