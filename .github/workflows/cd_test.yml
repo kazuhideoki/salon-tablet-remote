@@ -1,11 +1,9 @@
 name: Continuous Delivery
 
 on:
-  workflow_run:
-    workflows: ['Continuous Integration']
-    branches: [master, test]
-    types:
-      - completed
+  push:
+    branches:
+      - test
 
 jobs:
   deploy:
@@ -14,15 +12,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.0.0
-      # - name: Decrypt GCP secret
-      #   run: ./.github/scripts/decrypt_secret.sh
-      #   env:
-      #     GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
       - name: Decrypt .env file
         run: ./.github/scripts/decrypt_env.sh
         env:
           ENV_CREDENTIALS: ${{ secrets.ENV_CREDENTIALS }}
-
       - name: Set Node.js 12.x
         uses: actions/setup-node@v2
         with:
