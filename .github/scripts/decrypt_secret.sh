@@ -1,6 +1,4 @@
 #!/bin/sh
 
-mkdir $HOME/secrets
-
-gpg --quiet --batch --yes --decrypt --passphrase="$GCP_CREDENTIALS" \
---output $HOME/secrets/gcp_credentials.json gcp_credentials.json.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$ENV_CREDENTIALS" \
+--output firebase_secret.json firebase_secret.json.gpg
