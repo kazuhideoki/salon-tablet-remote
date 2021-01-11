@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserInfoContext } from '../../../../../store/userInfo/Context';
+import { UserInfoContext } from '../../../../../stores/userInfo/Context';
 export const useStateAccount = () => {
   const { userInfo } = React.useContext(UserInfoContext);
 

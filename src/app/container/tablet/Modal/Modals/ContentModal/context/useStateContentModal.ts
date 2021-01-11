@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppStateContext } from '../../../../../../store/appState/Context';
+import { AppStateContext } from '../../../../../../stores/appState/Context';
 export const useStateContentModal = () => {
   const { appState } = React.useContext(AppStateContext);
   const article = appState.currentModalContent.article;

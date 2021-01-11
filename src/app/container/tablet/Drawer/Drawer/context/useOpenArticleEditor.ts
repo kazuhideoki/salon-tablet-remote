@@ -1,6 +1,9 @@
 import React from 'react';
-import { createArticle, setModal } from '../../../../../store/appState/actions';
-import { AppStateContext } from '../../../../../store/appState/Context';
+import {
+  createArticle,
+  setModal,
+} from '../../../../../stores/appState/actions';
+import { AppStateContext } from '../../../../../stores/appState/Context';
 export const useOpenArticleEditor = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
 

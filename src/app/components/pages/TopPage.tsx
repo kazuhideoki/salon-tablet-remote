@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Typography,
-  makeStyles,
-  createStyles,
-  useMediaQuery,
-  Button,
-} from '@material-ui/core';
+import { Typography, makeStyles, createStyles } from '@material-ui/core';
 import Link from 'next/link';
 import { AboutST } from './AboutST';
 import { Parallax } from 'react-parallax';

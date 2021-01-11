@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select, MenuItem } from '@material-ui/core';
 import { ManageThemePresenterProps } from '../ManageTheme';
-import { Font1, Font2 } from '../../../../../store/theme/lib/fonts';
+import { Font1, Font2 } from '../../../../../stores/theme/lib/fonts';
 import { WhichFont } from '../../../../../../pages/api/user_info/theme/font';
 import { ThemeFont } from '../../../../../../util/interface/Interface';
 

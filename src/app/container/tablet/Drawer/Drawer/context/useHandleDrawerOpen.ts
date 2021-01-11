@@ -1,6 +1,6 @@
 import React from 'react';
-import { openDrawer } from '../../../../../store/appState/actions';
-import { AppStateContext } from '../../../../../store/appState/Context';
+import { openDrawer } from '../../../../../stores/appState/actions';
+import { AppStateContext } from '../../../../../stores/appState/Context';
 
 export const useHandleDrawerOpen = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);

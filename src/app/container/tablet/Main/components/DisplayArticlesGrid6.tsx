@@ -11,7 +11,7 @@ import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtons
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
 import { Articles } from '../../../../../util/interface/Interface';
-import { ThemeContext } from '../../../../store/theme/ThemeProvider';
+import { ThemeContext } from '../../../../stores/theme/ThemeProvider';
 import { DisplayProps } from './DisplayArticlesScroll';
 
 const useStyles = makeStyles((theme) => {
