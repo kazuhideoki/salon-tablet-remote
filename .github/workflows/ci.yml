@@ -53,6 +53,10 @@ jobs:
     name: tsc
     runs-on: ubuntu-latest
     steps:
+      - name: Decrypt firebase_secret file
+        run: ./.github/scripts/decrypt_secret.sh
+        env:
+          ENV_CREDENTIALS: ${{ secrets.ENV_CREDENTIALS }}
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Set Node.js 12.x
