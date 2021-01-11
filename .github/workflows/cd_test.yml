@@ -16,6 +16,10 @@ jobs:
         run: ./.github/scripts/decrypt_env.sh
         env:
           ENV_CREDENTIALS: ${{ secrets.ENV_CREDENTIALS }}
+      - name: Decrypt firebase_secret file
+        run: ./.github/scripts/decrypt_secret.sh
+        env:
+          ENV_CREDENTIALS: ${{ secrets.ENV_CREDENTIALS }}
       - name: Set Node.js 12.x
         uses: actions/setup-node@v2
         with:
