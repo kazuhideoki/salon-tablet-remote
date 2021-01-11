@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ifのテスト test
-        if: ${{ github.on.push.branches == "test" }}
+        if: ${{ github.on.push.branches == 'test' }}
         run: echo "これはtestブランチです。"
       - name: ifのテスト master
-        if: ${{ github.on.push.branches == "master" }}
+        if: ${{ github.on.push.branches == 'master' }}
         run: echo "これはmasterブランチです。"
       - name: Checkout
         uses: actions/checkout@v2.0.0
