@@ -6,9 +6,9 @@ import {
   apiInfoBarUpdate,
 } from '../../../pages/api/info_bar/update';
 import { InfoBarType } from '../../../util/interface/Interface';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { AppStateContext } from '../../store/appState/Context';
-import { closeModal } from '../../store/appState/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { AppStateContext } from '../../stores/appState/Context';
+import { closeModal } from '../../stores/appState/actions';
 
 export const scrollingAnimationDuration = (charCount: number) =>
   (32 * charCount) / 245 + 8; // アニメーションの再生時間がが文字数に応じて増え、どの文字数でもある程度同じスピードで再生されるように調整

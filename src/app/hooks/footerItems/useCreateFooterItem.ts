@@ -14,10 +14,10 @@ import {
   ApiFooterItemsCreate,
   apiFooterItemsCreate,
 } from '../../../pages/api/footer_items/create';
-import { FooterItemsContext } from '../../store/footerItems/Context';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { closeModal, isLoadingFooter } from '../../store/appState/actions';
-import { AppStateContext } from '../../store/appState/Context';
+import { FooterItemsContext } from '../../stores/footerItems/Context';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { closeModal, isLoadingFooter } from '../../stores/appState/actions';
+import { AppStateContext } from '../../stores/appState/Context';
 
 export type FooterItemEdittingParams = {
   titleText: string;

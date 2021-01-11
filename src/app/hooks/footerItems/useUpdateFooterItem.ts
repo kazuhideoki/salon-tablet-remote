@@ -9,9 +9,9 @@ import {
   ApiFooterItemsUpdate,
   apiFooterItemsUpdate,
 } from '../../../pages/api/footer_items/update';
-import { FooterItemsContext } from '../../store/footerItems/Context';
-import { AppStateContext } from '../../store/appState/Context';
-import { closeModal, isLoadingFooter } from '../../store/appState/actions';
+import { FooterItemsContext } from '../../stores/footerItems/Context';
+import { AppStateContext } from '../../stores/appState/Context';
+import { closeModal, isLoadingFooter } from '../../stores/appState/actions';
 
 export type Props = CreateFooterItem;
 

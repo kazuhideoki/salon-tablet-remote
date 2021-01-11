@@ -6,7 +6,7 @@ import { SelectTheme } from './components/SelectTheme';
 import { SelectShowArticleType } from './components/SelectShowArticleType';
 import { SelectPrimaryColor } from './components/SelectPrimaryColor';
 import { SelectFont } from './components/SelectFont';
-import { fonts2, fonts1 } from '../../../../store/theme/lib/fonts';
+import { fonts2, fonts1 } from '../../../../stores/theme/lib/fonts';
 import { FiberManualRecord } from '@material-ui/icons';
 import { secondaryColor } from '../../../../../util/secondaryColor';
 import { SelectFooterIconSize } from './components/SelectFooterIconSize';

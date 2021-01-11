@@ -1,7 +1,7 @@
 import React from 'react';
 import { useChangeThemeFont } from '../../../../../hooks/userInfo/theme/useChangeThemeFont';
-import { Font1, Font2 } from '../../../../../store/theme/lib/fonts';
-import { UserInfoContext } from '../../../../../store/userInfo/Context';
+import { Font1, Font2 } from '../../../../../stores/theme/lib/fonts';
+import { UserInfoContext } from '../../../../../stores/userInfo/Context';
 
 export const useHandleChangeThemeFont1 = () => {
   const { userInfo } = React.useContext(UserInfoContext);

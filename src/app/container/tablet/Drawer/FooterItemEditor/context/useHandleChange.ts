@@ -1,8 +1,8 @@
 import React from 'react';
 import { FooterItemEdittingParams } from '../../../../../hooks/footerItems/useCreateFooterItem';
-import { setModalSize } from '../../../../../store/appState/actions';
-import { AppStateContext } from '../../../../../store/appState/Context';
-import { FooterItemsContext } from '../../../../../store/footerItems/Context';
+import { setModalSize } from '../../../../../stores/appState/actions';
+import { AppStateContext } from '../../../../../stores/appState/Context';
+import { FooterItemsContext } from '../../../../../stores/footerItems/Context';
 import { ModalSize } from '../../../../../../util/interface/Interface';
 export const useHandleChange = (
   edittingFooterItemParams: FooterItemEdittingParams

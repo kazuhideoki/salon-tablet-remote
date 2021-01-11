@@ -1,7 +1,7 @@
 import { db } from '../../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiResponse } from '../../../../util/db/apiWrap';
-import { ThemeParams } from '../../../../app/store/theme/ThemeProvider';
+import { ThemeParams } from '../../../../app/stores/theme/ThemeProvider';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
 // サーバーサイドとフロントサイド考えずに使えるようにラップする

@@ -5,8 +5,8 @@ import { AppTablet } from './tablet/AppTablet';
 import { useIsMobile } from '../../util/useIsMobile';
 import { IndexProps, IndexPropsData } from '../../pages';
 import { ApiGetSessionReturn } from '../../pages/api/auth/get_session';
-import { UserInfoContext } from '../store/userInfo/Context';
-import { StoreContextProvider } from '../store/Store';
+import { UserInfoContext } from '../stores/userInfo/Context';
+import { StoreContextProvider } from '../stores/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
 import { UaDeviceType } from '../../util/interface/Interface';
 

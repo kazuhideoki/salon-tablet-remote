@@ -4,16 +4,16 @@ import {
   apiInstagramAccountsReconnectNeeded,
   ApiInstagramAccountsReconnectNeeded,
 } from '../../../pages/api/instagram_accounts/reconnect_needed';
-import { InstagramContext } from '../../store/instagram/Context';
-import { setMedias, setReconnect } from '../../store/instagram/actions';
-import { UserInfoContext } from '../../store/userInfo/Context';
-import { AppStateContext } from '../../store/appState/Context';
+import { InstagramContext } from '../../stores/instagram/Context';
+import { setMedias, setReconnect } from '../../stores/instagram/actions';
+import { UserInfoContext } from '../../stores/userInfo/Context';
+import { AppStateContext } from '../../stores/appState/Context';
 import {
   closeModal,
   isLoadingMain,
   isShowInstagram,
   setSelectedInstagramAccounts,
-} from '../../store/appState/actions';
+} from '../../stores/appState/actions';
 
 type Props = {
   instagram_id: number;

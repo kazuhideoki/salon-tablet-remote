@@ -4,13 +4,13 @@ import {
   ApiUserInfoThemeFont,
   WhichFont,
 } from '../../../../pages/api/user_info/theme/font';
-import { Font1, Font2 } from '../../../store/theme/lib/fonts';
-import { UserInfoContext } from '../../../store/userInfo/Context';
+import { Font1, Font2 } from '../../../stores/theme/lib/fonts';
+import { UserInfoContext } from '../../../stores/userInfo/Context';
 import {
   setThemeFont1,
   setThemeFont2,
   setThemeFontHeading,
-} from '../../../store/userInfo/actions';
+} from '../../../stores/userInfo/actions';
 
 export const useChangeThemeFont = (): ((
   font: Font1[0] | Font2[0],

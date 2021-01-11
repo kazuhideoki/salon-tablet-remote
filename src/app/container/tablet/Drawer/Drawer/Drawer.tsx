@@ -10,7 +10,7 @@ import { Drawer as MuiDrawer } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import { ThemeArgs } from '../../../../store/theme/ThemeProvider';
+import { ThemeArgs } from '../../../../stores/theme/ThemeProvider';
 import { DrawerSetting } from './components/DrawerSetting';
 import { DrawerHeader } from './components/DrawerHeader';
 import { DrawerItems } from './components/DrawerItems';

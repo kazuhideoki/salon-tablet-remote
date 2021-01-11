@@ -10,7 +10,7 @@ import {
   createMuiTheme,
   useTheme,
 } from '@material-ui/core';
-import { ThemeContext } from '../../../../../store/theme/ThemeProvider';
+import { ThemeContext } from '../../../../../stores/theme/ThemeProvider';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { Skeleton } from '@material-ui/lab';
 

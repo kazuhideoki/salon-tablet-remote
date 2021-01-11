@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMediaQuery } from '@material-ui/core';
-import { AppStateContext } from '../app/store/appState/Context';
+import { AppStateContext } from '../app/stores/appState/Context';
 
 export const useIsMobile = (): boolean => {
   const { appState } = React.useContext(AppStateContext);

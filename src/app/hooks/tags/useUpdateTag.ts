@@ -1,8 +1,8 @@
 import React from 'react';
 import { useGetTags } from './useGetTags';
 import { ApiTagsUpdata, apiTagsUpdata } from '../../../pages/api/tags/update';
-import { AppStateContext } from '../../store/appState/Context';
-import { isLoadingTags } from '../../store/appState/actions';
+import { AppStateContext } from '../../stores/appState/Context';
+import { isLoadingTags } from '../../stores/appState/actions';
 
 type Props = { edittingTagId: number; tagName: string };
 

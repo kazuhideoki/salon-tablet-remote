@@ -1,7 +1,7 @@
 import React from 'react';
 import { selectedIconReducer } from './selectedIconReducer';
-import { AppStateContext } from '../../../../../store/appState/Context';
-import { UserInfoContext } from '../../../../../store/userInfo/Context';
+import { AppStateContext } from '../../../../../stores/appState/Context';
+import { UserInfoContext } from '../../../../../stores/userInfo/Context';
 import { IconsSetting } from '../components/iconSelect/icons';
 import { MoodBad } from '@material-ui/icons';
 

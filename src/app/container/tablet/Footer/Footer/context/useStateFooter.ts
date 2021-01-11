@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppStateContext } from '../../../../../store/appState/Context';
-import { FooterItemsContext } from '../../../../../store/footerItems/Context';
+import { AppStateContext } from '../../../../../stores/appState/Context';
+import { FooterItemsContext } from '../../../../../stores/footerItems/Context';
 
 export const useStateFooter = () => {
   const { appState } = React.useContext(AppStateContext);

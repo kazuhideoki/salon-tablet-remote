@@ -2,8 +2,8 @@ import React from 'react';
 import {
   createFooterItem,
   setModal,
-} from '../../../../../store/appState/actions';
-import { AppStateContext } from '../../../../../store/appState/Context';
+} from '../../../../../stores/appState/actions';
+import { AppStateContext } from '../../../../../stores/appState/Context';
 export const useOpenFooterItemEditor = () => {
   const { dispatchAppState } = React.useContext(AppStateContext);
 
