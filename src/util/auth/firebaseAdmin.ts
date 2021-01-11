@@ -1,5 +1,6 @@
 import * as firebaseAdmin from 'firebase-admin';
 
+// envからの読み込みにするとうまく行かない
 import serviceAccount from '../../../firebase_secret.json';
 
 if (!firebaseAdmin.apps.length) {
