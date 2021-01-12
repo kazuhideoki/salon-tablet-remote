@@ -61,12 +61,12 @@ export const DrawerSetting: React.FC<DrawerPresenterProps> = (props) => {
             </ListItemIcon>
             <ListItemText primary="アカウント" />
           </ListItem>
-          <ListItem button onClick={() => props.openModal('feedback_form')}>
+          {/* <ListItem button onClick={() => props.openModal('feedback_form')}>
             <ListItemIcon>
               <Feedback />
             </ListItemIcon>
             <ListItemText primary="フィードバック" />
-          </ListItem>
+          </ListItem> */}
           <ListItem button onClick={() => props.handleOnSignOut()}>
             <ListItemIcon>
               <ExitToApp />

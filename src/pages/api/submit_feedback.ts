@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { UserInfo } from '../../util/interface/Interface';
 import { ApiResponse } from '../../util/db/apiWrap';
+import nodemailer from 'nodemailer';
 
 const receiverEmailAddress = 'infosalontablet@gmail.com';
 const senderEmailAddress = 'infosalontablet@gmail.com';
-const senderEmailPassword = '2356Sp!p';
+const senderEmailPassword = process.env.INFOSALONTABLET_PASSWORD;
 
-import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
@@ -46,11 +46,19 @@ const submit_feedback = async (
     };
 
     try {
-      const info = await transporter.sendMail(mailOptions1);
+      // await transporter.verify();
+      transporter.verify(async function (error, success) {
+        if (error) {
+          console.log(`submit_feedback transporter.verify: ${error}`);
+        } else {
+          console.log('Server is ready to take our messages');
+          const info = await transporter.sendMail(mailOptions1);
 
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-      res.status(200).json({ err: false, rawData: null } as ApiResponse);
+          res.status(200).json({ err: false, rawData: null } as ApiResponse);
+        }
+      });
     } catch (err) {
       console.log('/submit_feedbackのエラーは ' + JSON.stringify(err));
 
