@@ -12,23 +12,15 @@ import { AuthCircular } from '../../app/components/AuthCircular';
 initFirebase();
 
 const handleSingup = async (email: string, password: string) => {
-  try {
-    await firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
-    const user = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
+  const user = await firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password);
 
-    await createUserData(email);
+  await createUserData(email);
 
-    return user;
-  } catch (err) {
-    console.log('handleSingupは ' + err);
-    alert('エラーによりアカウントを作成出来ませんでした');
-    return null;
-  }
+  return user;
 };
 
 const SignupForm = () => {

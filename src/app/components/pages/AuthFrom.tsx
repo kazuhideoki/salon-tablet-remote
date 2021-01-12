@@ -68,23 +68,30 @@ export const AuthForm: React.FC<Props> = (props) => {
       }
 
       router.push('/');
-    } catch (error) {
-      const errorMessage = error.message;
-      const errorCode = error.code;
-      if (errorCode === 'auth/wrong-password') {
-        alert('メールアドレス、もしくはパスワードが間違っています。');
+    } catch (err) {
+      console.log(JSON.stringify(err));
+
+      const errorCode = err.code;
+      // サインイン時エラー
+      if (errorCode === 'auth/user-not-found') {
+        alert(
+          '登録されたユーザーが見つかりませんでした。入力したメールアドレスをご確認ください。'
+        );
       }
       if (errorCode === 'auth/invalid-email') {
         alert('正しいメールアドレスではありません。');
       }
+      if (errorCode === 'auth/wrong-password') {
+        alert('メールアドレス、もしくはパスワードが間違っています。');
+      }
+      // サインアップ時エラー
       if (errorCode === 'auth/weak-password') {
         alert(
           'パスワード強度が低すぎます。より複雑な英数字の組み合わせ6文字以上にしてください。'
         );
       }
-      props.setIsClicked(false);
 
-      console.log(errorMessage);
+      props.setIsClicked(false);
     }
   };
 

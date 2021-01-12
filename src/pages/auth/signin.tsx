@@ -74,17 +74,9 @@ export const useStylesAuthForm = (): Record<
 initFirebase();
 
 const handleSignin = async (email: string, password: string) => {
-  try {
-    await firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
-    return firebase.auth().signInWithEmailAndPassword(email, password);
-  } catch (err) {
-    console.log('handleSigninは ' + err);
-    alert('エラーによりサインイン出来ませんでした');
-    return null;
-  }
+  return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
 const SigninForm = () => {
