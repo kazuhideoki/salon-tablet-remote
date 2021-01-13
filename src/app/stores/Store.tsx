@@ -1,5 +1,4 @@
 import React from 'react';
-import { IndexPropsData } from '../../pages';
 import { ArticlesContextProvider } from './articles/Context';
 import { FooterItemsContextProvider } from './footerItems/Context';
 import { TagsContextProvider } from './tags/Context';
@@ -8,27 +7,25 @@ import { InstagramContextProvider } from './instagram/Context';
 import { UserInfoContextProvider } from './userInfo/Context';
 import { AppStateContextProvider } from './appState/Context';
 import { ThemeProvider } from './theme/ThemeProvider';
-import { InitAppState } from './appState/initialValue';
+import { AppProps } from '../container/App';
 
-type Props = IndexPropsData & InitAppState;
-
-export const StoreContextProvider: React.FC<Props> = (props) => {
+export const StoreContextProvider: React.FC<AppProps> = (props) => {
   return (
     <AppStateContextProvider
       isPublicPage={props.isPublicPage}
       device={props.device}
       samplePage={props.samplePage}>
-      <UserInfoContextProvider userInfo={props.userInfo}>
+      <UserInfoContextProvider userInfo={props.data.userInfo}>
         <ArticlesContextProvider
-          articles={props.articles}
-          allArticles={props.allArticles}
-          paginationParams={props.pagination}>
-          <FooterItemsContextProvider footerItems={props.footerItems}>
-            <TagsContextProvider tags={props.tags}>
-              <InfoBarContextProvider infoBarData={props.infoBarData}>
+          articles={props.data.articles}
+          allArticles={props.data.allArticles}
+          paginationParams={props.data.pagination}>
+          <FooterItemsContextProvider footerItems={props.data.footerItems}>
+            <TagsContextProvider tags={props.data.tags}>
+              <InfoBarContextProvider infoBarData={props.data.infoBarData}>
                 <InstagramContextProvider
-                  instagramAccounts={props.instagramAccounts}>
-                  <ThemeProvider {...props.userInfo}>
+                  instagramAccounts={props.data.instagramAccounts}>
+                  <ThemeProvider {...props.data.userInfo}>
                     {props.children}
                   </ThemeProvider>
                 </InstagramContextProvider>

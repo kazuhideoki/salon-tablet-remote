@@ -27,13 +27,7 @@ const PublicPage = (props: IndexProps) => {
         <Head>
           <meta name="robots" content="noindex" />
         </Head>
-        <App
-          data={props.data}
-          isPublicPage={props.isPublicPage}
-          device={props.device}
-          samplePage={props.samplePage}
-          session={props.session}
-        />
+        <App {...props} data={props.data} session={props.session} />
       </>
     );
   } else {
@@ -68,17 +62,17 @@ export const getServerSideProps: GetServerSideProps = async ({
   let userInfo: UserInfo | null = null;
   const slicedSlug = slug.replace('/public_page/', '');
   // サンプルページのiframeでで間違い半手せれてしまうため?以降のqueryとる
-  const SlugArray = slicedSlug.split('?');
+  const publicPageSlug = slicedSlug.split('?')[0];
   try {
     // slugがDBにあるかどうかチェックして、「表示させているか？」「slug」を返す
-    userInfo = await checkIsGeneratePubulicPage(SlugArray[0]);
+    userInfo = await checkIsGeneratePubulicPage(publicPageSlug);
 
     if (userInfo === null) throw `userInfo is null`;
     const returnData: IndexProps = {
       data: await generateProps(userInfo, true),
       isPublicPage: true,
       device: device,
-      samplePage: query?.['sample'] as SamplePage | undefined,
+      samplePage: query?.['sample'] as SamplePage,
       // sessionを入れてAppBarを表示させなくする
       session: { email: 'sample@sample.com', emailVerified: true },
     };

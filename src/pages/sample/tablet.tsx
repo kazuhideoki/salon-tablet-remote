@@ -54,7 +54,7 @@ function Tablet(): JSX.Element {
       <iframe
         id="sample-iframe"
         className={classes.iframe}
-        src={`${server}/public_page/bu2j6bfup547/?sample=tablet`}></iframe>
+        src={`${server}/public_page/bu2j6bfup547?sample=tablet`}></iframe>
       <ScrollButton
         to="#back-to-top-anchor"
         threshold={1}
