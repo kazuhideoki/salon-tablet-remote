@@ -8,6 +8,7 @@ import { checkIsGeneratePubulicPage } from '../../util/db/checkIsGeneratePubulic
 import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
 import { UserInfo } from '../../util/interface/Interface';
 import { getDeviceType } from '../../util/getDeviceType';
+import { SamplePage } from '../../app/stores/appState/initialValue';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +31,7 @@ const PublicPage = (props: IndexProps) => {
           data={props.data}
           isPublicPage={props.isPublicPage}
           device={props.device}
+          samplePage={props.samplePage}
           session={props.session}
         />
       </>
@@ -76,6 +78,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       data: await generateProps(userInfo, true),
       isPublicPage: true,
       device: device,
+      samplePage: query?.['sample'] as SamplePage | undefined,
       // sessionを入れてAppBarを表示させなくする
       session: { email: 'sample@sample.com', emailVerified: true },
     };

@@ -9,6 +9,7 @@ import { UserInfoContext } from '../stores/userInfo/Context';
 import { StoreContextProvider } from '../stores/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
 import { UaDeviceType } from '../../util/interface/Interface';
+import { SamplePage } from '../stores/appState/initialValue';
 
 type AppViewProps = {
   session: ApiGetSessionReturn;
@@ -46,6 +47,7 @@ type Props = {
   data: IndexPropsData;
   isPublicPage: boolean;
   device: UaDeviceType;
+  samplePage: SamplePage;
   session: ApiGetSessionReturn;
 };
 
@@ -55,7 +57,8 @@ export const App = (props: Props) => {
     <StoreContextProvider
       {...props.data}
       isPublicPage={props.isPublicPage}
-      device={props.device}>
+      device={props.device}
+      samplePage={props.samplePage}>
       <AppView session={props.session} />
       <Modal />
     </StoreContextProvider>

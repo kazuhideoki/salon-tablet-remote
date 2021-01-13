@@ -16,7 +16,8 @@ export const StoreContextProvider: React.FC<Props> = (props) => {
   return (
     <AppStateContextProvider
       isPublicPage={props.isPublicPage}
-      device={props.device}>
+      device={props.device}
+      samplePage={props.samplePage}>
       <UserInfoContextProvider userInfo={props.userInfo}>
         <ArticlesContextProvider
           articles={props.articles}

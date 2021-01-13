@@ -4,7 +4,7 @@ import { AppStateContext } from '../app/stores/appState/Context';
 
 export const useIsMobile = (): boolean => {
   const { appState } = React.useContext(AppStateContext);
-  const { uaDevice } = appState;
+  const { uaDevice, samplePage } = appState;
 
   // 描画直後の判定に（直後はmobileでもfalseになるため）
   const defaultMatches = () => {
@@ -21,6 +21,12 @@ export const useIsMobile = (): boolean => {
   const smallHeight = useMediaQuery('(max-height:480px)', {
     defaultMatches: defaultMatches(),
   });
+
+  if (samplePage === 'tablet') {
+    return false;
+  } else if (samplePage === 'mobile') {
+    return true;
+  }
 
   if (smallWidth || smallHeight) {
     return true;

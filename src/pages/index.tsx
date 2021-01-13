@@ -18,6 +18,7 @@ import { SEO } from '../app/components/pages/SEO';
 import { getDeviceType } from '../util/getDeviceType';
 import { apiGetSession, ApiGetSessionReturn } from './api/auth/get_session';
 import { apiGetUserInfoFromEmail } from './api/user_info/get';
+import { SamplePage } from '../app/stores/appState/initialValue';
 
 export type IndexPropsData = {
   articles: Articles;
@@ -34,6 +35,7 @@ export type IndexProps = {
   data: IndexPropsData | null;
   isPublicPage: boolean;
   device: UaDeviceType;
+  samplePage: SamplePage;
   session: ApiGetSessionReturn | null;
 };
 
@@ -45,6 +47,7 @@ const Index: React.FC<IndexProps> = (props) => {
           data={props.data}
           isPublicPage={props.isPublicPage}
           device={props.device}
+          samplePage={props.samplePage}
           session={props.session}
         />
       </>
@@ -59,16 +62,19 @@ const Index: React.FC<IndexProps> = (props) => {
   }
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const device = getDeviceType(req);
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
+  console.log('queryは ' + JSON.stringify(query));
 
-  const topPageProps = {
-    props: {
-      data: null,
-      session: null,
-      isPublicPage: false,
-      device: device,
-    } as IndexProps,
+  const device: UaDeviceType = getDeviceType(req);
+  const topPageProps: IndexProps = {
+    data: null,
+    session: null,
+    samplePage: 'none',
+    isPublicPage: false,
+    device: device,
   };
 
   try {
@@ -77,20 +83,21 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     if (session?.email) {
       const data = await apiGetUserInfoFromEmail(session.email);
 
-      return {
-        props: {
-          data: await generateProps(data.rawData, false),
-          isPublicPage: false,
-          device: device,
-          session,
-        } as IndexProps,
+      const props: IndexProps = {
+        data: await generateProps(data.rawData, false),
+        isPublicPage: false,
+        samplePage: 'none',
+        device: device,
+        session,
       };
+
+      return { props };
     } else {
-      return topPageProps;
+      return { props: topPageProps };
     }
   } catch (err) {
     console.log(`index.tsx gSSP: ${err}`);
-    return topPageProps;
+    return { props: topPageProps };
   }
 };
 
