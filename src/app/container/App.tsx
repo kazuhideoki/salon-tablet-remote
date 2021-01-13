@@ -4,10 +4,10 @@ import { AppMobile } from './mobile/AppMobile';
 import { AppTablet } from './tablet/AppTablet';
 import { useIsMobile } from '../../util/useIsMobile';
 import { IndexProps } from '../../pages';
-import { ApiGetSessionReturn } from '../../pages/api/auth/get_session';
 import { UserInfoContext } from '../stores/userInfo/Context';
 import { StoreContextProvider } from '../stores/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
+import { ApiGetSessionReturn } from '../../util/db/apiGetSession';
 
 type AppViewProps = {
   session: ApiGetSessionReturn;

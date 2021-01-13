@@ -43,7 +43,7 @@ export const DisplayNumbers: React.FC<PaginationPresenterPropsAndClasses> = (
 
     return (
       <props.StyledIconButton
-        key={num}
+        key={index}
         onClick={() => props.handleOnNumClick(num)}
         className={props.classes.button}>
         {/* <Typography variant='button' >

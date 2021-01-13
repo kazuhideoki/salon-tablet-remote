@@ -3,11 +3,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { server, instagramRedirectHost } from '../../../util/loadUrl';
 import { apiInstagramAccountsReconnectNeeded } from './reconnect_needed';
 import { apiGetUserInfoFromEmail } from '../user_info/get';
-import { apiGetSession } from '../auth/get_session';
 
 // ※instagramアカウントを認証するときのリダイレクト先
 
 import FormData from 'form-data';
+import { apiGetSession } from '../../../util/db/apiGetSession';
 
 const get_token = async (
   req: NextApiRequest,
