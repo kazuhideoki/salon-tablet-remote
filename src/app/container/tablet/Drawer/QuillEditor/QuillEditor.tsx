@@ -39,6 +39,7 @@ Quill.register('modules/imageCompress', ImageCompress);
 import ImageResize from 'quill-image-resize';
 import { Resize } from './context/quill/quillImageResizeModuleFixedForTouchEvent';
 import { Toolbar } from './context/quill/toolbar';
+import { OldResize } from './context/quill/oldQuillImageResize';
 Quill.register('modules/imageResize', ImageResize);
 
 type Props = {

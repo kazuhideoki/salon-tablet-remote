@@ -38,7 +38,7 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
 
   return (
     <>
-      <IconButton className={props.className}>
+      <div className={props.className}>
         <IconButton aria-describedby={id} onClick={(e) => handleClick(e)}>
           <MoreVert />
         </IconButton>
@@ -74,7 +74,7 @@ export const EditButtonsBox: React.FC<Props> = (props) => {
             />
           ) : null}
         </Popover>
-      </IconButton>
+      </div>
     </>
   );
 };

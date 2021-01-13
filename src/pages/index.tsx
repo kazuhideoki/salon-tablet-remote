@@ -6,9 +6,9 @@ import { TopPage } from '../app/components/pages/TopPage';
 import { DataFromDB, generateProps } from '../util/db/generateProps';
 import { SEO } from '../app/components/pages/SEO';
 import { getDeviceType } from '../util/getDeviceType';
-import { apiGetSession, ApiGetSessionReturn } from './api/auth/get_session';
 import { apiGetUserInfoFromEmail } from './api/user_info/get';
 import { InitAppState } from '../app/stores/appState/initialValue';
+import { apiGetSession, ApiGetSessionReturn } from '../util/db/apiGetSession';
 
 export type IndexProps = {
   data?: DataFromDB;
