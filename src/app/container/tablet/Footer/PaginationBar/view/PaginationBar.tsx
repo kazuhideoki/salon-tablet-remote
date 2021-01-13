@@ -90,7 +90,6 @@ export type PaginationPresenterPropsAndClasses = PaginationBarPresenterProps & {
 };
 
 const useStyles = makeStyles((theme: Theme) => {
-  const themes = React.useContext(ThemeContext);
   return createStyles({
     root: {
       borderRadius: 0,

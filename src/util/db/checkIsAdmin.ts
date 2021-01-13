@@ -1,6 +1,6 @@
 import { NextApiRequest } from 'next';
-import { apiGetSession } from '../../pages/api/auth/get_session';
 import { apiGetUserInfoFromEmail } from '../../pages/api/user_info/get';
+import { apiGetSession } from './apiGetSession';
 
 type Props = {
   req: NextApiRequest;

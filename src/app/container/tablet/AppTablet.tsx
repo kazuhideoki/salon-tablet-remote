@@ -7,10 +7,7 @@ import { ThemeContext } from '../../stores/theme/ThemeProvider';
 import { Drawer } from './Drawer/Drawer/Drawer';
 import dynamic from 'next/dynamic';
 import { PaginationBar } from './Footer/PaginationBar/PaginationBar';
-import {
-  AppStateContext,
-  AppStateContextProvider,
-} from '../../stores/appState/Context';
+import { AppStateContext } from '../../stores/appState/Context';
 const InfoBar = dynamic(() => import('./InfoBar/InfoBar'), {
   ssr: false,
 });
