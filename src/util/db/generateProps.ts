@@ -1,19 +1,34 @@
 import {
-  InfoBarData,
-  PaginationParams,
   UserInfo,
-} from '../interface/Interface';
+  Articles,
+  PaginationParams,
+  FooterItems,
+  Tags,
+  InstagramAccounts,
+  AllArticles,
+  InfoBarData,
+} from '../../util/interface/Interface';
 import { ApiArticlesGet, apiArticlesGet } from '../../pages/api/articles/get';
 import { apiFooterItemsGet } from '../../pages/api/footer_items/get';
 import { apiTagsGet } from '../../pages/api/tags/get';
 import { apiInstagramAccountsGet } from '../../pages/api/instagram_accounts/get';
 import { apiInfoBarGet } from '../../pages/api/info_bar/get';
-import { IndexPropsData } from '../../pages';
+
+export type DataFromDB = {
+  articles: Articles;
+  pagination: PaginationParams;
+  allArticles: AllArticles;
+  footerItems: FooterItems;
+  infoBarData: InfoBarData;
+  tags: Tags;
+  instagramAccounts: InstagramAccounts;
+  userInfo: UserInfo;
+};
 
 export const generateProps = async (
   userInfo: UserInfo,
   getPublishedOnly: boolean
-): Promise<IndexPropsData> => {
+): Promise<DataFromDB> => {
   const { user_id } = userInfo;
   // 記事一覧取得
   const articlesParam: ApiArticlesGet = {
@@ -33,7 +48,7 @@ export const generateProps = async (
     ]);
 
     // as any で何故かエラー消える
-    const propsData: IndexPropsData = {
+    const propsData: DataFromDB = {
       articles: data.err ? [] : data.rawData.articles,
       pagination: data.err ? ({} as PaginationParams) : data.rawData.pagination,
       allArticles: data.err ? [] : data.rawData.allArticles,

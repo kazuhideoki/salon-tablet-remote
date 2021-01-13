@@ -1,52 +1,25 @@
 import React from 'react';
-import {
-  UserInfo,
-  Articles,
-  PaginationParams,
-  FooterItems,
-  Tags,
-  InstagramAccounts,
-  AllArticles,
-  InfoBarData,
-  UaDeviceType,
-} from '../util/interface/Interface';
+import { UaDeviceType } from '../util/interface/Interface';
 import { App } from '../app/container/App';
 import { GetServerSideProps } from 'next';
 import { TopPage } from '../app/components/pages/TopPage';
-import { generateProps } from '../util/db/generateProps';
+import { DataFromDB, generateProps } from '../util/db/generateProps';
 import { SEO } from '../app/components/pages/SEO';
 import { getDeviceType } from '../util/getDeviceType';
-import { apiGetSession, ApiGetSessionReturn } from './api/auth/get_session';
 import { apiGetUserInfoFromEmail } from './api/user_info/get';
-
-export type IndexPropsData = {
-  articles: Articles;
-  pagination: PaginationParams;
-  allArticles: AllArticles;
-  footerItems: FooterItems;
-  infoBarData: InfoBarData;
-  tags: Tags;
-  instagramAccounts: InstagramAccounts;
-  userInfo: UserInfo;
-};
+import { InitAppState } from '../app/stores/appState/initialValue';
+import { apiGetSession, ApiGetSessionReturn } from '../util/db/apiGetSession';
 
 export type IndexProps = {
-  data: IndexPropsData | null;
-  isPublicPage: boolean;
-  device: UaDeviceType;
-  session: ApiGetSessionReturn | null;
-};
+  data?: DataFromDB;
+  session?: ApiGetSessionReturn;
+} & InitAppState;
 
 const Index: React.FC<IndexProps> = (props) => {
   if (props.data && props.session) {
     return (
       <>
-        <App
-          data={props.data}
-          isPublicPage={props.isPublicPage}
-          device={props.device}
-          session={props.session}
-        />
+        <App {...props} data={props.data} session={props.session} />
       </>
     );
   } else {
@@ -60,15 +33,11 @@ const Index: React.FC<IndexProps> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const device = getDeviceType(req);
-
-  const topPageProps = {
-    props: {
-      data: null,
-      session: null,
-      isPublicPage: false,
-      device: device,
-    } as IndexProps,
+  const device: UaDeviceType = getDeviceType(req);
+  const topPageProps: IndexProps = {
+    isPublicPage: false,
+    device: device,
+    samplePage: 'none',
   };
 
   try {
@@ -77,20 +46,21 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     if (session?.email) {
       const data = await apiGetUserInfoFromEmail(session.email);
 
-      return {
-        props: {
-          data: await generateProps(data.rawData, false),
-          isPublicPage: false,
-          device: device,
-          session,
-        } as IndexProps,
+      const props: IndexProps = {
+        data: await generateProps(data.rawData, false),
+        isPublicPage: false,
+        device: device,
+        samplePage: 'none',
+        session,
       };
+
+      return { props };
     } else {
-      return topPageProps;
+      return { props: topPageProps };
     }
   } catch (err) {
     console.log(`index.tsx gSSP: ${err}`);
-    return topPageProps;
+    return { props: topPageProps };
   }
 };
 
