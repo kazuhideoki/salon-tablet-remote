@@ -13,7 +13,6 @@ export const apiArticlesGet = async (
   params: ApiArticlesGet
 ): Promise<ApiResponse<ApiArticlesGetReturn>> => {
   const { page, selectingTags, isSetting, userId } = params;
-  console.log('apiArticlesGetだよ');
 
   return apiWrapGet(
     `articles/get?page=${page}&selectingTags=${selectingTags}&isSetting=${isSetting}&userId=${userId}`
@@ -36,8 +35,6 @@ export type ApiArticlesGetReturn = {
 const pageSize = 6;
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('req.queryは ' + JSON.stringify(req.query));
-
   const page = Number(req.query.page) as number;
   const selectingTags = req.query.selectingTags
     ? ((req.query.selectingTags as string)

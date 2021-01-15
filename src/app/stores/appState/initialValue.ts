@@ -8,14 +8,18 @@ import {
   Ontap,
 } from '../../../util/interface/Interface';
 
+export type SamplePage = 'tablet' | 'mobile' | 'none';
+
 export type InitAppState = {
   isPublicPage: boolean;
+  samplePage: SamplePage;
   device: UaDeviceType;
 };
 
 export const initAppState = (data: InitAppState) => ({
   isPublicPage: data.isPublicPage,
   uaDevice: data.device,
+  samplePage: data.samplePage,
   isSetting: !data.isPublicPage,
   isDrawerOpen: !data.isPublicPage,
   setModal: 'edit_article' as SetModal,

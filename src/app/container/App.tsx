@@ -3,12 +3,11 @@ import { Modal } from './tablet/Modal/Modal/Modal';
 import { AppMobile } from './mobile/AppMobile';
 import { AppTablet } from './tablet/AppTablet';
 import { useIsMobile } from '../../util/useIsMobile';
-import { IndexProps, IndexPropsData } from '../../pages';
-import { ApiGetSessionReturn } from '../../pages/api/auth/get_session';
+import { IndexProps } from '../../pages';
 import { UserInfoContext } from '../stores/userInfo/Context';
 import { StoreContextProvider } from '../stores/Store';
 import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
-import { UaDeviceType } from '../../util/interface/Interface';
+import { ApiGetSessionReturn } from '../../util/db/apiGetSession';
 
 type AppViewProps = {
   session: ApiGetSessionReturn;
@@ -42,20 +41,12 @@ const AppView = ({ session }: AppViewProps) => {
   }
 };
 
-type Props = {
-  data: IndexPropsData;
-  isPublicPage: boolean;
-  device: UaDeviceType;
-  session: ApiGetSessionReturn;
-};
+export type AppProps = Required<IndexProps>;
 
-export const App = (props: Props) => {
+export const App = (props: AppProps) => {
   return (
     // Storeの情報をContextから読み込んで出力
-    <StoreContextProvider
-      {...props.data}
-      isPublicPage={props.isPublicPage}
-      device={props.device}>
+    <StoreContextProvider {...props}>
       <AppView session={props.session} />
       <Modal />
     </StoreContextProvider>

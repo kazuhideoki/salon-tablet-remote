@@ -38,7 +38,7 @@ export const useSubmitFeedback = (props: Props): (() => Promise<void>) => {
       props.setContactFormContent('');
       dispatchAppState(closeModal());
     } catch (err) {
-      console.log(`useSubmitFeedback ${JSON.stringify(err)}`);
+      console.log(`useSubmitFeedback: ${JSON.stringify(err)}`);
       alert('送信に失敗しました。');
     }
   };

@@ -12,8 +12,8 @@ import 'firebase/auth';
 import initFirebase from '../../util/auth/initFirebase';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
-import { apiGetSession } from '../api/auth/get_session';
 import { AuthCircular } from '../../app/components/AuthCircular';
+import { apiGetSession } from '../../util/db/apiGetSession';
 
 export const useStyles = (isTabletPortrait: boolean) =>
   makeStyles((theme: Theme) => {
@@ -74,17 +74,9 @@ export const useStylesAuthForm = (): Record<
 initFirebase();
 
 const handleSignin = async (email: string, password: string) => {
-  try {
-    await firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
-    return firebase.auth().signInWithEmailAndPassword(email, password);
-  } catch (err) {
-    console.log('handleSigninは ' + err);
-    alert('エラーによりサインイン出来ませんでした');
-    return null;
-  }
+  return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
 const SigninForm = () => {
