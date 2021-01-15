@@ -38,7 +38,7 @@ Quill.register('modules/imageCompress', ImageCompress);
 //@ts-ignore
 import ImageResize from 'quill-image-resize';
 import { Resize } from './context/quill/quillImageResizeModuleFixedForTouchEvent';
-import { Toolbar } from './context/quill/toolbar';
+// import { Toolbar } from './context/quill/toolbar';
 Quill.register('modules/imageResize', ImageResize);
 
 type Props = {
@@ -112,7 +112,7 @@ export const QuillEditor: React.FC<Props> = ({
     imageResize: {
       parchment: Quill.import('parchment'),
       // ResizeはimageのResizeをtouchイベントでも適応
-      modules: ['DisplaySize', Toolbar, Resize],
+      modules: ['DisplaySize', 'Toolbar', Resize],
     },
   };
 

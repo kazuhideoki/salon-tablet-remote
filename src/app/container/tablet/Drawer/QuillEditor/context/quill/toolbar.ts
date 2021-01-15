@@ -1,11 +1,11 @@
 import Quill from 'quill';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
-const Parchment = Quill.imports.parchment;
-// const Parchment = Quill.import('parchment');
+// const Parchment = Quill.imports.parchment;
+const Parchment = Quill.import('parchment');
 
 const Align = Parchment.Attributor.Class('align', 'ql-align');
+console.log('Alignは ' + JSON.stringify(Align));
+
 const offsetAttributor = new Parchment.Attributor.Attribute(
   'nameClass',
   'class',
