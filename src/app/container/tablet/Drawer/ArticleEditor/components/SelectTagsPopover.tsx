@@ -107,25 +107,23 @@ export const SelectTagsPopover: React.FC<Props> = (props) => {
         }}>
         {props.tags.length ? (
           props.tags.map((value, key) => {
+            // セレクトされている
+            if (props.selectedTags.includes(value.tag_id))
+              return (
+                <Chip
+                  key={key}
+                  label={value.tag_name}
+                  onClick={() => handleDelete(value.tag_id)}
+                  color="primary"
+                />
+              );
+            // セレクトされてない
             return (
-              <>
-                {props.selectedTags.includes(value.tag_id) ? (
-                  // セレクトされてる
-                  <Chip
-                    key={key}
-                    label={value.tag_name}
-                    onClick={() => handleDelete(value.tag_id)}
-                    color="primary"
-                  />
-                ) : (
-                  // セレクトされてない
-                  <Chip
-                    key={key}
-                    label={value.tag_name}
-                    onClick={() => handleOnClick(value.tag_id)}
-                  />
-                )}
-              </>
+              <Chip
+                key={key}
+                label={value.tag_name}
+                onClick={() => handleOnClick(value.tag_id)}
+              />
             );
           })
         ) : (
