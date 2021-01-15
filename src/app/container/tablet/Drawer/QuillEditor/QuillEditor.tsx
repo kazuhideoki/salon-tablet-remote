@@ -57,12 +57,7 @@ export const QuillEditor: React.FC<Props> = ({
 }) => {
   const [hasMaxImgs, setHasMaxImgs] = React.useState(false);
 
-  const handleOnChange = (
-    content: string,
-    delta: any,
-    source: any,
-    editor: any
-  ) => {
+  const handleOnChange = (content: string, editor: any) => {
     setEditorText(content);
     setEditorTextExcerpt(editor.getText(0, 100));
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
@@ -124,7 +119,7 @@ export const QuillEditor: React.FC<Props> = ({
         id="react_quill_editor"
         value={editorText}
         onChange={(content, delta, source, editor) =>
-          handleOnChange(content, delta, source, editor)
+          handleOnChange(content, editor)
         }
         theme="snow"
         modules={modules}

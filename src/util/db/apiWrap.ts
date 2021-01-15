@@ -2,7 +2,7 @@ import { server, localhost } from '../loadUrl';
 
 export type ApiResponse<T = null> = { err: boolean; rawData: T };
 
-const fetchPost = async (str: string, url: string, params: any) => {
+const fetchPost = async (str: string, url: string, params: unknown) => {
   return await fetch(`${str}/api/${url}`, {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
@@ -16,9 +16,9 @@ const fetchGet = async (str: string, url: string) => {
 };
 
 const apiWrap = async <T>(
-  fetch: any,
+  fetch: (str: string, url: string, params?: unknown) => Promise<Response>,
   url: string,
-  params?: any
+  params?: unknown
 ): Promise<ApiResponse<T>> => {
   const str = typeof window !== 'undefined' ? server : localhost;
 
@@ -34,7 +34,7 @@ const apiWrap = async <T>(
 
 export const apiWrapPost = async <T = null>(
   url: string,
-  params: any
+  params: unknown
 ): Promise<ApiResponse<T>> => await apiWrap<T>(fetchPost, url, params);
 
 export const apiWrapGet = async <T = null>(

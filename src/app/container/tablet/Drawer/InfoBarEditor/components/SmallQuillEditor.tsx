@@ -11,12 +11,7 @@ export const SmallQuillEditor: React.FC<SmallQuillEditorProps> = ({
   setEditorText,
   setCharCount,
 }) => {
-  const handleOnChange = (
-    content: string,
-    delta: any,
-    source: any,
-    editor: any
-  ) => {
+  const handleOnChange = (content: string, editor: any) => {
     setEditorText(content);
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
     const plainText = editor.getText();
@@ -48,7 +43,7 @@ export const SmallQuillEditor: React.FC<SmallQuillEditorProps> = ({
         id="react_quill_editor"
         value={editorText}
         onChange={(content, delta, source, editor) =>
-          handleOnChange(content, delta, source, editor)
+          handleOnChange(content, editor)
         }
         theme="snow"
         modules={modules}

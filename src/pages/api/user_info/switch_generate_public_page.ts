@@ -18,7 +18,7 @@ export type ApiUserInfoSwitchGeneratePublicPage = {
 const switch_generate_public_page = async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   if (req.method === 'POST') {
     const {
       is_generate_public_page,

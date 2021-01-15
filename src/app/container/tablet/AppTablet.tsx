@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const AppTablet = () => {
+export const AppTablet = (): JSX.Element => {
   // スタイルを反映させたclassNameを出力
   const classes = useStyles();
   const { appState } = React.useContext(AppStateContext);
