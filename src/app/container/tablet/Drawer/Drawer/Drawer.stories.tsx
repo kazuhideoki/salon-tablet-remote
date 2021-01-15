@@ -9,9 +9,6 @@ export default {
 };
 
 const props: DrawerPresenterProps = {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //@ts-ignore
-  theme: null,
   isSetting: false,
   isPublicPage: false,
   isDrawerOpen: false,

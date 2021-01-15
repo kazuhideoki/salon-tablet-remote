@@ -1,9 +1,11 @@
 import Quill from 'quill';
+import Parchment from 'parchment';
 
-// const Parchment = Quill.imports.parchment;
-const Parchment = Quill.import('parchment');
+import { BaseModule, Toolbar } from 'quill-image-resize-module-react';
 
-const Align = Parchment.Attributor.Class('align', 'ql-align');
+// const Parchment = Quill.import('parchment');
+
+const Align = new Parchment.Attributor.Class('align', 'ql-align');
 console.log('Alignは ' + JSON.stringify(Align));
 
 const offsetAttributor = new Parchment.Attributor.Attribute(
@@ -16,8 +18,9 @@ const offsetAttributor = new Parchment.Attributor.Attribute(
 
 Quill.register(offsetAttributor);
 
-export class Toolbar {
+export class CustomToolbar extends Toolbar {
   constructor(resizer: any) {
+    super();
     this.overlay = resizer.overlay;
     this.img = resizer.img;
     this.options = resizer.options;
@@ -40,16 +43,6 @@ export class Toolbar {
     this._addToolbarButtons();
   };
 
-  // The toolbar and its children will be destroyed when the overlay is removed
-  onDestroy = (): void => {
-    return;
-  };
-
-  // Nothing to update on drag because we are are positioned relative to the overlay
-  onUpdate = (): void => {
-    return;
-  };
-
   _defineAlignments = (): void => {
     this.alignments = [
       {
@@ -57,29 +50,17 @@ export class Toolbar {
         apply: () => {
           Align.add(this.img.parentNode, 'left');
         },
-        //  isApplied: () => FloatStyle.value(this.img) == "left",
-        isApplied: (): void => {
-          return;
-        },
       },
       {
         icon: '○',
         apply: () => {
           Align.add(this.img.parentNode, 'center');
         },
-        //  isApplied: () => MarginStyle.value(this.img) == "auto",
-        isApplied: (): void => {
-          return;
-        },
       },
       {
         icon: '→',
         apply: () => {
           Align.add(this.img.parentNode, 'right');
-        },
-        //  isApplied: () => FloatStyle.value(this.img) == "right",
-        isApplied: (): void => {
-          return;
         },
       },
     ];
@@ -92,33 +73,17 @@ export class Toolbar {
       buttons.push(button);
       button.innerHTML = alignment.icon;
       button.addEventListener('click', () => {
-        // deselect all buttons
         buttons.forEach((button) => (button.style.filter = ''));
-        if (alignment.isApplied()) {
-          // If applied, unapply
-          //  FloatStyle.remove(this.img);
-          //  MarginStyle.remove(this.img);
-          //  DisplayStyle.remove(this.img);
-        } else {
-          // otherwise, select button and apply
-          this._selectButton(button);
-          alignment.apply();
-        }
-        // image may change position; redraw drag handles
+
+        this._selectButton(button);
+        alignment.apply();
         this.requestUpdate();
       });
       Object.assign(button.style, this.options.toolbarButtonStyles);
       if (idx > 0) {
         button.style.borderLeftWidth = '0';
       }
-      Object.assign(
-        //  button.children[0].style,
-        this.options.toolbarButtonSvgStyles
-      );
-      if (alignment.isApplied()) {
-        // select button if previously applied
-        this._selectButton(button);
-      }
+      Object.assign(this.options.toolbarButtonSvgStyles);
       this.toolbar.appendChild(button);
     });
   };

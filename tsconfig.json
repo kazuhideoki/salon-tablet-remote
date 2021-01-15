@@ -22,6 +22,10 @@
       "quill-image-resize-module-react": [
         "./src/util/@types/quill-image-resize-module-react.d.ts"
       ],
+      "quill-image-drop-and-paste": [
+        "./src/util/@types/quill-image-drop-and-paste.d.ts"
+      ],
+      "quill-image-compress": ["./src/util/@types/quill-image-compress.d.ts"],
       "*": ["@types/*"]
     }
   },
