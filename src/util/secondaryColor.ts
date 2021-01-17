@@ -37,8 +37,6 @@ export const generateSecondaryColor = (
 
 export const secondaryColor = (theme_color: string): string => {
   return `#${colorConvert.hsl.hex(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
     generateSecondaryColor(colorConvert.hex.hsl(theme_color))
   )}`;
 };

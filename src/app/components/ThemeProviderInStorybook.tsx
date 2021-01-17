@@ -10,8 +10,6 @@ import {
 import { googleFontsUrl } from '../../util/googleFontsUrl';
 import { SelectedTheme } from '../../util/interface/Interface';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
 const selectThemeProps: ManageThemePresenterProps = {
   selected_theme: 'default',
   expanded: true,
@@ -47,6 +45,7 @@ const selectThemeProps: ManageThemePresenterProps = {
   handleChangeShowArticleType: async () => {
     return;
   },
+  user: null,
 };
 
 const border = {
@@ -87,8 +86,6 @@ export const ThemeProvider: React.FC = (props) => {
         <StorybookStore.Provider value={values}>
           <ThemeContext.Provider value={useThemeArgs('medium')}>
             {
-              /* // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //@ts-ignore */
               <SelectTheme
                 {...selectThemeProps}
                 selected_theme={selected_theme}

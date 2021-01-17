@@ -33,9 +33,7 @@ const get_token = async (
       `https://api.instagram.com/oauth/access_token`,
       {
         method: 'POST',
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        body: form,
+        body: form as any,
       }
     );
 

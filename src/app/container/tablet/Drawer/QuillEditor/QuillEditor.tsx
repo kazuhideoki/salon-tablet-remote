@@ -6,39 +6,14 @@ import { removeExceededImgs } from './context/removeExceededImgs';
 
 const maxNumberOfImgs = 5;
 
-// コピペ、ドラック/ドロップのモジュール
-// ※コピペはできるが、ドラック/ドロップができない？
-// import { ImageDrop } from "quill-image-drop-module";
-// Quill.register("modules/imageDrop", ImageDrop);
-
-// コピペ、ドラック/ドロップのモジュール 動作確認
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// const QuillImageDropAndPaste = require('quill-image-drop-and-paste');
-// ↑requireはエラーになる
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
 import QuillImageDropAndPaste from 'quill-image-drop-and-paste';
 Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
 
-// 画像圧縮のモジュールを利用可能にimageCompress;
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// const ImageCompress = require('quill-image-compress');
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
 import ImageCompress from 'quill-image-compress';
 Quill.register('modules/imageCompress', ImageCompress);
 
-// 画像サイズ変更のモジュールregister
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// const ImageResize = require('quill-image-resize');
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
-import ImageResize from 'quill-image-resize';
+import ImageResize from 'quill-image-resize-module-react';
 import { Resize } from './context/quill/quillImageResizeModuleFixedForTouchEvent';
-// import { Toolbar } from './context/quill/toolbar';
 Quill.register('modules/imageResize', ImageResize);
 
 type Props = {
@@ -57,12 +32,7 @@ export const QuillEditor: React.FC<Props> = ({
 }) => {
   const [hasMaxImgs, setHasMaxImgs] = React.useState(false);
 
-  const handleOnChange = (
-    content: string,
-    delta: any,
-    source: any,
-    editor: any
-  ) => {
+  const handleOnChange = (content: string, editor: any) => {
     setEditorText(content);
     setEditorTextExcerpt(editor.getText(0, 100));
     // エディターから文字数を取得して文字数カウントのためのeditorText.lengthに値を格納
@@ -112,7 +82,7 @@ export const QuillEditor: React.FC<Props> = ({
     imageResize: {
       parchment: Quill.import('parchment'),
       // ResizeはimageのResizeをtouchイベントでも適応
-      modules: ['DisplaySize', 'Toolbar', Resize],
+      modules: ['DisplaySize', Resize],
     },
   };
 
@@ -124,7 +94,7 @@ export const QuillEditor: React.FC<Props> = ({
         id="react_quill_editor"
         value={editorText}
         onChange={(content, delta, source, editor) =>
-          handleOnChange(content, delta, source, editor)
+          handleOnChange(content, editor)
         }
         theme="snow"
         modules={modules}
