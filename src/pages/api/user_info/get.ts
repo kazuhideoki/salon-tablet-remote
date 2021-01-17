@@ -1,7 +1,7 @@
 import { apiWrapGet, ApiResponse } from '../../../util/db/apiWrap';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '../../../util/db/db';
-import { UserInfo } from '../../../util/interface/Interface';
+import { UserInfo, UserInfoFromDB } from '../../../util/interface/Interface';
 import { userInfoParamsFromSql } from '../../../util/db/userInfoParamsFromSql';
 
 export const apiGetUserInfoFromEmail = async (
@@ -17,9 +17,9 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = (await db(
       'select * from `user_info` where `user_email` = ?',
       email
-    )) as UserInfo[];
+    )) as UserInfoFromDB[];
 
-    const rawData = userInfoParamsFromSql(data[0]);
+    const rawData = userInfoParamsFromSql(data[0]) as UserInfo;
     if (data.length === 0) throw new Error('userInfoがありません');
     res.status(200).json({ err: false, rawData } as ApiResponse<UserInfo>);
   } catch (err) {

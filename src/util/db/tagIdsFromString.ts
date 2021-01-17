@@ -1,15 +1,13 @@
-import { Article } from '../interface/Interface';
+import { ArticleFromDB } from '../interface/Interface';
 
-type Props = Article | { article_id: number; tag_ids: number[] };
+type Props = ArticleFromDB | { article_id: number; tag_ids: number[] | string };
 
-export const tagIdsFromString = <T extends Props>(data: T[]): T[] => {
+export const tagIdsFromString = (data: Props[]): Props[] => {
   // tag_idsをnumber[]化する
   const newData = data.map((value) => {
     // 値がある場合のみ(nullではないとき)変換
     if (value.tag_ids) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      const parsedTagId: string[] = JSON.parse(value.tag_ids);
+      const parsedTagId: string[] = JSON.parse(value.tag_ids as string);
 
       const intArray = parsedTagId.map((str) => parseInt(str, 10));
 

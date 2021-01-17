@@ -5,25 +5,33 @@ export type SelectedTheme = 'default' | 'white' | 'natural';
 export type ThemeFont = Font1[0] | Font2[0];
 export type FooterIconSize = 'medium' | 'small';
 
-export type UserInfo = {
+export type UserInfoFromDB = {
   user_id: number;
   user_name: string;
   shop_name: string;
   user_email: string;
-  show_article_type: ShowArticleType;
-  is_first_sign_in: boolean;
-
+  created_at: string;
+  updated_at: string | null;
+  is_first_sign_in: boolean | number;
   selected_theme: SelectedTheme;
+  is_admin: boolean | number;
+  is_generate_public_page: boolean | number;
+  public_page_slug: string;
+  show_article_type: ShowArticleType;
   theme_color: string;
   theme_font1: ThemeFont;
   theme_font2: ThemeFont;
-  theme_font_heading: ThemeFont;
   footer_icon_size: FooterIconSize;
-  is_generate_public_page: boolean;
-  public_page_slug: string;
+  theme_font_heading: ThemeFont;
+};
+
+export type UserInfo = Omit<
+  UserInfoFromDB,
+  'is_first_sign_in' | 'is_admin' | 'is_generate_public_page'
+> & {
+  is_first_sign_in: boolean;
   is_admin: boolean;
-  created_at: string;
-  updated_at: string | null;
+  is_generate_public_page: boolean;
 };
 
 const initPagination = {
@@ -38,9 +46,11 @@ export type DataTypeFooterItem = 'default_data' | 'sample_data';
 export type DataTypeArticle = DataTypeFooterItem | 'web_article';
 
 // ●●●●●● テーブル `articles`
-export type ArticleWithoutArticleId = {
+
+export type ArticleFromDB = {
+  article_id: number;
   user_id: number;
-  tag_ids: number[];
+  tag_ids: string | number;
   is_published: boolean;
   created_at: string;
   updated_at: string;
@@ -51,7 +61,10 @@ export type ArticleWithoutArticleId = {
   // 初回サインイン時のサンプルデータのコピー元をtrueに
   data_type: DataTypeArticle;
 };
-export type Article = { article_id: number } & ArticleWithoutArticleId;
+export type Article = Omit<ArticleFromDB, 'tag_ids'> & {
+  tag_ids: number[];
+};
+export type ArticleWithoutId = Omit<Article, 'article_id'>;
 export type Articles = Article[];
 
 export type AllArticles = {

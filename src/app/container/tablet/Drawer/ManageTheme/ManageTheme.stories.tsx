@@ -16,10 +16,10 @@ export default {
 };
 import colorConvert from 'color-convert';
 
-export const Normal = () => {
+export const Normal = (): JSX.Element => {
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleAccordion = (panel: boolean) => (
+  const handleAccordion = () => (
     event: React.ChangeEvent<Record<string, unknown>>,
     isExpanded: boolean
   ) => {
@@ -142,9 +142,7 @@ export const Normal = () => {
         </div>
         <div
           style={{
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //@ts-ignore
-            fontFamily: [font1, font2],
+            fontFamily: font2,
             lineHeight: 1.5,
             fontSize: '1.1rem',
           }}>

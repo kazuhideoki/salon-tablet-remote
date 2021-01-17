@@ -4,6 +4,7 @@ import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
 import {
   Articles,
   AllArticles,
+  ArticleFromDB,
   PaginationParams,
 } from '../../../util/interface/Interface';
 import { apiWrapGet, ApiResponse } from '../../../util/db/apiWrap';
@@ -34,7 +35,10 @@ export type ApiArticlesGetReturn = {
 
 const pageSize = 6;
 
-const get = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   const page = Number(req.query.page) as number;
   const selectingTags = req.query.selectingTags
     ? ((req.query.selectingTags as string)
@@ -71,11 +75,11 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = (await db(
       `SELECT * FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages} ORDER BY created_at DESC LIMIT ${offSet} ${pageSize}`
-    )) as Articles;
+    )) as ArticleFromDB[];
 
     const data2 = (await db(
       `SELECT user_id FROM articles WHERE user_id = ${userId} ${getPublishedOnly} ${getTagedPages}`
-    )) as any[];
+    )) as { user_id: number }[];
 
     const data3 = await db(
       `SELECT article_id, title FROM articles WHERE user_id = ${userId}`
@@ -90,7 +94,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const rawData: ApiArticlesGetReturn = {
       // tag_idsをnumber[]化する、なければnullのまま
-      articles: data.length ? tagIdsFromString(data) : data,
+      articles: (data.length ? tagIdsFromString(data) : data) as Articles,
       pagination: pagination,
       allArticles: data3 as AllArticles,
     };

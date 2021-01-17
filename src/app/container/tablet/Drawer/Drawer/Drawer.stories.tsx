@@ -8,75 +8,89 @@ export default {
   component: DrawerPresenter,
 };
 
-const props: DrawerPresenterProps = {
-  isSetting: false,
-  isPublicPage: false,
-  isDrawerOpen: false,
-  dispatchAppState: () => {
-    return;
-  },
-  handleOnSignOut: () => {
-    return;
-  },
-  handleDrawerClose: () => {
-    return;
-  },
-  isMobile: false,
-  footerItems: samplefooterItems,
-  handleSwitchIsSetting: () => {
-    return;
-  },
-  pass: '',
-  setPass: () => {
-    return;
-  },
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //@ts-ignore
-  themes: null,
-  closeDrawer: () => {
-    return;
-  },
-  handleOnUpDateFooterIcon: () => {
-    return;
-  },
-  isClicked: false,
+const useProps = (): DrawerPresenterProps => {
+  const theme = useTheme();
+  return {
+    theme: theme,
+    handleDrawerOpen: () => {
+      return;
+    },
+    openFooterItemModal: () => {
+      return;
+    },
+    deleteFooterItem: async () => {
+      return;
+    },
+    isSetting: false,
+    isPublicPage: false,
+    isDrawerOpen: false,
+    dispatchAppState: () => {
+      return;
+    },
+    handleOnSignOut: () => {
+      return;
+    },
+    handleDrawerClose: () => {
+      return;
+    },
+    isMobile: false,
+    footerItems: samplefooterItems,
+    handleSwitchIsSetting: () => {
+      return;
+    },
+    pass: '',
+    setPass: () => {
+      return;
+    },
+    themes: useThemeArgs('medium'),
+    closeDrawer: () => {
+      return;
+    },
+    handleOnUpDateFooterIcon: () => {
+      return;
+    },
+    isClicked: false,
+    openModal: () => {
+      return;
+    },
+    openArticleEditor: () => {
+      return;
+    },
+    openFooterItemEditor: () => {
+      return;
+    },
+    switchOrder: async () => {
+      return;
+    },
+  };
 };
 
-export const Close = () => {
-  function test() {
-    const today = new Date();
-
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-  }
-  test();
-
+export const Close = (): JSX.Element => {
   const theme = useTheme();
   const themes = useThemeArgs('medium');
 
-  return <DrawerPresenter {...props} theme={theme} themes={themes} />;
+  return <DrawerPresenter {...useProps()} theme={theme} themes={themes} />;
 };
-export const Open = () => {
+export const Open = (): JSX.Element => {
   const theme = useTheme();
   const themes = useThemeArgs('medium');
 
   return (
     <DrawerPresenter
-      {...props}
+      {...useProps()}
       theme={theme}
       themes={themes}
       isDrawerOpen={true}
     />
   );
 };
-export const OpenMobile = () => {
+export const OpenMobile = (): JSX.Element => {
   const theme = useTheme();
   const themes = useThemeArgs('medium');
 
   return (
     <DrawerPresenter
-      {...props}
+      {...useProps()}
       theme={theme}
       themes={themes}
       isDrawerOpen={true}
@@ -84,13 +98,13 @@ export const OpenMobile = () => {
     />
   );
 };
-export const OpenIsSetting = () => {
+export const OpenIsSetting = (): JSX.Element => {
   const theme = useTheme();
   const themes = useThemeArgs('medium');
 
   return (
     <DrawerPresenter
-      {...props}
+      {...useProps()}
       theme={theme}
       themes={themes}
       isDrawerOpen={true}
@@ -98,13 +112,13 @@ export const OpenIsSetting = () => {
     />
   );
 };
-export const OpenIsSettingMobile = () => {
+export const OpenIsSettingMobile = (): JSX.Element => {
   const theme = useTheme();
   const themes = useThemeArgs('medium');
 
   return (
     <DrawerPresenter
-      {...props}
+      {...useProps()}
       theme={theme}
       themes={themes}
       isDrawerOpen={true}
