@@ -19,9 +19,7 @@ const firebaseAuthConfig: firebaseui.auth.Config = {
   signInSuccessUrl: '/',
   credentialHelper: 'none',
   callbacks: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    signInSuccessWithAuthResult: async ({
+    signInSuccessWithAuthResult: (async ({
       user,
     }: firebase.auth.UserCredential) => {
       if (user) {
@@ -33,7 +31,7 @@ const firebaseAuthConfig: firebaseui.auth.Config = {
           path: '/',
         });
       }
-    },
+    }) as any,
   },
 };
 

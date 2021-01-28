@@ -35,7 +35,6 @@
 - Firebase
   サービスの安定稼働のためにクラウドへ移行。サインイン周りの機能を Firebase Authentication に。
 - GCP
-  <<<<<<< Updated upstream
   サービスの安定稼働のためにクラウドへ移行。Firebase Authentication と一緒利用するので AWS ではなくこちらを導入。
 
 - Github Actions

@@ -10,7 +10,7 @@ export const deleteTagIdInArticle = async (
     const data0 = (await db(
       `SELECT article_id, tag_ids FROM articles WHERE user_id = ?`,
       user_id
-    )) as { article_id: number; tag_ids: number[] }[];
+    )) as { article_id: number; tag_ids: string | number[] }[];
 
     const article_ids = data0.map((value) => {
       return value.article_id;
@@ -24,7 +24,7 @@ export const deleteTagIdInArticle = async (
     // 該当tag_idを取り除いたtag_idsの入ったdataを新たに生成
     const newData = parsedData.map((value) => {
       // 該当tag_idが含まれていたらその部分のみ削除する
-      if (value.tag_ids.includes(tag_id)) {
+      if (value.tag_ids.includes(tag_id as number)) {
         const new_tag_ids = value.tag_ids.filter((value) => {
           return value !== tag_id;
         });
@@ -33,7 +33,10 @@ export const deleteTagIdInArticle = async (
       } else {
         return value;
       }
-    });
+    }) as {
+      article_id: number;
+      tag_ids: number[] | string;
+    }[];
 
     // DBのデータ型似合わせてstring化
     const stringifiedNewData = newData.map((value) => {
@@ -45,9 +48,6 @@ export const deleteTagIdInArticle = async (
         };
       }
 
-      // ※number[]とstringが違うので、別々のtypeを設定する予定
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
       value.tag_ids = JSON.stringify(value.tag_ids);
       return value;
     });
