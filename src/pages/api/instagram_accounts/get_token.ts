@@ -61,7 +61,6 @@ const get_token = async (
         username: userProfile.username,
         profile_img: '',
         access_token: longLived.access_token,
-        expires: '',
         user_id: rawData.user_id,
       };
 
