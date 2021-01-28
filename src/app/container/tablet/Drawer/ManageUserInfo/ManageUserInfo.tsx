@@ -30,7 +30,6 @@ const useSettingUserInfoProps = () => {
     shopName,
     setShopName,
     email,
-    setEmail,
     password,
     setPassword,
     isShowMobile,
@@ -156,7 +155,6 @@ export const SettingUserInfoPresenter: React.FC<SettingUserInfoPresenterProps> =
                 label="パスワード"
                 type="password"
                 id="password"
-                autoComplete="current-password"
                 value={props.password}
                 onChange={(e) => props.setPassword(e.target.value)}
               />
@@ -165,7 +163,6 @@ export const SettingUserInfoPresenter: React.FC<SettingUserInfoPresenterProps> =
           {isValidPassword(props.password) ||
           props.password.length === 0 ? null : (
             <Typography component="h3" variant="body1" color={'error'}>
-              {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
               <b>
                 ※パスワードは【0-9】【a-z】【A-Z】を含む【8文字以上】でご入力下さい
               </b>
@@ -173,7 +170,6 @@ export const SettingUserInfoPresenter: React.FC<SettingUserInfoPresenterProps> =
           )}
           {isValidPassword(props.password) ? (
             <Typography component="h3" variant="body1" color={'primary'}>
-              {/* ※パスワードは半角で英小文字大文字数字をそれぞれ1種類以上含む8文字以上でご入力下さい */}
               <b>有効なパスワードです。</b>
             </Typography>
           ) : null}
@@ -231,7 +227,7 @@ export const SettingUserInfoPresenter: React.FC<SettingUserInfoPresenterProps> =
   );
 };
 
-export const SettingUserInfo = () => {
+export const SettingUserInfo = (): JSX.Element => {
   const props = useSettingUserInfoProps();
   return <SettingUserInfoPresenter {...props} />;
 };
