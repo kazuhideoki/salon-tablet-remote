@@ -47,10 +47,11 @@ const get = async (
       const data2 = await response.json();
 
       if (data2.error) {
-        console.log('data2.errorは ' + data2.error);
+        console.log('data2.errorは ' + JSON.stringify(data2.error));
+        const type = data2.error.type;
         return res
           .status(500)
-          .json({ err: true, rawData: data2 } as ApiResponse);
+          .json({ err: true, rawData: type } as ApiResponse);
       }
 
       const rawData: InstagramMediaObject = data2;

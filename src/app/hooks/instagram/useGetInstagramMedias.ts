@@ -40,6 +40,7 @@ export const useGetInstagramMedias = (): ((params: Props) => Promise<void>) => {
         instagram_id: params.instagram_id,
         paging: params.paging,
       });
+
       dispatchInstagram(setMedias(data.rawData));
       dispatchAppState(
         setSelectedInstagramAccounts({
@@ -50,11 +51,9 @@ export const useGetInstagramMedias = (): ((params: Props) => Promise<void>) => {
       dispatchAppState(isShowInstagram(true));
       dispatchAppState(isLoadingMain(false));
     } catch (err) {
-      console.log(`useGetInstagramMedias: ${err}`);
-      alert('取得できませんでした');
+      console.log(`useGetInstagramMedias: ${JSON.stringify(err)}`);
 
-      if (err.data.error.message.type === 'OAuthException') {
-        console.log('message.typeは OAuthException');
+      if ((err as string).includes('OAuthException')) {
         alert('インスタグラムアカウントの再連携が必要です');
         const params2: ApiInstagramAccountsReconnectNeeded = {
           instagram_id: params.instagram_id,

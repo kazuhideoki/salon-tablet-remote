@@ -20,6 +20,7 @@ const instagram_accounts_delete = async (
 ): Promise<void> => {
   if (req.method === 'POST') {
     const { instagram_id }: ApiInstagramAccountsDelete = req.body;
+    console.log('instagram_accounts_deleteのinstagram_idは ' + instagram_id);
 
     try {
       await db(
