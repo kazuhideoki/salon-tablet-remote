@@ -146,7 +146,6 @@ export type InstagramAccountFromDB = {
   instagram_id: number;
   username: string;
   profile_img: string;
-  expires: string;
   access_token?: string;
   user_id: number;
   created_at: string;
