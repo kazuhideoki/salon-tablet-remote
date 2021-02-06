@@ -74,7 +74,7 @@ export const useStylesAuthForm = (): Record<
 initFirebase();
 
 const handleSignin = async (email: string, password: string) => {
-  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
   return firebase.auth().signInWithEmailAndPassword(email, password);
 };

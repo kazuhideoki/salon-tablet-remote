@@ -12,7 +12,7 @@ import { AuthCircular } from '../../app/components/AuthCircular';
 initFirebase();
 
 const handleSingup = async (email: string, password: string) => {
-  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
   const user = await firebase
     .auth()
