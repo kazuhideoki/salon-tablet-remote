@@ -53,3 +53,5 @@
 ![image](public/images/entity_relationship_diagram.png)
 
 ## インフラ構成図
+
+![image](public/images/infrastructure architecture.png)
