@@ -1,13 +1,13 @@
 import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { checkOrders } from '../../../util/db/checkOrders';
+import { checkIsCorrectOrder } from '../../../util/db/checkIsCorrectOrder';
 import {
   FooterItemFromDB,
   FooterItems,
 } from '../../../util/interface/Interface';
 import { correctOrders } from '../../../util/db/correctOrders';
 import { ApiResponse } from '../../../util/db/apiWrap';
-import { checkOrdersSidebar } from '../../../util/db/checkOrders';
+import { checkIsCorrectOrderSidebar } from '../../../util/db/checkIsCorrectOrder';
 import { correctOrdersSidebar } from '../../../util/db/correctOrders';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 
@@ -38,16 +38,16 @@ const get = async (
     )) as FooterItems;
 
     // footer_itemsのorderが正しく連番になっているかチェックする
-    const isCorrectOrders = checkOrders(data);
+    const isCorrectOrder = checkIsCorrectOrder(data);
 
     // もしorderが正しくなかったら、直す処理
-    if (isCorrectOrders === false) {
+    if (isCorrectOrder === false) {
       await correctOrders(data);
     }
 
-    const isCorrectOrdersSidebar = checkOrdersSidebar(data);
+    const isCorrectOrderSidebar = checkIsCorrectOrderSidebar(data);
 
-    if (isCorrectOrdersSidebar === false) {
+    if (isCorrectOrderSidebar === false) {
       await correctOrdersSidebar(data);
     }
 

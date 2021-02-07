@@ -1,9 +1,11 @@
 import React from 'react';
-import { selectedIconReducer } from './selectedIconReducer';
+import { SelectedIcon, selectedIconReducer } from './selectedIconReducer';
 import { AppStateContext } from '../../../../../stores/appState/Context';
 import { UserInfoContext } from '../../../../../stores/userInfo/Context';
 import { IconsSetting } from '../components/iconSelect/icons';
 import { MoodBad } from '@material-ui/icons';
+import { SvgIconTypeMap } from '@material-ui/core';
+import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 
 export const useStateFooterItemEditor = () => {
   const { userInfo } = React.useContext(UserInfoContext);
@@ -26,6 +28,7 @@ export const useStateFooterItemEditor = () => {
   const [editorTextExcerpt, setEditorTextExcerpt] = React.useState(
     isEditting || isModalSizeChanged ? footerItem.item_excerpt : ''
   );
+
   const [selectedIcon, dispatchSelectedIcon] = React.useReducer(
     selectedIconReducer,
     isEditting || isModalSizeChanged
@@ -34,6 +37,9 @@ export const useStateFooterItemEditor = () => {
         )
       : [MoodBad, 'MoodBad']
   );
+  const setSelectedIcon = (selectedIcon: SelectedIcon) => {
+    dispatchSelectedIcon({ type: 'SET_ICON', payload: selectedIcon });
+  };
 
   const [dataType, setDataType] = React.useState(
     isEditting || isModalSizeChanged ? footerItem.data_type : 'default_data'
@@ -65,7 +71,7 @@ export const useStateFooterItemEditor = () => {
     editorTextExcerpt,
     setEditorTextExcerpt,
     selectedIcon,
-    dispatchSelectedIcon,
+    setSelectedIcon,
     dataType,
     setDataType,
     onTapRadio,

@@ -19,10 +19,9 @@ import { useFooterProps } from '../../Footer/Footer/Footer';
 import { Settings } from '@material-ui/icons';
 import { AuthCircular } from '../../../../components/AuthCircular';
 import { useHandleSwitchIsSetting } from './context/useHandleSwitchIsSetting';
-import { useHandleOnSingOut } from './context/useHandleOnSingOut';
-import { useHandleDrawerClose } from './context/useHandleDrawerClose';
-import { useCloseDrawer } from './context/useCloseDrawer';
-import { useHandleDrawerOpen } from './context/useHandleDrawerOpen';
+import { useHandleSingOut } from './context/useHandleSignOut';
+import { useHandleCloseDrawer } from './context/useHandleCloseDrawer';
+import { useHandleOpneDrawer } from './context/useHandleOpenDrawer';
 import { useStateDrawer } from './context/useStateDrawer';
 import { useOpenModal } from './context/useOpenModal';
 import { useOpenArticleEditor } from './context/useOpenArticleEditor';
@@ -41,11 +40,11 @@ export const useDrawerProps = () => {
     themes,
   } = useStateDrawer();
 
-  const { isClicked, handleOnSignOut } = useHandleOnSingOut();
+  const { isClicked, handleSignOut } = useHandleSingOut();
   const handleSwitchIsSetting = useHandleSwitchIsSetting();
-  const handleDrawerOpen = useHandleDrawerOpen();
-  const handleDrawerClose = useHandleDrawerClose();
-  const closeDrawer = useCloseDrawer();
+  const handleOpenDrawer = useHandleOpneDrawer();
+  const handleCloseDrawerAndGet = useHandleCloseDrawer(true);
+  const handleCloseDrawer = useHandleCloseDrawer(false);
   const openModal = useOpenModal();
   const openArticleEditor = useOpenArticleEditor();
   const openFooterItemEditor = useOpenFooterItemEditor();
@@ -66,15 +65,15 @@ export const useDrawerProps = () => {
     isPublicPage,
     isDrawerOpen,
     footerItems,
-    handleDrawerOpen,
+    handleOpenDrawer,
     handleSwitchIsSetting,
-    handleOnSignOut,
-    handleDrawerClose,
+    handleSignOut,
+    handleCloseDrawerAndGet,
     isMobile,
     pass,
     setPass,
     themes,
-    closeDrawer,
+    handleCloseDrawer,
     handleOnUpDateFooterIcon,
     openFooterItemModal,
     deleteFooterItem,
@@ -173,7 +172,7 @@ export const DrawerPresenter: React.FC<DrawerPresenterProps> = (props) => {
       <IconButton
         // color="inherit"
         aria-label="open drawer"
-        onClick={() => props.handleDrawerOpen()}
+        onClick={() => props.handleOpenDrawer()}
         edge="start"
         className={clsx(
           classes.menuButton,
@@ -223,7 +222,9 @@ export const DrawerPresenter: React.FC<DrawerPresenterProps> = (props) => {
         {props.children}
       </main>
       {props.isMobile && props.isDrawerOpen ? (
-        <div className={classes.greyScreen} onClick={props.closeDrawer}></div>
+        <div
+          className={classes.greyScreen}
+          onClick={props.handleCloseDrawer}></div>
       ) : null}
       {props.isClicked ? <AuthCircular message="サインアウト中" /> : null}
     </div>

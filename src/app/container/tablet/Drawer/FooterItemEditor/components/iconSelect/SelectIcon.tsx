@@ -30,7 +30,7 @@ type SelectIconProps = FooterItemEditorPresenterProps & { className?: string };
 
 export const SelectIcon: React.FC<SelectIconProps> = ({
   selectedIcon,
-  dispatchSelectedIcon,
+  setSelectedIcon,
   className,
 }) => {
   const classes = useStyles();
@@ -87,12 +87,7 @@ export const SelectIcon: React.FC<SelectIconProps> = ({
               <GridListTile
                 key={index}
                 cols={1}
-                onClick={() =>
-                  dispatchSelectedIcon({
-                    type: 'SET_ICON',
-                    payload: icon,
-                  })
-                }>
+                onClick={() => setSelectedIcon(icon)}>
                 {/* // 単純な配列だとうまく行かなかったので各アイコンを配列に入れた */}
                 <IconItem icon={icon[0]} />
               </GridListTile>
