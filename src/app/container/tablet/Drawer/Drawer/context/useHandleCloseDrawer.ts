@@ -3,12 +3,14 @@ import { useGetArticles } from '../../../../../hooks/articles/useGetArticles';
 import { closeDrawer } from '../../../../../stores/appState/actions';
 import { AppStateContext } from '../../../../../stores/appState/Context';
 
-export const useHandleDrawerClose = () => {
+export const useHandleCloseDrawer = (isGetArticle: boolean) => {
   const getArticles = useGetArticles();
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
 
   return () => {
-    getArticles(false, 1, appState.selectedArticlesTags, false);
+    if (isGetArticle) {
+      getArticles(false, 1, appState.selectedArticlesTags, false);
+    }
     dispatchAppState(closeDrawer());
   };
 };
