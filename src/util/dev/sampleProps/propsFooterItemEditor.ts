@@ -30,7 +30,7 @@ export const propsFooterItemEditor: FooterItemEditorPresenterProps = {
     return;
   },
   selectedIcon: [MoodBad, 'MoodBad'],
-  dispatchSelectedIcon: () => {
+  setSelectedIcon: () => {
     return;
   },
   linkUrl: '',

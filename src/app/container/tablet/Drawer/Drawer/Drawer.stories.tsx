@@ -30,7 +30,7 @@ const useProps = (): DrawerPresenterProps => {
     handleSignOut: () => {
       return;
     },
-    handleDrawerClose: () => {
+    handleCloseDrawerAndGet: () => {
       return;
     },
     isMobile: false,
@@ -43,7 +43,7 @@ const useProps = (): DrawerPresenterProps => {
       return;
     },
     themes: useThemeArgs('medium'),
-    closeDrawer: () => {
+    handleCloseDrawer: () => {
       return;
     },
     handleOnUpDateFooterIcon: () => {
