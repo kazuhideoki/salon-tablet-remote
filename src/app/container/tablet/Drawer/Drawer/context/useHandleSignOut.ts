@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAuth } from '../../../../../../util/auth/AuthProvider';
-export const useHandleOnSingOut = () => {
+export const useHandleSingOut = () => {
   const [isClicked, setIsClicked] = React.useState(false);
   const { signout } = useAuth();
 
-  const handleOnSignOut = () => {
+  const handleSignOut = () => {
     const signOuting = confirm('サインアウトしますか？');
     if (signOuting) {
       setIsClicked(true);
@@ -13,5 +13,5 @@ export const useHandleOnSingOut = () => {
     }
   };
 
-  return { isClicked, handleOnSignOut };
+  return { isClicked, handleSignOut };
 };

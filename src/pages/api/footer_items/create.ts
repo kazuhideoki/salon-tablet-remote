@@ -9,7 +9,6 @@ import { ApiResponse } from '../../../util/db/apiWrap';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsCreate = async (
   params: ApiFooterItemsCreate
 ): Promise<ApiResponse> => {
@@ -57,8 +56,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

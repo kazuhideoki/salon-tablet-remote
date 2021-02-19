@@ -67,7 +67,7 @@ export const DrawerSetting: React.FC<DrawerPresenterProps> = (props) => {
             </ListItemIcon>
             <ListItemText primary="フィードバック" />
           </ListItem> */}
-          <ListItem button onClick={() => props.handleOnSignOut()}>
+          <ListItem button onClick={() => props.handleSignOut()}>
             <ListItemIcon>
               <ExitToApp />
             </ListItemIcon>

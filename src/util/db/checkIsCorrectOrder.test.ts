@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals';
-import { checkOrders } from './checkOrders';
-import { checkOrdersSidebar } from './checkOrders';
-import { FooterItems } from '../../util/interface/Interface';
+import { checkIsCorrectOrder } from './checkIsCorrectOrder';
+import { checkIsCorrectOrderSidebar } from './checkIsCorrectOrder';
+import { FooterItems } from '../interface/Interface';
 
 const footerItems1 = [
   {
@@ -56,16 +56,16 @@ const footerItems3 = [
   },
 ] as FooterItems;
 
-test('checkOrders trueが返る', () => {
-  const result1 = checkOrders(footerItems1);
+test('checkIsCorrectOrder trueが返る', () => {
+  const result1 = checkIsCorrectOrder(footerItems1);
   expect(result1).toBe(true);
 });
-test('checkOrders 連番になってなくて falseが返る', () => {
-  const result2 = checkOrders(footerItems2);
+test('checkIsCorrectOrder 連番になってなくて falseが返る', () => {
+  const result2 = checkIsCorrectOrder(footerItems2);
   expect(result2).toBe(false);
 });
-test('checkOrders 1からの連番になってなくて falseが返る', () => {
-  const result3 = checkOrders(footerItems3);
+test('checkIsCorrectOrder 1からの連番になってなくて falseが返る', () => {
+  const result3 = checkIsCorrectOrder(footerItems3);
   expect(result3).toBe(false);
 });
 
@@ -122,16 +122,16 @@ const footerItemsSideBar3 = [
   },
 ] as FooterItems;
 
-test('checkOrdersSidebar ダブりなしで trueが返る', () => {
-  const result1 = checkOrdersSidebar(footerItemsSideBar1);
-  // const result1 = checkOrders(samplefooterItems)
+test('checkIsCorrectOrderSidebar ダブりなしで trueが返る', () => {
+  const result1 = checkIsCorrectOrderSidebar(footerItemsSideBar1);
+  // const result1 = checkIsCorrectOrder(samplefooterItems)
   expect(result1).toBe(true);
 });
-test('checkOrdersSidebar ダブリがあって falseが返る', () => {
-  const result2 = checkOrdersSidebar(footerItemsSideBar2);
+test('checkIsCorrectOrderSidebar ダブリがあって falseが返る', () => {
+  const result2 = checkIsCorrectOrderSidebar(footerItemsSideBar2);
   expect(result2).toBe(false);
 });
-test('checkOrders 1からの連番になってなくて falseが返る', () => {
-  const result3 = checkOrdersSidebar(footerItemsSideBar3);
+test('checkIsCorrectOrder 1からの連番になってなくて falseが返る', () => {
+  const result3 = checkIsCorrectOrderSidebar(footerItemsSideBar3);
   expect(result3).toBe(false);
 });

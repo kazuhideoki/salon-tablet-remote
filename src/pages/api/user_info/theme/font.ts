@@ -4,7 +4,6 @@ import { ThemeFont } from '../../../../util/interface/Interface';
 import { ApiResponse } from '../../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeFont = async (
   params: ApiUserInfoThemeFont
 ): Promise<ApiResponse> => {
@@ -36,8 +35,6 @@ const font = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

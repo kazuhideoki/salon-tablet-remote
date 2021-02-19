@@ -67,8 +67,6 @@ const submit_feedback = async (
   }
 };
 
-// エラーメッセージ非表示
-
 export const config = {
   api: {
     externalResolver: true,

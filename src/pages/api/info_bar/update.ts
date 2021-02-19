@@ -4,7 +4,6 @@ import { InfoBarType } from '../../../util/interface/Interface';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarUpdate = async (
   params: ApiInfoBarUpdate
 ): Promise<ApiResponse> => {
@@ -40,8 +39,6 @@ const update = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

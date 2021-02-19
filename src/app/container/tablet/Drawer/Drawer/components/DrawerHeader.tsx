@@ -9,7 +9,7 @@ export const DrawerHeader: React.FC<DrawerPresenterProps> = (props) => {
   // Open 開いてパスワード入力画面
   if (!props.isSetting) {
     return (
-      <IconButton onClick={props.handleDrawerClose}>
+      <IconButton onClick={props.handleCloseDrawerAndGet}>
         {props.theme.direction === 'ltr' ? (
           <ChevronLeftIcon />
         ) : (
@@ -25,12 +25,12 @@ export const DrawerHeader: React.FC<DrawerPresenterProps> = (props) => {
         <>
           <Button
             variant="text"
-            onClick={props.handleDrawerClose}
+            onClick={props.handleCloseDrawerAndGet}
             color="primary">
             <Close />
             <Typography variant="body1">終了</Typography>
           </Button>
-          <Button variant="text" onClick={props.closeDrawer}>
+          <Button variant="text" onClick={props.handleCloseDrawer}>
             {props.theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
@@ -42,7 +42,7 @@ export const DrawerHeader: React.FC<DrawerPresenterProps> = (props) => {
       );
     }
     return (
-      <Button variant="text" onClick={props.handleDrawerClose}>
+      <Button variant="text" onClick={props.handleCloseDrawerAndGet}>
         {props.theme.direction === 'ltr' ? (
           <ChevronLeftIcon />
         ) : (

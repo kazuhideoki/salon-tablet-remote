@@ -38,8 +38,6 @@ const create = async (
 
       await db(`INSERT INTO articles SET ?`, params);
 
-      await db(`SELECT * FROM articles WHERE user_id = ?`, params.user_id);
-
       res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
       console.log('/articles/create/のエラーは ' + JSON.stringify(err));
@@ -48,8 +46,6 @@ const create = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

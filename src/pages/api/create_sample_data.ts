@@ -5,7 +5,6 @@ import { ApiResponse } from '../../util/db/apiWrap';
 import { apiWrapPost } from '../../util/db/apiWrap';
 import { PartiallyPartial } from '../../util/interface/typescript';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreateSampleData = async (
   params: ApiCreateSampleData
 ): Promise<ApiResponse<void>> => {
@@ -98,8 +97,6 @@ const create_sample_data = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

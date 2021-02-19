@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoDelete = async (
   params: ApiUserInfoDelete
 ): Promise<ApiResponse> => {
@@ -19,20 +18,14 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
     const { user_id }: ApiUserInfoDelete = req.body;
 
     try {
-      const data = await db(
-        'DELETE FROM `user_info` WHERE `user_id`=?',
-        user_id
-      );
-
-      await db('DELETE FROM `articles` WHERE `user_id`=?', user_id);
-
-      await db('DELETE FROM `footer_items` WHERE `user_id`=?', user_id);
-
-      await db('DELETE FROM `tags` WHERE `user_id`=?', user_id);
-
-      await db('DELETE FROM `instagram_accounts` WHERE `user_id`=?', user_id);
-
-      await db('DELETE FROM `info_bar` WHERE `user_id`=?', user_id);
+      await Promise.all([
+        db('DELETE FROM `user_info` WHERE `user_id`=?', user_id),
+        db('DELETE FROM `articles` WHERE `user_id`=?', user_id),
+        db('DELETE FROM `footer_items` WHERE `user_id`=?', user_id),
+        db('DELETE FROM `tags` WHERE `user_id`=?', user_id),
+        db('DELETE FROM `instagram_accounts` WHERE `user_id`=?', user_id),
+        db('DELETE FROM `info_bar` WHERE `user_id`=?', user_id),
+      ]);
 
       res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {
@@ -41,8 +34,6 @@ const user_info_delete = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

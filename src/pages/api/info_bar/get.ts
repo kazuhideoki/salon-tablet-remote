@@ -8,7 +8,6 @@ import {
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInfoBarGet = async (
   user_id: number
 ): Promise<ApiResponse<InfoBarData>> => {
@@ -76,7 +75,6 @@ const get = async (
   }
 };
 
-// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

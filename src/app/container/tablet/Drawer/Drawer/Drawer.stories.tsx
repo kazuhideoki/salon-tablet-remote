@@ -12,7 +12,7 @@ const useProps = (): DrawerPresenterProps => {
   const theme = useTheme();
   return {
     theme: theme,
-    handleDrawerOpen: () => {
+    handleOpenDrawer: () => {
       return;
     },
     openFooterItemModal: () => {
@@ -27,10 +27,10 @@ const useProps = (): DrawerPresenterProps => {
     dispatchAppState: () => {
       return;
     },
-    handleOnSignOut: () => {
+    handleSignOut: () => {
       return;
     },
-    handleDrawerClose: () => {
+    handleCloseDrawerAndGet: () => {
       return;
     },
     isMobile: false,
@@ -43,7 +43,7 @@ const useProps = (): DrawerPresenterProps => {
       return;
     },
     themes: useThemeArgs('medium'),
-    closeDrawer: () => {
+    handleCloseDrawer: () => {
       return;
     },
     handleOnUpDateFooterIcon: () => {
