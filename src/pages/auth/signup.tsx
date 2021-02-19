@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core';
 import Link from 'next/link';
 import { createUserData } from '../../util/db/createUserData';
 import { AuthCircular } from '../../app/components/AuthCircular';
+import { SEO } from '../../app/components/pages/SEO';
 
 initFirebase();
 
@@ -52,9 +53,12 @@ const SignupForm = () => {
 };
 
 const Signup = () => (
-  <BackgroundDiv>
-    <SignupForm />
-  </BackgroundDiv>
+  <>
+    <SEO title="サインアップ" />
+    <BackgroundDiv>
+      <SignupForm />
+    </BackgroundDiv>
+  </>
 );
 
 export default Signup;

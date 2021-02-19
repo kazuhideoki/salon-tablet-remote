@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import { AuthCircular } from '../../app/components/AuthCircular';
 import { apiGetSession } from '../../util/db/apiGetSession';
+import { SEO } from '../../app/components/pages/SEO';
 
 export const useStyles = (isTabletPortrait: boolean) =>
   makeStyles((theme: Theme) => {
@@ -85,7 +86,6 @@ const SigninForm = () => {
 
   return (
     <>
-      {/* <div className={classes.root}> */}
       <div className={classes.authBoxContainer}>
         <div className={classes.authBox}>
           <AuthForm
@@ -104,7 +104,6 @@ const SigninForm = () => {
         </div>
       </div>
       {isClicked ? <AuthCircular message="読み込み中" /> : null}
-      {/* </div> */}
     </>
   );
 };
@@ -131,9 +130,12 @@ export const BackgroundDiv: React.FC = ({ children }) => {
 };
 
 const Signin = (): JSX.Element => (
-  <BackgroundDiv>
-    <SigninForm />
-  </BackgroundDiv>
+  <>
+    <SEO title="サインイン" />
+    <BackgroundDiv>
+      <SigninForm />
+    </BackgroundDiv>
+  </>
 );
 
 export default Signin;
