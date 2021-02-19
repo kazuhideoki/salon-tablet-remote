@@ -4,7 +4,6 @@ import { ApiResponse } from '../../../util/db/apiWrap';
 import { InstagramMediaObject } from '../../../util/interface/Interface';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiInstagramMediasGet = async (
   params: ApiInstagramMediasGet
 ): Promise<ApiResponse<InstagramMediaObject>> => {
@@ -65,7 +64,6 @@ const get = async (
   }
 };
 
-// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

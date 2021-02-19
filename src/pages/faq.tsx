@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { SEO } from '../app/components/pages/SEO';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,6 +15,7 @@ const Faq = () => {
 
   return (
     <div>
+      <SEO />
       <Typography
         className={classes.typography}
         align="center"

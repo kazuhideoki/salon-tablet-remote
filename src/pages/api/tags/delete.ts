@@ -4,7 +4,6 @@ import { deleteTagIdInArticle } from '../../../util/db/deleteTagIdInArticle';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsDelete = async (
   params: ApiTagsCreate
 ): Promise<ApiResponse> => {
@@ -21,7 +20,7 @@ const tags_delete = async (
     const { tag_id, user_id }: ApiTagsCreate = req.body;
 
     try {
-      // articleのtag_idsの該当タグを消す。DBのtab_idsは文字列だが、うまいこと該当タグのtag_id:numberだけをを削除する
+      // articleのtag_idsの該当タグを消す。DBのtab_idsは文字列だが、該当タグのtag_id:numberだけをを削除する
       await deleteTagIdInArticle(tag_id, user_id);
 
       // ★タグそのものを消す
@@ -35,8 +34,6 @@ const tags_delete = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

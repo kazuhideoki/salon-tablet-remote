@@ -11,7 +11,6 @@ import { checkIsCorrectOrderSidebar } from '../../../util/db/checkIsCorrectOrder
 import { correctOrdersSidebar } from '../../../util/db/correctOrders';
 import { apiWrapGet } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsGet = async (
   user_id: number
 ): Promise<ApiResponse<FooterItems>> => {
@@ -62,7 +61,6 @@ const get = async (
   }
 };
 
-// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

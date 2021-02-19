@@ -1,13 +1,6 @@
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  Typography,
-  Button,
-} from '@material-ui/core';
+import { makeStyles, Theme, createStyles, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import React from 'react';
-import { server } from '../../util/loadUrl';
 import { PlainButton } from '../../app/components/pages/PlainButton';
 import { SEO } from '../../app/components/pages/SEO';
 
@@ -26,7 +19,7 @@ export const Error = () => {
   const classes = useStyles();
   return (
     <>
-      <SEO noindex={false} nofollow={false} />
+      <SEO noindex />
       <div className="error">
         <Typography variant="h5" component="h2" align="center" gutterBottom>
           サインインに失敗しました

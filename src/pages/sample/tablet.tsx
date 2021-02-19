@@ -35,7 +35,7 @@ function Tablet(): JSX.Element {
 
   return (
     <div>
-      <SEO title="サンプルページ Tablet" />
+      <SEO title="サンプルページ" />
 
       <div className={classes.paragraphDiv}>
         <Typography variant="h5" component="h1" align="center">

@@ -5,7 +5,6 @@ import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { ApiFooterItemsParams } from './create';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsUpdate = async (
   params: ApiFooterItemsUpdate
 ): Promise<ApiResponse> => {
@@ -44,8 +43,6 @@ const update = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

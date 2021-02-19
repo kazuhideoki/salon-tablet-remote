@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiTagsUpdata = async (
   params: ApiTagsUpdata
 ): Promise<ApiResponse> => {
@@ -37,8 +36,6 @@ const update = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

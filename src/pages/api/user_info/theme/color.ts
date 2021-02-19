@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiResponse } from '../../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoThemeColor = async (
   params: ApiUserInfoThemeColor
 ): Promise<ApiResponse> => {
@@ -32,8 +31,6 @@ const color = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

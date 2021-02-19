@@ -35,7 +35,7 @@ function Mobile(): JSX.Element {
 
   return (
     <div>
-      <SEO title="サンプルページ Mobile" />
+      <SEO title="サンプルページ Mobile版" />
       <div className={classes.paragraphDiv}>
         <Typography variant="h5" component="h1" align="center">
           モバイル版SALON TABLETの表示サンプルです。

@@ -1,9 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import { SEO } from '../app/components/pages/SEO';
 
 const Privacy = () => {
   return (
     <>
+      <SEO title="プライバシーポリシー" />
       <div>
         <h1>プライバシーポリシー</h1>
         <p>
