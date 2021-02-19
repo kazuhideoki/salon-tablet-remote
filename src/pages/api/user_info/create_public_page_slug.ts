@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiCreatePublicPageSlug = async (
   params: ApiCreatePublicPageSlug
 ): Promise<ApiResponse<void>> => {
@@ -41,8 +40,6 @@ const create_public_page_slug = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

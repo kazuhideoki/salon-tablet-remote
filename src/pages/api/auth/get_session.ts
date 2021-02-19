@@ -27,8 +27,6 @@ const get_session = async (
   }
 };
 
-// エラーメッセージ非表示
-
 export const config = {
   api: {
     externalResolver: true,

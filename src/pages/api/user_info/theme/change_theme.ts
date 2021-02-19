@@ -4,7 +4,6 @@ import { ApiResponse } from '../../../../util/db/apiWrap';
 import { ThemeParams } from '../../../../app/stores/theme/ThemeProvider';
 import { apiWrapPost } from '../../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiUserInfoChangeTheme = async (
   params: ApiUserInfoChangeTheme
 ): Promise<ApiResponse> => {
@@ -36,8 +35,6 @@ const change_theme = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

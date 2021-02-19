@@ -91,7 +91,6 @@ const get_token = async (
   }
 };
 
-// エラーメッセージ非表示
 export const config = {
   api: {
     externalResolver: true,

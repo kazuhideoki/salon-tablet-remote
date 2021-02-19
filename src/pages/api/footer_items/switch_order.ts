@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ApiResponse } from '../../../util/db/apiWrap';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiFooterItemsSwitchOrder = async (
   params: ApiFooterItemsSwitchOrder
 ): Promise<ApiResponse> => {
@@ -65,8 +64,6 @@ const switch_order = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

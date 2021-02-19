@@ -9,7 +9,6 @@ import {
 } from '../../../util/interface/Interface';
 import { apiWrapGet, ApiResponse } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesGet = async (
   params: ApiArticlesGet
 ): Promise<ApiResponse<ApiArticlesGetReturn>> => {
@@ -108,8 +107,6 @@ const get = async (
     return res.status(500).json({ err: true, rawData: err } as ApiResponse);
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {

@@ -5,7 +5,6 @@ import { DataTypeArticle } from '../../../util/interface/Interface';
 import { checkIsAdmin } from '../../../util/db/checkIsAdmin';
 import { apiWrapPost } from '../../../util/db/apiWrap';
 
-// サーバーサイドとフロントサイド考えずに使えるようにラップする
 export const apiArticlesUpdate = async (
   params: ApiArticlesUpdate
 ): Promise<ApiResponse> => {
@@ -52,8 +51,6 @@ const update = async (
     }
   }
 };
-
-// エラーメッセージ非表示
 
 export const config = {
   api: {
