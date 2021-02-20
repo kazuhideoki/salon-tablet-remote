@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "mdc": "./node_modules/.bin/markdownlint",
+    "mdc:linter": "markdownlint",
+    "mdc:link-check": "markdown-link-check",
     "tsc": "tsc",
     "test": "jest",
     "tests": "jest src/.*/*.test.tsx?$",
