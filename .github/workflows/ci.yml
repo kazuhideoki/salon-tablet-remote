@@ -5,6 +5,8 @@ on:
     branches-ignore:
       - master
       - test
+    paths-ignore:
+      - '**.md'
 
 jobs:
   unit-test:

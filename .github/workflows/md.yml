@@ -1,0 +1,36 @@
+name: Check Markdown File
+
+on:
+  push:
+    paths:
+      - '**.md'
+
+jobs:
+  lint:
+    name: マークダウンファイル リンター
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm i
+      - name: Lint
+        run: npm run mdc:linter
+  check-link:
+    name: マークダウンファイル リンク切れチェック
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm i
+      - name: Check Link
+        run: npm run mdc:link-check
