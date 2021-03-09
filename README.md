@@ -2,6 +2,8 @@
 
 ![image](public/images/feature_img_square.jpg)
 
+[SALON TABLET](https://salon-tablet.com)
+
 美容師と来店顧客のより良いコミュニケーションの手助けをする美容室専用コンテンツマネジメントシステムを提供するウェブサービスです。
 
 美容室が抱える以下のような問題を解決します
