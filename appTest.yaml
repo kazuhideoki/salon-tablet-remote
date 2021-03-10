@@ -20,5 +20,4 @@ handlers:
   - url: /.*
     secure: always
     script: auto
-    login: admin
 # [END app_yaml]
