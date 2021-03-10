@@ -9,6 +9,7 @@ import { makeStyles, Typography, Theme, createStyles } from '@material-ui/core';
 import { UserInfo } from '../../util/interface/Interface';
 import { getDeviceType } from '../../util/getDeviceType';
 import { SamplePage } from '../../app/stores/appState/initialValue';
+import { SEO } from '../../app/components/pages/SEO';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,9 +34,7 @@ const PublicPage = (props: IndexProps) => {
   } else {
     return (
       <>
-        <Head>
-          <meta name="robots" content="noindex" />
-        </Head>
+        <SEO noindex />
         <Typography
           className={classes.typography}
           align="center"

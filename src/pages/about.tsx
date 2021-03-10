@@ -1,6 +1,6 @@
 import React from 'react';
-import WebSiteDrawer from '../app/components/pages/WebsiteDrawer';
 import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { SEO } from '../app/components/pages/SEO';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,6 +15,7 @@ function About(): JSX.Element {
 
   return (
     <div>
+      <SEO title="About" noindex />
       <Typography
         className={classes.typography}
         align="center"

@@ -3,8 +3,10 @@ name: Continuous Delivery
 on:
   push:
     branches:
-      - test
       - master
+      - test
+    paths-ignore:
+      - '**.md'
 
 jobs:
   deploy:

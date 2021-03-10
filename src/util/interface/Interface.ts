@@ -12,7 +12,6 @@ export type UserInfoFromDB = {
   user_email: string;
   created_at: string;
   updated_at: string | null;
-  is_first_sign_in: boolean | number;
   selected_theme: SelectedTheme;
   is_admin: boolean | number;
   is_generate_public_page: boolean | number;
@@ -27,9 +26,8 @@ export type UserInfoFromDB = {
 
 export type UserInfo = Omit<
   UserInfoFromDB,
-  'is_first_sign_in' | 'is_admin' | 'is_generate_public_page'
+  'is_admin' | 'is_generate_public_page'
 > & {
-  is_first_sign_in: boolean;
   is_admin: boolean;
   is_generate_public_page: boolean;
 };
