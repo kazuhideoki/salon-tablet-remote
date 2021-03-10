@@ -15,10 +15,10 @@
 env: standard
 runtime: nodejs12
 service: test
-  
+
 handlers:
   - url: /.*
     secure: always
     script: auto
-
+    login: admin
 # [END app_yaml]
