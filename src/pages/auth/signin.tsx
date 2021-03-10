@@ -108,21 +108,6 @@ const SigninForm = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const session = await apiGetSession({ req: context.req });
-    if (session) {
-      context.res.writeHead(302, { Location: '/' });
-      context.res.end();
-    }
-
-    return { props: {} };
-  } catch (err) {
-    console.log(`signin.tsx gSSP: ${err}`);
-    return { props: {} };
-  }
-};
-
 // 背景再レンダリング防ぐために別の関数コンポーネントに定義
 export const BackgroundDiv: React.FC = ({ children }) => {
   const classes = useStylesAuthForm();
@@ -137,5 +122,20 @@ const Signin = (): JSX.Element => (
     </BackgroundDiv>
   </>
 );
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const session = await apiGetSession({ req: context.req });
+    if (session) {
+      context.res.writeHead(302, { Location: '/' });
+      context.res.end();
+    }
+
+    return { props: {} };
+  } catch (err) {
+    console.log(`signin.tsx gSSP: ${err}`);
+    return { props: {} };
+  }
+};
 
 export default Signin;

@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { createUserData } from '../../util/db/createUserData';
 import { AuthCircular } from '../../app/components/AuthCircular';
 import { SEO } from '../../app/components/pages/SEO';
+import { GetServerSideProps } from 'next';
+import { server } from '../../util/loadUrl';
 
 initFirebase();
 
@@ -60,5 +62,14 @@ const Signup = () => (
     </BackgroundDiv>
   </>
 );
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  if (server.includes('test')) {
+    context.res.writeHead(302, { Location: '/' });
+    context.res.end();
+  }
+
+  return { props: {} };
+};
 
 export default Signup;
