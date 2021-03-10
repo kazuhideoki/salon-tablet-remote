@@ -6,7 +6,6 @@ export const sampleUserInfo: UserInfo = {
   shop_name: '美容室 太郎',
   user_email: '123@example.com',
   show_article_type: 'scroll',
-  is_first_sign_in: false,
   selected_theme: 'default',
   theme_color: '#123456f',
   theme_font1: '"ヒラギノ角ゴ ProN"',
