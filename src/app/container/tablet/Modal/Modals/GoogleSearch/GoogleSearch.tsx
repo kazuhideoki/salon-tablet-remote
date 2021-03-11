@@ -6,35 +6,10 @@ import { useHandleOnClick } from './context/useHandleOnClick';
 import { useHandleOnChange } from './context/useHandleOnChange';
 import { useStateGoogleSearch } from './context/useStateGoogleSearch';
 import { useClearHistory } from './context/useClearHistory';
-
-export const useGoogleSearchProps = () => {
-  const {
-    field,
-    setField,
-    query,
-    setQuery,
-    setSearchHistoryStr,
-    searchHistoryArr,
-  } = useStateGoogleSearch();
-
-  const handleOnChange = useHandleOnChange(setField, setQuery);
-
-  const handleOnClick = useHandleOnClick(field, setField, setSearchHistoryStr);
-
-  const clearHistory = useClearHistory();
-
-  return {
-    field,
-    setField,
-    query,
-    searchHistoryArr,
-    handleOnChange,
-    handleOnClick,
-    clearHistory,
-  };
-};
-
-type Props = ReturnType<typeof useGoogleSearchProps>;
+import {
+  GoogleSearchPresenterProps,
+  useGoogleSearchProps,
+} from './useGoogleSearchProps';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -56,7 +31,9 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const GoogleSearchPresenter: React.FC<Props> = (props) => {
+export const GoogleSearchPresenter: React.FC<GoogleSearchPresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   return (

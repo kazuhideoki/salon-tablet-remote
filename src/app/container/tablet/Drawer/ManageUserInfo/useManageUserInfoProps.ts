@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import { QrPopover } from './components/QrPopover';
 import { HelpButton } from '../../../../components/HelpButton';
-import { useGoogleSearchProps } from '../../Modal/Modals/GoogleSearch/GoogleSearch';
+import { useGoogleSearchProps } from '../../Modal/Modals/GoogleSearch/useGoogleSearchProps';
 import { useHandleSwitch } from './context/useHandleSwitch';
 import { useStateAccount } from './context/useStateAccount';
 import { useDrawerProps } from '../Drawer/useDrawerPops';

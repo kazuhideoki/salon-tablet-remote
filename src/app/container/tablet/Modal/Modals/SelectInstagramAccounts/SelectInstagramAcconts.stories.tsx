@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  SelectInstagramAccountsPresenter,
-  SelectInstagramAccountsPresenterProps,
-} from './SelectInstagramAccounts';
+import { SelectInstagramAccountsPresenter } from './SelectInstagramAccounts';
 import { sampleInstagramAccounts } from '../../../../../../util/dev/sampleInstagramAccounts';
+import { SelectInstagramAccountsPresenterProps } from './useSelectInstagramAccountProps';
 export default {
   title: 'Footer/SelectInstagramAccountsPresenter',
   component: SelectInstagramAccountsPresenter,

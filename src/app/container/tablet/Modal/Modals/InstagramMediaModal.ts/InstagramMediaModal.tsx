@@ -2,18 +2,10 @@ import React from 'react';
 import { makeStyles, createStyles, Typography } from '@material-ui/core';
 import { sqlToDate } from '../../../../../../util/sqlToDate';
 import { useStateInstagramMediaModal } from './context/useStateInstagramMediaModal';
-
-const useInstagramMediaModalProps = () => {
-  const { instagramMedia } = useStateInstagramMediaModal();
-
-  return {
-    instagramMedia,
-  };
-};
-
-export type ContentModalPresenterProps = ReturnType<
-  typeof useInstagramMediaModalProps
->;
+import {
+  InstagramMediaModalPresenterProps,
+  useInstagramMediaModalProps,
+} from './useInstagramMediaModalProps';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -33,7 +25,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const InstagramMediaModalPresenter: React.FC<ContentModalPresenterProps> = (
+export const InstagramMediaModalPresenter: React.FC<InstagramMediaModalPresenterProps> = (
   props
 ) => {
   const classes = useStyles();
