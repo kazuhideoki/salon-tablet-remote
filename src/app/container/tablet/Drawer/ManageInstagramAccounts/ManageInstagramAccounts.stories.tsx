@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  ManageInstagramAccountsPresenter,
-  ManageInstagramAccountsPresenterProps,
-} from './ManageInstagmaAccounts';
+import { ManageInstagramAccountsPresenter } from './ManageInstagmaAccounts';
 import { sampleInstagramAccounts } from '../../../../../util/dev/sampleInstagramAccounts';
+import { ManageInstagramAccountsPresenterProps } from './useManageInstagramAccounts';
 export default {
   title: 'Drawer/ManageInstagramAccountsPresenter',
   component: ManageInstagramAccountsPresenter,

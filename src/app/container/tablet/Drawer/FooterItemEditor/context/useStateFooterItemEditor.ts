@@ -4,8 +4,6 @@ import { AppStateContext } from '../../../../../stores/appState/Context';
 import { UserInfoContext } from '../../../../../stores/userInfo/Context';
 import { IconsSetting } from '../components/iconSelect/icons';
 import { MoodBad } from '@material-ui/icons';
-import { SvgIconTypeMap } from '@material-ui/core';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 
 export const useStateFooterItemEditor = () => {
   const { userInfo } = React.useContext(UserInfoContext);

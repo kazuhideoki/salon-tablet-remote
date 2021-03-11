@@ -1,18 +1,5 @@
 import React from 'react';
-import { Button, Typography, IconButton } from '@material-ui/core';
 import { PaginationPresenterPropsAndClasses } from '../../PaginationBar';
-
-type Props = {
-  paginationParams: {
-    page: number;
-    pageCount: number;
-    pageSize: number;
-    rowCount: number;
-  };
-  handleOnNumClick: (num: any) => void;
-  nums: string;
-  numsCurrent: string;
-};
 
 export const DisplayNumbers: React.FC<PaginationPresenterPropsAndClasses> = (
   props

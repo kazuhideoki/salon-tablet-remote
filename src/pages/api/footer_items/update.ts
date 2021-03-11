@@ -30,10 +30,10 @@ const update = async (
         params.data_type = 'default_data';
       }
 
-      const data = await db(
-        `UPDATE footer_items SET ? WHERE footer_item_id = ?`,
-        [params, id]
-      );
+      await db(`UPDATE footer_items SET ? WHERE footer_item_id = ?`, [
+        params,
+        id,
+      ]);
 
       res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {

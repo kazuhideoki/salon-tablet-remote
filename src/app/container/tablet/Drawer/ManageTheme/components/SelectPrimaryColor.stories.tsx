@@ -10,8 +10,6 @@ export default {
 };
 
 export const Normal = () => {
-  const [color, setColor] = React.useState({ hex: '#FFFFFF' });
-
   const props: SelectPrimaryColorProps = sampleManageThemePresenterProps;
   return <SelectPrimaryColor {...props} />;
 };

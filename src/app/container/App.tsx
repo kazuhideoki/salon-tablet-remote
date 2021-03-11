@@ -6,7 +6,7 @@ import { useIsMobile } from '../../util/useIsMobile';
 import { IndexProps } from '../../pages';
 import { UserInfoContext } from '../stores/userInfo/Context';
 import { StoreContextProvider } from '../stores/Store';
-import { useDrawerProps } from './tablet/Drawer/Drawer/Drawer';
+import { useDrawerProps } from './tablet/Drawer/Drawer/useDrawerPops';
 import { ApiGetSessionReturn } from '../../util/db/apiGetSession';
 
 type AppViewProps = {

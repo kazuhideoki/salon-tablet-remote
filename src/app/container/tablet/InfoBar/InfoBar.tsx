@@ -7,36 +7,7 @@ import {
   CardActionArea,
 } from '@material-ui/core';
 import { EditButtonsBox } from '../../../components/editButtonBox/EditButtonsBox';
-import { useStateInfoBar } from './context/useStateInfoBar';
-import { useDrawerProps } from '../Drawer/Drawer/Drawer';
-import { useOpenArticleModalInfoBar } from './context/useOpenArticleModalInfoBar';
-
-const useInfoBarProps = () => {
-  const {
-    dispatchAppState,
-    isSetting,
-    infoBar,
-    targetArticle,
-    shop_name,
-  } = useStateInfoBar();
-  const openArticleModalInfoBar = useOpenArticleModalInfoBar();
-
-  const { openModal } = useDrawerProps();
-
-  return {
-    dispatchAppState,
-    isSetting,
-    infoBar,
-    targetArticle,
-    openModal,
-    shop_name,
-    openArticleModalInfoBar,
-  };
-};
-
-export type InfoBarPresenterProps = ReturnType<typeof useInfoBarProps> & {
-  className?: string;
-};
+import { InfoBarPresenterProps, useInfoBarProps } from './useInfoBarProps';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({

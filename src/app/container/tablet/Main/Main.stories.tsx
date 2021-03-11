@@ -1,7 +1,8 @@
 import React from 'react';
-import { MainPresenter, MainPresenterProps } from './Main';
+import { MainPresenter } from './Main';
 import { sampleArticles } from '../../../../util/dev/sampleArticles';
 import { initInstagramMediaObject } from '../../../../util/interface/Interface';
+import { MainPresenterProps } from './useMainProps';
 export default {
   title: 'Main/Main',
   component: MainPresenter,

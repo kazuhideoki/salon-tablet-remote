@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainMobilePresenter } from './MainMobile';
 import { sampleArticles } from '../../../../util/dev/sampleArticles';
-import { MainPresenterProps } from '../../tablet/Main/Main';
+import { MainPresenterProps } from '../../tablet/Main/useMainProps';
 import { sampleTags } from '../../../../util/dev/sampleTags';
 import { sampleInstagramMediaObject } from '../../../../util/dev/sampleData/sampleInstagramMediaObject';
 export default {

@@ -2,11 +2,7 @@ import React from 'react';
 
 import '../../../../../../public/fonts/fonts.css';
 
-import {
-  ManageThemePresenter,
-  ManageThemePresenterProps,
-  Color,
-} from './ManageTheme';
+import { ManageThemePresenter, Color } from './ManageTheme';
 import { Font1, Font2 } from '../../../../stores/theme/lib/fonts';
 import { googleFontsUrl } from '../../../../../util/googleFontsUrl';
 import { generateSecondaryColor } from '../../../../../util/secondaryColor';
@@ -15,6 +11,7 @@ export default {
   component: ManageThemePresenter,
 };
 import colorConvert from 'color-convert';
+import { ManageThemePresenterProps } from './useManageTheme';
 
 export const Normal = (): JSX.Element => {
   const [expanded, setExpanded] = React.useState(false);

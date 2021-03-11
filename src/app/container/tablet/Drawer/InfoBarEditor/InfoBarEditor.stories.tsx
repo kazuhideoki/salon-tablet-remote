@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  InfoBarEditorPresenter,
-  InfoBarEditorPresenterProps,
-} from './InfoBarEditor';
+import { InfoBarEditorPresenter } from './InfoBarEditor';
 import { InfoBarType } from '../../../../../util/interface/Interface';
 import { sampleAllArticles } from '../../../../../util/dev/sampleAllArticles';
+import { InfoBarEditorPresenterProps } from './useInfoBarEditorProps';
 export default {
   title: 'Drawer/InfoBar/InfoBarEditorPresenter',
   component: InfoBarEditorPresenter,

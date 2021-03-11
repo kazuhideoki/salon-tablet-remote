@@ -47,7 +47,7 @@ const submit_feedback = async (
 
     try {
       // await transporter.verify();
-      transporter.verify(async function (error, success) {
+      transporter.verify(async function (error) {
         if (error) {
           console.log(`submit_feedback transporter.verify: ${error}`);
         } else {

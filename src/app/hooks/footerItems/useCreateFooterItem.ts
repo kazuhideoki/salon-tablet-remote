@@ -4,8 +4,6 @@ import {
   Ontap,
   DataTypeFooterItem,
   FooterItems,
-  FooterItem,
-  FooterItemWithoutId,
 } from '../../../util/interface/Interface';
 import { useGetFooterItems } from './useGetFooterItems';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';

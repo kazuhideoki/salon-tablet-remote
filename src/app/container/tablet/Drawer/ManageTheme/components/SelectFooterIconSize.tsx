@@ -1,6 +1,6 @@
 import React from 'react';
 import { Select, MenuItem } from '@material-ui/core';
-import { ManageThemePresenterProps } from '../ManageTheme';
+import { ManageThemePresenterProps } from '../useManageTheme';
 import { FooterIconSize } from '../../../../../../util/interface/Interface';
 
 type Props = ManageThemePresenterProps & { className?: string };

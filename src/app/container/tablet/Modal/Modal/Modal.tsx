@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  DialogContent,
-  makeStyles,
-  createStyles,
-  useTheme,
-} from '@material-ui/core';
+import { DialogContent, makeStyles, createStyles } from '@material-ui/core';
 import { CloseButton } from '../../../../components/editButtonBox/CloseButton';
 import dynamic from 'next/dynamic';
 const ContentModal = dynamic(
@@ -36,41 +31,7 @@ import InfoBarEditor from '../../Drawer/InfoBarEditor/InfoBarEditor';
 import { GoogleSearch } from '../Modals/GoogleSearch/GoogleSearch';
 import { PageNotEmailVerified } from '../../../../components/pages/PageNotEmailVerified';
 import { switchingTransition } from './context/switchingTransition';
-import { useCloseModal } from './context/useCloseModal';
-import { useStateModal } from './context/useStateModal';
-import { useIsMobile } from '../../../../../util/useIsMobile';
-
-export const useModalProps = () => {
-  const {
-    modalSize,
-    setModal,
-    isModalOpen,
-    currentModalContent,
-    selected_theme,
-    edittingPrams,
-  } = useStateModal();
-
-  const closeModal = useCloseModal();
-
-  const isMobile = useIsMobile();
-
-  const theme = useTheme();
-  const duration = theme.transitions.duration;
-
-  return {
-    modalSize,
-    setModal,
-    isModalOpen,
-    currentModalContent,
-    closeModal,
-    duration,
-    selected_theme,
-    edittingPrams,
-    isMobile,
-  };
-};
-
-type Props = ReturnType<typeof useModalProps>;
+import { ModalPresenterProps, useModalProps } from './useModalProps';
 
 const useStyles = makeStyles(() => {
   return createStyles({
@@ -83,7 +44,7 @@ const useStyles = makeStyles(() => {
   });
 });
 
-export const ModalPresenter: React.FC<Props> = (props) => {
+export const ModalPresenter: React.FC<ModalPresenterProps> = (props) => {
   const classes = useStyles();
 
   // ModalContentは内容モーダルウィンドウの中身の設定

@@ -1,15 +1,13 @@
 import React from 'react';
 import { sampleUserInfo } from '../../../../../util/dev/sampleUserInfo';
-import {
-  SettingUserInfoPresenter,
-  SettingUserInfoPresenterProps,
-} from './ManageUserInfo';
+import { SettingUserInfoPresenter } from './ManageUserInfo';
+import { ManageUserInfoPresenterProps } from './useManageUserInfoProps';
 export default {
   title: 'Drawer/Account/SettingUserInfo',
   component: SettingUserInfoPresenter,
 };
 
-const props: SettingUserInfoPresenterProps = {
+const props: ManageUserInfoPresenterProps = {
   name: '',
   setName: () => {
     return;

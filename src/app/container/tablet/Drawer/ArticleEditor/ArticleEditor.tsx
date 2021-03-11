@@ -12,83 +12,12 @@ import {
   Theme,
   Grid,
 } from '@material-ui/core';
-import { CreateArticleParams } from '../../../../hooks/articles/useCreateArticle';
 import { SelectTagsPopover } from './components/SelectTagsPopover';
 import { CharCounter } from '../../../../components/CharCounter';
 import { SaveTwoTone, PublishTwoTone } from '@material-ui/icons';
-import {
-  SwitchDataTypeBox,
-  DataTypeAndSet,
-} from '../QuillEditor/components/SwitchDataTypeBox';
+import { SwitchDataTypeBox } from '../QuillEditor/components/SwitchDataTypeBox';
 import pure from 'recompose/pure';
-
-import { useHandleSubmit } from './context/useHandleSubmit';
-import { useStateArticleEditor } from './context/useStateArticleEditor';
-import { DataTypeArticle } from '../../../../../util/interface/Interface';
-
-const useArticleEditorProps = () => {
-  const {
-    isEditting,
-    is_admin,
-    titleText,
-    setTitleText,
-    editorText,
-    setEditorText,
-    editorTextExcerpt,
-    setEditorTextExcerpt,
-    createdAt,
-    setCreatedAt,
-    updatedAt,
-    setUpdatedAt,
-    dataType,
-    setDataType,
-    editorImg,
-    setEditorImg,
-    selectedTags,
-    setSelectedTags,
-    charCountArticleContent,
-    setCharCountArticleContent,
-    tags,
-  } = useStateArticleEditor();
-
-  const params: CreateArticleParams = {
-    titleText,
-    editorText,
-    editorTextExcerpt,
-    editorImg,
-    selectedTags,
-    dataType,
-  };
-
-  const handleSubmit = useHandleSubmit({ params, isEditting });
-
-  const dataTypeAndSet: DataTypeAndSet<DataTypeArticle> = {
-    dataType,
-    setDataType,
-  };
-
-  return {
-    is_admin,
-    isEditting,
-    titleText,
-    editorText,
-    setEditorText,
-    setEditorTextExcerpt,
-    createdAt,
-    setCreatedAt,
-    updatedAt,
-    setUpdatedAt,
-    setEditorImg,
-    selectedTags,
-    setSelectedTags,
-    charCountArticleContent,
-    setCharCountArticleContent,
-    setTitleText,
-    handleSubmit,
-    tags,
-    dataTypeAndSet,
-  };
-};
+import { useArticleEditorProps } from './useArticleEditorProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -112,7 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
     bottomDiv: {
       position: 'sticky',
       bottom: 0,
-      // right: theme.spacing(2),
       marginRight: theme.spacing(2),
       zIndex: 100,
     },

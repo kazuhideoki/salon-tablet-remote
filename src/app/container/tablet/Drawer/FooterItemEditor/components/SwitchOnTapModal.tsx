@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { HelpButton } from '../../../../../components/HelpButton';
 import { Ontap } from '../../../../../../util/interface/Interface';
-import { FooterItemEditorPresenterProps } from '../FooterItemEditor';
+import { FooterItemEditorPresenterProps } from '../useFooterItemEditorProps';
 
 type Props = FooterItemEditorPresenterProps & {
   className?: string;

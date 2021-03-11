@@ -1,6 +1,5 @@
 import React from 'react';
 import { sqlToDate } from '../../../../util/sqlToDate';
-import { useMainProps } from '../../tablet/Main/Main';
 import {
   makeStyles,
   createStyles,
@@ -12,30 +11,10 @@ import {
 } from '@material-ui/core';
 import { EditButtonsBox } from '../../../components/editButtonBox/EditButtonsBox';
 import { showDataType } from '../../tablet/Main/components/showDataType';
-
-export const useMainMobileProps = () => {
-  const {
-    articles,
-    dispatchAppState,
-    onClickUpdate,
-    deleteArticle,
-    loading,
-    isSetting,
-    openArticleModal,
-  } = useMainProps();
-
-  return {
-    articles,
-    dispatchAppState,
-    loading,
-    isSetting,
-    deleteArticle,
-    onClickUpdate,
-    openArticleModal,
-  };
-};
-
-type Props = ReturnType<typeof useMainMobileProps> & { className?: string };
+import {
+  MainMobilePresenterProps,
+  useMainMobileProps,
+} from './useMainMobileProps';
 
 const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
@@ -88,7 +67,9 @@ const useStyles = makeStyles((theme: Theme) => {
   });
 });
 
-export const MainMobilePresenter: React.FC<Props> = (props) => {
+export const MainMobilePresenter: React.FC<MainMobilePresenterProps> = (
+  props
+) => {
   const classes = useStyles();
 
   if (props.loading) {

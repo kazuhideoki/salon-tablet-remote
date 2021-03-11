@@ -7,11 +7,12 @@ import {
   Typography,
 } from '@material-ui/core';
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
-import { MainPresenterProps, MainClasses } from '../Main';
+import { MainPresenterProps } from '../useMainProps';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
 import { sqlToDate } from '../../../../../util/sqlToDate';
 import { SelectedTags } from './SelectedTags';
+import { MainClasses } from '../Main';
 
 export type DisplayProps = {
   props: MainPresenterProps;

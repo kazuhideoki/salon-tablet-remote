@@ -1,4 +1,4 @@
-import { ManageThemePresenterProps } from '../../../app/container/tablet/Drawer/ManageTheme/ManageTheme';
+import { ManageThemePresenterProps } from '../../../app/container/tablet/Drawer/ManageTheme/useManageTheme';
 
 export const sampleManageThemePresenterProps: ManageThemePresenterProps = {
   selected_theme: 'default',
