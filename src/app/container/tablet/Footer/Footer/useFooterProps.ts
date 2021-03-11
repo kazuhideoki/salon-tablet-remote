@@ -1,9 +1,3 @@
-import React from 'react';
-import { Grid, makeStyles, createStyles } from '@material-ui/core';
-import { IconAndText } from './components/IconAndText';
-import { IconsSetting } from '../../Drawer/FooterItemEditor/components/iconSelect/icons';
-import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
-import { showDataType } from '../../Main/components/showDataType';
 import { useIsMobile } from '../../../../../util/useIsMobile';
 import { useDeleteFooterItem } from '../../../../hooks/footerItems/useDeleteFooterItem';
 import { useStateFooter } from './context/useStateFooter';

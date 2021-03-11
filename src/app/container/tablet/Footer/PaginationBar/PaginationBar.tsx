@@ -6,23 +6,13 @@ import {
   createStyles,
   Theme,
   Chip,
-  IconButton,
-  withStyles,
-  useTheme,
   Card,
-  useMediaQuery,
 } from '@material-ui/core';
 import { HomeButton } from './components/HomeButton';
 import { PaginationArrows } from './components/PaginationArrows';
 import { TagsButton } from './components/TagsButton';
-import { useSelectedArticlesTagNames } from './context/useSelectedArticlesTagNames';
 import { Instagram } from '@material-ui/icons';
 import { PaginationInstagram } from './components/PaginationInstagram';
-import { useHandleOnNumClick } from './context/useHandleOnNumClick';
-import { useManageInstagramAccountsProps } from '../../Drawer/ManageInstagramAccounts/useManageInstagramAccounts';
-import { useStatePaginationBar } from './context/useStatePaginationBar';
-import { useDrawerProps } from '../../Drawer/Drawer/useDrawerPops';
-import { useGetArticles } from '../../../../hooks/articles/useGetArticles';
 import {
   PaginationBarPresenterProps,
   usePaginationBarProps,
@@ -33,7 +23,6 @@ export type PaginationPresenterPropsAndClasses = PaginationBarPresenterProps & {
 };
 
 const useStyles = makeStyles((theme: Theme) => {
-  const themes = React.useContext(ThemeContext);
   return createStyles({
     root: {
       borderRadius: 0,

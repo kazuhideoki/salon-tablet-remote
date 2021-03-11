@@ -4,13 +4,6 @@ import { IconAndText } from './components/IconAndText';
 import { IconsSetting } from '../../Drawer/FooterItemEditor/components/iconSelect/icons';
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { showDataType } from '../../Main/components/showDataType';
-import { useIsMobile } from '../../../../../util/useIsMobile';
-import { useDeleteFooterItem } from '../../../../hooks/footerItems/useDeleteFooterItem';
-import { useStateFooter } from './context/useStateFooter';
-import { useHandleOnUpdateFooterItem } from './context/useHandleOnUpdateFooterItem';
-import { useHandleLoadingFooter } from './context/useHandleLoadingFooter';
-import { useOpenFooterItemModal } from './context/useOpenFooterItemModal';
-import { useSwitchOrder } from '../../../../hooks/footerItems/useSwitchOrder';
 import { FooterPresenterProps, useFooterProps } from './useFooterProps';
 
 const useStyles = makeStyles((theme) =>

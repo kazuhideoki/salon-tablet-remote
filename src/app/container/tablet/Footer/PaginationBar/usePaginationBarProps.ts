@@ -1,23 +1,10 @@
-import React from 'react';
-import { ThemeContext } from '../../../../stores/theme/ThemeProvider';
 import {
-  Grid,
-  makeStyles,
-  createStyles,
-  Theme,
-  Chip,
   IconButton,
   withStyles,
   useTheme,
-  Card,
   useMediaQuery,
 } from '@material-ui/core';
-import { HomeButton } from './components/HomeButton';
-import { PaginationArrows } from './components/PaginationArrows';
-import { TagsButton } from './components/TagsButton';
 import { useSelectedArticlesTagNames } from './context/useSelectedArticlesTagNames';
-import { Instagram } from '@material-ui/icons';
-import { PaginationInstagram } from './components/PaginationInstagram';
 import { useHandleOnNumClick } from './context/useHandleOnNumClick';
 import { useManageInstagramAccountsProps } from '../../Drawer/ManageInstagramAccounts/useManageInstagramAccounts';
 import { useStatePaginationBar } from './context/useStatePaginationBar';

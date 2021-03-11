@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, createStyles, Typography } from '@material-ui/core';
-import ReactQuill, { Quill } from 'react-quill';
+import ReactQuill from 'react-quill';
 import {
   ContentModalPresenterProps,
   useContentModalProps,

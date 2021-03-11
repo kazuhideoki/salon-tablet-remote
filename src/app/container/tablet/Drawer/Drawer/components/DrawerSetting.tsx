@@ -1,19 +1,10 @@
 import React from 'react';
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  Typography,
-  Button,
-  TextField,
-  ListItemText,
-} from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import {
   NoteAddOutlined,
   VideoLabel,
   Settings,
   ExitToApp,
-  Feedback,
   Wallpaper,
   Instagram,
 } from '@material-ui/icons';

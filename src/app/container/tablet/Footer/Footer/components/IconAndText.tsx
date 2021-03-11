@@ -7,7 +7,6 @@ import {
   createStyles,
   Theme,
   SvgIconTypeMap,
-  createMuiTheme,
   useTheme,
 } from '@material-ui/core';
 import { ThemeContext } from '../../../../../stores/theme/ThemeProvider';

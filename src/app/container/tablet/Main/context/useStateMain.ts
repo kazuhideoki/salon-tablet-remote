@@ -4,7 +4,6 @@ import { ArticlesContext } from '../../../../stores/articles/Context';
 import { InstagramContext } from '../../../../stores/instagram/Context';
 import { TagsContext } from '../../../../stores/tags/Context';
 import { UserInfoContext } from '../../../../stores/userInfo/Context';
-import { useOpenInstagramModal } from './useOpenInstagramModal';
 export const useStateMain = () => {
   const { appState, dispatchAppState } = React.useContext(AppStateContext);
   const { articles } = React.useContext(ArticlesContext);

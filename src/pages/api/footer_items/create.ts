@@ -46,7 +46,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
         params.data_type = 'default_data';
       }
 
-      const data = await db(`INSERT INTO footer_items SET ?`, params);
+      await db(`INSERT INTO footer_items SET ?`, params);
 
       res.status(200).json({ err: false, rawData: null } as ApiResponse);
     } catch (err) {

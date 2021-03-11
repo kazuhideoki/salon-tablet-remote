@@ -1,9 +1,4 @@
 import React from 'react';
-import {
-  AllArticles,
-  Articles,
-  PaginationParams,
-} from '../../../util/interface/Interface';
 import { ArticlesAction } from './actions';
 import { articlesReducer, ArticlesContextState } from './reducer';
 

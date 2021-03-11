@@ -1,5 +1,5 @@
 import React from 'react';
-import { useInfoBarProps, InfoBarPresenterProps } from './useInfoBarProps';
+import { InfoBarPresenterProps } from './useInfoBarProps';
 import { sampleArticles } from '../../../../util/dev/sampleArticles';
 import { scrollingAnimationDuration } from '../../../hooks/infoBar/useUpdateInfoBar';
 import { InfoBarPresenter } from './InfoBar';

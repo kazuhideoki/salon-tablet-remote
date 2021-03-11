@@ -10,12 +10,6 @@ import { DisplayArticlesScroll } from './components/DisplayArticlesScroll';
 import { DisplayArticlesGrid6 } from './components/DisplayArticlesGrid6';
 import { DisplayInstagramMedias } from './components/DisplayInstagramMedias';
 import { noArticlesJsx } from './components/noArticlesJsx';
-import { useOnClickUpdate } from './context/useOnClickUpdate';
-import { useStateMain } from './context/useStateMain';
-import { useOpenArticleModal } from './context/useOpenArticleModal';
-import { useOpenInstagramModal } from './context/useOpenInstagramModal';
-import { useHandleLoadingMain } from './context/useHandleLoadingMain';
-import { useDeleteArticle } from '../../../hooks/articles/useDeleteArticle';
 import { MainPresenterProps, useMainProps } from './useMainProps';
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。

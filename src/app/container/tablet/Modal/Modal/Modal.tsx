@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  DialogContent,
-  makeStyles,
-  createStyles,
-  useTheme,
-} from '@material-ui/core';
+import { DialogContent, makeStyles, createStyles } from '@material-ui/core';
 import { CloseButton } from '../../../../components/editButtonBox/CloseButton';
 import dynamic from 'next/dynamic';
 const ContentModal = dynamic(
@@ -36,9 +31,6 @@ import InfoBarEditor from '../../Drawer/InfoBarEditor/InfoBarEditor';
 import { GoogleSearch } from '../Modals/GoogleSearch/GoogleSearch';
 import { PageNotEmailVerified } from '../../../../components/pages/PageNotEmailVerified';
 import { switchingTransition } from './context/switchingTransition';
-import { useCloseModal } from './context/useCloseModal';
-import { useStateModal } from './context/useStateModal';
-import { useIsMobile } from '../../../../../util/useIsMobile';
 import { ModalPresenterProps, useModalProps } from './useModalProps';
 
 const useStyles = makeStyles(() => {

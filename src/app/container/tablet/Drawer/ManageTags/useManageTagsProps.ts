@@ -1,15 +1,3 @@
-import React from 'react';
-import {
-  TextField,
-  Button,
-  Chip,
-  makeStyles,
-  Theme,
-  createStyles,
-  Typography,
-} from '@material-ui/core';
-import { CharCounter } from '../../../../components/CharCounter';
-import { Skeleton } from '@material-ui/lab';
 import { useHandleOnClick } from './context/useHandleOnClick';
 import { useIsValidTagName } from './context/useIsValidTagName';
 import { useDeleteTag } from '../../../../hooks/tags/useDeleteTag';

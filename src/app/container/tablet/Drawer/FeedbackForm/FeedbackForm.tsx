@@ -8,8 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { ContactMail } from '@material-ui/icons';
-import { useSubmitFeedback } from '../../../../hooks/useSubmitFeedback';
-import { useStateFeedbackForm } from './context/useStateFeedbackForm';
 import {
   FeedbackFormPresenterProps,
   useFeedbackFormProps,
