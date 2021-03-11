@@ -16,49 +16,7 @@ import { useOpenArticleModal } from './context/useOpenArticleModal';
 import { useOpenInstagramModal } from './context/useOpenInstagramModal';
 import { useHandleLoadingMain } from './context/useHandleLoadingMain';
 import { useDeleteArticle } from '../../../hooks/articles/useDeleteArticle';
-
-export const useMainProps = () => {
-  const {
-    dispatchAppState,
-    articles,
-    tags,
-    instagramMediaObject,
-    loading,
-    isShowInstagram,
-    userInfo,
-    isSetting,
-  } = useStateMain();
-
-  const openArticleModal = useOpenArticleModal();
-
-  const deleteArticle = useDeleteArticle();
-
-  const onClickUpdate = useOnClickUpdate();
-
-  const openInstagramModal = useOpenInstagramModal();
-
-  const handleLoadingMain = useHandleLoadingMain();
-
-  return {
-    isSetting,
-    articles,
-    instagramMediaObject,
-    tags,
-    deleteArticle,
-
-    dispatchAppState,
-    openArticleModal,
-    openInstagramModal,
-
-    isShowInstagram,
-    show_article_type: userInfo.show_article_type,
-    onClickUpdate,
-    loading,
-    handleLoadingMain,
-  };
-};
-
-export type MainPresenterProps = ReturnType<typeof useMainProps>;
+import { MainPresenterProps, useMainProps } from './useMainProps';
 
 // 主に位置情報に関するスタイルは親コンポーネントからpropsを通して渡される。
 const useStyles = makeStyles((theme) => {

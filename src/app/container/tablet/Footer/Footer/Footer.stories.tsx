@@ -1,7 +1,8 @@
 import React from 'react';
-import { FooterPresenter, FooterPresenterProps } from './Footer';
+import { FooterPresenter } from './Footer';
 import { samplefooterItems } from '../../../../../util/dev/sampleFooterItems';
 import { ThemeProvider } from '../../../../components/ThemeProviderInStorybook';
+import { FooterPresenterProps } from './useFooterProps';
 
 export default {
   title: 'Footer/Footer',

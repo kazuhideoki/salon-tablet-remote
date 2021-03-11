@@ -1,6 +1,6 @@
 import React from 'react';
 import { sqlToDate } from '../../../../util/sqlToDate';
-import { useMainProps } from '../../tablet/Main/Main';
+import { useMainProps } from '../../tablet/Main/useMainProps';
 import {
   makeStyles,
   createStyles,

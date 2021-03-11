@@ -15,7 +15,7 @@ import { DrawerSetting } from './components/DrawerSetting';
 import { DrawerHeader } from './components/DrawerHeader';
 import { DrawerItems } from './components/DrawerItems';
 import { useIsMobile } from '../../../../../util/useIsMobile';
-import { useFooterProps } from '../../Footer/Footer/Footer';
+import { useFooterProps } from '../../Footer/Footer/useFooterProps';
 import { Settings } from '@material-ui/icons';
 import { AuthCircular } from '../../../../components/AuthCircular';
 import { useHandleSwitchIsSetting } from './context/useHandleSwitchIsSetting';
