@@ -18,7 +18,7 @@ import {
   Instagram,
 } from '@material-ui/icons';
 import { TagsButton } from '../../../Footer/PaginationBar/components/TagsButton';
-import { DrawerPresenterProps } from '../Drawer';
+import { DrawerPresenterProps } from '../useDrawerPops';
 
 export const DrawerSetting: React.FC<DrawerPresenterProps> = (props) => {
   if (props.isSetting) {

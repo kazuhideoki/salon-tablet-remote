@@ -20,9 +20,9 @@ import { useSelectedArticlesTagNames } from '../context/useSelectedArticlesTagNa
 import { Instagram } from '@material-ui/icons';
 import { PaginationInstagram } from '../components/PaginationInstagram';
 import { useHandleOnNumClick } from '../context/useHandleOnNumClick';
-import { useManageInstagramAccountsProps } from '../../../Drawer/ManageInstagramAccounts/ManageInstagmaAccounts';
+import { useManageInstagramAccountsProps } from '../../../Drawer/ManageInstagramAccounts/useManageInstagramAccounts';
 import { useStatePaginationBar } from '../context/useStatePaginationBar';
-import { useDrawerProps } from '../../../Drawer/Drawer/Drawer';
+import { useDrawerProps } from '../../../Drawer/Drawer/useDrawerPops';
 
 export const usePaginationBarProps = () => {
   const {

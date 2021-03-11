@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Button, IconButton } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { DrawerPresenterProps } from '../Drawer';
+import { DrawerPresenterProps } from '../useDrawerPops';
 import { Close } from '@material-ui/icons';
 
 export const DrawerHeader: React.FC<DrawerPresenterProps> = (props) => {

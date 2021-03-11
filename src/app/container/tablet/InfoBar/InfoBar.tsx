@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { EditButtonsBox } from '../../../components/editButtonBox/EditButtonsBox';
 import { useStateInfoBar } from './context/useStateInfoBar';
-import { useDrawerProps } from '../Drawer/Drawer/Drawer';
+import { useDrawerProps } from '../Drawer/Drawer/useDrawerPops';
 import { useOpenArticleModalInfoBar } from './context/useOpenArticleModalInfoBar';
 
 const useInfoBarProps = () => {

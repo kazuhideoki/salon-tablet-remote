@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, useTheme } from '@material-ui/core';
-import { SettingUserInfoPresenterProps } from '../ManageUserInfo';
+import { ManageUserInfoPresenterProps } from '../useManageUserInfoProps';
 import QRCode from 'qrcode.react';
 import { server } from '../../../../../../util/loadUrl';
 
@@ -8,7 +8,7 @@ const width = 450;
 
 // FCにするとuseReactToPrintでエラーがでてしまうのでhooksにした。
 export const useQrCodeForPrint = (
-  props: SettingUserInfoPresenterProps,
+  props: ManageUserInfoPresenterProps,
   ref: React.MutableRefObject<null>
 ) => {
   const theme = useTheme();
