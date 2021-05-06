@@ -1,6 +1,6 @@
 # Get Started
 
-## gcloud の操作
+## ◆gcloud の設定
 
 ### アカウント、プロジェクト確認
 
@@ -25,7 +25,7 @@ $ gcloud config set project [PROJECT_ID]
 Updated property [core/project].
 ```
 
-## 立ち上げ
+## ◆ 立ち上げ
 
 ### Cloud SQL の Proxy 起動 (ローカルからデータベースに接続できるようにする)
 
