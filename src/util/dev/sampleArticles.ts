@@ -1,6 +1,6 @@
-import { Articles } from '../interface/Interface';
+import { Article } from '../interface/Interface';
 
-export const sampleArticles: Articles = [
+export const sampleArticles: Article[] = [
   {
     article_id: 3,
     user_id: 1,

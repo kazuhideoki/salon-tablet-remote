@@ -63,7 +63,6 @@ export type Article = Omit<ArticleFromDB, 'tag_ids'> & {
   tag_ids: number[];
 };
 export type ArticleWithoutId = Omit<Article, 'article_id'>;
-export type Articles = Article[];
 
 export type AllArticles = {
   article_id: number;

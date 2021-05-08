@@ -4,7 +4,7 @@
 
 ### アカウント、プロジェクト確認
 
-```
+```-
 $ gcloud config list
 
 （略）
@@ -20,7 +20,7 @@ project = ****
 
 ### ※プロジェクトの切り替え
 
-```
+```-
 $ gcloud config set project [PROJECT_ID]
 Updated property [core/project].
 ```

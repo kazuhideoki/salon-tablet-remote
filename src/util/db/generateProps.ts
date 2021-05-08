@@ -1,7 +1,7 @@
 import {
   UserInfo,
-  Articles,
   PaginationParams,
+  Article,
   FooterItems,
   Tags,
   InstagramAccounts,
@@ -15,7 +15,7 @@ import { apiInstagramAccountsGet } from '../../pages/api/instagram_accounts/get'
 import { apiInfoBarGet } from '../../pages/api/info_bar/get';
 
 export type DataFromDB = {
-  articles: Articles;
+  articles: Article[];
   pagination: PaginationParams;
   allArticles: AllArticles;
   footerItems: FooterItems;
