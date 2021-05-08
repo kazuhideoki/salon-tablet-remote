@@ -6,7 +6,7 @@ import {
   Radio,
   FormLabel,
 } from '@material-ui/core';
-import { ManageThemePresenterProps } from '../ManageTheme';
+import { ManageThemePresenterProps } from '../useManageTheme';
 
 export const SelectTheme = (props: ManageThemePresenterProps) => {
   return (

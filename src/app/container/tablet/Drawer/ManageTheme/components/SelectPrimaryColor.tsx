@@ -3,7 +3,7 @@ import { TextField, Popover } from '@material-ui/core';
 import { SwatchesPicker } from 'react-color';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import { FiberManualRecord } from '@material-ui/icons';
-import { ManageThemePresenterProps } from '../ManageTheme';
+import { ManageThemePresenterProps } from '../useManageTheme';
 
 export type SelectPrimaryColorProps = ManageThemePresenterProps & {
   className?: string;

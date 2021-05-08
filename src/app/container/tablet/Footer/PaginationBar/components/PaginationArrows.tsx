@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, withStyles, IconButton } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Latest } from './PaginationArrowsComponents/Latest';
 import { Prev } from './PaginationArrowsComponents/Prev';
 import { DisplayNumbers } from './PaginationArrowsComponents/DisplayNumbers';

@@ -16,58 +16,11 @@ import {
 } from '@material-ui/core';
 import { QrPopover } from './components/QrPopover';
 import { HelpButton } from '../../../../components/HelpButton';
-import { useGoogleSearchProps } from '../../Modal/Modals/GoogleSearch/GoogleSearch';
-import { useHandleSwitch } from './context/useHandleSwitch';
-import { useStateAccount } from './context/useStateAccount';
-import { useDrawerProps } from '../Drawer/Drawer';
-import { useUpdateUser } from '../../../../hooks/userInfo/useUpdateUser';
-
-const useSettingUserInfoProps = () => {
-  const {
-    userInfo,
-    name,
-    setName,
-    shopName,
-    setShopName,
-    email,
-    password,
-    setPassword,
-    isShowMobile,
-    setIsShowMobile,
-  } = useStateAccount();
-
-  const updateUser = useUpdateUser({
-    name,
-    shopName,
-    email,
-    password,
-    isShowMobile,
-  });
-  const { openModal } = useDrawerProps();
-  const handleSwitch = useHandleSwitch();
-  const { clearHistory } = useGoogleSearchProps();
-
-  return {
-    name,
-    setName,
-    shopName,
-    setShopName,
-    email,
-    password,
-    setPassword,
-    userInfo,
-    updateUser,
-    isShowMobile,
-    setIsShowMobile,
-    handleSwitch,
-    clearHistory,
-    openModal,
-  };
-};
-
-export type SettingUserInfoPresenterProps = ReturnType<
-  typeof useSettingUserInfoProps
->;
+import { isValidPassword } from './context/isValidPassword';
+import {
+  ManageUserInfoPresenterProps,
+  useManageUserInfoProps,
+} from './useManageUserInfoProps';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -93,12 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const isValidPassword = (password: string) => {
-  const regrex = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/;
-  return regrex.test(password);
-};
-
-export const SettingUserInfoPresenter: React.FC<SettingUserInfoPresenterProps> = (
+export const SettingUserInfoPresenter: React.FC<ManageUserInfoPresenterProps> = (
   props
 ) => {
   const classes = useStyles();
@@ -228,6 +176,6 @@ export const SettingUserInfoPresenter: React.FC<SettingUserInfoPresenterProps> =
 };
 
 export const SettingUserInfo = (): JSX.Element => {
-  const props = useSettingUserInfoProps();
+  const props = useManageUserInfoProps();
   return <SettingUserInfoPresenter {...props} />;
 };

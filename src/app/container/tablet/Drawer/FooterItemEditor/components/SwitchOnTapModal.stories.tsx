@@ -1,6 +1,5 @@
 import React from 'react';
 import { SwitchOnTapModal } from './SwitchOnTapModal';
-import { Ontap } from '../../../../../../util/interface/Interface';
 import { propsFooterItemEditor } from '../../../../../../util/dev/sampleProps/propsFooterItemEditor';
 export default {
   title: 'Drawer/ItemEditor/SwitchOnTapModal',

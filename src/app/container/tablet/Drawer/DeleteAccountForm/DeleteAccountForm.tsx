@@ -3,28 +3,14 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Info } from '@material-ui/icons';
-import { server } from '../../../../../util/loadUrl';
 import { useDeleteUser } from '../../../../hooks/userInfo/useDeleteUser';
 import { useStateDeleteAccountFrom } from './context/useStateDeleteAccountForm';
-
-function Copyright() {
-  return (
-    <Typography variant="body1" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href={server}>
-        SALON TABLET
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Copyright } from './components/Copyright';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

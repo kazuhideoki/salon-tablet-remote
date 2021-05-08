@@ -1,19 +1,10 @@
 import React from 'react';
 import { makeStyles, createStyles, Typography } from '@material-ui/core';
-import ReactQuill, { Quill } from 'react-quill';
-import { useStateContentModal } from './context/useStateContentModal';
-
-const useContentModalProps = () => {
-  const { article } = useStateContentModal();
-
-  return {
-    article,
-  };
-};
-
-export type ContentModalPresenterProps = ReturnType<
-  typeof useContentModalProps
->;
+import ReactQuill from 'react-quill';
+import {
+  ContentModalPresenterProps,
+  useContentModalProps,
+} from './useContentModalProps';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

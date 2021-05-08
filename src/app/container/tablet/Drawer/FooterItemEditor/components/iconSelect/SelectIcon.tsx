@@ -6,7 +6,7 @@ import { Popover, Button, SvgIconTypeMap } from '@material-ui/core';
 import { IconsSetting } from './icons';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { EmojiEmotionsTwoTone } from '@material-ui/icons';
-import { FooterItemEditorPresenterProps } from '../../FooterItemEditor';
+import { FooterItemEditorPresenterProps } from '../../useFooterItemEditorProps';
 
 const useStyles = makeStyles(() =>
   createStyles({

@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  ContentModalPresenter,
-  ContentModalPresenterProps,
-} from './ContentModal';
+import { ContentModalPresenterProps } from './useContentModalProps';
 import { sampleArticles } from '../../../../../../util/dev/sampleArticles';
+import { ContentModalPresenter } from './ContentModal';
 export default {
   title: 'Main/ContentModal',
   component: ContentModalPresenter,

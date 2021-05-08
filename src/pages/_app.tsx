@@ -22,7 +22,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import { themeDefault } from '../app/stores/theme/lib/themes/themeDefault';
 import { generateDefaultParamsFromTheme } from '../app/stores/theme/lib/paramsFromTheme';
 
-export default function MyApp({ Component, pageProps, slug }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   const session = pageProps.session;
 
   return (

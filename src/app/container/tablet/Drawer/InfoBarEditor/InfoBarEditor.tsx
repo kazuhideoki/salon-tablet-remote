@@ -18,42 +18,10 @@ import { CharCounter } from '../../../../components/CharCounter';
 import { SwitchOnTapInfoBar } from './components/SwitchOnTapInfoBar';
 import { SelectArticleInfoBar } from './components/SelectArticleInfoBar';
 import { PublishTwoTone } from '@material-ui/icons';
-import { useStateInfoBarEditor } from './context/useStateInfoBarEditor';
-import { useUpdateInfoBar } from '../../../../hooks/infoBar/useUpdateInfoBar';
-
-const useInfoBarEditorProps = () => {
-  const {
-    allArticles,
-    infoBarType,
-    setInfoBarType,
-    editorText,
-    setEditorText,
-    articleInfoBar,
-    setArticleInfoBar,
-    charCount,
-    setCharCount,
-  } = useStateInfoBarEditor();
-
-  const updateInfoBar = useUpdateInfoBar({
-    infoBarType,
-    editorText,
-    articleInfoBar,
-    charCount,
-  });
-
-  return {
-    infoBarType,
-    setInfoBarType,
-    editorText,
-    setEditorText,
-    charCount,
-    setCharCount,
-    articleInfoBar,
-    setArticleInfoBar,
-    allArticles,
-    updateInfoBar,
-  };
-};
+import {
+  InfoBarEditorPresenterProps,
+  useInfoBarEditorProps,
+} from './useInfoBarEditorProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,10 +49,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-export type InfoBarEditorPresenterProps = ReturnType<
-  typeof useInfoBarEditorProps
->;
 
 export const InfoBarEditorPresenter: React.FC<InfoBarEditorPresenterProps> = (
   props
