@@ -10,7 +10,7 @@ import {
 import { EditButtonsBox } from '../../../../components/editButtonBox/EditButtonsBox';
 import { showDataType } from './showDataType';
 import { Skeleton } from '@material-ui/lab';
-import { Articles } from '../../../../../util/interface/Interface';
+import { Article } from '../../../../../util/interface/Interface';
 import { ThemeContext } from '../../../../stores/theme/ThemeProvider';
 import { DisplayProps } from './DisplayArticlesScroll';
 
@@ -70,7 +70,7 @@ export const DisplayArticlesGrid6: React.FC<DisplayProps> = ({
 }) => {
   const classesGrid6 = useStyles();
 
-  const row = (articles: Articles, row2: boolean) =>
+  const row = (articles: Article[], row2: boolean) =>
     articles.map((value, index) => {
       return (
         <Grid

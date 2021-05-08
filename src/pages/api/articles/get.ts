@@ -2,7 +2,7 @@ import { db } from '../../../util/db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { tagIdsFromString } from '../../../util/db/tagIdsFromString';
 import {
-  Articles,
+  Article,
   AllArticles,
   ArticleFromDB,
   PaginationParams,
@@ -27,7 +27,7 @@ export type ApiArticlesGet = {
 };
 
 export type ApiArticlesGetReturn = {
-  articles: Articles;
+  articles: Article[];
   pagination: PaginationParams;
   allArticles: AllArticles;
 };
@@ -93,7 +93,7 @@ const get = async (
 
     const rawData: ApiArticlesGetReturn = {
       // tag_idsをnumber[]化する、なければnullのまま
-      articles: (data.length ? tagIdsFromString(data) : data) as Articles,
+      articles: (data.length ? tagIdsFromString(data) : data) as Article[],
       pagination: pagination,
       allArticles: data3 as AllArticles,
     };
