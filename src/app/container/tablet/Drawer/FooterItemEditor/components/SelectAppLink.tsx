@@ -52,7 +52,7 @@ export const SelectAppLink: React.FC<Props> = ({
         <MenuItem value="rmagazine://">楽天マガジン(iOS, Android)</MenuItem>
 
         <MenuItem value="com-nttdocomo-dmagazine://">
-          Dマガジン(iOS, Android)
+          Dマガジン(iOS, Android )
         </MenuItem>
 
         <MenuItem value="fb179689808731959://">Magzter(iOS)</MenuItem>
