@@ -50,7 +50,11 @@ export const SelectAppLink: React.FC<Props> = ({
         </MenuItem>
         {/* ※↓mapを使ってやろうとしたがうまく行かなかった。別ファイルにも分けられない？ */}
         <MenuItem value="rmagazine://">楽天マガジン(iOS, Android)</MenuItem>
-        <MenuItem value="dmagazine://">Dマガジン(iOS, Android)</MenuItem>
+
+        <MenuItem value="com-nttdocomo-dmagazine://">
+          Dマガジン(iOS, Android)
+        </MenuItem>
+
         <MenuItem value="fb179689808731959://">Magzter(iOS)</MenuItem>
         <MenuItem value="magzter://">Magzter(Android)</MenuItem>
         <MenuItem value="ibooks://">iBooks(iOS)</MenuItem>
