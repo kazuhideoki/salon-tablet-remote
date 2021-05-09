@@ -42,3 +42,14 @@ Updated property [core/project].
 
 本番環境 `use salon_tablet`
 テスト環境 `use test_salon_tablet`
+
+## URL スキームの調べ方
+
+### 参考サイト
+
+[総計 290 個以上掲載！iPhone アプリの URL スキーム一覧](https://hibikanblog.net/blog-entry-157.html)
+
+### 確認方法
+
+iPhone アプリ 「スキーム」
+android アプリ 「Deep Link Test」
