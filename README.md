@@ -39,7 +39,3 @@
 ## ユースケース図
 
 ![image](public/images/use_case.png)
-
-## インフラ構成図
-
-![image](public/images/infrastructure_architecture.png)
